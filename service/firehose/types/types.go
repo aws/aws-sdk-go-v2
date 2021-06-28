@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -27,6 +28,8 @@ type BufferingHints struct {
 	// example, if you typically ingest data at 1 MiB/sec, the value should be 10 MiB
 	// or higher.
 	SizeInMBs *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Amazon CloudWatch logging options for your delivery stream.
@@ -42,6 +45,8 @@ type CloudWatchLoggingOptions struct {
 	// The CloudWatch log stream name for logging. This value is required if CloudWatch
 	// logging is enabled.
 	LogStreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a COPY command for Amazon Redshift.
@@ -69,6 +74,8 @@ type CopyCommand struct {
 
 	// A comma-separated list of column names.
 	DataTableColumns *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies that you want Kinesis Data Firehose to convert data from the JSON
@@ -97,6 +104,8 @@ type DataFormatConversionConfiguration struct {
 	// Specifies the AWS Glue Data Catalog table that contains the column information.
 	// This parameter is required if Enabled is set to true.
 	SchemaConfiguration *SchemaConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a delivery stream.
@@ -169,6 +178,8 @@ type DeliveryStreamDescription struct {
 	// If the DeliveryStreamType parameter is KinesisStreamAsSource, a
 	// SourceDescription object describing the source Kinesis data stream.
 	Source *SourceDescription
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the server-side encryption (SSE) status for the
@@ -199,6 +210,8 @@ type DeliveryStreamEncryptionConfiguration struct {
 	// is ENABLING_FAILED or DISABLING_FAILED, it is the status of the most recent
 	// attempt to enable or disable SSE, respectively.
 	Status DeliveryStreamEncryptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the type and Amazon Resource Name (ARN) of the CMK to use for
@@ -234,6 +247,8 @@ type DeliveryStreamEncryptionConfigurationInput struct {
 	// Name (ARN) of the CMK. If you set KeyType to AWS_OWNED_CMK, Kinesis Data
 	// Firehose uses a service-account CMK.
 	KeyARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The deserializer you want Kinesis Data Firehose to use for converting the input
@@ -257,6 +272,8 @@ type Deserializer struct {
 	// depending on which one offers the functionality you need. The other option is
 	// the native Hive / HCatalog JsonSerDe.
 	OpenXJsonSerDe *OpenXJsonSerDe
+
+	noSmithyDocumentSerde
 }
 
 // Describes the destination for a delivery stream.
@@ -284,6 +301,8 @@ type DestinationDescription struct {
 
 	// The destination in Splunk.
 	SplunkDestinationDescription *SplunkDestinationDescription
+
+	noSmithyDocumentSerde
 }
 
 // Describes the buffering to perform before delivering data to the Amazon ES
@@ -300,6 +319,8 @@ type ElasticsearchBufferingHints struct {
 	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
 	// value should be 10 MB or higher.
 	SizeInMBs *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of a destination in Amazon ES.
@@ -380,6 +401,8 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// The details of the VPC of the Amazon ES destination.
 	VpcConfiguration *VpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The destination description in Amazon ES.
@@ -432,6 +455,8 @@ type ElasticsearchDestinationDescription struct {
 
 	// The details of the VPC of the Amazon ES destination.
 	VpcConfigurationDescription *VpcConfigurationDescription
+
+	noSmithyDocumentSerde
 }
 
 // Describes an update for a destination in Amazon ES.
@@ -494,6 +519,8 @@ type ElasticsearchDestinationUpdate struct {
 	// name and type name. If you want to update your delivery stream with a new index
 	// name, provide an empty string for TypeName.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
@@ -506,6 +533,8 @@ type ElasticsearchRetryOptions struct {
 	// Amazon S3. Default value is 300 seconds (5 minutes). A value of 0 (zero) results
 	// in no retries.
 	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the encryption for a destination in Amazon S3.
@@ -517,6 +546,8 @@ type EncryptionConfiguration struct {
 	// Specifically override existing encryption information to ensure that no
 	// encryption is used.
 	NoEncryptionConfig NoEncryptionConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of a destination in Amazon S3.
@@ -575,6 +606,8 @@ type ExtendedS3DestinationConfiguration struct {
 	// to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
 	// update the delivery stream to disable it.
 	S3BackupMode S3BackupMode
+
+	noSmithyDocumentSerde
 }
 
 // Describes a destination in Amazon S3.
@@ -637,6 +670,8 @@ type ExtendedS3DestinationDescription struct {
 
 	// The Amazon S3 backup mode.
 	S3BackupMode S3BackupMode
+
+	noSmithyDocumentSerde
 }
 
 // Describes an update for a destination in Amazon S3.
@@ -690,6 +725,8 @@ type ExtendedS3DestinationUpdate struct {
 
 	// The Amazon S3 destination for backup.
 	S3BackupUpdate *S3DestinationUpdate
+
+	noSmithyDocumentSerde
 }
 
 // Provides details in case one of the following operations fails due to an error
@@ -706,6 +743,8 @@ type FailureDescription struct {
 	//
 	// This member is required.
 	Type DeliveryStreamFailureType
+
+	noSmithyDocumentSerde
 }
 
 // The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose for
@@ -724,6 +763,8 @@ type HiveJsonSerDe struct {
 	// milliseconds. If you don't specify a format, Kinesis Data Firehose uses
 	// java.sql.Timestamp::valueOf by default.
 	TimestampFormats []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the buffering options that can be applied before data is delivered to
@@ -743,6 +784,8 @@ type HttpEndpointBufferingHints struct {
 	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
 	// value should be 10 MB or higher.
 	SizeInMBs *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the metadata that's delivered to the specified HTTP endpoint
@@ -758,6 +801,8 @@ type HttpEndpointCommonAttribute struct {
 	//
 	// This member is required.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of the HTTP endpoint to which Kinesis Firehose
@@ -775,6 +820,8 @@ type HttpEndpointConfiguration struct {
 
 	// The name of the HTTP endpoint selected as the destination.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the HTTP endpoint selected as the destination.
@@ -785,6 +832,8 @@ type HttpEndpointDescription struct {
 
 	// The URL of the HTTP endpoint selected as the destination.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of the HTTP endpoint destination.
@@ -831,6 +880,8 @@ type HttpEndpointDestinationConfiguration struct {
 	// (AllData) or only the documents that Kinesis Data Firehose could not deliver to
 	// the specified HTTP endpoint destination (FailedDataOnly).
 	S3BackupMode HttpEndpointS3BackupMode
+
+	noSmithyDocumentSerde
 }
 
 // Describes the HTTP endpoint destination.
@@ -873,6 +924,8 @@ type HttpEndpointDestinationDescription struct {
 
 	// Describes a destination in Amazon S3.
 	S3DestinationDescription *S3DestinationDescription
+
+	noSmithyDocumentSerde
 }
 
 // Updates the specified HTTP endpoint destination.
@@ -915,6 +968,8 @@ type HttpEndpointDestinationUpdate struct {
 
 	// Describes an update for a destination in Amazon S3.
 	S3Update *S3DestinationUpdate
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of the HTTP endpoint request.
@@ -929,6 +984,8 @@ type HttpEndpointRequestConfiguration struct {
 	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding) in
 	// MDN Web Docs, the official Mozilla documentation.
 	ContentEncoding ContentEncoding
+
+	noSmithyDocumentSerde
 }
 
 // Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
@@ -942,6 +999,8 @@ type HttpEndpointRetryOptions struct {
 	// Data Firehose waits for acknowledgment from the specified destination after each
 	// attempt.
 	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the deserializer you want to use to convert the format of the input
@@ -952,6 +1011,8 @@ type InputFormatConfiguration struct {
 	// SerDe or the OpenX JSON SerDe. If both are non-null, the server rejects the
 	// request.
 	Deserializer *Deserializer
+
+	noSmithyDocumentSerde
 }
 
 // The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used
@@ -971,6 +1032,8 @@ type KinesisStreamSourceConfiguration struct {
 	//
 	// This member is required.
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a Kinesis data stream used as the source for a Kinesis Data
@@ -990,6 +1053,8 @@ type KinesisStreamSourceDescription struct {
 	// information, see AWS Identity and Access Management (IAM) ARN Format
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an encryption key for a destination in Amazon S3.
@@ -1002,6 +1067,8 @@ type KMSEncryptionConfig struct {
 	//
 	// This member is required.
 	AWSKMSKeyARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The OpenX SerDe. Used by Kinesis Data Firehose for deserializing data, which
@@ -1027,6 +1094,8 @@ type OpenXJsonSerDe struct {
 	// JSON contains a key whose name is "a.b", you can define the column name to be
 	// "a_b" when using this option. The default is false.
 	ConvertDotsInJsonKeysToUnderscores *bool
+
+	noSmithyDocumentSerde
 }
 
 // A serializer to use for converting data to the ORC format before storing it in
@@ -1084,6 +1153,8 @@ type OrcSerDe struct {
 	// The number of bytes in each stripe. The default is 64 MiB and the minimum is 8
 	// MiB.
 	StripeSizeBytes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the serializer that you want Kinesis Data Firehose to use to convert
@@ -1094,6 +1165,8 @@ type OutputFormatConfiguration struct {
 	// Specifies which serializer to use. You can choose either the ORC SerDe or the
 	// Parquet SerDe. If both are non-null, the server rejects the request.
 	Serializer *Serializer
+
+	noSmithyDocumentSerde
 }
 
 // A serializer to use for converting data to the Parquet format before storing it
@@ -1128,6 +1201,8 @@ type ParquetSerDe struct {
 	// Indicates the version of row format to output. The possible values are V1 and
 	// V2. The default is V1.
 	WriterVersion ParquetWriterVersion
+
+	noSmithyDocumentSerde
 }
 
 // Describes a data processing configuration.
@@ -1138,6 +1213,8 @@ type ProcessingConfiguration struct {
 
 	// The data processors.
 	Processors []Processor
+
+	noSmithyDocumentSerde
 }
 
 // Describes a data processor.
@@ -1150,6 +1227,8 @@ type Processor struct {
 
 	// The processor parameters.
 	Parameters []ProcessorParameter
+
+	noSmithyDocumentSerde
 }
 
 // Describes the processor parameter.
@@ -1164,6 +1243,8 @@ type ProcessorParameter struct {
 	//
 	// This member is required.
 	ParameterValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result for an individual record from a PutRecordBatch request. If
@@ -1180,6 +1261,8 @@ type PutRecordBatchResponseEntry struct {
 
 	// The ID of the record.
 	RecordId *string
+
+	noSmithyDocumentSerde
 }
 
 // The unit of data in a delivery stream.
@@ -1190,6 +1273,8 @@ type Record struct {
 	//
 	// This member is required.
 	Data []byte
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of a destination in Amazon Redshift.
@@ -1249,6 +1334,8 @@ type RedshiftDestinationConfiguration struct {
 	// to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
 	// update the delivery stream to disable it.
 	S3BackupMode RedshiftS3BackupMode
+
+	noSmithyDocumentSerde
 }
 
 // Describes a destination in Amazon Redshift.
@@ -1296,6 +1383,8 @@ type RedshiftDestinationDescription struct {
 
 	// The Amazon S3 backup mode.
 	S3BackupMode RedshiftS3BackupMode
+
+	noSmithyDocumentSerde
 }
 
 // Describes an update for a destination in Amazon Redshift.
@@ -1340,6 +1429,8 @@ type RedshiftDestinationUpdate struct {
 
 	// The name of the user.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
@@ -1352,6 +1443,8 @@ type RedshiftRetryOptions struct {
 	// if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt
 	// takes longer than the current value.
 	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of a destination in Amazon S3.
@@ -1399,6 +1492,8 @@ type S3DestinationConfiguration struct {
 	// Prefixes for Amazon S3 Objects
 	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a destination in Amazon S3.
@@ -1449,6 +1544,8 @@ type S3DestinationDescription struct {
 	// Prefixes for Amazon S3 Objects
 	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an update for a destination in Amazon S3.
@@ -1492,6 +1589,8 @@ type S3DestinationUpdate struct {
 	// Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the schema to which you want Kinesis Data Firehose to configure your
@@ -1524,6 +1623,8 @@ type SchemaConfiguration struct {
 	// recent version. This means that any updates to the table are automatically
 	// picked up.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The serializer that you want Kinesis Data Firehose to use to convert data to the
@@ -1542,6 +1643,8 @@ type Serializer struct {
 	// in Amazon S3. For more information, see Apache Parquet
 	// (https://parquet.apache.org/documentation/latest/).
 	ParquetSerDe *ParquetSerDe
+
+	noSmithyDocumentSerde
 }
 
 // Details about a Kinesis data stream used as the source for a Kinesis Data
@@ -1550,6 +1653,8 @@ type SourceDescription struct {
 
 	// The KinesisStreamSourceDescription value for the source Kinesis data stream.
 	KinesisStreamSourceDescription *KinesisStreamSourceDescription
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of a destination in Splunk.
@@ -1601,6 +1706,8 @@ type SplunkDestinationConfiguration struct {
 	// this backup mode from FailedEventsOnly to AllEvents. You can't update it from
 	// AllEvents to FailedEventsOnly.
 	S3BackupMode SplunkS3BackupMode
+
+	noSmithyDocumentSerde
 }
 
 // Describes a destination in Splunk.
@@ -1641,6 +1748,8 @@ type SplunkDestinationDescription struct {
 
 	// The Amazon S3 destination.>
 	S3DestinationDescription *S3DestinationDescription
+
+	noSmithyDocumentSerde
 }
 
 // Describes an update for a destination in Splunk.
@@ -1684,6 +1793,8 @@ type SplunkDestinationUpdate struct {
 
 	// Your update to the configuration of the backup Amazon S3 location.
 	S3Update *S3DestinationUpdate
+
+	noSmithyDocumentSerde
 }
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
@@ -1695,6 +1806,8 @@ type SplunkRetryOptions struct {
 	// doesn't include the periods during which Kinesis Data Firehose waits for
 	// acknowledgment from Splunk after each attempt.
 	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Metadata that you can assign to a delivery stream, consisting of a key-value
@@ -1711,6 +1824,8 @@ type Tag struct {
 	// length: 256 characters. Valid characters: Unicode letters, digits, white space,
 	// _ . / = + - % @
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the VPC of the Amazon ES destination.
@@ -1781,6 +1896,8 @@ type VpcConfiguration struct {
 	//
 	// This member is required.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the VPC of the Amazon ES destination.
@@ -1856,4 +1973,8 @@ type VpcConfigurationDescription struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -148,6 +148,8 @@ type CreateHITInput struct {
 	// token expires after 24 hours. Subsequent calls using the same UniqueRequestToken
 	// made after the 24 hour limit could create duplicate HITs.
 	UniqueRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateHITOutput struct {
@@ -158,6 +160,8 @@ type CreateHITOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHITMiddlewares(stack *middleware.Stack, options Options) (err error) {

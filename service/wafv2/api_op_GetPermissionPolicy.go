@@ -34,6 +34,8 @@ type GetPermissionPolicyInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPermissionPolicyOutput struct {
@@ -43,6 +45,8 @@ type GetPermissionPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPermissionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

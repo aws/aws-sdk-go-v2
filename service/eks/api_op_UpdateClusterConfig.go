@@ -70,6 +70,8 @@ type UpdateClusterConfigInput struct {
 
 	// An object representing the VPC configuration to use for an Amazon EKS cluster.
 	ResourcesVpcConfig *types.VpcConfigRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateClusterConfigOutput struct {
@@ -79,6 +81,8 @@ type UpdateClusterConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateClusterConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

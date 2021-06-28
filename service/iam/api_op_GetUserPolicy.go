@@ -54,6 +54,8 @@ type GetUserPolicyInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetUserPolicy request.
@@ -79,6 +81,8 @@ type GetUserPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUserPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

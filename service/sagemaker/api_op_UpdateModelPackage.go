@@ -41,6 +41,8 @@ type UpdateModelPackageInput struct {
 
 	// A description for the approval status of the model.
 	ApprovalDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateModelPackageOutput struct {
@@ -52,6 +54,8 @@ type UpdateModelPackageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {

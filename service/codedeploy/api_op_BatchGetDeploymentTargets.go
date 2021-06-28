@@ -68,6 +68,8 @@ type BatchGetDeploymentTargetsInput struct {
 	// For deployments that are deployed with AWS CloudFormation, the target IDs are
 	// CloudFormation stack IDs. Their target type is cloudFormationTarget.
 	TargetIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetDeploymentTargetsOutput struct {
@@ -91,6 +93,8 @@ type BatchGetDeploymentTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetDeploymentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

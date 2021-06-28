@@ -65,6 +65,8 @@ type VerifyDomainDkimInput struct {
 	//
 	// This member is required.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns CNAME records that you must publish to the DNS server of your domain to
@@ -87,6 +89,8 @@ type VerifyDomainDkimOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVerifyDomainDkimMiddlewares(stack *middleware.Stack, options Options) (err error) {

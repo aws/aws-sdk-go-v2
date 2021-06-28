@@ -71,6 +71,8 @@ type ListSlotsInput struct {
 	// choose to sort by the slot name or last updated date in either ascending or
 	// descending order.
 	SortBy *types.SlotSortBy
+
+	noSmithyDocumentSerde
 }
 
 type ListSlotsOutput struct {
@@ -101,6 +103,8 @@ type ListSlotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSlotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

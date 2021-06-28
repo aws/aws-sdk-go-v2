@@ -34,6 +34,8 @@ type DeleteReplicationTaskInput struct {
 	//
 	// This member is required.
 	ReplicationTaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -44,6 +46,8 @@ type DeleteReplicationTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

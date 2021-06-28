@@ -29,6 +29,7 @@ func (c *Client) DescribeAcceleratorTypes(ctx context.Context, params *DescribeA
 }
 
 type DescribeAcceleratorTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeAcceleratorTypesOutput struct {
@@ -38,6 +39,8 @@ type DescribeAcceleratorTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAcceleratorTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

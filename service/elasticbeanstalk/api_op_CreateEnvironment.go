@@ -114,6 +114,8 @@ type CreateEnvironmentInput struct {
 	// The name of the application version to deploy. Default: If not specified,
 	// Elastic Beanstalk attempts to deploy the sample application.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of an environment.
@@ -227,6 +229,8 @@ type CreateEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

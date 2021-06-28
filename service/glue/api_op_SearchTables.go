@@ -75,6 +75,8 @@ type SearchTablesInput struct {
 	// A list of criteria for sorting the results by a field name, in an ascending or
 	// descending order.
 	SortCriteria []types.SortCriterion
+
+	noSmithyDocumentSerde
 }
 
 type SearchTablesOutput struct {
@@ -88,6 +90,8 @@ type SearchTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

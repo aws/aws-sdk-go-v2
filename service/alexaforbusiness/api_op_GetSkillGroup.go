@@ -31,6 +31,8 @@ type GetSkillGroupInput struct {
 
 	// The ARN of the skill group for which to get details. Required.
 	SkillGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSkillGroupOutput struct {
@@ -40,6 +42,8 @@ type GetSkillGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

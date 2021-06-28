@@ -38,11 +38,15 @@ type ModifyInstanceGroupsInput struct {
 
 	// Instance groups to change.
 	InstanceGroups []types.InstanceGroupModifyConfig
+
+	noSmithyDocumentSerde
 }
 
 type ModifyInstanceGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

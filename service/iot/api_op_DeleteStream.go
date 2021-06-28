@@ -32,11 +32,15 @@ type DeleteStreamInput struct {
 	//
 	// This member is required.
 	StreamId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

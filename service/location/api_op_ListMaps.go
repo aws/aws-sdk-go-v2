@@ -37,6 +37,8 @@ type ListMapsInput struct {
 	// The pagination token specifying which page of results to return in the response.
 	// If no token is provided, the default page is the first page. Default value: null
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMapsOutput struct {
@@ -52,6 +54,8 @@ type ListMapsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {

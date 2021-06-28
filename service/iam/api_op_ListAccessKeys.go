@@ -59,6 +59,8 @@ type ListAccessKeysInput struct {
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful ListAccessKeys request.
@@ -83,6 +85,8 @@ type ListAccessKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccessKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

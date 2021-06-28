@@ -49,6 +49,8 @@ type RevokeSnapshotAccessInput struct {
 	// required if your IAM user has a policy containing a snapshot resource element
 	// that specifies anything other than * for the cluster name.
 	SnapshotClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeSnapshotAccessOutput struct {
@@ -58,6 +60,8 @@ type RevokeSnapshotAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeSnapshotAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

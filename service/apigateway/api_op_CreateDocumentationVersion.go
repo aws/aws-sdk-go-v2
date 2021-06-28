@@ -44,6 +44,8 @@ type CreateDocumentationVersionInput struct {
 
 	// The stage name to be associated with the new documentation snapshot.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -64,6 +66,8 @@ type CreateDocumentationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDocumentationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

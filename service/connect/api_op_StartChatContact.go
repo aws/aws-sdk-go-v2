@@ -86,6 +86,8 @@ type StartChatContactInput struct {
 
 	// The initial message to be sent to the newly created chat.
 	InitialMessage *types.ChatMessage
+
+	noSmithyDocumentSerde
 }
 
 type StartChatContactOutput struct {
@@ -104,6 +106,8 @@ type StartChatContactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

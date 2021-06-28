@@ -50,6 +50,8 @@ type UpdateBuildInput struct {
 	// Version information that is associated with a build or script. Version strings
 	// do not need to be unique.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -60,6 +62,8 @@ type UpdateBuildOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {

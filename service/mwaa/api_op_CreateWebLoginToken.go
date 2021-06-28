@@ -34,6 +34,8 @@ type CreateWebLoginTokenInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateWebLoginTokenOutput struct {
@@ -47,6 +49,8 @@ type CreateWebLoginTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWebLoginTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

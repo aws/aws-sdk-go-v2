@@ -61,6 +61,8 @@ type ListRoutesInput struct {
 	// continues from the end of the previous results that returned the nextToken
 	// value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -79,6 +81,8 @@ type ListRoutesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {

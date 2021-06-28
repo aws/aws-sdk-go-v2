@@ -32,11 +32,15 @@ type StopChannelInput struct {
 	//
 	// This member is required.
 	ChannelName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

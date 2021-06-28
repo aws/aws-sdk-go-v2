@@ -44,6 +44,8 @@ type PutAttributesInput struct {
 	// the resource to apply attributes. If you do not specify a cluster, the default
 	// cluster is assumed.
 	Cluster *string
+
+	noSmithyDocumentSerde
 }
 
 type PutAttributesOutput struct {
@@ -53,6 +55,8 @@ type PutAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -110,6 +110,8 @@ type CreateDiskFromSnapshotInput struct {
 	// Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateDiskFromSnapshotOutput struct {
@@ -121,6 +123,8 @@ type CreateDiskFromSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDiskFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

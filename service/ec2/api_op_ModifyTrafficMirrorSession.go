@@ -69,6 +69,8 @@ type ModifyTrafficMirrorSessionInput struct {
 
 	// The virtual network ID of the Traffic Mirror session.
 	VirtualNetworkId *int32
+
+	noSmithyDocumentSerde
 }
 
 type ModifyTrafficMirrorSessionOutput struct {
@@ -78,6 +80,8 @@ type ModifyTrafficMirrorSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyTrafficMirrorSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

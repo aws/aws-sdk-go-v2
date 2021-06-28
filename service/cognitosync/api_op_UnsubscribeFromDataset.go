@@ -67,12 +67,16 @@ type UnsubscribeFromDatasetInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Response to an UnsubscribeFromDataset request.
 type UnsubscribeFromDatasetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnsubscribeFromDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

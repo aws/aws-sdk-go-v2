@@ -40,6 +40,8 @@ type UpdateCodeRepositoryInput struct {
 	// staging label of AWSCURRENT and must be in the following format: {"username":
 	// UserName, "password": Password}
 	GitConfig *types.GitConfigForUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCodeRepositoryOutput struct {
@@ -51,6 +53,8 @@ type UpdateCodeRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

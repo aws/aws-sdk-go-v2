@@ -32,11 +32,15 @@ type RebootBrokerInput struct {
 	//
 	// This member is required.
 	BrokerId *string
+
+	noSmithyDocumentSerde
 }
 
 type RebootBrokerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type DeleteKnownHostKeysInput struct {
 	//
 	// This member is required.
 	InstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteKnownHostKeysOutput struct {
@@ -53,6 +55,8 @@ type DeleteKnownHostKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteKnownHostKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

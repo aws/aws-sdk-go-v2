@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -106,6 +107,8 @@ type AccountQuota struct {
 
 	// The amount currently used toward the quota maximum.
 	Used int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains Availability Zone information. This data type is used as an element in
@@ -114,6 +117,8 @@ type AvailabilityZone struct {
 
 	// The name of the Availability Zone.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the available processor feature information for the DB instance class
@@ -131,6 +136,8 @@ type AvailableProcessorFeature struct {
 
 	// The name of the processor feature. Valid names are coreCount and threadsPerCore.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A CA certificate for an Amazon Web Services account.
@@ -160,6 +167,8 @@ type Certificate struct {
 
 	// The final date that the certificate continues to be valid.
 	ValidTill *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the action
@@ -171,6 +180,8 @@ type CharacterSet struct {
 
 	// The name of the character set.
 	CharacterSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration setting for the log types to be enabled for export to
@@ -192,6 +203,8 @@ type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to enable.
 	EnableLogTypes []string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the ModifyDBCluster operation
@@ -214,6 +227,8 @@ type ClusterPendingModifiedValues struct {
 	// A list of the log types whose configuration is still pending. In other words,
 	// these log types are in the process of being activated or deactivated.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings that control the size and behavior of the connection pool
@@ -254,6 +269,8 @@ type ConnectionPoolConfiguration struct {
 	// underlying database connection. Including an item in the list exempts that class
 	// of SQL operations from the pinning behavior. Default: no session pinning filters
 	SessionPinningFilters []string
+
+	noSmithyDocumentSerde
 }
 
 // Displays the settings that control the size and behavior of the connection pool
@@ -292,6 +309,8 @@ type ConnectionPoolConfigurationInfo struct {
 	// of SQL operations from the pinning behavior. Currently, the only allowed value
 	// is EXCLUDE_VARIABLE_SETS.
 	SessionPinningFilters []string
+
+	noSmithyDocumentSerde
 }
 
 // A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a
@@ -313,6 +332,8 @@ type CustomAvailabilityZone struct {
 	// Information about the virtual private network (VPN) between the VMware vSphere
 	// cluster and the Amazon Web Services website.
 	VpnDetails *VpnDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon Aurora DB cluster. This data type is used as a
@@ -559,6 +580,8 @@ type DBCluster struct {
 
 	// Provides a list of VPC security groups that the DB cluster belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the DescribeDBClusterBacktracks
@@ -596,6 +619,8 @@ type DBClusterBacktrack struct {
 	// * pending - The
 	// backtrack is currently pending application to or rollback from the DB cluster.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -652,6 +677,8 @@ type DBClusterEndpoint struct {
 	// used for a certain kind of cluster, such as a writer endpoint for a read-only
 	// secondary cluster in a global database.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an instance that is part of a DB cluster.
@@ -674,6 +701,8 @@ type DBClusterMember struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance)
 	// in the Amazon Aurora User Guide.
 	PromotionTier *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains status information for a DB cluster option group.
@@ -684,6 +713,8 @@ type DBClusterOptionGroupStatus struct {
 
 	// Specifies the status of the DB cluster option group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon RDS DB cluster parameter group. This data type
@@ -702,6 +733,8 @@ type DBClusterParameterGroup struct {
 
 	// Provides the customer-specified description for this DB cluster parameter group.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Web Services Identity and Access Management (IAM) role that
@@ -731,6 +764,8 @@ type DBClusterRole struct {
 	// but the DB cluster is unable to assume the IAM role in order to access other
 	// Amazon Web Services on your behalf.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details for an Amazon RDS DB cluster snapshot This data type is
@@ -815,6 +850,8 @@ type DBClusterSnapshot struct {
 
 	// Provides the VPC ID associated with the DB cluster snapshot.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name and values of a manual DB cluster snapshot attribute. Manual
@@ -836,6 +873,8 @@ type DBClusterSnapshotAttribute struct {
 	// snapshot is public and available for any Amazon Web Services account to copy or
 	// restore.
 	AttributeValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of a successful call to the
@@ -850,6 +889,8 @@ type DBClusterSnapshotAttributesResult struct {
 
 	// The identifier of the manual DB cluster snapshot that the attributes apply to.
 	DBClusterSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the action
@@ -920,6 +961,8 @@ type DBEngineVersion struct {
 
 	// A list of engine versions that this database engine version can be upgraded to.
 	ValidUpgradeTarget []UpgradeTarget
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon RDS DB instance. This data type is used as a
@@ -1240,6 +1283,8 @@ type DBInstance struct {
 
 	// Provides a list of VPC security group elements that the DB instance belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 // An automated backup of a DB instance. It consists of system backups, transaction
@@ -1347,6 +1392,8 @@ type DBInstanceAutomatedBackup struct {
 
 	// Provides the VPC ID associated with the DB instance
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Automated backups of a DB instance replicated to another Amazon Web Services
@@ -1356,6 +1403,8 @@ type DBInstanceAutomatedBackupsReplication struct {
 
 	// The Amazon Resource Name (ARN) of the replicated automated backups.
 	DBInstanceAutomatedBackupsArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Web Services Identity and Access Management (IAM) role that
@@ -1385,6 +1434,8 @@ type DBInstanceRole struct {
 	// with the DB instance, but the DB instance is unable to assume the IAM role in
 	// order to access other Amazon Web Services services on your behalf.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a list of status information for a DB instance.
@@ -1405,6 +1456,8 @@ type DBInstanceStatusInfo struct {
 
 	// This value is currently "read replication."
 	StatusType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon RDS DB parameter group. This data type is used
@@ -1423,6 +1476,8 @@ type DBParameterGroup struct {
 
 	// Provides the customer-specified description for this DB parameter group.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the DB parameter group. This data type is used as a response
@@ -1448,6 +1503,8 @@ type DBParameterGroupStatus struct {
 
 	// The status of parameter updates.
 	ParameterApplyStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // The data structure representing a proxy managed by the RDS Proxy. This data type
@@ -1514,6 +1571,8 @@ type DBProxy struct {
 
 	// The EC2 subnet IDs for the proxy.
 	VpcSubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The data structure representing an endpoint associated with a DB proxy. RDS
@@ -1565,6 +1624,8 @@ type DBProxyEndpoint struct {
 
 	// The EC2 subnet IDs for the DB proxy endpoint.
 	VpcSubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details for an RDS Proxy target. It represents an RDS DB instance
@@ -1601,6 +1662,8 @@ type DBProxyTarget struct {
 	// Specifies the kind of database, such as an RDS DB instance or an Aurora DB
 	// cluster, that the target represents.
 	Type TargetType
+
+	noSmithyDocumentSerde
 }
 
 // Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy
@@ -1640,6 +1703,8 @@ type DBProxyTargetGroup struct {
 
 	// The date and time when the target group was last updated.
 	UpdatedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details for an Amazon RDS DB security group. This data type is used
@@ -1667,6 +1732,8 @@ type DBSecurityGroup struct {
 
 	// Provides the VpcId of the DB security group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the following actions:
@@ -1687,6 +1754,8 @@ type DBSecurityGroupMembership struct {
 
 	// The status of the DB security group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon RDS DB snapshot. This data type is used as a
@@ -1797,6 +1866,8 @@ type DBSnapshot struct {
 
 	// Provides the VPC ID associated with the DB snapshot.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name and values of a manual DB snapshot attribute Manual DB
@@ -1817,6 +1888,8 @@ type DBSnapshotAttribute struct {
 	// snapshot. If a value of all is in the list, then the manual DB snapshot is
 	// public and available for any Amazon Web Services account to copy or restore.
 	AttributeValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of a successful call to the DescribeDBSnapshotAttributes
@@ -1830,6 +1903,8 @@ type DBSnapshotAttributesResult struct {
 
 	// The identifier of the manual DB snapshot that the attributes apply to.
 	DBSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon RDS DB subnet group. This data type is used as
@@ -1853,6 +1928,8 @@ type DBSubnetGroup struct {
 
 	// Provides the VpcId of the DB subnet group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element to DescribeDBLogFiles.
@@ -1866,6 +1943,8 @@ type DescribeDBLogFilesDetails struct {
 
 	// The size, in bytes, of the log file for the specified DB instance.
 	Size int64
+
+	noSmithyDocumentSerde
 }
 
 // An Active Directory Domain membership record associated with the DB instance or
@@ -1885,6 +1964,8 @@ type DomainMembership struct {
 	// The status of the Active Directory Domain membership for the DB instance or
 	// cluster. Values include joined, pending-join, failed, and so on.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A range of double values.
@@ -1895,6 +1976,8 @@ type DoubleRange struct {
 
 	// The maximum value in the range.
 	To float64
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the following actions:
@@ -1921,6 +2004,8 @@ type EC2SecurityGroup struct {
 	// Provides the status of the EC2 security group. Status can be "authorizing",
 	// "authorized", "revoking", and "revoked".
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type represents the information you need to connect to an Amazon RDS
@@ -1946,6 +2031,8 @@ type Endpoint struct {
 
 	// Specifies the port that the database engine is listening on.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of a successful invocation of the
@@ -1963,6 +2050,8 @@ type EngineDefaults struct {
 
 	// Contains a list of engine default parameters.
 	Parameters []Parameter
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the DescribeEvents action.
@@ -1985,6 +2074,8 @@ type Event struct {
 
 	// Specifies the source type for this event.
 	SourceType SourceType
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of a successful invocation of the DescribeEventCategories
@@ -1996,6 +2087,8 @@ type EventCategoriesMap struct {
 
 	// The source type that the returned categories belong to
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of a successful invocation of the
@@ -2037,6 +2130,8 @@ type EventSubscription struct {
 
 	// The time the RDS event notification subscription was created.
 	SubscriptionCreationTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of a snapshot export to Amazon S3. This data type is used
@@ -2109,6 +2204,8 @@ type ExportTask struct {
 
 	// A warning about the snapshot export task.
 	WarningMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the state of scheduled or in-process failover operations on an Aurora
@@ -2142,6 +2239,8 @@ type FailoverState struct {
 	// The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being
 	// promoted, and which is associated with this state.
 	ToDbClusterArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter name and value pair that is used to return a more specific list of
@@ -2172,6 +2271,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A data type representing an Aurora global database.
@@ -2217,6 +2318,8 @@ type GlobalCluster struct {
 
 	// The storage encryption setting for the global database cluster.
 	StorageEncrypted *bool
+
+	noSmithyDocumentSerde
 }
 
 // A data structure with information about any primary and secondary clusters
@@ -2238,6 +2341,8 @@ type GlobalClusterMember struct {
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
 	// with the Aurora global database.
 	Readers []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the installation media for a DB engine that requires an on-premises
@@ -2268,6 +2373,8 @@ type InstallationMedia struct {
 
 	// The status of the installation medium.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the cause of an installation media failure. Installation media is used
@@ -2277,6 +2384,8 @@ type InstallationMediaFailureCause struct {
 
 	// The reason that an installation media import failed.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the DescribeDBSecurityGroups
@@ -2289,6 +2398,8 @@ type IPRange struct {
 	// Specifies the status of the IP range. Status can be "authorizing", "authorized",
 	// "revoking", and "revoked".
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The minimum DB engine version required for each corresponding allowed value for
@@ -2300,6 +2411,8 @@ type MinimumEngineVersionPerAllowedValue struct {
 
 	// The minimum DB engine version required for the allowed value.
 	MinimumEngineVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Option details.
@@ -2333,6 +2446,8 @@ type Option struct {
 	// If the option requires access to a port, then this VPC security group allows
 	// access to the port.
 	VpcSecurityGroupMemberships []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 // A list of all available options
@@ -2357,6 +2472,8 @@ type OptionConfiguration struct {
 
 	// A list of VpcSecurityGroupMembership name strings used for this option.
 	VpcSecurityGroupMemberships []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -2391,6 +2508,8 @@ type OptionGroup struct {
 	// contains a value, then this option group can only be applied to instances that
 	// are in the VPC indicated by this field.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information on the option groups the DB instance is a member of.
@@ -2403,6 +2522,8 @@ type OptionGroupMembership struct {
 	// in-sync, pending-apply, pending-removal, pending-maintenance-apply,
 	// pending-maintenance-removal, applying, removing, and failed.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Available option.
@@ -2463,6 +2584,8 @@ type OptionGroupOption struct {
 
 	// If true, you can only use this option with a DB instance that is in a VPC.
 	VpcOnly bool
+
+	noSmithyDocumentSerde
 }
 
 // Option group option settings are used to display settings available for each
@@ -2496,6 +2619,8 @@ type OptionGroupOptionSetting struct {
 
 	// The name of the option group option.
 	SettingName *string
+
+	noSmithyDocumentSerde
 }
 
 // Option settings are the actual settings being applied or configured for that
@@ -2531,6 +2656,8 @@ type OptionSetting struct {
 
 	// The current value of the option setting.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The version for an option. Option group option versions are returned by the
@@ -2542,6 +2669,8 @@ type OptionVersion struct {
 
 	// The version of the option.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of available options for a DB instance. This data type is used
@@ -2641,6 +2770,8 @@ type OrderableDBInstanceOption struct {
 
 	// Indicates whether a DB instance is in a VPC.
 	Vpc bool
+
+	noSmithyDocumentSerde
 }
 
 // A data type that represents an Outpost. For more information about RDS on
@@ -2651,6 +2782,8 @@ type Outpost struct {
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a request parameter in the ModifyDBParameterGroup and
@@ -2692,6 +2825,8 @@ type Parameter struct {
 
 	// The valid DB engine modes.
 	SupportedEngineModes []string
+
+	noSmithyDocumentSerde
 }
 
 // A list of the log types whose configuration is still pending. In other words,
@@ -2705,6 +2840,8 @@ type PendingCloudwatchLogsExports struct {
 	// Log types that are in the process of being deactivated. After they are
 	// deactivated, these log types aren't exported to CloudWatch Logs.
 	LogTypesToEnable []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a pending maintenance action for a resource.
@@ -2738,6 +2875,8 @@ type PendingMaintenanceAction struct {
 
 	// Indicates the type of opt-in request that has been received for the resource.
 	OptInStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the ModifyDBInstance operation
@@ -2796,6 +2935,8 @@ type PendingModifiedValues struct {
 
 	// The storage type of the DB instance.
 	StorageType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the processor features of a DB instance class. To specify the number of
@@ -2853,6 +2994,8 @@ type ProcessorFeature struct {
 
 	// The value of a processor feature name.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A range of integer values.
@@ -2869,6 +3012,8 @@ type Range struct {
 
 	// The maximum value in the range.
 	To int32
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the DescribeReservedDBInstances
@@ -2880,6 +3025,8 @@ type RecurringCharge struct {
 
 	// The frequency of the recurring charge.
 	RecurringChargeFrequency *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the DescribeReservedDBInstances
@@ -2935,6 +3082,8 @@ type ReservedDBInstance struct {
 
 	// The hourly price charged for this reserved DB instance.
 	UsagePrice float64
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the
@@ -2970,6 +3119,8 @@ type ReservedDBInstancesOffering struct {
 
 	// The hourly price charged for this offering.
 	UsagePrice float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes the pending maintenance actions for a resource.
@@ -2981,6 +3132,8 @@ type ResourcePendingMaintenanceActions struct {
 
 	// The ARN of the resource that has pending maintenance actions.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Earliest and latest time an instance can be restored to:
@@ -2991,6 +3144,8 @@ type RestoreWindow struct {
 
 	// The latest time you can restore an instance to.
 	LatestTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the scaling configuration of an Aurora Serverless DB cluster. For more
@@ -3032,6 +3187,8 @@ type ScalingConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling)
 	// in the Amazon Aurora User Guide.
 	TimeoutAction *string
+
+	noSmithyDocumentSerde
 }
 
 // Shows the scaling configuration for an Aurora DB cluster in serverless DB engine
@@ -3059,6 +3216,8 @@ type ScalingConfigurationInfo struct {
 	// The timeout action of a call to ModifyCurrentDBClusterCapacity, either
 	// ForceApplyCapacityChange or RollbackCapacityChange.
 	TimeoutAction *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an Amazon Web Services Region name as the result of a successful call
@@ -3077,6 +3236,8 @@ type SourceRegion struct {
 	// Whether the source Amazon Web Services Region supports replicating automated
 	// backups to the current Amazon Web Services Region.
 	SupportsDBInstanceAutomatedBackupsReplication bool
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element for the DescribeDBSubnetGroups
@@ -3099,6 +3260,8 @@ type Subnet struct {
 
 	// The status of the subnet.
 	SubnetStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
@@ -3117,6 +3280,8 @@ type Tag struct {
 	// ':', '/', '=', '+', '-', '@' (Java regex:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the connection health of an RDS Proxy target.
@@ -3133,6 +3298,8 @@ type TargetHealth struct {
 	// The following is a typical lifecycle example for the states of an RDS Proxy
 	// target: registering > unavailable > available > unavailable > available
 	State TargetState
+
+	noSmithyDocumentSerde
 }
 
 // A time zone associated with a DBInstance or a DBSnapshot. This data type is an
@@ -3142,6 +3309,8 @@ type Timezone struct {
 
 	// The name of the time zone.
 	TimezoneName *string
+
+	noSmithyDocumentSerde
 }
 
 // The version of the database engine that a DB instance can be upgraded to.
@@ -3174,6 +3343,8 @@ type UpgradeTarget struct {
 	// A value that indicates whether you can use Aurora parallel query with the target
 	// engine version.
 	SupportsParallelQuery *bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the details of authentication used by a proxy to log in as a specific
@@ -3199,6 +3370,8 @@ type UserAuthConfig struct {
 
 	// The name of the database user to which the proxy connects.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the details of authentication used by a proxy to log in as a specific
@@ -3224,6 +3397,8 @@ type UserAuthConfigInfo struct {
 
 	// The name of the database user to which the proxy connects.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about valid modifications that you can make to your DB instance.
@@ -3237,6 +3412,8 @@ type ValidDBInstanceModificationsMessage struct {
 
 	// Valid processor features for your DB instance.
 	ValidProcessorFeatures []AvailableProcessorFeature
+
+	noSmithyDocumentSerde
 }
 
 // Information about valid modifications that you can make to your DB instance.
@@ -3261,6 +3438,8 @@ type ValidStorageOptions struct {
 	// Whether or not Amazon RDS can automatically scale storage for DB instances that
 	// use the new instance class.
 	SupportsStorageAutoscaling bool
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element for queries on VPC security group
@@ -3272,6 +3451,8 @@ type VpcSecurityGroupMembership struct {
 
 	// The name of the VPC security group.
 	VpcSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the virtual private network (VPN) between the VMware vSphere
@@ -3299,4 +3480,8 @@ type VpnDetails struct {
 	// The IP address of network traffic from your on-premises data center. A custom AZ
 	// receives the network traffic.
 	VpnTunnelOriginatorIP *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

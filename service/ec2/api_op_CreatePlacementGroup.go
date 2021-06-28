@@ -56,6 +56,8 @@ type CreatePlacementGroupInput struct {
 
 	// The tags to apply to the new placement group.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreatePlacementGroupOutput struct {
@@ -65,6 +67,8 @@ type CreatePlacementGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePlacementGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

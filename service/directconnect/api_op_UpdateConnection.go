@@ -48,6 +48,8 @@ type UpdateConnectionInput struct {
 	// The connection MAC Security (MACsec) encryption mode. The valid values are
 	// no_encrypt, should_encrypt, and must_encrypt.
 	EncryptionMode *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect connection.
@@ -157,6 +159,8 @@ type UpdateConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

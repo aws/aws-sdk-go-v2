@@ -28,6 +28,7 @@ func (c *Client) GetAssociationForServiceQuotaTemplate(ctx context.Context, para
 }
 
 type GetAssociationForServiceQuotaTemplateInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetAssociationForServiceQuotaTemplateOutput struct {
@@ -38,6 +39,8 @@ type GetAssociationForServiceQuotaTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssociationForServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

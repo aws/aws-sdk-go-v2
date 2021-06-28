@@ -48,11 +48,15 @@ type UpdateTableInput struct {
 	// updating it. However, if skipArchive is set to true, UpdateTable does not create
 	// the archived version.
 	SkipArchive *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

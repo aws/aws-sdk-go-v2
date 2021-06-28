@@ -61,6 +61,8 @@ type CreateContextInput struct {
 
 	// A list of tags to apply to the context.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateContextOutput struct {
@@ -70,6 +72,8 @@ type CreateContextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContextMiddlewares(stack *middleware.Stack, options Options) (err error) {

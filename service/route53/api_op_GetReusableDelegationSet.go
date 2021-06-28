@@ -36,6 +36,8 @@ type GetReusableDelegationSetInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to the GetReusableDelegationSet
@@ -49,6 +51,8 @@ type GetReusableDelegationSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReusableDelegationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

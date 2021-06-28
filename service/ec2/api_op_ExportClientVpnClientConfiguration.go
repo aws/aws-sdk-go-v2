@@ -41,6 +41,8 @@ type ExportClientVpnClientConfigurationInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type ExportClientVpnClientConfigurationOutput struct {
@@ -50,6 +52,8 @@ type ExportClientVpnClientConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportClientVpnClientConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

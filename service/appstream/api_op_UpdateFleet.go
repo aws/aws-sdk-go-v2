@@ -204,6 +204,8 @@ type UpdateFleetInput struct {
 
 	// The VPC configuration for the fleet.
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFleetOutput struct {
@@ -213,6 +215,8 @@ type UpdateFleetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,15 @@ type DeleteDestinationInput struct {
 	//
 	// This member is required.
 	DestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,6 +32,8 @@ type CreateConfigurationSetInput struct {
 
 	// The name that you want to give the configuration set.
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty object that indicates that the configuration set was successfully
@@ -39,6 +41,8 @@ type CreateConfigurationSetInput struct {
 type CreateConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

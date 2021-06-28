@@ -65,6 +65,8 @@ type SendChannelMessageInput struct {
 
 	// The optional metadata for each message.
 	Metadata *string
+
+	noSmithyDocumentSerde
 }
 
 type SendChannelMessageOutput struct {
@@ -77,6 +79,8 @@ type SendChannelMessageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

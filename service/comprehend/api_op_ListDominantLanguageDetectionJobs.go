@@ -40,6 +40,8 @@ type ListDominantLanguageDetectionJobsInput struct {
 
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDominantLanguageDetectionJobsOutput struct {
@@ -52,6 +54,8 @@ type ListDominantLanguageDetectionJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDominantLanguageDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

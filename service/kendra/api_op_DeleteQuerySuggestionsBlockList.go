@@ -39,11 +39,15 @@ type DeleteQuerySuggestionsBlockListInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteQuerySuggestionsBlockListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,11 +45,15 @@ type CreatePreparedStatementInput struct {
 
 	// The description of the prepared statement.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePreparedStatementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

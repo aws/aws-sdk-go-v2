@@ -59,12 +59,16 @@ type StartConfigRulesEvaluationInput struct {
 
 	// The list of names of AWS Config rules that you want to run evaluations for.
 	ConfigRuleNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The output when you start the evaluation for the specified AWS Config rule.
 type StartConfigRulesEvaluationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartConfigRulesEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {

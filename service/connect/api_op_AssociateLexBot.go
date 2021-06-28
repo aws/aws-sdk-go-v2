@@ -41,11 +41,15 @@ type AssociateLexBotInput struct {
 	//
 	// This member is required.
 	LexBot *types.LexBot
+
+	noSmithyDocumentSerde
 }
 
 type AssociateLexBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateLexBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

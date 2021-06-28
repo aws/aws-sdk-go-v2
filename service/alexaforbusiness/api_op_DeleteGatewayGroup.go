@@ -32,11 +32,15 @@ type DeleteGatewayGroupInput struct {
 	//
 	// This member is required.
 	GatewayGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGatewayGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGatewayGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

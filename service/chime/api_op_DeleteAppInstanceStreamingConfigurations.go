@@ -32,11 +32,15 @@ type DeleteAppInstanceStreamingConfigurationsInput struct {
 	//
 	// This member is required.
 	AppInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAppInstanceStreamingConfigurationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAppInstanceStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

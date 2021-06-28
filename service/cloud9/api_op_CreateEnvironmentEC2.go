@@ -102,6 +102,8 @@ type CreateEnvironmentEC2Input struct {
 	// An array of key-value pairs that will be associated with the new Cloud9
 	// development environment.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentEC2Output struct {
@@ -111,6 +113,8 @@ type CreateEnvironmentEC2Output struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentEC2Middlewares(stack *middleware.Stack, options Options) (err error) {

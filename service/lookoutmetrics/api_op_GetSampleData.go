@@ -31,6 +31,8 @@ type GetSampleDataInput struct {
 
 	// A datasource bucket in Amazon S3.
 	S3SourceConfig *types.SampleDataS3SourceConfig
+
+	noSmithyDocumentSerde
 }
 
 type GetSampleDataOutput struct {
@@ -43,6 +45,8 @@ type GetSampleDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSampleDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

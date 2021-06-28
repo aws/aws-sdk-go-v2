@@ -41,11 +41,15 @@ type PublishInput struct {
 
 	// The Quality of Service (QoS) level.
 	Qos int32
+
+	noSmithyDocumentSerde
 }
 
 type PublishOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {

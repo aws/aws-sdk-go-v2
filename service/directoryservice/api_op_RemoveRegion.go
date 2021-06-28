@@ -34,11 +34,15 @@ type RemoveRegionInput struct {
 	//
 	// This member is required.
 	DirectoryId *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {

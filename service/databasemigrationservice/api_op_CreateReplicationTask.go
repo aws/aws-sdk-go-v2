@@ -125,6 +125,8 @@ type CreateReplicationTaskInput struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html) in
 	// the Database Migration Service User Guide.
 	TaskData *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -135,6 +137,8 @@ type CreateReplicationTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

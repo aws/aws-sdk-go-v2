@@ -57,6 +57,8 @@ type CreateProjectInput struct {
 
 	// Metadata tags to apply to this project.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateProjectOutput struct {
@@ -68,6 +70,8 @@ type CreateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type DeleteEmailTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // If the action is successful, the service sends back an HTTP 200 response with an
@@ -43,6 +45,8 @@ type DeleteEmailTemplateInput struct {
 type DeleteEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

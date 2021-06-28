@@ -41,6 +41,8 @@ type ListRecipesInput struct {
 	// LATEST_PUBLISHED recipe versions. Valid values: LATEST_WORKING |
 	// LATEST_PUBLISHED
 	RecipeVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRecipesOutput struct {
@@ -56,6 +58,8 @@ type ListRecipesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {

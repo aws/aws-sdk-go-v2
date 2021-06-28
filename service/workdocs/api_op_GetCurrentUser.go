@@ -39,6 +39,8 @@ type GetCurrentUserInput struct {
 	//
 	// This member is required.
 	AuthenticationToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCurrentUserOutput struct {
@@ -48,6 +50,8 @@ type GetCurrentUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCurrentUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

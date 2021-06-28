@@ -55,6 +55,8 @@ type ModifyGlobalClusterInput struct {
 	//
 	// Example: my-cluster2
 	NewGlobalClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyGlobalClusterOutput struct {
@@ -64,6 +66,8 @@ type ModifyGlobalClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type ImportRestApiInput struct {
 	// endpointConfigurationTypes=REGIONAL --body
 	// 'file:///path/to/imported-api-body.json'
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a REST API. Create an API
@@ -126,6 +128,8 @@ type ImportRestApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

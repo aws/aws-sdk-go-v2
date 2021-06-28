@@ -55,11 +55,15 @@ type DeleteMessageInput struct {
 	//
 	// This member is required.
 	ReceiptHandle *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMessageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

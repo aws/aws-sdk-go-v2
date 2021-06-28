@@ -79,6 +79,8 @@ type CreateIndexInput struct {
 
 	// The user token configuration.
 	UserTokenConfigurations []types.UserTokenConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type CreateIndexOutput struct {
@@ -89,6 +91,8 @@ type CreateIndexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,11 +45,15 @@ type UpdateQueueStatusInput struct {
 	//
 	// This member is required.
 	Status types.QueueStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQueueStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQueueStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

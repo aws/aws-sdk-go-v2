@@ -33,6 +33,8 @@ type GetEulaInput struct {
 	//
 	// This member is required.
 	EulaId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEulaOutput struct {
@@ -42,6 +44,8 @@ type GetEulaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEulaMiddlewares(stack *middleware.Stack, options Options) (err error) {

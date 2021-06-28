@@ -60,6 +60,8 @@ type CreateConnectorProfileInput struct {
 	// AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses
 	// the Amazon AppFlow-managed KMS key.
 	KmsArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateConnectorProfileOutput struct {
@@ -69,6 +71,8 @@ type CreateConnectorProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

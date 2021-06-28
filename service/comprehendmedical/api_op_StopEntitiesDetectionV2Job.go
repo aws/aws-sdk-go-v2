@@ -32,6 +32,8 @@ type StopEntitiesDetectionV2JobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopEntitiesDetectionV2JobOutput struct {
@@ -41,6 +43,8 @@ type StopEntitiesDetectionV2JobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {

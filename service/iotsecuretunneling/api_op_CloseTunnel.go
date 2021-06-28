@@ -37,11 +37,15 @@ type CloseTunnelInput struct {
 
 	// When set to true, AWS IoT Secure Tunneling deletes the tunnel data immediately.
 	Delete bool
+
+	noSmithyDocumentSerde
 }
 
 type CloseTunnelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCloseTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {

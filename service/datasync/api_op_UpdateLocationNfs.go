@@ -65,11 +65,15 @@ type UpdateLocationNfsInput struct {
 	// The /etc/exports Configuration File in the Red Hat Enterprise Linux
 	// documentation.
 	Subdirectory *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLocationNfsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type DescribeConfigurationRecordersInput struct {
 
 	// A list of configuration recorder names.
 	ConfigurationRecorderNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DescribeConfigurationRecorders action.
@@ -45,6 +47,8 @@ type DescribeConfigurationRecordersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConfigurationRecordersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type ListBundlesInput struct {
 	// pagination token is returned in a result, then pass its value in here in another
 	// request to list more bundles.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Result structure contains a list of all available bundles with details.
@@ -52,6 +54,8 @@ type ListBundlesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {

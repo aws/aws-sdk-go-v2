@@ -88,6 +88,8 @@ type CreateProductInput struct {
 
 	// One or more tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateProductOutput struct {
@@ -103,6 +105,8 @@ type CreateProductOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

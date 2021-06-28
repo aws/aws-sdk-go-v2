@@ -39,6 +39,8 @@ type DeleteCampaignInput struct {
 	//
 	// This member is required.
 	CampaignId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCampaignOutput struct {
@@ -51,6 +53,8 @@ type DeleteCampaignOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {

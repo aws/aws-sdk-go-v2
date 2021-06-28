@@ -41,6 +41,8 @@ type DeleteTapeArchiveInput struct {
 	// can be deleted. Archived tapes with tape retention lock set to compliance can't
 	// be deleted.
 	BypassGovernanceRetention bool
+
+	noSmithyDocumentSerde
 }
 
 // DeleteTapeArchiveOutput
@@ -52,6 +54,8 @@ type DeleteTapeArchiveOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTapeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {

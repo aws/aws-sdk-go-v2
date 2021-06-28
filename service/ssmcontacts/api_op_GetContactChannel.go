@@ -34,6 +34,8 @@ type GetContactChannelInput struct {
 	//
 	// This member is required.
 	ContactChannelId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetContactChannelOutput struct {
@@ -69,6 +71,8 @@ type GetContactChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

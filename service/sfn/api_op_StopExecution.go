@@ -39,6 +39,8 @@ type StopExecutionInput struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 type StopExecutionOutput struct {
@@ -50,6 +52,8 @@ type StopExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

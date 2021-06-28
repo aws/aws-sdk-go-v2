@@ -44,6 +44,8 @@ type DescribeStepInput struct {
 	//
 	// This member is required.
 	StepId *string
+
+	noSmithyDocumentSerde
 }
 
 // This output contains the description of the cluster step.
@@ -54,6 +56,8 @@ type DescribeStepOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStepMiddlewares(stack *middleware.Stack, options Options) (err error) {

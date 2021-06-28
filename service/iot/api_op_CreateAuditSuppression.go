@@ -57,11 +57,15 @@ type CreateAuditSuppressionInput struct {
 
 	// Indicates whether a suppression should exist indefinitely or not.
 	SuppressIndefinitely *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateAuditSuppressionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAuditSuppressionMiddlewares(stack *middleware.Stack, options Options) (err error) {

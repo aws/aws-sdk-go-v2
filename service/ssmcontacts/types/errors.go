@@ -10,6 +10,8 @@ import (
 // You don't have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -30,6 +32,8 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -47,6 +51,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The action failed to due an encryption key error.
 type DataEncryptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DataEncryptionException) Error() string {
@@ -66,6 +72,8 @@ type InternalServerException struct {
 	Message *string
 
 	RetryAfterSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -86,6 +94,8 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -108,6 +118,8 @@ type ServiceQuotaExceededException struct {
 	ResourceType *string
 	QuotaCode    *string
 	ServiceCode  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -129,6 +141,8 @@ type ThrottlingException struct {
 	QuotaCode         *string
 	ServiceCode       *string
 	RetryAfterSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -149,6 +163,8 @@ type ValidationException struct {
 
 	Reason ValidationExceptionReason
 	Fields []ValidationExceptionField
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

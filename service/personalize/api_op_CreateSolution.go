@@ -108,6 +108,8 @@ type CreateSolutionInput struct {
 	// configuration. Amazon Personalize doesn't support configuring the hpoObjective
 	// at this time.
 	SolutionConfig *types.SolutionConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateSolutionOutput struct {
@@ -117,6 +119,8 @@ type CreateSolutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSolutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

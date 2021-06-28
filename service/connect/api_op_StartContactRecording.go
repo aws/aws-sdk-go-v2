@@ -59,11 +59,15 @@ type StartContactRecordingInput struct {
 	//
 	// This member is required.
 	VoiceRecordingConfiguration *types.VoiceRecordingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type StartContactRecordingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartContactRecordingMiddlewares(stack *middleware.Stack, options Options) (err error) {

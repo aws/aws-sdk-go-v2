@@ -61,6 +61,8 @@ type CreateAppInput struct {
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAppOutput struct {
@@ -70,6 +72,8 @@ type CreateAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type CreateVoiceConnectorInput struct {
 	// The AWS Region in which the Amazon Chime Voice Connector is created. Default
 	// value: us-east-1 .
 	AwsRegion types.VoiceConnectorAwsRegion
+
+	noSmithyDocumentSerde
 }
 
 type CreateVoiceConnectorOutput struct {
@@ -56,6 +58,8 @@ type CreateVoiceConnectorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

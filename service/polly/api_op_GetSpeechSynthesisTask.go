@@ -35,6 +35,8 @@ type GetSpeechSynthesisTaskInput struct {
 	//
 	// This member is required.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSpeechSynthesisTaskOutput struct {
@@ -45,6 +47,8 @@ type GetSpeechSynthesisTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSpeechSynthesisTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

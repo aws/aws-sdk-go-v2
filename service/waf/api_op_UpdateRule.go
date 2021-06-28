@@ -96,6 +96,8 @@ type UpdateRuleInput struct {
 	//
 	// This member is required.
 	Updates []types.RuleUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRuleOutput struct {
@@ -107,6 +109,8 @@ type UpdateRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

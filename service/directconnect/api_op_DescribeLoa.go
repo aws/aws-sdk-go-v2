@@ -48,6 +48,8 @@ type DescribeLoaInput struct {
 	// you specify this parameter, the LOA-CFA lists the provider name alongside your
 	// company name as the requester of the cross connect.
 	ProviderName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Letter of Authorization - Connecting Facility Assignment
@@ -63,6 +65,8 @@ type DescribeLoaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLoaMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type ListEffectiveDeploymentsInput struct {
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEffectiveDeploymentsOutput struct {
@@ -54,6 +56,8 @@ type ListEffectiveDeploymentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEffectiveDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

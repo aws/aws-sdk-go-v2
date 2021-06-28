@@ -42,6 +42,8 @@ type ListSubscriptionsByTopicInput struct {
 
 	// Token returned by the previous ListSubscriptionsByTopic request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Response for ListSubscriptionsByTopic action.
@@ -56,6 +58,8 @@ type ListSubscriptionsByTopicOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSubscriptionsByTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {

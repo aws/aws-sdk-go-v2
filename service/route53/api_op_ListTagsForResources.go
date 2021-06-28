@@ -49,6 +49,8 @@ type ListTagsForResourcesInput struct {
 	//
 	// This member is required.
 	ResourceType types.TagResourceType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type containing tags for the specified resources.
@@ -62,6 +64,8 @@ type ListTagsForResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

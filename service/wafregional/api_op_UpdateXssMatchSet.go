@@ -96,6 +96,8 @@ type UpdateXssMatchSetInput struct {
 	//
 	// This member is required.
 	XssMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to an UpdateXssMatchSets request.
@@ -108,6 +110,8 @@ type UpdateXssMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

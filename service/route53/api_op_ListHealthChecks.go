@@ -46,6 +46,8 @@ type ListHealthChecksInput struct {
 	// If you set MaxItems to a value greater than 100, Route 53 returns only the first
 	// 100 health checks.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to a ListHealthChecks request.
@@ -84,6 +86,8 @@ type ListHealthChecksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHealthChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {

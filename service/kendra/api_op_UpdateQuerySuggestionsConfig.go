@@ -75,11 +75,15 @@ type UpdateQuerySuggestionsConfigInput struct {
 	// the number of days from current day to past days. By default, Amazon Kendra sets
 	// this to 180.
 	QueryLogLookBackWindowInDays *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQuerySuggestionsConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQuerySuggestionsConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

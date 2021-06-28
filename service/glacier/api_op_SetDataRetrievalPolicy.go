@@ -49,11 +49,15 @@ type SetDataRetrievalPolicyInput struct {
 
 	// The data retrieval policy in JSON format.
 	Policy *types.DataRetrievalPolicy
+
+	noSmithyDocumentSerde
 }
 
 type SetDataRetrievalPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetDataRetrievalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

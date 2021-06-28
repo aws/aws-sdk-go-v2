@@ -47,6 +47,8 @@ type UpdateGroupInput struct {
 
 	// The description for the group that you want to update.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGroupOutput struct {
@@ -62,6 +64,8 @@ type UpdateGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

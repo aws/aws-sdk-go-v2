@@ -33,6 +33,8 @@ type DescribeFeatureTransformationInput struct {
 	//
 	// This member is required.
 	FeatureTransformationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFeatureTransformationOutput struct {
@@ -42,6 +44,8 @@ type DescribeFeatureTransformationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFeatureTransformationMiddlewares(stack *middleware.Stack, options Options) (err error) {

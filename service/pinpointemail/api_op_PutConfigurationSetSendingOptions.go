@@ -40,6 +40,8 @@ type PutConfigurationSetSendingOptionsInput struct {
 	// If true, email sending is enabled for the configuration set. If false, email
 	// sending is disabled for the configuration set.
 	SendingEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -47,6 +49,8 @@ type PutConfigurationSetSendingOptionsInput struct {
 type PutConfigurationSetSendingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConfigurationSetSendingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

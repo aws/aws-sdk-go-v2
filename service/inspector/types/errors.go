@@ -13,6 +13,8 @@ type AccessDeniedException struct {
 
 	ErrorCode_ AccessDeniedErrorCode
 	CanRetry   *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -35,6 +37,8 @@ type AgentsAlreadyRunningAssessmentException struct {
 	Agents          []AgentAlreadyRunningAssessment
 	AgentsTruncated *bool
 	CanRetry        *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *AgentsAlreadyRunningAssessmentException) Error() string {
@@ -61,6 +65,8 @@ type AssessmentRunInProgressException struct {
 	AssessmentRunArns          []string
 	AssessmentRunArnsTruncated *bool
 	CanRetry                   *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssessmentRunInProgressException) Error() string {
@@ -82,6 +88,8 @@ type InternalException struct {
 	Message *string
 
 	CanRetry *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalException) Error() string {
@@ -103,6 +111,8 @@ type InvalidCrossAccountRoleException struct {
 
 	ErrorCode_ InvalidCrossAccountRoleErrorCode
 	CanRetry   *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCrossAccountRoleException) Error() string {
@@ -126,6 +136,8 @@ type InvalidInputException struct {
 
 	ErrorCode_ InvalidInputErrorCode
 	CanRetry   *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -147,6 +159,8 @@ type LimitExceededException struct {
 
 	ErrorCode_ LimitExceededErrorCode
 	CanRetry   *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -168,6 +182,8 @@ type NoSuchEntityException struct {
 
 	ErrorCode_ NoSuchEntityErrorCode
 	CanRetry   *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchEntityException) Error() string {
@@ -186,6 +202,8 @@ func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.F
 // generating an exclusions preview.
 type PreviewGenerationInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PreviewGenerationInProgressException) Error() string {
@@ -209,6 +227,8 @@ type ServiceTemporarilyUnavailableException struct {
 	Message *string
 
 	CanRetry *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceTemporarilyUnavailableException) Error() string {
@@ -236,6 +256,8 @@ type UnsupportedFeatureException struct {
 	Message *string
 
 	CanRetry *bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedFeatureException) Error() string {

@@ -66,6 +66,8 @@ type CreatePrivateDnsNamespaceInput struct {
 	// value that you define. Tags keys can be up to 128 characters in length, and tag
 	// values can be up to 256 characters in length.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePrivateDnsNamespaceOutput struct {
@@ -77,6 +79,8 @@ type CreatePrivateDnsNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePrivateDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type GetServiceQuotaIncreaseRequestFromTemplateInput struct {
 	//
 	// This member is required.
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
 
 type GetServiceQuotaIncreaseRequestFromTemplateOutput struct {
@@ -53,6 +55,8 @@ type GetServiceQuotaIncreaseRequestFromTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceQuotaIncreaseRequestFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

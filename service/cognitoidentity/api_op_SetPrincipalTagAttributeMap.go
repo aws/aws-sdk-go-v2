@@ -45,6 +45,8 @@ type SetPrincipalTagAttributeMapInput struct {
 	// You can use this operation to use default (username and clientID) attribute
 	// mappings.
 	UseDefaults *bool
+
+	noSmithyDocumentSerde
 }
 
 type SetPrincipalTagAttributeMapOutput struct {
@@ -65,6 +67,8 @@ type SetPrincipalTagAttributeMapOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetPrincipalTagAttributeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {

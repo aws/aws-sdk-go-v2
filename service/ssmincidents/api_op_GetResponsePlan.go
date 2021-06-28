@@ -33,6 +33,8 @@ type GetResponsePlanInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResponsePlanOutput struct {
@@ -67,6 +69,8 @@ type GetResponsePlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResponsePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

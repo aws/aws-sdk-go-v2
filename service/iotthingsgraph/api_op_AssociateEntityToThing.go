@@ -44,11 +44,15 @@ type AssociateEntityToThingInput struct {
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace.
 	NamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type AssociateEntityToThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateEntityToThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type BatchDeleteDocumentInput struct {
 
 	// Maps a particular data source sync job to a particular data source.
 	DataSourceSyncJobMetricTarget *types.DataSourceSyncJobMetricTarget
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteDocumentOutput struct {
@@ -56,6 +58,8 @@ type BatchDeleteDocumentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {

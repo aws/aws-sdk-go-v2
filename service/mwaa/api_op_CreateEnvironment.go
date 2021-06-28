@@ -156,6 +156,8 @@ type CreateEnvironmentInput struct {
 	//
 	// * MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)
 	WeeklyMaintenanceWindowStart *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentOutput struct {
@@ -165,6 +167,8 @@ type CreateEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

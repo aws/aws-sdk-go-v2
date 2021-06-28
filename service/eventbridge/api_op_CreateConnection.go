@@ -49,6 +49,8 @@ type CreateConnectionInput struct {
 
 	// A description for the connection to create.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateConnectionOutput struct {
@@ -67,6 +69,8 @@ type CreateConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

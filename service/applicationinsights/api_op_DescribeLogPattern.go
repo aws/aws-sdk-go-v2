@@ -43,6 +43,8 @@ type DescribeLogPatternInput struct {
 	//
 	// This member is required.
 	ResourceGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLogPatternOutput struct {
@@ -55,6 +57,8 @@ type DescribeLogPatternOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {

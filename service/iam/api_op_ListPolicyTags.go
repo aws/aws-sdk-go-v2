@@ -55,6 +55,8 @@ type ListPolicyTagsInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListPolicyTagsOutput struct {
@@ -80,6 +82,8 @@ type ListPolicyTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPolicyTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

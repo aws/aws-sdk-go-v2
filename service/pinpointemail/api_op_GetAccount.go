@@ -31,6 +31,7 @@ func (c *Client) GetAccount(ctx context.Context, params *GetAccountInput, optFns
 // A request to obtain information about the email-sending capabilities of your
 // Amazon Pinpoint account.
 type GetAccountInput struct {
+	noSmithyDocumentSerde
 }
 
 // A list of details about the email-sending capabilities of your Amazon Pinpoint
@@ -78,6 +79,8 @@ type GetAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

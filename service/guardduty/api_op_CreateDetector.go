@@ -50,6 +50,8 @@ type CreateDetectorInput struct {
 
 	// The tags to be added to a new detector resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDetectorOutput struct {
@@ -59,6 +61,8 @@ type CreateDetectorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

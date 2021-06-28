@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -67,6 +68,8 @@ type DescribedAccess struct {
 	// system. The IAM role should also contain a trust relationship that allows the
 	// server to access your resources when servicing your users' transfer requests.
 	Role *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of a security policy that was specified. For more
@@ -98,6 +101,8 @@ type DescribedSecurityPolicy struct {
 	// Specifies the enabled Transport Layer Security (TLS) cipher encryption
 	// algorithms in the security policy that is attached to the server.
 	TlsCiphers []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of a file transfer protocol-enabled server that was
@@ -196,6 +201,8 @@ type DescribedServer struct {
 	// Specifies the number of users that are assigned to a server you specified with
 	// the ServerId.
 	UserCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of a user that was specified.
@@ -265,6 +272,8 @@ type DescribedUser struct {
 	// are used for authentication purposes. This is the string that will be used by
 	// your user when they log in to your server.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // The virtual private cloud (VPC) endpoint settings that are configured for your
@@ -308,6 +317,8 @@ type EndpointDetails struct {
 	// The VPC ID of the VPC in which a server's endpoint will be hosted. This property
 	// can only be set when EndpointType is set to VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an object that contains entries and targets for
@@ -331,6 +342,8 @@ type HomeDirectoryMapEntry struct {
 	//
 	// This member is required.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information related to the type of user authentication that is in use
@@ -347,6 +360,8 @@ type IdentityProviderDetails struct {
 
 	// Provides the location of the service endpoint used to authenticate users.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists the properties for one or more specified associated accesses.
@@ -384,6 +399,8 @@ type ListedAccess struct {
 	// system. The IAM role should also contain a trust relationship that allows the
 	// server to access your resources when servicing your users' transfer requests.
 	Role *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns properties of a file transfer protocol-enabled server that was
@@ -436,6 +453,8 @@ type ListedServer struct {
 	// Specifies the number of users that are assigned to a server you specified with
 	// the ServerId.
 	UserCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // Returns properties of the user that you specify.
@@ -478,6 +497,8 @@ type ListedUser struct {
 	// Specifies the name of the user whose ARN was specified. User names are used for
 	// authentication purposes.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // The full POSIX identity, including user ID (Uid), group ID (Gid), and any
@@ -499,6 +520,8 @@ type PosixProfile struct {
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
 	SecondaryGids []int64
+
+	noSmithyDocumentSerde
 }
 
 // The protocol settings that are configured for your server. This type is only
@@ -511,6 +534,8 @@ type ProtocolDetails struct {
 	// PassiveIp=0.0.0.0  Replace  0.0.0.0  in the example above with the actual IP
 	// address you want to use.
 	PassiveIp *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the public Secure Shell (SSH) key that is associated
@@ -535,6 +560,8 @@ type SshPublicKey struct {
 	//
 	// This member is required.
 	SshPublicKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Creates a key-value pair for a specific resource. Tags are metadata that you can
@@ -553,4 +580,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

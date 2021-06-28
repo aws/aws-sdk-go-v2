@@ -52,6 +52,8 @@ type DescribeEventsInput struct {
 	// nextToken parameter value is null. Setting a nextToken value that was not
 	// returned in your previous results causes an InvalidNextTokenException to occur.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEventsOutput struct {
@@ -70,6 +72,8 @@ type DescribeEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

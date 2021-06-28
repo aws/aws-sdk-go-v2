@@ -50,6 +50,8 @@ type DescribeEventSubscriptionsInput struct {
 
 	// The name of the event notification subscription you want to describe.
 	SubscriptionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEventSubscriptionsOutput struct {
@@ -65,6 +67,8 @@ type DescribeEventSubscriptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

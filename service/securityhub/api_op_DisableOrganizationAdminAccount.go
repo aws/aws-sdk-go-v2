@@ -33,11 +33,15 @@ type DisableOrganizationAdminAccountInput struct {
 	//
 	// This member is required.
 	AdminAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableOrganizationAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

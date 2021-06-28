@@ -38,6 +38,8 @@ type DescribeIdentityProviderConfigInput struct {
 	//
 	// This member is required.
 	IdentityProviderConfig *types.IdentityProviderConfig
+
+	noSmithyDocumentSerde
 }
 
 type DescribeIdentityProviderConfigOutput struct {
@@ -48,6 +50,8 @@ type DescribeIdentityProviderConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

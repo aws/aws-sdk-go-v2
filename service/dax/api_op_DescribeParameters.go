@@ -48,6 +48,8 @@ type DescribeParametersInput struct {
 	// How the parameter is defined. For example, system denotes a system-defined
 	// parameter.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeParametersOutput struct {
@@ -61,6 +63,8 @@ type DescribeParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

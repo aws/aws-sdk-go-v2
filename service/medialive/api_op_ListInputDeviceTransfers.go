@@ -43,6 +43,8 @@ type ListInputDeviceTransfersInput struct {
 
 	// Placeholder documentation for __string
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ListInputDeviceTransfersResponse
@@ -56,6 +58,8 @@ type ListInputDeviceTransfersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInputDeviceTransfersMiddlewares(stack *middleware.Stack, options Options) (err error) {

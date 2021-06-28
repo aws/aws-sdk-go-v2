@@ -72,11 +72,15 @@ type DeleteBucketTaggingInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBucketTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBucketTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

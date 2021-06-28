@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -42,6 +43,8 @@ type Activity struct {
 
 	// The activity type.
 	Type ActivityType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a comment.
@@ -78,6 +81,8 @@ type Comment struct {
 	// visible only to the comment author and document owner and co-owners, or PUBLIC,
 	// where the comment is visible to document owners, co-owners, and contributors.
 	Visibility CommentVisibilityType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the metadata of a comment.
@@ -97,6 +102,8 @@ type CommentMetadata struct {
 
 	// The ID of the user being replied to.
 	RecipientId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the document.
@@ -125,6 +132,8 @@ type DocumentMetadata struct {
 
 	// The resource state.
 	ResourceState ResourceStateType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a version of a document.
@@ -168,6 +177,8 @@ type DocumentVersionMetadata struct {
 
 	// The thumbnail of the document.
 	Thumbnail map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a folder.
@@ -205,6 +216,8 @@ type FolderMetadata struct {
 
 	// The size of the folder metadata.
 	Size *int64
+
+	noSmithyDocumentSerde
 }
 
 // Describes the metadata of a user group.
@@ -215,6 +228,8 @@ type GroupMetadata struct {
 
 	// The name of the group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Set of options which defines notification preferences of given action.
@@ -226,6 +241,8 @@ type NotificationOptions struct {
 	// Boolean value to indicate an email notification should be sent to the
 	// receipients.
 	SendEmail bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes the users or user groups.
@@ -236,6 +253,8 @@ type Participants struct {
 
 	// The list of users.
 	Users []UserMetadata
+
+	noSmithyDocumentSerde
 }
 
 // Describes the permissions.
@@ -246,6 +265,8 @@ type PermissionInfo struct {
 
 	// The type of permissions.
 	Type RolePermissionType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resource.
@@ -259,6 +280,8 @@ type Principal struct {
 
 	// The type of resource.
 	Type PrincipalType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the metadata of a resource.
@@ -285,6 +308,8 @@ type ResourceMetadata struct {
 	// The version ID of the resource. This is an optional field and is filled for
 	// action on document version.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the path information of a resource.
@@ -292,6 +317,8 @@ type ResourcePath struct {
 
 	// The components of the resource path.
 	Components []ResourcePathComponent
+
+	noSmithyDocumentSerde
 }
 
 // Describes the resource path.
@@ -302,6 +329,8 @@ type ResourcePathComponent struct {
 
 	// The name of the resource path.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the recipient type and ID, if available.
@@ -321,6 +350,8 @@ type SharePrincipal struct {
 	//
 	// This member is required.
 	Type PrincipalType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the share results of a resource.
@@ -343,6 +374,8 @@ type ShareResult struct {
 
 	// The status message.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the storage for a user.
@@ -353,6 +386,8 @@ type StorageRuleType struct {
 
 	// The type of storage.
 	StorageType StorageType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a subscription.
@@ -366,6 +401,8 @@ type Subscription struct {
 
 	// The ID of the subscription.
 	SubscriptionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the upload.
@@ -376,6 +413,8 @@ type UploadMetadata struct {
 
 	// The URL of the upload.
 	UploadUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a user.
@@ -425,6 +464,8 @@ type User struct {
 
 	// The login name of the user.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the metadata of the user.
@@ -444,6 +485,8 @@ type UserMetadata struct {
 
 	// The name of the user.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the storage for a user.
@@ -454,4 +497,8 @@ type UserStorageMetadata struct {
 
 	// The amount of storage used, in bytes.
 	StorageUtilizedInBytes *int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

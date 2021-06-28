@@ -100,6 +100,8 @@ type InvokeEndpointInput struct {
 	// use variant targeting to perform a/b testing, see Test models in production
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html)
 	TargetVariant *string
+
+	noSmithyDocumentSerde
 }
 
 type InvokeEndpointOutput struct {
@@ -137,6 +139,8 @@ type InvokeEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInvokeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,11 +59,15 @@ type SetSecurityTokenServicePreferencesInput struct {
 	//
 	// This member is required.
 	GlobalEndpointTokenVersion types.GlobalEndpointTokenVersion
+
+	noSmithyDocumentSerde
 }
 
 type SetSecurityTokenServicePreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetSecurityTokenServicePreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {

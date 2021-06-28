@@ -106,6 +106,8 @@ type CreateJobInput struct {
 	// or workflows that rely on job metadata tags. Otherwise, we recommend that you
 	// use standard AWS tags.
 	UserMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateJobOutput struct {
@@ -117,6 +119,8 @@ type CreateJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

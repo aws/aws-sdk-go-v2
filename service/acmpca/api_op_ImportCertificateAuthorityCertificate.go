@@ -157,11 +157,15 @@ type ImportCertificateAuthorityCertificateInput struct {
 	// supplied when you import a subordinate CA. When you import a root CA, there is
 	// no chain.
 	CertificateChain []byte
+
+	noSmithyDocumentSerde
 }
 
 type ImportCertificateAuthorityCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportCertificateAuthorityCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

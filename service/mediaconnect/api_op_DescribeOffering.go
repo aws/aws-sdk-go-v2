@@ -35,6 +35,8 @@ type DescribeOfferingInput struct {
 	//
 	// This member is required.
 	OfferingArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeOfferingOutput struct {
@@ -45,6 +47,8 @@ type DescribeOfferingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type BatchError struct {
 
 	// Error message, determined by the application.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Object specifying a channel.
@@ -66,6 +69,8 @@ type Channel struct {
 	// original input. Vertical resolution can be up to 480 and bitrate can be up to
 	// 1.5 Mbps.
 	Type ChannelType
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a channel.
@@ -93,6 +98,8 @@ type ChannelSummary struct {
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that describes a location where recorded videos will be stored.
@@ -102,6 +109,8 @@ type DestinationConfiguration struct {
 
 	// An S3 destination configuration where recorded videos will be stored.
 	S3 *S3DestinationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A key pair used to sign and validate a playback authorization token.
@@ -119,6 +128,8 @@ type PlaybackKeyPair struct {
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a playback key pair.
@@ -133,6 +144,8 @@ type PlaybackKeyPairSummary struct {
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a configuration to record a channel stream.
@@ -161,6 +174,8 @@ type RecordingConfiguration struct {
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a RecordingConfiguration.
@@ -189,6 +204,8 @@ type RecordingConfigurationSummary struct {
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that describes an S3 location where recorded videos will be
@@ -199,6 +216,8 @@ type S3DestinationConfiguration struct {
 	//
 	// This member is required.
 	BucketName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a live video stream that has been ingested and distributed.
@@ -222,6 +241,8 @@ type Stream struct {
 	// Number of current viewers of the stream. A value of -1 indicates that the
 	// request timed out; in this case, retry.
 	ViewerCount int64
+
+	noSmithyDocumentSerde
 }
 
 // Object specifying a stream key.
@@ -238,6 +259,8 @@ type StreamKey struct {
 
 	// Stream-key value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a stream key.
@@ -251,6 +274,8 @@ type StreamKeySummary struct {
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a stream.
@@ -271,4 +296,8 @@ type StreamSummary struct {
 	// Number of current viewers of the stream. A value of -1 indicates that the
 	// request timed out; in this case, retry.
 	ViewerCount int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

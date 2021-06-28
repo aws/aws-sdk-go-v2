@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type CategoricalParameterRange struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a continuous hyperparameter and it's range of tunable values. This
@@ -54,6 +57,8 @@ type ContinuousParameterRange struct {
 	// (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
 	// One of the following values:
 	ScalingType ScalingType
+
+	noSmithyDocumentSerde
 }
 
 // The destination for an export job. Provide an S3 path, an AWS Identity and
@@ -66,6 +71,8 @@ type DataDestination struct {
 	//
 	// This member is required.
 	S3Config *S3Config
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the dataset group properties used in the ListDatasetGroups
@@ -86,6 +93,8 @@ type DatasetGroupSummary struct {
 	// UpdateDatasetGroup operation. While the dataset group is being updated,
 	// LastModificationTime is the current time of the ListDatasetGroups call.
 	LastModificationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the dataset import job properties used in the
@@ -140,6 +149,8 @@ type DatasetImportJobSummary struct {
 	//
 	// * CREATE_STOPPING, CREATE_STOPPED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the dataset properties used in the ListDatasets operation.
@@ -167,6 +178,8 @@ type DatasetSummary struct {
 	// time of the ListDatasets call. After a CreateDatasetImportJob operation has
 	// finished, LastModificationTime is when the import job completed or failed.
 	LastModificationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The source of your training data, an AWS Identity and Access Management (IAM)
@@ -180,6 +193,8 @@ type DataSource struct {
 	//
 	// This member is required.
 	S3Config *S3Config
+
+	noSmithyDocumentSerde
 }
 
 // An AWS Key Management Service (KMS) key and an AWS Identity and Access
@@ -198,6 +213,8 @@ type EncryptionConfig struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides detailed error metrics to evaluate the performance of a predictor. This
@@ -212,6 +229,8 @@ type ErrorMetric struct {
 
 	// The weighted absolute percentage error (WAPE).
 	WAPE *float64
+
+	noSmithyDocumentSerde
 }
 
 // Parameters that define how to split a dataset into training data and testing
@@ -232,6 +251,8 @@ type EvaluationParameters struct {
 	// The number of times to split the input data. The default is 1. Valid values are
 	// 1 through 5.
 	NumberOfBacktestWindows *int32
+
+	noSmithyDocumentSerde
 }
 
 // The results of evaluating an algorithm. Returned as part of the
@@ -245,6 +266,8 @@ type EvaluationResult struct {
 	// NumberOfBacktestWindows from the EvaluationParameters object determines the
 	// number of windows in the array.
 	TestWindows []WindowSummary
+
+	noSmithyDocumentSerde
 }
 
 // Provides featurization (transformation) information for a dataset field. This
@@ -277,6 +300,8 @@ type Featurization struct {
 	// An array of one FeaturizationMethod object that specifies the feature
 	// transformation method.
 	FeaturizationPipeline []FeaturizationMethod
+
+	noSmithyDocumentSerde
 }
 
 // In a CreatePredictor operation, the specified algorithm trains a model using the
@@ -316,6 +341,8 @@ type FeaturizationConfig struct {
 	// dimensions specified in the RELATED_TIME_SERIES dataset must be specified in the
 	// CreatePredictor request.
 	ForecastDimensions []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the method that featurizes (transforms) a dataset
@@ -370,6 +397,8 @@ type FeaturizationMethod struct {
 	// backfilling to a value of 2, include the following: "backfill": "value" and
 	// "backfill_value":"2".
 	FeaturizationMethodParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter for choosing a subset of objects. Each filter consists of a
@@ -393,6 +422,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the forecast export job properties used in the
@@ -450,6 +481,8 @@ type ForecastExportJobSummary struct {
 	// of the forecast export job must be ACTIVE before you can access the forecast in
 	// your S3 bucket.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the forecast properties used in the ListForecasts
@@ -508,6 +541,8 @@ type ForecastSummary struct {
 	// The Status of the forecast
 	// must be ACTIVE before you can query or export the forecast.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for a hyperparameter tuning job. You specify this
@@ -524,6 +559,8 @@ type HyperParameterTuningJobConfig struct {
 
 	// Specifies the ranges of valid values for the hyperparameters.
 	ParameterRanges *ParameterRanges
+
+	noSmithyDocumentSerde
 }
 
 // The data used to train a predictor. The data includes a dataset group and any
@@ -538,6 +575,8 @@ type InputDataConfig struct {
 	// An array of supplementary features. The only supported feature is a holiday
 	// calendar.
 	SupplementaryFeatures []SupplementaryFeature
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an integer hyperparameter and it's range of tunable values. This
@@ -572,6 +611,8 @@ type IntegerParameterRange struct {
 	// (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
 	// One of the following values:
 	ScalingType ScalingType
+
+	noSmithyDocumentSerde
 }
 
 // Provides metrics that are used to evaluate the performance of a predictor. This
@@ -592,6 +633,8 @@ type Metrics struct {
 	// distribution into regions of equal probability. The distribution in this case is
 	// the loss function.
 	WeightedQuantileLosses []WeightedQuantileLoss
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the categorical, continuous, and integer hyperparameters, and their
@@ -608,6 +651,8 @@ type ParameterRanges struct {
 
 	// Specifies the tunable range for each integer hyperparameter.
 	IntegerParameterRanges []IntegerParameterRange
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the predictor backtest export job properties used in the
@@ -662,6 +707,8 @@ type PredictorBacktestExportJobSummary struct {
 	//
 	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The algorithm used to perform a backtest and the status of those tests.
@@ -674,6 +721,8 @@ type PredictorExecution struct {
 	// NumberOfBacktestWindows from the object determines the number of windows in the
 	// array.
 	TestWindows []TestWindowSummary
+
+	noSmithyDocumentSerde
 }
 
 // Contains details on the backtests performed to evaluate the accuracy of the
@@ -686,6 +735,8 @@ type PredictorExecutionDetails struct {
 	// against a particular algorithm. The NumberOfBacktestWindows from the object
 	// determines the number of windows in the array.
 	PredictorExecutions []PredictorExecution
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the predictor properties that are used in the
@@ -741,6 +792,8 @@ type PredictorSummary struct {
 	// The Status of the predictor
 	// must be ACTIVE before you can use the predictor to create a forecast.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
@@ -767,6 +820,8 @@ type S3Config struct {
 
 	// The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.
 	KMSKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the fields of a dataset. You specify this object in the CreateDataset
@@ -775,6 +830,8 @@ type Schema struct {
 
 	// An array of attributes specifying the name and type of each field in a dataset.
 	Attributes []SchemaAttribute
+
+	noSmithyDocumentSerde
 }
 
 // An attribute of a schema, which defines a dataset field. A schema attribute is
@@ -787,6 +844,8 @@ type SchemaAttribute struct {
 
 	// The data type of the field.
 	AttributeType AttributeType
+
+	noSmithyDocumentSerde
 }
 
 // Provides statistics for each data field imported into to an Amazon Forecast
@@ -836,6 +895,8 @@ type Statistics struct {
 
 	// For a numeric field, the standard deviation.
 	Stddev *float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a supplementary feature of a dataset group. This object is part of the
@@ -1013,6 +1074,8 @@ type SupplementaryFeature struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The optional metadata that you apply to a resource to help you categorize and
@@ -1058,6 +1121,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The status, start time, and end time of a backtest, as well as a failure reason
@@ -1082,6 +1147,8 @@ type TestWindowSummary struct {
 
 	// The time at which the test began.
 	TestWindowStart *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The weighted loss value for a quantile. This object is part of the Metrics
@@ -1096,6 +1163,8 @@ type WeightedQuantileLoss struct {
 	// probability. For example, if the distribution was divided into 5 regions of
 	// equal probability, the quantiles would be 0.2, 0.4, 0.6, and 0.8.
 	Quantile *float64
+
+	noSmithyDocumentSerde
 }
 
 // The metrics for a time range within the evaluation portion of a dataset. This
@@ -1123,4 +1192,8 @@ type WindowSummary struct {
 
 	// The timestamp that defines the start of the window.
 	TestWindowStart *time.Time
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -43,11 +43,15 @@ type DeleteChannelBanInput struct {
 
 	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteChannelBanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {

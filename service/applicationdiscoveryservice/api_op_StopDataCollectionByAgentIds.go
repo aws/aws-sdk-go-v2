@@ -33,6 +33,8 @@ type StopDataCollectionByAgentIdsInput struct {
 	//
 	// This member is required.
 	AgentIds []string
+
+	noSmithyDocumentSerde
 }
 
 type StopDataCollectionByAgentIdsOutput struct {
@@ -45,6 +47,8 @@ type StopDataCollectionByAgentIdsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopDataCollectionByAgentIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {

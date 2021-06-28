@@ -76,6 +76,8 @@ type RestoreTableFromBackupInput struct {
 
 	// The new server-side encryption settings for the restored table.
 	SSESpecificationOverride *types.SSESpecification
+
+	noSmithyDocumentSerde
 }
 
 type RestoreTableFromBackupOutput struct {
@@ -85,6 +87,8 @@ type RestoreTableFromBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreTableFromBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

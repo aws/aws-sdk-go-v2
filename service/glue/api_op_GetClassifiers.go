@@ -35,6 +35,8 @@ type GetClassifiersInput struct {
 
 	// An optional continuation token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetClassifiersOutput struct {
@@ -47,6 +49,8 @@ type GetClassifiersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetClassifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {

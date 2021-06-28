@@ -45,11 +45,15 @@ type DisassociateLexBotInput struct {
 	//
 	// This member is required.
 	LexRegion *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateLexBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateLexBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

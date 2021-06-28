@@ -111,11 +111,15 @@ type AddIpRoutesInput struct {
 	// These security rules impact an internal
 	// network interface that is not exposed publicly.
 	UpdateSecurityGroupForDirectoryControllers bool
+
+	noSmithyDocumentSerde
 }
 
 type AddIpRoutesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListVodSourcesInput struct {
 	// Pagination token from the GET list request. Use the token to fetch the next page
 	// of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListVodSourcesOutput struct {
@@ -55,6 +57,8 @@ type ListVodSourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVodSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

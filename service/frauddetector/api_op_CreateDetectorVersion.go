@@ -59,6 +59,8 @@ type CreateDetectorVersionInput struct {
 
 	// A collection of key and value pairs.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDetectorVersionOutput struct {
@@ -74,6 +76,8 @@ type CreateDetectorVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

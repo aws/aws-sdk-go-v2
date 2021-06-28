@@ -44,11 +44,15 @@ type TagLogGroupInput struct {
 	//
 	// This member is required.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type TagLogGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -94,6 +94,8 @@ type CreateAppInput struct {
 
 	// The tag for an Amplify app.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAppOutput struct {
@@ -106,6 +108,8 @@ type CreateAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,11 +40,15 @@ type UpdateTagsForDomainInput struct {
 	// A list of the tag keys and values that you want to add or update. If you specify
 	// a key that already exists, the corresponding value will be replaced.
 	TagsToUpdate []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTagsForDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

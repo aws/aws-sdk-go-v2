@@ -128,6 +128,8 @@ type SendCommandInput struct {
 	// If this time is reached and the command hasn't already started running, it won't
 	// run.
 	TimeoutSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 type SendCommandOutput struct {
@@ -138,6 +140,8 @@ type SendCommandOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {

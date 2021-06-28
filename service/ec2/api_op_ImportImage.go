@@ -120,6 +120,8 @@ type ImportImageInput struct {
 
 	// The tags to apply to the import image task during creation.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type ImportImageOutput struct {
@@ -172,6 +174,8 @@ type ImportImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

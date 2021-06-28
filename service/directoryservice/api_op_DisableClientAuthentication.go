@@ -39,11 +39,15 @@ type DisableClientAuthenticationInput struct {
 	//
 	// This member is required.
 	Type types.ClientAuthenticationType
+
+	noSmithyDocumentSerde
 }
 
 type DisableClientAuthenticationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableClientAuthenticationMiddlewares(stack *middleware.Stack, options Options) (err error) {

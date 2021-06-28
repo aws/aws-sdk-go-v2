@@ -56,6 +56,8 @@ type UpdateGlobalTableInput struct {
 	//
 	// This member is required.
 	ReplicaUpdates []types.ReplicaUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGlobalTableOutput struct {
@@ -65,6 +67,8 @@ type UpdateGlobalTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGlobalTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

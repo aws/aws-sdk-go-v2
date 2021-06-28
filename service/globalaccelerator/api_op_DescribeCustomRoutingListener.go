@@ -33,6 +33,8 @@ type DescribeCustomRoutingListenerInput struct {
 	//
 	// This member is required.
 	ListenerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCustomRoutingListenerOutput struct {
@@ -42,6 +44,8 @@ type DescribeCustomRoutingListenerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

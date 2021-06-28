@@ -32,11 +32,15 @@ type DeleteCoreDefinitionInput struct {
 	//
 	// This member is required.
 	CoreDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCoreDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCoreDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -66,6 +66,8 @@ type StartRxNormInferenceJobInput struct {
 	// An AWS Key Management Service key to encrypt your output files. If you do not
 	// specify a key, the files are written in plain text.
 	KMSKey *string
+
+	noSmithyDocumentSerde
 }
 
 type StartRxNormInferenceJobOutput struct {
@@ -75,6 +77,8 @@ type StartRxNormInferenceJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

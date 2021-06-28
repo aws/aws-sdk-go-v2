@@ -64,6 +64,8 @@ type UpdateGlobalTableSettingsInput struct {
 
 	// Represents the settings for a global table in a Region that will be modified.
 	ReplicaSettingsUpdate []types.ReplicaSettingsUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGlobalTableSettingsOutput struct {
@@ -76,6 +78,8 @@ type UpdateGlobalTableSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGlobalTableSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

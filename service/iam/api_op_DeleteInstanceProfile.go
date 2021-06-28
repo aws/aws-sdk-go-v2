@@ -41,11 +41,15 @@ type DeleteInstanceProfileInput struct {
 	//
 	// This member is required.
 	InstanceProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -28,6 +28,7 @@ func (c *Client) GetEncryptionConfig(ctx context.Context, params *GetEncryptionC
 }
 
 type GetEncryptionConfigInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetEncryptionConfigOutput struct {
@@ -37,6 +38,8 @@ type GetEncryptionConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -72,6 +72,8 @@ type CreateMicrosoftADInput struct {
 
 	// The tags to be assigned to the AWS Managed Microsoft AD directory.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Result of a CreateMicrosoftAD request.
@@ -82,6 +84,8 @@ type CreateMicrosoftADOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMicrosoftADMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -11,6 +11,8 @@ import (
 // exists.
 type AlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsException) Error() string {
@@ -35,6 +37,8 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 // operation.
 type CloudHsmClusterInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmClusterInUseException) Error() string {
@@ -89,6 +93,8 @@ func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return 
 // AWS CloudHSM User Guide .
 type CloudHsmClusterInvalidConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmClusterInvalidConfigurationException) Error() string {
@@ -114,6 +120,8 @@ func (e *CloudHsmClusterInvalidConfigurationException) ErrorFault() smithy.Error
 // the AWS CloudHSM User Guide.
 type CloudHsmClusterNotActiveException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmClusterNotActiveException) Error() string {
@@ -134,6 +142,8 @@ func (e *CloudHsmClusterNotActiveException) ErrorFault() smithy.ErrorFault { ret
 // with the specified cluster ID. Retry the request with a different cluster ID.
 type CloudHsmClusterNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmClusterNotFoundException) Error() string {
@@ -162,6 +172,8 @@ func (e *CloudHsmClusterNotFoundException) ErrorFault() smithy.ErrorFault { retu
 // operation.
 type CloudHsmClusterNotRelatedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmClusterNotRelatedException) Error() string {
@@ -186,6 +198,8 @@ func (e *CloudHsmClusterNotRelatedException) ErrorFault() smithy.ErrorFault {
 // you can delete the custom key store.
 type CustomKeyStoreHasCMKsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomKeyStoreHasCMKsException) Error() string {
@@ -219,6 +233,8 @@ func (e *CustomKeyStoreHasCMKsException) ErrorFault() smithy.ErrorFault { return
 // FAILED. This operation is valid for all other ConnectionState values.
 type CustomKeyStoreInvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomKeyStoreInvalidStateException) Error() string {
@@ -242,6 +258,8 @@ func (e *CustomKeyStoreInvalidStateException) ErrorFault() smithy.ErrorFault {
 // store name that is unique in the account.
 type CustomKeyStoreNameInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomKeyStoreNameInUseException) Error() string {
@@ -262,6 +280,8 @@ func (e *CustomKeyStoreNameInUseException) ErrorFault() smithy.ErrorFault { retu
 // specified key store name or ID.
 type CustomKeyStoreNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomKeyStoreNotFoundException) Error() string {
@@ -282,6 +302,8 @@ func (e *CustomKeyStoreNotFoundException) ErrorFault() smithy.ErrorFault { retur
 // retried.
 type DependencyTimeoutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependencyTimeoutException) Error() string {
@@ -299,6 +321,8 @@ func (e *DependencyTimeoutException) ErrorFault() smithy.ErrorFault { return smi
 // The request was rejected because the specified CMK is not enabled.
 type DisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DisabledException) Error() string {
@@ -318,6 +342,8 @@ func (e *DisabledException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // public key to encrypt the key material, and then try the request again.
 type ExpiredImportTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredImportTokenException) Error() string {
@@ -337,6 +363,8 @@ func (e *ExpiredImportTokenException) ErrorFault() smithy.ErrorFault { return sm
 // identify the same CMK that was used to encrypt the ciphertext.
 type IncorrectKeyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncorrectKeyException) Error() string {
@@ -356,6 +384,8 @@ func (e *IncorrectKeyException) ErrorFault() smithy.ErrorFault { return smithy.F
 // customer master key (CMK).
 type IncorrectKeyMaterialException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncorrectKeyMaterialException) Error() string {
@@ -377,6 +407,8 @@ func (e *IncorrectKeyMaterialException) ErrorFault() smithy.ErrorFault { return 
 // you create the trust anchor certificate and save it in the customerCA.crt file.
 type IncorrectTrustAnchorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncorrectTrustAnchorException) Error() string {
@@ -394,6 +426,8 @@ func (e *IncorrectTrustAnchorException) ErrorFault() smithy.ErrorFault { return 
 // The request was rejected because the specified alias name is not valid.
 type InvalidAliasNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAliasNameException) Error() string {
@@ -412,6 +446,8 @@ func (e *InvalidAliasNameException) ErrorFault() smithy.ErrorFault { return smit
 // not valid.
 type InvalidArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArnException) Error() string {
@@ -433,6 +469,8 @@ func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // AWS KMS could not decrypt the encrypted (wrapped) key material.
 type InvalidCiphertextException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCiphertextException) Error() string {
@@ -450,6 +488,8 @@ func (e *InvalidCiphertextException) ErrorFault() smithy.ErrorFault { return smi
 // The request was rejected because the specified GrantId is not valid.
 type InvalidGrantIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGrantIdException) Error() string {
@@ -467,6 +507,8 @@ func (e *InvalidGrantIdException) ErrorFault() smithy.ErrorFault { return smithy
 // The request was rejected because the specified grant token is not valid.
 type InvalidGrantTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGrantTokenException) Error() string {
@@ -485,6 +527,8 @@ func (e *InvalidGrantTokenException) ErrorFault() smithy.ErrorFault { return smi
 // associated with a different customer master key (CMK).
 type InvalidImportTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidImportTokenException) Error() string {
@@ -516,6 +560,8 @@ func (e *InvalidImportTokenException) ErrorFault() smithy.ErrorFault { return sm
 // operation.
 type InvalidKeyUsageException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKeyUsageException) Error() string {
@@ -534,6 +580,8 @@ func (e *InvalidKeyUsageException) ErrorFault() smithy.ErrorFault { return smith
 // should next begin is not valid.
 type InvalidMarkerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMarkerException) Error() string {
@@ -552,6 +600,8 @@ func (e *InvalidMarkerException) ErrorFault() smithy.ErrorFault { return smithy.
 // retry the request.
 type KeyUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KeyUnavailableException) Error() string {
@@ -570,6 +620,8 @@ func (e *KeyUnavailableException) ErrorFault() smithy.ErrorFault { return smithy
 // be retried.
 type KMSInternalException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSInternalException) Error() string {
@@ -589,6 +641,8 @@ func (e *KMSInternalException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // the specified message with the specified CMK and signing algorithm.
 type KMSInvalidSignatureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSInvalidSignatureException) Error() string {
@@ -610,6 +664,8 @@ func (e *KMSInvalidSignatureException) ErrorFault() smithy.ErrorFault { return s
 // AWS Key Management Service Developer Guide .
 type KMSInvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSInvalidStateException) Error() string {
@@ -629,6 +685,8 @@ func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smith
 // the AWS Key Management Service Developer Guide.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -647,6 +705,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // semantically correct.
 type MalformedPolicyDocumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MalformedPolicyDocumentException) Error() string {
@@ -667,6 +727,8 @@ func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { retu
 // found.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -684,6 +746,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The request was rejected because one or more tags are not valid.
 type TagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagException) Error() string {
@@ -702,6 +766,8 @@ func (e *TagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // specified resource is not valid for this operation.
 type UnsupportedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {

@@ -38,6 +38,8 @@ type CreateTagOptionInput struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTagOptionOutput struct {
@@ -47,6 +49,8 @@ type CreateTagOptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

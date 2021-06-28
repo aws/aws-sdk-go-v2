@@ -43,6 +43,8 @@ type DetachFromIndexInput struct {
 	//
 	// This member is required.
 	TargetReference *types.ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 type DetachFromIndexOutput struct {
@@ -52,6 +54,8 @@ type DetachFromIndexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachFromIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

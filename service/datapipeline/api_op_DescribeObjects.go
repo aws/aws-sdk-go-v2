@@ -67,6 +67,8 @@ type DescribeObjectsInput struct {
 	// DescribeObjects with the marker value from the previous call to retrieve the
 	// next set of results.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeObjects.
@@ -87,6 +89,8 @@ type DescribeObjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

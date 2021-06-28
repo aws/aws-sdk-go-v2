@@ -45,6 +45,8 @@ type CreateDirectConnectGatewayInput struct {
 	// range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294. The default is
 	// 64512.
 	AmazonSideAsn *int64
+
+	noSmithyDocumentSerde
 }
 
 type CreateDirectConnectGatewayOutput struct {
@@ -54,6 +56,8 @@ type CreateDirectConnectGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDirectConnectGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

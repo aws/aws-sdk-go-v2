@@ -95,6 +95,8 @@ type CreateActivationInput struct {
 	// AddTagsToResource. For information about how to remove tags from your managed
 	// instances, see RemoveTagsFromResource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateActivationOutput struct {
@@ -109,6 +111,8 @@ type CreateActivationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateActivationMiddlewares(stack *middleware.Stack, options Options) (err error) {

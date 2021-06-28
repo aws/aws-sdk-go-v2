@@ -96,6 +96,8 @@ type ListObjectVersionsInput struct {
 
 	// Specifies the object version you want to start listing from.
 	VersionIdMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListObjectVersionsOutput struct {
@@ -158,6 +160,8 @@ type ListObjectVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListObjectVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type ListFolderMembersInput struct {
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFolderMembersOutput struct {
@@ -63,6 +65,8 @@ type ListFolderMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFolderMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

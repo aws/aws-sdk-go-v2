@@ -155,6 +155,8 @@ type GenerateDataKeyInput struct {
 	// the KeySpec or the NumberOfBytes parameter (but not both) in every
 	// GenerateDataKey request.
 	NumberOfBytes *int32
+
+	noSmithyDocumentSerde
 }
 
 type GenerateDataKeyOutput struct {
@@ -176,6 +178,8 @@ type GenerateDataKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateDataKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

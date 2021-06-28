@@ -124,6 +124,8 @@ type CreateTrailInput struct {
 
 	// A list of tags.
 	TagsList []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -184,6 +186,8 @@ type CreateTrailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {

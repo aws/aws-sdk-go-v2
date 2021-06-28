@@ -53,6 +53,8 @@ type StartDataIngestionJobInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StartDataIngestionJobOutput struct {
@@ -65,6 +67,8 @@ type StartDataIngestionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

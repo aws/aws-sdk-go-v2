@@ -39,11 +39,15 @@ type DisassociateAwsAccountFromPartnerAccountInput struct {
 	//
 	// This member is required.
 	PartnerType types.PartnerType
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateAwsAccountFromPartnerAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateAwsAccountFromPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

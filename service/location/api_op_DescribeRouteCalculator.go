@@ -33,6 +33,8 @@ type DescribeRouteCalculatorInput struct {
 	//
 	// This member is required.
 	CalculatorName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRouteCalculatorOutput struct {
@@ -100,6 +102,8 @@ type DescribeRouteCalculatorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,11 +43,15 @@ type RemoveUserFromGroupInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveUserFromGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveUserFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

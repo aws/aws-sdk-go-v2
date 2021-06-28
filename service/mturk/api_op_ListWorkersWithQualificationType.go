@@ -44,6 +44,8 @@ type ListWorkersWithQualificationTypeInput struct {
 
 	// The status of the Qualifications to return. Can be Granted | Revoked.
 	Status types.QualificationStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListWorkersWithQualificationTypeOutput struct {
@@ -62,6 +64,8 @@ type ListWorkersWithQualificationTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkersWithQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

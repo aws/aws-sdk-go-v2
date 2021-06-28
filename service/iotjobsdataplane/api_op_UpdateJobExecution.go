@@ -79,6 +79,8 @@ type UpdateJobExecutionInput struct {
 	// timeout which may have been specified when the job was created (CreateJob using
 	// field timeoutConfig).
 	StepTimeoutInMinutes *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateJobExecutionOutput struct {
@@ -91,6 +93,8 @@ type UpdateJobExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

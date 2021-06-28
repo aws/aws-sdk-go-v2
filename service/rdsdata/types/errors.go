@@ -10,6 +10,8 @@ import (
 // There is an error in the call or in a SQL statement.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -27,6 +29,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // There are insufficient privileges to make the call.
 type ForbiddenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -44,6 +48,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // An internal error occurred.
 type InternalServerErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -61,6 +67,8 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // The resourceArn, secretArn, or transactionId value can't be found.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -78,6 +86,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The service specified by the resourceArn parameter is not available.
 type ServiceUnavailableError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableError) Error() string {
@@ -97,6 +107,8 @@ type StatementTimeoutException struct {
 	Message *string
 
 	DbConnectionId int64
+
+	noSmithyDocumentSerde
 }
 
 func (e *StatementTimeoutException) Error() string {

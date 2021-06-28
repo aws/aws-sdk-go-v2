@@ -81,6 +81,8 @@ type StartKeyPhrasesDetectionJobInput struct {
 	// more information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type StartKeyPhrasesDetectionJobOutput struct {
@@ -105,6 +107,8 @@ type StartKeyPhrasesDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

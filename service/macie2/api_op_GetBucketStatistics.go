@@ -33,6 +33,8 @@ type GetBucketStatisticsInput struct {
 
 	// The unique identifier for the Amazon Web Services account.
 	AccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBucketStatisticsOutput struct {
@@ -104,6 +106,8 @@ type GetBucketStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBucketStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

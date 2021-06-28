@@ -40,6 +40,8 @@ type AssociatePackageInput struct {
 	//
 	// This member is required.
 	PackageID *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by AssociatePackage operation.
@@ -50,6 +52,8 @@ type AssociatePackageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {

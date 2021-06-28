@@ -32,11 +32,15 @@ type DeleteAppValidationConfigurationInput struct {
 	//
 	// This member is required.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAppValidationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

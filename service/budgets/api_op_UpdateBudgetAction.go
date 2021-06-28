@@ -63,6 +63,8 @@ type UpdateBudgetActionInput struct {
 
 	// A list of subscribers.
 	Subscribers []types.Subscriber
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBudgetActionOutput struct {
@@ -90,6 +92,8 @@ type UpdateBudgetActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBudgetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

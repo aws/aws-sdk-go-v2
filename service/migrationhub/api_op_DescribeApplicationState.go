@@ -35,6 +35,8 @@ type DescribeApplicationStateInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeApplicationStateOutput struct {
@@ -47,6 +49,8 @@ type DescribeApplicationStateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeApplicationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type UpdateThingGroupsForThingInput struct {
 
 	// The thing whose group memberships will be updated.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateThingGroupsForThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThingGroupsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

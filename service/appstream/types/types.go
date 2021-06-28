@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -21,6 +22,8 @@ type AccessEndpoint struct {
 
 	// The identifier (ID) of the VPC in which the interface endpoint is used.
 	VpceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an application in the application catalog.
@@ -46,6 +49,8 @@ type Application struct {
 
 	// The name of the application.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The persistent application settings for users of a stack.
@@ -61,6 +66,8 @@ type ApplicationSettings struct {
 	// are stored. You can allow the same persistent application settings to be used
 	// across multiple stacks by specifying the same settings group for each stack.
 	SettingsGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the persistent application settings for users of a stack.
@@ -79,6 +86,8 @@ type ApplicationSettingsResponse struct {
 	// The path prefix for the S3 bucket where users’ persistent application settings
 	// are stored.
 	SettingsGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the capacity for a fleet.
@@ -88,6 +97,8 @@ type ComputeCapacity struct {
 	//
 	// This member is required.
 	DesiredInstances *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the capacity status for a fleet.
@@ -106,6 +117,8 @@ type ComputeCapacityStatus struct {
 
 	// The total number of simultaneous streaming instances that are running.
 	Running *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration information required to join fleets and image
@@ -126,6 +139,8 @@ type DirectoryConfig struct {
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.
 	ServiceAccountCredentials *ServiceAccountCredentials
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration information required to join fleets and image
@@ -137,6 +152,8 @@ type DomainJoinInfo struct {
 
 	// The distinguished name of the organizational unit for computer accounts.
 	OrganizationalUnitDistinguishedName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a fleet.
@@ -335,6 +352,8 @@ type Fleet struct {
 
 	// The VPC configuration for the fleet.
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes a fleet error.
@@ -345,6 +364,8 @@ type FleetError struct {
 
 	// The error message.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an image.
@@ -407,6 +428,8 @@ type Image struct {
 
 	// Indicates whether the image is public or private.
 	Visibility VisibilityType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a virtual machine that is used to create an image.
@@ -560,6 +583,8 @@ type ImageBuilder struct {
 
 	// The VPC configuration of the image builder.
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the reason why the last image builder state change occurred.
@@ -570,6 +595,8 @@ type ImageBuilderStateChangeReason struct {
 
 	// The state change reason message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the permissions for an image.
@@ -580,6 +607,8 @@ type ImagePermissions struct {
 
 	// Indicates whether the image can be used for an image builder.
 	AllowImageBuilder *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes the reason why the last image state change occurred.
@@ -590,6 +619,8 @@ type ImageStateChangeReason struct {
 
 	// The state change reason message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the error that is returned when a usage report can't be generated.
@@ -602,6 +633,8 @@ type LastReportGenerationExecutionError struct {
 	// The error message for the error that is returned when a usage report can't be
 	// generated.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the network details of the fleet or image builder instance.
@@ -615,6 +648,8 @@ type NetworkAccessConfiguration struct {
 	// The private IP address of the elastic network interface that is attached to
 	// instances in your VPC.
 	EniPrivateIpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resource error.
@@ -628,6 +663,8 @@ type ResourceError struct {
 
 	// The time the error occurred.
 	ErrorTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the credentials for the service account used by the fleet or image
@@ -645,6 +682,8 @@ type ServiceAccountCredentials struct {
 	//
 	// This member is required.
 	AccountPassword *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a streaming session.
@@ -696,6 +735,8 @@ type Session struct {
 
 	// The time when a streaming instance is dedicated for the user.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the permissions that are available to the specified AWS account for a
@@ -711,6 +752,8 @@ type SharedImagePermissions struct {
 	//
 	// This member is required.
 	SharedAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a stack.
@@ -761,6 +804,8 @@ type Stack struct {
 	// The actions that are enabled or disabled for users during their streaming
 	// sessions. By default these actions are enabled.
 	UserSettings []UserSetting
+
+	noSmithyDocumentSerde
 }
 
 // Describes a stack error.
@@ -771,6 +816,8 @@ type StackError struct {
 
 	// The error message.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a connector that enables persistent storage for users.
@@ -786,6 +833,8 @@ type StorageConnector struct {
 
 	// The ARN of the storage connector.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes information about the usage report subscription.
@@ -808,6 +857,8 @@ type UsageReportSubscription struct {
 
 	// The errors that were returned if usage reports couldn't be generated.
 	SubscriptionErrors []LastReportGenerationExecutionError
+
+	noSmithyDocumentSerde
 }
 
 // Describes a user in the user pool.
@@ -852,6 +903,8 @@ type User struct {
 
 	// The email address of the user. Users' email addresses are case-sensitive.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action and whether the action is enabled or disabled for users
@@ -867,6 +920,8 @@ type UserSetting struct {
 	//
 	// This member is required.
 	Permission Permission
+
+	noSmithyDocumentSerde
 }
 
 // Describes a user in the user pool and the associated stack.
@@ -891,6 +946,8 @@ type UserStackAssociation struct {
 	// Specifies whether a welcome email is sent to a user after the user is created in
 	// the user pool.
 	SendEmailNotification bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes the error that is returned when a user can’t be associated with or
@@ -907,6 +964,8 @@ type UserStackAssociationError struct {
 
 	// Information about the user and associated stack.
 	UserStackAssociation *UserStackAssociation
+
+	noSmithyDocumentSerde
 }
 
 // Describes VPC configuration information for fleets and image builders.
@@ -919,4 +978,8 @@ type VpcConfig struct {
 	// fleet instance or image builder instance. Fleet instances use one or more
 	// subnets. Image builder instances use one subnet.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

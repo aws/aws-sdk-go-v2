@@ -59,6 +59,8 @@ type CreateContactInput struct {
 	// Adds a tag to the target. You can only tag resources created in the first Region
 	// of your replication set.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateContactOutput struct {
@@ -70,6 +72,8 @@ type CreateContactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

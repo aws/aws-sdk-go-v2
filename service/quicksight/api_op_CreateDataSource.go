@@ -75,6 +75,8 @@ type CreateDataSourceInput struct {
 	// Use this parameter only when you want QuickSight to use a VPC connection when
 	// connecting to your underlying source.
 	VpcConnectionProperties *types.VpcConnectionProperties
+
+	noSmithyDocumentSerde
 }
 
 type CreateDataSourceOutput struct {
@@ -97,6 +99,8 @@ type CreateDataSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

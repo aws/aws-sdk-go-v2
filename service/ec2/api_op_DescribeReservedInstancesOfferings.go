@@ -140,6 +140,8 @@ type DescribeReservedInstancesOfferingsInput struct {
 
 	// One or more Reserved Instances offering IDs.
 	ReservedInstancesOfferingIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeReservedInstancesOfferings.
@@ -154,6 +156,8 @@ type DescribeReservedInstancesOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedInstancesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

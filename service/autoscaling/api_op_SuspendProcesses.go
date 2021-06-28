@@ -64,11 +64,15 @@ type SuspendProcessesInput struct {
 	// If you omit this
 	// parameter, all processes are specified.
 	ScalingProcesses []string
+
+	noSmithyDocumentSerde
 }
 
 type SuspendProcessesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSuspendProcessesMiddlewares(stack *middleware.Stack, options Options) (err error) {

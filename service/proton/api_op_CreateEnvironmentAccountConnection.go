@@ -60,6 +60,8 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// AWS Proton returns the environment account connection that the first request
 	// created.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentAccountConnectionOutput struct {
@@ -71,6 +73,8 @@ type CreateEnvironmentAccountConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

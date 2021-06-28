@@ -50,6 +50,8 @@ type CreateSpotDatafeedSubscriptionInput struct {
 
 	// The prefix for the data feed file names.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateSpotDatafeedSubscription.
@@ -60,6 +62,8 @@ type CreateSpotDatafeedSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSpotDatafeedSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,6 +60,8 @@ type PutRestApiInput struct {
 	// --parameters ignore=documentation --body
 	// 'file:///path/to/imported-api-body.json'.
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a REST API. Create an API
@@ -127,6 +129,8 @@ type PutRestApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

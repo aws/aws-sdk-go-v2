@@ -89,6 +89,8 @@ type CreateVpcInput struct {
 
 	// The tags to assign to the VPC.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateVpcOutput struct {
@@ -98,6 +100,8 @@ type CreateVpcOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {

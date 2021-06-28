@@ -40,11 +40,15 @@ type DeletePolicyInput struct {
 
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

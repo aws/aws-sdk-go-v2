@@ -49,6 +49,8 @@ type GetAccessPointConfigurationForObjectLambdaInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAccessPointConfigurationForObjectLambdaOutput struct {
@@ -58,6 +60,8 @@ type GetAccessPointConfigurationForObjectLambdaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccessPointConfigurationForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {

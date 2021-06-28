@@ -100,6 +100,8 @@ type ModifyReplicationInstanceInput struct {
 	// Specifies the VPC security group to be used with the replication instance. The
 	// VPC security group must work with the VPC containing the replication instance.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -110,6 +112,8 @@ type ModifyReplicationInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

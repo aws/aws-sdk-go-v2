@@ -40,6 +40,8 @@ type ListProposalsInput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProposalsOutput struct {
@@ -52,6 +54,8 @@ type ListProposalsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProposalsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -95,6 +95,8 @@ type ScheduleKeyDeletionInput struct {
 	// value is optional. If you include a value, it must be between 7 and 30,
 	// inclusive. If you do not include a value, it defaults to 30.
 	PendingWindowInDays *int32
+
+	noSmithyDocumentSerde
 }
 
 type ScheduleKeyDeletionOutput struct {
@@ -123,6 +125,8 @@ type ScheduleKeyDeletionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationScheduleKeyDeletionMiddlewares(stack *middleware.Stack, options Options) (err error) {

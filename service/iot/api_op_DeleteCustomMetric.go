@@ -37,11 +37,15 @@ type DeleteCustomMetricInput struct {
 	//
 	// This member is required.
 	MetricName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomMetricOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {

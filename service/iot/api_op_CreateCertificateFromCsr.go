@@ -58,6 +58,8 @@ type CreateCertificateFromCsrInput struct {
 
 	// Specifies whether the certificate is active.
 	SetAsActive bool
+
+	noSmithyDocumentSerde
 }
 
 // The output from the CreateCertificateFromCsr operation.
@@ -76,6 +78,8 @@ type CreateCertificateFromCsrOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCertificateFromCsrMiddlewares(stack *middleware.Stack, options Options) (err error) {

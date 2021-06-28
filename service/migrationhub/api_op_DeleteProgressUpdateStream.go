@@ -59,11 +59,15 @@ type DeleteProgressUpdateStreamInput struct {
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
 	DryRun bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProgressUpdateStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProgressUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

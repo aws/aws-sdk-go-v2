@@ -46,6 +46,8 @@ type UntagResourceInput struct {
 	// The Amazon Resource Name (ARN) of the resource from which you want to remove a
 	// tag.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UntagResourceOutput struct {
@@ -57,6 +59,8 @@ type UntagResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

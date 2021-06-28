@@ -40,6 +40,8 @@ type ListLicenseSpecificationsForResourceInput struct {
 
 	// Token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLicenseSpecificationsForResourceOutput struct {
@@ -52,6 +54,8 @@ type ListLicenseSpecificationsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLicenseSpecificationsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

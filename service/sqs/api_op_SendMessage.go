@@ -152,6 +152,8 @@ type SendMessageInput struct {
 	// * The size of a message system
 	// attribute doesn't count towards the total size of a message.
 	MessageSystemAttributes map[string]types.MessageSystemAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // The MD5OfMessageBody and MessageId elements.
@@ -188,6 +190,8 @@ type SendMessageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

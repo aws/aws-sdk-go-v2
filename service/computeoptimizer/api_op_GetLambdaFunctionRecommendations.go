@@ -61,6 +61,8 @@ type GetLambdaFunctionRecommendationsInput struct {
 
 	// The token to advance to the next page of function recommendations.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLambdaFunctionRecommendationsOutput struct {
@@ -75,6 +77,8 @@ type GetLambdaFunctionRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

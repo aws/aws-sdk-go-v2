@@ -48,6 +48,8 @@ type ListActionExecutionsInput struct {
 	// The token that was returned from the previous ListActionExecutions call, which
 	// can be used to return the next set of action executions in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListActionExecutionsOutput struct {
@@ -62,6 +64,8 @@ type ListActionExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListActionExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -135,6 +135,8 @@ type GetClusterCredentialsInput struct {
 	// The number of seconds until the returned temporary password expires. Constraint:
 	// minimum 900, maximum 3600. Default: 900
 	DurationSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Temporary credentials with authorization to log on to an Amazon Redshift
@@ -158,6 +160,8 @@ type GetClusterCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetClusterCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

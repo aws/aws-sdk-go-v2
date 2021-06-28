@@ -220,6 +220,8 @@ type PostContentInput struct {
 	//
 	// This value conforms to the media type: application/json
 	SessionAttributes *string
+
+	noSmithyDocumentSerde
 }
 
 type PostContentOutput struct {
@@ -414,6 +416,8 @@ type PostContentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPostContentMiddlewares(stack *middleware.Stack, options Options) (err error) {

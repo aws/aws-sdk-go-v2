@@ -45,6 +45,8 @@ type UpdateGroupInput struct {
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGroupOutput struct {
@@ -54,6 +56,8 @@ type UpdateGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -183,11 +183,15 @@ type DeleteScalingPolicyInput struct {
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
+	noSmithyDocumentSerde
 }
 
 type DeleteScalingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

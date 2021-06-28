@@ -65,6 +65,8 @@ type ListProjectsInput struct {
 	// Use sortBy to
 	// specify the criterion to be used to list build project names.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type ListProjectsOutput struct {
@@ -81,6 +83,8 @@ type ListProjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

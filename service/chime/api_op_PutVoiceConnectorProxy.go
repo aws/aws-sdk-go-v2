@@ -51,6 +51,8 @@ type PutVoiceConnectorProxyInput struct {
 
 	// The phone number to route calls to after a proxy session expires.
 	FallBackPhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 type PutVoiceConnectorProxyOutput struct {
@@ -60,6 +62,8 @@ type PutVoiceConnectorProxyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutVoiceConnectorProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {

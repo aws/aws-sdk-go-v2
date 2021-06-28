@@ -70,6 +70,8 @@ type DescribeEnvironmentsInput struct {
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that are associated with this application version.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Result message containing a list of environment descriptions.
@@ -84,6 +86,8 @@ type DescribeEnvironmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetSipMediaApplicationLoggingConfigurationInput struct {
 	//
 	// This member is required.
 	SipMediaApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSipMediaApplicationLoggingConfigurationOutput struct {
@@ -42,6 +44,8 @@ type GetSipMediaApplicationLoggingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSipMediaApplicationLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

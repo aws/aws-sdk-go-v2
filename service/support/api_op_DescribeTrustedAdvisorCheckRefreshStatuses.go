@@ -49,6 +49,8 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	//
 	// This member is required.
 	CheckIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The statuses of the Trusted Advisor checks returned by the
@@ -62,6 +64,8 @@ type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrustedAdvisorCheckRefreshStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {

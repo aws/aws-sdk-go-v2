@@ -37,6 +37,8 @@ type CreateStreamingDistributionInput struct {
 	//
 	// This member is required.
 	StreamingDistributionConfig *types.StreamingDistributionConfig
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -53,6 +55,8 @@ type CreateStreamingDistributionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

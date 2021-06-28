@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -41,6 +42,8 @@ type Alias struct {
 	// The routing configuration, including routing type and fleet target, for the
 	// alias.
 	RoutingStrategy *RoutingStrategy
+
+	noSmithyDocumentSerde
 }
 
 // Values for use in Player attribute key-value pairs. This object lets you specify
@@ -63,6 +66,8 @@ type AttributeValue struct {
 	// characters. Duplicate values are not recognized; all occurrences of the repeated
 	// value after the first of a repeated value are ignored.
 	SL []string
+
+	noSmithyDocumentSerde
 }
 
 // Temporary access credentials used for uploading game build files to Amazon
@@ -79,6 +84,8 @@ type AwsCredentials struct {
 	// Token used to associate a specific build ID with the files uploaded using these
 	// credentials.
 	SessionToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Properties describing a custom game build. Related actions CreateBuild |
@@ -132,6 +139,8 @@ type Build struct {
 	// do not need to be unique. This value can be set using CreateBuild or
 	// UpdateBuild.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Determines whether a TLS/SSL certificate is generated for a fleet. This feature
@@ -152,6 +161,8 @@ type CertificateConfiguration struct {
 	//
 	// This member is required.
 	CertificateType CertificateType
+
+	noSmithyDocumentSerde
 }
 
 // Player information for use when creating player sessions using a game session
@@ -164,6 +175,8 @@ type DesiredPlayerSession struct {
 
 	// A unique identifier for a player to associate with the player session.
 	PlayerId *string
+
+	noSmithyDocumentSerde
 }
 
 // Resource capacity settings. Fleet capacity is measured in EC2 instances. Pending
@@ -194,6 +207,8 @@ type EC2InstanceCounts struct {
 
 	// Number of instances that are no longer active but haven't yet been terminated.
 	TERMINATING *int32
+
+	noSmithyDocumentSerde
 }
 
 // The GameLift service limits for an EC2 instance type and current utilization.
@@ -217,6 +232,8 @@ type EC2InstanceLimit struct {
 
 	// An AWS Region code, such as us-west-2.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Log entry describing an event that involves GameLift resources (such as a
@@ -352,6 +369,8 @@ type Event struct {
 
 	// A unique identifier for an event resource, such as a fleet ID.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of fleet locations where a game session queue can place new game
@@ -364,6 +383,8 @@ type FilterConfiguration struct {
 	// A list of locations to allow game session placement in, in the form of AWS
 	// Region codes such as us-west-2.
 	AllowedLocations []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a GameLift fleet of game hosting resources. Related actions
@@ -503,6 +524,8 @@ type FleetAttributes struct {
 	// A time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	TerminationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Current resource capacity settings in a specified fleet or location. The
@@ -533,6 +556,8 @@ type FleetCapacity struct {
 	// The fleet location for the instance count information, expressed as an AWS
 	// Region code, such as us-west-2.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Current resource utilization statistics in a specified fleet or location. The
@@ -569,6 +594,8 @@ type FleetUtilization struct {
 	// The maximum number of players allowed across all game sessions that are
 	// currently being hosted across all instances in the fleet location.
 	MaximumPlayerSessionCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // Set of key-value pairs that contain information about a game session. When
@@ -589,6 +616,8 @@ type GameProperty struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used with the GameLift FleetIQ and game server groups.
@@ -663,6 +692,8 @@ type GameServer struct {
 	// * UTILIZED - The game server is currently
 	// hosting a game session with players.
 	UtilizationStatus GameServerUtilizationStatus
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used with the GameLift FleetIQ and game server groups.
@@ -770,6 +801,8 @@ type GameServerGroup struct {
 	// A list of activities that are currently suspended for this game server group. If
 	// this property is empty, all activities are occurring.
 	SuspendedActions []GameServerGroupAction
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used with the GameLift FleetIQ and game server groups.
@@ -795,6 +828,8 @@ type GameServerGroupAutoScalingPolicy struct {
 	// useful, particularly with game servers that take a long time to start up,
 	// because it avoids prematurely starting new instances.
 	EstimatedInstanceWarmup *int32
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used with the GameLift FleetIQ and game server groups.
@@ -838,6 +873,8 @@ type GameServerInstance struct {
 	// in the process of shutting down due to a Spot instance interruption. No new game
 	// servers are started on this instance.
 	InstanceStatus GameServerInstanceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Properties describing a game session. A game session in ACTIVE status can host
@@ -948,6 +985,8 @@ type GameSession struct {
 	// A time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	TerminationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Connection information for a new game session that is created in response to a
@@ -987,6 +1026,8 @@ type GameSessionConnectionInfo struct {
 	// The port number for the game session. To connect to a GameLift game server, an
 	// app needs both the IP address and port number.
 	Port *int32
+
+	noSmithyDocumentSerde
 }
 
 // A game session's properties plus the protection policy currently in force.
@@ -1004,6 +1045,8 @@ type GameSessionDetail struct {
 	// game session is in an ACTIVE status, it cannot be terminated during a scale-down
 	// event.
 	ProtectionPolicy ProtectionPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Object that describes a StartGameSessionPlacement request. This object includes
@@ -1135,6 +1178,8 @@ type GameSessionPlacement struct {
 	// terminated before the placement process was completed, or an unexpected internal
 	// error.
 	Status GameSessionPlacementState
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for a game session placement mechanism that processes requests for
@@ -1192,6 +1237,8 @@ type GameSessionQueue struct {
 	// in the queue. When a request exceeds this time, the game session placement
 	// changes to a TIMED_OUT status.
 	TimeoutInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // A fleet or alias designated in a game session queue. Queues fulfill requests for
@@ -1203,6 +1250,8 @@ type GameSessionQueueDestination struct {
 	// which include a fleet ID or alias ID and a Region name, provide a unique
 	// identifier across all Regions.
 	DestinationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an EC2 instance of virtual computing resources that hosts one or more
@@ -1271,6 +1320,8 @@ type Instance struct {
 
 	// EC2 instance type that defines the computing resources of this instance.
 	Type EC2InstanceType
+
+	noSmithyDocumentSerde
 }
 
 // Information required to remotely connect to a fleet instance. Access is
@@ -1291,6 +1342,8 @@ type InstanceAccess struct {
 
 	// Operating system that is running on the instance.
 	OperatingSystem OperatingSystem
+
+	noSmithyDocumentSerde
 }
 
 // Set of credentials required to remotely access a fleet instance. Access
@@ -1305,6 +1358,8 @@ type InstanceCredentials struct {
 
 	// User login string.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used with the GameLift FleetIQ and game server groups. An
@@ -1327,6 +1382,8 @@ type InstanceDefinition struct {
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Default value is "1".
 	WeightedCapacity *string
+
+	noSmithyDocumentSerde
 }
 
 // A range of IP addresses and port settings that allow inbound traffic to connect
@@ -1359,6 +1416,8 @@ type IpPermission struct {
 	//
 	// This member is required.
 	ToPort *int32
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used with the GameLift FleetIQ and game server groups. An EC2
@@ -1377,6 +1436,8 @@ type LaunchTemplateSpecification struct {
 	// default version will be used. With Amazon EC2, you can specify a default version
 	// for a launch template. If none is set, the default is the first version created.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a location in a multi-location fleet. Related actions
@@ -1393,6 +1454,8 @@ type LocationAttributes struct {
 	// indicates that StopFleetActions or StartFleetActions has been requested but the
 	// update has not yet been completed for the location.
 	UpdateStatus LocationUpdateStatus
+
+	noSmithyDocumentSerde
 }
 
 // A remote location where a multi-location fleet can deploy EC2 instances for game
@@ -1401,6 +1464,8 @@ type LocationConfiguration struct {
 
 	// An AWS Region code, such as us-west-2.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // A fleet location and its life-cycle state. A location state object might be used
@@ -1416,6 +1481,8 @@ type LocationState struct {
 
 	// The life-cycle status of a fleet location.
 	Status FleetStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents a new player session that is created as a result of a successful
@@ -1430,6 +1497,8 @@ type MatchedPlayerSession struct {
 
 	// A unique identifier for a player session
 	PlayerSessionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Guidelines for use with FlexMatch to match players into games. All matchmaking
@@ -1545,6 +1614,8 @@ type MatchmakingConfiguration struct {
 	// A matchmaking configuration can only use rule sets that are defined in the same
 	// Region.
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Set of rule statements, used with FlexMatch, that determine how to build your
@@ -1603,6 +1674,8 @@ type MatchmakingRuleSet struct {
 
 	// A unique identifier for the matchmaking rule set
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Ticket generated to track the progress of a matchmaking request. Each ticket is
@@ -1693,6 +1766,8 @@ type MatchmakingTicket struct {
 
 	// A unique identifier for a matchmaking ticket.
 	TicketId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a player session that was created as part of a
@@ -1710,6 +1785,8 @@ type PlacedPlayerSession struct {
 
 	// A unique identifier for a player session.
 	PlayerSessionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a player in matchmaking. When starting a matchmaking request, a
@@ -1738,6 +1815,8 @@ type Player struct {
 	// Name of the team that the player is assigned to in a match. Team names are
 	// defined in a matchmaking rule set.
 	Team *string
+
+	noSmithyDocumentSerde
 }
 
 // Regional latency information for a player, used when requesting a new game
@@ -1757,6 +1836,8 @@ type PlayerLatency struct {
 
 	// Name of the Region that is associated with the latency value.
 	RegionIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Sets a latency cap for individual players when placing a game session. With a
@@ -1775,6 +1856,8 @@ type PlayerLatencyPolicy struct {
 	// game session. A null value for this property means that the policy is enforced
 	// until the queue times out.
 	PolicyDurationSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents a player session. Player sessions are created either for a specific
@@ -1859,6 +1942,8 @@ type PlayerSession struct {
 	// A time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	TerminationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Custom prioritization settings for use by a game session queue when placing new
@@ -1908,6 +1993,8 @@ type PriorityConfiguration struct {
 	// * LOCATION -- FleetIQ prioritizes based on
 	// the provided order of locations, as defined in LocationOrder.
 	PriorityOrder []PriorityType
+
+	noSmithyDocumentSerde
 }
 
 // A policy that puts limits on the number of game sessions that a player can
@@ -1925,6 +2012,8 @@ type ResourceCreationLimitPolicy struct {
 
 	// The time span used in evaluating the resource creation limit policy.
 	PolicyPeriodInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // The routing configuration for a fleet alias. Related actions CreateAlias |
@@ -1951,6 +2040,8 @@ type RoutingStrategy struct {
 	// throws a TerminalRoutingStrategyException with the RoutingStrategy message
 	// embedded.
 	Type RoutingStrategyType
+
+	noSmithyDocumentSerde
 }
 
 // A collection of server process configurations that describe the set of processes
@@ -1980,6 +2071,8 @@ type RuntimeConfiguration struct {
 	// A collection of server process configurations that identify what server
 	// processes to run on each instance in a fleet.
 	ServerProcesses []ServerProcess
+
+	noSmithyDocumentSerde
 }
 
 // The location in Amazon S3 where build or script files are stored for access by
@@ -2005,6 +2098,8 @@ type S3Location struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
 	// role that allows Amazon GameLift to access the S3 bucket.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Rule that controls how a fleet is scaled. Scaling policies are uniquely
@@ -2147,6 +2242,8 @@ type ScalingPolicy struct {
 	// location. The status PENDING_UPDATE indicates that an update was requested for
 	// the fleet but has not yet been completed for the location.
 	UpdateStatus LocationUpdateStatus
+
+	noSmithyDocumentSerde
 }
 
 // Properties describing a Realtime script. Related actions CreateScript |
@@ -2184,6 +2281,8 @@ type Script struct {
 	// Version information that is associated with a build or script. Version strings
 	// do not need to be unique.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // A set of instructions for launching server processes on each instance in a
@@ -2214,6 +2313,8 @@ type ServerProcess struct {
 	// An optional list of parameters to pass to the server executable or Realtime
 	// script on launch.
 	Parameters *string
+
+	noSmithyDocumentSerde
 }
 
 // A label that can be assigned to a GameLift resource. Learn more Tagging AWS
@@ -2234,6 +2335,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for a target-based scaling policy (see ScalingPolicy. A target-based
@@ -2255,6 +2358,8 @@ type TargetConfiguration struct {
 	//
 	// This member is required.
 	TargetValue float64
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used with the GameLift FleetIQ and game server groups.
@@ -2270,6 +2375,8 @@ type TargetTrackingConfiguration struct {
 	//
 	// This member is required.
 	TargetValue *float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents an authorization for a VPC peering connection between the VPC for an
@@ -2306,6 +2413,8 @@ type VpcPeeringAuthorization struct {
 	// Fleets
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 	PeerVpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a peering connection between a VPC on one of your AWS accounts and
@@ -2352,6 +2461,8 @@ type VpcPeeringConnection struct {
 	// This ID is referenced in VPC peering connection events, and is used when
 	// deleting a connection with DeleteVpcPeeringConnection.
 	VpcPeeringConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents status information for a VPC peering connection. Status is associated
@@ -2366,4 +2477,8 @@ type VpcPeeringConnectionStatus struct {
 
 	// Additional messaging associated with the connection status.
 	Message *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

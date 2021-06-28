@@ -83,6 +83,8 @@ type InviteAccountToOrganizationInput struct {
 	// invalid or if you exceed the allowed number of tags for an account, then the
 	// entire request fails and invitations are not sent.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type InviteAccountToOrganizationOutput struct {
@@ -93,6 +95,8 @@ type InviteAccountToOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInviteAccountToOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

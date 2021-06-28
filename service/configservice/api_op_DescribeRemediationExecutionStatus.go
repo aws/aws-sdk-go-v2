@@ -49,6 +49,8 @@ type DescribeRemediationExecutionStatusInput struct {
 	// A list of resource keys to be processed with the current request. Each element
 	// in the list consists of the resource type and resource ID.
 	ResourceKeys []types.ResourceKey
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRemediationExecutionStatusOutput struct {
@@ -62,6 +64,8 @@ type DescribeRemediationExecutionStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRemediationExecutionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type ListServiceProfilesInput struct {
 	// To retrieve the next set of results, the nextToken value from a previous
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListServiceProfilesOutput struct {
@@ -49,6 +51,8 @@ type ListServiceProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListServiceProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

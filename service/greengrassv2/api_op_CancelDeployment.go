@@ -34,6 +34,8 @@ type CancelDeploymentInput struct {
 	//
 	// This member is required.
 	DeploymentId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelDeploymentOutput struct {
@@ -43,6 +45,8 @@ type CancelDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

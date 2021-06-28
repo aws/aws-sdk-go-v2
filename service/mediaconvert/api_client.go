@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
@@ -155,6 +156,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	}
 	return result, metadata, err
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 func resolveDefaultLogger(o *Options) {
 	if o.Logger != nil {

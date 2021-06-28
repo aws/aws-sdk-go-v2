@@ -32,11 +32,15 @@ type DeleteSecurityConfigurationInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSecurityConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,11 +35,15 @@ type DeleteDynamicThingGroupInput struct {
 
 	// The expected version of the dynamic thing group to delete.
 	ExpectedVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDynamicThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

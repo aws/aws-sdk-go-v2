@@ -79,6 +79,8 @@ type ListWorkflowTypesInput struct {
 	// When set to true, returns the results in reverse order. By default the results
 	// are returned in ascending alphabetical order of the name of the workflow types.
 	ReverseOrder bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains a paginated list of information structures about workflow types.
@@ -98,6 +100,8 @@ type ListWorkflowTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkflowTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type DescribeCustomAvailabilityZonesInput struct {
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCustomAvailabilityZonesOutput struct {
@@ -66,6 +68,8 @@ type DescribeCustomAvailabilityZonesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCustomAvailabilityZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {

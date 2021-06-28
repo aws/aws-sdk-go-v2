@@ -187,6 +187,8 @@ type UpdateSecretInput struct {
 	// double-quotes. All of the embedded double quotes are escaped:
 	// "[{\"username\":\"bob\"},{\"password\":\"abc123xyz456\"}]"
 	SecretString *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSecretOutput struct {
@@ -208,6 +210,8 @@ type UpdateSecretOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {

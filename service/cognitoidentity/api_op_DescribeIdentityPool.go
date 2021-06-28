@@ -36,6 +36,8 @@ type DescribeIdentityPoolInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon Cognito identity pool.
@@ -85,6 +87,8 @@ type DescribeIdentityPoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

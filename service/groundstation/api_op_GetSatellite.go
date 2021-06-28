@@ -33,6 +33,8 @@ type GetSatelliteInput struct {
 	//
 	// This member is required.
 	SatelliteId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -52,6 +54,8 @@ type GetSatelliteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSatelliteMiddlewares(stack *middleware.Stack, options Options) (err error) {

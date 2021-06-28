@@ -40,11 +40,15 @@ type DisconnectParticipantInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DisconnectParticipantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisconnectParticipantMiddlewares(stack *middleware.Stack, options Options) (err error) {

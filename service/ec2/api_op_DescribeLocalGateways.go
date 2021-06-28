@@ -66,6 +66,8 @@ type DescribeLocalGatewaysInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLocalGatewaysOutput struct {
@@ -79,6 +81,8 @@ type DescribeLocalGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocalGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

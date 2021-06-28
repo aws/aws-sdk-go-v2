@@ -51,6 +51,8 @@ type DetectStackResourceDriftInput struct {
 	//
 	// This member is required.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectStackResourceDriftOutput struct {
@@ -64,6 +66,8 @@ type DetectStackResourceDriftOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectStackResourceDriftMiddlewares(stack *middleware.Stack, options Options) (err error) {

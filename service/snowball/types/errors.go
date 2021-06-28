@@ -12,6 +12,8 @@ import (
 // cluster, try again and create jobs until your cluster has exactly five nodes.
 type ClusterLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterLimitExceededException) Error() string {
@@ -32,6 +34,8 @@ type ConflictException struct {
 	Message *string
 
 	ConflictResource *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -50,6 +54,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // attempted action.
 type Ec2RequestFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *Ec2RequestFailedException) Error() string {
@@ -68,6 +74,8 @@ func (e *Ec2RequestFailedException) ErrorFault() smithy.ErrorFault { return smit
 // and try again.
 type InvalidAddressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAddressException) Error() string {
@@ -87,6 +95,8 @@ func (e *InvalidAddressException) ErrorFault() smithy.ErrorFault { return smithy
 // CreateJobRequest$JobType, and try again.
 type InvalidInputCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputCombinationException) Error() string {
@@ -107,6 +117,8 @@ func (e *InvalidInputCombinationException) ErrorFault() smithy.ErrorFault { retu
 // action to be performed.
 type InvalidJobStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidJobStateException) Error() string {
@@ -125,6 +137,8 @@ func (e *InvalidJobStateException) ErrorFault() smithy.ErrorFault { return smith
 // Run the operation without changing the NextToken string, and try again.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -145,6 +159,8 @@ type InvalidResourceException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceException) Error() string {
@@ -163,6 +179,8 @@ func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smith
 // specified CreateJob or UpdateJob action.
 type KMSRequestFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSRequestFailedException) Error() string {
@@ -182,6 +200,8 @@ func (e *KMSRequestFailedException) ErrorFault() smithy.ErrorFault { return smit
 // get the url.
 type ReturnShippingLabelAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReturnShippingLabelAlreadyExistsException) Error() string {
@@ -205,6 +225,8 @@ func (e *ReturnShippingLabelAlreadyExistsException) ErrorFault() smithy.ErrorFau
 // issue persists, contact AWS Support.
 type UnsupportedAddressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedAddressException) Error() string {

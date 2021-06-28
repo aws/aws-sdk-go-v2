@@ -49,11 +49,15 @@ type UpdateCertificateInput struct {
 	//
 	// This member is required.
 	NewStatus types.CertificateStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

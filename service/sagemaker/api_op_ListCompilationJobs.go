@@ -70,6 +70,8 @@ type ListCompilationJobsInput struct {
 	// A filter that retrieves model compilation jobs with a specific
 	// DescribeCompilationJobResponse$CompilationJobStatus status.
 	StatusEquals types.CompilationJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListCompilationJobsOutput struct {
@@ -87,6 +89,8 @@ type ListCompilationJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCompilationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

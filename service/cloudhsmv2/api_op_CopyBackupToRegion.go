@@ -43,6 +43,8 @@ type CopyBackupToRegionInput struct {
 	// only these tags will be applied to the destination backup. If you do not specify
 	// tags, the service copies tags from the source backup to the destination backup.
 	TagList []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CopyBackupToRegionOutput struct {
@@ -57,6 +59,8 @@ type CopyBackupToRegionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyBackupToRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {

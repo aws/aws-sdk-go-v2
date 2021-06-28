@@ -32,6 +32,7 @@ func (c *Client) GetAccountPasswordPolicy(ctx context.Context, params *GetAccoun
 }
 
 type GetAccountPasswordPolicyInput struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetAccountPasswordPolicy request.
@@ -44,6 +45,8 @@ type GetAccountPasswordPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

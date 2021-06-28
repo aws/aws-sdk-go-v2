@@ -37,6 +37,8 @@ type CreateSnapshotInput struct {
 
 	// The descriptive name to apply to the snapshot.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the CreateSnapshot operation.
@@ -47,6 +49,8 @@ type CreateSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

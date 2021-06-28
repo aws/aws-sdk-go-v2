@@ -48,11 +48,15 @@ type PutRawMessageContentInput struct {
 	//
 	// This member is required.
 	MessageId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutRawMessageContentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRawMessageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {

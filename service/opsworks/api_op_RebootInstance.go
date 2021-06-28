@@ -39,11 +39,15 @@ type RebootInstanceInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type RebootInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

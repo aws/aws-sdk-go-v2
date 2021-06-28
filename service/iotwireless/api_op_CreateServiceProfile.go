@@ -45,6 +45,8 @@ type CreateServiceProfileInput struct {
 	// The tags to attach to the new service profile. Tags are metadata that you can
 	// use to manage a resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceProfileOutput struct {
@@ -57,6 +59,8 @@ type CreateServiceProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

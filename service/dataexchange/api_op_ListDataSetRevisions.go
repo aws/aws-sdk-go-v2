@@ -42,6 +42,8 @@ type ListDataSetRevisionsInput struct {
 	// The token value retrieved from a previous call to access the next page of
 	// results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDataSetRevisionsOutput struct {
@@ -55,6 +57,8 @@ type ListDataSetRevisionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDataSetRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

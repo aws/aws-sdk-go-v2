@@ -47,11 +47,15 @@ type DeleteAutoScalingGroupInput struct {
 	// parameter also deletes any outstanding lifecycle actions associated with the
 	// group.
 	ForceDelete *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAutoScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

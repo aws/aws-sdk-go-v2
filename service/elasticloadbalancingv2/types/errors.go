@@ -10,6 +10,8 @@ import (
 // The specified allocation ID does not exist.
 type AllocationIdNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AllocationIdNotFoundException) Error() string {
@@ -27,6 +29,8 @@ func (e *AllocationIdNotFoundException) ErrorFault() smithy.ErrorFault { return 
 // The specified ALPN policy is not supported.
 type ALPNPolicyNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ALPNPolicyNotSupportedException) Error() string {
@@ -44,6 +48,8 @@ func (e *ALPNPolicyNotSupportedException) ErrorFault() smithy.ErrorFault { retur
 // The specified Availability Zone is not supported.
 type AvailabilityZoneNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AvailabilityZoneNotSupportedException) Error() string {
@@ -65,6 +71,8 @@ func (e *AvailabilityZoneNotSupportedException) ErrorFault() smithy.ErrorFault {
 // The specified certificate does not exist.
 type CertificateNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateNotFoundException) Error() string {
@@ -82,6 +90,8 @@ func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // A listener with the specified port already exists.
 type DuplicateListenerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateListenerException) Error() string {
@@ -99,6 +109,8 @@ func (e *DuplicateListenerException) ErrorFault() smithy.ErrorFault { return smi
 // A load balancer with the specified name already exists.
 type DuplicateLoadBalancerNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateLoadBalancerNameException) Error() string {
@@ -118,6 +130,8 @@ func (e *DuplicateLoadBalancerNameException) ErrorFault() smithy.ErrorFault {
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateTagKeysException) Error() string {
@@ -135,6 +149,8 @@ func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smit
 // A target group with the specified name already exists.
 type DuplicateTargetGroupNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateTargetGroupNameException) Error() string {
@@ -153,6 +169,8 @@ func (e *DuplicateTargetGroupNameException) ErrorFault() smithy.ErrorFault { ret
 // error.
 type HealthUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HealthUnavailableException) Error() string {
@@ -170,6 +188,8 @@ func (e *HealthUnavailableException) ErrorFault() smithy.ErrorFault { return smi
 // The specified configuration is not valid with this protocol.
 type IncompatibleProtocolsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncompatibleProtocolsException) Error() string {
@@ -187,6 +207,8 @@ func (e *IncompatibleProtocolsException) ErrorFault() smithy.ErrorFault { return
 // The requested configuration is not valid.
 type InvalidConfigurationRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConfigurationRequestException) Error() string {
@@ -208,6 +230,8 @@ func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 // The requested action is not valid.
 type InvalidLoadBalancerActionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLoadBalancerActionException) Error() string {
@@ -227,6 +251,8 @@ func (e *InvalidLoadBalancerActionException) ErrorFault() smithy.ErrorFault {
 // The requested scheme is not valid.
 type InvalidSchemeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSchemeException) Error() string {
@@ -244,6 +270,8 @@ func (e *InvalidSchemeException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified security group does not exist.
 type InvalidSecurityGroupException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSecurityGroupException) Error() string {
@@ -261,6 +289,8 @@ func (e *InvalidSecurityGroupException) ErrorFault() smithy.ErrorFault { return 
 // The specified subnet is out of available addresses.
 type InvalidSubnetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubnetException) Error() string {
@@ -279,6 +309,8 @@ func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.
 // or has an unsupported instance type.
 type InvalidTargetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTargetException) Error() string {
@@ -296,6 +328,8 @@ func (e *InvalidTargetException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified listener does not exist.
 type ListenerNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ListenerNotFoundException) Error() string {
@@ -313,6 +347,8 @@ func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The specified load balancer does not exist.
 type LoadBalancerNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LoadBalancerNotFoundException) Error() string {
@@ -330,6 +366,8 @@ func (e *LoadBalancerNotFoundException) ErrorFault() smithy.ErrorFault { return 
 // This operation is not allowed.
 type OperationNotPermittedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotPermittedException) Error() string {
@@ -347,6 +385,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // The specified priority is in use.
 type PriorityInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PriorityInUseException) Error() string {
@@ -364,6 +404,8 @@ func (e *PriorityInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // A specified resource is in use.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -381,6 +423,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified rule does not exist.
 type RuleNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RuleNotFoundException) Error() string {
@@ -398,6 +442,8 @@ func (e *RuleNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The specified SSL policy does not exist.
 type SSLPolicyNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SSLPolicyNotFoundException) Error() string {
@@ -415,6 +461,8 @@ func (e *SSLPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 // The specified subnet does not exist.
 type SubnetNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetNotFoundException) Error() string {
@@ -432,6 +480,8 @@ func (e *SubnetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // You've reached the limit on the number of load balancers per target group.
 type TargetGroupAssociationLimitException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TargetGroupAssociationLimitException) Error() string {
@@ -453,6 +503,8 @@ func (e *TargetGroupAssociationLimitException) ErrorFault() smithy.ErrorFault {
 // The specified target group does not exist.
 type TargetGroupNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TargetGroupNotFoundException) Error() string {
@@ -470,6 +522,8 @@ func (e *TargetGroupNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // You've reached the limit on the number of actions per rule.
 type TooManyActionsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyActionsException) Error() string {
@@ -487,6 +541,8 @@ func (e *TooManyActionsException) ErrorFault() smithy.ErrorFault { return smithy
 // You've reached the limit on the number of certificates per load balancer.
 type TooManyCertificatesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyCertificatesException) Error() string {
@@ -504,6 +560,8 @@ func (e *TooManyCertificatesException) ErrorFault() smithy.ErrorFault { return s
 // You've reached the limit on the number of listeners per load balancer.
 type TooManyListenersException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyListenersException) Error() string {
@@ -522,6 +580,8 @@ func (e *TooManyListenersException) ErrorFault() smithy.ErrorFault { return smit
 // Services account.
 type TooManyLoadBalancersException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyLoadBalancersException) Error() string {
@@ -540,6 +600,8 @@ func (e *TooManyLoadBalancersException) ErrorFault() smithy.ErrorFault { return 
 // a load balancer.
 type TooManyRegistrationsForTargetIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRegistrationsForTargetIdException) Error() string {
@@ -561,6 +623,8 @@ func (e *TooManyRegistrationsForTargetIdException) ErrorFault() smithy.ErrorFaul
 // You've reached the limit on the number of rules per load balancer.
 type TooManyRulesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRulesException) Error() string {
@@ -578,6 +642,8 @@ func (e *TooManyRulesException) ErrorFault() smithy.ErrorFault { return smithy.F
 // You've reached the limit on the number of tags per load balancer.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -596,6 +662,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Services account.
 type TooManyTargetGroupsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTargetGroupsException) Error() string {
@@ -613,6 +681,8 @@ func (e *TooManyTargetGroupsException) ErrorFault() smithy.ErrorFault { return s
 // You've reached the limit on the number of targets.
 type TooManyTargetsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTargetsException) Error() string {
@@ -632,6 +702,8 @@ func (e *TooManyTargetsException) ErrorFault() smithy.ErrorFault { return smithy
 // balancer, it is counted as only one use.
 type TooManyUniqueTargetGroupsPerLoadBalancerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) Error() string {
@@ -653,6 +725,8 @@ func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) ErrorFault() smithy.
 // The specified protocol is not supported.
 type UnsupportedProtocolException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedProtocolException) Error() string {

@@ -45,6 +45,8 @@ type DisableTransitGatewayRouteTablePropagationInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DisableTransitGatewayRouteTablePropagationOutput struct {
@@ -54,6 +56,8 @@ type DisableTransitGatewayRouteTablePropagationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableTransitGatewayRouteTablePropagationMiddlewares(stack *middleware.Stack, options Options) (err error) {

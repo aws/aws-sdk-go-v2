@@ -10,6 +10,8 @@ import (
 // The maximum number of alarms for a deployment group (10) was exceeded.
 type AlarmsLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlarmsLimitExceededException) Error() string {
@@ -28,6 +30,8 @@ func (e *AlarmsLimitExceededException) ErrorFault() smithy.ErrorFault { return s
 // exists.
 type ApplicationAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApplicationAlreadyExistsException) Error() string {
@@ -47,6 +51,8 @@ func (e *ApplicationAlreadyExistsException) ErrorFault() smithy.ErrorFault { ret
 // The application does not exist with the IAM user or AWS account.
 type ApplicationDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApplicationDoesNotExistException) Error() string {
@@ -66,6 +72,8 @@ func (e *ApplicationDoesNotExistException) ErrorFault() smithy.ErrorFault { retu
 // More applications were attempted to be created than are allowed.
 type ApplicationLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApplicationLimitExceededException) Error() string {
@@ -85,6 +93,8 @@ func (e *ApplicationLimitExceededException) ErrorFault() smithy.ErrorFault { ret
 // The minimum number of required application names was not specified.
 type ApplicationNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApplicationNameRequiredException) Error() string {
@@ -105,6 +115,8 @@ func (e *ApplicationNameRequiredException) ErrorFault() smithy.ErrorFault { retu
 // resource that is not expected.
 type ArnNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ArnNotSupportedException) Error() string {
@@ -122,6 +134,8 @@ func (e *ArnNotSupportedException) ErrorFault() smithy.ErrorFault { return smith
 // The maximum number of names or IDs allowed for this request (100) was exceeded.
 type BatchLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BatchLimitExceededException) Error() string {
@@ -139,6 +153,8 @@ func (e *BatchLimitExceededException) ErrorFault() smithy.ErrorFault { return sm
 // A bucket name is required, but was not provided.
 type BucketNameFilterRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BucketNameFilterRequiredException) Error() string {
@@ -158,6 +174,8 @@ func (e *BucketNameFilterRequiredException) ErrorFault() smithy.ErrorFault { ret
 // The deployment is already complete.
 type DeploymentAlreadyCompletedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentAlreadyCompletedException) Error() string {
@@ -180,6 +198,8 @@ func (e *DeploymentAlreadyCompletedException) ErrorFault() smithy.ErrorFault {
 // account already exists.
 type DeploymentConfigAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentConfigAlreadyExistsException) Error() string {
@@ -201,6 +221,8 @@ func (e *DeploymentConfigAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 // The deployment configuration does not exist with the IAM user or AWS account.
 type DeploymentConfigDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentConfigDoesNotExistException) Error() string {
@@ -222,6 +244,8 @@ func (e *DeploymentConfigDoesNotExistException) ErrorFault() smithy.ErrorFault {
 // The deployment configuration is still in use.
 type DeploymentConfigInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentConfigInUseException) Error() string {
@@ -239,6 +263,8 @@ func (e *DeploymentConfigInUseException) ErrorFault() smithy.ErrorFault { return
 // The deployment configurations limit was exceeded.
 type DeploymentConfigLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentConfigLimitExceededException) Error() string {
@@ -260,6 +286,8 @@ func (e *DeploymentConfigLimitExceededException) ErrorFault() smithy.ErrorFault 
 // The deployment configuration name was not specified.
 type DeploymentConfigNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentConfigNameRequiredException) Error() string {
@@ -281,6 +309,8 @@ func (e *DeploymentConfigNameRequiredException) ErrorFault() smithy.ErrorFault {
 // The deployment with the IAM user or AWS account does not exist.
 type DeploymentDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentDoesNotExistException) Error() string {
@@ -301,6 +331,8 @@ func (e *DeploymentDoesNotExistException) ErrorFault() smithy.ErrorFault { retur
 // already exists.
 type DeploymentGroupAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentGroupAlreadyExistsException) Error() string {
@@ -322,6 +354,8 @@ func (e *DeploymentGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 // The named deployment group with the IAM user or AWS account does not exist.
 type DeploymentGroupDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentGroupDoesNotExistException) Error() string {
@@ -343,6 +377,8 @@ func (e *DeploymentGroupDoesNotExistException) ErrorFault() smithy.ErrorFault {
 // The deployment groups limit was exceeded.
 type DeploymentGroupLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentGroupLimitExceededException) Error() string {
@@ -364,6 +400,8 @@ func (e *DeploymentGroupLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The deployment group name was not specified.
 type DeploymentGroupNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentGroupNameRequiredException) Error() string {
@@ -385,6 +423,8 @@ func (e *DeploymentGroupNameRequiredException) ErrorFault() smithy.ErrorFault {
 // At least one deployment ID must be specified.
 type DeploymentIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentIdRequiredException) Error() string {
@@ -402,6 +442,8 @@ func (e *DeploymentIdRequiredException) ErrorFault() smithy.ErrorFault { return 
 // The deployment does not have a status of Ready and can't continue yet.
 type DeploymentIsNotInReadyStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentIsNotInReadyStateException) Error() string {
@@ -423,6 +465,8 @@ func (e *DeploymentIsNotInReadyStateException) ErrorFault() smithy.ErrorFault {
 // The number of allowed deployments was exceeded.
 type DeploymentLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentLimitExceededException) Error() string {
@@ -442,6 +486,8 @@ func (e *DeploymentLimitExceededException) ErrorFault() smithy.ErrorFault { retu
 // The specified deployment has not started.
 type DeploymentNotStartedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentNotStartedException) Error() string {
@@ -459,6 +505,8 @@ func (e *DeploymentNotStartedException) ErrorFault() smithy.ErrorFault { return 
 // The provided target ID does not belong to the attempted deployment.
 type DeploymentTargetDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentTargetDoesNotExistException) Error() string {
@@ -480,6 +528,8 @@ func (e *DeploymentTargetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 // A deployment target ID was not provided.
 type DeploymentTargetIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentTargetIdRequiredException) Error() string {
@@ -504,6 +554,8 @@ func (e *DeploymentTargetIdRequiredException) ErrorFault() smithy.ErrorFault {
 // deployments.
 type DeploymentTargetListSizeExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeploymentTargetListSizeExceededException) Error() string {
@@ -525,6 +577,8 @@ func (e *DeploymentTargetListSizeExceededException) ErrorFault() smithy.ErrorFau
 // The description is too long.
 type DescriptionTooLongException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DescriptionTooLongException) Error() string {
@@ -543,6 +597,8 @@ func (e *DescriptionTooLongException) ErrorFault() smithy.ErrorFault { return sm
 // Amazon ECS service can be associated with only one deployment group.
 type ECSServiceMappingLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ECSServiceMappingLimitExceededException) Error() string {
@@ -564,6 +620,8 @@ func (e *ECSServiceMappingLimitExceededException) ErrorFault() smithy.ErrorFault
 // No GitHub account connection exists with the named specified in the call.
 type GitHubAccountTokenDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GitHubAccountTokenDoesNotExistException) Error() string {
@@ -585,6 +643,8 @@ func (e *GitHubAccountTokenDoesNotExistException) ErrorFault() smithy.ErrorFault
 // The call is missing a required GitHub account connection name.
 type GitHubAccountTokenNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GitHubAccountTokenNameRequiredException) Error() string {
@@ -607,6 +667,8 @@ func (e *GitHubAccountTokenNameRequiredException) ErrorFault() smithy.ErrorFault
 // user ARN in the request.
 type IamArnRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IamArnRequiredException) Error() string {
@@ -625,6 +687,8 @@ func (e *IamArnRequiredException) ErrorFault() smithy.ErrorFault { return smithy
 // different instance.
 type IamSessionArnAlreadyRegisteredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IamSessionArnAlreadyRegisteredException) Error() string {
@@ -646,6 +710,8 @@ func (e *IamSessionArnAlreadyRegisteredException) ErrorFault() smithy.ErrorFault
 // The specified IAM user ARN is already registered with an on-premises instance.
 type IamUserArnAlreadyRegisteredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IamUserArnAlreadyRegisteredException) Error() string {
@@ -667,6 +733,8 @@ func (e *IamUserArnAlreadyRegisteredException) ErrorFault() smithy.ErrorFault {
 // An IAM user ARN was not specified.
 type IamUserArnRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IamUserArnRequiredException) Error() string {
@@ -684,6 +752,8 @@ func (e *IamUserArnRequiredException) ErrorFault() smithy.ErrorFault { return sm
 // The specified instance does not exist in the deployment group.
 type InstanceDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceDoesNotExistException) Error() string {
@@ -701,6 +771,8 @@ func (e *InstanceDoesNotExistException) ErrorFault() smithy.ErrorFault { return 
 // The instance ID was not specified.
 type InstanceIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceIdRequiredException) Error() string {
@@ -719,6 +791,8 @@ func (e *InstanceIdRequiredException) ErrorFault() smithy.ErrorFault { return sm
 // exceeded.
 type InstanceLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceLimitExceededException) Error() string {
@@ -736,6 +810,8 @@ func (e *InstanceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // The specified on-premises instance name is already registered.
 type InstanceNameAlreadyRegisteredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceNameAlreadyRegisteredException) Error() string {
@@ -757,6 +833,8 @@ func (e *InstanceNameAlreadyRegisteredException) ErrorFault() smithy.ErrorFault 
 // An on-premises instance name was not specified.
 type InstanceNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceNameRequiredException) Error() string {
@@ -774,6 +852,8 @@ func (e *InstanceNameRequiredException) ErrorFault() smithy.ErrorFault { return 
 // The specified on-premises instance is not registered.
 type InstanceNotRegisteredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceNotRegisteredException) Error() string {
@@ -805,6 +885,8 @@ func (e *InstanceNotRegisteredException) ErrorFault() smithy.ErrorFault { return
 // is empty.
 type InvalidAlarmConfigException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAlarmConfigException) Error() string {
@@ -822,6 +904,8 @@ func (e *InvalidAlarmConfigException) ErrorFault() smithy.ErrorFault { return sm
 // The application name was specified in an invalid format.
 type InvalidApplicationNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApplicationNameException) Error() string {
@@ -841,6 +925,8 @@ func (e *InvalidApplicationNameException) ErrorFault() smithy.ErrorFault { retur
 // The specified ARN is not in a valid format.
 type InvalidArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArnException) Error() string {
@@ -860,6 +946,8 @@ func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // no event types were listed.
 type InvalidAutoRollbackConfigException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAutoRollbackConfigException) Error() string {
@@ -881,6 +969,8 @@ func (e *InvalidAutoRollbackConfigException) ErrorFault() smithy.ErrorFault {
 // The Auto Scaling group was specified in an invalid format or does not exist.
 type InvalidAutoScalingGroupException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAutoScalingGroupException) Error() string {
@@ -902,6 +992,8 @@ func (e *InvalidAutoScalingGroupException) ErrorFault() smithy.ErrorFault { retu
 // CreateDeploymentConfig.
 type InvalidBlueGreenDeploymentConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidBlueGreenDeploymentConfigurationException) Error() string {
@@ -923,6 +1015,8 @@ func (e *InvalidBlueGreenDeploymentConfigurationException) ErrorFault() smithy.E
 // The bucket name either doesn't exist or was specified in an invalid format.
 type InvalidBucketNameFilterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidBucketNameFilterException) Error() string {
@@ -943,6 +1037,8 @@ func (e *InvalidBucketNameFilterException) ErrorFault() smithy.ErrorFault { retu
 // ECS.
 type InvalidComputePlatformException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidComputePlatformException) Error() string {
@@ -962,6 +1058,8 @@ func (e *InvalidComputePlatformException) ErrorFault() smithy.ErrorFault { retur
 // The deployed state filter was specified in an invalid format.
 type InvalidDeployedStateFilterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeployedStateFilterException) Error() string {
@@ -983,6 +1081,8 @@ func (e *InvalidDeployedStateFilterException) ErrorFault() smithy.ErrorFault {
 // The deployment configuration name was specified in an invalid format.
 type InvalidDeploymentConfigNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeploymentConfigNameException) Error() string {
@@ -1004,6 +1104,8 @@ func (e *InvalidDeploymentConfigNameException) ErrorFault() smithy.ErrorFault {
 // The deployment group name was specified in an invalid format.
 type InvalidDeploymentGroupNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeploymentGroupNameException) Error() string {
@@ -1025,6 +1127,8 @@ func (e *InvalidDeploymentGroupNameException) ErrorFault() smithy.ErrorFault {
 // At least one of the deployment IDs was specified in an invalid format.
 type InvalidDeploymentIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeploymentIdException) Error() string {
@@ -1043,6 +1147,8 @@ func (e *InvalidDeploymentIdException) ErrorFault() smithy.ErrorFault { return s
 // supported for blue/green deployments only.
 type InvalidDeploymentInstanceTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeploymentInstanceTypeException) Error() string {
@@ -1064,6 +1170,8 @@ func (e *InvalidDeploymentInstanceTypeException) ErrorFault() smithy.ErrorFault 
 // The specified deployment status doesn't exist or cannot be determined.
 type InvalidDeploymentStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeploymentStatusException) Error() string {
@@ -1085,6 +1193,8 @@ func (e *InvalidDeploymentStatusException) ErrorFault() smithy.ErrorFault { retu
 // "WITH_TRAFFIC_CONTROL" and "WITHOUT_TRAFFIC_CONTROL."
 type InvalidDeploymentStyleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeploymentStyleException) Error() string {
@@ -1104,6 +1214,8 @@ func (e *InvalidDeploymentStyleException) ErrorFault() smithy.ErrorFault { retur
 // The target ID provided was not valid.
 type InvalidDeploymentTargetIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeploymentTargetIdException) Error() string {
@@ -1125,6 +1237,8 @@ func (e *InvalidDeploymentTargetIdException) ErrorFault() smithy.ErrorFault {
 // The wait type is invalid.
 type InvalidDeploymentWaitTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeploymentWaitTypeException) Error() string {
@@ -1147,6 +1261,8 @@ func (e *InvalidDeploymentWaitTypeException) ErrorFault() smithy.ErrorFault {
 // one of these data types can be used in a single call.
 type InvalidEC2TagCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEC2TagCombinationException) Error() string {
@@ -1166,6 +1282,8 @@ func (e *InvalidEC2TagCombinationException) ErrorFault() smithy.ErrorFault { ret
 // The tag was specified in an invalid format.
 type InvalidEC2TagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEC2TagException) Error() string {
@@ -1183,6 +1301,8 @@ func (e *InvalidEC2TagException) ErrorFault() smithy.ErrorFault { return smithy.
 // The Amazon ECS service identifier is not valid.
 type InvalidECSServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidECSServiceException) Error() string {
@@ -1200,6 +1320,8 @@ func (e *InvalidECSServiceException) ErrorFault() smithy.ErrorFault { return smi
 // The external ID was specified in an invalid format.
 type InvalidExternalIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidExternalIdException) Error() string {
@@ -1220,6 +1342,8 @@ func (e *InvalidExternalIdException) ErrorFault() smithy.ErrorFault { return smi
 // values include "DISALLOW," "OVERWRITE," and "RETAIN."
 type InvalidFileExistsBehaviorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFileExistsBehaviorException) Error() string {
@@ -1241,6 +1365,8 @@ func (e *InvalidFileExistsBehaviorException) ErrorFault() smithy.ErrorFault {
 // The GitHub token is not valid.
 type InvalidGitHubAccountTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGitHubAccountTokenException) Error() string {
@@ -1262,6 +1388,8 @@ func (e *InvalidGitHubAccountTokenException) ErrorFault() smithy.ErrorFault {
 // The format of the specified GitHub account connection name is invalid.
 type InvalidGitHubAccountTokenNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGitHubAccountTokenNameException) Error() string {
@@ -1283,6 +1411,8 @@ func (e *InvalidGitHubAccountTokenNameException) ErrorFault() smithy.ErrorFault 
 // The IAM session ARN was specified in an invalid format.
 type InvalidIamSessionArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidIamSessionArnException) Error() string {
@@ -1300,6 +1430,8 @@ func (e *InvalidIamSessionArnException) ErrorFault() smithy.ErrorFault { return 
 // The IAM user ARN was specified in an invalid format.
 type InvalidIamUserArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidIamUserArnException) Error() string {
@@ -1318,6 +1450,8 @@ func (e *InvalidIamUserArnException) ErrorFault() smithy.ErrorFault { return smi
 // false is expected. For EC2/On-premises deployments, true or false is expected.
 type InvalidIgnoreApplicationStopFailuresValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidIgnoreApplicationStopFailuresValueException) Error() string {
@@ -1339,6 +1473,8 @@ func (e *InvalidIgnoreApplicationStopFailuresValueException) ErrorFault() smithy
 // The input was specified in an invalid format.
 type InvalidInputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -1356,6 +1492,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The on-premises instance name was specified in an invalid format.
 type InvalidInstanceNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInstanceNameException) Error() string {
@@ -1373,6 +1511,8 @@ func (e *InvalidInstanceNameException) ErrorFault() smithy.ErrorFault { return s
 // The specified instance status does not exist.
 type InvalidInstanceStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInstanceStatusException) Error() string {
@@ -1392,6 +1532,8 @@ func (e *InvalidInstanceStatusException) ErrorFault() smithy.ErrorFault { return
 // replacement environment.
 type InvalidInstanceTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInstanceTypeException) Error() string {
@@ -1409,6 +1551,8 @@ func (e *InvalidInstanceTypeException) ErrorFault() smithy.ErrorFault { return s
 // The specified key prefix filter was specified in an invalid format.
 type InvalidKeyPrefixFilterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKeyPrefixFilterException) Error() string {
@@ -1429,6 +1573,8 @@ func (e *InvalidKeyPrefixFilterException) ErrorFault() smithy.ErrorFault { retur
 // to ensure the lifecycle events and hooks functions are valid.
 type InvalidLifecycleEventHookExecutionIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLifecycleEventHookExecutionIdException) Error() string {
@@ -1451,6 +1597,8 @@ func (e *InvalidLifecycleEventHookExecutionIdException) ErrorFault() smithy.Erro
 // invalid. It should return Succeeded or Failed.
 type InvalidLifecycleEventHookExecutionStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLifecycleEventHookExecutionStatusException) Error() string {
@@ -1472,6 +1620,8 @@ func (e *InvalidLifecycleEventHookExecutionStatusException) ErrorFault() smithy.
 // An invalid load balancer name, or no load balancer name, was specified.
 type InvalidLoadBalancerInfoException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLoadBalancerInfoException) Error() string {
@@ -1491,6 +1641,8 @@ func (e *InvalidLoadBalancerInfoException) ErrorFault() smithy.ErrorFault { retu
 // The minimum healthy instance value was specified in an invalid format.
 type InvalidMinimumHealthyHostValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMinimumHealthyHostValueException) Error() string {
@@ -1512,6 +1664,8 @@ func (e *InvalidMinimumHealthyHostValueException) ErrorFault() smithy.ErrorFault
 // The next token was specified in an invalid format.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -1530,6 +1684,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // OnPremisesTagSet, but only one of these data types can be used in a single call.
 type InvalidOnPremisesTagCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOnPremisesTagCombinationException) Error() string {
@@ -1551,6 +1707,8 @@ func (e *InvalidOnPremisesTagCombinationException) ErrorFault() smithy.ErrorFaul
 // An invalid operation was detected.
 type InvalidOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOperationException) Error() string {
@@ -1568,6 +1726,8 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 // The registration status was specified in an invalid format.
 type InvalidRegistrationStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRegistrationStatusException) Error() string {
@@ -1589,6 +1749,8 @@ func (e *InvalidRegistrationStatusException) ErrorFault() smithy.ErrorFault {
 // The revision was specified in an invalid format.
 type InvalidRevisionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRevisionException) Error() string {
@@ -1608,6 +1770,8 @@ func (e *InvalidRevisionException) ErrorFault() smithy.ErrorFault { return smith
 // permissions to Amazon EC2 Auto Scaling.
 type InvalidRoleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRoleException) Error() string {
@@ -1626,6 +1790,8 @@ func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // format.
 type InvalidSortByException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSortByException) Error() string {
@@ -1643,6 +1809,8 @@ func (e *InvalidSortByException) ErrorFault() smithy.ErrorFault { return smithy.
 // The sort order was specified in an invalid format.
 type InvalidSortOrderException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSortOrderException) Error() string {
@@ -1660,6 +1828,8 @@ func (e *InvalidSortOrderException) ErrorFault() smithy.ErrorFault { return smit
 // The tag was specified in an invalid format.
 type InvalidTagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagException) Error() string {
@@ -1677,6 +1847,8 @@ func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The tag filter was specified in an invalid format.
 type InvalidTagFilterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagFilterException) Error() string {
@@ -1694,6 +1866,8 @@ func (e *InvalidTagFilterException) ErrorFault() smithy.ErrorFault { return smit
 // The specified tags are not valid.
 type InvalidTagsToAddException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagsToAddException) Error() string {
@@ -1711,6 +1885,8 @@ func (e *InvalidTagsToAddException) ErrorFault() smithy.ErrorFault { return smit
 // The target filter name is invalid.
 type InvalidTargetFilterNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTargetFilterNameException) Error() string {
@@ -1730,6 +1906,8 @@ func (e *InvalidTargetFilterNameException) ErrorFault() smithy.ErrorFault { retu
 // A target group pair associated with this deployment is not valid.
 type InvalidTargetGroupPairException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTargetGroupPairException) Error() string {
@@ -1761,6 +1939,8 @@ func (e *InvalidTargetGroupPairException) ErrorFault() smithy.ErrorFault { retur
 // applied to any instances.
 type InvalidTargetInstancesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTargetInstancesException) Error() string {
@@ -1780,6 +1960,8 @@ func (e *InvalidTargetInstancesException) ErrorFault() smithy.ErrorFault { retur
 // The specified time range was specified in an invalid format.
 type InvalidTimeRangeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTimeRangeException) Error() string {
@@ -1798,6 +1980,8 @@ func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smit
 // invalid.
 type InvalidTrafficRoutingConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTrafficRoutingConfigurationException) Error() string {
@@ -1819,6 +2003,8 @@ func (e *InvalidTrafficRoutingConfigurationException) ErrorFault() smithy.ErrorF
 // The trigger was specified in an invalid format.
 type InvalidTriggerConfigException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTriggerConfigException) Error() string {
@@ -1837,6 +2023,8 @@ func (e *InvalidTriggerConfigException) ErrorFault() smithy.ErrorFault { return 
 // false is expected. For EC2/On-premises deployments, true or false is expected.
 type InvalidUpdateOutdatedInstancesOnlyValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUpdateOutdatedInstancesOnlyValueException) Error() string {
@@ -1859,6 +2047,8 @@ func (e *InvalidUpdateOutdatedInstancesOnlyValueException) ErrorFault() smithy.E
 // occurred.
 type LifecycleEventAlreadyCompletedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LifecycleEventAlreadyCompletedException) Error() string {
@@ -1880,6 +2070,8 @@ func (e *LifecycleEventAlreadyCompletedException) ErrorFault() smithy.ErrorFault
 // The limit for lifecycle hooks was exceeded.
 type LifecycleHookLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LifecycleHookLimitExceededException) Error() string {
@@ -1902,6 +2094,8 @@ func (e *LifecycleHookLimitExceededException) ErrorFault() smithy.ErrorFault {
 // only one ARN type.
 type MultipleIamArnsProvidedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MultipleIamArnsProvidedException) Error() string {
@@ -1921,6 +2115,8 @@ func (e *MultipleIamArnsProvidedException) ErrorFault() smithy.ErrorFault { retu
 // The API used does not support the deployment.
 type OperationNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotSupportedException) Error() string {
@@ -1938,6 +2134,8 @@ func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return
 // The ARN of a resource is required, but was not found.
 type ResourceArnRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceArnRequiredException) Error() string {
@@ -1955,6 +2153,8 @@ func (e *ResourceArnRequiredException) ErrorFault() smithy.ErrorFault { return s
 // The specified resource could not be validated.
 type ResourceValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceValidationException) Error() string {
@@ -1972,6 +2172,8 @@ func (e *ResourceValidationException) ErrorFault() smithy.ErrorFault { return sm
 // The named revision does not exist with the IAM user or AWS account.
 type RevisionDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RevisionDoesNotExistException) Error() string {
@@ -1989,6 +2191,8 @@ func (e *RevisionDoesNotExistException) ErrorFault() smithy.ErrorFault { return 
 // The revision ID was not specified.
 type RevisionRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RevisionRequiredException) Error() string {
@@ -2006,6 +2210,8 @@ func (e *RevisionRequiredException) ErrorFault() smithy.ErrorFault { return smit
 // The role ID was not specified.
 type RoleRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RoleRequiredException) Error() string {
@@ -2023,6 +2229,8 @@ func (e *RoleRequiredException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The maximum allowed number of tags was exceeded.
 type TagLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagLimitExceededException) Error() string {
@@ -2040,6 +2248,8 @@ func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smit
 // A tag was not specified.
 type TagRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagRequiredException) Error() string {
@@ -2058,6 +2268,8 @@ func (e *TagRequiredException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // allowed limit of 3.
 type TagSetListLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagSetListLimitExceededException) Error() string {
@@ -2077,6 +2289,8 @@ func (e *TagSetListLimitExceededException) ErrorFault() smithy.ErrorFault { retu
 // An API function was called too frequently.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -2094,6 +2308,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The maximum allowed number of triggers was exceeded.
 type TriggerTargetsLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TriggerTargetsLimitExceededException) Error() string {
@@ -2115,6 +2331,8 @@ func (e *TriggerTargetsLimitExceededException) ErrorFault() smithy.ErrorFault {
 // A call was submitted that is not supported for the specified deployment type.
 type UnsupportedActionForDeploymentTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedActionForDeploymentTypeException) Error() string {

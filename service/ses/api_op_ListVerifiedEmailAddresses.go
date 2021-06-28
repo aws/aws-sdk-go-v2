@@ -28,6 +28,7 @@ func (c *Client) ListVerifiedEmailAddresses(ctx context.Context, params *ListVer
 }
 
 type ListVerifiedEmailAddressesInput struct {
+	noSmithyDocumentSerde
 }
 
 // A list of email addresses that you have verified with Amazon SES under your AWS
@@ -39,6 +40,8 @@ type ListVerifiedEmailAddressesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVerifiedEmailAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

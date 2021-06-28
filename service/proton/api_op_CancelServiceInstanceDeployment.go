@@ -55,6 +55,8 @@ type CancelServiceInstanceDeploymentInput struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelServiceInstanceDeploymentOutput struct {
@@ -66,6 +68,8 @@ type CancelServiceInstanceDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelServiceInstanceDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

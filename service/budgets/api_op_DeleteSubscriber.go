@@ -51,12 +51,16 @@ type DeleteSubscriberInput struct {
 	//
 	// This member is required.
 	Subscriber *types.Subscriber
+
+	noSmithyDocumentSerde
 }
 
 // Response of DeleteSubscriber
 type DeleteSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {

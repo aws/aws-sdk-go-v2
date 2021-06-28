@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Aac Settings
 type AacSettings struct {
 
@@ -42,6 +46,8 @@ type AacSettings struct {
 
 	// VBR Quality Level - Only used if rateControlMode is VBR.
 	VbrQuality AacVbrQuality
+
+	noSmithyDocumentSerde
 }
 
 // Ac3 Settings
@@ -73,6 +79,8 @@ type Ac3Settings struct {
 	// DolbyE decoder that supplied this audio data. If audio was not supplied from one
 	// of these streams, then the static metadata settings will be used.
 	MetadataControl Ac3MetadataControl
+
+	noSmithyDocumentSerde
 }
 
 // Ancillary Source Settings
@@ -84,6 +92,8 @@ type AncillarySourceSettings struct {
 	// destination in the output (to pass through all the channels in the ancillary
 	// captions), leave this field blank because MediaLive ignores the field.
 	SourceAncillaryChannelNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Archive Cdn Settings
@@ -91,6 +101,8 @@ type ArchiveCdnSettings struct {
 
 	// Archive S3 Settings
 	ArchiveS3Settings *ArchiveS3Settings
+
+	noSmithyDocumentSerde
 }
 
 // Archive Container Settings
@@ -101,6 +113,8 @@ type ArchiveContainerSettings struct {
 
 	// Raw Settings
 	RawSettings *RawSettings
+
+	noSmithyDocumentSerde
 }
 
 // Archive Group Settings
@@ -117,6 +131,8 @@ type ArchiveGroupSettings struct {
 	// Number of seconds to write to archive file before closing and starting a new
 	// one.
 	RolloverInterval int32
+
+	noSmithyDocumentSerde
 }
 
 // Archive Output Settings
@@ -134,6 +150,8 @@ type ArchiveOutputSettings struct {
 	// String concatenated to the end of the destination filename. Required for
 	// multiple outputs of the same type.
 	NameModifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Archive S3 Settings
@@ -141,14 +159,18 @@ type ArchiveS3Settings struct {
 
 	// Specify the canned ACL to apply to each S3 request. Defaults to none.
 	CannedAcl S3CannedAcl
+
+	noSmithyDocumentSerde
 }
 
 // Arib Destination Settings
 type AribDestinationSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Arib Source Settings
 type AribSourceSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Audio Channel Mapping
@@ -164,6 +186,8 @@ type AudioChannelMapping struct {
 	//
 	// This member is required.
 	OutputChannel int32
+
+	noSmithyDocumentSerde
 }
 
 // Audio Codec Settings
@@ -186,6 +210,8 @@ type AudioCodecSettings struct {
 
 	// Wav Settings
 	WavSettings *WavSettings
+
+	noSmithyDocumentSerde
 }
 
 // Audio Description
@@ -239,6 +265,8 @@ type AudioDescription struct {
 	// Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the
 	// player (eg. English, or Director Commentary).
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // Audio Language Selection
@@ -256,6 +284,8 @@ type AudioLanguageSelection struct {
 	// demux will choose another audio stream in the program with the same stream type
 	// if it can't find one with the same language.
 	LanguageSelectionPolicy AudioLanguageSelectionPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Audio Normalization Settings
@@ -274,6 +304,8 @@ type AudioNormalizationSettings struct {
 	// recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends
 	// a target of -23 LKFS.
 	TargetLkfs float64
+
+	noSmithyDocumentSerde
 }
 
 // Audio Only Hls Settings
@@ -304,6 +336,8 @@ type AudioOnlyHlsSettings struct {
 
 	// Specifies the segment type.
 	SegmentType AudioOnlyHlsSegmentType
+
+	noSmithyDocumentSerde
 }
 
 // Audio Pid Selection
@@ -313,6 +347,8 @@ type AudioPidSelection struct {
 	//
 	// This member is required.
 	Pid int32
+
+	noSmithyDocumentSerde
 }
 
 // Audio Selector
@@ -326,6 +362,8 @@ type AudioSelector struct {
 
 	// The audio selector settings.
 	SelectorSettings *AudioSelectorSettings
+
+	noSmithyDocumentSerde
 }
 
 // Audio Selector Settings
@@ -339,6 +377,8 @@ type AudioSelectorSettings struct {
 
 	// Audio Track Selection
 	AudioTrackSelection *AudioTrackSelection
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for AudioSilenceFailoverSettings
@@ -355,6 +395,8 @@ type AudioSilenceFailoverSettings struct {
 	// automatic input failover occurs. Silence is defined as audio loss or audio
 	// quieter than -50 dBFS.
 	AudioSilenceThresholdMsec int32
+
+	noSmithyDocumentSerde
 }
 
 // Audio Track
@@ -364,6 +406,8 @@ type AudioTrack struct {
 	//
 	// This member is required.
 	Track int32
+
+	noSmithyDocumentSerde
 }
 
 // Audio Track Selection
@@ -373,6 +417,8 @@ type AudioTrackSelection struct {
 	//
 	// This member is required.
 	Tracks []AudioTrack
+
+	noSmithyDocumentSerde
 }
 
 // The settings for Automatic Input Failover.
@@ -397,6 +443,8 @@ type AutomaticInputFailoverSettings struct {
 	// Input preference when deciding which input to make active when a previously
 	// failed input has recovered.
 	InputPreference InputPreference
+
+	noSmithyDocumentSerde
 }
 
 // Avail Blanking
@@ -409,6 +457,8 @@ type AvailBlanking struct {
 	// When set to enabled, causes video, audio and captions to be blanked when
 	// insertion metadata is added.
 	State AvailBlankingState
+
+	noSmithyDocumentSerde
 }
 
 // Avail Configuration
@@ -416,6 +466,8 @@ type AvailConfiguration struct {
 
 	// Ad avail settings.
 	AvailSettings *AvailSettings
+
+	noSmithyDocumentSerde
 }
 
 // Avail Settings
@@ -426,6 +478,8 @@ type AvailSettings struct {
 
 	// Scte35 Time Signal Apos
 	Scte35TimeSignalApos *Scte35TimeSignalApos
+
+	noSmithyDocumentSerde
 }
 
 // Details from a failed operation
@@ -442,6 +496,8 @@ type BatchFailedResultModel struct {
 
 	// Error message for the failed operation
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of schedule actions to create (in a request) or that have been created
@@ -452,6 +508,8 @@ type BatchScheduleActionCreateRequest struct {
 	//
 	// This member is required.
 	ScheduleActions []ScheduleAction
+
+	noSmithyDocumentSerde
 }
 
 // List of actions that have been created in the schedule.
@@ -461,6 +519,8 @@ type BatchScheduleActionCreateResult struct {
 	//
 	// This member is required.
 	ScheduleActions []ScheduleAction
+
+	noSmithyDocumentSerde
 }
 
 // A list of schedule actions to delete.
@@ -470,6 +530,8 @@ type BatchScheduleActionDeleteRequest struct {
 	//
 	// This member is required.
 	ActionNames []string
+
+	noSmithyDocumentSerde
 }
 
 // List of actions that have been deleted from the schedule.
@@ -479,6 +541,8 @@ type BatchScheduleActionDeleteResult struct {
 	//
 	// This member is required.
 	ScheduleActions []ScheduleAction
+
+	noSmithyDocumentSerde
 }
 
 // Details from a successful operation
@@ -492,6 +556,8 @@ type BatchSuccessfulResultModel struct {
 
 	// Current state of the resource
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // Blackout Slate
@@ -520,6 +586,8 @@ type BlackoutSlate struct {
 	// When set to enabled, causes video, audio and captions to be blanked when
 	// indicated by program metadata.
 	State BlackoutSlateState
+
+	noSmithyDocumentSerde
 }
 
 // Burn In Destination Settings
@@ -617,6 +685,8 @@ type BurnInDestinationSettings struct {
 	// positioned towards the bottom of the output. All burn-in and DVB-Sub font
 	// settings must match.
 	YPosition int32
+
+	noSmithyDocumentSerde
 }
 
 // Caption Description
@@ -644,6 +714,8 @@ type CaptionDescription struct {
 	// Human readable information to indicate captions available for players (eg.
 	// English, or Spanish).
 	LanguageDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Caption Destination Settings
@@ -687,6 +759,8 @@ type CaptionDestinationSettings struct {
 
 	// Webvtt Destination Settings
 	WebvttDestinationSettings *WebvttDestinationSettings
+
+	noSmithyDocumentSerde
 }
 
 // Maps a caption channel to an ISO 693-2 language code
@@ -709,6 +783,8 @@ type CaptionLanguageMapping struct {
 	//
 	// This member is required.
 	LanguageDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Caption Rectangle
@@ -758,6 +834,8 @@ type CaptionRectangle struct {
 	//
 	// This member is required.
 	Width float64
+
+	noSmithyDocumentSerde
 }
 
 // Output groups for this Live Event. Output groups contain information about where
@@ -777,6 +855,8 @@ type CaptionSelector struct {
 
 	// Caption selector settings.
 	SelectorSettings *CaptionSelectorSettings
+
+	noSmithyDocumentSerde
 }
 
 // Caption Selector Settings
@@ -802,6 +882,8 @@ type CaptionSelectorSettings struct {
 
 	// Teletext Source Settings
 	TeletextSourceSettings *TeletextSourceSettings
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for CdiInputSpecification
@@ -809,6 +891,8 @@ type CdiInputSpecification struct {
 
 	// Maximum CDI input resolution
 	Resolution CdiInputResolution
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for Channel
@@ -867,6 +951,8 @@ type Channel struct {
 
 	// Settings for VPC output
 	Vpc *VpcOutputSettingsDescription
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ChannelEgressEndpoint
@@ -874,6 +960,8 @@ type ChannelEgressEndpoint struct {
 
 	// Public IP of where a channel's output comes from
 	SourceIp *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ChannelSummary
@@ -926,10 +1014,13 @@ type ChannelSummary struct {
 
 	// Settings for VPC output
 	Vpc *VpcOutputSettingsDescription
+
+	noSmithyDocumentSerde
 }
 
 // Passthrough applies no color space conversion to the output
 type ColorSpacePassthroughSettings struct {
+	noSmithyDocumentSerde
 }
 
 // DVB Network Information Table (NIT)
@@ -949,6 +1040,8 @@ type DvbNitSettings struct {
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
 	RepInterval int32
+
+	noSmithyDocumentSerde
 }
 
 // DVB Service Description Table (SDT)
@@ -974,6 +1067,8 @@ type DvbSdtSettings struct {
 	// The service provider name placed in the serviceDescriptor in the Service
 	// Description Table. Maximum length is 256 characters.
 	ServiceProviderName *string
+
+	noSmithyDocumentSerde
 }
 
 // Dvb Sub Destination Settings
@@ -1077,6 +1172,8 @@ type DvbSubDestinationSettings struct {
 	// already pre-defined by the caption stream. All burn-in and DVB-Sub font settings
 	// must match.
 	YPosition int32
+
+	noSmithyDocumentSerde
 }
 
 // Dvb Sub Source Settings
@@ -1091,6 +1188,8 @@ type DvbSubSourceSettings struct {
 	// content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through,
 	// regardless of selectors.
 	Pid int32
+
+	noSmithyDocumentSerde
 }
 
 // DVB Time and Date Table (SDT)
@@ -1099,6 +1198,8 @@ type DvbTdtSettings struct {
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
 	RepInterval int32
+
+	noSmithyDocumentSerde
 }
 
 // Eac3 Settings
@@ -1176,6 +1277,8 @@ type Eac3Settings struct {
 	// When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the
 	// two channels.
 	SurroundMode Eac3SurroundMode
+
+	noSmithyDocumentSerde
 }
 
 // Ebu Tt DDestination Settings
@@ -1224,14 +1327,18 @@ type EbuTtDDestinationSettings struct {
 	// * exclude: In the font data attached to the EBU-TT captions, set
 	// the font family to "monospaced". Do not include any other style information.
 	StyleControl EbuTtDDestinationStyleControl
+
+	noSmithyDocumentSerde
 }
 
 // Embedded Destination Settings
 type EmbeddedDestinationSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Embedded Plus Scte20 Destination Settings
 type EmbeddedPlusScte20DestinationSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Embedded Source Settings
@@ -1252,6 +1359,8 @@ type EmbeddedSourceSettings struct {
 
 	// This field is unused and deprecated.
 	Source608TrackNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Encoder Settings
@@ -1300,6 +1409,8 @@ type EncoderSettings struct {
 
 	// Nielsen configuration settings.
 	NielsenConfiguration *NielsenConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Failover Condition settings. There can be multiple failover conditions inside
@@ -1308,6 +1419,8 @@ type FailoverCondition struct {
 
 	// Failover condition type-specific settings.
 	FailoverConditionSettings *FailoverConditionSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings for one failover condition.
@@ -1324,6 +1437,8 @@ type FailoverConditionSettings struct {
 	// MediaLive will perform a failover if content is considered black for the
 	// specified period.
 	VideoBlackSettings *VideoBlackFailoverSettings
+
+	noSmithyDocumentSerde
 }
 
 // Feature Activations
@@ -1334,6 +1449,8 @@ type FeatureActivations struct {
 	// existing schedule, make sure that you first delete all input prepare actions
 	// from the schedule.
 	InputPrepareScheduleActions FeatureActivationsInputPrepareScheduleActions
+
+	noSmithyDocumentSerde
 }
 
 // Fec Output Settings
@@ -1354,6 +1471,8 @@ type FecOutputSettings struct {
 	// and 20, inclusive, if includeFec is columnAndRow. If includeFec is column, this
 	// value must be 1 to 20, inclusive.
 	RowLength int32
+
+	noSmithyDocumentSerde
 }
 
 // Start time for the action.
@@ -1367,6 +1486,8 @@ type FixedModeScheduleActionStartSettings struct {
 	//
 	// This member is required.
 	Time *string
+
+	noSmithyDocumentSerde
 }
 
 // Fmp4 Hls Settings
@@ -1383,6 +1504,8 @@ type Fmp4HlsSettings struct {
 
 	// When set to passthrough, timed metadata is passed through from input to output.
 	TimedMetadataBehavior Fmp4TimedMetadataBehavior
+
+	noSmithyDocumentSerde
 }
 
 // Settings to specify if an action follows another.
@@ -1398,6 +1521,8 @@ type FollowModeScheduleActionStartSettings struct {
 	//
 	// This member is required.
 	ReferenceActionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Frame Capture Cdn Settings
@@ -1405,6 +1530,8 @@ type FrameCaptureCdnSettings struct {
 
 	// Frame Capture S3 Settings
 	FrameCaptureS3Settings *FrameCaptureS3Settings
+
+	noSmithyDocumentSerde
 }
 
 // Frame Capture Group Settings
@@ -1424,10 +1551,13 @@ type FrameCaptureGroupSettings struct {
 
 	// Parameters that control interactions with the CDN.
 	FrameCaptureCdnSettings *FrameCaptureCdnSettings
+
+	noSmithyDocumentSerde
 }
 
 // Frame Capture Hls Settings
 type FrameCaptureHlsSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Frame Capture Output Settings
@@ -1436,6 +1566,8 @@ type FrameCaptureOutputSettings struct {
 	// Required if the output group contains more than one output. This modifier forms
 	// part of the output file name.
 	NameModifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Frame Capture S3 Settings
@@ -1443,6 +1575,8 @@ type FrameCaptureS3Settings struct {
 
 	// Specify the canned ACL to apply to each S3 request. Defaults to none.
 	CannedAcl S3CannedAcl
+
+	noSmithyDocumentSerde
 }
 
 // Frame Capture Settings
@@ -1455,6 +1589,8 @@ type FrameCaptureSettings struct {
 
 	// Unit for the frame capture interval.
 	CaptureIntervalUnits FrameCaptureIntervalUnit
+
+	noSmithyDocumentSerde
 }
 
 // Global Configuration
@@ -1490,6 +1626,8 @@ type GlobalConfiguration struct {
 	// commonly set to enabled for music channels with less than one video frame per
 	// second.
 	SupportLowFramerateInputs GlobalConfigurationLowFramerateInputs
+
+	noSmithyDocumentSerde
 }
 
 // H264 Color Space Settings
@@ -1503,6 +1641,8 @@ type H264ColorSpaceSettings struct {
 
 	// Rec709 Settings
 	Rec709Settings *Rec709Settings
+
+	noSmithyDocumentSerde
 }
 
 // H264 Filter Settings
@@ -1510,6 +1650,8 @@ type H264FilterSettings struct {
 
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
+
+	noSmithyDocumentSerde
 }
 
 // H264 Settings
@@ -1756,6 +1898,8 @@ type H264Settings struct {
 	// * 'picTimingSei': Pass through picture
 	// timing SEI messages from the source specified in Timecode Config
 	TimecodeInsertion H264TimecodeInsertionBehavior
+
+	noSmithyDocumentSerde
 }
 
 // H265 Color Space Settings
@@ -1772,6 +1916,8 @@ type H265ColorSpaceSettings struct {
 
 	// Rec709 Settings
 	Rec709Settings *Rec709Settings
+
+	noSmithyDocumentSerde
 }
 
 // H265 Filter Settings
@@ -1779,6 +1925,8 @@ type H265FilterSettings struct {
 
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
+
+	noSmithyDocumentSerde
 }
 
 // H265 Settings
@@ -1924,6 +2072,8 @@ type H265Settings struct {
 	// * 'picTimingSei': Pass through picture
 	// timing SEI messages from the source specified in Timecode Config
 	TimecodeInsertion H265TimecodeInsertionBehavior
+
+	noSmithyDocumentSerde
 }
 
 // Hdr10 Settings
@@ -1937,6 +2087,8 @@ type Hdr10Settings struct {
 	// average light level, in nits, for any single frame within an encoded HDR video
 	// stream or file.
 	MaxFall int32
+
+	noSmithyDocumentSerde
 }
 
 // Hls Akamai Settings
@@ -1966,6 +2118,8 @@ type HlsAkamaiSettings struct {
 
 	// Token parameter for authenticated akamai. If not specified, gda is used.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 // Hls Basic Put Settings
@@ -1985,6 +2139,8 @@ type HlsBasicPutSettings struct {
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
 	RestartDelay int32
+
+	noSmithyDocumentSerde
 }
 
 // Hls Cdn Settings
@@ -2004,6 +2160,8 @@ type HlsCdnSettings struct {
 
 	// Hls Webdav Settings
 	HlsWebdavSettings *HlsWebdavSettings
+
+	noSmithyDocumentSerde
 }
 
 // Hls Group Settings
@@ -2230,6 +2388,8 @@ type HlsGroupSettings struct {
 	// Elemental MediaConvert, which can accept only a single media file. Playback
 	// while the channel is running is not guaranteed due to HTTP server caching.
 	TsFileMode HlsTsFileMode
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the action to insert a user-defined ID3 tag in each HLS segment
@@ -2241,6 +2401,8 @@ type HlsId3SegmentTaggingScheduleActionSettings struct {
 	//
 	// This member is required.
 	Tag *string
+
+	noSmithyDocumentSerde
 }
 
 // Hls Input Settings
@@ -2270,6 +2432,8 @@ type HlsInputSettings struct {
 	// in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the
 	// source that is not selected.
 	Scte35Source HlsScte35SourceType
+
+	noSmithyDocumentSerde
 }
 
 // Hls Media Store Settings
@@ -2293,6 +2457,8 @@ type HlsMediaStoreSettings struct {
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
 	RestartDelay int32
+
+	noSmithyDocumentSerde
 }
 
 // Hls Output Settings
@@ -2314,6 +2480,8 @@ type HlsOutputSettings struct {
 
 	// String concatenated to end of segment filenames.
 	SegmentModifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Hls S3 Settings
@@ -2321,6 +2489,8 @@ type HlsS3Settings struct {
 
 	// Specify the canned ACL to apply to each S3 request. Defaults to none.
 	CannedAcl S3CannedAcl
+
+	noSmithyDocumentSerde
 }
 
 // Hls Settings
@@ -2337,6 +2507,8 @@ type HlsSettings struct {
 
 	// Standard Hls Settings
 	StandardHlsSettings *StandardHlsSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the action to emit HLS metadata
@@ -2347,6 +2519,8 @@ type HlsTimedMetadataScheduleActionSettings struct {
 	//
 	// This member is required.
 	Id3 *string
+
+	noSmithyDocumentSerde
 }
 
 // Hls Webdav Settings
@@ -2369,14 +2543,18 @@ type HlsWebdavSettings struct {
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
 	RestartDelay int32
+
+	noSmithyDocumentSerde
 }
 
 // Html Motion Graphics Settings
 type HtmlMotionGraphicsSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Settings to configure an action so that it occurs as soon as possible.
 type ImmediateModeScheduleActionStartSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for Input
@@ -2439,6 +2617,8 @@ type Input struct {
 
 	// Placeholder documentation for InputType
 	Type InputType
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for InputAttachment
@@ -2457,6 +2637,8 @@ type InputAttachment struct {
 
 	// Settings of an input (caption selector, etc.)
 	InputSettings *InputSettings
+
+	noSmithyDocumentSerde
 }
 
 // Input Channel Level
@@ -2472,6 +2654,8 @@ type InputChannelLevel struct {
 	//
 	// This member is required.
 	InputChannel int32
+
+	noSmithyDocumentSerde
 }
 
 // Settings to let you create a clip of the file input, in order to set up the
@@ -2488,6 +2672,8 @@ type InputClippingSettings struct {
 
 	// Settings to identify the end of the clip.
 	StopTimecode *StopTimecode
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a PUSH type input.
@@ -2505,6 +2691,8 @@ type InputDestination struct {
 
 	// The properties for a VPC type input destination.
 	Vpc *InputDestinationVpc
+
+	noSmithyDocumentSerde
 }
 
 // Endpoint settings for a PUSH type input.
@@ -2512,6 +2700,8 @@ type InputDestinationRequest struct {
 
 	// A unique name for the location the RTMP stream is being pushed to.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties for a VPC type input destination.
@@ -2522,6 +2712,8 @@ type InputDestinationVpc struct {
 
 	// The network interface ID of the Input destination in the VPC.
 	NetworkInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Configurable settings for the input device.
@@ -2536,6 +2728,8 @@ type InputDeviceConfigurableSettings struct {
 	// The maximum bitrate in bits per second. Set a value here to throttle the bitrate
 	// of the source video.
 	MaxBitrate int32
+
+	noSmithyDocumentSerde
 }
 
 // Settings that describe the active source from the input device, and the video
@@ -2568,6 +2762,8 @@ type InputDeviceHdSettings struct {
 
 	// The width of the video source, in pixels.
 	Width int32
+
+	noSmithyDocumentSerde
 }
 
 // The network settings for the input device.
@@ -2588,6 +2784,8 @@ type InputDeviceNetworkSettings struct {
 
 	// The subnet mask of the input device.
 	SubnetMask *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for an input device.
@@ -2595,6 +2793,8 @@ type InputDeviceRequest struct {
 
 	// The unique ID for the device.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for an input device.
@@ -2602,6 +2802,8 @@ type InputDeviceSettings struct {
 
 	// The unique ID for the device.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the input device.
@@ -2646,6 +2848,8 @@ type InputDeviceSummary struct {
 
 	// Settings that describe an input device that is type UHD.
 	UhdDeviceSettings *InputDeviceUhdSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings that describe the active source from the input device, and the video
@@ -2678,6 +2882,8 @@ type InputDeviceUhdSettings struct {
 
 	// The width of the video source, in pixels.
 	Width int32
+
+	noSmithyDocumentSerde
 }
 
 // Input Location
@@ -2695,6 +2901,8 @@ type InputLocation struct {
 
 	// Documentation update needed
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Input Loss Behavior
@@ -2717,6 +2925,8 @@ type InputLossBehavior struct {
 
 	// Documentation update needed
 	RepeatFrameMsec int32
+
+	noSmithyDocumentSerde
 }
 
 // MediaLive will perform a failover if content is not detected in this input for
@@ -2726,6 +2936,8 @@ type InputLossFailoverSettings struct {
 	// The amount of time (in milliseconds) that no input is detected. After that time,
 	// an input failover will occur.
 	InputLossThresholdMsec int32
+
+	noSmithyDocumentSerde
 }
 
 // Action to prepare an input for a future immediate input switch.
@@ -2745,6 +2957,8 @@ type InputPrepareScheduleActionSettings struct {
 	// switch action, you can provide a different value, in order to connect the input
 	// to a different content source.
 	UrlPath []string
+
+	noSmithyDocumentSerde
 }
 
 // An Input Security Group
@@ -2767,6 +2981,8 @@ type InputSecurityGroup struct {
 
 	// Whitelist rules and their sync status
 	WhitelistRules []InputWhitelistRule
+
+	noSmithyDocumentSerde
 }
 
 // Live Event input parameters. There can be multiple inputs in a single Live
@@ -2822,6 +3038,8 @@ type InputSettings struct {
 	// Informs which video elementary stream to decode for input types that have
 	// multiple available.
 	VideoSelector *VideoSelector
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a PULL type input.
@@ -2835,6 +3053,8 @@ type InputSource struct {
 
 	// The username for the input source.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for for a PULL type input.
@@ -2848,6 +3068,8 @@ type InputSourceRequest struct {
 
 	// The username for the input source.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for InputSpecification
@@ -2861,6 +3083,8 @@ type InputSpecification struct {
 
 	// Input resolution, categorized coarsely
 	Resolution InputResolution
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the "switch input" action: to switch from ingesting one input to
@@ -2882,6 +3106,8 @@ type InputSwitchScheduleActionSettings struct {
 	// switch action, you can provide a different value, in order to connect the input
 	// to a different content source.
 	UrlPath []string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for a private VPC Input. When this property is specified, the input
@@ -2900,6 +3126,8 @@ type InputVpcRequest struct {
 	// interfaces. Requires subnetIds. If none are specified then the VPC default
 	// security group will be used.
 	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Whitelist rule
@@ -2907,6 +3135,8 @@ type InputWhitelistRule struct {
 
 	// The IPv4 CIDR that's whitelisted.
 	Cidr *string
+
+	noSmithyDocumentSerde
 }
 
 // An IPv4 CIDR to whitelist.
@@ -2914,6 +3144,8 @@ type InputWhitelistRuleCidr struct {
 
 	// The IPv4 CIDR to whitelist.
 	Cidr *string
+
+	noSmithyDocumentSerde
 }
 
 // Key Provider Settings
@@ -2921,6 +3153,8 @@ type KeyProviderSettings struct {
 
 	// Static Key Settings
 	StaticKeySettings *StaticKeySettings
+
+	noSmithyDocumentSerde
 }
 
 // M2ts Settings
@@ -3153,6 +3387,8 @@ type M2tsSettings struct {
 	// Can be entered as a decimal or hexadecimal value. Valid values are 32 (or
 	// 0x20)..8182 (or 0x1ff6).
 	VideoPid *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings information for the .m3u8 container
@@ -3225,6 +3461,8 @@ type M3u8Settings struct {
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
 	// Can be entered as a decimal or hexadecimal value.
 	VideoPid *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a MediaConnect Flow.
@@ -3232,6 +3470,8 @@ type MediaConnectFlow struct {
 
 	// The unique ARN of the MediaConnect Flow being used as a source.
 	FlowArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a MediaConnect Flow.
@@ -3239,6 +3479,8 @@ type MediaConnectFlowRequest struct {
 
 	// The ARN of the MediaConnect Flow that you want to use as a source.
 	FlowArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Media Package Group Settings
@@ -3248,6 +3490,8 @@ type MediaPackageGroupSettings struct {
 	//
 	// This member is required.
 	Destination *OutputLocationRef
+
+	noSmithyDocumentSerde
 }
 
 // MediaPackage Output Destination Settings
@@ -3259,10 +3503,13 @@ type MediaPackageOutputDestinationSettings struct {
 	// inputs. The MediaPackage channel and MediaLive channel must be in the same
 	// region.
 	ChannelId *string
+
+	noSmithyDocumentSerde
 }
 
 // Media Package Output Settings
 type MediaPackageOutputSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Settings to specify the rendering of motion graphics into the video stream.
@@ -3281,6 +3528,8 @@ type MotionGraphicsActivateScheduleActionSettings struct {
 
 	// Documentation update needed
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Motion Graphics Configuration
@@ -3293,11 +3542,14 @@ type MotionGraphicsConfiguration struct {
 
 	// Motion Graphics Insertion
 	MotionGraphicsInsertion MotionGraphicsInsertion
+
+	noSmithyDocumentSerde
 }
 
 // Settings to specify the ending of rendering motion graphics into the video
 // stream.
 type MotionGraphicsDeactivateScheduleActionSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Motion Graphics Settings
@@ -3305,6 +3557,8 @@ type MotionGraphicsSettings struct {
 
 	// Html Motion Graphics Settings
 	HtmlMotionGraphicsSettings *HtmlMotionGraphicsSettings
+
+	noSmithyDocumentSerde
 }
 
 // Mp2 Settings
@@ -3319,6 +3573,8 @@ type Mp2Settings struct {
 
 	// Sample rate in Hz.
 	SampleRate float64
+
+	noSmithyDocumentSerde
 }
 
 // Mpeg2 Filter Settings
@@ -3326,6 +3582,8 @@ type Mpeg2FilterSettings struct {
 
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
+
+	noSmithyDocumentSerde
 }
 
 // Mpeg2 Settings
@@ -3423,6 +3681,8 @@ type Mpeg2Settings struct {
 	// Guide. DISABLED: do not include timecodes. GOP_TIMECODE: Include timecode
 	// metadata in the GOP header.
 	TimecodeInsertion Mpeg2TimecodeInsertionBehavior
+
+	noSmithyDocumentSerde
 }
 
 // Ms Smooth Group Settings
@@ -3528,6 +3788,8 @@ type MsSmoothGroupSettings struct {
 	// * useConfiguredOffset: Use an explicitly
 	// configured date as the offset
 	TimestampOffsetMode SmoothGroupTimestampOffsetMode
+
+	noSmithyDocumentSerde
 }
 
 // Ms Smooth Output Settings
@@ -3540,6 +3802,8 @@ type MsSmoothOutputSettings struct {
 	// String concatenated to the end of the destination filename. Required for
 	// multiple outputs of the same type.
 	NameModifier *string
+
+	noSmithyDocumentSerde
 }
 
 // The multiplex object.
@@ -3574,10 +3838,13 @@ type Multiplex struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Multiplex Group Settings
 type MultiplexGroupSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Multiplex MediaConnect output destination settings.
@@ -3585,6 +3852,8 @@ type MultiplexMediaConnectOutputDestinationSettings struct {
 
 	// The MediaConnect entitlement ARN available as a Flow source.
 	EntitlementArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Multiplex output destination settings
@@ -3592,6 +3861,8 @@ type MultiplexOutputDestination struct {
 
 	// Multiplex MediaConnect output destination settings.
 	MediaConnectSettings *MultiplexMediaConnectOutputDestinationSettings
+
+	noSmithyDocumentSerde
 }
 
 // Multiplex Output Settings
@@ -3601,6 +3872,8 @@ type MultiplexOutputSettings struct {
 	//
 	// This member is required.
 	Destination *OutputLocationRef
+
+	noSmithyDocumentSerde
 }
 
 // The multiplex program object.
@@ -3623,6 +3896,8 @@ type MultiplexProgram struct {
 
 	// The name of the multiplex program.
 	ProgramName *string
+
+	noSmithyDocumentSerde
 }
 
 // Multiplex Program Input Destination Settings for outputting a Channel to a
@@ -3638,6 +3913,8 @@ type MultiplexProgramChannelDestinationSettings struct {
 	// The program name of the Multiplex program that the encoder is providing output
 	// to.
 	ProgramName *string
+
+	noSmithyDocumentSerde
 }
 
 // Packet identifiers map for a given Multiplex program.
@@ -3681,6 +3958,8 @@ type MultiplexProgramPacketIdentifiersMap struct {
 
 	// Placeholder documentation for __integer
 	VideoPid int32
+
+	noSmithyDocumentSerde
 }
 
 // The current source for one of the pipelines in the multiplex.
@@ -3692,6 +3971,8 @@ type MultiplexProgramPipelineDetail struct {
 
 	// Identifies a specific pipeline in the multiplex.
 	PipelineId *string
+
+	noSmithyDocumentSerde
 }
 
 // Transport stream service descriptor configuration for the Multiplex program.
@@ -3706,6 +3987,8 @@ type MultiplexProgramServiceDescriptor struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Multiplex Program settings configuration.
@@ -3724,6 +4007,8 @@ type MultiplexProgramSettings struct {
 
 	// Program video settings configuration.
 	VideoSettings *MultiplexVideoSettings
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for MultiplexProgramSummary
@@ -3734,6 +4019,8 @@ type MultiplexProgramSummary struct {
 
 	// The name of the multiplex program.
 	ProgramName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration for a Multiplex event
@@ -3754,6 +4041,8 @@ type MultiplexSettings struct {
 
 	// Transport stream reserved bit rate.
 	TransportStreamReservedBitrate int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary configuration for a Multiplex event.
@@ -3761,6 +4050,8 @@ type MultiplexSettingsSummary struct {
 
 	// Transport stream bit rate.
 	TransportStreamBitrate int32
+
+	noSmithyDocumentSerde
 }
 
 // Statmux rate control settings
@@ -3778,6 +4069,8 @@ type MultiplexStatmuxVideoSettings struct {
 	// higher priority will\nget higher video quality at the expense of the video
 	// quality of\nother channels in the multiplex with lower priority.
 	Priority int32
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for MultiplexSummary
@@ -3809,6 +4102,8 @@ type MultiplexSummary struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The video configuration for each program in a multiplex.
@@ -3821,6 +4116,8 @@ type MultiplexVideoSettings struct {
 	// Statmux rate control settings. When this field is defined, ConstantBitrate must
 	// be undefined.
 	StatmuxSettings *MultiplexStatmuxVideoSettings
+
+	noSmithyDocumentSerde
 }
 
 // Network source to transcode. Must be accessible to the Elemental Live node that
@@ -3836,6 +4133,8 @@ type NetworkInputSettings struct {
 	// match the corresponding certificate's wildcard pattern and would otherwise cause
 	// the event to error. This setting is ignored for protocols that do not use https.
 	ServerValidation NetworkInputServerValidation
+
+	noSmithyDocumentSerde
 }
 
 // Nielsen Configuration
@@ -3846,6 +4145,8 @@ type NielsenConfiguration struct {
 
 	// Enables Nielsen PCM to ID3 tagging
 	NielsenPcmToId3Tagging NielsenPcmToId3TaggingState
+
+	noSmithyDocumentSerde
 }
 
 // Reserved resources available for purchase
@@ -3885,6 +4186,8 @@ type Offering struct {
 
 	// Recurring usage charge for each reserved resource, e.g. '157.0'
 	UsagePrice float64
+
+	noSmithyDocumentSerde
 }
 
 // Output settings. There can be multiple outputs within a group.
@@ -3906,6 +4209,8 @@ type Output struct {
 
 	// The name of the VideoDescription used as the source for this output.
 	VideoDescriptionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for OutputDestination
@@ -3924,6 +4229,8 @@ type OutputDestination struct {
 	// Destination settings for a standard output; one destination for each redundant
 	// encoder.
 	Settings []OutputDestinationSettings
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for OutputDestinationSettings
@@ -3940,6 +4247,8 @@ type OutputDestinationSettings struct {
 
 	// username for destination
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Output groups for this Live Event. Output groups contain information about where
@@ -3959,6 +4268,8 @@ type OutputGroup struct {
 	// Custom output group name optionally defined by the user. Only letters, numbers,
 	// and the underscore character allowed; only 32 characters allowed.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Output Group Settings
@@ -3987,6 +4298,8 @@ type OutputGroupSettings struct {
 
 	// Udp Group Settings
 	UdpGroupSettings *UdpGroupSettings
+
+	noSmithyDocumentSerde
 }
 
 // Reference to an OutputDestination ID defined in the channel
@@ -3994,6 +4307,8 @@ type OutputLocationRef struct {
 
 	// Placeholder documentation for __string
 	DestinationRefId *string
+
+	noSmithyDocumentSerde
 }
 
 // Output Settings
@@ -4022,10 +4337,13 @@ type OutputSettings struct {
 
 	// Udp Output Settings
 	UdpOutputSettings *UdpOutputSettings
+
+	noSmithyDocumentSerde
 }
 
 // Pass Through Settings
 type PassThroughSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Settings for the action to set pause state of a channel.
@@ -4033,6 +4351,8 @@ type PauseStateScheduleActionSettings struct {
 
 	// Placeholder documentation for __listOfPipelinePauseStateSettings
 	Pipelines []PipelinePauseStateSettings
+
+	noSmithyDocumentSerde
 }
 
 // Runtime details of a pipeline when a channel is running.
@@ -4055,6 +4375,8 @@ type PipelineDetail struct {
 
 	// Pipeline ID
 	PipelineId *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for pausing a pipeline.
@@ -4064,18 +4386,23 @@ type PipelinePauseStateSettings struct {
 	//
 	// This member is required.
 	PipelineId PipelineId
+
+	noSmithyDocumentSerde
 }
 
 // Raw Settings
 type RawSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Rec601 Settings
 type Rec601Settings struct {
+	noSmithyDocumentSerde
 }
 
 // Rec709 Settings
 type Rec709Settings struct {
+	noSmithyDocumentSerde
 }
 
 // Remix Settings
@@ -4091,6 +4418,8 @@ type RemixSettings struct {
 
 	// Number of output channels to be produced. Valid values: 1, 2, 4, 6, 8
 	ChannelsOut int32
+
+	noSmithyDocumentSerde
 }
 
 // Reserved resources available to use
@@ -4152,6 +4481,8 @@ type Reservation struct {
 
 	// Recurring usage charge for each reserved resource, e.g. '157.0'
 	UsagePrice float64
+
+	noSmithyDocumentSerde
 }
 
 // Resource configuration (codec, resolution, bitrate, ...)
@@ -4180,10 +4511,13 @@ type ReservationResourceSpecification struct {
 
 	// Video quality, e.g. 'STANDARD' (Outputs only)
 	VideoQuality ReservationVideoQuality
+
+	noSmithyDocumentSerde
 }
 
 // Rtmp Caption Info Destination Settings
 type RtmpCaptionInfoDestinationSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Rtmp Group Settings
@@ -4228,6 +4562,8 @@ type RtmpGroupSettings struct {
 	// If a streaming output fails, number of seconds to wait until a restart is
 	// initiated. A value of 0 means never restart.
 	RestartDelay int32
+
+	noSmithyDocumentSerde
 }
 
 // Rtmp Output Settings
@@ -4251,6 +4587,8 @@ type RtmpOutputSettings struct {
 
 	// Number of retry attempts.
 	NumRetries int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on a single schedule action.
@@ -4274,6 +4612,8 @@ type ScheduleAction struct {
 	//
 	// This member is required.
 	ScheduleActionStartSettings *ScheduleActionStartSettings
+
+	noSmithyDocumentSerde
 }
 
 // Holds the settings for a single schedule action.
@@ -4314,6 +4654,8 @@ type ScheduleActionSettings struct {
 
 	// Action to deactivate a static image overlay
 	StaticImageDeactivateSettings *StaticImageDeactivateScheduleActionSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings to specify when an action should occur. Only one of the options must be
@@ -4328,10 +4670,13 @@ type ScheduleActionStartSettings struct {
 
 	// Option for specifying an action that should be applied immediately.
 	ImmediateModeScheduleActionStartSettings *ImmediateModeScheduleActionStartSettings
+
+	noSmithyDocumentSerde
 }
 
 // Scte20 Plus Embedded Destination Settings
 type Scte20PlusEmbeddedDestinationSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Scte20 Source Settings
@@ -4345,10 +4690,13 @@ type Scte20SourceSettings struct {
 	// Specifies the 608/708 channel number within the video track from which to
 	// extract captions. Unused for passthrough.
 	Source608ChannelNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Scte27 Destination Settings
 type Scte27DestinationSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Scte27 Source Settings
@@ -4375,6 +4723,8 @@ type Scte27SourceSettings struct {
 	// only if source is DVB-Sub that is being passed through; all languages will be
 	// passed through.
 	Pid int32
+
+	noSmithyDocumentSerde
 }
 
 // Corresponds to SCTE-35 delivery_not_restricted_flag parameter. To declare
@@ -4401,6 +4751,8 @@ type Scte35DeliveryRestrictions struct {
 	//
 	// This member is required.
 	WebDeliveryAllowedFlag Scte35WebDeliveryAllowedFlag
+
+	noSmithyDocumentSerde
 }
 
 // Holds one set of SCTE-35 Descriptor Settings.
@@ -4410,6 +4762,8 @@ type Scte35Descriptor struct {
 	//
 	// This member is required.
 	Scte35DescriptorSettings *Scte35DescriptorSettings
+
+	noSmithyDocumentSerde
 }
 
 // SCTE-35 Descriptor settings.
@@ -4419,6 +4773,8 @@ type Scte35DescriptorSettings struct {
 	//
 	// This member is required.
 	SegmentationDescriptorScte35DescriptorSettings *Scte35SegmentationDescriptor
+
+	noSmithyDocumentSerde
 }
 
 // Settings for a SCTE-35 return_to_network message.
@@ -4428,6 +4784,8 @@ type Scte35ReturnToNetworkScheduleActionSettings struct {
 	//
 	// This member is required.
 	SpliceEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Corresponds to SCTE-35 segmentation_descriptor.
@@ -4487,6 +4845,8 @@ type Scte35SegmentationDescriptor struct {
 	// Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the
 	// specified segmentation_type_id.
 	SubSegmentsExpected int32
+
+	noSmithyDocumentSerde
 }
 
 // Scte35 Splice Insert
@@ -4504,6 +4864,8 @@ type Scte35SpliceInsert struct {
 	// When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0
 	// will no longer trigger blackouts or Ad Avail slates
 	WebDeliveryAllowedFlag Scte35SpliceInsertWebDeliveryAllowedBehavior
+
+	noSmithyDocumentSerde
 }
 
 // Settings for a SCTE-35 splice_insert message.
@@ -4521,6 +4883,8 @@ type Scte35SpliceInsertScheduleActionSettings struct {
 	// indefinitely and there is an expectation that you will enter a return_to_network
 	// to end the splice_insert at the appropriate time.
 	Duration int64
+
+	noSmithyDocumentSerde
 }
 
 // Scte35 Time Signal Apos
@@ -4538,6 +4902,8 @@ type Scte35TimeSignalApos struct {
 	// When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0
 	// will no longer trigger blackouts or Ad Avail slates
 	WebDeliveryAllowedFlag Scte35AposWebDeliveryAllowedBehavior
+
+	noSmithyDocumentSerde
 }
 
 // Settings for a SCTE-35 time_signal.
@@ -4547,10 +4913,13 @@ type Scte35TimeSignalScheduleActionSettings struct {
 	//
 	// This member is required.
 	Scte35Descriptors []Scte35Descriptor
+
+	noSmithyDocumentSerde
 }
 
 // Smpte Tt Destination Settings
 type SmpteTtDestinationSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Standard Hls Settings
@@ -4564,6 +4933,8 @@ type StandardHlsSettings struct {
 	// List all the audio groups that are used with the video output stream. Input all
 	// the audio GROUP-IDs that are associated to the video, separate by ','.
 	AudioRenditionSets *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings to identify the start of the clip.
@@ -4573,6 +4944,8 @@ type StartTimecode struct {
 	// specified, the clip starts at first frame in the file. Enter the timecode as
 	// HH:MM:SS:FF or HH:MM:SS;FF.
 	Timecode *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the action to activate a static image.
@@ -4629,6 +5002,8 @@ type StaticImageActivateScheduleActionSettings struct {
 	// be scaled up or down to the specified width. Leave blank to use the native width
 	// of the overlay.
 	Width int32
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the action to deactivate the image in a specific layer.
@@ -4639,6 +5014,8 @@ type StaticImageDeactivateScheduleActionSettings struct {
 
 	// The image overlay layer to deactivate, 0 to 7. Default is 0.
 	Layer int32
+
+	noSmithyDocumentSerde
 }
 
 // Static Key Settings
@@ -4651,6 +5028,8 @@ type StaticKeySettings struct {
 
 	// The URL of the license server used for protecting content.
 	KeyProviderServer *InputLocation
+
+	noSmithyDocumentSerde
 }
 
 // Settings to identify the end of the clip.
@@ -4665,10 +5044,13 @@ type StopTimecode struct {
 	// specified, the clip continues to the end of the file. Enter the timecode as
 	// HH:MM:SS:FF or HH:MM:SS;FF.
 	Timecode *string
+
+	noSmithyDocumentSerde
 }
 
 // Teletext Destination Settings
 type TeletextDestinationSettings struct {
+	noSmithyDocumentSerde
 }
 
 // Teletext Source Settings
@@ -4681,6 +5063,8 @@ type TeletextSourceSettings struct {
 	// captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should
 	// be specified as a hexadecimal string with no "0x" prefix.
 	PageNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Temporal Filter Settings
@@ -4699,6 +5083,8 @@ type TemporalFilterSettings struct {
 	// Choose a filter strength. We recommend a strength of 1 or 2. A higher strength
 	// might take out good information, resulting in an image that is overly soft.
 	Strength TemporalFilterStrength
+
+	noSmithyDocumentSerde
 }
 
 // Timecode Config
@@ -4719,6 +5105,8 @@ type TimecodeConfig struct {
 	// discontinuities in the output timecode. No timecode sync when this is not
 	// specified.
 	SyncThreshold int32
+
+	noSmithyDocumentSerde
 }
 
 // Details about the input device that is being transferred.
@@ -4735,6 +5123,8 @@ type TransferringInputDeviceSummary struct {
 
 	// The type (direction) of the input device transfer.
 	TransferType InputDeviceTransferType
+
+	noSmithyDocumentSerde
 }
 
 // Ttml Destination Settings
@@ -4744,6 +5134,8 @@ type TtmlDestinationSettings struct {
 	// TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML
 	// output.
 	StyleControl TtmlDestinationStyleControl
+
+	noSmithyDocumentSerde
 }
 
 // Udp Container Settings
@@ -4751,6 +5143,8 @@ type UdpContainerSettings struct {
 
 	// M2ts Settings
 	M2tsSettings *M2tsSettings
+
+	noSmithyDocumentSerde
 }
 
 // Udp Group Settings
@@ -4770,6 +5164,8 @@ type UdpGroupSettings struct {
 
 	// Timed Metadata interval in seconds.
 	TimedMetadataId3Period int32
+
+	noSmithyDocumentSerde
 }
 
 // Udp Output Settings
@@ -4794,6 +5190,8 @@ type UdpOutputSettings struct {
 
 	// Settings for enabling and adjusting Forward Error Correction on UDP outputs.
 	FecOutputSettings *FecOutputSettings
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ValidationError
@@ -4804,6 +5202,8 @@ type ValidationError struct {
 
 	// The error message.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for VideoBlackFailoverSettings
@@ -4823,6 +5223,8 @@ type VideoBlackFailoverSettings struct {
 	// The amount of time (in milliseconds) that the active input must be black before
 	// automatic input failover occurs.
 	VideoBlackThresholdMsec int32
+
+	noSmithyDocumentSerde
 }
 
 // Video Codec Settings
@@ -4839,6 +5241,8 @@ type VideoCodecSettings struct {
 
 	// Mpeg2 Settings
 	Mpeg2Settings *Mpeg2Settings
+
+	noSmithyDocumentSerde
 }
 
 // Video settings for this stream.
@@ -4887,6 +5291,8 @@ type VideoDescription struct {
 	// (resolution) from the source. Note, however, that leaving blank is not
 	// recommended. For the Frame Capture codec, height and width are required.
 	Width int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a particular video stream within an input source. An input may have
@@ -4913,6 +5319,8 @@ type VideoSelector struct {
 
 	// The video selector settings.
 	SelectorSettings *VideoSelectorSettings
+
+	noSmithyDocumentSerde
 }
 
 // Video Selector Color Space Settings
@@ -4920,6 +5328,8 @@ type VideoSelectorColorSpaceSettings struct {
 
 	// Hdr10 Settings
 	Hdr10Settings *Hdr10Settings
+
+	noSmithyDocumentSerde
 }
 
 // Video Selector Pid
@@ -4927,6 +5337,8 @@ type VideoSelectorPid struct {
 
 	// Selects a specific PID from within a video source.
 	Pid int32
+
+	noSmithyDocumentSerde
 }
 
 // Video Selector Program Id
@@ -4936,6 +5348,8 @@ type VideoSelectorProgramId struct {
 	// program doesn't exist, the first program within the transport stream will be
 	// selected by default.
 	ProgramId int32
+
+	noSmithyDocumentSerde
 }
 
 // Video Selector Settings
@@ -4946,6 +5360,8 @@ type VideoSelectorSettings struct {
 
 	// Video Selector Program Id
 	VideoSelectorProgramId *VideoSelectorProgramId
+
+	noSmithyDocumentSerde
 }
 
 // The properties for a private VPC Output When this property is specified, the
@@ -4967,6 +5383,8 @@ type VpcOutputSettings struct {
 	// interfaces. If none are specified then the VPC default security group will be
 	// used
 	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The properties for a private VPC Output
@@ -4987,6 +5405,8 @@ type VpcOutputSettingsDescription struct {
 	// A list of VPC subnet IDs from the same VPC. If STANDARD channel, subnet IDs must
 	// be mapped to two unique availability zones (AZ).
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Wav Settings
@@ -5001,8 +5421,13 @@ type WavSettings struct {
 
 	// Sample rate in Hz.
 	SampleRate float64
+
+	noSmithyDocumentSerde
 }
 
 // Webvtt Destination Settings
 type WebvttDestinationSettings struct {
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

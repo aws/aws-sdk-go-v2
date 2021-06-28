@@ -52,6 +52,8 @@ type ListTrafficPolicyVersionsInput struct {
 	// ListTrafficPolicyVersions request. For the value of TrafficPolicyVersionMarker,
 	// specify the value of TrafficPolicyVersionMarker in the previous response.
 	TrafficPolicyVersionMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the request.
@@ -88,6 +90,8 @@ type ListTrafficPolicyVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTrafficPolicyVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

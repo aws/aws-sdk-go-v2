@@ -49,6 +49,8 @@ type UpdateApiDestinationInput struct {
 
 	// The maximum number of invocations per second to send to the API destination.
 	InvocationRateLimitPerSecond *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApiDestinationOutput struct {
@@ -67,6 +69,8 @@ type UpdateApiDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

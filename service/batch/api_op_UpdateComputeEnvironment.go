@@ -71,6 +71,8 @@ type UpdateComputeEnvironmentInput struct {
 	// state don't scale out. However, they scale in to minvCpus value after instances
 	// become idle.
 	State types.CEState
+
+	noSmithyDocumentSerde
 }
 
 type UpdateComputeEnvironmentOutput struct {
@@ -84,6 +86,8 @@ type UpdateComputeEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

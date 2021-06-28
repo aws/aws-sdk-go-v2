@@ -40,6 +40,8 @@ type CheckSchemaVersionValidityInput struct {
 	//
 	// This member is required.
 	SchemaDefinition *string
+
+	noSmithyDocumentSerde
 }
 
 type CheckSchemaVersionValidityOutput struct {
@@ -52,6 +54,8 @@ type CheckSchemaVersionValidityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCheckSchemaVersionValidityMiddlewares(stack *middleware.Stack, options Options) (err error) {

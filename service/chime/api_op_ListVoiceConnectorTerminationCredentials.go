@@ -32,6 +32,8 @@ type ListVoiceConnectorTerminationCredentialsInput struct {
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListVoiceConnectorTerminationCredentialsOutput struct {
@@ -41,6 +43,8 @@ type ListVoiceConnectorTerminationCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVoiceConnectorTerminationCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

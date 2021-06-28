@@ -35,6 +35,8 @@ type DeleteBaiduChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBaiduChannelOutput struct {
@@ -47,6 +49,8 @@ type DeleteBaiduChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

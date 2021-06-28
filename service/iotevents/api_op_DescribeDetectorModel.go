@@ -37,6 +37,8 @@ type DescribeDetectorModelInput struct {
 
 	// The version of the detector model.
 	DetectorModelVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDetectorModelOutput struct {
@@ -46,6 +48,8 @@ type DescribeDetectorModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDetectorModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

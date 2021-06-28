@@ -55,6 +55,8 @@ type DescribeMaintenanceWindowExecutionsInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMaintenanceWindowExecutionsOutput struct {
@@ -68,6 +70,8 @@ type DescribeMaintenanceWindowExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMaintenanceWindowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,11 +47,15 @@ type DeleteCustomMetadataInput struct {
 	// The ID of the version, if the custom metadata is being deleted from a document
 	// version.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

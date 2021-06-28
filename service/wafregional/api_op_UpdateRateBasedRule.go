@@ -93,6 +93,8 @@ type UpdateRateBasedRuleInput struct {
 	//
 	// This member is required.
 	Updates []types.RuleUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRateBasedRuleOutput struct {
@@ -104,6 +106,8 @@ type UpdateRateBasedRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type GetAutoSnapshotsInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAutoSnapshotsOutput struct {
@@ -52,6 +54,8 @@ type GetAutoSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAutoSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

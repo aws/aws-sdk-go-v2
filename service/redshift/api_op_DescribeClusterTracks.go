@@ -43,6 +43,8 @@ type DescribeClusterTracksInput struct {
 
 	// An integer value for the maximum number of maintenance tracks to return.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClusterTracksOutput struct {
@@ -57,6 +59,8 @@ type DescribeClusterTracksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClusterTracksMiddlewares(stack *middleware.Stack, options Options) (err error) {

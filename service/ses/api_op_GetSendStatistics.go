@@ -31,6 +31,7 @@ func (c *Client) GetSendStatistics(ctx context.Context, params *GetSendStatistic
 }
 
 type GetSendStatisticsInput struct {
+	noSmithyDocumentSerde
 }
 
 // Represents a list of data points. This list contains aggregated data from the
@@ -42,6 +43,8 @@ type GetSendStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSendStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

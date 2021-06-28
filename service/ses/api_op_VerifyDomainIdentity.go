@@ -42,6 +42,8 @@ type VerifyDomainIdentityInput struct {
 	//
 	// This member is required.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns a TXT record that you must publish to the DNS server of your domain to
@@ -61,6 +63,8 @@ type VerifyDomainIdentityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVerifyDomainIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

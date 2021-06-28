@@ -34,6 +34,8 @@ type DescribeAssessmentTargetsInput struct {
 	//
 	// This member is required.
 	AssessmentTargetArns []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAssessmentTargetsOutput struct {
@@ -51,6 +53,8 @@ type DescribeAssessmentTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAssessmentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

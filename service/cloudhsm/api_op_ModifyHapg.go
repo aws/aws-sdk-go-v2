@@ -49,6 +49,8 @@ type ModifyHapgInput struct {
 	// The list of partition serial numbers to make members of the high-availability
 	// partition group.
 	PartitionSerialList []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyHapgOutput struct {
@@ -58,6 +60,8 @@ type ModifyHapgOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type CancelEnvironmentDeploymentInput struct {
 	//
 	// This member is required.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelEnvironmentDeploymentOutput struct {
@@ -58,6 +60,8 @@ type CancelEnvironmentDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelEnvironmentDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

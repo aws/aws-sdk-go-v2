@@ -48,6 +48,8 @@ type ListClustersInput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // This contains a ClusterSummaryList with the cluster details; for example, the
@@ -62,6 +64,8 @@ type ListClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

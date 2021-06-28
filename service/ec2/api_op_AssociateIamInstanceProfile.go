@@ -39,6 +39,8 @@ type AssociateIamInstanceProfileInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateIamInstanceProfileOutput struct {
@@ -48,6 +50,8 @@ type AssociateIamInstanceProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateIamInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

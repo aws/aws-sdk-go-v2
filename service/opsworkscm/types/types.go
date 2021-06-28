@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -26,6 +27,8 @@ type AccountAttribute struct {
 	// The current usage, such as the current number of servers that are associated
 	// with the account.
 	Used *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a single backup.
@@ -116,6 +119,8 @@ type Backup struct {
 	// The IAM user ARN of the requester for manual backups. This field is empty for
 	// automated backups.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A name and value pair that is specific to the engine of the server.
@@ -126,6 +131,8 @@ type EngineAttribute struct {
 
 	// The value of the engine attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a configuration management server.
@@ -241,6 +248,8 @@ type Server struct {
 
 	// The subnet IDs specified in a CreateServer request.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // An event that is related to the server, such as the start of maintenance or
@@ -258,6 +267,8 @@ type ServerEvent struct {
 
 	// The name of the server on or for which the event occurred.
 	ServerName *string
+
+	noSmithyDocumentSerde
 }
 
 // A map that contains tag keys and tag values to attach to an AWS OpsWorks for
@@ -279,4 +290,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

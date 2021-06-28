@@ -61,6 +61,8 @@ type DetectTextInput struct {
 	// Optional parameters that let you set the criteria that the text must meet to be
 	// included in your response.
 	Filters *types.DetectTextFilters
+
+	noSmithyDocumentSerde
 }
 
 type DetectTextOutput struct {
@@ -73,6 +75,8 @@ type DetectTextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectTextMiddlewares(stack *middleware.Stack, options Options) (err error) {

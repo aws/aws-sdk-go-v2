@@ -44,6 +44,8 @@ type ListLensReviewsInput struct {
 
 	// The token to use to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a list lens reviews call.
@@ -63,6 +65,8 @@ type ListLensReviewsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLensReviewsMiddlewares(stack *middleware.Stack, options Options) (err error) {

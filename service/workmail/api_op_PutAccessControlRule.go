@@ -71,11 +71,15 @@ type PutAccessControlRuleInput struct {
 
 	// User IDs to include in the rule.
 	UserIds []string
+
+	noSmithyDocumentSerde
 }
 
 type PutAccessControlRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccessControlRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

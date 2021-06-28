@@ -51,6 +51,8 @@ type ListPullRequestsInput struct {
 	// Optional. The status of the pull request. If used, this refines the results to
 	// the pull requests that match the specified status.
 	PullRequestStatus types.PullRequestStatusEnum
+
+	noSmithyDocumentSerde
 }
 
 type ListPullRequestsOutput struct {
@@ -66,6 +68,8 @@ type ListPullRequestsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPullRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {

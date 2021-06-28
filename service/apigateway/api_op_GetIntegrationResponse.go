@@ -49,6 +49,8 @@ type GetIntegrationResponseInput struct {
 	//
 	// This member is required.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an integration response. The status code must map to an existing
@@ -105,6 +107,8 @@ type GetIntegrationResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

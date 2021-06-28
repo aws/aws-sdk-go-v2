@@ -35,6 +35,8 @@ type DescribeLocationNfsInput struct {
 	//
 	// This member is required.
 	LocationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeLocationNfsResponse
@@ -58,6 +60,8 @@ type DescribeLocationNfsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {

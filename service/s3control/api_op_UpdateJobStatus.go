@@ -70,6 +70,8 @@ type UpdateJobStatusInput struct {
 	// A description of the reason why you want to change the specified job's status.
 	// This field can be any string up to the maximum length.
 	StatusUpdateReason *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateJobStatusOutput struct {
@@ -85,6 +87,8 @@ type UpdateJobStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateJobStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

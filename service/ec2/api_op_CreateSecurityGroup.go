@@ -74,6 +74,8 @@ type CreateSecurityGroupInput struct {
 
 	// [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSecurityGroupOutput struct {
@@ -86,6 +88,8 @@ type CreateSecurityGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

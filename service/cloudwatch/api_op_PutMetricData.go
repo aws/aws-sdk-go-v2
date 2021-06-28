@@ -81,11 +81,15 @@ type PutMetricDataInput struct {
 	//
 	// This member is required.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 type PutMetricDataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

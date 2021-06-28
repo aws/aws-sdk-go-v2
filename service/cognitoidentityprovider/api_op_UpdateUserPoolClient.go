@@ -187,6 +187,8 @@ type UpdateUserPoolClientInput struct {
 
 	// The writeable attributes of the user pool.
 	WriteAttributes []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to the request to update the user pool
@@ -199,6 +201,8 @@ type UpdateUserPoolClientOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserPoolClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

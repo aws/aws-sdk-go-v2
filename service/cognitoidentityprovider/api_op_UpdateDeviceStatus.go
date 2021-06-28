@@ -42,12 +42,16 @@ type UpdateDeviceStatusInput struct {
 
 	// The status of whether a device is remembered.
 	DeviceRememberedStatus types.DeviceRememberedStatusType
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request to update the device status.
 type UpdateDeviceStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeviceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

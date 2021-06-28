@@ -39,6 +39,8 @@ type GetLayerVersionPolicyInput struct {
 	//
 	// This member is required.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 type GetLayerVersionPolicyOutput struct {
@@ -51,6 +53,8 @@ type GetLayerVersionPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLayerVersionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

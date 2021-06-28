@@ -42,11 +42,15 @@ type CancelUpdateStackInput struct {
 	// CancelUpdateStack requests to ensure that AWS CloudFormation successfully
 	// received them.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelUpdateStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

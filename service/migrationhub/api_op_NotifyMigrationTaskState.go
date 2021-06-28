@@ -72,11 +72,15 @@ type NotifyMigrationTaskStateInput struct {
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
 	DryRun bool
+
+	noSmithyDocumentSerde
 }
 
 type NotifyMigrationTaskStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNotifyMigrationTaskStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

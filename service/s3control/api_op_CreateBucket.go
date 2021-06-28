@@ -116,6 +116,8 @@ type CreateBucketInput struct {
 	// The ID of the Outposts where the bucket is being created. This is required by
 	// Amazon S3 on Outposts buckets.
 	OutpostId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBucketOutput struct {
@@ -136,6 +138,8 @@ type CreateBucketOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {

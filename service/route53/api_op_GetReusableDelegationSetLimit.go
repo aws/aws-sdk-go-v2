@@ -45,6 +45,8 @@ type GetReusableDelegationSetLimitInput struct {
 	//
 	// This member is required.
 	Type types.ReusableDelegationSetLimitType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the requested limit.
@@ -64,6 +66,8 @@ type GetReusableDelegationSetLimitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReusableDelegationSetLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

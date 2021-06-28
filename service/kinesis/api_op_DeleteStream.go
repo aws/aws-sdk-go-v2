@@ -50,11 +50,15 @@ type DeleteStreamInput struct {
 	// registered consumers, the call to DeleteStream fails with a
 	// ResourceInUseException.
 	EnforceConsumerDeletion *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

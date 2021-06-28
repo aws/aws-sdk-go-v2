@@ -33,6 +33,8 @@ type DescribeClientPropertiesInput struct {
 	//
 	// This member is required.
 	ResourceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClientPropertiesOutput struct {
@@ -42,6 +44,8 @@ type DescribeClientPropertiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClientPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

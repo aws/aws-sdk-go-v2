@@ -46,6 +46,8 @@ type GetComponentVersionArtifactInput struct {
 	//
 	// This member is required.
 	ArtifactName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetComponentVersionArtifactOutput struct {
@@ -57,6 +59,8 @@ type GetComponentVersionArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetComponentVersionArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

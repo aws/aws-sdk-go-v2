@@ -39,6 +39,8 @@ type BatchPutScheduledUpdateGroupActionInput struct {
 	//
 	// This member is required.
 	ScheduledUpdateGroupActions []types.ScheduledUpdateGroupActionRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchPutScheduledUpdateGroupActionOutput struct {
@@ -49,6 +51,8 @@ type BatchPutScheduledUpdateGroupActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchPutScheduledUpdateGroupActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

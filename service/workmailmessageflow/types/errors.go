@@ -24,6 +24,8 @@ import (
 // in the WorkMail Administrator Guide.
 type InvalidContentLocation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidContentLocation) Error() string {
@@ -42,6 +44,8 @@ func (e *InvalidContentLocation) ErrorFault() smithy.ErrorFault { return smithy.
 // redirected email.
 type MessageFrozen struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MessageFrozen) Error() string {
@@ -60,6 +64,8 @@ func (e *MessageFrozen) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // Check the error message for more information about what caused the error.
 type MessageRejected struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MessageRejected) Error() string {
@@ -77,6 +83,8 @@ func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The requested email message is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

@@ -34,6 +34,8 @@ type DescribeContextInput struct {
 	//
 	// This member is required.
 	ContextName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeContextOutput struct {
@@ -72,6 +74,8 @@ type DescribeContextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeContextMiddlewares(stack *middleware.Stack, options Options) (err error) {

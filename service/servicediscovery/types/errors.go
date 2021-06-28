@@ -11,6 +11,8 @@ import (
 // isn't a custom health check.
 type CustomHealthNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomHealthNotFound) Error() string {
@@ -30,6 +32,8 @@ type DuplicateRequest struct {
 	Message *string
 
 	DuplicateOperationId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateRequest) Error() string {
@@ -48,6 +52,8 @@ func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // registered, and information about the instance hasn't propagated yet.
 type InstanceNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceNotFound) Error() string {
@@ -67,6 +73,8 @@ func (e *InstanceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // value might exceed length constraints.
 type InvalidInput struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInput) Error() string {
@@ -87,6 +95,8 @@ type NamespaceAlreadyExists struct {
 
 	CreatorRequestId *string
 	NamespaceId      *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NamespaceAlreadyExists) Error() string {
@@ -104,6 +114,8 @@ func (e *NamespaceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.
 // No namespace exists with the specified ID.
 type NamespaceNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NamespaceNotFound) Error() string {
@@ -121,6 +133,8 @@ func (e *NamespaceNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // No operation exists with the specified ID.
 type OperationNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotFound) Error() string {
@@ -141,6 +155,8 @@ func (e *OperationNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Map Developer Guide.
 type RequestLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestLimitExceeded) Error() string {
@@ -159,6 +175,8 @@ func (e *RequestLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // example, you can't delete a service that contains any instances.
 type ResourceInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUse) Error() string {
@@ -177,6 +195,8 @@ func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // resources.
 type ResourceLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceeded) Error() string {
@@ -194,6 +214,8 @@ func (e *ResourceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.F
 // The operation can't be completed because the resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -215,6 +237,8 @@ type ServiceAlreadyExists struct {
 
 	CreatorRequestId *string
 	ServiceId        *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceAlreadyExists) Error() string {
@@ -232,6 +256,8 @@ func (e *ServiceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // No service exists with the specified ID.
 type ServiceNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceNotFound) Error() string {
@@ -252,6 +278,8 @@ type TooManyTagsException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

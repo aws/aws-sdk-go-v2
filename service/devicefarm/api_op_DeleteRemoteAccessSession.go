@@ -34,6 +34,8 @@ type DeleteRemoteAccessSessionInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // The response from the server when a request is made to delete the remote access
@@ -41,6 +43,8 @@ type DeleteRemoteAccessSessionInput struct {
 type DeleteRemoteAccessSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

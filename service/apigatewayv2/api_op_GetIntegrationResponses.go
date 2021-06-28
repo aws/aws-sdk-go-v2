@@ -45,6 +45,8 @@ type GetIntegrationResponsesInput struct {
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIntegrationResponsesOutput struct {
@@ -58,6 +60,8 @@ type GetIntegrationResponsesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIntegrationResponsesMiddlewares(stack *middleware.Stack, options Options) (err error) {

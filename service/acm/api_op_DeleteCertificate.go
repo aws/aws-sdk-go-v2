@@ -42,11 +42,15 @@ type DeleteCertificateInput struct {
 	//
 	// This member is required.
 	CertificateArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

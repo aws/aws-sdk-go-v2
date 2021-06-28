@@ -42,6 +42,8 @@ type UpdateMultiplexProgramInput struct {
 
 	// The new settings for a multiplex program.
 	MultiplexProgramSettings *types.MultiplexProgramSettings
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for UpdateMultiplexProgramResponse
@@ -52,6 +54,8 @@ type UpdateMultiplexProgramOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {

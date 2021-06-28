@@ -70,12 +70,16 @@ type SetTaskStatusInput struct {
 	// is used to display error information to the user. The web service does not parse
 	// this value.
 	ErrorStackTrace *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of SetTaskStatus.
 type SetTaskStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetTaskStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

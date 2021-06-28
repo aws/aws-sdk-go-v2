@@ -42,6 +42,8 @@ type ListDomainAssociationsInput struct {
 	// non-null, a pagination token is returned in a result. Pass its value in here to
 	// list more projects.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the list domain association request.
@@ -58,6 +60,8 @@ type ListDomainAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

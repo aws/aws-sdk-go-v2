@@ -48,6 +48,8 @@ type UpdateIdentityProviderInput struct {
 	// The identity provider details to be updated, such as MetadataURL and
 	// MetadataFile.
 	ProviderDetails map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIdentityProviderOutput struct {
@@ -59,6 +61,8 @@ type UpdateIdentityProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

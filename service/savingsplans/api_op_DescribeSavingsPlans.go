@@ -47,6 +47,8 @@ type DescribeSavingsPlansInput struct {
 
 	// The states.
 	States []types.SavingsPlanState
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSavingsPlansOutput struct {
@@ -60,6 +62,8 @@ type DescribeSavingsPlansOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSavingsPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {

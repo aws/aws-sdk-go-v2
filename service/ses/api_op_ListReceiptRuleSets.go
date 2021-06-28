@@ -42,6 +42,8 @@ type ListReceiptRuleSetsInput struct {
 	// A token returned from a previous call to ListReceiptRuleSets to indicate the
 	// position in the receipt rule set list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of receipt rule sets that exist under your AWS account.
@@ -58,6 +60,8 @@ type ListReceiptRuleSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReceiptRuleSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

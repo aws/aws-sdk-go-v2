@@ -40,6 +40,8 @@ type PutDefaultEncryptionConfigurationInput struct {
 	// The Key ID of the customer managed customer master key (CMK) used for KMS
 	// encryption. This is required if you use KMS_BASED_ENCRYPTION.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutDefaultEncryptionConfigurationOutput struct {
@@ -61,6 +63,8 @@ type PutDefaultEncryptionConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDefaultEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // The specified Amazon Resource Name (ARN) does not exist in the AWS account.
 type ActorDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActorDoesNotExistException) Error() string {
@@ -28,6 +30,8 @@ func (e *ActorDoesNotExistException) ErrorFault() smithy.ErrorFault { return smi
 // approval rule. The content cannot be null.
 type ApprovalRuleContentRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleContentRequiredException) Error() string {
@@ -49,6 +53,8 @@ func (e *ApprovalRuleContentRequiredException) ErrorFault() smithy.ErrorFault {
 // The specified approval rule does not exist.
 type ApprovalRuleDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleDoesNotExistException) Error() string {
@@ -69,6 +75,8 @@ func (e *ApprovalRuleDoesNotExistException) ErrorFault() smithy.ErrorFault { ret
 // unique within the scope of a pull request.
 type ApprovalRuleNameAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleNameAlreadyExistsException) Error() string {
@@ -90,6 +98,8 @@ func (e *ApprovalRuleNameAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 // An approval rule name is required, but was not specified.
 type ApprovalRuleNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleNameRequiredException) Error() string {
@@ -110,6 +120,8 @@ func (e *ApprovalRuleNameRequiredException) ErrorFault() smithy.ErrorFault { ret
 // content for an approval rule template. The content cannot be null.
 type ApprovalRuleTemplateContentRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleTemplateContentRequiredException) Error() string {
@@ -133,6 +145,8 @@ func (e *ApprovalRuleTemplateContentRequiredException) ErrorFault() smithy.Error
 // created, and then try again.
 type ApprovalRuleTemplateDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleTemplateDoesNotExistException) Error() string {
@@ -156,6 +170,8 @@ func (e *ApprovalRuleTemplateDoesNotExistException) ErrorFault() smithy.ErrorFau
 // associations, and then try again.
 type ApprovalRuleTemplateInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleTemplateInUseException) Error() string {
@@ -179,6 +195,8 @@ func (e *ApprovalRuleTemplateInUseException) ErrorFault() smithy.ErrorFault {
 // rule template names must be unique.
 type ApprovalRuleTemplateNameAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleTemplateNameAlreadyExistsException) Error() string {
@@ -200,6 +218,8 @@ func (e *ApprovalRuleTemplateNameAlreadyExistsException) ErrorFault() smithy.Err
 // An approval rule template name is required, but was not specified.
 type ApprovalRuleTemplateNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalRuleTemplateNameRequiredException) Error() string {
@@ -221,6 +241,8 @@ func (e *ApprovalRuleTemplateNameRequiredException) ErrorFault() smithy.ErrorFau
 // An approval state is required, but was not specified.
 type ApprovalStateRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalStateRequiredException) Error() string {
@@ -238,6 +260,8 @@ func (e *ApprovalStateRequiredException) ErrorFault() smithy.ErrorFault { return
 // The specified Amazon Resource Name (ARN) does not exist in the AWS account.
 type AuthorDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorDoesNotExistException) Error() string {
@@ -256,6 +280,8 @@ func (e *AuthorDoesNotExistException) ErrorFault() smithy.ErrorFault { return sm
 // The before commit ID and the after commit ID must be different commit IDs.
 type BeforeCommitIdAndAfterCommitIdAreSameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BeforeCommitIdAndAfterCommitIdAreSameException) Error() string {
@@ -277,6 +303,8 @@ func (e *BeforeCommitIdAndAfterCommitIdAreSameException) ErrorFault() smithy.Err
 // The specified blob does not exist.
 type BlobIdDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BlobIdDoesNotExistException) Error() string {
@@ -294,6 +322,8 @@ func (e *BlobIdDoesNotExistException) ErrorFault() smithy.ErrorFault { return sm
 // A blob ID is required, but was not specified.
 type BlobIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BlobIdRequiredException) Error() string {
@@ -311,6 +341,8 @@ func (e *BlobIdRequiredException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified branch does not exist.
 type BranchDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BranchDoesNotExistException) Error() string {
@@ -329,6 +361,8 @@ func (e *BranchDoesNotExistException) ErrorFault() smithy.ErrorFault { return sm
 // with an existing branch with the same name. Branch names must be unique.
 type BranchNameExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BranchNameExistsException) Error() string {
@@ -348,6 +382,8 @@ func (e *BranchNameExistsException) ErrorFault() smithy.ErrorFault { return smit
 // ListBranches.
 type BranchNameIsTagNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BranchNameIsTagNameException) Error() string {
@@ -365,6 +401,8 @@ func (e *BranchNameIsTagNameException) ErrorFault() smithy.ErrorFault { return s
 // A branch name is required, but was not specified.
 type BranchNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BranchNameRequiredException) Error() string {
@@ -383,6 +421,8 @@ func (e *BranchNameRequiredException) ErrorFault() smithy.ErrorFault { return sm
 // by an approval rule template and applied to the pull request automatically.
 type CannotDeleteApprovalRuleFromTemplateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CannotDeleteApprovalRuleFromTemplateException) Error() string {
@@ -405,6 +445,8 @@ func (e *CannotDeleteApprovalRuleFromTemplateException) ErrorFault() smithy.Erro
 // by an approval rule template and applied to the pull request automatically.
 type CannotModifyApprovalRuleFromTemplateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CannotModifyApprovalRuleFromTemplateException) Error() string {
@@ -430,6 +472,8 @@ func (e *CannotModifyApprovalRuleFromTemplateException) ErrorFault() smithy.Erro
 // information about the initial request that used that token.
 type ClientRequestTokenRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientRequestTokenRequiredException) Error() string {
@@ -452,6 +496,8 @@ func (e *ClientRequestTokenRequiredException) ErrorFault() smithy.ErrorFault {
 // cannot be null.
 type CommentContentRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommentContentRequiredException) Error() string {
@@ -471,6 +517,8 @@ func (e *CommentContentRequiredException) ErrorFault() smithy.ErrorFault { retur
 // The comment is too large. Comments are limited to 1,000 characters.
 type CommentContentSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommentContentSizeLimitExceededException) Error() string {
@@ -493,6 +541,8 @@ func (e *CommentContentSizeLimitExceededException) ErrorFault() smithy.ErrorFaul
 // comment.
 type CommentDeletedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommentDeletedException) Error() string {
@@ -511,6 +561,8 @@ func (e *CommentDeletedException) ErrorFault() smithy.ErrorFault { return smithy
 // ID, and then try again.
 type CommentDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommentDoesNotExistException) Error() string {
@@ -528,6 +580,8 @@ func (e *CommentDoesNotExistException) ErrorFault() smithy.ErrorFault { return s
 // The comment ID is missing or null. A comment ID is required.
 type CommentIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommentIdRequiredException) Error() string {
@@ -546,6 +600,8 @@ func (e *CommentIdRequiredException) ErrorFault() smithy.ErrorFault { return smi
 // delete their comments.
 type CommentNotCreatedByCallerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommentNotCreatedByCallerException) Error() string {
@@ -568,6 +624,8 @@ func (e *CommentNotCreatedByCallerException) ErrorFault() smithy.ErrorFault {
 // specified repository has no default branch.
 type CommitDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommitDoesNotExistException) Error() string {
@@ -585,6 +643,8 @@ func (e *CommitDoesNotExistException) ErrorFault() smithy.ErrorFault { return sm
 // The specified commit ID does not exist.
 type CommitIdDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommitIdDoesNotExistException) Error() string {
@@ -602,6 +662,8 @@ func (e *CommitIdDoesNotExistException) ErrorFault() smithy.ErrorFault { return 
 // A commit ID was not specified.
 type CommitIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommitIdRequiredException) Error() string {
@@ -620,6 +682,8 @@ func (e *CommitIdRequiredException) ErrorFault() smithy.ErrorFault { return smit
 // your batch requests contains no more than 100 commit IDs, and then try again.
 type CommitIdsLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommitIdsLimitExceededException) Error() string {
@@ -640,6 +704,8 @@ func (e *CommitIdsLimitExceededException) ErrorFault() smithy.ErrorFault { retur
 // empty.
 type CommitIdsListRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommitIdsListRequiredException) Error() string {
@@ -657,6 +723,8 @@ func (e *CommitIdsListRequiredException) ErrorFault() smithy.ErrorFault { return
 // The commit message is too long. Provide a shorter string.
 type CommitMessageLengthExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommitMessageLengthExceededException) Error() string {
@@ -678,6 +746,8 @@ func (e *CommitMessageLengthExceededException) ErrorFault() smithy.ErrorFault {
 // A commit was not specified.
 type CommitRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CommitRequiredException) Error() string {
@@ -697,6 +767,8 @@ func (e *CommitRequiredException) ErrorFault() smithy.ErrorFault { return smithy
 // progress. Wait a few minutes, and then try again.
 type ConcurrentReferenceUpdateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentReferenceUpdateException) Error() string {
@@ -720,6 +792,8 @@ func (e *ConcurrentReferenceUpdateException) ErrorFault() smithy.ErrorFault {
 // branch.
 type DefaultBranchCannotBeDeletedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DefaultBranchCannotBeDeletedException) Error() string {
@@ -743,6 +817,8 @@ func (e *DefaultBranchCannotBeDeletedException) ErrorFault() smithy.ErrorFault {
 // different name for the file, or specify a different path for the file.
 type DirectoryNameConflictsWithFileNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryNameConflictsWithFileNameException) Error() string {
@@ -764,6 +840,8 @@ func (e *DirectoryNameConflictsWithFileNameException) ErrorFault() smithy.ErrorF
 // An encryption integrity check failed.
 type EncryptionIntegrityChecksFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EncryptionIntegrityChecksFailedException) Error() string {
@@ -785,6 +863,8 @@ func (e *EncryptionIntegrityChecksFailedException) ErrorFault() smithy.ErrorFaul
 // An encryption key could not be accessed.
 type EncryptionKeyAccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EncryptionKeyAccessDeniedException) Error() string {
@@ -806,6 +886,8 @@ func (e *EncryptionKeyAccessDeniedException) ErrorFault() smithy.ErrorFault {
 // The encryption key is disabled.
 type EncryptionKeyDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EncryptionKeyDisabledException) Error() string {
@@ -823,6 +905,8 @@ func (e *EncryptionKeyDisabledException) ErrorFault() smithy.ErrorFault { return
 // No encryption key was found.
 type EncryptionKeyNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EncryptionKeyNotFoundException) Error() string {
@@ -840,6 +924,8 @@ func (e *EncryptionKeyNotFoundException) ErrorFault() smithy.ErrorFault { return
 // The encryption key is not available.
 type EncryptionKeyUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EncryptionKeyUnavailableException) Error() string {
@@ -861,6 +947,8 @@ func (e *EncryptionKeyUnavailableException) ErrorFault() smithy.ErrorFault { ret
 // source file or provide the file content directly.
 type FileContentAndSourceFileSpecifiedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileContentAndSourceFileSpecifiedException) Error() string {
@@ -883,6 +971,8 @@ func (e *FileContentAndSourceFileSpecifiedException) ErrorFault() smithy.ErrorFa
 // repository with this API.
 type FileContentRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileContentRequiredException) Error() string {
@@ -902,6 +992,8 @@ func (e *FileContentRequiredException) ErrorFault() smithy.ErrorFault { return s
 // using a Git client.
 type FileContentSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileContentSizeLimitExceededException) Error() string {
@@ -924,6 +1016,8 @@ func (e *FileContentSizeLimitExceededException) ErrorFault() smithy.ErrorFault {
 // name, full path, and extension.
 type FileDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileDoesNotExistException) Error() string {
@@ -942,6 +1036,8 @@ func (e *FileDoesNotExistException) ErrorFault() smithy.ErrorFault { return smit
 // updated, or changed (PutFile or DeleteFile) for the commit.
 type FileEntryRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileEntryRequiredException) Error() string {
@@ -960,6 +1056,8 @@ func (e *FileEntryRequiredException) ErrorFault() smithy.ErrorFault { return smi
 // mode is required to update mode permissions for a file.
 type FileModeRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileModeRequiredException) Error() string {
@@ -979,6 +1077,8 @@ func (e *FileModeRequiredException) ErrorFault() smithy.ErrorFault { return smit
 // file, or add the file in a directory that does not match the file name.
 type FileNameConflictsWithDirectoryNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileNameConflictsWithDirectoryNameException) Error() string {
@@ -1002,6 +1102,8 @@ func (e *FileNameConflictsWithDirectoryNameException) ErrorFault() smithy.ErrorF
 // point to a submodule.
 type FilePathConflictsWithSubmodulePathException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FilePathConflictsWithSubmodulePathException) Error() string {
@@ -1025,6 +1127,8 @@ func (e *FilePathConflictsWithSubmodulePathException) ErrorFault() smithy.ErrorF
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html).
 type FileTooLargeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileTooLargeException) Error() string {
@@ -1045,6 +1149,8 @@ func (e *FileTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.F
 // folders.
 type FolderContentSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FolderContentSizeLimitExceededException) Error() string {
@@ -1067,6 +1173,8 @@ func (e *FolderContentSizeLimitExceededException) ErrorFault() smithy.ErrorFault
 // you did not enter the full path to the folder.
 type FolderDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FolderDoesNotExistException) Error() string {
@@ -1085,6 +1193,8 @@ func (e *FolderDoesNotExistException) ErrorFault() smithy.ErrorFault { return sm
 // format, or the token has been used in a previous request and cannot be reused.
 type IdempotencyParameterMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotencyParameterMismatchException) Error() string {
@@ -1108,6 +1218,8 @@ func (e *IdempotencyParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // then try again.
 type InvalidActorArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidActorArnException) Error() string {
@@ -1125,6 +1237,8 @@ func (e *InvalidActorArnException) ErrorFault() smithy.ErrorFault { return smith
 // The content for the approval rule is not valid.
 type InvalidApprovalRuleContentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApprovalRuleContentException) Error() string {
@@ -1146,6 +1260,8 @@ func (e *InvalidApprovalRuleContentException) ErrorFault() smithy.ErrorFault {
 // The name for the approval rule is not valid.
 type InvalidApprovalRuleNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApprovalRuleNameException) Error() string {
@@ -1165,6 +1281,8 @@ func (e *InvalidApprovalRuleNameException) ErrorFault() smithy.ErrorFault { retu
 // The content of the approval rule template is not valid.
 type InvalidApprovalRuleTemplateContentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApprovalRuleTemplateContentException) Error() string {
@@ -1189,6 +1307,8 @@ func (e *InvalidApprovalRuleTemplateContentException) ErrorFault() smithy.ErrorF
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html).
 type InvalidApprovalRuleTemplateDescriptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApprovalRuleTemplateDescriptionException) Error() string {
@@ -1213,6 +1333,8 @@ func (e *InvalidApprovalRuleTemplateDescriptionException) ErrorFault() smithy.Er
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html).
 type InvalidApprovalRuleTemplateNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApprovalRuleTemplateNameException) Error() string {
@@ -1235,6 +1357,8 @@ func (e *InvalidApprovalRuleTemplateNameException) ErrorFault() smithy.ErrorFaul
 // REVOKE.
 type InvalidApprovalStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApprovalStateException) Error() string {
@@ -1253,6 +1377,8 @@ func (e *InvalidApprovalStateException) ErrorFault() smithy.ErrorFault { return 
 // the full ARN for the author of the pull request, and then try again.
 type InvalidAuthorArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAuthorArnException) Error() string {
@@ -1270,6 +1396,8 @@ func (e *InvalidAuthorArnException) ErrorFault() smithy.ErrorFault { return smit
 // The specified blob is not valid.
 type InvalidBlobIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidBlobIdException) Error() string {
@@ -1287,6 +1415,8 @@ func (e *InvalidBlobIdException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified reference name is not valid.
 type InvalidBranchNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidBranchNameException) Error() string {
@@ -1304,6 +1434,8 @@ func (e *InvalidBranchNameException) ErrorFault() smithy.ErrorFault { return smi
 // The client request token is not valid.
 type InvalidClientRequestTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClientRequestTokenException) Error() string {
@@ -1326,6 +1458,8 @@ func (e *InvalidClientRequestTokenException) ErrorFault() smithy.ErrorFault {
 // full comment ID.
 type InvalidCommentIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCommentIdException) Error() string {
@@ -1343,6 +1477,8 @@ func (e *InvalidCommentIdException) ErrorFault() smithy.ErrorFault { return smit
 // The specified commit is not valid.
 type InvalidCommitException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCommitException) Error() string {
@@ -1360,6 +1496,8 @@ func (e *InvalidCommitException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified commit ID is not valid.
 type InvalidCommitIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCommitIdException) Error() string {
@@ -1377,6 +1515,8 @@ func (e *InvalidCommitIdException) ErrorFault() smithy.ErrorFault { return smith
 // The specified conflict detail level is not valid.
 type InvalidConflictDetailLevelException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConflictDetailLevelException) Error() string {
@@ -1398,6 +1538,8 @@ func (e *InvalidConflictDetailLevelException) ErrorFault() smithy.ErrorFault {
 // The specified conflict resolution list is not valid.
 type InvalidConflictResolutionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConflictResolutionException) Error() string {
@@ -1419,6 +1561,8 @@ func (e *InvalidConflictResolutionException) ErrorFault() smithy.ErrorFault {
 // The specified conflict resolution strategy is not valid.
 type InvalidConflictResolutionStrategyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConflictResolutionStrategyException) Error() string {
@@ -1440,6 +1584,8 @@ func (e *InvalidConflictResolutionStrategyException) ErrorFault() smithy.ErrorFa
 // The specified continuation token is not valid.
 type InvalidContinuationTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidContinuationTokenException) Error() string {
@@ -1459,6 +1605,8 @@ func (e *InvalidContinuationTokenException) ErrorFault() smithy.ErrorFault { ret
 // The specified deletion parameter is not valid.
 type InvalidDeletionParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeletionParameterException) Error() string {
@@ -1479,6 +1627,8 @@ func (e *InvalidDeletionParameterException) ErrorFault() smithy.ErrorFault { ret
 // 1,000 characters.
 type InvalidDescriptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDescriptionException) Error() string {
@@ -1497,6 +1647,8 @@ func (e *InvalidDescriptionException) ErrorFault() smithy.ErrorFault { return sm
 // name, tag, or full commit ID.
 type InvalidDestinationCommitSpecifierException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDestinationCommitSpecifierException) Error() string {
@@ -1520,6 +1672,8 @@ func (e *InvalidDestinationCommitSpecifierException) ErrorFault() smithy.ErrorFa
 // address.
 type InvalidEmailException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEmailException) Error() string {
@@ -1538,6 +1692,8 @@ func (e *InvalidEmailException) ErrorFault() smithy.ErrorFault { return smithy.F
 // and extension.
 type InvalidFileLocationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFileLocationException) Error() string {
@@ -1556,6 +1712,8 @@ func (e *InvalidFileLocationException) ErrorFault() smithy.ErrorFault { return s
 // permissions, see PutFile.
 type InvalidFileModeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFileModeException) Error() string {
@@ -1574,6 +1732,8 @@ func (e *InvalidFileModeException) ErrorFault() smithy.ErrorFault { return smith
 // of the file you want to comment on.
 type InvalidFilePositionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFilePositionException) Error() string {
@@ -1591,6 +1751,8 @@ func (e *InvalidFilePositionException) ErrorFault() smithy.ErrorFault { return s
 // The specified value for the number of conflict files to return is not valid.
 type InvalidMaxConflictFilesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMaxConflictFilesException) Error() string {
@@ -1610,6 +1772,8 @@ func (e *InvalidMaxConflictFilesException) ErrorFault() smithy.ErrorFault { retu
 // The specified value for the number of merge hunks to return is not valid.
 type InvalidMaxMergeHunksException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMaxMergeHunksException) Error() string {
@@ -1627,6 +1791,8 @@ func (e *InvalidMaxMergeHunksException) ErrorFault() smithy.ErrorFault { return 
 // The specified number of maximum results is not valid.
 type InvalidMaxResultsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMaxResultsException) Error() string {
@@ -1645,6 +1811,8 @@ func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smi
 // strategies are supported for all operations.
 type InvalidMergeOptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMergeOptionException) Error() string {
@@ -1662,6 +1830,8 @@ func (e *InvalidMergeOptionException) ErrorFault() smithy.ErrorFault { return sm
 // The specified sort order is not valid.
 type InvalidOrderException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOrderException) Error() string {
@@ -1679,6 +1849,8 @@ func (e *InvalidOrderException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The override status is not valid. Valid statuses are OVERRIDE and REVOKE.
 type InvalidOverrideStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOverrideStatusException) Error() string {
@@ -1698,6 +1870,8 @@ func (e *InvalidOverrideStatusException) ErrorFault() smithy.ErrorFault { return
 // update a file.
 type InvalidParentCommitIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParentCommitIdException) Error() string {
@@ -1715,6 +1889,8 @@ func (e *InvalidParentCommitIdException) ErrorFault() smithy.ErrorFault { return
 // The specified path is not valid.
 type InvalidPathException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPathException) Error() string {
@@ -1732,6 +1908,8 @@ func (e *InvalidPathException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The pull request event type is not valid.
 type InvalidPullRequestEventTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPullRequestEventTypeException) Error() string {
@@ -1754,6 +1932,8 @@ func (e *InvalidPullRequestEventTypeException) ErrorFault() smithy.ErrorFault {
 // and that the pull request is in the specified repository, and then try again.
 type InvalidPullRequestIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPullRequestIdException) Error() string {
@@ -1771,6 +1951,8 @@ func (e *InvalidPullRequestIdException) ErrorFault() smithy.ErrorFault { return 
 // The pull request status is not valid. The only valid values are OPEN and CLOSED.
 type InvalidPullRequestStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPullRequestStatusException) Error() string {
@@ -1791,6 +1973,8 @@ func (e *InvalidPullRequestStatusException) ErrorFault() smithy.ErrorFault { ret
 // to CLOSED.
 type InvalidPullRequestStatusUpdateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPullRequestStatusUpdateException) Error() string {
@@ -1812,6 +1996,8 @@ func (e *InvalidPullRequestStatusUpdateException) ErrorFault() smithy.ErrorFault
 // The Amazon Resource Name (ARN) of the user or identity is not valid.
 type InvalidReactionUserArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidReactionUserArnException) Error() string {
@@ -1833,6 +2019,8 @@ func (e *InvalidReactionUserArnException) ErrorFault() smithy.ErrorFault { retur
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html).
 type InvalidReactionValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidReactionValueException) Error() string {
@@ -1854,6 +2042,8 @@ func (e *InvalidReactionValueException) ErrorFault() smithy.ErrorFault { return 
 // Git documentation.
 type InvalidReferenceNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidReferenceNameException) Error() string {
@@ -1872,6 +2062,8 @@ func (e *InvalidReferenceNameException) ErrorFault() smithy.ErrorFault { return 
 // not valid in respect to the current file version.
 type InvalidRelativeFileVersionEnumException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRelativeFileVersionEnumException) Error() string {
@@ -1894,6 +2086,8 @@ func (e *InvalidRelativeFileVersionEnumException) ErrorFault() smithy.ErrorFault
 // not valid or content is missing.
 type InvalidReplacementContentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidReplacementContentException) Error() string {
@@ -1916,6 +2110,8 @@ func (e *InvalidReplacementContentException) ErrorFault() smithy.ErrorFault {
 // replacement type is not valid.
 type InvalidReplacementTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidReplacementTypeException) Error() string {
@@ -1935,6 +2131,8 @@ func (e *InvalidReplacementTypeException) ErrorFault() smithy.ErrorFault { retur
 // The specified repository description is not valid.
 type InvalidRepositoryDescriptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRepositoryDescriptionException) Error() string {
@@ -1958,6 +2156,8 @@ func (e *InvalidRepositoryDescriptionException) ErrorFault() smithy.ErrorFault {
 // repository parameter is missing, or when a specified repository does not exist.
 type InvalidRepositoryNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRepositoryNameException) Error() string {
@@ -1975,6 +2175,8 @@ func (e *InvalidRepositoryNameException) ErrorFault() smithy.ErrorFault { return
 // One or more branch names specified for the trigger is not valid.
 type InvalidRepositoryTriggerBranchNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRepositoryTriggerBranchNameException) Error() string {
@@ -1996,6 +2198,8 @@ func (e *InvalidRepositoryTriggerBranchNameException) ErrorFault() smithy.ErrorF
 // The custom data provided for the trigger is not valid.
 type InvalidRepositoryTriggerCustomDataException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRepositoryTriggerCustomDataException) Error() string {
@@ -2019,6 +2223,8 @@ func (e *InvalidRepositoryTriggerCustomDataException) ErrorFault() smithy.ErrorF
 // the requirements for the service type.
 type InvalidRepositoryTriggerDestinationArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRepositoryTriggerDestinationArnException) Error() string {
@@ -2041,6 +2247,8 @@ func (e *InvalidRepositoryTriggerDestinationArnException) ErrorFault() smithy.Er
 // that all events specified match the requirements for allowed events.
 type InvalidRepositoryTriggerEventsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRepositoryTriggerEventsException) Error() string {
@@ -2062,6 +2270,8 @@ func (e *InvalidRepositoryTriggerEventsException) ErrorFault() smithy.ErrorFault
 // The name of the trigger is not valid.
 type InvalidRepositoryTriggerNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRepositoryTriggerNameException) Error() string {
@@ -2085,6 +2295,8 @@ func (e *InvalidRepositoryTriggerNameException) ErrorFault() smithy.ErrorFault {
 // trigger.
 type InvalidRepositoryTriggerRegionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRepositoryTriggerRegionException) Error() string {
@@ -2109,6 +2321,8 @@ func (e *InvalidRepositoryTriggerRegionException) ErrorFault() smithy.ErrorFault
 // in the AWS CodeCommit User Guide.
 type InvalidResourceArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceArnException) Error() string {
@@ -2126,6 +2340,8 @@ func (e *InvalidResourceArnException) ErrorFault() smithy.ErrorFault { return sm
 // The revision ID is not valid. Use GetPullRequest to determine the value.
 type InvalidRevisionIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRevisionIdException) Error() string {
@@ -2143,6 +2359,8 @@ func (e *InvalidRevisionIdException) ErrorFault() smithy.ErrorFault { return smi
 // The SHA-256 hash signature for the rule content is not valid.
 type InvalidRuleContentSha256Exception struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRuleContentSha256Exception) Error() string {
@@ -2162,6 +2380,8 @@ func (e *InvalidRuleContentSha256Exception) ErrorFault() smithy.ErrorFault { ret
 // The specified sort by value is not valid.
 type InvalidSortByException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSortByException) Error() string {
@@ -2180,6 +2400,8 @@ func (e *InvalidSortByException) ErrorFault() smithy.ErrorFault { return smithy.
 // tag, or full commit ID.
 type InvalidSourceCommitSpecifierException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSourceCommitSpecifierException) Error() string {
@@ -2201,6 +2423,8 @@ func (e *InvalidSourceCommitSpecifierException) ErrorFault() smithy.ErrorFault {
 // The specified tag is not valid. Key names cannot be prefixed with aws:.
 type InvalidSystemTagUsageException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSystemTagUsageException) Error() string {
@@ -2218,6 +2442,8 @@ func (e *InvalidSystemTagUsageException) ErrorFault() smithy.ErrorFault { return
 // The list of tags is not valid.
 type InvalidTagKeysListException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagKeysListException) Error() string {
@@ -2235,6 +2461,8 @@ func (e *InvalidTagKeysListException) ErrorFault() smithy.ErrorFault { return sm
 // The map of tags is not valid.
 type InvalidTagsMapException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagsMapException) Error() string {
@@ -2252,6 +2480,8 @@ func (e *InvalidTagsMapException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified target branch is not valid.
 type InvalidTargetBranchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTargetBranchException) Error() string {
@@ -2271,6 +2501,8 @@ func (e *InvalidTargetBranchException) ErrorFault() smithy.ErrorFault { return s
 // pull request.
 type InvalidTargetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTargetException) Error() string {
@@ -2291,6 +2523,8 @@ func (e *InvalidTargetException) ErrorFault() smithy.ErrorFault { return smithy.
 // request.
 type InvalidTargetsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTargetsException) Error() string {
@@ -2309,6 +2543,8 @@ func (e *InvalidTargetsException) ErrorFault() smithy.ErrorFault { return smithy
 // 100 characters in length.
 type InvalidTitleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTitleException) Error() string {
@@ -2327,6 +2563,8 @@ func (e *InvalidTitleException) ErrorFault() smithy.ErrorFault { return smithy.F
 // must manually merge the branches and resolve any conflicts.
 type ManualMergeRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ManualMergeRequiredException) Error() string {
@@ -2344,6 +2582,8 @@ func (e *ManualMergeRequiredException) ErrorFault() smithy.ErrorFault { return s
 // The number of branches for the trigger was exceeded.
 type MaximumBranchesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumBranchesExceededException) Error() string {
@@ -2363,6 +2603,8 @@ func (e *MaximumBranchesExceededException) ErrorFault() smithy.ErrorFault { retu
 // The number of allowed conflict resolution entries was exceeded.
 type MaximumConflictResolutionEntriesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumConflictResolutionEntriesExceededException) Error() string {
@@ -2384,6 +2626,8 @@ func (e *MaximumConflictResolutionEntriesExceededException) ErrorFault() smithy.
 // The number of files to load exceeds the allowed limit.
 type MaximumFileContentToLoadExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumFileContentToLoadExceededException) Error() string {
@@ -2407,6 +2651,8 @@ func (e *MaximumFileContentToLoadExceededException) ErrorFault() smithy.ErrorFau
 // Git client for these changes.
 type MaximumFileEntriesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumFileEntriesExceededException) Error() string {
@@ -2429,6 +2675,8 @@ func (e *MaximumFileEntriesExceededException) ErrorFault() smithy.ErrorFault {
 // the merge base has exceeded the maximum allowed.
 type MaximumItemsToCompareExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumItemsToCompareExceededException) Error() string {
@@ -2451,6 +2699,8 @@ func (e *MaximumItemsToCompareExceededException) ErrorFault() smithy.ErrorFault 
 // number allowed.
 type MaximumNumberOfApprovalsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumNumberOfApprovalsExceededException) Error() string {
@@ -2474,6 +2724,8 @@ func (e *MaximumNumberOfApprovalsExceededException) ErrorFault() smithy.ErrorFau
 // Close one or more open pull requests, and then try again.
 type MaximumOpenPullRequestsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumOpenPullRequestsExceededException) Error() string {
@@ -2496,6 +2748,8 @@ func (e *MaximumOpenPullRequestsExceededException) ErrorFault() smithy.ErrorFaul
 // number is 100.
 type MaximumRepositoryNamesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumRepositoryNamesExceededException) Error() string {
@@ -2517,6 +2771,8 @@ func (e *MaximumRepositoryNamesExceededException) ErrorFault() smithy.ErrorFault
 // The number of triggers allowed for the repository was exceeded.
 type MaximumRepositoryTriggersExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumRepositoryTriggersExceededException) Error() string {
@@ -2540,6 +2796,8 @@ func (e *MaximumRepositoryTriggersExceededException) ErrorFault() smithy.ErrorFa
 // repository.
 type MaximumRuleTemplatesAssociatedWithRepositoryException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumRuleTemplatesAssociatedWithRepositoryException) Error() string {
@@ -2561,6 +2819,8 @@ func (e *MaximumRuleTemplatesAssociatedWithRepositoryException) ErrorFault() smi
 // A merge option or stategy is required, and none was provided.
 type MergeOptionRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MergeOptionRequiredException) Error() string {
@@ -2579,6 +2839,8 @@ func (e *MergeOptionRequiredException) ErrorFault() smithy.ErrorFault { return s
 // can have only one conflict resolution entry.
 type MultipleConflictResolutionEntriesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MultipleConflictResolutionEntriesException) Error() string {
@@ -2601,6 +2863,8 @@ func (e *MultipleConflictResolutionEntriesException) ErrorFault() smithy.ErrorFa
 // have specified only one repository name in your request, and then try again.
 type MultipleRepositoriesInPullRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MultipleRepositoriesInPullRequestException) Error() string {
@@ -2623,6 +2887,8 @@ func (e *MultipleRepositoriesInPullRequestException) ErrorFault() smithy.ErrorFa
 // author names.
 type NameLengthExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NameLengthExceededException) Error() string {
@@ -2641,6 +2907,8 @@ func (e *NameLengthExceededException) ErrorFault() smithy.ErrorFault { return sm
 // as a result of this commit. A commit must contain at least one change.
 type NoChangeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoChangeException) Error() string {
@@ -2659,6 +2927,8 @@ func (e *NoChangeException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // approval rules associated with it.
 type NumberOfRulesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NumberOfRulesExceededException) Error() string {
@@ -2677,6 +2947,8 @@ func (e *NumberOfRulesExceededException) ErrorFault() smithy.ErrorFault { return
 // Region.
 type NumberOfRuleTemplatesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NumberOfRuleTemplatesExceededException) Error() string {
@@ -2698,6 +2970,8 @@ func (e *NumberOfRuleTemplatesExceededException) ErrorFault() smithy.ErrorFault 
 // The pull request has already had its approval rules set to override.
 type OverrideAlreadySetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OverrideAlreadySetException) Error() string {
@@ -2716,6 +2990,8 @@ func (e *OverrideAlreadySetException) ErrorFault() smithy.ErrorFault { return sm
 // OVERRIDE and REVOKE.
 type OverrideStatusRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OverrideStatusRequiredException) Error() string {
@@ -2736,6 +3012,8 @@ func (e *OverrideStatusRequiredException) ErrorFault() smithy.ErrorFault { retur
 // parent commit ID does not exist in the specified branch of the repository.
 type ParentCommitDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParentCommitDoesNotExistException) Error() string {
@@ -2757,6 +3035,8 @@ func (e *ParentCommitDoesNotExistException) ErrorFault() smithy.ErrorFault { ret
 // head of the branch, use GetBranch.
 type ParentCommitIdOutdatedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParentCommitIdOutdatedException) Error() string {
@@ -2777,6 +3057,8 @@ func (e *ParentCommitIdOutdatedException) ErrorFault() smithy.ErrorFault { retur
 // repository, use GetBranch or a Git command (for example, git pull or git log).
 type ParentCommitIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParentCommitIdRequiredException) Error() string {
@@ -2796,6 +3078,8 @@ func (e *ParentCommitIdRequiredException) ErrorFault() smithy.ErrorFault { retur
 // The specified path does not exist.
 type PathDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PathDoesNotExistException) Error() string {
@@ -2813,6 +3097,8 @@ func (e *PathDoesNotExistException) ErrorFault() smithy.ErrorFault { return smit
 // The folderPath for a location cannot be null.
 type PathRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PathRequiredException) Error() string {
@@ -2830,6 +3116,8 @@ func (e *PathRequiredException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The pull request status cannot be updated because it is already closed.
 type PullRequestAlreadyClosedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PullRequestAlreadyClosedException) Error() string {
@@ -2850,6 +3138,8 @@ func (e *PullRequestAlreadyClosedException) ErrorFault() smithy.ErrorFault { ret
 // the pull request have conditions that have not been met.
 type PullRequestApprovalRulesNotSatisfiedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PullRequestApprovalRulesNotSatisfiedException) Error() string {
@@ -2873,6 +3163,8 @@ func (e *PullRequestApprovalRulesNotSatisfiedException) ErrorFault() smithy.Erro
 // that you created.
 type PullRequestCannotBeApprovedByAuthorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PullRequestCannotBeApprovedByAuthorException) Error() string {
@@ -2895,6 +3187,8 @@ func (e *PullRequestCannotBeApprovedByAuthorException) ErrorFault() smithy.Error
 // correct repository name and pull request ID, and then try again.
 type PullRequestDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PullRequestDoesNotExistException) Error() string {
@@ -2914,6 +3208,8 @@ func (e *PullRequestDoesNotExistException) ErrorFault() smithy.ErrorFault { retu
 // A pull request ID is required, but none was provided.
 type PullRequestIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PullRequestIdRequiredException) Error() string {
@@ -2931,6 +3227,8 @@ func (e *PullRequestIdRequiredException) ErrorFault() smithy.ErrorFault { return
 // A pull request status is required, but none was provided.
 type PullRequestStatusRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PullRequestStatusRequiredException) Error() string {
@@ -2953,6 +3251,8 @@ func (e *PullRequestStatusRequiredException) ErrorFault() smithy.ErrorFault {
 // reference both a file and a folder.
 type PutFileEntryConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PutFileEntryConflictException) Error() string {
@@ -2971,6 +3271,8 @@ func (e *PutFileEntryConflictException) ErrorFault() smithy.ErrorFault { return 
 // per user for each individual comment ID.
 type ReactionLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReactionLimitExceededException) Error() string {
@@ -2988,6 +3290,8 @@ func (e *ReactionLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // A reaction value is required.
 type ReactionValueRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReactionValueRequiredException) Error() string {
@@ -3005,6 +3309,8 @@ func (e *ReactionValueRequiredException) ErrorFault() smithy.ErrorFault { return
 // The specified reference does not exist. You must provide a full commit ID.
 type ReferenceDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReferenceDoesNotExistException) Error() string {
@@ -3022,6 +3328,8 @@ func (e *ReferenceDoesNotExistException) ErrorFault() smithy.ErrorFault { return
 // A reference name is required, but none was provided.
 type ReferenceNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReferenceNameRequiredException) Error() string {
@@ -3039,6 +3347,8 @@ func (e *ReferenceNameRequiredException) ErrorFault() smithy.ErrorFault { return
 // The specified reference is not a supported type.
 type ReferenceTypeNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReferenceTypeNotSupportedException) Error() string {
@@ -3060,6 +3370,8 @@ func (e *ReferenceTypeNotSupportedException) ErrorFault() smithy.ErrorFault {
 // USE_NEW_CONTENT was specified, but no replacement content has been provided.
 type ReplacementContentRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplacementContentRequiredException) Error() string {
@@ -3081,6 +3393,8 @@ func (e *ReplacementContentRequiredException) ErrorFault() smithy.ErrorFault {
 // A replacement type is required.
 type ReplacementTypeRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplacementTypeRequiredException) Error() string {
@@ -3100,6 +3414,8 @@ func (e *ReplacementTypeRequiredException) ErrorFault() smithy.ErrorFault { retu
 // The specified repository does not exist.
 type RepositoryDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryDoesNotExistException) Error() string {
@@ -3119,6 +3435,8 @@ func (e *RepositoryDoesNotExistException) ErrorFault() smithy.ErrorFault { retur
 // A repository resource limit was exceeded.
 type RepositoryLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryLimitExceededException) Error() string {
@@ -3138,6 +3456,8 @@ func (e *RepositoryLimitExceededException) ErrorFault() smithy.ErrorFault { retu
 // The specified repository name already exists.
 type RepositoryNameExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryNameExistsException) Error() string {
@@ -3155,6 +3475,8 @@ func (e *RepositoryNameExistsException) ErrorFault() smithy.ErrorFault { return 
 // A repository name is required, but was not specified.
 type RepositoryNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryNameRequiredException) Error() string {
@@ -3174,6 +3496,8 @@ func (e *RepositoryNameRequiredException) ErrorFault() smithy.ErrorFault { retur
 // At least one repository name object is required, but was not specified.
 type RepositoryNamesRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryNamesRequiredException) Error() string {
@@ -3194,6 +3518,8 @@ func (e *RepositoryNamesRequiredException) ErrorFault() smithy.ErrorFault { retu
 // GetPullRequest to verify the correct repository name for the pull request ID.
 type RepositoryNotAssociatedWithPullRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryNotAssociatedWithPullRequestException) Error() string {
@@ -3216,6 +3542,8 @@ func (e *RepositoryNotAssociatedWithPullRequestException) ErrorFault() smithy.Er
 // configuration.
 type RepositoryTriggerBranchNameListRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryTriggerBranchNameListRequiredException) Error() string {
@@ -3238,6 +3566,8 @@ func (e *RepositoryTriggerBranchNameListRequiredException) ErrorFault() smithy.E
 // not specified.
 type RepositoryTriggerDestinationArnRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryTriggerDestinationArnRequiredException) Error() string {
@@ -3259,6 +3589,8 @@ func (e *RepositoryTriggerDestinationArnRequiredException) ErrorFault() smithy.E
 // At least one event for the trigger is required, but was not specified.
 type RepositoryTriggerEventsListRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryTriggerEventsListRequiredException) Error() string {
@@ -3280,6 +3612,8 @@ func (e *RepositoryTriggerEventsListRequiredException) ErrorFault() smithy.Error
 // A name for the trigger is required, but was not specified.
 type RepositoryTriggerNameRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryTriggerNameRequiredException) Error() string {
@@ -3301,6 +3635,8 @@ func (e *RepositoryTriggerNameRequiredException) ErrorFault() smithy.ErrorFault 
 // The list of triggers for the repository is required, but was not specified.
 type RepositoryTriggersListRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RepositoryTriggersListRequiredException) Error() string {
@@ -3326,6 +3662,8 @@ func (e *RepositoryTriggersListRequiredException) ErrorFault() smithy.ErrorFault
 // in the AWS CodeCommit User Guide.
 type ResourceArnRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceArnRequiredException) Error() string {
@@ -3344,6 +3682,8 @@ func (e *ResourceArnRequiredException) ErrorFault() smithy.ErrorFault { return s
 // moving a .gitkeep file.
 type RestrictedSourceFileException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RestrictedSourceFileException) Error() string {
@@ -3361,6 +3701,8 @@ func (e *RestrictedSourceFileException) ErrorFault() smithy.ErrorFault { return 
 // A revision ID is required, but was not provided.
 type RevisionIdRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RevisionIdRequiredException) Error() string {
@@ -3379,6 +3721,8 @@ func (e *RevisionIdRequiredException) ErrorFault() smithy.ErrorFault { return sm
 // Use GetPullRequest to retrieve the current revision ID.
 type RevisionNotCurrentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RevisionNotCurrentException) Error() string {
@@ -3398,6 +3742,8 @@ func (e *RevisionNotCurrentException) ErrorFault() smithy.ErrorFault { return sm
 // specified.
 type SameFileContentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SameFileContentException) Error() string {
@@ -3418,6 +3764,8 @@ func (e *SameFileContentException) ErrorFault() smithy.ErrorFault { return smith
 // request and a move request to the same file as part of the same commit.
 type SamePathRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SamePathRequestException) Error() string {
@@ -3436,6 +3784,8 @@ func (e *SamePathRequestException) ErrorFault() smithy.ErrorFault { return smith
 // must specify different branches for the source and destination.
 type SourceAndDestinationAreSameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SourceAndDestinationAreSameException) Error() string {
@@ -3458,6 +3808,8 @@ func (e *SourceAndDestinationAreSameException) ErrorFault() smithy.ErrorFault {
 // specified for the commit.
 type SourceFileOrContentRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SourceFileOrContentRequiredException) Error() string {
@@ -3479,6 +3831,8 @@ func (e *SourceFileOrContentRequiredException) ErrorFault() smithy.ErrorFault {
 // A list of tag keys is required. The list cannot be empty or null.
 type TagKeysListRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagKeysListRequiredException) Error() string {
@@ -3496,6 +3850,8 @@ func (e *TagKeysListRequiredException) ErrorFault() smithy.ErrorFault { return s
 // The tag policy is not valid.
 type TagPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagPolicyException) Error() string {
@@ -3513,6 +3869,8 @@ func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // A map of tags is required.
 type TagsMapRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagsMapRequiredException) Error() string {
@@ -3532,6 +3890,8 @@ func (e *TagsMapRequiredException) ErrorFault() smithy.ErrorFault { return smith
 // destination branch for the pull request.
 type TargetRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TargetRequiredException) Error() string {
@@ -3549,6 +3909,8 @@ func (e *TargetRequiredException) ErrorFault() smithy.ErrorFault { return smithy
 // An array of target objects is required. It cannot be empty or null.
 type TargetsRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TargetsRequiredException) Error() string {
@@ -3568,6 +3930,8 @@ func (e *TargetsRequiredException) ErrorFault() smithy.ErrorFault { return smith
 // been updated. Make sure that you have the latest changes.
 type TipOfSourceReferenceIsDifferentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TipOfSourceReferenceIsDifferentException) Error() string {
@@ -3591,6 +3955,8 @@ func (e *TipOfSourceReferenceIsDifferentException) ErrorFault() smithy.ErrorFaul
 // specifiers using git diff or a diff tool.
 type TipsDivergenceExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TipsDivergenceExceededException) Error() string {
@@ -3610,6 +3976,8 @@ func (e *TipsDivergenceExceededException) ErrorFault() smithy.ErrorFault { retur
 // A pull request title is required. It cannot be empty or null.
 type TitleRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TitleRequiredException) Error() string {
@@ -3627,6 +3995,8 @@ func (e *TitleRequiredException) ErrorFault() smithy.ErrorFault { return smithy.
 // The maximum number of tags for an AWS CodeCommit resource has been exceeded.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

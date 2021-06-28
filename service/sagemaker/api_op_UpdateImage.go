@@ -47,6 +47,8 @@ type UpdateImageInput struct {
 	// The new Amazon Resource Name (ARN) for the IAM role that enables Amazon
 	// SageMaker to perform tasks on your behalf.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateImageOutput struct {
@@ -56,6 +58,8 @@ type UpdateImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

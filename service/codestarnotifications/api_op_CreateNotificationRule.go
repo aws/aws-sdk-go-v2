@@ -81,6 +81,8 @@ type CreateNotificationRuleInput struct {
 	// A list of tags to apply to this notification rule. Key names cannot start with
 	// "aws".
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateNotificationRuleOutput struct {
@@ -90,6 +92,8 @@ type CreateNotificationRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

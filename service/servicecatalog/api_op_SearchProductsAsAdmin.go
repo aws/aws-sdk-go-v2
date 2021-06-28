@@ -61,6 +61,8 @@ type SearchProductsAsAdminInput struct {
 
 	// The sort order. If no value is specified, the results are not sorted.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type SearchProductsAsAdminOutput struct {
@@ -74,6 +76,8 @@ type SearchProductsAsAdminOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchProductsAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {

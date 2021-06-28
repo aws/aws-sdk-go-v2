@@ -69,6 +69,8 @@ type UpdateFunctionInput struct {
 	// Conflict Detection as well as Resolution strategy should be performed when the
 	// resolver is invoked.
 	SyncConfig *types.SyncConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFunctionOutput struct {
@@ -78,6 +80,8 @@ type UpdateFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

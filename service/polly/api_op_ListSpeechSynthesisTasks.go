@@ -41,6 +41,8 @@ type ListSpeechSynthesisTasksInput struct {
 
 	// Status of the speech synthesis tasks returned in a List operation
 	Status types.TaskStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListSpeechSynthesisTasksOutput struct {
@@ -56,6 +58,8 @@ type ListSpeechSynthesisTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSpeechSynthesisTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type DescribeDBParametersInput struct {
 	// The parameter types to return. Default: All parameter types returned Valid
 	// Values: user | system | engine-default
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDBParametersOutput struct {
@@ -69,6 +71,8 @@ type DescribeDBParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

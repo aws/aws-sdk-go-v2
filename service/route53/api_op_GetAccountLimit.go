@@ -65,6 +65,8 @@ type GetAccountLimitInput struct {
 	//
 	// This member is required.
 	Type types.AccountLimitType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the requested limit.
@@ -88,6 +90,8 @@ type GetAccountLimitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

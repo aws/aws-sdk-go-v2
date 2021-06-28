@@ -33,11 +33,15 @@ type DeleteCustomDataIdentifierInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomDataIdentifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

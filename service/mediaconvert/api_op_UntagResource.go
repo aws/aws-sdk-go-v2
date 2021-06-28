@@ -38,11 +38,15 @@ type UntagResourceInput struct {
 
 	// The keys of the tags that you want to remove from the resource.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

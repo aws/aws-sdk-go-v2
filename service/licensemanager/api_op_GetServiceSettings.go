@@ -28,6 +28,7 @@ func (c *Client) GetServiceSettings(ctx context.Context, params *GetServiceSetti
 }
 
 type GetServiceSettingsInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetServiceSettingsOutput struct {
@@ -52,6 +53,8 @@ type GetServiceSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

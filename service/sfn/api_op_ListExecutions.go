@@ -60,6 +60,8 @@ type ListExecutionsInput struct {
 	// If specified, only list the executions whose current execution status matches
 	// the given filter.
 	StatusFilter types.ExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListExecutionsOutput struct {
@@ -78,6 +80,8 @@ type ListExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

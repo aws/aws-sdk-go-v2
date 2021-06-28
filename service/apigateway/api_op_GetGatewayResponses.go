@@ -49,6 +49,8 @@ type GetGatewayResponsesInput struct {
 	// The current pagination position in the paged result set. The GatewayResponse
 	// collection does not support pagination and the position does not apply here.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // The collection of the GatewayResponse instances of a RestApi as a
@@ -275,6 +277,8 @@ type GetGatewayResponsesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGatewayResponsesMiddlewares(stack *middleware.Stack, options Options) (err error) {

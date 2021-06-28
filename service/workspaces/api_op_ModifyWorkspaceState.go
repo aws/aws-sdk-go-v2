@@ -42,11 +42,15 @@ type ModifyWorkspaceStateInput struct {
 	//
 	// This member is required.
 	WorkspaceState types.TargetWorkspaceState
+
+	noSmithyDocumentSerde
 }
 
 type ModifyWorkspaceStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyWorkspaceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

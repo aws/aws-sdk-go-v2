@@ -67,6 +67,8 @@ type ModifyEventSubscriptionInput struct {
 	// specify source IDs. Valid values: cluster, cluster-parameter-group,
 	// cluster-security-group, cluster-snapshot, and scheduled-action.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyEventSubscriptionOutput struct {
@@ -76,6 +78,8 @@ type ModifyEventSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

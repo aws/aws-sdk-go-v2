@@ -67,6 +67,8 @@ type DetachVolumeInput struct {
 	// The ID of the instance. If you are detaching a Multi-Attach enabled volume, you
 	// must specify an instance ID.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes volume attachment details.
@@ -92,6 +94,8 @@ type DetachVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

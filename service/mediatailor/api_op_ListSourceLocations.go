@@ -37,6 +37,8 @@ type ListSourceLocationsInput struct {
 	// Pagination token from the GET list request. Use the token to fetch the next page
 	// of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSourceLocationsOutput struct {
@@ -50,6 +52,8 @@ type ListSourceLocationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSourceLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

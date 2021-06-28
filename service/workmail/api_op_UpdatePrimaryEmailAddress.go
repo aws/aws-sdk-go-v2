@@ -45,11 +45,15 @@ type UpdatePrimaryEmailAddressInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePrimaryEmailAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type AcceptDirectConnectGatewayAssociationProposalInput struct {
 	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
 	// in the Direct Connect User Guide.
 	OverrideAllowedPrefixesToDirectConnectGateway []types.RouteFilterPrefix
+
+	noSmithyDocumentSerde
 }
 
 type AcceptDirectConnectGatewayAssociationProposalOutput struct {
@@ -60,6 +62,8 @@ type AcceptDirectConnectGatewayAssociationProposalOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptDirectConnectGatewayAssociationProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,6 +57,8 @@ type AddCommunicationToCaseInput struct {
 
 	// The email addresses in the CC line of an email to be added to the support case.
 	CcEmailAddresses []string
+
+	noSmithyDocumentSerde
 }
 
 // The result of the AddCommunicationToCase operation.
@@ -67,6 +69,8 @@ type AddCommunicationToCaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddCommunicationToCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

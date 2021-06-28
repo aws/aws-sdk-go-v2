@@ -41,6 +41,8 @@ type DescribeQueryDefinitionsInput struct {
 	// Use this parameter to filter your results to only the query definitions that
 	// have names that start with the prefix you specify.
 	QueryDefinitionNamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeQueryDefinitionsOutput struct {
@@ -53,6 +55,8 @@ type DescribeQueryDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeQueryDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type GetRemoteAccessSessionInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server that lists detailed information about
@@ -47,6 +49,8 @@ type GetRemoteAccessSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

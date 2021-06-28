@@ -36,6 +36,8 @@ type DeleteMeshInput struct {
 	//
 	// This member is required.
 	MeshName *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -48,6 +50,8 @@ type DeleteMeshOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {

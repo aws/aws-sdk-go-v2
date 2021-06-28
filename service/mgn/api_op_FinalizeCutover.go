@@ -43,6 +43,8 @@ type FinalizeCutoverInput struct {
 	//
 	// This member is required.
 	SourceServerID *string
+
+	noSmithyDocumentSerde
 }
 
 type FinalizeCutoverOutput struct {
@@ -73,6 +75,8 @@ type FinalizeCutoverOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFinalizeCutoverMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type ListFunctionEventInvokeConfigsInput struct {
 
 	// The maximum number of configurations to return.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListFunctionEventInvokeConfigsOutput struct {
@@ -67,6 +69,8 @@ type ListFunctionEventInvokeConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFunctionEventInvokeConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

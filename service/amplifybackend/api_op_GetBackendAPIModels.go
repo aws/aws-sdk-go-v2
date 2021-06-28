@@ -44,6 +44,8 @@ type GetBackendAPIModelsInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBackendAPIModelsOutput struct {
@@ -56,6 +58,8 @@ type GetBackendAPIModelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackendAPIModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

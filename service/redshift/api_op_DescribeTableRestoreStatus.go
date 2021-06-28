@@ -53,6 +53,8 @@ type DescribeTableRestoreStatusInput struct {
 	// specify a TableRestoreRequestId value, then DescribeTableRestoreStatus returns
 	// the status of all in-progress table restore requests.
 	TableRestoreRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -67,6 +69,8 @@ type DescribeTableRestoreStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTableRestoreStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

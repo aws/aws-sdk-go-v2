@@ -28,11 +28,14 @@ func (c *Client) NoInputAndNoOutput(ctx context.Context, params *NoInputAndNoOut
 }
 
 type NoInputAndNoOutputInput struct {
+	noSmithyDocumentSerde
 }
 
 type NoInputAndNoOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNoInputAndNoOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {

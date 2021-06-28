@@ -55,6 +55,8 @@ type XmlEmptyListsInput struct {
 	StructureList []types.StructureListMember
 
 	TimestampList []time.Time
+
+	noSmithyDocumentSerde
 }
 
 type XmlEmptyListsOutput struct {
@@ -89,6 +91,8 @@ type XmlEmptyListsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlEmptyListsMiddlewares(stack *middleware.Stack, options Options) (err error) {

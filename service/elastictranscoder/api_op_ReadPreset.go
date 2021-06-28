@@ -34,6 +34,8 @@ type ReadPresetInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The ReadPresetResponse structure.
@@ -44,6 +46,8 @@ type ReadPresetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReadPresetMiddlewares(stack *middleware.Stack, options Options) (err error) {

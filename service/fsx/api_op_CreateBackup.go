@@ -84,6 +84,8 @@ type CreateBackupInput struct {
 	// CreateBackup action, no existing file system tags are copied from the file
 	// system to the backup.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // The response object for the CreateBackup operation.
@@ -94,6 +96,8 @@ type CreateBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DeleteJourneyInput struct {
 	//
 	// This member is required.
 	JourneyId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteJourneyOutput struct {
@@ -51,6 +53,8 @@ type DeleteJourneyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {

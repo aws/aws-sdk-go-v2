@@ -59,6 +59,8 @@ type CreateDeploymentConfigInput struct {
 
 	// The configuration that specifies how the deployment traffic is routed.
 	TrafficRoutingConfig *types.TrafficRoutingConfig
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateDeploymentConfig operation.
@@ -69,6 +71,8 @@ type CreateDeploymentConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

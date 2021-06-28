@@ -37,6 +37,8 @@ type CreatePublicKeyInput struct {
 	//
 	// This member is required.
 	PublicKeyConfig *types.PublicKeyConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreatePublicKeyOutput struct {
@@ -52,6 +54,8 @@ type CreatePublicKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

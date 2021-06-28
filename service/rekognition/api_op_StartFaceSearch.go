@@ -69,6 +69,8 @@ type StartFaceSearchInput struct {
 	// The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to
 	// publish the completion status of the search.
 	NotificationChannel *types.NotificationChannel
+
+	noSmithyDocumentSerde
 }
 
 type StartFaceSearchOutput struct {
@@ -79,6 +81,8 @@ type StartFaceSearchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartFaceSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type DescribeServiceErrorsInput struct {
 	// The stack ID. If you use this parameter, DescribeServiceErrors returns
 	// descriptions of the errors associated with the specified stack.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeServiceErrors request.
@@ -56,6 +58,8 @@ type DescribeServiceErrorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServiceErrorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

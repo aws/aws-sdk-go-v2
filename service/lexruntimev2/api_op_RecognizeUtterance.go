@@ -152,6 +152,8 @@ type RecognizeUtteranceInput struct {
 	// the user. The sessionState field must be compressed using gzip and then base64
 	// encoded before sending to Amazon Lex V2.
 	SessionState *string
+
+	noSmithyDocumentSerde
 }
 
 type RecognizeUtteranceOutput struct {
@@ -217,6 +219,8 @@ type RecognizeUtteranceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRecognizeUtteranceMiddlewares(stack *middleware.Stack, options Options) (err error) {

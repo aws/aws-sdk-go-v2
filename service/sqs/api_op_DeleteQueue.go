@@ -44,11 +44,15 @@ type DeleteQueueInput struct {
 	//
 	// This member is required.
 	QueueUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

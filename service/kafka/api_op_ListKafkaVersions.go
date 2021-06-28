@@ -38,6 +38,8 @@ type ListKafkaVersionsInput struct {
 	// call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListKafkaVersionsOutput struct {
@@ -47,6 +49,8 @@ type ListKafkaVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListKafkaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

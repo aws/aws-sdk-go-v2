@@ -51,6 +51,8 @@ type GetProvisionedConcurrencyConfigInput struct {
 	//
 	// This member is required.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type GetProvisionedConcurrencyConfigOutput struct {
@@ -77,6 +79,8 @@ type GetProvisionedConcurrencyConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -65,6 +65,8 @@ type GetDimensionKeyDetailsInput struct {
 	// this parameter, Performance Insights returns all dimension data within the
 	// specified dimension group.
 	RequestedDimensions []string
+
+	noSmithyDocumentSerde
 }
 
 type GetDimensionKeyDetailsOutput struct {
@@ -74,6 +76,8 @@ type GetDimensionKeyDetailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDimensionKeyDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

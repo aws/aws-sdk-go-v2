@@ -116,6 +116,8 @@ type DescribeEvaluationsInput struct {
 	// Results are sorted by
 	// FilterVariable.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Represents the query results from a DescribeEvaluations operation. The content
@@ -131,6 +133,8 @@ type DescribeEvaluationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

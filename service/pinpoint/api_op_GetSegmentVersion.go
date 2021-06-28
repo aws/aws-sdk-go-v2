@@ -45,6 +45,8 @@ type GetSegmentVersionInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSegmentVersionOutput struct {
@@ -57,6 +59,8 @@ type GetSegmentVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSegmentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

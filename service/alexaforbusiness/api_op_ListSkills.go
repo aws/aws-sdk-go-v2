@@ -48,6 +48,8 @@ type ListSkillsInput struct {
 
 	// Whether the skill is publicly available or is a private skill.
 	SkillType types.SkillTypeFilter
+
+	noSmithyDocumentSerde
 }
 
 type ListSkillsOutput struct {
@@ -60,6 +62,8 @@ type ListSkillsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSkillsMiddlewares(stack *middleware.Stack, options Options) (err error) {

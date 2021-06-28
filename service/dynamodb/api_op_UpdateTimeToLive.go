@@ -60,6 +60,8 @@ type UpdateTimeToLiveInput struct {
 	//
 	// This member is required.
 	TimeToLiveSpecification *types.TimeToLiveSpecification
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTimeToLiveOutput struct {
@@ -69,6 +71,8 @@ type UpdateTimeToLiveOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTimeToLiveMiddlewares(stack *middleware.Stack, options Options) (err error) {

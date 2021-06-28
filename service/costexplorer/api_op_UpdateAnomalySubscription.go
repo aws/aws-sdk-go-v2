@@ -49,6 +49,8 @@ type UpdateAnomalySubscriptionInput struct {
 
 	// The update to the threshold value for receiving notifications.
 	Threshold *float64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAnomalySubscriptionOutput struct {
@@ -60,6 +62,8 @@ type UpdateAnomalySubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

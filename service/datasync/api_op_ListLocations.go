@@ -45,6 +45,8 @@ type ListLocationsInput struct {
 	// An opaque string that indicates the position at which to begin the next list of
 	// locations.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // ListLocationsResponse
@@ -59,6 +61,8 @@ type ListLocationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

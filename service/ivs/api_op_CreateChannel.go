@@ -62,6 +62,8 @@ type CreateChannelInput struct {
 	// original input. Vertical resolution can be up to 480 and bitrate can be up to
 	// 1.5 Mbps.
 	Type types.ChannelType
+
+	noSmithyDocumentSerde
 }
 
 type CreateChannelOutput struct {
@@ -74,6 +76,8 @@ type CreateChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

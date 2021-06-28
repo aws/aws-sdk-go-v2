@@ -86,6 +86,8 @@ type CreateOTAUpdateInput struct {
 	// thing is added to a target group, even after the update was completed by all
 	// things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.
 	TargetSelection types.TargetSelection
+
+	noSmithyDocumentSerde
 }
 
 type CreateOTAUpdateOutput struct {
@@ -107,6 +109,8 @@ type CreateOTAUpdateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {

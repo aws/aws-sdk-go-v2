@@ -57,6 +57,8 @@ type ListTableRowsInput struct {
 	// then only the specified row ids are returned in the result. If no row ids are
 	// specified here, then all the rows in the table are returned.
 	RowIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ListTableRowsOutput struct {
@@ -89,6 +91,8 @@ type ListTableRowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

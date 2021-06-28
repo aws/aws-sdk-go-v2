@@ -39,6 +39,8 @@ type CreateProjectInput struct {
 	// this project use the specified execution timeout value unless overridden when
 	// scheduling a run.
 	DefaultJobTimeoutMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a create project request.
@@ -49,6 +51,8 @@ type CreateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

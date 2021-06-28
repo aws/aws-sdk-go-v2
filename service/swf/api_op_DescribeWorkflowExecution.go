@@ -60,6 +60,8 @@ type DescribeWorkflowExecutionInput struct {
 	//
 	// This member is required.
 	Execution *types.WorkflowExecution
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a workflow execution.
@@ -94,6 +96,8 @@ type DescribeWorkflowExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

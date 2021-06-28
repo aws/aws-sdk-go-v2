@@ -53,6 +53,8 @@ type UpdateModelVersionInput struct {
 
 	// A collection of key and value pairs.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type UpdateModelVersionOutput struct {
@@ -71,6 +73,8 @@ type UpdateModelVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

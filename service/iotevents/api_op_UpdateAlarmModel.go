@@ -63,6 +63,8 @@ type UpdateAlarmModelInput struct {
 
 	// A non-negative integer that reflects the severity level of the alarm.
 	Severity *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAlarmModelOutput struct {
@@ -101,6 +103,8 @@ type UpdateAlarmModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAlarmModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

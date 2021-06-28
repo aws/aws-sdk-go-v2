@@ -32,6 +32,8 @@ type DeleteInfrastructureConfigurationInput struct {
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInfrastructureConfigurationOutput struct {
@@ -45,6 +47,8 @@ type DeleteInfrastructureConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

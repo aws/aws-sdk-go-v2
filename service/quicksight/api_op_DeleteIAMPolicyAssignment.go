@@ -42,6 +42,8 @@ type DeleteIAMPolicyAssignmentInput struct {
 	//
 	// This member is required.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteIAMPolicyAssignmentOutput struct {
@@ -57,6 +59,8 @@ type DeleteIAMPolicyAssignmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

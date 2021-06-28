@@ -58,6 +58,8 @@ type UpdateWorkforceInput struct {
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) that can be
 	// used to access tasks assigned to this workforce. Maximum: Ten CIDR values
 	SourceIpConfig *types.SourceIpConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWorkforceOutput struct {
@@ -73,6 +75,8 @@ type UpdateWorkforceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {

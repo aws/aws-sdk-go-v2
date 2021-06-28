@@ -33,6 +33,8 @@ type ValidateSecurityProfileBehaviorsInput struct {
 	//
 	// This member is required.
 	Behaviors []types.Behavior
+
+	noSmithyDocumentSerde
 }
 
 type ValidateSecurityProfileBehaviorsOutput struct {
@@ -45,6 +47,8 @@ type ValidateSecurityProfileBehaviorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationValidateSecurityProfileBehaviorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

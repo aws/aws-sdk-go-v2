@@ -44,6 +44,8 @@ type ListChannelsModeratedByAppInstanceUserInput struct {
 	// The token returned from previous API requests until the number of channels
 	// moderated by the user is reached.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListChannelsModeratedByAppInstanceUserOutput struct {
@@ -57,6 +59,8 @@ type ListChannelsModeratedByAppInstanceUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type ListCertificatesInput struct {
 	// returned NextToken element in your request until the token comes back as null.
 	// Pass null if this is the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListCertificatesOutput struct {
@@ -57,6 +59,8 @@ type ListCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

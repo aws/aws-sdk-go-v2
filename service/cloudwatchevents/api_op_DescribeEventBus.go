@@ -37,6 +37,8 @@ type DescribeEventBusInput struct {
 	// The name or ARN of the event bus to show details for. If you omit this, the
 	// default event bus is displayed.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEventBusOutput struct {
@@ -53,6 +55,8 @@ type DescribeEventBusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {

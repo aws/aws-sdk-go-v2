@@ -36,6 +36,8 @@ type ImportApplicationUsageInput struct {
 	//
 	// This member is required.
 	SourceS3Location *types.SourceS3Location
+
+	noSmithyDocumentSerde
 }
 
 type ImportApplicationUsageOutput struct {
@@ -47,6 +49,8 @@ type ImportApplicationUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportApplicationUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

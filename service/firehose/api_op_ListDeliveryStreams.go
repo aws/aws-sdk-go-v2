@@ -56,6 +56,8 @@ type ListDeliveryStreamsInput struct {
 
 	// The maximum number of delivery streams to list. The default value is 10.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListDeliveryStreamsOutput struct {
@@ -72,6 +74,8 @@ type ListDeliveryStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeliveryStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

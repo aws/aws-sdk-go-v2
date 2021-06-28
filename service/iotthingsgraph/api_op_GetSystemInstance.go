@@ -35,6 +35,8 @@ type GetSystemInstanceInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSystemInstanceOutput struct {
@@ -44,6 +46,8 @@ type GetSystemInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

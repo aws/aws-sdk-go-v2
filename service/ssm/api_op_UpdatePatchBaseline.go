@@ -94,6 +94,8 @@ type UpdatePatchBaselineInput struct {
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
 	Sources []types.PatchSource
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePatchBaselineOutput struct {
@@ -148,6 +150,8 @@ type UpdatePatchBaselineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {

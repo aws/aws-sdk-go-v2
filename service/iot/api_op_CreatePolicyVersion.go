@@ -50,6 +50,8 @@ type CreatePolicyVersionInput struct {
 	// is true, the new policy version becomes the operative version (that is, the
 	// version that is in effect for the certificates to which the policy is attached).
 	SetAsDefault bool
+
+	noSmithyDocumentSerde
 }
 
 // The output of the CreatePolicyVersion operation.
@@ -69,6 +71,8 @@ type CreatePolicyVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

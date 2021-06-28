@@ -28,6 +28,7 @@ func (c *Client) GetAccountSendingEnabled(ctx context.Context, params *GetAccoun
 }
 
 type GetAccountSendingEnabledInput struct {
+	noSmithyDocumentSerde
 }
 
 // Represents a request to return the email sending status for your Amazon SES
@@ -40,6 +41,8 @@ type GetAccountSendingEnabledOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {

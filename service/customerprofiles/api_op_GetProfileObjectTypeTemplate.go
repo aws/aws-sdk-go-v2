@@ -37,6 +37,8 @@ type GetProfileObjectTypeTemplateInput struct {
 	//
 	// This member is required.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetProfileObjectTypeTemplateOutput struct {
@@ -65,6 +67,8 @@ type GetProfileObjectTypeTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProfileObjectTypeTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type UpdateUserProfileInput struct {
 	// allows the user remote access to project resources, this public key will be used
 	// along with the user's private key for SSH access.
 	SshPublicKey *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserProfileOutput struct {
@@ -77,6 +79,8 @@ type UpdateUserProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

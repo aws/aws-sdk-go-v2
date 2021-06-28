@@ -41,6 +41,8 @@ type ListEventTypesInput struct {
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEventTypesOutput struct {
@@ -55,6 +57,8 @@ type ListEventTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEventTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

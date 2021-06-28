@@ -40,6 +40,8 @@ type ListExportsInput struct {
 
 	// The Amazon Resource Name (ARN) associated with the exported table.
 	TableArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListExportsOutput struct {
@@ -53,6 +55,8 @@ type ListExportsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {

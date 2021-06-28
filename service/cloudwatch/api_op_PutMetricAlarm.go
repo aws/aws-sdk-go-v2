@@ -237,11 +237,15 @@ type PutMetricAlarmInput struct {
 	// an incorrect unit that is not published for this metric. Doing so causes the
 	// alarm to be stuck in the INSUFFICIENT DATA state.
 	Unit types.StandardUnit
+
+	noSmithyDocumentSerde
 }
 
 type PutMetricAlarmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMetricAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

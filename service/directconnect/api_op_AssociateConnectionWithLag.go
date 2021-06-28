@@ -52,6 +52,8 @@ type AssociateConnectionWithLagInput struct {
 	//
 	// This member is required.
 	LagId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect connection.
@@ -161,6 +163,8 @@ type AssociateConnectionWithLagOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateConnectionWithLagMiddlewares(stack *middleware.Stack, options Options) (err error) {

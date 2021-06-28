@@ -42,6 +42,8 @@ type GetRoomSkillParameterInput struct {
 
 	// The ARN of the room from which to get the room skill parameter details.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRoomSkillParameterOutput struct {
@@ -51,6 +53,8 @@ type GetRoomSkillParameterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {

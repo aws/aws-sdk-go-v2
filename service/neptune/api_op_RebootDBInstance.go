@@ -45,6 +45,8 @@ type RebootDBInstanceInput struct {
 	// When true, the reboot is conducted through a MultiAZ failover. Constraint: You
 	// can't specify true if the instance is not configured for MultiAZ.
 	ForceFailover *bool
+
+	noSmithyDocumentSerde
 }
 
 type RebootDBInstanceOutput struct {
@@ -55,6 +57,8 @@ type RebootDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

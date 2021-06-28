@@ -77,6 +77,8 @@ type CreateQuerySuggestionsBlockListInput struct {
 
 	// A tag that you can assign to a block list that categorizes the block list.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateQuerySuggestionsBlockListOutput struct {
@@ -86,6 +88,8 @@ type CreateQuerySuggestionsBlockListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {

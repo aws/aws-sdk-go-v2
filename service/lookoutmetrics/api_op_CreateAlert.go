@@ -56,6 +56,8 @@ type CreateAlertInput struct {
 	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) to
 	// apply to the alert.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAlertOutput struct {
@@ -65,6 +67,8 @@ type CreateAlertOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {

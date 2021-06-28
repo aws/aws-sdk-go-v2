@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -20,6 +21,8 @@ type BrokerEBSVolumeInfo struct {
 	//
 	// This member is required.
 	VolumeSizeGB int32
+
+	noSmithyDocumentSerde
 }
 
 type BrokerLogs struct {
@@ -28,6 +31,8 @@ type BrokerLogs struct {
 	Firehose *Firehose
 
 	S3 *S3
+
+	noSmithyDocumentSerde
 }
 
 // Describes the setup to be used for Kafka broker nodes in the cluster.
@@ -64,6 +69,8 @@ type BrokerNodeGroupInfo struct {
 
 	// Contains information about storage volumes attached to MSK broker nodes.
 	StorageInfo *StorageInfo
+
+	noSmithyDocumentSerde
 }
 
 // BrokerNodeInfo
@@ -87,6 +94,8 @@ type BrokerNodeInfo struct {
 
 	// Endpoints for accessing the broker.
 	Endpoints []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the current software installed on the cluster.
@@ -102,6 +111,8 @@ type BrokerSoftwareInfo struct {
 
 	// The version of Apache Kafka.
 	KafkaVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Includes all client authentication information.
@@ -112,6 +123,8 @@ type ClientAuthentication struct {
 
 	// Details for ClientAuthentication using TLS.
 	Tls *Tls
+
+	noSmithyDocumentSerde
 }
 
 type CloudWatchLogs struct {
@@ -120,6 +133,8 @@ type CloudWatchLogs struct {
 	Enabled bool
 
 	LogGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a cluster.
@@ -182,6 +197,8 @@ type ClusterInfo struct {
 
 	// The connection string to use to connect to zookeeper cluster on Tls port.
 	ZookeeperConnectStringTls *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a cluster operation.
@@ -219,6 +236,8 @@ type ClusterOperationInfo struct {
 
 	// Information about cluster attributes after a cluster is updated.
 	TargetClusterInfo *MutableClusterInfo
+
+	noSmithyDocumentSerde
 }
 
 // Step taken during a cluster operation.
@@ -229,6 +248,8 @@ type ClusterOperationStep struct {
 
 	// The name of the step.
 	StepName *string
+
+	noSmithyDocumentSerde
 }
 
 // State information about the operation step.
@@ -236,6 +257,8 @@ type ClusterOperationStepInfo struct {
 
 	// The steps current status.
 	StepStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains source Kafka versions and compatible target Kafka versions.
@@ -246,6 +269,8 @@ type CompatibleKafkaVersion struct {
 
 	// A list of Kafka versions.
 	TargetVersions []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an MSK Configuration.
@@ -288,6 +313,8 @@ type Configuration struct {
 	//
 	// This member is required.
 	State ConfigurationState
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration to use for the brokers.
@@ -302,6 +329,8 @@ type ConfigurationInfo struct {
 	//
 	// This member is required.
 	Revision int64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a configuration revision.
@@ -319,6 +348,8 @@ type ConfigurationRevision struct {
 
 	// The description of the configuration revision.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the EBS storage volumes attached to Kafka broker
@@ -327,6 +358,8 @@ type EBSStorageInfo struct {
 
 	// The size in GiB of the EBS volume for the data drive on each broker node.
 	VolumeSize int32
+
+	noSmithyDocumentSerde
 }
 
 // The data-volume encryption details.
@@ -337,6 +370,8 @@ type EncryptionAtRest struct {
 	//
 	// This member is required.
 	DataVolumeKMSKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Includes encryption-related information, such as the AWS KMS key used for
@@ -349,6 +384,8 @@ type EncryptionInfo struct {
 
 	// The details for encryption in transit.
 	EncryptionInTransit *EncryptionInTransit
+
+	noSmithyDocumentSerde
 }
 
 // The settings for encrypting data in transit.
@@ -366,6 +403,8 @@ type EncryptionInTransit struct {
 	// the cluster is encrypted. When set to false, the communication happens in
 	// plaintext. The default value is true.
 	InCluster bool
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about an error state of the cluster.
@@ -376,6 +415,8 @@ type ErrorInfo struct {
 
 	// An optional field to provide more details about the error.
 	ErrorString *string
+
+	noSmithyDocumentSerde
 }
 
 type Firehose struct {
@@ -384,6 +425,8 @@ type Firehose struct {
 	Enabled bool
 
 	DeliveryStream *string
+
+	noSmithyDocumentSerde
 }
 
 // Details for IAM access control.
@@ -391,6 +434,8 @@ type Iam struct {
 
 	// Indicates whether IAM access control is enabled.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether you want to enable or disable the JMX Exporter.
@@ -400,6 +445,8 @@ type JmxExporter struct {
 	//
 	// This member is required.
 	EnabledInBroker bool
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether you want to enable or disable the JMX Exporter.
@@ -409,18 +456,24 @@ type JmxExporterInfo struct {
 	//
 	// This member is required.
 	EnabledInBroker bool
+
+	noSmithyDocumentSerde
 }
 
 type KafkaVersion struct {
 	Status KafkaVersionStatus
 
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type LoggingInfo struct {
 
 	// This member is required.
 	BrokerLogs *BrokerLogs
+
+	noSmithyDocumentSerde
 }
 
 // Information about cluster attributes that can be updated via update APIs.
@@ -449,6 +502,8 @@ type MutableClusterInfo struct {
 
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoring
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether you want to enable or disable the Node Exporter.
@@ -458,6 +513,8 @@ type NodeExporter struct {
 	//
 	// This member is required.
 	EnabledInBroker bool
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether you want to enable or disable the Node Exporter.
@@ -467,6 +524,8 @@ type NodeExporterInfo struct {
 	//
 	// This member is required.
 	EnabledInBroker bool
+
+	noSmithyDocumentSerde
 }
 
 // The node information object.
@@ -489,6 +548,8 @@ type NodeInfo struct {
 
 	// The ZookeeperNodeInfo.
 	ZookeeperNodeInfo *ZookeeperNodeInfo
+
+	noSmithyDocumentSerde
 }
 
 // JMX and Node monitoring for the MSK cluster.
@@ -498,6 +559,8 @@ type OpenMonitoring struct {
 	//
 	// This member is required.
 	Prometheus *Prometheus
+
+	noSmithyDocumentSerde
 }
 
 // JMX and Node monitoring for the MSK cluster.
@@ -507,6 +570,8 @@ type OpenMonitoringInfo struct {
 	//
 	// This member is required.
 	Prometheus *PrometheusInfo
+
+	noSmithyDocumentSerde
 }
 
 // Prometheus settings.
@@ -517,6 +582,8 @@ type Prometheus struct {
 
 	// Indicates whether you want to enable or disable the Node Exporter.
 	NodeExporter *NodeExporter
+
+	noSmithyDocumentSerde
 }
 
 // Prometheus settings.
@@ -527,6 +594,8 @@ type PrometheusInfo struct {
 
 	// Indicates whether you want to enable or disable the Node Exporter.
 	NodeExporter *NodeExporterInfo
+
+	noSmithyDocumentSerde
 }
 
 type S3 struct {
@@ -537,6 +606,8 @@ type S3 struct {
 	Bucket *string
 
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Details for client authentication using SASL.
@@ -547,6 +618,8 @@ type Sasl struct {
 
 	// Details for SASL/SCRAM client authentication.
 	Scram *Scram
+
+	noSmithyDocumentSerde
 }
 
 // Details for SASL/SCRAM client authentication.
@@ -554,12 +627,16 @@ type Scram struct {
 
 	// SASL/SCRAM authentication is enabled or not.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 type StateInfo struct {
 	Code *string
 
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about storage volumes attached to MSK broker nodes.
@@ -567,6 +644,8 @@ type StorageInfo struct {
 
 	// EBS volume information.
 	EbsStorageInfo *EBSStorageInfo
+
+	noSmithyDocumentSerde
 }
 
 // Details for client authentication using TLS.
@@ -574,6 +653,8 @@ type Tls struct {
 
 	// List of ACM Certificate Authority ARNs.
 	CertificateAuthorityArnList []string
+
+	noSmithyDocumentSerde
 }
 
 // Error info for scram secret associate/disassociate failure.
@@ -587,6 +668,8 @@ type UnprocessedScramSecret struct {
 
 	// AWS Secrets Manager secret ARN.
 	SecretArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Zookeeper node information.
@@ -606,4 +689,8 @@ type ZookeeperNodeInfo struct {
 
 	// The version of Zookeeper.
 	ZookeeperVersion *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

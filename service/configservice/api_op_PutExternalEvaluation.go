@@ -39,11 +39,15 @@ type PutExternalEvaluationInput struct {
 	//
 	// This member is required.
 	ExternalEvaluation *types.ExternalEvaluation
+
+	noSmithyDocumentSerde
 }
 
 type PutExternalEvaluationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutExternalEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {

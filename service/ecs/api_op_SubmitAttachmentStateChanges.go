@@ -38,6 +38,8 @@ type SubmitAttachmentStateChangesInput struct {
 	// The short name or full ARN of the cluster that hosts the container instance the
 	// attachment belongs to.
 	Cluster *string
+
+	noSmithyDocumentSerde
 }
 
 type SubmitAttachmentStateChangesOutput struct {
@@ -47,6 +49,8 @@ type SubmitAttachmentStateChangesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubmitAttachmentStateChangesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type ListResourceSharePermissionsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourceSharePermissionsOutput struct {
@@ -54,6 +56,8 @@ type ListResourceSharePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourceSharePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

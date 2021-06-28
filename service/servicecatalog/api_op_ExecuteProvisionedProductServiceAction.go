@@ -60,6 +60,8 @@ type ExecuteProvisionedProductServiceActionInput struct {
 	// not provided, no additional parameters are passed and default values will be
 	// used for any special parameters such as TARGET.
 	Parameters map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 type ExecuteProvisionedProductServiceActionOutput struct {
@@ -70,6 +72,8 @@ type ExecuteProvisionedProductServiceActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteProvisionedProductServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DisableSnapshotCopyInput struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableSnapshotCopyOutput struct {
@@ -49,6 +51,8 @@ type DisableSnapshotCopyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableSnapshotCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {

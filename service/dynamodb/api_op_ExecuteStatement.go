@@ -45,6 +45,8 @@ type ExecuteStatementInput struct {
 
 	// The parameters for the PartiQL statement, if any.
 	Parameters []types.AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 type ExecuteStatementOutput struct {
@@ -61,6 +63,8 @@ type ExecuteStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type GetProductsInput struct {
 
 	// The code for the service whose products you want to retrieve.
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
 
 type GetProductsOutput struct {
@@ -62,6 +64,8 @@ type GetProductsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {

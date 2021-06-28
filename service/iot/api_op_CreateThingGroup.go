@@ -44,6 +44,8 @@ type CreateThingGroupInput struct {
 
 	// The thing group properties.
 	ThingGroupProperties *types.ThingGroupProperties
+
+	noSmithyDocumentSerde
 }
 
 type CreateThingGroupOutput struct {
@@ -59,6 +61,8 @@ type CreateThingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

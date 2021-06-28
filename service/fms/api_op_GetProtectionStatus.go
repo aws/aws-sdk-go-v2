@@ -66,6 +66,8 @@ type GetProtectionStatusInput struct {
 	// Firewall Manager is Unix time in seconds. However, any valid timestamp format is
 	// allowed.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type GetProtectionStatusOutput struct {
@@ -107,6 +109,8 @@ type GetProtectionStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProtectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

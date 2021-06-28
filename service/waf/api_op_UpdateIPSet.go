@@ -113,6 +113,8 @@ type UpdateIPSetInput struct {
 	//
 	// This member is required.
 	Updates []types.IPSetUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIPSetOutput struct {
@@ -124,6 +126,8 @@ type UpdateIPSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

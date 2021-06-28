@@ -114,6 +114,8 @@ type ActivateGatewayInput struct {
 	// The value that indicates the type of tape drive to use for tape gateway. This
 	// field is optional. Valid Values: IBM-ULT3580-TD5
 	TapeDriveType *string
+
+	noSmithyDocumentSerde
 }
 
 // Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway.
@@ -130,6 +132,8 @@ type ActivateGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationActivateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

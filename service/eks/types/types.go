@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -42,6 +43,8 @@ type Addon struct {
 	// you define. Add-on tags do not propagate to any other resources associated with
 	// the cluster.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The health of the add-on.
@@ -49,6 +52,8 @@ type AddonHealth struct {
 
 	// An object that represents the add-on's health issues.
 	Issues []AddonIssue
+
+	noSmithyDocumentSerde
 }
 
 // Information about an add-on.
@@ -63,6 +68,8 @@ type AddonInfo struct {
 
 	// The type of the add-on.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // An issue related to an add-on.
@@ -76,6 +83,8 @@ type AddonIssue struct {
 
 	// The resource IDs of the issue.
 	ResourceIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an add-on version.
@@ -89,6 +98,8 @@ type AddonVersionInfo struct {
 
 	// An object that represents the compatibilities of a version.
 	Compatibilities []Compatibility
+
+	noSmithyDocumentSerde
 }
 
 // An Auto Scaling group that is associated with an Amazon EKS managed node group.
@@ -97,6 +108,8 @@ type AutoScalingGroup struct {
 	// The name of the Auto Scaling group associated with an Amazon EKS managed node
 	// group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the certificate-authority-data for your cluster.
@@ -106,6 +119,8 @@ type Certificate struct {
 	// Add this to the certificate-authority-data section of the kubeconfig file for
 	// your cluster.
 	Data *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon EKS cluster.
@@ -173,6 +188,8 @@ type Cluster struct {
 
 	// The Kubernetes server version for the cluster.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Compatibility information.
@@ -186,6 +203,8 @@ type Compatibility struct {
 
 	// The supported compute platform.
 	PlatformVersions []string
+
+	noSmithyDocumentSerde
 }
 
 // The encryption configuration for the cluster.
@@ -196,6 +215,8 @@ type EncryptionConfig struct {
 
 	// Specifies the resources to be encrypted. The only supported value is "secrets".
 	Resources []string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an error when an asynchronous operation fails.
@@ -231,6 +252,8 @@ type ErrorDetail struct {
 
 	// An optional field that contains the resource IDs associated with the error.
 	ResourceIds []string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Fargate profile.
@@ -270,6 +293,8 @@ type FargateProfile struct {
 	// associated with the Fargate profile, such as the pods that are scheduled with
 	// it.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Fargate profile selector.
@@ -281,6 +306,8 @@ type FargateProfileSelector struct {
 
 	// The Kubernetes namespace that the selector should match.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an identity provider.
@@ -289,6 +316,8 @@ type Identity struct {
 	// An object representing the OpenID Connect (https://openid.net/connect/) identity
 	// provider information.
 	Oidc *OIDC
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an identity provider configuration.
@@ -303,6 +332,8 @@ type IdentityProviderConfig struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents an identity configuration.
@@ -311,6 +342,8 @@ type IdentityProviderConfigResponse struct {
 	// An object that represents an OpenID Connect (OIDC) identity provider
 	// configuration.
 	Oidc *OidcIdentityProviderConfig
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an issue with an Amazon EKS resource.
@@ -393,6 +426,8 @@ type Issue struct {
 
 	// The Amazon Web Services resources that are afflicted by this issue.
 	ResourceIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The Kubernetes network configuration for the cluster.
@@ -417,6 +452,8 @@ type KubernetesNetworkConfigRequest struct {
 	// CIDR block when you create a cluster and can't change this value once the
 	// cluster is created.
 	ServiceIpv4Cidr *string
+
+	noSmithyDocumentSerde
 }
 
 // The Kubernetes network configuration for the cluster.
@@ -428,6 +465,8 @@ type KubernetesNetworkConfigResponse struct {
 	// this was specified, then it was specified when the cluster was created and it
 	// cannot be changed.
 	ServiceIpv4Cidr *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a node group launch template specification. The launch
@@ -459,6 +498,8 @@ type LaunchTemplateSpecification struct {
 	// The version of the launch template to use. If no version is specified, then the
 	// template's default version is used.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the logging configuration for resources in your cluster.
@@ -466,6 +507,8 @@ type Logging struct {
 
 	// The cluster control plane logging configuration for your cluster.
 	ClusterLogging []LogSetup
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the enabled or disabled Kubernetes control plane logs for
@@ -480,6 +523,8 @@ type LogSetup struct {
 
 	// The available cluster control plane log types.
 	Types []LogType
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon EKS managed node group.
@@ -581,6 +626,8 @@ type Nodegroup struct {
 
 	// The Kubernetes version of the managed node group.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the health status of the node group.
@@ -588,6 +635,8 @@ type NodegroupHealth struct {
 
 	// Any issues that are associated with the node group.
 	Issues []Issue
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the resources associated with the node group, such as
@@ -600,6 +649,8 @@ type NodegroupResources struct {
 	// The remote access security group associated with the node group. This security
 	// group controls SSH access to the nodes.
 	RemoteAccessSecurityGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the scaling configuration details for the Auto Scaling
@@ -620,6 +671,8 @@ type NodegroupScalingConfig struct {
 
 	// The minimum number of nodes that the managed node group can scale in to.
 	MinSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // The node group update configuration.
@@ -634,6 +687,8 @@ type NodegroupUpdateConfig struct {
 	// percentage of nodes will be updated in parallel, up to 100 nodes at once. This
 	// value or maxUnavailable is required to have a value.
 	MaxUnavailablePercentage *int32
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the OpenID Connect (https://openid.net/connect/) (OIDC)
@@ -642,6 +697,8 @@ type OIDC struct {
 
 	// The issuer URL for the OIDC identity provider.
 	Issuer *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the configuration for an OpenID Connect (OIDC)
@@ -691,6 +748,8 @@ type OidcIdentityProviderConfig struct {
 	// The prefix that is prepended to username claims to prevent clashes with existing
 	// names. The prefix can't contain system:
 	UsernamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an OpenID Connect (OIDC) configuration. Before
@@ -751,6 +810,8 @@ type OidcIdentityProviderConfigRequest struct {
 	// email, the prefix defaults to issuerurl#. You can use the value - to disable all
 	// prefixing.
 	UsernamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the Key Management Service (KMS) key used to encrypt the secrets.
@@ -763,6 +824,8 @@ type Provider struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html)
 	// in the Key Management Service Developer Guide.
 	KeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the remote access configuration for the managed node
@@ -783,6 +846,8 @@ type RemoteAccessConfig struct {
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in
 	// the Amazon Virtual Private Cloud User Guide.
 	SourceSecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 // A property that allows a node to repel a set of pods.
@@ -796,6 +861,8 @@ type Taint struct {
 
 	// The value of the taint.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an asynchronous update.
@@ -818,6 +885,8 @@ type Update struct {
 
 	// The type of the update.
 	Type UpdateType
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a Kubernetes label change for a managed node group.
@@ -828,6 +897,8 @@ type UpdateLabelsPayload struct {
 
 	// Kubernetes labels to be removed.
 	RemoveLabels []string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the details of an update request.
@@ -838,6 +909,8 @@ type UpdateParam struct {
 
 	// The value of the keys submitted as part of an update request.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the details of an update to a taints payload.
@@ -848,6 +921,8 @@ type UpdateTaintsPayload struct {
 
 	// Kubernetes taints to be removed.
 	RemoveTaints []Taint
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the VPC configuration to use for an Amazon EKS cluster.
@@ -905,6 +980,8 @@ type VpcConfigRequest struct {
 	// elastic network interfaces in these subnets to allow communication between your
 	// nodes and the Kubernetes control plane.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon EKS cluster VPC configuration response.
@@ -952,4 +1029,8 @@ type VpcConfigResponse struct {
 
 	// The VPC associated with your cluster.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -82,6 +82,8 @@ type CreateDatasetGroupInput struct {
 	// The ARN of the IAM role that has permissions to access the KMS key. Supplying an
 	// IAM role is only valid when also specifying a KMS key.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetGroupOutput struct {
@@ -91,6 +93,8 @@ type CreateDatasetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

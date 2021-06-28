@@ -54,6 +54,8 @@ type UpdateReportDefinitionInput struct {
 	//
 	// This member is required.
 	ReportId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateReportDefinitionOutput struct {
@@ -63,6 +65,8 @@ type UpdateReportDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

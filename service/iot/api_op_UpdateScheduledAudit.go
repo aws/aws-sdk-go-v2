@@ -55,6 +55,8 @@ type UpdateScheduledAuditInput struct {
 	// checks, including those that are enabled or use UpdateAccountAuditConfiguration
 	// to select which checks are enabled.)
 	TargetCheckNames []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateScheduledAuditOutput struct {
@@ -64,6 +66,8 @@ type UpdateScheduledAuditOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {

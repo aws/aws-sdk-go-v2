@@ -49,6 +49,8 @@ type AuthorizeSnapshotAccessInput struct {
 	// required if your IAM user has a policy containing a snapshot resource element
 	// that specifies anything other than * for the cluster name.
 	SnapshotClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type AuthorizeSnapshotAccessOutput struct {
@@ -58,6 +60,8 @@ type AuthorizeSnapshotAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAuthorizeSnapshotAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

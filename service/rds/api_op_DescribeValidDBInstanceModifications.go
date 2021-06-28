@@ -36,6 +36,8 @@ type DescribeValidDBInstanceModificationsInput struct {
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeValidDBInstanceModificationsOutput struct {
@@ -48,6 +50,8 @@ type DescribeValidDBInstanceModificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeValidDBInstanceModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

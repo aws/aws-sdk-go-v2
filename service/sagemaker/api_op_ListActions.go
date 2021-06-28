@@ -56,6 +56,8 @@ type ListActionsInput struct {
 
 	// A filter that returns only actions with the specified source URI.
 	SourceUri *string
+
+	noSmithyDocumentSerde
 }
 
 type ListActionsOutput struct {
@@ -68,6 +70,8 @@ type ListActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type BatchDeleteImportDataInput struct {
 	//
 	// This member is required.
 	ImportTaskIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteImportDataOutput struct {
@@ -50,6 +52,8 @@ type BatchDeleteImportDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteImportDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

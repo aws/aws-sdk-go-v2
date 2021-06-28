@@ -48,6 +48,8 @@ type SearchAddressBooksInput struct {
 	// The sort order to use in listing the specified set of address books. The
 	// supported sort key is AddressBookName.
 	SortCriteria []types.Sort
+
+	noSmithyDocumentSerde
 }
 
 type SearchAddressBooksOutput struct {
@@ -63,6 +65,8 @@ type SearchAddressBooksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchAddressBooksMiddlewares(stack *middleware.Stack, options Options) (err error) {

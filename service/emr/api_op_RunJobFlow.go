@@ -235,6 +235,8 @@ type RunJobFlowInput struct {
 	// default. A value of false indicates that only the IAM user who created the
 	// cluster can perform actions.
 	VisibleToAllUsers bool
+
+	noSmithyDocumentSerde
 }
 
 // The result of the RunJobFlow operation.
@@ -248,6 +250,8 @@ type RunJobFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRunJobFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

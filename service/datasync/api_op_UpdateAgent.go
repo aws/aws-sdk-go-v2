@@ -36,11 +36,15 @@ type UpdateAgentInput struct {
 
 	// The name that you want to use to configure the agent.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAgentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {

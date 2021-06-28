@@ -40,6 +40,8 @@ type GetCommitInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a get commit operation.
@@ -52,6 +54,8 @@ type GetCommitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {

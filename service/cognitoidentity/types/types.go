@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -23,6 +24,8 @@ type CognitoIdentityProvider struct {
 	// provides an OIDC token or AWS credentials for the user. If the user is signed
 	// out or deleted, the identity pool will return a 400 Not Authorized error.
 	ServerSideTokenCheck bool
+
+	noSmithyDocumentSerde
 }
 
 // Credentials for the provided identity ID.
@@ -39,6 +42,8 @@ type Credentials struct {
 
 	// The Session Token portion of the credentials
 	SessionToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of the identity.
@@ -55,6 +60,8 @@ type IdentityDescription struct {
 
 	// The provider names.
 	Logins []string
+
+	noSmithyDocumentSerde
 }
 
 // A description of the identity pool.
@@ -65,6 +72,8 @@ type IdentityPoolShortDescription struct {
 
 	// A string that you provide.
 	IdentityPoolName *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule that maps a claim name, a claim value, and a match type to a role ARN.
@@ -91,6 +100,8 @@ type MappingRule struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A role mapping.
@@ -112,6 +123,8 @@ type RoleMapping struct {
 	// The rules to be used for mapping users to roles. If you specify Rules as the
 	// role mapping type, RulesConfiguration is required.
 	RulesConfiguration *RulesConfigurationType
+
+	noSmithyDocumentSerde
 }
 
 // A container for rules.
@@ -122,6 +135,8 @@ type RulesConfigurationType struct {
 	//
 	// This member is required.
 	Rules []MappingRule
+
+	noSmithyDocumentSerde
 }
 
 // An array of UnprocessedIdentityId objects, each of which contains an ErrorCode
@@ -133,4 +148,8 @@ type UnprocessedIdentityId struct {
 
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

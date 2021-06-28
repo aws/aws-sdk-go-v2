@@ -58,6 +58,8 @@ type AddTagsToResourceInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
@@ -69,6 +71,8 @@ type AddTagsToResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

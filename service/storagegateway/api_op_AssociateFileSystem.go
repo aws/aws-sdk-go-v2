@@ -76,6 +76,8 @@ type AssociateFileSystemInput struct {
 	// A list of up to 50 tags that can be assigned to the file system association.
 	// Each tag is a key-value pair.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type AssociateFileSystemOutput struct {
@@ -85,6 +87,8 @@ type AssociateFileSystemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {

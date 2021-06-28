@@ -34,6 +34,8 @@ type GetSipRuleInput struct {
 	//
 	// This member is required.
 	SipRuleId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSipRuleOutput struct {
@@ -43,6 +45,8 @@ type GetSipRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

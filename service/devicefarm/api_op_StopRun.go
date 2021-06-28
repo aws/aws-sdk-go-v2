@@ -38,6 +38,8 @@ type StopRunInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the results of your stop run attempt.
@@ -48,6 +50,8 @@ type StopRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

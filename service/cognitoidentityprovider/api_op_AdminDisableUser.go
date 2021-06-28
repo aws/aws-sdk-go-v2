@@ -38,6 +38,8 @@ type AdminDisableUserInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response received from the server to disable the user as an
@@ -45,6 +47,8 @@ type AdminDisableUserInput struct {
 type AdminDisableUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminDisableUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

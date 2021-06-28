@@ -41,6 +41,8 @@ type PutStoredQueryInput struct {
 
 	// A list of Tags object.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutStoredQueryOutput struct {
@@ -51,6 +53,8 @@ type PutStoredQueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

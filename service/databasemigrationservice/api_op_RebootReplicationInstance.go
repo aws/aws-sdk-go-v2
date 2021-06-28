@@ -38,6 +38,8 @@ type RebootReplicationInstanceInput struct {
 	// If this parameter is true, the reboot is conducted through a Multi-AZ failover.
 	// (If the instance isn't configured for Multi-AZ, then you can't specify true.)
 	ForceFailover *bool
+
+	noSmithyDocumentSerde
 }
 
 type RebootReplicationInstanceOutput struct {
@@ -47,6 +49,8 @@ type RebootReplicationInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

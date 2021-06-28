@@ -59,6 +59,8 @@ type CreatePublicDnsNamespaceInput struct {
 	// value that you define. Tags keys can be up to 128 characters in length, and tag
 	// values can be up to 256 characters in length.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePublicDnsNamespaceOutput struct {
@@ -70,6 +72,8 @@ type CreatePublicDnsNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePublicDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

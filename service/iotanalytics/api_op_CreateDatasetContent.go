@@ -39,6 +39,8 @@ type CreateDatasetContentInput struct {
 	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
 	// filter.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetContentOutput struct {
@@ -48,6 +50,8 @@ type CreateDatasetContentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetContentMiddlewares(stack *middleware.Stack, options Options) (err error) {

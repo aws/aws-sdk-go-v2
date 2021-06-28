@@ -42,6 +42,8 @@ type UpdateDashboardPublishedVersionInput struct {
 	//
 	// This member is required.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDashboardPublishedVersionOutput struct {
@@ -60,6 +62,8 @@ type UpdateDashboardPublishedVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDashboardPublishedVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

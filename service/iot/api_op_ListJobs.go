@@ -59,6 +59,8 @@ type ListJobsInput struct {
 
 	// A filter that limits the returned jobs to those for the specified group.
 	ThingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListJobsOutput struct {
@@ -72,6 +74,8 @@ type ListJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

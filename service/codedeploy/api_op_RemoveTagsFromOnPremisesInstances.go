@@ -39,11 +39,15 @@ type RemoveTagsFromOnPremisesInstancesInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type RemoveTagsFromOnPremisesInstancesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveTagsFromOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

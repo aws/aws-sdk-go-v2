@@ -50,11 +50,15 @@ type SendAutomationSignalInput struct {
 	// ID as the payload. For example:
 	// StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"
 	Payload map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 type SendAutomationSignalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendAutomationSignalMiddlewares(stack *middleware.Stack, options Options) (err error) {

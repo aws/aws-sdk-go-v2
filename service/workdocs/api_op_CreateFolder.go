@@ -40,6 +40,8 @@ type CreateFolderInput struct {
 
 	// The name of the new folder.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateFolderOutput struct {
@@ -49,6 +51,8 @@ type CreateFolderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

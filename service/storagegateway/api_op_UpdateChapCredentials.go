@@ -70,6 +70,8 @@ type UpdateChapCredentialsInput struct {
 	// Maximum bytes of 16. The secret key must be between 12 and 16 bytes when encoded
 	// in UTF-8.
 	SecretToAuthenticateTarget *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -85,6 +87,8 @@ type UpdateChapCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

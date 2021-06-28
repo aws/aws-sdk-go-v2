@@ -61,11 +61,15 @@ type ReleaseAddressInput struct {
 
 	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
 	PublicIp *string
+
+	noSmithyDocumentSerde
 }
 
 type ReleaseAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReleaseAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {

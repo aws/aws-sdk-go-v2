@@ -84,6 +84,8 @@ type StartChangeRequestExecutionInput struct {
 	//
 	// * Key=Region,Value=us-east-2
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type StartChangeRequestExecutionOutput struct {
@@ -94,6 +96,8 @@ type StartChangeRequestExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartChangeRequestExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

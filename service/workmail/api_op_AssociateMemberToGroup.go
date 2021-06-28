@@ -42,11 +42,15 @@ type AssociateMemberToGroupInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateMemberToGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateMemberToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

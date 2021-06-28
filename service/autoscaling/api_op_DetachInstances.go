@@ -52,6 +52,8 @@ type DetachInstancesInput struct {
 
 	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DetachInstancesOutput struct {
@@ -61,6 +63,8 @@ type DetachInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

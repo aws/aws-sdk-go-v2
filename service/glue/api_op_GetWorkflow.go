@@ -37,6 +37,8 @@ type GetWorkflowInput struct {
 	// Specifies whether to include a graph when returning the workflow resource
 	// metadata.
 	IncludeGraph *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetWorkflowOutput struct {
@@ -46,6 +48,8 @@ type GetWorkflowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {

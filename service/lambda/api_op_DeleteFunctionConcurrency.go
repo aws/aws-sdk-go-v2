@@ -44,11 +44,15 @@ type DeleteFunctionConcurrencyInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFunctionConcurrencyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {

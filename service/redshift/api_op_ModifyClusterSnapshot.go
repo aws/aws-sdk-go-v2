@@ -45,6 +45,8 @@ type ModifyClusterSnapshotInput struct {
 	// delete the snapshot. The value must be either -1 or an integer between 1 and
 	// 3,653.
 	ManualSnapshotRetentionPeriod *int32
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterSnapshotOutput struct {
@@ -54,6 +56,8 @@ type ModifyClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

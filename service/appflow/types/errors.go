@@ -12,6 +12,8 @@ import (
 // names and try again.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -29,6 +31,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // An error occurred when authenticating with the connector endpoint.
 type ConnectorAuthenticationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConnectorAuthenticationException) Error() string {
@@ -48,6 +52,8 @@ func (e *ConnectorAuthenticationException) ErrorFault() smithy.ErrorFault { retu
 // An error occurred when retrieving data from the connector endpoint.
 type ConnectorServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConnectorServerException) Error() string {
@@ -66,6 +72,8 @@ func (e *ConnectorServerException) ErrorFault() smithy.ErrorFault { return smith
 // again later.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -84,6 +92,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // connector profile) is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -102,6 +112,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -119,6 +131,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // The requested operation is not supported for the current flow.
 type UnsupportedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {
@@ -136,6 +150,8 @@ func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return 
 // The request has invalid or missing parameters.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

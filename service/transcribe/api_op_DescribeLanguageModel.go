@@ -39,6 +39,8 @@ type DescribeLanguageModelInput struct {
 	//
 	// This member is required.
 	ModelName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLanguageModelOutput struct {
@@ -48,6 +50,8 @@ type DescribeLanguageModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

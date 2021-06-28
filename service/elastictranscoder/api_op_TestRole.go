@@ -59,6 +59,8 @@ type TestRoleInput struct {
 	//
 	// This member is required.
 	Topics []string
+
+	noSmithyDocumentSerde
 }
 
 // The TestRoleResponse structure.
@@ -74,6 +76,8 @@ type TestRoleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

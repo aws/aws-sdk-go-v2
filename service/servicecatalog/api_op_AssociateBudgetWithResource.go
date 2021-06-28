@@ -37,11 +37,15 @@ type AssociateBudgetWithResourceInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateBudgetWithResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateBudgetWithResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

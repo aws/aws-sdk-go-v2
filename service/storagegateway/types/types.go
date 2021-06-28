@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type AutomaticTapeCreationPolicyInfo struct {
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and Region.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 // An automatic tape creation policy consists of automatic tape creation rules
@@ -60,6 +63,8 @@ type AutomaticTapeCreationRule struct {
 	// Set to true to indicate that tapes are to be archived as write-once-read-many
 	// (WORM). Set to false when WORM is not enabled for tapes.
 	Worm bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
@@ -109,6 +114,8 @@ type BandwidthRateLimitInterval struct {
 	// bits per second. This field does not appear in the response if the upload rate
 	// limit is not set.
 	AverageUploadRateLimitInBitsPerSec *int64
+
+	noSmithyDocumentSerde
 }
 
 // The refresh cache information for the file share or FSx file systems.
@@ -120,6 +127,8 @@ type CacheAttributes struct {
 	// bucket or Amazon FSx file system. The TTL duration is in seconds. Valid
 	// Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)
 	CacheStaleTimeoutInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an iSCSI cached volume.
@@ -184,6 +193,8 @@ type CachediSCSIVolume struct {
 	// An VolumeiSCSIAttributes object that represents a collection of iSCSI attributes
 	// for one stored volume.
 	VolumeiSCSIAttributes *VolumeiSCSIAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Describes Challenge-Handshake Authentication Protocol (CHAP) information that
@@ -204,6 +215,8 @@ type ChapInfo struct {
 	// The Amazon Resource Name (ARN) of the volume. Valid Values: 50 to 500 lowercase
 	// letters, numbers, periods (.), and hyphens (-).
 	TargetARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists iSCSI information about a VTL device.
@@ -221,6 +234,8 @@ type DeviceiSCSIAttributes struct {
 	// Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI qualified
 	// name(iqn) of a tape drive or media changer target.
 	TargetARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a gateway's local disk.
@@ -252,6 +267,8 @@ type Disk struct {
 
 	// A value that represents the status of a local disk.
 	DiskStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies network configuration information for the gateway associated with the
@@ -262,6 +279,8 @@ type EndpointNetworkConfiguration struct {
 	// available. If multiple file systems are associated with this gateway, this field
 	// is required.
 	IpAddresses []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a file share. Only supported S3 File Gateway.
@@ -283,6 +302,8 @@ type FileShareInfo struct {
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and Region.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the object returned by DescribeFileSystemAssociations that describes a
@@ -320,6 +341,8 @@ type FileSystemAssociationInfo struct {
 	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by
 	// key name. Each tag is a key-value pair.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Gets the summary returned by ListFileSystemAssociation, which is a summary of a
@@ -339,6 +362,8 @@ type FileSystemAssociationSummary struct {
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and Region.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a gateway object.
@@ -367,6 +392,8 @@ type GatewayInfo struct {
 
 	// The type of the gateway.
 	GatewayType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a gateway's network interface.
@@ -382,6 +409,8 @@ type NetworkInterface struct {
 	// The Media Access Control (MAC) address of the interface. This is currently
 	// unsupported and will not be returned in output.
 	MacAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes Network File System (NFS) file share default values. Files and folders
@@ -407,6 +436,8 @@ type NFSFileShareDefaults struct {
 	// The default owner ID for files in the file share (unless the files have another
 	// owner ID specified). The default value is nfsnobody.
 	OwnerId *int64
+
+	noSmithyDocumentSerde
 }
 
 // The Unix file permissions and ownership information assigned, by default, to
@@ -533,6 +564,8 @@ type NFSFileShareInfo struct {
 	// connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access
 	// point alias that points to a VPC access point.
 	VPCEndpointDNSName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a custom tape pool.
@@ -565,6 +598,8 @@ type PoolInfo struct {
 	// storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
 	// pool.
 	StorageClass TapeStorageClass
+
+	noSmithyDocumentSerde
 }
 
 // The Windows file permissions and ownership information assigned, by default, to
@@ -716,6 +751,8 @@ type SMBFileShareInfo struct {
 	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
 	// Authentication is set to ActiveDirectory.
 	ValidUserList []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides additional information about an error that was returned by the service.
@@ -727,6 +764,8 @@ type StorageGatewayError struct {
 
 	// Human-readable text that provides detail about the error that occurred.
 	ErrorDetails map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an iSCSI stored volume.
@@ -800,6 +839,8 @@ type StorediSCSIVolume struct {
 	// An VolumeiSCSIAttributes object that represents a collection of iSCSI attributes
 	// for one stored volume.
 	VolumeiSCSIAttributes *VolumeiSCSIAttributes
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair that helps you manage, filter, and search for your resource.
@@ -816,6 +857,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a virtual tape object.
@@ -867,6 +910,8 @@ type Tape struct {
 
 	// If the tape is archived as write-once-read-many (WORM), this value is true.
 	Worm bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents a virtual tape that is archived in the virtual tape shelf (VTS).
@@ -920,6 +965,8 @@ type TapeArchive struct {
 
 	// Set to true if the archived tape is stored as write-once-read-many (WORM).
 	Worm bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a virtual tape.
@@ -954,6 +1001,8 @@ type TapeInfo struct {
 
 	// The status of the tape.
 	TapeStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a recovery point.
@@ -972,6 +1021,8 @@ type TapeRecoveryPointInfo struct {
 
 	// The status of the virtual tapes.
 	TapeStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a storage volume object.
@@ -1008,6 +1059,8 @@ type VolumeInfo struct {
 
 	// One of the VolumeType enumeration values describing the type of the volume.
 	VolumeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists iSCSI information about a volume.
@@ -1027,6 +1080,8 @@ type VolumeiSCSIAttributes struct {
 
 	// The Amazon Resource Name (ARN) of the volume target.
 	TargetARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a storage volume recovery point object.
@@ -1044,6 +1099,8 @@ type VolumeRecoveryPointInfo struct {
 	// The size of the data stored on the volume in bytes. This value is not available
 	// for volumes created prior to May 13, 2015, until you store data on the volume.
 	VolumeUsageInBytes int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a device object associated with a tape gateway.
@@ -1064,4 +1121,8 @@ type VTLDevice struct {
 
 	// Specifies the vendor of the device that the VTL device object emulates.
 	VTLDeviceVendor *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

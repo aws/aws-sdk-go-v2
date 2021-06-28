@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -25,6 +26,8 @@ type ArchivalSummary struct {
 	// table's AWS KMS key being inaccessible for more than seven days. An On-Demand
 	// backup was created at the archival time.
 	ArchivalReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an attribute for describing the key schema for the table and indexes.
@@ -47,6 +50,8 @@ type AttributeDefinition struct {
 	//
 	// This member is required.
 	AttributeType ScalarAttributeType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the data for an attribute. Each attribute value is described as a
@@ -73,6 +78,8 @@ type AttributeValue interface {
 // An attribute of type String. For example: "S": "Hello"
 type AttributeValueMemberS struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberS) isAttributeValue() {}
@@ -83,6 +90,8 @@ func (*AttributeValueMemberS) isAttributeValue() {}
 // mathematical operations.
 type AttributeValueMemberN struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberN) isAttributeValue() {}
@@ -91,6 +100,8 @@ func (*AttributeValueMemberN) isAttributeValue() {}
 // "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
 type AttributeValueMemberB struct {
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberB) isAttributeValue() {}
@@ -99,6 +110,8 @@ func (*AttributeValueMemberB) isAttributeValue() {}
 // ,"Zebra"]
 type AttributeValueMemberSS struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberSS) isAttributeValue() {}
@@ -109,6 +122,8 @@ func (*AttributeValueMemberSS) isAttributeValue() {}
 // number type attributes for mathematical operations.
 type AttributeValueMemberNS struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberNS) isAttributeValue() {}
@@ -117,6 +132,8 @@ func (*AttributeValueMemberNS) isAttributeValue() {}
 // "U25vd3k="]
 type AttributeValueMemberBS struct {
 	Value [][]byte
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberBS) isAttributeValue() {}
@@ -125,6 +142,8 @@ func (*AttributeValueMemberBS) isAttributeValue() {}
 // "35"}}
 type AttributeValueMemberM struct {
 	Value map[string]AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberM) isAttributeValue() {}
@@ -133,6 +152,8 @@ func (*AttributeValueMemberM) isAttributeValue() {}
 // "Coffee"}, {"N", "3.14159"}]
 type AttributeValueMemberL struct {
 	Value []AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberL) isAttributeValue() {}
@@ -140,6 +161,8 @@ func (*AttributeValueMemberL) isAttributeValue() {}
 // An attribute of type Null. For example: "NULL": true
 type AttributeValueMemberNULL struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberNULL) isAttributeValue() {}
@@ -147,6 +170,8 @@ func (*AttributeValueMemberNULL) isAttributeValue() {}
 // An attribute of type Boolean. For example: "BOOL": true
 type AttributeValueMemberBOOL struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberBOOL) isAttributeValue() {}
@@ -228,6 +253,8 @@ type AttributeValueUpdate struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 	// in the Amazon DynamoDB Developer Guide.
 	Value AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of the scaling policy.
@@ -238,6 +265,8 @@ type AutoScalingPolicyDescription struct {
 
 	// Represents a target tracking scaling policy configuration.
 	TargetTrackingScalingPolicyConfiguration *AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling policy to be modified.
@@ -250,6 +279,8 @@ type AutoScalingPolicyUpdate struct {
 
 	// The name of the scaling policy.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling settings for a global table or global secondary
@@ -272,6 +303,8 @@ type AutoScalingSettingsDescription struct {
 
 	// Information about the scaling policies.
 	ScalingPolicies []AutoScalingPolicyDescription
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling settings to be modified for a global table or global
@@ -295,6 +328,8 @@ type AutoScalingSettingsUpdate struct {
 	// The scaling policy to apply for scaling target global table or global secondary
 	// index capacity units.
 	ScalingPolicyUpdate *AutoScalingPolicyUpdate
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a target tracking scaling policy.
@@ -327,6 +362,8 @@ type AutoScalingTargetTrackingScalingPolicyConfigurationDescription struct {
 	// the cooldown is calculated as part of the desired capacity for the next scale
 	// out. You should continuously (but not excessively) scale out.
 	ScaleOutCooldown *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the settings of a target tracking scaling policy that will be
@@ -360,6 +397,8 @@ type AutoScalingTargetTrackingScalingPolicyConfigurationUpdate struct {
 	// the cooldown is calculated as part of the desired capacity for the next scale
 	// out. You should continuously (but not excessively) scale out.
 	ScaleOutCooldown *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the description of the backup created for the table.
@@ -374,6 +413,8 @@ type BackupDescription struct {
 	// Contains the details of the features enabled on the table when the backup was
 	// created. For example, LSIs, GSIs, streams, TTL.
 	SourceTableFeatureDetails *SourceTableFeatureDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the backup created for the table.
@@ -421,6 +462,8 @@ type BackupDetails struct {
 
 	// Size of the backup in bytes.
 	BackupSizeBytes *int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains details for the backup.
@@ -467,6 +510,8 @@ type BackupSummary struct {
 
 	// Name of the table.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // An error associated with a statement in a PartiQL batch that was run.
@@ -477,6 +522,8 @@ type BatchStatementError struct {
 
 	// The error message associated with the PartiQL batch resposne.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // A PartiQL batch statement request.
@@ -492,6 +539,8 @@ type BatchStatementRequest struct {
 
 	// The parameters associated with a PartiQL statement in the batch request.
 	Parameters []AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // A PartiQL batch statement response..
@@ -505,6 +554,8 @@ type BatchStatementResponse struct {
 
 	// The table name associated with a failed PartiQL batch statement.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details for the read/write capacity mode.
@@ -524,6 +575,8 @@ type BillingModeSummary struct {
 	// Represents the time when PAY_PER_REQUEST was last set as the read/write capacity
 	// mode.
 	LastUpdateToPayPerRequestDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An ordered list of errors for each item in the request which caused the
@@ -541,6 +594,8 @@ type CancellationReason struct {
 
 	// Cancellation reason message description.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the amount of provisioned throughput capacity consumed on a table or
@@ -555,6 +610,8 @@ type Capacity struct {
 
 	// The total number of write capacity units consumed on a table or an index.
 	WriteCapacityUnits *float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the selection criteria for a Query or Scan operation:
@@ -696,6 +753,8 @@ type Condition struct {
 	// DynamoDB treats each byte of the binary data as unsigned when it compares binary
 	// values.
 	AttributeValueList []AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents a request to perform a check that an item exists or to check the
@@ -728,6 +787,8 @@ type ConditionCheck struct {
 	// ConditionCheck condition fails. For ReturnValuesOnConditionCheckFailure, the
 	// valid values are: NONE and ALL_OLD.
 	ReturnValuesOnConditionCheckFailure ReturnValuesOnConditionCheckFailure
+
+	noSmithyDocumentSerde
 }
 
 // The capacity units consumed by an operation. The data returned includes the
@@ -759,6 +820,8 @@ type ConsumedCapacity struct {
 
 	// The total number of write capacity units consumed by the operation.
 	WriteCapacityUnits *float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the continuous backups and point in time recovery settings on the
@@ -772,6 +835,8 @@ type ContinuousBackupsDescription struct {
 
 	// The description of the point in time recovery settings applied to the table.
 	PointInTimeRecoveryDescription *PointInTimeRecoveryDescription
+
+	noSmithyDocumentSerde
 }
 
 // Represents a Contributor Insights summary entry.
@@ -786,6 +851,8 @@ type ContributorInsightsSummary struct {
 
 	// Name of the table associated with the summary.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a new global secondary index to be added to an existing table.
@@ -814,6 +881,8 @@ type CreateGlobalSecondaryIndexAction struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *ProvisionedThroughput
+
+	noSmithyDocumentSerde
 }
 
 // Represents a replica to be added.
@@ -823,6 +892,8 @@ type CreateReplicaAction struct {
 	//
 	// This member is required.
 	RegionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a replica to be created.
@@ -846,6 +917,8 @@ type CreateReplicationGroupMemberAction struct {
 	// Replica-specific provisioned throughput. If not specified, uses the source
 	// table's provisioned throughput settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
+
+	noSmithyDocumentSerde
 }
 
 // Represents a request to perform a DeleteItem operation.
@@ -875,6 +948,8 @@ type Delete struct {
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
 	// NONE and ALL_OLD.
 	ReturnValuesOnConditionCheckFailure ReturnValuesOnConditionCheckFailure
+
+	noSmithyDocumentSerde
 }
 
 // Represents a global secondary index to be deleted from an existing table.
@@ -884,6 +959,8 @@ type DeleteGlobalSecondaryIndexAction struct {
 	//
 	// This member is required.
 	IndexName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a replica to be removed.
@@ -893,6 +970,8 @@ type DeleteReplicaAction struct {
 	//
 	// This member is required.
 	RegionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a replica to be deleted.
@@ -902,6 +981,8 @@ type DeleteReplicationGroupMemberAction struct {
 	//
 	// This member is required.
 	RegionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a request to perform a DeleteItem operation on an item.
@@ -913,6 +994,8 @@ type DeleteRequest struct {
 	//
 	// This member is required.
 	Key map[string]AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // An endpoint information details.
@@ -927,6 +1010,8 @@ type Endpoint struct {
 	//
 	// This member is required.
 	CachePeriodInMinutes int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a condition to be compared with an attribute value. This condition
@@ -1107,6 +1192,8 @@ type ExpectedAttributeValue struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 	// in the Amazon DynamoDB Developer Guide.
 	Value AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of the exported table.
@@ -1179,6 +1266,8 @@ type ExportDescription struct {
 
 	// Unique ID of the table that was exported.
 	TableId *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about an export task.
@@ -1189,6 +1278,8 @@ type ExportSummary struct {
 
 	// Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
 	ExportStatus ExportStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents a failure a contributor insights operation.
@@ -1199,6 +1290,8 @@ type FailureException struct {
 
 	// Exception name.
 	ExceptionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an item and related attribute values to retrieve in a TransactGetItem
@@ -1226,6 +1319,8 @@ type Get struct {
 	// specified item are returned. If any of the requested attributes are not found,
 	// they do not appear in the result.
 	ProjectionExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a global secondary index.
@@ -1268,6 +1363,8 @@ type GlobalSecondaryIndex struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *ProvisionedThroughput
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling settings of a global secondary index for a global
@@ -1280,6 +1377,8 @@ type GlobalSecondaryIndexAutoScalingUpdate struct {
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
 	ProvisionedWriteCapacityAutoScalingUpdate *AutoScalingSettingsUpdate
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a global secondary index.
@@ -1354,6 +1453,8 @@ type GlobalSecondaryIndexDescription struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *ProvisionedThroughputDescription
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a global secondary index for the table when the
@@ -1387,6 +1488,8 @@ type GlobalSecondaryIndexInfo struct {
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index.
 	ProvisionedThroughput *ProvisionedThroughput
+
+	noSmithyDocumentSerde
 }
 
 // Represents one of the following:
@@ -1422,6 +1525,8 @@ type GlobalSecondaryIndexUpdate struct {
 	// The name of an existing global secondary index, along with new provisioned
 	// throughput settings to be applied to that index.
 	Update *UpdateGlobalSecondaryIndexAction
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a global table.
@@ -1432,6 +1537,8 @@ type GlobalTable struct {
 
 	// The Regions where the global table has replicas.
 	ReplicationGroup []Replica
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the global table.
@@ -1461,6 +1568,8 @@ type GlobalTableDescription struct {
 
 	// The Regions where the global table has replicas.
 	ReplicationGroup []ReplicaDescription
+
+	noSmithyDocumentSerde
 }
 
 // Represents the settings of a global secondary index for a global table that will
@@ -1480,6 +1589,8 @@ type GlobalTableGlobalSecondaryIndexSettingsUpdate struct {
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
 	ProvisionedWriteCapacityUnits *int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about item collections, if any, that were affected by the operation.
@@ -1500,6 +1611,8 @@ type ItemCollectionMetrics struct {
 	// limit. The estimate is subject to change over time; therefore, do not rely on
 	// the precision or accuracy of the estimate.
 	SizeEstimateRangeGB []float64
+
+	noSmithyDocumentSerde
 }
 
 // Details for the requested item.
@@ -1507,6 +1620,8 @@ type ItemResponse struct {
 
 	// Map of attribute data consisting of the data type and attribute value.
 	Item map[string]AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents a set of primary keys and, for each key, the attributes to retrieve
@@ -1582,6 +1697,8 @@ type KeysAndAttributes struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProjectionExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single element of a key schema. A key schema specifies the
@@ -1616,6 +1733,8 @@ type KeySchemaElement struct {
 	//
 	// This member is required.
 	KeyType KeyType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a Kinesis data stream destination.
@@ -1629,6 +1748,8 @@ type KinesisDataStreamDestination struct {
 
 	// The ARN for a specific Kinesis data stream.
 	StreamArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a local secondary index.
@@ -1664,6 +1785,8 @@ type LocalSecondaryIndex struct {
 	//
 	// This member is required.
 	Projection *Projection
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a local secondary index.
@@ -1705,6 +1828,8 @@ type LocalSecondaryIndexDescription struct {
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
 	Projection *Projection
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a local secondary index for the table when the
@@ -1734,6 +1859,8 @@ type LocalSecondaryIndexInfo struct {
 	// secondary index. These are in addition to the primary key attributes and index
 	// key attributes, which are automatically projected.
 	Projection *Projection
+
+	noSmithyDocumentSerde
 }
 
 // Represents a PartiQL statment that uses parameters.
@@ -1746,6 +1873,8 @@ type ParameterizedStatement struct {
 
 	// The parameter values.
 	Parameters []AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // The description of the point in time settings applied to the table.
@@ -1768,6 +1897,8 @@ type PointInTimeRecoveryDescription struct {
 	// *
 	// DISABLED - Point in time recovery is disabled.
 	PointInTimeRecoveryStatus PointInTimeRecoveryStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the settings used to enable point in time recovery.
@@ -1778,6 +1909,8 @@ type PointInTimeRecoverySpecification struct {
 	//
 	// This member is required.
 	PointInTimeRecoveryEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents attributes that are copied (projected) from the table into an index.
@@ -1804,6 +1937,8 @@ type Projection struct {
 	// * ALL - All of the table attributes are
 	// projected into the index.
 	ProjectionType ProjectionType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the provisioned throughput settings for a specified table or index.
@@ -1833,6 +1968,8 @@ type ProvisionedThroughput struct {
 	//
 	// This member is required.
 	WriteCapacityUnits *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the provisioned throughput settings for the table, consisting of read
@@ -1861,6 +1998,8 @@ type ProvisionedThroughputDescription struct {
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
 	WriteCapacityUnits *int64
+
+	noSmithyDocumentSerde
 }
 
 // Replica-specific provisioned throughput settings. If not specified, uses the
@@ -1870,6 +2009,8 @@ type ProvisionedThroughputOverride struct {
 	// Replica-specific read capacity units. If not specified, uses the source table's
 	// read capacity settings.
 	ReadCapacityUnits *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a request to perform a PutItem operation.
@@ -1902,6 +2043,8 @@ type Put struct {
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
 	// NONE and ALL_OLD.
 	ReturnValuesOnConditionCheckFailure ReturnValuesOnConditionCheckFailure
+
+	noSmithyDocumentSerde
 }
 
 // Represents a request to perform a PutItem operation on an item.
@@ -1915,6 +2058,8 @@ type PutRequest struct {
 	//
 	// This member is required.
 	Item map[string]AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a replica.
@@ -1922,6 +2067,8 @@ type Replica struct {
 
 	// The Region where the replica needs to be created.
 	RegionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling settings of the replica.
@@ -1953,6 +2100,8 @@ type ReplicaAutoScalingDescription struct {
 	//
 	// * ACTIVE - The replica is ready for use.
 	ReplicaStatus ReplicaStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling settings of a replica that will be modified.
@@ -1970,6 +2119,8 @@ type ReplicaAutoScalingUpdate struct {
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
 	ReplicaProvisionedReadCapacityAutoScalingUpdate *AutoScalingSettingsUpdate
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the replica.
@@ -2024,6 +2175,8 @@ type ReplicaDescription struct {
 	// Specifies the progress of a Create, Update, or Delete action on the replica as a
 	// percentage.
 	ReplicaStatusPercentProgress *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a replica global secondary index.
@@ -2037,6 +2190,8 @@ type ReplicaGlobalSecondaryIndex struct {
 	// Replica table GSI-specific provisioned throughput. If not specified, uses the
 	// source table GSI's read capacity settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling configuration for a replica global secondary index.
@@ -2065,6 +2220,8 @@ type ReplicaGlobalSecondaryIndexAutoScalingDescription struct {
 	// Represents the auto scaling settings for a global table or global secondary
 	// index.
 	ProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling settings of a global secondary index for a replica
@@ -2077,6 +2234,8 @@ type ReplicaGlobalSecondaryIndexAutoScalingUpdate struct {
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
 	ProvisionedReadCapacityAutoScalingUpdate *AutoScalingSettingsUpdate
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a replica global secondary index.
@@ -2087,6 +2246,8 @@ type ReplicaGlobalSecondaryIndexDescription struct {
 
 	// If not described, uses the source table GSI's read capacity settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a global secondary index.
@@ -2127,6 +2288,8 @@ type ReplicaGlobalSecondaryIndexSettingsDescription struct {
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
 	ProvisionedWriteCapacityUnits *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the settings of a global secondary index for a global table that will
@@ -2146,6 +2309,8 @@ type ReplicaGlobalSecondaryIndexSettingsUpdate struct {
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException.
 	ProvisionedReadCapacityUnits *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a replica.
@@ -2194,6 +2359,8 @@ type ReplicaSettingsDescription struct {
 	//
 	// * ACTIVE - The Region is ready for use.
 	ReplicaStatus ReplicaStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the settings for a global table in a Region that will be modified.
@@ -2217,6 +2384,8 @@ type ReplicaSettingsUpdate struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput)
 	// in the Amazon DynamoDB Developer Guide.
 	ReplicaProvisionedReadCapacityUnits *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents one of the following:
@@ -2242,6 +2411,8 @@ type ReplicationGroupUpdate struct {
 
 	// The parameters required for updating a replica for the table.
 	Update *UpdateReplicationGroupMemberAction
+
+	noSmithyDocumentSerde
 }
 
 // Represents one of the following:
@@ -2260,6 +2431,8 @@ type ReplicaUpdate struct {
 
 	// The name of the existing replica to be removed.
 	Delete *DeleteReplicaAction
+
+	noSmithyDocumentSerde
 }
 
 // Contains details for the restore.
@@ -2280,6 +2453,8 @@ type RestoreSummary struct {
 
 	// The ARN of the source table of the backup that is being restored.
 	SourceTableArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the table when the backup was created.
@@ -2329,6 +2504,8 @@ type SourceTableDetails struct {
 
 	// Size of the table in bytes. Note that this is an approximate value.
 	TableSizeBytes int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the features enabled on the table when the backup was
@@ -2354,6 +2531,8 @@ type SourceTableFeatureDetails struct {
 
 	// Time to Live settings on the table when the backup was created.
 	TimeToLiveDescription *TimeToLiveDescription
+
+	noSmithyDocumentSerde
 }
 
 // The description of the server-side encryption status on the specified table.
@@ -2384,6 +2563,8 @@ type SSEDescription struct {
 	// * UPDATING -
 	// Server-side encryption is being updated.
 	Status SSEStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the settings used to enable server-side encryption.
@@ -2407,6 +2588,8 @@ type SSESpecification struct {
 	// encryption that uses AWS Key Management Service. The key is stored in your
 	// account and is managed by AWS KMS (AWS KMS charges apply).
 	SSEType SSEType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the DynamoDB Streams configuration for a table in DynamoDB.
@@ -2434,6 +2617,8 @@ type StreamSpecification struct {
 	// * NEW_AND_OLD_IMAGES
 	// - Both the new and the old item images of the item are written to the stream.
 	StreamViewType StreamViewType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the auto scaling configuration for a global table.
@@ -2457,6 +2642,8 @@ type TableAutoScalingDescription struct {
 	//
 	// * ACTIVE - The table is ready for use.
 	TableStatus TableStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a table.
@@ -2716,6 +2903,8 @@ type TableDescription struct {
 	// ARCHIVED - The table has been archived. See the ArchivalReason for more
 	// information.
 	TableStatus TableStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a
@@ -2740,6 +2929,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The description of the Time to Live (TTL) status on the specified table.
@@ -2750,6 +2941,8 @@ type TimeToLiveDescription struct {
 
 	// The TTL status for the table.
 	TimeToLiveStatus TimeToLiveStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the settings used to enable or disable Time to Live (TTL) for the
@@ -2766,6 +2959,8 @@ type TimeToLiveSpecification struct {
 	//
 	// This member is required.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an item to be retrieved as part of the transaction.
@@ -2777,6 +2972,8 @@ type TransactGetItem struct {
 	//
 	// This member is required.
 	Get *Get
+
+	noSmithyDocumentSerde
 }
 
 // A list of requests that can perform update, put, delete, or check operations on
@@ -2794,6 +2991,8 @@ type TransactWriteItem struct {
 
 	// A request to perform an UpdateItem operation.
 	Update *Update
+
+	noSmithyDocumentSerde
 }
 
 // Represents a request to perform an UpdateItem operation.
@@ -2829,6 +3028,8 @@ type Update struct {
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
 	// NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW.
 	ReturnValuesOnConditionCheckFailure ReturnValuesOnConditionCheckFailure
+
+	noSmithyDocumentSerde
 }
 
 // Represents the new provisioned throughput settings to be applied to a global
@@ -2848,6 +3049,8 @@ type UpdateGlobalSecondaryIndexAction struct {
 	//
 	// This member is required.
 	ProvisionedThroughput *ProvisionedThroughput
+
+	noSmithyDocumentSerde
 }
 
 // Represents a replica to be modified.
@@ -2871,6 +3074,8 @@ type UpdateReplicationGroupMemberAction struct {
 	// Replica-specific provisioned throughput. If not specified, uses the source
 	// table's provisioned throughput settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
+
+	noSmithyDocumentSerde
 }
 
 // Represents an operation to perform - either DeleteItem or PutItem. You can only
@@ -2884,13 +3089,19 @@ type WriteRequest struct {
 
 	// A request to perform a PutItem operation.
 	PutRequest *PutRequest
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isAttributeValue() {}

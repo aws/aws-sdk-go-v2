@@ -44,6 +44,8 @@ type GetQueueUrlInput struct {
 
 	// The account ID of the account that created the queue.
 	QueueOwnerAWSAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // For more information, see Interpreting Responses
@@ -56,6 +58,8 @@ type GetQueueUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetQueueUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

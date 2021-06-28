@@ -58,6 +58,8 @@ type GetPushTemplateInput struct {
 	// For a delete operation, deletes the template, including all versions of the
 	// template.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPushTemplateOutput struct {
@@ -70,6 +72,8 @@ type GetPushTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

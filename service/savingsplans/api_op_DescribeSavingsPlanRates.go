@@ -43,6 +43,8 @@ type DescribeSavingsPlanRatesInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSavingsPlanRatesOutput struct {
@@ -59,6 +61,8 @@ type DescribeSavingsPlanRatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSavingsPlanRatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

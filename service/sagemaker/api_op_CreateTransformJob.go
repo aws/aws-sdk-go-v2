@@ -151,6 +151,8 @@ type CreateTransformJobInput struct {
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateTransformJobOutput struct {
@@ -162,6 +164,8 @@ type CreateTransformJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

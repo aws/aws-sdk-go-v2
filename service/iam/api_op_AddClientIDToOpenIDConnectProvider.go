@@ -43,11 +43,15 @@ type AddClientIDToOpenIDConnectProviderInput struct {
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AddClientIDToOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddClientIDToOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

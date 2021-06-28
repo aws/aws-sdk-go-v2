@@ -47,6 +47,8 @@ type PutInstancePublicPortsInput struct {
 	//
 	// This member is required.
 	PortInfos []types.PortInfo
+
+	noSmithyDocumentSerde
 }
 
 type PutInstancePublicPortsOutput struct {
@@ -58,6 +60,8 @@ type PutInstancePublicPortsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {

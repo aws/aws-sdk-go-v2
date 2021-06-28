@@ -63,6 +63,8 @@ type GetScreenDataInput struct {
 	// only one property, rawValue, which holds the value of the variable to be passed
 	// to the screen.
 	Variables map[string]types.VariableValue
+
+	noSmithyDocumentSerde
 }
 
 type GetScreenDataOutput struct {
@@ -86,6 +88,8 @@ type GetScreenDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetScreenDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type CreateDomainAssociationInput struct {
 
 	// Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the create domain association request.
@@ -68,6 +70,8 @@ type CreateDomainAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,12 +43,16 @@ type DetachThingPrincipalInput struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the DetachThingPrincipal operation.
 type DetachThingPrincipalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachThingPrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {

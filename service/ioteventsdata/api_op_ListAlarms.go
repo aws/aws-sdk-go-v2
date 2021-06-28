@@ -40,6 +40,8 @@ type ListAlarmsInput struct {
 
 	// The token that you can use to return the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAlarmsOutput struct {
@@ -53,6 +55,8 @@ type ListAlarmsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {

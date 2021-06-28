@@ -52,6 +52,8 @@ type CreateStreamInput struct {
 
 	// Metadata which can be used to manage streams.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateStreamOutput struct {
@@ -70,6 +72,8 @@ type CreateStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

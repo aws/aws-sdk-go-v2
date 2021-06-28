@@ -41,6 +41,8 @@ type GetConfigurationSetInput struct {
 	//
 	// This member is required.
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a configuration set.
@@ -75,6 +77,8 @@ type GetConfigurationSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

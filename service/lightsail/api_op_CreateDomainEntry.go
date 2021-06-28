@@ -46,6 +46,8 @@ type CreateDomainEntryInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDomainEntryOutput struct {
@@ -57,6 +59,8 @@ type CreateDomainEntryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDomainEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type CreateSkillGroupInput struct {
 
 	// The tags for the skill group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateSkillGroupOutput struct {
@@ -52,6 +54,8 @@ type CreateSkillGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

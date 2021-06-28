@@ -40,11 +40,15 @@ type AcceptQualificationRequestInput struct {
 	// The value of the Qualification. You can omit this value if you are using the
 	// presence or absence of the Qualification as the basis for a HIT requirement.
 	IntegerValue *int32
+
+	noSmithyDocumentSerde
 }
 
 type AcceptQualificationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptQualificationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {

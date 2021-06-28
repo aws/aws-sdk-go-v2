@@ -36,6 +36,8 @@ type UpdateAnomalyMonitorInput struct {
 
 	// The new name for the cost anomaly monitor.
 	MonitorName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAnomalyMonitorOutput struct {
@@ -47,6 +49,8 @@ type UpdateAnomalyMonitorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {

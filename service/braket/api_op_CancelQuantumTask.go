@@ -38,6 +38,8 @@ type CancelQuantumTaskInput struct {
 	//
 	// This member is required.
 	QuantumTaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelQuantumTaskOutput struct {
@@ -54,6 +56,8 @@ type CancelQuantumTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

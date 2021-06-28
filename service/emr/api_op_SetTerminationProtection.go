@@ -55,11 +55,15 @@ type SetTerminationProtectionInput struct {
 	//
 	// This member is required.
 	TerminationProtected bool
+
+	noSmithyDocumentSerde
 }
 
 type SetTerminationProtectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetTerminationProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

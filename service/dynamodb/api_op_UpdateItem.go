@@ -261,6 +261,8 @@ type UpdateItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html)
 	// in the Amazon DynamoDB Developer Guide.
 	UpdateExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an UpdateItem operation.
@@ -303,6 +305,8 @@ type UpdateItemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

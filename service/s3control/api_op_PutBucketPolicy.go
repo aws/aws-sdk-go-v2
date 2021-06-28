@@ -92,11 +92,15 @@ type PutBucketPolicyInput struct {
 	// to change this bucket policy in the future. This is not supported by Amazon S3
 	// on Outposts buckets.
 	ConfirmRemoveSelfBucketAccess bool
+
+	noSmithyDocumentSerde
 }
 
 type PutBucketPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBucketPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -75,6 +75,8 @@ type CreateResolverQueryLogConfigInput struct {
 	// A list of the tag keys and values that you want to associate with the query
 	// logging configuration.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateResolverQueryLogConfigOutput struct {
@@ -85,6 +87,8 @@ type CreateResolverQueryLogConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

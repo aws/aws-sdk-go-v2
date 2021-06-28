@@ -41,6 +41,8 @@ type ListCompatibleImagesInput struct {
 	// compatible images, you can specify a value for NextToken as the starting point
 	// for your list of returned images.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListCompatibleImagesOutput struct {
@@ -55,6 +57,8 @@ type ListCompatibleImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCompatibleImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -56,6 +56,8 @@ type CreateStoreImageTaskInput struct {
 
 	// The tags to apply to the AMI object that will be stored in the S3 bucket.
 	S3ObjectTags []types.S3ObjectTag
+
+	noSmithyDocumentSerde
 }
 
 type CreateStoreImageTaskOutput struct {
@@ -65,6 +67,8 @@ type CreateStoreImageTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStoreImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

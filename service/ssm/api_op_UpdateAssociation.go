@@ -145,6 +145,8 @@ type UpdateAssociationInput struct {
 
 	// The targets of the association.
 	Targets []types.Target
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAssociationOutput struct {
@@ -154,6 +156,8 @@ type UpdateAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -65,6 +65,8 @@ type QueryObjectsInput struct {
 	// String fields in the object. These filters can be applied to components,
 	// instances, and attempts.
 	Query *types.Query
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of QueryObjects.
@@ -84,6 +86,8 @@ type QueryObjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

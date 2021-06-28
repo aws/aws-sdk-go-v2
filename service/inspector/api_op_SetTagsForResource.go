@@ -38,11 +38,15 @@ type SetTagsForResourceInput struct {
 	// A collection of key and value pairs that you want to set to the assessment
 	// template.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type SetTagsForResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

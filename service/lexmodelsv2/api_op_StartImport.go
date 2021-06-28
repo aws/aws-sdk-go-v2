@@ -53,6 +53,8 @@ type StartImportInput struct {
 	// definition. You should always encrypt the zip archive to protect it during
 	// transit between your site and Amazon Lex.
 	FilePassword *string
+
+	noSmithyDocumentSerde
 }
 
 type StartImportOutput struct {
@@ -77,6 +79,8 @@ type StartImportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {

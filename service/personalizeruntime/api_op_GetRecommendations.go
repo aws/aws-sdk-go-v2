@@ -78,6 +78,8 @@ type GetRecommendationsInput struct {
 	// The user ID to provide recommendations for. Required for USER_PERSONALIZATION
 	// recipe type.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRecommendationsOutput struct {
@@ -91,6 +93,8 @@ type GetRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

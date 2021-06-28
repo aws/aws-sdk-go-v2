@@ -37,6 +37,8 @@ type ListProgressUpdateStreamsInput struct {
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in NextToken.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProgressUpdateStreamsOutput struct {
@@ -51,6 +53,8 @@ type ListProgressUpdateStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProgressUpdateStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

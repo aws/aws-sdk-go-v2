@@ -49,11 +49,15 @@ type SetInstanceProtectionInput struct {
 	//
 	// This member is required.
 	ProtectedFromScaleIn *bool
+
+	noSmithyDocumentSerde
 }
 
 type SetInstanceProtectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetInstanceProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

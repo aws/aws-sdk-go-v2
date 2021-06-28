@@ -51,6 +51,8 @@ type DescribeEndpointAccessInput struct {
 
 	// The virtual private cloud (VPC) identifier with access to the cluster.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEndpointAccessOutput struct {
@@ -65,6 +67,8 @@ type DescribeEndpointAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

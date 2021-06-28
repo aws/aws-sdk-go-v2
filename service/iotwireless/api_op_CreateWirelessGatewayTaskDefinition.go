@@ -52,6 +52,8 @@ type CreateWirelessGatewayTaskDefinitionInput struct {
 
 	// Information about the gateways to update.
 	Update *types.UpdateWirelessGatewayTaskCreate
+
+	noSmithyDocumentSerde
 }
 
 type CreateWirelessGatewayTaskDefinitionOutput struct {
@@ -64,6 +66,8 @@ type CreateWirelessGatewayTaskDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWirelessGatewayTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

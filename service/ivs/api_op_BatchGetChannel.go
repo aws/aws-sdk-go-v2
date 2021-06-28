@@ -33,6 +33,8 @@ type BatchGetChannelInput struct {
 	//
 	// This member is required.
 	Arns []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetChannelOutput struct {
@@ -43,6 +45,8 @@ type BatchGetChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

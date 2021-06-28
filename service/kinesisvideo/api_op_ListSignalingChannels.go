@@ -42,6 +42,8 @@ type ListSignalingChannelsInput struct {
 	// operation is truncated, the call returns the NextToken in the response. To get
 	// another batch of channels, provide this token in your next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSignalingChannelsOutput struct {
@@ -55,6 +57,8 @@ type ListSignalingChannelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSignalingChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

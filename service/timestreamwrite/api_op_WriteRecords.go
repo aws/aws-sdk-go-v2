@@ -65,11 +65,15 @@ type WriteRecordsInput struct {
 	// in here will be merged with the measure and dimension attributes in the records
 	// object when the data is written into Timestream.
 	CommonAttributes *types.Record
+
+	noSmithyDocumentSerde
 }
 
 type WriteRecordsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationWriteRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

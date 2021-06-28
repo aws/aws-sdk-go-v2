@@ -61,6 +61,8 @@ type GetRepositoryEndpointInput struct {
 	// The 12-digit account number of the AWS account that owns the domain that
 	// contains the repository. It does not include dashes or spaces.
 	DomainOwner *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRepositoryEndpointOutput struct {
@@ -70,6 +72,8 @@ type GetRepositoryEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRepositoryEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

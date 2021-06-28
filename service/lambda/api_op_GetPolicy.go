@@ -50,6 +50,8 @@ type GetPolicyInput struct {
 
 	// Specify a version or alias to get the policy for that resource.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPolicyOutput struct {
@@ -62,6 +64,8 @@ type GetPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

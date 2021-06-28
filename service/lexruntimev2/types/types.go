@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Contains information about the contexts that a user is using in a session. You
 // can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you
 // can set a context using the , , or operations. Use a context to indicate to
@@ -29,6 +33,8 @@ type ActiveContext struct {
 	//
 	// This member is required.
 	TimeToLive *ActiveContextTimeToLive
+
+	noSmithyDocumentSerde
 }
 
 // The time that a context is active. You can specify the time to live in seconds
@@ -46,6 +52,8 @@ type ActiveContextTimeToLive struct {
 	//
 	// This member is required.
 	TurnsToLive *int32
+
+	noSmithyDocumentSerde
 }
 
 // A button that appears on a response card show to the user.
@@ -60,6 +68,8 @@ type Button struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a score that indicates the confidence that Amazon Lex V2 has that an
@@ -70,6 +80,8 @@ type ConfidenceScore struct {
 	// the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher
 	// confidence.
 	Score float64
+
+	noSmithyDocumentSerde
 }
 
 // The next action that Amazon Lex V2 should take.
@@ -96,6 +108,8 @@ type DialogAction struct {
 
 	// The name of the slot that should be elicited from the user.
 	SlotToElicit *string
+
+	noSmithyDocumentSerde
 }
 
 // A card that is shown to the user by a messaging platform. You define the
@@ -122,6 +136,8 @@ type ImageResponseCard struct {
 	// The subtitle to display on the response card. The format of the subtitle is
 	// determined by the platform displaying the response card.
 	Subtitle *string
+
+	noSmithyDocumentSerde
 }
 
 // The current intent that Amazon Lex V2 is attempting to fulfill.
@@ -141,6 +157,8 @@ type Intent struct {
 
 	// Contains fulfillment information for the intent.
 	State IntentState
+
+	noSmithyDocumentSerde
 }
 
 // An intent that Amazon Lex V2 determined might satisfy the user's utterance. The
@@ -161,6 +179,8 @@ type Interpretation struct {
 	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
 	// result of the analysis.
 	SentimentResponse *SentimentResponse
+
+	noSmithyDocumentSerde
 }
 
 // Container for text that is returned to the customer..
@@ -179,6 +199,8 @@ type Message struct {
 	// response card, the response from the user is constrained to the text associated
 	// with a button on the card.
 	ImageResponseCard *ImageResponseCard
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the sentiment expressed in a user's response in a
@@ -195,6 +217,8 @@ type SentimentResponse struct {
 
 	// The individual sentiment responses for the utterance.
 	SentimentScore *SentimentScore
+
+	noSmithyDocumentSerde
 }
 
 // The individual sentiment responses for the utterance.
@@ -215,6 +239,8 @@ type SentimentScore struct {
 	// The level of confidence that Amazon Comprehend has in the accuracy of its
 	// detection of the POSITIVE sentiment.
 	Positive float64
+
+	noSmithyDocumentSerde
 }
 
 // The state of the user's session with Amazon Lex V2.
@@ -238,6 +264,8 @@ type SessionState struct {
 	// contains application information passed between Amazon Lex V2 and a client
 	// application.
 	SessionAttributes map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A value that Amazon Lex V2 uses to fulfill an intent.
@@ -255,6 +283,8 @@ type Slot struct {
 	// if a for a slot that elicits pizza toppings, the values might be "pepperoni" and
 	// "pineapple."
 	Values []Slot
+
+	noSmithyDocumentSerde
 }
 
 // The value of a slot.
@@ -273,4 +303,8 @@ type Value struct {
 
 	// A list of additional values that have been recognized for the slot.
 	ResolvedValues []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

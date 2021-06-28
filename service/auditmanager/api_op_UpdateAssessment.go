@@ -51,6 +51,8 @@ type UpdateAssessmentInput struct {
 
 	// The list of roles for the specified assessment.
 	Roles []types.Role
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAssessmentOutput struct {
@@ -61,6 +63,8 @@ type UpdateAssessmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

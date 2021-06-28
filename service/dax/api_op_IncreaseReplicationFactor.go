@@ -43,6 +43,8 @@ type IncreaseReplicationFactorInput struct {
 	// nodes belonging to the cluster are placed in these Availability Zones. Use this
 	// parameter if you want to distribute the nodes across multiple AZs.
 	AvailabilityZones []string
+
+	noSmithyDocumentSerde
 }
 
 type IncreaseReplicationFactorOutput struct {
@@ -52,6 +54,8 @@ type IncreaseReplicationFactorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIncreaseReplicationFactorMiddlewares(stack *middleware.Stack, options Options) (err error) {

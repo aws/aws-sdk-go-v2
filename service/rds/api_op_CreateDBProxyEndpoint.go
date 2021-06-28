@@ -61,6 +61,8 @@ type CreateDBProxyEndpointInput struct {
 	// specify a different set of security group IDs than for the original DB proxy.
 	// The default is the default security group for the VPC.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBProxyEndpointOutput struct {
@@ -72,6 +74,8 @@ type CreateDBProxyEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBProxyEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

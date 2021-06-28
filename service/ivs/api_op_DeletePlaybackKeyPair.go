@@ -36,11 +36,15 @@ type DeletePlaybackKeyPairInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePlaybackKeyPairOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

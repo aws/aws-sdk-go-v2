@@ -50,6 +50,8 @@ type DescribeTrustsInput struct {
 	// current account are returned. An empty list results in an
 	// InvalidParameterException being thrown.
 	TrustIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeTrust request.
@@ -68,6 +70,8 @@ type DescribeTrustsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrustsMiddlewares(stack *middleware.Stack, options Options) (err error) {

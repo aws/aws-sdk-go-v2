@@ -39,6 +39,8 @@ type DescribeDataSourceInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDataSourceOutput struct {
@@ -87,6 +89,8 @@ type DescribeDataSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

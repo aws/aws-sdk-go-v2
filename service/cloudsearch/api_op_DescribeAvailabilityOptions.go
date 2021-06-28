@@ -45,6 +45,8 @@ type DescribeAvailabilityOptionsInput struct {
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeAvailabilityOptions request. Indicates whether or not
@@ -57,6 +59,8 @@ type DescribeAvailabilityOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAvailabilityOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

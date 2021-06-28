@@ -33,11 +33,15 @@ type StartCrawlerScheduleInput struct {
 	//
 	// This member is required.
 	CrawlerName *string
+
+	noSmithyDocumentSerde
 }
 
 type StartCrawlerScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

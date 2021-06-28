@@ -149,6 +149,8 @@ type GetDistributionMetricDataInput struct {
 	//
 	// This member is required.
 	Unit types.MetricUnit
+
+	noSmithyDocumentSerde
 }
 
 type GetDistributionMetricDataOutput struct {
@@ -161,6 +163,8 @@ type GetDistributionMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDistributionMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

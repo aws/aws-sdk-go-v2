@@ -59,6 +59,8 @@ type CreateGroupInput struct {
 
 	// The role ARN for the group.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGroupOutput struct {
@@ -68,6 +70,8 @@ type CreateGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

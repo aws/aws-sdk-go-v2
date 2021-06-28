@@ -36,6 +36,8 @@ type ListServiceTemplatesInput struct {
 	// A token to indicate the location of the next service template in the array of
 	// service templates, after the list of service templates previously requested.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListServiceTemplatesOutput struct {
@@ -51,6 +53,8 @@ type ListServiceTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListServiceTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

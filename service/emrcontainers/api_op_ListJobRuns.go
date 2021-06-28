@@ -55,6 +55,8 @@ type ListJobRunsInput struct {
 
 	// The states of the job run.
 	States []types.JobRunState
+
+	noSmithyDocumentSerde
 }
 
 type ListJobRunsOutput struct {
@@ -67,6 +69,8 @@ type ListJobRunsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {

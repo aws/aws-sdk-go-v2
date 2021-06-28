@@ -69,6 +69,8 @@ type SetUserPoolMfaConfigInput struct {
 
 	// The software token MFA configuration.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
+
+	noSmithyDocumentSerde
 }
 
 type SetUserPoolMfaConfigOutput struct {
@@ -92,6 +94,8 @@ type SetUserPoolMfaConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetUserPoolMfaConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

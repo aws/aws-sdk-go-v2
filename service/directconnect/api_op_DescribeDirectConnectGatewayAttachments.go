@@ -48,6 +48,8 @@ type DescribeDirectConnectGatewayAttachmentsInput struct {
 
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDirectConnectGatewayAttachmentsOutput struct {
@@ -60,6 +62,8 @@ type DescribeDirectConnectGatewayAttachmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDirectConnectGatewayAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -66,11 +66,15 @@ type UndeprecateActivityTypeInput struct {
 	//
 	// This member is required.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 type UndeprecateActivityTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUndeprecateActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

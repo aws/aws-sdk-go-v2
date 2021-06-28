@@ -54,6 +54,8 @@ type UpdateTaskSetInput struct {
 	//
 	// This member is required.
 	TaskSet *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTaskSetOutput struct {
@@ -63,6 +65,8 @@ type UpdateTaskSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

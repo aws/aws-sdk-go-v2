@@ -60,6 +60,8 @@ type ListSSHPublicKeysInput struct {
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful ListSSHPublicKeys request.
@@ -82,6 +84,8 @@ type ListSSHPublicKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSSHPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

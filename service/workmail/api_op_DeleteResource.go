@@ -38,11 +38,15 @@ type DeleteResourceInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

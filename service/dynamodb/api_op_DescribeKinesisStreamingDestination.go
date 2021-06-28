@@ -35,6 +35,8 @@ type DescribeKinesisStreamingDestinationInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeKinesisStreamingDestinationOutput struct {
@@ -47,6 +49,8 @@ type DescribeKinesisStreamingDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeKinesisStreamingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

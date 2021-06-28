@@ -61,6 +61,8 @@ type ListSharedProjectsInput struct {
 	//
 	// * DESCENDING: List in descending order.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type ListSharedProjectsOutput struct {
@@ -79,6 +81,8 @@ type ListSharedProjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSharedProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

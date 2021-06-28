@@ -66,12 +66,16 @@ type AdminConfirmSignUpInput struct {
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
 	ClientMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server for the request to confirm registration.
 type AdminConfirmSignUpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminConfirmSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {

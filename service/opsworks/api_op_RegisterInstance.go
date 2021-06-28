@@ -70,6 +70,8 @@ type RegisterInstanceInput struct {
 
 	// The instances public RSA key fingerprint.
 	RsaPublicKeyFingerprint *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a RegisterInstanceResult request.
@@ -80,6 +82,8 @@ type RegisterInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,6 +57,8 @@ type CreateClusterSecurityGroupInput struct {
 
 	// A list of tag instances.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterSecurityGroupOutput struct {
@@ -66,6 +68,8 @@ type CreateClusterSecurityGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

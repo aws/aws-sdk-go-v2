@@ -46,6 +46,8 @@ type ListTriggersInput struct {
 
 	// Specifies to return only these tagged resources.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type ListTriggersOutput struct {
@@ -60,6 +62,8 @@ type ListTriggersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {

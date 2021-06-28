@@ -75,6 +75,8 @@ type UpdateStackInput struct {
 	// The actions that are enabled or disabled for users during their streaming
 	// sessions. By default, these actions are enabled.
 	UserSettings []types.UserSetting
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStackOutput struct {
@@ -84,6 +86,8 @@ type UpdateStackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

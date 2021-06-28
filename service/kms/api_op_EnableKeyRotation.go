@@ -72,11 +72,15 @@ type EnableKeyRotationInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableKeyRotationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableKeyRotationMiddlewares(stack *middleware.Stack, options Options) (err error) {

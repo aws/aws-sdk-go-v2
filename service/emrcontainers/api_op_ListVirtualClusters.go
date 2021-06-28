@@ -57,6 +57,8 @@ type ListVirtualClustersInput struct {
 
 	// The states of the requested virtual clusters.
 	States []types.VirtualClusterState
+
+	noSmithyDocumentSerde
 }
 
 type ListVirtualClustersOutput struct {
@@ -69,6 +71,8 @@ type ListVirtualClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVirtualClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -89,6 +89,8 @@ type DescribeOpsItemsInput struct {
 	// the response by using the OperationalData operator, specify a key-value pair by
 	// using the following JSON format: {"key":"key_name","value":"a_value"}
 	OpsItemFilters []types.OpsItemFilter
+
+	noSmithyDocumentSerde
 }
 
 type DescribeOpsItemsOutput struct {
@@ -102,6 +104,8 @@ type DescribeOpsItemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOpsItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

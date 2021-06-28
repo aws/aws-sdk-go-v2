@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type BatchRestrictions struct {
 
 	// Specifies the maximum number of builds allowed.
 	MaximumBuildsAllowed *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a build.
@@ -193,6 +196,8 @@ type Build struct {
 	// subnet IDs. The security groups and subnets must belong to the same VPC. You
 	// must provide at least one security group and one subnet ID.
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about build output artifacts.
@@ -222,6 +227,8 @@ type BuildArtifacts struct {
 	// checksum tool to confirm file integrity and authenticity. This value is
 	// available only if the build project's packaging value is set to ZIP.
 	Sha256sum *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a batch build.
@@ -370,6 +377,8 @@ type BuildBatch struct {
 
 	// Information about the VPC configuration that CodeBuild accesses.
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Specifies filters when retrieving batch builds.
@@ -378,6 +387,8 @@ type BuildBatchFilter struct {
 	// The status of the batch builds to retrieve. Only batch builds that have this
 	// status will be retrieved.
 	Status StatusType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a stage for a batch build.
@@ -411,6 +422,8 @@ type BuildBatchPhase struct {
 
 	// When the batch build phase started, expressed in Unix time format.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a batch build build group. Build groups are used to
@@ -434,6 +447,8 @@ type BuildGroup struct {
 	// An array of BuildSummary objects that contain summaries of previous build
 	// groups.
 	PriorBuildSummaryList []BuildSummary
+
+	noSmithyDocumentSerde
 }
 
 // Information about a build that could not be successfully deleted.
@@ -444,6 +459,8 @@ type BuildNotDeleted struct {
 
 	// Additional information about the build that could not be successfully deleted.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a stage for a build.
@@ -504,6 +521,8 @@ type BuildPhase struct {
 
 	// When the build phase started, expressed in Unix time format.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information that defines how the CodeBuild build project reports the
@@ -533,6 +552,8 @@ type BuildStatusConfig struct {
 	// (https://developer.github.com/v3/repos/statuses/#create-a-commit-status) in the
 	// GitHub developer guide.
 	TargetUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a batch build group.
@@ -557,6 +578,8 @@ type BuildSummary struct {
 	// An array of ResolvedArtifact objects that represents the secondary build
 	// artifacts for the build group.
 	SecondaryArtifacts []ResolvedArtifact
+
+	noSmithyDocumentSerde
 }
 
 // Information about CloudWatch Logs for a build project.
@@ -582,6 +605,8 @@ type CloudWatchLogsConfig struct {
 	// Working with Log Groups and Log Streams
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html).
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains code coverage report information. Line coverage measures how many
@@ -619,6 +644,8 @@ type CodeCoverage struct {
 
 	// The ARN of the report.
 	ReportARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of a code coverage report. Line coverage measures how many
@@ -644,6 +671,8 @@ type CodeCoverageReportSummary struct {
 
 	// The number of lines that are not covered by your tests.
 	LinesMissed *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the debug session for a build. For more information,
@@ -658,6 +687,8 @@ type DebugSession struct {
 	// work with the paused build, you open this session to examine, control, and
 	// resume the build.
 	SessionTarget *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Docker image that is managed by CodeBuild.
@@ -671,6 +702,8 @@ type EnvironmentImage struct {
 
 	// A list of environment image versions.
 	Versions []string
+
+	noSmithyDocumentSerde
 }
 
 // A set of Docker images that are related by programming language and are managed
@@ -683,6 +716,8 @@ type EnvironmentLanguage struct {
 
 	// The programming language for the Docker images.
 	Language LanguageType
+
+	noSmithyDocumentSerde
 }
 
 // A set of Docker images that are related by platform and are managed by
@@ -694,6 +729,8 @@ type EnvironmentPlatform struct {
 
 	// The platform's name.
 	Platform PlatformType
+
+	noSmithyDocumentSerde
 }
 
 // Information about an environment variable for a build project or a build.
@@ -731,6 +768,8 @@ type EnvironmentVariable struct {
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager)
 	// in the CodeBuild User Guide.
 	Type EnvironmentVariableType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an exported environment variable. Exported
@@ -749,6 +788,8 @@ type ExportedEnvironmentVariable struct {
 
 	// The value assigned to the exported environment variable.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the Git submodules configuration for an CodeBuild build
@@ -759,6 +800,8 @@ type GitSubmodulesConfig struct {
 	//
 	// This member is required.
 	FetchSubmodules *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about logs for a build project. These can be logs in CloudWatch
@@ -772,6 +815,8 @@ type LogsConfig struct {
 	// Information about logs built to an S3 bucket for a build project. S3 logs are
 	// not enabled by default.
 	S3Logs *S3LogsConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about build logs in CloudWatch Logs.
@@ -806,6 +851,8 @@ type LogsLocation struct {
 
 	// The name of the CloudWatch Logs stream for the build logs.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a network interface.
@@ -816,6 +863,8 @@ type NetworkInterface struct {
 
 	// The ID of the subnet.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Additional information about a build phase that has an error. You can use this
@@ -828,6 +877,8 @@ type PhaseContext struct {
 
 	// The status code for the context of the build phase.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a build project.
@@ -956,6 +1007,8 @@ type Project struct {
 	// Information about a webhook that connects repository events to a build project
 	// in CodeBuild.
 	Webhook *Webhook
+
+	noSmithyDocumentSerde
 }
 
 // Information about the build output artifacts for the build project.
@@ -1096,6 +1149,8 @@ type ProjectArtifacts struct {
 	// to NONE, and name is set to MyArtifact.zip, the output artifact is stored in the
 	// output bucket at MyArtifacts/MyArtifact.zip.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the build badge for the build project.
@@ -1108,6 +1163,8 @@ type ProjectBadge struct {
 	// The publicly-accessible URL through which you can access the build badge for
 	// your project.
 	BadgeRequestUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information about a batch build project.
@@ -1126,6 +1183,8 @@ type ProjectBuildBatchConfig struct {
 	// Specifies the maximum amount of time, in minutes, that the batch build must be
 	// completed in.
 	TimeoutInMins *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the cache for the build project.
@@ -1190,6 +1249,8 @@ type ProjectCache struct {
 	// if a source item has the same name. Directories are specified using cache paths
 	// in the buildspec file.
 	Modes []CacheMode
+
+	noSmithyDocumentSerde
 }
 
 // Information about the build environment of the build project.
@@ -1328,6 +1389,8 @@ type ProjectEnvironment struct {
 
 	// The credentials for access to a private registry.
 	RegistryCredential *RegistryCredential
+
+	noSmithyDocumentSerde
 }
 
 // Information about a file system created by Amazon Elastic File System (EFS). For
@@ -1366,6 +1429,8 @@ type ProjectFileSystemLocation struct {
 
 	// The type of the file system. The one supported type is EFS.
 	Type FileSystemType
+
+	noSmithyDocumentSerde
 }
 
 // Information about the build input source code for the build project.
@@ -1494,6 +1559,8 @@ type ProjectSource struct {
 	// alphanumeric characters and underscores, and must be less than 128 characters in
 	// length.
 	SourceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // A source identifier and its corresponding version.
@@ -1534,6 +1601,8 @@ type ProjectSourceVersion struct {
 	//
 	// This member is required.
 	SourceVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about credentials that provide access to a private Docker registry.
@@ -1561,6 +1630,8 @@ type RegistryCredential struct {
 	//
 	// This member is required.
 	CredentialProvider CredentialProviderType
+
+	noSmithyDocumentSerde
 }
 
 // Information about the results from running a series of test cases during the run
@@ -1608,6 +1679,8 @@ type Report struct {
 	// The type of the report that was run. CODE_COVERAGE A code coverage report. TEST
 	// A test report.
 	Type ReportType
+
+	noSmithyDocumentSerde
 }
 
 // Information about the location where the run of a report is exported.
@@ -1624,6 +1697,8 @@ type ReportExportConfig struct {
 	// A S3ReportExportConfig object that contains information about the S3 bucket
 	// where the run of a report is exported.
 	S3Destination *S3ReportExportConfig
+
+	noSmithyDocumentSerde
 }
 
 // A filter used to return reports with the status specified by the input status
@@ -1632,6 +1707,8 @@ type ReportFilter struct {
 
 	// The status used to filter reports. You can filter using one status only.
 	Status ReportStatusType
+
+	noSmithyDocumentSerde
 }
 
 // A series of reports. Each report contains information about the results from
@@ -1670,6 +1747,8 @@ type ReportGroup struct {
 	// CODE_COVERAGE The report group contains code coverage reports. TEST The report
 	// group contains test reports.
 	Type ReportType
+
+	noSmithyDocumentSerde
 }
 
 // Contains trend statistics for a set of reports. The actual values depend on the
@@ -1684,6 +1763,8 @@ type ReportGroupTrendStats struct {
 
 	// Contains the minimum value analyzed.
 	Min *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the unmodified data for the report. For more information, see .
@@ -1694,6 +1775,8 @@ type ReportWithRawData struct {
 
 	// The ARN of the report.
 	ReportArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a resolved build artifact. A resolve artifact is an artifact that is
@@ -1708,6 +1791,8 @@ type ResolvedArtifact struct {
 
 	// Specifies the type of artifact.
 	Type ArtifactsType
+
+	noSmithyDocumentSerde
 }
 
 // Information about S3 logs for a build project.
@@ -1732,6 +1817,8 @@ type S3LogsConfig struct {
 	// bucket name is my-bucket, and your path prefix is build-log, then acceptable
 	// formats are my-bucket/build-log or arn:aws:s3:::my-bucket/build-log.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the S3 bucket where the raw data of a report are exported.
@@ -1763,6 +1850,8 @@ type S3ReportExportConfig struct {
 
 	// The path to the exported report's raw data results.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the authorization settings for CodeBuild to access the source
@@ -1779,6 +1868,8 @@ type SourceAuth struct {
 
 	// The resource value that applies to the specified authorization type.
 	Resource *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the credentials for a GitHub, GitHub Enterprise, or Bitbucket
@@ -1795,6 +1886,8 @@ type SourceCredentialsInfo struct {
 	// The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, or
 	// BITBUCKET.
 	ServerType ServerType
+
+	noSmithyDocumentSerde
 }
 
 // A tag, consisting of a key and a value. This tag is available for use by Amazon
@@ -1806,6 +1899,8 @@ type Tag struct {
 
 	// The tag's value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a test case created using a framework such as NUnit or
@@ -1839,6 +1934,8 @@ type TestCase struct {
 
 	// The path to the raw data file that contains the test result.
 	TestRawDataPath *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter used to return specific types of test cases. In order to pass the
@@ -1863,6 +1960,8 @@ type TestCaseFilter struct {
 	//
 	// * UNKNOWN
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a test report.
@@ -1884,6 +1983,8 @@ type TestReportSummary struct {
 	//
 	// This member is required.
 	Total *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the VPC configuration that CodeBuild accesses.
@@ -1897,6 +1998,8 @@ type VpcConfig struct {
 
 	// The ID of the Amazon VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a webhook that connects repository events to a build project
@@ -1931,6 +2034,8 @@ type Webhook struct {
 
 	// The URL to the webhook.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter used to determine which webhooks trigger a build.
@@ -1982,4 +2087,8 @@ type WebhookFilter struct {
 	// a build. If false, then a webhook event that matches the pattern triggers a
 	// build.
 	ExcludeMatchedPattern *bool
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

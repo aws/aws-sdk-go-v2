@@ -44,6 +44,8 @@ type DeregisterTransitGatewayMulticastGroupSourcesInput struct {
 
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterTransitGatewayMulticastGroupSourcesOutput struct {
@@ -53,6 +55,8 @@ type DeregisterTransitGatewayMulticastGroupSourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterTransitGatewayMulticastGroupSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

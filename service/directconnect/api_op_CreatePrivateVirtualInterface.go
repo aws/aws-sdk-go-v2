@@ -50,6 +50,8 @@ type CreatePrivateVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	NewPrivateVirtualInterface *types.NewPrivateVirtualInterface
+
+	noSmithyDocumentSerde
 }
 
 // Information about a virtual interface.
@@ -174,6 +176,8 @@ type CreatePrivateVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePrivateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

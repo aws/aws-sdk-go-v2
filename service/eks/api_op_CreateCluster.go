@@ -103,6 +103,8 @@ type CreateClusterInput struct {
 	// The desired Kubernetes version for your cluster. If you don't specify a value
 	// here, the latest version available in Amazon EKS is used.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterOutput struct {
@@ -112,6 +114,8 @@ type CreateClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

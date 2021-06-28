@@ -55,6 +55,8 @@ type UpdateMetricSetInput struct {
 
 	// The timestamp column.
 	TimestampColumn *types.TimestampColumn
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMetricSetOutput struct {
@@ -64,6 +66,8 @@ type UpdateMetricSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMetricSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

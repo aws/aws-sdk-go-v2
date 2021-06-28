@@ -42,6 +42,8 @@ type DeleteVpcEndpointServiceConfigurationsInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVpcEndpointServiceConfigurationsOutput struct {
@@ -52,6 +54,8 @@ type DeleteVpcEndpointServiceConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVpcEndpointServiceConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

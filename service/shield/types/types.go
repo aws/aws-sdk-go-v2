@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -37,6 +38,8 @@ type AttackDetail struct {
 	// If applicable, additional detail about the resource being attacked, for example,
 	// IP address or URL.
 	SubResources []SubResourceSummary
+
+	noSmithyDocumentSerde
 }
 
 // Details of the described attack.
@@ -62,6 +65,8 @@ type AttackProperty struct {
 
 	// The unit of the Value of the contributions.
 	Unit Unit
+
+	noSmithyDocumentSerde
 }
 
 // A single attack statistics data record. This is returned by
@@ -78,6 +83,8 @@ type AttackStatisticsDataItem struct {
 	// Information about the volume of attacks during the time period. If the
 	// accompanying AttackCount is zero, this setting might be empty.
 	AttackVolume *AttackVolume
+
+	noSmithyDocumentSerde
 }
 
 // Summarizes all DDoS attacks for a specified time period.
@@ -101,6 +108,8 @@ type AttackSummary struct {
 	// timestamp
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the attack.
@@ -151,6 +160,8 @@ type AttackVectorDescription struct {
 	//
 	// This member is required.
 	VectorType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the volume of attacks during the time period, included in an
@@ -170,6 +181,8 @@ type AttackVolume struct {
 	// for application level attacks, and is only available for accounts that are
 	// subscribed to Shield Advanced.
 	RequestsPerSecond *AttackVolumeStatistics
+
+	noSmithyDocumentSerde
 }
 
 // Statistics objects for the various data types in AttackVolume.
@@ -179,6 +192,8 @@ type AttackVolumeStatistics struct {
 	//
 	// This member is required.
 	Max float64
+
+	noSmithyDocumentSerde
 }
 
 // A contributor to the attack and their contribution.
@@ -192,6 +207,8 @@ type Contributor struct {
 	// The contribution of this contributor expressed in Protection units. For example
 	// 10,000.
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 // Contact information that the DRT can use to contact you if you have proactive
@@ -209,6 +226,8 @@ type EmergencyContact struct {
 
 	// The phone number for the contact.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies how many protections of a given type you can create.
@@ -219,6 +238,8 @@ type Limit struct {
 
 	// The type of protection.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The mitigation applied to a DDoS attack.
@@ -226,6 +247,8 @@ type Mitigation struct {
 
 	// The name of the mitigation taken for this attack.
 	MitigationName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a resource that is under DDoS protection.
@@ -246,6 +269,8 @@ type Protection struct {
 
 	// The ARN (Amazon Resource Name) of the AWS resource that is protected.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A grouping of protected resources that you and AWS Shield Advanced can monitor
@@ -303,6 +328,8 @@ type ProtectionGroup struct {
 	// Pattern to BY_RESOURCE_TYPE and you must not set it for any other Pattern
 	// setting.
 	ResourceType ProtectedResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Limits settings on protection groups with arbitrary pattern type.
@@ -313,6 +340,8 @@ type ProtectionGroupArbitraryPatternLimits struct {
 	//
 	// This member is required.
 	MaxMembers int64
+
+	noSmithyDocumentSerde
 }
 
 // Limits settings on protection groups for your subscription.
@@ -327,6 +356,8 @@ type ProtectionGroupLimits struct {
 	//
 	// This member is required.
 	PatternTypeLimits *ProtectionGroupPatternTypeLimits
+
+	noSmithyDocumentSerde
 }
 
 // Limits settings by pattern type in the protection groups for your subscription.
@@ -336,6 +367,8 @@ type ProtectionGroupPatternTypeLimits struct {
 	//
 	// This member is required.
 	ArbitraryPatternLimits *ProtectionGroupArbitraryPatternLimits
+
+	noSmithyDocumentSerde
 }
 
 // Limits settings on protections for your subscription.
@@ -345,6 +378,8 @@ type ProtectionLimits struct {
 	//
 	// This member is required.
 	ProtectedResourceTypeLimits []Limit
+
+	noSmithyDocumentSerde
 }
 
 // The attack information for the specified SubResource.
@@ -361,6 +396,8 @@ type SubResourceSummary struct {
 
 	// The SubResource type.
 	Type SubResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Information about the AWS Shield Advanced subscription for an account.
@@ -402,6 +439,8 @@ type Subscription struct {
 
 	// The length, in seconds, of the AWS Shield Advanced subscription for the account.
 	TimeCommitmentInSeconds int64
+
+	noSmithyDocumentSerde
 }
 
 // Limits settings for your subscription.
@@ -416,6 +455,8 @@ type SubscriptionLimits struct {
 	//
 	// This member is required.
 	ProtectionLimits *ProtectionLimits
+
+	noSmithyDocumentSerde
 }
 
 // A summary of information about the attack.
@@ -428,6 +469,8 @@ type SummarizedAttackVector struct {
 
 	// The list of counters that describe the details of the attack.
 	VectorCounters []SummarizedCounter
+
+	noSmithyDocumentSerde
 }
 
 // The counter that describes a DDoS attack.
@@ -450,6 +493,8 @@ type SummarizedCounter struct {
 
 	// The unit of the counters.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag associated with an AWS resource. Tags are key:value pairs that you can use
@@ -469,6 +514,8 @@ type Tag struct {
 	// describe a specific value within a category, such as "companyA" or "companyB."
 	// Tag values are case-sensitive.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The time range.
@@ -481,6 +528,8 @@ type TimeRange struct {
 	// The end time, in Unix time in seconds. For more information see timestamp
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	ToExclusive *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a particular parameter passed inside a request that
@@ -496,4 +545,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

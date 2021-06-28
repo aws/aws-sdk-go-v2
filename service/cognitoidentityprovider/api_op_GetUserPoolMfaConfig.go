@@ -33,6 +33,8 @@ type GetUserPoolMfaConfigInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetUserPoolMfaConfigOutput struct {
@@ -57,6 +59,8 @@ type GetUserPoolMfaConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUserPoolMfaConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

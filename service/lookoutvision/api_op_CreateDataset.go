@@ -67,6 +67,8 @@ type CreateDatasetInput struct {
 	// the current status, Check the value of Status returned in a call to
 	// DescribeDataset.
 	DatasetSource *types.DatasetSource
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetOutput struct {
@@ -76,6 +78,8 @@ type CreateDatasetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

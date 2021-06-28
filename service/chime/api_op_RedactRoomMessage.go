@@ -42,11 +42,15 @@ type RedactRoomMessageInput struct {
 	//
 	// This member is required.
 	RoomId *string
+
+	noSmithyDocumentSerde
 }
 
 type RedactRoomMessageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRedactRoomMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,6 +60,8 @@ type GetAuthorizationTokenInput struct {
 	// value of 0 will set the expiration of the authorization token to the same
 	// expiration of the user's role's temporary credentials.
 	DurationSeconds *int64
+
+	noSmithyDocumentSerde
 }
 
 type GetAuthorizationTokenOutput struct {
@@ -72,6 +74,8 @@ type GetAuthorizationTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAuthorizationTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type BatchGetCrawlersInput struct {
 	//
 	// This member is required.
 	CrawlerNames []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetCrawlersOutput struct {
@@ -49,6 +51,8 @@ type BatchGetCrawlersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {

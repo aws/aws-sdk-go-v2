@@ -35,6 +35,8 @@ type ListFunctionDefinitionsInput struct {
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFunctionDefinitionsOutput struct {
@@ -48,6 +50,8 @@ type ListFunctionDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFunctionDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

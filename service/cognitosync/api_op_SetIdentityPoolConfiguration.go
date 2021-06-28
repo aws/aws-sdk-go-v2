@@ -61,6 +61,8 @@ type SetIdentityPoolConfigurationInput struct {
 
 	// Options to apply to this identity pool for push synchronization.
 	PushSync *types.PushSync
+
+	noSmithyDocumentSerde
 }
 
 // The output for the SetIdentityPoolConfiguration operation
@@ -78,6 +80,8 @@ type SetIdentityPoolConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetIdentityPoolConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

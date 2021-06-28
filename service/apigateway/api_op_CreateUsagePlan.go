@@ -54,6 +54,8 @@ type CreateUsagePlanInput struct {
 
 	// The throttling limits of the usage plan.
 	Throttle *types.ThrottleSettings
+
+	noSmithyDocumentSerde
 }
 
 // Represents a usage plan than can specify who can assess associated API stages
@@ -90,6 +92,8 @@ type CreateUsagePlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUsagePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

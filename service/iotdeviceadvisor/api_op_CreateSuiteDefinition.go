@@ -35,6 +35,8 @@ type CreateSuiteDefinitionInput struct {
 
 	// The tags to be attached to the suite definition.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSuiteDefinitionOutput struct {
@@ -53,6 +55,8 @@ type CreateSuiteDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

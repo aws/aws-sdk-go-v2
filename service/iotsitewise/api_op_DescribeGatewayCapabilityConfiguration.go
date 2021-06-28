@@ -48,6 +48,8 @@ type DescribeGatewayCapabilityConfigurationInput struct {
 	//
 	// This member is required.
 	GatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeGatewayCapabilityConfigurationOutput struct {
@@ -87,6 +89,8 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGatewayCapabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

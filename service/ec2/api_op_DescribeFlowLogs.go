@@ -77,6 +77,8 @@ type DescribeFlowLogsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFlowLogsOutput struct {
@@ -90,6 +92,8 @@ type DescribeFlowLogsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFlowLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {

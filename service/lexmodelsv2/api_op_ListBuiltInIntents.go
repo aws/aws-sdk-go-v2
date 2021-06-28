@@ -54,6 +54,8 @@ type ListBuiltInIntentsInput struct {
 	// that the list be sorted by the built-in intent signature in either ascending or
 	// descending order.
 	SortBy *types.BuiltInIntentSortBy
+
+	noSmithyDocumentSerde
 }
 
 type ListBuiltInIntentsOutput struct {
@@ -75,6 +77,8 @@ type ListBuiltInIntentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBuiltInIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

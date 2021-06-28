@@ -58,11 +58,15 @@ type UpdateTypedLinkFacetInput struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTypedLinkFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {

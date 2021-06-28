@@ -45,6 +45,8 @@ type GetTransitGatewayRegistrationsInput struct {
 	// The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is
 	// 10.
 	TransitGatewayArns []string
+
+	noSmithyDocumentSerde
 }
 
 type GetTransitGatewayRegistrationsOutput struct {
@@ -57,6 +59,8 @@ type GetTransitGatewayRegistrationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTransitGatewayRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

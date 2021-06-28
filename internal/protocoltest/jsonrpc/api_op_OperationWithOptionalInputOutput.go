@@ -27,6 +27,8 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 
 type OperationWithOptionalInputOutputInput struct {
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type OperationWithOptionalInputOutputOutput struct {
@@ -34,6 +36,8 @@ type OperationWithOptionalInputOutputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationOperationWithOptionalInputOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {

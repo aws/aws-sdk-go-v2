@@ -37,6 +37,8 @@ type ModifyClusterInput struct {
 	// The number of steps that can be executed concurrently. You can specify a minimum
 	// of 1 step and a maximum of 256 steps.
 	StepConcurrencyLevel *int32
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterOutput struct {
@@ -46,6 +48,8 @@ type ModifyClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

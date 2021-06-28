@@ -89,6 +89,8 @@ type ExportEBSVolumeRecommendationsInput struct {
 	// accounts are not included in the export if this parameter, or the account IDs
 	// parameter, is omitted.
 	IncludeMemberAccounts bool
+
+	noSmithyDocumentSerde
 }
 
 type ExportEBSVolumeRecommendationsOutput struct {
@@ -105,6 +107,8 @@ type ExportEBSVolumeRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportEBSVolumeRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

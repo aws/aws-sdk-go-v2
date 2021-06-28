@@ -35,6 +35,8 @@ type GetIdentityPoolRolesInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Returned in response to a successful GetIdentityPoolRoles operation.
@@ -55,6 +57,8 @@ type GetIdentityPoolRolesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIdentityPoolRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {

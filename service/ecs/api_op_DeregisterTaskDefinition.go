@@ -46,6 +46,8 @@ type DeregisterTaskDefinitionInput struct {
 	//
 	// This member is required.
 	TaskDefinition *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterTaskDefinitionOutput struct {
@@ -55,6 +57,8 @@ type DeregisterTaskDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

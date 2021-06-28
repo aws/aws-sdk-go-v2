@@ -59,6 +59,8 @@ type DescribePendingMaintenanceActionsInput struct {
 
 	// The ARN of a resource to return pending maintenance actions for.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Data returned from the DescribePendingMaintenanceActions action.
@@ -75,6 +77,8 @@ type DescribePendingMaintenanceActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePendingMaintenanceActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type Endpoint struct {
 
 	// EndpointArn for mobile app and device.
 	EndpointArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The user-specified message attribute value. For string data types, the value
@@ -45,6 +48,8 @@ type MessageAttributeValue struct {
 	// ASCII Printable Characters
 	// (https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of phone numbers and their metadata.
@@ -67,6 +72,8 @@ type PhoneNumberInformation struct {
 
 	// The status of the phone number.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Platform application object.
@@ -77,6 +84,8 @@ type PlatformApplication struct {
 
 	// PlatformApplicationArn for platform application object.
 	PlatformApplicationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A verified or pending destination phone number in the SMS sandbox. When you
@@ -96,6 +105,8 @@ type SMSSandboxPhoneNumber struct {
 
 	// The destination phone number's verification status.
 	Status SMSSandboxPhoneNumberVerificationStatus
+
+	noSmithyDocumentSerde
 }
 
 // A wrapper type for the attributes of an Amazon SNS subscription.
@@ -115,6 +126,8 @@ type Subscription struct {
 
 	// The ARN of the subscription's topic.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The list of tags to be added to the specified topic.
@@ -129,6 +142,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a topic's
@@ -137,4 +152,8 @@ type Topic struct {
 
 	// The topic's ARN.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

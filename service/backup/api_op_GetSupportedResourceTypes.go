@@ -27,6 +27,7 @@ func (c *Client) GetSupportedResourceTypes(ctx context.Context, params *GetSuppo
 }
 
 type GetSupportedResourceTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetSupportedResourceTypesOutput struct {
@@ -54,6 +55,8 @@ type GetSupportedResourceTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSupportedResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

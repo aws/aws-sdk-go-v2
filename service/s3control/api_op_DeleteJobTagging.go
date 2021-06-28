@@ -57,11 +57,15 @@ type DeleteJobTaggingInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteJobTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -39,6 +40,8 @@ type Container struct {
 	// container, the status is CREATING. When the endpoint is available, the status
 	// changes to ACTIVE.
 	Status ContainerStatus
+
+	noSmithyDocumentSerde
 }
 
 // A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more
@@ -77,6 +80,8 @@ type CorsRule struct {
 	// The time in seconds that your browser caches the preflight response for the
 	// specified resource. A CORS rule can have only one MaxAgeSeconds element.
 	MaxAgeSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // The metric policy that is associated with the container. A metric policy allows
@@ -100,6 +105,8 @@ type MetricPolicy struct {
 	// (https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas)
 	// to allow up to 300 rules per policy.
 	MetricPolicyRules []MetricPolicyRule
+
+	noSmithyDocumentSerde
 }
 
 // A setting that enables metrics at the object level. Each rule contains an object
@@ -120,6 +127,8 @@ type MetricPolicyRule struct {
 	//
 	// This member is required.
 	ObjectGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of tags associated with a container. Each tag consists of a
@@ -141,4 +150,8 @@ type Tag struct {
 	// describe a specific value within a category, such as "companyA" or "companyB."
 	// Tag values are case-sensitive.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -33,6 +33,8 @@ type ListSupportedPhoneNumberCountriesInput struct {
 	//
 	// This member is required.
 	ProductType types.PhoneNumberProductType
+
+	noSmithyDocumentSerde
 }
 
 type ListSupportedPhoneNumberCountriesOutput struct {
@@ -42,6 +44,8 @@ type ListSupportedPhoneNumberCountriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSupportedPhoneNumberCountriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

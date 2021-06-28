@@ -63,6 +63,8 @@ type GetExecutionHistoryInput struct {
 
 	// Lists events in descending order of their timeStamp.
 	ReverseOrder bool
+
+	noSmithyDocumentSerde
 }
 
 type GetExecutionHistoryOutput struct {
@@ -81,6 +83,8 @@ type GetExecutionHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

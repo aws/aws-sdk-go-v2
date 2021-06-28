@@ -37,6 +37,8 @@ type GetBranchInput struct {
 	// The name of the repository that contains the branch for which you want to
 	// retrieve information.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a get branch operation.
@@ -47,6 +49,8 @@ type GetBranchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {

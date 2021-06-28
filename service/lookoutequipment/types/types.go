@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -25,6 +26,8 @@ type DataIngestionJobSummary struct {
 
 	// Indicates the status of the data ingestion job.
 	Status IngestionJobStatus
+
+	noSmithyDocumentSerde
 }
 
 // The configuration is the TargetSamplingRate, which is the sampling rate of the
@@ -45,6 +48,8 @@ type DataPreProcessingConfiguration struct {
 	// The value for a 1 second rate is therefore PT1S, the value for a 15 minute rate
 	// is PT15M, and the value for a 1 hour rate is PT1H
 	TargetSamplingRate TargetSamplingRate
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the data schema used with the given dataset.
@@ -54,6 +59,8 @@ type DatasetSchema struct {
 	//
 	// This value conforms to the media type: application/json
 	InlineDataSchema *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the specific data set, including name, ARN, and
@@ -71,6 +78,8 @@ type DatasetSummary struct {
 
 	// Indicates the status of the dataset.
 	Status DatasetStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the specific inference execution, including input and
@@ -118,6 +127,8 @@ type InferenceExecutionSummary struct {
 
 	// Indicates the status of the inference execution.
 	Status InferenceExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 // > Specifies configuration information for the input data for the inference,
@@ -134,6 +145,8 @@ type InferenceInputConfiguration struct {
 	// Specifies configuration information for the input data for the inference,
 	// including S3 location of input data..
 	S3InputConfiguration *InferenceS3InputConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // >> Specifies configuration information for the input data for the inference,
@@ -146,6 +159,8 @@ type InferenceInputNameConfiguration struct {
 	// The format of the timestamp, whether Epoch time, or standard, with or without
 	// hyphens (-).
 	TimestampFormat *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration information for the output results from for the
@@ -160,6 +175,8 @@ type InferenceOutputConfiguration struct {
 
 	// The ID number for the AWS KMS key used to encrypt the inference output.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration information for the input data for the inference,
@@ -173,6 +190,8 @@ type InferenceS3InputConfiguration struct {
 
 	// The prefix for the S3 bucket used for the input data for the inference.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration information for the output results from the inference,
@@ -186,6 +205,8 @@ type InferenceS3OutputConfiguration struct {
 
 	// The prefix for the S3 bucket used for the output results from the inference.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the specific inference scheduler, including data
@@ -224,6 +245,8 @@ type InferenceSchedulerSummary struct {
 
 	// Indicates the status of the inference scheduler.
 	Status InferenceSchedulerStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration information for the input data for the data ingestion
@@ -235,6 +258,8 @@ type IngestionInputConfiguration struct {
 	//
 	// This member is required.
 	S3InputConfiguration *IngestionS3InputConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Specifies S3 configuration information for the input data for the data ingestion
@@ -249,6 +274,8 @@ type IngestionS3InputConfiguration struct {
 	// The prefix for the S3 location being used for the input data for the data
 	// ingestion.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information for the S3 location being used to hold
@@ -259,6 +286,8 @@ type LabelsInputConfiguration struct {
 	//
 	// This member is required.
 	S3InputConfiguration *LabelsS3InputConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The location information (prefix and bucket name) for the s3 location being used
@@ -272,6 +301,8 @@ type LabelsS3InputConfiguration struct {
 
 	// The prefix for the S3 bucket used for the label data.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the specified ML model, including dataset and model
@@ -295,6 +326,8 @@ type ModelSummary struct {
 
 	// Indicates the status of the ML model.
 	Status ModelStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an S3 bucket.
@@ -310,6 +343,8 @@ type S3Object struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag is a key-value pair that can be added to a resource as metadata.
@@ -324,4 +359,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

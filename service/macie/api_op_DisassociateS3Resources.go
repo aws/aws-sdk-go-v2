@@ -42,6 +42,8 @@ type DisassociateS3ResourcesInput struct {
 	// The ID of the Amazon Macie Classic member account whose resources you want to
 	// remove from being monitored by Macie Classic.
 	MemberAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateS3ResourcesOutput struct {
@@ -53,6 +55,8 @@ type DisassociateS3ResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

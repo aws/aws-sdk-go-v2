@@ -52,12 +52,16 @@ type DeleteTrafficPolicyInput struct {
 	//
 	// This member is required.
 	Version *int32
+
+	noSmithyDocumentSerde
 }
 
 // An empty element.
 type DeleteTrafficPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

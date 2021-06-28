@@ -34,6 +34,8 @@ type GetDefaultPatchBaselineInput struct {
 
 	// Returns the default patch baseline for the specified operating system.
 	OperatingSystem types.OperatingSystem
+
+	noSmithyDocumentSerde
 }
 
 type GetDefaultPatchBaselineOutput struct {
@@ -46,6 +48,8 @@ type GetDefaultPatchBaselineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDefaultPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {

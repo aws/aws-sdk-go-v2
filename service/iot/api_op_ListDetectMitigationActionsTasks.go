@@ -48,6 +48,8 @@ type ListDetectMitigationActionsTasksInput struct {
 
 	// The token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDetectMitigationActionsTasksOutput struct {
@@ -61,6 +63,8 @@ type ListDetectMitigationActionsTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDetectMitigationActionsTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

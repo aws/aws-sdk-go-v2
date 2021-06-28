@@ -50,6 +50,8 @@ type ListFirewallsInput struct {
 	// the firewalls for. Leave this blank to retrieve all firewalls that you have
 	// defined.
 	VpcIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ListFirewallsOutput struct {
@@ -68,6 +70,8 @@ type ListFirewallsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFirewallsMiddlewares(stack *middleware.Stack, options Options) (err error) {

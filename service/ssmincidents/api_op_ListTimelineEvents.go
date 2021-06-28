@@ -54,6 +54,8 @@ type ListTimelineEventsInput struct {
 
 	// Sorts the order of timeline events by the value specified in the sortBy field.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListTimelineEventsOutput struct {
@@ -68,6 +70,8 @@ type ListTimelineEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTimelineEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

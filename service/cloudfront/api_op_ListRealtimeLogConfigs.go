@@ -44,6 +44,8 @@ type ListRealtimeLogConfigsInput struct {
 	// The maximum number of real-time log configurations that you want in the
 	// response.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListRealtimeLogConfigsOutput struct {
@@ -53,6 +55,8 @@ type ListRealtimeLogConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRealtimeLogConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

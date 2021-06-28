@@ -59,6 +59,8 @@ type GetIdentityVerificationAttributesInput struct {
 	//
 	// This member is required.
 	Identities []string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon SES verification status of a list of identities. For domain
@@ -72,6 +74,8 @@ type GetIdentityVerificationAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIdentityVerificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

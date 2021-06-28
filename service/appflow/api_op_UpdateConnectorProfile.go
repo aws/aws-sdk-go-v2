@@ -44,6 +44,8 @@ type UpdateConnectorProfileInput struct {
 	//
 	// This member is required.
 	ConnectorProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConnectorProfileOutput struct {
@@ -53,6 +55,8 @@ type UpdateConnectorProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

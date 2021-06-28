@@ -42,6 +42,8 @@ type DeleteDiskSnapshotInput struct {
 	//
 	// This member is required.
 	DiskSnapshotName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDiskSnapshotOutput struct {
@@ -53,6 +55,8 @@ type DeleteDiskSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDiskSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type PutAppInstanceRetentionSettingsInput struct {
 	//
 	// This member is required.
 	AppInstanceRetentionSettings *types.AppInstanceRetentionSettings
+
+	noSmithyDocumentSerde
 }
 
 type PutAppInstanceRetentionSettingsOutput struct {
@@ -52,6 +54,8 @@ type PutAppInstanceRetentionSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAppInstanceRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

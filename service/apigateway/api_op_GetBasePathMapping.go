@@ -41,6 +41,8 @@ type GetBasePathMappingInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
@@ -62,6 +64,8 @@ type GetBasePathMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

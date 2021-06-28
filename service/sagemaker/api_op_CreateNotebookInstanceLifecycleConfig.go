@@ -54,6 +54,8 @@ type CreateNotebookInstanceLifecycleConfigInput struct {
 	// when you create the notebook instance. The shell script must be a base64-encoded
 	// string.
 	OnStart []types.NotebookInstanceLifecycleHook
+
+	noSmithyDocumentSerde
 }
 
 type CreateNotebookInstanceLifecycleConfigOutput struct {
@@ -63,6 +65,8 @@ type CreateNotebookInstanceLifecycleConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

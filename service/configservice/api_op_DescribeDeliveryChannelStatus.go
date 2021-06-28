@@ -35,6 +35,8 @@ type DescribeDeliveryChannelStatusInput struct {
 
 	// A list of delivery channel names.
 	DeliveryChannelNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DescribeDeliveryChannelStatus action.
@@ -45,6 +47,8 @@ type DescribeDeliveryChannelStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDeliveryChannelStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

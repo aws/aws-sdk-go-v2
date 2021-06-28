@@ -37,11 +37,15 @@ type AssociateContactWithAddressBookInput struct {
 	//
 	// This member is required.
 	ContactArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateContactWithAddressBookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateContactWithAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {

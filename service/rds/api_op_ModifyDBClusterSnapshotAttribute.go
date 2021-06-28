@@ -77,6 +77,8 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// added to the restore attribute can still copy or restore a manual DB cluster
 	// snapshot.
 	ValuesToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBClusterSnapshotAttributeOutput struct {
@@ -90,6 +92,8 @@ type ModifyDBClusterSnapshotAttributeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBClusterSnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

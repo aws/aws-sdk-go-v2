@@ -79,6 +79,8 @@ type UpdateGameServerInput struct {
 
 	// Indicates whether the game server is available or is currently hosting gameplay.
 	UtilizationStatus types.GameServerUtilizationStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGameServerOutput struct {
@@ -88,6 +90,8 @@ type UpdateGameServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

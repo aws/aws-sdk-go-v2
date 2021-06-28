@@ -37,6 +37,8 @@ type GetModelInput struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetModelOutput struct {
@@ -59,6 +61,8 @@ type GetModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type UpdateInputDeviceInput struct {
 
 	// The settings that you want to apply to the UHD input device.
 	UhdDeviceSettings *types.InputDeviceConfigurableSettings
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for UpdateInputDeviceResponse
@@ -90,6 +92,8 @@ type UpdateInputDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInputDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

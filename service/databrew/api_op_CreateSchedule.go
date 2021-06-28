@@ -48,6 +48,8 @@ type CreateScheduleInput struct {
 
 	// Metadata tags to apply to this schedule.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateScheduleOutput struct {
@@ -59,6 +61,8 @@ type CreateScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type ReplaceRouteTableAssociationInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type ReplaceRouteTableAssociationOutput struct {
@@ -63,6 +65,8 @@ type ReplaceRouteTableAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReplaceRouteTableAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

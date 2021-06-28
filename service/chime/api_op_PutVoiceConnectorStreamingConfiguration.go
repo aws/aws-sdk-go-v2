@@ -41,6 +41,8 @@ type PutVoiceConnectorStreamingConfigurationInput struct {
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutVoiceConnectorStreamingConfigurationOutput struct {
@@ -50,6 +52,8 @@ type PutVoiceConnectorStreamingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutVoiceConnectorStreamingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

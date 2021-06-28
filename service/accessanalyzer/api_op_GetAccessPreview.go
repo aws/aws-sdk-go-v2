@@ -40,6 +40,8 @@ type GetAccessPreviewInput struct {
 	//
 	// This member is required.
 	AnalyzerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAccessPreviewOutput struct {
@@ -51,6 +53,8 @@ type GetAccessPreviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccessPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

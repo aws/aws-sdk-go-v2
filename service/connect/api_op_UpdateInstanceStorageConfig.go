@@ -51,11 +51,15 @@ type UpdateInstanceStorageConfigInput struct {
 	//
 	// This member is required.
 	StorageConfig *types.InstanceStorageConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInstanceStorageConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

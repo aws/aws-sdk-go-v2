@@ -53,6 +53,8 @@ type ListEntitiesInput struct {
 
 	// An object that contains two attributes, SortBy and SortOrder.
 	Sort *types.Sort
+
+	noSmithyDocumentSerde
 }
 
 type ListEntitiesOutput struct {
@@ -65,6 +67,8 @@ type ListEntitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

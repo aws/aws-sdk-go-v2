@@ -58,6 +58,8 @@ type GetSmsTemplateInput struct {
 	// For a delete operation, deletes the template, including all versions of the
 	// template.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSmsTemplateOutput struct {
@@ -70,6 +72,8 @@ type GetSmsTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

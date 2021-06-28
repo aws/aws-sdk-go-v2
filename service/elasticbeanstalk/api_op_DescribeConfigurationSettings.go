@@ -57,6 +57,8 @@ type DescribeConfigurationSettingsInput struct {
 	// error. If you do not specify either, AWS Elastic Beanstalk returns a
 	// MissingRequiredParameter error.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // The results from a request to change the configuration settings of an
@@ -68,6 +70,8 @@ type DescribeConfigurationSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConfigurationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

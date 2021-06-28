@@ -66,12 +66,16 @@ type SubscribeToDatasetInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Response to a SubscribeToDataset request.
 type SubscribeToDatasetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubscribeToDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

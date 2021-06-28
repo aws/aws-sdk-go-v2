@@ -60,6 +60,8 @@ type ModifyEventSubscriptionInput struct {
 	// values: db-instance | db-cluster | db-parameter-group | db-security-group |
 	// db-snapshot | db-cluster-snapshot
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyEventSubscriptionOutput struct {
@@ -70,6 +72,8 @@ type ModifyEventSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type GenerateTemplateInput struct {
 
 	// The format for generating the AWS CloudFormation template.
 	TemplateFormat types.OutputFormat
+
+	noSmithyDocumentSerde
 }
 
 type GenerateTemplateOutput struct {
@@ -45,6 +47,8 @@ type GenerateTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

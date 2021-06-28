@@ -64,6 +64,8 @@ type DescribeFileSystemsInput struct {
 	// (String). If a token present, the action continues the list from where the
 	// returning call left off.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The response object for DescribeFileSystems operation.
@@ -78,6 +80,8 @@ type DescribeFileSystemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

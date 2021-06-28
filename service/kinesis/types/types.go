@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type ChildShard struct {
 
 	// This member is required.
 	ShardId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the details of the consumer you registered. This type
@@ -48,6 +51,8 @@ type Consumer struct {
 	//
 	// This member is required.
 	ConsumerStatus ConsumerStatus
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the details of a registered consumer. This type of
@@ -82,6 +87,8 @@ type ConsumerDescription struct {
 	//
 	// This member is required.
 	StreamARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents enhanced metrics types.
@@ -114,6 +121,8 @@ type EnhancedMetrics struct {
 	// (https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
 	ShardLevelMetrics []MetricsName
+
+	noSmithyDocumentSerde
 }
 
 // The range of possible hash key values for the shard, which is a set of ordered
@@ -129,6 +138,8 @@ type HashKeyRange struct {
 	//
 	// This member is required.
 	StartingHashKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for PutRecords.
@@ -157,6 +168,8 @@ type PutRecordsRequestEntry struct {
 	// The hash value used to determine explicitly the shard that the data record is
 	// assigned to by overriding the partition key hash.
 	ExplicitHashKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of an individual record from a PutRecords request. A
@@ -180,6 +193,8 @@ type PutRecordsResultEntry struct {
 
 	// The shard ID for an individual record result.
 	ShardId *string
+
+	noSmithyDocumentSerde
 }
 
 // The unit of data of the Kinesis data stream, which is composed of a sequence
@@ -217,6 +232,8 @@ type Record struct {
 	// server-side encryption on the records in the stream using a customer-managed AWS
 	// KMS key.
 	EncryptionType EncryptionType
+
+	noSmithyDocumentSerde
 }
 
 // The range of possible sequence numbers for the shard.
@@ -230,6 +247,8 @@ type SequenceNumberRange struct {
 	// The ending sequence number for the range. Shards that are in the OPEN state have
 	// an ending sequence number of null.
 	EndingSequenceNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // A uniquely identified group of data records in a Kinesis data stream.
@@ -256,6 +275,8 @@ type Shard struct {
 
 	// The shard ID of the shard's parent.
 	ParentShardId *string
+
+	noSmithyDocumentSerde
 }
 
 type ShardFilter struct {
@@ -266,6 +287,8 @@ type ShardFilter struct {
 	ShardId *string
 
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for DescribeStream.
@@ -358,6 +381,8 @@ type StreamDescription struct {
 	// * Master key owned by Kinesis Data Streams:
 	// alias/aws/kinesis
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for DescribeStreamSummary
@@ -444,6 +469,8 @@ type StreamDescriptionSummary struct {
 	// * Master key owned by Kinesis Data Streams:
 	// alias/aws/kinesis
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata assigned to the stream, consisting of a key-value pair.
@@ -459,4 +486,8 @@ type Tag struct {
 	// length: 256 characters. Valid characters: Unicode letters, digits, white space,
 	// _ . / = + - % @
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -39,6 +39,8 @@ type StartImagePipelineExecutionInput struct {
 	//
 	// This member is required.
 	ImagePipelineArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StartImagePipelineExecutionOutput struct {
@@ -54,6 +56,8 @@ type StartImagePipelineExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartImagePipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type DescribeEventCategoriesInput struct {
 	// event categories apply. Valid values: cluster, cluster-snapshot,
 	// cluster-parameter-group, cluster-security-group, and scheduled-action.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -47,6 +49,8 @@ type DescribeEventCategoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

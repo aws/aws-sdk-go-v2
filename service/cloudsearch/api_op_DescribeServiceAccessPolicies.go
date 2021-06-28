@@ -46,6 +46,8 @@ type DescribeServiceAccessPoliciesInput struct {
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeServiceAccessPolicies request.
@@ -58,6 +60,8 @@ type DescribeServiceAccessPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServiceAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

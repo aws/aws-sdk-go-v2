@@ -69,6 +69,8 @@ type CreateAutoScalingConfigurationInput struct {
 	// A list of metadata items that you can associate with your auto scaling
 	// configuration resource. A tag is a key-value pair.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAutoScalingConfigurationOutput struct {
@@ -81,6 +83,8 @@ type CreateAutoScalingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

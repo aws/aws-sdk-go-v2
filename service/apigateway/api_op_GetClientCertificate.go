@@ -34,6 +34,8 @@ type GetClientCertificateInput struct {
 	//
 	// This member is required.
 	ClientCertificateId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -65,6 +67,8 @@ type GetClientCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

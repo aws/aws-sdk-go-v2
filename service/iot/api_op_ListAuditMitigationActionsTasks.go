@@ -59,6 +59,8 @@ type ListAuditMitigationActionsTasksInput struct {
 
 	// Specify this filter to limit results to tasks that are in a specific state.
 	TaskStatus types.AuditMitigationActionsTaskStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListAuditMitigationActionsTasksOutput struct {
@@ -71,6 +73,8 @@ type ListAuditMitigationActionsTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAuditMitigationActionsTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

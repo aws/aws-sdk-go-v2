@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // flag is set to "true".
 type DryRunOperation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DryRunOperation) Error() string {
@@ -45,6 +49,8 @@ func (e *DryRunOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The home region is not set. Set the home region to continue.
 type HomeRegionNotSetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HomeRegionNotSetException) Error() string {
@@ -63,6 +69,8 @@ func (e *HomeRegionNotSetException) ErrorFault() smithy.ErrorFault { return smit
 // encountered.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -81,6 +89,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // entered in the wrong format or data type.
 type InvalidInputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -100,6 +110,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // the migrationhub-discovery role is missing or not configured correctly.
 type PolicyErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyErrorException) Error() string {
@@ -120,6 +132,8 @@ func (e *PolicyErrorException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Hub's repository.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -138,6 +152,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // encountered.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -157,6 +173,8 @@ type ThrottlingException struct {
 	Message *string
 
 	RetryAfterSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -175,6 +193,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // is set to "true".
 type UnauthorizedOperation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedOperation) Error() string {

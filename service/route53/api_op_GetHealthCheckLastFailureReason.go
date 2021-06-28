@@ -39,6 +39,8 @@ type GetHealthCheckLastFailureReasonInput struct {
 	//
 	// This member is required.
 	HealthCheckId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to a GetHealthCheckLastFailureReason
@@ -53,6 +55,8 @@ type GetHealthCheckLastFailureReasonOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHealthCheckLastFailureReasonMiddlewares(stack *middleware.Stack, options Options) (err error) {

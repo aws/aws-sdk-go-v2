@@ -53,6 +53,8 @@ type GetObjectAttributesInput struct {
 
 	// The consistency level at which to retrieve the attributes on an object.
 	ConsistencyLevel types.ConsistencyLevel
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectAttributesOutput struct {
@@ -62,6 +64,8 @@ type GetObjectAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

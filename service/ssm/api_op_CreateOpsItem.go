@@ -124,6 +124,8 @@ type CreateOpsItemInput struct {
 	// ssm:AddTagsToResource operation. To add tags to an existing OpsItem, use the
 	// AddTagsToResource operation.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateOpsItemOutput struct {
@@ -133,6 +135,8 @@ type CreateOpsItemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOpsItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

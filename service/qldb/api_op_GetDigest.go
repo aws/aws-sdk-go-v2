@@ -34,6 +34,8 @@ type GetDigestInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDigestOutput struct {
@@ -51,6 +53,8 @@ type GetDigestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDigestMiddlewares(stack *middleware.Stack, options Options) (err error) {

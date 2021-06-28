@@ -48,6 +48,8 @@ type GetSegmentExportJobsInput struct {
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSegmentExportJobsOutput struct {
@@ -61,6 +63,8 @@ type GetSegmentExportJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSegmentExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

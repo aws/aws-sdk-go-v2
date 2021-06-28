@@ -43,6 +43,8 @@ type CreateMonitoringSubscriptionInput struct {
 	//
 	// This member is required.
 	MonitoringSubscription *types.MonitoringSubscription
+
+	noSmithyDocumentSerde
 }
 
 type CreateMonitoringSubscriptionOutput struct {
@@ -53,6 +55,8 @@ type CreateMonitoringSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMonitoringSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

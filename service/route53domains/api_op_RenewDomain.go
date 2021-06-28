@@ -54,6 +54,8 @@ type RenewDomainInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide. Default: 1
 	DurationInYears *int32
+
+	noSmithyDocumentSerde
 }
 
 type RenewDomainOutput struct {
@@ -67,6 +69,8 @@ type RenewDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRenewDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

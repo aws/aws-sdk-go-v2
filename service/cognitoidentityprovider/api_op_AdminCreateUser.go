@@ -160,6 +160,8 @@ type AdminCreateUserInput struct {
 	// The Lambda trigger receives the validation data and uses it in the validation
 	// process. The user's validation data is not persisted.
 	ValidationData []types.AttributeType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to the request to create the user.
@@ -170,6 +172,8 @@ type AdminCreateUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

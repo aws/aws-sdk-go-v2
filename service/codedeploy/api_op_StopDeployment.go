@@ -39,6 +39,8 @@ type StopDeploymentInput struct {
 	// updated should be rolled back to the previous version of the application
 	// revision.
 	AutoRollbackEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a StopDeployment operation.
@@ -57,6 +59,8 @@ type StopDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,7 @@ func (c *Client) ListReceiptFilters(ctx context.Context, params *ListReceiptFilt
 // more information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type ListReceiptFiltersInput struct {
+	noSmithyDocumentSerde
 }
 
 // A list of IP address filters that exist under your AWS account.
@@ -47,6 +48,8 @@ type ListReceiptFiltersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReceiptFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {

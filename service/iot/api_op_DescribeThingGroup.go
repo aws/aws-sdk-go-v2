@@ -33,6 +33,8 @@ type DescribeThingGroupInput struct {
 	//
 	// This member is required.
 	ThingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeThingGroupOutput struct {
@@ -69,6 +71,8 @@ type DescribeThingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

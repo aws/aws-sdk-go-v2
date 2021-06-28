@@ -10,6 +10,8 @@ import (
 // An unexpected service exception occurred.
 type InternalServiceErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceErrorException) Error() string {
@@ -28,6 +30,8 @@ func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return 
 // page, correct the input parameters, and try the action again.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -45,6 +49,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // You can't perform this action when the resource is in its current state.
 type InvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStateException) Error() string {
@@ -63,6 +69,8 @@ func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.F
 // AWS account.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -84,6 +92,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // General Reference.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {

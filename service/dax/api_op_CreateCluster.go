@@ -131,6 +131,8 @@ type CreateClusterInput struct {
 
 	// A set of tags to associate with the DAX cluster.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterOutput struct {
@@ -140,6 +142,8 @@ type CreateClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

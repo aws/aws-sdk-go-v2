@@ -52,6 +52,8 @@ type UpdateClusterVersionInput struct {
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateClusterVersionOutput struct {
@@ -61,6 +63,8 @@ type UpdateClusterVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateClusterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -62,6 +62,8 @@ type UpdateServiceInput struct {
 	// either CodeRepository or ImageRepository. To update the source configuration,
 	// set the values to members of the structure that you include.
 	SourceConfiguration *types.SourceConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceOutput struct {
@@ -81,6 +83,8 @@ type UpdateServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type ListBatchInferenceJobsInput struct {
 	// The Amazon Resource Name (ARN) of the solution version from which the batch
 	// inference jobs were created.
 	SolutionVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBatchInferenceJobsOutput struct {
@@ -54,6 +56,8 @@ type ListBatchInferenceJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBatchInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

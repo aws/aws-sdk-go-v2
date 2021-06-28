@@ -80,6 +80,8 @@ type CreateReplicationJobInput struct {
 
 	// Indicates whether to run the replication job one time.
 	RunOnce *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateReplicationJobOutput struct {
@@ -89,6 +91,8 @@ type CreateReplicationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReplicationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

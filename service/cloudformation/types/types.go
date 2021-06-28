@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -53,6 +54,8 @@ type AccountGateResult struct {
 	// The reason for the account gate status assigned to this account and Region for
 	// the stack set operation.
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // The AccountLimit data type. CloudFormation has the following limits per
@@ -77,6 +80,8 @@ type AccountLimit struct {
 
 	// The value that is associated with the account limit name.
 	Value *int32
+
+	noSmithyDocumentSerde
 }
 
 // [Service-managed permissions] Describes whether StackSets automatically deploys
@@ -95,6 +100,8 @@ type AutoDeployment struct {
 	// target organization or OU. If set to false, stack resources are deleted. Specify
 	// only if Enabled is set to True.
 	RetainStacksOnAccountRemoval *bool
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information concerning an error generated during the setting of
@@ -109,6 +116,8 @@ type BatchDescribeTypeConfigurationsError struct {
 
 	// Identifying information for the configuration of a CloudFormation extension.
 	TypeConfigurationIdentifier *TypeConfigurationIdentifier
+
+	noSmithyDocumentSerde
 }
 
 // The Change structure describes the changes AWS CloudFormation will perform if
@@ -122,6 +131,8 @@ type Change struct {
 	// The type of entity that AWS CloudFormation changes. Currently, the only entity
 	// type is Resource.
 	Type ChangeType
+
+	noSmithyDocumentSerde
 }
 
 // The ChangeSetSummary structure describes a change set, its status, and the stack
@@ -168,6 +179,8 @@ type ChangeSetSummary struct {
 	// A description of the change set's status. For example, if your change set is in
 	// the FAILED state, AWS CloudFormation shows the error message.
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // [Service-managed permissions] The AWS Organizations accounts to which StackSets
@@ -188,6 +201,8 @@ type DeploymentTargets struct {
 	// The organization root ID or organizational unit (OU) IDs to which StackSets
 	// deploys.
 	OrganizationalUnitIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The Export structure describes the exported output values for a stack.
@@ -204,6 +219,8 @@ type Export struct {
 	// The value of the exported output, such as a resource physical ID. This value is
 	// defined in the Export field in the associated stack's Outputs section.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains logging configuration information for an extension.
@@ -220,6 +237,8 @@ type LoggingConfig struct {
 	//
 	// This member is required.
 	LogRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the module from which the resource was created, if
@@ -243,6 +262,8 @@ type ModuleInfo struct {
 	// type AWS::Second::Example::MODULE.
 	// AWS::First::Example::MODULE/AWS::Second::Example::MODULE
 	TypeHierarchy *string
+
+	noSmithyDocumentSerde
 }
 
 // The Output data type.
@@ -259,6 +280,8 @@ type Output struct {
 
 	// The value associated with the output.
 	OutputValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The Parameter data type.
@@ -282,6 +305,8 @@ type Parameter struct {
 	// for a given parameter key. If you specify true, do not specify a parameter
 	// value.
 	UsePreviousValue *bool
+
+	noSmithyDocumentSerde
 }
 
 // A set of criteria that AWS CloudFormation uses to validate parameter values.
@@ -291,6 +316,8 @@ type ParameterConstraints struct {
 
 	// A list of values that are permitted for a parameter.
 	AllowedValues []string
+
+	noSmithyDocumentSerde
 }
 
 // The ParameterDeclaration data type.
@@ -314,6 +341,8 @@ type ParameterDeclaration struct {
 
 	// The type of parameter.
 	ParameterType *string
+
+	noSmithyDocumentSerde
 }
 
 // Context information that enables AWS CloudFormation to uniquely identify a
@@ -332,6 +361,8 @@ type PhysicalResourceIdContextKeyValuePair struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a resource property whose actual value differs from its
@@ -372,6 +403,8 @@ type PropertyDifference struct {
 	//
 	// This member is required.
 	PropertyPath *string
+
+	noSmithyDocumentSerde
 }
 
 // For extensions that are modules, a public third-party extension that must be
@@ -401,6 +434,8 @@ type RequiredActivatedType struct {
 	// extension type name within this account and region. You must use the alias to
 	// refer to the extension in your templates, API calls, and CloudFormation console.
 	TypeNameAlias *string
+
+	noSmithyDocumentSerde
 }
 
 // The ResourceChange structure describes the resource and the action that AWS
@@ -450,6 +485,8 @@ type ResourceChange struct {
 	// update, such as a change in the resource attribute's Metadata, Properties, or
 	// Tags.
 	Scope []ResourceAttribute
+
+	noSmithyDocumentSerde
 }
 
 // For a resource with Modify as the action, the ResourceChange structure describes
@@ -507,6 +544,8 @@ type ResourceChangeDetail struct {
 	// A ResourceTargetDefinition structure that describes the field that AWS
 	// CloudFormation will change and whether the resource will be recreated.
 	Target *ResourceTargetDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Describes the target resources of a specific type in your import template (for
@@ -525,6 +564,8 @@ type ResourceIdentifierSummary struct {
 
 	// The template resource type of the target resources, such as AWS::S3::Bucket.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // The field that AWS CloudFormation will change, such as the name of a resource's
@@ -546,6 +587,8 @@ type ResourceTargetDefinition struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	RequiresRecreation RequiresRecreation
+
+	noSmithyDocumentSerde
 }
 
 // Describes the target resource of an import operation.
@@ -570,6 +613,8 @@ type ResourceToImport struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Structure containing the rollback triggers for AWS CloudFormation to monitor
@@ -620,6 +665,8 @@ type RollbackConfiguration struct {
 	// specified trigger is missing, the entire stack operation fails and is rolled
 	// back.
 	RollbackTriggers []RollbackTrigger
+
+	noSmithyDocumentSerde
 }
 
 // A rollback trigger AWS CloudFormation monitors during creation and updating of
@@ -640,6 +687,8 @@ type RollbackTrigger struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The Stack data type.
@@ -744,6 +793,8 @@ type Stack struct {
 
 	// The amount of time within which stack creation should complete.
 	TimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about whether the stack's actual configuration differs, or
@@ -774,6 +825,8 @@ type StackDriftInformation struct {
 	// Most recent time when a drift detection operation was initiated on the stack, or
 	// any of its individual resources that support drift detection.
 	LastCheckTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about whether the stack's actual configuration differs, or
@@ -804,6 +857,8 @@ type StackDriftInformationSummary struct {
 	// Most recent time when a drift detection operation was initiated on the stack, or
 	// any of its individual resources that support drift detection.
 	LastCheckTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The StackEvent data type.
@@ -862,6 +917,8 @@ type StackEvent struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // An AWS CloudFormation stack, in a specific account and Region, that's part of a
@@ -949,6 +1006,8 @@ type StackInstance struct {
 	// The explanation for the specific status code that is assigned to this stack
 	// instance.
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // The detailed status of the stack instance.
@@ -979,6 +1038,8 @@ type StackInstanceComprehensiveStatus struct {
 	// * SUCCEEDED: The operation in the specified account and
 	// Region completed successfully.
 	DetailedStatus StackInstanceDetailedStatus
+
+	noSmithyDocumentSerde
 }
 
 // The status that stack instances are filtered by.
@@ -989,6 +1050,8 @@ type StackInstanceFilter struct {
 
 	// The status to filter by.
 	Values *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure that contains summary information about a stack instance.
@@ -1065,6 +1128,8 @@ type StackInstanceSummary struct {
 
 	// The explanation for the specific status code assigned to this stack instance.
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // The StackResource data type.
@@ -1118,6 +1183,8 @@ type StackResource struct {
 
 	// The name associated with the stack.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains detailed information about the specified stack resource.
@@ -1177,6 +1244,8 @@ type StackResourceDetail struct {
 
 	// The name associated with the stack.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the drift information for a resource that has been checked for drift.
@@ -1264,6 +1333,8 @@ type StackResourceDrift struct {
 	// expected values. These will be present only for resources whose
 	// StackResourceDriftStatus is MODIFIED.
 	PropertyDifferences []PropertyDifference
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about whether the resource's actual configuration differs,
@@ -1295,6 +1366,8 @@ type StackResourceDriftInformation struct {
 	// When AWS CloudFormation last checked if the resource had drifted from its
 	// expected configuration.
 	LastCheckTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Summarizes information about whether the resource's actual configuration
@@ -1331,6 +1404,8 @@ type StackResourceDriftInformationSummary struct {
 	// When AWS CloudFormation last checked if the resource had drifted from its
 	// expected configuration.
 	LastCheckTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains high-level information about the specified stack resource.
@@ -1375,6 +1450,8 @@ type StackResourceSummary struct {
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains information about a stack set. A stack set enables you
@@ -1461,6 +1538,8 @@ type StackSet struct {
 	// The structure that contains the body of the template that was used to create or
 	// update the stack set.
 	TemplateBody *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about the drift status of the stack set. For stack sets,
@@ -1545,6 +1624,8 @@ type StackSetDriftDetectionDetails struct {
 	//
 	// * Stack instances currently being checked for drift.
 	TotalStackInstancesCount int32
+
+	noSmithyDocumentSerde
 }
 
 // The structure that contains information about a stack set operation.
@@ -1638,6 +1719,8 @@ type StackSetOperation struct {
 	// operation completed creating or updating all the specified stacks without
 	// exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
+
+	noSmithyDocumentSerde
 }
 
 // The user-specified preferences for how AWS CloudFormation performs a stack set
@@ -1689,6 +1772,8 @@ type StackSetOperationPreferences struct {
 
 	// The order of the Regions in where you want to perform the stack operation.
 	RegionOrder []string
+
+	noSmithyDocumentSerde
 }
 
 // The structure that contains information about a specified operation's results
@@ -1736,6 +1821,8 @@ type StackSetOperationResultSummary struct {
 
 	// The reason for the assigned result status.
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // The structures that contain summary information about the specified operation.
@@ -1791,6 +1878,8 @@ type StackSetOperationSummary struct {
 	// operation completed creating or updating all the specified stacks without
 	// exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
+
+	noSmithyDocumentSerde
 }
 
 // The structures that contain summary information about the specified stack set.
@@ -1854,6 +1943,8 @@ type StackSetSummary struct {
 
 	// The status of the stack set.
 	Status StackSetStatus
+
+	noSmithyDocumentSerde
 }
 
 // The StackSummary Data Type
@@ -1911,6 +2002,8 @@ type StackSummary struct {
 
 	// The template description of the template used to create the stack.
 	TemplateDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // The Tag type enables you to specify a key-value pair that can be used to store
@@ -1929,6 +2022,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The TemplateParameter data type.
@@ -1946,6 +2041,8 @@ type TemplateParameter struct {
 
 	// The name associated with the parameter.
 	ParameterKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information concerning the specification of a CloudFormation extension
@@ -1988,6 +2085,8 @@ type TypeConfigurationDetails struct {
 
 	// The name of the extension.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifying information for the configuration of a CloudFormation extension.
@@ -2015,6 +2114,8 @@ type TypeConfigurationIdentifier struct {
 
 	// The name of the extension type to which this configuration applies.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Filter criteria to use in determining which extensions to return.
@@ -2048,6 +2149,8 @@ type TypeFilters struct {
 
 	// A prefix to use as a filter for results.
 	TypeNamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about the specified CloudFormation extension.
@@ -2143,6 +2246,8 @@ type TypeSummary struct {
 	// in your account and region, CloudFormation considers that alias as the type
 	// name.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a specific version of a CloudFormation
@@ -2186,4 +2291,8 @@ type TypeVersionSummary struct {
 	// the end of the Amazon Resource Name (ARN) assigned to the extension version when
 	// it is registered.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -46,6 +46,8 @@ type AdminDeleteUserAttributesInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response received from the server for a request to delete user
@@ -53,6 +55,8 @@ type AdminDeleteUserAttributesInput struct {
 type AdminDeleteUserAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminDeleteUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

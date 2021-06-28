@@ -34,11 +34,15 @@ type SendActivationCodeInput struct {
 	//
 	// This member is required.
 	ContactChannelId *string
+
+	noSmithyDocumentSerde
 }
 
 type SendActivationCodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendActivationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

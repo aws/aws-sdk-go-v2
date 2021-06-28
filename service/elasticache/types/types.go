@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type Authentication struct {
 
 	// Indicates whether the user requires a password to authenticate.
 	Type AuthenticationType
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Availability Zone in which the cluster is launched.
@@ -21,6 +24,8 @@ type AvailabilityZone struct {
 
 	// The name of the Availability Zone.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains all of the attributes of a specific cluster.
@@ -225,6 +230,8 @@ type CacheCluster struct {
 	// when you create a cluster. Required: Only available when creating a replication
 	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
 	TransitEncryptionEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides all of the details about a particular cache engine version.
@@ -246,6 +253,8 @@ type CacheEngineVersion struct {
 
 	// The version number of the cache engine.
 	EngineVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an individual cache node within a cluster. Each cache node runs its
@@ -342,6 +351,8 @@ type CacheNode struct {
 	// The ID of the primary node to which this read replica node is synchronized. If
 	// this field is empty, this node is not associated with a primary cluster.
 	SourceCacheNodeId *string
+
+	noSmithyDocumentSerde
 }
 
 // A parameter that has a different value for each cache node type it is applied
@@ -380,6 +391,8 @@ type CacheNodeTypeSpecificParameter struct {
 
 	// The source of the parameter value.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // A value that applies only to a certain cache node type.
@@ -390,6 +403,8 @@ type CacheNodeTypeSpecificValue struct {
 
 	// The value for the cache node type.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the service update on the cache node
@@ -419,6 +434,8 @@ type CacheNodeUpdateStatus struct {
 
 	// The date when the NodeUpdateStatus was last modified>
 	NodeUpdateStatusModifiedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateCacheParameterGroup operation.
@@ -440,6 +457,8 @@ type CacheParameterGroup struct {
 
 	// Indicates whether the parameter group is associated with a Global datastore
 	IsGlobal bool
+
+	noSmithyDocumentSerde
 }
 
 // Status of the cache parameter group.
@@ -454,6 +473,8 @@ type CacheParameterGroupStatus struct {
 
 	// The status of parameter updates.
 	ParameterApplyStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of one of the following operations:
@@ -482,6 +503,8 @@ type CacheSecurityGroup struct {
 
 	// The AWS account ID of the cache security group owner.
 	OwnerId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a cluster's status within a particular cache security group.
@@ -494,6 +517,8 @@ type CacheSecurityGroupMembership struct {
 	// cache security group is modified, or when the cache security groups assigned to
 	// a cluster are modified.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of one of the following operations:
@@ -518,6 +543,8 @@ type CacheSubnetGroup struct {
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration details of the CloudWatch Logs destination.
@@ -525,6 +552,8 @@ type CloudWatchLogsDestinationDetails struct {
 
 	// The name of the CloudWatch Logs log group.
 	LogGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Node group (shard) configuration options when adding or removing replicas. Each
@@ -568,6 +597,8 @@ type ConfigureShard struct {
 
 	// The outpost ARNs in which the cache cluster is created.
 	PreferredOutpostArns []string
+
+	noSmithyDocumentSerde
 }
 
 // The endpoint from which data should be migrated.
@@ -578,6 +609,8 @@ type CustomerNodeEndpoint struct {
 
 	// The port of the node endpoint
 	Port *int32
+
+	noSmithyDocumentSerde
 }
 
 // Configuration details of either a CloudWatch Logs destination or Kinesis Data
@@ -589,6 +622,8 @@ type DestinationDetails struct {
 
 	// The configuration details of the Kinesis Data Firehose destination.
 	KinesisFirehoseDetails *KinesisFirehoseDestinationDetails
+
+	noSmithyDocumentSerde
 }
 
 // Provides ownership and status information for an Amazon EC2 security group.
@@ -602,6 +637,8 @@ type EC2SecurityGroup struct {
 
 	// The status of the Amazon EC2 security group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the information required for client programs to connect to a cache
@@ -613,6 +650,8 @@ type Endpoint struct {
 
 	// The port number that the cache engine is listening on.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeEngineDefaultParameters operation.
@@ -632,6 +671,8 @@ type EngineDefaults struct {
 
 	// Contains a list of engine default parameters.
 	Parameters []Parameter
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single occurrence of something interesting within the system. Some
@@ -652,6 +693,8 @@ type Event struct {
 	// Specifies the origin of this event - a cluster, a parameter group, a security
 	// group, etc.
 	SourceType SourceType
+
+	noSmithyDocumentSerde
 }
 
 // Used to streamline results of a search based on the property being filtered.
@@ -666,6 +709,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Indicates the slot configuration and global identifier for a slice group.
@@ -676,6 +721,8 @@ type GlobalNodeGroup struct {
 
 	// The keyspace for this node group
 	Slots *string
+
+	noSmithyDocumentSerde
 }
 
 // Consists of a primary cluster that accepts writes and an associated secondary
@@ -735,6 +782,8 @@ type GlobalReplicationGroup struct {
 	// when you create a cluster. Required: Only available when creating a replication
 	// group in an Amazon VPC using redis version 3.2.6, 4.x or later.
 	TransitEncryptionEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // The name of the Global datastore and role of this replication group in the
@@ -747,6 +796,8 @@ type GlobalReplicationGroupInfo struct {
 	// The role of the replication group in a Global datastore. Can be primary or
 	// secondary.
 	GlobalReplicationGroupMemberRole *string
+
+	noSmithyDocumentSerde
 }
 
 // A member of a Global datastore. It contains the Replication Group Id, the AWS
@@ -767,6 +818,8 @@ type GlobalReplicationGroupMember struct {
 
 	// The status of the membership of the replication group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration details of the Kinesis Data Firehose destination.
@@ -774,6 +827,8 @@ type KinesisFirehoseDestinationDetails struct {
 
 	// The name of the Kinesis Data Firehose delivery stream.
 	DeliveryStream *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the destination, format and type of the logs.
@@ -798,6 +853,8 @@ type LogDeliveryConfiguration struct {
 	// Returns the log delivery configuration status. Values are one of enabling |
 	// disabling | modifying | active | error
 	Status LogDeliveryConfigurationStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the destination, format and type of the logs.
@@ -818,6 +875,8 @@ type LogDeliveryConfigurationRequest struct {
 
 	// Refers to slow-log (https://redis.io/commands/slowlog).
 	LogType LogType
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of cache nodes in a replication group. One node in the
@@ -848,6 +907,8 @@ type NodeGroup struct {
 	// The current state of this replication group - creating, available, modifying,
 	// deleting.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Node group (shard) configuration options. Each node group (shard) configuration
@@ -881,6 +942,8 @@ type NodeGroupConfiguration struct {
 	// range from 0 to 16,383. The string is in the format startkey-endkey. Example:
 	// "0-3999"
 	Slots *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single node within a node group (shard).
@@ -907,6 +970,8 @@ type NodeGroupMember struct {
 	// operations. The read endpoint is only applicable on Redis (cluster mode
 	// disabled) clusters.
 	ReadEndpoint *Endpoint
+
+	noSmithyDocumentSerde
 }
 
 // The status of the service update on the node group member
@@ -939,6 +1004,8 @@ type NodeGroupMemberUpdateStatus struct {
 
 	// The date when the NodeUpdateStatus was last modified
 	NodeUpdateStatusModifiedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The status of the service update on the node group
@@ -949,6 +1016,8 @@ type NodeGroupUpdateStatus struct {
 
 	// The status of the service update on the node group member
 	NodeGroupMemberUpdateStatus []NodeGroupMemberUpdateStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents an individual cache node in a snapshot of a cluster.
@@ -975,6 +1044,8 @@ type NodeSnapshot struct {
 	// The date and time when the source node's metadata and cache data set was
 	// obtained for the snapshot.
 	SnapshotCreateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes a notification topic and its status. Notification topics are used for
@@ -987,6 +1058,8 @@ type NotificationConfiguration struct {
 
 	// The current state of the topic.
 	TopicStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an individual setting that controls some aspect of ElastiCache
@@ -1024,6 +1097,8 @@ type Parameter struct {
 
 	// The source of the parameter.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a name-value pair that is used to update the value of a parameter.
@@ -1034,6 +1109,8 @@ type ParameterNameValue struct {
 
 	// The value of the parameter.
 	ParameterValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The log delivery configurations being modified
@@ -1051,6 +1128,8 @@ type PendingLogDeliveryConfiguration struct {
 
 	// Refers to slow-log (https://redis.io/commands/slowlog).
 	LogType LogType
+
+	noSmithyDocumentSerde
 }
 
 // A group of settings that are applied to the cluster in the future, or that are
@@ -1077,6 +1156,8 @@ type PendingModifiedValues struct {
 	// value must be 1. For clusters running Memcached, this value must be between 1
 	// and 40.
 	NumCacheNodes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Update action that has been processed for the corresponding apply/stop request
@@ -1093,6 +1174,8 @@ type ProcessedUpdateAction struct {
 
 	// The status of the update action on the Redis cluster
 	UpdateActionStatus UpdateActionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains the specific price and frequency of a recurring charges for a reserved
@@ -1104,6 +1187,8 @@ type RecurringCharge struct {
 
 	// The frequency of the recurring charge.
 	RecurringChargeFrequency *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of the replication groups
@@ -1124,6 +1209,8 @@ type RegionalConfiguration struct {
 	//
 	// This member is required.
 	ReshardingConfiguration []ReshardingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains all of the attributes of a specific Redis replication group.
@@ -1228,6 +1315,8 @@ type ReplicationGroup struct {
 
 	// The list of user group IDs that have access to the replication group.
 	UserGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The settings to be applied to the Redis replication group, either immediately or
@@ -1252,6 +1341,8 @@ type ReplicationGroupPendingModifiedValues struct {
 
 	// The user groups being modified.
 	UserGroups *UserGroupsUpdateStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a PurchaseReservedCacheNodesOffering operation.
@@ -1359,6 +1450,8 @@ type ReservedCacheNode struct {
 
 	// The hourly price charged for this reserved cache node.
 	UsagePrice float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes all of the attributes of a reserved cache node offering.
@@ -1450,6 +1543,8 @@ type ReservedCacheNodesOffering struct {
 
 	// The hourly price charged for this offering.
 	UsagePrice float64
+
+	noSmithyDocumentSerde
 }
 
 // A list of PreferredAvailabilityZones objects that specifies the configuration of
@@ -1462,6 +1557,8 @@ type ReshardingConfiguration struct {
 
 	// A list of preferred availability zones for the nodes in this cluster.
 	PreferredAvailabilityZones []string
+
+	noSmithyDocumentSerde
 }
 
 // The status of an online resharding operation.
@@ -1469,6 +1566,8 @@ type ReshardingStatus struct {
 
 	// Represents the progress of an online resharding operation.
 	SlotMigration *SlotMigration
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single cache security group and its status.
@@ -1481,6 +1580,8 @@ type SecurityGroupMembership struct {
 	// cache security group is modified, or when the cache security groups assigned to
 	// a cluster are modified.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // An update that you can apply to your Redis clusters.
@@ -1525,6 +1626,8 @@ type ServiceUpdate struct {
 
 	// Reflects the nature of the service update
 	ServiceUpdateType ServiceUpdateType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the progress of an online resharding operation.
@@ -1532,6 +1635,8 @@ type SlotMigration struct {
 
 	// The percentage of the slot migration that is complete.
 	ProgressPercentage float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a copy of an entire Redis cluster as of the time when the snapshot
@@ -1717,6 +1822,8 @@ type Snapshot struct {
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group
 	// for the source cluster.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the subnet associated with a cluster. This parameter refers to
@@ -1732,6 +1839,8 @@ type Subnet struct {
 
 	// The outpost ARN of the subnet.
 	SubnetOutpost *SubnetOutpost
+
+	noSmithyDocumentSerde
 }
 
 // The ID of the outpost subnet.
@@ -1739,6 +1848,8 @@ type SubnetOutpost struct {
 
 	// The outpost ARN of the subnet.
 	SubnetOutpostArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag that can be added to an ElastiCache cluster or replication group. Tags are
@@ -1753,6 +1864,8 @@ type Tag struct {
 
 	// The tag's value. May be null.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters update actions from the service updates that are in available status
@@ -1764,6 +1877,8 @@ type TimeRangeFilter struct {
 
 	// The start time of the time range filter
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Update action that has failed to be processed for the corresponding apply/stop
@@ -1784,6 +1899,8 @@ type UnprocessedUpdateAction struct {
 
 	// The unique ID of the service update
 	ServiceUpdateName *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the service update for a specific replication group
@@ -1844,6 +1961,8 @@ type UpdateAction struct {
 
 	// The date when the UpdateActionStatus was last modified
 	UpdateActionStatusModifiedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type User struct {
@@ -1871,6 +1990,8 @@ type User struct {
 
 	// The username of the user.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type UserGroup struct {
@@ -1896,6 +2017,8 @@ type UserGroup struct {
 
 	// The list of user IDs that belong to the user group.
 	UserIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the updates being applied to the user group.
@@ -1906,6 +2029,8 @@ type UserGroupPendingChanges struct {
 
 	// The list of user IDs to remove.
 	UserIdsToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the user group update.
@@ -1916,4 +2041,8 @@ type UserGroupsUpdateStatus struct {
 
 	// The list of user group IDs to remove.
 	UserGroupIdsToRemove []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

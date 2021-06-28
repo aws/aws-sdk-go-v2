@@ -44,6 +44,8 @@ type GetAssetInput struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAssetOutput struct {
@@ -85,6 +87,8 @@ type GetAssetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {

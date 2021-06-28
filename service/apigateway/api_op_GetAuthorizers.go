@@ -42,6 +42,8 @@ type GetAuthorizersInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of Authorizer resources. Use Lambda Function as
@@ -59,6 +61,8 @@ type GetAuthorizersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAuthorizersMiddlewares(stack *middleware.Stack, options Options) (err error) {

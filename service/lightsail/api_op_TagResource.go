@@ -49,6 +49,8 @@ type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource to which you want to add a tag.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type TagResourceOutput struct {
@@ -60,6 +62,8 @@ type TagResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

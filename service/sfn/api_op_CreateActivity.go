@@ -76,6 +76,8 @@ type CreateActivityInput struct {
 	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
 	// = + - @.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateActivityOutput struct {
@@ -92,6 +94,8 @@ type CreateActivityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {

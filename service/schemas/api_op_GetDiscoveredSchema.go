@@ -40,6 +40,8 @@ type GetDiscoveredSchemaInput struct {
 	//
 	// This member is required.
 	Type types.Type
+
+	noSmithyDocumentSerde
 }
 
 type GetDiscoveredSchemaOutput struct {
@@ -49,6 +51,8 @@ type GetDiscoveredSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDiscoveredSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

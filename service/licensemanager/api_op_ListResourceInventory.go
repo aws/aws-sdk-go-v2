@@ -59,6 +59,8 @@ type ListResourceInventoryInput struct {
 
 	// Token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourceInventoryOutput struct {
@@ -71,6 +73,8 @@ type ListResourceInventoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourceInventoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

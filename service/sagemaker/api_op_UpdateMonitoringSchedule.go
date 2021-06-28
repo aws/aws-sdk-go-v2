@@ -40,6 +40,8 @@ type UpdateMonitoringScheduleInput struct {
 	//
 	// This member is required.
 	MonitoringScheduleName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMonitoringScheduleOutput struct {
@@ -51,6 +53,8 @@ type UpdateMonitoringScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

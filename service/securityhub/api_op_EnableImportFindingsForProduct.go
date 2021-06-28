@@ -35,6 +35,8 @@ type EnableImportFindingsForProductInput struct {
 	//
 	// This member is required.
 	ProductArn *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableImportFindingsForProductOutput struct {
@@ -44,6 +46,8 @@ type EnableImportFindingsForProductOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableImportFindingsForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

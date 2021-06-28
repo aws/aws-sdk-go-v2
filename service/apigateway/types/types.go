@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -20,6 +21,8 @@ type AccessLogSettings struct {
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference).
 	// The format must include at least $context.requestId.
 	Format *string
+
+	noSmithyDocumentSerde
 }
 
 // A resource that can be distributed to callers for executing Method resources
@@ -59,6 +62,8 @@ type ApiKey struct {
 
 	// The value of the API Key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // API stage name of the associated API stage in a usage plan.
@@ -73,6 +78,8 @@ type ApiStage struct {
 	// Map containing method level throttling information for API stage in a usage
 	// plan.
 	Throttle map[string]ThrottleSettings
+
+	noSmithyDocumentSerde
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
@@ -161,6 +168,8 @@ type Authorizer struct {
 	// using incoming request parameters, and COGNITO_USER_POOLS for using an Amazon
 	// Cognito user pool.
 	Type AuthorizerType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
@@ -179,6 +188,8 @@ type BasePathMapping struct {
 
 	// The name of the associated stage.
 	Stage *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration settings of a canary deployment.
@@ -198,6 +209,8 @@ type CanarySettings struct {
 	// A Boolean flag to indicate whether the canary deployment uses the stage cache or
 	// not.
 	UseStageCache bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -226,6 +239,8 @@ type ClientCertificate struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An immutable representation of a RestApi resource that can be called by users
@@ -251,6 +266,8 @@ type Deployment struct {
 
 	// The identifier for the deployment resource.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The input configuration for a canary deployment.
@@ -268,6 +285,8 @@ type DeploymentCanarySettings struct {
 	// A Boolean flag to indicate whether the canary release deployment uses the stage
 	// cache or not.
 	UseStageCache bool
+
+	noSmithyDocumentSerde
 }
 
 // A documentation part for a targeted API entity. A documentation part consists of
@@ -302,6 +321,8 @@ type DocumentationPart struct {
 	// entity definitions, while the original documentation parts are exported in a
 	// OpenAPI extension of x-amazon-apigateway-documentation.
 	Properties *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the target API entity to which the documentation applies.
@@ -346,6 +367,8 @@ type DocumentationPartLocation struct {
 	// attributes, the child entity's statusCode attribute must match that of the
 	// parent entity exactly.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -363,6 +386,8 @@ type DocumentationVersion struct {
 
 	// The version identifier of the API documentation snapshot.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
@@ -455,6 +480,8 @@ type DomainName struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The endpoint configuration to indicate the types of endpoints an API (RestApi)
@@ -470,6 +497,8 @@ type EndpointConfiguration struct {
 	// A list of VpcEndpointIds of an API (RestApi) against which to create Route53
 	// ALIASes. It is only supported for PRIVATE endpoint type.
 	VpcEndpointIds []string
+
+	noSmithyDocumentSerde
 }
 
 // A gateway response of a given response type and status code, with optional
@@ -583,6 +612,8 @@ type GatewayResponse struct {
 
 	// The HTTP status code for this GatewayResponse.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration. In the API
@@ -781,6 +812,8 @@ type Integration struct {
 	// arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or
 	// arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an integration response. The status code must map to an existing
@@ -834,6 +867,8 @@ type IntegrationResponse struct {
 	// Specifies the status code that is used to map the integration response to an
 	// existing MethodResponse.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a client-facing interface by which the client calls the API to access
@@ -1066,6 +1101,8 @@ type Method struct {
 
 	// The identifier of a RequestValidator for request validation.
 	RequestValidatorId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -1123,6 +1160,8 @@ type MethodResponse struct {
 
 	// The method response's status code.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the method setting properties.
@@ -1181,6 +1220,8 @@ type MethodSetting struct {
 	// available values are FAIL_WITH_403, SUCCEED_WITH_RESPONSE_HEADER,
 	// SUCCEED_WITHOUT_RESPONSE_HEADER.
 	UnauthorizedCacheControlHeaderStrategy UnauthorizedCacheControlHeaderStrategy
+
+	noSmithyDocumentSerde
 }
 
 // Represents a summary of a Method resource, given a particular date and time.
@@ -1193,6 +1234,8 @@ type MethodSnapshot struct {
 	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
 	// COGNITO_USER_POOLS for using a Cognito user pool.
 	AuthorizationType *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the data structure of a method's request or response payload. A
@@ -1224,6 +1267,8 @@ type Model struct {
 	// languages, such as Java or JavaScript, causing the installation of your API's
 	// SDK generated by API Gateway to fail.
 	Schema *string
+
+	noSmithyDocumentSerde
 }
 
 // If specified, API Gateway performs two-way authentication between the client and
@@ -1248,6 +1293,8 @@ type MutualTlsAuthentication struct {
 	// clients might not be able to access your API. To resolve warnings, upload a new
 	// truststore to S3, and then update you domain name to use the new version.
 	TruststoreWarnings []string
+
+	noSmithyDocumentSerde
 }
 
 // If specified, API Gateway performs two-way authentication between the client and
@@ -1266,6 +1313,8 @@ type MutualTlsAuthenticationInput struct {
 	// The version of the S3 object that contains your truststore. To specify a
 	// version, you must have versioning enabled for the S3 bucket.
 	TruststoreVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // A single patch operation to apply to the specified resource. Please refer to
@@ -1305,6 +1354,8 @@ type PatchOperation struct {
 	// '{"a": ...}'. In a Windows shell, see Using JSON for Parameters
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json).
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Quotas configured for a usage plan.
@@ -1320,6 +1371,8 @@ type QuotaSettings struct {
 	// The time period in which the limit applies. Valid values are "DAY", "WEEK" or
 	// "MONTH".
 	Period QuotaPeriodType
+
+	noSmithyDocumentSerde
 }
 
 // A set of validation rules for incoming Method requests. In OpenAPI, a
@@ -1345,6 +1398,8 @@ type RequestValidator struct {
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
 	ValidateRequestParameters bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents an API resource. Create an API
@@ -1443,6 +1498,8 @@ type Resource struct {
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
 	ResourceMethods map[string]Method
+
+	noSmithyDocumentSerde
 }
 
 // Represents a REST API. Create an API
@@ -1507,6 +1564,8 @@ type RestApi struct {
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
 	Warnings []string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration property of an SDK type.
@@ -1527,6 +1586,8 @@ type SdkConfigurationProperty struct {
 	// A boolean flag of an SdkType configuration property to indicate if the
 	// associated SDK configuration property is required (true) or not (false).
 	Required bool
+
+	noSmithyDocumentSerde
 }
 
 // A type of SDK that API Gateway can generate.
@@ -1543,6 +1604,8 @@ type SdkType struct {
 
 	// The identifier of an SdkType instance.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is
@@ -1608,6 +1671,8 @@ type Stage struct {
 
 	// The ARN of the WebAcl associated with the Stage.
 	WebAclArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A reference to a unique stage identified in the format {restApiId}/{stage}.
@@ -1618,6 +1683,8 @@ type StageKey struct {
 
 	// The stage name associated with the stage key.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 // The API request rate limits.
@@ -1630,6 +1697,8 @@ type ThrottleSettings struct {
 
 	// The API request steady-state rate limit.
 	RateLimit float64
+
+	noSmithyDocumentSerde
 }
 
 type TlsConfig struct {
@@ -1643,6 +1712,8 @@ type TlsConfig struct {
 	// checking the certificate's expiration date, hostname, and presence of a root
 	// certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
 	InsecureSkipVerification bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents a usage plan than can specify who can assess associated API stages
@@ -1676,6 +1747,8 @@ type UsagePlan struct {
 
 	// The request throttle limits of a usage plan.
 	Throttle *ThrottleSettings
+
+	noSmithyDocumentSerde
 }
 
 // Represents a usage plan key to identify a plan customer. To associate an API
@@ -1695,6 +1768,8 @@ type UsagePlanKey struct {
 
 	// The value of a usage plan key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
@@ -1731,4 +1806,8 @@ type VpcLink struct {
 	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
 	// network load balancer must be owned by the same AWS account of the API owner.
 	TargetArns []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

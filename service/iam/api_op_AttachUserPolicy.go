@@ -51,11 +51,15 @@ type AttachUserPolicyInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type AttachUserPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachUserPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

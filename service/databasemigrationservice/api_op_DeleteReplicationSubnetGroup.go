@@ -33,12 +33,16 @@ type DeleteReplicationSubnetGroupInput struct {
 	//
 	// This member is required.
 	ReplicationSubnetGroupIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 //
 type DeleteReplicationSubnetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReplicationSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

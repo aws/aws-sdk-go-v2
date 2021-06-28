@@ -38,11 +38,15 @@ type RestoreWorkspaceInput struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreWorkspaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

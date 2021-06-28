@@ -55,6 +55,8 @@ type CreateParallelDataInput struct {
 
 	// The encryption key used to encrypt this object.
 	EncryptionKey *types.EncryptionKey
+
+	noSmithyDocumentSerde
 }
 
 type CreateParallelDataOutput struct {
@@ -68,6 +70,8 @@ type CreateParallelDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

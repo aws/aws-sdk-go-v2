@@ -77,11 +77,15 @@ type PutAccessPointPolicyInput struct {
 	//
 	// This member is required.
 	Policy *string
+
+	noSmithyDocumentSerde
 }
 
 type PutAccessPointPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccessPointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type CreateProvisioningTemplateInput struct {
 	// command-line parameter use format: &&tags "key1=value1&key2=value2..." For the
 	// cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateProvisioningTemplateOutput struct {
@@ -74,6 +76,8 @@ type CreateProvisioningTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

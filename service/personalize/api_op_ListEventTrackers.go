@@ -42,6 +42,8 @@ type ListEventTrackersInput struct {
 	// A token returned from the previous call to ListEventTrackers for getting the
 	// next set of event trackers (if they exist).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEventTrackersOutput struct {
@@ -54,6 +56,8 @@ type ListEventTrackersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEventTrackersMiddlewares(stack *middleware.Stack, options Options) (err error) {

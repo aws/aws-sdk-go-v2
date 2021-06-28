@@ -48,6 +48,8 @@ type ListOperationsInput struct {
 	// identical to the ones specified in the initial request. If you don't specify
 	// NextToken, the request retrieves the first result page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListOperationsOutput struct {
@@ -62,6 +64,8 @@ type ListOperationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

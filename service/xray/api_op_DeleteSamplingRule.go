@@ -36,6 +36,8 @@ type DeleteSamplingRuleInput struct {
 	// The name of the sampling rule. Specify a rule by either name or ARN, but not
 	// both.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSamplingRuleOutput struct {
@@ -45,6 +47,8 @@ type DeleteSamplingRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSamplingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

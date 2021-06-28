@@ -39,6 +39,8 @@ type GetProposalInput struct {
 	//
 	// This member is required.
 	ProposalId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetProposalOutput struct {
@@ -48,6 +50,8 @@ type GetProposalOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {

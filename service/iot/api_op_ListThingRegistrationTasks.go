@@ -39,6 +39,8 @@ type ListThingRegistrationTasksInput struct {
 
 	// The status of the bulk thing provisioning task.
 	Status types.Status
+
+	noSmithyDocumentSerde
 }
 
 type ListThingRegistrationTasksOutput struct {
@@ -52,6 +54,8 @@ type ListThingRegistrationTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThingRegistrationTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

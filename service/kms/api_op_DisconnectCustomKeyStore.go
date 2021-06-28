@@ -66,11 +66,15 @@ type DisconnectCustomKeyStoreInput struct {
 	//
 	// This member is required.
 	CustomKeyStoreId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisconnectCustomKeyStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisconnectCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

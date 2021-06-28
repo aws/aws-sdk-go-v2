@@ -38,11 +38,15 @@ type EnableRuleInput struct {
 	// The name or ARN of the event bus associated with the rule. If you omit this, the
 	// default event bus is used.
 	EventBusName *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

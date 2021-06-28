@@ -66,6 +66,8 @@ type CreateManagedPrefixListInput struct {
 
 	// The tags to apply to the prefix list during creation.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateManagedPrefixListOutput struct {
@@ -75,6 +77,8 @@ type CreateManagedPrefixListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateManagedPrefixListMiddlewares(stack *middleware.Stack, options Options) (err error) {

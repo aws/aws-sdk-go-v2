@@ -61,11 +61,15 @@ type CancelJobExecutionInput struct {
 	// If not specified, the statusDetails are unchanged. You can specify at most 10
 	// name/value pairs.
 	StatusDetails map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CancelJobExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

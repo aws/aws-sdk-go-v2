@@ -42,6 +42,8 @@ type DescribeExportConfigurationsInput struct {
 
 	// The token from the previous call to describe-export-tasks.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeExportConfigurationsOutput struct {
@@ -54,6 +56,8 @@ type DescribeExportConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeExportConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

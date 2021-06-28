@@ -44,6 +44,8 @@ type CreateFleetInput struct {
 
 	// The tags to add to the resource. A tag is a key-value pair.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateFleetOutput struct {
@@ -53,6 +55,8 @@ type CreateFleetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

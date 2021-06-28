@@ -49,6 +49,8 @@ type DescribeUsersInput struct {
 
 	// The ID of the user.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUsersOutput struct {
@@ -64,6 +66,8 @@ type DescribeUsersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {

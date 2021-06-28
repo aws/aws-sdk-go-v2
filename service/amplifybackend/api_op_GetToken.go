@@ -37,6 +37,8 @@ type GetTokenInput struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTokenOutput struct {
@@ -55,6 +57,8 @@ type GetTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DeleteFacesInput struct {
 	//
 	// This member is required.
 	FaceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFacesOutput struct {
@@ -48,6 +50,8 @@ type DeleteFacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

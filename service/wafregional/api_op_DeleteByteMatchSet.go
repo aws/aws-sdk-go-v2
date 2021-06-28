@@ -57,6 +57,8 @@ type DeleteByteMatchSetInput struct {
 	//
 	// This member is required.
 	ChangeToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteByteMatchSetOutput struct {
@@ -68,6 +70,8 @@ type DeleteByteMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -189,6 +189,8 @@ type DescribeScheduledActionsInput struct {
 
 	// The names of the scheduled actions to describe.
 	ScheduledActionNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeScheduledActionsOutput struct {
@@ -202,6 +204,8 @@ type DescribeScheduledActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

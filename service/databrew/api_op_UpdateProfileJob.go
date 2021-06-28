@@ -79,6 +79,8 @@ type UpdateProfileJobInput struct {
 	// The job's timeout in minutes. A job that attempts to run longer than this
 	// timeout period ends with a status of TIMEOUT.
 	Timeout int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProfileJobOutput struct {
@@ -90,6 +92,8 @@ type UpdateProfileJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProfileJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

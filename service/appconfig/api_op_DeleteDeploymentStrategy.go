@@ -33,11 +33,15 @@ type DeleteDeploymentStrategyInput struct {
 	//
 	// This member is required.
 	DeploymentStrategyId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDeploymentStrategyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDeploymentStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {

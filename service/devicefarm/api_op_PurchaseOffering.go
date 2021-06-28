@@ -46,6 +46,8 @@ type PurchaseOfferingInput struct {
 
 	// The ID of the offering promotion to be applied to the purchase.
 	OfferingPromotionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of the purchase offering (for example, success or failure).
@@ -56,6 +58,8 @@ type PurchaseOfferingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {

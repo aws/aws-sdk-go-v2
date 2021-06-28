@@ -71,6 +71,8 @@ type ListAttachedGroupPoliciesInput struct {
 	// character from the ! (\u0021) through the DEL character (\u007F), including most
 	// punctuation characters, digits, and upper and lowercased letters.
 	PathPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful ListAttachedGroupPolicies request.
@@ -93,6 +95,8 @@ type ListAttachedGroupPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAttachedGroupPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

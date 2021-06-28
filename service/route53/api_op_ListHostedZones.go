@@ -54,6 +54,8 @@ type ListHostedZonesInput struct {
 	// the response is true, and the value of NextMarker is the hosted zone ID of the
 	// first hosted zone that Route 53 will return if you submit another request.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListHostedZonesOutput struct {
@@ -92,6 +94,8 @@ type ListHostedZonesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHostedZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {

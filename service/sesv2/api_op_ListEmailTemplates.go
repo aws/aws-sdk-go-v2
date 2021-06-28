@@ -45,6 +45,8 @@ type ListEmailTemplatesInput struct {
 	// additional results. The value you specify has to be at least 1, and can be no
 	// more than 10.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // The following elements are returned by the service.
@@ -61,6 +63,8 @@ type ListEmailTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

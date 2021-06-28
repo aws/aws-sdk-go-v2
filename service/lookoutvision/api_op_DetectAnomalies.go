@@ -57,6 +57,8 @@ type DetectAnomaliesInput struct {
 	//
 	// This member is required.
 	ProjectName *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectAnomaliesOutput struct {
@@ -66,6 +68,8 @@ type DetectAnomaliesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectAnomaliesMiddlewares(stack *middleware.Stack, options Options) (err error) {

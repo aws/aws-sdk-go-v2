@@ -47,11 +47,15 @@ type SubmitFeedbackInput struct {
 	// Provides Amazon Kendra with relevant or not relevant feedback for whether a
 	// particular item was relevant to the search.
 	RelevanceFeedbackItems []types.RelevanceFeedback
+
+	noSmithyDocumentSerde
 }
 
 type SubmitFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

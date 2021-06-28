@@ -43,11 +43,15 @@ type DeleteReportGroupInput struct {
 	// to delete the reports. If you call DeleteReportGroup for a report group that
 	// contains one or more reports, an exception is thrown.
 	DeleteReports bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteReportGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

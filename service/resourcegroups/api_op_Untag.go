@@ -41,6 +41,8 @@ type UntagInput struct {
 	//
 	// This member is required.
 	Keys []string
+
+	noSmithyDocumentSerde
 }
 
 type UntagOutput struct {
@@ -53,6 +55,8 @@ type UntagOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -73,6 +73,8 @@ type UpdateVoiceTemplateInput struct {
 	// For a delete operation, deletes the template, including all versions of the
 	// template.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateVoiceTemplateOutput struct {
@@ -84,6 +86,8 @@ type UpdateVoiceTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

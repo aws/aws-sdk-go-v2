@@ -42,6 +42,8 @@ type ListPagesByContactInput struct {
 
 	// The pagination token to continue to the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPagesByContactOutput struct {
@@ -56,6 +58,8 @@ type ListPagesByContactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPagesByContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

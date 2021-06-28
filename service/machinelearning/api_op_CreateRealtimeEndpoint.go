@@ -35,6 +35,8 @@ type CreateRealtimeEndpointInput struct {
 	//
 	// This member is required.
 	MLModelId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an CreateRealtimeEndpoint operation. The result
@@ -52,6 +54,8 @@ type CreateRealtimeEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRealtimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

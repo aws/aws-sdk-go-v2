@@ -36,6 +36,8 @@ type BatchGetApplicationsInput struct {
 	//
 	// This member is required.
 	ApplicationNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchGetApplications operation.
@@ -46,6 +48,8 @@ type BatchGetApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

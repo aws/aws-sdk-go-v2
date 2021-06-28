@@ -58,6 +58,8 @@ type CreateWirelessDeviceInput struct {
 	// The tags to attach to the new wireless device. Tags are metadata that you can
 	// use to manage a resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateWirelessDeviceOutput struct {
@@ -70,6 +72,8 @@ type CreateWirelessDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type ListTagsForVaultInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -56,6 +58,8 @@ type ListTagsForVaultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

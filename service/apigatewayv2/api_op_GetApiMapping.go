@@ -37,6 +37,8 @@ type GetApiMappingInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetApiMappingOutput struct {
@@ -55,6 +57,8 @@ type GetApiMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApiMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

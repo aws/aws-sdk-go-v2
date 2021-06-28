@@ -40,6 +40,8 @@ type RebootNodeInput struct {
 	//
 	// This member is required.
 	NodeId *string
+
+	noSmithyDocumentSerde
 }
 
 type RebootNodeOutput struct {
@@ -49,6 +51,8 @@ type RebootNodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

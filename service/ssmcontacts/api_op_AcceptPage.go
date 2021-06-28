@@ -49,11 +49,15 @@ type AcceptPageInput struct {
 
 	// Information provided by the user when the user acknowledges the page.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 type AcceptPageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, options Options) (err error) {

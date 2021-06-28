@@ -40,6 +40,8 @@ type DisableAddOnInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableAddOnOutput struct {
@@ -51,6 +53,8 @@ type DisableAddOnOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableAddOnMiddlewares(stack *middleware.Stack, options Options) (err error) {

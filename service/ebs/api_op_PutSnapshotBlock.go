@@ -80,6 +80,8 @@ type PutSnapshotBlockInput struct {
 
 	// The progress of the write process, as a percentage.
 	Progress *int32
+
+	noSmithyDocumentSerde
 }
 
 type PutSnapshotBlockOutput struct {
@@ -92,6 +94,8 @@ type PutSnapshotBlockOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSnapshotBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type GetIdentityNotificationAttributesInput struct {
 	//
 	// This member is required.
 	Identities []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the notification attributes for a list of identities.
@@ -56,6 +58,8 @@ type GetIdentityNotificationAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIdentityNotificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

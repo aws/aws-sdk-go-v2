@@ -38,6 +38,8 @@ type CreateAuthenticationProfileInput struct {
 	//
 	// This member is required.
 	AuthenticationProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAuthenticationProfileOutput struct {
@@ -50,6 +52,8 @@ type CreateAuthenticationProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAuthenticationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

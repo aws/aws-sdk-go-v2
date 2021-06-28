@@ -165,6 +165,8 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// Key: string, between 1 and 255 characters Value: an array of strings, each
 	// string is between 1 and 255 characters
 	TaskParameters map[string]types.MaintenanceWindowTaskParameterValueExpression
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMaintenanceWindowTaskOutput struct {
@@ -221,6 +223,8 @@ type UpdateMaintenanceWindowTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMaintenanceWindowTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

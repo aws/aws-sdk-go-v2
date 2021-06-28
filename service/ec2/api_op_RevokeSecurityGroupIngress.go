@@ -96,6 +96,8 @@ type RevokeSecurityGroupIngressInput struct {
 	// The end of port range for the TCP and UDP protocols, or an ICMP code number. For
 	// the ICMP code number, use -1 to specify all ICMP codes for the ICMP type.
 	ToPort *int32
+
+	noSmithyDocumentSerde
 }
 
 type RevokeSecurityGroupIngressOutput struct {
@@ -110,6 +112,8 @@ type RevokeSecurityGroupIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

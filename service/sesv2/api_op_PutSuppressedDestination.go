@@ -40,6 +40,8 @@ type PutSuppressedDestinationInput struct {
 	//
 	// This member is required.
 	Reason types.SuppressionListReason
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -47,6 +49,8 @@ type PutSuppressedDestinationInput struct {
 type PutSuppressedDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

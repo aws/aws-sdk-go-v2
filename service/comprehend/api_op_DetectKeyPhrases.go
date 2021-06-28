@@ -41,6 +41,8 @@ type DetectKeyPhrasesInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectKeyPhrasesOutput struct {
@@ -53,6 +55,8 @@ type DetectKeyPhrasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

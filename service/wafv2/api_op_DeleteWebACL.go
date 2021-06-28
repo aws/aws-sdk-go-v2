@@ -67,11 +67,15 @@ type DeleteWebACLInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWebACLOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type GetHostInput struct {
 	//
 	// This member is required.
 	HostArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetHostOutput struct {
@@ -55,6 +57,8 @@ type GetHostOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHostMiddlewares(stack *middleware.Stack, options Options) (err error) {

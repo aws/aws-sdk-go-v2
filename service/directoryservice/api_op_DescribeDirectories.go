@@ -50,6 +50,8 @@ type DescribeDirectoriesInput struct {
 	// The DescribeDirectoriesResult.NextToken value from a previous call to
 	// DescribeDirectories. Pass null if this is the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the DescribeDirectories operation.
@@ -69,6 +71,8 @@ type DescribeDirectoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

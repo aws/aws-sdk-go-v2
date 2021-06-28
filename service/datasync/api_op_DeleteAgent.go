@@ -37,11 +37,15 @@ type DeleteAgentInput struct {
 	//
 	// This member is required.
 	AgentArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAgentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {

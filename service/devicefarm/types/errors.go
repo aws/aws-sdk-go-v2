@@ -10,6 +10,8 @@ import (
 // An invalid argument was specified.
 type ArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ArgumentException) Error() string {
@@ -27,6 +29,8 @@ func (e *ArgumentException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The requested object could not be deleted.
 type CannotDeleteException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CannotDeleteException) Error() string {
@@ -44,6 +48,8 @@ func (e *CannotDeleteException) ErrorFault() smithy.ErrorFault { return smithy.F
 // An entity with the same name already exists.
 type IdempotencyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotencyException) Error() string {
@@ -63,6 +69,8 @@ func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // you see this error.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -81,6 +89,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // permissions to update this VPC endpoint configuration.
 type InvalidOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOperationException) Error() string {
@@ -98,6 +108,8 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 // A limit was exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -116,6 +128,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // transaction.
 type NotEligibleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotEligibleException) Error() string {
@@ -133,6 +147,8 @@ func (e *NotEligibleException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The specified entity was not found.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -150,6 +166,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // There was a problem with the service account.
 type ServiceAccountException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceAccountException) Error() string {
@@ -169,6 +187,8 @@ type TagOperationException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagOperationException) Error() string {
@@ -189,6 +209,8 @@ type TagPolicyException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagPolicyException) Error() string {
@@ -209,6 +231,8 @@ type TooManyTagsException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

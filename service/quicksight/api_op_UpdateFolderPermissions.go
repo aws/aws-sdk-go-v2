@@ -44,6 +44,8 @@ type UpdateFolderPermissionsInput struct {
 
 	// The permissions that you want to revoke from a resource.
 	RevokePermissions []types.ResourcePermission
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFolderPermissionsOutput struct {
@@ -65,6 +67,8 @@ type UpdateFolderPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFolderPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

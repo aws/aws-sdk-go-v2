@@ -45,6 +45,8 @@ type StartExportLabelsTaskRunInput struct {
 	//
 	// This member is required.
 	TransformId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartExportLabelsTaskRunOutput struct {
@@ -54,6 +56,8 @@ type StartExportLabelsTaskRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartExportLabelsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

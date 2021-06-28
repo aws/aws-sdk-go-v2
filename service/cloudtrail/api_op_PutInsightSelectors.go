@@ -43,6 +43,8 @@ type PutInsightSelectorsInput struct {
 	//
 	// This member is required.
 	TrailName *string
+
+	noSmithyDocumentSerde
 }
 
 type PutInsightSelectorsOutput struct {
@@ -57,6 +59,8 @@ type PutInsightSelectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutInsightSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,11 +61,15 @@ type CompleteVaultLockInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 type CompleteVaultLockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCompleteVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {

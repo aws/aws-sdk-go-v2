@@ -45,6 +45,8 @@ type ModifyUserInput struct {
 
 	// The passwords belonging to the user. You are allowed up to two.
 	Passwords []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyUserOutput struct {
@@ -75,6 +77,8 @@ type ModifyUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

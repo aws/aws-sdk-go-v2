@@ -40,11 +40,15 @@ type PublishMetricsInput struct {
 	//
 	// This member is required.
 	MetricData []types.MetricDatum
+
+	noSmithyDocumentSerde
 }
 
 type PublishMetricsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {

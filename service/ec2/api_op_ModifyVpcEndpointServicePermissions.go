@@ -53,6 +53,8 @@ type ModifyVpcEndpointServicePermissionsInput struct {
 	// The Amazon Resource Names (ARN) of one or more principals. Permissions are
 	// revoked for principals in this list.
 	RemoveAllowedPrincipals []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyVpcEndpointServicePermissionsOutput struct {
@@ -62,6 +64,8 @@ type ModifyVpcEndpointServicePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyVpcEndpointServicePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

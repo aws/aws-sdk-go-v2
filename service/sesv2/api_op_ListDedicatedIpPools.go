@@ -40,6 +40,8 @@ type ListDedicatedIpPoolsInput struct {
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of dedicated IP pools.
@@ -56,6 +58,8 @@ type ListDedicatedIpPoolsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {

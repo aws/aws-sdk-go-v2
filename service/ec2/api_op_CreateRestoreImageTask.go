@@ -68,6 +68,8 @@ type CreateRestoreImageTaskInput struct {
 	// * To tag the snapshots, the value for ResourceType must be snapshot. The
 	// same tag is applied to all of the snapshots that are created.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateRestoreImageTaskOutput struct {
@@ -77,6 +79,8 @@ type CreateRestoreImageTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRestoreImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

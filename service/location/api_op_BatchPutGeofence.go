@@ -40,6 +40,8 @@ type BatchPutGeofenceInput struct {
 	//
 	// This member is required.
 	Entries []types.BatchPutGeofenceRequestEntry
+
+	noSmithyDocumentSerde
 }
 
 type BatchPutGeofenceOutput struct {
@@ -57,6 +59,8 @@ type BatchPutGeofenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

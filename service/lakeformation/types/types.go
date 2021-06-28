@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type BatchPermissionsFailureEntry struct {
 
 	// An identifier for an entry of the batch request.
 	RequestEntry *BatchPermissionsRequestEntry
+
+	noSmithyDocumentSerde
 }
 
 // A permission to a resource granted by batch operation to the principal.
@@ -35,10 +38,13 @@ type BatchPermissionsRequestEntry struct {
 
 	// The resource to which the principal is to be granted a permission.
 	Resource *Resource
+
+	noSmithyDocumentSerde
 }
 
 // A structure for the catalog object.
 type CatalogResource struct {
+	noSmithyDocumentSerde
 }
 
 // A structure containing the name of a column resource and the tags attached to
@@ -50,6 +56,8 @@ type ColumnLFTag struct {
 
 	// The name of a column resource.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A wildcard object, consisting of an optional list of excluded column names or
@@ -58,6 +66,8 @@ type ColumnWildcard struct {
 
 	// Excludes column names. Any column with this name will be excluded.
 	ExcludedColumnNames []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure for the database object.
@@ -71,6 +81,8 @@ type DatabaseResource struct {
 	// The identifier for the Data Catalog. By default, it is the account ID of the
 	// caller.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 // The AWS Lake Formation principal. Supported principals are IAM users or IAM
@@ -79,6 +91,8 @@ type DataLakePrincipal struct {
 
 	// An identifier for the AWS Lake Formation principal.
 	DataLakePrincipalIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure representing a list of AWS Lake Formation principals designated as
@@ -103,6 +117,8 @@ type DataLakeSettings struct {
 	// resource owner's AWS CloudTrail log. You may want to specify this property when
 	// you are in a high-trust boundary, such as the same team or company.
 	TrustedResourceOwners []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure for a data location object where permissions are granted or revoked.
@@ -117,6 +133,8 @@ type DataLocationResource struct {
 	// The identifier for the Data Catalog where the location is registered with AWS
 	// Lake Formation. By default, it is the account ID of the caller.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing the additional details to be returned in the
@@ -128,6 +146,8 @@ type DetailsMap struct {
 	// A resource share ARN for a catalog resource shared through AWS Resource Access
 	// Manager (AWS RAM).
 	ResourceShare []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an error.
@@ -138,6 +158,8 @@ type ErrorDetail struct {
 
 	// A message describing the error.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // This structure describes the filtering of columns in a table based on a filter
@@ -152,6 +174,8 @@ type FilterCondition struct {
 
 	// A string with values used in evaluating the filter condition.
 	StringValueList []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that allows an admin to grant user permissions on certain
@@ -168,6 +192,8 @@ type LFTag struct {
 	//
 	// This member is required.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing an error related to a TagResource or UnTagResource
@@ -179,6 +205,8 @@ type LFTagError struct {
 
 	// The key-name of the tag.
 	LFTag *LFTagPair
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing a tag key and values for a resource.
@@ -199,6 +227,8 @@ type LFTagKeyResource struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing a tag key-value pair.
@@ -219,6 +249,8 @@ type LFTagPair struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing a list of tag conditions that apply to a resource's tag
@@ -240,6 +272,8 @@ type LFTagPolicyResource struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 // Permissions granted to a principal.
@@ -250,6 +284,8 @@ type PrincipalPermissions struct {
 
 	// The principal who is granted permissions.
 	Principal *DataLakePrincipal
+
+	noSmithyDocumentSerde
 }
 
 // The permissions granted or revoked on a resource.
@@ -272,6 +308,8 @@ type PrincipalResourcePermissions struct {
 
 	// The resource where permissions are to be granted or revoked.
 	Resource *Resource
+
+	noSmithyDocumentSerde
 }
 
 // A structure for the resource.
@@ -305,6 +343,8 @@ type Resource struct {
 	// resource can select metadata from the columns of a table in the Data Catalog and
 	// the underlying data in Amazon S3.
 	TableWithColumns *TableWithColumnsResource
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing information about an AWS Lake Formation resource.
@@ -318,6 +358,8 @@ type ResourceInfo struct {
 
 	// The IAM role that registered a resource.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure for the table object. A table is a metadata definition that
@@ -341,10 +383,13 @@ type TableResource struct {
 	// A wildcard object representing every table under a database. At least one of
 	// TableResource$Name or TableResource$TableWildcard is required.
 	TableWildcard *TableWildcard
+
+	noSmithyDocumentSerde
 }
 
 // A wildcard object representing every table under a database.
 type TableWildcard struct {
+	noSmithyDocumentSerde
 }
 
 // A structure for a table with columns object. This object is only used when
@@ -376,6 +421,8 @@ type TableWithColumnsResource struct {
 	// A wildcard specified by a ColumnWildcard object. At least one of ColumnNames or
 	// ColumnWildcard is required.
 	ColumnWildcard *ColumnWildcard
+
+	noSmithyDocumentSerde
 }
 
 // A structure describing a database resource with tags.
@@ -386,6 +433,8 @@ type TaggedDatabase struct {
 
 	// A list of tags attached to the database.
 	LFTags []LFTagPair
+
+	noSmithyDocumentSerde
 }
 
 // A structure describing a table resource with tags.
@@ -402,4 +451,8 @@ type TaggedTable struct {
 
 	// A table that has tags attached to it.
 	Table *TableResource
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

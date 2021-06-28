@@ -41,6 +41,8 @@ type CreateRegistryInput struct {
 	// Amazon Web Services tags that contain a key value pair and may be searched by
 	// console, command line, or API.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRegistryOutput struct {
@@ -59,6 +61,8 @@ type CreateRegistryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {

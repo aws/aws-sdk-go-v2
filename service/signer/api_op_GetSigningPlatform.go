@@ -33,6 +33,8 @@ type GetSigningPlatformInput struct {
 	//
 	// This member is required.
 	PlatformId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSigningPlatformOutput struct {
@@ -68,6 +70,8 @@ type GetSigningPlatformOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSigningPlatformMiddlewares(stack *middleware.Stack, options Options) (err error) {

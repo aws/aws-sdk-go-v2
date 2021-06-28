@@ -90,6 +90,8 @@ type GetSessionEmbedUrlInput struct {
 	// Omit this parameter for users in the third
 	// group, IAM users and IAM role-based sessions.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSessionEmbedUrlOutput struct {
@@ -108,6 +110,8 @@ type GetSessionEmbedUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSessionEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

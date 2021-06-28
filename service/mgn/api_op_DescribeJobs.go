@@ -45,6 +45,8 @@ type DescribeJobsInput struct {
 
 	// Request to describe Job logby next token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJobsOutput struct {
@@ -57,6 +59,8 @@ type DescribeJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

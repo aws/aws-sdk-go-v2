@@ -88,6 +88,8 @@ type CreateUnreferencedMergeCommitInput struct {
 	// if the changes leave the folders empty. If this is specified as true, a .gitkeep
 	// file is created for empty folders. The default is false.
 	KeepEmptyFolders bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateUnreferencedMergeCommitOutput struct {
@@ -101,6 +103,8 @@ type CreateUnreferencedMergeCommitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUnreferencedMergeCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {

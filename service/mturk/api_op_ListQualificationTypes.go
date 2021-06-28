@@ -55,6 +55,8 @@ type ListQualificationTypesInput struct {
 
 	// A text query against all of the searchable attributes of Qualification types.
 	Query *string
+
+	noSmithyDocumentSerde
 }
 
 type ListQualificationTypesOutput struct {
@@ -73,6 +75,8 @@ type ListQualificationTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListQualificationTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

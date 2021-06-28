@@ -39,6 +39,8 @@ type UpdateDeviceInstanceInput struct {
 
 	// The ARN of the profile that you want to associate with the device instance.
 	ProfileArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDeviceInstanceOutput struct {
@@ -48,6 +50,8 @@ type UpdateDeviceInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeviceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

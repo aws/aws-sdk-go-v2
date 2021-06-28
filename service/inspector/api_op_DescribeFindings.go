@@ -37,6 +37,8 @@ type DescribeFindingsInput struct {
 	// The locale into which you want to translate a finding description,
 	// recommendation, and the short description that identifies the finding.
 	Locale types.Locale
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFindingsOutput struct {
@@ -54,6 +56,8 @@ type DescribeFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,6 +69,8 @@ type CreatePipelineInput struct {
 	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreatePipeline.
@@ -82,6 +84,8 @@ type CreatePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

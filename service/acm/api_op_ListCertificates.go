@@ -49,6 +49,8 @@ type ListCertificatesInput struct {
 	// after you receive a response with truncated results. Set it to the value of
 	// NextToken from the response you just received.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListCertificatesOutput struct {
@@ -62,6 +64,8 @@ type ListCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type DescribeRulesInput struct {
 
 	// The Amazon Resource Names (ARN) of the rules.
 	RuleArns []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRulesOutput struct {
@@ -55,6 +57,8 @@ type DescribeRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type DeleteBucketAccessKeyInput struct {
 	//
 	// This member is required.
 	BucketName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBucketAccessKeyOutput struct {
@@ -55,6 +57,8 @@ type DeleteBucketAccessKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBucketAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

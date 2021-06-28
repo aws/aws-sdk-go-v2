@@ -37,6 +37,8 @@ type ListBusinessReportSchedulesInput struct {
 
 	// The token used to list the remaining schedules from the previous API call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBusinessReportSchedulesOutput struct {
@@ -49,6 +51,8 @@ type ListBusinessReportSchedulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBusinessReportSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

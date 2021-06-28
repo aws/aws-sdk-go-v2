@@ -75,6 +75,8 @@ type GetContentModerationInput struct {
 	// array element are sorted by detection confidence. The default sort is by
 	// TIMESTAMP.
 	SortBy types.ContentModerationSortBy
+
+	noSmithyDocumentSerde
 }
 
 type GetContentModerationOutput struct {
@@ -103,6 +105,8 @@ type GetContentModerationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContentModerationMiddlewares(stack *middleware.Stack, options Options) (err error) {

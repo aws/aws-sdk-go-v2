@@ -44,6 +44,8 @@ type CreateHapgInput struct {
 	//
 	// This member is required.
 	Label *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the CreateHAPartitionGroup action.
@@ -54,6 +56,8 @@ type CreateHapgOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type ListMailboxPermissionsInput struct {
 	// The token to use to retrieve the next page of results. The first call does not
 	// contain any tokens.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMailboxPermissionsOutput struct {
@@ -62,6 +64,8 @@ type ListMailboxPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

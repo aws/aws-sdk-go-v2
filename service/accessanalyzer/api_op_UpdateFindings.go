@@ -53,11 +53,15 @@ type UpdateFindingsInput struct {
 
 	// The ARN of the resource identified in the finding.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

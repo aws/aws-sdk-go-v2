@@ -41,6 +41,8 @@ type GetMaintenanceWindowExecutionTaskInput struct {
 	//
 	// This member is required.
 	WindowExecutionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMaintenanceWindowExecutionTaskOutput struct {
@@ -98,6 +100,8 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMaintenanceWindowExecutionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

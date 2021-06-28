@@ -66,6 +66,8 @@ type UpdateTrialComponentInput struct {
 
 	// The new status of the component.
 	Status *types.TrialComponentStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTrialComponentOutput struct {
@@ -75,6 +77,8 @@ type UpdateTrialComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

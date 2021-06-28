@@ -65,11 +65,15 @@ type CreateFacetInput struct {
 	// *
 	// Index: Can be created with the Index API.
 	ObjectType types.ObjectType
+
+	noSmithyDocumentSerde
 }
 
 type CreateFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {

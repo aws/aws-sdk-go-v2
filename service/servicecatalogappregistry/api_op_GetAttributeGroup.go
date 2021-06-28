@@ -35,6 +35,8 @@ type GetAttributeGroupInput struct {
 	//
 	// This member is required.
 	AttributeGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAttributeGroupOutput struct {
@@ -69,6 +71,8 @@ type GetAttributeGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

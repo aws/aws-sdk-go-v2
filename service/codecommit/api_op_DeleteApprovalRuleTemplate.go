@@ -33,6 +33,8 @@ type DeleteApprovalRuleTemplateInput struct {
 	//
 	// This member is required.
 	ApprovalRuleTemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApprovalRuleTemplateOutput struct {
@@ -45,6 +47,8 @@ type DeleteApprovalRuleTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

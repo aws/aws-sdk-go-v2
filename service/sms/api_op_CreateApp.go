@@ -48,6 +48,8 @@ type CreateAppInput struct {
 
 	// The tags to be associated with the application.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAppOutput struct {
@@ -63,6 +65,8 @@ type CreateAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

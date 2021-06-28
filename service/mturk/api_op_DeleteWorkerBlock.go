@@ -41,11 +41,15 @@ type DeleteWorkerBlockInput struct {
 	// A message that explains the reason for unblocking the Worker. The Worker does
 	// not see this message.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorkerBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorkerBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

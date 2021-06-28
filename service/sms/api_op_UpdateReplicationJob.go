@@ -74,11 +74,15 @@ type UpdateReplicationJobInput struct {
 
 	// The name of the IAM role to be used by AWS SMS.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateReplicationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateReplicationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

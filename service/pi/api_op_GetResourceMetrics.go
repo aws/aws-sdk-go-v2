@@ -100,6 +100,8 @@ type GetResourceMetricsInput struct {
 	// PeriodInSeconds, then Performance Insights will choose a value for you, with a
 	// goal of returning roughly 100-200 data points in the response.
 	PeriodInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceMetricsOutput struct {
@@ -131,6 +133,8 @@ type GetResourceMetricsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {

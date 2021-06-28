@@ -100,6 +100,8 @@ type CompareFacesInput struct {
 	// The minimum level of confidence in the face matches that a match must meet to be
 	// included in the FaceMatches array.
 	SimilarityThreshold *float32
+
+	noSmithyDocumentSerde
 }
 
 type CompareFacesOutput struct {
@@ -144,6 +146,8 @@ type CompareFacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCompareFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

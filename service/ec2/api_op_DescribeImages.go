@@ -171,6 +171,8 @@ type DescribeImagesInput struct {
 	// this parameter, the results include all images for which you have launch
 	// permissions, regardless of ownership.
 	Owners []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImagesOutput struct {
@@ -180,6 +182,8 @@ type DescribeImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

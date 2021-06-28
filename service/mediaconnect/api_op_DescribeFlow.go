@@ -41,6 +41,8 @@ type DescribeFlowInput struct {
 	//
 	// This member is required.
 	FlowArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFlowOutput struct {
@@ -53,6 +55,8 @@ type DescribeFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

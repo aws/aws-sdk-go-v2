@@ -53,6 +53,8 @@ type DescribeTagsInput struct {
 	// ignored. The response is paginated at 100 per page if you have more than 100
 	// tags.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -73,6 +75,8 @@ type DescribeTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -81,6 +81,8 @@ type CreateEventSubscriptionInput struct {
 
 	// One or more tags to be assigned to the event subscription.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -91,6 +93,8 @@ type CreateEventSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

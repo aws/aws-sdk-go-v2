@@ -52,6 +52,8 @@ type UpdateMonitoringInput struct {
 
 	// The settings for open monitoring.
 	OpenMonitoring *types.OpenMonitoringInfo
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMonitoringOutput struct {
@@ -64,6 +66,8 @@ type UpdateMonitoringOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMonitoringMiddlewares(stack *middleware.Stack, options Options) (err error) {

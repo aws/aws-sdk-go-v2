@@ -35,6 +35,8 @@ type GetSMSAttributesInput struct {
 	// (https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html). If you
 	// don't use this parameter, Amazon SNS returns all SMS attributes.
 	Attributes []string
+
+	noSmithyDocumentSerde
 }
 
 // The response from the GetSMSAttributes request.
@@ -45,6 +47,8 @@ type GetSMSAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSMSAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

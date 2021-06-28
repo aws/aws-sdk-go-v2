@@ -49,6 +49,8 @@ type StartStudioSSOConfigurationRepairInput struct {
 	// but one or more of the parameters are different, the retry fails with a
 	// ValidationException error.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type StartStudioSSOConfigurationRepairOutput struct {
@@ -58,6 +60,8 @@ type StartStudioSSOConfigurationRepairOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartStudioSSOConfigurationRepairMiddlewares(stack *middleware.Stack, options Options) (err error) {

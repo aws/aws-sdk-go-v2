@@ -39,6 +39,8 @@ type UpdateTagOptionInput struct {
 
 	// The updated value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTagOptionOutput struct {
@@ -48,6 +50,8 @@ type UpdateTagOptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

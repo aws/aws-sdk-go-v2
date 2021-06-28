@@ -62,6 +62,8 @@ type CreateGlobalReplicationGroupInput struct {
 
 	// Provides details of the Global datastore
 	GlobalReplicationGroupDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGlobalReplicationGroupOutput struct {
@@ -77,6 +79,8 @@ type CreateGlobalReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

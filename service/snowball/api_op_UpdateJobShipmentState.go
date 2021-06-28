@@ -41,11 +41,15 @@ type UpdateJobShipmentStateInput struct {
 	//
 	// This member is required.
 	ShipmentState types.ShipmentState
+
+	noSmithyDocumentSerde
 }
 
 type UpdateJobShipmentStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateJobShipmentStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

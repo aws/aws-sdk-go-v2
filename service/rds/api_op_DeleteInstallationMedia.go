@@ -34,6 +34,8 @@ type DeleteInstallationMediaInput struct {
 	//
 	// This member is required.
 	InstallationMediaId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the installation media for a DB engine that requires an on-premises
@@ -67,6 +69,8 @@ type DeleteInstallationMediaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {

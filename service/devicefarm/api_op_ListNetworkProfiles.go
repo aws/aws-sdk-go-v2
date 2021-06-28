@@ -42,6 +42,8 @@ type ListNetworkProfilesInput struct {
 	// The type of network profile to return information about. Valid values are listed
 	// here.
 	Type types.NetworkProfileType
+
+	noSmithyDocumentSerde
 }
 
 type ListNetworkProfilesOutput struct {
@@ -55,6 +57,8 @@ type ListNetworkProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNetworkProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

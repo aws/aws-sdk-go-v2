@@ -49,6 +49,8 @@ type CreateGatewayInput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGatewayOutput struct {
@@ -69,6 +71,8 @@ type CreateGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

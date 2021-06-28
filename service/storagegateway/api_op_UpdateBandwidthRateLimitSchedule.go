@@ -44,6 +44,8 @@ type UpdateBandwidthRateLimitScheduleInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBandwidthRateLimitScheduleOutput struct {
@@ -54,6 +56,8 @@ type UpdateBandwidthRateLimitScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBandwidthRateLimitScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -89,6 +89,8 @@ type GetDevicePoolCompatibilityInput struct {
 	//
 	// * XCTEST_UI.
 	TestType types.TestType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of describe device pool compatibility request.
@@ -102,6 +104,8 @@ type GetDevicePoolCompatibilityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDevicePoolCompatibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {

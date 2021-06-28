@@ -38,6 +38,8 @@ type DisableDomainTransferLockInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The DisableDomainTransferLock response includes the following element.
@@ -52,6 +54,8 @@ type DisableDomainTransferLockOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableDomainTransferLockMiddlewares(stack *middleware.Stack, options Options) (err error) {

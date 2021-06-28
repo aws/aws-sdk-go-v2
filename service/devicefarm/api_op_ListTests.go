@@ -39,6 +39,8 @@ type ListTestsInput struct {
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a list tests request.
@@ -54,6 +56,8 @@ type ListTestsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTestsMiddlewares(stack *middleware.Stack, options Options) (err error) {

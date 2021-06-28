@@ -49,6 +49,8 @@ type CreateBotVersionInput struct {
 	// a new version. If you don't specify a checksum, Amazon Lex publishes the $LATEST
 	// version.
 	Checksum *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBotVersionOutput struct {
@@ -136,6 +138,8 @@ type CreateBotVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

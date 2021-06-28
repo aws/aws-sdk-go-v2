@@ -45,6 +45,8 @@ type UpdateAttributeGroupInput struct {
 	// The new name of the attribute group. The name must be unique in the region in
 	// which you are updating the attribute group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAttributeGroupOutput struct {
@@ -54,6 +56,8 @@ type UpdateAttributeGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

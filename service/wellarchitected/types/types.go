@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -50,6 +51,8 @@ type Answer struct {
 	// List of selected choice IDs in a question answer. The values entered replace the
 	// previously selected choices.
 	SelectedChoices []string
+
+	noSmithyDocumentSerde
 }
 
 // An answer summary of a lens review in a workload.
@@ -83,6 +86,8 @@ type AnswerSummary struct {
 	// List of selected choice IDs in a question answer. The values entered replace the
 	// previously selected choices.
 	SelectedChoices []string
+
+	noSmithyDocumentSerde
 }
 
 // A choice available to answer question.
@@ -96,6 +101,8 @@ type Choice struct {
 
 	// The title of a choice.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // A choice that has been answered on a question in your workload.
@@ -112,6 +119,8 @@ type ChoiceAnswer struct {
 
 	// The status of a choice.
 	Status ChoiceStatus
+
+	noSmithyDocumentSerde
 }
 
 // A choice summary that has been answered on a question in your workload.
@@ -125,6 +134,8 @@ type ChoiceAnswerSummary struct {
 
 	// The status of a choice.
 	Status ChoiceStatus
+
+	noSmithyDocumentSerde
 }
 
 // A list of choices to be updated.
@@ -140,6 +151,8 @@ type ChoiceUpdate struct {
 
 	// The reason why a choice is non-applicable to a question in your workload.
 	Reason ChoiceReason
+
+	noSmithyDocumentSerde
 }
 
 // An improvement summary of a lens review in a workload.
@@ -161,6 +174,8 @@ type ImprovementSummary struct {
 
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
+
+	noSmithyDocumentSerde
 }
 
 // A lens review of a question.
@@ -193,6 +208,8 @@ type LensReview struct {
 
 	// The date and time recorded.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A report of a lens review.
@@ -205,6 +222,8 @@ type LensReviewReport struct {
 	// The alias of the lens, for example, serverless. Each lens is identified by its
 	// LensSummary$LensAlias.
 	LensAlias *string
+
+	noSmithyDocumentSerde
 }
 
 // A lens review summary of a workload.
@@ -228,6 +247,8 @@ type LensReviewSummary struct {
 
 	// The date and time recorded.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A lens summary of a lens.
@@ -245,6 +266,8 @@ type LensSummary struct {
 
 	// The version of the lens.
 	LensVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Lens upgrade summary return object.
@@ -266,6 +289,8 @@ type LensUpgradeSummary struct {
 	// The name of the workload. The name must be unique within an account within a
 	// Region. Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
+
+	noSmithyDocumentSerde
 }
 
 // A milestone return object.
@@ -283,6 +308,8 @@ type Milestone struct {
 
 	// A workload return object.
 	Workload *Workload
+
+	noSmithyDocumentSerde
 }
 
 // A milestone summary return object.
@@ -300,6 +327,8 @@ type MilestoneSummary struct {
 
 	// A workload summary return object.
 	WorkloadSummary *WorkloadSummary
+
+	noSmithyDocumentSerde
 }
 
 // A notification summary return object.
@@ -310,6 +339,8 @@ type NotificationSummary struct {
 
 	// The type of notification.
 	Type NotificationType
+
+	noSmithyDocumentSerde
 }
 
 // A pillar difference return object.
@@ -324,6 +355,8 @@ type PillarDifference struct {
 
 	// List of question differences.
 	QuestionDifferences []QuestionDifference
+
+	noSmithyDocumentSerde
 }
 
 // A pillar review summary of a lens review.
@@ -341,6 +374,8 @@ type PillarReviewSummary struct {
 
 	// A map from risk names to the count of how questions have that rating.
 	RiskCounts map[string]int32
+
+	noSmithyDocumentSerde
 }
 
 // A question difference return object.
@@ -354,6 +389,8 @@ type QuestionDifference struct {
 
 	// The title of the question.
 	QuestionTitle *string
+
+	noSmithyDocumentSerde
 }
 
 // The share invitation.
@@ -364,6 +401,8 @@ type ShareInvitation struct {
 
 	// The ID assigned to the workload. This ID is unique within an AWS Region.
 	WorkloadId *string
+
+	noSmithyDocumentSerde
 }
 
 // A share invitation summary return object.
@@ -387,6 +426,8 @@ type ShareInvitationSummary struct {
 	// The name of the workload. The name must be unique within an account within a
 	// Region. Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
+
+	noSmithyDocumentSerde
 }
 
 // Stores information about a field passed inside a request that resulted in an
@@ -402,6 +443,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The differences between the base and latest versions of the lens.
@@ -409,6 +452,8 @@ type VersionDifferences struct {
 
 	// The differences between the base and latest versions of the lens.
 	PillarDifferences []PillarDifference
+
+	noSmithyDocumentSerde
 }
 
 // A workload return object.
@@ -552,6 +597,8 @@ type Workload struct {
 	// The name of the workload. The name must be unique within an account within a
 	// Region. Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
+
+	noSmithyDocumentSerde
 }
 
 // A workload share return object.
@@ -578,6 +625,8 @@ type WorkloadShare struct {
 	// The name of the workload. The name must be unique within an account within a
 	// Region. Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
+
+	noSmithyDocumentSerde
 }
 
 // A workload share summary return object.
@@ -594,6 +643,8 @@ type WorkloadShareSummary struct {
 
 	// The status of a workload share.
 	Status ShareStatus
+
+	noSmithyDocumentSerde
 }
 
 // A workload summary return object.
@@ -624,4 +675,8 @@ type WorkloadSummary struct {
 	// The name of the workload. The name must be unique within an account within a
 	// Region. Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

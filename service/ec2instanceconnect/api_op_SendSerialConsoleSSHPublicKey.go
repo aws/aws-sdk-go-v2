@@ -49,6 +49,8 @@ type SendSerialConsoleSSHPublicKeyInput struct {
 	// The serial port of the EC2 instance. Currently only port 0 is supported.
 	// Default: 0
 	SerialPort int32
+
+	noSmithyDocumentSerde
 }
 
 type SendSerialConsoleSSHPublicKeyOutput struct {
@@ -62,6 +64,8 @@ type SendSerialConsoleSSHPublicKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendSerialConsoleSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

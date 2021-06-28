@@ -46,12 +46,16 @@ type DeleteApplicationInput struct {
 	//
 	// This member is required.
 	CreateTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 //
 type DeleteApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

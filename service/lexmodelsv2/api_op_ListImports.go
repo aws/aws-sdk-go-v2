@@ -55,6 +55,8 @@ type ListImportsInput struct {
 	// Determines the field that the list of imports is sorted by. You can sort by the
 	// LastUpdatedDateTime field in ascending or descending order.
 	SortBy *types.ImportSortBy
+
+	noSmithyDocumentSerde
 }
 
 type ListImportsOutput struct {
@@ -79,6 +81,8 @@ type ListImportsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, options Options) (err error) {

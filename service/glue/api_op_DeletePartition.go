@@ -46,11 +46,15 @@ type DeletePartitionInput struct {
 	// The ID of the Data Catalog where the partition to be deleted resides. If none is
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePartitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

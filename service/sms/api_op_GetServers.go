@@ -42,6 +42,8 @@ type GetServersInput struct {
 
 	// The server addresses.
 	VmServerAddressList []types.VmServerAddress
+
+	noSmithyDocumentSerde
 }
 
 type GetServersOutput struct {
@@ -61,6 +63,8 @@ type GetServersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServersMiddlewares(stack *middleware.Stack, options Options) (err error) {

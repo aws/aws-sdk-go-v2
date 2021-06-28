@@ -34,11 +34,15 @@ type DisassociateSkillGroupFromRoomInput struct {
 
 	// The ARN of the skill group to disassociate from a room. Required.
 	SkillGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateSkillGroupFromRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateSkillGroupFromRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -75,6 +75,8 @@ type ListFragmentsInput struct {
 	// The name of the stream from which to retrieve a fragment list. Specify either
 	// this parameter or the StreamARN parameter.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFragmentsOutput struct {
@@ -90,6 +92,8 @@ type ListFragmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFragmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

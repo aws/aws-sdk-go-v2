@@ -100,6 +100,8 @@ type CreateApiInput struct {
 
 	// A version identifier for the API.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateApiOutput struct {
@@ -171,6 +173,8 @@ type CreateApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

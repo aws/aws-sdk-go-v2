@@ -38,11 +38,15 @@ type DeleteEnvironmentMembershipInput struct {
 	//
 	// This member is required.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEnvironmentMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

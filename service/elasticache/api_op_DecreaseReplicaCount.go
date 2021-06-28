@@ -70,6 +70,8 @@ type DecreaseReplicaCountInput struct {
 	// A list of the node ids to remove from the replication group or node group
 	// (shard).
 	ReplicasToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type DecreaseReplicaCountOutput struct {
@@ -79,6 +81,8 @@ type DecreaseReplicaCountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDecreaseReplicaCountMiddlewares(stack *middleware.Stack, options Options) (err error) {

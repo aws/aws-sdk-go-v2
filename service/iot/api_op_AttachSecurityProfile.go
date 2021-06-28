@@ -39,11 +39,15 @@ type AttachSecurityProfileInput struct {
 	//
 	// This member is required.
 	SecurityProfileTargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AttachSecurityProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

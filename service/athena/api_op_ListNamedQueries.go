@@ -46,6 +46,8 @@ type ListNamedQueriesInput struct {
 	// workgroup is not specified, the saved queries for the primary workgroup are
 	// returned.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type ListNamedQueriesOutput struct {
@@ -60,6 +62,8 @@ type ListNamedQueriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNamedQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

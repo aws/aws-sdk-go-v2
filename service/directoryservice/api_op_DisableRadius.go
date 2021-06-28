@@ -34,12 +34,16 @@ type DisableRadiusInput struct {
 	//
 	// This member is required.
 	DirectoryId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the DisableRadius operation.
 type DisableRadiusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableRadiusMiddlewares(stack *middleware.Stack, options Options) (err error) {

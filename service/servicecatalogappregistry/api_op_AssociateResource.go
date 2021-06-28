@@ -44,6 +44,8 @@ type AssociateResourceInput struct {
 	//
 	// This member is required.
 	ResourceType types.ResourceType
+
+	noSmithyDocumentSerde
 }
 
 type AssociateResourceOutput struct {
@@ -57,6 +59,8 @@ type AssociateResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

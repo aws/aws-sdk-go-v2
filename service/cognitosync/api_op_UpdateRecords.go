@@ -75,6 +75,8 @@ type UpdateRecordsInput struct {
 
 	// A list of patch operations.
 	RecordPatches []types.RecordPatch
+
+	noSmithyDocumentSerde
 }
 
 // Returned for a successful UpdateRecordsRequest.
@@ -85,6 +87,8 @@ type UpdateRecordsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -54,6 +54,8 @@ type UpdateDomainNameserversInput struct {
 	//
 	// Deprecated: This member has been deprecated.
 	FIAuthKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The UpdateDomainNameservers response includes the following element.
@@ -68,6 +70,8 @@ type UpdateDomainNameserversOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainNameserversMiddlewares(stack *middleware.Stack, options Options) (err error) {

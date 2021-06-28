@@ -59,6 +59,8 @@ type UpdateUserInput struct {
 
 	// The type of the user.
 	Type types.UserType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserOutput struct {
@@ -68,6 +70,8 @@ type UpdateUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

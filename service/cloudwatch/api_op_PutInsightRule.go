@@ -61,11 +61,15 @@ type PutInsightRuleInput struct {
 	// tags of an existing rule, use TagResource
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutInsightRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutInsightRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

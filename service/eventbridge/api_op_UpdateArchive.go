@@ -43,6 +43,8 @@ type UpdateArchiveInput struct {
 
 	// The number of days to retain events in the archive.
 	RetentionDays *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateArchiveOutput struct {
@@ -61,6 +63,8 @@ type UpdateArchiveOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {

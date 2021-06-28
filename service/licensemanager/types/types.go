@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type AutomatedDiscoveryInformation struct {
 
 	// Time that automated discovery last ran.
 	LastRunTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details about a borrow configuration.
@@ -25,6 +28,8 @@ type BorrowConfiguration struct {
 	//
 	// This member is required.
 	MaxTimeToLiveInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Details about license consumption.
@@ -35,6 +40,8 @@ type ConsumedLicenseSummary struct {
 
 	// Resource type of the resource consuming a license.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Details about a consumption configuration.
@@ -48,6 +55,8 @@ type ConsumptionConfiguration struct {
 
 	// Renewal frequency.
 	RenewType RenewType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a time range, in ISO8601-UTC format.
@@ -60,6 +69,8 @@ type DatetimeRange struct {
 
 	// End of the time range.
 	End *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resource entitled for use with a license.
@@ -86,6 +97,8 @@ type Entitlement struct {
 
 	// Entitlement resource. Use only if the unit is None.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Data associated with an entitlement resource.
@@ -103,6 +116,8 @@ type EntitlementData struct {
 
 	// Entitlement data value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Usage associated with an entitlement resource.
@@ -125,6 +140,8 @@ type EntitlementUsage struct {
 
 	// Maximum entitlement usage count.
 	MaxCount *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter name and value pair that is used to return more specific results from a
@@ -137,6 +154,8 @@ type Filter struct {
 
 	// Filter values. Filter values are case-sensitive.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a grant.
@@ -189,6 +208,8 @@ type Grant struct {
 
 	// Grant status reason.
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a license that is granted to a grantee.
@@ -239,6 +260,8 @@ type GrantedLicense struct {
 
 	// Version of the granted license.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // An inventory filter.
@@ -256,6 +279,8 @@ type InventoryFilter struct {
 
 	// Value of the filter.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the issuer of a license.
@@ -269,6 +294,8 @@ type Issuer struct {
 	// Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of
 	// sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
 	SignKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Details associated with the issuer of a license.
@@ -283,6 +310,8 @@ type IssuerDetails struct {
 	// Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of
 	// sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
 	SignKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Software license that is managed in AWS License Manager.
@@ -329,6 +358,8 @@ type License struct {
 
 	// License version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // A license configuration is an abstraction of a customer license agreement that
@@ -386,6 +417,8 @@ type LicenseConfiguration struct {
 
 	// Status of the license configuration.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an association with a license configuration.
@@ -405,6 +438,8 @@ type LicenseConfigurationAssociation struct {
 
 	// Type of server resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Details about the usage of a resource associated with a license configuration.
@@ -427,6 +462,8 @@ type LicenseConfigurationUsage struct {
 
 	// Type of resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the failure of a license operation.
@@ -455,6 +492,8 @@ type LicenseOperationFailure struct {
 
 	// Resource type.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Details for associating a license configuration with a resource.
@@ -467,6 +506,8 @@ type LicenseSpecification struct {
 
 	// Scope of AMI associations. The possible value is cross-account.
 	AmiAssociationScope *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the entitlement usage associated with a license.
@@ -474,6 +515,8 @@ type LicenseUsage struct {
 
 	// License entitlement usages.
 	EntitlementUsages []EntitlementUsage
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a managed resource.
@@ -484,6 +527,8 @@ type ManagedResourceSummary struct {
 
 	// Type of resource associated with a license.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes key/value pairs.
@@ -494,6 +539,8 @@ type Metadata struct {
 
 	// The value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for AWS Organizations.
@@ -503,6 +550,8 @@ type OrganizationConfiguration struct {
 	//
 	// This member is required.
 	EnableIntegration bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes product information for a license configuration.
@@ -563,6 +612,8 @@ type ProductInformation struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes product information filters.
@@ -580,6 +631,8 @@ type ProductInformationFilter struct {
 
 	// Filter value.
 	ProductInformationFilterValue []string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a provisional configuration.
@@ -589,6 +642,8 @@ type ProvisionalConfiguration struct {
 	//
 	// This member is required.
 	MaxTimeToLiveInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Metadata associated with received licenses and grants.
@@ -601,6 +656,8 @@ type ReceivedMetadata struct {
 	ReceivedStatus ReceivedStatus
 
 	ReceivedStatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the license configuration that this generator reports on.
@@ -611,6 +668,8 @@ type ReportContext struct {
 	//
 	// This member is required.
 	LicenseConfigurationArns []string
+
+	noSmithyDocumentSerde
 }
 
 // Details on how frequently reports are generated.
@@ -622,6 +681,8 @@ type ReportFrequency struct {
 	// Number of times within the frequency period that a report will be generated.
 	// Currently only 1 is supported.
 	Value *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describe the details of a report generator.
@@ -665,6 +726,8 @@ type ReportGenerator struct {
 
 	// Tags associated with the report generator.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Details about a resource.
@@ -687,6 +750,8 @@ type ResourceInventory struct {
 
 	// Type of resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Details of the S3 bucket that report generator reports are published to.
@@ -697,6 +762,8 @@ type S3Location struct {
 
 	// Prefix of the S3 bucket reports are published to.
 	KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a tag for a license configuration.
@@ -707,6 +774,8 @@ type Tag struct {
 
 	// Tag value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a token.
@@ -732,4 +801,8 @@ type TokenData struct {
 
 	// Type of token generated. The supported value is REFRESH_TOKEN.
 	TokenType *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

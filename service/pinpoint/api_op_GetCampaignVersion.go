@@ -45,6 +45,8 @@ type GetCampaignVersionInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCampaignVersionOutput struct {
@@ -57,6 +59,8 @@ type GetCampaignVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCampaignVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

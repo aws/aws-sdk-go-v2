@@ -85,6 +85,8 @@ type CreateDhcpOptionsInput struct {
 
 	// The tags to assign to the DHCP option.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateDhcpOptionsOutput struct {
@@ -94,6 +96,8 @@ type CreateDhcpOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDhcpOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

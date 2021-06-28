@@ -48,6 +48,8 @@ type DeleteIndexFieldInput struct {
 	//
 	// This member is required.
 	IndexFieldName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DeleteIndexField request.
@@ -60,6 +62,8 @@ type DeleteIndexFieldOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteIndexFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type BatchDetectSentimentInput struct {
 	//
 	// This member is required.
 	TextList []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDetectSentimentOutput struct {
@@ -65,6 +67,8 @@ type BatchDetectSentimentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDetectSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -73,6 +73,8 @@ type GetRelationalDatabaseLogEventsInput struct {
 	// format. For example, if you wish to use a start time of October 1, 2018, at 8 PM
 	// UTC, then you input 1538424000 as the start time.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type GetRelationalDatabaseLogEventsOutput struct {
@@ -91,6 +93,8 @@ type GetRelationalDatabaseLogEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRelationalDatabaseLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

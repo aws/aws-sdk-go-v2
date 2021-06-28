@@ -43,6 +43,8 @@ type ListProvisioningArtifactsInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProvisioningArtifactsOutput struct {
@@ -56,6 +58,8 @@ type ListProvisioningArtifactsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProvisioningArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

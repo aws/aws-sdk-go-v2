@@ -35,6 +35,8 @@ type DeleteVoiceChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVoiceChannelOutput struct {
@@ -47,6 +49,8 @@ type DeleteVoiceChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVoiceChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

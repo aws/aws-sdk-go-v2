@@ -10,6 +10,8 @@ import (
 // You do not have sufficient permission to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // Quotas is enabled in your organization.
 type AWSServiceAccessNotEnabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AWSServiceAccessNotEnabledException) Error() string {
@@ -49,6 +53,8 @@ func (e *AWSServiceAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 // You can't perform this action because a dependency does not have access.
 type DependencyAccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependencyAccessDeniedException) Error() string {
@@ -68,6 +74,8 @@ func (e *DependencyAccessDeniedException) ErrorFault() smithy.ErrorFault { retur
 // Invalid input was provided.
 type IllegalArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IllegalArgumentException) Error() string {
@@ -85,6 +93,8 @@ func (e *IllegalArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // Invalid input was provided.
 type InvalidPaginationTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPaginationTokenException) Error() string {
@@ -104,6 +114,8 @@ func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { retur
 // The resource is in an invalid state.
 type InvalidResourceStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceStateException) Error() string {
@@ -121,6 +133,8 @@ func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return 
 // The account making this call is not a member of an organization.
 type NoAvailableOrganizationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoAvailableOrganizationException) Error() string {
@@ -140,6 +154,8 @@ func (e *NoAvailableOrganizationException) ErrorFault() smithy.ErrorFault { retu
 // The specified resource does not exist.
 type NoSuchResourceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchResourceException) Error() string {
@@ -157,6 +173,8 @@ func (e *NoSuchResourceException) ErrorFault() smithy.ErrorFault { return smithy
 // The organization that your account belongs to is not in All Features mode.
 type OrganizationNotInAllFeaturesModeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationNotInAllFeaturesModeException) Error() string {
@@ -180,6 +198,8 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFau
 // increase.
 type QuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *QuotaExceededException) Error() string {
@@ -197,6 +217,8 @@ func (e *QuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -214,6 +236,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // Something went wrong.
 type ServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceException) Error() string {
@@ -231,6 +255,8 @@ func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultS
 // The quota request template is not associated with your organization.
 type ServiceQuotaTemplateNotInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaTemplateNotInUseException) Error() string {
@@ -252,6 +278,8 @@ func (e *ServiceQuotaTemplateNotInUseException) ErrorFault() smithy.ErrorFault {
 // The specified tag is a reserved word and cannot be used.
 type TagPolicyViolationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagPolicyViolationException) Error() string {
@@ -269,6 +297,8 @@ func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return sm
 // The Service Quotas template is not available in this AWS Region.
 type TemplatesNotAvailableInRegionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TemplatesNotAvailableInRegionException) Error() string {
@@ -291,6 +321,8 @@ func (e *TemplatesNotAvailableInRegionException) ErrorFault() smithy.ErrorFault 
 // or request an increase for this quota.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -311,6 +343,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // in the Service Quotas User Guide.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

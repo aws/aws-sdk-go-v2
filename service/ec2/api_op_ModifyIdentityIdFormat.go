@@ -70,11 +70,15 @@ type ModifyIdentityIdFormatInput struct {
 	//
 	// This member is required.
 	UseLongIds *bool
+
+	noSmithyDocumentSerde
 }
 
 type ModifyIdentityIdFormatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyIdentityIdFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {

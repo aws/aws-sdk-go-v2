@@ -98,6 +98,8 @@ type PutRecordInput struct {
 	// putting record n-1). If this parameter is not set, records are coarsely ordered
 	// based on arrival time.
 	SequenceNumberForOrdering *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for PutRecord.
@@ -128,6 +130,8 @@ type PutRecordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {

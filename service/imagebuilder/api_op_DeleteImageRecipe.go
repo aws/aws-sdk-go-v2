@@ -32,6 +32,8 @@ type DeleteImageRecipeInput struct {
 	//
 	// This member is required.
 	ImageRecipeArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteImageRecipeOutput struct {
@@ -44,6 +46,8 @@ type DeleteImageRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type RemoveRegionsFromReplicationInput struct {
 	//
 	// This member is required.
 	SecretId *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveRegionsFromReplicationOutput struct {
@@ -51,6 +53,8 @@ type RemoveRegionsFromReplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveRegionsFromReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

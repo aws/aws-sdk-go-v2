@@ -32,6 +32,8 @@ type DeleteSourceCredentialsInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSourceCredentialsOutput struct {
@@ -41,6 +43,8 @@ type DeleteSourceCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

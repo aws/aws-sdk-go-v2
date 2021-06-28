@@ -36,6 +36,8 @@ type GetCanaryInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCanaryOutput struct {
@@ -45,6 +47,8 @@ type GetCanaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

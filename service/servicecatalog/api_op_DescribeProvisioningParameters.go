@@ -67,6 +67,8 @@ type DescribeProvisioningParametersInput struct {
 	// The name of the provisioning artifact. You must provide the name or ID, but not
 	// both.
 	ProvisioningArtifactName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProvisioningParametersOutput struct {
@@ -93,6 +95,8 @@ type DescribeProvisioningParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProvisioningParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

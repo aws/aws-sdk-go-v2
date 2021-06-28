@@ -69,6 +69,8 @@ type ListSecretsInput struct {
 
 	// Lists secrets in the requested order.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type ListSecretsOutput struct {
@@ -87,6 +89,8 @@ type ListSecretsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type DeleteAdmChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAdmChannelOutput struct {
@@ -47,6 +49,8 @@ type DeleteAdmChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAdmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

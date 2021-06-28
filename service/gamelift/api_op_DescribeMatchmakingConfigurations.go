@@ -63,6 +63,8 @@ type DescribeMatchmakingConfigurationsInput struct {
 	// set name or ARN value. Use this parameter to retrieve all matchmaking
 	// configurations that use this rule set.
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -78,6 +80,8 @@ type DescribeMatchmakingConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

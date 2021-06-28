@@ -39,6 +39,8 @@ type CreateReturnShippingLabelInput struct {
 	// device is returned to AWS. This speed represents how quickly it moves to its
 	// destination while in transit. Regional shipping speeds are as follows:
 	ShippingOption types.ShippingOption
+
+	noSmithyDocumentSerde
 }
 
 type CreateReturnShippingLabelOutput struct {
@@ -49,6 +51,8 @@ type CreateReturnShippingLabelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReturnShippingLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {

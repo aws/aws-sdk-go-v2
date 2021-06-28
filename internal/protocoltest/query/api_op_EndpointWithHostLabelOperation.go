@@ -31,11 +31,15 @@ type EndpointWithHostLabelOperationInput struct {
 
 	// This member is required.
 	Label *string
+
+	noSmithyDocumentSerde
 }
 
 type EndpointWithHostLabelOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {

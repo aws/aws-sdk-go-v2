@@ -44,11 +44,15 @@ type AssignVolumeInput struct {
 
 	// The instance ID.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssignVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssignVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

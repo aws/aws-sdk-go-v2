@@ -42,6 +42,8 @@ type DescribeAccountOverviewInput struct {
 	// level. The floor of the start time is used. Returned information occurred before
 	// this day. If this is not specified, then the current day is used.
 	ToTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountOverviewOutput struct {
@@ -66,6 +68,8 @@ type DescribeAccountOverviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountOverviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type RemoveAttributesInput struct {
 	//
 	// This member is required.
 	UpdateAttributesRequest *types.UpdateAttributesRequest
+
+	noSmithyDocumentSerde
 }
 
 type RemoveAttributesOutput struct {
@@ -71,6 +73,8 @@ type RemoveAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

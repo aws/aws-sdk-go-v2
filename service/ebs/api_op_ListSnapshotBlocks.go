@@ -45,6 +45,8 @@ type ListSnapshotBlocksInput struct {
 	// The block index from which the list should start. The list in the response will
 	// start from this block index or the next valid block index in the snapshot.
 	StartingBlockIndex *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListSnapshotBlocksOutput struct {
@@ -67,6 +69,8 @@ type ListSnapshotBlocksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSnapshotBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {

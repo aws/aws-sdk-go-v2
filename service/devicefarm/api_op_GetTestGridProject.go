@@ -34,6 +34,8 @@ type GetTestGridProjectInput struct {
 	//
 	// This member is required.
 	ProjectArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTestGridProjectOutput struct {
@@ -43,6 +45,8 @@ type GetTestGridProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

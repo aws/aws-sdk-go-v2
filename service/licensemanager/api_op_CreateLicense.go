@@ -84,6 +84,8 @@ type CreateLicenseInput struct {
 
 	// Information about the license.
 	LicenseMetadata []types.Metadata
+
+	noSmithyDocumentSerde
 }
 
 type CreateLicenseOutput struct {
@@ -99,6 +101,8 @@ type CreateLicenseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {

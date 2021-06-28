@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type AvailabilityZone struct {
 
 	// Id for the availability zone.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Types of broker engines.
@@ -21,6 +24,8 @@ type BrokerEngineType struct {
 
 	// The list of engine versions.
 	EngineVersions []EngineVersion
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about all brokers.
@@ -35,6 +40,8 @@ type BrokerInstance struct {
 	// The IP address of the Elastic Network Interface (ENI) attached to the broker.
 	// Does not apply to RabbitMQ brokers.
 	IpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Option for host instance type.
@@ -57,6 +64,8 @@ type BrokerInstanceOption struct {
 
 	// The list of supported engine versions.
 	SupportedEngineVersions []string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about all brokers.
@@ -91,6 +100,8 @@ type BrokerSummary struct {
 
 	// The broker's instance type.
 	HostInstanceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about all configurations.
@@ -149,6 +160,8 @@ type Configuration struct {
 
 	// The list of all tags associated with this configuration.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A list of information about the configuration. Does not apply to RabbitMQ
@@ -162,6 +175,8 @@ type ConfigurationId struct {
 
 	// The revision number of the configuration.
 	Revision int32
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the specified configuration revision.
@@ -179,6 +194,8 @@ type ConfigurationRevision struct {
 
 	// The description of the configuration revision.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Broker configuration information
@@ -192,6 +209,8 @@ type Configurations struct {
 
 	// The broker's pending configuration.
 	Pending *ConfigurationId
+
+	noSmithyDocumentSerde
 }
 
 // Does not apply to RabbitMQ brokers. Encryption options for the broker.
@@ -207,6 +226,8 @@ type EncryptionOptions struct {
 	// This key is used to encrypt your data at rest. If not provided, Amazon MQ will
 	// use a default CMK to encrypt your data.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Id of the engine version.
@@ -214,6 +235,8 @@ type EngineVersion struct {
 
 	// Id for the version.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Optional. The metadata of the LDAP server used to authenticate and authorize
@@ -291,6 +314,8 @@ type LdapServerMetadataInput struct {
 	// The directory search scope for the user. If set to true, scope is to search the
 	// entire subtree.
 	UserSearchSubtree bool
+
+	noSmithyDocumentSerde
 }
 
 // Optional. The metadata of the LDAP server used to authenticate and authorize
@@ -361,6 +386,8 @@ type LdapServerMetadataOutput struct {
 	// The directory search scope for the user. If set to true, scope is to search the
 	// entire subtree.
 	UserSearchSubtree bool
+
+	noSmithyDocumentSerde
 }
 
 // The list of information about logs to be enabled for the specified broker.
@@ -372,6 +399,8 @@ type Logs struct {
 
 	// Enables general logging.
 	General bool
+
+	noSmithyDocumentSerde
 }
 
 // The list of information about logs currently enabled and pending to be deployed
@@ -398,6 +427,8 @@ type LogsSummary struct {
 	// The list of information about logs pending to be deployed for the specified
 	// broker.
 	Pending *PendingLogs
+
+	noSmithyDocumentSerde
 }
 
 // The list of information about logs to be enabled for the specified broker.
@@ -409,6 +440,8 @@ type PendingLogs struct {
 
 	// Enables general logging.
 	General bool
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the XML element or attribute that was sanitized in the
@@ -425,6 +458,8 @@ type SanitizationWarning struct {
 
 	// The name of the XML element that has been sanitized.
 	ElementName *string
+
+	noSmithyDocumentSerde
 }
 
 // A user associated with the broker. For RabbitMQ brokers, one and only one
@@ -460,6 +495,8 @@ type User struct {
 	// tildes (- . _ ~). This value must be 2-100 characters long. Does not apply to
 	// RabbitMQ brokers.
 	Groups []string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the status of the changes pending for the ActiveMQ
@@ -478,6 +515,8 @@ type UserPendingChanges struct {
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []string
+
+	noSmithyDocumentSerde
 }
 
 // Returns a list of all broker users. Does not apply to RabbitMQ brokers.
@@ -492,6 +531,8 @@ type UserSummary struct {
 
 	// The type of change pending for the broker user.
 	PendingChange ChangeType
+
+	noSmithyDocumentSerde
 }
 
 // The scheduled time period relative to UTC during which Amazon MQ begins to apply
@@ -511,4 +552,8 @@ type WeeklyStartTime struct {
 	// The time zone, UTC by default, in either the Country/City format, or the UTC
 	// offset format.
 	TimeZone *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

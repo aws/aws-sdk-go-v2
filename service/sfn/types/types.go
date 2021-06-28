@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type ActivityFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an activity.
@@ -48,6 +51,8 @@ type ActivityListItem struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an activity scheduled during an execution.
@@ -70,6 +75,8 @@ type ActivityScheduledEventDetails struct {
 
 	// The maximum allowed duration of the activity task.
 	TimeoutInSeconds int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an activity schedule failure that occurred during an
@@ -81,6 +88,8 @@ type ActivityScheduleFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the start of an activity during an execution.
@@ -89,6 +98,8 @@ type ActivityStartedEventDetails struct {
 	// The name of the worker that the task is assigned to. These names are provided by
 	// the workers when calling GetActivityTask.
 	WorkerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an activity that successfully terminated during an
@@ -101,6 +112,8 @@ type ActivitySucceededEventDetails struct {
 
 	// Contains details about the output of an execution history event.
 	OutputDetails *HistoryEventExecutionDataDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an activity timeout that occurred during an execution.
@@ -111,6 +124,8 @@ type ActivityTimedOutEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes workflow billing details.
@@ -121,6 +136,8 @@ type BillingDetails struct {
 
 	// Billed memory consumption of your workflow, in MB.
 	BilledMemoryUsedInMB int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about execution input or output.
@@ -129,6 +146,8 @@ type CloudWatchEventsExecutionDataDetails struct {
 	// Indicates whether input or output was included in the response. Always true for
 	// API calls.
 	Included bool
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -137,6 +156,8 @@ type CloudWatchLogsLogGroup struct {
 	// The ARN of the the CloudWatch log group to which you want your logs emitted to.
 	// The ARN must end with :*
 	LogGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an abort of an execution.
@@ -147,6 +168,8 @@ type ExecutionAbortedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an execution failure event.
@@ -157,6 +180,8 @@ type ExecutionFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an execution.
@@ -204,6 +229,8 @@ type ExecutionListItem struct {
 
 	// If the execution already ended, the date the execution stopped.
 	StopDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the start of the execution.
@@ -219,6 +246,8 @@ type ExecutionStartedEventDetails struct {
 	// The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda
 	// tasks.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the successful termination of the execution.
@@ -230,6 +259,8 @@ type ExecutionSucceededEventDetails struct {
 
 	// Contains details about the output of an execution history event.
 	OutputDetails *HistoryEventExecutionDataDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the execution timeout that occurred during the execution.
@@ -240,6 +271,8 @@ type ExecutionTimedOutEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the events of an execution.
@@ -364,6 +397,8 @@ type HistoryEvent struct {
 
 	// Contains details about a task that timed out.
 	TaskTimedOutEventDetails *TaskTimedOutEventDetails
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about input or output in an execution history event.
@@ -372,6 +407,8 @@ type HistoryEventExecutionDataDetails struct {
 	// Indicates whether input or output was truncated in the response. Always false
 	// for API calls.
 	Truncated bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a lambda function that failed during an execution.
@@ -382,6 +419,8 @@ type LambdaFunctionFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a lambda function scheduled during an execution.
@@ -401,6 +440,8 @@ type LambdaFunctionScheduledEventDetails struct {
 
 	// The maximum allowed duration of the lambda function.
 	TimeoutInSeconds int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a failed lambda function schedule event that occurred
@@ -412,6 +453,8 @@ type LambdaFunctionScheduleFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a lambda function that failed to start during an
@@ -423,6 +466,8 @@ type LambdaFunctionStartFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a lambda function that successfully terminated during an
@@ -435,6 +480,8 @@ type LambdaFunctionSucceededEventDetails struct {
 
 	// Contains details about the output of an execution history event.
 	OutputDetails *HistoryEventExecutionDataDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a lambda function timeout that occurred during an
@@ -446,6 +493,8 @@ type LambdaFunctionTimedOutEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -456,6 +505,8 @@ type LogDestination struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
 	// in the AWS CloudFormation User Guide.
 	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup
+
+	noSmithyDocumentSerde
 }
 
 // The LoggingConfiguration data type is used to set CloudWatch Logs options.
@@ -471,6 +522,8 @@ type LoggingConfiguration struct {
 
 	// Defines which category of execution history events are logged.
 	Level LogLevel
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an iteration of a Map state.
@@ -481,6 +534,8 @@ type MapIterationEventDetails struct {
 
 	// The name of the iteration’s parent Map state.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a Map state that was started.
@@ -488,6 +543,8 @@ type MapStateStartedEventDetails struct {
 
 	// The size of the array for Map state iterations.
 	Length int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a state entered during an execution.
@@ -504,6 +561,8 @@ type StateEnteredEventDetails struct {
 
 	// Contains details about the input for an execution history event.
 	InputDetails *HistoryEventExecutionDataDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an exit from a state during an execution.
@@ -535,6 +594,8 @@ type StateExitedEventDetails struct {
 
 	// Contains details about the output of an execution history event.
 	OutputDetails *HistoryEventExecutionDataDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the state machine.
@@ -575,6 +636,8 @@ type StateMachineListItem struct {
 	//
 	// This member is required.
 	Type StateMachineType
+
+	noSmithyDocumentSerde
 }
 
 // Tags are key-value pairs that can be associated with Step Functions state
@@ -593,6 +656,8 @@ type Tag struct {
 
 	// The value of a tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a task failure event.
@@ -613,6 +678,8 @@ type TaskFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a task scheduled during an execution.
@@ -645,6 +712,8 @@ type TaskScheduledEventDetails struct {
 
 	// The maximum allowed duration of the task.
 	TimeoutInSeconds int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the start of a task during an execution.
@@ -659,6 +728,8 @@ type TaskStartedEventDetails struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a task that failed to start during an execution.
@@ -679,6 +750,8 @@ type TaskStartFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a task that failed to submit during an execution.
@@ -699,6 +772,8 @@ type TaskSubmitFailedEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a task submitted to a resource .
@@ -720,6 +795,8 @@ type TaskSubmittedEventDetails struct {
 
 	// Contains details about the output of an execution history event.
 	OutputDetails *HistoryEventExecutionDataDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the successful completion of a task state.
@@ -742,6 +819,8 @@ type TaskSucceededEventDetails struct {
 
 	// Contains details about the output of an execution history event.
 	OutputDetails *HistoryEventExecutionDataDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a resource timeout that occurred during an execution.
@@ -762,6 +841,8 @@ type TaskTimedOutEventDetails struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 // Selects whether or not the state machine's AWS X-Ray tracing is enabled. Default
@@ -770,4 +851,8 @@ type TracingConfiguration struct {
 
 	// When set to true, AWS X-Ray tracing is enabled.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

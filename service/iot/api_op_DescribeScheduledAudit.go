@@ -33,6 +33,8 @@ type DescribeScheduledAuditInput struct {
 	//
 	// This member is required.
 	ScheduledAuditName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeScheduledAuditOutput struct {
@@ -64,6 +66,8 @@ type DescribeScheduledAuditOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {

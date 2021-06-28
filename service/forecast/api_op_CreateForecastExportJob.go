@@ -90,6 +90,8 @@ type CreateForecastExportJobInput struct {
 	// with only the key prefix of aws do not count against your tags per resource
 	// limit.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateForecastExportJobOutput struct {
@@ -99,6 +101,8 @@ type CreateForecastExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

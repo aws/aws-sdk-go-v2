@@ -46,6 +46,8 @@ type UpdateDataSetPermissionsInput struct {
 
 	// The resource permissions that you want to revoke from the dataset.
 	RevokePermissions []types.ResourcePermission
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDataSetPermissionsOutput struct {
@@ -65,6 +67,8 @@ type UpdateDataSetPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataSetPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetDiskInput struct {
 	//
 	// This member is required.
 	DiskName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDiskOutput struct {
@@ -42,6 +44,8 @@ type GetDiskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {

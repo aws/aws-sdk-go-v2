@@ -57,6 +57,8 @@ type GetIdInput struct {
 	// *
 	// Digits: www.digits.com
 	Logins map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Returned in response to a GetId request.
@@ -67,6 +69,8 @@ type GetIdOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIdMiddlewares(stack *middleware.Stack, options Options) (err error) {

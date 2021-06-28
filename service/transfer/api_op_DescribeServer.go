@@ -36,6 +36,8 @@ type DescribeServerInput struct {
 	//
 	// This member is required.
 	ServerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeServerOutput struct {
@@ -47,6 +49,8 @@ type DescribeServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

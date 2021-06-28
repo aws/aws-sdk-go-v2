@@ -86,6 +86,8 @@ type DetectCustomLabelsInput struct {
 	// specified value. If you specify a value of 0, all labels are return, regardless
 	// of the default thresholds that the model version applies.
 	MinConfidence *float32
+
+	noSmithyDocumentSerde
 }
 
 type DetectCustomLabelsOutput struct {
@@ -95,6 +97,8 @@ type DetectCustomLabelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectCustomLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,11 +43,15 @@ type UpdateResourceCollectionInput struct {
 	//
 	// This member is required.
 	ResourceCollection *types.UpdateResourceCollectionFilter
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResourceCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResourceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DescribeLabelingJobInput struct {
 	//
 	// This member is required.
 	LabelingJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLabelingJobOutput struct {
@@ -166,6 +168,8 @@ type DescribeLabelingJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLabelingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

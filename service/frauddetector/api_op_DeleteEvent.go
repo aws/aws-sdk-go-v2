@@ -39,11 +39,15 @@ type DeleteEventInput struct {
 	//
 	// This member is required.
 	EventTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEventMiddlewares(stack *middleware.Stack, options Options) (err error) {

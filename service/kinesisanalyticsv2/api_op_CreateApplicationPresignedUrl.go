@@ -53,6 +53,8 @@ type CreateApplicationPresignedUrlInput struct {
 
 	// The duration in seconds for which the returned URL will be valid.
 	SessionExpirationDurationInSeconds *int64
+
+	noSmithyDocumentSerde
 }
 
 type CreateApplicationPresignedUrlOutput struct {
@@ -62,6 +64,8 @@ type CreateApplicationPresignedUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationPresignedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

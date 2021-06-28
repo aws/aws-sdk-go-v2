@@ -40,11 +40,15 @@ type UpdateLongTermPricingInput struct {
 	// Specifies that a device that is ordered with long-term pricing should be
 	// replaced with a new device.
 	ReplacementJob *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLongTermPricingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLongTermPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {

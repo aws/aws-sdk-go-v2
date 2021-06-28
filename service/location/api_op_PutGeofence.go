@@ -48,6 +48,8 @@ type PutGeofenceInput struct {
 	//
 	// This member is required.
 	Geometry *types.GeofenceGeometry
+
+	noSmithyDocumentSerde
 }
 
 type PutGeofenceOutput struct {
@@ -73,6 +75,8 @@ type PutGeofenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

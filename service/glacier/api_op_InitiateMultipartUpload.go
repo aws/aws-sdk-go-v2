@@ -82,6 +82,8 @@ type InitiateMultipartUploadInput struct {
 	// The size of each part except the last, in bytes. The last part can be smaller
 	// than this part size.
 	PartSize *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon S3 Glacier response to your request.
@@ -96,6 +98,8 @@ type InitiateMultipartUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInitiateMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

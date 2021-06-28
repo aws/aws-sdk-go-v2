@@ -33,6 +33,8 @@ type DescribeEndpointGroupInput struct {
 	//
 	// This member is required.
 	EndpointGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEndpointGroupOutput struct {
@@ -42,6 +44,8 @@ type DescribeEndpointGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

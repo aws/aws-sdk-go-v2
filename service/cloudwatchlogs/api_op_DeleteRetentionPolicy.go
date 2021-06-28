@@ -33,11 +33,15 @@ type DeleteRetentionPolicyInput struct {
 	//
 	// This member is required.
 	LogGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRetentionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

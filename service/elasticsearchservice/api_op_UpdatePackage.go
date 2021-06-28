@@ -46,6 +46,8 @@ type UpdatePackageInput struct {
 
 	// New description of the package.
 	PackageDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by UpdatePackage operation.
@@ -56,6 +58,8 @@ type UpdatePackageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -99,6 +99,8 @@ type CreateNetworkInterfaceInput struct {
 
 	// The tags to apply to the new network interface.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateNetworkInterface.
@@ -113,6 +115,8 @@ type CreateNetworkInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

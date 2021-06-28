@@ -72,6 +72,8 @@ type CreateLocationS3Input struct {
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []types.TagListEntry
+
+	noSmithyDocumentSerde
 }
 
 // CreateLocationS3Response
@@ -83,6 +85,8 @@ type CreateLocationS3Output struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLocationS3Middlewares(stack *middleware.Stack, options Options) (err error) {

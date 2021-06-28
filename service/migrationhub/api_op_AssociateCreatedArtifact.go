@@ -63,11 +63,15 @@ type AssociateCreatedArtifactInput struct {
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
 	DryRun bool
+
+	noSmithyDocumentSerde
 }
 
 type AssociateCreatedArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateCreatedArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

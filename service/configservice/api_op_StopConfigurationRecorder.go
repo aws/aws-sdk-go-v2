@@ -35,11 +35,15 @@ type StopConfigurationRecorderInput struct {
 	//
 	// This member is required.
 	ConfigurationRecorderName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopConfigurationRecorderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {

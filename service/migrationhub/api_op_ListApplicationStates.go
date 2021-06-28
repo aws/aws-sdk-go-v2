@@ -43,6 +43,8 @@ type ListApplicationStatesInput struct {
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in NextToken.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListApplicationStatesOutput struct {
@@ -57,6 +59,8 @@ type ListApplicationStatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListApplicationStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

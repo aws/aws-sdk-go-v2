@@ -91,6 +91,8 @@ type SearchFacesByImageInput struct {
 	// value is NONE. To use quality filtering, the collection you are using must be
 	// associated with version 3 of the face model or higher.
 	QualityFilter types.QualityFilter
+
+	noSmithyDocumentSerde
 }
 
 type SearchFacesByImageOutput struct {
@@ -112,6 +114,8 @@ type SearchFacesByImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchFacesByImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

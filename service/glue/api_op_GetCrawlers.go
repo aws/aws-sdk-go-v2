@@ -35,6 +35,8 @@ type GetCrawlersInput struct {
 
 	// A continuation token, if this is a continuation request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCrawlersOutput struct {
@@ -48,6 +50,8 @@ type GetCrawlersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {

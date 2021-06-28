@@ -38,6 +38,8 @@ type ListOrganizationAdminAccountsInput struct {
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListOrganizationAdminAccountsOutput struct {
@@ -51,6 +53,8 @@ type ListOrganizationAdminAccountsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOrganizationAdminAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {

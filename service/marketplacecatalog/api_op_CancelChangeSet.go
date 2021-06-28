@@ -41,6 +41,8 @@ type CancelChangeSetInput struct {
 	//
 	// This member is required.
 	ChangeSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelChangeSetOutput struct {
@@ -53,6 +55,8 @@ type CancelChangeSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

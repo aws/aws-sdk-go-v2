@@ -40,12 +40,16 @@ type DeleteConfigurationSetInput struct {
 	//
 	// This member is required.
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type DeleteConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

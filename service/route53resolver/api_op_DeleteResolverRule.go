@@ -36,6 +36,8 @@ type DeleteResolverRuleInput struct {
 	//
 	// This member is required.
 	ResolverRuleId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResolverRuleOutput struct {
@@ -46,6 +48,8 @@ type DeleteResolverRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

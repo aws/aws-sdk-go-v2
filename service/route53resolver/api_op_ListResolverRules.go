@@ -47,6 +47,8 @@ type ListResolverRulesInput struct {
 	// get the next group of Resolver rules. In the next request, specify the value of
 	// NextToken from the previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResolverRulesOutput struct {
@@ -65,6 +67,8 @@ type ListResolverRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResolverRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

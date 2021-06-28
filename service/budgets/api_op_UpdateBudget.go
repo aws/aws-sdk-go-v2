@@ -47,12 +47,16 @@ type UpdateBudgetInput struct {
 	//
 	// This member is required.
 	NewBudget *types.Budget
+
+	noSmithyDocumentSerde
 }
 
 // Response of UpdateBudget
 type UpdateBudgetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {

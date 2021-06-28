@@ -75,6 +75,8 @@ type CreateClusterParameterGroupInput struct {
 
 	// A list of tag instances.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterParameterGroupOutput struct {
@@ -84,6 +86,8 @@ type CreateClusterParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

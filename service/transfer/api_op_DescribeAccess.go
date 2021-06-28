@@ -51,6 +51,8 @@ type DescribeAccessInput struct {
 	//
 	// This member is required.
 	ServerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccessOutput struct {
@@ -67,6 +69,8 @@ type DescribeAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -56,6 +56,8 @@ type DescribeFleetLocationCapacityInput struct {
 	//
 	// This member is required.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -67,6 +69,8 @@ type DescribeFleetLocationCapacityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFleetLocationCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {

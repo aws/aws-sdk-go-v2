@@ -39,6 +39,8 @@ type AssociateSecurityKeyInput struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateSecurityKeyOutput struct {
@@ -49,6 +51,8 @@ type AssociateSecurityKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

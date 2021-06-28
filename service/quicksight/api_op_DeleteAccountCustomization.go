@@ -37,6 +37,8 @@ type DeleteAccountCustomizationInput struct {
 
 	// The QuickSight namespace that you're deleting the customizations from.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccountCustomizationOutput struct {
@@ -49,6 +51,8 @@ type DeleteAccountCustomizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccountCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

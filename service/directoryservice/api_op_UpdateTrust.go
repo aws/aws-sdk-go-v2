@@ -37,6 +37,8 @@ type UpdateTrustInput struct {
 
 	// Updates selective authentication for the trust.
 	SelectiveAuth types.SelectiveAuth
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTrustOutput struct {
@@ -49,6 +51,8 @@ type UpdateTrustOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type UpdateGroupCertificateConfigurationInput struct {
 
 	// The amount of time remaining before the certificate expires, in milliseconds.
 	CertificateExpiryInMilliseconds *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGroupCertificateConfigurationOutput struct {
@@ -51,6 +53,8 @@ type UpdateGroupCertificateConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGroupCertificateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

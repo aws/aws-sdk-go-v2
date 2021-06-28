@@ -32,6 +32,7 @@ func (c *Client) GetBlockPublicAccessConfiguration(ctx context.Context, params *
 }
 
 type GetBlockPublicAccessConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetBlockPublicAccessConfigurationOutput struct {
@@ -64,6 +65,8 @@ type GetBlockPublicAccessConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBlockPublicAccessConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A summary of information about a AWS IoT Device Management web application.
 // Fleet Hub for AWS IoT Device Management is in public preview and is subject to
 // change.
@@ -33,4 +37,8 @@ type ApplicationSummary struct {
 
 	// The current state of the web application.
 	ApplicationState ApplicationState
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

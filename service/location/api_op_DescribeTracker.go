@@ -33,6 +33,8 @@ type DescribeTrackerInput struct {
 	//
 	// This member is required.
 	TrackerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTrackerOutput struct {
@@ -90,6 +92,8 @@ type DescribeTrackerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {

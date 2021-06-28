@@ -51,6 +51,8 @@ type CreateImageInput struct {
 
 	// A list of tags to apply to the image.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateImageOutput struct {
@@ -60,6 +62,8 @@ type CreateImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

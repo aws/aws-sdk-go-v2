@@ -37,11 +37,15 @@ type DeleteApiMappingInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApiMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApiMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

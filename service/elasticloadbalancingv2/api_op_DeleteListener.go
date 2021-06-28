@@ -33,11 +33,15 @@ type DeleteListenerInput struct {
 	//
 	// This member is required.
 	ListenerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteListenerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type UpdateEnvironmentAccountConnectionInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEnvironmentAccountConnectionOutput struct {
@@ -52,6 +54,8 @@ type UpdateEnvironmentAccountConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

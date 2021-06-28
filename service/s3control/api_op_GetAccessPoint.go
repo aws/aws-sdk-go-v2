@@ -71,6 +71,8 @@ type GetAccessPointInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAccessPointOutput struct {
@@ -107,6 +109,8 @@ type GetAccessPointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {

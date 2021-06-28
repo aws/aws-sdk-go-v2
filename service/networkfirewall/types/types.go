@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A custom action to use in stateless rule actions settings. This is used in
 // CustomAction.
 type ActionDefinition struct {
@@ -14,6 +18,8 @@ type ActionDefinition struct {
 	// a packet matches the rule, Network Firewall publishes metrics for the packet and
 	// forwards it.
 	PublishMetricAction *PublishMetricAction
+
+	noSmithyDocumentSerde
 }
 
 // A single IP address specification. This is used in the MatchAttributes source
@@ -36,6 +42,8 @@ type Address struct {
 	//
 	// This member is required.
 	AddressDefinition *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration and status for a single subnet that you've specified for use
@@ -58,6 +66,8 @@ type Attachment struct {
 	// The unique identifier of the subnet that you've specified to be used for a
 	// firewall endpoint.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // An optional, non-standard action to use for stateless packet handling. You can
@@ -89,6 +99,8 @@ type CustomAction struct {
 	//
 	// This member is required.
 	ActionName *string
+
+	noSmithyDocumentSerde
 }
 
 // The value to use in an Amazon CloudWatch custom metric dimension. This is used
@@ -106,6 +118,8 @@ type Dimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The firewall defines the configuration settings for an AWS Network Firewall
@@ -170,6 +184,8 @@ type Firewall struct {
 
 	//
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a firewall, returned by operations like create and
@@ -183,6 +199,8 @@ type FirewallMetadata struct {
 	// The descriptive name of the firewall. You can't change the name of a firewall
 	// after you create it.
 	FirewallName *string
+
+	noSmithyDocumentSerde
 }
 
 // The firewall policy defines the behavior of a firewall using a collection of
@@ -230,6 +248,8 @@ type FirewallPolicy struct {
 	// References to the stateless rule groups that are used in the policy. These
 	// define the matching criteria in stateless rules.
 	StatelessRuleGroupReferences []StatelessRuleGroupReference
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a firewall policy, returned by operations like
@@ -244,6 +264,8 @@ type FirewallPolicyMetadata struct {
 	// The descriptive name of the firewall policy. You can't change the name of a
 	// firewall policy after you create it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The high-level properties of a firewall policy. This, along with the
@@ -279,6 +301,8 @@ type FirewallPolicyResponse struct {
 
 	// The key:value pairs to associate with the resource.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about the current status of a Firewall. You can retrieve
@@ -313,6 +337,8 @@ type FirewallStatus struct {
 	// the ConfigurationSyncStateSummary and Status, broken down by zone and
 	// configuration object.
 	SyncStates map[string]SyncState
+
+	noSmithyDocumentSerde
 }
 
 // The 5-tuple criteria for AWS Network Firewall to use to inspect packet headers
@@ -385,6 +411,8 @@ type Header struct {
 	//
 	// This member is required.
 	SourcePort *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of IP addresses and address ranges, in CIDR notation. This is part of a
@@ -395,6 +423,8 @@ type IPSet struct {
 	//
 	// This member is required.
 	Definition []string
+
+	noSmithyDocumentSerde
 }
 
 // Defines where AWS Network Firewall sends logs for the firewall for one log type.
@@ -441,6 +471,8 @@ type LogDestinationConfig struct {
 	//
 	// This member is required.
 	LogType LogType
+
+	noSmithyDocumentSerde
 }
 
 // Defines how AWS Network Firewall performs logging for a Firewall.
@@ -451,6 +483,8 @@ type LoggingConfiguration struct {
 	//
 	// This member is required.
 	LogDestinationConfigs []LogDestinationConfig
+
+	noSmithyDocumentSerde
 }
 
 // Criteria for Network Firewall to use to inspect an individual packet in
@@ -485,6 +519,8 @@ type MatchAttributes struct {
 	// The TCP flags and masks to inspect for. If not specified, this matches with any
 	// settings. This setting is only used for protocol 6 (TCP).
 	TCPFlags []TCPFlagField
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration status for a single policy or rule group that is used for
@@ -502,6 +538,8 @@ type PerObjectStatus struct {
 	// The current version of the object that is either in sync or pending
 	// synchronization.
 	UpdateToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A single port range specification. This is used for source and destination port
@@ -520,6 +558,8 @@ type PortRange struct {
 	//
 	// This member is required.
 	ToPort int32
+
+	noSmithyDocumentSerde
 }
 
 // A set of port ranges for use in the rules in a rule group.
@@ -527,6 +567,8 @@ type PortSet struct {
 
 	// The set of port ranges.
 	Definition []string
+
+	noSmithyDocumentSerde
 }
 
 // Stateless inspection criteria that publishes the specified metrics to Amazon
@@ -538,6 +580,8 @@ type PublishMetricAction struct {
 	//
 	// This member is required.
 	Dimensions []Dimension
+
+	noSmithyDocumentSerde
 }
 
 // The inspection criteria and action for a single stateless rule. AWS Network
@@ -583,6 +627,8 @@ type RuleDefinition struct {
 	//
 	// This member is required.
 	MatchAttributes *MatchAttributes
+
+	noSmithyDocumentSerde
 }
 
 // The object that defines the rules in a rule group. This, along with
@@ -604,6 +650,8 @@ type RuleGroup struct {
 	// Settings that are available for use in the rules in the rule group. You can only
 	// use these for stateful rule groups.
 	RuleVariables *RuleVariables
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a rule group, returned by ListRuleGroups. You can
@@ -617,6 +665,8 @@ type RuleGroupMetadata struct {
 	// The descriptive name of the rule group. You can't change the name of a rule
 	// group after you create it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The high-level properties of a rule group. This, along with the RuleGroup,
@@ -663,6 +713,8 @@ type RuleGroupResponse struct {
 	// stateless, it contains stateless rules. If it is stateful, it contains stateful
 	// rules.
 	Type RuleGroupType
+
+	noSmithyDocumentSerde
 }
 
 // Additional settings for a stateful rule. This is part of the StatefulRule
@@ -676,6 +728,8 @@ type RuleOption struct {
 
 	//
 	Settings []string
+
+	noSmithyDocumentSerde
 }
 
 // The stateless or stateful rules definitions for use in a single rule group. Each
@@ -700,6 +754,8 @@ type RulesSource struct {
 
 	// Stateless inspection criteria to be used in a stateless rule group.
 	StatelessRulesAndCustomActions *StatelessRulesAndCustomActions
+
+	noSmithyDocumentSerde
 }
 
 // Stateful inspection criteria for a domain list rule group. For HTTPS traffic,
@@ -738,6 +794,8 @@ type RulesSourceList struct {
 	//
 	// This member is required.
 	Targets []string
+
+	noSmithyDocumentSerde
 }
 
 // Settings that are available for use in the rules in the RuleGroup where this is
@@ -749,6 +807,8 @@ type RuleVariables struct {
 
 	// A list of port ranges.
 	PortSets map[string]PortSet
+
+	noSmithyDocumentSerde
 }
 
 // A single 5-tuple stateful rule, for use in a stateful rule group.
@@ -786,6 +846,8 @@ type StatefulRule struct {
 	//
 	// This member is required.
 	RuleOptions []RuleOption
+
+	noSmithyDocumentSerde
 }
 
 // Identifier for a single stateful rule group, used in a firewall policy to refer
@@ -796,6 +858,8 @@ type StatefulRuleGroupReference struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A single stateless rule. This is used in StatelessRulesAndCustomActions.
@@ -821,6 +885,8 @@ type StatelessRule struct {
 	//
 	// This member is required.
 	RuleDefinition *RuleDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Identifier for a single stateless rule group, used in a firewall policy to refer
@@ -839,6 +905,8 @@ type StatelessRuleGroupReference struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Stateless inspection criteria. Each stateless rule group uses exactly one of
@@ -855,6 +923,8 @@ type StatelessRulesAndCustomActions struct {
 	// You name each custom action that you define, and then you can use it by name in
 	// your StatelessRuleRuleDefinitionActions specification.
 	CustomActions []CustomAction
+
+	noSmithyDocumentSerde
 }
 
 // The ID for a subnet that you want to associate with the firewall. This is used
@@ -867,6 +937,8 @@ type SubnetMapping struct {
 	//
 	// This member is required.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the firewall endpoint and firewall policy configuration for a
@@ -897,6 +969,8 @@ type SyncState struct {
 	// firewall policy, Network Firewall synchronizes the rules in the endpoint, so it
 	// can properly filter network traffic. This is part of the FirewallStatus.
 	Config map[string]PerObjectStatus
+
+	noSmithyDocumentSerde
 }
 
 // A key:value pair associated with an AWS resource. The key:value pair can be
@@ -919,6 +993,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // TCP flags and masks to inspect packets for, used in stateless rules
@@ -943,4 +1019,8 @@ type TCPFlagField struct {
 	// The set of flags to consider in the inspection. To inspect all flags in the
 	// valid values list, leave this with no setting.
 	Masks []TCPFlag
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

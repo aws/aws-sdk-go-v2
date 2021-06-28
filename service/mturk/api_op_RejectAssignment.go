@@ -45,11 +45,15 @@ type RejectAssignmentInput struct {
 	//
 	// This member is required.
 	RequesterFeedback *string
+
+	noSmithyDocumentSerde
 }
 
 type RejectAssignmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

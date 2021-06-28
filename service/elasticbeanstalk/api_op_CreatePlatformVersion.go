@@ -55,6 +55,8 @@ type CreatePlatformVersionInput struct {
 	// applies these tags only to the platform version. Environments that you create
 	// using the platform version don't inherit the tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePlatformVersionOutput struct {
@@ -67,6 +69,8 @@ type CreatePlatformVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

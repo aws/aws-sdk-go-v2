@@ -47,6 +47,8 @@ type CreateFirewallDomainListInput struct {
 	// A list of the tag keys and values that you want to associate with the domain
 	// list.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateFirewallDomainListOutput struct {
@@ -56,6 +58,8 @@ type CreateFirewallDomainListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {

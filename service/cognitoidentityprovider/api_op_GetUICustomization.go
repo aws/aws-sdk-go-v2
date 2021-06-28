@@ -39,6 +39,8 @@ type GetUICustomizationInput struct {
 
 	// The client ID for the client app.
 	ClientId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetUICustomizationOutput struct {
@@ -50,6 +52,8 @@ type GetUICustomizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUICustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

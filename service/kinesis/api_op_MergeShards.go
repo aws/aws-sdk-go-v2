@@ -70,11 +70,15 @@ type MergeShardsInput struct {
 	//
 	// This member is required.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type MergeShardsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMergeShardsMiddlewares(stack *middleware.Stack, options Options) (err error) {

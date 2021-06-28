@@ -38,11 +38,15 @@ type DisassociateDomainInput struct {
 	//
 	// This member is required.
 	FleetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

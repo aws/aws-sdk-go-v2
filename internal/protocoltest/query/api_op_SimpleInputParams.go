@@ -42,11 +42,15 @@ type SimpleInputParamsInput struct {
 	FooEnum types.FooEnum
 
 	Qux []byte
+
+	noSmithyDocumentSerde
 }
 
 type SimpleInputParamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSimpleInputParamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

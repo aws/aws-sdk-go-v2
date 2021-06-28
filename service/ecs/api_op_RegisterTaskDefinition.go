@@ -279,6 +279,8 @@ type RegisterTaskDefinitionInput struct {
 	// A list of volume definitions in JSON format that containers in your task may
 	// use.
 	Volumes []types.Volume
+
+	noSmithyDocumentSerde
 }
 
 type RegisterTaskDefinitionOutput struct {
@@ -291,6 +293,8 @@ type RegisterTaskDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

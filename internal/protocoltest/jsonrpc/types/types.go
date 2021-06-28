@@ -3,14 +3,18 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
 type ComplexNestedErrorData struct {
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type EmptyStruct struct {
+	noSmithyDocumentSerde
 }
 
 type KitchenSink struct {
@@ -66,6 +70,8 @@ type KitchenSink struct {
 	Timestamp *time.Time
 
 	UnixTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A union with a representative set of types for members.
@@ -86,75 +92,103 @@ type MyUnion interface {
 
 type MyUnionMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberStringValue) isMyUnion() {}
 
 type MyUnionMemberBooleanValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberBooleanValue) isMyUnion() {}
 
 type MyUnionMemberNumberValue struct {
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberNumberValue) isMyUnion() {}
 
 type MyUnionMemberBlobValue struct {
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberBlobValue) isMyUnion() {}
 
 type MyUnionMemberTimestampValue struct {
 	Value time.Time
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberTimestampValue) isMyUnion() {}
 
 type MyUnionMemberEnumValue struct {
 	Value FooEnum
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberEnumValue) isMyUnion() {}
 
 type MyUnionMemberListValue struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberListValue) isMyUnion() {}
 
 type MyUnionMemberMapValue struct {
 	Value map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberMapValue) isMyUnion() {}
 
 type MyUnionMemberStructureValue struct {
 	Value GreetingStruct
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberStructureValue) isMyUnion() {}
 
 type SimpleStruct struct {
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type StructWithLocationName struct {
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type GreetingStruct struct {
 	Hi *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isMyUnion() {}

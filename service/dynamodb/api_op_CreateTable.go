@@ -218,6 +218,8 @@ type CreateTableInput struct {
 	// for DynamoDB
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateTable operation.
@@ -228,6 +230,8 @@ type CreateTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

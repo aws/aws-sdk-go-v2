@@ -85,6 +85,8 @@ type GetUserAttributeVerificationCodeInput struct {
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
 	ClientMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The verification code response returned by the server response to get the user
@@ -97,6 +99,8 @@ type GetUserAttributeVerificationCodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUserAttributeVerificationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

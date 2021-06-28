@@ -49,6 +49,8 @@ type SetUICustomizationInput struct {
 
 	// The uploaded logo image for the UI customization.
 	ImageFile []byte
+
+	noSmithyDocumentSerde
 }
 
 type SetUICustomizationOutput struct {
@@ -60,6 +62,8 @@ type SetUICustomizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetUICustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

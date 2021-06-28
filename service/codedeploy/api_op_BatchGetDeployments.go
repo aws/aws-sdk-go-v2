@@ -36,6 +36,8 @@ type BatchGetDeploymentsInput struct {
 	//
 	// This member is required.
 	DeploymentIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchGetDeployments operation.
@@ -46,6 +48,8 @@ type BatchGetDeploymentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

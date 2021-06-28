@@ -61,6 +61,8 @@ type DescribeSecurityGroupRulesInput struct {
 
 	// The IDs of the security group rules.
 	SecurityGroupRuleIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSecurityGroupRulesOutput struct {
@@ -74,6 +76,8 @@ type DescribeSecurityGroupRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSecurityGroupRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type DeleteLaunchTemplateVersionsInput struct {
 	// The name of the launch template. You must specify either the launch template ID
 	// or launch template name in the request.
 	LaunchTemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLaunchTemplateVersionsOutput struct {
@@ -62,6 +64,8 @@ type DeleteLaunchTemplateVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLaunchTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

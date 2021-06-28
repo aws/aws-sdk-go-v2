@@ -48,6 +48,8 @@ type CreateChannelBanInput struct {
 
 	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateChannelBanOutput struct {
@@ -60,6 +62,8 @@ type CreateChannelBanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {

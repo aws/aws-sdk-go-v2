@@ -35,11 +35,15 @@ type DeleteModelInput struct {
 	//
 	// This member is required.
 	ModelName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

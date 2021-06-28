@@ -55,6 +55,8 @@ type PurchaseOfferingInput struct {
 
 	// A collection of key-value pairs
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for PurchaseOfferingResponse
@@ -65,6 +67,8 @@ type PurchaseOfferingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {

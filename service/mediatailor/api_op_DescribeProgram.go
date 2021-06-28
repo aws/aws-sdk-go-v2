@@ -39,6 +39,8 @@ type DescribeProgramInput struct {
 	//
 	// This member is required.
 	ProgramName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProgramOutput struct {
@@ -66,6 +68,8 @@ type DescribeProgramOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {

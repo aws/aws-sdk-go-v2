@@ -77,6 +77,8 @@ type DescribeBundleTasksInput struct {
 	// *
 	// update-time - The time of the most recent update for the task.
 	Filters []types.Filter
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBundleTasksOutput struct {
@@ -86,6 +88,8 @@ type DescribeBundleTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBundleTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

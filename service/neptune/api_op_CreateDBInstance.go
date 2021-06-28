@@ -249,6 +249,8 @@ type CreateDBInstanceInput struct {
 	// cluster. For more information, see CreateDBCluster. Default: The default EC2 VPC
 	// security group for the DB subnet group's VPC.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBInstanceOutput struct {
@@ -259,6 +261,8 @@ type CreateDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

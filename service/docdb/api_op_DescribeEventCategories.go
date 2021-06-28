@@ -37,6 +37,8 @@ type DescribeEventCategoriesInput struct {
 	// The type of source that is generating the events. Valid values: db-instance,
 	// db-parameter-group, db-security-group
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of DescribeEventCategories.
@@ -47,6 +49,8 @@ type DescribeEventCategoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

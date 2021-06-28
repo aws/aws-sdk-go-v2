@@ -170,6 +170,8 @@ type CreateGrantInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
 	// in the Example ARNs section of the AWS General Reference.
 	RetiringPrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGrantOutput struct {
@@ -187,6 +189,8 @@ type CreateGrantOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {

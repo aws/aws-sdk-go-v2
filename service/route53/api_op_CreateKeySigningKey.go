@@ -80,6 +80,8 @@ type CreateKeySigningKeyInput struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateKeySigningKeyOutput struct {
@@ -102,6 +104,8 @@ type CreateKeySigningKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

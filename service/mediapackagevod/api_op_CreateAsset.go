@@ -55,6 +55,8 @@ type CreateAssetInput struct {
 
 	// A collection of tags associated with a resource
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssetOutput struct {
@@ -88,6 +90,8 @@ type CreateAssetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {

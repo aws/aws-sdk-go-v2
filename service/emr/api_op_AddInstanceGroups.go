@@ -39,6 +39,8 @@ type AddInstanceGroupsInput struct {
 	//
 	// This member is required.
 	JobFlowId *string
+
+	noSmithyDocumentSerde
 }
 
 // Output from an AddInstanceGroups call.
@@ -55,6 +57,8 @@ type AddInstanceGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

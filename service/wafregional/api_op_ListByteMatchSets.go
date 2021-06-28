@@ -47,6 +47,8 @@ type ListByteMatchSetsInput struct {
 	// ListByteMatchSets requests, specify the value of NextMarker from the previous
 	// response to get information about another batch of ByteMatchSets.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListByteMatchSetsOutput struct {
@@ -62,6 +64,8 @@ type ListByteMatchSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListByteMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

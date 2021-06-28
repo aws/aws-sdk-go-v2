@@ -91,6 +91,8 @@ type DeleteDBInstanceInput struct {
 	// skip is specified. Specify skip when deleting a read replica. The
 	// FinalDBSnapshotIdentifier parameter must be specified if skip isn't specified.
 	SkipFinalSnapshot bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBInstanceOutput struct {
@@ -101,6 +103,8 @@ type DeleteDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

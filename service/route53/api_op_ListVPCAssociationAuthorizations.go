@@ -52,6 +52,8 @@ type ListVPCAssociationAuthorizationsInput struct {
 	// response in the nexttoken parameter in another ListVPCAssociationAuthorizations
 	// request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the request.
@@ -76,6 +78,8 @@ type ListVPCAssociationAuthorizationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVPCAssociationAuthorizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

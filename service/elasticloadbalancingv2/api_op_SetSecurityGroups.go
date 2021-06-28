@@ -40,6 +40,8 @@ type SetSecurityGroupsInput struct {
 	//
 	// This member is required.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 type SetSecurityGroupsOutput struct {
@@ -49,6 +51,8 @@ type SetSecurityGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

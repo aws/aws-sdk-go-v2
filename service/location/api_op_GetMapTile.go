@@ -52,6 +52,8 @@ type GetMapTileInput struct {
 	//
 	// This member is required.
 	Z *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMapTileOutput struct {
@@ -64,6 +66,8 @@ type GetMapTileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMapTileMiddlewares(stack *middleware.Stack, options Options) (err error) {

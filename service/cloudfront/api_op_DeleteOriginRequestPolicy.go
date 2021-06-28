@@ -44,11 +44,15 @@ type DeleteOriginRequestPolicyInput struct {
 	// ListOriginRequestPolicies, GetOriginRequestPolicy, or
 	// GetOriginRequestPolicyConfig.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOriginRequestPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

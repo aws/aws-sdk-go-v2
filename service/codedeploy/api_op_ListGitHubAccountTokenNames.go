@@ -32,6 +32,8 @@ type ListGitHubAccountTokenNamesInput struct {
 	// An identifier returned from the previous ListGitHubAccountTokenNames call. It
 	// can be used to return the next set of names in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListGitHubAccountTokenNames operation.
@@ -47,6 +49,8 @@ type ListGitHubAccountTokenNamesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGitHubAccountTokenNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {

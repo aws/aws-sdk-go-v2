@@ -69,6 +69,8 @@ type JoinDomainInput struct {
 	// Specifies the time in seconds, in which the JoinDomain operation must complete.
 	// The default is 20 seconds.
 	TimeoutInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // JoinDomainOutput
@@ -105,6 +107,8 @@ type JoinDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationJoinDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

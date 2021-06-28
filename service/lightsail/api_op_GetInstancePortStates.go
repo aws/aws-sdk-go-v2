@@ -35,6 +35,8 @@ type GetInstancePortStatesInput struct {
 	//
 	// This member is required.
 	InstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInstancePortStatesOutput struct {
@@ -45,6 +47,8 @@ type GetInstancePortStatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInstancePortStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

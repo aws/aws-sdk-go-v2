@@ -43,6 +43,8 @@ type DescribeIngestionInput struct {
 	//
 	// This member is required.
 	IngestionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeIngestionOutput struct {
@@ -58,6 +60,8 @@ type DescribeIngestionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {

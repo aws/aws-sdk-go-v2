@@ -61,6 +61,8 @@ type CopyWorkspaceImageInput struct {
 
 	// The tags for the image.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CopyWorkspaceImageOutput struct {
@@ -70,6 +72,8 @@ type CopyWorkspaceImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

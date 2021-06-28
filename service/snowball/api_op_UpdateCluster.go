@@ -68,11 +68,15 @@ type UpdateClusterInput struct {
 
 	// The updated shipping option value of this cluster's ShippingDetails object.
 	ShippingOption types.ShippingOption
+
+	noSmithyDocumentSerde
 }
 
 type UpdateClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

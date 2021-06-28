@@ -12,6 +12,8 @@ type InternalServerException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -34,6 +36,8 @@ type InvalidRequestException struct {
 	Code                        *string
 	RequiredParameters          []string
 	MutuallyExclusiveParameters []string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -54,6 +58,8 @@ type LimitExceededException struct {
 
 	Code         *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -75,6 +81,8 @@ type ResourceNotFoundException struct {
 	Code         *string
 	ResourceType *string
 	ResourceIds  []string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

@@ -11,6 +11,8 @@ import (
 // an Application Auto Scaling resource that already has a pending update.
 type ConcurrentUpdateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentUpdateException) Error() string {
@@ -33,6 +35,8 @@ func (e *ConcurrentUpdateException) ErrorFault() smithy.ErrorFault { return smit
 // on your behalf.
 type FailedResourceAccessException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FailedResourceAccessException) Error() string {
@@ -50,6 +54,8 @@ func (e *FailedResourceAccessException) ErrorFault() smithy.ErrorFault { return 
 // The service encountered an internal error.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -67,6 +73,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // The next token supplied was invalid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -86,6 +94,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html).
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -107,6 +117,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // exception is thrown if the resource cannot be found.
 type ObjectNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ObjectNotFoundException) Error() string {
@@ -125,6 +137,8 @@ func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // for the API request.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

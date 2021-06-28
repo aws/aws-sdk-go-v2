@@ -52,11 +52,15 @@ type RevokeSigningProfileInput struct {
 	//
 	// This member is required.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeSigningProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

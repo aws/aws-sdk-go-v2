@@ -53,6 +53,8 @@ type DescribeProvisioningArtifactInput struct {
 
 	// Indicates whether a verbose level of detail is enabled.
 	Verbose bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProvisioningArtifactOutput struct {
@@ -68,6 +70,8 @@ type DescribeProvisioningArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

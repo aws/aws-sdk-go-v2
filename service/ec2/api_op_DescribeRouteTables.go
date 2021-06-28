@@ -126,6 +126,8 @@ type DescribeRouteTablesInput struct {
 
 	// One or more route table IDs. Default: Describes all your route tables.
 	RouteTableIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeRouteTables.
@@ -140,6 +142,8 @@ type DescribeRouteTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRouteTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,6 +32,7 @@ func (c *Client) GetAccountBalance(ctx context.Context, params *GetAccountBalanc
 }
 
 type GetAccountBalanceInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetAccountBalanceOutput struct {
@@ -44,6 +45,8 @@ type GetAccountBalanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountBalanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

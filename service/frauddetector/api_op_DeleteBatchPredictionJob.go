@@ -32,11 +32,15 @@ type DeleteBatchPredictionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBatchPredictionJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

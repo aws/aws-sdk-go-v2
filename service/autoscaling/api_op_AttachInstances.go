@@ -45,11 +45,15 @@ type AttachInstancesInput struct {
 
 	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type AttachInstancesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

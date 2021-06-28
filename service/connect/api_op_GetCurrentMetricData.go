@@ -104,6 +104,8 @@ type GetCurrentMetricDataInput struct {
 	// use the token must use the same request parameters as the request that generated
 	// the token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCurrentMetricDataOutput struct {
@@ -122,6 +124,8 @@ type GetCurrentMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCurrentMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

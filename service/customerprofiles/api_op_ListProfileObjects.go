@@ -50,6 +50,8 @@ type ListProfileObjectsInput struct {
 
 	// The pagination token from the previous call to ListProfileObjects.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProfileObjectsOutput struct {
@@ -62,6 +64,8 @@ type ListProfileObjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProfileObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

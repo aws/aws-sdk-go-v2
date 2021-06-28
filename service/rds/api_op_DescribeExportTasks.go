@@ -65,6 +65,8 @@ type DescribeExportTasksInput struct {
 
 	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
 	SourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeExportTasksOutput struct {
@@ -79,6 +81,8 @@ type DescribeExportTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

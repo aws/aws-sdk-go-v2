@@ -44,6 +44,8 @@ type ListMemberAccountsInput struct {
 	// NextToken from the previous response to get information about another batch of
 	// member account IDs.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMemberAccountsOutput struct {
@@ -59,6 +61,8 @@ type ListMemberAccountsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMemberAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {

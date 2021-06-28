@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // ABP device object for LoRaWAN specification v1.0.x
 type AbpV1_0_x struct {
 
@@ -10,6 +14,8 @@ type AbpV1_0_x struct {
 
 	// Session keys for ABP v1.0.x
 	SessionKeys *SessionKeysAbpV1_0_x
+
+	noSmithyDocumentSerde
 }
 
 // ABP device object for LoRaWAN specification v1.1
@@ -20,6 +26,8 @@ type AbpV1_1 struct {
 
 	// Session keys for ABP v1.1
 	SessionKeys *SessionKeysAbpV1_1
+
+	noSmithyDocumentSerde
 }
 
 // List of sidewalk certificates.
@@ -34,6 +42,8 @@ type CertificateList struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a destination.
@@ -56,6 +66,8 @@ type Destinations struct {
 
 	// The ARN of the IAM Role that authorizes the destination.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a device profile.
@@ -69,6 +81,8 @@ type DeviceProfile struct {
 
 	// The name of the resource.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWAN object for create functions.
@@ -94,6 +108,8 @@ type LoRaWANDevice struct {
 
 	// The ID of the service profile.
 	ServiceProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWAN device metatdata.
@@ -116,6 +132,8 @@ type LoRaWANDeviceMetadata struct {
 
 	// The date and time of the metadata.
 	Timestamp *string
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWANDeviceProfile object.
@@ -178,6 +196,8 @@ type LoRaWANDeviceProfile struct {
 
 	// The SupportsJoin value.
 	SupportsJoin *bool
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWANGateway object.
@@ -198,6 +218,8 @@ type LoRaWANGateway struct {
 
 	// A list of integer indicating which sub bands are supported by LoRa gateway.
 	SubBands []int32
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWANGatewayCurrentVersion object.
@@ -205,6 +227,8 @@ type LoRaWANGatewayCurrentVersion struct {
 
 	// The version of the gateways that should receive the update.
 	CurrentVersion *LoRaWANGatewayVersion
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWAN gateway metatdata.
@@ -218,6 +242,8 @@ type LoRaWANGatewayMetadata struct {
 
 	// The SNR value.
 	Snr *float64
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWANGatewayVersion object.
@@ -231,6 +257,8 @@ type LoRaWANGatewayVersion struct {
 
 	// The basic station version of the wireless gateway.
 	Station *string
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWANGetServiceProfileInfo object.
@@ -292,6 +320,8 @@ type LoRaWANGetServiceProfileInfo struct {
 
 	// The ULRatePolicy value.
 	UlRatePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWAN object for list functions.
@@ -299,6 +329,8 @@ type LoRaWANListDevice struct {
 
 	// The DevEUI value.
 	DevEui *string
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWAN router info.
@@ -306,6 +338,8 @@ type LoRaWANSendDataToDevice struct {
 
 	// The Fport value.
 	FPort *int32
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWANServiceProfile object.
@@ -313,6 +347,8 @@ type LoRaWANServiceProfile struct {
 
 	// The AddGWMetaData value.
 	AddGwMetadata bool
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWAN object for update functions.
@@ -323,6 +359,8 @@ type LoRaWANUpdateDevice struct {
 
 	// The ID of the service profile.
 	ServiceProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWANUpdateGatewayTaskCreate object.
@@ -339,6 +377,8 @@ type LoRaWANUpdateGatewayTaskCreate struct {
 
 	// The firmware version to update the gateway to.
 	UpdateVersion *LoRaWANGatewayVersion
+
+	noSmithyDocumentSerde
 }
 
 // LoRaWANUpdateGatewayTaskEntry object.
@@ -349,6 +389,8 @@ type LoRaWANUpdateGatewayTaskEntry struct {
 
 	// The firmware version to update the gateway to.
 	UpdateVersion *LoRaWANGatewayVersion
+
+	noSmithyDocumentSerde
 }
 
 // OTAA device object for v1.0.x
@@ -359,6 +401,8 @@ type OtaaV1_0_x struct {
 
 	// The AppKey value.
 	AppKey *string
+
+	noSmithyDocumentSerde
 }
 
 // OTAA device object for v1.1
@@ -372,6 +416,8 @@ type OtaaV1_1 struct {
 
 	// The NwkKey value.
 	NwkKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a service profile.
@@ -385,6 +431,8 @@ type ServiceProfile struct {
 
 	// The name of the resource.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Session keys for ABP v1.1
@@ -395,6 +443,8 @@ type SessionKeysAbpV1_0_x struct {
 
 	// The NwkSKey value.
 	NwkSKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Session keys for ABP v1.1
@@ -411,6 +461,8 @@ type SessionKeysAbpV1_1 struct {
 
 	// The SNwkSIntKey value.
 	SNwkSIntKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Sidewalk account.
@@ -421,6 +473,8 @@ type SidewalkAccountInfo struct {
 
 	// The Sidewalk application server private key.
 	AppServerPrivateKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Sidewalk account.
@@ -434,6 +488,8 @@ type SidewalkAccountInfoWithFingerprint struct {
 
 	// The fingerprint of the Sidewalk application server private key.
 	Fingerprint *string
+
+	noSmithyDocumentSerde
 }
 
 // Sidewalk device object.
@@ -447,6 +503,8 @@ type SidewalkDevice struct {
 
 	// The Sidewalk manufacturing series number.
 	SidewalkManufacturingSn *string
+
+	noSmithyDocumentSerde
 }
 
 // MetaData for Sidewalk device.
@@ -463,6 +521,8 @@ type SidewalkDeviceMetadata struct {
 
 	// The RSSI value.
 	Rssi *int32
+
+	noSmithyDocumentSerde
 }
 
 // Sidewalk object used by list functions.
@@ -479,6 +539,8 @@ type SidewalkListDevice struct {
 
 	// The Sidewalk manufacturing series number.
 	SidewalkManufacturingSn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Sidewalk router.
@@ -489,6 +551,8 @@ type SidewalkSendDataToDevice struct {
 
 	// The sequence number.
 	Seq *int32
+
+	noSmithyDocumentSerde
 }
 
 // Sidewalk update.
@@ -496,6 +560,8 @@ type SidewalkUpdateAccount struct {
 
 	// The new Sidewalk application server private key.
 	AppServerPrivateKey *string
+
+	noSmithyDocumentSerde
 }
 
 // A simple label consisting of a customer-defined key-value pair
@@ -510,6 +576,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // UpdateWirelessGatewayTaskCreate object.
@@ -523,6 +591,8 @@ type UpdateWirelessGatewayTaskCreate struct {
 
 	// The link to the S3 bucket.
 	UpdateDataSource *string
+
+	noSmithyDocumentSerde
 }
 
 // UpdateWirelessGatewayTaskEntry object.
@@ -536,6 +606,8 @@ type UpdateWirelessGatewayTaskEntry struct {
 
 	// The properties that relate to the LoRaWAN wireless gateway.
 	LoRaWAN *LoRaWANUpdateGatewayTaskEntry
+
+	noSmithyDocumentSerde
 }
 
 // The log option for a wireless device event. Can be used to set log level for a
@@ -554,6 +626,8 @@ type WirelessDeviceEventLogOption struct {
 	//
 	// This member is required.
 	LogLevel LogLevel
+
+	noSmithyDocumentSerde
 }
 
 // The log option for wireless devices. Can be used to set log level for a specific
@@ -572,6 +646,8 @@ type WirelessDeviceLogOption struct {
 
 	// The list of wireless device event log options.
 	Events []WirelessDeviceEventLogOption
+
+	noSmithyDocumentSerde
 }
 
 // Information about a wireless device's operation.
@@ -600,6 +676,8 @@ type WirelessDeviceStatistics struct {
 
 	// The wireless device type.
 	Type WirelessDeviceType
+
+	noSmithyDocumentSerde
 }
 
 // The log option for a wireless gateway event. Can be used to set log level for a
@@ -616,6 +694,8 @@ type WirelessGatewayEventLogOption struct {
 	//
 	// This member is required.
 	LogLevel LogLevel
+
+	noSmithyDocumentSerde
 }
 
 // The log option for wireless gateways. Can be used to set log level for a
@@ -634,6 +714,8 @@ type WirelessGatewayLogOption struct {
 
 	// The list of wireless gateway event log options.
 	Events []WirelessGatewayEventLogOption
+
+	noSmithyDocumentSerde
 }
 
 // Information about a wireless gateway's operation.
@@ -656,6 +738,8 @@ type WirelessGatewayStatistics struct {
 
 	// The name of the resource.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // WirelessMetadata object.
@@ -666,4 +750,8 @@ type WirelessMetadata struct {
 
 	// The Sidewalk account credentials.
 	Sidewalk *SidewalkSendDataToDevice
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

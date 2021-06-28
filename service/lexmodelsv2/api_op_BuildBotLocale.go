@@ -51,6 +51,8 @@ type BuildBotLocaleInput struct {
 	//
 	// This member is required.
 	LocaleId *string
+
+	noSmithyDocumentSerde
 }
 
 type BuildBotLocaleOutput struct {
@@ -76,6 +78,8 @@ type BuildBotLocaleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBuildBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {

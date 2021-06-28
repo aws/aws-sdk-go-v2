@@ -47,6 +47,8 @@ type CopyImageInput struct {
 
 	// The description that the image will have when it is copied to the destination.
 	DestinationImageDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type CopyImageOutput struct {
@@ -56,6 +58,8 @@ type CopyImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

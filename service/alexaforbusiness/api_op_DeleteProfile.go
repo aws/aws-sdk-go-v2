@@ -30,11 +30,15 @@ type DeleteProfileInput struct {
 
 	// The ARN of the room profile to delete. Required.
 	ProfileArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

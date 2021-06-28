@@ -51,6 +51,8 @@ type DeleteApplicationVpcConfigurationInput struct {
 	// support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId.
 	CurrentApplicationVersionId *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationVpcConfigurationOutput struct {
@@ -63,6 +65,8 @@ type DeleteApplicationVpcConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

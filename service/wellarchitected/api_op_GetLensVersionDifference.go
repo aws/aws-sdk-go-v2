@@ -39,6 +39,8 @@ type GetLensVersionDifferenceInput struct {
 	//
 	// This member is required.
 	LensAlias *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLensVersionDifferenceOutput struct {
@@ -58,6 +60,8 @@ type GetLensVersionDifferenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLensVersionDifferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

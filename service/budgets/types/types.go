@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -61,6 +62,8 @@ type Action struct {
 	//
 	// This member is required.
 	Subscribers []Subscriber
+
+	noSmithyDocumentSerde
 }
 
 // The historical records for a budget action.
@@ -86,6 +89,8 @@ type ActionHistory struct {
 	//
 	// This member is required.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The description of details of the event.
@@ -100,6 +105,8 @@ type ActionHistoryDetails struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The trigger threshold of the action.
@@ -114,6 +121,8 @@ type ActionThreshold struct {
 	//
 	// This member is required.
 	ActionThresholdValue float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of the CreateBudget operation. The content consists of the
@@ -210,6 +219,8 @@ type Budget struct {
 	// operation. After the end date, AWS deletes the budget and all associated
 	// notifications and subscribers.
 	TimePeriod *TimePeriod
+
+	noSmithyDocumentSerde
 }
 
 // The amount of cost or usage that you created the budget for, compared to your
@@ -224,6 +235,8 @@ type BudgetedAndActualAmounts struct {
 
 	// The time period covered by this budget comparison.
 	TimePeriod *TimePeriod
+
+	noSmithyDocumentSerde
 }
 
 // A history of the state of a budget at the end of the budget's specified time
@@ -251,6 +264,8 @@ type BudgetPerformanceHistory struct {
 
 	// The time unit of the budget, such as MONTHLY or QUARTERLY.
 	TimeUnit TimeUnit
+
+	noSmithyDocumentSerde
 }
 
 // The spend objects that are associated with this budget. The actualSpend tracks
@@ -269,6 +284,8 @@ type CalculatedSpend struct {
 	// The amount of cost, usage, RI units, or Savings Plans units that you are
 	// forecasted to use.
 	ForecastedSpend *Spend
+
+	noSmithyDocumentSerde
 }
 
 // The types of cost that are included in a COST budget, such as tax and
@@ -311,6 +328,8 @@ type CostTypes struct {
 
 	// Specifies whether a budget uses a blended rate. The default value is false.
 	UseBlended *bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies all of the type-specific parameters.
@@ -324,6 +343,8 @@ type Definition struct {
 
 	// The AWS Systems Manager (SSM) action definition details.
 	SsmActionDefinition *SsmActionDefinition
+
+	noSmithyDocumentSerde
 }
 
 // The AWS Identity and Access Management (IAM) action definition details.
@@ -342,6 +363,8 @@ type IamActionDefinition struct {
 
 	// A list of users to be attached. There must be at least one user.
 	Users []string
+
+	noSmithyDocumentSerde
 }
 
 // A notification that is associated with a budget. A budget can have up to ten
@@ -392,6 +415,8 @@ type Notification struct {
 	// example, if you have a budget for 200 dollars and you have a PERCENTAGE
 	// threshold of 80%, AWS notifies you when you go over 160 dollars.
 	ThresholdType ThresholdType
+
+	noSmithyDocumentSerde
 }
 
 // A notification with subscribers. A notification can have one SNS subscriber and
@@ -407,6 +432,8 @@ type NotificationWithSubscribers struct {
 	//
 	// This member is required.
 	Subscribers []Subscriber
+
+	noSmithyDocumentSerde
 }
 
 // The service control policies (SCP) action definition details.
@@ -421,6 +448,8 @@ type ScpActionDefinition struct {
 	//
 	// This member is required.
 	TargetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The amount of cost or usage that is measured for a budget. For example, a Spend
@@ -443,6 +472,8 @@ type Spend struct {
 	//
 	// This member is required.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // The AWS Systems Manager (SSM) action definition details.
@@ -462,6 +493,8 @@ type SsmActionDefinition struct {
 	//
 	// This member is required.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // The subscriber to a budget notification. The subscriber consists of a
@@ -485,6 +518,8 @@ type Subscriber struct {
 	//
 	// This member is required.
 	SubscriptionType SubscriptionType
+
+	noSmithyDocumentSerde
 }
 
 // The period of time that is covered by a budget. The period has a start date and
@@ -508,4 +543,8 @@ type TimePeriod struct {
 	// Management console and the API. You can change your start date with the
 	// UpdateBudget operation.
 	Start *time.Time
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

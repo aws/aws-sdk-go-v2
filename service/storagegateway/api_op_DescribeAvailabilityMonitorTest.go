@@ -37,6 +37,8 @@ type DescribeAvailabilityMonitorTestInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAvailabilityMonitorTestOutput struct {
@@ -55,6 +57,8 @@ type DescribeAvailabilityMonitorTestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAvailabilityMonitorTestMiddlewares(stack *middleware.Stack, options Options) (err error) {

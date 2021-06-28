@@ -43,11 +43,15 @@ type UpdatePartnerAccountInput struct {
 	//
 	// This member is required.
 	Sidewalk *types.SidewalkUpdateAccount
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePartnerAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

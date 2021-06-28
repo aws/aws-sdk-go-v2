@@ -90,6 +90,8 @@ type CreateApplicationVersionInput struct {
 	// these tags only to the application version. Environments that use the
 	// application version don't inherit the tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Result message wrapping a single description of an application version.
@@ -100,6 +102,8 @@ type CreateApplicationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

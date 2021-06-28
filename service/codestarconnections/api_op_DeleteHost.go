@@ -34,11 +34,15 @@ type DeleteHostInput struct {
 	//
 	// This member is required.
 	HostArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteHostOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHostMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type VerifyTrustInput struct {
 	//
 	// This member is required.
 	TrustId *string
+
+	noSmithyDocumentSerde
 }
 
 // Result of a VerifyTrust request.
@@ -46,6 +48,8 @@ type VerifyTrustOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVerifyTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type ListContainersInput struct {
 	// token is included in a response only if there actually are more containers to
 	// list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListContainersOutput struct {
@@ -62,6 +64,8 @@ type ListContainersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContainersMiddlewares(stack *middleware.Stack, options Options) (err error) {

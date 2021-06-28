@@ -46,6 +46,8 @@ type SelectResourceConfigInput struct {
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SelectResourceConfigOutput struct {
@@ -62,6 +64,8 @@ type SelectResourceConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSelectResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

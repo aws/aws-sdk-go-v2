@@ -70,6 +70,8 @@ type ModifyVpcPeeringConnectionOptionsInput struct {
 
 	// The VPC peering connection options for the requester VPC.
 	RequesterPeeringConnectionOptions *types.PeeringConnectionOptionsRequest
+
+	noSmithyDocumentSerde
 }
 
 type ModifyVpcPeeringConnectionOptionsOutput struct {
@@ -82,6 +84,8 @@ type ModifyVpcPeeringConnectionOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyVpcPeeringConnectionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

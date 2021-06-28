@@ -44,6 +44,8 @@ type GetMethodInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a client-facing interface by which the client calls the API to access
@@ -279,6 +281,8 @@ type GetMethodOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {

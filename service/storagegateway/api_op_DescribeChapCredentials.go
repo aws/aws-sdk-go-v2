@@ -40,6 +40,8 @@ type DescribeChapCredentialsInput struct {
 	//
 	// This member is required.
 	TargetARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -67,6 +69,8 @@ type DescribeChapCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

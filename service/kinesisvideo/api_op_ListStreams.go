@@ -43,6 +43,8 @@ type ListStreamsInput struct {
 	// Optional: Returns only streams that satisfy a specific condition. Currently, you
 	// can specify only the prefix of a stream name as a condition.
 	StreamNameCondition *types.StreamNameCondition
+
+	noSmithyDocumentSerde
 }
 
 type ListStreamsOutput struct {
@@ -56,6 +58,8 @@ type ListStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

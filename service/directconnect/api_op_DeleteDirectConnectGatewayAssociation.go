@@ -41,6 +41,8 @@ type DeleteDirectConnectGatewayAssociationInput struct {
 
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDirectConnectGatewayAssociationOutput struct {
@@ -50,6 +52,8 @@ type DeleteDirectConnectGatewayAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDirectConnectGatewayAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

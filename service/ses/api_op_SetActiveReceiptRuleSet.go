@@ -40,12 +40,16 @@ type SetActiveReceiptRuleSetInput struct {
 	// The name of the receipt rule set to make active. Setting this value to null
 	// disables all email receiving.
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type SetActiveReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetActiveReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

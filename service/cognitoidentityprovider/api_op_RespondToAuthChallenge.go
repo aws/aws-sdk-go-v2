@@ -129,6 +129,8 @@ type RespondToAuthChallengeInput struct {
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
+	noSmithyDocumentSerde
 }
 
 // The response to respond to the authentication challenge.
@@ -154,6 +156,8 @@ type RespondToAuthChallengeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRespondToAuthChallengeMiddlewares(stack *middleware.Stack, options Options) (err error) {

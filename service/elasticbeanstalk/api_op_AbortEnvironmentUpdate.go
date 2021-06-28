@@ -37,11 +37,15 @@ type AbortEnvironmentUpdateInput struct {
 	// This specifies the name of the environment with the in-progress update that you
 	// want to cancel.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 type AbortEnvironmentUpdateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAbortEnvironmentUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type SendAlexaOfferToMasterInput struct {
 	//
 	// This member is required.
 	SenderClientId *string
+
+	noSmithyDocumentSerde
 }
 
 type SendAlexaOfferToMasterOutput struct {
@@ -56,6 +58,8 @@ type SendAlexaOfferToMasterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendAlexaOfferToMasterMiddlewares(stack *middleware.Stack, options Options) (err error) {

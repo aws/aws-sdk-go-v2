@@ -65,6 +65,8 @@ type DescribeFileSystemsInput struct {
 	// response (integer). This number is automatically set to 100. The response is
 	// paginated at 100 per page if you have more than 100 file systems.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFileSystemsOutput struct {
@@ -81,6 +83,8 @@ type DescribeFileSystemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

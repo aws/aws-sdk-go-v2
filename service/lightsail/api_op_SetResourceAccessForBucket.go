@@ -53,6 +53,8 @@ type SetResourceAccessForBucketInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type SetResourceAccessForBucketOutput struct {
@@ -64,6 +66,8 @@ type SetResourceAccessForBucketOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetResourceAccessForBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {

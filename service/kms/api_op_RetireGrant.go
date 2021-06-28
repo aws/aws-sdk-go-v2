@@ -78,11 +78,15 @@ type RetireGrantInput struct {
 	// operation. For example:
 	// arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type RetireGrantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRetireGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {

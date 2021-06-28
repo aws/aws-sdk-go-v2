@@ -39,6 +39,8 @@ type GetConfigurationProfileInput struct {
 	//
 	// This member is required.
 	ConfigurationProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetConfigurationProfileOutput struct {
@@ -67,6 +69,8 @@ type GetConfigurationProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

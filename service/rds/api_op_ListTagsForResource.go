@@ -44,6 +44,8 @@ type ListTagsForResourceInput struct {
 
 	// This parameter isn't currently supported.
 	Filters []types.Filter
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -54,6 +56,8 @@ type ListTagsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

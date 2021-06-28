@@ -145,6 +145,8 @@ type UpdateWorkloadInput struct {
 	// The name of the workload. The name must be unique within an account within a
 	// Region. Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
+
+	noSmithyDocumentSerde
 }
 
 // Output of an update workload call.
@@ -155,6 +157,8 @@ type UpdateWorkloadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {

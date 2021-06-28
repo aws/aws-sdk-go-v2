@@ -56,6 +56,8 @@ type ListUsageForLicenseConfigurationInput struct {
 
 	// Token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListUsageForLicenseConfigurationOutput struct {
@@ -68,6 +70,8 @@ type ListUsageForLicenseConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUsageForLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

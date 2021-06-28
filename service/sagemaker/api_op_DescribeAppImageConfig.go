@@ -34,6 +34,8 @@ type DescribeAppImageConfigInput struct {
 	//
 	// This member is required.
 	AppImageConfigName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAppImageConfigOutput struct {
@@ -55,6 +57,8 @@ type DescribeAppImageConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

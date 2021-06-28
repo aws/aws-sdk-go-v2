@@ -77,6 +77,8 @@ type ListPlatformBranchesInput struct {
 	// the ones specified in the initial request. If no NextToken is specified, the
 	// first page is retrieved.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPlatformBranchesOutput struct {
@@ -90,6 +92,8 @@ type ListPlatformBranchesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPlatformBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {

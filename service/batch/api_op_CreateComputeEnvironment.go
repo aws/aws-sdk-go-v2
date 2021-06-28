@@ -136,6 +136,8 @@ type CreateComputeEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html)
 	// API operations. These tags don't propagate to the underlying compute resources.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateComputeEnvironmentOutput struct {
@@ -149,6 +151,8 @@ type CreateComputeEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

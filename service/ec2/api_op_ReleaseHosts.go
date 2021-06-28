@@ -41,6 +41,8 @@ type ReleaseHostsInput struct {
 	//
 	// This member is required.
 	HostIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ReleaseHostsOutput struct {
@@ -54,6 +56,8 @@ type ReleaseHostsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReleaseHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {

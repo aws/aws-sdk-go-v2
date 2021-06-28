@@ -41,11 +41,15 @@ type UpdateDefaultBranchInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDefaultBranchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDefaultBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {

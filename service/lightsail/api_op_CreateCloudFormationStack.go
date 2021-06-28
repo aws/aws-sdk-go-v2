@@ -41,6 +41,8 @@ type CreateCloudFormationStackInput struct {
 	//
 	// This member is required.
 	Instances []types.InstanceEntry
+
+	noSmithyDocumentSerde
 }
 
 type CreateCloudFormationStackOutput struct {
@@ -52,6 +54,8 @@ type CreateCloudFormationStackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCloudFormationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

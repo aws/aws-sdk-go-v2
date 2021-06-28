@@ -41,6 +41,8 @@ type UpdateMitigationActionInput struct {
 
 	// The ARN of the IAM role that is used to apply the mitigation action.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMitigationActionOutput struct {
@@ -53,6 +55,8 @@ type UpdateMitigationActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type SuggestInput struct {
 
 	// Specifies the maximum number of suggestions to return.
 	Size int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a Suggest request.
@@ -69,6 +71,8 @@ type SuggestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSuggestMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type ModifyMountTargetSecurityGroupsInput struct {
 
 	// An array of up to five VPC security group IDs.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyMountTargetSecurityGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyMountTargetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

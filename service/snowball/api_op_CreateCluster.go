@@ -139,6 +139,8 @@ type CreateClusterInput struct {
 
 	// The tax documents required in your AWS Region.
 	TaxDocuments *types.TaxDocuments
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterOutput struct {
@@ -148,6 +150,8 @@ type CreateClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A key-value pair that describes a property of a pipeline object. The value is
 // specified as either a string value (StringValue) or a reference to another
 // object (RefValue) but not as both.
@@ -17,6 +21,8 @@ type Field struct {
 
 	// The field value, expressed as a String.
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Identity information for the EC2 instance that is hosting the task runner. You
@@ -36,6 +42,8 @@ type InstanceIdentity struct {
 	// A signature which can be used to verify the accuracy and authenticity of the
 	// information provided in the instance identity document.
 	Signature *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a logical operation for comparing the value of a field with a specified
@@ -93,6 +101,8 @@ type Operator struct {
 
 	// The value that the actual field value will be compared with.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The attributes allowed or specified with a parameter object.
@@ -107,6 +117,8 @@ type ParameterAttribute struct {
 	//
 	// This member is required.
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a parameter object.
@@ -121,6 +133,8 @@ type ParameterObject struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A value or list of parameter values.
@@ -135,6 +149,8 @@ type ParameterValue struct {
 	//
 	// This member is required.
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains pipeline metadata.
@@ -165,6 +181,8 @@ type PipelineDescription struct {
 	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name and identifier of a pipeline.
@@ -176,6 +194,8 @@ type PipelineIdName struct {
 
 	// The name of the pipeline.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a pipeline object. This can be a logical, physical,
@@ -197,6 +217,8 @@ type PipelineObject struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the query to run against an object.
@@ -205,6 +227,8 @@ type Query struct {
 	// List of selectors that define the query. An object must satisfy all of the
 	// selectors to match the query.
 	Selectors []Selector
+
+	noSmithyDocumentSerde
 }
 
 // A comparision that is used to determine whether a query should return this
@@ -220,6 +244,8 @@ type Selector struct {
 	// Contains a logical operation for comparing the value of a field with a specified
 	// value.
 	Operator *Operator
+
+	noSmithyDocumentSerde
 }
 
 // Tags are key/value pairs defined by a user and associated with a pipeline to
@@ -244,6 +270,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a pipeline task that is assigned to a task runner.
@@ -263,6 +291,8 @@ type TaskObject struct {
 	// An internal identifier for the task. This ID is passed to the SetTaskStatus and
 	// ReportTaskProgress actions.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a validation error. Validation errors prevent pipeline activation. The
@@ -274,6 +304,8 @@ type ValidationError struct {
 
 	// The identifier of the object that contains the validation error.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a validation warning. Validation warnings do not prevent pipeline
@@ -286,4 +318,8 @@ type ValidationWarning struct {
 
 	// A description of the validation warning.
 	Warnings []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

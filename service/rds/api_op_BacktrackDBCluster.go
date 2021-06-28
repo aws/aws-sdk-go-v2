@@ -77,6 +77,8 @@ type BacktrackDBClusterInput struct {
 	// earliest backtrack time. When this parameter is disabled and BacktrackTo is set
 	// to a timestamp earlier than the earliest backtrack time, an error occurs.
 	UseEarliestTimeOnPointInTimeUnavailable *bool
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the DescribeDBClusterBacktracks
@@ -117,6 +119,8 @@ type BacktrackDBClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBacktrackDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

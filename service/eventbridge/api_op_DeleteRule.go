@@ -52,11 +52,15 @@ type DeleteRuleInput struct {
 	// using DescribeRule or ListRules and checking the ManagedBy field of the
 	// response.
 	Force bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

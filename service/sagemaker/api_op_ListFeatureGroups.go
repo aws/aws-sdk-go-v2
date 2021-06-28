@@ -59,6 +59,8 @@ type ListFeatureGroupsInput struct {
 
 	// The order in which feature groups are listed.
 	SortOrder types.FeatureGroupSortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListFeatureGroupsOutput struct {
@@ -75,6 +77,8 @@ type ListFeatureGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFeatureGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -74,6 +74,8 @@ type ExecuteStatementInput struct {
 	// A value that indicates whether to send an event to the Amazon EventBridge event
 	// bus after the SQL statement runs.
 	WithEvent *bool
+
+	noSmithyDocumentSerde
 }
 
 type ExecuteStatementOutput struct {
@@ -99,6 +101,8 @@ type ExecuteStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

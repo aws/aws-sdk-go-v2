@@ -37,11 +37,15 @@ type UntagProjectInput struct {
 	//
 	// This member is required.
 	Tags []string
+
+	noSmithyDocumentSerde
 }
 
 type UntagProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

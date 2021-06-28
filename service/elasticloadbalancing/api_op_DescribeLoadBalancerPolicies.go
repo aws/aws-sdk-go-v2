@@ -41,6 +41,8 @@ type DescribeLoadBalancerPoliciesInput struct {
 
 	// The names of the policies.
 	PolicyNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeLoadBalancerPolicies.
@@ -51,6 +53,8 @@ type DescribeLoadBalancerPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLoadBalancerPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

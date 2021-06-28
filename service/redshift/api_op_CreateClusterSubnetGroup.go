@@ -64,6 +64,8 @@ type CreateClusterSubnetGroupInput struct {
 
 	// A list of tag instances.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterSubnetGroupOutput struct {
@@ -73,6 +75,8 @@ type CreateClusterSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

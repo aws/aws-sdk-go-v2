@@ -31,11 +31,15 @@ type UpdateEventConfigurationsInput struct {
 
 	// The new event configuration values.
 	EventConfigurations map[string]types.Configuration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEventConfigurationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEventConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

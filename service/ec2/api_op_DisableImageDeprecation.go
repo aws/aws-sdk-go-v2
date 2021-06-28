@@ -41,6 +41,8 @@ type DisableImageDeprecationInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DisableImageDeprecationOutput struct {
@@ -50,6 +52,8 @@ type DisableImageDeprecationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableImageDeprecationMiddlewares(stack *middleware.Stack, options Options) (err error) {

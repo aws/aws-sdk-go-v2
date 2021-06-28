@@ -41,6 +41,8 @@ type UpdateVTLDeviceTypeInput struct {
 	//
 	// This member is required.
 	VTLDeviceARN *string
+
+	noSmithyDocumentSerde
 }
 
 // UpdateVTLDeviceTypeOutput
@@ -51,6 +53,8 @@ type UpdateVTLDeviceTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVTLDeviceTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

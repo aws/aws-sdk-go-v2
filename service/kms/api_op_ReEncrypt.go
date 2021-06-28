@@ -216,6 +216,8 @@ type ReEncryptInput struct {
 	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
 	// use ListAliases.
 	SourceKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type ReEncryptOutput struct {
@@ -241,6 +243,8 @@ type ReEncryptOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReEncryptMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -63,6 +63,8 @@ type CreateWorkspaceBundleInput struct {
 	// creating the bundle, you must create an IAM policy that grants your IAM user
 	// permissions to use workspaces:CreateTags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorkspaceBundleOutput struct {
@@ -72,6 +74,8 @@ type CreateWorkspaceBundleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {

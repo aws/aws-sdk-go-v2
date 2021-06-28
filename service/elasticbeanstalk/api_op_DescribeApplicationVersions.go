@@ -47,6 +47,8 @@ type DescribeApplicationVersionsInput struct {
 
 	// Specify a version label to show a specific application version.
 	VersionLabels []string
+
+	noSmithyDocumentSerde
 }
 
 // Result message wrapping a list of application version descriptions.
@@ -61,6 +63,8 @@ type DescribeApplicationVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeApplicationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

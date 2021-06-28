@@ -49,6 +49,8 @@ type QuerySchemaVersionMetadataInput struct {
 
 	// The version number of the schema.
 	SchemaVersionNumber *types.SchemaVersionNumber
+
+	noSmithyDocumentSerde
 }
 
 type QuerySchemaVersionMetadataOutput struct {
@@ -65,6 +67,8 @@ type QuerySchemaVersionMetadataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQuerySchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

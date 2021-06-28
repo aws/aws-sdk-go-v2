@@ -49,6 +49,8 @@ type ListContactsInput struct {
 	// limit, the NextToken element is sent in the response. Use the NextToken value in
 	// subsequent requests to retrieve additional contacts.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListContactsOutput struct {
@@ -63,6 +65,8 @@ type ListContactsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

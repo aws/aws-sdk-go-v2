@@ -93,6 +93,8 @@ type CreateAlgorithmInput struct {
 	// transform jobs that Amazon SageMaker runs to test the algorithm's inference
 	// code.
 	ValidationSpecification *types.AlgorithmValidationSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateAlgorithmOutput struct {
@@ -104,6 +106,8 @@ type CreateAlgorithmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -72,6 +72,8 @@ type StartMatchmakingInput struct {
 	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to
 	// track the matchmaking ticket status and retrieve match results.
 	TicketId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -84,6 +86,8 @@ type StartMatchmakingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMatchmakingMiddlewares(stack *middleware.Stack, options Options) (err error) {

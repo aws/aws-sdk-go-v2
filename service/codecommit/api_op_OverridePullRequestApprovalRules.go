@@ -49,11 +49,15 @@ type OverridePullRequestApprovalRulesInput struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type OverridePullRequestApprovalRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationOverridePullRequestApprovalRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -64,6 +64,8 @@ type ShareDirectoryInput struct {
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
 	ShareNotes *string
+
+	noSmithyDocumentSerde
 }
 
 type ShareDirectoryOutput struct {
@@ -74,6 +76,8 @@ type ShareDirectoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationShareDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

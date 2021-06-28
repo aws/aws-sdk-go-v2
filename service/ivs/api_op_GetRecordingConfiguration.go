@@ -33,6 +33,8 @@ type GetRecordingConfigurationInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRecordingConfigurationOutput struct {
@@ -42,6 +44,8 @@ type GetRecordingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRecordingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

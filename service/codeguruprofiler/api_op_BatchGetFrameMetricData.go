@@ -72,6 +72,8 @@ type BatchGetFrameMetricDataInput struct {
 	//
 	// * PT5M — 5 minutes
 	TargetResolution types.AggregationPeriod
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the BatchGetFrameMetricDataResponse.
@@ -127,6 +129,8 @@ type BatchGetFrameMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetFrameMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

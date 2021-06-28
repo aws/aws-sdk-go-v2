@@ -32,11 +32,15 @@ type DeleteSipMediaApplicationInput struct {
 	//
 	// This member is required.
 	SipMediaApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSipMediaApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSipMediaApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

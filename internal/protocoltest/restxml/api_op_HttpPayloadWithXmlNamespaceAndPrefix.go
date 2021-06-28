@@ -28,6 +28,8 @@ func (c *Client) HttpPayloadWithXmlNamespaceAndPrefix(ctx context.Context, param
 
 type HttpPayloadWithXmlNamespaceAndPrefixInput struct {
 	Nested *types.PayloadWithXmlNamespaceAndPrefix
+
+	noSmithyDocumentSerde
 }
 
 type HttpPayloadWithXmlNamespaceAndPrefixOutput struct {
@@ -35,6 +37,8 @@ type HttpPayloadWithXmlNamespaceAndPrefixOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpPayloadWithXmlNamespaceAndPrefixMiddlewares(stack *middleware.Stack, options Options) (err error) {

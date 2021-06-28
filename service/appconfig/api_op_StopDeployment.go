@@ -45,6 +45,8 @@ type StopDeploymentInput struct {
 	//
 	// This member is required.
 	EnvironmentId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopDeploymentOutput struct {
@@ -108,6 +110,8 @@ type StopDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

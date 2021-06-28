@@ -52,11 +52,15 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
+
+	noSmithyDocumentSerde
 }
 
 type AddApplicationCloudWatchLoggingOptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

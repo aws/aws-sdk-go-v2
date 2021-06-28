@@ -52,6 +52,8 @@ type ListCoreDevicesInput struct {
 	// the AWS IoT thing group by which to filter. If you specify this parameter, the
 	// list includes only core devices that are members of this thing group.
 	ThingGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListCoreDevicesOutput struct {
@@ -65,6 +67,8 @@ type ListCoreDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCoreDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

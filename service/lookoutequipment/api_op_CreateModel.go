@@ -98,6 +98,8 @@ type CreateModelInput struct {
 	// Indicates the time reference in the dataset that should be used to begin the
 	// subset of training data for the ML model.
 	TrainingDataStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type CreateModelOutput struct {
@@ -110,6 +112,8 @@ type CreateModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

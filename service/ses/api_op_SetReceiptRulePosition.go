@@ -47,12 +47,16 @@ type SetReceiptRulePositionInput struct {
 
 	// The name of the receipt rule after which to place the specified receipt rule.
 	After *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type SetReceiptRulePositionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetReceiptRulePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {

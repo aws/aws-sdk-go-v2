@@ -106,6 +106,8 @@ type DescribeVpcsInput struct {
 
 	// One or more VPC IDs. Default: Describes all your VPCs.
 	VpcIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcsOutput struct {
@@ -119,6 +121,8 @@ type DescribeVpcsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type ListSchemasInput struct {
 	// A wrapper structure that may contain the registry name and Amazon Resource Name
 	// (ARN).
 	RegistryId *types.RegistryId
+
+	noSmithyDocumentSerde
 }
 
 type ListSchemasOutput struct {
@@ -56,6 +58,8 @@ type ListSchemasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {

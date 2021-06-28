@@ -51,6 +51,8 @@ type CreateCarrierGatewayInput struct {
 
 	// The tags to associate with the carrier gateway.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateCarrierGatewayOutput struct {
@@ -60,6 +62,8 @@ type CreateCarrierGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCarrierGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

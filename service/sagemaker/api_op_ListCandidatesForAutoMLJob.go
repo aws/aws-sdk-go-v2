@@ -53,6 +53,8 @@ type ListCandidatesForAutoMLJobInput struct {
 
 	// List the candidates for the job and filter by status.
 	StatusEquals types.CandidateStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListCandidatesForAutoMLJobOutput struct {
@@ -68,6 +70,8 @@ type ListCandidatesForAutoMLJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCandidatesForAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

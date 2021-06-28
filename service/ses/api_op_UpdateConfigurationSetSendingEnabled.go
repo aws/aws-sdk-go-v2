@@ -45,11 +45,15 @@ type UpdateConfigurationSetSendingEnabledInput struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConfigurationSetSendingEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConfigurationSetSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {

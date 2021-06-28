@@ -36,6 +36,8 @@ type DeleteOutboundCrossClusterSearchConnectionInput struct {
 	//
 	// This member is required.
 	CrossClusterSearchConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DeleteOutboundCrossClusterSearchConnection operation. Contains
@@ -48,6 +50,8 @@ type DeleteOutboundCrossClusterSearchConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOutboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

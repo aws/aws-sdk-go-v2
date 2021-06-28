@@ -32,6 +32,7 @@ func (c *Client) DescribeDefaultEncryptionConfiguration(ctx context.Context, par
 }
 
 type DescribeDefaultEncryptionConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeDefaultEncryptionConfigurationOutput struct {
@@ -53,6 +54,8 @@ type DescribeDefaultEncryptionConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDefaultEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

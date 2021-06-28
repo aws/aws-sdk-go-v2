@@ -41,6 +41,8 @@ type GetAnalyzedResourceInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request.
@@ -52,6 +54,8 @@ type GetAnalyzedResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAnalyzedResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

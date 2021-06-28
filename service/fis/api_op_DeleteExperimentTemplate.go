@@ -33,6 +33,8 @@ type DeleteExperimentTemplateInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteExperimentTemplateOutput struct {
@@ -42,6 +44,8 @@ type DeleteExperimentTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

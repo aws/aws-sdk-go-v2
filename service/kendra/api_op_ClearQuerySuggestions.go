@@ -37,11 +37,15 @@ type ClearQuerySuggestionsInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type ClearQuerySuggestionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationClearQuerySuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

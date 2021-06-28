@@ -40,6 +40,8 @@ type CancelCommandInput struct {
 	// not provided, the command is canceled on every instance on which it was
 	// requested.
 	InstanceIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Whether or not the command was successfully canceled. There is no guarantee that
@@ -47,6 +49,8 @@ type CancelCommandInput struct {
 type CancelCommandOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {

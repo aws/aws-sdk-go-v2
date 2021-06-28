@@ -76,6 +76,8 @@ type CreateContactMethodInput struct {
 	//
 	// This member is required.
 	Protocol types.ContactProtocol
+
+	noSmithyDocumentSerde
 }
 
 type CreateContactMethodOutput struct {
@@ -87,6 +89,8 @@ type CreateContactMethodOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContactMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {

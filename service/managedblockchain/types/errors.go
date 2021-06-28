@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 //
 type IllegalActionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IllegalActionException) Error() string {
@@ -45,6 +49,8 @@ func (e *IllegalActionException) ErrorFault() smithy.ErrorFault { return smithy.
 // failure.
 type InternalServiceErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceErrorException) Error() string {
@@ -63,6 +69,8 @@ func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return 
 // correctly.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -80,6 +88,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // A resource request is issued for a resource that already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -99,6 +109,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // limits.
 type ResourceLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceededException) Error() string {
@@ -119,6 +131,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -137,6 +151,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // operation.
 type ResourceNotReadyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotReadyException) Error() string {
@@ -157,6 +173,8 @@ func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smit
 // increase or delete unused resources if possible.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -176,6 +194,8 @@ type TooManyTagsException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

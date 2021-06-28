@@ -49,6 +49,8 @@ type ListOperationsInput struct {
 	// operations matched the specified criteria but that subsequent groups of
 	// MaxResults operations do contain operations that match the criteria.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListOperationsOutput struct {
@@ -67,6 +69,8 @@ type ListOperationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

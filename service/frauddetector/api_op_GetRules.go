@@ -53,6 +53,8 @@ type GetRulesInput struct {
 
 	// The rule version.
 	RuleVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRulesOutput struct {
@@ -65,6 +67,8 @@ type GetRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

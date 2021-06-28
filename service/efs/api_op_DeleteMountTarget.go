@@ -53,11 +53,15 @@ type DeleteMountTargetInput struct {
 	//
 	// This member is required.
 	MountTargetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMountTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMountTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

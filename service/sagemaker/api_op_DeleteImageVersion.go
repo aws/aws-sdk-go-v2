@@ -38,11 +38,15 @@ type DeleteImageVersionInput struct {
 	//
 	// This member is required.
 	Version *int32
+
+	noSmithyDocumentSerde
 }
 
 type DeleteImageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

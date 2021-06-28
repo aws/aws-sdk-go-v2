@@ -39,6 +39,8 @@ type UpdateConnectivityInfoInput struct {
 
 	// A list of connectivity info.
 	ConnectivityInfo []types.ConnectivityInfo
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConnectivityInfoOutput struct {
@@ -51,6 +53,8 @@ type UpdateConnectivityInfoOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConnectivityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {

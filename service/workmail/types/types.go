@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -43,6 +44,8 @@ type AccessControlRule struct {
 
 	// User IDs to include in the rule.
 	UserIds []string
+
+	noSmithyDocumentSerde
 }
 
 // At least one delegate must be associated to the resource to disable automatic
@@ -58,6 +61,8 @@ type BookingOptions struct {
 
 	// The resource's ability to automatically decline any recurring requests.
 	AutoDeclineRecurringRequests bool
+
+	noSmithyDocumentSerde
 }
 
 // The name of the attribute, which is one of the values defined in the
@@ -73,6 +78,8 @@ type Delegate struct {
 	//
 	// This member is required.
 	Type MemberType
+
+	noSmithyDocumentSerde
 }
 
 // The domain to associate with an Amazon WorkMail organization. When you configure
@@ -88,6 +95,8 @@ type Domain struct {
 	// The hosted zone ID for a domain hosted in Route 53. Required when configuring a
 	// domain hosted in Route 53.
 	HostedZoneId *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration applied to an organization's folders by its retention policy.
@@ -106,6 +115,8 @@ type FolderConfiguration struct {
 
 	// The period of time at which the folder configuration action is applied.
 	Period *int32
+
+	noSmithyDocumentSerde
 }
 
 // The representation of an Amazon WorkMail group.
@@ -128,6 +139,8 @@ type Group struct {
 
 	// The state of the group, which can be ENABLED, DISABLED, or DELETED.
 	State EntityState
+
+	noSmithyDocumentSerde
 }
 
 // The details of a mailbox export job, including the user or resource ID
@@ -161,6 +174,8 @@ type MailboxExportJob struct {
 
 	// The state of the mailbox export job.
 	State MailboxExportJobState
+
+	noSmithyDocumentSerde
 }
 
 // The representation of a user or group.
@@ -183,6 +198,8 @@ type Member struct {
 
 	// A member can be a user or group.
 	Type MemberType
+
+	noSmithyDocumentSerde
 }
 
 // The rule that a simulated user matches.
@@ -193,6 +210,8 @@ type MobileDeviceAccessMatchedRule struct {
 
 	// Name of a rule that a simulated user matches.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule that controls access to mobile devices for an Amazon WorkMail group.
@@ -241,6 +260,8 @@ type MobileDeviceAccessRule struct {
 	// Device user agents that a rule will not match. All other device user agents will
 	// match.
 	NotDeviceUserAgents []string
+
+	noSmithyDocumentSerde
 }
 
 // The representation of an organization.
@@ -262,6 +283,8 @@ type OrganizationSummary struct {
 
 	// The state associated with the organization.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // Permission granted to a user, group, or resource to access a certain aspect of
@@ -288,6 +311,8 @@ type Permission struct {
 	//
 	// This member is required.
 	PermissionValues []PermissionType
+
+	noSmithyDocumentSerde
 }
 
 // The representation of a resource.
@@ -313,6 +338,8 @@ type Resource struct {
 
 	// The type of the resource: equipment or room.
 	Type ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag applied to a resource.
@@ -327,6 +354,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The representation of an Amazon WorkMail user.
@@ -355,4 +384,8 @@ type User struct {
 
 	// The role of the user.
 	UserRole UserRole
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

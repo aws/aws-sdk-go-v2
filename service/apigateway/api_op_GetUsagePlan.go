@@ -34,6 +34,8 @@ type GetUsagePlanInput struct {
 	//
 	// This member is required.
 	UsagePlanId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a usage plan than can specify who can assess associated API stages
@@ -70,6 +72,8 @@ type GetUsagePlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUsagePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

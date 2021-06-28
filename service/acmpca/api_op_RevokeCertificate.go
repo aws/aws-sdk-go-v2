@@ -73,11 +73,15 @@ type RevokeCertificateInput struct {
 	//
 	// This member is required.
 	RevocationReason types.RevocationReason
+
+	noSmithyDocumentSerde
 }
 
 type RevokeCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

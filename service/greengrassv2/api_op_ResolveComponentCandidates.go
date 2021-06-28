@@ -51,6 +51,8 @@ type ResolveComponentCandidatesInput struct {
 	//
 	// This member is required.
 	Platform *types.ComponentPlatform
+
+	noSmithyDocumentSerde
 }
 
 type ResolveComponentCandidatesOutput struct {
@@ -62,6 +64,8 @@ type ResolveComponentCandidatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResolveComponentCandidatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

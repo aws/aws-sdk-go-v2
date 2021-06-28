@@ -54,6 +54,8 @@ type DescribeReplicationGroupsInput struct {
 	// case sensitive. If you do not specify this parameter, information about all
 	// replication groups is returned.
 	ReplicationGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeReplicationGroups operation.
@@ -68,6 +70,8 @@ type DescribeReplicationGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReplicationGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

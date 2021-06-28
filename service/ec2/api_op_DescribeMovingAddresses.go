@@ -57,6 +57,8 @@ type DescribeMovingAddressesInput struct {
 
 	// One or more Elastic IP addresses.
 	PublicIps []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMovingAddressesOutput struct {
@@ -70,6 +72,8 @@ type DescribeMovingAddressesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMovingAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

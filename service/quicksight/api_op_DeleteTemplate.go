@@ -41,6 +41,8 @@ type DeleteTemplateInput struct {
 	// Specifies the version of the template that you want to delete. If you don't
 	// provide a version number, DeleteTemplate deletes all versions of the template.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTemplateOutput struct {
@@ -59,6 +61,8 @@ type DeleteTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

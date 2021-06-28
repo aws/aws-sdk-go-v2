@@ -34,6 +34,8 @@ type GetInstanceSnapshotsInput struct {
 	// paginated, the response will return a next page token that you can specify as
 	// the page token in a subsequent request.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInstanceSnapshotsOutput struct {
@@ -50,6 +52,8 @@ type GetInstanceSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInstanceSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

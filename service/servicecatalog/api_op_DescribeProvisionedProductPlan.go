@@ -49,6 +49,8 @@ type DescribeProvisionedProductPlanInput struct {
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProvisionedProductPlanOutput struct {
@@ -66,6 +68,8 @@ type DescribeProvisionedProductPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

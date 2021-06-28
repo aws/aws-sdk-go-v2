@@ -32,11 +32,15 @@ type DeleteSuiteDefinitionInput struct {
 	//
 	// This member is required.
 	SuiteDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSuiteDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

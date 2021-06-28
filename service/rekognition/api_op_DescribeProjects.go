@@ -41,6 +41,8 @@ type DescribeProjectsInput struct {
 	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
 	// response. You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProjectsOutput struct {
@@ -56,6 +58,8 @@ type DescribeProjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

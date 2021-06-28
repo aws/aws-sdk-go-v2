@@ -40,6 +40,8 @@ type DescribePublishingDestinationInput struct {
 	//
 	// This member is required.
 	DetectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePublishingDestinationOutput struct {
@@ -74,6 +76,8 @@ type DescribePublishingDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePublishingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

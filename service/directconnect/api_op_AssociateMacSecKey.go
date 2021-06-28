@@ -59,6 +59,8 @@ type AssociateMacSecKeyInput struct {
 	// DescribeLags to retrieve the MAC Security (MACsec) secret key. If you use this
 	// request parameter, you do not use the ckn and cak request parameters.
 	SecretARN *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateMacSecKeyOutput struct {
@@ -73,6 +75,8 @@ type AssociateMacSecKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateMacSecKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

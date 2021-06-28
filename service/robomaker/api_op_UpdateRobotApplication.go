@@ -47,6 +47,8 @@ type UpdateRobotApplicationInput struct {
 
 	// The revision id for the robot application.
 	CurrentRevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRobotApplicationOutput struct {
@@ -75,6 +77,8 @@ type UpdateRobotApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRobotApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

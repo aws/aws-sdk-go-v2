@@ -40,11 +40,15 @@ type AuthorizeIpRulesInput struct {
 	//
 	// This member is required.
 	UserRules []types.IpRuleItem
+
+	noSmithyDocumentSerde
 }
 
 type AuthorizeIpRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAuthorizeIpRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

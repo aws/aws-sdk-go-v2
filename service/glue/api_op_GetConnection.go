@@ -44,6 +44,8 @@ type GetConnectionInput struct {
 	// have permission to use the KMS key to decrypt the password, but it does have
 	// permission to access the rest of the connection properties.
 	HidePassword bool
+
+	noSmithyDocumentSerde
 }
 
 type GetConnectionOutput struct {
@@ -53,6 +55,8 @@ type GetConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

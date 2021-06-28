@@ -61,6 +61,8 @@ type UpdateBotAliasInput struct {
 	// Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment
 	// of user utterances.
 	SentimentAnalysisSettings *types.SentimentAnalysisSettings
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBotAliasOutput struct {
@@ -103,6 +105,8 @@ type UpdateBotAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

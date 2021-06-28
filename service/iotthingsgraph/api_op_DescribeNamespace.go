@@ -31,6 +31,8 @@ type DescribeNamespaceInput struct {
 
 	// The name of the user's namespace. Set this to aws to get the public namespace.
 	NamespaceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNamespaceOutput struct {
@@ -52,6 +54,8 @@ type DescribeNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

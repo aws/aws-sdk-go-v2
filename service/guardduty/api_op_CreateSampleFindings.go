@@ -37,11 +37,15 @@ type CreateSampleFindingsInput struct {
 
 	// The types of sample findings to generate.
 	FindingTypes []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSampleFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSampleFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

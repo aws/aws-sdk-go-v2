@@ -51,6 +51,8 @@ type UpdateBucketBundleInput struct {
 	//
 	// This member is required.
 	BundleId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBucketBundleOutput struct {
@@ -62,6 +64,8 @@ type UpdateBucketBundleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBucketBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {

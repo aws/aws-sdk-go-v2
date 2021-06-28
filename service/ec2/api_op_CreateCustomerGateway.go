@@ -86,6 +86,8 @@ type CreateCustomerGatewayInput struct {
 
 	// The tags to apply to the customer gateway.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateCustomerGateway.
@@ -96,6 +98,8 @@ type CreateCustomerGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

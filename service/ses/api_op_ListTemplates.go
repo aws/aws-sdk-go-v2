@@ -39,6 +39,8 @@ type ListTemplatesInput struct {
 	// A token returned from a previous call to ListTemplates to indicate the position
 	// in the list of email templates.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTemplatesOutput struct {
@@ -54,6 +56,8 @@ type ListTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

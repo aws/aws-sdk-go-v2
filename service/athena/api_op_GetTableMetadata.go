@@ -44,6 +44,8 @@ type GetTableMetadataInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTableMetadataOutput struct {
@@ -53,6 +55,8 @@ type GetTableMetadataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

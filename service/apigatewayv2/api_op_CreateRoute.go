@@ -77,6 +77,8 @@ type CreateRouteInput struct {
 
 	// The target for the route.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRouteOutput struct {
@@ -138,6 +140,8 @@ type CreateRouteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

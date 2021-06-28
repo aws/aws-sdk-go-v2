@@ -63,6 +63,8 @@ type DescribeUpdateActionsInput struct {
 
 	// The status of the update action.
 	UpdateActionStatus []types.UpdateActionStatus
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUpdateActionsOutput struct {
@@ -78,6 +80,8 @@ type DescribeUpdateActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUpdateActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

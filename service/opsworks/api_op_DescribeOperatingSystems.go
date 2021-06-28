@@ -28,6 +28,7 @@ func (c *Client) DescribeOperatingSystems(ctx context.Context, params *DescribeO
 }
 
 type DescribeOperatingSystemsInput struct {
+	noSmithyDocumentSerde
 }
 
 // The response to a DescribeOperatingSystems request.
@@ -38,6 +39,8 @@ type DescribeOperatingSystemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOperatingSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

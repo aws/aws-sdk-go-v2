@@ -60,6 +60,8 @@ type UpdateConfigurationTemplateInput struct {
 	// A list of configuration options to remove from the configuration set.
 	// Constraint: You can remove only UserDefined configuration options.
 	OptionsToRemove []types.OptionSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Describes the settings for a configuration set.
@@ -112,6 +114,8 @@ type UpdateConfigurationTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

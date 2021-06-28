@@ -62,6 +62,8 @@ type DescribeOrderableClusterOptionsInput struct {
 	// The node type filter value. Specify this parameter to show only the available
 	// offerings matching the specified node type.
 	NodeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output from the DescribeOrderableClusterOptions action.
@@ -80,6 +82,8 @@ type DescribeOrderableClusterOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOrderableClusterOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

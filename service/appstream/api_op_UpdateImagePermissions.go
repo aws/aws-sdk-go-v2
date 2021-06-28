@@ -44,11 +44,15 @@ type UpdateImagePermissionsInput struct {
 	//
 	// This member is required.
 	SharedAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateImagePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

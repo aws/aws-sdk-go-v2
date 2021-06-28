@@ -65,6 +65,8 @@ type ListAccountSettingsInput struct {
 	// The value of the account settings with which to filter results. You must also
 	// specify an account setting name to use this parameter.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAccountSettingsOutput struct {
@@ -80,6 +82,8 @@ type ListAccountSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

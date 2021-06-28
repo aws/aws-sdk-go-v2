@@ -35,6 +35,8 @@ type ListPackagingGroupsInput struct {
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPackagingGroupsOutput struct {
@@ -47,6 +49,8 @@ type ListPackagingGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPackagingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

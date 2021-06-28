@@ -36,6 +36,8 @@ type ListAppInstancesInput struct {
 	// The token passed by previous API requests until you reach the maximum number of
 	// AppInstances.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAppInstancesOutput struct {
@@ -49,6 +51,8 @@ type ListAppInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAppInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

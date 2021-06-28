@@ -35,6 +35,8 @@ type BatchAcknowledgeAlarmInput struct {
 	//
 	// This member is required.
 	AcknowledgeActionRequests []types.AcknowledgeAlarmActionRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchAcknowledgeAlarmOutput struct {
@@ -46,6 +48,8 @@ type BatchAcknowledgeAlarmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchAcknowledgeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

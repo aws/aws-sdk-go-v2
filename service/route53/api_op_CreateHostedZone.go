@@ -114,6 +114,8 @@ type CreateHostedZoneInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html)
 	// after you create a hosted zone.
 	VPC *types.VPC
+
+	noSmithyDocumentSerde
 }
 
 // A complex type containing the response information for the hosted zone.
@@ -145,6 +147,8 @@ type CreateHostedZoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type CancelReplayInput struct {
 	//
 	// This member is required.
 	ReplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelReplayOutput struct {
@@ -48,6 +50,8 @@ type CancelReplayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {

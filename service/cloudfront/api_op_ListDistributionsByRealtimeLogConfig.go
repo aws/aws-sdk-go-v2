@@ -54,6 +54,8 @@ type ListDistributionsByRealtimeLogConfigInput struct {
 	// The name of the real-time log configuration whose associated distributions you
 	// want to list.
 	RealtimeLogConfigName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDistributionsByRealtimeLogConfigOutput struct {
@@ -63,6 +65,8 @@ type ListDistributionsByRealtimeLogConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDistributionsByRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,11 +43,15 @@ type PutSkillAuthorizationInput struct {
 
 	// The room that the skill is authorized for.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutSkillAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSkillAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

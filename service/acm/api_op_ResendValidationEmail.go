@@ -76,11 +76,15 @@ type ResendValidationEmailInput struct {
 	//
 	// This member is required.
 	ValidationDomain *string
+
+	noSmithyDocumentSerde
 }
 
 type ResendValidationEmailOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResendValidationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {

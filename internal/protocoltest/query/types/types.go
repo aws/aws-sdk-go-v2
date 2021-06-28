@@ -2,28 +2,42 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 type ComplexNestedErrorData struct {
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type NestedStructWithList struct {
 	ListArg []string
+
+	noSmithyDocumentSerde
 }
 
 type NestedStructWithMap struct {
 	MapArg map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type RecursiveXmlShapesOutputNested1 struct {
 	Foo *string
 
 	Nested *RecursiveXmlShapesOutputNested2
+
+	noSmithyDocumentSerde
 }
 
 type RecursiveXmlShapesOutputNested2 struct {
 	Bar *string
 
 	RecursiveMember *RecursiveXmlShapesOutputNested1
+
+	noSmithyDocumentSerde
 }
 
 type StructArg struct {
@@ -32,20 +46,30 @@ type StructArg struct {
 	RecursiveArg *StructArg
 
 	StringArg *string
+
+	noSmithyDocumentSerde
 }
 
 type StructureListMember struct {
 	A *string
 
 	B *string
+
+	noSmithyDocumentSerde
 }
 
 type XmlNamespaceNested struct {
 	Foo *string
 
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 type GreetingStruct struct {
 	Hi *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -70,6 +70,8 @@ type CreateDeploymentInput struct {
 
 	// The layer IDs for the deployment targets.
 	LayerIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a CreateDeployment request.
@@ -81,6 +83,8 @@ type CreateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

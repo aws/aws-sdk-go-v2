@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -29,6 +30,8 @@ type AccountModification struct {
 
 	// The timestamp when the modification of the BYOL configuration was started.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon WorkSpaces client.
@@ -38,6 +41,8 @@ type ClientProperties struct {
 	// client. When enabled, users can choose to reconnect to their WorkSpaces without
 	// re-entering their credentials.
 	ReconnectEnabled ReconnectEnum
+
+	noSmithyDocumentSerde
 }
 
 // Information about the Amazon WorkSpaces client.
@@ -48,6 +53,8 @@ type ClientPropertiesResult struct {
 
 	// The resource identifier, in the form of a directory ID.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the compute type of the bundle.
@@ -55,6 +62,8 @@ type ComputeType struct {
 
 	// The compute type.
 	Name Compute
+
+	noSmithyDocumentSerde
 }
 
 // Describes a connection alias. Connection aliases are used for cross-Region
@@ -79,6 +88,8 @@ type ConnectionAlias struct {
 
 	// The current state of the connection alias.
 	State ConnectionAliasState
+
+	noSmithyDocumentSerde
 }
 
 // Describes a connection alias association that is used for cross-Region
@@ -101,6 +112,8 @@ type ConnectionAliasAssociation struct {
 
 	// The identifier of the directory associated with a connection alias.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the permissions for a connection alias. Connection aliases are used
@@ -119,6 +132,8 @@ type ConnectionAliasPermission struct {
 	//
 	// This member is required.
 	SharedAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the default values that are used to create WorkSpaces. For more
@@ -157,6 +172,8 @@ type DefaultWorkspaceCreationProperties struct {
 
 	// Specifies whether WorkSpace users are local administrators on their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a WorkSpace that cannot be created.
@@ -171,6 +188,8 @@ type FailedCreateWorkspaceRequest struct {
 
 	// Information about the WorkSpace.
 	WorkspaceRequest *WorkspaceRequest
+
+	noSmithyDocumentSerde
 }
 
 // Describes a WorkSpace that could not be rebooted. (RebootWorkspaces), rebuilt
@@ -187,6 +206,8 @@ type FailedWorkspaceChangeRequest struct {
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the AWS accounts that have been granted permission to use a shared
@@ -197,6 +218,8 @@ type ImagePermission struct {
 
 	// The identifier of the AWS account that an image has been shared with.
 	SharedAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a rule for an IP access control group.
@@ -207,6 +230,8 @@ type IpRuleItem struct {
 
 	// The description.
 	RuleDesc *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a WorkSpace modification.
@@ -217,6 +242,8 @@ type ModificationState struct {
 
 	// The modification state.
 	State ModificationStateEnum
+
+	noSmithyDocumentSerde
 }
 
 // The operating system that the image is running.
@@ -224,6 +251,8 @@ type OperatingSystem struct {
 
 	// The operating system.
 	Type OperatingSystemType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the information used to reboot a WorkSpace.
@@ -233,6 +262,8 @@ type RebootRequest struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the information used to rebuild a WorkSpace.
@@ -242,6 +273,8 @@ type RebuildRequest struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the root volume for a WorkSpace bundle.
@@ -249,6 +282,8 @@ type RootStorage struct {
 
 	// The size of the root volume.
 	Capacity *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the self-service permissions for a directory. For more information,
@@ -273,6 +308,8 @@ type SelfservicePermissions struct {
 
 	// Specifies whether users can switch the running mode of their WorkSpace.
 	SwitchRunningMode ReconnectEnum
+
+	noSmithyDocumentSerde
 }
 
 // Describes a snapshot.
@@ -280,6 +317,8 @@ type Snapshot struct {
 
 	// The time when the snapshot was created.
 	SnapshotTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information used to start a WorkSpace.
@@ -287,6 +326,8 @@ type StartRequest struct {
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the information used to stop a WorkSpace.
@@ -294,6 +335,8 @@ type StopRequest struct {
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag.
@@ -306,6 +349,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the information used to terminate a WorkSpace.
@@ -315,6 +360,8 @@ type TerminateRequest struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the user volume for a WorkSpace bundle.
@@ -322,6 +369,8 @@ type UserStorage struct {
 
 	// The size of the user volume.
 	Capacity *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a WorkSpace.
@@ -381,6 +430,8 @@ type Workspace struct {
 
 	// The properties of the WorkSpace.
 	WorkspaceProperties *WorkspaceProperties
+
+	noSmithyDocumentSerde
 }
 
 // The device types and operating systems that can be used to access a WorkSpace.
@@ -419,6 +470,8 @@ type WorkspaceAccessProperties struct {
 
 	// Indicates whether users can use zero client devices to access their WorkSpaces.
 	DeviceTypeZeroClient AccessPropertyValue
+
+	noSmithyDocumentSerde
 }
 
 // Describes a WorkSpace bundle.
@@ -455,6 +508,8 @@ type WorkspaceBundle struct {
 
 	// The size of the user volume.
 	UserStorage *UserStorage
+
+	noSmithyDocumentSerde
 }
 
 // Describes the connection status of a WorkSpace.
@@ -472,6 +527,8 @@ type WorkspaceConnectionStatus struct {
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the default properties that are used for creating WorkSpaces. For more
@@ -526,6 +583,8 @@ type WorkspaceCreationProperties struct {
 
 	// Indicates whether users are local administrators of their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a directory that is used with Amazon WorkSpaces.
@@ -590,6 +649,8 @@ type WorkspaceDirectory struct {
 
 	// The identifier of the security group that is assigned to new WorkSpaces.
 	WorkspaceSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a WorkSpace image.
@@ -629,6 +690,8 @@ type WorkspaceImage struct {
 
 	// The status of the image.
 	State WorkspaceImageState
+
+	noSmithyDocumentSerde
 }
 
 // Describes a WorkSpace.
@@ -655,6 +718,8 @@ type WorkspaceProperties struct {
 	// size of the root and user volumes, see Modify a WorkSpace
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
 	UserVolumeSizeGib *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the information used to create a WorkSpace.
@@ -693,6 +758,8 @@ type WorkspaceRequest struct {
 
 	// The WorkSpace properties.
 	WorkspaceProperties *WorkspaceProperties
+
+	noSmithyDocumentSerde
 }
 
 // Describes an IP access control group.
@@ -709,4 +776,8 @@ type WorkspacesIpGroup struct {
 
 	// The rules.
 	UserRules []IpRuleItem
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -49,6 +49,8 @@ type DeleteFolderMembershipInput struct {
 	//
 	// This member is required.
 	MemberType types.MemberType
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFolderMembershipOutput struct {
@@ -61,6 +63,8 @@ type DeleteFolderMembershipOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFolderMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

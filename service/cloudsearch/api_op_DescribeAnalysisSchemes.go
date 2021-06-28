@@ -52,6 +52,8 @@ type DescribeAnalysisSchemesInput struct {
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeAnalysisSchemes request. Contains the analysis schemes
@@ -65,6 +67,8 @@ type DescribeAnalysisSchemesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAnalysisSchemesMiddlewares(stack *middleware.Stack, options Options) (err error) {

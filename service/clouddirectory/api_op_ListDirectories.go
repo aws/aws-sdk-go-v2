@@ -39,6 +39,8 @@ type ListDirectoriesInput struct {
 	// The state of the directories in the list. Can be either Enabled, Disabled, or
 	// Deleted.
 	State types.DirectoryState
+
+	noSmithyDocumentSerde
 }
 
 type ListDirectoriesOutput struct {
@@ -54,6 +56,8 @@ type ListDirectoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

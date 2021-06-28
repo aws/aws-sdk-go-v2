@@ -75,6 +75,8 @@ type ListStackInstancesInput struct {
 
 	// The name of the Region where you want to list stack instances.
 	StackInstanceRegion *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStackInstancesOutput struct {
@@ -91,6 +93,8 @@ type ListStackInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

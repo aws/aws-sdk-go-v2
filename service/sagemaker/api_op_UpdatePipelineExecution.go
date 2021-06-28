@@ -38,6 +38,8 @@ type UpdatePipelineExecutionInput struct {
 
 	// The display name of the pipeline execution.
 	PipelineExecutionDisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePipelineExecutionOutput struct {
@@ -47,6 +49,8 @@ type UpdatePipelineExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

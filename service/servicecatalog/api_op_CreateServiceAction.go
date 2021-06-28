@@ -73,6 +73,8 @@ type CreateServiceActionInput struct {
 
 	// The self-service action description.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceActionOutput struct {
@@ -82,6 +84,8 @@ type CreateServiceActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type CreateConnectionInput struct {
 
 	// The tags to apply to the resource during creation.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateConnectionOutput struct {
@@ -68,6 +70,8 @@ type CreateConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

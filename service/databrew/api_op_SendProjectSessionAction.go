@@ -52,6 +52,8 @@ type SendProjectSessionActionInput struct {
 
 	// Represents the data being transformed during an action.
 	ViewFrame *types.ViewFrame
+
+	noSmithyDocumentSerde
 }
 
 type SendProjectSessionActionOutput struct {
@@ -69,6 +71,8 @@ type SendProjectSessionActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendProjectSessionActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

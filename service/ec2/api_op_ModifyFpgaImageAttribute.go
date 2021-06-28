@@ -66,6 +66,8 @@ type ModifyFpgaImageAttributeInput struct {
 	// The AWS account IDs. This parameter is valid only when modifying the
 	// loadPermission attribute.
 	UserIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyFpgaImageAttributeOutput struct {
@@ -75,6 +77,8 @@ type ModifyFpgaImageAttributeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyFpgaImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

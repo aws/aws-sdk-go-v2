@@ -37,11 +37,15 @@ type DeleteTargetInput struct {
 	// The default value is FALSE. If set to TRUE, all associations between that target
 	// and every notification rule in your AWS account are deleted.
 	ForceUnsubscribeAll bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

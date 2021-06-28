@@ -59,11 +59,15 @@ type UpdateKeyDescriptionInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateKeyDescriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateKeyDescriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

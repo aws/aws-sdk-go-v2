@@ -74,6 +74,8 @@ type PutFileInput struct {
 	// match the ID of the head commit at the time of the operation. Otherwise, an
 	// error occurs, and the file is not added or updated.
 	ParentCommitId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutFileOutput struct {
@@ -96,6 +98,8 @@ type PutFileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutFileMiddlewares(stack *middleware.Stack, options Options) (err error) {

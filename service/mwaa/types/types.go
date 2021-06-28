@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type Dimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Managed Workflows for Apache Airflow (MWAA) environment.
@@ -171,6 +174,8 @@ type Environment struct {
 	// The day and time of the week that weekly maintenance updates are scheduled. For
 	// example: TUE:03:30.
 	WeeklyMaintenanceWindowStart *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the last update on the environment, and any errors that were
@@ -186,6 +191,8 @@ type LastUpdate struct {
 	// The status of the last update on the environment. Valid values: SUCCESS,
 	// PENDING, FAILED.
 	Status UpdateStatus
+
+	noSmithyDocumentSerde
 }
 
 // Defines the Apache Airflow logs to send to CloudWatch Logs: DagProcessingLogs,
@@ -211,6 +218,8 @@ type LoggingConfiguration struct {
 	// Defines the type of logs to send for the Apache Airflow log type (e.g.
 	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
 	WorkerLogs *ModuleLoggingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Defines the Apache Airflow logs to send to CloudWatch Logs: DagProcessingLogs,
@@ -236,6 +245,8 @@ type LoggingConfigurationInput struct {
 	// Defines the type of logs to send for the Apache Airflow log type (e.g.
 	// DagProcessingLogs). Valid values: CloudWatchLogGroupArn, Enabled, LogLevel.
 	WorkerLogs *ModuleLoggingConfigurationInput
+
+	noSmithyDocumentSerde
 }
 
 // Internal only API.
@@ -262,6 +273,8 @@ type MetricDatum struct {
 
 	// Internal only API.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Defines the type of logs to send for the Apache Airflow log type (e.g.
@@ -281,6 +294,8 @@ type ModuleLoggingConfiguration struct {
 	// DagProcessingLogs) to CloudWatch Logs. Valid values: CRITICAL, ERROR, WARNING,
 	// INFO.
 	LogLevel LoggingLevel
+
+	noSmithyDocumentSerde
 }
 
 // Defines the type of logs to send for the Apache Airflow log type (e.g.
@@ -299,6 +314,8 @@ type ModuleLoggingConfigurationInput struct {
 	//
 	// This member is required.
 	LogLevel LoggingLevel
+
+	noSmithyDocumentSerde
 }
 
 // The VPC networking components used to secure and enable network traffic between
@@ -317,6 +334,8 @@ type NetworkConfiguration struct {
 	// subnets in two different availability zones. A subnet must be attached to the
 	// same VPC as the security group.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Internal only API.
@@ -333,6 +352,8 @@ type StatisticSet struct {
 
 	// Internal only API.
 	Sum *float64
+
+	noSmithyDocumentSerde
 }
 
 // An object containing the error encountered with the last update: ErrorCode,
@@ -344,6 +365,8 @@ type UpdateError struct {
 
 	// The error message that corresponds to the error code.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // The VPC networking components used to secure and enable network traffic between
@@ -359,4 +382,8 @@ type UpdateNetworkConfigurationInput struct {
 	//
 	// This member is required.
 	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

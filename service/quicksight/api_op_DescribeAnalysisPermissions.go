@@ -40,6 +40,8 @@ type DescribeAnalysisPermissionsInput struct {
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAnalysisPermissionsOutput struct {
@@ -63,6 +65,8 @@ type DescribeAnalysisPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAnalysisPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

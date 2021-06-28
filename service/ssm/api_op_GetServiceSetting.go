@@ -65,6 +65,8 @@ type GetServiceSettingInput struct {
 	//
 	// This member is required.
 	SettingId *string
+
+	noSmithyDocumentSerde
 }
 
 // The query result body of the GetServiceSetting API operation.
@@ -75,6 +77,8 @@ type GetServiceSettingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {

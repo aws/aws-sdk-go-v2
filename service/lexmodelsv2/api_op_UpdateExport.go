@@ -40,6 +40,8 @@ type UpdateExportInput struct {
 
 	// The new password to use to encrypt the export zip archive.
 	FilePassword *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateExportOutput struct {
@@ -66,6 +68,8 @@ type UpdateExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

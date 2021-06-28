@@ -65,6 +65,8 @@ type DescribeCertificateAuthorityInput struct {
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCertificateAuthorityOutput struct {
@@ -76,6 +78,8 @@ type DescribeCertificateAuthorityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

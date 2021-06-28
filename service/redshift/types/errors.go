@@ -10,6 +10,8 @@ import (
 // You are not authorized to access the cluster.
 type AccessToClusterDeniedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessToClusterDeniedFault) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessToClusterDeniedFault) ErrorFault() smithy.ErrorFault { return smi
 // the snapshot.
 type AccessToSnapshotDeniedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessToSnapshotDeniedFault) Error() string {
@@ -45,6 +49,8 @@ func (e *AccessToSnapshotDeniedFault) ErrorFault() smithy.ErrorFault { return sm
 // The authentication profile already exists.
 type AuthenticationProfileAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthenticationProfileAlreadyExistsFault) Error() string {
@@ -66,6 +72,8 @@ func (e *AuthenticationProfileAlreadyExistsFault) ErrorFault() smithy.ErrorFault
 // The authentication profile can't be found.
 type AuthenticationProfileNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthenticationProfileNotFoundFault) Error() string {
@@ -89,6 +97,8 @@ func (e *AuthenticationProfileNotFoundFault) ErrorFault() smithy.ErrorFault {
 // is determined by a quota for your account.
 type AuthenticationProfileQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthenticationProfileQuotaExceededFault) Error() string {
@@ -111,6 +121,8 @@ func (e *AuthenticationProfileQuotaExceededFault) ErrorFault() smithy.ErrorFault
 // specified cluster security group.
 type AuthorizationAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationAlreadyExistsFault) Error() string {
@@ -129,6 +141,8 @@ func (e *AuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { retur
 // specified cluster security group.
 type AuthorizationNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationNotFoundFault) Error() string {
@@ -146,6 +160,8 @@ func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 // The authorization quota for the cluster security group has been reached.
 type AuthorizationQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationQuotaExceededFault) Error() string {
@@ -164,6 +180,8 @@ func (e *AuthorizationQuotaExceededFault) ErrorFault() smithy.ErrorFault { retur
 // is 100.
 type BatchDeleteRequestSizeExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BatchDeleteRequestSizeExceededFault) Error() string {
@@ -185,6 +203,8 @@ func (e *BatchDeleteRequestSizeExceededFault) ErrorFault() smithy.ErrorFault {
 // The maximum number for snapshot identifiers has been reached. The limit is 100.
 type BatchModifyClusterSnapshotsLimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BatchModifyClusterSnapshotsLimitExceededFault) Error() string {
@@ -206,6 +226,8 @@ func (e *BatchModifyClusterSnapshotsLimitExceededFault) ErrorFault() smithy.Erro
 // Could not find the specified S3 bucket.
 type BucketNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BucketNotFoundFault) Error() string {
@@ -223,6 +245,8 @@ func (e *BucketNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The account already has a cluster with the given identifier.
 type ClusterAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterAlreadyExistsFault) Error() string {
@@ -240,6 +264,8 @@ func (e *ClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smit
 // The ClusterIdentifier parameter does not refer to an existing cluster.
 type ClusterNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterNotFoundFault) Error() string {
@@ -257,6 +283,8 @@ func (e *ClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Cluster is already on the latest database revision.
 type ClusterOnLatestRevisionFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterOnLatestRevisionFault) Error() string {
@@ -274,6 +302,8 @@ func (e *ClusterOnLatestRevisionFault) ErrorFault() smithy.ErrorFault { return s
 // A cluster parameter group with the same name already exists.
 type ClusterParameterGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterParameterGroupAlreadyExistsFault) Error() string {
@@ -295,6 +325,8 @@ func (e *ClusterParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault
 // The parameter group name does not refer to an existing parameter group.
 type ClusterParameterGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterParameterGroupNotFoundFault) Error() string {
@@ -320,6 +352,8 @@ func (e *ClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 // in the Amazon Redshift Cluster Management Guide.
 type ClusterParameterGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterParameterGroupQuotaExceededFault) Error() string {
@@ -345,6 +379,8 @@ func (e *ClusterParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault
 // in the Amazon Redshift Cluster Management Guide.
 type ClusterQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterQuotaExceededFault) Error() string {
@@ -362,6 +398,8 @@ func (e *ClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smit
 // A cluster security group with the same name already exists.
 type ClusterSecurityGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSecurityGroupAlreadyExistsFault) Error() string {
@@ -384,6 +422,8 @@ func (e *ClusterSecurityGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault 
 // group.
 type ClusterSecurityGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSecurityGroupNotFoundFault) Error() string {
@@ -405,6 +445,8 @@ func (e *ClusterSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { ret
 // in the Amazon Redshift Cluster Management Guide.
 type ClusterSecurityGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSecurityGroupQuotaExceededFault) Error() string {
@@ -427,6 +469,8 @@ func (e *ClusterSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault 
 // snapshot.
 type ClusterSnapshotAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSnapshotAlreadyExistsFault) Error() string {
@@ -444,6 +488,8 @@ func (e *ClusterSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { ret
 // The snapshot identifier does not refer to an existing cluster snapshot.
 type ClusterSnapshotNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSnapshotNotFoundFault) Error() string {
@@ -462,6 +508,8 @@ func (e *ClusterSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return s
 // snapshots.
 type ClusterSnapshotQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSnapshotQuotaExceededFault) Error() string {
@@ -479,6 +527,8 @@ func (e *ClusterSnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { ret
 // A ClusterSubnetGroupName is already used by an existing cluster subnet group.
 type ClusterSubnetGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSubnetGroupAlreadyExistsFault) Error() string {
@@ -501,6 +551,8 @@ func (e *ClusterSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // group.
 type ClusterSubnetGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSubnetGroupNotFoundFault) Error() string {
@@ -524,6 +576,8 @@ func (e *ClusterSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { retur
 // in the Amazon Redshift Cluster Management Guide.
 type ClusterSubnetGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSubnetGroupQuotaExceededFault) Error() string {
@@ -549,6 +603,8 @@ func (e *ClusterSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // in the Amazon Redshift Cluster Management Guide.
 type ClusterSubnetQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterSubnetQuotaExceededFault) Error() string {
@@ -568,6 +624,8 @@ func (e *ClusterSubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { retur
 // Cross-region snapshot copy was temporarily disabled. Try your request again.
 type CopyToRegionDisabledFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CopyToRegionDisabledFault) Error() string {
@@ -586,6 +644,8 @@ func (e *CopyToRegionDisabledFault) ErrorFault() smithy.ErrorFault { return smit
 // requests made by Amazon Redshift on your behalf. Wait and retry the request.
 type DependentServiceRequestThrottlingFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependentServiceRequestThrottlingFault) Error() string {
@@ -608,6 +668,8 @@ func (e *DependentServiceRequestThrottlingFault) ErrorFault() smithy.ErrorFault 
 // temporarily unavailable. Wait 30 to 60 seconds and try again.
 type DependentServiceUnavailableFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependentServiceUnavailableFault) Error() string {
@@ -628,6 +690,8 @@ func (e *DependentServiceUnavailableFault) ErrorFault() smithy.ErrorFault { retu
 // identifier.
 type EndpointAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointAlreadyExistsFault) Error() string {
@@ -645,6 +709,8 @@ func (e *EndpointAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smi
 // The authorization already exists for this endpoint.
 type EndpointAuthorizationAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointAuthorizationAlreadyExistsFault) Error() string {
@@ -666,6 +732,8 @@ func (e *EndpointAuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault
 // The authorization for this endpoint can't be found.
 type EndpointAuthorizationNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointAuthorizationNotFoundFault) Error() string {
@@ -687,6 +755,8 @@ func (e *EndpointAuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault {
 // The number of endpoint authorizations per cluster has exceeded its limit.
 type EndpointAuthorizationsPerClusterLimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointAuthorizationsPerClusterLimitExceededFault) Error() string {
@@ -708,6 +778,8 @@ func (e *EndpointAuthorizationsPerClusterLimitExceededFault) ErrorFault() smithy
 // The endpoint name doesn't refer to an existing endpoint.
 type EndpointNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointNotFoundFault) Error() string {
@@ -726,6 +798,8 @@ func (e *EndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // limit.
 type EndpointsPerAuthorizationLimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointsPerAuthorizationLimitExceededFault) Error() string {
@@ -747,6 +821,8 @@ func (e *EndpointsPerAuthorizationLimitExceededFault) ErrorFault() smithy.ErrorF
 // The number of Redshift-managed VPC endpoints per cluster has exceeded its limit.
 type EndpointsPerClusterLimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointsPerClusterLimitExceededFault) Error() string {
@@ -772,6 +848,8 @@ func (e *EndpointsPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFault {
 // in the Amazon Redshift Cluster Management Guide.
 type EventSubscriptionQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EventSubscriptionQuotaExceededFault) Error() string {
@@ -794,6 +872,8 @@ func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // specified identifier.
 type HsmClientCertificateAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HsmClientCertificateAlreadyExistsFault) Error() string {
@@ -816,6 +896,8 @@ func (e *HsmClientCertificateAlreadyExistsFault) ErrorFault() smithy.ErrorFault 
 // identifier.
 type HsmClientCertificateNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HsmClientCertificateNotFoundFault) Error() string {
@@ -838,6 +920,8 @@ func (e *HsmClientCertificateNotFoundFault) ErrorFault() smithy.ErrorFault { ret
 // in the Amazon Redshift Cluster Management Guide.
 type HsmClientCertificateQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HsmClientCertificateQuotaExceededFault) Error() string {
@@ -860,6 +944,8 @@ func (e *HsmClientCertificateQuotaExceededFault) ErrorFault() smithy.ErrorFault 
 // specified identifier.
 type HsmConfigurationAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HsmConfigurationAlreadyExistsFault) Error() string {
@@ -881,6 +967,8 @@ func (e *HsmConfigurationAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // There is no Amazon Redshift HSM configuration with the specified identifier.
 type HsmConfigurationNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HsmConfigurationNotFoundFault) Error() string {
@@ -901,6 +989,8 @@ func (e *HsmConfigurationNotFoundFault) ErrorFault() smithy.ErrorFault { return 
 // in the Amazon Redshift Cluster Management Guide.
 type HsmConfigurationQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HsmConfigurationQuotaExceededFault) Error() string {
@@ -922,6 +1012,8 @@ func (e *HsmConfigurationQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // The specified options are incompatible.
 type IncompatibleOrderableOptions struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncompatibleOrderableOptions) Error() string {
@@ -940,6 +1032,8 @@ func (e *IncompatibleOrderableOptions) ErrorFault() smithy.ErrorFault { return s
 // current table restore requests to complete before making a new request.
 type InProgressTableRestoreQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InProgressTableRestoreQuotaExceededFault) Error() string {
@@ -961,6 +1055,8 @@ func (e *InProgressTableRestoreQuotaExceededFault) ErrorFault() smithy.ErrorFaul
 // The number of nodes specified exceeds the allotted capacity of the cluster.
 type InsufficientClusterCapacityFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientClusterCapacityFault) Error() string {
@@ -979,6 +1075,8 @@ func (e *InsufficientClusterCapacityFault) ErrorFault() smithy.ErrorFault { retu
 // specified when enabling logging.
 type InsufficientS3BucketPolicyFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientS3BucketPolicyFault) Error() string {
@@ -1000,6 +1098,8 @@ func (e *InsufficientS3BucketPolicyFault) ErrorFault() smithy.ErrorFault { retur
 // Region.
 type InvalidAuthenticationProfileRequestFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAuthenticationProfileRequestFault) Error() string {
@@ -1021,6 +1121,8 @@ func (e *InvalidAuthenticationProfileRequestFault) ErrorFault() smithy.ErrorFaul
 // The status of the authorization is not valid.
 type InvalidAuthorizationStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAuthorizationStateFault) Error() string {
@@ -1040,6 +1142,8 @@ func (e *InvalidAuthorizationStateFault) ErrorFault() smithy.ErrorFault { return
 // operation again.
 type InvalidClusterParameterGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterParameterGroupStateFault) Error() string {
@@ -1061,6 +1165,8 @@ func (e *InvalidClusterParameterGroupStateFault) ErrorFault() smithy.ErrorFault 
 // The state of the cluster security group is not available.
 type InvalidClusterSecurityGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterSecurityGroupStateFault) Error() string {
@@ -1082,6 +1188,8 @@ func (e *InvalidClusterSecurityGroupStateFault) ErrorFault() smithy.ErrorFault {
 // The cluster snapshot schedule state is not valid.
 type InvalidClusterSnapshotScheduleStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterSnapshotScheduleStateFault) Error() string {
@@ -1104,6 +1212,8 @@ func (e *InvalidClusterSnapshotScheduleStateFault) ErrorFault() smithy.ErrorFaul
 // are authorized to access the snapshot.
 type InvalidClusterSnapshotStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterSnapshotStateFault) Error() string {
@@ -1121,6 +1231,8 @@ func (e *InvalidClusterSnapshotStateFault) ErrorFault() smithy.ErrorFault { retu
 // The specified cluster is not in the available state.
 type InvalidClusterStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterStateFault) Error() string {
@@ -1138,6 +1250,8 @@ func (e *InvalidClusterStateFault) ErrorFault() smithy.ErrorFault { return smith
 // The cluster subnet group cannot be deleted because it is in use.
 type InvalidClusterSubnetGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterSubnetGroupStateFault) Error() string {
@@ -1159,6 +1273,8 @@ func (e *InvalidClusterSubnetGroupStateFault) ErrorFault() smithy.ErrorFault {
 // The state of the subnet is invalid.
 type InvalidClusterSubnetStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterSubnetStateFault) Error() string {
@@ -1176,6 +1292,8 @@ func (e *InvalidClusterSubnetStateFault) ErrorFault() smithy.ErrorFault { return
 // The provided cluster track name is not valid.
 type InvalidClusterTrackFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterTrackFault) Error() string {
@@ -1193,6 +1311,8 @@ func (e *InvalidClusterTrackFault) ErrorFault() smithy.ErrorFault { return smith
 // The Elastic IP (EIP) is invalid or cannot be found.
 type InvalidElasticIpFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidElasticIpFault) Error() string {
@@ -1210,6 +1330,8 @@ func (e *InvalidElasticIpFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // The status of the endpoint is not valid.
 type InvalidEndpointStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEndpointStateFault) Error() string {
@@ -1228,6 +1350,8 @@ func (e *InvalidEndpointStateFault) ErrorFault() smithy.ErrorFault { return smit
 // still in use by one or more Amazon Redshift clusters.
 type InvalidHsmClientCertificateStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidHsmClientCertificateStateFault) Error() string {
@@ -1250,6 +1374,8 @@ func (e *InvalidHsmClientCertificateStateFault) ErrorFault() smithy.ErrorFault {
 // use by one or more Amazon Redshift clusters.
 type InvalidHsmConfigurationStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidHsmConfigurationStateFault) Error() string {
@@ -1269,6 +1395,8 @@ func (e *InvalidHsmConfigurationStateFault) ErrorFault() smithy.ErrorFault { ret
 // Indicates that the Reserved Node being exchanged is not in an active state.
 type InvalidReservedNodeStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidReservedNodeStateFault) Error() string {
@@ -1286,6 +1414,8 @@ func (e *InvalidReservedNodeStateFault) ErrorFault() smithy.ErrorFault { return 
 // The restore is invalid.
 type InvalidRestoreFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRestoreFault) Error() string {
@@ -1304,6 +1434,8 @@ func (e *InvalidRestoreFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The value must be either -1 or an integer between 1 and 3,653.
 type InvalidRetentionPeriodFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRetentionPeriodFault) Error() string {
@@ -1324,6 +1456,8 @@ func (e *InvalidRetentionPeriodFault) ErrorFault() smithy.ErrorFault { return sm
 // Amazon Simple Storage Service (S3) Developer Guide.
 type InvalidS3BucketNameFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3BucketNameFault) Error() string {
@@ -1342,6 +1476,8 @@ func (e *InvalidS3BucketNameFault) ErrorFault() smithy.ErrorFault { return smith
 // documented constraints.
 type InvalidS3KeyPrefixFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3KeyPrefixFault) Error() string {
@@ -1359,6 +1495,8 @@ func (e *InvalidS3KeyPrefixFault) ErrorFault() smithy.ErrorFault { return smithy
 // The scheduled action is not valid.
 type InvalidScheduledActionFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidScheduledActionFault) Error() string {
@@ -1376,6 +1514,8 @@ func (e *InvalidScheduledActionFault) ErrorFault() smithy.ErrorFault { return sm
 // The schedule you submitted isn't valid.
 type InvalidScheduleFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidScheduleFault) Error() string {
@@ -1394,6 +1534,8 @@ func (e *InvalidScheduleFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // clusters.
 type InvalidSnapshotCopyGrantStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSnapshotCopyGrantStateFault) Error() string {
@@ -1416,6 +1558,8 @@ func (e *InvalidSnapshotCopyGrantStateFault) ErrorFault() smithy.ErrorFault {
 // VPC.
 type InvalidSubnet struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubnet) Error() string {
@@ -1434,6 +1578,8 @@ func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // subscription request is already in progress.
 type InvalidSubscriptionStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubscriptionStateFault) Error() string {
@@ -1453,6 +1599,8 @@ func (e *InvalidSubscriptionStateFault) ErrorFault() smithy.ErrorFault { return 
 // snapshot.
 type InvalidTableRestoreArgumentFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTableRestoreArgumentFault) Error() string {
@@ -1470,6 +1618,8 @@ func (e *InvalidTableRestoreArgumentFault) ErrorFault() smithy.ErrorFault { retu
 // The tag is invalid.
 type InvalidTagFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagFault) Error() string {
@@ -1487,6 +1637,8 @@ func (e *InvalidTagFault) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The usage limit is not valid.
 type InvalidUsageLimitFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUsageLimitFault) Error() string {
@@ -1504,6 +1656,8 @@ func (e *InvalidUsageLimitFault) ErrorFault() smithy.ErrorFault { return smithy.
 // The cluster subnet group does not cover all Availability Zones.
 type InvalidVPCNetworkStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidVPCNetworkStateFault) Error() string {
@@ -1521,6 +1675,8 @@ func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return sm
 // The encryption key has exceeded its grant limit in Amazon Web Services KMS.
 type LimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededFault) Error() string {
@@ -1538,6 +1694,8 @@ func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The operation would exceed the number of nodes allowed for a cluster.
 type NumberOfNodesPerClusterLimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NumberOfNodesPerClusterLimitExceededFault) Error() string {
@@ -1562,6 +1720,8 @@ func (e *NumberOfNodesPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFau
 // in the Amazon Redshift Cluster Management Guide.
 type NumberOfNodesQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NumberOfNodesQuotaExceededFault) Error() string {
@@ -1579,6 +1739,8 @@ func (e *NumberOfNodesQuotaExceededFault) ErrorFault() smithy.ErrorFault { retur
 // The name of the partner was not found.
 type PartnerNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PartnerNotFoundFault) Error() string {
@@ -1596,6 +1758,8 @@ func (e *PartnerNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // User already has a reservation with the given identifier.
 type ReservedNodeAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedNodeAlreadyExistsFault) Error() string {
@@ -1613,6 +1777,8 @@ func (e *ReservedNodeAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return
 // Indicates that the reserved node has already been exchanged.
 type ReservedNodeAlreadyMigratedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedNodeAlreadyMigratedFault) Error() string {
@@ -1630,6 +1796,8 @@ func (e *ReservedNodeAlreadyMigratedFault) ErrorFault() smithy.ErrorFault { retu
 // The specified reserved compute node not found.
 type ReservedNodeNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedNodeNotFoundFault) Error() string {
@@ -1647,6 +1815,8 @@ func (e *ReservedNodeNotFoundFault) ErrorFault() smithy.ErrorFault { return smit
 // Specified offering does not exist.
 type ReservedNodeOfferingNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedNodeOfferingNotFoundFault) Error() string {
@@ -1667,6 +1837,8 @@ func (e *ReservedNodeOfferingNotFoundFault) ErrorFault() smithy.ErrorFault { ret
 // in the Amazon Redshift Cluster Management Guide.
 type ReservedNodeQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedNodeQuotaExceededFault) Error() string {
@@ -1684,6 +1856,8 @@ func (e *ReservedNodeQuotaExceededFault) ErrorFault() smithy.ErrorFault { return
 // A resize operation for the specified cluster is not found.
 type ResizeNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResizeNotFoundFault) Error() string {
@@ -1701,6 +1875,8 @@ func (e *ResizeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The resource could not be found.
 type ResourceNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundFault) Error() string {
@@ -1718,6 +1894,8 @@ func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // The scheduled action already exists.
 type ScheduledActionAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ScheduledActionAlreadyExistsFault) Error() string {
@@ -1735,6 +1913,8 @@ func (e *ScheduledActionAlreadyExistsFault) ErrorFault() smithy.ErrorFault { ret
 // The scheduled action cannot be found.
 type ScheduledActionNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ScheduledActionNotFoundFault) Error() string {
@@ -1752,6 +1932,8 @@ func (e *ScheduledActionNotFoundFault) ErrorFault() smithy.ErrorFault { return s
 // The quota for scheduled actions exceeded.
 type ScheduledActionQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ScheduledActionQuotaExceededFault) Error() string {
@@ -1769,6 +1951,8 @@ func (e *ScheduledActionQuotaExceededFault) ErrorFault() smithy.ErrorFault { ret
 // The action type specified for a scheduled action is not supported.
 type ScheduledActionTypeUnsupportedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ScheduledActionTypeUnsupportedFault) Error() string {
@@ -1790,6 +1974,8 @@ func (e *ScheduledActionTypeUnsupportedFault) ErrorFault() smithy.ErrorFault {
 // The definition you submitted is not supported.
 type ScheduleDefinitionTypeUnsupportedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ScheduleDefinitionTypeUnsupportedFault) Error() string {
@@ -1811,6 +1997,8 @@ func (e *ScheduleDefinitionTypeUnsupportedFault) ErrorFault() smithy.ErrorFault 
 // The cluster already has cross-region snapshot copy disabled.
 type SnapshotCopyAlreadyDisabledFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotCopyAlreadyDisabledFault) Error() string {
@@ -1830,6 +2018,8 @@ func (e *SnapshotCopyAlreadyDisabledFault) ErrorFault() smithy.ErrorFault { retu
 // The cluster already has cross-region snapshot copy enabled.
 type SnapshotCopyAlreadyEnabledFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotCopyAlreadyEnabledFault) Error() string {
@@ -1849,6 +2039,8 @@ func (e *SnapshotCopyAlreadyEnabledFault) ErrorFault() smithy.ErrorFault { retur
 // Cross-region snapshot copy was temporarily disabled. Try your request again.
 type SnapshotCopyDisabledFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotCopyDisabledFault) Error() string {
@@ -1867,6 +2059,8 @@ func (e *SnapshotCopyDisabledFault) ErrorFault() smithy.ErrorFault { return smit
 // already exists.
 type SnapshotCopyGrantAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotCopyGrantAlreadyExistsFault) Error() string {
@@ -1889,6 +2083,8 @@ func (e *SnapshotCopyGrantAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // typed correctly and that the grant exists in the destination region.
 type SnapshotCopyGrantNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotCopyGrantNotFoundFault) Error() string {
@@ -1907,6 +2103,8 @@ func (e *SnapshotCopyGrantNotFoundFault) ErrorFault() smithy.ErrorFault { return
 // region.
 type SnapshotCopyGrantQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotCopyGrantQuotaExceededFault) Error() string {
@@ -1928,6 +2126,8 @@ func (e *SnapshotCopyGrantQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // The specified snapshot schedule already exists.
 type SnapshotScheduleAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotScheduleAlreadyExistsFault) Error() string {
@@ -1949,6 +2149,8 @@ func (e *SnapshotScheduleAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // We could not find the specified snapshot schedule.
 type SnapshotScheduleNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotScheduleNotFoundFault) Error() string {
@@ -1966,6 +2168,8 @@ func (e *SnapshotScheduleNotFoundFault) ErrorFault() smithy.ErrorFault { return 
 // You have exceeded the quota of snapshot schedules.
 type SnapshotScheduleQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotScheduleQuotaExceededFault) Error() string {
@@ -1987,6 +2191,8 @@ func (e *SnapshotScheduleQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // The specified snapshot schedule is already being updated.
 type SnapshotScheduleUpdateInProgressFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotScheduleUpdateInProgressFault) Error() string {
@@ -2009,6 +2215,8 @@ func (e *SnapshotScheduleUpdateInProgressFault) ErrorFault() smithy.ErrorFault {
 // topic.
 type SNSInvalidTopicFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SNSInvalidTopicFault) Error() string {
@@ -2026,6 +2234,8 @@ func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // You do not have permission to publish to the specified Amazon SNS topic.
 type SNSNoAuthorizationFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SNSNoAuthorizationFault) Error() string {
@@ -2044,6 +2254,8 @@ func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy
 // exist.
 type SNSTopicArnNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SNSTopicArnNotFoundFault) Error() string {
@@ -2061,6 +2273,8 @@ func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smith
 // The specified Amazon Redshift event source could not be found.
 type SourceNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SourceNotFoundFault) Error() string {
@@ -2078,6 +2292,8 @@ func (e *SourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // A specified subnet is already in use by another cluster.
 type SubnetAlreadyInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetAlreadyInUse) Error() string {
@@ -2096,6 +2312,8 @@ func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // name.
 type SubscriptionAlreadyExistFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionAlreadyExistFault) Error() string {
@@ -2115,6 +2333,8 @@ func (e *SubscriptionAlreadyExistFault) ErrorFault() smithy.ErrorFault { return 
 // allowed values are Configuration, Management, Monitoring, and Security.
 type SubscriptionCategoryNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionCategoryNotFoundFault) Error() string {
@@ -2132,6 +2352,8 @@ func (e *SubscriptionCategoryNotFoundFault) ErrorFault() smithy.ErrorFault { ret
 // An Amazon Redshift event with the specified event ID does not exist.
 type SubscriptionEventIdNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionEventIdNotFoundFault) Error() string {
@@ -2150,6 +2372,8 @@ func (e *SubscriptionEventIdNotFoundFault) ErrorFault() smithy.ErrorFault { retu
 // not exist.
 type SubscriptionNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionNotFoundFault) Error() string {
@@ -2169,6 +2393,8 @@ func (e *SubscriptionNotFoundFault) ErrorFault() smithy.ErrorFault { return smit
 // allowed values are ERROR and INFO.
 type SubscriptionSeverityNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionSeverityNotFoundFault) Error() string {
@@ -2187,6 +2413,8 @@ func (e *SubscriptionSeverityNotFoundFault) ErrorFault() smithy.ErrorFault { ret
 // cluster node type.
 type TableLimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TableLimitExceededFault) Error() string {
@@ -2204,6 +2432,8 @@ func (e *TableLimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy
 // The specified TableRestoreRequestId value was not found.
 type TableRestoreNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TableRestoreNotFoundFault) Error() string {
@@ -2221,6 +2451,8 @@ func (e *TableRestoreNotFoundFault) ErrorFault() smithy.ErrorFault { return smit
 // You have exceeded the number of tags allowed.
 type TagLimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagLimitExceededFault) Error() string {
@@ -2238,6 +2470,8 @@ func (e *TagLimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // Your account is not authorized to perform the requested operation.
 type UnauthorizedOperation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedOperation) Error() string {
@@ -2255,6 +2489,8 @@ func (e *UnauthorizedOperation) ErrorFault() smithy.ErrorFault { return smithy.F
 // The partner integration is not authorized.
 type UnauthorizedPartnerIntegrationFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedPartnerIntegrationFault) Error() string {
@@ -2276,6 +2512,8 @@ func (e *UnauthorizedPartnerIntegrationFault) ErrorFault() smithy.ErrorFault {
 // The specified region is incorrect or does not exist.
 type UnknownSnapshotCopyRegionFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnknownSnapshotCopyRegionFault) Error() string {
@@ -2293,6 +2531,8 @@ func (e *UnknownSnapshotCopyRegionFault) ErrorFault() smithy.ErrorFault { return
 // The requested operation isn't supported.
 type UnsupportedOperationFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationFault) Error() string {
@@ -2310,6 +2550,8 @@ func (e *UnsupportedOperationFault) ErrorFault() smithy.ErrorFault { return smit
 // A request option was specified that is not supported.
 type UnsupportedOptionFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOptionFault) Error() string {
@@ -2327,6 +2569,8 @@ func (e *UnsupportedOptionFault) ErrorFault() smithy.ErrorFault { return smithy.
 // The usage limit already exists.
 type UsageLimitAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UsageLimitAlreadyExistsFault) Error() string {
@@ -2344,6 +2588,8 @@ func (e *UsageLimitAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return s
 // The usage limit identifier can't be found.
 type UsageLimitNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UsageLimitNotFoundFault) Error() string {

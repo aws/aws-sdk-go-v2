@@ -66,6 +66,8 @@ type DescribeVpcEndpointConnectionNotificationsInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcEndpointConnectionNotificationsOutput struct {
@@ -79,6 +81,8 @@ type DescribeVpcEndpointConnectionNotificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcEndpointConnectionNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

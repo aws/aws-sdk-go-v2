@@ -32,11 +32,15 @@ type StopMonitoringScheduleInput struct {
 	//
 	// This member is required.
 	MonitoringScheduleName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopMonitoringScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

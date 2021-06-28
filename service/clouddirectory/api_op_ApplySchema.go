@@ -40,6 +40,8 @@ type ApplySchemaInput struct {
 	//
 	// This member is required.
 	PublishedSchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ApplySchemaOutput struct {
@@ -54,6 +56,8 @@ type ApplySchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationApplySchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

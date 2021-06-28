@@ -58,11 +58,15 @@ type UpdateAssumeRolePolicyInput struct {
 	//
 	// This member is required.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAssumeRolePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAssumeRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

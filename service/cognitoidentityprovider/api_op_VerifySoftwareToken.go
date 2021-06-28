@@ -47,6 +47,8 @@ type VerifySoftwareTokenInput struct {
 	// The session which should be passed both ways in challenge-response calls to the
 	// service.
 	Session *string
+
+	noSmithyDocumentSerde
 }
 
 type VerifySoftwareTokenOutput struct {
@@ -60,6 +62,8 @@ type VerifySoftwareTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

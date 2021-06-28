@@ -65,11 +65,15 @@ type AllQueryStringTypesInput struct {
 	QueryTimestamp *time.Time
 
 	QueryTimestampList []time.Time
+
+	noSmithyDocumentSerde
 }
 
 type AllQueryStringTypesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAllQueryStringTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

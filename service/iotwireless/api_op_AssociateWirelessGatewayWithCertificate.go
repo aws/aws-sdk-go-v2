@@ -37,6 +37,8 @@ type AssociateWirelessGatewayWithCertificateInput struct {
 	//
 	// This member is required.
 	IotCertificateId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateWirelessGatewayWithCertificateOutput struct {
@@ -46,6 +48,8 @@ type AssociateWirelessGatewayWithCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateWirelessGatewayWithCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

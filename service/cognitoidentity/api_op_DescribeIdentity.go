@@ -36,6 +36,8 @@ type DescribeIdentityInput struct {
 	//
 	// This member is required.
 	IdentityId *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of the identity.
@@ -55,6 +57,8 @@ type DescribeIdentityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

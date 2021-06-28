@@ -44,11 +44,15 @@ type DetachLoadBalancersInput struct {
 	//
 	// This member is required.
 	LoadBalancerNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DetachLoadBalancersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {

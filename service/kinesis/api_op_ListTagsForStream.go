@@ -44,6 +44,8 @@ type ListTagsForStreamInput struct {
 	// tags associated with the stream, HasMoreTags is set to true. To list additional
 	// tags, set ExclusiveStartTagKey to the last key in the response.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for ListTagsForStream.
@@ -63,6 +65,8 @@ type ListTagsForStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type UpdateInstanceProfileInput struct {
 	// The updated choice for whether you want to reboot the device after use. The
 	// default value is true.
 	RebootAfterUse *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInstanceProfileOutput struct {
@@ -61,6 +63,8 @@ type UpdateInstanceProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

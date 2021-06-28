@@ -38,6 +38,8 @@ type DeleteNetworkInsightsPathInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNetworkInsightsPathOutput struct {
@@ -47,6 +49,8 @@ type DeleteNetworkInsightsPathOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNetworkInsightsPathMiddlewares(stack *middleware.Stack, options Options) (err error) {

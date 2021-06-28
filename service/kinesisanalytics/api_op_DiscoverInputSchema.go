@@ -60,6 +60,8 @@ type DiscoverInputSchemaInput struct {
 
 	// Specify this parameter to discover a schema from data in an Amazon S3 object.
 	S3Configuration *types.S3Configuration
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -83,6 +85,8 @@ type DiscoverInputSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDiscoverInputSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -78,6 +78,8 @@ type StreamJournalToKinesisInput struct {
 	// The key-value pairs to add as tags to the stream that you want to create. Tag
 	// keys are case sensitive. Tag values are case sensitive and can be null.
 	Tags map[string]*string
+
+	noSmithyDocumentSerde
 }
 
 type StreamJournalToKinesisOutput struct {
@@ -88,6 +90,8 @@ type StreamJournalToKinesisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStreamJournalToKinesisMiddlewares(stack *middleware.Stack, options Options) (err error) {

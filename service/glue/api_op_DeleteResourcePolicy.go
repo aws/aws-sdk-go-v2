@@ -33,11 +33,15 @@ type DeleteResourcePolicyInput struct {
 
 	// The ARN of the Glue resource for the resource policy to be deleted.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourcePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

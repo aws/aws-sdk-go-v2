@@ -120,6 +120,8 @@ type ListUploadsInput struct {
 	//
 	// * XCTEST_UI_TEST_SPEC
 	Type types.UploadType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a list uploads request.
@@ -135,6 +137,8 @@ type ListUploadsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUploadsMiddlewares(stack *middleware.Stack, options Options) (err error) {

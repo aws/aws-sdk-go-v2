@@ -44,6 +44,8 @@ type DeliverConfigSnapshotInput struct {
 	//
 	// This member is required.
 	DeliveryChannelName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DeliverConfigSnapshot action, in JSON format.
@@ -54,6 +56,8 @@ type DeliverConfigSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeliverConfigSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

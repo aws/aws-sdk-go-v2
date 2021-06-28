@@ -40,6 +40,8 @@ type UpdateApplicationInput struct {
 	// The new name of the application. The name must be unique in the region in which
 	// you are updating the application.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApplicationOutput struct {
@@ -49,6 +51,8 @@ type UpdateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

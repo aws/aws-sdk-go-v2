@@ -105,6 +105,8 @@ type CreateCachediSCSIVolumeInput struct {
 	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
 	// characters, and the maximum length for a tag's value is 256 characters.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateCachediSCSIVolumeOutput struct {
@@ -118,6 +120,8 @@ type CreateCachediSCSIVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCachediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

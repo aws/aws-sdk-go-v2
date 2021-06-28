@@ -57,11 +57,15 @@ type UpdateNotificationRuleInput struct {
 	// The address and type of the targets to receive notifications from this
 	// notification rule.
 	Targets []types.Target
+
+	noSmithyDocumentSerde
 }
 
 type UpdateNotificationRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

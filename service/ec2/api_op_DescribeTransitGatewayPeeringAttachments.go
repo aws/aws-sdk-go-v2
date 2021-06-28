@@ -74,6 +74,8 @@ type DescribeTransitGatewayPeeringAttachmentsInput struct {
 
 	// One or more IDs of the transit gateway peering attachments.
 	TransitGatewayAttachmentIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTransitGatewayPeeringAttachmentsOutput struct {
@@ -87,6 +89,8 @@ type DescribeTransitGatewayPeeringAttachmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTransitGatewayPeeringAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

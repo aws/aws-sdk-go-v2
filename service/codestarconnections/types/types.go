@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A resource that is used to connect third-party source providers with services
 // like AWS CodePipeline. Note: A connection created through CloudFormation, the
 // CLI, or the SDK is in `PENDING` status by default. You can make its status
@@ -31,6 +35,8 @@ type Connection struct {
 	// The name of the external provider where your third-party code repository is
 	// configured.
 	ProviderType ProviderType
+
+	noSmithyDocumentSerde
 }
 
 // A resource that represents the infrastructure where a third-party provider is
@@ -64,6 +70,8 @@ type Host struct {
 
 	// The VPC configuration provisioned for the host.
 	VpcConfiguration *VpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A tag is a key-value pair that is used to manage the resource. This tag is
@@ -79,6 +87,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The VPC configuration provisioned for the host.
@@ -105,4 +115,8 @@ type VpcConfiguration struct {
 	// The value of the Transport Layer Security (TLS) certificate associated with the
 	// infrastructure where your provider type is installed.
 	TlsCertificate *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -80,11 +80,15 @@ type AdminLinkProviderForUserInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 type AdminLinkProviderForUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminLinkProviderForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

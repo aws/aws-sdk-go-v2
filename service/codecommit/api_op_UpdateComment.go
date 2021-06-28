@@ -39,6 +39,8 @@ type UpdateCommentInput struct {
 	//
 	// This member is required.
 	Content *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCommentOutput struct {
@@ -48,6 +50,8 @@ type UpdateCommentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {

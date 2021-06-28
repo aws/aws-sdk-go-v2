@@ -42,6 +42,8 @@ type StartGatewayInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
@@ -54,6 +56,8 @@ type StartGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

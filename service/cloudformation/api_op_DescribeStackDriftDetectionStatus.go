@@ -49,6 +49,8 @@ type DescribeStackDriftDetectionStatusInput struct {
 	//
 	// This member is required.
 	StackDriftDetectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStackDriftDetectionStatusOutput struct {
@@ -118,6 +120,8 @@ type DescribeStackDriftDetectionStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

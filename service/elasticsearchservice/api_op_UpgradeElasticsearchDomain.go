@@ -46,6 +46,8 @@ type UpgradeElasticsearchDomainInput struct {
 	// This flag, when set to True, indicates that an Upgrade Eligibility Check needs
 	// to be performed. This will not actually perform the Upgrade.
 	PerformCheckOnly *bool
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by UpgradeElasticsearchDomain operation.
@@ -66,6 +68,8 @@ type UpgradeElasticsearchDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpgradeElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,12 +33,16 @@ type DeleteScheduleInput struct {
 	//
 	// This member is required.
 	ChannelId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DeleteScheduleResponse
 type DeleteScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

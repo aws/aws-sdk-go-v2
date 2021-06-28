@@ -37,6 +37,8 @@ type RegisterPatchBaselineForPatchGroupInput struct {
 	//
 	// This member is required.
 	PatchGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterPatchBaselineForPatchGroupOutput struct {
@@ -49,6 +51,8 @@ type RegisterPatchBaselineForPatchGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

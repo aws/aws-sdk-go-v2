@@ -43,11 +43,15 @@ type UpdateUserRoutingProfileInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserRoutingProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

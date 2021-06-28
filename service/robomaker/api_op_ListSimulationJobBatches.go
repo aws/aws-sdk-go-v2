@@ -46,6 +46,8 @@ type ListSimulationJobBatchesInput struct {
 	// token to the request object's nextToken parameter. If there are no remaining
 	// results, the previous response object's NextToken parameter is set to null.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSimulationJobBatchesOutput struct {
@@ -62,6 +64,8 @@ type ListSimulationJobBatchesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSimulationJobBatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {

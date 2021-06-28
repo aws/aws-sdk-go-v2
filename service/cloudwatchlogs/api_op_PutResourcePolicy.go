@@ -44,6 +44,8 @@ type PutResourcePolicyInput struct {
 
 	// Name of the new policy. This parameter is required.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 type PutResourcePolicyOutput struct {
@@ -53,6 +55,8 @@ type PutResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

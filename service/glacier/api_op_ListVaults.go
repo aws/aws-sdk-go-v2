@@ -70,6 +70,8 @@ type ListVaultsInput struct {
 	// A string used for pagination. The marker specifies the vault ARN after which the
 	// listing of vaults should begin.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -84,6 +86,8 @@ type ListVaultsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {

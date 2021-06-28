@@ -10,6 +10,8 @@ import (
 // The specified action cannot be found.
 type ActionNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActionNotFoundException) Error() string {
@@ -27,6 +29,8 @@ func (e *ActionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified action type cannot be found.
 type ActionTypeNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActionTypeNotFoundException) Error() string {
@@ -44,6 +48,8 @@ func (e *ActionTypeNotFoundException) ErrorFault() smithy.ErrorFault { return sm
 // The approval action has already been approved or rejected.
 type ApprovalAlreadyCompletedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApprovalAlreadyCompletedException) Error() string {
@@ -63,6 +69,8 @@ func (e *ApprovalAlreadyCompletedException) ErrorFault() smithy.ErrorFault { ret
 // Unable to modify the tag due to a simultaneous update request.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -83,6 +91,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // activities. Try again later.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -104,6 +114,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // request again.
 type DuplicatedStopRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicatedStopRequestException) Error() string {
@@ -121,6 +133,8 @@ func (e *DuplicatedStopRequestException) ErrorFault() smithy.ErrorFault { return
 // The action declaration was specified in an invalid format.
 type InvalidActionDeclarationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidActionDeclarationException) Error() string {
@@ -140,6 +154,8 @@ func (e *InvalidActionDeclarationException) ErrorFault() smithy.ErrorFault { ret
 // The approval request already received a response or has expired.
 type InvalidApprovalTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApprovalTokenException) Error() string {
@@ -157,6 +173,8 @@ func (e *InvalidApprovalTokenException) ErrorFault() smithy.ErrorFault { return 
 // The specified resource ARN is invalid.
 type InvalidArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArnException) Error() string {
@@ -174,6 +192,8 @@ func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Reserved for future use.
 type InvalidBlockerDeclarationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidBlockerDeclarationException) Error() string {
@@ -195,6 +215,8 @@ func (e *InvalidBlockerDeclarationException) ErrorFault() smithy.ErrorFault {
 // The client token was specified in an invalid format
 type InvalidClientTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClientTokenException) Error() string {
@@ -212,6 +234,8 @@ func (e *InvalidClientTokenException) ErrorFault() smithy.ErrorFault { return sm
 // The job was specified in an invalid format or cannot be found.
 type InvalidJobException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidJobException) Error() string {
@@ -229,6 +253,8 @@ func (e *InvalidJobException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The job state was specified in an invalid format.
 type InvalidJobStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidJobStateException) Error() string {
@@ -247,6 +273,8 @@ func (e *InvalidJobStateException) ErrorFault() smithy.ErrorFault { return smith
 // you provide is the token returned by a previous call.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -264,6 +292,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // The nonce was specified in an invalid format.
 type InvalidNonceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNonceException) Error() string {
@@ -281,6 +311,8 @@ func (e *InvalidNonceException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The stage declaration was specified in an invalid format.
 type InvalidStageDeclarationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStageDeclarationException) Error() string {
@@ -300,6 +332,8 @@ func (e *InvalidStageDeclarationException) ErrorFault() smithy.ErrorFault { retu
 // The structure was specified in an invalid format.
 type InvalidStructureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStructureException) Error() string {
@@ -317,6 +351,8 @@ func (e *InvalidStructureException) ErrorFault() smithy.ErrorFault { return smit
 // The specified resource tags are invalid.
 type InvalidTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagsException) Error() string {
@@ -334,6 +370,8 @@ func (e *InvalidTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The specified authentication type is in an invalid format.
 type InvalidWebhookAuthenticationParametersException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidWebhookAuthenticationParametersException) Error() string {
@@ -355,6 +393,8 @@ func (e *InvalidWebhookAuthenticationParametersException) ErrorFault() smithy.Er
 // The specified event filter rule is in an invalid format.
 type InvalidWebhookFilterPatternException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidWebhookFilterPatternException) Error() string {
@@ -376,6 +416,8 @@ func (e *InvalidWebhookFilterPatternException) ErrorFault() smithy.ErrorFault {
 // The job was specified in an invalid format or cannot be found.
 type JobNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *JobNotFoundException) Error() string {
@@ -394,6 +436,8 @@ func (e *JobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // allowed for the account.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -412,6 +456,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // associated with the request is out of date.
 type NotLatestPipelineExecutionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotLatestPipelineExecutionException) Error() string {
@@ -433,6 +479,8 @@ func (e *NotLatestPipelineExecutionException) ErrorFault() smithy.ErrorFault {
 // Exceeded the total size limit for all variables in the pipeline.
 type OutputVariablesSizeExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OutputVariablesSizeExceededException) Error() string {
@@ -455,6 +503,8 @@ func (e *OutputVariablesSizeExceededException) ErrorFault() smithy.ErrorFault {
 // an execution ID does not belong to the specified pipeline.
 type PipelineExecutionNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PipelineExecutionNotFoundException) Error() string {
@@ -477,6 +527,8 @@ func (e *PipelineExecutionNotFoundException) ErrorFault() smithy.ErrorFault {
 // Stopped state, or it might no longer be in progress.
 type PipelineExecutionNotStoppableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PipelineExecutionNotStoppableException) Error() string {
@@ -498,6 +550,8 @@ func (e *PipelineExecutionNotStoppableException) ErrorFault() smithy.ErrorFault 
 // The specified pipeline name is already in use.
 type PipelineNameInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PipelineNameInUseException) Error() string {
@@ -515,6 +569,8 @@ func (e *PipelineNameInUseException) ErrorFault() smithy.ErrorFault { return smi
 // The pipeline was specified in an invalid format or cannot be found.
 type PipelineNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PipelineNotFoundException) Error() string {
@@ -532,6 +588,8 @@ func (e *PipelineNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The pipeline version was specified in an invalid format or cannot be found.
 type PipelineVersionNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PipelineVersionNotFoundException) Error() string {
@@ -551,6 +609,8 @@ func (e *PipelineVersionNotFoundException) ErrorFault() smithy.ErrorFault { retu
 // The request failed because of an unknown error, exception, or failure.
 type RequestFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestFailedException) Error() string {
@@ -568,6 +628,8 @@ func (e *RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.
 // The resource was specified in an invalid format.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -585,6 +647,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The stage was specified in an invalid format or cannot be found.
 type StageNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StageNotFoundException) Error() string {
@@ -603,6 +667,8 @@ func (e *StageNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.
 // actions awaited retry, or the stage contains no failed actions.
 type StageNotRetryableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StageNotRetryableException) Error() string {
@@ -620,6 +686,8 @@ func (e *StageNotRetryableException) ErrorFault() smithy.ErrorFault { return smi
 // The tags limit for a resource has been exceeded.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -637,6 +705,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The validation was specified in an invalid format.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {
@@ -654,6 +724,8 @@ func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The specified webhook was entered in an invalid format or cannot be found.
 type WebhookNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WebhookNotFoundException) Error() string {

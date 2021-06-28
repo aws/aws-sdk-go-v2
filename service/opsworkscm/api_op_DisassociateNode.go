@@ -53,6 +53,8 @@ type DisassociateNodeInput struct {
 	// * CHEF_ORGANIZATION: The Chef organization with which the node was
 	// associated. By default only one organization named default can exist.
 	EngineAttributes []types.EngineAttribute
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateNodeOutput struct {
@@ -63,6 +65,8 @@ type DisassociateNodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

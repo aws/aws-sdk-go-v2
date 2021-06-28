@@ -43,6 +43,8 @@ type DeleteBGPPeerInput struct {
 
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBGPPeerOutput struct {
@@ -52,6 +54,8 @@ type DeleteBGPPeerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {

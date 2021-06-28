@@ -43,6 +43,8 @@ type GetLaunchProfileMemberInput struct {
 	//
 	// This member is required.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLaunchProfileMemberOutput struct {
@@ -52,6 +54,8 @@ type GetLaunchProfileMemberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLaunchProfileMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type StopBackupJobInput struct {
 	//
 	// This member is required.
 	BackupJobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopBackupJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

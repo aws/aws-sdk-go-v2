@@ -31,11 +31,15 @@ type SendInvitationInput struct {
 
 	// The ARN of the user to whom to send an invitation. Required.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type SendInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {

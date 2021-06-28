@@ -35,6 +35,8 @@ type GetCSVHeaderInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to the request to get the header
@@ -49,6 +51,8 @@ type GetCSVHeaderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCSVHeaderMiddlewares(stack *middleware.Stack, options Options) (err error) {

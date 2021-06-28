@@ -39,6 +39,8 @@ type GetOperationsForResourceInput struct {
 	// are paginated, the response will return a next page token that you can specify
 	// as the page token in a subsequent request.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetOperationsForResourceOutput struct {
@@ -63,6 +65,8 @@ type GetOperationsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOperationsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type PurchaseReservedElasticsearchInstanceOfferingInput struct {
 
 	// The number of Elasticsearch instances to reserve.
 	InstanceCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a PurchaseReservedElasticsearchInstanceOffering
@@ -55,6 +57,8 @@ type PurchaseReservedElasticsearchInstanceOfferingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseReservedElasticsearchInstanceOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {

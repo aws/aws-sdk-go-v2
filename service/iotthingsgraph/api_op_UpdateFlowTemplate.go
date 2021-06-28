@@ -48,6 +48,8 @@ type UpdateFlowTemplateInput struct {
 	// version is used by default. Use the GetFlowTemplateRevisions if you want to find
 	// earlier revisions of the flow to update.
 	CompatibleNamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFlowTemplateOutput struct {
@@ -57,6 +59,8 @@ type UpdateFlowTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Represents an FinSpace environment.
 type Environment struct {
 
@@ -41,6 +45,8 @@ type Environment struct {
 
 	// The current status of creation of the FinSpace environment.
 	Status EnvironmentStatus
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information when authentication mode is FEDERATED.
@@ -69,4 +75,8 @@ type FederationParameters struct {
 
 	// Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
 	SamlMetadataURL *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

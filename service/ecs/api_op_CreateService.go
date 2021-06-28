@@ -365,6 +365,8 @@ type CreateServiceInput struct {
 	// is used. A task definition must be specified if the service is using either the
 	// ECS or CODE_DEPLOY deployment controllers.
 	TaskDefinition *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceOutput struct {
@@ -379,6 +381,8 @@ type CreateServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

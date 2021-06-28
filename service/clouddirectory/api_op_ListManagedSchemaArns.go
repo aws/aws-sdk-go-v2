@@ -40,6 +40,8 @@ type ListManagedSchemaArnsInput struct {
 	// The response for ListManagedSchemaArns. When this parameter is used, all minor
 	// version ARNs for a major version are listed.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListManagedSchemaArnsOutput struct {
@@ -52,6 +54,8 @@ type ListManagedSchemaArnsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListManagedSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {

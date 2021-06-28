@@ -44,6 +44,8 @@ type ListBotAliasesInput struct {
 	// specified in the maxResults parameter, a token is returned in the response. Use
 	// that token in the nextToken parameter to return the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBotAliasesOutput struct {
@@ -65,6 +67,8 @@ type ListBotAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBotAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

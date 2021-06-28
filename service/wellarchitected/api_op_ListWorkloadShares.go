@@ -44,6 +44,8 @@ type ListWorkloadSharesInput struct {
 
 	// The AWS account ID or IAM role with which the workload is shared.
 	SharedWithPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Input for List Workload Share
@@ -60,6 +62,8 @@ type ListWorkloadSharesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkloadSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {

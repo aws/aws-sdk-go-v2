@@ -45,6 +45,8 @@ type RegisterElasticIpInput struct {
 	//
 	// This member is required.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a RegisterElasticIp request.
@@ -55,6 +57,8 @@ type RegisterElasticIpOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

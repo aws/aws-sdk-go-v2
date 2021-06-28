@@ -44,6 +44,8 @@ type GetTransitGatewayConnectPeerAssociationsInput struct {
 
 	// One or more transit gateway Connect peer Amazon Resource Names (ARNs).
 	TransitGatewayConnectPeerArns []string
+
+	noSmithyDocumentSerde
 }
 
 type GetTransitGatewayConnectPeerAssociationsOutput struct {
@@ -56,6 +58,8 @@ type GetTransitGatewayConnectPeerAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTransitGatewayConnectPeerAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

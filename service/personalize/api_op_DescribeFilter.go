@@ -33,6 +33,8 @@ type DescribeFilterInput struct {
 	//
 	// This member is required.
 	FilterArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFilterOutput struct {
@@ -42,6 +44,8 @@ type DescribeFilterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

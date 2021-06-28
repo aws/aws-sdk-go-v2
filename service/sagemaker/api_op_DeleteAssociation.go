@@ -37,6 +37,8 @@ type DeleteAssociationInput struct {
 	//
 	// This member is required.
 	SourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAssociationOutput struct {
@@ -49,6 +51,8 @@ type DeleteAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

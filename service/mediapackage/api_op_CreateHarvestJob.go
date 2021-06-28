@@ -57,6 +57,8 @@ type CreateHarvestJobInput struct {
 	//
 	// This member is required.
 	StartTime *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateHarvestJobOutput struct {
@@ -95,6 +97,8 @@ type CreateHarvestJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHarvestJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

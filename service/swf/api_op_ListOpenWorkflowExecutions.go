@@ -104,6 +104,8 @@ type ListOpenWorkflowExecutionsInput struct {
 	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
 	// specify at most one of these in a request.
 	TypeFilter *types.WorkflowTypeFilter
+
+	noSmithyDocumentSerde
 }
 
 // Contains a paginated list of information about workflow executions.
@@ -123,6 +125,8 @@ type ListOpenWorkflowExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOpenWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

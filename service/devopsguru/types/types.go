@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type AnomalyReportedTimeRange struct {
 
 	// The time when an anomaly is closed.
 	CloseTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details about the source of the anomalous operational data that triggered the
@@ -27,6 +30,8 @@ type AnomalySourceDetails struct {
 	// An array of CloudWatchMetricsDetail object that contains information about the
 	// analyzed metrics that displayed anomalous behavior.
 	CloudWatchMetrics []CloudWatchMetricsDetail
+
+	noSmithyDocumentSerde
 }
 
 // A time range that specifies when the observed unusual behavior in an anomaly
@@ -41,6 +46,8 @@ type AnomalyTimeRange struct {
 
 	// The time when the anomalous behavior ended.
 	EndTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information about AWS CloudFormation stacks. You can use up to 500 stacks to
@@ -52,6 +59,8 @@ type CloudFormationCollection struct {
 
 	// An array of CloudFormation stack names.
 	StackNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about AWS CloudFormation stacks. You can use up to 500 stacks to
@@ -63,6 +72,8 @@ type CloudFormationCollectionFilter struct {
 
 	// An array of CloudFormation stack names.
 	StackNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an AWS CloudFormation stack used to create a monthly cost
@@ -76,6 +87,8 @@ type CloudFormationCostEstimationResourceCollectionFilter struct {
 
 	// An array of CloudFormation stack names. Its size is fixed at 1 item.
 	StackNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the health of AWS resources in your account that are specified
@@ -90,6 +103,8 @@ type CloudFormationHealth struct {
 
 	// The name of the CloudFormation stack.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Amazon CloudWatch metric.
@@ -117,6 +132,8 @@ type CloudWatchMetricsDetail struct {
 	// The unit of measure used for the CloudWatch metric. For example, Bytes, Seconds,
 	// Count, and Percent.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // The dimension of a Amazon CloudWatch metric that is used when DevOps Guru
@@ -133,6 +150,8 @@ type CloudWatchMetricsDimension struct {
 
 	// The value of the CloudWatch dimension.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter used to specify which AWS resources are analyzed to
@@ -145,6 +164,8 @@ type CostEstimationResourceCollectionFilter struct {
 	// An object that specifies the CloudFormation stack that defines the AWS resources
 	// used to create a monthly estimate for DevOps Guru.
 	CloudFormation *CloudFormationCostEstimationResourceCollectionFilter
+
+	noSmithyDocumentSerde
 }
 
 // The time range of a cost estimation.
@@ -155,6 +176,8 @@ type CostEstimationTimeRange struct {
 
 	// The start time of the cost estimation.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A range of time that specifies when anomalous behavior in an anomaly or insight
@@ -166,6 +189,8 @@ type EndTimeRange struct {
 
 	// The latest end time in the time range.
 	ToTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An AWS resource event. AWS resource events and metrics are analyzed by DevOps
@@ -202,6 +227,8 @@ type Event struct {
 
 	// A Timestamp that specifies the time the event occurred.
 	Time *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The AWS resource that emitted an event. AWS resource events and metrics are
@@ -217,6 +244,8 @@ type EventResource struct {
 
 	// The type of resource that emitted an event.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The time range during which an AWS event occurred. AWS resource events and
@@ -233,6 +262,8 @@ type EventTimeRange struct {
 	//
 	// This member is required.
 	ToTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information about insight feedback received from a customer.
@@ -243,6 +274,8 @@ type InsightFeedback struct {
 
 	// The insight feedback ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the number of open reactive and proactive insights that can be
@@ -257,6 +290,8 @@ type InsightHealth struct {
 
 	// The number of open reactive insights.
 	OpenReactiveInsights int32
+
+	noSmithyDocumentSerde
 }
 
 // A time ranged that specifies when the observed behavior in an insight started
@@ -270,6 +305,8 @@ type InsightTimeRange struct {
 
 	// The time when the behavior described in an insight ended.
 	EndTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Filters you can use to specify which events are returned when ListEvents is
@@ -297,6 +334,8 @@ type ListEventsFilters struct {
 	// configured to analyze only the AWS resources that are defined in the stacks. You
 	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter for insights that have any status.
@@ -311,6 +350,8 @@ type ListInsightsAnyStatusFilter struct {
 	//
 	// This member is required.
 	Type InsightType
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter for insights that have the status CLOSED.
@@ -325,6 +366,8 @@ type ListInsightsClosedStatusFilter struct {
 	//
 	// This member is required.
 	Type InsightType
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter for insights that have the status ONGOING.
@@ -334,6 +377,8 @@ type ListInsightsOngoingStatusFilter struct {
 	//
 	// This member is required.
 	Type InsightType
+
+	noSmithyDocumentSerde
 }
 
 // A filter used by ListInsights to specify which insights to return.
@@ -350,6 +395,8 @@ type ListInsightsStatusFilter struct {
 	// A ListInsightsAnyStatusFilter that specifies ongoing insights that are either
 	// REACTIVE or PROACTIVE.
 	Ongoing *ListInsightsOngoingStatusFilter
+
+	noSmithyDocumentSerde
 }
 
 // Information about a notification channel. A notification channel is used to
@@ -372,6 +419,8 @@ type NotificationChannel struct {
 
 	// The ID of a notification channel.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about notification channels you have configured with DevOps Guru.
@@ -393,6 +442,8 @@ type NotificationChannelConfig struct {
 	//
 	// This member is required.
 	Sns *SnsChannelConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about whether DevOps Guru is configured to create an OpsItem in AWS
@@ -402,6 +453,8 @@ type OpsCenterIntegration struct {
 	// Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for
 	// each created insight.
 	OptInStatus OptInStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about whether DevOps Guru is configured to create an OpsItem in AWS
@@ -411,6 +464,8 @@ type OpsCenterIntegrationConfig struct {
 	// Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for
 	// each created insight.
 	OptInStatus OptInStatus
+
+	noSmithyDocumentSerde
 }
 
 // The time range during which anomalous behavior in a proactive anomaly or an
@@ -425,6 +480,8 @@ type PredictionTimeRange struct {
 
 	// The time when the behavior in a proactive insight is expected to end.
 	EndTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information about an anomaly. This object is returned by ListAnomalies.
@@ -472,6 +529,8 @@ type ProactiveAnomaly struct {
 
 	// The time of the anomaly's most recent update.
 	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details about a proactive anomaly. This object is returned by DescribeAnomaly.
@@ -519,6 +578,8 @@ type ProactiveAnomalySummary struct {
 
 	// The time of the anomaly's most recent update.
 	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details about a proactive insight. This object is returned by ListInsights.
@@ -554,6 +615,8 @@ type ProactiveInsight struct {
 
 	// The status of the proactive insight.
 	Status InsightStatus
+
+	noSmithyDocumentSerde
 }
 
 // Details about a proactive insight. This object is returned by DescribeInsight.
@@ -587,6 +650,8 @@ type ProactiveInsightSummary struct {
 
 	// The status of the proactive insight.
 	Status InsightStatus
+
+	noSmithyDocumentSerde
 }
 
 // Details about a reactive anomaly. This object is returned by ListAnomalies.
@@ -623,6 +688,8 @@ type ReactiveAnomaly struct {
 
 	// The status of the anomaly.
 	Status AnomalyStatus
+
+	noSmithyDocumentSerde
 }
 
 // Details about a reactive anomaly. This object is returned by DescribeAnomaly.
@@ -659,6 +726,8 @@ type ReactiveAnomalySummary struct {
 
 	// The status of the reactive anomaly.
 	Status AnomalyStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about a reactive insight. This object is returned by ListInsights.
@@ -690,6 +759,8 @@ type ReactiveInsight struct {
 
 	// The status of a reactive insight.
 	Status InsightStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about a reactive insight. This object is returned by
@@ -720,6 +791,8 @@ type ReactiveInsightSummary struct {
 
 	// The status of a reactive insight.
 	Status InsightStatus
+
+	noSmithyDocumentSerde
 }
 
 // Recommendation information to help you remediate detected anomalous behavior
@@ -745,6 +818,8 @@ type Recommendation struct {
 	// Events that are related to the problem. Use these events to learn more about
 	// what's happening and to help address the issue.
 	RelatedEvents []RecommendationRelatedEvent
+
+	noSmithyDocumentSerde
 }
 
 // Information about an anomaly that is related to a recommendation.
@@ -757,6 +832,8 @@ type RecommendationRelatedAnomaly struct {
 	// Information about where the anomalous behavior related the recommendation was
 	// found. For example, details in Amazon CloudWatch metrics.
 	SourceDetails []RecommendationRelatedAnomalySourceDetail
+
+	noSmithyDocumentSerde
 }
 
 // Information about a resource in which DevOps Guru detected anomalous behavior.
@@ -767,6 +844,8 @@ type RecommendationRelatedAnomalyResource struct {
 
 	// The type of the resource.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an array of RecommendationRelatedCloudWatchMetricsSourceDetail objects
@@ -776,6 +855,8 @@ type RecommendationRelatedAnomalySourceDetail struct {
 	// An array of CloudWatchMetricsDetail objects that contains information about the
 	// analyzed metrics that displayed anomalous behavior.
 	CloudWatchMetrics []RecommendationRelatedCloudWatchMetricsSourceDetail
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Amazon CloudWatch metric that is analyzed by DevOps Guru.
@@ -788,6 +869,8 @@ type RecommendationRelatedCloudWatchMetricsSourceDetail struct {
 	// The namespace of the CloudWatch metric. A namespace is a container for
 	// CloudWatch metrics.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an event that is related to a recommendation.
@@ -799,6 +882,8 @@ type RecommendationRelatedEvent struct {
 	// A ResourceCollection object that contains arrays of the names of AWS
 	// CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks.
 	Resources []RecommendationRelatedEventResource
+
+	noSmithyDocumentSerde
 }
 
 // Information about an AWS resource that emitted and event that is related to a
@@ -812,6 +897,8 @@ type RecommendationRelatedEventResource struct {
 	// The type of the resource that emitted the event. This corresponds to the Type
 	// field in an EventResource object.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of AWS resources supported by DevOps Guru. The one type of AWS
@@ -824,6 +911,8 @@ type ResourceCollection struct {
 	// resources that DevOps Guru analyzes. You can specify up to 500 AWS
 	// CloudFormation stacks.
 	CloudFormation *CloudFormationCollection
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter used to specify which AWS resources are analyzed for
@@ -836,6 +925,8 @@ type ResourceCollectionFilter struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
 	// the AWS CloudFormation User Guide.
 	CloudFormation *CloudFormationCollectionFilter
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one or more severity values and one or more status values that are
@@ -856,6 +947,8 @@ type SearchInsightsFilters struct {
 
 	// An array of status values used to search for insights.
 	Statuses []InsightStatus
+
+	noSmithyDocumentSerde
 }
 
 // A collection of the names of AWS services.
@@ -863,6 +956,8 @@ type ServiceCollection struct {
 
 	// An array of strings that each specifies the name of an AWS service.
 	ServiceNames []ServiceName
+
+	noSmithyDocumentSerde
 }
 
 // Represents the health of an AWS service.
@@ -874,6 +969,8 @@ type ServiceHealth struct {
 
 	// The name of the AWS service.
 	ServiceName ServiceName
+
+	noSmithyDocumentSerde
 }
 
 // Contains the number of open proactive and reactive insights in an analyzed AWS
@@ -885,6 +982,8 @@ type ServiceInsightHealth struct {
 
 	// The number of open reactive insights in the AWS service
 	OpenReactiveInsights int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the integration of DevOps Guru with another AWS service, such
@@ -894,6 +993,8 @@ type ServiceIntegrationConfig struct {
 	// Information about whether DevOps Guru is configured to create an OpsItem in AWS
 	// Systems Manager OpsCenter for each created insight.
 	OpsCenter *OpsCenterIntegration
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the estimated monthly cost to analyze
@@ -925,6 +1026,8 @@ type ServiceResourceCost struct {
 	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
 	// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
 	UnitCost float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service
@@ -942,6 +1045,8 @@ type SnsChannelConfig struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A time range used to specify when the behavior of an insight or anomaly started.
@@ -952,6 +1057,8 @@ type StartTimeRange struct {
 
 	// The end time of the time range.
 	ToTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the names of AWS CloudFormation stacks used to update a collection of
@@ -961,6 +1068,8 @@ type UpdateCloudFormationCollectionFilter struct {
 	// An array of the names of the AWS CloudFormation stacks to update. You can
 	// specify up to 500 AWS CloudFormation stacks.
 	StackNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information used to update a collection of AWS resources.
@@ -969,6 +1078,8 @@ type UpdateResourceCollectionFilter struct {
 	// An collection of AWS CloudFormation stacks. You can specify up to 500 AWS
 	// CloudFormation stacks.
 	CloudFormation *UpdateCloudFormationCollectionFilter
+
+	noSmithyDocumentSerde
 }
 
 // Information about updating the integration status of an AWS service, such as AWS
@@ -978,6 +1089,8 @@ type UpdateServiceIntegrationConfig struct {
 	// Information about whether DevOps Guru is configured to create an OpsItem in AWS
 	// Systems Manager OpsCenter for each created insight.
 	OpsCenter *OpsCenterIntegrationConfig
+
+	noSmithyDocumentSerde
 }
 
 // The field associated with the validation exception.
@@ -993,4 +1106,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

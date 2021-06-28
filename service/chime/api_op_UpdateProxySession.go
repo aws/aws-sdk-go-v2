@@ -46,6 +46,8 @@ type UpdateProxySessionInput struct {
 
 	// The number of minutes allowed for the proxy session.
 	ExpiryMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProxySessionOutput struct {
@@ -55,6 +57,8 @@ type UpdateProxySessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

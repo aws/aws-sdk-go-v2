@@ -47,6 +47,8 @@ type ListAnomaliesForInsightInput struct {
 	// A time range used to specify when the requested anomalies started. All returned
 	// anomalies started during this time range.
 	StartTimeRange *types.StartTimeRange
+
+	noSmithyDocumentSerde
 }
 
 type ListAnomaliesForInsightOutput struct {
@@ -65,6 +67,8 @@ type ListAnomaliesForInsightOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAnomaliesForInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {

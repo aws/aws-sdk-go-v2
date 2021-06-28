@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -16,6 +17,8 @@ type AccessControlList struct {
 	// A value that indicates whether public write access for the bucket is enabled
 	// through an Access Control List (ACL).
 	AllowsPublicWriteAccess bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the access keys.
@@ -32,6 +35,8 @@ type AccessKeyDetails struct {
 
 	// The type of the user.
 	UserType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the account.
@@ -46,6 +51,8 @@ type AccountDetail struct {
 	//
 	// This member is required.
 	Email *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the account level permissions on the S3 bucket.
@@ -53,6 +60,8 @@ type AccountLevelPermissions struct {
 
 	// Describes the S3 Block Public Access settings of the bucket's parent account.
 	BlockPublicAccess *BlockPublicAccess
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about actions.
@@ -72,6 +81,8 @@ type Action struct {
 
 	// Information about the PORT_PROBE action described in this finding.
 	PortProbeAction *PortProbeAction
+
+	noSmithyDocumentSerde
 }
 
 // The account within the organization specified as the GuardDuty delegated
@@ -83,6 +94,8 @@ type AdminAccount struct {
 
 	// Indicates whether the account is enabled as the delegated administrator.
 	AdminStatus AdminStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the API action.
@@ -105,6 +118,8 @@ type AwsApiCallAction struct {
 
 	// The AWS service name whose API was invoked.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on how the bucker owner's S3 Block Public Access settings
@@ -124,6 +139,8 @@ type BlockPublicAccess struct {
 
 	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
 	RestrictPublicBuckets bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the bucket level permissions for the S3 bucket.
@@ -138,6 +155,8 @@ type BucketLevelPermissions struct {
 
 	// Contains information on the bucket policies for the S3 bucket.
 	BucketPolicy *BucketPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the current bucket policies for the S3 bucket.
@@ -150,6 +169,8 @@ type BucketPolicy struct {
 	// A value that indicates whether public write access for the bucket is enabled
 	// through a bucket policy.
 	AllowsPublicWriteAccess bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the city associated with the IP address.
@@ -157,6 +178,8 @@ type City struct {
 
 	// The city name of the remote IP address.
 	CityName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the status of CloudTrail as a data source for the
@@ -167,6 +190,8 @@ type CloudTrailConfigurationResult struct {
 	//
 	// This member is required.
 	Status DataSourceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the condition.
@@ -231,6 +256,8 @@ type Condition struct {
 	// Represents a not equal condition to be applied to a single field when querying
 	// for findings.
 	NotEquals []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the country where the remote IP address is located.
@@ -241,6 +268,8 @@ type Country struct {
 
 	// The country name of the remote IP address.
 	CountryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about which data sources are enabled.
@@ -248,6 +277,8 @@ type DataSourceConfigurations struct {
 
 	// Describes whether S3 data event logs are enabled as a data source.
 	S3Logs *S3LogsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the status of data sources for the detector.
@@ -275,6 +306,8 @@ type DataSourceConfigurationsResult struct {
 	//
 	// This member is required.
 	S3Logs *S3LogsConfigurationResult
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the server side encryption method used in the S3 bucket.
@@ -289,6 +322,8 @@ type DefaultServerSideEncryption struct {
 	// The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the
 	// bucket EncryptionType is aws:kms.
 	KmsMasterKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the publishing destination, including the ID, type,
@@ -310,6 +345,8 @@ type Destination struct {
 	//
 	// This member is required.
 	Status PublishingStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon Resource Name (ARN) of the resource to publish to, such as
@@ -321,6 +358,8 @@ type DestinationProperties struct {
 
 	// The ARN of the KMS key to use for encryption.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the status of DNS logs as a data source.
@@ -330,6 +369,8 @@ type DNSLogsConfigurationResult struct {
 	//
 	// This member is required.
 	Status DataSourceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the DNS_REQUEST action described in this finding.
@@ -337,6 +378,8 @@ type DnsRequestAction struct {
 
 	// The domain information for the API request.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the domain.
@@ -344,6 +387,8 @@ type DomainDetails struct {
 
 	// The domain information for the AWS API call.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the reason that the finding was generated.
@@ -351,6 +396,8 @@ type Evidence struct {
 
 	// A list of threat intelligence details related to the evidence.
 	ThreatIntelligenceDetails []ThreatIntelligenceDetail
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the finding, which is generated when abnormal or
@@ -422,6 +469,8 @@ type Finding struct {
 
 	// The title of the finding.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the criteria used for querying findings.
@@ -430,6 +479,8 @@ type FindingCriteria struct {
 	// Represents a map of finding properties that match specified conditions and
 	// values when querying findings.
 	Criterion map[string]Condition
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about finding statistics.
@@ -437,6 +488,8 @@ type FindingStatistics struct {
 
 	// Represents a map of severity to count statistics for a set of findings.
 	CountBySeverity map[string]int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the status of VPC flow logs as a data source.
@@ -446,6 +499,8 @@ type FlowLogsConfigurationResult struct {
 	//
 	// This member is required.
 	Status DataSourceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the location of the remote IP address.
@@ -456,6 +511,8 @@ type GeoLocation struct {
 
 	// The longitude information of the remote IP address.
 	Lon float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the EC2 instance profile.
@@ -466,6 +523,8 @@ type IamInstanceProfile struct {
 
 	// The profile ID of the EC2 instance.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the details of an instance.
@@ -510,6 +569,8 @@ type InstanceDetails struct {
 
 	// The tags of the EC2 instance.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the invitation to become a member account.
@@ -527,6 +588,8 @@ type Invitation struct {
 
 	// The status of the relationship between the inviter and invitee accounts.
 	RelationshipStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the local IP address of the connection.
@@ -534,6 +597,8 @@ type LocalIpDetails struct {
 
 	// The IPv4 local address of the connection.
 	IpAddressV4 *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the port for the local connection.
@@ -544,6 +609,8 @@ type LocalPortDetails struct {
 
 	// The port name of the local connection.
 	PortName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the administrator account and invitation.
@@ -560,6 +627,8 @@ type Master struct {
 
 	// The status of the relationship between the administrator and member accounts.
 	RelationshipStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the member account.
@@ -595,6 +664,8 @@ type Member struct {
 
 	// The timestamp when the invitation was sent.
 	InvitedAt *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on which data sources are enabled for a member account.
@@ -609,6 +680,8 @@ type MemberDataSourceConfiguration struct {
 	//
 	// This member is required.
 	DataSources *DataSourceConfigurationsResult
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the NETWORK_CONNECTION action described in the
@@ -635,6 +708,8 @@ type NetworkConnectionAction struct {
 
 	// The remote port information of the connection.
 	RemotePortDetails *RemotePortDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the elastic network interface of the EC2 instance.
@@ -669,6 +744,8 @@ type NetworkInterface struct {
 
 	// The VPC ID of the EC2 instance.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the ISP organization of the remote IP address.
@@ -686,6 +763,8 @@ type Organization struct {
 
 	// The name of the internet provider.
 	Org *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information on which data sources will be configured to
@@ -695,6 +774,8 @@ type OrganizationDataSourceConfigurations struct {
 	// Describes whether S3 data event logs are enabled for new members of the
 	// organization.
 	S3Logs *OrganizationS3LogsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information on which data sources are automatically
@@ -705,6 +786,8 @@ type OrganizationDataSourceConfigurationsResult struct {
 	//
 	// This member is required.
 	S3Logs *OrganizationS3LogsConfigurationResult
+
+	noSmithyDocumentSerde
 }
 
 // Describes whether S3 data event logs will be automatically enabled for new
@@ -716,6 +799,8 @@ type OrganizationS3LogsConfiguration struct {
 	//
 	// This member is required.
 	AutoEnable bool
+
+	noSmithyDocumentSerde
 }
 
 // The current configuration of S3 data event logs as a data source for the
@@ -727,6 +812,8 @@ type OrganizationS3LogsConfigurationResult struct {
 	//
 	// This member is required.
 	AutoEnable bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the owner of the bucket.
@@ -736,6 +823,8 @@ type Owner struct {
 	// canonical user ID see Finding Your Account Canonical User ID.
 	// (https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about how permissions are configured for the S3 bucket.
@@ -746,6 +835,8 @@ type PermissionConfiguration struct {
 
 	// Contains information about the bucket level permissions for the S3 bucket.
 	BucketLevelPermissions *BucketLevelPermissions
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the PORT_PROBE action described in the finding.
@@ -757,6 +848,8 @@ type PortProbeAction struct {
 
 	// A list of objects related to port probe details.
 	PortProbeDetails []PortProbeDetail
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the port probe details.
@@ -770,6 +863,8 @@ type PortProbeDetail struct {
 
 	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains other private IP address information of the EC2 instance.
@@ -780,6 +875,8 @@ type PrivateIpAddressDetails struct {
 
 	// The private IP address of the EC2 instance.
 	PrivateIpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the product code for the EC2 instance.
@@ -790,6 +887,8 @@ type ProductCode struct {
 
 	// The product code type.
 	ProductType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the public access policies that apply to the S3 bucket.
@@ -801,6 +900,8 @@ type PublicAccess struct {
 
 	// Contains information about how permissions are configured for the S3 bucket.
 	PermissionConfiguration *PermissionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the remote IP address of the connection.
@@ -820,6 +921,8 @@ type RemoteIpDetails struct {
 
 	// The ISP organization information of the remote IP address.
 	Organization *Organization
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the remote port.
@@ -830,6 +933,8 @@ type RemotePortDetails struct {
 
 	// The port name of the remote connection.
 	PortName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the AWS resource associated with the activity that
@@ -849,6 +954,8 @@ type Resource struct {
 
 	// Contains information on the S3 bucket.
 	S3BucketDetails []S3BucketDetail
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the S3 bucket.
@@ -877,6 +984,8 @@ type S3BucketDetail struct {
 
 	// Describes whether the bucket is a source or destination bucket.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes whether S3 data event logs will be enabled as a data source.
@@ -886,6 +995,8 @@ type S3LogsConfiguration struct {
 	//
 	// This member is required.
 	Enable bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes whether S3 data event logs will be enabled as a data source.
@@ -896,6 +1007,8 @@ type S3LogsConfigurationResult struct {
 	//
 	// This member is required.
 	Status DataSourceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the security groups associated with the EC2 instance.
@@ -906,6 +1019,8 @@ type SecurityGroup struct {
 
 	// The security group name of the EC2 instance.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains additional information about the generated finding.
@@ -942,6 +1057,8 @@ type Service struct {
 
 	// Feedback that was submitted about the finding.
 	UserFeedback *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the criteria used for sorting findings.
@@ -952,6 +1069,8 @@ type SortCriteria struct {
 
 	// The order by which the sorted findings are to be displayed.
 	OrderBy OrderBy
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a tag associated with the EC2 instance.
@@ -962,6 +1081,8 @@ type Tag struct {
 
 	// The EC2 instance tag value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An instance of a threat intelligence detail that constitutes evidence for the
@@ -974,6 +1095,8 @@ type ThreatIntelligenceDetail struct {
 	// A list of names of the threats in the threat intelligence list that triggered
 	// the finding.
 	ThreatNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the total usage with the corresponding currency unit for that value.
@@ -984,6 +1107,8 @@ type Total struct {
 
 	// The currency unit that the amount is given in.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the accounts that weren't processed.
@@ -998,6 +1123,8 @@ type UnprocessedAccount struct {
 	//
 	// This member is required.
 	Result *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the total of usage based on account IDs.
@@ -1008,6 +1135,8 @@ type UsageAccountResult struct {
 
 	// Represents the total of usage for the Account ID.
 	Total *Total
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the criteria used to query usage statistics.
@@ -1024,6 +1153,8 @@ type UsageCriteria struct {
 	// The resources to aggregate usage statistics from. Only accepts exact resource
 	// names.
 	Resources []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the result of usage based on data source type.
@@ -1034,6 +1165,8 @@ type UsageDataSourceResult struct {
 
 	// Represents the total of usage for the specified data source.
 	Total *Total
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on the sum of usage based on an AWS resource.
@@ -1044,6 +1177,8 @@ type UsageResourceResult struct {
 
 	// Represents the sum total of usage for the specified resource type.
 	Total *Total
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of GuardDuty usage. If a UsageStatisticType is provided the
@@ -1062,4 +1197,8 @@ type UsageStatistics struct {
 	// Lists the top 50 resources that have generated the most GuardDuty usage, in
 	// order from most to least expensive.
 	TopResources []UsageResourceResult
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

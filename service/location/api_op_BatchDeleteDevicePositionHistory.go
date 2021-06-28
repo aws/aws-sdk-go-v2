@@ -41,6 +41,8 @@ type BatchDeleteDevicePositionHistoryInput struct {
 	//
 	// This member is required.
 	TrackerName *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteDevicePositionHistoryOutput struct {
@@ -52,6 +54,8 @@ type BatchDeleteDevicePositionHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

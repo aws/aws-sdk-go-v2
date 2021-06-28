@@ -44,6 +44,8 @@ type DescribeComponentConfigurationRecommendationInput struct {
 	//
 	// This member is required.
 	Tier types.Tier
+
+	noSmithyDocumentSerde
 }
 
 type DescribeComponentConfigurationRecommendationOutput struct {
@@ -54,6 +56,8 @@ type DescribeComponentConfigurationRecommendationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeComponentConfigurationRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {

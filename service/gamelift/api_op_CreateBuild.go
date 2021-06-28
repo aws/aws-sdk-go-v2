@@ -98,6 +98,8 @@ type CreateBuildInput struct {
 	// Version information that is associated with a build or script. Version strings
 	// do not need to be unique. You can use UpdateBuild to change this value later.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -117,6 +119,8 @@ type CreateBuildOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {

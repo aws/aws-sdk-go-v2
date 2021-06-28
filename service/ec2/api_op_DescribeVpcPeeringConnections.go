@@ -96,6 +96,8 @@ type DescribeVpcPeeringConnectionsInput struct {
 	// One or more VPC peering connection IDs. Default: Describes all your VPC peering
 	// connections.
 	VpcPeeringConnectionIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcPeeringConnectionsOutput struct {
@@ -109,6 +111,8 @@ type DescribeVpcPeeringConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcPeeringConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

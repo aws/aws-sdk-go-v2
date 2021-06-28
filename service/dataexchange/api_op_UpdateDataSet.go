@@ -41,6 +41,8 @@ type UpdateDataSetInput struct {
 
 	// The name of the data set.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDataSetOutput struct {
@@ -82,6 +84,8 @@ type UpdateDataSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

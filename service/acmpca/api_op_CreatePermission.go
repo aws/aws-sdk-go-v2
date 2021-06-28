@@ -75,11 +75,15 @@ type CreatePermissionInput struct {
 
 	// The ID of the calling account.
 	SourceAccount *string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,12 +44,16 @@ type UpdateReceiptRuleInput struct {
 	//
 	// This member is required.
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type UpdateReceiptRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateReceiptRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

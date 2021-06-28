@@ -34,6 +34,8 @@ type DisableDirectoryInput struct {
 	//
 	// This member is required.
 	DirectoryArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableDirectoryOutput struct {
@@ -45,6 +47,8 @@ type DisableDirectoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

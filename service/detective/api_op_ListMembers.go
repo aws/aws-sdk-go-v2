@@ -45,6 +45,8 @@ type ListMembersInput struct {
 	// token that was returned with the previous page of results. The initial request
 	// does not include a pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMembersOutput struct {
@@ -61,6 +63,8 @@ type ListMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type CloneBackendInput struct {
 	//
 	// This member is required.
 	TargetEnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 type CloneBackendOutput struct {
@@ -67,6 +69,8 @@ type CloneBackendOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCloneBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {

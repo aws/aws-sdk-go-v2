@@ -41,6 +41,8 @@ type CreateDataflowEndpointGroupInput struct {
 
 	// Tags of a dataflow endpoint group.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -51,6 +53,8 @@ type CreateDataflowEndpointGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataflowEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

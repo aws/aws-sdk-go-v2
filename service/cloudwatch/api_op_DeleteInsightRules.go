@@ -37,6 +37,8 @@ type DeleteInsightRulesInput struct {
 	//
 	// This member is required.
 	RuleNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInsightRulesOutput struct {
@@ -47,6 +49,8 @@ type DeleteInsightRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -48,6 +49,8 @@ type Attribute struct {
 
 	// The type of attribute.
 	Type EntitySubType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of detection jobs.
@@ -69,6 +72,8 @@ type ComprehendMedicalAsyncJobFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a detection job.
@@ -124,6 +129,8 @@ type ComprehendMedicalAsyncJobProperties struct {
 
 	// The time that the detection job was submitted for processing.
 	SubmitTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an extracted medical entity.
@@ -159,6 +166,8 @@ type Entity struct {
 
 	// Describes the specific type of entity with category of entities.
 	Type EntitySubType
+
+	noSmithyDocumentSerde
 }
 
 // The detected attributes that relate to an entity. This includes an extracted
@@ -203,6 +212,8 @@ type ICD10CMAttribute struct {
 
 	// The type of attribute. InferICD10CM detects entities of the type DX_NAME.
 	Type ICD10CMAttributeType
+
+	noSmithyDocumentSerde
 }
 
 // The ICD-10-CM concepts that the entity could refer to, along with a score
@@ -219,6 +230,8 @@ type ICD10CMConcept struct {
 	// The level of confidence that Amazon Comprehend Medical has that the entity is
 	// accurately linked to an ICD-10-CM concept.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // The collection of medical entities extracted from the input text and their
@@ -267,6 +280,8 @@ type ICD10CMEntity struct {
 	// Describes the specific type of entity with category of entities. InferICD10CM
 	// detects entities of the type DX_NAME and TIME_EXPRESSION.
 	Type ICD10CMEntityType
+
+	noSmithyDocumentSerde
 }
 
 // Contextual information for the entity. The traits recognized by InferICD10CM are
@@ -279,6 +294,8 @@ type ICD10CMTrait struct {
 	// The level of confidence that Amazon Comprehend Medical has that the segment of
 	// text is correctly recognized as a trait.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // The input properties for an entities detection job. This includes the name of
@@ -295,6 +312,8 @@ type InputDataConfig struct {
 
 	// The path to the input data files in the S3 bucket.
 	S3Key *string
+
+	noSmithyDocumentSerde
 }
 
 // The output properties for a detection job.
@@ -312,6 +331,8 @@ type OutputDataConfig struct {
 	// creates an output directory using the job ID so that the output from one job
 	// does not overwrite the output of another.
 	S3Key *string
+
+	noSmithyDocumentSerde
 }
 
 // The extracted attributes that relate to this entity. The attributes recognized
@@ -349,6 +370,8 @@ type RxNormAttribute struct {
 	// The type of attribute. The types of attributes recognized by InferRxNorm are
 	// BRAND_NAME and GENERIC_NAME.
 	Type RxNormAttributeType
+
+	noSmithyDocumentSerde
 }
 
 // The RxNorm concept that the entity could refer to, along with a score indicating
@@ -364,6 +387,8 @@ type RxNormConcept struct {
 	// The level of confidence that Amazon Comprehend Medical has that the entity is
 	// accurately linked to the reported RxNorm concept.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // The collection of medical entities extracted from the input text and their
@@ -410,6 +435,8 @@ type RxNormEntity struct {
 	// Describes the specific type of entity. For InferRxNorm, the recognized entity
 	// type is MEDICATION.
 	Type RxNormEntityType
+
+	noSmithyDocumentSerde
 }
 
 // The contextual information for the entity. InferRxNorm recognizes the trait
@@ -422,6 +449,8 @@ type RxNormTrait struct {
 	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// the detected trait.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // Provides contextual information about the extracted entity.
@@ -433,6 +462,8 @@ type Trait struct {
 	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// this trait.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // An attribute that we extracted, but were unable to relate to an entity.
@@ -445,4 +476,8 @@ type UnmappedAttribute struct {
 	// "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or
 	// "PROTECTED_HEALTH_INFORMATION".
 	Type EntityType
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

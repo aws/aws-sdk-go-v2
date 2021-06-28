@@ -84,11 +84,15 @@ type SetTopicAttributesInput struct {
 
 	// The new value for the attribute.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 type SetTopicAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetTopicAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

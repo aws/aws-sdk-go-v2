@@ -40,6 +40,8 @@ type ListFieldLevelEncryptionProfilesInput struct {
 	// The maximum number of field-level encryption profiles you want in the response
 	// body.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListFieldLevelEncryptionProfilesOutput struct {
@@ -50,6 +52,8 @@ type ListFieldLevelEncryptionProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFieldLevelEncryptionProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

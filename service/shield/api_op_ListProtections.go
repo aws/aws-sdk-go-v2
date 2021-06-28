@@ -42,6 +42,8 @@ type ListProtectionsInput struct {
 	// The ListProtectionsRequest.NextToken value from a previous call to
 	// ListProtections. Pass null if this is the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProtectionsOutput struct {
@@ -61,6 +63,8 @@ type ListProtectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProtectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

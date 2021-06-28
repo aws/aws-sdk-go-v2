@@ -74,6 +74,8 @@ type CreateDBClusterParameterGroupInput struct {
 
 	// The tags to be assigned to the new DB cluster parameter group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBClusterParameterGroupOutput struct {
@@ -85,6 +87,8 @@ type CreateDBClusterParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

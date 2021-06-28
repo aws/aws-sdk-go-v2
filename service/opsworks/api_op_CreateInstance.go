@@ -182,6 +182,8 @@ type CreateInstanceInput struct {
 
 	// The instance's virtualization type, paravirtual or hvm.
 	VirtualizationType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a CreateInstance request.
@@ -192,6 +194,8 @@ type CreateInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

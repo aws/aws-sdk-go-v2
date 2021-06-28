@@ -59,6 +59,8 @@ type DescribeBackupsInput struct {
 	// Designates whether or not to sort the return backups by ascending chronological
 	// order of generation.
 	SortAscending *bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBackupsOutput struct {
@@ -73,6 +75,8 @@ type DescribeBackupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

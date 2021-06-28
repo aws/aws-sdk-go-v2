@@ -39,6 +39,8 @@ type StopSentimentDetectionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopSentimentDetectionJobOutput struct {
@@ -52,6 +54,8 @@ type StopSentimentDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

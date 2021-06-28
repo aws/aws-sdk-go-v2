@@ -44,6 +44,8 @@ type DeleteUserByPrincipalIdInput struct {
 	//
 	// This member is required.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserByPrincipalIdOutput struct {
@@ -56,6 +58,8 @@ type DeleteUserByPrincipalIdOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserByPrincipalIdMiddlewares(stack *middleware.Stack, options Options) (err error) {

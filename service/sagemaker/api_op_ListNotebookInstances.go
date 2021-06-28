@@ -86,6 +86,8 @@ type ListNotebookInstancesInput struct {
 
 	// A filter that returns only notebook instances with the specified status.
 	StatusEquals types.NotebookInstanceStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListNotebookInstancesOutput struct {
@@ -100,6 +102,8 @@ type ListNotebookInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNotebookInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

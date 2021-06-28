@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -30,6 +31,8 @@ type Application struct {
 
 	// The version of the application.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // An automatic scaling policy for a core instance group or task instance group in
@@ -49,6 +52,8 @@ type AutoScalingPolicy struct {
 	//
 	// This member is required.
 	Rules []ScalingRule
+
+	noSmithyDocumentSerde
 }
 
 // An automatic scaling policy for a core instance group or task instance group in
@@ -67,6 +72,8 @@ type AutoScalingPolicyDescription struct {
 
 	// The status of an automatic scaling policy.
 	Status *AutoScalingPolicyStatus
+
+	noSmithyDocumentSerde
 }
 
 // The reason for an AutoScalingPolicyStatus change.
@@ -81,6 +88,8 @@ type AutoScalingPolicyStateChangeReason struct {
 	// A friendly, more verbose message that accompanies an automatic scaling policy
 	// state change.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of an automatic scaling policy.
@@ -91,6 +100,8 @@ type AutoScalingPolicyStatus struct {
 
 	// The reason for a change in status.
 	StateChangeReason *AutoScalingPolicyStateChangeReason
+
+	noSmithyDocumentSerde
 }
 
 // A configuration for Amazon EMR block public access. When
@@ -124,6 +135,8 @@ type BlockPublicAccessConfiguration struct {
 
 	// A set of properties specified within a configuration classification.
 	Properties map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Properties that describe the AWS principal that created the
@@ -142,6 +155,8 @@ type BlockPublicAccessConfigurationMetadata struct {
 	//
 	// This member is required.
 	CreationDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Configuration of a bootstrap action.
@@ -156,6 +171,8 @@ type BootstrapActionConfig struct {
 	//
 	// This member is required.
 	ScriptBootstrapAction *ScriptBootstrapActionConfig
+
+	noSmithyDocumentSerde
 }
 
 // Reports the configuration of a bootstrap action in a cluster (job flow).
@@ -163,6 +180,8 @@ type BootstrapActionDetail struct {
 
 	// A description of the bootstrap action.
 	BootstrapActionConfig *BootstrapActionConfig
+
+	noSmithyDocumentSerde
 }
 
 // Specification of the status of a CancelSteps request. Available only in Amazon
@@ -177,6 +196,8 @@ type CancelStepsInfo struct {
 
 	// The encrypted StepId of a step.
 	StepId *string
+
+	noSmithyDocumentSerde
 }
 
 // The definition of a CloudWatch metric alarm, which determines when an automatic
@@ -227,6 +248,8 @@ type CloudWatchAlarmDefinition struct {
 	// value specified for Unit must correspond to the units specified in the
 	// CloudWatch metric.
 	Unit Unit
+
+	noSmithyDocumentSerde
 }
 
 // The detailed description of the cluster.
@@ -375,6 +398,8 @@ type Cluster struct {
 	// true when you create a cluster by using the VisibleToAllUsers parameter of the
 	// RunJobFlow action.
 	VisibleToAllUsers bool
+
+	noSmithyDocumentSerde
 }
 
 // The reason that the cluster changed to its current state.
@@ -385,6 +410,8 @@ type ClusterStateChangeReason struct {
 
 	// The descriptive message for the state change reason.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The detailed status of the cluster.
@@ -399,6 +426,8 @@ type ClusterStatus struct {
 	// A timeline that represents the status of a cluster over the lifetime of the
 	// cluster.
 	Timeline *ClusterTimeline
+
+	noSmithyDocumentSerde
 }
 
 // The summary description of the cluster.
@@ -426,6 +455,8 @@ type ClusterSummary struct {
 
 	// The details about the current status of the cluster.
 	Status *ClusterStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the timeline of the cluster's lifecycle.
@@ -439,6 +470,8 @@ type ClusterTimeline struct {
 
 	// The date and time when the cluster was ready to run steps.
 	ReadyDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An entity describing an executable that runs on a cluster.
@@ -452,6 +485,8 @@ type Command struct {
 
 	// The Amazon S3 location of the command script.
 	ScriptPath *string
+
+	noSmithyDocumentSerde
 }
 
 // The EC2 unit limits for a managed scaling policy. The managed scaling activity
@@ -495,6 +530,8 @@ type ComputeLimits struct {
 	// The On-Demand units are not allowed to scale beyond this boundary. The parameter
 	// is used to split capacity allocation between On-Demand and Spot Instances.
 	MaximumOnDemandCapacityUnits *int32
+
+	noSmithyDocumentSerde
 }
 
 // Amazon EMR releases 4.x or later. An optional configuration specification to be
@@ -515,6 +552,8 @@ type Configuration struct {
 
 	// A set of properties specified within a configuration classification.
 	Properties map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration of requested EBS block device associated with the instance group.
@@ -526,6 +565,8 @@ type EbsBlockDevice struct {
 	// EBS volume specifications such as volume type, IOPS, and size (GiB) that will be
 	// requested for the EBS volume attached to an EC2 instance in the cluster.
 	VolumeSpecification *VolumeSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Configuration of requested EBS block device associated with the instance group
@@ -541,6 +582,8 @@ type EbsBlockDeviceConfig struct {
 	// Number of EBS volumes with a specific volume configuration that will be
 	// associated with every instance in the instance group
 	VolumesPerInstance *int32
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon EBS configuration of a cluster instance.
@@ -551,6 +594,8 @@ type EbsConfiguration struct {
 
 	// Indicates whether an Amazon EBS volume is EBS-optimized.
 	EbsOptimized *bool
+
+	noSmithyDocumentSerde
 }
 
 // EBS block device that's attached to an EC2 instance.
@@ -561,6 +606,8 @@ type EbsVolume struct {
 
 	// The volume identifier of the EBS volume.
 	VolumeId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the EC2 instances in a cluster grouped by category.
@@ -621,6 +668,8 @@ type Ec2InstanceAttributes struct {
 	// The identifier of the Amazon EC2 security group for the Amazon EMR service to
 	// access clusters in VPC private subnets.
 	ServiceAccessSecurityGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the execution engine (cluster) to run the notebook and perform the
@@ -642,6 +691,8 @@ type ExecutionEngineConfig struct {
 
 	// The type of execution engine. A value of EMR specifies an EMR cluster.
 	Type ExecutionEngineType
+
+	noSmithyDocumentSerde
 }
 
 // The details of the step failure. The service attempts to detect the root cause
@@ -661,6 +712,8 @@ type FailureDetails struct {
 	// successfully determine the root cause of the failure, it returns "Unknown Error"
 	// as a reason.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // A job flow step consisting of a JAR file whose main function will be executed.
@@ -684,6 +737,8 @@ type HadoopJarStepConfig struct {
 	// A list of Java properties that are set when the step runs. You can use these
 	// properties to pass key-value pairs to your main function.
 	Properties []KeyValue
+
+	noSmithyDocumentSerde
 }
 
 // A cluster step consisting of a JAR file whose main function will be executed.
@@ -705,6 +760,8 @@ type HadoopStepConfig struct {
 	// The list of Java properties that are set when the step runs. You can use these
 	// properties to pass key-value pairs to your main function.
 	Properties map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an EC2 instance provisioned as part of cluster.
@@ -745,6 +802,8 @@ type Instance struct {
 
 	// The current status of the instance.
 	Status *InstanceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance fleet, which is a group of EC2 instances that host a
@@ -821,6 +880,8 @@ type InstanceFleet struct {
 	// master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity
 	// can be specified, and its value must be 1.
 	TargetSpotCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // The configuration that defines an instance fleet. The instance fleet
@@ -876,6 +937,8 @@ type InstanceFleetConfig struct {
 	// master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity
 	// can be specified, and its value must be 1.
 	TargetSpotCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // Configuration parameters for an instance fleet modification request. The
@@ -895,6 +958,8 @@ type InstanceFleetModifyConfig struct {
 	// The target capacity of Spot units for the instance fleet. For more information,
 	// see InstanceFleetConfig$TargetSpotCapacity.
 	TargetSpotCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // The launch specification for Spot Instances in the fleet, which determines the
@@ -914,6 +979,8 @@ type InstanceFleetProvisioningSpecifications struct {
 	// The launch specification for Spot Instances in the fleet, which determines the
 	// defined duration, provisioning timeout behavior, and allocation strategy.
 	SpotSpecification *SpotProvisioningSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Provides status change reason details for the instance fleet. The instance fleet
@@ -926,6 +993,8 @@ type InstanceFleetStateChangeReason struct {
 
 	// An explanatory message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the instance fleet. The instance fleet configuration is available
@@ -965,6 +1034,8 @@ type InstanceFleetStatus struct {
 	// Provides historical timestamps for the instance fleet, including the time of
 	// creation, the time it became ready to run jobs, and the time of termination.
 	Timeline *InstanceFleetTimeline
+
+	noSmithyDocumentSerde
 }
 
 // Provides historical timestamps for the instance fleet, including the time of
@@ -981,6 +1052,8 @@ type InstanceFleetTimeline struct {
 
 	// The time and date the instance fleet was ready to run jobs.
 	ReadyDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // This entity represents an instance group, which is a group of instances that
@@ -1050,6 +1123,8 @@ type InstanceGroup struct {
 
 	// The current status of the instance group.
 	Status *InstanceGroupStatus
+
+	noSmithyDocumentSerde
 }
 
 // Configuration defining a new instance group.
@@ -1095,6 +1170,8 @@ type InstanceGroupConfig struct {
 
 	// Friendly name given to the instance group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an instance group.
@@ -1158,6 +1235,8 @@ type InstanceGroupDetail struct {
 
 	// The date/time the instance group was started.
 	StartDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Modify the size or configurations of an instance group.
@@ -1180,6 +1259,8 @@ type InstanceGroupModifyConfig struct {
 
 	// Policy for customizing shrink operations.
 	ShrinkPolicy *ShrinkPolicy
+
+	noSmithyDocumentSerde
 }
 
 // The status change reason details for the instance group.
@@ -1190,6 +1271,8 @@ type InstanceGroupStateChangeReason struct {
 
 	// The status change reason description.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the instance group status.
@@ -1203,6 +1286,8 @@ type InstanceGroupStatus struct {
 
 	// The timeline of the instance group status over time.
 	Timeline *InstanceGroupTimeline
+
+	noSmithyDocumentSerde
 }
 
 // The timeline of the instance group lifecycle.
@@ -1216,6 +1301,8 @@ type InstanceGroupTimeline struct {
 
 	// The date and time when the instance group became ready to perform tasks.
 	ReadyDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Custom policy for requesting termination protection or termination of specific
@@ -1231,6 +1318,8 @@ type InstanceResizePolicy struct {
 
 	// Specific list of instances to be terminated when shrinking an instance group.
 	InstancesToTerminate []string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the status change reason for the instance.
@@ -1241,6 +1330,8 @@ type InstanceStateChangeReason struct {
 
 	// The status change reason description.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The instance status details.
@@ -1254,6 +1345,8 @@ type InstanceStatus struct {
 
 	// The timeline of the instance status over time.
 	Timeline *InstanceTimeline
+
+	noSmithyDocumentSerde
 }
 
 // The timeline of the instance lifecycle.
@@ -1267,6 +1360,8 @@ type InstanceTimeline struct {
 
 	// The date and time when the instance was ready to perform tasks.
 	ReadyDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An instance type configuration for each instance type in an instance fleet,
@@ -1306,6 +1401,8 @@ type InstanceTypeConfig struct {
 	// for a master instance fleet, and must be 1 or greater for core and task instance
 	// fleets. Defaults to 1 if not specified.
 	WeightedCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // The configuration specification for each instance type in an instance fleet. The
@@ -1341,6 +1438,8 @@ type InstanceTypeSpecification struct {
 	// represent performance characteristics such as vCPUs, memory, or I/O. If not
 	// specified, the default value is 1.
 	WeightedCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // A description of a cluster (job flow).
@@ -1427,6 +1526,8 @@ type JobFlowDetail struct {
 	// true when you create a cluster by using the VisibleToAllUsers parameter of the
 	// RunJobFlow action.
 	VisibleToAllUsers bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of the cluster (job flow).
@@ -1454,6 +1555,8 @@ type JobFlowExecutionStatusDetail struct {
 
 	// The start date and time of the job flow.
 	StartDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A description of the Amazon EC2 instance on which the cluster (job flow) runs. A
@@ -1532,6 +1635,8 @@ type JobFlowInstancesConfig struct {
 	// being terminated by API call, user intervention, or in the event of a job-flow
 	// error.
 	TerminationProtected bool
+
+	noSmithyDocumentSerde
 }
 
 // Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
@@ -1595,6 +1700,8 @@ type JobFlowInstancesDetail struct {
 	// termination by API calls, user intervention, or in the event of a job-flow
 	// error.
 	TerminationProtected bool
+
+	noSmithyDocumentSerde
 }
 
 // Attributes for Kerberos configuration when Kerberos authentication is enabled
@@ -1628,6 +1735,8 @@ type KerberosAttributes struct {
 	// realm. The cross-realm principal password, which must be identical across
 	// realms.
 	CrossRealmTrustPrincipalPassword *string
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair.
@@ -1638,6 +1747,8 @@ type KeyValue struct {
 
 	// The value part of the identified key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Managed scaling policy for an Amazon EMR cluster. The policy specifies the
@@ -1651,6 +1762,8 @@ type ManagedScalingPolicy struct {
 	// applies to the core and task nodes. The master node cannot be scaled after
 	// initial configuration.
 	ComputeLimits *ComputeLimits
+
+	noSmithyDocumentSerde
 }
 
 // A CloudWatch dimension, which is specified using a Key (known as a Name in
@@ -1665,6 +1778,8 @@ type MetricDimension struct {
 
 	// The dimension value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A notebook execution. An execution is a specific instance that an EMR Notebook
@@ -1749,6 +1864,8 @@ type NotebookExecution struct {
 	// key-value pairs that consist of a required key string with a maximum of 128
 	// characters and an optional value string with a maximum of 256 characters.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -1802,6 +1919,8 @@ type NotebookExecutionSummary struct {
 	// * STOPPED indicates that the
 	// execution stopped because of a StopNotebookExecution request.
 	Status NotebookExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes the strategy for using unused Capacity Reservations for fulfilling
@@ -1832,6 +1951,8 @@ type OnDemandCapacityReservationOptions struct {
 	// strategy (lowest-price). If you do not specify a value, the fleet fulfils the
 	// On-Demand capacity according to the chosen On-Demand allocation strategy.
 	UsageStrategy OnDemandCapacityReservationUsageStrategy
+
+	noSmithyDocumentSerde
 }
 
 // The launch specification for On-Demand Instances in the instance fleet, which
@@ -1851,6 +1972,8 @@ type OnDemandProvisioningSpecification struct {
 	// The launch specification for On-Demand instances in the instance fleet, which
 	// determines the allocation strategy.
 	CapacityReservationOptions *OnDemandCapacityReservationOptions
+
+	noSmithyDocumentSerde
 }
 
 // Placement group configuration for an Amazon EMR cluster. The configuration
@@ -1869,6 +1992,8 @@ type PlacementGroupConfig struct {
 	// EMR version 5.23.0, the only supported placement strategy is SPREAD for the
 	// MASTER instance role.
 	PlacementStrategy PlacementGroupStrategy
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon EC2 Availability Zone configuration of the cluster (job flow).
@@ -1885,6 +2010,8 @@ type PlacementType struct {
 	// instance groups. The instance fleet configuration is available only in Amazon
 	// EMR versions 4.8.0 and later, excluding 5.0.x versions.
 	AvailabilityZones []string
+
+	noSmithyDocumentSerde
 }
 
 // A list of port ranges that are permitted to allow inbound traffic from all
@@ -1899,6 +2026,8 @@ type PortRange struct {
 
 	// The smallest port number in a specified range of port numbers.
 	MaxRange *int32
+
+	noSmithyDocumentSerde
 }
 
 // The type of adjustment the automatic scaling activity makes when triggered, and
@@ -1914,6 +2043,8 @@ type ScalingAction struct {
 	// Not available for instance groups. Instance groups use the market type specified
 	// for the group.
 	Market MarketType
+
+	noSmithyDocumentSerde
 }
 
 // The upper and lower EC2 instance limits for an automatic scaling policy.
@@ -1934,6 +2065,8 @@ type ScalingConstraints struct {
 	//
 	// This member is required.
 	MinCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // A scale-in or scale-out rule that defines scaling activity, including the
@@ -1961,6 +2094,8 @@ type ScalingRule struct {
 
 	// A friendly, more verbose description of the automatic scaling rule.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // The conditions that trigger an automatic scaling activity.
@@ -1971,6 +2106,8 @@ type ScalingTrigger struct {
 	//
 	// This member is required.
 	CloudWatchAlarmDefinition *CloudWatchAlarmDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Configuration of the script to run during a bootstrap action.
@@ -1984,6 +2121,8 @@ type ScriptBootstrapActionConfig struct {
 
 	// A list of command line arguments to pass to the bootstrap action script.
 	Args []string
+
+	noSmithyDocumentSerde
 }
 
 // The creation date and time, and name, of a security configuration.
@@ -1994,6 +2133,8 @@ type SecurityConfigurationSummary struct {
 
 	// The name of the security configuration.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Details for an Amazon EMR Studio session mapping including creation time, user
@@ -2026,6 +2167,8 @@ type SessionMappingDetail struct {
 
 	// The ID of the Amazon EMR Studio.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details for an Amazon EMR Studio session mapping. The details do not include the
@@ -2056,6 +2199,8 @@ type SessionMappingSummary struct {
 
 	// The ID of the Amazon EMR Studio.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 // Policy for customizing shrink operations. Allows configuration of
@@ -2069,6 +2214,8 @@ type ShrinkPolicy struct {
 	// Custom policy for requesting termination protection or termination of specific
 	// instances when shrinking an instance group.
 	InstanceResizePolicy *InstanceResizePolicy
+
+	noSmithyDocumentSerde
 }
 
 // An automatic scaling configuration, which describes how the policy adds or
@@ -2103,6 +2250,8 @@ type SimpleScalingPolicyConfiguration struct {
 	// The amount of time, in seconds, after a scaling activity completes before any
 	// further trigger-related scaling activities can start. The default value is 0.
 	CoolDown *int32
+
+	noSmithyDocumentSerde
 }
 
 // The launch specification for Spot Instances in the instance fleet, which
@@ -2144,6 +2293,8 @@ type SpotProvisioningSpecification struct {
 	// the Spot Instance for termination and provides a Spot Instance termination
 	// notice, which gives the instance a two-minute warning before it terminates.
 	BlockDurationMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // This represents a step in a cluster.
@@ -2165,6 +2316,8 @@ type Step struct {
 
 	// The current execution status details of the cluster step.
 	Status *StepStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specification of a cluster (job flow) step.
@@ -2184,6 +2337,8 @@ type StepConfig struct {
 	// TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided
 	// for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 	ActionOnFailure ActionOnFailure
+
+	noSmithyDocumentSerde
 }
 
 // Combines the execution state and configuration of a step.
@@ -2198,6 +2353,8 @@ type StepDetail struct {
 	//
 	// This member is required.
 	StepConfig *StepConfig
+
+	noSmithyDocumentSerde
 }
 
 // The execution state of a step.
@@ -2221,6 +2378,8 @@ type StepExecutionStatusDetail struct {
 
 	// The start date and time of the step.
 	StartDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The details of the step state change reason.
@@ -2232,6 +2391,8 @@ type StepStateChangeReason struct {
 
 	// The descriptive message for the state change reason.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The execution status details of the cluster step.
@@ -2249,6 +2410,8 @@ type StepStatus struct {
 
 	// The timeline of the cluster step status over time.
 	Timeline *StepTimeline
+
+	noSmithyDocumentSerde
 }
 
 // The summary of the cluster step.
@@ -2271,6 +2434,8 @@ type StepSummary struct {
 
 	// The current execution status details of the cluster step.
 	Status *StepStatus
+
+	noSmithyDocumentSerde
 }
 
 // The timeline of the cluster step lifecycle.
@@ -2284,6 +2449,8 @@ type StepTimeline struct {
 
 	// The date and time when the cluster step execution started.
 	StartDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details for an Amazon EMR Studio including ID, creation time, name, and so on.
@@ -2339,6 +2506,8 @@ type Studio struct {
 	// The Workspace security group allows outbound network traffic to resources in the
 	// Engine security group and to the internet.
 	WorkspaceSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The
@@ -2364,6 +2533,8 @@ type StudioSummary struct {
 	// The ID of the Virtual Private Cloud (Amazon VPC) associated with the Amazon EMR
 	// Studio.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // The list of supported product configurations that allow user-supplied arguments.
@@ -2376,6 +2547,8 @@ type SupportedProductConfig struct {
 
 	// The name of the product configuration.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair containing user-defined metadata that you can associate with an
@@ -2394,6 +2567,8 @@ type Tag struct {
 	// Clusters
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // EBS volume specifications such as volume type, IOPS, and size (GiB) that will be
@@ -2413,4 +2588,8 @@ type VolumeSpecification struct {
 
 	// The number of I/O operations per second (IOPS) that the volume supports.
 	Iops *int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

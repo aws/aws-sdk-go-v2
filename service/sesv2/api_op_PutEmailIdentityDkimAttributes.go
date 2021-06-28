@@ -39,6 +39,8 @@ type PutEmailIdentityDkimAttributesInput struct {
 	// true, then the messages that are sent from the identity are signed using DKIM.
 	// If you set this value to false, your messages are sent without DKIM signing.
 	SigningEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -46,6 +48,8 @@ type PutEmailIdentityDkimAttributesInput struct {
 type PutEmailIdentityDkimAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEmailIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

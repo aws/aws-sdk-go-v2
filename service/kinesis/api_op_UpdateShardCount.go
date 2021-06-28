@@ -96,6 +96,8 @@ type UpdateShardCountInput struct {
 	//
 	// This member is required.
 	TargetShardCount *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateShardCountOutput struct {
@@ -111,6 +113,8 @@ type UpdateShardCountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateShardCountMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,12 +44,16 @@ type CreateLoadBalancerListenersInput struct {
 	//
 	// This member is required.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the parameters for CreateLoadBalancerListener.
 type CreateLoadBalancerListenersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLoadBalancerListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {

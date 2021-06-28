@@ -68,6 +68,8 @@ type StartQueryInput struct {
 	// StartQuery operation must include a logGroupNames or a logGroupName parameter,
 	// but not both.
 	LogGroupNames []string
+
+	noSmithyDocumentSerde
 }
 
 type StartQueryOutput struct {
@@ -77,6 +79,8 @@ type StartQueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

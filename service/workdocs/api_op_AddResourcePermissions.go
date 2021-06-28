@@ -47,6 +47,8 @@ type AddResourcePermissionsInput struct {
 
 	// The notification options.
 	NotificationOptions *types.NotificationOptions
+
+	noSmithyDocumentSerde
 }
 
 type AddResourcePermissionsOutput struct {
@@ -56,6 +58,8 @@ type AddResourcePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddResourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

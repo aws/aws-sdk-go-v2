@@ -41,6 +41,8 @@ type ListStreamKeysInput struct {
 	// The first stream key to retrieve. This is used for pagination; see the nextToken
 	// response field.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStreamKeysOutput struct {
@@ -56,6 +58,8 @@ type ListStreamKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

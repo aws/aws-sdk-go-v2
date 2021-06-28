@@ -60,6 +60,8 @@ type CheckoutLicenseInput struct {
 
 	// Node ID.
 	NodeId *string
+
+	noSmithyDocumentSerde
 }
 
 type CheckoutLicenseOutput struct {
@@ -87,6 +89,8 @@ type CheckoutLicenseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCheckoutLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {

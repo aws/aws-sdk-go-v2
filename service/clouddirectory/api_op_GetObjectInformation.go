@@ -41,6 +41,8 @@ type GetObjectInformationInput struct {
 
 	// The consistency level at which to retrieve the object information.
 	ConsistencyLevel types.ConsistencyLevel
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectInformationOutput struct {
@@ -55,6 +57,8 @@ type GetObjectInformationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {

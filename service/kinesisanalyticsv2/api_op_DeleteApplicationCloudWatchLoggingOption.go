@@ -55,6 +55,8 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	// support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId.
 	CurrentApplicationVersionId *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {
@@ -72,6 +74,8 @@ type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

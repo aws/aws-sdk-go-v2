@@ -113,6 +113,8 @@ type QueryInput struct {
 	// identifier, such as a GUID. Don't use personally identifiable information, such
 	// as the user's email address, as the VisitorId.
 	VisitorId *string
+
+	noSmithyDocumentSerde
 }
 
 type QueryOutput struct {
@@ -135,6 +137,8 @@ type QueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -14,6 +14,8 @@ type IdempotentParameterMismatchException struct {
 	Message *string
 
 	Code int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -37,6 +39,8 @@ type InternalServerException struct {
 	Message *string
 
 	Code int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -56,6 +60,8 @@ type InvalidInputException struct {
 	Message *string
 
 	Code int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -72,6 +78,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 type InvalidTagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagException) Error() string {
@@ -92,6 +100,8 @@ type LimitExceededException struct {
 	Message *string
 
 	Code int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -109,6 +119,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The exception is thrown when a predict request is made to an unmounted MLModel.
 type PredictorNotMountedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PredictorNotMountedException) Error() string {
@@ -128,6 +140,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	Code int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -144,6 +158,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 
 type TagLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagLimitExceededException) Error() string {

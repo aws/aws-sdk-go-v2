@@ -36,6 +36,8 @@ type GetAccessTokenInput struct {
 
 	// Token properties to validate against those present in the JWT token.
 	TokenProperties []string
+
+	noSmithyDocumentSerde
 }
 
 type GetAccessTokenOutput struct {
@@ -45,6 +47,8 @@ type GetAccessTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

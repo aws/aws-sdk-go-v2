@@ -43,6 +43,8 @@ type RenewOfferingInput struct {
 	//
 	// This member is required.
 	Quantity *int32
+
+	noSmithyDocumentSerde
 }
 
 // The result of a renewal offering.
@@ -53,6 +55,8 @@ type RenewOfferingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRenewOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {

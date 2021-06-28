@@ -33,6 +33,8 @@ type GetArtifactUrlInput struct {
 	//
 	// This member is required.
 	ArtifactId *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the result structure for the get artifact request.
@@ -50,6 +52,8 @@ type GetArtifactUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetArtifactUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

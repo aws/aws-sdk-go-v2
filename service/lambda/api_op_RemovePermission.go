@@ -59,11 +59,15 @@ type RemovePermissionInput struct {
 	// Only update the policy if the revision ID matches the ID that's specified. Use
 	// this option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type RemovePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemovePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

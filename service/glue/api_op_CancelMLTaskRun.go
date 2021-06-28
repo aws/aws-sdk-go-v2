@@ -41,6 +41,8 @@ type CancelMLTaskRunInput struct {
 	//
 	// This member is required.
 	TransformId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelMLTaskRunOutput struct {
@@ -56,6 +58,8 @@ type CancelMLTaskRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelMLTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

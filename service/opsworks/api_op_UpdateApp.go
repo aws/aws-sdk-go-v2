@@ -79,11 +79,15 @@ type UpdateAppInput struct {
 
 	// The app type.
 	Type types.AppType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

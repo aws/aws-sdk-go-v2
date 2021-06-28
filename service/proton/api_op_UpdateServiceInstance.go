@@ -80,6 +80,8 @@ type UpdateServiceInstanceInput struct {
 
 	// The minor version of the service template to update.
 	TemplateMinorVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceInstanceOutput struct {
@@ -91,6 +93,8 @@ type UpdateServiceInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

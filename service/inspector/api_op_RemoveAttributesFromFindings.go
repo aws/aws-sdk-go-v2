@@ -40,6 +40,8 @@ type RemoveAttributesFromFindingsInput struct {
 	//
 	// This member is required.
 	FindingArns []string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveAttributesFromFindingsOutput struct {
@@ -52,6 +54,8 @@ type RemoveAttributesFromFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveAttributesFromFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

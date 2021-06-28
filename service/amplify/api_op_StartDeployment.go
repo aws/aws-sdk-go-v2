@@ -48,6 +48,8 @@ type StartDeploymentInput struct {
 	// create deployment. The source URL can be any HTTP GET URL that is publicly
 	// accessible and downloads a single .zip file.
 	SourceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the start a deployment request.
@@ -60,6 +62,8 @@ type StartDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

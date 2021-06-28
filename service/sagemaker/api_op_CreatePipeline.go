@@ -60,6 +60,8 @@ type CreatePipelineInput struct {
 
 	// A list of tags to apply to the created pipeline.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePipelineOutput struct {
@@ -69,6 +71,8 @@ type CreatePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

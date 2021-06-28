@@ -47,11 +47,15 @@ type UpdatePipelineInput struct {
 	//
 	// This member is required.
 	PipelineName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

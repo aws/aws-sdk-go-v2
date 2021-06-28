@@ -123,11 +123,15 @@ type PutComplianceItemsInput struct {
 	// to MANUAL. By default, all requests use COMPLETE mode. This attribute is only
 	// valid for association compliance.
 	UploadType types.ComplianceUploadType
+
+	noSmithyDocumentSerde
 }
 
 type PutComplianceItemsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutComplianceItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

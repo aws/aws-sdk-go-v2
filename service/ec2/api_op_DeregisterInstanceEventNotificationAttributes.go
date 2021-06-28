@@ -38,6 +38,8 @@ type DeregisterInstanceEventNotificationAttributesInput struct {
 
 	// Information about the tag keys to deregister.
 	InstanceTagAttribute *types.DeregisterInstanceTagAttributeRequest
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterInstanceEventNotificationAttributesOutput struct {
@@ -47,6 +49,8 @@ type DeregisterInstanceEventNotificationAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterInstanceEventNotificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

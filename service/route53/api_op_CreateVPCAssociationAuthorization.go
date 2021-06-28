@@ -51,6 +51,8 @@ type CreateVPCAssociationAuthorizationInput struct {
 	//
 	// This member is required.
 	VPC *types.VPC
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information from a
@@ -69,6 +71,8 @@ type CreateVPCAssociationAuthorizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVPCAssociationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

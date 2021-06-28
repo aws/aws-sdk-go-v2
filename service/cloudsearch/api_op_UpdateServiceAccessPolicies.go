@@ -47,6 +47,8 @@ type UpdateServiceAccessPoliciesInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of an UpdateServiceAccessPolicies request. Contains the new access
@@ -60,6 +62,8 @@ type UpdateServiceAccessPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

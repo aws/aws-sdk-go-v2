@@ -63,12 +63,16 @@ type SetIdentityMailFromDomainInput struct {
 	// not be used to receive emails. A value of null disables the custom MAIL FROM
 	// setting for the identity.
 	MailFromDomain *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type SetIdentityMailFromDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetIdentityMailFromDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

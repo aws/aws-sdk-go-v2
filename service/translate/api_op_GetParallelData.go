@@ -33,6 +33,8 @@ type GetParallelDataInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetParallelDataOutput struct {
@@ -59,6 +61,8 @@ type GetParallelDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

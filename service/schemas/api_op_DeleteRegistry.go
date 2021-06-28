@@ -32,11 +32,15 @@ type DeleteRegistryInput struct {
 	//
 	// This member is required.
 	RegistryName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRegistryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {

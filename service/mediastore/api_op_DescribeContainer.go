@@ -36,6 +36,8 @@ type DescribeContainerInput struct {
 
 	// The name of the container to query.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeContainerOutput struct {
@@ -45,6 +47,8 @@ type DescribeContainerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeContainerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -29,6 +29,8 @@ func (c *Client) BodyWithXmlName(ctx context.Context, params *BodyWithXmlNameInp
 
 type BodyWithXmlNameInput struct {
 	Nested *types.PayloadWithXmlName
+
+	noSmithyDocumentSerde
 }
 
 type BodyWithXmlNameOutput struct {
@@ -36,6 +38,8 @@ type BodyWithXmlNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBodyWithXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,11 +55,15 @@ type AssociateQualificationWithWorkerInput struct {
 	// Specifies whether to send a notification email message to the Worker saying that
 	// the qualification was assigned to the Worker. Note: this is true by default.
 	SendNotification *bool
+
+	noSmithyDocumentSerde
 }
 
 type AssociateQualificationWithWorkerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateQualificationWithWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {

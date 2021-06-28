@@ -39,6 +39,8 @@ type ListResourcesInput struct {
 
 	// A continuation token, if this is not the first call to retrieve these resources.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourcesOutput struct {
@@ -51,6 +53,8 @@ type ListResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

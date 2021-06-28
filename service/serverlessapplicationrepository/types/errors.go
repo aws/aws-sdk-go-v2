@@ -12,6 +12,8 @@ type BadRequestException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -31,6 +33,8 @@ type ConflictException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -50,6 +54,8 @@ type ForbiddenException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -69,6 +75,8 @@ type InternalServerErrorException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -89,6 +97,8 @@ type NotFoundException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -108,6 +118,8 @@ type TooManyRequestsException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

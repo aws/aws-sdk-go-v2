@@ -11,6 +11,8 @@ import (
 // does not have the appropriate permissions to access the AttackId.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -32,6 +34,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
 type AccessDeniedForDependencyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedForDependencyException) Error() string {
@@ -54,6 +58,8 @@ func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 // infrastructure. You can retry the request.
 type InternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalErrorException) Error() string {
@@ -71,6 +77,8 @@ func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 // Exception that indicates that the operation would not cause any change to occur.
 type InvalidOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOperationException) Error() string {
@@ -89,6 +97,8 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 // Submit the request using the NextToken value that was returned in the response.
 type InvalidPaginationTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPaginationTokenException) Error() string {
@@ -112,6 +122,8 @@ type InvalidParameterException struct {
 
 	Reason ValidationExceptionReason
 	Fields []ValidationExceptionField
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -130,6 +142,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // to the resource, or the resource might not exist.
 type InvalidResourceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceException) Error() string {
@@ -150,6 +164,8 @@ type LimitsExceededException struct {
 
 	Type  *string
 	Limit int64
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitsExceededException) Error() string {
@@ -170,6 +186,8 @@ func (e *LimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy
 // AutoRenew prior to that period.
 type LockedSubscriptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LockedSubscriptionException) Error() string {
@@ -187,6 +205,8 @@ func (e *LockedSubscriptionException) ErrorFault() smithy.ErrorFault { return sm
 // The ARN of the role that you specifed does not exist.
 type NoAssociatedRoleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoAssociatedRoleException) Error() string {
@@ -205,6 +225,8 @@ func (e *NoAssociatedRoleException) ErrorFault() smithy.ErrorFault { return smit
 // client. Retrieve the resource and then retry your request.
 type OptimisticLockException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OptimisticLockException) Error() string {
@@ -225,6 +247,8 @@ type ResourceAlreadyExistsException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -245,6 +269,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

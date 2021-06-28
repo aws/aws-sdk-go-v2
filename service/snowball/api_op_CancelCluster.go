@@ -35,11 +35,15 @@ type CancelClusterInput struct {
 	//
 	// This member is required.
 	ClusterId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

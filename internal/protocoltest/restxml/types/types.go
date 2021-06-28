@@ -2,56 +2,80 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 type ComplexNestedErrorData struct {
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type NestedPayload struct {
 	Greeting *string
 
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type PayloadWithXmlName struct {
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type PayloadWithXmlNamespace struct {
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type PayloadWithXmlNamespaceAndPrefix struct {
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type RecursiveShapesInputOutputNested1 struct {
 	Foo *string
 
 	Nested *RecursiveShapesInputOutputNested2
+
+	noSmithyDocumentSerde
 }
 
 type RecursiveShapesInputOutputNested2 struct {
 	Bar *string
 
 	RecursiveMember *RecursiveShapesInputOutputNested1
+
+	noSmithyDocumentSerde
 }
 
 type StructureListMember struct {
 	A *string
 
 	B *string
+
+	noSmithyDocumentSerde
 }
 
 type XmlAttributesInputOutput struct {
 	Attr *string
 
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type XmlNamespaceNested struct {
 	Foo *string
 
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 type XmlNestedUnionStruct struct {
@@ -70,6 +94,8 @@ type XmlNestedUnionStruct struct {
 	ShortValue *int16
 
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The following types satisfy this interface:
@@ -89,73 +115,99 @@ type XmlUnionShape interface {
 
 type XmlUnionShapeMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberStringValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberBooleanValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberBooleanValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberByteValue struct {
 	Value int8
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberByteValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberShortValue struct {
 	Value int16
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberShortValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberIntegerValue struct {
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberIntegerValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberLongValue struct {
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberLongValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberFloatValue struct {
 	Value float32
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberFloatValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberDoubleValue struct {
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberDoubleValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberUnionValue struct {
 	Value XmlUnionShape
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberUnionValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberStructValue struct {
 	Value XmlNestedUnionStruct
+
+	noSmithyDocumentSerde
 }
 
 func (*XmlUnionShapeMemberStructValue) isXmlUnionShape() {}
 
 type GreetingStruct struct {
 	Hi *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isXmlUnionShape() {}

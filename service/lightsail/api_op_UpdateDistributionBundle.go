@@ -46,6 +46,8 @@ type UpdateDistributionBundleInput struct {
 	// GetDistributions action to get a list of distribution names that you can
 	// specify.
 	DistributionName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDistributionBundleOutput struct {
@@ -55,6 +57,8 @@ type UpdateDistributionBundleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDistributionBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {

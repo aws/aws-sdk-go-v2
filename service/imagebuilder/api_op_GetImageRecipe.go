@@ -33,6 +33,8 @@ type GetImageRecipeInput struct {
 	//
 	// This member is required.
 	ImageRecipeArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetImageRecipeOutput struct {
@@ -45,6 +47,8 @@ type GetImageRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

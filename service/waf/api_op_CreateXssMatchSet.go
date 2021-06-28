@@ -68,6 +68,8 @@ type CreateXssMatchSetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a CreateXssMatchSet request.
@@ -83,6 +85,8 @@ type CreateXssMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

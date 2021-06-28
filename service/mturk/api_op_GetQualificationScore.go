@@ -42,6 +42,8 @@ type GetQualificationScoreInput struct {
 	//
 	// This member is required.
 	WorkerId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetQualificationScoreOutput struct {
@@ -52,6 +54,8 @@ type GetQualificationScoreOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetQualificationScoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

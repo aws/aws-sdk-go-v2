@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type AssetSummary struct {
 
 	// The size of the asset.
 	Size *int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a domain. A domain is a container for repositories. When you
@@ -56,6 +59,8 @@ type DomainDescription struct {
 	//
 	// * Deleted
 	Status DomainStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about a domain, including its name, Amazon Resource Name (ARN), and
@@ -87,6 +92,8 @@ type DomainSummary struct {
 	//
 	// * Deleted
 	Status DomainStatus
+
+	noSmithyDocumentSerde
 }
 
 // Details of the license data.
@@ -97,6 +104,8 @@ type LicenseInfo struct {
 
 	// The URL for license data.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a package dependency.
@@ -127,6 +136,8 @@ type PackageDependency struct {
 	// on. The version format is specific to the package type. For example, the
 	// following are possible valid required versions: 1.2.3, ^2.3.4, or 4.x.
 	VersionRequirement *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a package, including its format, namespace, and name. The
@@ -159,6 +170,8 @@ type PackageSummary struct {
 
 	// The name of the package.
 	Package *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a package version.
@@ -234,6 +247,8 @@ type PackageVersionDescription struct {
 
 	// The version of the package.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // An error associated with package.
@@ -258,6 +273,8 @@ type PackageVersionError struct {
 
 	// The error message associated with the error.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a package version, including its status, version, and revision.
@@ -289,6 +306,8 @@ type PackageVersionSummary struct {
 
 	// The revision associated with a package version.
 	Revision *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a repository stored in AWS CodeArtifact. A CodeArtifact
@@ -327,6 +346,8 @@ type RepositoryDescription struct {
 	// Working with upstream repositories
 	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
 	Upstreams []UpstreamRepositoryInfo
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the external connection of a repository.
@@ -350,6 +371,8 @@ type RepositoryExternalConnectionInfo struct {
 	// The status of the external connection of a repository. There is one valid value,
 	// Available.
 	Status ExternalConnectionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Details about a repository, including its Amazon Resource Name (ARN),
@@ -376,6 +399,8 @@ type RepositorySummary struct {
 
 	// The name of the repository.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An AWS CodeArtifact resource policy that contains a resource ARN, document
@@ -390,6 +415,8 @@ type ResourcePolicy struct {
 
 	// The current revision of the resource policy.
 	Revision *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the revision and status of a package version.
@@ -411,6 +438,8 @@ type SuccessfulPackageVersionInfo struct {
 	//
 	// * Disposed
 	Status PackageVersionStatus
+
+	noSmithyDocumentSerde
 }
 
 // A tag is a key-value pair that can be used to manage, search for, or filter
@@ -426,6 +455,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an upstream repository. A list of UpstreamRepository objects
@@ -439,6 +470,8 @@ type UpstreamRepository struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an upstream repository.
@@ -446,4 +479,8 @@ type UpstreamRepositoryInfo struct {
 
 	// The name of an upstream repository.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

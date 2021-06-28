@@ -48,6 +48,8 @@ type BatchCreateChannelMembershipInput struct {
 	// the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden
 	// members are not returned. This is only supported by moderators.
 	Type types.ChannelMembershipType
+
+	noSmithyDocumentSerde
 }
 
 type BatchCreateChannelMembershipOutput struct {
@@ -61,6 +63,8 @@ type BatchCreateChannelMembershipOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchCreateChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

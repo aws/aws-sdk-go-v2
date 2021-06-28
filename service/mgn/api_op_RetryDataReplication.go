@@ -36,6 +36,8 @@ type RetryDataReplicationInput struct {
 	//
 	// This member is required.
 	SourceServerID *string
+
+	noSmithyDocumentSerde
 }
 
 type RetryDataReplicationOutput struct {
@@ -66,6 +68,8 @@ type RetryDataReplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRetryDataReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

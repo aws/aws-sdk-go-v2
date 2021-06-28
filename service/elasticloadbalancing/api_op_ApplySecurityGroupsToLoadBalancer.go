@@ -44,6 +44,8 @@ type ApplySecurityGroupsToLoadBalancerInput struct {
 	//
 	// This member is required.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of ApplySecurityGroupsToLoadBalancer.
@@ -54,6 +56,8 @@ type ApplySecurityGroupsToLoadBalancerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationApplySecurityGroupsToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

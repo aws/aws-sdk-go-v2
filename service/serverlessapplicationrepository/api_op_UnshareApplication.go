@@ -38,11 +38,15 @@ type UnshareApplicationInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type UnshareApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnshareApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type BeginTransactionInput struct {
 
 	// The name of the database schema.
 	Schema *string
+
+	noSmithyDocumentSerde
 }
 
 // The response elements represent the output of a request to start a SQL
@@ -62,6 +64,8 @@ type BeginTransactionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBeginTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {

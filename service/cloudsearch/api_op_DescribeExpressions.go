@@ -52,6 +52,8 @@ type DescribeExpressionsInput struct {
 	// Limits the DescribeExpressions response to the specified expressions. If not
 	// specified, all expressions are shown.
 	ExpressionNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeExpressions request. Contains the expressions configured
@@ -65,6 +67,8 @@ type DescribeExpressionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeExpressionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

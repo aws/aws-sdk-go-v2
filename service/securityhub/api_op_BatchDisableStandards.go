@@ -36,6 +36,8 @@ type BatchDisableStandardsInput struct {
 	//
 	// This member is required.
 	StandardsSubscriptionArns []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDisableStandardsOutput struct {
@@ -45,6 +47,8 @@ type BatchDisableStandardsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDisableStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {

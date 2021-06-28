@@ -52,6 +52,8 @@ type ModifyClusterMaintenanceInput struct {
 
 	// A timestamp indicating the start time for the deferred maintenance window.
 	DeferMaintenanceStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterMaintenanceOutput struct {
@@ -61,6 +63,8 @@ type ModifyClusterMaintenanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterMaintenanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

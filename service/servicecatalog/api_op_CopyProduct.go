@@ -68,6 +68,8 @@ type CopyProductInput struct {
 
 	// A name for the target product. The default is the name of the source product.
 	TargetProductName *string
+
+	noSmithyDocumentSerde
 }
 
 type CopyProductOutput struct {
@@ -77,6 +79,8 @@ type CopyProductOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

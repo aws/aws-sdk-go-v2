@@ -30,6 +30,7 @@ func (c *Client) DescribeAccountAuditConfiguration(ctx context.Context, params *
 }
 
 type DescribeAccountAuditConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountAuditConfigurationOutput struct {
@@ -49,6 +50,8 @@ type DescribeAccountAuditConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountAuditConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

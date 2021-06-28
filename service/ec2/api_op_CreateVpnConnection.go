@@ -71,6 +71,8 @@ type CreateVpnConnectionInput struct {
 	// The ID of the virtual private gateway. If you specify a virtual private gateway,
 	// you cannot specify a transit gateway.
 	VpnGatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateVpnConnection.
@@ -81,6 +83,8 @@ type CreateVpnConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpnConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

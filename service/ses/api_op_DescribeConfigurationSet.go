@@ -43,6 +43,8 @@ type DescribeConfigurationSetInput struct {
 
 	// A list of configuration set attributes to return.
 	ConfigurationSetAttributeNames []types.ConfigurationSetAttribute
+
+	noSmithyDocumentSerde
 }
 
 // Represents the details of a configuration set. Configuration sets enable you to
@@ -70,6 +72,8 @@ type DescribeConfigurationSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

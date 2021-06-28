@@ -40,11 +40,15 @@ type CreateLogSubscriptionInput struct {
 	//
 	// This member is required.
 	LogGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLogSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLogSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

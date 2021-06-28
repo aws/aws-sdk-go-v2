@@ -32,6 +32,8 @@ type TestWirelessDeviceInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type TestWirelessDeviceOutput struct {
@@ -41,6 +43,8 @@ type TestWirelessDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

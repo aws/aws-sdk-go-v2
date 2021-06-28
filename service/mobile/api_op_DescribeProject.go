@@ -39,6 +39,8 @@ type DescribeProjectInput struct {
 	// services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub
 	// project.
 	SyncFromResources bool
+
+	noSmithyDocumentSerde
 }
 
 // Result structure used for requests of project details.
@@ -49,6 +51,8 @@ type DescribeProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

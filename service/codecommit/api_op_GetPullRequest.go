@@ -34,6 +34,8 @@ type GetPullRequestInput struct {
 	//
 	// This member is required.
 	PullRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPullRequestOutput struct {
@@ -45,6 +47,8 @@ type GetPullRequestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {

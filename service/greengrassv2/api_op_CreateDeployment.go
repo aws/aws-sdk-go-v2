@@ -73,6 +73,8 @@ type CreateDeploymentInput struct {
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
 	// the AWS IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeploymentOutput struct {
@@ -90,6 +92,8 @@ type CreateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

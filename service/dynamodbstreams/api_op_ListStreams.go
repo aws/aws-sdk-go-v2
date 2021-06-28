@@ -44,6 +44,8 @@ type ListStreamsInput struct {
 	// If this parameter is provided, then only the streams associated with this table
 	// name are returned.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListStreams operation.
@@ -63,6 +65,8 @@ type ListStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

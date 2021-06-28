@@ -35,6 +35,8 @@ type GetAppInstanceRetentionSettingsInput struct {
 	//
 	// This member is required.
 	AppInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAppInstanceRetentionSettingsOutput struct {
@@ -48,6 +50,8 @@ type GetAppInstanceRetentionSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAppInstanceRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

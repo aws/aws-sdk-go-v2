@@ -46,6 +46,8 @@ type GetFolderInput struct {
 	// ID, branch name, tag, or reference such as HEAD. If no specifier is provided,
 	// the folder content is returned as it exists in the HEAD commit.
 	CommitSpecifier *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFolderOutput struct {
@@ -80,6 +82,8 @@ type GetFolderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type ListUserPoolClientsInput struct {
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server that lists user pool clients.
@@ -57,6 +59,8 @@ type ListUserPoolClientsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUserPoolClientsMiddlewares(stack *middleware.Stack, options Options) (err error) {

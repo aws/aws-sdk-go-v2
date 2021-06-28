@@ -37,6 +37,8 @@ type ListMissionProfilesInput struct {
 	// Next token returned in the request of a previous ListMissionProfiles call. Used
 	// to get the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -51,6 +53,8 @@ type ListMissionProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMissionProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

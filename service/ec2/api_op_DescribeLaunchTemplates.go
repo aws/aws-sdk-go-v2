@@ -67,6 +67,8 @@ type DescribeLaunchTemplatesInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLaunchTemplatesOutput struct {
@@ -80,6 +82,8 @@ type DescribeLaunchTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLaunchTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

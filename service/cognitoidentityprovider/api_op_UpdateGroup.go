@@ -52,6 +52,8 @@ type UpdateGroupInput struct {
 	// The new role ARN for the group. This is used for setting the cognito:roles and
 	// cognito:preferred_role claims in the token.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGroupOutput struct {
@@ -61,6 +63,8 @@ type UpdateGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

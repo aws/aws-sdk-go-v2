@@ -54,6 +54,8 @@ type DescribeFileSystemAliasesInput struct {
 	// operation (String). If a token is included in the request, the action continues
 	// the list from where the previous returning call left off.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The response object for DescribeFileSystemAliases operation.
@@ -70,6 +72,8 @@ type DescribeFileSystemAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

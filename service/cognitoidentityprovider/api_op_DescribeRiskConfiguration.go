@@ -36,6 +36,8 @@ type DescribeRiskConfigurationInput struct {
 
 	// The app client ID.
 	ClientId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRiskConfigurationOutput struct {
@@ -47,6 +49,8 @@ type DescribeRiskConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRiskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

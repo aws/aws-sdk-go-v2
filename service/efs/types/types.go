@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -41,6 +42,8 @@ type AccessPointDescription struct {
 
 	// The tags associated with the access point, presented as an array of Tag objects.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // The backup policy for the file system used to create automatic daily backups. If
@@ -65,6 +68,8 @@ type BackupPolicy struct {
 	//
 	// This member is required.
 	Status Status
+
+	noSmithyDocumentSerde
 }
 
 // Required if the RootDirectory > Path specified does not exist. Specifies the
@@ -97,6 +102,8 @@ type CreationInfo struct {
 	//
 	// This member is required.
 	Permissions *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of the file system.
@@ -198,6 +205,8 @@ type FileSystemDescription struct {
 	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes) in
 	// the Amazon EFS User Guide.
 	ThroughputMode ThroughputMode
+
+	noSmithyDocumentSerde
 }
 
 // The latest known metered size (in bytes) of data stored in the file system, in
@@ -225,6 +234,8 @@ type FileSystemSize struct {
 	// The latest known metered size (in bytes) of data stored in the Standard storage
 	// class.
 	ValueInStandard *int64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a policy used by EFS lifecycle management to transition files to the
@@ -235,6 +246,8 @@ type LifecyclePolicy struct {
 	// which it transitions to the IA storage class. Metadata operations such as
 	// listing the contents of a directory don't count as file access events.
 	TransitionToIA TransitionToIARules
+
+	noSmithyDocumentSerde
 }
 
 // Provides a description of a mount target.
@@ -283,6 +296,8 @@ type MountTargetDescription struct {
 
 	// The virtual private cloud (VPC) ID that the mount target is configured in.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // The full POSIX identity, including the user ID, group ID, and any secondary
@@ -303,6 +318,8 @@ type PosixUser struct {
 	// Secondary POSIX group IDs used for all file system operations using this access
 	// point.
 	SecondaryGids []int64
+
+	noSmithyDocumentSerde
 }
 
 type ResourceIdPreference struct {
@@ -313,6 +330,8 @@ type ResourceIdPreference struct {
 
 	// EFS resources to which a preference applies to.
 	Resources []Resource
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the directory on the Amazon EFS file system that the access point
@@ -336,6 +355,8 @@ type RootDirectory struct {
 	// to four subdirectories. If the specified path does not exist, you are required
 	// to provide the CreationInfo.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag is a key-value pair. Allowed characters are letters, white space, and
@@ -352,4 +373,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -49,6 +49,8 @@ type GetBotAliasesInput struct {
 	// To fetch the next page of aliases, specify the pagination token in the next
 	// request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBotAliasesOutput struct {
@@ -64,6 +66,8 @@ type GetBotAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

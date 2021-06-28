@@ -35,11 +35,15 @@ type DeleteReplicationJobInput struct {
 	//
 	// This member is required.
 	ReplicationJobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteReplicationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReplicationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

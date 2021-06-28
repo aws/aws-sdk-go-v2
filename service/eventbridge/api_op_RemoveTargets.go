@@ -55,6 +55,8 @@ type RemoveTargetsInput struct {
 	// using DescribeRule or ListRules and checking the ManagedBy field of the
 	// response.
 	Force bool
+
+	noSmithyDocumentSerde
 }
 
 type RemoveTargetsOutput struct {
@@ -67,6 +69,8 @@ type RemoveTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

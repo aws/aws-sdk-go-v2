@@ -81,6 +81,8 @@ type CreateConfigurationProfileInput struct {
 
 	// A list of methods for validating the configuration.
 	Validators []types.Validator
+
+	noSmithyDocumentSerde
 }
 
 type CreateConfigurationProfileOutput struct {
@@ -109,6 +111,8 @@ type CreateConfigurationProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

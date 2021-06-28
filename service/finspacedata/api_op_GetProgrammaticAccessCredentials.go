@@ -36,6 +36,8 @@ type GetProgrammaticAccessCredentialsInput struct {
 
 	// The time duration in which the credentials remain valid.
 	DurationInMinutes int64
+
+	noSmithyDocumentSerde
 }
 
 type GetProgrammaticAccessCredentialsOutput struct {
@@ -48,6 +50,8 @@ type GetProgrammaticAccessCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProgrammaticAccessCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

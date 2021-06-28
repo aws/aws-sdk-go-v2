@@ -36,6 +36,8 @@ type StartElasticsearchServiceSoftwareUpdateInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains the
@@ -47,6 +49,8 @@ type StartElasticsearchServiceSoftwareUpdateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartElasticsearchServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type UpdateFlowInput struct {
 
 	// The settings for source failover
 	SourceFailoverConfig *types.UpdateFailoverConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFlowOutput struct {
@@ -46,6 +48,8 @@ type UpdateFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

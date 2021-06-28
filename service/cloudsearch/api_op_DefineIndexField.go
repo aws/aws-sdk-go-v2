@@ -51,6 +51,8 @@ type DefineIndexFieldInput struct {
 	//
 	// This member is required.
 	IndexField *types.IndexField
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DefineIndexField request. Contains the status of the
@@ -64,6 +66,8 @@ type DefineIndexFieldOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDefineIndexFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {

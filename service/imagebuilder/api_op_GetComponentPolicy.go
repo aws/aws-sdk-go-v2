@@ -33,6 +33,8 @@ type GetComponentPolicyInput struct {
 	//
 	// This member is required.
 	ComponentArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetComponentPolicyOutput struct {
@@ -45,6 +47,8 @@ type GetComponentPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetComponentPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

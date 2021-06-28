@@ -40,6 +40,8 @@ type GetDomainDeliverabilityCampaignInput struct {
 	//
 	// This member is required.
 	CampaignId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains all the deliverability data for a specific campaign.
@@ -54,6 +56,8 @@ type GetDomainDeliverabilityCampaignOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDomainDeliverabilityCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {

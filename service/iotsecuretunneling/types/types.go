@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -15,6 +16,8 @@ type ConnectionState struct {
 	// The connection status of the tunnel. Valid values are CONNECTED and
 	// DISCONNECTED.
 	Status ConnectionStatus
+
+	noSmithyDocumentSerde
 }
 
 // The destination configuration.
@@ -30,6 +33,8 @@ type DestinationConfig struct {
 
 	// The name of the IoT thing to which you want to connect.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // An arbitary key/value pair used to add searchable metadata to secure tunnel
@@ -45,6 +50,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Tunnel timeout configuration.
@@ -54,6 +61,8 @@ type TimeoutConfig struct {
 	// specified, maxLifetimeTimeoutMinutes defaults to 720 minutes. Valid values are
 	// from 1 minute to 12 hours (720 minutes)
 	MaxLifetimeTimeoutMinutes int32
+
+	noSmithyDocumentSerde
 }
 
 // A connection between a source computer and a destination device.
@@ -94,6 +103,8 @@ type Tunnel struct {
 
 	// A unique alpha-numeric ID that identifies a tunnel.
 	TunnelId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the tunnel.
@@ -117,4 +128,8 @@ type TunnelSummary struct {
 
 	// The unique alpha-numeric identifier for the tunnel.
 	TunnelId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

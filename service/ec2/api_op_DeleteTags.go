@@ -52,11 +52,15 @@ type DeleteTagsInput struct {
 	// If you omit this parameter, we delete all user-defined tags for the specified
 	// resources. We do not delete AWS-generated tags (tags that have the aws: prefix).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

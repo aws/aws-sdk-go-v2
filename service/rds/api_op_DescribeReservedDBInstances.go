@@ -80,6 +80,8 @@ type DescribeReservedDBInstancesInput struct {
 	// The offering identifier filter value. Specify this parameter to show only
 	// purchased reservations matching the specified offering identifier.
 	ReservedDBInstancesOfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of a successful invocation of the
@@ -96,6 +98,8 @@ type DescribeReservedDBInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedDBInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

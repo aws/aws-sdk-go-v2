@@ -67,6 +67,8 @@ type PutQueryDefinitionInput struct {
 	// definition, do not specify this parameter. CloudWatch generates a unique ID for
 	// the new query definition and include it in the response to this operation.
 	QueryDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutQueryDefinitionOutput struct {
@@ -76,6 +78,8 @@ type PutQueryDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

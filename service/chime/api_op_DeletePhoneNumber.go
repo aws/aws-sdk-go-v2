@@ -35,11 +35,15 @@ type DeletePhoneNumberInput struct {
 	//
 	// This member is required.
 	PhoneNumberId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

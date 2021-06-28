@@ -47,6 +47,8 @@ type PutCodeBindingInput struct {
 
 	// Specifying this limits the results to only this schema version.
 	SchemaVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type PutCodeBindingOutput struct {
@@ -65,6 +67,8 @@ type PutCodeBindingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutCodeBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {

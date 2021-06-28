@@ -36,11 +36,15 @@ type UpdateDevicePolicyConfigurationInput struct {
 	// The certificate chain, including intermediate certificates and the root
 	// certificate authority certificate used to issue device certificates.
 	DeviceCaCertificate *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDevicePolicyConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDevicePolicyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

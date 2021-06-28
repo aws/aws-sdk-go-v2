@@ -38,6 +38,8 @@ type CancelJobRunInput struct {
 	//
 	// This member is required.
 	VirtualClusterId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelJobRunOutput struct {
@@ -50,6 +52,8 @@ type CancelJobRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

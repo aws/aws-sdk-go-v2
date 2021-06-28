@@ -27,11 +27,14 @@ func (c *Client) DeleteUsageReportSubscription(ctx context.Context, params *Dele
 }
 
 type DeleteUsageReportSubscriptionInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeleteUsageReportSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUsageReportSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

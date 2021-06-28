@@ -116,11 +116,15 @@ type PutLifecycleHookInput struct {
 	// queue. Required for new lifecycle hooks, but optional when updating existing
 	// hooks.
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 type PutLifecycleHookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutLifecycleHookMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type DescribeNodegroupInput struct {
 	//
 	// This member is required.
 	NodegroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNodegroupOutput struct {
@@ -53,6 +55,8 @@ type DescribeNodegroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

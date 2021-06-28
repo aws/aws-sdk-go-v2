@@ -41,11 +41,15 @@ type DeleteSMSSandboxPhoneNumberInput struct {
 	//
 	// This member is required.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSMSSandboxPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

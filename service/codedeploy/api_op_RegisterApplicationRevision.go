@@ -44,11 +44,15 @@ type RegisterApplicationRevisionInput struct {
 
 	// A comment about the revision.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterApplicationRevisionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterApplicationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

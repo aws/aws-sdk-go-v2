@@ -50,6 +50,8 @@ type GetIntentVersionsInput struct {
 	// response. To fetch the next page of versions, specify the pagination token in
 	// the next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIntentVersionsOutput struct {
@@ -66,6 +68,8 @@ type GetIntentVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIntentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

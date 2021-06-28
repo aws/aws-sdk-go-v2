@@ -44,11 +44,15 @@ type UpdateQueueHoursOfOperationInput struct {
 	//
 	// This member is required.
 	QueueId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQueueHoursOfOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQueueHoursOfOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {

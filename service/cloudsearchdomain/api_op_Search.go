@@ -352,6 +352,8 @@ type SearchInput struct {
 	// are specified in JSON using the form: {"FIELD-A":{},"FIELD-B":{}} There are
 	// currently no options supported for statistics.
 	Stats *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a Search request. Contains the documents that match the specified
@@ -372,6 +374,8 @@ type SearchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {

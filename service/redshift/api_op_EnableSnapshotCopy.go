@@ -60,6 +60,8 @@ type EnableSnapshotCopyInput struct {
 	// The name of the snapshot copy grant to use when snapshots of an Amazon Web
 	// Services KMS-encrypted cluster are copied to the destination region.
 	SnapshotCopyGrantName *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableSnapshotCopyOutput struct {
@@ -69,6 +71,8 @@ type EnableSnapshotCopyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableSnapshotCopyMiddlewares(stack *middleware.Stack, options Options) (err error) {

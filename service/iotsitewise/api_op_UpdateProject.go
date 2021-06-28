@@ -46,11 +46,15 @@ type UpdateProjectInput struct {
 
 	// A new description for the project.
 	ProjectDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

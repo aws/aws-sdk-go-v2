@@ -52,6 +52,8 @@ type CreateTransitVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	NewTransitVirtualInterface *types.NewTransitVirtualInterface
+
+	noSmithyDocumentSerde
 }
 
 type CreateTransitVirtualInterfaceOutput struct {
@@ -61,6 +63,8 @@ type CreateTransitVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type AcceptSharedDirectoryInput struct {
 	//
 	// This member is required.
 	SharedDirectoryId *string
+
+	noSmithyDocumentSerde
 }
 
 type AcceptSharedDirectoryOutput struct {
@@ -44,6 +46,8 @@ type AcceptSharedDirectoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptSharedDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

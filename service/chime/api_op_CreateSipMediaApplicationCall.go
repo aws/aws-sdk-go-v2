@@ -45,6 +45,8 @@ type CreateSipMediaApplicationCallInput struct {
 	//
 	// This member is required.
 	ToPhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSipMediaApplicationCallOutput struct {
@@ -54,6 +56,8 @@ type CreateSipMediaApplicationCallOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSipMediaApplicationCallMiddlewares(stack *middleware.Stack, options Options) (err error) {

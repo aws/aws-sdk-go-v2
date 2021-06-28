@@ -73,6 +73,8 @@ type UpdateFleetAttributesInput struct {
 	// Policy settings that limit the number of game sessions an individual player can
 	// create over a span of time.
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -83,6 +85,8 @@ type UpdateFleetAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFleetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

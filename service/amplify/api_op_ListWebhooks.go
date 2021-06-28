@@ -42,6 +42,8 @@ type ListWebhooksInput struct {
 	// non-null,the pagination token is returned in a result. Pass its value in here to
 	// list more webhooks.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the list webhooks request.
@@ -58,6 +60,8 @@ type ListWebhooksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWebhooksMiddlewares(stack *middleware.Stack, options Options) (err error) {

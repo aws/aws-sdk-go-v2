@@ -82,6 +82,8 @@ type GetSampledRequestsInput struct {
 	//
 	// This member is required.
 	WebAclArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSampledRequestsOutput struct {
@@ -105,6 +107,8 @@ type GetSampledRequestsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSampledRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,6 +61,8 @@ type CreateDBSnapshotInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBSnapshotOutput struct {
@@ -71,6 +73,8 @@ type CreateDBSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

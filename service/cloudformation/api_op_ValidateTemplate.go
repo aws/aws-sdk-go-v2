@@ -47,6 +47,8 @@ type ValidateTemplateInput struct {
 	// in the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or
 	// TemplateBody. If both are passed, only TemplateBody is used.
 	TemplateURL *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for ValidateTemplate action.
@@ -76,6 +78,8 @@ type ValidateTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationValidateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

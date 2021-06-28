@@ -39,6 +39,8 @@ type DeleteMultiplexProgramInput struct {
 	//
 	// This member is required.
 	ProgramName *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DeleteMultiplexProgramResponse
@@ -64,6 +66,8 @@ type DeleteMultiplexProgramOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {

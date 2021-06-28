@@ -73,6 +73,8 @@ type CreateSystemInstanceInput struct {
 	// Metadata, consisting of key-value pairs, that can be used to categorize your
 	// system instances.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateSystemInstanceOutput struct {
@@ -82,6 +84,8 @@ type CreateSystemInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

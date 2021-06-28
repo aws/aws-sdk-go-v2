@@ -41,6 +41,8 @@ type BatchDeleteInput struct {
 
 	// List of multiplex IDs
 	MultiplexIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for BatchDeleteResponse
@@ -54,6 +56,8 @@ type BatchDeleteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type GetConsoleOutputInput struct {
 	// When enabled, retrieves the latest console output for the instance. Default:
 	// disabled (false)
 	Latest *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetConsoleOutputOutput struct {
@@ -71,6 +73,8 @@ type GetConsoleOutputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConsoleOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {

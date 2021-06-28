@@ -39,6 +39,8 @@ type GetMLTransformInput struct {
 	//
 	// This member is required.
 	TransformId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMLTransformOutput struct {
@@ -134,6 +136,8 @@ type GetMLTransformOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {

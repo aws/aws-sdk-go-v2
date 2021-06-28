@@ -33,6 +33,8 @@ type DescribeAccountPreferencesInput struct {
 
 	// Token used for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountPreferencesOutput struct {
@@ -44,6 +46,8 @@ type DescribeAccountPreferencesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {

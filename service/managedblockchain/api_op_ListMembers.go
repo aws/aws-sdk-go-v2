@@ -53,6 +53,8 @@ type ListMembersInput struct {
 	// An optional status specifier. If provided, only members currently in this status
 	// are listed.
 	Status types.MemberStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListMembersOutput struct {
@@ -66,6 +68,8 @@ type ListMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

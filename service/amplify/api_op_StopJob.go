@@ -44,6 +44,8 @@ type StopJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the stop job request.
@@ -56,6 +58,8 @@ type StopJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

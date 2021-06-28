@@ -36,6 +36,8 @@ type DeleteUserGroupInput struct {
 	//
 	// This member is required.
 	UserGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserGroupOutput struct {
@@ -64,6 +66,8 @@ type DeleteUserGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

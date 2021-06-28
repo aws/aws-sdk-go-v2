@@ -40,6 +40,8 @@ type DeleteTransitGatewayRouteTableInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTransitGatewayRouteTableOutput struct {
@@ -49,6 +51,8 @@ type DeleteTransitGatewayRouteTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTransitGatewayRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

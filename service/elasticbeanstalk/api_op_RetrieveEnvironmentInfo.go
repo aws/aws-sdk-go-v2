@@ -49,6 +49,8 @@ type RetrieveEnvironmentInfoInput struct {
 	// EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk
 	// returns MissingRequiredParameter error.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // Result message containing a description of the requested environment info.
@@ -59,6 +61,8 @@ type RetrieveEnvironmentInfoOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRetrieveEnvironmentInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {

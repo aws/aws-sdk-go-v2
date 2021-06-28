@@ -45,6 +45,8 @@ type ListIPSetsInput struct {
 	// the action, fill nextToken in the request with the value of NextToken from the
 	// previous response to continue listing data.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListIPSetsOutput struct {
@@ -60,6 +62,8 @@ type ListIPSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIPSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

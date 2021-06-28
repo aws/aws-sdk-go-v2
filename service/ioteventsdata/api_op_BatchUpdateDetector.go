@@ -34,6 +34,8 @@ type BatchUpdateDetectorInput struct {
 	//
 	// This member is required.
 	Detectors []types.UpdateDetectorRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchUpdateDetectorOutput struct {
@@ -44,6 +46,8 @@ type BatchUpdateDetectorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUpdateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

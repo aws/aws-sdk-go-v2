@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -27,6 +28,8 @@ type HomeRegionControl struct {
 	// applied, which is always an ACCOUNT. It applies the home region to the current
 	// ACCOUNT.
 	Target *Target
+
+	noSmithyDocumentSerde
 }
 
 // The target parameter specifies the identifier to which the home region is
@@ -42,4 +45,8 @@ type Target struct {
 	// The TargetID is a 12-character identifier of the ACCOUNT for which the control
 	// was created. (This must be the current account.)
 	Id *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

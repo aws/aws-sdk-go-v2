@@ -57,6 +57,8 @@ type AssociateTargetsWithJobInput struct {
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
 	// namespaceId feature is in public preview.
 	NamespaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateTargetsWithJobOutput struct {
@@ -72,6 +74,8 @@ type AssociateTargetsWithJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateTargetsWithJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

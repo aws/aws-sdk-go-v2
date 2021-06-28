@@ -101,6 +101,8 @@ type ChangeResourceRecordSetsInput struct {
 	//
 	// This member is required.
 	HostedZoneId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type containing the response for the request.
@@ -116,6 +118,8 @@ type ChangeResourceRecordSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationChangeResourceRecordSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

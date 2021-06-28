@@ -63,6 +63,8 @@ type AssociateTrunkInterfaceInput struct {
 
 	// The ID of the VLAN. This applies to the VLAN protocol.
 	VlanId *int32
+
+	noSmithyDocumentSerde
 }
 
 type AssociateTrunkInterfaceOutput struct {
@@ -78,6 +80,8 @@ type AssociateTrunkInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateTrunkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,11 +44,15 @@ type AddRegionInput struct {
 	//
 	// This member is required.
 	VPCSettings *types.DirectoryVpcSettings
+
+	noSmithyDocumentSerde
 }
 
 type AddRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {

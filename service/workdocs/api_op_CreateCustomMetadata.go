@@ -46,11 +46,15 @@ type CreateCustomMetadataInput struct {
 	// The ID of the version, if the custom metadata is being added to a document
 	// version.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCustomMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCustomMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

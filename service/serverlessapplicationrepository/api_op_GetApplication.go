@@ -36,6 +36,8 @@ type GetApplicationInput struct {
 
 	// The semantic version of the application to get.
 	SemanticVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type GetApplicationOutput struct {
@@ -91,6 +93,8 @@ type GetApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

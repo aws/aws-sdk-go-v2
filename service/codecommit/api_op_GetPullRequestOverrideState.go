@@ -42,6 +42,8 @@ type GetPullRequestOverrideStateInput struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPullRequestOverrideStateOutput struct {
@@ -56,6 +58,8 @@ type GetPullRequestOverrideStateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPullRequestOverrideStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

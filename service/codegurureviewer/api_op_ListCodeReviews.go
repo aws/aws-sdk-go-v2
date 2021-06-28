@@ -66,6 +66,8 @@ type ListCodeReviewsInput struct {
 	//
 	// * Deleting: The code review is being deleted.
 	States []types.JobState
+
+	noSmithyDocumentSerde
 }
 
 type ListCodeReviewsOutput struct {
@@ -78,6 +80,8 @@ type ListCodeReviewsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCodeReviewsMiddlewares(stack *middleware.Stack, options Options) (err error) {

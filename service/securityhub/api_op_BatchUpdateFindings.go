@@ -130,6 +130,8 @@ type BatchUpdateFindingsInput struct {
 	// Used to update the workflow status of a finding. The workflow status indicates
 	// the progress of the investigation into the finding.
 	Workflow *types.WorkflowUpdate
+
+	noSmithyDocumentSerde
 }
 
 type BatchUpdateFindingsOutput struct {
@@ -146,6 +148,8 @@ type BatchUpdateFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

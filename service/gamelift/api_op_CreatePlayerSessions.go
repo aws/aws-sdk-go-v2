@@ -58,6 +58,8 @@ type CreatePlayerSessionsInput struct {
 	// can be formatted as needed for use in the game. Any player data strings for
 	// player IDs that are not included in the PlayerIds parameter are ignored.
 	PlayerDataMap map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -68,6 +70,8 @@ type CreatePlayerSessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePlayerSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

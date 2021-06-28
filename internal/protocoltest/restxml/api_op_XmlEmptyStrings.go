@@ -26,6 +26,8 @@ func (c *Client) XmlEmptyStrings(ctx context.Context, params *XmlEmptyStringsInp
 
 type XmlEmptyStringsInput struct {
 	EmptyString *string
+
+	noSmithyDocumentSerde
 }
 
 type XmlEmptyStringsOutput struct {
@@ -33,6 +35,8 @@ type XmlEmptyStringsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlEmptyStringsMiddlewares(stack *middleware.Stack, options Options) (err error) {

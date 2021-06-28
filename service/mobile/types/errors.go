@@ -10,6 +10,8 @@ import (
 // Account Action is required in order to continue the request.
 type AccountActionRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccountActionRequiredException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccountActionRequiredException) ErrorFault() smithy.ErrorFault { return
 // project state prevents the operation from being performed.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -46,6 +50,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // servicing the request.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -68,6 +74,8 @@ type LimitExceededException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -85,6 +93,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // No entity can be found with the specified identifier.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -105,6 +115,8 @@ type ServiceUnavailableException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -125,6 +137,8 @@ type TooManyRequestsException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -142,6 +156,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // Credentials of the caller are insufficient to authorize the request.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {

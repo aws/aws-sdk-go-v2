@@ -52,6 +52,8 @@ type GetEntitlementsInput struct {
 	// For paginated calls to GetEntitlements, pass the NextToken from the previous
 	// GetEntitlementsResult.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The GetEntitlementsRequest contains results from the GetEntitlements operation.
@@ -69,6 +71,8 @@ type GetEntitlementsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {

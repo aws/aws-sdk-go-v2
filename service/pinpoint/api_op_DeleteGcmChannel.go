@@ -35,6 +35,8 @@ type DeleteGcmChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGcmChannelOutput struct {
@@ -49,6 +51,8 @@ type DeleteGcmChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGcmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

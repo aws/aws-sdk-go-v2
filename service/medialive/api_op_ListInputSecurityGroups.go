@@ -36,6 +36,8 @@ type ListInputSecurityGroupsInput struct {
 
 	// Placeholder documentation for __string
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ListInputSecurityGroupsResponse
@@ -49,6 +51,8 @@ type ListInputSecurityGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInputSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

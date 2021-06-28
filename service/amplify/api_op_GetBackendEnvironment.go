@@ -39,6 +39,8 @@ type GetBackendEnvironmentInput struct {
 	//
 	// This member is required.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the get backend environment result.
@@ -51,6 +53,8 @@ type GetBackendEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackendEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

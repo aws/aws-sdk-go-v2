@@ -37,6 +37,8 @@ type PauseServiceInput struct {
 	//
 	// This member is required.
 	ServiceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PauseServiceOutput struct {
@@ -52,6 +54,8 @@ type PauseServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPauseServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

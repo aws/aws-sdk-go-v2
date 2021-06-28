@@ -42,6 +42,8 @@ type DescribeEnvironmentManagedActionHistoryInput struct {
 
 	// The pagination token returned by a previous request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A result message containing a list of completed and failed managed actions.
@@ -56,6 +58,8 @@ type DescribeEnvironmentManagedActionHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEnvironmentManagedActionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -109,6 +109,8 @@ type CreatePatchBaselineInput struct {
 	// To add tags to an
 	// existing patch baseline, use the AddTagsToResource operation.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePatchBaselineOutput struct {
@@ -118,6 +120,8 @@ type CreatePatchBaselineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {

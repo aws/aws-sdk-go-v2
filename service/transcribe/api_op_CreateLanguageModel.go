@@ -55,6 +55,8 @@ type CreateLanguageModelInput struct {
 	//
 	// This member is required.
 	ModelName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLanguageModelOutput struct {
@@ -79,6 +81,8 @@ type CreateLanguageModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

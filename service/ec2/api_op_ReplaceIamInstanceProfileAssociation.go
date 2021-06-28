@@ -41,6 +41,8 @@ type ReplaceIamInstanceProfileAssociationInput struct {
 	//
 	// This member is required.
 	IamInstanceProfile *types.IamInstanceProfileSpecification
+
+	noSmithyDocumentSerde
 }
 
 type ReplaceIamInstanceProfileAssociationOutput struct {
@@ -50,6 +52,8 @@ type ReplaceIamInstanceProfileAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReplaceIamInstanceProfileAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

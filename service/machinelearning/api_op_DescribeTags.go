@@ -38,6 +38,8 @@ type DescribeTagsInput struct {
 	//
 	// This member is required.
 	ResourceType types.TaggableResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Amazon ML returns the following elements.
@@ -54,6 +56,8 @@ type DescribeTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

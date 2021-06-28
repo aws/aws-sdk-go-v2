@@ -40,6 +40,8 @@ type DissociatePackageInput struct {
 	//
 	// This member is required.
 	PackageID *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by DissociatePackage operation.
@@ -50,6 +52,8 @@ type DissociatePackageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDissociatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {

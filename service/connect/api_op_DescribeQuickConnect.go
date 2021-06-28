@@ -39,6 +39,8 @@ type DescribeQuickConnectInput struct {
 	//
 	// This member is required.
 	QuickConnectId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeQuickConnectOutput struct {
@@ -48,6 +50,8 @@ type DescribeQuickConnectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeQuickConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {

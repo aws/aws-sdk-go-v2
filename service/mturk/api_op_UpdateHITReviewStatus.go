@@ -43,11 +43,15 @@ type UpdateHITReviewStatusInput struct {
 	// * Setting this to
 	// true will only transition a HIT from Reviewing to Reviewable
 	Revert *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateHITReviewStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateHITReviewStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

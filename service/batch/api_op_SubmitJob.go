@@ -123,6 +123,8 @@ type SubmitJobInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Timeout *types.JobTimeout
+
+	noSmithyDocumentSerde
 }
 
 type SubmitJobOutput struct {
@@ -142,6 +144,8 @@ type SubmitJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubmitJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

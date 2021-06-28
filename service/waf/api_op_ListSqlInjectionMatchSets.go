@@ -50,6 +50,8 @@ type ListSqlInjectionMatchSetsInput struct {
 	// from the previous response to get information about another batch of
 	// SqlInjectionMatchSets.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a ListSqlInjectionMatchSets request.
@@ -67,6 +69,8 @@ type ListSqlInjectionMatchSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSqlInjectionMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

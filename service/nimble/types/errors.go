@@ -12,6 +12,8 @@ type AccessDeniedException struct {
 
 	Code    *string
 	Context map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -31,6 +33,8 @@ type ConflictException struct {
 
 	Code    *string
 	Context map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -50,6 +54,8 @@ type InternalServerErrorException struct {
 
 	Code    *string
 	Context map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -69,6 +75,8 @@ type ResourceNotFoundException struct {
 
 	Code    *string
 	Context map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -88,6 +96,8 @@ type ServiceQuotaExceededException struct {
 
 	Code    *string
 	Context map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -107,6 +117,8 @@ type ThrottlingException struct {
 
 	Code    *string
 	Context map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -126,6 +138,8 @@ type ValidationException struct {
 
 	Code    *string
 	Context map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

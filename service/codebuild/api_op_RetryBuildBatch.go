@@ -42,6 +42,8 @@ type RetryBuildBatchInput struct {
 
 	// Specifies the type of retry to perform.
 	RetryType types.RetryBuildBatchType
+
+	noSmithyDocumentSerde
 }
 
 type RetryBuildBatchOutput struct {
@@ -51,6 +53,8 @@ type RetryBuildBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRetryBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

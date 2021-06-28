@@ -63,6 +63,8 @@ type UpdateDevicePoolInput struct {
 	// Represents the rules to modify for the device pool. Updating rules is optional.
 	// If you update rules for your request, the update replaces the existing rules.
 	Rules []types.Rule
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of an update device pool request.
@@ -73,6 +75,8 @@ type UpdateDevicePoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

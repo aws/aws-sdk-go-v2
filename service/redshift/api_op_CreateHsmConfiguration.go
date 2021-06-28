@@ -72,6 +72,8 @@ type CreateHsmConfigurationInput struct {
 
 	// A list of tag instances.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateHsmConfigurationOutput struct {
@@ -83,6 +85,8 @@ type CreateHsmConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHsmConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

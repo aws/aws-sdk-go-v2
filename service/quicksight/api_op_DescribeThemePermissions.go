@@ -38,6 +38,8 @@ type DescribeThemePermissionsInput struct {
 	//
 	// This member is required.
 	ThemeId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeThemePermissionsOutput struct {
@@ -59,6 +61,8 @@ type DescribeThemePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeThemePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

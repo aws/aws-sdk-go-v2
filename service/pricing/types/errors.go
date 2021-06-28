@@ -10,6 +10,8 @@ import (
 // The pagination token expired. Try again without a pagination token.
 type ExpiredNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredNextTokenException) Error() string {
@@ -28,6 +30,8 @@ func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // later.
 type InternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalErrorException) Error() string {
@@ -45,6 +49,8 @@ func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 // The pagination token is invalid. Try again without a pagination token.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -62,6 +68,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // One or more parameters had an invalid value.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -79,6 +87,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // The requested resource can't be found.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {

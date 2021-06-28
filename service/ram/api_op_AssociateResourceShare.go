@@ -46,6 +46,8 @@ type AssociateResourceShareInput struct {
 
 	// The Amazon Resource Names (ARN) of the resources.
 	ResourceArns []string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateResourceShareOutput struct {
@@ -59,6 +61,8 @@ type AssociateResourceShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

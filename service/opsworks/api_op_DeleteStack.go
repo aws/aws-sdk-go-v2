@@ -39,11 +39,15 @@ type DeleteStackInput struct {
 	//
 	// This member is required.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

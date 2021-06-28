@@ -68,6 +68,8 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 	// traffic policy instances. If the value of IsTruncated in the previous response
 	// was false, there are no more traffic policy instances to get.
 	TrafficPolicyInstanceTypeMarker types.RRType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the request.
@@ -107,6 +109,8 @@ type ListTrafficPolicyInstancesByHostedZoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTrafficPolicyInstancesByHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

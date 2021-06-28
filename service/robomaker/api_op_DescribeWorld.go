@@ -33,6 +33,8 @@ type DescribeWorldInput struct {
 	//
 	// This member is required.
 	World *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorldOutput struct {
@@ -55,6 +57,8 @@ type DescribeWorldOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorldMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -145,6 +145,8 @@ type BatchWriteItemInput struct {
 	// during the operation are returned in the response. If set to NONE (the default),
 	// no statistics are returned.
 	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchWriteItem operation.
@@ -211,6 +213,8 @@ type BatchWriteItemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchWriteItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

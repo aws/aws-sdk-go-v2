@@ -35,6 +35,8 @@ type ListMediaCapturePipelinesInput struct {
 
 	// The token used to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMediaCapturePipelinesOutput struct {
@@ -47,6 +49,8 @@ type ListMediaCapturePipelinesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMediaCapturePipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -25,6 +25,7 @@ func (c *Client) HttpResponseCode(ctx context.Context, params *HttpResponseCodeI
 }
 
 type HttpResponseCodeInput struct {
+	noSmithyDocumentSerde
 }
 
 type HttpResponseCodeOutput struct {
@@ -32,6 +33,8 @@ type HttpResponseCodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpResponseCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

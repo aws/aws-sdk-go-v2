@@ -46,6 +46,8 @@ type UpdateClusterKafkaVersionInput struct {
 
 	// The custom configuration that should be applied on the new version of cluster.
 	ConfigurationInfo *types.ConfigurationInfo
+
+	noSmithyDocumentSerde
 }
 
 type UpdateClusterKafkaVersionOutput struct {
@@ -58,6 +60,8 @@ type UpdateClusterKafkaVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateClusterKafkaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

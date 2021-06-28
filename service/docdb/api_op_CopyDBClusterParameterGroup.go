@@ -72,6 +72,8 @@ type CopyDBClusterParameterGroupInput struct {
 
 	// The tags that are to be assigned to the parameter group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CopyDBClusterParameterGroupOutput struct {
@@ -81,6 +83,8 @@ type CopyDBClusterParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

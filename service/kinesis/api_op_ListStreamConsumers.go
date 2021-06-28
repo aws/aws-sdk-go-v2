@@ -70,6 +70,8 @@ type ListStreamConsumersInput struct {
 	// to specify which of the two streams you want to list the consumers for. You
 	// can't specify this parameter if you specify the NextToken parameter.
 	StreamCreationTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ListStreamConsumersOutput struct {
@@ -92,6 +94,8 @@ type ListStreamConsumersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {

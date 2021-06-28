@@ -133,6 +133,8 @@ type DescribeDimensionKeysInput struct {
 	// PeriodInSeconds, then Performance Insights chooses a value for you, with a goal
 	// of returning roughly 100-200 data points in the response.
 	PeriodInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDimensionKeysOutput struct {
@@ -161,6 +163,8 @@ type DescribeDimensionKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDimensionKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

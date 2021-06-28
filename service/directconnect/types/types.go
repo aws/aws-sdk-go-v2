@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -21,6 +22,8 @@ type AssociatedGateway struct {
 
 	// The type of associated gateway.
 	Type GatewayType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a BGP peer.
@@ -81,6 +84,8 @@ type BGPPeer struct {
 
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect connection.
@@ -187,6 +192,8 @@ type Connection struct {
 
 	// The ID of the VLAN.
 	Vlan int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Direct Connect gateway, which enables you to connect virtual
@@ -223,6 +230,8 @@ type DirectConnectGateway struct {
 
 	// The error message if the state of an object failed to advance.
 	StateChangeError *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an association between a Direct Connect gateway and a virtual
@@ -277,6 +286,8 @@ type DirectConnectGatewayAssociation struct {
 	//
 	// Deprecated: This member has been deprecated.
 	VirtualGatewayRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the proposal request to attach a virtual private gateway to a
@@ -314,6 +325,8 @@ type DirectConnectGatewayAssociationProposal struct {
 
 	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
 	RequestedAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix
+
+	noSmithyDocumentSerde
 }
 
 // Information about an attachment between a Direct Connect gateway and a virtual
@@ -354,6 +367,8 @@ type DirectConnectGatewayAttachment struct {
 
 	// The Region where the virtual interface is located.
 	VirtualInterfaceRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an interconnect.
@@ -428,6 +443,8 @@ type Interconnect struct {
 
 	// The tags associated with the interconnect.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about a link aggregation group (LAG).
@@ -523,6 +540,8 @@ type Lag struct {
 
 	// The tags associated with the LAG.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Letter of Authorization - Connecting Facility Assignment
@@ -535,6 +554,8 @@ type Loa struct {
 	// The standard media type for the LOA-CFA document. The only supported value is
 	// application/pdf.
 	LoaContentType LoaContentType
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect location.
@@ -558,6 +579,8 @@ type Location struct {
 
 	// The Region for the location.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the MAC Security (MACsec) secret key.
@@ -589,6 +612,8 @@ type MacSecKey struct {
 	// * disassociated: The MAC Security (MACsec) secret key is
 	// no longer associated with the connection or LAG.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a new BGP peer.
@@ -610,6 +635,8 @@ type NewBGPPeer struct {
 
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a private virtual interface.
@@ -658,6 +685,8 @@ type NewPrivateVirtualInterface struct {
 
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a private virtual interface to be provisioned on a connection.
@@ -700,6 +729,8 @@ type NewPrivateVirtualInterfaceAllocation struct {
 
 	// The tags associated with the private virtual interface.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about a public virtual interface.
@@ -742,6 +773,8 @@ type NewPublicVirtualInterface struct {
 
 	// The tags associated with the public virtual interface.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about a public virtual interface to be provisioned on a connection.
@@ -784,6 +817,8 @@ type NewPublicVirtualInterfaceAllocation struct {
 
 	// The tags associated with the public virtual interface.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about a transit virtual interface.
@@ -823,6 +858,8 @@ type NewTransitVirtualInterface struct {
 
 	// The ID of the VLAN.
 	Vlan int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a transit virtual interface to be provisioned on a connection.
@@ -859,6 +896,8 @@ type NewTransitVirtualInterfaceAllocation struct {
 
 	// The ID of the VLAN.
 	Vlan int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tag associated with an Direct Connect resource.
@@ -869,6 +908,8 @@ type ResourceTag struct {
 
 	// The tags.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about a route filter prefix that a customer can advertise through
@@ -878,6 +919,8 @@ type RouteFilterPrefix struct {
 	// The CIDR block for the advertised route. Separate multiple routes using commas.
 	// An IPv6 CIDR must use /64 or shorter.
 	Cidr *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tag.
@@ -890,6 +933,8 @@ type Tag struct {
 
 	// The value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a virtual private gateway for a private virtual interface.
@@ -913,6 +958,8 @@ type VirtualGateway struct {
 	// private gateway is deleted. The private virtual interface is unable to send
 	// traffic over this gateway.
 	VirtualGatewayState *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a virtual interface.
@@ -1034,6 +1081,8 @@ type VirtualInterface struct {
 
 	// The ID of the VLAN.
 	Vlan int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the virtual interface failover test.
@@ -1063,4 +1112,8 @@ type VirtualInterfaceTestHistory struct {
 
 	// The ID of the tested virtual interface.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

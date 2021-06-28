@@ -82,6 +82,8 @@ type ListMultipartUploadsInput struct {
 	// Uploads response. You need only include the marker if you are continuing the
 	// pagination of results started in a previous List Uploads request.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -97,6 +99,8 @@ type ListMultipartUploadsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMultipartUploadsMiddlewares(stack *middleware.Stack, options Options) (err error) {

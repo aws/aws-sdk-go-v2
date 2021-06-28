@@ -10,6 +10,8 @@ import (
 // Access to a resource was denied.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // A resource to be created or added already exists.
 type AlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsException) Error() string {
@@ -44,6 +48,8 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 // Two processes are trying to modify a resource simultaneously.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -63,6 +69,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // Too many jobs are being run concurrently.
 type ConcurrentRunsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentRunsExceededException) Error() string {
@@ -82,6 +90,8 @@ func (e *ConcurrentRunsExceededException) ErrorFault() smithy.ErrorFault { retur
 // A specified condition was not satisfied.
 type ConditionCheckFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConditionCheckFailureException) Error() string {
@@ -99,6 +109,8 @@ func (e *ConditionCheckFailureException) ErrorFault() smithy.ErrorFault { return
 // The CreatePartitions API was called on a table that has indexes enabled.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -116,6 +128,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The specified crawler is not running.
 type CrawlerNotRunningException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CrawlerNotRunningException) Error() string {
@@ -133,6 +147,8 @@ func (e *CrawlerNotRunningException) ErrorFault() smithy.ErrorFault { return smi
 // The operation cannot be performed because the crawler is already running.
 type CrawlerRunningException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CrawlerRunningException) Error() string {
@@ -150,6 +166,8 @@ func (e *CrawlerRunningException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified crawler is stopping.
 type CrawlerStoppingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CrawlerStoppingException) Error() string {
@@ -167,6 +185,8 @@ func (e *CrawlerStoppingException) ErrorFault() smithy.ErrorFault { return smith
 // A specified entity does not exist
 type EntityNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityNotFoundException) Error() string {
@@ -184,6 +204,8 @@ func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // An encryption operation failed.
 type GlueEncryptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GlueEncryptionException) Error() string {
@@ -201,6 +223,8 @@ func (e *GlueEncryptionException) ErrorFault() smithy.ErrorFault { return smithy
 // The same unique identifier was associated with two different records.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -222,6 +246,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // The workflow is in an invalid state to perform a requested operation.
 type IllegalWorkflowStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IllegalWorkflowStateException) Error() string {
@@ -239,6 +265,8 @@ func (e *IllegalWorkflowStateException) ErrorFault() smithy.ErrorFault { return 
 // An internal service error occurred.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -256,6 +284,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // The input provided was not valid.
 type InvalidInputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -273,6 +303,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The machine learning transform is not ready to run.
 type MLTransformNotReadyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MLTransformNotReadyException) Error() string {
@@ -290,6 +322,8 @@ func (e *MLTransformNotReadyException) ErrorFault() smithy.ErrorFault { return s
 // There is no applicable schedule.
 type NoScheduleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoScheduleException) Error() string {
@@ -307,6 +341,8 @@ func (e *NoScheduleException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The operation timed out.
 type OperationTimeoutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationTimeoutException) Error() string {
@@ -324,6 +360,8 @@ func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smit
 // A resource numerical limit was exceeded.
 type ResourceNumberLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNumberLimitExceededException) Error() string {
@@ -345,6 +383,8 @@ func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The specified scheduler is not running.
 type SchedulerNotRunningException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SchedulerNotRunningException) Error() string {
@@ -362,6 +402,8 @@ func (e *SchedulerNotRunningException) ErrorFault() smithy.ErrorFault { return s
 // The specified scheduler is already running.
 type SchedulerRunningException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SchedulerRunningException) Error() string {
@@ -379,6 +421,8 @@ func (e *SchedulerRunningException) ErrorFault() smithy.ErrorFault { return smit
 // The specified scheduler is transitioning.
 type SchedulerTransitioningException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SchedulerTransitioningException) Error() string {
@@ -398,6 +442,8 @@ func (e *SchedulerTransitioningException) ErrorFault() smithy.ErrorFault { retur
 // A value could not be validated.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {
@@ -415,6 +461,8 @@ func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // There was a version conflict.
 type VersionMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *VersionMismatchException) Error() string {

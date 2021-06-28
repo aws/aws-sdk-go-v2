@@ -53,6 +53,8 @@ type DeleteTaskSetInput struct {
 	// If true, this allows you to delete a task set even if it hasn't been scaled down
 	// to zero.
 	Force *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTaskSetOutput struct {
@@ -62,6 +64,8 @@ type DeleteTaskSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

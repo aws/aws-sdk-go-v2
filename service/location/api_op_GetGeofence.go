@@ -39,6 +39,8 @@ type GetGeofenceInput struct {
 	//
 	// This member is required.
 	GeofenceId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGeofenceOutput struct {
@@ -88,6 +90,8 @@ type GetGeofenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

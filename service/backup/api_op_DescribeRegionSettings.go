@@ -32,6 +32,7 @@ func (c *Client) DescribeRegionSettings(ctx context.Context, params *DescribeReg
 }
 
 type DescribeRegionSettingsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeRegionSettingsOutput struct {
@@ -41,6 +42,8 @@ type DescribeRegionSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRegionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

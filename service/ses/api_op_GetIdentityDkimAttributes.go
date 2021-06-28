@@ -60,6 +60,8 @@ type GetIdentityDkimAttributesInput struct {
 	//
 	// This member is required.
 	Identities []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the status of Amazon SES Easy DKIM signing for an identity. For
@@ -75,6 +77,8 @@ type GetIdentityDkimAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

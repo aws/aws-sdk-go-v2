@@ -35,6 +35,8 @@ type DescribeSMBSettingsInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSMBSettingsOutput struct {
@@ -102,6 +104,8 @@ type DescribeSMBSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSMBSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

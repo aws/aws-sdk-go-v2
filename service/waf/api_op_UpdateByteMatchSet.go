@@ -102,6 +102,8 @@ type UpdateByteMatchSetInput struct {
 	//
 	// This member is required.
 	Updates []types.ByteMatchSetUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateByteMatchSetOutput struct {
@@ -113,6 +115,8 @@ type UpdateByteMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

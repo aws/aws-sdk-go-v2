@@ -49,11 +49,15 @@ type DeleteProvisionedConcurrencyConfigInput struct {
 	//
 	// This member is required.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProvisionedConcurrencyConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProvisionedConcurrencyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

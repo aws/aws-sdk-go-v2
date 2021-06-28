@@ -46,11 +46,15 @@ type DeleteRecordInput struct {
 	//
 	// This member is required.
 	RecordIdentifierValueAsString *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type UpdateModelInput struct {
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 model.
 	Schema *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateModelOutput struct {
@@ -73,6 +75,8 @@ type UpdateModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

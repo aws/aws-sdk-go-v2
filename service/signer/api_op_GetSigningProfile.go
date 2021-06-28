@@ -36,6 +36,8 @@ type GetSigningProfileInput struct {
 
 	// The AWS account ID of the profile owner.
 	ProfileOwner *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSigningProfileOutput struct {
@@ -87,6 +89,8 @@ type GetSigningProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

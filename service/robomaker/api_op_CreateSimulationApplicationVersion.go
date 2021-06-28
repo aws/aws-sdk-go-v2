@@ -38,6 +38,8 @@ type CreateSimulationApplicationVersionInput struct {
 	// The current revision id for the simulation application. If you provide a value
 	// and it matches the latest revision ID, a new version will be created.
 	CurrentRevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSimulationApplicationVersionOutput struct {
@@ -72,6 +74,8 @@ type CreateSimulationApplicationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSimulationApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

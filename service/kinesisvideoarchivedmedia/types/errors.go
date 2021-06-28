@@ -13,6 +13,8 @@ import (
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
 type ClientLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientLimitExceededException) Error() string {
@@ -31,6 +33,8 @@ func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return s
 // used.
 type InvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgumentException) Error() string {
@@ -49,6 +53,8 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // valid for this operation.
 type InvalidCodecPrivateDataException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCodecPrivateDataException) Error() string {
@@ -69,6 +75,8 @@ func (e *InvalidCodecPrivateDataException) ErrorFault() smithy.ErrorFault { retu
 // specified codec.
 type InvalidMediaFrameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMediaFrameException) Error() string {
@@ -86,6 +94,8 @@ func (e *InvalidMediaFrameException) ErrorFault() smithy.ErrorFault { return smi
 // No codec private data was found in at least one of tracks of the video stream.
 type MissingCodecPrivateDataException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingCodecPrivateDataException) Error() string {
@@ -106,6 +116,8 @@ func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { retu
 // is, has a DataRetentionInHours of 0).
 type NoDataRetentionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoDataRetentionException) Error() string {
@@ -124,6 +136,8 @@ func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smith
 // given stream, or the token has expired.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {
@@ -146,6 +160,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // fragments within the last 30 seconds.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -166,6 +182,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // optionally, the codec ID for track 2 should be A_AAC.
 type UnsupportedStreamMediaTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedStreamMediaTypeException) Error() string {

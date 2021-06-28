@@ -39,11 +39,15 @@ type UpdateRulesOfIpGroupInput struct {
 	//
 	// This member is required.
 	UserRules []types.IpRuleItem
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRulesOfIpGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRulesOfIpGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

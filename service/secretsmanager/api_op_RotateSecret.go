@@ -126,6 +126,8 @@ type RotateSecretInput struct {
 
 	// A structure that defines the rotation configuration for this secret.
 	RotationRules *types.RotationRulesType
+
+	noSmithyDocumentSerde
 }
 
 type RotateSecretOutput struct {
@@ -142,6 +144,8 @@ type RotateSecretOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRotateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {

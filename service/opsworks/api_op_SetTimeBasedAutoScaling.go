@@ -43,11 +43,15 @@ type SetTimeBasedAutoScalingInput struct {
 
 	// An AutoScalingSchedule with the instance schedule.
 	AutoScalingSchedule *types.WeeklyAutoScalingSchedule
+
+	noSmithyDocumentSerde
 }
 
 type SetTimeBasedAutoScalingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetTimeBasedAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {

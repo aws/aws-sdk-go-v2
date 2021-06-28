@@ -36,6 +36,8 @@ type GetSuppressedDestinationInput struct {
 	//
 	// This member is required.
 	EmailAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the suppressed email address.
@@ -48,6 +50,8 @@ type GetSuppressedDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

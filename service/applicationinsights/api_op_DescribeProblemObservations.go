@@ -33,6 +33,8 @@ type DescribeProblemObservationsInput struct {
 	//
 	// This member is required.
 	ProblemId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProblemObservationsOutput struct {
@@ -42,6 +44,8 @@ type DescribeProblemObservationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProblemObservationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

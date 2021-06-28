@@ -37,6 +37,8 @@ type DeleteFolderInput struct {
 	//
 	// This member is required.
 	FolderId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFolderOutput struct {
@@ -55,6 +57,8 @@ type DeleteFolderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

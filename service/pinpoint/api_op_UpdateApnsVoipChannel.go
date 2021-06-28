@@ -41,6 +41,8 @@ type UpdateApnsVoipChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApnsVoipChannelOutput struct {
@@ -53,6 +55,8 @@ type UpdateApnsVoipChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApnsVoipChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

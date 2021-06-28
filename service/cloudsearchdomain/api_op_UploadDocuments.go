@@ -65,6 +65,8 @@ type UploadDocumentsInput struct {
 	//
 	// This member is required.
 	Documents io.Reader
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to an UploadDocuments request.
@@ -85,6 +87,8 @@ type UploadDocumentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUploadDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

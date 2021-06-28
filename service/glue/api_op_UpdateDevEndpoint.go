@@ -64,11 +64,15 @@ type UpdateDevEndpointInput struct {
 	// True if the list of custom libraries to be loaded in the development endpoint
 	// needs to be updated, or False if otherwise.
 	UpdateEtlLibraries bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDevEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type GetBuiltinIntentsInput struct {
 	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
 	// in the Alexa Skills Kit.
 	SignatureContains *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBuiltinIntentsOutput struct {
@@ -64,6 +66,8 @@ type GetBuiltinIntentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBuiltinIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

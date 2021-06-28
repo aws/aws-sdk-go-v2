@@ -64,6 +64,8 @@ type ListStackSetOperationsInput struct {
 	// to the request object's NextToken parameter. If there are no remaining results,
 	// the previous response object's NextToken parameter is set to null.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStackSetOperationsOutput struct {
@@ -80,6 +82,8 @@ type ListStackSetOperationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStackSetOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type ListHITsForQualificationTypeInput struct {
 
 	// Pagination Token
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListHITsForQualificationTypeOutput struct {
@@ -61,6 +63,8 @@ type ListHITsForQualificationTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHITsForQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

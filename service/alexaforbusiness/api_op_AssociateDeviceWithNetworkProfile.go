@@ -37,11 +37,15 @@ type AssociateDeviceWithNetworkProfileInput struct {
 	//
 	// This member is required.
 	NetworkProfileArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateDeviceWithNetworkProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateDeviceWithNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

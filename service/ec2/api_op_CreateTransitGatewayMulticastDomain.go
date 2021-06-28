@@ -49,6 +49,8 @@ type CreateTransitGatewayMulticastDomainInput struct {
 
 	// The tags for the transit gateway multicast domain.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateTransitGatewayMulticastDomainOutput struct {
@@ -58,6 +60,8 @@ type CreateTransitGatewayMulticastDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTransitGatewayMulticastDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

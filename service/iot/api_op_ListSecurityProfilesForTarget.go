@@ -44,6 +44,8 @@ type ListSecurityProfilesForTargetInput struct {
 
 	// If true, return child groups too.
 	Recursive bool
+
+	noSmithyDocumentSerde
 }
 
 type ListSecurityProfilesForTargetOutput struct {
@@ -57,6 +59,8 @@ type ListSecurityProfilesForTargetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSecurityProfilesForTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

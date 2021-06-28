@@ -44,6 +44,8 @@ type DescribeDBClusterSnapshotAttributesInput struct {
 	//
 	// This member is required.
 	DBClusterSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDBClusterSnapshotAttributesOutput struct {
@@ -57,6 +59,8 @@ type DescribeDBClusterSnapshotAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 	// messages can be delivered in plain text if a TLS connection can't be
 	// established.
 	TlsPolicy types.TlsPolicy
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -55,6 +57,8 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 type PutConfigurationSetDeliveryOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConfigurationSetDeliveryOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

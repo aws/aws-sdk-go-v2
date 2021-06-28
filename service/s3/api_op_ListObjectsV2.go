@@ -119,6 +119,8 @@ type ListObjectsV2Input struct {
 	// StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts
 	// listing after this specified key. StartAfter can be any key in the bucket.
 	StartAfter *string
+
+	noSmithyDocumentSerde
 }
 
 type ListObjectsV2Output struct {
@@ -200,6 +202,8 @@ type ListObjectsV2Output struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListObjectsV2Middlewares(stack *middleware.Stack, options Options) (err error) {

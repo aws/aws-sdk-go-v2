@@ -40,11 +40,15 @@ type DeleteClusterParameterGroupInput struct {
 	//
 	// This member is required.
 	ParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteClusterParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type DescribeAlarmModelInput struct {
 
 	// The version of the alarm model.
 	AlarmModelVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAlarmModelOutput struct {
@@ -112,6 +114,8 @@ type DescribeAlarmModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAlarmModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

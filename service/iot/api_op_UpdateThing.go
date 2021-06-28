@@ -52,12 +52,16 @@ type UpdateThingInput struct {
 
 	// The name of the thing type.
 	ThingTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the UpdateThing operation.
 type UpdateThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

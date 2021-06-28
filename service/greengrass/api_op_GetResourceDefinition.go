@@ -33,6 +33,8 @@ type GetResourceDefinitionInput struct {
 	//
 	// This member is required.
 	ResourceDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceDefinitionOutput struct {
@@ -63,6 +65,8 @@ type GetResourceDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

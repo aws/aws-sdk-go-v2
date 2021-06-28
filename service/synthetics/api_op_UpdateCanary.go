@@ -91,11 +91,15 @@ type UpdateCanaryInput struct {
 	// information, see  Running a Canary in a VPC
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html).
 	VpcConfig *types.VpcConfigInput
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCanaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

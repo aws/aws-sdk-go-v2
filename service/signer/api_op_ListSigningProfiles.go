@@ -54,6 +54,8 @@ type ListSigningProfilesInput struct {
 
 	// Filters results to return only signing jobs with statuses in the specified list.
 	Statuses []types.SigningProfileStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListSigningProfilesOutput struct {
@@ -67,6 +69,8 @@ type ListSigningProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSigningProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetContactPolicyInput struct {
 	//
 	// This member is required.
 	ContactArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetContactPolicyOutput struct {
@@ -45,6 +47,8 @@ type GetContactPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContactPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

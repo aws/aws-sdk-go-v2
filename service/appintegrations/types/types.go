@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The Amazon AppIntegrations APIs are in preview release and are subject to
 // change. The event filter.
 type EventFilter struct {
@@ -10,6 +14,8 @@ type EventFilter struct {
 	//
 	// This member is required.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon AppIntegrations APIs are in preview release and are subject to
@@ -33,6 +39,8 @@ type EventIntegration struct {
 
 	// The tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon AppIntegrations APIs are in preview release and are subject to
@@ -56,4 +64,8 @@ type EventIntegrationAssociation struct {
 
 	// The name of the event integration.
 	EventIntegrationName *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

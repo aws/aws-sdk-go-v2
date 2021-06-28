@@ -80,6 +80,8 @@ type MergeBranchesByThreeWayInput struct {
 
 	// The branch where the merge is applied.
 	TargetBranch *string
+
+	noSmithyDocumentSerde
 }
 
 type MergeBranchesByThreeWayOutput struct {
@@ -92,6 +94,8 @@ type MergeBranchesByThreeWayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMergeBranchesByThreeWayMiddlewares(stack *middleware.Stack, options Options) (err error) {

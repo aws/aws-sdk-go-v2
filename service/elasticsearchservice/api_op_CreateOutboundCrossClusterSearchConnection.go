@@ -47,6 +47,8 @@ type CreateOutboundCrossClusterSearchConnectionInput struct {
 	//
 	// This member is required.
 	SourceDomainInfo *types.DomainInformation
+
+	noSmithyDocumentSerde
 }
 
 // The result of a CreateOutboundCrossClusterSearchConnection request. Contains the
@@ -72,6 +74,8 @@ type CreateOutboundCrossClusterSearchConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOutboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

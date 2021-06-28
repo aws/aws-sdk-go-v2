@@ -49,6 +49,8 @@ type CreateAccessPreviewInput struct {
 
 	// A client token.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAccessPreviewOutput struct {
@@ -60,6 +62,8 @@ type CreateAccessPreviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAccessPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListChangeSetsInput struct {
 	// A string (provided by the ListChangeSets response output) that identifies the
 	// next page of change sets that you want to retrieve.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the ListChangeSets action.
@@ -57,6 +59,8 @@ type ListChangeSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChangeSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

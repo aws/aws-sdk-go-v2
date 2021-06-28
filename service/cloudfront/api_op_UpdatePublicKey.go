@@ -43,6 +43,8 @@ type UpdatePublicKeyInput struct {
 	// The value of the ETag header that you received when retrieving the public key to
 	// update. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePublicKeyOutput struct {
@@ -55,6 +57,8 @@ type UpdatePublicKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

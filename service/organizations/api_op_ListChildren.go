@@ -74,6 +74,8 @@ type ListChildrenInput struct {
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListChildrenOutput struct {
@@ -89,6 +91,8 @@ type ListChildrenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChildrenMiddlewares(stack *middleware.Stack, options Options) (err error) {

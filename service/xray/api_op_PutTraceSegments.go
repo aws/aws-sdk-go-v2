@@ -80,6 +80,8 @@ type PutTraceSegmentsInput struct {
 	//
 	// This member is required.
 	TraceSegmentDocuments []string
+
+	noSmithyDocumentSerde
 }
 
 type PutTraceSegmentsOutput struct {
@@ -89,6 +91,8 @@ type PutTraceSegmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutTraceSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

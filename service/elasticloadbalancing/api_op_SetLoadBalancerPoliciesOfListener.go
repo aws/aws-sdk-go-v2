@@ -54,12 +54,16 @@ type SetLoadBalancerPoliciesOfListenerInput struct {
 	//
 	// This member is required.
 	PolicyNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of SetLoadBalancePoliciesOfListener.
 type SetLoadBalancerPoliciesOfListenerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetLoadBalancerPoliciesOfListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

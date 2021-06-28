@@ -40,11 +40,15 @@ type DisassociateLensesInput struct {
 	//
 	// This member is required.
 	WorkloadId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateLensesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // You are not authorized to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // Unable to poll results for a cancelled query.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -45,6 +49,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // server error.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -62,6 +68,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // The requested endpoint was invalid.
 type InvalidEndpointException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEndpointException) Error() string {
@@ -79,6 +87,8 @@ func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smith
 // Timestream was unable to run the query successfully.
 type QueryExecutionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *QueryExecutionException) Error() string {
@@ -96,6 +106,8 @@ func (e *QueryExecutionException) ErrorFault() smithy.ErrorFault { return smithy
 // The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -113,6 +125,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Invalid or malformed request.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

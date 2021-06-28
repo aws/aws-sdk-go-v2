@@ -55,6 +55,8 @@ type GetEC2InstanceRecommendationsInput struct {
 
 	// The token to advance to the next page of instance recommendations.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEC2InstanceRecommendationsOutput struct {
@@ -74,6 +76,8 @@ type GetEC2InstanceRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEC2InstanceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

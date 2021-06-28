@@ -40,6 +40,8 @@ type DescribeMultiplexInput struct {
 	//
 	// This member is required.
 	MultiplexId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DescribeMultiplexResponse
@@ -77,6 +79,8 @@ type DescribeMultiplexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {

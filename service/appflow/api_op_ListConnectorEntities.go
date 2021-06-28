@@ -45,6 +45,8 @@ type ListConnectorEntitiesInput struct {
 	// request returns the list of roots. Otherwise, this request returns all entities
 	// supported by the provider.
 	EntitiesPath *string
+
+	noSmithyDocumentSerde
 }
 
 type ListConnectorEntitiesOutput struct {
@@ -58,6 +60,8 @@ type ListConnectorEntitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConnectorEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

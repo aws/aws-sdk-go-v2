@@ -49,6 +49,8 @@ type ListWorkteamsInput struct {
 
 	// The sort order for results. The default is Ascending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListWorkteamsOutput struct {
@@ -64,6 +66,8 @@ type ListWorkteamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkteamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

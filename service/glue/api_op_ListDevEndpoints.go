@@ -42,6 +42,8 @@ type ListDevEndpointsInput struct {
 
 	// Specifies to return only these tagged resources.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type ListDevEndpointsOutput struct {
@@ -56,6 +58,8 @@ type ListDevEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

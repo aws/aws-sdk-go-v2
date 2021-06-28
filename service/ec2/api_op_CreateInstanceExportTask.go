@@ -55,6 +55,8 @@ type CreateInstanceExportTaskInput struct {
 
 	// The tags to apply to the export instance task during creation.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateInstanceExportTaskOutput struct {
@@ -64,6 +66,8 @@ type CreateInstanceExportTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInstanceExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

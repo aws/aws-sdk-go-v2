@@ -29,6 +29,7 @@ func (c *Client) DescribeStorageConfiguration(ctx context.Context, params *Descr
 }
 
 type DescribeStorageConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeStorageConfigurationOutput struct {
@@ -59,6 +60,8 @@ type DescribeStorageConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DescribeRobotInput struct {
 	//
 	// This member is required.
 	Robot *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRobotOutput struct {
@@ -70,6 +72,8 @@ type DescribeRobotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRobotMiddlewares(stack *middleware.Stack, options Options) (err error) {

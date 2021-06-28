@@ -39,6 +39,8 @@ type GetThingShadowInput struct {
 
 	// The name of the shadow.
 	ShadowName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the GetThingShadow operation.
@@ -49,6 +51,8 @@ type GetThingShadowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {

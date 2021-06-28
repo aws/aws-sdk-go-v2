@@ -44,6 +44,8 @@ type CreateInputInput struct {
 
 	// Metadata that can be used to manage the input.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateInputOutput struct {
@@ -53,6 +55,8 @@ type CreateInputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInputMiddlewares(stack *middleware.Stack, options Options) (err error) {

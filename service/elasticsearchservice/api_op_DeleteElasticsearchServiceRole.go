@@ -32,11 +32,14 @@ func (c *Client) DeleteElasticsearchServiceRole(ctx context.Context, params *Del
 }
 
 type DeleteElasticsearchServiceRoleInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeleteElasticsearchServiceRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteElasticsearchServiceRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

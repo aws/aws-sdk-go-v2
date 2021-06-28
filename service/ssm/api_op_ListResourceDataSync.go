@@ -50,6 +50,8 @@ type ListResourceDataSyncInput struct {
 	// S3 bucket. Specify SyncFromSource to view resource data syncs from Organizations
 	// or from multiple Regions.
 	SyncType *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourceDataSyncOutput struct {
@@ -63,6 +65,8 @@ type ListResourceDataSyncOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {

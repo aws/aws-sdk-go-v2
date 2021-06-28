@@ -48,6 +48,8 @@ type BatchSuspendUserInput struct {
 	//
 	// This member is required.
 	UserIdList []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchSuspendUserOutput struct {
@@ -59,6 +61,8 @@ type BatchSuspendUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchSuspendUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

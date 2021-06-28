@@ -50,11 +50,15 @@ type UntagCertificateAuthorityInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type UntagCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

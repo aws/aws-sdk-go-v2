@@ -33,6 +33,8 @@ type ClaimDevicesByClaimCodeInput struct {
 	//
 	// This member is required.
 	ClaimCode *string
+
+	noSmithyDocumentSerde
 }
 
 type ClaimDevicesByClaimCodeOutput struct {
@@ -46,6 +48,8 @@ type ClaimDevicesByClaimCodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationClaimDevicesByClaimCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

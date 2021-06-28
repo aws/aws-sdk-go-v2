@@ -62,6 +62,8 @@ type DescribeAlarmHistoryInput struct {
 
 	// The starting date to retrieve alarm history.
 	StartDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAlarmHistoryOutput struct {
@@ -74,6 +76,8 @@ type DescribeAlarmHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAlarmHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

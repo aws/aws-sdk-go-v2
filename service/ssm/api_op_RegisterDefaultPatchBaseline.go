@@ -37,6 +37,8 @@ type RegisterDefaultPatchBaselineInput struct {
 	//
 	// This member is required.
 	BaselineId *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterDefaultPatchBaselineOutput struct {
@@ -46,6 +48,8 @@ type RegisterDefaultPatchBaselineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterDefaultPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,6 +60,8 @@ type RestoreServerInput struct {
 	// The name of the key pair to set on the new EC2 instance. This can be helpful if
 	// the administrator no longer has the SSH key.
 	KeyPair *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreServerOutput struct {
@@ -69,6 +71,8 @@ type RestoreServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

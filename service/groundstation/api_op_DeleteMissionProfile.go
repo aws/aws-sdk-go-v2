@@ -33,6 +33,8 @@ type DeleteMissionProfileInput struct {
 	//
 	// This member is required.
 	MissionProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -43,6 +45,8 @@ type DeleteMissionProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type SearchPlaceIndexForPositionInput struct {
 	// An optional paramer. The maximum number of results returned per request. Default
 	// value: 50
 	MaxResults int32
+
+	noSmithyDocumentSerde
 }
 
 type SearchPlaceIndexForPositionOutput struct {
@@ -69,6 +71,8 @@ type SearchPlaceIndexForPositionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchPlaceIndexForPositionMiddlewares(stack *middleware.Stack, options Options) (err error) {

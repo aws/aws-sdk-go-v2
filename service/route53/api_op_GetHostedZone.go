@@ -35,6 +35,8 @@ type GetHostedZoneInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contain the response to a GetHostedZone request.
@@ -56,6 +58,8 @@ type GetHostedZoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

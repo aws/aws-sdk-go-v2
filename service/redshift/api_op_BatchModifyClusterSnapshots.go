@@ -45,6 +45,8 @@ type BatchModifyClusterSnapshotsInput struct {
 	// the new retention period will return an error. If you want to suppress the
 	// errors and delete the snapshots, use the force option.
 	ManualSnapshotRetentionPeriod *int32
+
+	noSmithyDocumentSerde
 }
 
 type BatchModifyClusterSnapshotsOutput struct {
@@ -57,6 +59,8 @@ type BatchModifyClusterSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchModifyClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

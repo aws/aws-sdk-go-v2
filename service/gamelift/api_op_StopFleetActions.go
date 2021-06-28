@@ -70,6 +70,8 @@ type StopFleetActionsInput struct {
 	// The fleet location to stop fleet actions for. Specify a location in the form of
 	// an AWS Region code, such as us-west-2.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the input for a request operation.
@@ -87,6 +89,8 @@ type StopFleetActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopFleetActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

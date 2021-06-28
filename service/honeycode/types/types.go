@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -60,6 +61,8 @@ type Cell struct {
 	// auto-detected format, the raw and formatted values will be the same as the data
 	// in the cell.
 	RawValue *string
+
+	noSmithyDocumentSerde
 }
 
 // CellInput object contains the data needed to create or update cells in a table.
@@ -68,6 +71,8 @@ type CellInput struct {
 	// Fact represents the data that is entered into a cell. This data can be free text
 	// or a formula. Formulas need to start with the equals (=) sign.
 	Fact *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for column in the table.
@@ -82,6 +87,8 @@ type ColumnMetadata struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Data needed to create a single row in a table as part of the
@@ -103,6 +110,8 @@ type CreateRowData struct {
 	//
 	// This member is required.
 	CellsToCreate map[string]CellInput
+
+	noSmithyDocumentSerde
 }
 
 // The data in a particular data cell defined on the screen.
@@ -118,6 +127,8 @@ type DataItem struct {
 
 	// The raw value of the data. e.g. jsmith@example.com
 	RawValue *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the options relating to parsing delimited text as part
@@ -139,6 +150,8 @@ type DelimitedTextImportOptions struct {
 	// A parameter to indicate whether empty rows should be ignored or be included in
 	// the import.
 	IgnoreEmptyRows bool
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the options relating to the destination of the import
@@ -147,6 +160,8 @@ type DestinationOptions struct {
 
 	// A map of the column id to the import properties for each column.
 	ColumnMap map[string]SourceDataColumnProperties
+
+	noSmithyDocumentSerde
 }
 
 // A single item in a batch that failed to perform the intended action because of
@@ -164,6 +179,8 @@ type FailedBatchItem struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a filter formula along with the id of the context row
@@ -184,6 +201,8 @@ type Filter struct {
 	// context row if the filter formula contains unqualified references to table
 	// columns and needs a context row to evaluate them successfully.
 	ContextRowId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that has details about the source of the data that was submitted for
@@ -194,6 +213,8 @@ type ImportDataSource struct {
 	//
 	// This member is required.
 	DataSourceConfig *ImportDataSourceConfig
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the configuration parameters for the data source of an
@@ -202,6 +223,8 @@ type ImportDataSourceConfig struct {
 
 	// The URL from which source data will be downloaded for the import request.
 	DataSourceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the attributes of the submitter of the import job.
@@ -212,6 +235,8 @@ type ImportJobSubmitter struct {
 
 	// The AWS user ARN of the submitter of the import job, if available.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the options specified by the sumitter of the import
@@ -224,6 +249,8 @@ type ImportOptions struct {
 
 	// Options relating to the destination of the import request.
 	DestinationOptions *DestinationOptions
+
+	noSmithyDocumentSerde
 }
 
 // A single row in the ResultSet.
@@ -236,6 +263,8 @@ type ResultRow struct {
 
 	// The ID for a particular row.
 	RowId *string
+
+	noSmithyDocumentSerde
 }
 
 // ResultSet contains the results of the request for a single block or list defined
@@ -263,6 +292,8 @@ type ResultSet struct {
 	//
 	// This member is required.
 	Rows []ResultRow
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the properties for importing data to a specific column
@@ -271,6 +302,8 @@ type SourceDataColumnProperties struct {
 
 	// The index of the column in the input file.
 	ColumnIndex int32
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the properties of a table in a workbook.
@@ -281,6 +314,8 @@ type Table struct {
 
 	// The name of the table.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains attributes about a single column in a table
@@ -295,6 +330,8 @@ type TableColumn struct {
 
 	// The name of the column in the table.
 	TableColumnName *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata associated with the table data import job that was submitted.
@@ -319,6 +356,8 @@ type TableDataImportJobMetadata struct {
 	//
 	// This member is required.
 	Submitter *ImportJobSubmitter
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains attributes about a single row in a table
@@ -334,6 +373,8 @@ type TableRow struct {
 	//
 	// This member is required.
 	RowId *string
+
+	noSmithyDocumentSerde
 }
 
 // Data needed to create a single row in a table as part of the
@@ -351,6 +392,8 @@ type UpdateRowData struct {
 	//
 	// This member is required.
 	RowId *string
+
+	noSmithyDocumentSerde
 }
 
 // Data needed to upsert rows in a table as part of a single item in the
@@ -384,6 +427,8 @@ type UpsertRowData struct {
 	//
 	// This member is required.
 	Filter *Filter
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the result of a single upsert row request.
@@ -401,6 +446,8 @@ type UpsertRowsResult struct {
 	//
 	// This member is required.
 	UpsertAction UpsertAction
+
+	noSmithyDocumentSerde
 }
 
 // The input variables to the app to be used by the InvokeScreenAutomation action
@@ -411,4 +458,8 @@ type VariableValue struct {
 	//
 	// This member is required.
 	RawValue *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

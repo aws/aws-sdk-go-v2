@@ -47,6 +47,8 @@ type CreateMonitoringScheduleInput struct {
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateMonitoringScheduleOutput struct {
@@ -58,6 +60,8 @@ type CreateMonitoringScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

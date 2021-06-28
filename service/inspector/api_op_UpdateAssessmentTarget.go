@@ -43,11 +43,15 @@ type UpdateAssessmentTargetInput struct {
 	// The ARN of the resource group that is used to specify the new resource group to
 	// associate with the assessment target.
 	ResourceGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAssessmentTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAssessmentTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

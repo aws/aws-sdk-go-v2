@@ -63,6 +63,8 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRecoveryPointsByBackupVaultOutput struct {
@@ -79,6 +81,8 @@ type ListRecoveryPointsByBackupVaultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRecoveryPointsByBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

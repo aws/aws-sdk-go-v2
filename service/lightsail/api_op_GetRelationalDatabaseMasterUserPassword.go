@@ -44,6 +44,8 @@ type GetRelationalDatabaseMasterUserPasswordInput struct {
 	// password rotates to CURRENT, the PENDING password is no longer available.
 	// Default: CURRENT
 	PasswordVersion types.RelationalDatabasePasswordVersion
+
+	noSmithyDocumentSerde
 }
 
 type GetRelationalDatabaseMasterUserPasswordOutput struct {
@@ -57,6 +59,8 @@ type GetRelationalDatabaseMasterUserPasswordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRelationalDatabaseMasterUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

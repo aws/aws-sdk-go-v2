@@ -31,11 +31,15 @@ type UpdateGlobalSettingsInput struct {
 
 	// A list of resources along with the opt-in preferences for the account.
 	GlobalSettings map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGlobalSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

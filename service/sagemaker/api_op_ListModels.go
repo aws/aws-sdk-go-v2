@@ -55,6 +55,8 @@ type ListModelsInput struct {
 
 	// The sort order for results. The default is Descending.
 	SortOrder types.OrderKey
+
+	noSmithyDocumentSerde
 }
 
 type ListModelsOutput struct {
@@ -70,6 +72,8 @@ type ListModelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

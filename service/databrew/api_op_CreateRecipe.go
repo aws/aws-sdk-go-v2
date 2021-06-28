@@ -47,6 +47,8 @@ type CreateRecipeInput struct {
 
 	// Metadata tags to apply to this recipe.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRecipeOutput struct {
@@ -58,6 +60,8 @@ type CreateRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

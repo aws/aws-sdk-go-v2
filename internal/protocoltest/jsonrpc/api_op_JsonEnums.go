@@ -39,6 +39,8 @@ type JsonEnumsInput struct {
 	FooEnumMap map[string]types.FooEnum
 
 	FooEnumSet []types.FooEnum
+
+	noSmithyDocumentSerde
 }
 
 type JsonEnumsOutput struct {
@@ -56,6 +58,8 @@ type JsonEnumsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationJsonEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {

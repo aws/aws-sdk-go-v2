@@ -48,6 +48,8 @@ type ListAuditSuppressionsInput struct {
 
 	// Information that identifies the noncompliant resource.
 	ResourceIdentifier *types.ResourceIdentifier
+
+	noSmithyDocumentSerde
 }
 
 type ListAuditSuppressionsOutput struct {
@@ -61,6 +63,8 @@ type ListAuditSuppressionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAuditSuppressionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

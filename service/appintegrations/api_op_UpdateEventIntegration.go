@@ -36,11 +36,15 @@ type UpdateEventIntegrationInput struct {
 
 	// The description of the event inegration.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEventIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEventIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

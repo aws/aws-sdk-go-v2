@@ -10,6 +10,8 @@ import (
 // Access denied.
 type AccessDenied struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDenied) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDenied) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // Invalidation batch specified is too large.
 type BatchTooLarge struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BatchTooLarge) Error() string {
@@ -45,6 +49,8 @@ func (e *BatchTooLarge) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // modify an existing cache policy, use UpdateCachePolicy.
 type CachePolicyAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CachePolicyAlreadyExists) Error() string {
@@ -63,6 +69,8 @@ func (e *CachePolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smith
 // behaviors.
 type CachePolicyInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CachePolicyInUse) Error() string {
@@ -80,6 +88,8 @@ func (e *CachePolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // You can't change the value of a public key.
 type CannotChangeImmutablePublicKeyFields struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CannotChangeImmutablePublicKeyFields) Error() string {
@@ -104,6 +114,8 @@ func (e *CannotChangeImmutablePublicKeyFields) ErrorFault() smithy.ErrorFault {
 // CloudFrontOriginAccessIdentityAlreadyExists error.
 type CloudFrontOriginAccessIdentityAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudFrontOriginAccessIdentityAlreadyExists) Error() string {
@@ -125,6 +137,8 @@ func (e *CloudFrontOriginAccessIdentityAlreadyExists) ErrorFault() smithy.ErrorF
 // The Origin Access Identity specified is already in use.
 type CloudFrontOriginAccessIdentityInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudFrontOriginAccessIdentityInUse) Error() string {
@@ -146,6 +160,8 @@ func (e *CloudFrontOriginAccessIdentityInUse) ErrorFault() smithy.ErrorFault {
 // The CNAME specified is already defined for CloudFront.
 type CNAMEAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CNAMEAlreadyExists) Error() string {
@@ -164,6 +180,8 @@ func (e *CNAMEAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // with another distribution.
 type DistributionAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DistributionAlreadyExists) Error() string {
@@ -182,6 +200,8 @@ func (e *DistributionAlreadyExists) ErrorFault() smithy.ErrorFault { return smit
 // distribution before you can delete it.
 type DistributionNotDisabled struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DistributionNotDisabled) Error() string {
@@ -199,6 +219,8 @@ func (e *DistributionNotDisabled) ErrorFault() smithy.ErrorFault { return smithy
 // The specified configuration for field-level encryption already exists.
 type FieldLevelEncryptionConfigAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FieldLevelEncryptionConfigAlreadyExists) Error() string {
@@ -220,6 +242,8 @@ func (e *FieldLevelEncryptionConfigAlreadyExists) ErrorFault() smithy.ErrorFault
 // The specified configuration for field-level encryption is in use.
 type FieldLevelEncryptionConfigInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FieldLevelEncryptionConfigInUse) Error() string {
@@ -239,6 +263,8 @@ func (e *FieldLevelEncryptionConfigInUse) ErrorFault() smithy.ErrorFault { retur
 // The specified profile for field-level encryption already exists.
 type FieldLevelEncryptionProfileAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FieldLevelEncryptionProfileAlreadyExists) Error() string {
@@ -260,6 +286,8 @@ func (e *FieldLevelEncryptionProfileAlreadyExists) ErrorFault() smithy.ErrorFaul
 // The specified profile for field-level encryption is in use.
 type FieldLevelEncryptionProfileInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FieldLevelEncryptionProfileInUse) Error() string {
@@ -279,6 +307,8 @@ func (e *FieldLevelEncryptionProfileInUse) ErrorFault() smithy.ErrorFault { retu
 // The maximum size of a profile for field-level encryption was exceeded.
 type FieldLevelEncryptionProfileSizeExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FieldLevelEncryptionProfileSizeExceeded) Error() string {
@@ -302,6 +332,8 @@ func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorFault() smithy.ErrorFault
 // UpdateFunction.
 type FunctionAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FunctionAlreadyExists) Error() string {
@@ -319,6 +351,8 @@ func (e *FunctionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.F
 // Cannot delete the function because it’s attached to one or more cache behaviors.
 type FunctionInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FunctionInUse) Error() string {
@@ -338,6 +372,8 @@ func (e *FunctionInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type FunctionSizeLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FunctionSizeLimitExceeded) Error() string {
@@ -355,6 +391,8 @@ func (e *FunctionSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smit
 // You cannot delete a managed policy.
 type IllegalDelete struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IllegalDelete) Error() string {
@@ -373,6 +411,8 @@ func (e *IllegalDelete) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // the specified cache behavior.
 type IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) Error() string {
@@ -394,6 +434,8 @@ func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) ErrorFau
 // The update contains modifications that are not allowed.
 type IllegalUpdate struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IllegalUpdate) Error() string {
@@ -411,6 +453,8 @@ func (e *IllegalUpdate) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The value of Quantity and the size of Items don't match.
 type InconsistentQuantities struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InconsistentQuantities) Error() string {
@@ -428,6 +472,8 @@ func (e *InconsistentQuantities) ErrorFault() smithy.ErrorFault { return smithy.
 // An argument is invalid.
 type InvalidArgument struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgument) Error() string {
@@ -445,6 +491,8 @@ func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The default root object file name is too big or contains an invalid character.
 type InvalidDefaultRootObject struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDefaultRootObject) Error() string {
@@ -462,6 +510,8 @@ func (e *InvalidDefaultRootObject) ErrorFault() smithy.ErrorFault { return smith
 // An invalid error code was specified.
 type InvalidErrorCode struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidErrorCode) Error() string {
@@ -482,6 +532,8 @@ func (e *InvalidErrorCode) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // when expected.
 type InvalidForwardCookies struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidForwardCookies) Error() string {
@@ -499,6 +551,8 @@ func (e *InvalidForwardCookies) ErrorFault() smithy.ErrorFault { return smithy.F
 // A CloudFront function association is invalid.
 type InvalidFunctionAssociation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFunctionAssociation) Error() string {
@@ -516,6 +570,8 @@ func (e *InvalidFunctionAssociation) ErrorFault() smithy.ErrorFault { return smi
 // The specified geo restriction parameter is not valid.
 type InvalidGeoRestrictionParameter struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGeoRestrictionParameter) Error() string {
@@ -533,6 +589,8 @@ func (e *InvalidGeoRestrictionParameter) ErrorFault() smithy.ErrorFault { return
 // The headers specified are not valid for an Amazon S3 origin.
 type InvalidHeadersForS3Origin struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidHeadersForS3Origin) Error() string {
@@ -550,6 +608,8 @@ func (e *InvalidHeadersForS3Origin) ErrorFault() smithy.ErrorFault { return smit
 // The If-Match version is missing or not valid.
 type InvalidIfMatchVersion struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidIfMatchVersion) Error() string {
@@ -567,6 +627,8 @@ func (e *InvalidIfMatchVersion) ErrorFault() smithy.ErrorFault { return smithy.F
 // The specified Lambda@Edge function association is invalid.
 type InvalidLambdaFunctionAssociation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLambdaFunctionAssociation) Error() string {
@@ -586,6 +648,8 @@ func (e *InvalidLambdaFunctionAssociation) ErrorFault() smithy.ErrorFault { retu
 // The location code specified is not valid.
 type InvalidLocationCode struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLocationCode) Error() string {
@@ -603,6 +667,8 @@ func (e *InvalidLocationCode) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The minimum protocol version specified is not valid.
 type InvalidMinimumProtocolVersion struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMinimumProtocolVersion) Error() string {
@@ -621,6 +687,8 @@ func (e *InvalidMinimumProtocolVersion) ErrorFault() smithy.ErrorFault { return 
 // bucket.
 type InvalidOrigin struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOrigin) Error() string {
@@ -638,6 +706,8 @@ func (e *InvalidOrigin) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The origin access identity is not valid or doesn't exist.
 type InvalidOriginAccessIdentity struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOriginAccessIdentity) Error() string {
@@ -655,6 +725,8 @@ func (e *InvalidOriginAccessIdentity) ErrorFault() smithy.ErrorFault { return sm
 // The keep alive timeout specified for the origin is not valid.
 type InvalidOriginKeepaliveTimeout struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOriginKeepaliveTimeout) Error() string {
@@ -672,6 +744,8 @@ func (e *InvalidOriginKeepaliveTimeout) ErrorFault() smithy.ErrorFault { return 
 // The read timeout specified for the origin is not valid.
 type InvalidOriginReadTimeout struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOriginReadTimeout) Error() string {
@@ -690,6 +764,8 @@ func (e *InvalidOriginReadTimeout) ErrorFault() smithy.ErrorFault { return smith
 // support only clients that support Server Name Indication (SNI).
 type InvalidProtocolSettings struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidProtocolSettings) Error() string {
@@ -707,6 +783,8 @@ func (e *InvalidProtocolSettings) ErrorFault() smithy.ErrorFault { return smithy
 // The query string parameters specified are not valid.
 type InvalidQueryStringParameters struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidQueryStringParameters) Error() string {
@@ -725,6 +803,8 @@ func (e *InvalidQueryStringParameters) ErrorFault() smithy.ErrorFault { return s
 // (/).
 type InvalidRelativePath struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRelativePath) Error() string {
@@ -744,6 +824,8 @@ func (e *InvalidRelativePath) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // distribution configuration.
 type InvalidRequiredProtocol struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequiredProtocol) Error() string {
@@ -761,6 +843,8 @@ func (e *InvalidRequiredProtocol) ErrorFault() smithy.ErrorFault { return smithy
 // A response code is not valid.
 type InvalidResponseCode struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResponseCode) Error() string {
@@ -778,6 +862,8 @@ func (e *InvalidResponseCode) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The tagging specified is not valid.
 type InvalidTagging struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagging) Error() string {
@@ -795,6 +881,8 @@ func (e *InvalidTagging) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 // The TTL order specified is not valid.
 type InvalidTTLOrder struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTTLOrder) Error() string {
@@ -812,6 +900,8 @@ func (e *InvalidTTLOrder) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // A viewer certificate specified is not valid.
 type InvalidViewerCertificate struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidViewerCertificate) Error() string {
@@ -833,6 +923,8 @@ func (e *InvalidViewerCertificate) ErrorFault() smithy.ErrorFault { return smith
 // 473e64fd-f30b-4765-81a0-62ad96dd167a.
 type InvalidWebACLId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidWebACLId) Error() string {
@@ -851,6 +943,8 @@ func (e *InvalidWebACLId) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // modify an existing key group, use UpdateKeyGroup.
 type KeyGroupAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KeyGroupAlreadyExists) Error() string {
@@ -869,6 +963,8 @@ func (e *KeyGroupAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.F
 // Content-Type header is set.
 type MissingBody struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingBody) Error() string {
@@ -886,6 +982,8 @@ func (e *MissingBody) ErrorFault() smithy.ErrorFault { return smithy.FaultClient
 // The cache policy does not exist.
 type NoSuchCachePolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchCachePolicy) Error() string {
@@ -903,6 +1001,8 @@ func (e *NoSuchCachePolicy) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The specified origin access identity does not exist.
 type NoSuchCloudFrontOriginAccessIdentity struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchCloudFrontOriginAccessIdentity) Error() string {
@@ -924,6 +1024,8 @@ func (e *NoSuchCloudFrontOriginAccessIdentity) ErrorFault() smithy.ErrorFault {
 // The specified distribution does not exist.
 type NoSuchDistribution struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchDistribution) Error() string {
@@ -941,6 +1043,8 @@ func (e *NoSuchDistribution) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The specified configuration for field-level encryption doesn't exist.
 type NoSuchFieldLevelEncryptionConfig struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchFieldLevelEncryptionConfig) Error() string {
@@ -960,6 +1064,8 @@ func (e *NoSuchFieldLevelEncryptionConfig) ErrorFault() smithy.ErrorFault { retu
 // The specified profile for field-level encryption doesn't exist.
 type NoSuchFieldLevelEncryptionProfile struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchFieldLevelEncryptionProfile) Error() string {
@@ -979,6 +1085,8 @@ func (e *NoSuchFieldLevelEncryptionProfile) ErrorFault() smithy.ErrorFault { ret
 // The function does not exist.
 type NoSuchFunctionExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchFunctionExists) Error() string {
@@ -996,6 +1104,8 @@ func (e *NoSuchFunctionExists) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The specified invalidation does not exist.
 type NoSuchInvalidation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchInvalidation) Error() string {
@@ -1013,6 +1123,8 @@ func (e *NoSuchInvalidation) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // No origin exists with the specified Origin Id.
 type NoSuchOrigin struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchOrigin) Error() string {
@@ -1030,6 +1142,8 @@ func (e *NoSuchOrigin) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // The origin request policy does not exist.
 type NoSuchOriginRequestPolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchOriginRequestPolicy) Error() string {
@@ -1047,6 +1161,8 @@ func (e *NoSuchOriginRequestPolicy) ErrorFault() smithy.ErrorFault { return smit
 // The specified public key doesn't exist.
 type NoSuchPublicKey struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchPublicKey) Error() string {
@@ -1064,6 +1180,8 @@ func (e *NoSuchPublicKey) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The real-time log configuration does not exist.
 type NoSuchRealtimeLogConfig struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchRealtimeLogConfig) Error() string {
@@ -1081,6 +1199,8 @@ func (e *NoSuchRealtimeLogConfig) ErrorFault() smithy.ErrorFault { return smithy
 // A resource that was specified is not valid.
 type NoSuchResource struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchResource) Error() string {
@@ -1098,6 +1218,8 @@ func (e *NoSuchResource) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 // The specified streaming distribution does not exist.
 type NoSuchStreamingDistribution struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchStreamingDistribution) Error() string {
@@ -1117,6 +1239,8 @@ func (e *NoSuchStreamingDistribution) ErrorFault() smithy.ErrorFault { return sm
 // UpdateOriginRequestPolicy.
 type OriginRequestPolicyAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OriginRequestPolicyAlreadyExists) Error() string {
@@ -1137,6 +1261,8 @@ func (e *OriginRequestPolicyAlreadyExists) ErrorFault() smithy.ErrorFault { retu
 // cache behaviors.
 type OriginRequestPolicyInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OriginRequestPolicyInUse) Error() string {
@@ -1154,6 +1280,8 @@ func (e *OriginRequestPolicyInUse) ErrorFault() smithy.ErrorFault { return smith
 // The precondition in one or more of the request fields evaluated to false.
 type PreconditionFailed struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PreconditionFailed) Error() string {
@@ -1171,6 +1299,8 @@ func (e *PreconditionFailed) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The specified public key already exists.
 type PublicKeyAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PublicKeyAlreadyExists) Error() string {
@@ -1188,6 +1318,8 @@ func (e *PublicKeyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified public key is in use.
 type PublicKeyInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PublicKeyInUse) Error() string {
@@ -1205,6 +1337,8 @@ func (e *PublicKeyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 // No profile specified for the field-level encryption query argument.
 type QueryArgProfileEmpty struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *QueryArgProfileEmpty) Error() string {
@@ -1224,6 +1358,8 @@ func (e *QueryArgProfileEmpty) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // UpdateRealtimeLogConfig.
 type RealtimeLogConfigAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RealtimeLogConfigAlreadyExists) Error() string {
@@ -1242,6 +1378,8 @@ func (e *RealtimeLogConfigAlreadyExists) ErrorFault() smithy.ErrorFault { return
 // more cache behaviors.
 type RealtimeLogConfigInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RealtimeLogConfigInUse) Error() string {
@@ -1259,6 +1397,8 @@ func (e *RealtimeLogConfigInUse) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified real-time log configuration belongs to a different account.
 type RealtimeLogConfigOwnerMismatch struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RealtimeLogConfigOwnerMismatch) Error() string {
@@ -1276,6 +1416,8 @@ func (e *RealtimeLogConfigOwnerMismatch) ErrorFault() smithy.ErrorFault { return
 // Cannot delete this resource because it is in use.
 type ResourceInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUse) Error() string {
@@ -1294,6 +1436,8 @@ func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // associated with another distribution
 type StreamingDistributionAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StreamingDistributionAlreadyExists) Error() string {
@@ -1316,6 +1460,8 @@ func (e *StreamingDistributionAlreadyExists) ErrorFault() smithy.ErrorFault {
 // distribution before you can delete it.
 type StreamingDistributionNotDisabled struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StreamingDistributionNotDisabled) Error() string {
@@ -1335,6 +1481,8 @@ func (e *StreamingDistributionNotDisabled) ErrorFault() smithy.ErrorFault { retu
 // The CloudFront function failed.
 type TestFunctionFailed struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TestFunctionFailed) Error() string {
@@ -1352,6 +1500,8 @@ func (e *TestFunctionFailed) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // You cannot create more cache behaviors for the distribution.
 type TooManyCacheBehaviors struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyCacheBehaviors) Error() string {
@@ -1372,6 +1522,8 @@ func (e *TooManyCacheBehaviors) ErrorFault() smithy.ErrorFault { return smithy.F
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyCachePolicies struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyCachePolicies) Error() string {
@@ -1389,6 +1541,8 @@ func (e *TooManyCachePolicies) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // You cannot create anymore custom SSL/TLS certificates.
 type TooManyCertificates struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyCertificates) Error() string {
@@ -1407,6 +1561,8 @@ func (e *TooManyCertificates) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // access identities allowed.
 type TooManyCloudFrontOriginAccessIdentities struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyCloudFrontOriginAccessIdentities) Error() string {
@@ -1429,6 +1585,8 @@ func (e *TooManyCloudFrontOriginAccessIdentities) ErrorFault() smithy.ErrorFault
 // cache behavior.
 type TooManyCookieNamesInWhiteList struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyCookieNamesInWhiteList) Error() string {
@@ -1449,6 +1607,8 @@ func (e *TooManyCookieNamesInWhiteList) ErrorFault() smithy.ErrorFault { return 
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyCookiesInCachePolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyCookiesInCachePolicy) Error() string {
@@ -1469,6 +1629,8 @@ func (e *TooManyCookiesInCachePolicy) ErrorFault() smithy.ErrorFault { return sm
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyCookiesInOriginRequestPolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyCookiesInOriginRequestPolicy) Error() string {
@@ -1490,6 +1652,8 @@ func (e *TooManyCookiesInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 // Your request contains more CNAMEs than are allowed per distribution.
 type TooManyDistributionCNAMEs struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributionCNAMEs) Error() string {
@@ -1508,6 +1672,8 @@ func (e *TooManyDistributionCNAMEs) ErrorFault() smithy.ErrorFault { return smit
 // distributions allowed.
 type TooManyDistributions struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributions) Error() string {
@@ -1528,6 +1694,8 @@ func (e *TooManyDistributions) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyDistributionsAssociatedToCachePolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributionsAssociatedToCachePolicy) Error() string {
@@ -1550,6 +1718,8 @@ func (e *TooManyDistributionsAssociatedToCachePolicy) ErrorFault() smithy.ErrorF
 // configuration for field-level encryption.
 type TooManyDistributionsAssociatedToFieldLevelEncryptionConfig struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) Error() string {
@@ -1574,6 +1744,8 @@ func (e *TooManyDistributionsAssociatedToFieldLevelEncryptionConfig) ErrorFault(
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyDistributionsAssociatedToKeyGroup struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributionsAssociatedToKeyGroup) Error() string {
@@ -1598,6 +1770,8 @@ func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorFault() smithy.ErrorFaul
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyDistributionsAssociatedToOriginRequestPolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) Error() string {
@@ -1622,6 +1796,8 @@ func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorFault() smith
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyDistributionsWithFunctionAssociations struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributionsWithFunctionAssociations) Error() string {
@@ -1644,6 +1820,8 @@ func (e *TooManyDistributionsWithFunctionAssociations) ErrorFault() smithy.Error
 // Lambda@Edge function associations per owner to be exceeded.
 type TooManyDistributionsWithLambdaAssociations struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributionsWithLambdaAssociations) Error() string {
@@ -1666,6 +1844,8 @@ func (e *TooManyDistributionsWithLambdaAssociations) ErrorFault() smithy.ErrorFa
 // Lambda@Edge function.
 type TooManyDistributionsWithSingleFunctionARN struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyDistributionsWithSingleFunctionARN) Error() string {
@@ -1688,6 +1868,8 @@ func (e *TooManyDistributionsWithSingleFunctionARN) ErrorFault() smithy.ErrorFau
 // created.
 type TooManyFieldLevelEncryptionConfigs struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFieldLevelEncryptionConfigs) Error() string {
@@ -1710,6 +1892,8 @@ func (e *TooManyFieldLevelEncryptionConfigs) ErrorFault() smithy.ErrorFault {
 // created.
 type TooManyFieldLevelEncryptionContentTypeProfiles struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFieldLevelEncryptionContentTypeProfiles) Error() string {
@@ -1732,6 +1916,8 @@ func (e *TooManyFieldLevelEncryptionContentTypeProfiles) ErrorFault() smithy.Err
 // created.
 type TooManyFieldLevelEncryptionEncryptionEntities struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFieldLevelEncryptionEncryptionEntities) Error() string {
@@ -1754,6 +1940,8 @@ func (e *TooManyFieldLevelEncryptionEncryptionEntities) ErrorFault() smithy.Erro
 // created.
 type TooManyFieldLevelEncryptionFieldPatterns struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFieldLevelEncryptionFieldPatterns) Error() string {
@@ -1775,6 +1963,8 @@ func (e *TooManyFieldLevelEncryptionFieldPatterns) ErrorFault() smithy.ErrorFaul
 // The maximum number of profiles for field-level encryption have been created.
 type TooManyFieldLevelEncryptionProfiles struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFieldLevelEncryptionProfiles) Error() string {
@@ -1797,6 +1987,8 @@ func (e *TooManyFieldLevelEncryptionProfiles) ErrorFault() smithy.ErrorFault {
 // created.
 type TooManyFieldLevelEncryptionQueryArgProfiles struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFieldLevelEncryptionQueryArgProfiles) Error() string {
@@ -1821,6 +2013,8 @@ func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorFault() smithy.ErrorF
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyFunctionAssociations struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFunctionAssociations) Error() string {
@@ -1841,6 +2035,8 @@ func (e *TooManyFunctionAssociations) ErrorFault() smithy.ErrorFault { return sm
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyFunctions struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFunctions) Error() string {
@@ -1861,6 +2057,8 @@ func (e *TooManyFunctions) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyHeadersInCachePolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyHeadersInCachePolicy) Error() string {
@@ -1878,6 +2076,8 @@ func (e *TooManyHeadersInCachePolicy) ErrorFault() smithy.ErrorFault { return sm
 // Your request contains too many headers in forwarded values.
 type TooManyHeadersInForwardedValues struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyHeadersInForwardedValues) Error() string {
@@ -1900,6 +2100,8 @@ func (e *TooManyHeadersInForwardedValues) ErrorFault() smithy.ErrorFault { retur
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyHeadersInOriginRequestPolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyHeadersInOriginRequestPolicy) Error() string {
@@ -1922,6 +2124,8 @@ func (e *TooManyHeadersInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
 // requests, or invalidation objects.
 type TooManyInvalidationsInProgress struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyInvalidationsInProgress) Error() string {
@@ -1942,6 +2146,8 @@ func (e *TooManyInvalidationsInProgress) ErrorFault() smithy.ErrorFault { return
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyKeyGroups struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyKeyGroups) Error() string {
@@ -1962,6 +2168,8 @@ func (e *TooManyKeyGroups) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyKeyGroupsAssociatedToDistribution struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyKeyGroupsAssociatedToDistribution) Error() string {
@@ -1984,6 +2192,8 @@ func (e *TooManyKeyGroupsAssociatedToDistribution) ErrorFault() smithy.ErrorFaul
 // per distribution.
 type TooManyLambdaFunctionAssociations struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyLambdaFunctionAssociations) Error() string {
@@ -2003,6 +2213,8 @@ func (e *TooManyLambdaFunctionAssociations) ErrorFault() smithy.ErrorFault { ret
 // Your request contains too many origin custom headers.
 type TooManyOriginCustomHeaders struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyOriginCustomHeaders) Error() string {
@@ -2021,6 +2233,8 @@ func (e *TooManyOriginCustomHeaders) ErrorFault() smithy.ErrorFault { return smi
 // groups allowed.
 type TooManyOriginGroupsPerDistribution struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyOriginGroupsPerDistribution) Error() string {
@@ -2045,6 +2259,8 @@ func (e *TooManyOriginGroupsPerDistribution) ErrorFault() smithy.ErrorFault {
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyOriginRequestPolicies struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyOriginRequestPolicies) Error() string {
@@ -2062,6 +2278,8 @@ func (e *TooManyOriginRequestPolicies) ErrorFault() smithy.ErrorFault { return s
 // You cannot create more origins for the distribution.
 type TooManyOrigins struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyOrigins) Error() string {
@@ -2080,6 +2298,8 @@ func (e *TooManyOrigins) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 // To create a new public key, delete one of the existing keys.
 type TooManyPublicKeys struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyPublicKeys) Error() string {
@@ -2100,6 +2320,8 @@ func (e *TooManyPublicKeys) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyPublicKeysInKeyGroup struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyPublicKeysInKeyGroup) Error() string {
@@ -2117,6 +2339,8 @@ func (e *TooManyPublicKeysInKeyGroup) ErrorFault() smithy.ErrorFault { return sm
 // Your request contains too many query string parameters.
 type TooManyQueryStringParameters struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyQueryStringParameters) Error() string {
@@ -2137,6 +2361,8 @@ func (e *TooManyQueryStringParameters) ErrorFault() smithy.ErrorFault { return s
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyQueryStringsInCachePolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyQueryStringsInCachePolicy) Error() string {
@@ -2159,6 +2385,8 @@ func (e *TooManyQueryStringsInCachePolicy) ErrorFault() smithy.ErrorFault { retu
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyQueryStringsInOriginRequestPolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyQueryStringsInOriginRequestPolicy) Error() string {
@@ -2183,6 +2411,8 @@ func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorFault() smithy.ErrorFaul
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyRealtimeLogConfigs struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRealtimeLogConfigs) Error() string {
@@ -2200,6 +2430,8 @@ func (e *TooManyRealtimeLogConfigs) ErrorFault() smithy.ErrorFault { return smit
 // Your request contains more CNAMEs than are allowed per distribution.
 type TooManyStreamingDistributionCNAMEs struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyStreamingDistributionCNAMEs) Error() string {
@@ -2222,6 +2454,8 @@ func (e *TooManyStreamingDistributionCNAMEs) ErrorFault() smithy.ErrorFault {
 // streaming distributions allowed.
 type TooManyStreamingDistributions struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyStreamingDistributions) Error() string {
@@ -2239,6 +2473,8 @@ func (e *TooManyStreamingDistributions) ErrorFault() smithy.ErrorFault { return 
 // Your request contains more trusted signers than are allowed per distribution.
 type TooManyTrustedSigners struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTrustedSigners) Error() string {
@@ -2256,6 +2492,8 @@ func (e *TooManyTrustedSigners) ErrorFault() smithy.ErrorFault { return smithy.F
 // The specified key group does not exist.
 type TrustedKeyGroupDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrustedKeyGroupDoesNotExist) Error() string {
@@ -2273,6 +2511,8 @@ func (e *TrustedKeyGroupDoesNotExist) ErrorFault() smithy.ErrorFault { return sm
 // One or more of your trusted signers don't exist.
 type TrustedSignerDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrustedSignerDoesNotExist) Error() string {
@@ -2290,6 +2530,8 @@ func (e *TrustedSignerDoesNotExist) ErrorFault() smithy.ErrorFault { return smit
 // This operation is not supported in this region.
 type UnsupportedOperation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperation) Error() string {

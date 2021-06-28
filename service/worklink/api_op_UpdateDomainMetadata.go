@@ -40,11 +40,15 @@ type UpdateDomainMetadataInput struct {
 
 	// The name to display.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDomainMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

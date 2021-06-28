@@ -90,6 +90,8 @@ type DetectStackSetDriftInput struct {
 	// tolerance, see Stack set operation options
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
 	OperationPreferences *types.StackSetOperationPreferences
+
+	noSmithyDocumentSerde
 }
 
 type DetectStackSetDriftOutput struct {
@@ -101,6 +103,8 @@ type DetectStackSetDriftOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectStackSetDriftMiddlewares(stack *middleware.Stack, options Options) (err error) {

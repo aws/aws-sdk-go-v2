@@ -85,6 +85,8 @@ type UpdateSlotInput struct {
 	// New settings that determine how slot values are formatted in Amazon CloudWatch
 	// logs.
 	ObfuscationSetting *types.ObfuscationSetting
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSlotOutput struct {
@@ -132,6 +134,8 @@ type UpdateSlotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {

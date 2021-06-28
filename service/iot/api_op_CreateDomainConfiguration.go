@@ -59,6 +59,8 @@ type CreateDomainConfigurationInput struct {
 	// ownership. This certificate must be signed by a public certificate authority.
 	// This value is not required for AWS-managed domains.
 	ValidationCertificateArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDomainConfigurationOutput struct {
@@ -71,6 +73,8 @@ type CreateDomainConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

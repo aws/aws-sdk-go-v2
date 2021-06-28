@@ -53,6 +53,8 @@ type LookupPolicyInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type LookupPolicyOutput struct {
@@ -67,6 +69,8 @@ type LookupPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationLookupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

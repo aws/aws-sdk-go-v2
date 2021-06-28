@@ -39,6 +39,8 @@ type DeleteInstanceInput struct {
 
 	// A Boolean value to indicate whether to delete the enabled add-ons for the disk.
 	ForceDeleteAddOns *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInstanceOutput struct {
@@ -50,6 +52,8 @@ type DeleteInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

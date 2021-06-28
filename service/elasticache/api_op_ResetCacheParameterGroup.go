@@ -48,6 +48,8 @@ type ResetCacheParameterGroupInput struct {
 	// values. If false, only the parameters listed by ParameterNameValues are reset to
 	// their default values. Valid values: true | false
 	ResetAllParameters bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of one of the following operations:
@@ -63,6 +65,8 @@ type ResetCacheParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

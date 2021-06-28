@@ -74,6 +74,8 @@ type CreateTrustInput struct {
 
 	// The trust relationship type. Forest is the default.
 	TrustType types.TrustType
+
+	noSmithyDocumentSerde
 }
 
 // The result of a CreateTrust request.
@@ -84,6 +86,8 @@ type CreateTrustOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {

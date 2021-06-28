@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -26,6 +27,8 @@ type AdvancedBackupSetting struct {
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html)
 	// in the AWS Backup User Guide. Valid values: EC2.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains detailed information about a backup job.
@@ -126,6 +129,8 @@ type BackupJob struct {
 
 	// A detailed message explaining the status of the job to back up a resource.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an optional backup plan display name and an array of BackupRule
@@ -146,6 +151,8 @@ type BackupPlan struct {
 
 	// Contains a list of BackupOptions for each resource type.
 	AdvancedBackupSettings []AdvancedBackupSetting
+
+	noSmithyDocumentSerde
 }
 
 // Contains an optional backup plan display name and an array of BackupRule
@@ -167,6 +174,8 @@ type BackupPlanInput struct {
 	// Specifies a list of BackupOptions for each resource type. These settings are
 	// only available for Windows VSS backup jobs.
 	AdvancedBackupSettings []AdvancedBackupSetting
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata about a backup plan.
@@ -211,6 +220,8 @@ type BackupPlansListMember struct {
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version IDs cannot be edited.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object specifying metadata associated with a backup plan template.
@@ -221,6 +232,8 @@ type BackupPlanTemplatesListMember struct {
 
 	// The optional display name of a backup plan template.
 	BackupPlanTemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a scheduled task used to back up a selection of resources.
@@ -281,6 +294,8 @@ type BackupRule struct {
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional.
 	StartWindowMinutes *int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a scheduled task used to back up a selection of resources.
@@ -332,6 +347,8 @@ type BackupRuleInput struct {
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional.
 	StartWindowMinutes *int64
+
+	noSmithyDocumentSerde
 }
 
 // Used to specify a set of resources to a backup plan.
@@ -356,6 +373,8 @@ type BackupSelection struct {
 	// An array of strings that contain Amazon Resource Names (ARNs) of resources to
 	// assign to a backup plan.
 	Resources []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata about a BackupSelection object.
@@ -383,6 +402,8 @@ type BackupSelectionsListMember struct {
 
 	// The display name of a resource selection document.
 	SelectionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata about a backup vault.
@@ -415,6 +436,8 @@ type BackupVaultListMember struct {
 
 	// The number of recovery points that are stored in a backup vault.
 	NumberOfRecoveryPoints int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains DeleteAt and MoveToColdStorageAt timestamps, which are used to specify
@@ -434,6 +457,8 @@ type CalculatedLifecycle struct {
 
 	// A timestamp that specifies when to transition a recovery point to cold storage.
 	MoveToColdStorageAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains an array of triplets made up of a condition type (such as
@@ -458,6 +483,8 @@ type Condition struct {
 	//
 	// This member is required.
 	ConditionValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the copy operation.
@@ -479,6 +506,8 @@ type CopyAction struct {
 	// to cold. Only Amazon EFS file system backups can be transitioned to cold
 	// storage.
 	Lifecycle *Lifecycle
+
+	noSmithyDocumentSerde
 }
 
 // Contains detailed information about a copy job.
@@ -544,6 +573,8 @@ type CopyJob struct {
 
 	// A detailed message explaining the status of the job to copy a resource.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an array of Transition objects specifying how long in days before a
@@ -563,6 +594,8 @@ type Lifecycle struct {
 	// Specifies the number of days after creation that a recovery point is moved to
 	// cold storage.
 	MoveToColdStorageAfterDays *int64
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains information about a backed-up resource.
@@ -582,6 +615,8 @@ type ProtectedResource struct {
 	// EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For
 	// VSS Windows backups, the only supported resource type is Amazon EC2.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains detailed information about the recovery points stored in a backup
@@ -672,6 +707,8 @@ type RecoveryPointByBackupVault struct {
 
 	// A status code specifying the state of the recovery point.
 	Status RecoveryPointStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains detailed information about a saved recovery point.
@@ -704,6 +741,8 @@ type RecoveryPointByResource struct {
 
 	// A status code specifying the state of the recovery point.
 	Status RecoveryPointStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the backup plan and rule that AWS Backup used to
@@ -725,6 +764,8 @@ type RecoveryPointCreator struct {
 	// Uniquely identifies a rule used to schedule the backup of a selection of
 	// resources.
 	BackupRuleId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata about a restore job.
@@ -783,4 +824,8 @@ type RestoreJobsListMember struct {
 
 	// A detailed message explaining the status of the job to restore a recovery point.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -37,6 +37,8 @@ type GetEmailTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // The following element is returned by the service.
@@ -55,6 +57,8 @@ type GetEmailTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

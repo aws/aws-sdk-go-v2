@@ -62,6 +62,8 @@ type CreateDomainInput struct {
 
 	// One or more tag key-value pairs for the domain.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDomainOutput struct {
@@ -71,6 +73,8 @@ type CreateDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

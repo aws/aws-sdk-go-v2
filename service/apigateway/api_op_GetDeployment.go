@@ -51,6 +51,8 @@ type GetDeploymentInput struct {
 	// "apisummary" string. For example, GET
 	// /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary.
 	Embed []string
+
+	noSmithyDocumentSerde
 }
 
 // An immutable representation of a RestApi resource that can be called by users
@@ -79,6 +81,8 @@ type GetDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

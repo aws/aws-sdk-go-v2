@@ -56,6 +56,8 @@ type CreateGroupVersionInput struct {
 
 	// The ARN of the subscription definition version for this group.
 	SubscriptionDefinitionVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGroupVersionOutput struct {
@@ -74,6 +76,8 @@ type CreateGroupVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

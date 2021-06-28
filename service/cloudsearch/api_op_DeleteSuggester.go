@@ -46,6 +46,8 @@ type DeleteSuggesterInput struct {
 	//
 	// This member is required.
 	SuggesterName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DeleteSuggester request. Contains the status of the deleted
@@ -59,6 +61,8 @@ type DeleteSuggesterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSuggesterMiddlewares(stack *middleware.Stack, options Options) (err error) {

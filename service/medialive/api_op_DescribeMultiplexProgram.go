@@ -39,6 +39,8 @@ type DescribeMultiplexProgramInput struct {
 	//
 	// This member is required.
 	ProgramName *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DescribeMultiplexProgramResponse
@@ -64,6 +66,8 @@ type DescribeMultiplexProgramOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {

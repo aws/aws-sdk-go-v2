@@ -54,6 +54,8 @@ type ListKeysInput struct {
 	// truncated results. Set it to the value of NextMarker from the truncated response
 	// you just received.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListKeysOutput struct {
@@ -73,6 +75,8 @@ type ListKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

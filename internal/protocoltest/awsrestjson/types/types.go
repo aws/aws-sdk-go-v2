@@ -3,11 +3,14 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
 type ComplexNestedErrorData struct {
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 // A union with a representative set of types for members.
@@ -29,60 +32,80 @@ type MyUnion interface {
 
 type MyUnionMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberStringValue) isMyUnion() {}
 
 type MyUnionMemberBooleanValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberBooleanValue) isMyUnion() {}
 
 type MyUnionMemberNumberValue struct {
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberNumberValue) isMyUnion() {}
 
 type MyUnionMemberBlobValue struct {
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberBlobValue) isMyUnion() {}
 
 type MyUnionMemberTimestampValue struct {
 	Value time.Time
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberTimestampValue) isMyUnion() {}
 
 type MyUnionMemberEnumValue struct {
 	Value FooEnum
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberEnumValue) isMyUnion() {}
 
 type MyUnionMemberListValue struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberListValue) isMyUnion() {}
 
 type MyUnionMemberMapValue struct {
 	Value map[string]string
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberMapValue) isMyUnion() {}
 
 type MyUnionMemberStructureValue struct {
 	Value GreetingStruct
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberStructureValue) isMyUnion() {}
 
 type MyUnionMemberRenamedStructureValue struct {
 	Value RenamedGreeting
+
+	noSmithyDocumentSerde
 }
 
 func (*MyUnionMemberRenamedStructureValue) isMyUnion() {}
@@ -91,39 +114,55 @@ type NestedPayload struct {
 	Greeting *string
 
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type RecursiveShapesInputOutputNested1 struct {
 	Foo *string
 
 	Nested *RecursiveShapesInputOutputNested2
+
+	noSmithyDocumentSerde
 }
 
 type RecursiveShapesInputOutputNested2 struct {
 	Bar *string
 
 	RecursiveMember *RecursiveShapesInputOutputNested1
+
+	noSmithyDocumentSerde
 }
 
 type StructureListMember struct {
 	A *string
 
 	B *string
+
+	noSmithyDocumentSerde
 }
 
 type RenamedGreeting struct {
 	Salutation *string
+
+	noSmithyDocumentSerde
 }
 
 type GreetingStruct struct {
 	Hi *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isMyUnion() {}

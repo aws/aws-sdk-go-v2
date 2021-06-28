@@ -32,11 +32,15 @@ type DeleteModelExplainabilityJobDefinitionInput struct {
 	//
 	// This member is required.
 	JobDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteModelExplainabilityJobDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteModelExplainabilityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

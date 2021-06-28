@@ -70,6 +70,8 @@ type ListBackupsInput struct {
 	// Only backups created before this time are listed. TimeRangeUpperBound is
 	// exclusive.
 	TimeRangeUpperBound *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ListBackupsOutput struct {
@@ -89,6 +91,8 @@ type ListBackupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,11 +60,15 @@ type UpdateGroupInput struct {
 	// any ASCII character from the ! (\u0021) through the DEL character (\u007F),
 	// including most punctuation characters, digits, and upper and lowercased letters.
 	NewPath *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

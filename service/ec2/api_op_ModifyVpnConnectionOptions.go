@@ -56,6 +56,8 @@ type ModifyVpnConnectionOptionsInput struct {
 
 	// The IPv6 CIDR on the AWS side of the VPN connection. Default: ::/0
 	RemoteIpv6NetworkCidr *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyVpnConnectionOptionsOutput struct {
@@ -65,6 +67,8 @@ type ModifyVpnConnectionOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyVpnConnectionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

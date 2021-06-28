@@ -84,6 +84,8 @@ type DeleteClusterInput struct {
 	// FinalClusterSnapshotIdentifier parameter must be specified if
 	// SkipFinalClusterSnapshot is false. Default: false
 	SkipFinalClusterSnapshot bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteClusterOutput struct {
@@ -93,6 +95,8 @@ type DeleteClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

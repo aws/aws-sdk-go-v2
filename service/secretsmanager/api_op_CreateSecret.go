@@ -243,6 +243,8 @@ type CreateSecretInput struct {
 	// characters. Generally allowed characters: letters, spaces, and numbers
 	// representable in UTF-8, plus the following special characters: + - = . _ : / @.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateSecretOutput struct {
@@ -268,6 +270,8 @@ type CreateSecretOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {

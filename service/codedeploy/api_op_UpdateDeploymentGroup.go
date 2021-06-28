@@ -110,6 +110,8 @@ type UpdateDeploymentGroupInput struct {
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
 	// in the AWS CodeDeploy User Guide.
 	TriggerConfigurations []types.TriggerConfig
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an UpdateDeploymentGroup operation.
@@ -124,6 +126,8 @@ type UpdateDeploymentGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type DeactivateMFADeviceInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeactivateMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeactivateMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

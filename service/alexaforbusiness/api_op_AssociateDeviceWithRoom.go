@@ -36,11 +36,15 @@ type AssociateDeviceWithRoomInput struct {
 
 	// The ARN of the room with which to associate the device. Required.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateDeviceWithRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateDeviceWithRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

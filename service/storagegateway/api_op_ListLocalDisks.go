@@ -42,6 +42,8 @@ type ListLocalDisksInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLocalDisksOutput struct {
@@ -57,6 +59,8 @@ type ListLocalDisksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLocalDisksMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -63,6 +63,8 @@ type DescribeTrafficMirrorTargetsInput struct {
 
 	// The ID of the Traffic Mirror targets.
 	TrafficMirrorTargetIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTrafficMirrorTargetsOutput struct {
@@ -76,6 +78,8 @@ type DescribeTrafficMirrorTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrafficMirrorTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type CreateApplicationInput struct {
 	// AppConfig resources. Each tag consists of a key and an optional value, both of
 	// which you define.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateApplicationOutput struct {
@@ -59,6 +61,8 @@ type CreateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,12 +35,16 @@ type DeleteDevicePoolInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a delete device pool request.
 type DeleteDevicePoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

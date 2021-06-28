@@ -40,6 +40,8 @@ type UpdateOpsMetadataInput struct {
 
 	// Metadata to add to an OpsMetadata object.
 	MetadataToUpdate map[string]types.MetadataValue
+
+	noSmithyDocumentSerde
 }
 
 type UpdateOpsMetadataOutput struct {
@@ -49,6 +51,8 @@ type UpdateOpsMetadataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateOpsMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

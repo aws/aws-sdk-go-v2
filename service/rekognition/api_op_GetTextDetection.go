@@ -63,6 +63,8 @@ type GetTextDetectionInput struct {
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of text.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTextDetectionOutput struct {
@@ -92,6 +94,8 @@ type GetTextDetectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -131,6 +131,8 @@ type CreateCloudFormationChangeSetInput struct {
 	// The UUID returned by CreateCloudFormationTemplate.Pattern:
 	// [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCloudFormationChangeSetOutput struct {
@@ -151,6 +153,8 @@ type CreateCloudFormationChangeSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCloudFormationChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

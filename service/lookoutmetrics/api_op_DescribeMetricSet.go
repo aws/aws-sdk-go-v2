@@ -36,6 +36,8 @@ type DescribeMetricSetInput struct {
 	//
 	// This member is required.
 	MetricSetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMetricSetOutput struct {
@@ -82,6 +84,8 @@ type DescribeMetricSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMetricSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

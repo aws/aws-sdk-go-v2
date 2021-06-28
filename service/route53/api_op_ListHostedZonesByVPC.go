@@ -67,6 +67,8 @@ type ListHostedZonesByVPCInput struct {
 	// NextToken from the previous response. If the previous response didn't include a
 	// NextToken element, there are no more hosted zones to get.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListHostedZonesByVPCOutput struct {
@@ -90,6 +92,8 @@ type ListHostedZonesByVPCOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHostedZonesByVPCMiddlewares(stack *middleware.Stack, options Options) (err error) {

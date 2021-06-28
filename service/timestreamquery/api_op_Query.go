@@ -64,6 +64,8 @@ type QueryInput struct {
 
 	// A pagination token passed to get a set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type QueryOutput struct {
@@ -93,6 +95,8 @@ type QueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

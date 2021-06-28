@@ -83,6 +83,8 @@ type UpdateFunctionCodeInput struct {
 	// The base64-encoded contents of the deployment package. Amazon Web Services SDK
 	// and Amazon Web Services CLI clients handle the encoding for you.
 	ZipFile []byte
+
+	noSmithyDocumentSerde
 }
 
 // Details about a function's configuration.
@@ -193,6 +195,8 @@ type UpdateFunctionCodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFunctionCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

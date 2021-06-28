@@ -41,6 +41,8 @@ type CreatePhoneNumberOrderInput struct {
 	//
 	// This member is required.
 	ProductType types.PhoneNumberProductType
+
+	noSmithyDocumentSerde
 }
 
 type CreatePhoneNumberOrderOutput struct {
@@ -50,6 +52,8 @@ type CreatePhoneNumberOrderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePhoneNumberOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {

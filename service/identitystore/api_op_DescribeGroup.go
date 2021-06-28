@@ -40,6 +40,8 @@ type DescribeGroupInput struct {
 	//
 	// This member is required.
 	IdentityStoreId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeGroupOutput struct {
@@ -61,6 +63,8 @@ type DescribeGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

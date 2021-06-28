@@ -42,6 +42,8 @@ type UpdateCustomRoutingListenerInput struct {
 	//
 	// This member is required.
 	PortRanges []types.PortRange
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCustomRoutingListenerOutput struct {
@@ -51,6 +53,8 @@ type UpdateCustomRoutingListenerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

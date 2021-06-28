@@ -41,11 +41,15 @@ type UpdateModelInput struct {
 
 	// The new model description.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

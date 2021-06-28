@@ -34,6 +34,8 @@ type ListDimensionsInput struct {
 
 	// The token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDimensionsOutput struct {
@@ -48,6 +50,8 @@ type ListDimensionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDimensionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

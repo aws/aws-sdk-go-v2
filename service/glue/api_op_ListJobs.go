@@ -42,6 +42,8 @@ type ListJobsInput struct {
 
 	// Specifies to return only these tagged resources.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type ListJobsOutput struct {
@@ -55,6 +57,8 @@ type ListJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListRepositoriesInput struct {
 
 	// The criteria used to sort the results of a list repositories operation.
 	SortBy types.SortByEnum
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a list repositories operation.
@@ -58,6 +60,8 @@ type ListRepositoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

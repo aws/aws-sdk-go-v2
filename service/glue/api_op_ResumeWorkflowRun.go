@@ -45,6 +45,8 @@ type ResumeWorkflowRunInput struct {
 	//
 	// This member is required.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type ResumeWorkflowRunOutput struct {
@@ -58,6 +60,8 @@ type ResumeWorkflowRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResumeWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

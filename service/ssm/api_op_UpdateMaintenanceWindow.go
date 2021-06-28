@@ -90,6 +90,8 @@ type UpdateMaintenanceWindowInput struct {
 	// "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	StartDate *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMaintenanceWindowOutput struct {
@@ -142,6 +144,8 @@ type UpdateMaintenanceWindowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {

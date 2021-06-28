@@ -43,11 +43,15 @@ type DeleteSecurityGroupInput struct {
 	// [EC2-Classic, default VPC] The name of the security group. You can specify
 	// either the security group name or the security group ID.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

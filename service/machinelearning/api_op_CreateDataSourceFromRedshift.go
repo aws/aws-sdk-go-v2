@@ -116,6 +116,8 @@ type CreateDataSourceFromRedshiftInput struct {
 
 	// A user-supplied name or description of the DataSource.
 	DataSourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateDataSourceFromRedshift operation, and is an
@@ -130,6 +132,8 @@ type CreateDataSourceFromRedshiftOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataSourceFromRedshiftMiddlewares(stack *middleware.Stack, options Options) (err error) {

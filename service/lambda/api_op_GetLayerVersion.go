@@ -40,6 +40,8 @@ type GetLayerVersionInput struct {
 	//
 	// This member is required.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 type GetLayerVersionOutput struct {
@@ -71,6 +73,8 @@ type GetLayerVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

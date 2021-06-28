@@ -48,6 +48,8 @@ type CreateWorkflowInput struct {
 
 	// The tags to be used with this workflow.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorkflowOutput struct {
@@ -57,6 +59,8 @@ type CreateWorkflowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {

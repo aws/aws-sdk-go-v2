@@ -37,6 +37,8 @@ type GetAppsListInput struct {
 	// Specifies whether the list to retrieve is a default list owned by Firewall
 	// Manager.
 	DefaultList bool
+
+	noSmithyDocumentSerde
 }
 
 type GetAppsListOutput struct {
@@ -49,6 +51,8 @@ type GetAppsListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAppsListMiddlewares(stack *middleware.Stack, options Options) (err error) {

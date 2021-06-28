@@ -32,11 +32,15 @@ type DeleteApiInput struct {
 	//
 	// This member is required.
 	ApiId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApiOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

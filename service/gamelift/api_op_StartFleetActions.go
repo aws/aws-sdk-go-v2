@@ -67,6 +67,8 @@ type StartFleetActionsInput struct {
 	// The fleet location to restart fleet actions for. Specify a location in the form
 	// of an AWS Region code, such as us-west-2.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -84,6 +86,8 @@ type StartFleetActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartFleetActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

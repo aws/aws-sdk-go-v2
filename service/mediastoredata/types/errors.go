@@ -10,6 +10,8 @@ import (
 // The specified container was not found for the specified account.
 type ContainerNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ContainerNotFoundException) Error() string {
@@ -27,6 +29,8 @@ func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 // The service is temporarily unavailable.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -44,6 +48,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Could not perform an operation on an object that does not exist.
 type ObjectNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ObjectNotFoundException) Error() string {
@@ -61,6 +67,8 @@ func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // The requested content range is not valid.
 type RequestedRangeNotSatisfiableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestedRangeNotSatisfiableException) Error() string {

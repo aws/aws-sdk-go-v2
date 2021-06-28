@@ -47,6 +47,8 @@ type RegisterCertificateInput struct {
 
 	// The status of the register certificate request.
 	Status types.CertificateStatus
+
+	noSmithyDocumentSerde
 }
 
 // The output from the RegisterCertificate operation.
@@ -60,6 +62,8 @@ type RegisterCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

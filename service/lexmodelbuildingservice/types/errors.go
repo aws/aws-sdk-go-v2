@@ -11,6 +11,8 @@ import (
 // required to migrate your bot.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -29,6 +31,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // field is missing. Check the field values, and try again.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -46,6 +50,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // There was a conflict processing the request. Try your request again.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -63,6 +69,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // An internal Amazon Lex error occurred. Try your request again.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -82,6 +90,8 @@ type LimitExceededException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -100,6 +110,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // again.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -118,6 +130,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // checksum in the request. Check the resource's checksum and try again.
 type PreconditionFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PreconditionFailedException) Error() string {
@@ -145,6 +159,8 @@ type ResourceInUseException struct {
 
 	ReferenceType    ReferenceType
 	ExampleReference *ResourceReference
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {

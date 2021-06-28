@@ -92,6 +92,8 @@ type CreateGeofenceCollectionInput struct {
 	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	// characters: + - = . _ : / @.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGeofenceCollectionOutput struct {
@@ -119,6 +121,8 @@ type CreateGeofenceCollectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGeofenceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

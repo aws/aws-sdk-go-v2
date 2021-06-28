@@ -64,6 +64,8 @@ type StartJobRunInput struct {
 
 	// The tags assigned to job runs.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type StartJobRunOutput struct {
@@ -82,6 +84,8 @@ type StartJobRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

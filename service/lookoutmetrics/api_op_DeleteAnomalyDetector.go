@@ -33,11 +33,15 @@ type DeleteAnomalyDetectorInput struct {
 	//
 	// This member is required.
 	AnomalyDetectorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

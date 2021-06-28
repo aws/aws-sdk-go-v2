@@ -52,6 +52,8 @@ type ListExperimentsInput struct {
 
 	// The sort order. The default value is Descending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListExperimentsOutput struct {
@@ -64,6 +66,8 @@ type ListExperimentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListExperimentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

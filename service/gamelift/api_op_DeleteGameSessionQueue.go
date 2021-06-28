@@ -40,11 +40,15 @@ type DeleteGameSessionQueueInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGameSessionQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,6 +60,8 @@ type DescribeJobFlowsInput struct {
 
 	// Return only job flows whose state is contained in this list.
 	JobFlowStates []types.JobFlowExecutionState
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DescribeJobFlows operation.
@@ -70,6 +72,8 @@ type DescribeJobFlowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

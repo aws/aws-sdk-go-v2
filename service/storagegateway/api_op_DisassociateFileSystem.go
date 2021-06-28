@@ -41,6 +41,8 @@ type DisassociateFileSystemInput struct {
 	// false, the Amazon FSx file system does not disassociate until all data is
 	// uploaded.
 	ForceDelete bool
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateFileSystemOutput struct {
@@ -50,6 +52,8 @@ type DisassociateFileSystemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {

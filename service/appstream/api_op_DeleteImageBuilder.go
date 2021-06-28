@@ -33,6 +33,8 @@ type DeleteImageBuilderInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteImageBuilderOutput struct {
@@ -42,6 +44,8 @@ type DeleteImageBuilderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type GetTablesInput struct {
 
 	// A continuation token, included if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTablesOutput struct {
@@ -61,6 +63,8 @@ type GetTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

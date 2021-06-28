@@ -107,12 +107,16 @@ type SetSMSAttributesInput struct {
 	//
 	// This member is required.
 	Attributes map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The response for the SetSMSAttributes action.
 type SetSMSAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetSMSAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

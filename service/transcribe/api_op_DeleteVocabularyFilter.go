@@ -32,11 +32,15 @@ type DeleteVocabularyFilterInput struct {
 	//
 	// This member is required.
 	VocabularyFilterName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVocabularyFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVocabularyFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type ListGroupsOlderThanOrderingIdInput struct {
 
 	// The next items in the list of groups that go beyond the maximum.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGroupsOlderThanOrderingIdOutput struct {
@@ -65,6 +67,8 @@ type ListGroupsOlderThanOrderingIdOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type UpdateDocumentMetadataInput struct {
 
 	// The version of a document to update.
 	DocumentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDocumentMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDocumentMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

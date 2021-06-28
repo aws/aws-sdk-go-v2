@@ -38,11 +38,15 @@ type StopTrainingEntityRecognizerInput struct {
 	//
 	// This member is required.
 	EntityRecognizerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StopTrainingEntityRecognizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopTrainingEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

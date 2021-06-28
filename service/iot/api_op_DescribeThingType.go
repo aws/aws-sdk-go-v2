@@ -34,6 +34,8 @@ type DescribeThingTypeInput struct {
 	//
 	// This member is required.
 	ThingTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DescribeThingType operation.
@@ -59,6 +61,8 @@ type DescribeThingTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

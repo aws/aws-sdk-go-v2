@@ -27,6 +27,7 @@ func (c *Client) FlattenedXmlMap(ctx context.Context, params *FlattenedXmlMapInp
 }
 
 type FlattenedXmlMapInput struct {
+	noSmithyDocumentSerde
 }
 
 type FlattenedXmlMapOutput struct {
@@ -34,6 +35,8 @@ type FlattenedXmlMapOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFlattenedXmlMapMiddlewares(stack *middleware.Stack, options Options) (err error) {

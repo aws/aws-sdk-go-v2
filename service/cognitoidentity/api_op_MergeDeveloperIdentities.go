@@ -65,6 +65,8 @@ type MergeDeveloperIdentitiesInput struct {
 	//
 	// This member is required.
 	SourceUserIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Returned in response to a successful MergeDeveloperIdentities action.
@@ -75,6 +77,8 @@ type MergeDeveloperIdentitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMergeDeveloperIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

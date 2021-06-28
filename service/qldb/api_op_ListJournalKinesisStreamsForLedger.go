@@ -53,6 +53,8 @@ type ListJournalKinesisStreamsForLedgerInput struct {
 	// ListJournalKinesisStreamsForLedger call, you should use that value as input
 	// here.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListJournalKinesisStreamsForLedgerOutput struct {
@@ -71,6 +73,8 @@ type ListJournalKinesisStreamsForLedgerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJournalKinesisStreamsForLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {

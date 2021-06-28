@@ -102,6 +102,8 @@ type UpdateRuleGroupInput struct {
 	// block, or count. Each rule includes one top-level statement that WAF uses to
 	// identify matching web requests, and parameters that govern how WAF handles them.
 	Rules []types.Rule
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRuleGroupOutput struct {
@@ -112,6 +114,8 @@ type UpdateRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

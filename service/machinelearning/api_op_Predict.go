@@ -46,6 +46,8 @@ type PredictInput struct {
 	//
 	// This member is required.
 	Record map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type PredictOutput struct {
@@ -68,6 +70,8 @@ type PredictOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPredictMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DeleteEventSubscriptionInput struct {
 	//
 	// This member is required.
 	SubscriptionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEventSubscriptionOutput struct {
@@ -44,6 +46,8 @@ type DeleteEventSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -73,6 +73,8 @@ type DeleteHostedZoneInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to a DeleteHostedZone request.
@@ -86,6 +88,8 @@ type DeleteHostedZoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

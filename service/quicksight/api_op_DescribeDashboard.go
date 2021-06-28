@@ -45,6 +45,8 @@ type DescribeDashboardInput struct {
 	// The version number for the dashboard. If a version number isn't passed, the
 	// latest published dashboard version is described.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDashboardOutput struct {
@@ -60,6 +62,8 @@ type DescribeDashboardOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {

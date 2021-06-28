@@ -11,6 +11,8 @@ import (
 // updated.
 type ContainerInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ContainerInUseException) Error() string {
@@ -28,6 +30,8 @@ func (e *ContainerInUseException) ErrorFault() smithy.ErrorFault { return smithy
 // The container that you specified in the request does not exist.
 type ContainerNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ContainerNotFoundException) Error() string {
@@ -45,6 +49,8 @@ func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 // The CORS policy that you specified in the request does not exist.
 type CorsPolicyNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CorsPolicyNotFoundException) Error() string {
@@ -62,6 +68,8 @@ func (e *CorsPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return sm
 // The service is temporarily unavailable.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -79,6 +87,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // A service limit has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -96,6 +106,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The policy that you specified in the request does not exist.
 type PolicyNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyNotFoundException) Error() string {

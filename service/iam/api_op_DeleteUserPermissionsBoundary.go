@@ -35,11 +35,15 @@ type DeleteUserPermissionsBoundaryInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserPermissionsBoundaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserPermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

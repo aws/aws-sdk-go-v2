@@ -44,6 +44,8 @@ type DescribeDomainAutoTunesInput struct {
 	// NextToken is sent in case the earlier API call results contain the NextToken. It
 	// is used for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of DescribeDomainAutoTunes request. See the Developer Guide
@@ -62,6 +64,8 @@ type DescribeDomainAutoTunesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middleware.Stack, options Options) (err error) {

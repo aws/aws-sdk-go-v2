@@ -54,6 +54,8 @@ type UpdateStateMachineInput struct {
 
 	// Selects whether AWS X-Ray tracing is enabled.
 	TracingConfiguration *types.TracingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStateMachineOutput struct {
@@ -65,6 +67,8 @@ type UpdateStateMachineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {

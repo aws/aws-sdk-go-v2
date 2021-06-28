@@ -33,6 +33,8 @@ type GetThingRuntimeConfigurationInput struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetThingRuntimeConfigurationOutput struct {
@@ -42,6 +44,8 @@ type GetThingRuntimeConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetThingRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

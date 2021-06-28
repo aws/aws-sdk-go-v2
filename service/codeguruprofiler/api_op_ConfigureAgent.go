@@ -76,6 +76,8 @@ type ConfigureAgentInput struct {
 	// LAMBDA_PREVIOUS_EXECUTION_TIME_IN_MILLISECONDS - The time in milliseconds for
 	// the previous Lambda invocation.
 	Metadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the configureAgentResponse.
@@ -91,6 +93,8 @@ type ConfigureAgentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfigureAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -75,6 +75,8 @@ type BatchExecuteStatementInput struct {
 	// include the SQL statement in. If the SQL statement is not part of a transaction,
 	// don't set this parameter.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response elements represent the output of a SQL statement over an array of
@@ -86,6 +88,8 @@ type BatchExecuteStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

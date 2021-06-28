@@ -48,6 +48,8 @@ type ListIdentitiesInput struct {
 
 	// A pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a ListIdentities request.
@@ -64,6 +66,8 @@ type ListIdentitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

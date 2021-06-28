@@ -33,11 +33,15 @@ type DeleteAppInstanceUserInput struct {
 	//
 	// This member is required.
 	AppInstanceUserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAppInstanceUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

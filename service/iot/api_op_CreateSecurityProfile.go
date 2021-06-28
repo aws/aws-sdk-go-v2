@@ -61,6 +61,8 @@ type CreateSecurityProfileInput struct {
 
 	// Metadata that can be used to manage the security profile.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateSecurityProfileOutput struct {
@@ -73,6 +75,8 @@ type CreateSecurityProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -101,6 +101,8 @@ type CreateContainerServiceInput struct {
 	// information about tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateContainerServiceOutput struct {
@@ -110,6 +112,8 @@ type CreateContainerServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContainerServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,6 +61,8 @@ type CreateNamedQueryInput struct {
 
 	// The name of the workgroup in which the named query is being created.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateNamedQueryOutput struct {
@@ -70,6 +72,8 @@ type CreateNamedQueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

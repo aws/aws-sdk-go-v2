@@ -25,6 +25,7 @@ func (c *Client) XmlEmptyBlobs(ctx context.Context, params *XmlEmptyBlobsInput, 
 }
 
 type XmlEmptyBlobsInput struct {
+	noSmithyDocumentSerde
 }
 
 type XmlEmptyBlobsOutput struct {
@@ -32,6 +33,8 @@ type XmlEmptyBlobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlEmptyBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,11 +43,15 @@ type AddUserToGroupInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type AddUserToGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddUserToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -53,6 +53,8 @@ type ListChangeSetsInput struct {
 
 	// An object that contains two attributes, SortBy and SortOrder.
 	Sort *types.Sort
+
+	noSmithyDocumentSerde
 }
 
 type ListChangeSetsOutput struct {
@@ -65,6 +67,8 @@ type ListChangeSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChangeSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

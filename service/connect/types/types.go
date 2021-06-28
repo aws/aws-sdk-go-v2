@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type Attribute struct {
 
 	// The value of the attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A chat message.
@@ -28,6 +31,8 @@ type ChatMessage struct {
 	//
 	// This member is required.
 	ContentType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a contact flow.
@@ -56,6 +61,8 @@ type ContactFlow struct {
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types)
 	// in the Amazon Connect Administrator Guide.
 	Type ContactFlowType
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a contact flow. You can also create and
@@ -74,6 +81,8 @@ type ContactFlowSummary struct {
 
 	// The name of the contact flow.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains credentials to use for federation.
@@ -91,6 +100,8 @@ type Credentials struct {
 
 	// Renews the expiration timer for a generated token.
 	RefreshTokenExpiration *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a real-time metric. For a description of each metric,
@@ -104,6 +115,8 @@ type CurrentMetric struct {
 
 	// The unit for the metric.
 	Unit Unit
+
+	noSmithyDocumentSerde
 }
 
 // Contains the data for a real-time metric.
@@ -114,6 +127,8 @@ type CurrentMetricData struct {
 
 	// The value of the metric.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a set of real-time metrics.
@@ -124,6 +139,8 @@ type CurrentMetricResult struct {
 
 	// The dimensions for the metrics.
 	Dimensions *Dimensions
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the dimensions for a set of metrics.
@@ -134,6 +151,8 @@ type Dimensions struct {
 
 	// Information about the queue for which metrics are returned.
 	Queue *QueueReference
+
+	noSmithyDocumentSerde
 }
 
 // The encryption configuration.
@@ -148,6 +167,8 @@ type EncryptionConfig struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the filter to apply when retrieving metrics.
@@ -159,6 +180,8 @@ type Filters struct {
 	// The queues to use to filter the metrics. You can specify up to 100 queues per
 	// request.
 	Queues []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a hierarchy group.
@@ -178,6 +201,8 @@ type HierarchyGroup struct {
 
 	// The name of the hierarchy group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a hierarchy group.
@@ -191,6 +216,8 @@ type HierarchyGroupSummary struct {
 
 	// The name of the hierarchy group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a hierarchy level.
@@ -204,6 +231,8 @@ type HierarchyLevel struct {
 
 	// The name of the hierarchy level.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the hierarchy level to update.
@@ -213,6 +242,8 @@ type HierarchyLevelUpdate struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the levels of a hierarchy group.
@@ -232,6 +263,8 @@ type HierarchyPath struct {
 
 	// Information about level two.
 	LevelTwo *HierarchyGroupSummary
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a hierarchy structure.
@@ -251,6 +284,8 @@ type HierarchyStructure struct {
 
 	// Information about level two.
 	LevelTwo *HierarchyLevel
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the level hierarchy to update.
@@ -270,6 +305,8 @@ type HierarchyStructureUpdate struct {
 
 	// The update for level two.
 	LevelTwo *HierarchyLevelUpdate
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a historical metric. For a description of each
@@ -289,6 +326,8 @@ type HistoricalMetric struct {
 
 	// The unit for the metric.
 	Unit Unit
+
+	noSmithyDocumentSerde
 }
 
 // Contains the data for a historical metric.
@@ -299,6 +338,8 @@ type HistoricalMetricData struct {
 
 	// The value of the metric.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the historical metrics retrieved.
@@ -309,6 +350,8 @@ type HistoricalMetricResult struct {
 
 	// The dimension for the metrics.
 	Dimensions *Dimensions
+
+	noSmithyDocumentSerde
 }
 
 // Information about of the hours of operation.
@@ -334,6 +377,8 @@ type HoursOfOperation struct {
 
 	// The time zone for the hours of operation.
 	TimeZone *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the hours of operation.
@@ -347,6 +392,8 @@ type HoursOfOperationConfig struct {
 
 	// The start time that your contact center is open.
 	StartTime *HoursOfOperationTimeSlice
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about hours of operation for a contact center.
@@ -360,6 +407,8 @@ type HoursOfOperationSummary struct {
 
 	// The name of the hours of operation.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The start time or end time for an hours of operation.
@@ -370,6 +419,8 @@ type HoursOfOperationTimeSlice struct {
 
 	// The minutes.
 	Minutes int32
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Connect instance.
@@ -405,6 +456,8 @@ type Instance struct {
 
 	// Relevant details why the instance was not successfully created.
 	StatusReason *InstanceStatusReason
+
+	noSmithyDocumentSerde
 }
 
 // Relevant details why the instance was not successfully created.
@@ -412,6 +465,8 @@ type InstanceStatusReason struct {
 
 	// The message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The storage configuration for the instance.
@@ -437,6 +492,8 @@ type InstanceStorageConfig struct {
 
 	// The S3 bucket configuration.
 	S3Config *S3Config
+
+	noSmithyDocumentSerde
 }
 
 // Information about the instance.
@@ -468,6 +525,8 @@ type InstanceSummary struct {
 
 	// The service role of the instance.
 	ServiceRole *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about the associated AppIntegrations.
@@ -497,6 +556,8 @@ type IntegrationAssociationSummary struct {
 
 	// The name of the source.
 	SourceType SourceType
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information of a Kinesis Data Firehose delivery stream.
@@ -506,6 +567,8 @@ type KinesisFirehoseConfig struct {
 	//
 	// This member is required.
 	FirehoseArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information of a Kinesis data stream.
@@ -515,6 +578,8 @@ type KinesisStreamConfig struct {
 	//
 	// This member is required.
 	StreamArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information of a Kinesis video stream.
@@ -536,6 +601,8 @@ type KinesisVideoStreamConfig struct {
 	//
 	// This member is required.
 	RetentionPeriodHours int32
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information of an Amazon Lex bot.
@@ -546,6 +613,8 @@ type LexBot struct {
 
 	// The name of the Amazon Lex bot.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information of an Amazon Lex or Amazon Lex V2 bot.
@@ -556,6 +625,8 @@ type LexBotConfig struct {
 
 	// Configuration information of an Amazon Lex V2 bot.
 	LexV2Bot *LexV2Bot
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information of an Amazon Lex V2 bot.
@@ -563,6 +634,8 @@ type LexV2Bot struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.
 	AliasArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about which channels are supported, and how many contacts
@@ -581,6 +654,8 @@ type MediaConcurrency struct {
 	//
 	// This member is required.
 	Concurrency int32
+
+	noSmithyDocumentSerde
 }
 
 // The outbound caller ID name, number, and outbound whisper flow.
@@ -594,6 +669,8 @@ type OutboundCallerConfig struct {
 
 	// The outbound whisper flow to be used during an outbound call.
 	OutboundFlowId *string
+
+	noSmithyDocumentSerde
 }
 
 // The customer's details.
@@ -603,6 +680,8 @@ type ParticipantDetails struct {
 	//
 	// This member is required.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a phone number for a quick connect.
@@ -612,6 +691,8 @@ type PhoneNumberQuickConnectConfig struct {
 	//
 	// This member is required.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a phone number for a contact center.
@@ -631,6 +712,8 @@ type PhoneNumberSummary struct {
 
 	// The type of phone number.
 	PhoneNumberType PhoneNumberType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a problem detail.
@@ -638,6 +721,8 @@ type ProblemDetail struct {
 
 	// The problem detail's message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the prompt.
@@ -651,6 +736,8 @@ type PromptSummary struct {
 
 	// The name of the prompt.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a queue.
@@ -683,6 +770,8 @@ type Queue struct {
 
 	// One or more tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a queue for a quick connect. The contact flow must be
@@ -698,6 +787,8 @@ type QueueQuickConnectConfig struct {
 	//
 	// This member is required.
 	QueueId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a queue resource for which metrics are returned.
@@ -708,6 +799,8 @@ type QueueReference struct {
 
 	// The identifier of the queue.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a queue.
@@ -724,6 +817,8 @@ type QueueSummary struct {
 
 	// The type of queue.
 	QueueType QueueType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a quick connect.
@@ -746,6 +841,8 @@ type QuickConnect struct {
 
 	// One or more tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration settings for a quick connect.
@@ -767,6 +864,8 @@ type QuickConnectConfig struct {
 
 	// The user configuration. This is required only if QuickConnectType is USER.
 	UserConfig *UserQuickConnectConfig
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a quick connect.
@@ -785,6 +884,8 @@ type QuickConnectSummary struct {
 	// quick connect, you are prompted to assign one of the following types: Agent
 	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 	QuickConnectType QuickConnectType
+
+	noSmithyDocumentSerde
 }
 
 // A link that an agent selects to complete a given task. You can have up to 4,096
@@ -800,6 +901,8 @@ type Reference struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a routing profile.
@@ -830,6 +933,8 @@ type RoutingProfile struct {
 
 	// One or more tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the queue and channel for which priority and delay
@@ -855,6 +960,8 @@ type RoutingProfileQueueConfig struct {
 	//
 	// This member is required.
 	QueueReference *RoutingProfileQueueReference
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a routing profile queue.
@@ -895,6 +1002,8 @@ type RoutingProfileQueueConfigSummary struct {
 	//
 	// This member is required.
 	QueueName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the channel and queue identifier for a routing profile.
@@ -910,6 +1019,8 @@ type RoutingProfileQueueReference struct {
 	//
 	// This member is required.
 	QueueId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a routing profile.
@@ -923,6 +1034,8 @@ type RoutingProfileSummary struct {
 
 	// The name of the routing profile.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the Amazon Simple Storage Service (Amazon S3) storage type.
@@ -940,6 +1053,8 @@ type S3Config struct {
 
 	// The Amazon S3 encryption configuration.
 	EncryptionConfig *EncryptionConfig
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information of the security key.
@@ -954,6 +1069,8 @@ type SecurityKey struct {
 
 	// The key of the security key.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a security profile.
@@ -967,6 +1084,8 @@ type SecurityProfileSummary struct {
 
 	// The name of the security profile.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the threshold for service level metrics.
@@ -977,6 +1096,8 @@ type Threshold struct {
 
 	// The threshold value to compare.
 	ThresholdValue *float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the use case.
@@ -991,6 +1112,8 @@ type UseCase struct {
 	// The type of use case to associate to the AppIntegration association. Each
 	// AppIntegration association can have only one of each use case type.
 	UseCaseType UseCaseType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a user account for a Amazon Connect instance.
@@ -1026,6 +1149,8 @@ type User struct {
 
 	// The user name assigned to the user account.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the identity of a user.
@@ -1042,6 +1167,8 @@ type UserIdentityInfo struct {
 	// The last name. This is required if you are using Amazon Connect or SAML for
 	// identity management.
 	LastName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the phone configuration settings for a user.
@@ -1060,6 +1187,8 @@ type UserPhoneConfig struct {
 
 	// The phone number for the user's desk phone.
 	DeskPhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the quick connect configuration settings for a user.
@@ -1075,6 +1204,8 @@ type UserQuickConnectConfig struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about a user.
@@ -1088,6 +1219,8 @@ type UserSummary struct {
 
 	// The Amazon Connect user name of the user account.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the recording configuration settings.
@@ -1095,4 +1228,8 @@ type VoiceRecordingConfiguration struct {
 
 	// Identifies which track is being recorded.
 	VoiceRecordingTrack VoiceRecordingTrack
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

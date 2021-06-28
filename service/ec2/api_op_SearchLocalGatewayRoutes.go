@@ -52,6 +52,8 @@ type SearchLocalGatewayRoutesInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchLocalGatewayRoutesOutput struct {
@@ -65,6 +67,8 @@ type SearchLocalGatewayRoutesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchLocalGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {

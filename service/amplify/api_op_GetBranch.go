@@ -39,6 +39,8 @@ type GetBranchInput struct {
 	//
 	// This member is required.
 	BranchName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBranchOutput struct {
@@ -50,6 +52,8 @@ type GetBranchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type ListPHIDetectionJobsInput struct {
 
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPHIDetectionJobsOutput struct {
@@ -52,6 +54,8 @@ type ListPHIDetectionJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPHIDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

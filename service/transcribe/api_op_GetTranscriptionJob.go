@@ -37,6 +37,8 @@ type GetTranscriptionJobInput struct {
 	//
 	// This member is required.
 	TranscriptionJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTranscriptionJobOutput struct {
@@ -46,6 +48,8 @@ type GetTranscriptionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

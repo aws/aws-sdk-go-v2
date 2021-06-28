@@ -34,6 +34,8 @@ type GetNetworkInput struct {
 	//
 	// This member is required.
 	NetworkId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetNetworkOutput struct {
@@ -43,6 +45,8 @@ type GetNetworkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

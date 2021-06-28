@@ -47,6 +47,8 @@ type ListQueryExecutionsInput struct {
 	// is not specified, a list of available query execution IDs for the queries in the
 	// primary workgroup is returned.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type ListQueryExecutionsOutput struct {
@@ -59,6 +61,8 @@ type ListQueryExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListQueryExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

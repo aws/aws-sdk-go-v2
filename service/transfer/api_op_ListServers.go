@@ -39,6 +39,8 @@ type ListServersInput struct {
 	// parameter is returned in the output. You can then pass the NextToken parameter
 	// in a subsequent command to continue listing additional servers.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListServersOutput struct {
@@ -55,6 +57,8 @@ type ListServersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListServersMiddlewares(stack *middleware.Stack, options Options) (err error) {

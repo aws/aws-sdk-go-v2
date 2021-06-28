@@ -60,6 +60,8 @@ type CreateDashboardInput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDashboardOutput struct {
@@ -79,6 +81,8 @@ type CreateDashboardOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {

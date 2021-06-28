@@ -34,6 +34,8 @@ type GetDeviceFleetReportInput struct {
 	//
 	// This member is required.
 	DeviceFleetName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDeviceFleetReportOutput struct {
@@ -68,6 +70,8 @@ type GetDeviceFleetReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeviceFleetReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

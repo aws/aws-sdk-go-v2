@@ -34,6 +34,8 @@ type GetDataSetInput struct {
 	//
 	// This member is required.
 	DataSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDataSetOutput struct {
@@ -78,6 +80,8 @@ type GetDataSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

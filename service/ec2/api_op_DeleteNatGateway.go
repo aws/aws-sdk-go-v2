@@ -41,6 +41,8 @@ type DeleteNatGatewayInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNatGatewayOutput struct {
@@ -50,6 +52,8 @@ type DeleteNatGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNatGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

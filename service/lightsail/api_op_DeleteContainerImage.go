@@ -45,11 +45,15 @@ type DeleteContainerImageInput struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteContainerImageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteContainerImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

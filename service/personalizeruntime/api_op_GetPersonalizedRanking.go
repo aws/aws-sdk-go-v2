@@ -72,6 +72,8 @@ type GetPersonalizedRankingInput struct {
 	// recommendations. For more information, see Filtering Recommendations
 	// (https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
 	FilterValues map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type GetPersonalizedRankingOutput struct {
@@ -85,6 +87,8 @@ type GetPersonalizedRankingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPersonalizedRankingMiddlewares(stack *middleware.Stack, options Options) (err error) {

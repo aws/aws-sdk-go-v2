@@ -34,6 +34,8 @@ type ReadPipelineInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The ReadPipelineResponse structure.
@@ -50,6 +52,8 @@ type ReadPipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReadPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

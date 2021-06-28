@@ -72,6 +72,8 @@ type StartMailboxExportJobInput struct {
 
 	// The mailbox export job description.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type StartMailboxExportJobOutput struct {
@@ -81,6 +83,8 @@ type StartMailboxExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

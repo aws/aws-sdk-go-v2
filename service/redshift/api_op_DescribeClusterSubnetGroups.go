@@ -73,6 +73,8 @@ type DescribeClusterSubnetGroupsInput struct {
 	// returns a response with the subnet groups that have either or both of these tag
 	// values associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output from the DescribeClusterSubnetGroups action.
@@ -90,6 +92,8 @@ type DescribeClusterSubnetGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClusterSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

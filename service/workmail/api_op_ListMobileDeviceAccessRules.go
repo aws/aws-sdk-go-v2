@@ -34,6 +34,8 @@ type ListMobileDeviceAccessRulesInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMobileDeviceAccessRulesOutput struct {
@@ -44,6 +46,8 @@ type ListMobileDeviceAccessRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMobileDeviceAccessRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

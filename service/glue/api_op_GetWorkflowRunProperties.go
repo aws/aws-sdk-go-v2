@@ -37,6 +37,8 @@ type GetWorkflowRunPropertiesInput struct {
 	//
 	// This member is required.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetWorkflowRunPropertiesOutput struct {
@@ -46,6 +48,8 @@ type GetWorkflowRunPropertiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWorkflowRunPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

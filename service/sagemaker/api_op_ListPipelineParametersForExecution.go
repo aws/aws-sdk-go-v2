@@ -42,6 +42,8 @@ type ListPipelineParametersForExecutionInput struct {
 	// truncated, the response includes a NextToken. To retrieve the next set of
 	// parameters, use the token in the next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPipelineParametersForExecutionOutput struct {
@@ -56,6 +58,8 @@ type ListPipelineParametersForExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPipelineParametersForExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // You do not have required permissions to perform this operation.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // account in this region.
 type AccountChannelLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccountChannelLimitExceededException) Error() string {
@@ -49,6 +53,8 @@ func (e *AccountChannelLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The number of streams created for the account is too high.
 type AccountStreamLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccountStreamLimitExceededException) Error() string {
@@ -71,6 +77,8 @@ func (e *AccountStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 // limit of allowed client calls. Try making the call later.
 type ClientLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientLimitExceededException) Error() string {
@@ -88,6 +96,8 @@ func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return s
 // Not implemented.
 type DeviceStreamLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeviceStreamLimitExceededException) Error() string {
@@ -109,6 +119,8 @@ func (e *DeviceStreamLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgumentException) Error() string {
@@ -126,6 +138,8 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // Not implemented.
 type InvalidDeviceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeviceException) Error() string {
@@ -143,6 +157,8 @@ func (e *InvalidDeviceException) ErrorFault() smithy.ErrorFault { return smithy.
 // The format of the StreamARN is invalid.
 type InvalidResourceFormatException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceFormatException) Error() string {
@@ -160,6 +176,8 @@ func (e *InvalidResourceFormatException) ErrorFault() smithy.ErrorFault { return
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {
@@ -177,6 +195,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // The signaling channel is currently not available for this operation.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -194,6 +214,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // Amazon Kinesis Video Streams can't find the stream that you specified.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -212,6 +234,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // Kinesis video streams support up to 50 tags.
 type TagsPerResourceExceededLimitException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagsPerResourceExceededLimitException) Error() string {
@@ -236,6 +260,8 @@ func (e *TagsPerResourceExceededLimitException) ErrorFault() smithy.ErrorFault {
 // API.
 type VersionMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *VersionMismatchException) Error() string {

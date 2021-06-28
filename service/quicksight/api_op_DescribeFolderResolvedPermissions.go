@@ -39,6 +39,8 @@ type DescribeFolderResolvedPermissionsInput struct {
 	//
 	// This member is required.
 	FolderId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFolderResolvedPermissionsOutput struct {
@@ -60,6 +62,8 @@ type DescribeFolderResolvedPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFolderResolvedPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetDefaultRetentionPolicyInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDefaultRetentionPolicyOutput struct {
@@ -51,6 +53,8 @@ type GetDefaultRetentionPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDefaultRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

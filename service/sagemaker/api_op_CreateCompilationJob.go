@@ -113,6 +113,8 @@ type CreateCompilationJobInput struct {
 	// information, see Protect Compilation Jobs by Using an Amazon Virtual Private
 	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html).
 	VpcConfig *types.NeoVpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateCompilationJobOutput struct {
@@ -128,6 +130,8 @@ type CreateCompilationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

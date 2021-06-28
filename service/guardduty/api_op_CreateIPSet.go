@@ -68,6 +68,8 @@ type CreateIPSetInput struct {
 
 	// The tags to be added to a new IP set resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateIPSetOutput struct {
@@ -79,6 +81,8 @@ type CreateIPSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

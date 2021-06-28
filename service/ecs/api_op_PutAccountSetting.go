@@ -81,6 +81,8 @@ type PutAccountSettingInput struct {
 	// changed only for the authenticated user. Federated users assume the account
 	// setting of the root user and can't have explicit account settings set for them.
 	PrincipalArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutAccountSettingOutput struct {
@@ -90,6 +92,8 @@ type PutAccountSettingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccountSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {

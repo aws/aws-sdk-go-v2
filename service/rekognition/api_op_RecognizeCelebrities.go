@@ -57,6 +57,8 @@ type RecognizeCelebritiesInput struct {
 	//
 	// This member is required.
 	Image *types.Image
+
+	noSmithyDocumentSerde
 }
 
 type RecognizeCelebritiesOutput struct {
@@ -82,6 +84,8 @@ type RecognizeCelebritiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRecognizeCelebritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

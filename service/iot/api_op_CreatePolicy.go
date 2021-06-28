@@ -48,6 +48,8 @@ type CreatePolicyInput struct {
 	// format: &&tags "key1=value1&key2=value2..." For the cli-input-json file use
 	// format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // The output from the CreatePolicy operation.
@@ -67,6 +69,8 @@ type CreatePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

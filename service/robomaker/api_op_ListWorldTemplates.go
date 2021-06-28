@@ -44,6 +44,8 @@ type ListWorldTemplatesInput struct {
 	// the request object's nextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListWorldTemplatesOutput struct {
@@ -60,6 +62,8 @@ type ListWorldTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorldTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

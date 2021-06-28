@@ -183,11 +183,15 @@ type UpdateAutoScalingGroupInput struct {
 	// specify VPCZoneIdentifier with AvailabilityZones, the subnets that you specify
 	// for this parameter must reside in those Availability Zones.
 	VPCZoneIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAutoScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

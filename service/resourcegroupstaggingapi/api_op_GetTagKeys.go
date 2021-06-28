@@ -39,6 +39,8 @@ type GetTagKeysInput struct {
 	// that you want the next page of results. Leave this parameter empty in your
 	// initial request.
 	PaginationToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTagKeysOutput struct {
@@ -53,6 +55,8 @@ type GetTagKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTagKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

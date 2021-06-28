@@ -37,11 +37,15 @@ type RemoveIpRoutesInput struct {
 	//
 	// This member is required.
 	DirectoryId *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveIpRoutesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {

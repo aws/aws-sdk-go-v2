@@ -77,6 +77,8 @@ type DescribeVpnGatewaysInput struct {
 	// One or more virtual private gateway IDs. Default: Describes all your virtual
 	// private gateways.
 	VpnGatewayIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeVpnGateways.
@@ -87,6 +89,8 @@ type DescribeVpnGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpnGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

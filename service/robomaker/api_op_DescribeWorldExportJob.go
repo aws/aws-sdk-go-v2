@@ -34,6 +34,8 @@ type DescribeWorldExportJobInput struct {
 	//
 	// This member is required.
 	Job *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorldExportJobOutput struct {
@@ -83,6 +85,8 @@ type DescribeWorldExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorldExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

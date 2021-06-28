@@ -68,6 +68,8 @@ type CreateConnectionInput struct {
 
 	// The tags to associate with the lag.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect connection.
@@ -177,6 +179,8 @@ type CreateConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

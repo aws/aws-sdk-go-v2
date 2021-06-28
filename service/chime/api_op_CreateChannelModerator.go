@@ -59,6 +59,8 @@ type CreateChannelModeratorInput struct {
 
 	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateChannelModeratorOutput struct {
@@ -71,6 +73,8 @@ type CreateChannelModeratorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateChannelModeratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

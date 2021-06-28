@@ -34,6 +34,8 @@ type StartChannelInput struct {
 	//
 	// This member is required.
 	ChannelId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for StartChannelResponse
@@ -95,6 +97,8 @@ type StartChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

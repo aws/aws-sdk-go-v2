@@ -89,6 +89,8 @@ type FilterLogEventsInput struct {
 	// The start of the time range, expressed as the number of milliseconds after Jan
 	// 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.
 	StartTime *int64
+
+	noSmithyDocumentSerde
 }
 
 type FilterLogEventsOutput struct {
@@ -107,6 +109,8 @@ type FilterLogEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFilterLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

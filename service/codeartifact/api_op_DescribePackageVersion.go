@@ -80,6 +80,8 @@ type DescribePackageVersionInput struct {
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePackageVersionOutput struct {
@@ -93,6 +95,8 @@ type DescribePackageVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

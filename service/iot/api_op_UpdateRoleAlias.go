@@ -38,6 +38,8 @@ type UpdateRoleAliasInput struct {
 
 	// The role ARN.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRoleAliasOutput struct {
@@ -50,6 +52,8 @@ type UpdateRoleAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

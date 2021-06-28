@@ -61,6 +61,8 @@ type UpdateFirewallDeleteProtectionInput struct {
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFirewallDeleteProtectionOutput struct {
@@ -91,6 +93,8 @@ type UpdateFirewallDeleteProtectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFirewallDeleteProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type UpdateStudioInput struct {
 	// associated with the Studio. The list order does not matter. A Studio can have a
 	// maximum of 5 subnets. The subnets must belong to the same VPC as the Studio.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStudioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {

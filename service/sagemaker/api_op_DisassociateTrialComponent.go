@@ -43,6 +43,8 @@ type DisassociateTrialComponentInput struct {
 	//
 	// This member is required.
 	TrialName *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateTrialComponentOutput struct {
@@ -55,6 +57,8 @@ type DisassociateTrialComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

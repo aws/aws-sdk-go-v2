@@ -68,6 +68,8 @@ type BatchImportFindingsInput struct {
 	//
 	// This member is required.
 	Findings []types.AwsSecurityFinding
+
+	noSmithyDocumentSerde
 }
 
 type BatchImportFindingsOutput struct {
@@ -87,6 +89,8 @@ type BatchImportFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchImportFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

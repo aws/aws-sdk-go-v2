@@ -124,6 +124,8 @@ type UpdateUserPoolInput struct {
 
 	// The template for verification messages.
 	VerificationMessageTemplate *types.VerificationMessageTemplateType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server when you make a request to update the
@@ -131,6 +133,8 @@ type UpdateUserPoolInput struct {
 type UpdateUserPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

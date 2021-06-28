@@ -43,6 +43,8 @@ type UpdateMLModelInput struct {
 	// such as true. Output values less than the ScoreThreshold receive a negative
 	// response from the MLModel, such as false.
 	ScoreThreshold *float32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an UpdateMLModel operation. You can see the updated
@@ -55,6 +57,8 @@ type UpdateMLModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

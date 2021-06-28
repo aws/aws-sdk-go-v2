@@ -53,6 +53,8 @@ type ListCachePoliciesInput struct {
 	//
 	// * custom – Returns only the custom policies created in your account.
 	Type types.CachePolicyType
+
+	noSmithyDocumentSerde
 }
 
 type ListCachePoliciesOutput struct {
@@ -62,6 +64,8 @@ type ListCachePoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCachePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

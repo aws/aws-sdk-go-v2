@@ -33,6 +33,8 @@ type GetHITInput struct {
 	//
 	// This member is required.
 	HITId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetHITOutput struct {
@@ -42,6 +44,8 @@ type GetHITOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHITMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -29,6 +29,8 @@ type XmlAttributesInput struct {
 	Attr *string
 
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type XmlAttributesOutput struct {
@@ -38,6 +40,8 @@ type XmlAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

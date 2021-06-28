@@ -35,6 +35,8 @@ type BatchResetAlarmInput struct {
 	//
 	// This member is required.
 	ResetActionRequests []types.ResetAlarmActionRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchResetAlarmOutput struct {
@@ -46,6 +48,8 @@ type BatchResetAlarmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchResetAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

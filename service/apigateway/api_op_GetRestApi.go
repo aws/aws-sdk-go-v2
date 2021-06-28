@@ -35,6 +35,8 @@ type GetRestApiInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a REST API. Create an API
@@ -102,6 +104,8 @@ type GetRestApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

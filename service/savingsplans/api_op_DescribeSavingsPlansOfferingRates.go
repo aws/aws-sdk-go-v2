@@ -59,6 +59,8 @@ type DescribeSavingsPlansOfferingRatesInput struct {
 
 	// The usage details of the line item in the billing report.
 	UsageTypes []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSavingsPlansOfferingRatesOutput struct {
@@ -72,6 +74,8 @@ type DescribeSavingsPlansOfferingRatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSavingsPlansOfferingRatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

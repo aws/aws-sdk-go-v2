@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type AccountSettings struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Proton pipeline service role.
 	PipelineServiceRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Compatible environment template data.
@@ -25,6 +28,8 @@ type CompatibleEnvironmentTemplate struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // Compatible environment template data.
@@ -39,6 +44,8 @@ type CompatibleEnvironmentTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // The environment detail data. An AWS Proton environment is a set resources shared
@@ -116,6 +123,8 @@ type Environment struct {
 	//
 	// This value conforms to the media type: application/yaml
 	Spec *string
+
+	noSmithyDocumentSerde
 }
 
 // The environment account connection detail data.
@@ -167,6 +176,8 @@ type EnvironmentAccountConnection struct {
 	//
 	// This member is required.
 	Status EnvironmentAccountConnectionStatus
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the environment account connection detail data.
@@ -219,6 +230,8 @@ type EnvironmentAccountConnectionSummary struct {
 	//
 	// This member is required.
 	Status EnvironmentAccountConnectionStatus
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the environment detail data.
@@ -290,6 +303,8 @@ type EnvironmentSummary struct {
 	// When included, indicates that the environment template is for customer
 	// provisioned and managed infrastructure.
 	Provisioning Provisioning
+
+	noSmithyDocumentSerde
 }
 
 // The environment template data.
@@ -330,6 +345,8 @@ type EnvironmentTemplate struct {
 
 	// The ID of the recommended version of the environment template.
 	RecommendedVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // A search filter for environment templates.
@@ -344,6 +361,8 @@ type EnvironmentTemplateFilter struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // The environment template data.
@@ -381,6 +400,8 @@ type EnvironmentTemplateSummary struct {
 
 	// The ID of the recommended version of the environment template.
 	RecommendedVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The environment template version data.
@@ -435,6 +456,8 @@ type EnvironmentTemplateVersion struct {
 
 	// The status message of the version of an environment template.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the version of an environment template detail data.
@@ -484,6 +507,8 @@ type EnvironmentTemplateVersionSummary struct {
 
 	// The status message of the version of an environment template.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Template bundle S3 bucket data.
@@ -498,6 +523,8 @@ type S3ObjectSource struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // The service detail data.
@@ -563,6 +590,8 @@ type Service struct {
 
 	// A service status message.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // The service instance detail data.
@@ -632,6 +661,8 @@ type ServiceInstance struct {
 	//
 	// This value conforms to the media type: application/yaml
 	Spec *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the service instance detail data.
@@ -694,6 +725,8 @@ type ServiceInstanceSummary struct {
 
 	// A service instance deployment status message.
 	DeploymentStatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // The service pipeline detail data.
@@ -748,6 +781,8 @@ type ServicePipeline struct {
 	//
 	// This value conforms to the media type: application/yaml
 	Spec *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the service detail data.
@@ -788,6 +823,8 @@ type ServiceSummary struct {
 
 	// A service status message.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // The service template detail data.
@@ -829,6 +866,8 @@ type ServiceTemplate struct {
 
 	// The ID of the recommended version of the service template.
 	RecommendedVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The service template summary data.
@@ -866,6 +905,8 @@ type ServiceTemplateSummary struct {
 
 	// The ID of the recommended version of the service template.
 	RecommendedVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The version of a service template detail data.
@@ -926,6 +967,8 @@ type ServiceTemplateVersion struct {
 
 	// A service template version status message.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the service template version detail data.
@@ -975,6 +1018,8 @@ type ServiceTemplateVersionSummary struct {
 
 	// A service template minor version status message.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of a resource tag.
@@ -989,6 +1034,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Template version source data.
@@ -1003,15 +1050,21 @@ type TemplateVersionSourceInput interface {
 // template minor version.
 type TemplateVersionSourceInputMemberS3 struct {
 	Value S3ObjectSource
+
+	noSmithyDocumentSerde
 }
 
 func (*TemplateVersionSourceInputMemberS3) isTemplateVersionSourceInput() {}
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isTemplateVersionSourceInput() {}

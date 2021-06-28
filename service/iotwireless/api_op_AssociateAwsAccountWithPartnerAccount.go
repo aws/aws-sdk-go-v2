@@ -44,6 +44,8 @@ type AssociateAwsAccountWithPartnerAccountInput struct {
 	// The tags to attach to the specified resource. Tags are metadata that you can use
 	// to manage a resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type AssociateAwsAccountWithPartnerAccountOutput struct {
@@ -56,6 +58,8 @@ type AssociateAwsAccountWithPartnerAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateAwsAccountWithPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -66,6 +66,8 @@ type UpdateLaunchProfileInput struct {
 	// Unique identifiers for a collection of studio components that can be used with
 	// this launch profile.
 	StudioComponentIds []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLaunchProfileOutput struct {
@@ -75,6 +77,8 @@ type UpdateLaunchProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLaunchProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

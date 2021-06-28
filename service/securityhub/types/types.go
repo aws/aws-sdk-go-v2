@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -16,6 +17,8 @@ type AccountDetails struct {
 
 	// The email of an AWS account.
 	Email *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about one of the following actions that affects or that was
@@ -59,6 +62,8 @@ type Action struct {
 	// Included if ActionType is PORT_PROBE. Provides details about the port probe that
 	// was detected.
 	PortProbeAction *PortProbeAction
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the IP address where the scanned port is located.
@@ -66,6 +71,8 @@ type ActionLocalIpDetails struct {
 
 	// The IP address.
 	IpAddressV4 *string
+
+	noSmithyDocumentSerde
 }
 
 // For NetworkConnectionAction and PortProbeDetails, LocalPortDetails provides
@@ -77,6 +84,8 @@ type ActionLocalPortDetails struct {
 
 	// The port name of the local connection.
 	PortName *string
+
+	noSmithyDocumentSerde
 }
 
 // For AwsApiAction, NetworkConnectionAction, and PortProbeAction, RemoteIpDetails
@@ -99,6 +108,8 @@ type ActionRemoteIpDetails struct {
 	// The internet service provider (ISP) organization associated with the remote IP
 	// address.
 	Organization *IpOrganizationDetails
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the remote port that was involved in an attempted
@@ -110,6 +121,8 @@ type ActionRemotePortDetails struct {
 
 	// The port name of the remote connection.
 	PortName *string
+
+	noSmithyDocumentSerde
 }
 
 // An ActionTarget object.
@@ -129,6 +142,8 @@ type ActionTarget struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a Security Hub administrator account designated by an organization
@@ -141,6 +156,8 @@ type AdminAccount struct {
 	// The current status of the Security Hub administrator account. Indicates whether
 	// the account is currently enabled as a Security Hub administrator.
 	Status AdminStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Availability Zone.
@@ -151,6 +168,8 @@ type AvailabilityZone struct {
 
 	// The name of the Availability Zone.
 	ZoneName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provided if ActionType is AWS_API_CALL. It provides details about the API call
@@ -185,6 +204,8 @@ type AwsApiCallAction struct {
 
 	// The name of the AWS service that the API method belongs to.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provided if CallerType is domain. It provides information about the DNS domain
@@ -193,6 +214,8 @@ type AwsApiCallActionDomainDetails struct {
 
 	// The name of the DNS domain that issued the API call.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about settings for logging access for the stage.
@@ -204,6 +227,8 @@ type AwsApiGatewayAccessLogSettings struct {
 	// A single-line format of the access logs of data, as specified by selected
 	// $context variables. The format must include at least $context.requestId.
 	Format *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about settings for canary deployment in the stage.
@@ -223,6 +248,8 @@ type AwsApiGatewayCanarySettings struct {
 
 	// Indicates whether the canary deployment uses the stage cache.
 	UseStageCache bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the endpoints for the API.
@@ -232,6 +259,8 @@ type AwsApiGatewayEndpointConfiguration struct {
 	// endpoint type is EDGE. For a Regional API, the endpoint type is REGIONAL. For a
 	// private API, the endpoint type is PRIVATE.
 	Types []string
+
+	noSmithyDocumentSerde
 }
 
 // Defines settings for a method for the stage.
@@ -286,6 +315,8 @@ type AwsApiGatewayMethodSettings struct {
 	// values: FAIL_WITH_403 | SUCCEED_WITH_RESPONSE_HEADER |
 	// SUCCEED_WITHOUT_RESPONSE_HEADER
 	UnauthorizedCacheControlHeaderStrategy *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a REST API in version 1 of Amazon API Gateway.
@@ -324,6 +355,8 @@ type AwsApiGatewayRestApiDetails struct {
 
 	// The version identifier for the REST API.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a version 1 Amazon API Gateway stage.
@@ -391,6 +424,8 @@ type AwsApiGatewayStageDetails struct {
 
 	// The ARN of the web ACL associated with the stage.
 	WebAclArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a version 2 API in Amazon API Gateway.
@@ -433,6 +468,8 @@ type AwsApiGatewayV2ApiDetails struct {
 
 	// The version identifier for the API.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains route settings for a stage.
@@ -458,6 +495,8 @@ type AwsApiGatewayV2RouteSettings struct {
 
 	// The throttling rate limit.
 	ThrottlingRateLimit float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a version 2 stage for Amazon API Gateway.
@@ -518,6 +557,8 @@ type AwsApiGatewayV2StageDetails struct {
 	// * Special
 	// characters -._~:/?#&=,
 	StageVariables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about an auto scaling group.
@@ -541,6 +582,8 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 
 	// The list of load balancers associated with the group.
 	LoadBalancerNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about an AWS Certificate Manager certificate.
@@ -654,6 +697,8 @@ type AwsCertificateManagerCertificateDetails struct {
 	// ImportCertificate, Type is IMPORTED. Valid values: IMPORTED | AMAZON_ISSUED |
 	// PRIVATE
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about one of the following:
@@ -685,6 +730,8 @@ type AwsCertificateManagerCertificateDomainValidationOption struct {
 
 	// The validation status of the domain name.
 	ValidationStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an extended key usage X.509 v3 extension object.
@@ -697,6 +744,8 @@ type AwsCertificateManagerCertificateExtendedKeyUsage struct {
 	// An object identifier (OID) for the extension value. The format is numbers
 	// separated by periods.
 	OId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a key usage X.509 v3 extension object.
@@ -704,6 +753,8 @@ type AwsCertificateManagerCertificateKeyUsage struct {
 
 	// The key usage extension name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains other options for the certificate.
@@ -712,6 +763,8 @@ type AwsCertificateManagerCertificateOptions struct {
 	// Whether to add the certificate to a transparency log. Valid values: DISABLED |
 	// ENABLED
 	CertificateTransparencyLoggingPreference *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the AWS Certificate Manager managed renewal for an
@@ -740,6 +793,8 @@ type AwsCertificateManagerCertificateRenewalSummary struct {
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	UpdatedAt *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about the CNAME record that is added to the DNS database for
@@ -754,6 +809,8 @@ type AwsCertificateManagerCertificateResourceRecord struct {
 
 	// The value of the resource.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a cache behavior for the distribution.
@@ -772,6 +829,8 @@ type AwsCloudFrontDistributionCacheBehavior struct {
 	// * https-only - CloudFront responds to HTTP request with an
 	// HTTP status code of 403 (Forbidden).
 	ViewerProtocolPolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about caching for the distribution.
@@ -779,6 +838,8 @@ type AwsCloudFrontDistributionCacheBehaviors struct {
 
 	// The cache behaviors for the distribution.
 	Items []AwsCloudFrontDistributionCacheBehavior
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the default cache configuration for the distribution.
@@ -797,6 +858,8 @@ type AwsCloudFrontDistributionDefaultCacheBehavior struct {
 	// * https-only - CloudFront responds to HTTP request with an
 	// HTTP status code of 403 (Forbidden).
 	ViewerProtocolPolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // A distribution configuration.
@@ -842,6 +905,8 @@ type AwsCloudFrontDistributionDetails struct {
 	// A unique identifier that specifies the AWS WAF web ACL, if any, to associate
 	// with this distribution.
 	WebAclId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that controls whether access logs are written for the
@@ -860,6 +925,8 @@ type AwsCloudFrontDistributionLogging struct {
 	// An optional string that you want CloudFront to use as a prefix to the access log
 	// filenames for this distribution.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an origin group for the distribution.
@@ -867,6 +934,8 @@ type AwsCloudFrontDistributionOriginGroup struct {
 
 	// Provides the criteria for an origin group to fail over.
 	FailoverCriteria *AwsCloudFrontDistributionOriginGroupFailover
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about when an origin group fails over.
@@ -874,6 +943,8 @@ type AwsCloudFrontDistributionOriginGroupFailover struct {
 
 	// Information about the status codes that cause an origin group to fail over.
 	StatusCodes *AwsCloudFrontDistributionOriginGroupFailoverStatusCodes
+
+	noSmithyDocumentSerde
 }
 
 // The status codes that cause an origin group to fail over.
@@ -884,6 +955,8 @@ type AwsCloudFrontDistributionOriginGroupFailoverStatusCodes struct {
 
 	// The number of status codes that can cause a failover.
 	Quantity int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about origin groups that are associated with the
@@ -892,6 +965,8 @@ type AwsCloudFrontDistributionOriginGroups struct {
 
 	// The list of origin groups.
 	Items []AwsCloudFrontDistributionOriginGroup
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that describes the Amazon S3 bucket, HTTP server (for example, a
@@ -913,6 +988,8 @@ type AwsCloudFrontDistributionOriginItem struct {
 	// An origin that is an S3 bucket that is not configured with static website
 	// hosting.
 	S3OriginConfig *AwsCloudFrontDistributionOriginS3OriginConfig
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about origins and origin groups for
@@ -921,6 +998,8 @@ type AwsCloudFrontDistributionOrigins struct {
 
 	// A complex type that contains origins or origin groups for this distribution.
 	Items []AwsCloudFrontDistributionOriginItem
+
+	noSmithyDocumentSerde
 }
 
 // Information about an origin that is an S3 bucket that is not configured with
@@ -929,6 +1008,8 @@ type AwsCloudFrontDistributionOriginS3OriginConfig struct {
 
 	// The CloudFront origin access identity to associate with the origin.
 	OriginAccessIdentity *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about a CloudTrail trail.
@@ -983,6 +1064,8 @@ type AwsCloudTrailTrailDetails struct {
 
 	// The ARN of the trail.
 	TrailArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an AWS CodeBuild project.
@@ -1008,6 +1091,8 @@ type AwsCodeBuildProjectDetails struct {
 
 	// Information about the VPC configuration that AWS CodeBuild accesses.
 	VpcConfig *AwsCodeBuildProjectVpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about the build environment for this build project.
@@ -1050,6 +1135,8 @@ type AwsCodeBuildProjectEnvironment struct {
 	// values: WINDOWS_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER |
 	// ARM_CONTAINER
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The credentials for access to a private registry.
@@ -1063,6 +1150,8 @@ type AwsCodeBuildProjectEnvironmentRegistryCredential struct {
 	// The service that created the credentials to access a private Docker registry.
 	// The valid value, SECRETS_MANAGER, is for AWS Secrets Manager.
 	CredentialProvider *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the build input source code for this build project.
@@ -1129,6 +1218,8 @@ type AwsCodeBuildProjectSource struct {
 	// * S3 - The source code
 	// is in an S3 input bucket.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the VPC configuration that AWS CodeBuild accesses.
@@ -1142,6 +1233,8 @@ type AwsCodeBuildProjectVpcConfig struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the cross-origin resource sharing (CORS) configuration for the API.
@@ -1165,6 +1258,8 @@ type AwsCorsConfiguration struct {
 
 	// The number of seconds for which the browser caches preflight request results.
 	MaxAge int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains a definition of an attribute for the table.
@@ -1175,6 +1270,8 @@ type AwsDynamoDbTableAttributeDefinition struct {
 
 	// The type of the attribute.
 	AttributeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the billing for read/write capacity on the table.
@@ -1188,6 +1285,8 @@ type AwsDynamoDbTableBillingModeSummary struct {
 	// Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6). The
 	// value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
 	LastUpdateToPayPerRequestDateTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about a DynamoDB table.
@@ -1252,6 +1351,8 @@ type AwsDynamoDbTableDetails struct {
 
 	// The current status of the table.
 	TableStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Information abut a global secondary index for the table.
@@ -1283,6 +1384,8 @@ type AwsDynamoDbTableGlobalSecondaryIndex struct {
 
 	// Information about the provisioned throughput settings for the indexes.
 	ProvisionedThroughput *AwsDynamoDbTableProvisionedThroughput
+
+	noSmithyDocumentSerde
 }
 
 // A component of the key schema for the DynamoDB table, a global secondary index,
@@ -1294,6 +1397,8 @@ type AwsDynamoDbTableKeySchema struct {
 
 	// The type of key used for the key schema attribute.
 	KeyType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a local secondary index for a DynamoDB table.
@@ -1312,6 +1417,8 @@ type AwsDynamoDbTableLocalSecondaryIndex struct {
 	// to the primary key attributes and index key attributes, which are automatically
 	// projected.
 	Projection *AwsDynamoDbTableProjection
+
+	noSmithyDocumentSerde
 }
 
 // For global and local secondary indexes, identifies the attributes that are
@@ -1324,6 +1431,8 @@ type AwsDynamoDbTableProjection struct {
 
 	// The types of attributes that are projected into the index.
 	ProjectionType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the provisioned throughput for the table or for a global
@@ -1353,6 +1462,8 @@ type AwsDynamoDbTableProvisionedThroughput struct {
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
 	WriteCapacityUnits int32
+
+	noSmithyDocumentSerde
 }
 
 // Replica-specific configuration for the provisioned throughput.
@@ -1360,6 +1471,8 @@ type AwsDynamoDbTableProvisionedThroughputOverride struct {
 
 	// The read capacity units for the replica.
 	ReadCapacityUnits int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a replica of a DynamoDB table.
@@ -1383,6 +1496,8 @@ type AwsDynamoDbTableReplica struct {
 
 	// Detailed information about the replica status.
 	ReplicaStatusDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a global secondary index for a DynamoDB table replica.
@@ -1393,6 +1508,8 @@ type AwsDynamoDbTableReplicaGlobalSecondaryIndex struct {
 
 	// Replica-specific configuration for the provisioned throughput for the index.
 	ProvisionedThroughputOverride *AwsDynamoDbTableProvisionedThroughputOverride
+
+	noSmithyDocumentSerde
 }
 
 // Information about the restore for the table.
@@ -1412,6 +1529,8 @@ type AwsDynamoDbTableRestoreSummary struct {
 
 	// The ARN of the source table for the backup.
 	SourceTableArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the server-side encryption for the table.
@@ -1433,6 +1552,8 @@ type AwsDynamoDbTableSseDescription struct {
 
 	// The status of the server-side encryption.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The current DynamoDB Streams configuration for the table.
@@ -1443,6 +1564,8 @@ type AwsDynamoDbTableStreamSpecification struct {
 
 	// Determines the information that is written to the table.
 	StreamViewType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Elastic IP address.
@@ -1481,6 +1604,8 @@ type AwsEc2EipDetails struct {
 	// The identifier of an IP address pool. This parameter allows Amazon EC2 to select
 	// an IP address from the address pool.
 	PublicIpv4Pool *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of an EC2 instance.
@@ -1520,6 +1645,8 @@ type AwsEc2InstanceDetails struct {
 
 	// The identifier of the VPC that the instance was launched in.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a network interface for the EC2 instance.
@@ -1528,6 +1655,8 @@ type AwsEc2InstanceNetworkInterfacesDetails struct {
 	// The identifier of the network interface. The details are in a corresponding
 	// AwsEc2NetworkInterfacesDetails object.
 	NetworkInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // An association between the network ACL and a subnet.
@@ -1541,6 +1670,8 @@ type AwsEc2NetworkAclAssociation struct {
 
 	// The identifier of the subnet that is associated with the network ACL.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an EC2 network access control list (ACL).
@@ -1563,6 +1694,8 @@ type AwsEc2NetworkAclDetails struct {
 
 	// The identifier of the VPC for the network ACL.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule for the network ACL. Each rule allows or denies access based on the IP
@@ -1595,6 +1728,8 @@ type AwsEc2NetworkAclEntry struct {
 
 	// The rule number. The rules are processed in order by their number.
 	RuleNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the network interface attachment.
@@ -1624,6 +1759,8 @@ type AwsEc2NetworkInterfaceAttachment struct {
 
 	// The attachment state. Valid values: attaching | attached | detaching | detached
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the network interface
@@ -1652,6 +1789,8 @@ type AwsEc2NetworkInterfaceDetails struct {
 
 	// Indicates whether traffic to or from the instance is validated.
 	SourceDestCheck bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an IPV6 address that is associated with the network
@@ -1660,6 +1799,8 @@ type AwsEc2NetworkInterfaceIpV6AddressDetail struct {
 
 	// The IPV6 address.
 	IpV6Address *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a private IPv4 address that is with the network
@@ -1671,6 +1812,8 @@ type AwsEc2NetworkInterfacePrivateIpAddressDetail struct {
 
 	// The IP address.
 	PrivateIpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // A security group associated with the network interface.
@@ -1681,6 +1824,8 @@ type AwsEc2NetworkInterfaceSecurityGroup struct {
 
 	// The name of the security group.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an EC2 security group.
@@ -1703,6 +1848,8 @@ type AwsEc2SecurityGroupDetails struct {
 
 	// [VPC only] The ID of the VPC for the security group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // An IP permission for an EC2 security group.
@@ -1739,6 +1886,8 @@ type AwsEc2SecurityGroupIpPermission struct {
 
 	// The security group and AWS account ID pairs.
 	UserIdGroupPairs []AwsEc2SecurityGroupUserIdGroupPair
+
+	noSmithyDocumentSerde
 }
 
 // A range of IPv4 addresses.
@@ -1748,6 +1897,8 @@ type AwsEc2SecurityGroupIpRange struct {
 	// group, but not both. To specify a single IPv4 address, use the /32 prefix
 	// length.
 	CidrIp *string
+
+	noSmithyDocumentSerde
 }
 
 // A range of IPv6 addresses.
@@ -1757,6 +1908,8 @@ type AwsEc2SecurityGroupIpv6Range struct {
 	// group, but not both. To specify a single IPv6 address, use the /128 prefix
 	// length.
 	CidrIpv6 *string
+
+	noSmithyDocumentSerde
 }
 
 // A prefix list ID.
@@ -1764,6 +1917,8 @@ type AwsEc2SecurityGroupPrefixListId struct {
 
 	// The ID of the prefix.
 	PrefixListId *string
+
+	noSmithyDocumentSerde
 }
 
 // A relationship between a security group and a user.
@@ -1790,6 +1945,8 @@ type AwsEc2SecurityGroupUserIdGroupPair struct {
 
 	// The ID of the VPC peering connection, if applicable.
 	VpcPeeringConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a subnet in EC2.
@@ -1835,6 +1992,8 @@ type AwsEc2SubnetDetails struct {
 
 	// The identifier of the VPC that contains the subnet.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // An attachment to an AWS EC2 volume.
@@ -1851,6 +2010,8 @@ type AwsEc2VolumeAttachment struct {
 
 	// The attachment state of the volume.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an EC2 volume.
@@ -1880,6 +2041,8 @@ type AwsEc2VolumeDetails struct {
 
 	// The volume state.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an EC2 VPC.
@@ -1898,6 +2061,8 @@ type AwsEc2VpcDetails struct {
 
 	// The current state of the VPC.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether to enable CloudWatch Container Insights for the ECS cluster.
@@ -1908,6 +2073,8 @@ type AwsEcsClusterClusterSettingsDetails struct {
 
 	// The value of the setting.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The run command configuration for the cluster.
@@ -1915,6 +2082,8 @@ type AwsEcsClusterConfigurationDetails struct {
 
 	// Contains the run command configuration for the cluster.
 	ExecuteCommandConfiguration *AwsEcsClusterConfigurationExecuteCommandConfigurationDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains the run command configuration for the cluster.
@@ -1930,6 +2099,8 @@ type AwsEcsClusterConfigurationExecuteCommandConfigurationDetails struct {
 
 	// The log setting to use for redirecting logs for run command results.
 	Logging *string
+
+	noSmithyDocumentSerde
 }
 
 // The log configuration for the results of the run command actions.
@@ -1949,6 +2120,8 @@ type AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetail
 
 	// Identifies the folder in the S3 bucket to send the logs to.
 	S3KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The default capacity provider strategy for the cluster. The default capacity
@@ -1965,6 +2138,8 @@ type AwsEcsClusterDefaultCapacityProviderStrategyDetails struct {
 	// The relative percentage of the total number of tasks launched that should use
 	// the capacity provider.
 	Weight int32
+
+	noSmithyDocumentSerde
 }
 
 // provides details about an ECS cluster.
@@ -1984,6 +2159,8 @@ type AwsEcsClusterDetails struct {
 	// provider strategy is used when services or tasks are run without a specified
 	// launch type or capacity provider strategy.
 	DefaultCapacityProviderStrategy []AwsEcsClusterDefaultCapacityProviderStrategyDetails
+
+	noSmithyDocumentSerde
 }
 
 // A dependency that is defined for container startup and shutdown.
@@ -1995,6 +2172,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails struct {
 
 	// The name of the dependent container.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 // A container definition that describes a container in the task.
@@ -2145,6 +2324,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsDetails struct {
 
 	// The working directory in which to run commands inside the container.
 	WorkingDirectory *string
+
+	noSmithyDocumentSerde
 }
 
 // An environment variable to pass to the container.
@@ -2155,6 +2336,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails struct {
 
 	// The value of the environment variable.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A file that contain environment variables to pass to a container.
@@ -2165,6 +2348,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails struct {
 
 	// The ARN of the S3 object that contains the environment variable file.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A hostname and IP address mapping to append to the /etc/hosts file on the
@@ -2176,6 +2361,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails struct {
 
 	// The IP address to use in the /etc/hosts entry.
 	IpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // The FireLens configuration for the container. The configuration specifies and
@@ -2196,6 +2383,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails struct
 
 	// The log router to use.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The container health check command and associated configuration parameters for
@@ -2220,6 +2409,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails struct {
 	// The time period in seconds to wait for a health check to succeed before it is
 	// considered a failure. The default value is 5.
 	Timeout int32
+
+	noSmithyDocumentSerde
 }
 
 // The Linux capabilities for the container that are added to or dropped from the
@@ -2233,6 +2424,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails 
 	// The Linux capabilities for the container that are dropped from the default
 	// configuration provided by Docker.
 	Drop []string
+
+	noSmithyDocumentSerde
 }
 
 // >Linux-specific modifications that are applied to the container, such as Linux
@@ -2263,6 +2456,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails struct {
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount.
 	Tmpfs []AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails
+
+	noSmithyDocumentSerde
 }
 
 // A host device to expose to the container.
@@ -2277,6 +2472,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails struc
 	// The explicit permissions to provide to the container for the device. By default,
 	// the container has permissions for read, write, and mknod for the device.
 	Permissions []string
+
+	noSmithyDocumentSerde
 }
 
 // The container path, mount options, and size (in MiB) of a tmpfs mount.
@@ -2290,6 +2487,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails struct 
 
 	// The maximum size (in MiB) of the tmpfs volume.
 	Size int32
+
+	noSmithyDocumentSerde
 }
 
 // The log configuration specification for the container.
@@ -2304,6 +2503,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails struct {
 
 	// The secrets to pass to the log configuration.
 	SecretOptions []AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails
+
+	noSmithyDocumentSerde
 }
 
 // A secret to pass to the log configuration.
@@ -2316,6 +2517,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetail
 	// Secrets Manager secret or the full ARN of the parameter in the Systems Manager
 	// Parameter Store.
 	ValueFrom *string
+
+	noSmithyDocumentSerde
 }
 
 // A mount point for the data volumes in the container.
@@ -2330,6 +2533,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails struct {
 	// The name of the volume to mount. Must match the name of a volume listed in
 	// VolumeDetails for the task definition.
 	SourceVolume *string
+
+	noSmithyDocumentSerde
 }
 
 // A port mapping for the container.
@@ -2344,6 +2549,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails struct {
 
 	// The protocol used for the port mapping. The default is tcp.
 	Protocol *string
+
+	noSmithyDocumentSerde
 }
 
 // The private repository authentication credentials to use.
@@ -2351,6 +2558,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails struct
 
 	// The ARN of the secret that contains the private repository credentials.
 	CredentialsParameter *string
+
+	noSmithyDocumentSerde
 }
 
 // A resource to assign to a container.
@@ -2364,6 +2573,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails struct 
 	// InferenceAccelerator, the value should match the DeviceName attribute of an
 	// entry in InferenceAccelerators.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A secret to pass to the container.
@@ -2376,6 +2587,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails struct {
 	// Secrets Manager secret or the full ARN of the parameter in the Systems Manager
 	// Parameter Store.
 	ValueFrom *string
+
+	noSmithyDocumentSerde
 }
 
 // A namespaced kernel parameter to set in the container.
@@ -2386,6 +2599,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails struct {
 
 	// The value of the parameter.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A ulimit to set in the container.
@@ -2399,6 +2614,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails struct {
 
 	// The soft limit for the ulimit type.
 	SoftLimit int32
+
+	noSmithyDocumentSerde
 }
 
 // A data volume to mount from another container.
@@ -2410,6 +2627,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails struct {
 	// The name of another container within the same task definition from which to
 	// mount volumes.
 	SourceContainer *string
+
+	noSmithyDocumentSerde
 }
 
 // details about a task definition. A task definition describes the container and
@@ -2459,6 +2678,8 @@ type AwsEcsTaskDefinitionDetails struct {
 
 	// The data volume definitions for the task.
 	Volumes []AwsEcsTaskDefinitionVolumesDetails
+
+	noSmithyDocumentSerde
 }
 
 // An Elastic Inference accelerator to use for the containers in the task.
@@ -2469,6 +2690,8 @@ type AwsEcsTaskDefinitionInferenceAcceleratorsDetails struct {
 
 	// The Elastic Inference accelerator type to use.
 	DeviceType *string
+
+	noSmithyDocumentSerde
 }
 
 // A placement constraint object to use for tasks.
@@ -2479,6 +2702,8 @@ type AwsEcsTaskDefinitionPlacementConstraintsDetails struct {
 
 	// The type of constraint.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration details for the App Mesh proxy.
@@ -2493,6 +2718,8 @@ type AwsEcsTaskDefinitionProxyConfigurationDetails struct {
 
 	// The proxy type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // A network configuration parameter to provide to the Container Network Interface
@@ -2504,6 +2731,8 @@ type AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails s
 
 	// The value of the property.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A data volume to mount from another container.
@@ -2521,6 +2750,8 @@ type AwsEcsTaskDefinitionVolumesDetails struct {
 
 	// The name of the data volume.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Docker volume.
@@ -2543,6 +2774,8 @@ type AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails struct {
 	// destroyed when the task stops. Docker volumes that are shared persist after the
 	// task stops.
 	Scope *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -2554,6 +2787,8 @@ type AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails
 	// Whether to use the Amazon ECS task IAM role defined in a task definition when
 	// mounting the Amazon EFS file system.
 	Iam *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the Amazon Elastic File System file system that is used for
@@ -2577,6 +2812,8 @@ type AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails struct {
 	// The port to use when sending encrypted data between the Amazon ECS host and the
 	// Amazon EFS server.
 	TransitEncryptionPort int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a bind mount host volume.
@@ -2584,6 +2821,8 @@ type AwsEcsTaskDefinitionVolumesHostDetails struct {
 
 	// The path on the host container instance that is presented to the container.
 	SourcePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an Elastic Beanstalk environment.
@@ -2637,6 +2876,8 @@ type AwsElasticBeanstalkEnvironmentDetails struct {
 
 	// The application version of the environment.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a link to another environment that is in the same
@@ -2648,6 +2889,8 @@ type AwsElasticBeanstalkEnvironmentEnvironmentLink struct {
 
 	// The name of the environment link.
 	LinkName *string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration option setting for the environment.
@@ -2664,6 +2907,8 @@ type AwsElasticBeanstalkEnvironmentOptionSetting struct {
 
 	// The value of the configuration setting.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the tier of the environment.
@@ -2677,6 +2922,8 @@ type AwsElasticBeanstalkEnvironmentTier struct {
 
 	// The version of the environment tier.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Elasticsearch domain.
@@ -2722,6 +2969,8 @@ type AwsElasticsearchDomainDetails struct {
 
 	// Information that Amazon ES derives based on VPCOptions for the domain.
 	VPCOptions *AwsElasticsearchDomainVPCOptions
+
+	noSmithyDocumentSerde
 }
 
 // Additional options for the domain endpoint, such as whether to require HTTPS for
@@ -2739,6 +2988,8 @@ type AwsElasticsearchDomainDomainEndpointOptions struct {
 	//
 	// * Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2
 	TLSSecurityPolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the configuration for encryption at rest.
@@ -2749,6 +3000,8 @@ type AwsElasticsearchDomainEncryptionAtRestOptions struct {
 
 	// The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // configures the CloudWatch Logs to publish for the Elasticsearch domain.
@@ -2759,6 +3012,8 @@ type AwsElasticsearchDomainLogPublishingOptions struct {
 
 	// Configures the Elasticsearch search slow log publishing.
 	SearchSlowLogs *AwsElasticsearchDomainLogPublishingOptionsLogConfig
+
+	noSmithyDocumentSerde
 }
 
 // The log configuration.
@@ -2769,6 +3024,8 @@ type AwsElasticsearchDomainLogPublishingOptionsLogConfig struct {
 
 	// Whether the log publishing is enabled.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Details about the configuration for node-to-node encryption.
@@ -2776,6 +3033,8 @@ type AwsElasticsearchDomainNodeToNodeEncryptionOptions struct {
 
 	// Whether node-to-node encryption is enabled.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the state of the domain relative to the latest service
@@ -2804,6 +3063,8 @@ type AwsElasticsearchDomainServiceSoftwareOptions struct {
 
 	// The status of the service software update.
 	UpdateStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Information that Amazon ES derives based on VPCOptions for the domain.
@@ -2820,6 +3081,8 @@ type AwsElasticsearchDomainVPCOptions struct {
 
 	// ID for the VPC.
 	VPCId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a stickiness policy that was created using
@@ -2832,6 +3095,8 @@ type AwsElbAppCookieStickinessPolicy struct {
 	// The mnemonic name for the policy being created. The name must be unique within
 	// the set of policies for the load balancer.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a stickiness policy that was created using
@@ -2846,6 +3111,8 @@ type AwsElbLbCookieStickinessPolicy struct {
 	// The name of the policy. The name must be unique within the set of policies for
 	// the load balancer.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the access log configuration for the load balancer.
@@ -2864,6 +3131,8 @@ type AwsElbLoadBalancerAccessLog struct {
 	// The logical hierarchy that was created for the S3 bucket. If a prefix is not
 	// provided, the log is placed at the root level of the bucket.
 	S3BucketPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains attributes for the load balancer.
@@ -2889,6 +3158,8 @@ type AwsElbLoadBalancerAttributes struct {
 	// balancing is enabled, the load balancer routes the request traffic evenly across
 	// all instances regardless of the Availability Zones.
 	CrossZoneLoadBalancing *AwsElbLoadBalancerCrossZoneLoadBalancing
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the configuration of an EC2 instance for the load
@@ -2900,6 +3171,8 @@ type AwsElbLoadBalancerBackendServerDescription struct {
 
 	// The names of the policies that are enabled for the EC2 instance.
 	PolicyNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the connection draining configuration for the load
@@ -2912,6 +3185,8 @@ type AwsElbLoadBalancerConnectionDraining struct {
 	// The maximum time, in seconds, to keep the existing connections open before
 	// deregistering the instances.
 	Timeout int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains connection settings for the load balancer.
@@ -2920,6 +3195,8 @@ type AwsElbLoadBalancerConnectionSettings struct {
 	// The time, in seconds, that the connection can be idle (no data is sent over the
 	// connection) before it is closed by the load balancer.
 	IdleTimeout int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains cross-zone load balancing settings for the load balancer.
@@ -2927,6 +3204,8 @@ type AwsElbLoadBalancerCrossZoneLoadBalancing struct {
 
 	// Indicates whether cross-zone load balancing is enabled for the load balancer.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a Classic Load Balancer.
@@ -2990,6 +3269,8 @@ type AwsElbLoadBalancerDetails struct {
 
 	// The identifier of the VPC for the load balancer.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the health checks that are conducted on the load
@@ -3019,6 +3300,8 @@ type AwsElbLoadBalancerHealthCheck struct {
 	// The number of consecutive health check failures that must occur before the
 	// instance is moved to the Unhealthy state.
 	UnhealthyThreshold int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an EC2 instance for a load balancer.
@@ -3026,6 +3309,8 @@ type AwsElbLoadBalancerInstance struct {
 
 	// The instance identifier.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a load balancer listener.
@@ -3049,6 +3334,8 @@ type AwsElbLoadBalancerListener struct {
 
 	// The ARN of the server certificate.
 	SslCertificateId *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists the policies that are enabled for a load balancer listener.
@@ -3059,6 +3346,8 @@ type AwsElbLoadBalancerListenerDescription struct {
 
 	// The policies enabled for the listener.
 	PolicyNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the policies for a load balancer.
@@ -3072,6 +3361,8 @@ type AwsElbLoadBalancerPolicies struct {
 
 	// The policies other than the stickiness policies.
 	OtherPolicies []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the security group for the load balancer.
@@ -3082,6 +3373,8 @@ type AwsElbLoadBalancerSourceSecurityGroup struct {
 
 	// The owner of the security group.
 	OwnerAlias *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a load balancer.
@@ -3121,6 +3414,8 @@ type AwsElbv2LoadBalancerDetails struct {
 
 	// The ID of the VPC for the load balancer.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // IAM access key details related to a finding.
@@ -3159,6 +3454,8 @@ type AwsIamAccessKeyDetails struct {
 	//
 	// Deprecated: This filter is deprecated. Instead, use PrincipalName.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the session that the key was used for.
@@ -3169,6 +3466,8 @@ type AwsIamAccessKeySessionContext struct {
 
 	// Information about the entity that created the session.
 	SessionIssuer *AwsIamAccessKeySessionContextSessionIssuer
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of the session that the key was used for.
@@ -3182,6 +3481,8 @@ type AwsIamAccessKeySessionContextAttributes struct {
 
 	// Indicates whether the session used multi-factor authentication (MFA).
 	MfaAuthenticated bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the entity that created the session.
@@ -3202,6 +3503,8 @@ type AwsIamAccessKeySessionContextSessionIssuer struct {
 
 	// The name of the principal that created the session.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // A managed policy that is attached to an IAM principal.
@@ -3212,6 +3515,8 @@ type AwsIamAttachedManagedPolicy struct {
 
 	// The name of the policy.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an IAM group.
@@ -3237,6 +3542,8 @@ type AwsIamGroupDetails struct {
 
 	// The path to the group.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // A managed policy that is attached to the IAM group.
@@ -3244,6 +3551,8 @@ type AwsIamGroupPolicy struct {
 
 	// The name of the policy.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an instance profile.
@@ -3269,6 +3578,8 @@ type AwsIamInstanceProfile struct {
 
 	// The roles associated with the instance profile.
 	Roles []AwsIamInstanceProfileRole
+
+	noSmithyDocumentSerde
 }
 
 // Information about a role associated with an instance profile.
@@ -3294,6 +3605,8 @@ type AwsIamInstanceProfileRole struct {
 
 	// The name of the role.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the policy used to set the permissions boundary for an IAM
@@ -3305,6 +3618,8 @@ type AwsIamPermissionsBoundary struct {
 
 	// The usage type for the permissions boundary.
 	PermissionsBoundaryType *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an IAM permissions policy.
@@ -3349,6 +3664,8 @@ type AwsIamPolicyDetails struct {
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	UpdateDate *string
+
+	noSmithyDocumentSerde
 }
 
 // A version of an IAM policy.
@@ -3365,6 +3682,8 @@ type AwsIamPolicyVersion struct {
 
 	// The identifier of the policy version.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an IAM role, including all of the role's policies.
@@ -3404,6 +3723,8 @@ type AwsIamRoleDetails struct {
 
 	// The list of inline policies that are embedded in the role.
 	RolePolicyList []AwsIamRolePolicy
+
+	noSmithyDocumentSerde
 }
 
 // An inline policy that is embedded in the role.
@@ -3411,6 +3732,8 @@ type AwsIamRolePolicy struct {
 
 	// The name of the policy.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an IAM user.
@@ -3442,6 +3765,8 @@ type AwsIamUserDetails struct {
 
 	// The list of inline policies that are embedded in the user.
 	UserPolicyList []AwsIamUserPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Information about an inline policy that is embedded in the user.
@@ -3449,6 +3774,8 @@ type AwsIamUserPolicy struct {
 
 	// The name of the policy.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata about a customer master key (CMK).
@@ -3482,6 +3809,8 @@ type AwsKmsKeyDetails struct {
 	// material. When this value is AWS_CLOUDHSM, the key material was created in the
 	// AWS CloudHSM cluster associated with a custom key store.
 	Origin *string
+
+	noSmithyDocumentSerde
 }
 
 // The code for the Lambda function. You can specify either an object in Amazon S3,
@@ -3501,6 +3830,8 @@ type AwsLambdaFunctionCode struct {
 	// The base64-encoded contents of the deployment package. AWS SDK and AWS CLI
 	// clients handle the encoding for you.
 	ZipFile *string
+
+	noSmithyDocumentSerde
 }
 
 // The dead-letter queue for failed asynchronous invocations.
@@ -3508,6 +3839,8 @@ type AwsLambdaFunctionDeadLetterConfig struct {
 
 	// The ARN of an Amazon SQS queue or Amazon SNS topic.
 	TargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a function's configuration.
@@ -3570,6 +3903,8 @@ type AwsLambdaFunctionDetails struct {
 
 	// The function's networking configuration.
 	VpcConfig *AwsLambdaFunctionVpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // A function's environment variable settings.
@@ -3580,6 +3915,8 @@ type AwsLambdaFunctionEnvironment struct {
 
 	// Environment variable key-value pairs.
 	Variables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Error messages for environment variables that could not be applied.
@@ -3590,6 +3927,8 @@ type AwsLambdaFunctionEnvironmentError struct {
 
 	// The error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // An AWS Lambda layer.
@@ -3600,6 +3939,8 @@ type AwsLambdaFunctionLayer struct {
 
 	// The size of the layer archive in bytes.
 	CodeSize int32
+
+	noSmithyDocumentSerde
 }
 
 // The function's AWS X-Ray tracing configuration.
@@ -3607,6 +3948,8 @@ type AwsLambdaFunctionTracingConfig struct {
 
 	// The tracing mode.
 	Mode *string
+
+	noSmithyDocumentSerde
 }
 
 // The VPC security groups and subnets that are attached to a Lambda function.
@@ -3620,6 +3963,8 @@ type AwsLambdaFunctionVpcConfig struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a Lambda layer version.
@@ -3638,6 +3983,8 @@ type AwsLambdaLayerVersionDetails struct {
 
 	// The version number.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // An IAM role that is associated with the Amazon RDS DB cluster.
@@ -3648,6 +3995,8 @@ type AwsRdsDbClusterAssociatedRole struct {
 
 	// The status of the association between the IAM role and the DB cluster.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Amazon RDS DB cluster.
@@ -3779,6 +4128,8 @@ type AwsRdsDbClusterDetails struct {
 
 	// A list of VPC security groups that the DB cluster belongs to.
 	VpcSecurityGroups []AwsRdsDbInstanceVpcSecurityGroup
+
+	noSmithyDocumentSerde
 }
 
 // Information about an instance in the DB cluster.
@@ -3796,6 +4147,8 @@ type AwsRdsDbClusterMember struct {
 	// Specifies the order in which an Aurora replica is promoted to the primary
 	// instance when the existing primary instance fails.
 	PromotionTier int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about an option group membership for a DB cluster.
@@ -3806,6 +4159,8 @@ type AwsRdsDbClusterOptionGroupMembership struct {
 
 	// The status of the DB cluster option group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Amazon RDS DB cluster snapshot.
@@ -3871,6 +4226,8 @@ type AwsRdsDbClusterSnapshotDetails struct {
 
 	// The VPC ID that is associated with the DB cluster snapshot.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Active Directory domain membership record associated with
@@ -3888,6 +4245,8 @@ type AwsRdsDbDomainMembership struct {
 
 	// The status of the Active Directory Domain membership for the DB instance.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // An AWS Identity and Access Management (IAM) role associated with the DB
@@ -3914,6 +4273,8 @@ type AwsRdsDbInstanceAssociatedRole struct {
 	// instance. But the DB instance is unable to assume the IAM role in order to
 	// access other AWS services on your behalf.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon RDS DB instance.
@@ -4136,6 +4497,8 @@ type AwsRdsDbInstanceDetails struct {
 
 	// A list of VPC security groups that the DB instance belongs to.
 	VpcSecurityGroups []AwsRdsDbInstanceVpcSecurityGroup
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the connection endpoint.
@@ -4149,6 +4512,8 @@ type AwsRdsDbInstanceEndpoint struct {
 
 	// Specifies the port that the database engine is listening on.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // A VPC security groups that the DB instance belongs to.
@@ -4159,6 +4524,8 @@ type AwsRdsDbInstanceVpcSecurityGroup struct {
 
 	// The name of the VPC security group.
 	VpcSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // An option group membership.
@@ -4169,6 +4536,8 @@ type AwsRdsDbOptionGroupMembership struct {
 
 	// The status of the option group membership.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a parameter group for a DB instance.
@@ -4179,6 +4548,8 @@ type AwsRdsDbParameterGroup struct {
 
 	// The status of parameter updates.
 	ParameterApplyStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Changes to a DB instance that are currently pending.
@@ -4229,6 +4600,8 @@ type AwsRdsDbPendingModifiedValues struct {
 
 	// The new storage type for the DB instance.
 	StorageType *string
+
+	noSmithyDocumentSerde
 }
 
 // A processor feature.
@@ -4239,6 +4612,8 @@ type AwsRdsDbProcessorFeature struct {
 
 	// The value of the processor feature.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about an Amazon RDS DB cluster snapshot.
@@ -4330,6 +4705,8 @@ type AwsRdsDbSnapshotDetails struct {
 
 	// The VPC ID associated with the DB snapshot.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the status of a read replica.
@@ -4346,6 +4723,8 @@ type AwsRdsDbStatusInfo struct {
 
 	// The type of status. For a read replica, the status type is read replication.
 	StatusType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the subnet group for the database instance.
@@ -4368,6 +4747,8 @@ type AwsRdsDbSubnetGroup struct {
 
 	// The VPC ID of the subnet group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a subnet in a subnet group.
@@ -4381,6 +4762,8 @@ type AwsRdsDbSubnetGroupSubnet struct {
 
 	// The status of a subnet in the subnet group.
 	SubnetStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // An Availability Zone for a subnet in a subnet group.
@@ -4388,6 +4771,8 @@ type AwsRdsDbSubnetGroupSubnetAvailabilityZone struct {
 
 	// The name of the Availability Zone for a subnet in the subnet group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the log types to enable and disable.
@@ -4398,6 +4783,8 @@ type AwsRdsPendingCloudWatchLogsExports struct {
 
 	// A list of log types that are being enabled.
 	LogTypesToEnable []string
+
+	noSmithyDocumentSerde
 }
 
 // A node in an Amazon Redshift cluster.
@@ -4411,6 +4798,8 @@ type AwsRedshiftClusterClusterNode struct {
 
 	// The public IP address of the node.
 	PublicIpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // A cluster parameter group that is associated with an Amazon Redshift cluster.
@@ -4424,6 +4813,8 @@ type AwsRedshiftClusterClusterParameterGroup struct {
 
 	// The name of the parameter group.
 	ParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of a parameter in a cluster parameter group for an Amazon Redshift
@@ -4441,6 +4832,8 @@ type AwsRedshiftClusterClusterParameterStatus struct {
 
 	// The name of the parameter.
 	ParameterName *string
+
+	noSmithyDocumentSerde
 }
 
 // A security group that is associated with the cluster.
@@ -4451,6 +4844,8 @@ type AwsRedshiftClusterClusterSecurityGroup struct {
 
 	// The status of the cluster security group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a cross-Region snapshot copy.
@@ -4472,6 +4867,8 @@ type AwsRedshiftClusterClusterSnapshotCopyStatus struct {
 
 	// The name of the snapshot copy grant.
 	SnapshotCopyGrantName *string
+
+	noSmithyDocumentSerde
 }
 
 // A time windows during which maintenance was deferred for an Amazon Redshift
@@ -4492,6 +4889,8 @@ type AwsRedshiftClusterDeferredMaintenanceWindow struct {
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	DeferMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an Amazon Redshift cluster.
@@ -4673,6 +5072,8 @@ type AwsRedshiftClusterDetails struct {
 	// The list of VPC security groups that the cluster belongs to, if the cluster is
 	// in a VPC.
 	VpcSecurityGroups []AwsRedshiftClusterVpcSecurityGroup
+
+	noSmithyDocumentSerde
 }
 
 // The status of the elastic IP (EIP) address for an Amazon Redshift cluster.
@@ -4683,6 +5084,8 @@ type AwsRedshiftClusterElasticIpStatus struct {
 
 	// The status of the elastic IP address.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The connection endpoint for an Amazon Redshift cluster.
@@ -4693,6 +5096,8 @@ type AwsRedshiftClusterEndpoint struct {
 
 	// The port that the database engine listens on.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about whether an Amazon Redshift cluster finished applying any
@@ -4712,6 +5117,8 @@ type AwsRedshiftClusterHsmStatus struct {
 	// settings changes specified in a modify cluster command. Type: String Valid
 	// values: active | applying
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // An IAM role that the cluster can use to access other AWS services.
@@ -4723,6 +5130,8 @@ type AwsRedshiftClusterIamRole struct {
 
 	// The ARN of the IAM role.
 	IamRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Changes to the Amazon Redshift cluster that are currently pending.
@@ -4762,6 +5171,8 @@ type AwsRedshiftClusterPendingModifiedValues struct {
 	// The pending or in-progress change to whether the cluster can be connected to
 	// from the public network.
 	PubliclyAccessible bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the resize operation for the cluster.
@@ -4772,6 +5183,8 @@ type AwsRedshiftClusterResizeInfo struct {
 
 	// The type of resize operation. Valid values: ClassicResize
 	ResizeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the status of a cluster restore action. It only applies if the
@@ -4804,6 +5217,8 @@ type AwsRedshiftClusterRestoreStatus struct {
 	// The status of the restore action. Valid values: starting | restoring | completed
 	// | failed
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A VPC security group that the cluster belongs to, if the cluster is in a VPC.
@@ -4814,6 +5229,8 @@ type AwsRedshiftClusterVpcSecurityGroup struct {
 
 	// The identifier of the VPC security group.
 	VpcSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // provides information about the Amazon S3 Public Access Block configuration for
@@ -4836,6 +5253,8 @@ type AwsS3AccountPublicAccessBlockDetails struct {
 	// public policy to only AWS service principals and authorized users within the S3
 	// bucket owner's account.
 	RestrictPublicBuckets bool
+
+	noSmithyDocumentSerde
 }
 
 // The lifecycle configuration for the objects in the S3 bucket.
@@ -4843,6 +5262,8 @@ type AwsS3BucketBucketLifecycleConfigurationDetails struct {
 
 	// The lifecycle rules.
 	Rules []AwsS3BucketBucketLifecycleConfigurationRulesDetails
+
+	noSmithyDocumentSerde
 }
 
 // Information about what Amazon S3 does when a multipart upload is incomplete.
@@ -4850,6 +5271,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadD
 
 	// The number of days after which Amazon S3 cancels an incomplete multipart upload.
 	DaysAfterInitiation int32
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for a lifecycle rule.
@@ -4898,6 +5321,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesDetails struct {
 	// Transition rules that indicate when objects transition to a specified storage
 	// class.
 	Transitions []AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the objects that a rule applies to.
@@ -4905,6 +5330,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails struct {
 
 	// The configuration for the filter.
 	Predicate *AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for the filter.
@@ -4921,6 +5348,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails struct {
 
 	// Whether to use AND or OR to join the operands.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // A value to use for the filter.
@@ -4934,6 +5363,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails 
 
 	// The type of filter value.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag that is assigned to matching objects.
@@ -4944,6 +5375,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetai
 
 	// The tag value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag filter.
@@ -4954,6 +5387,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails struc
 
 	// The tag value
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A transition rule that describes when noncurrent objects transition to a
@@ -4967,6 +5402,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDet
 	// The class of storage to change the object to after the object is noncurrent for
 	// the specified number of days.
 	StorageClass *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule for when objects transition to specific storage classes.
@@ -4985,6 +5422,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 
 	// The storage class to transition the object to.
 	StorageClass *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of an Amazon S3 bucket.
@@ -5011,6 +5450,8 @@ type AwsS3BucketDetails struct {
 
 	// The encryption rules that are applied to the S3 bucket.
 	ServerSideEncryptionConfiguration *AwsS3BucketServerSideEncryptionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default server-side encryption to apply to new objects in the
@@ -5022,6 +5463,8 @@ type AwsS3BucketServerSideEncryptionByDefault struct {
 
 	// Server-side encryption algorithm to use for the default encryption.
 	SSEAlgorithm *string
+
+	noSmithyDocumentSerde
 }
 
 // The encryption configuration for the S3 bucket.
@@ -5029,6 +5472,8 @@ type AwsS3BucketServerSideEncryptionConfiguration struct {
 
 	// The encryption rules that are applied to the S3 bucket.
 	Rules []AwsS3BucketServerSideEncryptionRule
+
+	noSmithyDocumentSerde
 }
 
 // An encryption rule to apply to the S3 bucket.
@@ -5038,6 +5483,8 @@ type AwsS3BucketServerSideEncryptionRule struct {
 	// bucket. If a PUT object request doesn't specify any server-side encryption, this
 	// default encryption is applied.
 	ApplyServerSideEncryptionByDefault *AwsS3BucketServerSideEncryptionByDefault
+
+	noSmithyDocumentSerde
 }
 
 // Details about an Amazon S3 object.
@@ -5066,6 +5513,8 @@ type AwsS3ObjectDetails struct {
 
 	// The version of the object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an AWS Secrets Manager secret.
@@ -5095,6 +5544,8 @@ type AwsSecretsManagerSecretDetails struct {
 
 	// Defines the rotation schedule for the secret.
 	RotationRules *AwsSecretsManagerSecretRotationRules
+
+	noSmithyDocumentSerde
 }
 
 // Defines the rotation schedule for the secret.
@@ -5102,6 +5553,8 @@ type AwsSecretsManagerSecretRotationRules struct {
 
 	// The number of days after the previous rotation to rotate the secret.
 	AutomaticallyAfterDays int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides consistent format for the contents of the Security Hub-aggregated
@@ -5279,6 +5732,8 @@ type AwsSecurityFinding struct {
 	// Deprecated: This filter is deprecated. Instead, use SeverityLabel or
 	// FindingProviderFieldsSeverityLabel.
 	WorkflowState WorkflowState
+
+	noSmithyDocumentSerde
 }
 
 // A collection of attributes that are applied to all active Security
@@ -5627,6 +6082,8 @@ type AwsSecurityFindingFilters struct {
 	// * RESOLVED - The
 	// finding was reviewed and remediated and is now considered resolved.
 	WorkflowStatus []StringFilter
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a finding to update using BatchUpdateFindings.
@@ -5643,6 +6100,8 @@ type AwsSecurityFindingIdentifier struct {
 	//
 	// This member is required.
 	ProductArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A wrapper type for the topic's ARN.
@@ -5661,6 +6120,8 @@ type AwsSnsTopicDetails struct {
 
 	// The name of the topic.
 	TopicName *string
+
+	noSmithyDocumentSerde
 }
 
 // A wrapper type for the attributes of an Amazon SNS subscription.
@@ -5671,6 +6132,8 @@ type AwsSnsTopicSubscription struct {
 
 	// The subscription's protocol.
 	Protocol *string
+
+	noSmithyDocumentSerde
 }
 
 // Data about a queue.
@@ -5690,6 +6153,8 @@ type AwsSqsQueueDetails struct {
 
 	// The name of the new queue.
 	QueueName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details about the compliance status for a patch.
@@ -5765,6 +6230,8 @@ type AwsSsmComplianceSummary struct {
 	//
 	// * UNSPECIFIED_DATA
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about the compliance for a patch.
@@ -5772,6 +6239,8 @@ type AwsSsmPatch struct {
 
 	// The compliance status details for the patch.
 	ComplianceSummary *AwsSsmComplianceSummary
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the state of a patch on an instance based on the
@@ -5780,6 +6249,8 @@ type AwsSsmPatchComplianceDetails struct {
 
 	// Information about the status of a patch.
 	Patch *AwsSsmPatch
+
+	noSmithyDocumentSerde
 }
 
 // Details about a WAF WebACL.
@@ -5798,6 +6269,8 @@ type AwsWafWebAclDetails struct {
 
 	// A unique identifier for a WebACL.
 	WebAclId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details for a rule in a WAF WebACL.
@@ -5834,6 +6307,8 @@ type AwsWafWebAclRule struct {
 	// The rule type. Valid values: REGULAR | RATE_BASED | GROUP The default is
 	// REGULAR.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // A finding from a BatchUpdateFindings request that Security Hub was unable to
@@ -5854,6 +6329,8 @@ type BatchUpdateFindingsUnprocessedFinding struct {
 	//
 	// This member is required.
 	FindingIdentifier *AwsSecurityFindingIdentifier
+
+	noSmithyDocumentSerde
 }
 
 // An occurrence of sensitive data detected in a Microsoft Excel workbook,
@@ -5876,6 +6353,8 @@ type Cell struct {
 
 	// The row number of the row that contains the data.
 	Row int64
+
+	noSmithyDocumentSerde
 }
 
 // An IPv4 CIDR block association.
@@ -5889,6 +6368,8 @@ type CidrBlockAssociation struct {
 
 	// Information about the state of the IPv4 CIDR block.
 	CidrBlockState *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a city.
@@ -5896,6 +6377,8 @@ type City struct {
 
 	// The name of the city.
 	CityName *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the sensitive data that was detected on the resource.
@@ -5922,6 +6405,8 @@ type ClassificationResult struct {
 
 	// The current status of the sensitive data detection.
 	Status *ClassificationStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about the current status of the sensitive data detection.
@@ -5932,6 +6417,8 @@ type ClassificationStatus struct {
 
 	// A longer description of the current status of the sensitive data detection.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains finding details that are specific to control-based findings. Only
@@ -5967,6 +6454,8 @@ type Compliance struct {
 	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff)
 	// in the AWS Security Hub User Guide.
 	StatusReasons []StatusReason
+
+	noSmithyDocumentSerde
 }
 
 // Container details related to a finding.
@@ -5986,6 +6475,8 @@ type ContainerDetails struct {
 
 	// The name of the container related to a finding.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a country.
@@ -5996,6 +6487,8 @@ type Country struct {
 
 	// The name of the country.
 	CountryName *string
+
+	noSmithyDocumentSerde
 }
 
 // The list of detected instances of sensitive data.
@@ -6012,6 +6505,8 @@ type CustomDataIdentifiersDetections struct {
 
 	// Details about the sensitive data that was detected.
 	Occurrences *Occurrences
+
+	noSmithyDocumentSerde
 }
 
 // Contains an instance of sensitive data that was detected by a customer-defined
@@ -6023,6 +6518,8 @@ type CustomDataIdentifiersResult struct {
 
 	// The total number of occurrences of sensitive data.
 	TotalCount int64
+
+	noSmithyDocumentSerde
 }
 
 // CVSS scores from the advisory related to the vulnerability.
@@ -6036,6 +6533,8 @@ type Cvss struct {
 
 	// The version of CVSS for the CVSS score.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about sensitive data that was detected on a resource.
@@ -6046,6 +6545,8 @@ type DataClassificationDetails struct {
 
 	// The details about the sensitive data that was detected on the resource.
 	Result *ClassificationResult
+
+	noSmithyDocumentSerde
 }
 
 // A date filter for querying findings.
@@ -6059,6 +6560,8 @@ type DateFilter struct {
 
 	// A start date for the date filter.
 	Start *string
+
+	noSmithyDocumentSerde
 }
 
 // A date range for the date filter.
@@ -6069,6 +6572,8 @@ type DateRange struct {
 
 	// A date range value for the date filter.
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 // Provided if ActionType is DNS_REQUEST. It provides details about the DNS request
@@ -6083,6 +6588,8 @@ type DnsRequestAction struct {
 
 	// The protocol that was used for the DNS request.
 	Protocol *string
+
+	noSmithyDocumentSerde
 }
 
 // In a BatchImportFindings request, finding providers use FindingProviderFields to
@@ -6111,6 +6618,8 @@ type FindingProviderFields struct {
 	// classify a finding. Valid namespace values are: Software and Configuration
 	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
 	Types []string
+
+	noSmithyDocumentSerde
 }
 
 // The severity assigned to the finding by the finding provider.
@@ -6121,6 +6630,8 @@ type FindingProviderSeverity struct {
 
 	// The finding provider's original value for the severity.
 	Original *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the latitude and longitude coordinates of a location.
@@ -6131,6 +6642,8 @@ type GeoLocation struct {
 
 	// The longitude of the location.
 	Lon float64
+
+	noSmithyDocumentSerde
 }
 
 // An Internet Control Message Protocol (ICMP) type and code.
@@ -6143,6 +6656,8 @@ type IcmpTypeCode struct {
 	// The ICMP type for which to deny or allow access. To deny or allow all types, use
 	// the value -1.
 	Type int32
+
+	noSmithyDocumentSerde
 }
 
 // The list of the findings that cannot be imported. For each finding, the list
@@ -6163,6 +6678,8 @@ type ImportFindingsError struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a Security Hub insight.
@@ -6191,6 +6708,8 @@ type Insight struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The insight results returned by the GetInsightResults operation.
@@ -6212,6 +6731,8 @@ type InsightResults struct {
 	//
 	// This member is required.
 	ResultValues []InsightResultValue
+
+	noSmithyDocumentSerde
 }
 
 // The insight result values returned by the GetInsightResults operation.
@@ -6227,6 +6748,8 @@ type InsightResultValue struct {
 	//
 	// This member is required.
 	GroupByAttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an invitation.
@@ -6245,6 +6768,8 @@ type Invitation struct {
 	// The current status of the association between the member and administrator
 	// accounts.
 	MemberStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // The IP filter for querying findings.
@@ -6252,6 +6777,8 @@ type IpFilter struct {
 
 	// A finding's CIDR value.
 	Cidr *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an internet provider.
@@ -6268,6 +6795,8 @@ type IpOrganizationDetails struct {
 
 	// The name of the internet provider.
 	Org *string
+
+	noSmithyDocumentSerde
 }
 
 // An IPV6 CIDR block association.
@@ -6281,6 +6810,8 @@ type Ipv6CidrBlockAssociation struct {
 
 	// The IPv6 CIDR block.
 	Ipv6CidrBlock *string
+
+	noSmithyDocumentSerde
 }
 
 // A keyword filter for querying findings.
@@ -6288,6 +6819,8 @@ type KeywordFilter struct {
 
 	// A value for the keyword.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the state of the load balancer.
@@ -6300,6 +6833,8 @@ type LoadBalancerState struct {
 
 	// A description of the state.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of malware related to a finding.
@@ -6318,6 +6853,8 @@ type Malware struct {
 
 	// The type of the malware that was observed.
 	Type MalwareType
+
+	noSmithyDocumentSerde
 }
 
 // A map filter for querying findings. Each map filter provides the field to check,
@@ -6345,6 +6882,8 @@ type MapFilter struct {
 	// example, one of the values for a tag called Department might be Security. If you
 	// provide security as the filter value, then there is no match.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The details about a member account.
@@ -6397,6 +6936,8 @@ type Member struct {
 
 	// The timestamp for the date and time when the member account was updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The details of network-related information about a finding.
@@ -6438,6 +6979,8 @@ type Network struct {
 
 	// The source port of network-related information about a finding.
 	SourcePort int32
+
+	noSmithyDocumentSerde
 }
 
 // Provided if ActionType is NETWORK_CONNECTION. It provides details about the
@@ -6462,6 +7005,8 @@ type NetworkConnectionAction struct {
 
 	// Information about the port on the remote IP address.
 	RemotePortDetails *ActionRemotePortDetails
+
+	noSmithyDocumentSerde
 }
 
 // Details about a network path component that occurs before or after the current
@@ -6476,6 +7021,8 @@ type NetworkHeader struct {
 
 	// Information about the origin of the component.
 	Source *NetworkPathComponentDetails
+
+	noSmithyDocumentSerde
 }
 
 // Information about a network path component.
@@ -6494,6 +7041,8 @@ type NetworkPathComponent struct {
 	// Information about the component that comes before the current node in the
 	// network path.
 	Ingress *NetworkHeader
+
+	noSmithyDocumentSerde
 }
 
 // Information about the destination of the next component in the network path.
@@ -6504,6 +7053,8 @@ type NetworkPathComponentDetails struct {
 
 	// A list of port ranges for the destination.
 	PortRanges []PortRange
+
+	noSmithyDocumentSerde
 }
 
 // A user-defined note added to a finding.
@@ -6526,6 +7077,8 @@ type Note struct {
 	//
 	// This member is required.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // The updated note.
@@ -6540,6 +7093,8 @@ type NoteUpdate struct {
 	//
 	// This member is required.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // A number filter for querying findings.
@@ -6556,6 +7111,8 @@ type NumberFilter struct {
 	// The less-than-equal condition to be applied to a single field when querying for
 	// findings.
 	Lte float64
+
+	noSmithyDocumentSerde
 }
 
 // The detected occurrences of sensitive data.
@@ -6579,6 +7136,8 @@ type Occurrences struct {
 	// Occurrences of sensitive data in an Apache Avro object container or an Apache
 	// Parquet file.
 	Records []Record
+
+	noSmithyDocumentSerde
 }
 
 // An occurrence of sensitive data in an Adobe Portable Document Format (PDF) file.
@@ -6594,6 +7153,8 @@ type Page struct {
 
 	// The page number of the page that contains the sensitive data.
 	PageNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides an overview of the patch compliance status for an instance against a
@@ -6646,6 +7207,8 @@ type PatchSummary struct {
 
 	// The reboot option specified for the instance.
 	RebootOption *string
+
+	noSmithyDocumentSerde
 }
 
 // Provided if ActionType is PORT_PROBE. It provides details about the attempted
@@ -6657,6 +7220,8 @@ type PortProbeAction struct {
 
 	// Information about the ports affected by the port probe.
 	PortProbeDetails []PortProbeDetail
+
+	noSmithyDocumentSerde
 }
 
 // A port scan that was part of the port probe. For each scan, PortProbeDetails
@@ -6672,6 +7237,8 @@ type PortProbeDetail struct {
 
 	// Provides information about the remote IP address that performed the scan.
 	RemoteIpDetails *ActionRemoteIpDetails
+
+	noSmithyDocumentSerde
 }
 
 // A range of ports.
@@ -6682,6 +7249,8 @@ type PortRange struct {
 
 	// The last port in the port range.
 	End int32
+
+	noSmithyDocumentSerde
 }
 
 // A range of ports.
@@ -6692,6 +7261,8 @@ type PortRangeFromTo struct {
 
 	// The last port in the port range.
 	To int32
+
+	noSmithyDocumentSerde
 }
 
 // The details of process-related information about a finding.
@@ -6720,6 +7291,8 @@ type ProcessDetails struct {
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	TerminatedAt *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a product.
@@ -6767,6 +7340,8 @@ type Product struct {
 
 	// The resource policy associated with the product.
 	ProductSubscriptionResourcePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies where the sensitive data begins and ends.
@@ -6783,6 +7358,8 @@ type Range struct {
 	// In the line where the sensitive data starts, the column within the line where
 	// the sensitive data starts.
 	StartColumn int64
+
+	noSmithyDocumentSerde
 }
 
 // A recommendation on how to remediate the issue identified in a finding.
@@ -6795,6 +7372,8 @@ type Recommendation struct {
 	// A URL to a page or site that contains information about how to remediate a
 	// finding.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // An occurrence of sensitive data in an Apache Avro object container or an Apache
@@ -6808,6 +7387,8 @@ type Record struct {
 
 	// The record index, starting from 0, for the record that contains the data.
 	RecordIndex int64
+
+	noSmithyDocumentSerde
 }
 
 // Details about a related finding.
@@ -6822,6 +7403,8 @@ type RelatedFinding struct {
 	//
 	// This member is required.
 	ProductArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the remediation steps for a finding.
@@ -6830,6 +7413,8 @@ type Remediation struct {
 	// A recommendation on the steps to take to remediate the issue identified by a
 	// finding.
 	Recommendation *Recommendation
+
+	noSmithyDocumentSerde
 }
 
 // A resource related to a finding.
@@ -6867,6 +7452,8 @@ type Resource struct {
 	// A list of AWS tags associated with a resource at the time the finding was
 	// processed.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Additional details about a resource related to a finding. To provide the
@@ -7030,6 +7617,8 @@ type ResourceDetails struct {
 	// The resource type does not have a corresponding object. This includes resources
 	// for which the type is Other.
 	Other map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the account that was not processed.
@@ -7040,6 +7629,8 @@ type Result struct {
 
 	// The reason that the account was not processed.
 	ProcessingResult *string
+
+	noSmithyDocumentSerde
 }
 
 // The list of detected instances of sensitive data.
@@ -7054,6 +7645,8 @@ type SensitiveDataDetections struct {
 	// The type of sensitive data that was detected. For example, the type might
 	// indicate that the data is an email address.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a detected instance of sensitive data that are based on built-in
@@ -7070,6 +7663,8 @@ type SensitiveDataResult struct {
 
 	// The total number of occurrences of sensitive data.
 	TotalCount int64
+
+	noSmithyDocumentSerde
 }
 
 // The severity of the finding. The finding provider can provide the initial
@@ -7136,6 +7731,8 @@ type Severity struct {
 	// provide Original. The native severity as defined by the AWS service or
 	// integrated partner product that generated the finding.
 	Product float64
+
+	noSmithyDocumentSerde
 }
 
 // Updates to the severity information for a finding.
@@ -7177,6 +7774,8 @@ type SeverityUpdate struct {
 	// The native severity as defined by the AWS service or integrated partner product
 	// that generated the finding.
 	Product float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a software package.
@@ -7196,6 +7795,8 @@ type SoftwarePackage struct {
 
 	// The version of the software package.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of finding attributes used to sort findings.
@@ -7206,6 +7807,8 @@ type SortCriterion struct {
 
 	// The order used to sort findings.
 	SortOrder SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a specific standard.
@@ -7226,6 +7829,8 @@ type Standard struct {
 
 	// The ARN of a standard.
 	StandardsArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details for an individual security standard control.
@@ -7267,6 +7872,8 @@ type StandardsControl struct {
 
 	// The title of the security standard control.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // A resource that represents your subscription to a supported standard.
@@ -7305,6 +7912,8 @@ type StandardsSubscription struct {
 	//
 	// This member is required.
 	StandardsSubscriptionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The standard that you want to enable.
@@ -7318,6 +7927,8 @@ type StandardsSubscriptionRequest struct {
 
 	// A key-value pair of input for the standard.
 	StandardsInput map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Provides additional context for the value of Compliance.Status.
@@ -7333,6 +7944,8 @@ type StatusReason struct {
 
 	// The corresponding description for the status reason code.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // A string filter for querying findings.
@@ -7396,6 +8009,8 @@ type StringFilter struct {
 	// product name for control-based findings is Security Hub. If you provide security
 	// hub as the filter text, then there is no match.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the threat intelligence related to a finding.
@@ -7422,6 +8037,8 @@ type ThreatIntelIndicator struct {
 
 	// The value of a threat intelligence indicator.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A vulnerability associated with a finding.
@@ -7446,6 +8063,8 @@ type Vulnerability struct {
 
 	// List of software packages that have the vulnerability.
 	VulnerablePackages []SoftwarePackage
+
+	noSmithyDocumentSerde
 }
 
 // A vendor that generates a vulnerability report.
@@ -7473,6 +8092,8 @@ type VulnerabilityVendor struct {
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	VendorUpdatedAt *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the action that CloudFront or AWS WAF takes when a web request
@@ -7492,6 +8113,8 @@ type WafAction struct {
 	// then continues to inspect the web request based on the remaining rules in the
 	// web ACL. You can't specify COUNT for the default action for a WebACL.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a rule to exclude from a rule group.
@@ -7499,6 +8122,8 @@ type WafExcludedRule struct {
 
 	// The unique identifier for the rule to exclude from the rule group.
 	RuleId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an override action for a rule.
@@ -7507,6 +8132,8 @@ type WafOverrideAction struct {
 	// COUNT overrides the action specified by the individual rule within a RuleGroup .
 	// If set to NONE, the rule's action takes place.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status of the investigation into a finding.
@@ -7535,6 +8162,8 @@ type Workflow struct {
 	// * RESOLVED - The
 	// finding was reviewed and remediated and is now considered resolved.
 	Status WorkflowStatus
+
+	noSmithyDocumentSerde
 }
 
 // Used to update information about the investigation into the finding.
@@ -7563,4 +8192,8 @@ type WorkflowUpdate struct {
 	// * SUPPRESSED - The
 	// finding will not be reviewed again and will not be acted upon.
 	Status WorkflowStatus
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

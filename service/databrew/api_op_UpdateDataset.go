@@ -50,6 +50,8 @@ type UpdateDatasetInput struct {
 	// A set of options that defines how DataBrew interprets an Amazon S3 path of the
 	// dataset.
 	PathOptions *types.PathOptions
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDatasetOutput struct {
@@ -61,6 +63,8 @@ type UpdateDatasetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

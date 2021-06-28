@@ -34,6 +34,8 @@ type CreateAppInput struct {
 	//
 	// This member is required.
 	CreateApplicationRequest *types.CreateApplicationRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateAppOutput struct {
@@ -45,6 +47,8 @@ type CreateAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

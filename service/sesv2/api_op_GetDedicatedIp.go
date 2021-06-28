@@ -38,6 +38,8 @@ type GetDedicatedIpInput struct {
 	//
 	// This member is required.
 	Ip *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a dedicated IP address.
@@ -48,6 +50,8 @@ type GetDedicatedIpOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDedicatedIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

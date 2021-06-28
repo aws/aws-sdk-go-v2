@@ -74,6 +74,8 @@ type TestDNSAnswerInput struct {
 	// address for that resolver. If you omit this value, TestDnsAnswer uses the IP
 	// address of a DNS resolver in the AWS US East (N. Virginia) Region (us-east-1).
 	ResolverIP *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to a TestDNSAnswer request.
@@ -118,6 +120,8 @@ type TestDNSAnswerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestDNSAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {

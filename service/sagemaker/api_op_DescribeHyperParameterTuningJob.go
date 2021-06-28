@@ -34,6 +34,8 @@ type DescribeHyperParameterTuningJobInput struct {
 	//
 	// This member is required.
 	HyperParameterTuningJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHyperParameterTuningJobOutput struct {
@@ -114,6 +116,8 @@ type DescribeHyperParameterTuningJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

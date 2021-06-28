@@ -38,11 +38,15 @@ type AssociateAssessmentReportEvidenceFolderInput struct {
 	//
 	// This member is required.
 	EvidenceFolderId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateAssessmentReportEvidenceFolderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateAssessmentReportEvidenceFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

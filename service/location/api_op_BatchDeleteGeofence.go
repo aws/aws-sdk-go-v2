@@ -39,6 +39,8 @@ type BatchDeleteGeofenceInput struct {
 	//
 	// This member is required.
 	GeofenceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteGeofenceOutput struct {
@@ -50,6 +52,8 @@ type BatchDeleteGeofenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteGeofenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

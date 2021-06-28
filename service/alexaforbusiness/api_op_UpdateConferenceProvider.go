@@ -49,11 +49,15 @@ type UpdateConferenceProviderInput struct {
 
 	// The information for PSTN conferencing.
 	PSTNDialIn *types.PSTNDialIn
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConferenceProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConferenceProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

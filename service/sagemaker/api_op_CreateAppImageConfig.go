@@ -41,6 +41,8 @@ type CreateAppImageConfigInput struct {
 
 	// A list of tags to apply to the AppImageConfig.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAppImageConfigOutput struct {
@@ -50,6 +52,8 @@ type CreateAppImageConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

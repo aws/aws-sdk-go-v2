@@ -42,6 +42,8 @@ type DescribeReservedElasticsearchInstanceOfferingsInput struct {
 	// The offering identifier filter value. Use this parameter to show only the
 	// available offering that matches the specified reservation identifier.
 	ReservedElasticsearchInstanceOfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for results from DescribeReservedElasticsearchInstanceOfferings
@@ -55,6 +57,8 @@ type DescribeReservedElasticsearchInstanceOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedElasticsearchInstanceOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

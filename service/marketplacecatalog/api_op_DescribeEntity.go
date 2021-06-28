@@ -37,6 +37,8 @@ type DescribeEntityInput struct {
 	//
 	// This member is required.
 	EntityId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEntityOutput struct {
@@ -59,6 +61,8 @@ type DescribeEntityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {

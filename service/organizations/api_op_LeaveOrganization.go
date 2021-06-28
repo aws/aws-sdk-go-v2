@@ -81,11 +81,14 @@ func (c *Client) LeaveOrganization(ctx context.Context, params *LeaveOrganizatio
 }
 
 type LeaveOrganizationInput struct {
+	noSmithyDocumentSerde
 }
 
 type LeaveOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationLeaveOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

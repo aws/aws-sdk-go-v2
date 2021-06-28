@@ -33,6 +33,8 @@ type DeleteDataflowEndpointGroupInput struct {
 	//
 	// This member is required.
 	DataflowEndpointGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -43,6 +45,8 @@ type DeleteDataflowEndpointGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDataflowEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

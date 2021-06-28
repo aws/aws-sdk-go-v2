@@ -38,6 +38,8 @@ type RemoveFlowSourceInput struct {
 	//
 	// This member is required.
 	SourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveFlowSourceOutput struct {
@@ -50,6 +52,8 @@ type RemoveFlowSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveFlowSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

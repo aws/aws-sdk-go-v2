@@ -50,6 +50,8 @@ type DescribeEngineDefaultParametersInput struct {
 	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
 	// 20; maximum 100.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEngineDefaultParametersOutput struct {
@@ -59,6 +61,8 @@ type DescribeEngineDefaultParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEngineDefaultParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

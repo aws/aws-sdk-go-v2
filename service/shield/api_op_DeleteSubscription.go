@@ -31,11 +31,14 @@ func (c *Client) DeleteSubscription(ctx context.Context, params *DeleteSubscript
 }
 
 type DeleteSubscriptionInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeleteSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type ListCollectionsInput struct {
 
 	// Pagination token from the previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListCollectionsOutput struct {
@@ -57,6 +59,8 @@ type ListCollectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCollectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

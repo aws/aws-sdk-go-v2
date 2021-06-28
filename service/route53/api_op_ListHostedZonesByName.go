@@ -93,6 +93,8 @@ type ListHostedZonesByNameInput struct {
 	// NextHostedZoneId specify the first hosted zone in the next group of maxitems
 	// hosted zones.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the request.
@@ -141,6 +143,8 @@ type ListHostedZonesByNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHostedZonesByNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

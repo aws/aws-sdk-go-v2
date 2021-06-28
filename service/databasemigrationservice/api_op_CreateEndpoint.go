@@ -237,6 +237,8 @@ type CreateEndpointInput struct {
 
 	// The user name to be used to log in to the endpoint database.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -247,6 +249,8 @@ type CreateEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type CreateDeviceDefinitionVersionInput struct {
 
 	// A list of devices in the definition version.
 	Devices []types.Device
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeviceDefinitionVersionOutput struct {
@@ -57,6 +59,8 @@ type CreateDeviceDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeviceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

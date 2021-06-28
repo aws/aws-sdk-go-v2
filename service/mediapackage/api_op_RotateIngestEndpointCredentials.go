@@ -39,6 +39,8 @@ type RotateIngestEndpointCredentialsInput struct {
 	//
 	// This member is required.
 	IngestEndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 type RotateIngestEndpointCredentialsOutput struct {
@@ -66,6 +68,8 @@ type RotateIngestEndpointCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRotateIngestEndpointCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

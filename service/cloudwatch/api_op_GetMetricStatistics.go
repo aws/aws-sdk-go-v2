@@ -180,6 +180,8 @@ type GetMetricStatisticsInput struct {
 	// unit that does not match the data collected, the results of the operation are
 	// null. CloudWatch does not perform unit conversions.
 	Unit types.StandardUnit
+
+	noSmithyDocumentSerde
 }
 
 type GetMetricStatisticsOutput struct {
@@ -192,6 +194,8 @@ type GetMetricStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMetricStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type ListPartnerEventSourcesInput struct {
 	// The token returned by a previous call to this operation. Specifying this
 	// retrieves the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPartnerEventSourcesOutput struct {
@@ -57,6 +59,8 @@ type ListPartnerEventSourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPartnerEventSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DescribeChannelInput struct {
 	//
 	// This member is required.
 	ChannelName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeChannelOutput struct {
@@ -64,6 +66,8 @@ type DescribeChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

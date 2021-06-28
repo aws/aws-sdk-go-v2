@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // In addition to your infrastruction configuration, these settings provide an
 // extra layer of control over your build instances. For instances where Image
 // Builder installs the SSM agent, you can choose whether to keep it for the AMI
@@ -18,6 +22,8 @@ type AdditionalInstanceConfiguration struct {
 	// build instance. If you override the user data, make sure that you add commands
 	// to install SSM, if it is not pre-installed on your source image.
 	UserDataOverride *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of an Amazon EC2 AMI.
@@ -41,6 +47,8 @@ type Ami struct {
 
 	// Image state shows the image status and the reason for that status.
 	State *ImageState
+
+	noSmithyDocumentSerde
 }
 
 // Define and configure the output AMIs of the pipeline.
@@ -65,6 +73,8 @@ type AmiDistributionConfiguration struct {
 
 	// The ID of an account to which you want to distribute an image.
 	TargetAccountIds []string
+
+	noSmithyDocumentSerde
 }
 
 // A detailed view of a component.
@@ -118,6 +128,8 @@ type Component struct {
 
 	// The version of the component.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration details of the component.
@@ -131,6 +143,8 @@ type ComponentConfiguration struct {
 	// A group of parameter settings that are used to configure the component for a
 	// specific recipe.
 	Parameters []ComponentParameter
+
+	noSmithyDocumentSerde
 }
 
 // Contains a key/value pair that sets the named component parameter.
@@ -145,6 +159,8 @@ type ComponentParameter struct {
 	//
 	// This member is required.
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a parameter that is used to provide configuration details for the
@@ -167,6 +183,8 @@ type ComponentParameterDetail struct {
 
 	// Describes this parameter.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // A high-level summary of a component.
@@ -207,6 +225,8 @@ type ComponentSummary struct {
 
 	// The version of the component.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // A high-level overview of a component semantic version.
@@ -241,6 +261,8 @@ type ComponentVersion struct {
 
 	// The semantic version of the component.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // A container encapsulates the runtime environment for an application.
@@ -252,6 +274,8 @@ type Container struct {
 	// Containers and container images are Region-specific. This is the Region context
 	// for the container.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Container distribution settings for encryption, licensing, and sharing in a
@@ -268,6 +292,8 @@ type ContainerDistributionConfiguration struct {
 
 	// The description of the container distribution configuration.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // A container recipe.
@@ -328,6 +354,8 @@ type ContainerRecipe struct {
 
 	// The working directory for use during build and test workflows.
 	WorkingDirectory *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a container recipe
@@ -356,6 +384,8 @@ type ContainerRecipeSummary struct {
 
 	// Tags that are attached to the container recipe.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the settings for a specific Region.
@@ -380,6 +410,8 @@ type Distribution struct {
 	// The License Manager Configuration to associate with the AMI in the specified
 	// Region.
 	LicenseConfigurationArns []string
+
+	noSmithyDocumentSerde
 }
 
 // A distribution configuration.
@@ -411,6 +443,8 @@ type DistributionConfiguration struct {
 
 	// The tags of the distribution configuration.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A high-level overview of a distribution configuration.
@@ -436,6 +470,8 @@ type DistributionConfigurationSummary struct {
 
 	// The tags associated with the distribution configuration.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Amazon EBS-specific block device mapping specifications.
@@ -461,6 +497,8 @@ type EbsInstanceBlockDeviceSpecification struct {
 
 	// Use to override the device's volume type.
 	VolumeType EbsVolumeType
+
+	noSmithyDocumentSerde
 }
 
 // A filter name and value pair that is used to return a more specific list of
@@ -473,6 +511,8 @@ type Filter struct {
 
 	// The filter values. Filter values are case-sensitive.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // An image build version.
@@ -534,6 +574,8 @@ type Image struct {
 
 	// The semantic version of the image.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a package installed on an Image Builder image.
@@ -544,6 +586,8 @@ type ImagePackage struct {
 
 	// The version of the package as reported to the operating system package manager.
 	PackageVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of an image pipeline.
@@ -605,6 +649,8 @@ type ImagePipeline struct {
 
 	// The tags of this image pipeline.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An image recipe.
@@ -655,6 +701,8 @@ type ImageRecipe struct {
 
 	// The working directory to be used during build and test workflows.
 	WorkingDirectory *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of an image recipe.
@@ -680,6 +728,8 @@ type ImageRecipeSummary struct {
 
 	// The tags of the image recipe.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Image state shows the image status and the reason for that status.
@@ -690,6 +740,8 @@ type ImageState struct {
 
 	// The status of the image.
 	Status ImageStatus
+
+	noSmithyDocumentSerde
 }
 
 // An image summary.
@@ -728,6 +780,8 @@ type ImageSummary struct {
 
 	// The version of the image.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Image tests configuration.
@@ -738,6 +792,8 @@ type ImageTestsConfiguration struct {
 
 	// The maximum time in minutes that tests are permitted to run.
 	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // An image semantic version.
@@ -767,6 +823,8 @@ type ImageVersion struct {
 
 	// The semantic version of the image semantic version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the infrastructure configuration.
@@ -817,6 +875,8 @@ type InfrastructureConfiguration struct {
 	// The terminate instance on failure configuration of the infrastructure
 	// configuration.
 	TerminateInstanceOnFailure *bool
+
+	noSmithyDocumentSerde
 }
 
 // The infrastructure used when building Amazon EC2 AMIs.
@@ -848,6 +908,8 @@ type InfrastructureConfigurationSummary struct {
 
 	// The tags of the infrastructure configuration.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Defines block device mappings for the instance used to configure your image.
@@ -864,6 +926,8 @@ type InstanceBlockDeviceMapping struct {
 
 	// Use to manage instance ephemeral devices.
 	VirtualName *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a custom source AMI and block device mapping configurations of an
@@ -878,6 +942,8 @@ type InstanceConfiguration struct {
 	// not specified, Image Builder will use the appropriate ECS-optimized AMI as a
 	// base image.
 	Image *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration for a launch permission. The launch permission
@@ -895,6 +961,8 @@ type LaunchPermissionConfiguration struct {
 
 	// The account ID.
 	UserIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies an Amazon EC2 launch template to use for a specific account.
@@ -911,6 +979,8 @@ type LaunchTemplateConfiguration struct {
 	// Set the specified Amazon EC2 launch template as the default launch template for
 	// the specified account.
 	SetDefaultVersion bool
+
+	noSmithyDocumentSerde
 }
 
 // Logging configuration defines where Image Builder uploads your logs.
@@ -918,6 +988,8 @@ type Logging struct {
 
 	// The Amazon S3 logging configuration.
 	S3Logs *S3Logs
+
+	noSmithyDocumentSerde
 }
 
 // The resources produced by this image.
@@ -929,6 +1001,8 @@ type OutputResources struct {
 	// Container images that the pipeline has generated and stored in the output
 	// repository.
 	Containers []Container
+
+	noSmithyDocumentSerde
 }
 
 // Amazon S3 logging configuration.
@@ -939,6 +1013,8 @@ type S3Logs struct {
 
 	// The Amazon S3 path in which to store the logs.
 	S3KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // A schedule configures how often and when a pipeline will automatically create a
@@ -969,6 +1045,8 @@ type Schedule struct {
 	// (https://www.joda.org/joda-time/timezones.html). If not specified this defaults
 	// to UTC.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains settings for the SSM agent on your build instance.
@@ -979,6 +1057,8 @@ type SystemsManagerAgent struct {
 	// ensure that the AMI you create includes the SSM agent, set this property to
 	// false.
 	UninstallAfterBuild *bool
+
+	noSmithyDocumentSerde
 }
 
 // The container repository where the output container image is stored.
@@ -994,4 +1074,8 @@ type TargetContainerRepository struct {
 	//
 	// This member is required.
 	Service ContainerRepositoryService
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

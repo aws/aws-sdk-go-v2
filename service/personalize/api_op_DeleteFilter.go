@@ -32,11 +32,15 @@ type DeleteFilterInput struct {
 	//
 	// This member is required.
 	FilterArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

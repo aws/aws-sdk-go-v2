@@ -49,6 +49,8 @@ type DescribeAgentsInput struct {
 	// DescribeAgentsRequest$maxResults to 10, you received a set of 10 results along
 	// with a token. Use that token in this query to get the next set of 10.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAgentsOutput struct {
@@ -68,6 +70,8 @@ type DescribeAgentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

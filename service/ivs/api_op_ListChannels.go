@@ -46,6 +46,8 @@ type ListChannelsInput struct {
 	// The first channel to retrieve. This is used for pagination; see the nextToken
 	// response field.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListChannelsOutput struct {
@@ -61,6 +63,8 @@ type ListChannelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

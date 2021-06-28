@@ -46,6 +46,8 @@ type AdminListDevicesInput struct {
 
 	// The pagination token.
 	PaginationToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists the device's response, as an administrator.
@@ -59,6 +61,8 @@ type AdminListDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminListDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

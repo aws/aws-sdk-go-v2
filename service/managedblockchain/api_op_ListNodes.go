@@ -49,6 +49,8 @@ type ListNodesInput struct {
 	// An optional status specifier. If provided, only nodes currently in this status
 	// are listed.
 	Status types.NodeStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListNodesOutput struct {
@@ -62,6 +64,8 @@ type ListNodesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {

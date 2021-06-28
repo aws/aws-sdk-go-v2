@@ -41,11 +41,15 @@ type DeleteWarmPoolInput struct {
 	// also deletes any outstanding lifecycle actions associated with the warm pool
 	// instances.
 	ForceDelete *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWarmPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

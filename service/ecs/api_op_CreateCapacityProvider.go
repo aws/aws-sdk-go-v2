@@ -75,6 +75,8 @@ type CreateCapacityProviderInput struct {
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateCapacityProviderOutput struct {
@@ -84,6 +86,8 @@ type CreateCapacityProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

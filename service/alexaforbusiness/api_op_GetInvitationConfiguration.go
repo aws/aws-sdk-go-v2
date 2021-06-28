@@ -28,6 +28,7 @@ func (c *Client) GetInvitationConfiguration(ctx context.Context, params *GetInvi
 }
 
 type GetInvitationConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetInvitationConfigurationOutput struct {
@@ -45,6 +46,8 @@ type GetInvitationConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInvitationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

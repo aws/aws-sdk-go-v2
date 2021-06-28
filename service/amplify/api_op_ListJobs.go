@@ -47,6 +47,8 @@ type ListJobsInput struct {
 	// non-null pagination token is returned in a result, pass its value in here to
 	// list more steps.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The maximum number of records to list in a single response.
@@ -63,6 +65,8 @@ type ListJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

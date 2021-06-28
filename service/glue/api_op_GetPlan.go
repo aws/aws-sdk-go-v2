@@ -56,6 +56,8 @@ type GetPlanInput struct {
 
 	// The target tables.
 	Sinks []types.CatalogEntry
+
+	noSmithyDocumentSerde
 }
 
 type GetPlanOutput struct {
@@ -68,6 +70,8 @@ type GetPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type StartMaintenanceInput struct {
 	// see Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html).
 	EngineAttributes []types.EngineAttribute
+
+	noSmithyDocumentSerde
 }
 
 type StartMaintenanceOutput struct {
@@ -59,6 +61,8 @@ type StartMaintenanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMaintenanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

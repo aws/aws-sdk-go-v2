@@ -10,6 +10,8 @@ import (
 // An error returned if a request is not formed properly.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -27,6 +29,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // An error returned if there's a temporary issue with the service.
 type GatewayTimeoutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GatewayTimeoutException) Error() string {
@@ -46,6 +50,8 @@ type NotFoundException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -65,6 +71,8 @@ type TooManyRequestsException struct {
 	Message *string
 
 	LimitType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

@@ -97,6 +97,8 @@ type GetComplianceSummaryInput struct {
 	// by. If you use this parameter, the count of returned noncompliant resources
 	// includes only resources with the specified target IDs.
 	TargetIdFilters []string
+
+	noSmithyDocumentSerde
 }
 
 type GetComplianceSummaryOutput struct {
@@ -111,6 +113,8 @@ type GetComplianceSummaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetComplianceSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

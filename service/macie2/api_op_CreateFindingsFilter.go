@@ -72,6 +72,8 @@ type CreateFindingsFilterInput struct {
 	// and an associated tag value. The maximum length of a tag key is 128 characters.
 	// The maximum length of a tag value is 256 characters.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateFindingsFilterOutput struct {
@@ -84,6 +86,8 @@ type CreateFindingsFilterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFindingsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,6 +69,8 @@ type CreateTokenInput struct {
 	// The list of scopes that is defined by the client. Upon authorization, this list
 	// is used to restrict permissions when granting an access token.
 	Scope []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTokenOutput struct {
@@ -92,6 +94,8 @@ type CreateTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

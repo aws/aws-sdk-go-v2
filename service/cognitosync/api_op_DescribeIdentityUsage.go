@@ -61,6 +61,8 @@ type DescribeIdentityUsageInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a successful DescribeIdentityUsage request.
@@ -71,6 +73,8 @@ type DescribeIdentityUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIdentityUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

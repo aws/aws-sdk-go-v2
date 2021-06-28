@@ -76,6 +76,8 @@ type ListMonitoringSchedulesInput struct {
 	// A filter that returns only monitoring schedules modified before a specified
 	// time.
 	StatusEquals types.ScheduleStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListMonitoringSchedulesOutput struct {
@@ -91,6 +93,8 @@ type ListMonitoringSchedulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMonitoringSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

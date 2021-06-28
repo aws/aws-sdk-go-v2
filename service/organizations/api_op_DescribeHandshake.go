@@ -42,6 +42,8 @@ type DescribeHandshakeInput struct {
 	//
 	// This member is required.
 	HandshakeId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHandshakeOutput struct {
@@ -51,6 +53,8 @@ type DescribeHandshakeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {

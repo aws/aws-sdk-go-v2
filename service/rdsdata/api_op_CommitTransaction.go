@@ -44,6 +44,8 @@ type CommitTransactionInput struct {
 	//
 	// This member is required.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response elements represent the output of a commit transaction request.
@@ -54,6 +56,8 @@ type CommitTransactionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCommitTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {

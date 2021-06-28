@@ -34,6 +34,8 @@ type GetFirewallConfigInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFirewallConfigOutput struct {
@@ -44,6 +46,8 @@ type GetFirewallConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFirewallConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

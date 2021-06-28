@@ -39,6 +39,8 @@ type DeleteTransitGatewayPeeringAttachmentInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTransitGatewayPeeringAttachmentOutput struct {
@@ -48,6 +50,8 @@ type DeleteTransitGatewayPeeringAttachmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTransitGatewayPeeringAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

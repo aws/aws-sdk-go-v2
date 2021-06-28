@@ -46,6 +46,8 @@ type ListBonusPaymentsInput struct {
 
 	// Pagination token
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBonusPaymentsOutput struct {
@@ -65,6 +67,8 @@ type ListBonusPaymentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBonusPaymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

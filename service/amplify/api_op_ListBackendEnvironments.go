@@ -45,6 +45,8 @@ type ListBackendEnvironmentsInput struct {
 	// start. If a non-null pagination token is returned in a result, pass its value in
 	// here to list more backend environments.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the list backend environments result.
@@ -61,6 +63,8 @@ type ListBackendEnvironmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBackendEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

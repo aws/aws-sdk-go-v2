@@ -137,6 +137,8 @@ type UpdateStackInstancesInput struct {
 	// specified in the stack set. Once a stack instance has been updated with the new
 	// parameter, you can then override the parameter value using UpdateStackInstances.
 	ParameterOverrides []types.Parameter
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStackInstancesOutput struct {
@@ -146,6 +148,8 @@ type UpdateStackInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

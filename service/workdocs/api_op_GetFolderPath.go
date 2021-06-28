@@ -51,6 +51,8 @@ type GetFolderPathInput struct {
 
 	// This value is not supported.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFolderPathOutput struct {
@@ -60,6 +62,8 @@ type GetFolderPathOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFolderPathMiddlewares(stack *middleware.Stack, options Options) (err error) {

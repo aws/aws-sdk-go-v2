@@ -32,11 +32,15 @@ type DeleteWorkspaceBundleInput struct {
 
 	// The identifier of the bundle.
 	BundleId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorkspaceBundleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {

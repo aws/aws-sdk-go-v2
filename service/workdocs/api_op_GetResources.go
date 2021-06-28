@@ -47,6 +47,8 @@ type GetResourcesInput struct {
 	// The user ID for the resource collection. This is a required field for accessing
 	// the API operation using IAM credentials.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourcesOutput struct {
@@ -63,6 +65,8 @@ type GetResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -64,6 +64,8 @@ type AssociateVpcCidrBlockInput struct {
 
 	// The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
 	Ipv6Pool *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateVpcCidrBlockOutput struct {
@@ -79,6 +81,8 @@ type AssociateVpcCidrBlockOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateVpcCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

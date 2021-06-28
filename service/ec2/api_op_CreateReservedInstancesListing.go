@@ -74,6 +74,8 @@ type CreateReservedInstancesListingInput struct {
 	//
 	// This member is required.
 	ReservedInstancesId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateReservedInstancesListing.
@@ -84,6 +86,8 @@ type CreateReservedInstancesListingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReservedInstancesListingMiddlewares(stack *middleware.Stack, options Options) (err error) {

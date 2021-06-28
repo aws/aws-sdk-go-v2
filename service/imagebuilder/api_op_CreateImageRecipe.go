@@ -76,6 +76,8 @@ type CreateImageRecipeInput struct {
 
 	// The working directory used during build and test workflows.
 	WorkingDirectory *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateImageRecipeOutput struct {
@@ -92,6 +94,8 @@ type CreateImageRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

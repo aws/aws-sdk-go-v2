@@ -72,6 +72,8 @@ type CreateModelInput struct {
 
 	// A set of tags (key-value pairs) that you want to attach to the model.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateModelOutput struct {
@@ -81,6 +83,8 @@ type CreateModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type AcceptEulasInput struct {
 
 	// The EULA ID.
 	EulaIds []string
+
+	noSmithyDocumentSerde
 }
 
 type AcceptEulasOutput struct {
@@ -56,6 +58,8 @@ type AcceptEulasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptEulasMiddlewares(stack *middleware.Stack, options Options) (err error) {

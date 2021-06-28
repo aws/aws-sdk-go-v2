@@ -77,6 +77,8 @@ type ExportJournalToS3Input struct {
 	//
 	// This member is required.
 	S3ExportConfiguration *types.S3ExportConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type ExportJournalToS3Output struct {
@@ -90,6 +92,8 @@ type ExportJournalToS3Output struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportJournalToS3Middlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,6 +69,8 @@ type DescribeActivitiesInput struct {
 	// pertaining to this user. This is an optional parameter and is only applicable
 	// for administrative API (SigV4) requests.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeActivitiesOutput struct {
@@ -81,6 +83,8 @@ type DescribeActivitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

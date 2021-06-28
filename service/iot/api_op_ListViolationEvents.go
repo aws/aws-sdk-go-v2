@@ -61,6 +61,8 @@ type ListViolationEventsInput struct {
 
 	// A filter to limit results to those alerts caused by the specified thing.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListViolationEventsOutput struct {
@@ -76,6 +78,8 @@ type ListViolationEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListViolationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

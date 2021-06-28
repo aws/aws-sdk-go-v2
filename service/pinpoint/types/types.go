@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type ActivitiesResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration and other settings for an activity in a journey.
@@ -64,6 +67,8 @@ type Activity struct {
 	// amount of time or until a specific date and time before moving participants to
 	// the next activity in a journey.
 	Wait *WaitActivity
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an activity that was performed by a campaign.
@@ -119,6 +124,8 @@ type ActivityResponse struct {
 	// treatment is a variation of a campaign that's used for A/B testing of a
 	// campaign.
 	TreatmentId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies address-based configuration settings for a message that's sent
@@ -151,6 +158,8 @@ type AddressConfiguration struct {
 	// The message title to use instead of the default message title. This value
 	// overrides the default message title.
 	TitleOverride *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the ADM (Amazon Device Messaging) channel
@@ -169,6 +178,8 @@ type ADMChannelRequest struct {
 
 	// Specifies whether to enable the ADM channel for the application.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the ADM (Amazon Device
@@ -208,6 +219,8 @@ type ADMChannelResponse struct {
 
 	// The current version of the ADM channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a one-time message that's sent directly to an
@@ -290,6 +303,8 @@ type ADMMessage struct {
 	// The URL to open in the recipient's default mobile browser, if a recipient taps
 	// the push notification and the value of the Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies channel-specific content and settings for a message template that can
@@ -348,6 +363,8 @@ type AndroidPushNotificationTemplate struct {
 	// push notification that's based on the message template and the value of the
 	// Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the APNs (Apple Push Notification service)
@@ -383,6 +400,8 @@ type APNSChannelRequest struct {
 	// The key identifier that's assigned to your APNs signing key, if you want Amazon
 	// Pinpoint to communicate with APNs by using APNs tokens.
 	TokenKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the APNs (Apple Push
@@ -431,6 +450,8 @@ type APNSChannelResponse struct {
 
 	// The current version of the APNs channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a one-time message that's sent directly to an
@@ -597,6 +618,8 @@ type APNSMessage struct {
 	// The URL to open in the recipient's default mobile browser, if a recipient taps
 	// the push notification and the value of the Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies channel-specific content and settings for a message template that can
@@ -647,6 +670,8 @@ type APNSPushNotificationTemplate struct {
 	// push notification that's based on the message template and the value of the
 	// Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the APNs (Apple Push Notification service)
@@ -683,6 +708,8 @@ type APNSSandboxChannelRequest struct {
 	// The key identifier that's assigned to your APNs signing key, if you want Amazon
 	// Pinpoint to communicate with the APNs sandbox environment by using APNs tokens.
 	TokenKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the APNs (Apple Push
@@ -732,6 +759,8 @@ type APNSSandboxChannelResponse struct {
 
 	// The current version of the APNs sandbox channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the APNs (Apple Push Notification service)
@@ -767,6 +796,8 @@ type APNSVoipChannelRequest struct {
 	// The key identifier that's assigned to your APNs signing key, if you want Amazon
 	// Pinpoint to communicate with APNs by using APNs tokens.
 	TokenKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the APNs (Apple Push
@@ -815,6 +846,8 @@ type APNSVoipChannelResponse struct {
 
 	// The current version of the APNs VoIP channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the APNs (Apple Push Notification service)
@@ -852,6 +885,8 @@ type APNSVoipSandboxChannelRequest struct {
 	// The key identifier that's assigned to your APNs signing key, if you want Amazon
 	// Pinpoint to communicate with the APNs sandbox environment by using APNs tokens.
 	TokenKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the APNs (Apple Push
@@ -901,6 +936,8 @@ type APNSVoipSandboxChannelResponse struct {
 
 	// The current version of the APNs VoIP sandbox channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides the results of a query that retrieved the data for a standard metric
@@ -944,6 +981,8 @@ type ApplicationDateRangeKpiResponse struct {
 	// paginated response. This value is null for the Application Metrics resource
 	// because the resource returns all results in a single page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an application.
@@ -970,6 +1009,8 @@ type ApplicationResponse struct {
 	// associated with the application. Each tag consists of a required tag key and an
 	// associated tag value.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an application, including the default settings for an
@@ -1014,6 +1055,8 @@ type ApplicationSettingsResource struct {
 	// preceding conditions isn't met, the endpoint will receive messages from a
 	// campaign or journey, even if quiet time is enabled.
 	QuietTime *QuietTime
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about all of your applications.
@@ -1025,6 +1068,8 @@ type ApplicationsResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attribute-based criteria for including or excluding endpoints from a
@@ -1064,6 +1109,8 @@ type AttributeDimension struct {
 	// * BETWEEN - endpoints with attributes read as ISO_INSTANT datetimes
 	// between the values are included in the segment.
 	AttributeType AttributeType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the type and the names of attributes that were
@@ -1093,6 +1140,8 @@ type AttributesResource struct {
 	// An array that specifies the names of the attributes that were removed from the
 	// endpoints.
 	Attributes []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for an
@@ -1113,6 +1162,8 @@ type BaiduChannelRequest struct {
 
 	// Specifies whether to enable the Baidu channel for the application.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the Baidu (Baidu Cloud
@@ -1158,6 +1209,8 @@ type BaiduChannelResponse struct {
 
 	// The current version of the Baidu channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a one-time message that's sent directly to an
@@ -1231,6 +1284,8 @@ type BaiduMessage struct {
 	// The URL to open in the recipient's default mobile browser, if a recipient taps
 	// the push notification and the value of the Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the results of a query that retrieved the data for a standard metric
@@ -1242,6 +1297,8 @@ type BaseKpiResult struct {
 	//
 	// This member is required.
 	Rows []ResultRow
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the contents of a message that's sent through a custom channel to
@@ -1251,6 +1308,8 @@ type CampaignCustomMessage struct {
 	// The raw, JSON-formatted string to use as the payload for the message. The
 	// maximum size is 5 KB.
 	Data *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the results of a query that retrieved the data for a standard metric
@@ -1299,6 +1358,8 @@ type CampaignDateRangeKpiResponse struct {
 	// paginated response. This value is null for the Campaign Metrics resource because
 	// the resource returns all results in a single page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the content and "From" address for an email message that's sent to
@@ -1319,6 +1380,8 @@ type CampaignEmailMessage struct {
 
 	// The subject line, or title, of the email.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for events that cause a campaign to be sent.
@@ -1335,6 +1398,8 @@ type CampaignEventFilter struct {
 	//
 	// This member is required.
 	FilterType FilterType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies settings for invoking an AWS Lambda function that customizes a segment
@@ -1360,6 +1425,8 @@ type CampaignHook struct {
 	// The web URL that Amazon Pinpoint calls to invoke the AWS Lambda function over
 	// HTTPS.
 	WebUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // For a campaign, specifies limits on the messages that the campaign can send. For
@@ -1388,6 +1455,8 @@ type CampaignLimits struct {
 	// during the course of the campaign. If a campaign recurs, this setting applies to
 	// all runs of the campaign. The maximum value is 100.
 	Total int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status, configuration, and other settings for a
@@ -1489,6 +1558,8 @@ type CampaignResponse struct {
 
 	// The version number of the campaign.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the content and settings for an SMS message that's sent to recipients
@@ -1520,6 +1591,8 @@ type CampaignSmsMessage struct {
 	// The template ID received from the regulatory body for sending SMS in your
 	// country.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the configuration and other settings for all the
@@ -1535,6 +1608,8 @@ type CampaignsResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status of a campaign.
@@ -1546,6 +1621,8 @@ type CampaignState struct {
 	// COMPLETED. If you delete the segment that's associated with a campaign, the
 	// campaign fails and has a status of DELETED.
 	CampaignStatus CampaignStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the general settings and status of a channel for an
@@ -1579,6 +1656,8 @@ type ChannelResponse struct {
 
 	// The current version of the channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the general settings and status of all channels for
@@ -1590,6 +1669,8 @@ type ChannelsResponse struct {
 	//
 	// This member is required.
 	Channels map[string]ChannelResponse
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the conditions to evaluate for an activity in a journey, and how to
@@ -1603,6 +1684,8 @@ type Condition struct {
 	// you specify two conditions for an activity, whether both or only one of the
 	// conditions must be met for the activity to be performed.
 	Operator Operator
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a yes/no split activity in a journey. This type of
@@ -1630,6 +1713,8 @@ type ConditionalSplitActivity struct {
 
 	// The unique identifier for the activity to perform if the conditions are met.
 	TrueActivity *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the display name of an application and the tags to associate with the
@@ -1646,6 +1731,8 @@ type CreateApplicationRequest struct {
 	// with the application. Each tag consists of a required tag key and an associated
 	// tag value.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies Amazon Pinpoint configuration settings for retrieving and processing
@@ -1741,6 +1828,8 @@ type CreateRecommenderConfigurationShape struct {
 	// variables, you have to use an AWS Lambda function (RecommendationTransformerUri)
 	// to perform additional processing of recommendation data.
 	RecommendationsPerMessage int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a request to create a message template.
@@ -1755,6 +1844,8 @@ type CreateTemplateMessageBody struct {
 
 	// The unique identifier for the request to create the message template.
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the delivery configuration settings for sending a campaign or campaign
@@ -1780,6 +1871,8 @@ type CustomDeliveryConfiguration struct {
 	// maps to a type of channel that you can associate with an endpoint by using the
 	// ChannelType property of an endpoint.
 	EndpointTypes []EndpointTypesElement
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a custom message activity. This type of activity calls an AWS
@@ -1823,6 +1916,8 @@ type CustomMessageActivity struct {
 	// reviewed and approved for use, depending on your workflow. It isn't necessarily
 	// the latest version of a template.
 	TemplateVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default message for all channels.
@@ -1834,6 +1929,8 @@ type DefaultMessage struct {
 	// The default message variables to use in the message. You can override these
 	// default variables with individual address variables.
 	Substitutions map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default settings and content for a push notification that's sent
@@ -1880,6 +1977,8 @@ type DefaultPushNotificationMessage struct {
 	// The default URL to open in a recipient's default mobile browser, if a recipient
 	// taps the push notification and the value of the Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default settings and content for a message template that can be
@@ -1922,6 +2021,8 @@ type DefaultPushNotificationTemplate struct {
 	// push notification that's based on the message template and the value of the
 	// Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings and content for the default message and any default
@@ -1966,6 +2067,8 @@ type DirectMessageConfiguration struct {
 	// The default message for the voice channel. This message overrides the default
 	// message (DefaultMessage).
 	VoiceMessage *VoiceMessage
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the email channel for an application.
@@ -1995,6 +2098,8 @@ type EmailChannelRequest struct {
 	// The ARN of the AWS Identity and Access Management (IAM) role that you want
 	// Amazon Pinpoint to use when it submits email-related event data for the channel.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the email channel for an
@@ -2054,6 +2159,8 @@ type EmailChannelResponse struct {
 
 	// The current version of the email channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default settings and content for a one-time email message that's
@@ -2084,6 +2191,8 @@ type EmailMessage struct {
 	// The default message variables to use in the email message. You can override the
 	// default variables with individual address variables.
 	Substitutions map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for an email activity in a journey. This type of activity
@@ -2111,6 +2220,8 @@ type EmailMessageActivity struct {
 	// reviewed and approved for use, depending on your workflow. It isn't necessarily
 	// the latest version of a template.
 	TemplateVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the content and settings for a message template that can be used in
@@ -2154,6 +2265,8 @@ type EmailTemplateRequest struct {
 	// that don't render HTML content and clients that are connected to high-latency
 	// networks, such as mobile devices.
 	TextPart *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the content and settings for a message template that
@@ -2218,6 +2331,8 @@ type EmailTemplateResponse struct {
 	// template, or the version of the template that you specified by using the version
 	// parameter in your request.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an endpoint to create or update and the settings and attributes to set
@@ -2285,6 +2400,8 @@ type EndpointBatchItem struct {
 	// One or more custom attributes that describe the user who's associated with the
 	// endpoint.
 	User *EndpointUser
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a batch of endpoints to create or update and the settings and
@@ -2297,6 +2414,8 @@ type EndpointBatchRequest struct {
 	//
 	// This member is required.
 	Item []EndpointBatchItem
+
+	noSmithyDocumentSerde
 }
 
 // Specifies demographic information about an endpoint, such as the applicable time
@@ -2328,6 +2447,8 @@ type EndpointDemographic struct {
 	// The time zone of the endpoint, specified as a tz database name value, such as
 	// America/Los_Angeles.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the status code and message that result from processing data for an
@@ -2341,6 +2462,8 @@ type EndpointItemResponse struct {
 	// The status code that's returned in the response as a result of processing the
 	// endpoint data.
 	StatusCode int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies geographic information about an endpoint.
@@ -2365,6 +2488,8 @@ type EndpointLocation struct {
 	// The name of the region where the endpoint is located. For locations in the
 	// United States, this value is the name of a state.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the delivery status and results of sending a message
@@ -2421,6 +2546,8 @@ type EndpointMessageResult struct {
 	// the endpoint's device registration token was updated as part of delivering the
 	// message.
 	UpdatedToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the channel type and other settings for an endpoint.
@@ -2484,6 +2611,8 @@ type EndpointRequest struct {
 	// One or more custom attributes that describe the user who's associated with the
 	// endpoint.
 	User *EndpointUser
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the channel type and other settings for an endpoint.
@@ -2560,6 +2689,8 @@ type EndpointResponse struct {
 	// One or more custom user attributes that your app reports to Amazon Pinpoint for
 	// the user who's associated with the endpoint.
 	User *EndpointUser
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the content, including message variables and attributes, to use in a
@@ -2588,6 +2719,8 @@ type EndpointSendConfiguration struct {
 	// The title or subject line of the message. If specified, this value overrides the
 	// default message title or subject line.
 	TitleOverride *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about all the endpoints that are associated with a user ID.
@@ -2597,6 +2730,8 @@ type EndpointsResponse struct {
 	//
 	// This member is required.
 	Item []EndpointResponse
+
+	noSmithyDocumentSerde
 }
 
 // Specifies data for one or more attributes that describe the user who's
@@ -2617,6 +2752,8 @@ type EndpointUser struct {
 
 	// The unique identifier for the user.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies information about an event that reports data to Amazon Pinpoint.
@@ -2655,6 +2792,8 @@ type Event struct {
 
 	// Information about the session in which the event occurred.
 	Session *Session
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the conditions to evaluate for an event that applies to an activity in
@@ -2667,6 +2806,8 @@ type EventCondition struct {
 	// The message identifier (message_id) for the message to use when determining
 	// whether message events meet the condition.
 	MessageActivity *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the dimensions for an event filter that determines when a campaign is
@@ -2690,6 +2831,8 @@ type EventDimensions struct {
 	// One or more custom metrics that your application reports to Amazon Pinpoint. You
 	// can use these metrics as selection criteria when you create an event filter.
 	Metrics map[string]MetricDimension
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for an event that causes a campaign to be sent or a
@@ -2709,6 +2852,8 @@ type EventFilter struct {
 	//
 	// This member is required.
 	FilterType FilterType
+
+	noSmithyDocumentSerde
 }
 
 // Provides the status code and message that result from processing an event.
@@ -2722,6 +2867,8 @@ type EventItemResponse struct {
 	// event. Possible values are: 202, for events that were accepted; and, 400, for
 	// events that weren't valid.
 	StatusCode int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a batch of endpoints and events to process.
@@ -2736,6 +2883,8 @@ type EventsBatch struct {
 	//
 	// This member is required.
 	Events map[string]Event
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a batch of events to process.
@@ -2746,6 +2895,8 @@ type EventsRequest struct {
 	//
 	// This member is required.
 	BatchItem map[string]EventsBatch
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about endpoints and the events that they're associated
@@ -2758,6 +2909,8 @@ type EventsResponse struct {
 	// request was processed successfully; or 400, the payload wasn't valid or required
 	// fields were missing.
 	Results map[string]ItemResponse
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for an event that causes a journey activity to start.
@@ -2768,6 +2921,8 @@ type EventStartCondition struct {
 	EventFilter *EventFilter
 
 	SegmentId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies settings for publishing event data to an Amazon Kinesis data stream or
@@ -2806,6 +2961,8 @@ type EventStream struct {
 
 	// The IAM user who last modified the event stream.
 	LastUpdatedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a job that exports endpoint definitions to an Amazon
@@ -2834,6 +2991,8 @@ type ExportJobRequest struct {
 
 	// The version of the segment to export endpoint definitions from, if specified.
 	SegmentVersion int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the resource settings for a job that exports endpoint
@@ -2864,6 +3023,8 @@ type ExportJobResource struct {
 
 	// The version of the segment that the endpoint definitions were exported from.
 	SegmentVersion int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of a job that exports
@@ -2930,6 +3091,8 @@ type ExportJobResponse struct {
 
 	// The total number of endpoint definitions that were processed by the export job.
 	TotalProcessed int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about all the export jobs that are associated with an
@@ -2946,6 +3109,8 @@ type ExportJobsResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the GCM channel for an application. This
@@ -2961,6 +3126,8 @@ type GCMChannelRequest struct {
 
 	// Specifies whether to enable the GCM channel for the application.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the GCM channel for an
@@ -3008,6 +3175,8 @@ type GCMChannelResponse struct {
 
 	// The current version of the GCM channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a one-time message that's sent directly to an
@@ -3109,6 +3278,8 @@ type GCMMessage struct {
 	// The URL to open in the recipient's default mobile browser, if a recipient taps
 	// the push notification and the value of the Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the GPS coordinates of a location.
@@ -3123,6 +3294,8 @@ type GPSCoordinates struct {
 	//
 	// This member is required.
 	Longitude float64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies GPS-based criteria for including or excluding endpoints from a
@@ -3136,6 +3309,8 @@ type GPSPointDimension struct {
 
 	// The range, in kilometers, from the GPS coordinates.
 	RangeInKilometers float64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a holdout activity in a journey. This type of
@@ -3154,6 +3329,8 @@ type HoldoutActivity struct {
 	// The unique identifier for the next activity to perform, after performing the
 	// holdout activity.
 	NextActivity *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a job that imports endpoint definitions from an
@@ -3209,6 +3386,8 @@ type ImportJobRequest struct {
 	// A custom name for the segment that's created by the import job, if the value of
 	// the DefineSegment property is true.
 	SegmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the resource settings for a job that imports endpoint
@@ -3266,6 +3445,8 @@ type ImportJobResource struct {
 	// The custom name for the segment that's created by the import job, if the value
 	// of the DefineSegment property is true.
 	SegmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of a job that imports
@@ -3332,6 +3513,8 @@ type ImportJobResponse struct {
 
 	// The total number of endpoint definitions that were processed by the import job.
 	TotalProcessed int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of all the import jobs that
@@ -3348,6 +3531,8 @@ type ImportJobsResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the results of a request to create or update an
@@ -3361,6 +3546,8 @@ type ItemResponse struct {
 	// the request. In each object, the event ID is the key and an EventItemResponse
 	// object is the value.
 	EventsItemResponse map[string]EventItemResponse
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the message content for a custom channel message that's sent to
@@ -3369,6 +3556,8 @@ type JourneyCustomMessage struct {
 
 	// The message content that's passed to an AWS Lambda function or to a web hook.
 	Data *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the results of a query that retrieved the data for a standard
@@ -3418,6 +3607,8 @@ type JourneyDateRangeKpiResponse struct {
 	// paginated response. This value is null for the Journey Engagement Metrics
 	// resource because the resource returns all results in a single page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the "From" address for an email message that's sent to participants in
@@ -3427,6 +3618,8 @@ type JourneyEmailMessage struct {
 	// The verified email address to send the email message from. The default address
 	// is the FromAddress specified for the email channel for the application.
 	FromAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the results of a query that retrieved the data for a standard execution
@@ -3490,6 +3683,8 @@ type JourneyExecutionActivityMetricsResponse struct {
 	//
 	// This member is required.
 	Metrics map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the results of a query that retrieved the data for a standard execution
@@ -3518,6 +3713,8 @@ type JourneyExecutionMetricsResponse struct {
 	//
 	// This member is required.
 	Metrics map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies limits on the messages that a journey can send and the number of times
@@ -3539,6 +3736,8 @@ type JourneyLimits struct {
 
 	// The maximum number of messages that the journey can send each second.
 	MessagesPerSecond int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the message configuration for a push notification that's sent to
@@ -3553,6 +3752,8 @@ type JourneyPushMessage struct {
 	// to deliver the notification again. This value doesn't apply to messages that are
 	// sent through the Amazon Device Messaging (ADM) service.
 	TimeToLive *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status, configuration, and other settings for a
@@ -3663,6 +3864,8 @@ type JourneyResponse struct {
 	// Specifies whether endpoints in quiet hours should enter a wait till the end of
 	// their quiet hours.
 	WaitForQuietTime bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the schedule settings for a journey.
@@ -3681,6 +3884,8 @@ type JourneySchedule struct {
 	// UTC+12:45, UTC+13, UTC+13:45, UTC-02, UTC-02:30, UTC-03, UTC-03:30, UTC-04,
 	// UTC-05, UTC-06, UTC-07, UTC-08, UTC-09, UTC-09:30, UTC-10, and UTC-11.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the sender ID and message type for an SMS message that's sent to
@@ -3712,6 +3917,8 @@ type JourneySMSMessage struct {
 	// The template ID received from the regulatory body for sending SMS in your
 	// country.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status, configuration, and other settings for all
@@ -3727,6 +3934,8 @@ type JourneysResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Changes the status of a journey.
@@ -3747,6 +3956,8 @@ type JourneyStateRequest struct {
 	// when the journey is paused. Currently, PAUSED only supports journeys with a
 	// segment refresh interval.
 	State State
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about all the recommender model configurations that are
@@ -3762,6 +3973,8 @@ type ListRecommenderConfigurationsResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the content and settings for a push notification that's sent to
@@ -3828,6 +4041,8 @@ type Message struct {
 	// The URL to open in a recipient's default mobile browser, if a recipient taps the
 	// push notification and the value of the Action property is URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an API request or response.
@@ -3838,6 +4053,8 @@ type MessageBody struct {
 
 	// The unique identifier for the request or response.
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the message configuration settings for a campaign.
@@ -3877,6 +4094,8 @@ type MessageConfiguration struct {
 	// The message that the campaign sends through the SMS channel. If specified, this
 	// message overrides the default message.
 	SMSMessage *CampaignSmsMessage
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration and other settings for a message.
@@ -3918,6 +4137,8 @@ type MessageRequest struct {
 	// The unique identifier for tracing the message. This identifier is visible to
 	// message recipients.
 	TraceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the results of a request to send a message to an
@@ -3940,6 +4161,8 @@ type MessageResponse struct {
 	// number, or push notification token) that the message was sent to. In the map,
 	// the address is the key and the result is the value.
 	Result map[string]MessageResult
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the results of sending a message directly to an
@@ -3993,6 +4216,8 @@ type MessageResult struct {
 	// the endpoint's device registration token was updated as part of delivering the
 	// message.
 	UpdatedToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies metric-based criteria for including or excluding endpoints from a
@@ -4010,6 +4235,8 @@ type MetricDimension struct {
 	//
 	// This member is required.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a condition to evaluate for an activity path in a journey.
@@ -4021,6 +4248,8 @@ type MultiConditionalBranch struct {
 	// The unique identifier for the next activity to perform, after completing the
 	// activity for the path.
 	NextActivity *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a multivariate split activity in a journey. This type
@@ -4045,6 +4274,8 @@ type MultiConditionalSplitActivity struct {
 	// The amount of time to wait or the date and time when Amazon Pinpoint determines
 	// whether the conditions are met.
 	EvaluationWaitTime *WaitTime
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a phone number to validate and retrieve information about.
@@ -4058,6 +4289,8 @@ type NumberValidateRequest struct {
 	// provide should include a valid numeric country code. Otherwise, the operation
 	// might result in an error.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a phone number.
@@ -4115,6 +4348,8 @@ type NumberValidateResponse struct {
 	// The postal or ZIP code for the location where the phone number was originally
 	// registered.
 	ZipCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the properties and attributes of an endpoint that's associated with an
@@ -4169,6 +4404,8 @@ type PublicEndpoint struct {
 	// One or more custom user attributes that your app reports to Amazon Pinpoint for
 	// the user who's associated with the endpoint.
 	User *EndpointUser
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a push notification activity in a journey. This type
@@ -4196,6 +4433,8 @@ type PushMessageActivity struct {
 	// been most recently reviewed and approved for use, depending on your workflow. It
 	// isn't necessarily the latest version of a template.
 	TemplateVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the content and settings for a message template that can be used in
@@ -4247,6 +4486,8 @@ type PushNotificationTemplateRequest struct {
 
 	// A custom description of the message template.
 	TemplateDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the content and settings for a message template that
@@ -4323,6 +4564,8 @@ type PushNotificationTemplateResponse struct {
 	// template, or the version of the template that you specified by using the version
 	// parameter in your request.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the start and end times that define a time range when messages aren't
@@ -4340,6 +4583,8 @@ type QuietTime struct {
 	// applicable) and MM is the minutes. For example, use 02:30 to represent 2:30 AM,
 	// or 14:30 to represent 2:30 PM.
 	Start *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a random split activity in a journey. This type of
@@ -4350,6 +4595,8 @@ type RandomSplitActivity struct {
 	// The paths for the activity, including the percentage of participants to enter
 	// each path and the activity to perform for each path.
 	Branches []RandomSplitEntry
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a path in a random split activity in a journey.
@@ -4365,6 +4612,8 @@ type RandomSplitEntry struct {
 	// Therefore, the actual percentage of participants who are sent down a path may
 	// not be equal to the percentage that you specify.
 	Percentage int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the contents of an email message, represented as a raw MIME message.
@@ -4373,6 +4622,8 @@ type RawEmail struct {
 	// The email message, represented as a raw MIME message. The entire message must be
 	// base64 encoded.
 	Data []byte
+
+	noSmithyDocumentSerde
 }
 
 // Specifies criteria for including or excluding endpoints from a segment based on
@@ -4391,6 +4642,8 @@ type RecencyDimension struct {
 	//
 	// This member is required.
 	RecencyType RecencyType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about Amazon Pinpoint configuration settings for retrieving
@@ -4480,6 +4733,8 @@ type RecommenderConfigurationResponse struct {
 	// property. This number determines how many recommended items are available for
 	// use in message variables.
 	RecommendationsPerMessage int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides the results of a query that retrieved the data for a standard metric
@@ -4498,6 +4753,8 @@ type ResultRow struct {
 	//
 	// This member is required.
 	Values []ResultRowValue
+
+	noSmithyDocumentSerde
 }
 
 // Provides a single value and metadata about that value as part of an array of
@@ -4521,6 +4778,8 @@ type ResultRowValue struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the schedule settings for a campaign.
@@ -4575,6 +4834,8 @@ type Schedule struct {
 	// UTC-02, UTC-03, UTC-04, UTC-05, UTC-06, UTC-07, UTC-08, UTC-09, UTC-10, and
 	// UTC-11.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies dimension settings for including or excluding endpoints from a segment
@@ -4583,6 +4844,8 @@ type SegmentBehaviors struct {
 
 	// The dimension settings that are based on how recently an endpoint was active.
 	Recency *RecencyDimension
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a segment to associate with an activity in a journey.
@@ -4592,6 +4855,8 @@ type SegmentCondition struct {
 	//
 	// This member is required.
 	SegmentId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies demographic-based dimension settings for including or excluding
@@ -4616,6 +4881,8 @@ type SegmentDemographics struct {
 
 	// The device platform criteria for the segment.
 	Platform *SetDimension
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the dimension settings for a segment.
@@ -4639,6 +4906,8 @@ type SegmentDimensions struct {
 
 	// One or more custom user attributes to use as criteria for the segment.
 	UserAttributes map[string]AttributeDimension
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the base segments and dimensions for a segment, and the relationships
@@ -4666,6 +4935,8 @@ type SegmentGroup struct {
 	// specify three dimensions for the segment, whether the resulting segment includes
 	// endpoints that match all, any, or none of the dimensions.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings that define the relationships between segment groups for
@@ -4680,6 +4951,8 @@ type SegmentGroupList struct {
 	// the segment includes three segment groups, whether the resulting segment
 	// includes endpoints that match all, any, or none of the segment groups.
 	Include Include
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the import job that created a segment. An import job
@@ -4724,6 +4997,8 @@ type SegmentImportResource struct {
 	// The number of channel types in the endpoint definitions that were imported to
 	// create the segment.
 	ChannelCounts map[string]int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies geographical dimension settings for a segment.
@@ -4734,6 +5009,8 @@ type SegmentLocation struct {
 
 	// The GPS location and range for the segment.
 	GPSPoint *GPSPointDimension
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the segment identifier and version of a segment.
@@ -4746,6 +5023,8 @@ type SegmentReference struct {
 
 	// The version number of the segment.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the configuration, dimension, and other settings for
@@ -4810,6 +5089,8 @@ type SegmentResponse struct {
 
 	// The version number of the segment.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about all the segments that are associated with an
@@ -4826,6 +5107,8 @@ type SegmentsResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration and other settings for a message to send to all the
@@ -4860,6 +5143,8 @@ type SendUsersMessageRequest struct {
 	// The unique identifier for tracing the message. This identifier is visible to
 	// message recipients.
 	TraceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about which users and endpoints a message was sent to.
@@ -4878,6 +5163,8 @@ type SendUsersMessageResponse struct {
 	// the message was sent to. For each endpoint ID, it provides an
 	// EndpointMessageResult object.
 	Result map[string]map[string]EndpointMessageResult
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a session.
@@ -4898,6 +5185,8 @@ type Session struct {
 
 	// The date and time when the session ended.
 	StopTimestamp *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the dimension type and values for a segment dimension.
@@ -4914,6 +5203,8 @@ type SetDimension struct {
 	// that match the criteria are included in the segment; and, EXCLUSIVE, endpoints
 	// that match the criteria are excluded from the segment.
 	DimensionType DimensionType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a condition to evaluate for an activity in a journey.
@@ -4927,6 +5218,8 @@ type SimpleCondition struct {
 
 	// The dimension settings for the segment that's associated with the activity.
 	SegmentDimensions *SegmentDimensions
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the contents of an email message, composed of a subject, a text part,
@@ -4945,6 +5238,8 @@ type SimpleEmail struct {
 	// text format for email clients that don't render HTML content and clients that
 	// are connected to high-latency networks, such as mobile devices.
 	TextPart *SimpleEmailPart
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the subject or body of an email message, represented as textual email
@@ -4956,6 +5251,8 @@ type SimpleEmailPart struct {
 
 	// The textual data of the message content.
 	Data *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the SMS channel for an application.
@@ -4971,6 +5268,8 @@ type SMSChannelRequest struct {
 	// The registered short code that you want to use when you send messages through
 	// the SMS channel.
 	ShortCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the SMS channel for an
@@ -5025,6 +5324,8 @@ type SMSChannelResponse struct {
 
 	// The current version of the SMS channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default settings for a one-time SMS message that's sent directly
@@ -5067,6 +5368,8 @@ type SMSMessage struct {
 	// The template ID received from the regulatory body for sending SMS in your
 	// country.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for an SMS activity in a journey. This type of activity
@@ -5094,6 +5397,8 @@ type SMSMessageActivity struct {
 	// reviewed and approved for use, depending on your workflow. It isn't necessarily
 	// the latest version of a template.
 	TemplateVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the content and settings for a message template that can be used in
@@ -5124,6 +5429,8 @@ type SMSTemplateRequest struct {
 
 	// A custom description of the message template.
 	TemplateDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the content and settings for a message template that
@@ -5180,6 +5487,8 @@ type SMSTemplateResponse struct {
 	// template, or the version of the template that you specified by using the version
 	// parameter in your request.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the conditions for the first activity in a journey. This activity and
@@ -5195,6 +5504,8 @@ type StartCondition struct {
 	// The segment that's associated with the first activity in the journey. This
 	// segment determines which users are participants in the journey.
 	SegmentStartCondition *SegmentCondition
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the tags (keys and values) for an application, campaign, message
@@ -5209,6 +5520,8 @@ type TagsModel struct {
 	//
 	// This member is required.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the name and version of the message template to use for the message.
@@ -5227,6 +5540,8 @@ type Template struct {
 	// reviewed and approved for use, depending on your workflow. It isn't necessarily
 	// the latest version of a template.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies which version of a message template to use as the active version of
@@ -5240,6 +5555,8 @@ type TemplateActiveVersionRequest struct {
 	// template version. To retrieve a list of versions and version identifiers for a
 	// template, use the Template Versions resource.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the message template to use for the message, for each type of channel.
@@ -5257,6 +5574,8 @@ type TemplateConfiguration struct {
 	// The voice template to use for the message. This object isn't supported for
 	// campaigns.
 	VoiceTemplate *Template
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a message template that's associated with your Amazon
@@ -5316,6 +5635,8 @@ type TemplateResponse struct {
 	// The unique identifier, as an integer, for the active version of the message
 	// template.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about all the message templates that are associated with
@@ -5332,6 +5653,8 @@ type TemplatesResponse struct {
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a specific version of a message template.
@@ -5373,6 +5696,8 @@ type TemplateVersionResponse struct {
 	// integer that Amazon Pinpoint automatically increments and assigns to each new
 	// version of a template.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about all the versions of a specific message template.
@@ -5394,6 +5719,8 @@ type TemplateVersionsResponse struct {
 	// The unique identifier for the request to retrieve information about all the
 	// versions of the message template.
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a campaign treatment. A treatment is a variation of a
@@ -5433,6 +5760,8 @@ type TreatmentResource struct {
 
 	// The custom name of the treatment.
 	TreatmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one or more attributes to remove from all the endpoints that are
@@ -5444,6 +5773,8 @@ type UpdateAttributesRequest struct {
 	// attribute to remove or it can specify a glob pattern that an attribute name must
 	// match in order for the attribute to be removed.
 	Blacklist []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies Amazon Pinpoint configuration settings for retrieving and processing
@@ -5539,6 +5870,8 @@ type UpdateRecommenderConfigurationShape struct {
 	// variables, you have to use an AWS Lambda function (RecommendationTransformerUri)
 	// to perform additional processing of recommendation data.
 	RecommendationsPerMessage int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status and settings of the voice channel for an application.
@@ -5546,6 +5879,8 @@ type VoiceChannelRequest struct {
 
 	// Specifies whether to enable the voice channel for the application.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status and settings of the voice channel for an
@@ -5585,6 +5920,8 @@ type VoiceChannelResponse struct {
 
 	// The current version of the voice channel.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a one-time voice message that's sent directly to an
@@ -5614,6 +5951,8 @@ type VoiceMessage struct {
 	// supported voices, see the Amazon Polly Developer Guide
 	// (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
 	VoiceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the content and settings for a message template that can be used in
@@ -5650,6 +5989,8 @@ type VoiceTemplateRequest struct {
 	// message template. For a list of supported voices, see the Amazon Polly Developer
 	// Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
 	VoiceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the content and settings for a message template that
@@ -5713,6 +6054,8 @@ type VoiceTemplateResponse struct {
 	// message template. For a list of supported voices, see the Amazon Polly Developer
 	// Guide (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
 	VoiceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a wait activity in a journey. This type of activity
@@ -5727,6 +6070,8 @@ type WaitActivity struct {
 	// The amount of time to wait or the date and time when the activity moves
 	// participants to the next activity in the journey.
 	WaitTime *WaitTime
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a duration or a date and time that indicates when Amazon Pinpoint
@@ -5743,6 +6088,8 @@ type WaitTime struct {
 	// the activity's conditions have been met or the activity moves participants to
 	// the next activity in the journey.
 	WaitUntil *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default settings for an application.
@@ -5788,6 +6135,8 @@ type WriteApplicationSettingsRequest struct {
 	// resource or the Journey resource to define a custom quiet time for the campaign
 	// or journey.
 	QuietTime *QuietTime
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration and other settings for a campaign.
@@ -5851,6 +6200,8 @@ type WriteCampaignRequest struct {
 	// multiple treatments. A treatment is a variation of a campaign that's used for
 	// A/B testing.
 	TreatmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the Amazon Resource Name (ARN) of an event stream to publish events to
@@ -5873,6 +6224,8 @@ type WriteEventStream struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration and other settings for a journey.
@@ -5962,6 +6315,8 @@ type WriteJourneyRequest struct {
 	// Specifies whether endpoints in quiet hours should enter a wait till the end of
 	// their quiet hours.
 	WaitForQuietTime bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration, dimension, and other settings for a segment. A
@@ -5984,6 +6339,8 @@ type WriteSegmentRequest struct {
 	// with the segment. Each tag consists of a required tag key and an associated tag
 	// value.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the settings for a campaign treatment. A treatment is a variation of a
@@ -6014,4 +6371,8 @@ type WriteTreatmentResource struct {
 
 	// A custom name for the treatment.
 	TreatmentName *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

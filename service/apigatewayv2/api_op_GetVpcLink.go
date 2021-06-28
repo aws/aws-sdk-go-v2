@@ -34,6 +34,8 @@ type GetVpcLinkInput struct {
 	//
 	// This member is required.
 	VpcLinkId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetVpcLinkOutput struct {
@@ -67,6 +69,8 @@ type GetVpcLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

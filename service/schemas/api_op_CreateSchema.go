@@ -55,6 +55,8 @@ type CreateSchemaInput struct {
 
 	// Tags associated with the schema.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSchemaOutput struct {
@@ -85,6 +87,8 @@ type CreateSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

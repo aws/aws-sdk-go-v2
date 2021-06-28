@@ -45,6 +45,8 @@ type GetMLTransformsInput struct {
 
 	// The sorting criteria.
 	Sort *types.TransformSortCriteria
+
+	noSmithyDocumentSerde
 }
 
 type GetMLTransformsOutput struct {
@@ -59,6 +61,8 @@ type GetMLTransformsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMLTransformsMiddlewares(stack *middleware.Stack, options Options) (err error) {

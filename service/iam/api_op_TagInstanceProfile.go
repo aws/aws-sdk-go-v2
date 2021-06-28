@@ -68,11 +68,15 @@ type TagInstanceProfileInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type TagInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

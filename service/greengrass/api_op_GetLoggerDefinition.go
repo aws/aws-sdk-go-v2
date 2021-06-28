@@ -32,6 +32,8 @@ type GetLoggerDefinitionInput struct {
 	//
 	// This member is required.
 	LoggerDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLoggerDefinitionOutput struct {
@@ -62,6 +64,8 @@ type GetLoggerDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

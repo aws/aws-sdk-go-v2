@@ -59,6 +59,8 @@ type ModifyGlobalReplicationGroupInput struct {
 
 	// A description of the Global datastore
 	GlobalReplicationGroupDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyGlobalReplicationGroupOutput struct {
@@ -74,6 +76,8 @@ type ModifyGlobalReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

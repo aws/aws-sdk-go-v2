@@ -45,6 +45,8 @@ type ModifyDBSubnetGroupInput struct {
 
 	// The description for the subnet group.
 	DBSubnetGroupDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBSubnetGroupOutput struct {
@@ -54,6 +56,8 @@ type ModifyDBSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

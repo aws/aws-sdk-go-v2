@@ -33,6 +33,8 @@ type DescribePatchGroupStateInput struct {
 	//
 	// This member is required.
 	PatchGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePatchGroupStateOutput struct {
@@ -94,6 +96,8 @@ type DescribePatchGroupStateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePatchGroupStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

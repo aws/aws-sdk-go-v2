@@ -49,6 +49,8 @@ type GetDocumentVersionInput struct {
 
 	// Set this to TRUE to include custom metadata in the response.
 	IncludeCustomMetadata bool
+
+	noSmithyDocumentSerde
 }
 
 type GetDocumentVersionOutput struct {
@@ -61,6 +63,8 @@ type GetDocumentVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDocumentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

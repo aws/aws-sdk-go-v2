@@ -47,6 +47,8 @@ type ListWebACLsInput struct {
 	// and subsequent ListWebACLs requests, specify the value of NextMarker from the
 	// previous response to get information about another batch of WebACL objects.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListWebACLsOutput struct {
@@ -62,6 +64,8 @@ type ListWebACLsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWebACLsMiddlewares(stack *middleware.Stack, options Options) (err error) {

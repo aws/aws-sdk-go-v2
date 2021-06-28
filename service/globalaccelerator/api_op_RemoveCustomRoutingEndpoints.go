@@ -38,11 +38,15 @@ type RemoveCustomRoutingEndpointsInput struct {
 	//
 	// This member is required.
 	EndpointIds []string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveCustomRoutingEndpointsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveCustomRoutingEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

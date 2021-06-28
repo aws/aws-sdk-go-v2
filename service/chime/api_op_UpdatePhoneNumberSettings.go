@@ -35,11 +35,15 @@ type UpdatePhoneNumberSettingsInput struct {
 	//
 	// This member is required.
 	CallingName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePhoneNumberSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePhoneNumberSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

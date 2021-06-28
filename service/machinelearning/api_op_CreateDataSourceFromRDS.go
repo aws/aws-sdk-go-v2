@@ -113,6 +113,8 @@ type CreateDataSourceFromRDSInput struct {
 
 	// A user-supplied name or description of the DataSource.
 	DataSourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateDataSourceFromRDS operation, and is an
@@ -130,6 +132,8 @@ type CreateDataSourceFromRDSOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataSourceFromRDSMiddlewares(stack *middleware.Stack, options Options) (err error) {

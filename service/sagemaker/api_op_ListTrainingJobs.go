@@ -76,6 +76,8 @@ type ListTrainingJobsInput struct {
 
 	// A filter that retrieves only training jobs with a specific status.
 	StatusEquals types.TrainingJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListTrainingJobsOutput struct {
@@ -91,6 +93,8 @@ type ListTrainingJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTrainingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

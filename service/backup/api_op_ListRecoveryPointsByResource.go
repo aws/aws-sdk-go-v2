@@ -45,6 +45,8 @@ type ListRecoveryPointsByResourceInput struct {
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRecoveryPointsByResourceOutput struct {
@@ -61,6 +63,8 @@ type ListRecoveryPointsByResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRecoveryPointsByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

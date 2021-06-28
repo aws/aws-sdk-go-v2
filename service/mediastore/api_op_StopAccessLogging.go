@@ -34,11 +34,15 @@ type StopAccessLoggingInput struct {
 	//
 	// This member is required.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopAccessLoggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopAccessLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type ListTemplatesInput struct {
 	// PUSH, SMS, and VOICE. To include all types of templates in the results, don't
 	// include this parameter in your request.
 	TemplateType *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTemplatesOutput struct {
@@ -60,6 +62,8 @@ type ListTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

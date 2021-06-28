@@ -57,6 +57,8 @@ type UpdateLogPatternInput struct {
 	// rank. And a High severity pattern translates to a 250,000 rank. Rank values less
 	// than 1 or greater than 1,000,000 are reserved for AWS-provided patterns.
 	Rank int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLogPatternOutput struct {
@@ -69,6 +71,8 @@ type UpdateLogPatternOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetCodeSigningConfigInput struct {
 	//
 	// This member is required.
 	CodeSigningConfigArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCodeSigningConfigOutput struct {
@@ -44,6 +46,8 @@ type GetCodeSigningConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

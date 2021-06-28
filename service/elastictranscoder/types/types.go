@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The file to be used as album art. There can be multiple artworks associated with
 // an audio file, to a maximum of 20. To remove artwork or leave the artwork empty,
 // you can either set Artwork to null, or set the Merge Policy to "Replace" and use
@@ -74,6 +78,8 @@ type Artwork struct {
 	// MaxHeight without dropping below either value. If you specify this option,
 	// Elastic Transcoder does not scale the art up.
 	SizingPolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // Options associated with your audio codec.
@@ -119,6 +125,8 @@ type AudioCodecOptions struct {
 	// and positive numbers (signed) or only positive numbers (unsigned). The supported
 	// value is Signed.
 	Signed *string
+
+	noSmithyDocumentSerde
 }
 
 // Parameters required for transcoding audio.
@@ -276,6 +284,8 @@ type AudioParameters struct {
 	// include: auto, 22050, 32000, 44100, 48000, 96000 If you specify auto, Elastic
 	// Transcoder automatically detects the sample rate.
 	SampleRate *string
+
+	noSmithyDocumentSerde
 }
 
 // The file format of the output captions. If you leave this value blank, Elastic
@@ -335,6 +345,8 @@ type CaptionFormat struct {
 	// "Sydney-{language}-sunrise", and the language of the captions is English (en),
 	// the name of the first caption file is be Sydney-en-sunrise00000.srt.
 	Pattern *string
+
+	noSmithyDocumentSerde
 }
 
 // The captions to be created, if any.
@@ -373,6 +385,8 @@ type Captions struct {
 	//
 	// Deprecated: This member has been deprecated.
 	MergePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // A source file for the input sidecar captions used during the transcoding
@@ -411,6 +425,8 @@ type CaptionSource struct {
 	// video to encode before including captions. Specify the TimeOffset in the form
 	// [+-]SS.sss or [+-]HH:mm:SS.ss.
 	TimeOffset *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for one clip in a composition. All jobs in a playlist must have the
@@ -419,6 +435,8 @@ type Clip struct {
 
 	// Settings that determine when a clip begins and how long it lasts.
 	TimeSpan *TimeSpan
+
+	noSmithyDocumentSerde
 }
 
 // The CreateJobOutput structure.
@@ -548,6 +566,8 @@ type CreateJobOutput struct {
 	// Settings for each watermark must be defined in the preset for the current
 	// output.
 	Watermarks []JobWatermark
+
+	noSmithyDocumentSerde
 }
 
 // Information about the master playlist.
@@ -604,6 +624,8 @@ type CreateJobPlaylist struct {
 	// The DRM settings, if any, that you want Elastic Transcoder to apply to the
 	// output files associated with this playlist.
 	PlayReadyDrm *PlayReadyDrm
+
+	noSmithyDocumentSerde
 }
 
 // The detected properties of the input file. Elastic Transcoder identifies these
@@ -624,6 +646,8 @@ type DetectedProperties struct {
 
 	// The detected width of the input file, in pixels.
 	Width *int32
+
+	noSmithyDocumentSerde
 }
 
 // The encryption settings, if any, that are used for decrypting your input files
@@ -692,6 +716,8 @@ type Encryption struct {
 	// your encryption keys. If you lose them, you won't be able to unencrypt your
 	// data.
 	Mode *string
+
+	noSmithyDocumentSerde
 }
 
 // The HLS content protection settings, if any, that you want Elastic Transcoder to
@@ -733,6 +759,8 @@ type HlsContentProtection struct {
 	// This value is written into the method attribute of the EXT-X-KEY metadata tag in
 	// the output playlist.
 	Method *string
+
+	noSmithyDocumentSerde
 }
 
 // The captions to be created, if any.
@@ -763,6 +791,8 @@ type InputCaptions struct {
 	//
 	// MergePolicy cannot be null.
 	MergePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // A section of the response body that provides information about the job that is
@@ -841,6 +871,8 @@ type Job struct {
 	// *
 	// The following symbols: _.:/=+-%@
 	UserMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The .jpg or .png file associated with an audio file.
@@ -866,6 +898,8 @@ type JobAlbumArt struct {
 	// Elastic Transcoder uses that artwork for the output. If the original input does
 	// not contain artwork, Elastic Transcoder uses the specified album art file.
 	MergePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the file that you're transcoding.
@@ -954,6 +988,8 @@ type JobInput struct {
 
 	// Settings for clipping an input. Each input can have different clip settings.
 	TimeSpan *TimeSpan
+
+	noSmithyDocumentSerde
 }
 
 // Outputs recommended instead. If you specified one output for a job, information
@@ -1148,6 +1184,8 @@ type JobOutput struct {
 
 	// Specifies the width of the output file in pixels.
 	Width *int32
+
+	noSmithyDocumentSerde
 }
 
 // Watermarks can be in .png or .jpg format. If you want to display a watermark
@@ -1171,6 +1209,8 @@ type JobWatermark struct {
 	// Preset for the current output. In that preset, the value of Watermarks Id tells
 	// Elastic Transcoder which settings to use.
 	PresetWatermarkId *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in
@@ -1193,6 +1233,8 @@ type Notifications struct {
 	// The Amazon SNS topic that you want to notify when Elastic Transcoder encounters
 	// a warning condition.
 	Warning *string
+
+	noSmithyDocumentSerde
 }
 
 // The Permission structure.
@@ -1235,6 +1277,8 @@ type Permission struct {
 	// of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers, or
 	// LogDelivery.
 	GranteeType *string
+
+	noSmithyDocumentSerde
 }
 
 // The pipeline (queue) that is used to manage jobs.
@@ -1402,6 +1446,8 @@ type Pipeline struct {
 	// ReducedRedundancy, that you want Elastic Transcoder to assign to the thumbnails
 	// that it stores in your Amazon S3 bucket.
 	ThumbnailConfig *PipelineOutputConfig
+
+	noSmithyDocumentSerde
 }
 
 // The PipelineOutputConfig structure.
@@ -1447,6 +1493,8 @@ type PipelineOutputConfig struct {
 	// Elastic Transcoder to assign to the video files and playlists that it stores in
 	// your Amazon S3 bucket.
 	StorageClass *string
+
+	noSmithyDocumentSerde
 }
 
 // Use Only for Fragmented MP4 or MPEG-TS Outputs. If you specify a preset for
@@ -1515,6 +1563,8 @@ type Playlist struct {
 
 	// Information that further explains the status.
 	StatusDetail *string
+
+	noSmithyDocumentSerde
 }
 
 // The PlayReady DRM settings, if any, that you want Elastic Transcoder to apply to
@@ -1560,6 +1610,8 @@ type PlayReadyDrm struct {
 	// HLS playlist outputs. An example URL looks like this:
 	// https://www.example.com/exampleKey/
 	LicenseAcquisitionUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Presets are templates that contain most of the settings for transcoding media
@@ -1601,6 +1653,8 @@ type Preset struct {
 	// A section of the response body that provides information about the video preset
 	// values.
 	Video *VideoParameters
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the size, location, and opacity of graphics that you want Elastic
@@ -1761,6 +1815,8 @@ type PresetWatermark struct {
 	// Transcoder to include the black bars that are added by Elastic Transcoder, if
 	// any, in the offset calculation.
 	VerticalOffset *string
+
+	noSmithyDocumentSerde
 }
 
 // Thumbnails for videos.
@@ -1840,6 +1896,8 @@ type Thumbnails struct {
 	// either value. If you specify this option, Elastic Transcoder does not scale
 	// thumbnails up.
 	SizingPolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings that determine when a clip begins and how long it lasts.
@@ -1858,6 +1916,8 @@ type TimeSpan struct {
 	// second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value,
 	// Elastic Transcoder starts at the beginning of the input file.
 	StartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the timing of a job.
@@ -1871,6 +1931,8 @@ type Timing struct {
 
 	// The time the job was submitted to Elastic Transcoder, in epoch milliseconds.
 	SubmitTimeMillis *int64
+
+	noSmithyDocumentSerde
 }
 
 // The VideoParameters structure.
@@ -2254,6 +2316,8 @@ type VideoParameters struct {
 	// settings in the preset, which allows you to use the same preset for up to four
 	// watermarks that have different dimensions.
 	Watermarks []PresetWatermark
+
+	noSmithyDocumentSerde
 }
 
 // Elastic Transcoder returns a warning if the resources used by your pipeline are
@@ -2268,4 +2332,8 @@ type Warning struct {
 	// The message explaining what resources are in a different region from the
 	// pipeline. AWS KMS keys must be in the same region as the pipeline.
 	Message *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

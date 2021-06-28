@@ -49,11 +49,15 @@ type SetVisibleToAllUsersInput struct {
 	//
 	// This member is required.
 	VisibleToAllUsers bool
+
+	noSmithyDocumentSerde
 }
 
 type SetVisibleToAllUsersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetVisibleToAllUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {

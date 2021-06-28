@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -28,6 +29,8 @@ type ErrorReason struct {
 
 	// The error message.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the CloudWatch metric that reflects quota usage.
@@ -45,6 +48,8 @@ type MetricInfo struct {
 
 	// The metric statistic that we recommend you use when determining quota usage.
 	MetricStatisticRecommendation *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the quota period.
@@ -55,6 +60,8 @@ type QuotaPeriod struct {
 
 	// The value.
 	PeriodValue *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a quota increase request.
@@ -102,6 +109,8 @@ type RequestedServiceQuotaChange struct {
 
 	// The unit of measurement.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a service.
@@ -112,6 +121,8 @@ type ServiceInfo struct {
 
 	// The service name.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a quota.
@@ -152,6 +163,8 @@ type ServiceQuota struct {
 
 	// The quota value.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a quota increase request.
@@ -180,6 +193,8 @@ type ServiceQuotaIncreaseRequestInTemplate struct {
 
 	// The unit of measurement.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type that contains a tag key and tag value.
@@ -198,4 +213,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

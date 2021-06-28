@@ -46,11 +46,15 @@ type PutAccountConfigurationInput struct {
 
 	// Specifies expiration events associated with an account.
 	ExpiryEvents *types.ExpiryEventsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutAccountConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

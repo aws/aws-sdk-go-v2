@@ -126,6 +126,8 @@ type UpdateUserInput struct {
 	// before a custom permissions profile was applied. This parameter defaults to NULL
 	// and it doesn't accept any other value.
 	UnapplyCustomPermissions bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserOutput struct {
@@ -141,6 +143,8 @@ type UpdateUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

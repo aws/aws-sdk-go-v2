@@ -11,6 +11,8 @@ import (
 // configured.
 type AccessDeniedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedFault) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // There are not enough resources allocated to the database migration.
 type InsufficientResourceCapacityFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientResourceCapacityFault) Error() string {
@@ -47,6 +51,8 @@ func (e *InsufficientResourceCapacityFault) ErrorFault() smithy.ErrorFault { ret
 // The certificate was not valid.
 type InvalidCertificateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCertificateFault) Error() string {
@@ -65,6 +71,8 @@ func (e *InvalidCertificateFault) ErrorFault() smithy.ErrorFault { return smithy
 // migration.
 type InvalidResourceStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceStateFault) Error() string {
@@ -82,6 +90,8 @@ func (e *InvalidResourceStateFault) ErrorFault() smithy.ErrorFault { return smit
 // The subnet provided is invalid.
 type InvalidSubnet struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubnet) Error() string {
@@ -100,6 +110,8 @@ func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // doesn't have access to.
 type KMSAccessDeniedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSAccessDeniedFault) Error() string {
@@ -117,6 +129,8 @@ func (e *KMSAccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The specified master key (CMK) isn't enabled.
 type KMSDisabledFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSDisabledFault) Error() string {
@@ -134,6 +148,8 @@ func (e *KMSDisabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // An Key Management Service (KMS) error is preventing access to KMS.
 type KMSFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSFault) Error() string {
@@ -151,6 +167,8 @@ func (e *KMSFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 // The state of the specified KMS resource isn't valid for this request.
 type KMSInvalidStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSInvalidStateFault) Error() string {
@@ -168,6 +186,8 @@ func (e *KMSInvalidStateFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // DMS cannot access the KMS key.
 type KMSKeyNotAccessibleFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSKeyNotAccessibleFault) Error() string {
@@ -185,6 +205,8 @@ func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smith
 // The specified KMS entity or resource can't be found.
 type KMSNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSNotFoundFault) Error() string {
@@ -202,6 +224,8 @@ func (e *KMSNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // This request triggered KMS request throttling.
 type KMSThrottlingFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSThrottlingFault) Error() string {
@@ -220,6 +244,8 @@ func (e *KMSThrottlingFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Edit the replication subnet group and add more AZs.
 type ReplicationSubnetGroupDoesNotCoverEnoughAZs struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicationSubnetGroupDoesNotCoverEnoughAZs) Error() string {
@@ -243,6 +269,8 @@ type ResourceAlreadyExistsFault struct {
 	Message *string
 
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsFault) Error() string {
@@ -260,6 +288,8 @@ func (e *ResourceAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smi
 // The resource could not be found.
 type ResourceNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundFault) Error() string {
@@ -277,6 +307,8 @@ func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // The quota for this resource quota has been exceeded.
 type ResourceQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceQuotaExceededFault) Error() string {
@@ -294,6 +326,8 @@ func (e *ResourceQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smi
 // Insufficient privileges are preventing access to an Amazon S3 object.
 type S3AccessDeniedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *S3AccessDeniedFault) Error() string {
@@ -311,6 +345,8 @@ func (e *S3AccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // A specified Amazon S3 bucket, bucket folder, or other object can't be found.
 type S3ResourceNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *S3ResourceNotFoundFault) Error() string {
@@ -328,6 +364,8 @@ func (e *S3ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy
 // The SNS topic is invalid.
 type SNSInvalidTopicFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SNSInvalidTopicFault) Error() string {
@@ -345,6 +383,8 @@ func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // You are not authorized for the SNS subscription.
 type SNSNoAuthorizationFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SNSNoAuthorizationFault) Error() string {
@@ -362,6 +402,8 @@ func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy
 // The storage quota has been exceeded.
 type StorageQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StorageQuotaExceededFault) Error() string {
@@ -379,6 +421,8 @@ func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smit
 // The specified subnet is already in use.
 type SubnetAlreadyInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetAlreadyInUse) Error() string {
@@ -396,6 +440,8 @@ func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // An upgrade dependency is preventing the database migration.
 type UpgradeDependencyFailureFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UpgradeDependencyFailureFault) Error() string {

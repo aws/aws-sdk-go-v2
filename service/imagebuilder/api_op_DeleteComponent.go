@@ -32,6 +32,8 @@ type DeleteComponentInput struct {
 	//
 	// This member is required.
 	ComponentBuildVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteComponentOutput struct {
@@ -44,6 +46,8 @@ type DeleteComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

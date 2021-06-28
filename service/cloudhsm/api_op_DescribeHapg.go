@@ -44,6 +44,8 @@ type DescribeHapgInput struct {
 	//
 	// This member is required.
 	HapgArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the DescribeHapg action.
@@ -79,6 +81,8 @@ type DescribeHapgOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {

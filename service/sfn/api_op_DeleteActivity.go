@@ -32,11 +32,15 @@ type DeleteActivityInput struct {
 	//
 	// This member is required.
 	ActivityArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteActivityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {

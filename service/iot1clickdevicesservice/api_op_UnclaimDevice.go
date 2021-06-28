@@ -32,6 +32,8 @@ type UnclaimDeviceInput struct {
 	//
 	// This member is required.
 	DeviceId *string
+
+	noSmithyDocumentSerde
 }
 
 type UnclaimDeviceOutput struct {
@@ -41,6 +43,8 @@ type UnclaimDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnclaimDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

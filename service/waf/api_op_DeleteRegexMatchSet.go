@@ -58,6 +58,8 @@ type DeleteRegexMatchSetInput struct {
 	//
 	// This member is required.
 	RegexMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRegexMatchSetOutput struct {
@@ -69,6 +71,8 @@ type DeleteRegexMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

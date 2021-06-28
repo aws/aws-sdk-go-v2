@@ -33,6 +33,8 @@ type EnableHostedZoneDNSSECInput struct {
 	//
 	// This member is required.
 	HostedZoneId *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableHostedZoneDNSSECOutput struct {
@@ -45,6 +47,8 @@ type EnableHostedZoneDNSSECOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableHostedZoneDNSSECMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type ListMetricStreamsInput struct {
 	// Include this value, if it was returned by the previous call, to get the next set
 	// of metric streams.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMetricStreamsOutput struct {
@@ -49,6 +51,8 @@ type ListMetricStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMetricStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

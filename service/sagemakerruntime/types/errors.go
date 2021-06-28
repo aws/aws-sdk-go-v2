@@ -10,6 +10,8 @@ import (
 // An internal failure occurred.
 type InternalFailure struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailure) Error() string {
@@ -31,6 +33,8 @@ type ModelError struct {
 	OriginalStatusCode *int32
 	OriginalMessage    *string
 	LogStreamArn       *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ModelError) Error() string {
@@ -48,6 +52,8 @@ func (e *ModelError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient 
 // The service is unavailable. Try your call again.
 type ServiceUnavailable struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailable) Error() string {
@@ -65,6 +71,8 @@ func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Inspect your request and try again.
 type ValidationError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationError) Error() string {

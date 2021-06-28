@@ -55,6 +55,8 @@ type ListObjectParentPathsInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListObjectParentPathsOutput struct {
@@ -68,6 +70,8 @@ type ListObjectParentPathsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListObjectParentPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {

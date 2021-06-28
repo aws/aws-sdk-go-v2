@@ -65,6 +65,8 @@ type StartImportInput struct {
 	// A list of tags to add to the imported bot. You can only add tags when you import
 	// a bot, you can't add tags to an intent or slot type.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type StartImportOutput struct {
@@ -93,6 +95,8 @@ type StartImportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {

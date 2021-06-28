@@ -32,11 +32,15 @@ type StopNotebookExecutionInput struct {
 	//
 	// This member is required.
 	NotebookExecutionId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopNotebookExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListContactsInput struct {
 	// The type of contact. A contact is type PERSONAL and an escalation plan is type
 	// ESCALATION.
 	Type types.ContactType
+
+	noSmithyDocumentSerde
 }
 
 type ListContactsOutput struct {
@@ -54,6 +56,8 @@ type ListContactsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

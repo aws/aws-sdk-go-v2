@@ -35,11 +35,15 @@ type SkipWaitTimeForInstanceTerminationInput struct {
 	// The unique ID of a blue/green deployment for which you want to skip the instance
 	// termination wait time.
 	DeploymentId *string
+
+	noSmithyDocumentSerde
 }
 
 type SkipWaitTimeForInstanceTerminationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSkipWaitTimeForInstanceTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {

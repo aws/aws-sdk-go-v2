@@ -57,6 +57,8 @@ type UpdateRouteResponseInput struct {
 
 	// The route response key.
 	RouteResponseKey *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRouteResponseOutput struct {
@@ -79,6 +81,8 @@ type UpdateRouteResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

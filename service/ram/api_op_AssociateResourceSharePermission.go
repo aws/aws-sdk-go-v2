@@ -50,6 +50,8 @@ type AssociateResourceSharePermissionInput struct {
 	// currently associated with the resource share. Use true to replace the current
 	// permissions. Use false to add the permission to the current permission.
 	Replace *bool
+
+	noSmithyDocumentSerde
 }
 
 type AssociateResourceSharePermissionOutput struct {
@@ -63,6 +65,8 @@ type AssociateResourceSharePermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateResourceSharePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type UpdateDataSourcePermissionsInput struct {
 
 	// A list of resource permissions that you want to revoke on the data source.
 	RevokePermissions []types.ResourcePermission
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDataSourcePermissionsOutput struct {
@@ -64,6 +66,8 @@ type UpdateDataSourcePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

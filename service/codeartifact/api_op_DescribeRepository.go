@@ -43,6 +43,8 @@ type DescribeRepositoryInput struct {
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRepositoryOutput struct {
@@ -53,6 +55,8 @@ type DescribeRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

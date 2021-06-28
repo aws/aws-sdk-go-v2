@@ -47,6 +47,8 @@ type SearchSchemasInput struct {
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchSchemasOutput struct {
@@ -61,6 +63,8 @@ type SearchSchemasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {

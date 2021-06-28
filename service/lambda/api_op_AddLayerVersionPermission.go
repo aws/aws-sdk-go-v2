@@ -70,6 +70,8 @@ type AddLayerVersionPermissionInput struct {
 	// Only update the policy if the revision ID matches the ID specified. Use this
 	// option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type AddLayerVersionPermissionOutput struct {
@@ -82,6 +84,8 @@ type AddLayerVersionPermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddLayerVersionPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

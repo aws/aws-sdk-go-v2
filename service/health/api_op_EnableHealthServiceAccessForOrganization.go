@@ -50,11 +50,14 @@ func (c *Client) EnableHealthServiceAccessForOrganization(ctx context.Context, p
 }
 
 type EnableHealthServiceAccessForOrganizationInput struct {
+	noSmithyDocumentSerde
 }
 
 type EnableHealthServiceAccessForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableHealthServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

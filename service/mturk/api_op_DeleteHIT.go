@@ -51,11 +51,15 @@ type DeleteHITInput struct {
 	//
 	// This member is required.
 	HITId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHITMiddlewares(stack *middleware.Stack, options Options) (err error) {

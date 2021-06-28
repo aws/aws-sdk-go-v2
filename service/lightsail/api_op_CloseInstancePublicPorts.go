@@ -42,6 +42,8 @@ type CloseInstancePublicPortsInput struct {
 	//
 	// This member is required.
 	PortInfo *types.PortInfo
+
+	noSmithyDocumentSerde
 }
 
 type CloseInstancePublicPortsOutput struct {
@@ -53,6 +55,8 @@ type CloseInstancePublicPortsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCloseInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {

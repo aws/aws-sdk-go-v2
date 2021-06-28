@@ -42,6 +42,8 @@ type CancelRetrievalInput struct {
 	//
 	// This member is required.
 	TapeARN *string
+
+	noSmithyDocumentSerde
 }
 
 // CancelRetrievalOutput
@@ -53,6 +55,8 @@ type CancelRetrievalOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelRetrievalMiddlewares(stack *middleware.Stack, options Options) (err error) {

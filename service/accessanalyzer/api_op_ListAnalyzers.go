@@ -39,6 +39,8 @@ type ListAnalyzersInput struct {
 
 	// The type of analyzer.
 	Type types.Type
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request.
@@ -54,6 +56,8 @@ type ListAnalyzersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAnalyzersMiddlewares(stack *middleware.Stack, options Options) (err error) {

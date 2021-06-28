@@ -35,6 +35,8 @@ type DisableVpcClassicLinkDnsSupportInput struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableVpcClassicLinkDnsSupportOutput struct {
@@ -44,6 +46,8 @@ type DisableVpcClassicLinkDnsSupportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableVpcClassicLinkDnsSupportMiddlewares(stack *middleware.Stack, options Options) (err error) {

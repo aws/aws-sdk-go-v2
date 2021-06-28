@@ -44,6 +44,8 @@ type ListDiscoverersInput struct {
 	// Specifying this limits the results to only those ARNs that start with the
 	// specified prefix.
 	SourceArnPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDiscoverersOutput struct {
@@ -58,6 +60,8 @@ type ListDiscoverersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDiscoverersMiddlewares(stack *middleware.Stack, options Options) (err error) {

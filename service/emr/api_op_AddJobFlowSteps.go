@@ -56,6 +56,8 @@ type AddJobFlowStepsInput struct {
 	//
 	// This member is required.
 	Steps []types.StepConfig
+
+	noSmithyDocumentSerde
 }
 
 // The output for the AddJobFlowSteps operation.
@@ -66,6 +68,8 @@ type AddJobFlowStepsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {

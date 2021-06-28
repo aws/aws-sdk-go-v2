@@ -68,6 +68,8 @@ type StartPiiEntitiesDetectionJobInput struct {
 	// required if you set the Mode parameter to ONLY_REDACTION. In that case, you must
 	// provide a RedactionConfig definition that includes the PiiEntityTypes parameter.
 	RedactionConfig *types.RedactionConfig
+
+	noSmithyDocumentSerde
 }
 
 type StartPiiEntitiesDetectionJobOutput struct {
@@ -80,6 +82,8 @@ type StartPiiEntitiesDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartPiiEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

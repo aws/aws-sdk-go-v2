@@ -51,11 +51,15 @@ type PutRecordInput struct {
 	//
 	// This member is required.
 	Record []types.FeatureValue
+
+	noSmithyDocumentSerde
 }
 
 type PutRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {

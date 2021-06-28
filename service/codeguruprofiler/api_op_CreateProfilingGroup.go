@@ -54,6 +54,8 @@ type CreateProfilingGroupInput struct {
 
 	// A list of tags to add to the created profiling group.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the createProfilingGroupResponse.
@@ -68,6 +70,8 @@ type CreateProfilingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

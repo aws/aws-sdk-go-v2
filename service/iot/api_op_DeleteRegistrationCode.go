@@ -28,12 +28,15 @@ func (c *Client) DeleteRegistrationCode(ctx context.Context, params *DeleteRegis
 
 // The input for the DeleteRegistrationCode operation.
 type DeleteRegistrationCodeInput struct {
+	noSmithyDocumentSerde
 }
 
 // The output for the DeleteRegistrationCode operation.
 type DeleteRegistrationCodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRegistrationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

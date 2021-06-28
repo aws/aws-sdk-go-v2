@@ -38,11 +38,15 @@ type DeleteAccountAliasInput struct {
 	//
 	// This member is required.
 	AccountAlias *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccountAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccountAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

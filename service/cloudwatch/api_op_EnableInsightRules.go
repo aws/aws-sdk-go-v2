@@ -36,6 +36,8 @@ type EnableInsightRulesInput struct {
 	//
 	// This member is required.
 	RuleNames []string
+
+	noSmithyDocumentSerde
 }
 
 type EnableInsightRulesOutput struct {
@@ -46,6 +48,8 @@ type EnableInsightRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

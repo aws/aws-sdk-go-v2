@@ -29,6 +29,7 @@ func (c *Client) DescribeDRTAccess(ctx context.Context, params *DescribeDRTAcces
 }
 
 type DescribeDRTAccessInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeDRTAccessOutput struct {
@@ -42,6 +43,8 @@ type DescribeDRTAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDRTAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

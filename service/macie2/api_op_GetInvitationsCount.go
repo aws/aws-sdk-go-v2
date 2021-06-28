@@ -28,6 +28,7 @@ func (c *Client) GetInvitationsCount(ctx context.Context, params *GetInvitations
 }
 
 type GetInvitationsCountInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetInvitationsCountOutput struct {
@@ -38,6 +39,8 @@ type GetInvitationsCountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInvitationsCountMiddlewares(stack *middleware.Stack, options Options) (err error) {

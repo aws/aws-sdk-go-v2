@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -16,6 +17,8 @@ type AssociateClientDeviceWithCoreDeviceEntry struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an error that occurs from a request to associate a client device with a
@@ -32,6 +35,8 @@ type AssociateClientDeviceWithCoreDeviceErrorEntry struct {
 
 	// The name of the AWS IoT thing whose associate request failed.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a client device that is associated to a core device
@@ -43,6 +48,8 @@ type AssociatedClientDevice struct {
 
 	// The name of the AWS IoT thing that represents the associated client device.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the status of a component in the AWS IoT Greengrass service.
@@ -60,6 +67,8 @@ type CloudComponentStatus struct {
 	// A message that communicates details, such as errors, about the status of the
 	// component.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a component.
@@ -75,6 +84,8 @@ type Component struct {
 
 	// The latest version of the component and its details.
 	LatestVersion *ComponentLatestVersion
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a component that is a candidate to deploy to a AWS
@@ -92,6 +103,8 @@ type ComponentCandidate struct {
 	// Greengrass V2 uses semantic version constraints. For more information, see
 	// Semantic Versioning (https://semver.org/).
 	VersionRequirements map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a deployment's update to a component's configuration
@@ -120,6 +133,8 @@ type ComponentConfigurationUpdate struct {
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update)
 	// in the AWS IoT Greengrass V2 Developer Guide.
 	Reset []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a component dependency for a Lambda function
@@ -141,6 +156,8 @@ type ComponentDependencyRequirement struct {
 	// Greengrass V2 uses semantic version constraints. For more information, see
 	// Semantic Versioning (https://semver.org/).
 	VersionRequirement *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a component to deploy.
@@ -167,6 +184,8 @@ type ComponentDeploymentSpecification struct {
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user)
 	// in the AWS IoT Greengrass V2 Developer Guide.
 	RunWith *ComponentRunWith
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the latest version of a component.
@@ -191,6 +210,8 @@ type ComponentLatestVersion struct {
 
 	// The publisher of the component version.
 	Publisher *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a platform that a component supports.
@@ -209,6 +230,8 @@ type ComponentPlatform struct {
 	// you omit this parameter, AWS IoT Greengrass creates a friendly name from the os
 	// and architecture of the platform.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information system user and group that the AWS IoT Greengrass Core
@@ -223,6 +246,8 @@ type ComponentRunWith struct {
 	// The group is optional. If you don't specify a group, the AWS IoT Greengrass Core
 	// software uses the primary user for the group.
 	PosixUser *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a component version in a list.
@@ -238,6 +263,8 @@ type ComponentVersionListItem struct {
 
 	// The version of the component.
 	ComponentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a AWS IoT Greengrass core device, which is an AWS IoT
@@ -260,6 +287,8 @@ type CoreDevice struct {
 	// * UNHEALTHY – The AWS IoT Greengrass Core software
 	// or a component is in a failed state on the core device.
 	Status CoreDeviceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a deployment.
@@ -290,6 +319,8 @@ type Deployment struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the target AWS IoT thing or thing group.
 	TargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a deployment's policy that defines when components
@@ -326,6 +357,8 @@ type DeploymentComponentUpdatePolicy struct {
 	// it's safe to update. If the component waits for longer than this timeout, then
 	// the deployment proceeds on the device. Default: 60
 	TimeoutInSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about how long a component on a core device can validate
@@ -345,6 +378,8 @@ type DeploymentConfigurationValidationPolicy struct {
 	// updates. If the validation time exceeds this timeout, then the deployment
 	// proceeds for the device. Default: 30
 	TimeoutInSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an AWS IoT job configuration.
@@ -361,6 +396,8 @@ type DeploymentIoTJobConfiguration struct {
 	// The timeout configuration for the job. This configuration defines the amount of
 	// time each device has to complete the job.
 	TimeoutConfig *IoTJobTimeoutConfig
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about policies that define how a deployment updates
@@ -378,6 +415,8 @@ type DeploymentPolicies struct {
 	// The failure handling policy for the configuration deployment. This policy
 	// defines what to do if the deployment fails. Default: ROLLBACK
 	FailureHandlingPolicy DeploymentFailureHandlingPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Contains a request to disassociate a client device from a core device. The
@@ -390,6 +429,8 @@ type DisassociateClientDeviceFromCoreDeviceEntry struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an error that occurs from a request to disassociate a client device
@@ -406,6 +447,8 @@ type DisassociateClientDeviceFromCoreDeviceErrorEntry struct {
 
 	// The name of the AWS IoT thing whose disassociate request failed.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a deployment job that AWS IoT Greengrass sends to a
@@ -461,6 +504,8 @@ type EffectiveDeployment struct {
 
 	// The reason code for the update, if the job was updated.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a component on a AWS IoT Greengrass core device.
@@ -480,6 +525,8 @@ type InstalledComponent struct {
 
 	// The details about the lifecycle state of the component.
 	LifecycleStateDetails *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of criteria that define when and how to cancel a configuration
@@ -491,6 +538,8 @@ type IoTJobAbortConfig struct {
 	//
 	// This member is required.
 	CriteriaList []IoTJobAbortCriteria
+
+	noSmithyDocumentSerde
 }
 
 // Contains criteria that define when and how to cancel a job. The deployment stops
@@ -525,6 +574,8 @@ type IoTJobAbortCriteria struct {
 	//
 	// This member is required.
 	ThresholdPercentage float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the rollout configuration for a job. This
@@ -538,6 +589,8 @@ type IoTJobExecutionsRolloutConfig struct {
 	// The maximum number of devices that receive a pending job notification, per
 	// minute.
 	MaximumPerMinute int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an exponential rollout rate for a configuration
@@ -562,6 +615,8 @@ type IoTJobExponentialRolloutRate struct {
 	//
 	// This member is required.
 	RateIncreaseCriteria *IoTJobRateIncreaseCriteria
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about criteria to meet before a job increases its rollout
@@ -575,6 +630,8 @@ type IoTJobRateIncreaseCriteria struct {
 	// The number of devices to successfully run the configuration job before the
 	// rollout rate increases.
 	NumberOfSucceededThings int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the timeout configuration for a job.
@@ -586,6 +643,8 @@ type IoTJobTimeoutConfig struct {
 	// to TIMED_OUT. The timeout interval must be between 1 minute and 7 days (10080
 	// minutes).
 	InProgressTimeoutInMinutes int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a container in which AWS Lambda functions run on AWS
@@ -604,6 +663,8 @@ type LambdaContainerParams struct {
 
 	// The list of volumes that the container can access.
 	Volumes []LambdaVolumeMount
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a device that Linux processes in a container can
@@ -622,6 +683,8 @@ type LambdaDeviceMount struct {
 	// The permission to access the device: read/only (ro) or read/write (rw). Default:
 	// ro
 	Permission LambdaFilesystemPermission
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an event source for an AWS Lambda function. The event
@@ -646,6 +709,8 @@ type LambdaEventSource struct {
 	//
 	// This member is required.
 	Type LambdaEventSourceType
+
+	noSmithyDocumentSerde
 }
 
 // Contains parameters for a Lambda function that runs on AWS IoT Greengrass.
@@ -704,6 +769,8 @@ type LambdaExecutionParameters struct {
 	// The maximum amount of time in seconds that the Lambda function can process a
 	// work item.
 	TimeoutInSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an AWS Lambda function to import to create a
@@ -735,6 +802,8 @@ type LambdaFunctionRecipeSource struct {
 	// a semantic version. For example, if your function version is 3, the component
 	// version becomes 3.0.0.
 	ComponentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains parameters for a Linux process that contains an AWS Lambda function.
@@ -748,6 +817,8 @@ type LambdaLinuxProcessParams struct {
 	// container, or as a regular process outside any container. Default:
 	// GreengrassContainer
 	IsolationMode LambdaIsolationMode
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a volume that Linux processes in a container can
@@ -772,6 +843,8 @@ type LambdaVolumeMount struct {
 	// The permission to access the volume: read/only (ro) or read/write (rw). Default:
 	// ro
 	Permission LambdaFilesystemPermission
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a component version that is compatible to run on a
@@ -791,6 +864,8 @@ type ResolvedComponentVersion struct {
 
 	// The recipe of the component version.
 	Recipe []byte
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a validation exception field.
@@ -805,4 +880,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -79,6 +79,8 @@ type CreateExportTaskInput struct {
 
 	// The name of the export task.
 	TaskName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateExportTaskOutput struct {
@@ -88,6 +90,8 @@ type CreateExportTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

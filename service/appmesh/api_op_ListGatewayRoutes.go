@@ -61,6 +61,8 @@ type ListGatewayRoutesInput struct {
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGatewayRoutesOutput struct {
@@ -79,6 +81,8 @@ type ListGatewayRoutesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {

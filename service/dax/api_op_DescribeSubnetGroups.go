@@ -43,6 +43,8 @@ type DescribeSubnetGroupsInput struct {
 
 	// The name of the subnet group.
 	SubnetGroupNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSubnetGroupsOutput struct {
@@ -56,6 +58,8 @@ type DescribeSubnetGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

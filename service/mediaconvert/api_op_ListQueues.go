@@ -47,6 +47,8 @@ type ListQueuesInput struct {
 	// Optional. When you request lists of resources, you can specify whether they are
 	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
+
+	noSmithyDocumentSerde
 }
 
 type ListQueuesOutput struct {
@@ -59,6 +61,8 @@ type ListQueuesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

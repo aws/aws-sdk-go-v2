@@ -41,11 +41,15 @@ type DeleteConfigurationRecorderInput struct {
 	//
 	// This member is required.
 	ConfigurationRecorderName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConfigurationRecorderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {

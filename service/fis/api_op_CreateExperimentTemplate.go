@@ -80,6 +80,8 @@ type CreateExperimentTemplateInput struct {
 
 	// The targets for the experiment.
 	Targets map[string]types.CreateExperimentTemplateTargetInput
+
+	noSmithyDocumentSerde
 }
 
 type CreateExperimentTemplateOutput struct {
@@ -89,6 +91,8 @@ type CreateExperimentTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

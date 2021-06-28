@@ -47,6 +47,8 @@ type DeleteAnalysisSchemeInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DeleteAnalysisScheme request. Contains the status of the deleted
@@ -60,6 +62,8 @@ type DeleteAnalysisSchemeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAnalysisSchemeMiddlewares(stack *middleware.Stack, options Options) (err error) {

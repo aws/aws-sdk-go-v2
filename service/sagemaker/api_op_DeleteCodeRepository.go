@@ -32,11 +32,15 @@ type DeleteCodeRepositoryInput struct {
 	//
 	// This member is required.
 	CodeRepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCodeRepositoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

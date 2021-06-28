@@ -38,6 +38,8 @@ type StartTestInput struct {
 
 	// Start Test by Tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type StartTestOutput struct {
@@ -47,6 +49,8 @@ type StartTestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTestMiddlewares(stack *middleware.Stack, options Options) (err error) {

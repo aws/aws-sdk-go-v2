@@ -46,6 +46,8 @@ type DescribeDomainControllersInput struct {
 	// The DescribeDomainControllers.NextToken value from a previous call to
 	// DescribeDomainControllers. Pass null if this is the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDomainControllersOutput struct {
@@ -60,6 +62,8 @@ type DescribeDomainControllersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDomainControllersMiddlewares(stack *middleware.Stack, options Options) (err error) {

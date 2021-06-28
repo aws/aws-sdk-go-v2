@@ -37,6 +37,8 @@ type GetLoadBalancerTlsCertificatesInput struct {
 	//
 	// This member is required.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLoadBalancerTlsCertificatesOutput struct {
@@ -47,6 +49,8 @@ type GetLoadBalancerTlsCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLoadBalancerTlsCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type UpdateAccountInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents an AWS account that is associated with API Gateway. To view the
@@ -98,6 +100,8 @@ type UpdateAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

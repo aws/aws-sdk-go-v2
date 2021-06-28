@@ -28,11 +28,14 @@ func (c *Client) ResetAllResourceLogLevels(ctx context.Context, params *ResetAll
 }
 
 type ResetAllResourceLogLevelsInput struct {
+	noSmithyDocumentSerde
 }
 
 type ResetAllResourceLogLevelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetAllResourceLogLevelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

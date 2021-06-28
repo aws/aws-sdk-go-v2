@@ -39,6 +39,8 @@ type BuildSuggestersInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a BuildSuggester request. Contains a list of the fields used for
@@ -50,6 +52,8 @@ type BuildSuggestersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBuildSuggestersMiddlewares(stack *middleware.Stack, options Options) (err error) {

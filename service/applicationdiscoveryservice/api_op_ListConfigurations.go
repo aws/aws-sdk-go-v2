@@ -59,6 +59,8 @@ type ListConfigurationsInput struct {
 	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
 	// in the AWS Application Discovery Service User Guide.
 	OrderBy []types.OrderByElement
+
+	noSmithyDocumentSerde
 }
 
 type ListConfigurationsOutput struct {
@@ -76,6 +78,8 @@ type ListConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

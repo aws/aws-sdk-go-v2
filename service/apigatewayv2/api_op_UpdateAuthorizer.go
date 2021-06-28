@@ -114,6 +114,8 @@ type UpdateAuthorizerInput struct {
 
 	// The name of the authorizer.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAuthorizerOutput struct {
@@ -197,6 +199,8 @@ type UpdateAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

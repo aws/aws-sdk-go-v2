@@ -224,11 +224,15 @@ type UpdateStackInput struct {
 	// For more information, see Create a New Stack
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
 	UseOpsworksSecurityGroups *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

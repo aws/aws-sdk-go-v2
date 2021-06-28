@@ -35,6 +35,8 @@ type StopWorkspacesInput struct {
 	//
 	// This member is required.
 	StopWorkspaceRequests []types.StopRequest
+
+	noSmithyDocumentSerde
 }
 
 type StopWorkspacesOutput struct {
@@ -44,6 +46,8 @@ type StopWorkspacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

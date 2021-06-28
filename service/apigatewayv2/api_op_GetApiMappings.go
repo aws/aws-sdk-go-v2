@@ -40,6 +40,8 @@ type GetApiMappingsInput struct {
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetApiMappingsOutput struct {
@@ -53,6 +55,8 @@ type GetApiMappingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApiMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

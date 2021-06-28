@@ -36,6 +36,8 @@ type DeleteProjectInput struct {
 	//
 	// This member is required.
 	ProjectArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProjectOutput struct {
@@ -45,6 +47,8 @@ type DeleteProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

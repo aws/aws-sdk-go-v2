@@ -39,6 +39,8 @@ type DescribeDashboardPermissionsInput struct {
 	//
 	// This member is required.
 	DashboardId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDashboardPermissionsOutput struct {
@@ -60,6 +62,8 @@ type DescribeDashboardPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -21,6 +22,8 @@ type AgentAlreadyRunningAssessment struct {
 	//
 	// This member is required.
 	AssessmentRunArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Inspector agent. This data type is used as
@@ -38,6 +41,8 @@ type AgentFilter struct {
 	//
 	// This member is required.
 	AgentHealths []AgentHealth
+
+	noSmithyDocumentSerde
 }
 
 // Used as a response element in the PreviewAgents action.
@@ -72,6 +77,8 @@ type AgentPreview struct {
 	// The operating system running on the EC2 instance on which the Amazon Inspector
 	// Agent is installed.
 	OperatingSystem *string
+
+	noSmithyDocumentSerde
 }
 
 // A snapshot of an Amazon Inspector assessment run that contains the findings of
@@ -152,6 +159,8 @@ type AssessmentRun struct {
 
 	// The time when StartAssessmentRun was called.
 	StartedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Inspector agent. This data type is used as
@@ -188,6 +197,8 @@ type AssessmentRunAgent struct {
 
 	// The Auto Scaling group of the EC2 instance that is specified by the agent ID.
 	AutoScalingGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Used as the request parameter in the ListAssessmentRuns action.
@@ -226,6 +237,8 @@ type AssessmentRunFilter struct {
 	// property must be the exact match of the value of the assessmentRunState property
 	// of the AssessmentRun data type.
 	States []AssessmentRunState
+
+	noSmithyDocumentSerde
 }
 
 // Used as one of the elements of the AssessmentRun data type.
@@ -254,6 +267,8 @@ type AssessmentRunNotification struct {
 
 	// The SNS topic to which the SNS notification is sent.
 	SnsTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Used as one of the elements of the AssessmentRun data type.
@@ -268,6 +283,8 @@ type AssessmentRunStateChange struct {
 	//
 	// This member is required.
 	StateChangedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Inspector application. This data type is
@@ -297,6 +314,8 @@ type AssessmentTarget struct {
 	// The ARN that specifies the resource group that is associated with the assessment
 	// target.
 	ResourceGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Used as the request parameter in the ListAssessmentTargets action.
@@ -306,6 +325,8 @@ type AssessmentTargetFilter struct {
 	// wildcard that is specified for this data type property must match the value of
 	// the assessmentTargetName property of the AssessmentTarget data type.
 	AssessmentTargetNamePattern *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Inspector assessment template. This data
@@ -359,6 +380,8 @@ type AssessmentTemplate struct {
 	// this assessment template. This value exists only when the value of
 	// assessmentRunCount is greaterpa than zero.
 	LastAssessmentRunArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Used as the request parameter in the ListAssessmentTemplates action.
@@ -378,6 +401,8 @@ type AssessmentTemplateFilter struct {
 	// property must be contained in the list of values of the rulesPackageArns
 	// property of the AssessmentTemplate data type.
 	RulesPackageArns []string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of attributes of the host from which the finding is generated.
@@ -411,6 +436,8 @@ type AssetAttributes struct {
 
 	// The tags related to the EC2 instance where the finding is generated.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a request parameter in the AddAttributesToFindings and
@@ -424,6 +451,8 @@ type Attribute struct {
 
 	// The value assigned to the attribute key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used in the AssessmentTemplateFilter data type.
@@ -435,6 +464,8 @@ type DurationRange struct {
 
 	// The minimum value of the duration range. Must be greater than zero.
 	MinSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used in the Subscription data type.
@@ -450,6 +481,8 @@ type EventSubscription struct {
 	//
 	// This member is required.
 	SubscribedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about what was excluded from an assessment run.
@@ -482,6 +515,8 @@ type Exclusion struct {
 
 	// The system-defined attributes for the exclusion.
 	Attributes []Attribute
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about what is excluded from an assessment run given the
@@ -510,6 +545,8 @@ type ExclusionPreview struct {
 
 	// The system-defined attributes for the exclusion preview.
 	Attributes []Attribute
+
+	noSmithyDocumentSerde
 }
 
 // Includes details about the failed items.
@@ -525,6 +562,8 @@ type FailedItemDetails struct {
 	//
 	// This member is required.
 	Retryable *bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Inspector finding. This data type is used
@@ -594,6 +633,8 @@ type Finding struct {
 
 	// The name of the finding.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a request parameter in the ListFindings action.
@@ -636,6 +677,8 @@ type FindingFilter struct {
 	// property must be contained in the list of values of the userAttributes property
 	// of the Finding data type.
 	UserAttributes []Attribute
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used in the Finding data type.
@@ -651,6 +694,8 @@ type InspectorServiceAttributes struct {
 
 	// The ARN of the rules package that is used to generate the finding.
 	RulesPackageArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the network interfaces interacting with an EC2
@@ -689,6 +734,8 @@ type NetworkInterface struct {
 
 	// The ID of a VPC associated with the network interface.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a private IP address associated with a network
@@ -701,6 +748,8 @@ type PrivateIp struct {
 
 	// The full IP address of the network inteface.
 	PrivateIpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a resource group. The resource group defines a set of
@@ -724,6 +773,8 @@ type ResourceGroup struct {
 	//
 	// This member is required.
 	Tags []ResourceGroupTag
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as one of the elements of the ResourceGroup data type.
@@ -736,6 +787,8 @@ type ResourceGroupTag struct {
 
 	// The value assigned to a tag key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Inspector rules package. This data type is
@@ -764,6 +817,8 @@ type RulesPackage struct {
 
 	// The description of the rules package.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type contains key-value pairs that identify various Amazon resources.
@@ -774,6 +829,8 @@ type Scope struct {
 
 	// The resource identifier for the specified scope type.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a security group associated with a network interface.
@@ -785,6 +842,8 @@ type SecurityGroup struct {
 
 	// The name of the security group.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the ListEventSubscriptions
@@ -807,6 +866,8 @@ type Subscription struct {
 	//
 	// This member is required.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A key and value pair. This data type is used as a request parameter in the
@@ -821,6 +882,8 @@ type Tag struct {
 
 	// A value assigned to a tag key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata about the Amazon Inspector application data metrics collected by
@@ -840,6 +903,8 @@ type TelemetryMetadata struct {
 
 	// The data size of messages that the agent sends to the Amazon Inspector service.
 	DataSize *int64
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used in the AssessmentRunFilter data type.
@@ -850,4 +915,8 @@ type TimestampRange struct {
 
 	// The maximum value of the timestamp range.
 	EndDate *time.Time
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

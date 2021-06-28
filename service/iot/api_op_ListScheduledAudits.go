@@ -35,6 +35,8 @@ type ListScheduledAuditsInput struct {
 
 	// The token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListScheduledAuditsOutput struct {
@@ -48,6 +50,8 @@ type ListScheduledAuditsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListScheduledAuditsMiddlewares(stack *middleware.Stack, options Options) (err error) {

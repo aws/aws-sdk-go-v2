@@ -56,6 +56,8 @@ type GetIceServerConfigInput struct {
 
 	// An optional user ID to be associated with the credentials.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIceServerConfigOutput struct {
@@ -65,6 +67,8 @@ type GetIceServerConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIceServerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

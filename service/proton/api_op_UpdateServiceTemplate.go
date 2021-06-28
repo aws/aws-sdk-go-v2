@@ -40,6 +40,8 @@ type UpdateServiceTemplateInput struct {
 	// The name of the service template to update as displayed in the developer
 	// interface.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceTemplateOutput struct {
@@ -51,6 +53,8 @@ type UpdateServiceTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

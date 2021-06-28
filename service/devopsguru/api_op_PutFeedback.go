@@ -31,11 +31,15 @@ type PutFeedbackInput struct {
 
 	// The feedback from customers is about the recommendations in this insight.
 	InsightFeedback *types.InsightFeedback
+
+	noSmithyDocumentSerde
 }
 
 type PutFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

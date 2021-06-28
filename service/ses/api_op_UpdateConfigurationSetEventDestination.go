@@ -54,12 +54,16 @@ type UpdateConfigurationSetEventDestinationInput struct {
 	//
 	// This member is required.
 	EventDestination *types.EventDestination
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type UpdateConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

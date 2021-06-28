@@ -74,6 +74,8 @@ type ModifyDBSnapshotAttributeInput struct {
 	// Amazon Web Services account whose account ID is explicitly added to the restore
 	// attribute can still copy or restore the manual DB snapshot.
 	ValuesToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBSnapshotAttributeOutput struct {
@@ -86,6 +88,8 @@ type ModifyDBSnapshotAttributeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBSnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

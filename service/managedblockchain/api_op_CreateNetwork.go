@@ -80,6 +80,8 @@ type CreateNetworkInput struct {
 	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateNetworkOutput struct {
@@ -92,6 +94,8 @@ type CreateNetworkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

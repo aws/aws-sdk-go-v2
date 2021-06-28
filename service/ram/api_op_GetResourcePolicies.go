@@ -43,6 +43,8 @@ type GetResourcePoliciesInput struct {
 
 	// The principal.
 	Principal *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourcePoliciesOutput struct {
@@ -56,6 +58,8 @@ type GetResourcePoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourcePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

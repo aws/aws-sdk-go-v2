@@ -44,6 +44,8 @@ type AttachLoadBalancerToSubnetsInput struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of AttachLoadBalancerToSubnets.
@@ -54,6 +56,8 @@ type AttachLoadBalancerToSubnetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachLoadBalancerToSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

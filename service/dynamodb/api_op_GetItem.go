@@ -130,6 +130,8 @@ type GetItemInput struct {
 	// * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetItem operation.
@@ -150,6 +152,8 @@ type GetItemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

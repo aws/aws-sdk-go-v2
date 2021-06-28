@@ -51,6 +51,8 @@ type ListPolicyAttachmentsInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPolicyAttachmentsOutput struct {
@@ -63,6 +65,8 @@ type ListPolicyAttachmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPolicyAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

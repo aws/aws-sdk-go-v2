@@ -43,6 +43,8 @@ type ListSubscribedWorkteamsInput struct {
 	// response includes a NextToken. To retrieve the next set of labeling jobs, use
 	// the token in the next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSubscribedWorkteamsOutput struct {
@@ -58,6 +60,8 @@ type ListSubscribedWorkteamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSubscribedWorkteamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

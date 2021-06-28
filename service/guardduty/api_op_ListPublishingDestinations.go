@@ -44,6 +44,8 @@ type ListPublishingDestinationsInput struct {
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPublishingDestinationsOutput struct {
@@ -62,6 +64,8 @@ type ListPublishingDestinationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPublishingDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

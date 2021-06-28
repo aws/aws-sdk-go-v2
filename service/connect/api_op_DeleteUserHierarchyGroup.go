@@ -39,11 +39,15 @@ type DeleteUserHierarchyGroupInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserHierarchyGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

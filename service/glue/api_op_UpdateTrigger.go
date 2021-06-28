@@ -38,6 +38,8 @@ type UpdateTriggerInput struct {
 	//
 	// This member is required.
 	TriggerUpdate *types.TriggerUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTriggerOutput struct {
@@ -47,6 +49,8 @@ type UpdateTriggerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -58,6 +58,8 @@ type CreateWebhookInput struct {
 	// type. For a build to be triggered, at least one filter group in the filterGroups
 	// array must pass. For a filter group to pass, each of its filters must pass.
 	FilterGroups [][]types.WebhookFilter
+
+	noSmithyDocumentSerde
 }
 
 type CreateWebhookOutput struct {
@@ -68,6 +70,8 @@ type CreateWebhookOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {

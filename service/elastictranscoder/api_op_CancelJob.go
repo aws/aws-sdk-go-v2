@@ -38,6 +38,8 @@ type CancelJobInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The response body contains a JSON object. If the job is successfully canceled,
@@ -45,6 +47,8 @@ type CancelJobInput struct {
 type CancelJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type StopContinuousExportInput struct {
 	//
 	// This member is required.
 	ExportId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopContinuousExportOutput struct {
@@ -45,6 +47,8 @@ type StopContinuousExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

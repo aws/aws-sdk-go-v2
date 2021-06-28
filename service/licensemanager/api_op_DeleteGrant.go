@@ -40,6 +40,8 @@ type DeleteGrantInput struct {
 	Version *string
 
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGrantOutput struct {
@@ -55,6 +57,8 @@ type DeleteGrantOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {

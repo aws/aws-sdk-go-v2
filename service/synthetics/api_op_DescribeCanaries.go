@@ -42,6 +42,8 @@ type DescribeCanariesInput struct {
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent operation to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCanariesOutput struct {
@@ -56,6 +58,8 @@ type DescribeCanariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCanariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

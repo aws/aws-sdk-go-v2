@@ -41,6 +41,8 @@ type StartDBInstanceInput struct {
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type StartDBInstanceOutput struct {
@@ -51,6 +53,8 @@ type StartDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type GetWorkingLocationInput struct {
 	// S3 location as a staging location to copy your data content and then use the
 	// location with the changeset creation operation.
 	LocationType types.LocationType
+
+	noSmithyDocumentSerde
 }
 
 type GetWorkingLocationOutput struct {
@@ -55,6 +57,8 @@ type GetWorkingLocationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWorkingLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {

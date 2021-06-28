@@ -39,6 +39,8 @@ type CreateMemberInput struct {
 	// a tag key and an associated tag value. The maximum length of a tag key is 128
 	// characters. The maximum length of a tag value is 256 characters.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateMemberOutput struct {
@@ -49,6 +51,8 @@ type CreateMemberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

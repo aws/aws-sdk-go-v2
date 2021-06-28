@@ -48,6 +48,8 @@ type ListXssMatchSetsInput struct {
 	// ListXssMatchSets requests, specify the value of NextMarker from the previous
 	// response to get information about another batch of XssMatchSets.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a ListXssMatchSets request.
@@ -64,6 +66,8 @@ type ListXssMatchSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListXssMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

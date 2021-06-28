@@ -36,6 +36,8 @@ type ListTopicRuleDestinationsInput struct {
 	// To retrieve the next set of results, the nextToken value from a previous
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTopicRuleDestinationsOutput struct {
@@ -49,6 +51,8 @@ type ListTopicRuleDestinationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTopicRuleDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

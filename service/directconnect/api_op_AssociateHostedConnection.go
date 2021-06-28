@@ -44,6 +44,8 @@ type AssociateHostedConnectionInput struct {
 	//
 	// This member is required.
 	ParentConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect connection.
@@ -153,6 +155,8 @@ type AssociateHostedConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateHostedConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -134,6 +134,8 @@ type CreateQueryLoggingConfigInput struct {
 	//
 	// This member is required.
 	HostedZoneId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateQueryLoggingConfigOutput struct {
@@ -152,6 +154,8 @@ type CreateQueryLoggingConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateQueryLoggingConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

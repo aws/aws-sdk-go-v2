@@ -40,6 +40,8 @@ type ListPlaybackConfigurationsInput struct {
 	// Pagination token returned by the GET list request when results exceed the
 	// maximum allowed. Use the token to fetch the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPlaybackConfigurationsOutput struct {
@@ -55,6 +57,8 @@ type ListPlaybackConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPlaybackConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

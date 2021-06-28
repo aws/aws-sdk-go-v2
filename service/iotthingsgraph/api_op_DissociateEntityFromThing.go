@@ -40,11 +40,15 @@ type DissociateEntityFromThingInput struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type DissociateEntityFromThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDissociateEntityFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

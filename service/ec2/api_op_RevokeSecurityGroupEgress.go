@@ -81,6 +81,8 @@ type RevokeSecurityGroupEgressInput struct {
 
 	// Not supported. Use a set of IP permissions to specify the port.
 	ToPort *int32
+
+	noSmithyDocumentSerde
 }
 
 type RevokeSecurityGroupEgressOutput struct {
@@ -95,6 +97,8 @@ type RevokeSecurityGroupEgressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeSecurityGroupEgressMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type DeletePackageInput struct {
 	//
 	// This member is required.
 	PackageID *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response parameters to DeletePackage operation.
@@ -45,6 +47,8 @@ type DeletePackageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -88,6 +88,8 @@ type CreateIdentityPoolInput struct {
 
 	// Optional key:value pairs mapping provider names to provider app IDs.
 	SupportedLoginProviders map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon Cognito identity pool.
@@ -137,6 +139,8 @@ type CreateIdentityPoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

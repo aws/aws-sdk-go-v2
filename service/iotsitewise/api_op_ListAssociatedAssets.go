@@ -69,6 +69,8 @@ type ListAssociatedAssetsInput struct {
 	//
 	// Default: CHILD
 	TraversalDirection types.TraversalDirection
+
+	noSmithyDocumentSerde
 }
 
 type ListAssociatedAssetsOutput struct {
@@ -84,6 +86,8 @@ type ListAssociatedAssetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssociatedAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

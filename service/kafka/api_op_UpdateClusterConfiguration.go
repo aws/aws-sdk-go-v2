@@ -45,6 +45,8 @@ type UpdateClusterConfigurationInput struct {
 	//
 	// This member is required.
 	CurrentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateClusterConfigurationOutput struct {
@@ -57,6 +59,8 @@ type UpdateClusterConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateClusterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

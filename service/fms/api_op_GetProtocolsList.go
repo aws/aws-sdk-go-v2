@@ -37,6 +37,8 @@ type GetProtocolsListInput struct {
 	// Specifies whether the list to retrieve is a default list owned by Firewall
 	// Manager.
 	DefaultList bool
+
+	noSmithyDocumentSerde
 }
 
 type GetProtocolsListOutput struct {
@@ -49,6 +51,8 @@ type GetProtocolsListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {

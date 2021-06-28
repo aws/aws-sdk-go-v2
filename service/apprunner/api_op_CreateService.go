@@ -66,6 +66,8 @@ type CreateServiceInput struct {
 	// An optional list of metadata items that you can associate with your service
 	// resource. A tag is a key-value pair.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceOutput struct {
@@ -85,6 +87,8 @@ type CreateServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

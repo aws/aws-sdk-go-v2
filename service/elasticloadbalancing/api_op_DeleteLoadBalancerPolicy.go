@@ -39,12 +39,16 @@ type DeleteLoadBalancerPolicyInput struct {
 	//
 	// This member is required.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DeleteLoadBalancerPolicy.
 type DeleteLoadBalancerPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLoadBalancerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

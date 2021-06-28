@@ -73,6 +73,8 @@ type ListFindingsReportsInput struct {
 	// as an opaque identifier that is only used to retrieve the next items in a list
 	// and not for other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the ListFindingsReportsResponse.
@@ -91,6 +93,8 @@ type ListFindingsReportsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -67,6 +67,8 @@ type PutOrganizationConfigRuleInput struct {
 
 	// An OrganizationManagedRuleMetadata object.
 	OrganizationManagedRuleMetadata *types.OrganizationManagedRuleMetadata
+
+	noSmithyDocumentSerde
 }
 
 type PutOrganizationConfigRuleOutput struct {
@@ -76,6 +78,8 @@ type PutOrganizationConfigRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutOrganizationConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

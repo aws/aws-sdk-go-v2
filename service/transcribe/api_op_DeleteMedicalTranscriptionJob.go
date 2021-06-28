@@ -34,11 +34,15 @@ type DeleteMedicalTranscriptionJobInput struct {
 	//
 	// This member is required.
 	MedicalTranscriptionJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMedicalTranscriptionJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMedicalTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

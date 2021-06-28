@@ -39,11 +39,15 @@ type EnableDomainAutoRenewInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableDomainAutoRenewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableDomainAutoRenewMiddlewares(stack *middleware.Stack, options Options) (err error) {

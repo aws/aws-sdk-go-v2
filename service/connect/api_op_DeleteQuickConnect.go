@@ -38,11 +38,15 @@ type DeleteQuickConnectInput struct {
 	//
 	// This member is required.
 	QuickConnectId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteQuickConnectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteQuickConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {

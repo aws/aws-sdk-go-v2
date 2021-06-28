@@ -303,6 +303,8 @@ type CreateKeyInput struct {
 	// details, see Tagging Keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateKeyOutput struct {
@@ -312,6 +314,8 @@ type CreateKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

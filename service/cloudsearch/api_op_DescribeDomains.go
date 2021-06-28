@@ -40,6 +40,8 @@ type DescribeDomainsInput struct {
 
 	// The names of the domains you want to include in the response.
 	DomainNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeDomains request. Contains the status of the domains
@@ -53,6 +55,8 @@ type DescribeDomainsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {

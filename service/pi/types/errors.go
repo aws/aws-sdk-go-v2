@@ -10,6 +10,8 @@ import (
 // The request failed due to an unknown error.
 type InternalServiceError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceError) Error() string {
@@ -27,6 +29,8 @@ func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // One of the arguments provided is invalid for this request.
 type InvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgumentException) Error() string {
@@ -44,6 +48,8 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // The user is not authorized to perform this request.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {

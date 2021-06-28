@@ -11,6 +11,8 @@ import (
 // limit of allowed client calls. Try making the call later.
 type ClientLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientLimitExceededException) Error() string {
@@ -29,6 +31,8 @@ func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return s
 // limit of allowed client connections.
 type ConnectionLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConnectionLimitExceededException) Error() string {
@@ -48,6 +52,8 @@ func (e *ConnectionLimitExceededException) ErrorFault() smithy.ErrorFault { retu
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgumentException) Error() string {
@@ -68,6 +74,8 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // call.
 type InvalidEndpointException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEndpointException) Error() string {
@@ -86,6 +94,8 @@ func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smith
 // given stream, or the token has expired.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {
@@ -103,6 +113,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // Status Code: 404, The stream with the given name does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

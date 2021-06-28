@@ -40,6 +40,8 @@ type DescribeAliasInput struct {
 	//
 	// This member is required.
 	AliasId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -50,6 +52,8 @@ type DescribeAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,11 +47,15 @@ type CreatePartitionIndexInput struct {
 
 	// The catalog ID where the table resides.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePartitionIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePartitionIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

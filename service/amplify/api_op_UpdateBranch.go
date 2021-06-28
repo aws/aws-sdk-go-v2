@@ -88,6 +88,8 @@ type UpdateBranchInput struct {
 
 	// The content Time to Live (TTL) for the website in seconds.
 	Ttl *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the update branch request.
@@ -100,6 +102,8 @@ type UpdateBranchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {

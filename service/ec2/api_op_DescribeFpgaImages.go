@@ -88,6 +88,8 @@ type DescribeFpgaImagesInput struct {
 	// of the request), or an AWS owner alias (valid values are amazon |
 	// aws-marketplace).
 	Owners []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFpgaImagesOutput struct {
@@ -101,6 +103,8 @@ type DescribeFpgaImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFpgaImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

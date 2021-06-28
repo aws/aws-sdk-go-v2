@@ -38,6 +38,8 @@ type StartAvailabilityMonitorTestInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type StartAvailabilityMonitorTestOutput struct {
@@ -48,6 +50,8 @@ type StartAvailabilityMonitorTestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartAvailabilityMonitorTestMiddlewares(stack *middleware.Stack, options Options) (err error) {

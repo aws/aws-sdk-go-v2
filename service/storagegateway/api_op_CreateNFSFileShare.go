@@ -163,6 +163,8 @@ type CreateNFSFileShareInput struct {
 	// connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access
 	// point alias that points to a VPC access point.
 	VPCEndpointDNSName *string
+
+	noSmithyDocumentSerde
 }
 
 // CreateNFSFileShareOutput
@@ -173,6 +175,8 @@ type CreateNFSFileShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNFSFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

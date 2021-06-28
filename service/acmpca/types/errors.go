@@ -11,6 +11,8 @@ import (
 // conditions specified in the certificate that signed it.
 type CertificateMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateMismatchException) Error() string {
@@ -28,6 +30,8 @@ func (e *CertificateMismatchException) ErrorFault() smithy.ErrorFault { return s
 // A previous update to your private CA is still ongoing.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -47,6 +51,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // One or more of the specified arguments was not valid.
 type InvalidArgsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgsException) Error() string {
@@ -64,6 +70,8 @@ func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The requested Amazon Resource Name (ARN) does not refer to an existing resource.
 type InvalidArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArnException) Error() string {
@@ -83,6 +91,8 @@ func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html).
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -103,6 +113,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json).
 type InvalidPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPolicyException) Error() string {
@@ -120,6 +132,8 @@ func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.
 // The request action cannot be performed or is prohibited.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -137,6 +151,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The state of the private CA does not allow this action to occur.
 type InvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStateException) Error() string {
@@ -155,6 +171,8 @@ func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.F
 // in the message field.
 type InvalidTagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagException) Error() string {
@@ -173,6 +191,8 @@ func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // determine the quota that was exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -192,6 +212,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // result in the caller being denied access to the resource.
 type LockoutPreventedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LockoutPreventedException) Error() string {
@@ -209,6 +231,8 @@ func (e *LockoutPreventedException) ErrorFault() smithy.ErrorFault { return smit
 // One or more fields in the certificate are invalid.
 type MalformedCertificateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MalformedCertificateException) Error() string {
@@ -226,6 +250,8 @@ func (e *MalformedCertificateException) ErrorFault() smithy.ErrorFault { return 
 // The certificate signing request is invalid.
 type MalformedCSRException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MalformedCSRException) Error() string {
@@ -243,6 +269,8 @@ func (e *MalformedCSRException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The designated permission has already been given to the user.
 type PermissionAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PermissionAlreadyExistsException) Error() string {
@@ -262,6 +290,8 @@ func (e *PermissionAlreadyExistsException) ErrorFault() smithy.ErrorFault { retu
 // Your request has already been completed.
 type RequestAlreadyProcessedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestAlreadyProcessedException) Error() string {
@@ -281,6 +311,8 @@ func (e *RequestAlreadyProcessedException) ErrorFault() smithy.ErrorFault { retu
 // The request has failed for an unspecified reason.
 type RequestFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestFailedException) Error() string {
@@ -298,6 +330,8 @@ func (e *RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.
 // Your request is already in progress.
 type RequestInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestInProgressException) Error() string {
@@ -316,6 +350,8 @@ func (e *RequestInProgressException) ErrorFault() smithy.ErrorFault { return smi
 // cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -334,6 +370,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // contained in the exception message field.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

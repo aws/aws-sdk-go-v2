@@ -48,6 +48,8 @@ type ListOperationsInput struct {
 	// that you submitted after a specified date and time. Specify the date and time in
 	// Unix time format and Coordinated Universal time (UTC).
 	SubmittedSince *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The ListOperations response includes the following elements.
@@ -65,6 +67,8 @@ type ListOperationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

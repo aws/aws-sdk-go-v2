@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type AccountRecoverySettingType struct {
 
 	// The list of RecoveryOptionTypes.
 	RecoveryMechanisms []RecoveryOptionType
+
+	noSmithyDocumentSerde
 }
 
 // Account takeover actions type.
@@ -24,6 +27,8 @@ type AccountTakeoverActionsType struct {
 
 	// Action to take for a medium risk.
 	MediumAction *AccountTakeoverActionType
+
+	noSmithyDocumentSerde
 }
 
 // Account takeover action type.
@@ -49,6 +54,8 @@ type AccountTakeoverActionType struct {
 	//
 	// This member is required.
 	Notify bool
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for mitigation actions and notification for different levels of
@@ -62,6 +69,8 @@ type AccountTakeoverRiskConfigurationType struct {
 
 	// The notify configuration used to construct email notifications.
 	NotifyConfiguration *NotifyConfigurationType
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for creating a new user profile.
@@ -83,6 +92,8 @@ type AdminCreateUserConfigType struct {
 	// TemporaryPasswordValidityDays in PasswordPolicy, that value will be used and
 	// UnusedAccountValidityDays will be deprecated for that user pool.
 	UnusedAccountValidityDays int32
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Pinpoint analytics configuration for collecting metrics for a user
@@ -111,6 +122,8 @@ type AnalyticsConfigurationType struct {
 	// If UserDataShared is true, Amazon Cognito will include user data in the events
 	// it publishes to Amazon Pinpoint analytics.
 	UserDataShared bool
+
+	noSmithyDocumentSerde
 }
 
 // An Amazon Pinpoint analytics endpoint. An endpoint uniquely identifies a mobile
@@ -122,6 +135,8 @@ type AnalyticsMetadataType struct {
 
 	// The endpoint ID.
 	AnalyticsEndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies whether the attribute is standard or custom.
@@ -134,6 +149,8 @@ type AttributeType struct {
 
 	// The value of the attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The authentication result.
@@ -156,6 +173,8 @@ type AuthenticationResultType struct {
 
 	// The token type.
 	TokenType *string
+
+	noSmithyDocumentSerde
 }
 
 // The authentication event type.
@@ -187,6 +206,8 @@ type AuthEventType struct {
 
 	// The event type.
 	EventType EventType
+
+	noSmithyDocumentSerde
 }
 
 // The challenge response type.
@@ -197,6 +218,8 @@ type ChallengeResponseType struct {
 
 	// The challenge response.
 	ChallengeResponse ChallengeResponse
+
+	noSmithyDocumentSerde
 }
 
 // The code delivery details being returned from the server.
@@ -210,6 +233,8 @@ type CodeDeliveryDetailsType struct {
 
 	// The destination for the code delivery details.
 	Destination *string
+
+	noSmithyDocumentSerde
 }
 
 // The compromised credentials actions type
@@ -219,6 +244,8 @@ type CompromisedCredentialsActionsType struct {
 	//
 	// This member is required.
 	EventAction CompromisedCredentialsEventActionType
+
+	noSmithyDocumentSerde
 }
 
 // The compromised credentials risk configuration type.
@@ -232,6 +259,8 @@ type CompromisedCredentialsRiskConfigurationType struct {
 	// Perform the action for these events. The default is to perform all events if no
 	// event filter is specified.
 	EventFilter []EventFilterType
+
+	noSmithyDocumentSerde
 }
 
 // Contextual user data type used for evaluating the risk of an unexpected event by
@@ -261,6 +290,8 @@ type ContextDataType struct {
 	// Encoded data containing device fingerprinting details, collected using the
 	// Amazon Cognito context data collection library.
 	EncodedData *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a custom domain that hosts the sign-up and sign-in
@@ -272,6 +303,8 @@ type CustomDomainConfigType struct {
 	//
 	// This member is required.
 	CertificateArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A custom email sender Lambda configuration type.
@@ -289,6 +322,8 @@ type CustomEmailLambdaVersionConfigType struct {
 	//
 	// This member is required.
 	LambdaVersion CustomEmailSenderLambdaVersionType
+
+	noSmithyDocumentSerde
 }
 
 // A custom SMS sender Lambda configuration type.
@@ -306,6 +341,8 @@ type CustomSMSLambdaVersionConfigType struct {
 	//
 	// This member is required.
 	LambdaVersion CustomSMSSenderLambdaVersionType
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for the user pool's device tracking.
@@ -317,6 +354,8 @@ type DeviceConfigurationType struct {
 
 	// If true, a device is only remembered on user prompt.
 	DeviceOnlyRememberedOnUserPrompt bool
+
+	noSmithyDocumentSerde
 }
 
 // The device verifier against which it will be authenticated.
@@ -327,6 +366,8 @@ type DeviceSecretVerifierConfigType struct {
 
 	// The salt.
 	Salt *string
+
+	noSmithyDocumentSerde
 }
 
 // The device type.
@@ -346,6 +387,8 @@ type DeviceType struct {
 
 	// The last modified date of the device.
 	DeviceLastModifiedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A container for information about a domain.
@@ -375,6 +418,8 @@ type DomainDescriptionType struct {
 
 	// The app version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // The email configuration type. Amazon Cognito has specific regions for use with
@@ -475,6 +520,8 @@ type EmailConfigurationType struct {
 	// DEVELOPER, Amazon Cognito emails your users with this address by calling Amazon
 	// SES on your behalf.
 	SourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the user context data captured at the time of an event request.
@@ -494,6 +541,8 @@ type EventContextDataType struct {
 
 	// The user's time zone.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the event feedback type.
@@ -511,6 +560,8 @@ type EventFeedbackType struct {
 
 	// The event feedback date.
 	FeedbackDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The event risk type.
@@ -525,6 +576,8 @@ type EventRiskType struct {
 
 	// The risk level.
 	RiskLevel RiskLevelType
+
+	noSmithyDocumentSerde
 }
 
 // The group type.
@@ -561,6 +614,8 @@ type GroupType struct {
 
 	// The user pool ID for the user pool.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // The HTTP header.
@@ -571,6 +626,8 @@ type HttpHeader struct {
 
 	// The header value.
 	HeaderValue *string
+
+	noSmithyDocumentSerde
 }
 
 // A container for information about an identity provider.
@@ -667,6 +724,8 @@ type IdentityProviderType struct {
 
 	// The user pool ID.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration for AWS Lambda triggers.
@@ -712,6 +771,8 @@ type LambdaConfigType struct {
 
 	// Verifies the authentication challenge response.
 	VerifyAuthChallengeResponse *string
+
+	noSmithyDocumentSerde
 }
 
 // The message template structure.
@@ -731,6 +792,8 @@ type MessageTemplateType struct {
 
 	// The message template for SMS messages.
 	SMSMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is no longer supported. You can use it only for SMS MFA
@@ -743,6 +806,8 @@ type MFAOptionType struct {
 	// The delivery medium to send the MFA code. You can use this parameter to set only
 	// the SMS delivery medium value.
 	DeliveryMedium DeliveryMediumType
+
+	noSmithyDocumentSerde
 }
 
 // The new device metadata type.
@@ -753,6 +818,8 @@ type NewDeviceMetadataType struct {
 
 	// The device key.
 	DeviceKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The notify configuration type.
@@ -781,6 +848,8 @@ type NotifyConfigurationType struct {
 
 	// The destination to which the receiver of an email should reply to.
 	ReplyTo *string
+
+	noSmithyDocumentSerde
 }
 
 // The notify email type.
@@ -796,6 +865,8 @@ type NotifyEmailType struct {
 
 	// The text body.
 	TextBody *string
+
+	noSmithyDocumentSerde
 }
 
 // The minimum and maximum value of an attribute that is of the number data type.
@@ -806,6 +877,8 @@ type NumberAttributeConstraintsType struct {
 
 	// The minimum value of an attribute that is of the number data type.
 	MinValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The password policy type.
@@ -837,6 +910,8 @@ type PasswordPolicyType struct {
 	// TemporaryPasswordValidityDays for a user pool, you will no longer be able to set
 	// the deprecated UnusedAccountValidityDays value for that user pool.
 	TemporaryPasswordValidityDays int32
+
+	noSmithyDocumentSerde
 }
 
 // A container for identity provider details.
@@ -853,6 +928,8 @@ type ProviderDescription struct {
 
 	// The identity provider type.
 	ProviderType IdentityProviderTypeType
+
+	noSmithyDocumentSerde
 }
 
 // A container for information about an identity provider for a user pool.
@@ -866,6 +943,8 @@ type ProviderUserIdentifierType struct {
 
 	// The name of the provider, for example, Facebook, Google, or Login with Amazon.
 	ProviderName *string
+
+	noSmithyDocumentSerde
 }
 
 // A map containing a priority as a key, and recovery method name as a value.
@@ -881,6 +960,8 @@ type RecoveryOptionType struct {
 	//
 	// This member is required.
 	Priority int32
+
+	noSmithyDocumentSerde
 }
 
 // A resource server scope.
@@ -895,6 +976,8 @@ type ResourceServerScopeType struct {
 	//
 	// This member is required.
 	ScopeName *string
+
+	noSmithyDocumentSerde
 }
 
 // A container for information about a resource server for a user pool.
@@ -911,6 +994,8 @@ type ResourceServerType struct {
 
 	// The user pool ID for the user pool that hosts the resource server.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // The risk configuration type.
@@ -935,6 +1020,8 @@ type RiskConfigurationType struct {
 
 	// The user pool ID.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // The type of the configuration to override the risk decision.
@@ -948,6 +1035,8 @@ type RiskExceptionConfigurationType struct {
 	// Risk detection is not performed on the IP addresses in the range list. The IP
 	// range is in CIDR notation.
 	SkippedIPRangeList []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the schema attribute.
@@ -989,6 +1078,8 @@ type SchemaAttributeType struct {
 
 	// Specifies the constraints for an attribute of the string type.
 	StringAttributeConstraints *StringAttributeConstraintsType
+
+	noSmithyDocumentSerde
 }
 
 // The SMS configuration type that includes the settings the Cognito User Pool
@@ -1016,6 +1107,8 @@ type SmsConfigurationType struct {
 	// your AWS resources to a third party
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)
 	ExternalId *string
+
+	noSmithyDocumentSerde
 }
 
 // The SMS text message multi-factor authentication (MFA) configuration type.
@@ -1029,6 +1122,8 @@ type SmsMfaConfigType struct {
 
 	// The SMS configuration.
 	SmsConfiguration *SmsConfigurationType
+
+	noSmithyDocumentSerde
 }
 
 // The type used for enabling SMS MFA at the user level. Phone numbers don't need
@@ -1046,6 +1141,8 @@ type SMSMfaSettingsType struct {
 
 	// Specifies whether SMS is the preferred MFA method.
 	PreferredMfa bool
+
+	noSmithyDocumentSerde
 }
 
 // The type used for enabling software token MFA at the user pool level.
@@ -1053,6 +1150,8 @@ type SoftwareTokenMfaConfigType struct {
 
 	// Specifies whether software token MFA is enabled.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // The type used for enabling software token MFA at the user level. If an MFA type
@@ -1070,6 +1169,8 @@ type SoftwareTokenMfaSettingsType struct {
 
 	// Specifies whether software token MFA is the preferred MFA method.
 	PreferredMfa bool
+
+	noSmithyDocumentSerde
 }
 
 // The constraints associated with a string attribute.
@@ -1080,6 +1181,8 @@ type StringAttributeConstraintsType struct {
 
 	// The minimum length.
 	MinLength *string
+
+	noSmithyDocumentSerde
 }
 
 // The data type for TokenValidityUnits that specifics the time measurements for
@@ -1097,6 +1200,8 @@ type TokenValidityUnitsType struct {
 	// A time unit in “seconds”, “minutes”, “hours” or “days” for the value in
 	// RefreshTokenValidity, defaults to days.
 	RefreshToken TimeUnitsType
+
+	noSmithyDocumentSerde
 }
 
 // A container for the UI customization information for a user pool's built-in app
@@ -1123,6 +1228,8 @@ type UICustomizationType struct {
 
 	// The user pool ID for the user pool.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contextual data such as the user's device fingerprint, IP address, or location
@@ -1134,6 +1241,8 @@ type UserContextDataType struct {
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	EncodedData *string
+
+	noSmithyDocumentSerde
 }
 
 // The user import job type.
@@ -1203,6 +1312,8 @@ type UserImportJobType struct {
 
 	// The user pool ID for the user pool that the users are being imported into.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // The username configuration type.
@@ -1224,6 +1335,8 @@ type UsernameConfigurationType struct {
 	//
 	// This member is required.
 	CaseSensitive *bool
+
+	noSmithyDocumentSerde
 }
 
 // The user pool add-ons type.
@@ -1233,6 +1346,8 @@ type UserPoolAddOnsType struct {
 	//
 	// This member is required.
 	AdvancedSecurityMode AdvancedSecurityModeType
+
+	noSmithyDocumentSerde
 }
 
 // The description of the user pool client.
@@ -1247,6 +1362,8 @@ type UserPoolClientDescription struct {
 	// The user pool ID for the user pool where you want to describe the user pool
 	// client.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a user pool client.
@@ -1407,6 +1524,8 @@ type UserPoolClientType struct {
 
 	// The writeable attributes.
 	WriteAttributes []string
+
+	noSmithyDocumentSerde
 }
 
 // A user pool description.
@@ -1429,6 +1548,8 @@ type UserPoolDescriptionType struct {
 
 	// The user pool status in a user pool description.
 	Status StatusType
+
+	noSmithyDocumentSerde
 }
 
 // The policy associated with a user pool.
@@ -1436,6 +1557,8 @@ type UserPoolPolicyType struct {
 
 	// The password policy.
 	PasswordPolicy *PasswordPolicyType
+
+	noSmithyDocumentSerde
 }
 
 // A container for information about the user pool.
@@ -1575,6 +1698,8 @@ type UserPoolType struct {
 
 	// The template for verification messages.
 	VerificationMessageTemplate *VerificationMessageTemplateType
+
+	noSmithyDocumentSerde
 }
 
 // The user type.
@@ -1621,6 +1746,8 @@ type UserType struct {
 
 	// The user name of the user you wish to describe.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The template for verification messages.
@@ -1654,4 +1781,8 @@ type VerificationMessageTemplateType struct {
 
 	// The SMS message template.
 	SmsMessage *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

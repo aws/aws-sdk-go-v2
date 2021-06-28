@@ -45,6 +45,8 @@ type GetFlowTemplateRevisionsInput struct {
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFlowTemplateRevisionsOutput struct {
@@ -57,6 +59,8 @@ type GetFlowTemplateRevisionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFlowTemplateRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

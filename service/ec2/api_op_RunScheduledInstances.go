@@ -63,6 +63,8 @@ type RunScheduledInstancesInput struct {
 
 	// The number of instances. Default: 1
 	InstanceCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of RunScheduledInstances.
@@ -73,6 +75,8 @@ type RunScheduledInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRunScheduledInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

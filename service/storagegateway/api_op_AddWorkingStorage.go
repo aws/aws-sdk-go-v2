@@ -51,6 +51,8 @@ type AddWorkingStorageInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway for which
@@ -63,6 +65,8 @@ type AddWorkingStorageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddWorkingStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {

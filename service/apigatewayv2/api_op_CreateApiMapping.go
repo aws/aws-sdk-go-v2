@@ -46,6 +46,8 @@ type CreateApiMappingInput struct {
 
 	// The API mapping key.
 	ApiMappingKey *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateApiMappingOutput struct {
@@ -64,6 +66,8 @@ type CreateApiMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApiMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type CreateDataSetInput struct {
 	// define. When you use tagging, you can also use tag-based access control in IAM
 	// policies to control access to these data sets and revisions.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDataSetOutput struct {
@@ -96,6 +98,8 @@ type CreateDataSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

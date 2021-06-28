@@ -34,6 +34,8 @@ type DescribeCustomRoutingAcceleratorAttributesInput struct {
 	//
 	// This member is required.
 	AcceleratorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCustomRoutingAcceleratorAttributesOutput struct {
@@ -43,6 +45,8 @@ type DescribeCustomRoutingAcceleratorAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCustomRoutingAcceleratorAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

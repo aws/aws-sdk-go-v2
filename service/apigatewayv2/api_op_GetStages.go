@@ -40,6 +40,8 @@ type GetStagesInput struct {
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStagesOutput struct {
@@ -53,6 +55,8 @@ type GetStagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

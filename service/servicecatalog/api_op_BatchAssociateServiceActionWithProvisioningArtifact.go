@@ -43,6 +43,8 @@ type BatchAssociateServiceActionWithProvisioningArtifactInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
@@ -53,6 +55,8 @@ type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchAssociateServiceActionWithProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

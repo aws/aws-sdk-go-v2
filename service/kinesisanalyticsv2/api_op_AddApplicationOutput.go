@@ -61,6 +61,8 @@ type AddApplicationOutputInput struct {
 	//
 	// This member is required.
 	Output *types.Output
+
+	noSmithyDocumentSerde
 }
 
 type AddApplicationOutputOutput struct {
@@ -79,6 +81,8 @@ type AddApplicationOutputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddApplicationOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {

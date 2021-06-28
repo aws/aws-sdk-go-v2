@@ -74,6 +74,8 @@ type UpdateProvisionedProductPropertiesInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProvisionedProductPropertiesOutput struct {
@@ -92,6 +94,8 @@ type UpdateProvisionedProductPropertiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProvisionedProductPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

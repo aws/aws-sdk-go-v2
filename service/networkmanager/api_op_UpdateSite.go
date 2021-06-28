@@ -53,6 +53,8 @@ type UpdateSiteInput struct {
 	//
 	// * Longitude: The longitude of the site.
 	Location *types.Location
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSiteOutput struct {
@@ -62,6 +64,8 @@ type UpdateSiteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {

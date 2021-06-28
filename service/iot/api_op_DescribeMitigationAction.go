@@ -34,6 +34,8 @@ type DescribeMitigationActionInput struct {
 	//
 	// This member is required.
 	ActionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMitigationActionOutput struct {
@@ -65,6 +67,8 @@ type DescribeMitigationActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

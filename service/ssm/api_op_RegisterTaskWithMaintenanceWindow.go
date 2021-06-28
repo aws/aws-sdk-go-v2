@@ -119,6 +119,8 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// information about how Systems Manager handles these options for the supported
 	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]types.MaintenanceWindowTaskParameterValueExpression
+
+	noSmithyDocumentSerde
 }
 
 type RegisterTaskWithMaintenanceWindowOutput struct {
@@ -128,6 +130,8 @@ type RegisterTaskWithMaintenanceWindowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterTaskWithMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {

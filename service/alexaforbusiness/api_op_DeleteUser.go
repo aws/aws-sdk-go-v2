@@ -35,11 +35,15 @@ type DeleteUserInput struct {
 
 	// The ARN of the user to delete in the organization. Required.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

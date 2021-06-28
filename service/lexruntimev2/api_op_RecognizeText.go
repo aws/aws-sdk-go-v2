@@ -65,6 +65,8 @@ type RecognizeTextInput struct {
 
 	// The current state of the dialog between the user and the bot.
 	SessionState *types.SessionState
+
+	noSmithyDocumentSerde
 }
 
 type RecognizeTextOutput struct {
@@ -94,6 +96,8 @@ type RecognizeTextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRecognizeTextMiddlewares(stack *middleware.Stack, options Options) (err error) {

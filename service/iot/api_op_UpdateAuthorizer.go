@@ -45,6 +45,8 @@ type UpdateAuthorizerInput struct {
 
 	// The public keys used to verify the token signature.
 	TokenSigningPublicKeys map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAuthorizerOutput struct {
@@ -57,6 +59,8 @@ type UpdateAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

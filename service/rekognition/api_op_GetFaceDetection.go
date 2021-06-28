@@ -60,6 +60,8 @@ type GetFaceDetectionInput struct {
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of faces.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFaceDetectionOutput struct {
@@ -86,6 +88,8 @@ type GetFaceDetectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

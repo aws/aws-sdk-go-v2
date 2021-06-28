@@ -30,6 +30,7 @@ func (c *Client) GetAWSOrganizationsAccessStatus(ctx context.Context, params *Ge
 }
 
 type GetAWSOrganizationsAccessStatusInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetAWSOrganizationsAccessStatusOutput struct {
@@ -39,6 +40,8 @@ type GetAWSOrganizationsAccessStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAWSOrganizationsAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

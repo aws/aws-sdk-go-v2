@@ -55,6 +55,8 @@ type UpdateStreamingImageInput struct {
 
 	// The name for the streaming image.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStreamingImageOutput struct {
@@ -64,6 +66,8 @@ type UpdateStreamingImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

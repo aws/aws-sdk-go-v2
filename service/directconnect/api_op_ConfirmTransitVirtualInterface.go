@@ -40,6 +40,8 @@ type ConfirmTransitVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type ConfirmTransitVirtualInterfaceOutput struct {
@@ -83,6 +85,8 @@ type ConfirmTransitVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DescribeExportInput struct {
 	//
 	// This member is required.
 	ExportId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeExportOutput struct {
@@ -67,6 +69,8 @@ type DescribeExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

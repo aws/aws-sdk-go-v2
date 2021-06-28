@@ -38,6 +38,8 @@ type GetMemberInput struct {
 	//
 	// This member is required.
 	NetworkId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMemberOutput struct {
@@ -47,6 +49,8 @@ type GetMemberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

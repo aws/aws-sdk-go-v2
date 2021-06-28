@@ -42,6 +42,8 @@ type DetectSentimentInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectSentimentOutput struct {
@@ -55,6 +57,8 @@ type DetectSentimentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {

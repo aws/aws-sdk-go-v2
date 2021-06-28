@@ -34,11 +34,15 @@ type ImportAppCatalogInput struct {
 	// (https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed)
 	// described in the AWS Migration Hub User Guide.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 type ImportAppCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportAppCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {

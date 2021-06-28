@@ -74,6 +74,8 @@ type UpdateMaintenanceWindowTargetInput struct {
 
 	// The targets to add or replace.
 	Targets []types.Target
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMaintenanceWindowTargetOutput struct {
@@ -98,6 +100,8 @@ type UpdateMaintenanceWindowTargetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMaintenanceWindowTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

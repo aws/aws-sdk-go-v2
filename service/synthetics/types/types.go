@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -66,6 +67,8 @@ type Canary struct {
 	// information, see  Running a Canary in a VPC
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html).
 	VpcConfig *VpcConfigOutput
+
+	noSmithyDocumentSerde
 }
 
 // Use this structure to input your script code for the canary. This structure
@@ -97,6 +100,8 @@ type CanaryCodeInput struct {
 	// an S3 location, the value of this parameter is the .zip file that contains the
 	// script. It can be up to 5 MB.
 	ZipFile []byte
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains information about the canary's Lambda handler and where
@@ -108,6 +113,8 @@ type CanaryCodeOutput struct {
 
 	// The ARN of the Lambda layer where Synthetics stores the canary script code.
 	SourceLocationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains information about the most recent run of a single
@@ -119,6 +126,8 @@ type CanaryLastRun struct {
 
 	// The results from this canary's most recent run.
 	LastRun *CanaryRun
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains the details about one run of one canary.
@@ -139,6 +148,8 @@ type CanaryRun struct {
 
 	// A structure that contains the start and end times of this run.
 	Timeline *CanaryRunTimeline
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains input information for a canary run.
@@ -173,6 +184,8 @@ type CanaryRunConfigInput struct {
 	// this field, the frequency of the canary is used as this value, up to a maximum
 	// of 14 minutes.
 	TimeoutInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains information about a canary run.
@@ -187,6 +200,8 @@ type CanaryRunConfigOutput struct {
 
 	// How long the canary is allowed to run before it must stop.
 	TimeoutInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains the status information about a canary run.
@@ -201,6 +216,8 @@ type CanaryRunStatus struct {
 	// If this value is CANARY_FAILURE, an exception occurred in the canary code. If
 	// this value is EXECUTION_FAILURE, an exception occurred in CloudWatch Synthetics.
 	StateReasonCode CanaryRunStateReasonCode
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains the start and end times of a single canary run.
@@ -211,6 +228,8 @@ type CanaryRunTimeline struct {
 
 	// The start time of the run.
 	Started *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // This structure specifies how often a canary is to make runs and the date and
@@ -232,6 +251,8 @@ type CanaryScheduleInput struct {
 	// to the schedule in the Expression value. If you specify 0, the canary continues
 	// making runs until you stop it. If you omit this field, the default of 0 is used.
 	DurationInSeconds *int64
+
+	noSmithyDocumentSerde
 }
 
 // How long, in seconds, for the canary to continue making regular runs according
@@ -250,6 +271,8 @@ type CanaryScheduleOutput struct {
 	// rate(0 hour) is a special value that causes the canary to run only once when it
 	// is started.
 	Expression *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains the current state of the canary.
@@ -264,6 +287,8 @@ type CanaryStatus struct {
 
 	// If the canary cannot run or has failed, this field displays the reason.
 	StateReasonCode CanaryStateReasonCode
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains information about when the canary was created and
@@ -281,6 +306,8 @@ type CanaryTimeline struct {
 
 	// The date and time that the canary's most recent run ended.
 	LastStopped *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains information about one canary runtime version. For more
@@ -301,6 +328,8 @@ type RuntimeVersion struct {
 	// Canary Runtime Versions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
 	VersionName *string
+
+	noSmithyDocumentSerde
 }
 
 // If this canary is to test an endpoint in a VPC, this structure contains
@@ -314,6 +343,8 @@ type VpcConfigInput struct {
 
 	// The IDs of the subnets where this canary is to run.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // If this canary is to test an endpoint in a VPC, this structure contains
@@ -330,4 +361,8 @@ type VpcConfigOutput struct {
 
 	// The IDs of the VPC where this canary is to run.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

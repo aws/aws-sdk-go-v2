@@ -37,11 +37,15 @@ type DeleteFeatureGroupInput struct {
 	//
 	// This member is required.
 	FeatureGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFeatureGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type ListPhoneNumberOrdersInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPhoneNumberOrdersOutput struct {
@@ -47,6 +49,8 @@ type ListPhoneNumberOrdersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPhoneNumberOrdersMiddlewares(stack *middleware.Stack, options Options) (err error) {

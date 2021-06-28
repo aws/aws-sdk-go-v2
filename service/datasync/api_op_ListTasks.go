@@ -43,6 +43,8 @@ type ListTasksInput struct {
 	// An opaque string that indicates the position at which to begin the next list of
 	// tasks.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // ListTasksResponse
@@ -57,6 +59,8 @@ type ListTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

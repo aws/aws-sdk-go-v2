@@ -57,6 +57,8 @@ type PutConfigurationAggregatorInput struct {
 
 	// An array of tag object.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutConfigurationAggregatorOutput struct {
@@ -66,6 +68,8 @@ type PutConfigurationAggregatorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConfigurationAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {

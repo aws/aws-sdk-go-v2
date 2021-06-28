@@ -35,6 +35,8 @@ type SetRulePrioritiesInput struct {
 	//
 	// This member is required.
 	RulePriorities []types.RulePriorityPair
+
+	noSmithyDocumentSerde
 }
 
 type SetRulePrioritiesOutput struct {
@@ -44,6 +46,8 @@ type SetRulePrioritiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetRulePrioritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

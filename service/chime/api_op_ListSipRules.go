@@ -38,6 +38,8 @@ type ListSipRulesInput struct {
 
 	// The SIP media application ID.
 	SipMediaApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSipRulesOutput struct {
@@ -50,6 +52,8 @@ type ListSipRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSipRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

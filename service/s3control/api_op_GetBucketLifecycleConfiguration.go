@@ -95,6 +95,8 @@ type GetBucketLifecycleConfigurationInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBucketLifecycleConfigurationOutput struct {
@@ -104,6 +106,8 @@ type GetBucketLifecycleConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

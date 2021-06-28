@@ -39,11 +39,15 @@ type DeleteBasePathMappingInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBasePathMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

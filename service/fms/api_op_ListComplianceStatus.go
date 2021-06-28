@@ -51,6 +51,8 @@ type ListComplianceStatusInput struct {
 	// response to get information about another batch of PolicyComplianceStatus
 	// objects.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListComplianceStatusOutput struct {
@@ -67,6 +69,8 @@ type ListComplianceStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListComplianceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

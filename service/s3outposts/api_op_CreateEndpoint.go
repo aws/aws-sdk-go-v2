@@ -53,6 +53,8 @@ type CreateEndpointInput struct {
 	//
 	// This member is required.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateEndpointOutput struct {
@@ -62,6 +64,8 @@ type CreateEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

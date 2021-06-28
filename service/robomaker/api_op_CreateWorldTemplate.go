@@ -46,6 +46,8 @@ type CreateWorldTemplateInput struct {
 
 	// The location of the world template.
 	TemplateLocation *types.TemplateLocation
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorldTemplateOutput struct {
@@ -69,6 +71,8 @@ type CreateWorldTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

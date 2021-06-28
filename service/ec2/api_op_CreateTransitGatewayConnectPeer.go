@@ -70,6 +70,8 @@ type CreateTransitGatewayConnectPeerInput struct {
 	// specified, Amazon automatically assigns the first available IP address from the
 	// transit gateway CIDR block.
 	TransitGatewayAddress *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTransitGatewayConnectPeerOutput struct {
@@ -79,6 +81,8 @@ type CreateTransitGatewayConnectPeerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTransitGatewayConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type ListHumanTaskUisInput struct {
 	// An optional value that specifies whether you want the results sorted in
 	// Ascending or Descending order.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListHumanTaskUisOutput struct {
@@ -64,6 +66,8 @@ type ListHumanTaskUisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHumanTaskUisMiddlewares(stack *middleware.Stack, options Options) (err error) {

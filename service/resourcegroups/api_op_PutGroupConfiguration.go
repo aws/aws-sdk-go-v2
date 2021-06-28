@@ -46,11 +46,15 @@ type PutGroupConfigurationInput struct {
 	// The name or ARN of the resource group with the configuration that you want to
 	// update.
 	Group *string
+
+	noSmithyDocumentSerde
 }
 
 type PutGroupConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutGroupConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

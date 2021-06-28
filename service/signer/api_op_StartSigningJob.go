@@ -80,6 +80,8 @@ type StartSigningJobInput struct {
 
 	// The AWS account ID of the signing profile owner.
 	ProfileOwner *string
+
+	noSmithyDocumentSerde
 }
 
 type StartSigningJobOutput struct {
@@ -92,6 +94,8 @@ type StartSigningJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

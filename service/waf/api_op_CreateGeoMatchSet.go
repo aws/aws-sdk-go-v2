@@ -68,6 +68,8 @@ type CreateGeoMatchSetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGeoMatchSetOutput struct {
@@ -83,6 +85,8 @@ type CreateGeoMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

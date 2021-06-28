@@ -38,6 +38,8 @@ type RegenerateSecurityTokenInput struct {
 	//
 	// This member is required.
 	BotId *string
+
+	noSmithyDocumentSerde
 }
 
 type RegenerateSecurityTokenOutput struct {
@@ -48,6 +50,8 @@ type RegenerateSecurityTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegenerateSecurityTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

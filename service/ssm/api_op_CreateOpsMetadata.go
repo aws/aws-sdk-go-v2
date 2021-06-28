@@ -50,6 +50,8 @@ type CreateOpsMetadataInput struct {
 	//
 	// * Key=Region,Value=us-east-2
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateOpsMetadataOutput struct {
@@ -60,6 +62,8 @@ type CreateOpsMetadataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOpsMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

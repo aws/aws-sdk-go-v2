@@ -44,6 +44,8 @@ type DetachVolumeInput struct {
 	// manually disconnect the iSCSI connection from the target volume. Valid Values:
 	// true | false
 	ForceDetach *bool
+
+	noSmithyDocumentSerde
 }
 
 // AttachVolumeOutput
@@ -54,6 +56,8 @@ type DetachVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

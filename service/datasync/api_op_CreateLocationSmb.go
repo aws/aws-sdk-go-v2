@@ -85,6 +85,8 @@ type CreateLocationSmbInput struct {
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []types.TagListEntry
+
+	noSmithyDocumentSerde
 }
 
 // CreateLocationSmbResponse
@@ -96,6 +98,8 @@ type CreateLocationSmbOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLocationSmbMiddlewares(stack *middleware.Stack, options Options) (err error) {

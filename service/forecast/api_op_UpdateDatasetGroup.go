@@ -40,11 +40,15 @@ type UpdateDatasetGroupInput struct {
 	//
 	// This member is required.
 	DatasetGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDatasetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

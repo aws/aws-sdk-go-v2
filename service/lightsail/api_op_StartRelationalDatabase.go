@@ -38,6 +38,8 @@ type StartRelationalDatabaseInput struct {
 	//
 	// This member is required.
 	RelationalDatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 type StartRelationalDatabaseOutput struct {
@@ -49,6 +51,8 @@ type StartRelationalDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

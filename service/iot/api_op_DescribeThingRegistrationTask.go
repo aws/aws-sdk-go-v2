@@ -34,6 +34,8 @@ type DescribeThingRegistrationTaskInput struct {
 	//
 	// This member is required.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeThingRegistrationTaskOutput struct {
@@ -76,6 +78,8 @@ type DescribeThingRegistrationTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

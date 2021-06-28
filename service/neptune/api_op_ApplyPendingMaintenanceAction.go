@@ -58,6 +58,8 @@ type ApplyPendingMaintenanceActionInput struct {
 	//
 	// This member is required.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type ApplyPendingMaintenanceActionOutput struct {
@@ -67,6 +69,8 @@ type ApplyPendingMaintenanceActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationApplyPendingMaintenanceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

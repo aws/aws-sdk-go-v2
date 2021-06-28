@@ -37,11 +37,15 @@ type DeleteFaqInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFaqOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFaqMiddlewares(stack *middleware.Stack, options Options) (err error) {

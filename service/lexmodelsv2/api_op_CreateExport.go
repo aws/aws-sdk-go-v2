@@ -51,6 +51,8 @@ type CreateExportInput struct {
 	// optional, but you should encrypt the archive to protect the data in transit
 	// between Amazon Lex and your local computer.
 	FilePassword *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateExportOutput struct {
@@ -74,6 +76,8 @@ type CreateExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

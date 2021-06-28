@@ -10,6 +10,8 @@ import (
 // Thrown if there are parallel requests to modify a resource.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -30,6 +32,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // a different identity ID.
 type DeveloperUserAlreadyRegisteredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeveloperUserAlreadyRegisteredException) Error() string {
@@ -52,6 +56,8 @@ func (e *DeveloperUserAlreadyRegisteredException) ErrorFault() smithy.ErrorFault
 // responding
 type ExternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExternalServiceException) Error() string {
@@ -69,6 +75,8 @@ func (e *ExternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // Thrown when the service encounters an error during processing the request.
 type InternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalErrorException) Error() string {
@@ -87,6 +95,8 @@ func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 // (auth/unauth) or if the AssumeRole fails.
 type InvalidIdentityPoolConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidIdentityPoolConfigurationException) Error() string {
@@ -108,6 +118,8 @@ func (e *InvalidIdentityPoolConfigurationException) ErrorFault() smithy.ErrorFau
 // Thrown for missing or bad input parameter(s).
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -125,6 +137,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // Thrown when the total number of user pools has exceeded a preset limit.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -142,6 +156,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Thrown when a user is not authorized to access the requested resource.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {
@@ -160,6 +176,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // account.
 type ResourceConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceConflictException) Error() string {
@@ -178,6 +196,8 @@ func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smit
 // exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -195,6 +215,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // Thrown when a request is throttled.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

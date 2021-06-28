@@ -39,6 +39,8 @@ type DescribeRecipeInput struct {
 	// The recipe version identifier. If this parameter isn't specified, then the
 	// latest published version is returned.
 	RecipeVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRecipeOutput struct {
@@ -87,6 +89,8 @@ type DescribeRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

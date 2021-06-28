@@ -46,6 +46,8 @@ type BatchGetDeploymentInstancesInput struct {
 	//
 	// This member is required.
 	InstanceIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchGetDeploymentInstances operation.
@@ -59,6 +61,8 @@ type BatchGetDeploymentInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetDeploymentInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

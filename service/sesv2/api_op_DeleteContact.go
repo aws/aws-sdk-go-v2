@@ -37,11 +37,15 @@ type DeleteContactInput struct {
 	//
 	// This member is required.
 	EmailAddress *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

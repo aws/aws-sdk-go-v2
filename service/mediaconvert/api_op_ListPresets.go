@@ -51,6 +51,8 @@ type ListPresetsInput struct {
 	// Optional. When you request lists of resources, you can specify whether they are
 	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
+
+	noSmithyDocumentSerde
 }
 
 type ListPresetsOutput struct {
@@ -63,6 +65,8 @@ type ListPresetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPresetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

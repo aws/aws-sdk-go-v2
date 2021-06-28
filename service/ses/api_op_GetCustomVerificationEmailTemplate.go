@@ -38,6 +38,8 @@ type GetCustomVerificationEmailTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // The content of the custom verification email template.
@@ -65,6 +67,8 @@ type GetCustomVerificationEmailTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

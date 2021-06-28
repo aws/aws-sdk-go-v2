@@ -34,6 +34,8 @@ type GetCustomDataIdentifierInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCustomDataIdentifierOutput struct {
@@ -84,6 +86,8 @@ type GetCustomDataIdentifierOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,11 +51,15 @@ type UpdateScalingPlanInput struct {
 	// (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html)
 	// in the AWS Auto Scaling API Reference.
 	ScalingInstructions []types.ScalingInstruction
+
+	noSmithyDocumentSerde
 }
 
 type UpdateScalingPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

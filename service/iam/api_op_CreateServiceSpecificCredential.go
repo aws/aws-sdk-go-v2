@@ -55,6 +55,8 @@ type CreateServiceSpecificCredentialInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceSpecificCredentialOutput struct {
@@ -67,6 +69,8 @@ type CreateServiceSpecificCredentialOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {

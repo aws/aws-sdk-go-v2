@@ -96,6 +96,8 @@ type CreatePlaceIndexInput struct {
 	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	// characters: + - = . _ : / @.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePlaceIndexOutput struct {
@@ -123,6 +125,8 @@ type CreatePlaceIndexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -65,11 +65,15 @@ type UpdateDetectorVersionInput struct {
 	// edit the rule mode at the detector version level, when it is in draft status.
 	// The default behavior is FIRST_MATCHED.
 	RuleExecutionMode types.RuleExecutionMode
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDetectorVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

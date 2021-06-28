@@ -65,6 +65,8 @@ type UpdateBotInput struct {
 
 	// A description of the bot.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBotOutput struct {
@@ -100,6 +102,8 @@ type UpdateBotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

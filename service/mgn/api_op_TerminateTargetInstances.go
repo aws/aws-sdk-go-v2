@@ -38,6 +38,8 @@ type TerminateTargetInstancesInput struct {
 
 	// Terminate Target instance by Tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type TerminateTargetInstancesOutput struct {
@@ -47,6 +49,8 @@ type TerminateTargetInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateTargetInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type GetSdkInput struct {
 	// artifactId, artifactVersion, and invokerPackage are required. For sdkType of
 	// java, parameters named serviceName and javaPackageName are required.
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The binary blob response to GetSdk, which contains the generated SDK.
@@ -67,6 +69,8 @@ type GetSdkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSdkMiddlewares(stack *middleware.Stack, options Options) (err error) {

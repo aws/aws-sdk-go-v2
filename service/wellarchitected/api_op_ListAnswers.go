@@ -54,6 +54,8 @@ type ListAnswersInput struct {
 	// The ID used to identify a pillar, for example, security. A pillar is identified
 	// by its PillarReviewSummary$PillarId.
 	PillarId *string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a list answers call.
@@ -77,6 +79,8 @@ type ListAnswersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAnswersMiddlewares(stack *middleware.Stack, options Options) (err error) {

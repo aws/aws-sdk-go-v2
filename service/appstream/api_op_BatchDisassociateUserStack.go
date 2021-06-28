@@ -33,6 +33,8 @@ type BatchDisassociateUserStackInput struct {
 	//
 	// This member is required.
 	UserStackAssociations []types.UserStackAssociation
+
+	noSmithyDocumentSerde
 }
 
 type BatchDisassociateUserStackOutput struct {
@@ -42,6 +44,8 @@ type BatchDisassociateUserStackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDisassociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

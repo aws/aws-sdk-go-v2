@@ -51,6 +51,8 @@ type GetChangeTokenStatusInput struct {
 	//
 	// This member is required.
 	ChangeToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetChangeTokenStatusOutput struct {
@@ -60,6 +62,8 @@ type GetChangeTokenStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetChangeTokenStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

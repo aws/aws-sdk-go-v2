@@ -35,6 +35,8 @@ type PublishRecipeInput struct {
 
 	// A description of the recipe to be published, for this version of the recipe.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type PublishRecipeOutput struct {
@@ -46,6 +48,8 @@ type PublishRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

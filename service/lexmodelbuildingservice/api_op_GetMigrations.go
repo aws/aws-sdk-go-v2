@@ -52,6 +52,8 @@ type GetMigrationsInput struct {
 	// Filters the list to contain only bots whose name contains the specified string.
 	// The string is matched anywhere in bot name.
 	V1BotNameContains *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMigrationsOutput struct {
@@ -67,6 +69,8 @@ type GetMigrationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMigrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

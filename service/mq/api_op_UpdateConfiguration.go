@@ -43,6 +43,8 @@ type UpdateConfigurationInput struct {
 
 	// The description of the configuration.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConfigurationOutput struct {
@@ -70,6 +72,8 @@ type UpdateConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

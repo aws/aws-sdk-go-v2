@@ -26,6 +26,7 @@ func (c *Client) HttpPrefixHeadersResponse(ctx context.Context, params *HttpPref
 }
 
 type HttpPrefixHeadersResponseInput struct {
+	noSmithyDocumentSerde
 }
 
 type HttpPrefixHeadersResponseOutput struct {
@@ -35,6 +36,8 @@ type HttpPrefixHeadersResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpPrefixHeadersResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

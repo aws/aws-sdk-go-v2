@@ -43,11 +43,15 @@ type DeleteUseCaseInput struct {
 	//
 	// This member is required.
 	UseCaseId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUseCaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

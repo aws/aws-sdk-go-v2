@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -16,6 +17,8 @@ type Attribute struct {
 
 	// The value assigned to the attribute key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing authorization data for an Amazon ECR registry.
@@ -35,6 +38,8 @@ type AuthorizationData struct {
 	// https://aws_account_id.dkr.ecr.region.amazonaws.com. For example,
 	// https://012345678910.dkr.ecr.us-east-1.amazonaws.com..
 	ProxyEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a filter on a DescribeImages operation.
@@ -43,6 +48,8 @@ type DescribeImagesFilter struct {
 	// The tag status with which to filter your DescribeImages results. You can filter
 	// results based on whether they are TAGGED or UNTAGGED.
 	TagStatus TagStatus
+
+	noSmithyDocumentSerde
 }
 
 // The encryption configuration for the repository. This determines how the
@@ -82,6 +89,8 @@ type EncryptionConfiguration struct {
 	// the same Region as the repository. If no key is specified, the default AWS
 	// managed CMK for Amazon ECR will be used.
 	KmsKey *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon ECR image.
@@ -101,6 +110,8 @@ type Image struct {
 
 	// The name of the repository associated with the image.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes an image returned by a DescribeImages operation.
@@ -141,6 +152,8 @@ type ImageDetail struct {
 
 	// The name of the repository to which this image belongs.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon ECR image failure.
@@ -154,6 +167,8 @@ type ImageFailure struct {
 
 	// The image ID associated with the failure.
 	ImageId *ImageIdentifier
+
+	noSmithyDocumentSerde
 }
 
 // An object with identifying information for an Amazon ECR image.
@@ -164,6 +179,8 @@ type ImageIdentifier struct {
 
 	// The tag used for the image.
 	ImageTag *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an image scan finding.
@@ -183,6 +200,8 @@ type ImageScanFinding struct {
 
 	// A link containing additional details about the security vulnerability.
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of an image scan.
@@ -199,6 +218,8 @@ type ImageScanFindings struct {
 
 	// The time when the vulnerability data was last scanned.
 	VulnerabilitySourceUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the last completed image scan.
@@ -212,6 +233,8 @@ type ImageScanFindingsSummary struct {
 
 	// The time when the vulnerability data was last scanned.
 	VulnerabilitySourceUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The image scanning configuration for a repository.
@@ -222,6 +245,8 @@ type ImageScanningConfiguration struct {
 	// parameter is not specified, it will default to false and images will not be
 	// scanned unless a scan is manually started with the StartImageScan API.
 	ScanOnPush bool
+
+	noSmithyDocumentSerde
 }
 
 // The current status of an image scan.
@@ -232,6 +257,8 @@ type ImageScanStatus struct {
 
 	// The current state of an image scan.
 	Status ScanStatus
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon ECR image layer.
@@ -250,6 +277,8 @@ type Layer struct {
 	// application/vnd.docker.image.rootfs.diff.tar.gzip or
 	// application/vnd.oci.image.layer.v1.tar+gzip.
 	MediaType *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an Amazon ECR image layer failure.
@@ -263,6 +292,8 @@ type LayerFailure struct {
 
 	// The layer digest associated with the failure.
 	LayerDigest *string
+
+	noSmithyDocumentSerde
 }
 
 // The filter for the lifecycle policy preview.
@@ -270,6 +301,8 @@ type LifecyclePolicyPreviewFilter struct {
 
 	// The tag status of the image.
 	TagStatus TagStatus
+
+	noSmithyDocumentSerde
 }
 
 // The result of the lifecycle policy preview.
@@ -290,6 +323,8 @@ type LifecyclePolicyPreviewResult struct {
 
 	// The list of tags associated with this image.
 	ImageTags []string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of the lifecycle policy preview request.
@@ -297,6 +332,8 @@ type LifecyclePolicyPreviewSummary struct {
 
 	// The number of expiring images.
 	ExpiringImageTotalCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // The type of action to be taken.
@@ -304,6 +341,8 @@ type LifecyclePolicyRuleAction struct {
 
 	// The type of action to be taken.
 	Type ImageActionType
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a filter on a ListImages operation.
@@ -312,6 +351,8 @@ type ListImagesFilter struct {
 	// The tag status with which to filter your ListImages results. You can filter
 	// results based on whether they are TAGGED or UNTAGGED.
 	TagStatus TagStatus
+
+	noSmithyDocumentSerde
 }
 
 // The replication configuration for a registry.
@@ -323,6 +364,8 @@ type ReplicationConfiguration struct {
 	//
 	// This member is required.
 	Rules []ReplicationRule
+
+	noSmithyDocumentSerde
 }
 
 // An array of objects representing the details of a replication destination.
@@ -337,6 +380,8 @@ type ReplicationDestination struct {
 	//
 	// This member is required.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 // An array of objects representing the replication destinations for a replication
@@ -348,6 +393,8 @@ type ReplicationRule struct {
 	//
 	// This member is required.
 	Destinations []ReplicationDestination
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a repository.
@@ -381,6 +428,8 @@ type Repository struct {
 	// The URI for the repository. You can use this URI for container image push and
 	// pull operations.
 	RepositoryUri *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata that you apply to a resource to help you categorize and organize
@@ -396,4 +445,8 @@ type Tag struct {
 	// The optional part of a key-value pair that make up a tag. A value acts as a
 	// descriptor within a tag category (key).
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -39,6 +39,8 @@ type ListWebhooksInput struct {
 	// The token that was returned from the previous ListWebhooks call, which can be
 	// used to return the next set of webhooks in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListWebhooksOutput struct {
@@ -54,6 +56,8 @@ type ListWebhooksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWebhooksMiddlewares(stack *middleware.Stack, options Options) (err error) {

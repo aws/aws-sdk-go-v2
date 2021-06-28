@@ -44,6 +44,8 @@ type UpdateWorkloadShareInput struct {
 	//
 	// This member is required.
 	WorkloadId *string
+
+	noSmithyDocumentSerde
 }
 
 // Input for Update Workload Share
@@ -57,6 +59,8 @@ type UpdateWorkloadShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorkloadShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

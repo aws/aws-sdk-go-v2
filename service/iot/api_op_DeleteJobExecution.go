@@ -61,11 +61,15 @@ type DeleteJobExecutionInput struct {
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
 	// namespaceId feature is in public preview.
 	NamespaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteJobExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

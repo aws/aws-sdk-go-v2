@@ -39,12 +39,16 @@ type DeleteReusableDelegationSetInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element.
 type DeleteReusableDelegationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReusableDelegationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

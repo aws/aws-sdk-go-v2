@@ -33,6 +33,8 @@ type DeleteParallelDataInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteParallelDataOutput struct {
@@ -45,6 +47,8 @@ type DeleteParallelDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

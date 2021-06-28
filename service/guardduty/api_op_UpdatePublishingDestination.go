@@ -43,11 +43,15 @@ type UpdatePublishingDestinationInput struct {
 	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn of
 	// the publishing destination.
 	DestinationProperties *types.DestinationProperties
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePublishingDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePublishingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

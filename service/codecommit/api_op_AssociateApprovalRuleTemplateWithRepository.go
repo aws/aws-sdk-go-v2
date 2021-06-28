@@ -43,11 +43,15 @@ type AssociateApprovalRuleTemplateWithRepositoryInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateApprovalRuleTemplateWithRepositoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateApprovalRuleTemplateWithRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -56,6 +56,8 @@ type RegisterInstancesWithLoadBalancerInput struct {
 	//
 	// This member is required.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of RegisterInstancesWithLoadBalancer.
@@ -66,6 +68,8 @@ type RegisterInstancesWithLoadBalancerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterInstancesWithLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

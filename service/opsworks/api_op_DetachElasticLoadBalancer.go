@@ -41,11 +41,15 @@ type DetachElasticLoadBalancerInput struct {
 	//
 	// This member is required.
 	LayerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DetachElasticLoadBalancerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachElasticLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

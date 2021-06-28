@@ -63,6 +63,8 @@ type GetDevicePositionHistoryInput struct {
 	// * The time specified for
 	// StartTimeInclusive must be before EndTimeExclusive.
 	StartTimeInclusive *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type GetDevicePositionHistoryOutput struct {
@@ -78,6 +80,8 @@ type GetDevicePositionHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

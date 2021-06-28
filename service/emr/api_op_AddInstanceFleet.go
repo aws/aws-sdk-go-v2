@@ -39,6 +39,8 @@ type AddInstanceFleetInput struct {
 	//
 	// This member is required.
 	InstanceFleet *types.InstanceFleetConfig
+
+	noSmithyDocumentSerde
 }
 
 type AddInstanceFleetOutput struct {
@@ -54,6 +56,8 @@ type AddInstanceFleetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddInstanceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

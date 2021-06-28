@@ -67,11 +67,15 @@ type PutBucketLifecycleConfigurationInput struct {
 
 	// Container for lifecycle rules. You can add as many as 1,000 rules.
 	LifecycleConfiguration *types.LifecycleConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutBucketLifecycleConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

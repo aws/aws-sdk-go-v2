@@ -43,6 +43,8 @@ type RegisterTransitGatewayInput struct {
 	//
 	// This member is required.
 	TransitGatewayArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterTransitGatewayOutput struct {
@@ -52,6 +54,8 @@ type RegisterTransitGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

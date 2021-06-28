@@ -47,6 +47,8 @@ type DescribeIamInstanceProfileAssociationsInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeIamInstanceProfileAssociationsOutput struct {
@@ -60,6 +62,8 @@ type DescribeIamInstanceProfileAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIamInstanceProfileAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

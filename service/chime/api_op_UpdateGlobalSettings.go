@@ -39,11 +39,15 @@ type UpdateGlobalSettingsInput struct {
 	//
 	// This member is required.
 	VoiceConnector *types.VoiceConnectorSettings
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGlobalSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

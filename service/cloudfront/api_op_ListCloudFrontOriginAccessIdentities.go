@@ -40,6 +40,8 @@ type ListCloudFrontOriginAccessIdentitiesInput struct {
 
 	// The maximum number of origin access identities you want in the response body.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -50,6 +52,8 @@ type ListCloudFrontOriginAccessIdentitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCloudFrontOriginAccessIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -179,6 +179,8 @@ type SearchGameSessionsInput struct {
 	// active sessions first: "SortExpression": "creationTimeMillis ASC". Results with
 	// a null value for the sort operand are returned at the end of the list.
 	SortExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -195,6 +197,8 @@ type SearchGameSessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchGameSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

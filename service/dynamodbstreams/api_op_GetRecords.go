@@ -45,6 +45,8 @@ type GetRecordsInput struct {
 
 	// The maximum number of records to return from the shard. The upper limit is 1000.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetRecords operation.
@@ -61,6 +63,8 @@ type GetRecordsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

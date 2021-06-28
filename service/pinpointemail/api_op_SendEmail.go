@@ -71,6 +71,8 @@ type SendEmailInput struct {
 	// The "Reply-to" email addresses for the message. When the recipient replies to
 	// the message, each Reply-to address receives the reply.
 	ReplyToAddresses []string
+
+	noSmithyDocumentSerde
 }
 
 // A unique message ID that you receive when Amazon Pinpoint accepts an email for
@@ -86,6 +88,8 @@ type SendEmailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {

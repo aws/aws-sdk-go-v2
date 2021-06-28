@@ -41,6 +41,8 @@ type UpdateBackupPlanInput struct {
 	//
 	// This member is required.
 	BackupPlanId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBackupPlanOutput struct {
@@ -68,6 +70,8 @@ type UpdateBackupPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

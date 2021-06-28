@@ -52,6 +52,8 @@ type SendSSHPublicKeyInput struct {
 	//
 	// This member is required.
 	SSHPublicKey *string
+
+	noSmithyDocumentSerde
 }
 
 type SendSSHPublicKeyOutput struct {
@@ -65,6 +67,8 @@ type SendSSHPublicKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

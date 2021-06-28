@@ -34,6 +34,8 @@ type DeleteWebhookInput struct {
 	//
 	// This member is required.
 	WebhookId *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the delete webhook request.
@@ -46,6 +48,8 @@ type DeleteWebhookOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,15 @@ type DeregisterJobDefinitionInput struct {
 	//
 	// This member is required.
 	JobDefinition *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterJobDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

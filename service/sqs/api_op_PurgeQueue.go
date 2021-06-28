@@ -40,11 +40,15 @@ type PurgeQueueInput struct {
 	//
 	// This member is required.
 	QueueUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type PurgeQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurgeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

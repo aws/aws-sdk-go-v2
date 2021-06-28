@@ -59,6 +59,8 @@ type ListModelExplainabilityJobDefinitionsInput struct {
 	// Whether to sort the results in Ascending or Descending order. The default is
 	// Descending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListModelExplainabilityJobDefinitionsOutput struct {
@@ -74,6 +76,8 @@ type ListModelExplainabilityJobDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListModelExplainabilityJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

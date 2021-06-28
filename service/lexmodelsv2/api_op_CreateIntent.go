@@ -144,6 +144,8 @@ type CreateIntentInput struct {
 	// enclosed in curly braces ("{", "}") to indicate where they should be displayed
 	// in the utterance shown to the user..
 	SampleUtterances []types.SampleUtterance
+
+	noSmithyDocumentSerde
 }
 
 type CreateIntentOutput struct {
@@ -198,6 +200,8 @@ type CreateIntentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {

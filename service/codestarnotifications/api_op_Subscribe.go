@@ -45,6 +45,8 @@ type SubscribeInput struct {
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SubscribeOutput struct {
@@ -55,6 +57,8 @@ type SubscribeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type StopHyperParameterTuningJobInput struct {
 	//
 	// This member is required.
 	HyperParameterTuningJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopHyperParameterTuningJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

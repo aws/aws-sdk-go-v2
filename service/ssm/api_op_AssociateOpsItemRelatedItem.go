@@ -56,6 +56,8 @@ type AssociateOpsItemRelatedItemInput struct {
 	//
 	// This member is required.
 	ResourceUri *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateOpsItemRelatedItemOutput struct {
@@ -65,6 +67,8 @@ type AssociateOpsItemRelatedItemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateOpsItemRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type AssociateTagOptionWithResourceInput struct {
 	//
 	// This member is required.
 	TagOptionId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateTagOptionWithResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateTagOptionWithResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

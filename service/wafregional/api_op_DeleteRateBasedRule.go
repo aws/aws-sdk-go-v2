@@ -57,6 +57,8 @@ type DeleteRateBasedRuleInput struct {
 	//
 	// This member is required.
 	RuleId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRateBasedRuleOutput struct {
@@ -68,6 +70,8 @@ type DeleteRateBasedRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -56,6 +56,8 @@ type UpdateGatewayCapabilityConfigurationInput struct {
 	//
 	// This member is required.
 	GatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGatewayCapabilityConfigurationOutput struct {
@@ -86,6 +88,8 @@ type UpdateGatewayCapabilityConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGatewayCapabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

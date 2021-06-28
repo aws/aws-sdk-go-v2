@@ -36,6 +36,8 @@ type ListProfilePermissionsInput struct {
 
 	// String for specifying the next set of paginated results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProfilePermissionsOutput struct {
@@ -54,6 +56,8 @@ type ListProfilePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProfilePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -58,11 +58,15 @@ type AbortVaultLockInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 type AbortVaultLockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAbortVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {

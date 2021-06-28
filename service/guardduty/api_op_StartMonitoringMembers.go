@@ -41,6 +41,8 @@ type StartMonitoringMembersInput struct {
 	//
 	// This member is required.
 	DetectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartMonitoringMembersOutput struct {
@@ -53,6 +55,8 @@ type StartMonitoringMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMonitoringMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

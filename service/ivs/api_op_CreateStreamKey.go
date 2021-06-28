@@ -40,6 +40,8 @@ type CreateStreamKeyInput struct {
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateStreamKeyOutput struct {
@@ -49,6 +51,8 @@ type CreateStreamKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

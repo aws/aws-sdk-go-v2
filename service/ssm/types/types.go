@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -15,6 +16,8 @@ type AccountSharingInfo struct {
 
 	// The version of the current document shared with the account.
 	SharedDocumentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // An activation registers one or more on-premises servers or virtual machines
@@ -54,6 +57,8 @@ type Activation struct {
 
 	// Tags assigned to the activation.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes an association of a Amazon Web Services Systems Manager document (SSM
@@ -91,6 +96,8 @@ type Association struct {
 
 	// The instances targeted by the request to create an association.
 	Targets []Target
+
+	noSmithyDocumentSerde
 }
 
 // Describes the parameters for a document.
@@ -202,6 +209,8 @@ type AssociationDescription struct {
 
 	// The instances targeted by the request.
 	Targets []Target
+
+	noSmithyDocumentSerde
 }
 
 // Includes information about the specified association.
@@ -230,6 +239,8 @@ type AssociationExecution struct {
 
 	// The status of the association execution.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters used in the request.
@@ -249,6 +260,8 @@ type AssociationExecutionFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Includes information about the specified association execution.
@@ -280,6 +293,8 @@ type AssociationExecutionTarget struct {
 
 	// The association execution status.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters for the association execution.
@@ -294,6 +309,8 @@ type AssociationExecutionTargetsFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter.
@@ -308,6 +325,8 @@ type AssociationFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the association.
@@ -323,6 +342,8 @@ type AssociationOverview struct {
 
 	// The status of the association. Status can be: Pending, Success, or Failed.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an association status.
@@ -345,6 +366,8 @@ type AssociationStatus struct {
 
 	// A user-defined string.
 	AdditionalInfo *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the association version.
@@ -439,6 +462,8 @@ type AssociationVersionInfo struct {
 	// The targets specified for the association when the association version was
 	// created.
 	Targets []Target
+
+	noSmithyDocumentSerde
 }
 
 // A structure that includes attributes that describe a document attachment.
@@ -458,6 +483,8 @@ type AttachmentContent struct {
 
 	// The URL location of the attachment content.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // An attribute of an attachment, such as the attachment name.
@@ -465,6 +492,8 @@ type AttachmentInformation struct {
 
 	// The name of the attachment.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifying information about a document attachment, including the file name and
@@ -499,6 +528,8 @@ type AttachmentsSource struct {
 	// "arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py"
 	// ]
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about the current state of an individual Automation
@@ -608,6 +639,8 @@ type AutomationExecution struct {
 
 	// The specified targets.
 	Targets []Target
+
+	noSmithyDocumentSerde
 }
 
 // A filter used to match specific automation executions. This is used to limit the
@@ -624,6 +657,8 @@ type AutomationExecutionFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a specific Automation execution.
@@ -723,6 +758,8 @@ type AutomationExecutionMetadata struct {
 
 	// The targets defined by the user when starting the automation.
 	Targets []Target
+
+	noSmithyDocumentSerde
 }
 
 // Defines the basic information about a patch baseline override.
@@ -769,6 +806,8 @@ type BaselineOverride struct {
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
 	Sources []PatchSource
+
+	noSmithyDocumentSerde
 }
 
 // Configuration options for sending command output to Amazon CloudWatch Logs.
@@ -782,6 +821,8 @@ type CloudWatchOutputConfig struct {
 
 	// Enables Systems Manager to send command output to CloudWatch Logs.
 	CloudWatchOutputEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a command request.
@@ -922,6 +963,8 @@ type Command struct {
 
 	// The TimeoutSeconds value specified for a command.
 	TimeoutSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a command filter. An instance ID can't be specified when a command
@@ -980,6 +1023,8 @@ type CommandFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An invocation is copy of a command sent to a specific instance. A command can
@@ -1095,6 +1140,8 @@ type CommandInvocation struct {
 
 	// Gets the trace output sent by the agent.
 	TraceOutput *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes plugin details.
@@ -1201,6 +1248,8 @@ type CommandPlugin struct {
 	// subsequent command invocations were canceled by the system. This is a terminal
 	// state.
 	StatusDetails *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the call execution that includes an execution ID, the type of
@@ -1220,6 +1269,8 @@ type ComplianceExecutionSummary struct {
 
 	// The type of execution. For example, Command is a valid execution type.
 	ExecutionType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the compliance as defined by the resource type. For example,
@@ -1261,6 +1312,8 @@ type ComplianceItem struct {
 	// Windows patch, the title could be the title of the KB article for the patch; for
 	// example: Security Update for Active Directory Federation Services.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a compliance item.
@@ -1288,6 +1341,8 @@ type ComplianceItemEntry struct {
 	// Windows patch, the title could be the title of the KB article for the patch; for
 	// example: Security Update for Active Directory Federation Services.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // One or more filters. Use a filter to return a more specific list of results.
@@ -1302,6 +1357,8 @@ type ComplianceStringFilter struct {
 
 	// The value for which to search.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of compliance information by compliance type.
@@ -1316,6 +1373,8 @@ type ComplianceSummaryItem struct {
 
 	// A list of NON_COMPLIANT items for the specified compliance type.
 	NonCompliantSummary *NonCompliantSummary
+
+	noSmithyDocumentSerde
 }
 
 // A summary of resources that are compliant. The summary is organized according to
@@ -1327,6 +1386,8 @@ type CompliantSummary struct {
 
 	// A summary of the compliance severity by compliance type.
 	SeveritySummary *SeveritySummary
+
+	noSmithyDocumentSerde
 }
 
 // Describes the association of a Amazon Web Services Systems Manager document (SSM
@@ -1427,6 +1488,8 @@ type CreateAssociationBatchRequestEntry struct {
 
 	// The instances targeted by the request.
 	Targets []Target
+
+	noSmithyDocumentSerde
 }
 
 // Filter for the DescribeActivation API.
@@ -1437,6 +1500,8 @@ type DescribeActivationsFilter struct {
 
 	// The filter values.
 	FilterValues []string
+
+	noSmithyDocumentSerde
 }
 
 // A default version of a document.
@@ -1450,6 +1515,8 @@ type DocumentDefaultVersionDescription struct {
 
 	// The name of the document.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a Amazon Web Services Systems Manager document (SSM document).
@@ -1551,6 +1618,8 @@ type DocumentDescription struct {
 
 	// The version of the artifact associated with the document.
 	VersionName *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is deprecated. Instead, use DocumentKeyValuesFilter.
@@ -1565,6 +1634,8 @@ type DocumentFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the name of a SSM document.
@@ -1624,6 +1695,8 @@ type DocumentIdentifier struct {
 	// document. For example, "Release 12, Update 6". This value is unique across all
 	// versions of a document, and can't be changed.
 	VersionName *string
+
+	noSmithyDocumentSerde
 }
 
 // One or more filters. Use a filter to return a more specific list of documents.
@@ -1696,6 +1769,8 @@ type DocumentKeyValuesFilter struct {
 
 	// The value for the filter key.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the response to a document review request.
@@ -1703,6 +1778,8 @@ type DocumentMetadataResponseInfo struct {
 
 	// Details about a reviewer's response to a document review request.
 	ReviewerResponse []DocumentReviewerResponseSource
+
+	noSmithyDocumentSerde
 }
 
 // Parameters specified in a System Manager document that run on the server when
@@ -1722,6 +1799,8 @@ type DocumentParameter struct {
 
 	// The type of parameter. The type can be either String or StringList.
 	Type DocumentParameterType
+
+	noSmithyDocumentSerde
 }
 
 // An SSM document required by the current document.
@@ -1735,6 +1814,8 @@ type DocumentRequires struct {
 
 	// The document version required by the current document.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about comments added to a document review request.
@@ -1747,6 +1828,8 @@ type DocumentReviewCommentSource struct {
 	// The type of information added to a review request. Currently, only the value
 	// Comment is supported.
 	Type DocumentReviewCommentType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a reviewer's response to a document review request.
@@ -1772,6 +1855,8 @@ type DocumentReviewerResponseSource struct {
 	// The date and time that a reviewer last updated a response to a document review
 	// request.
 	UpdatedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information about a document approval review.
@@ -1785,6 +1870,8 @@ type DocumentReviews struct {
 	// A comment entered by a user in your organization about the document review
 	// request.
 	Comment []DocumentReviewCommentSource
+
+	noSmithyDocumentSerde
 }
 
 // Version information about the document.
@@ -1826,6 +1913,8 @@ type DocumentVersionInfo struct {
 	// 12, Update 6". This value is unique across all versions of a document, and can't
 	// be changed.
 	VersionName *string
+
+	noSmithyDocumentSerde
 }
 
 // The EffectivePatch structure defines metadata about a patch along with the
@@ -1845,6 +1934,8 @@ type EffectivePatch struct {
 	// explicitly approved, or explicitly rejected and the date the patch was or will
 	// be approved.
 	PatchStatus *PatchStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes a failed association.
@@ -1858,6 +1949,8 @@ type FailedCreateAssociation struct {
 
 	// A description of the failure.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Automation failure.
@@ -1874,6 +1967,8 @@ type FailureDetails struct {
 	// The type of Automation failure. Failure types include the following: Action,
 	// Permission, Throttling, Verification, Internal.
 	FailureType *string
+
+	noSmithyDocumentSerde
 }
 
 // Status information about the aggregated associations.
@@ -1884,6 +1979,8 @@ type InstanceAggregatedAssociationOverview struct {
 
 	// The number of associations for the instance(s).
 	InstanceAssociationStatusAggregatedCount map[string]int32
+
+	noSmithyDocumentSerde
 }
 
 // One or more association documents on the instance.
@@ -1900,6 +1997,8 @@ type InstanceAssociation struct {
 
 	// The instance ID.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // An S3 bucket where you want to store the results of this request. For the
@@ -1911,6 +2010,8 @@ type InstanceAssociationOutputLocation struct {
 
 	// An S3 bucket where you want to store the results of this request.
 	S3Location *S3OutputLocation
+
+	noSmithyDocumentSerde
 }
 
 // The URL of S3 bucket where you want to store the results of this request.
@@ -1918,6 +2019,8 @@ type InstanceAssociationOutputUrl struct {
 
 	// The URL of S3 bucket where you want to store the results of this request.
 	S3OutputUrl *S3OutputUrl
+
+	noSmithyDocumentSerde
 }
 
 // Status information about the instance association.
@@ -1958,6 +2061,8 @@ type InstanceAssociationStatusInfo struct {
 
 	// Status information about the instance association.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter for a specific list of instances.
@@ -2047,6 +2152,8 @@ type InstanceInformation struct {
 
 	// The type of instance. Instances are either EC2 instances or managed instances.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter for a specific list of instances. You can filter instances
@@ -2066,6 +2173,8 @@ type InstanceInformationFilter struct {
 	//
 	// This member is required.
 	ValueSet []string
+
+	noSmithyDocumentSerde
 }
 
 // The filters to describe or get information about your managed instances.
@@ -2085,6 +2194,8 @@ type InstanceInformationStringFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the high-level patch compliance state for a managed instance, providing
@@ -2220,6 +2331,8 @@ type InstancePatchState struct {
 	// aren't reported by name to Inventory. Inventory is a capability of Amazon Web
 	// Services Systems Manager.
 	UnreportedNotApplicableCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Defines a filter used in DescribeInstancePatchStatesForPatchGroup to scope down
@@ -2268,6 +2381,8 @@ type InstancePatchStateFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the inventory type and attribute for the aggregation execution.
@@ -2283,6 +2398,8 @@ type InventoryAggregator struct {
 	// Groups return a count of resources that match and don't match the specified
 	// criteria.
 	Groups []InventoryGroup
+
+	noSmithyDocumentSerde
 }
 
 // Status information returned by the DeleteInventory operation.
@@ -2311,6 +2428,8 @@ type InventoryDeletionStatusItem struct {
 
 	// The name of the inventory data type.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the delete operation.
@@ -2325,6 +2444,8 @@ type InventoryDeletionSummary struct {
 	// The total number of items to delete. This count doesn't change during the delete
 	// operation.
 	TotalCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Either a count, remaining count, or a version number in a delete inventory
@@ -2339,6 +2460,8 @@ type InventoryDeletionSummaryItem struct {
 
 	// The inventory type version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // One or more filters. Use a filter to return a more specific list of results.
@@ -2361,6 +2484,8 @@ type InventoryFilter struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-aggregate.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Type InventoryQueryOperatorType
+
+	noSmithyDocumentSerde
 }
 
 // A user-defined set of one or more filters on which to aggregate inventory data.
@@ -2379,6 +2504,8 @@ type InventoryGroup struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information collected from managed instances based on your inventory policy
@@ -2416,6 +2543,8 @@ type InventoryItem struct {
 	// this attribute, you can specify the ExecutionId, ExecutionType, ComplianceType
 	// properties of the AWS:ComplianceItem type.
 	Context map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes are the entries within the inventory item content. It contains name
@@ -2431,6 +2560,8 @@ type InventoryItemAttribute struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The inventory item schema definition. Users can use this to compose inventory
@@ -2456,6 +2587,8 @@ type InventoryItemSchema struct {
 
 	// The schema version for the inventory item.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Inventory query results.
@@ -2468,6 +2601,8 @@ type InventoryResultEntity struct {
 	// the result will be the managed instance ID. For EC2 instance inventory, the
 	// result will be the instance ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The inventory result item.
@@ -2497,6 +2632,8 @@ type InventoryResultItem struct {
 	// update the inventory item type contents if the MD5 hash hasn't changed since
 	// last update.
 	ContentHash *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Amazon Simple Storage Service (Amazon S3) bucket to write
@@ -2520,6 +2657,8 @@ type LoggingInfo struct {
 
 	// (Optional) The S3 bucket subfolder.
 	S3KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The parameters for an AUTOMATION task type.
@@ -2543,6 +2682,8 @@ type MaintenanceWindowAutomationParameters struct {
 	// For AUTOMATION task types, Amazon Web Services Systems Manager ignores any
 	// values specified for these parameters.
 	Parameters map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the information about an execution of a maintenance window.
@@ -2565,6 +2706,8 @@ type MaintenanceWindowExecution struct {
 
 	// The ID of the maintenance window.
 	WindowId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a task execution performed as part of a maintenance window
@@ -2595,6 +2738,8 @@ type MaintenanceWindowExecutionTaskIdentity struct {
 
 	// The ID of the maintenance window execution that ran the task.
 	WindowExecutionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the information about a task invocation for a particular target as
@@ -2641,6 +2786,8 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	// The ID of the target definition in this maintenance window the invocation was
 	// performed for.
 	WindowTargetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Filter used in the request. Supported filter keys depend on the API operation
@@ -2668,6 +2815,8 @@ type MaintenanceWindowFilter struct {
 
 	// The filter values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the maintenance window.
@@ -2714,6 +2863,8 @@ type MaintenanceWindowIdentity struct {
 
 	// The ID of the maintenance window.
 	WindowId *string
+
+	noSmithyDocumentSerde
 }
 
 // The maintenance window to which the specified target belongs.
@@ -2724,6 +2875,8 @@ type MaintenanceWindowIdentityForTarget struct {
 
 	// The ID of the maintenance window.
 	WindowId *string
+
+	noSmithyDocumentSerde
 }
 
 // The parameters for a LAMBDA task type. For information about specifying and
@@ -2756,6 +2909,8 @@ type MaintenanceWindowLambdaParameters struct {
 	// operation uses the alias ARN to invoke the Lambda function version to which the
 	// alias points.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 // The parameters for a RUN_COMMAND task type. For information about specifying and
@@ -2819,6 +2974,8 @@ type MaintenanceWindowRunCommandParameters struct {
 	// If this time is reached and the command hasn't already started running, it
 	// doesn't run.
 	TimeoutSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // The parameters for a STEP_FUNCTIONS task. For information about specifying and
@@ -2842,6 +2999,8 @@ type MaintenanceWindowStepFunctionsParameters struct {
 
 	// The name of the STEP_FUNCTIONS task.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The target registered with the maintenance window.
@@ -2871,6 +3030,8 @@ type MaintenanceWindowTarget struct {
 
 	// The ID of the target.
 	WindowTargetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a task defined for a maintenance window.
@@ -2931,6 +3092,8 @@ type MaintenanceWindowTask struct {
 
 	// The task ID.
 	WindowTaskId *string
+
+	noSmithyDocumentSerde
 }
 
 // The parameters for task execution.
@@ -2947,6 +3110,8 @@ type MaintenanceWindowTaskInvocationParameters struct {
 
 	// The parameters for a STEP_FUNCTIONS task type.
 	StepFunctions *MaintenanceWindowStepFunctionsParameters
+
+	noSmithyDocumentSerde
 }
 
 // Defines the values for a task parameter.
@@ -2955,6 +3120,8 @@ type MaintenanceWindowTaskParameterValueExpression struct {
 	// This field contains an array of 0 or more strings, each 1 to 255 characters in
 	// length.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata to assign to an Application Manager application.
@@ -2962,6 +3129,8 @@ type MetadataValue struct {
 
 	// Metadata value to assign to an Application Manager application.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of resources that aren't compliant. The summary is organized according
@@ -2973,6 +3142,8 @@ type NonCompliantSummary struct {
 
 	// A summary of the non-compliance severity by compliance type
 	SeveritySummary *SeveritySummary
+
+	noSmithyDocumentSerde
 }
 
 // Configurations for sending notifications.
@@ -2998,6 +3169,8 @@ type NotificationConfig struct {
 	// * Invocation: For commands sent to multiple instances, receive
 	// notification on a per-instance basis when the status of a command changes.
 	NotificationType NotificationType
+
+	noSmithyDocumentSerde
 }
 
 // One or more aggregators for viewing counts of OpsData using different dimensions
@@ -3021,6 +3194,8 @@ type OpsAggregator struct {
 
 	// The aggregator value.
 	Values map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The result of the query.
@@ -3031,6 +3206,8 @@ type OpsEntity struct {
 
 	// The query ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The OpsData summary.
@@ -3041,6 +3218,8 @@ type OpsEntityItem struct {
 
 	// The details of an OpsData summary.
 	Content []map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A filter for viewing OpsData summaries.
@@ -3058,6 +3237,8 @@ type OpsFilter struct {
 
 	// The type of filter.
 	Type OpsFilterOperatorType
+
+	noSmithyDocumentSerde
 }
 
 // Operations engineers and IT professionals use Amazon Web Services Systems
@@ -3161,6 +3342,8 @@ type OpsItem struct {
 	// The version of this OpsItem. Each time the OpsItem is edited the version number
 	// increments by one.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the value of the key and its type in the OperationalData
@@ -3172,6 +3355,8 @@ type OpsItemDataValue struct {
 
 	// The value of the OperationalData key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter for a specific list of OpsItem events. You can filter event
@@ -3193,6 +3378,8 @@ type OpsItemEventFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about an OpsItem event or that associated an OpsItem with a
@@ -3219,6 +3406,8 @@ type OpsItemEventSummary struct {
 
 	// The source of the OpsItem event.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an OpsItem filter.
@@ -3238,6 +3427,8 @@ type OpsItemFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the user or resource that created an OpsItem event.
@@ -3245,6 +3436,8 @@ type OpsItemIdentity struct {
 
 	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem event.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // A notification about the OpsItem.
@@ -3253,6 +3446,8 @@ type OpsItemNotification struct {
 	// The Amazon Resource Name (ARN) of an Amazon Simple Notification Service (Amazon
 	// SNS) topic where notifications are sent when this OpsItem is edited or changed.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter for a specific list of related-item resources.
@@ -3273,6 +3468,8 @@ type OpsItemRelatedItemsFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about related-item resources for an OpsItem.
@@ -3304,6 +3501,8 @@ type OpsItemRelatedItemSummary struct {
 
 	// The Amazon Resource Name (ARN) of the related-item resource.
 	ResourceUri *string
+
+	noSmithyDocumentSerde
 }
 
 // A count of OpsItems.
@@ -3366,6 +3565,8 @@ type OpsItemSummary struct {
 	// A short heading that describes the nature of the OpsItem and the impacted
 	// resource.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Operational metadata for an application in Application Manager.
@@ -3385,6 +3586,8 @@ type OpsMetadata struct {
 
 	// The ID of the Application Manager application.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter to limit the number of OpsMetadata objects displayed.
@@ -3399,6 +3602,8 @@ type OpsMetadataFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The OpsItem data type to return.
@@ -3409,6 +3614,8 @@ type OpsResultAttribute struct {
 	//
 	// This member is required.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the source where the association execution details are stored.
@@ -3420,6 +3627,8 @@ type OutputSource struct {
 	// The type of source where the association execution details are stored, for
 	// example, Amazon S3.
 	OutputSourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // An Amazon Web Services Systems Manager parameter in Parameter Store.
@@ -3457,6 +3666,8 @@ type Parameter struct {
 
 	// The parameter version.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about parameter usage.
@@ -3505,6 +3716,8 @@ type ParameterHistory struct {
 
 	// The parameter version.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // One or more policies assigned to a parameter.
@@ -3523,6 +3736,8 @@ type ParameterInlinePolicy struct {
 	// Systems Manager, supports the following policy types: Expiration,
 	// ExpirationNotification, and NoChangeNotification.
 	PolicyType *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata includes information like the ARN of the last user and the date/time
@@ -3565,6 +3780,8 @@ type ParameterMetadata struct {
 
 	// The parameter version.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // This data type is deprecated. Instead, use ParameterStringFilter.
@@ -3579,6 +3796,8 @@ type ParametersFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // One or more filters. Use a filter to return a more specific list of results.
@@ -3608,6 +3827,8 @@ type ParameterStringFilter struct {
 
 	// The value you want to search for.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents metadata about a patch.
@@ -3699,6 +3920,8 @@ type Patch struct {
 	// example-pkg-1.710.10-2.7.abcd.x86_64, the version number is indicated by -1.
 	// Applies to Linux-based instances only.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the basic information about a patch baseline.
@@ -3721,6 +3944,8 @@ type PatchBaselineIdentity struct {
 	// Defines the operating system the patch baseline applies to. The default value is
 	// WINDOWS.
 	OperatingSystem OperatingSystem
+
+	noSmithyDocumentSerde
 }
 
 // Information about the state of a patch on a particular instance as it relates to
@@ -3765,6 +3990,8 @@ type PatchComplianceData struct {
 	// The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are
 	// resolved by the patch.
 	CVEIds *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines which patches should be included in a patch baseline. A patch filter
@@ -3792,6 +4019,8 @@ type PatchFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A set of patch filters, typically used for approval rules.
@@ -3801,6 +4030,8 @@ type PatchFilterGroup struct {
 	//
 	// This member is required.
 	PatchFilters []PatchFilter
+
+	noSmithyDocumentSerde
 }
 
 // The mapping between a patch group and the patch baseline the patch group is
@@ -3812,6 +4043,8 @@ type PatchGroupPatchBaselineMapping struct {
 
 	// The name of the patch group registered with the patch baseline.
 	PatchGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a filter used in Patch Manager APIs. Supported filter keys depend on the
@@ -3833,6 +4066,8 @@ type PatchOrchestratorFilter struct {
 
 	// The value for the filter.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Defines an approval rule for a patch baseline.
@@ -3861,6 +4096,8 @@ type PatchRule struct {
 	// to apply non-security updates available in the specified repository. The default
 	// value is false. Applies to Linux instances only.
 	EnableNonSecurity bool
+
+	noSmithyDocumentSerde
 }
 
 // A set of rules defining the approval rules for a patch baseline.
@@ -3870,6 +4107,8 @@ type PatchRuleGroup struct {
 	//
 	// This member is required.
 	PatchRules []PatchRule
+
+	noSmithyDocumentSerde
 }
 
 // Information about the patches to use to update the instances, including target
@@ -3900,6 +4139,8 @@ type PatchSource struct {
 	//
 	// This member is required.
 	Products []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the approval status of a patch.
@@ -3914,6 +4155,8 @@ type PatchStatus struct {
 
 	// The approval status of a patch.
 	DeploymentStatus PatchDeploymentStatus
+
+	noSmithyDocumentSerde
 }
 
 // An aggregate of step execution statuses displayed in the Amazon Web Services
@@ -3940,6 +4183,8 @@ type ProgressCounters struct {
 	// The total number of steps run in all specified Regions and accounts for the
 	// current Automation execution.
 	TotalSteps int32
+
+	noSmithyDocumentSerde
 }
 
 // An OpsItems that shares something in common with the current OpsItem. For
@@ -3951,6 +4196,8 @@ type RelatedOpsItem struct {
 	//
 	// This member is required.
 	OpsItemId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about targets that resolved during the Automation execution.
@@ -3962,6 +4209,8 @@ type ResolvedTargets struct {
 
 	// A boolean value indicating whether the resolved target list is truncated.
 	Truncated bool
+
+	noSmithyDocumentSerde
 }
 
 // Compliance summary information for a specific resource.
@@ -3991,6 +4240,8 @@ type ResourceComplianceSummaryItem struct {
 
 	// The compliance status for the resource.
 	Status ComplianceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about the AwsOrganizationsSource resource data sync source. A sync
@@ -4008,6 +4259,8 @@ type ResourceDataSyncAwsOrganizationsSource struct {
 
 	// The Organizations organization units included in the sync.
 	OrganizationalUnits []ResourceDataSyncOrganizationalUnit
+
+	noSmithyDocumentSerde
 }
 
 // Synchronize Amazon Web Services Systems Manager Inventory data from multiple
@@ -4018,6 +4271,8 @@ type ResourceDataSyncDestinationDataSharing struct {
 
 	// The sharing data type. Only Organization is supported.
 	DestinationDataSharingType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a resource data sync configuration, including its current
@@ -4056,6 +4311,8 @@ type ResourceDataSyncItem struct {
 	// SyncFromSource then the resource data sync synchronizes data from Organizations
 	// or from multiple Regions.
 	SyncType *string
+
+	noSmithyDocumentSerde
 }
 
 // The Organizations organizational unit data source for the sync.
@@ -4063,6 +4320,8 @@ type ResourceDataSyncOrganizationalUnit struct {
 
 	// The Organizations unit ID data source for the sync.
 	OrganizationalUnitId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the target S3 bucket for the resource data sync.
@@ -4092,6 +4351,8 @@ type ResourceDataSyncS3Destination struct {
 
 	// An Amazon S3 prefix for the bucket.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the source of the data included in the resource data sync.
@@ -4125,6 +4386,8 @@ type ResourceDataSyncSource struct {
 	// Whether to automatically synchronize and aggregate data from new Regions when
 	// those Regions come online.
 	IncludeFutureRegions bool
+
+	noSmithyDocumentSerde
 }
 
 // The data type name for including resource data sync state. There are four sync
@@ -4169,6 +4432,8 @@ type ResourceDataSyncSourceWithState struct {
 	// resource data sync configuration. TrustedAccessDisabled: You disabled Systems
 	// Manager access in the organization in Organizations.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // The inventory item result attribute.
@@ -4179,6 +4444,8 @@ type ResultAttribute struct {
 	//
 	// This member is required.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the result of a document review request.
@@ -4192,6 +4459,8 @@ type ReviewInformation struct {
 
 	// The current status of the document review request.
 	Status ReviewStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Automation runbook used in a runbook workflow in Change
@@ -4232,6 +4501,8 @@ type Runbook struct {
 	// A key-value mapping to target resources that the runbook operation performs
 	// tasks on. Required if you specify TargetParameterName.
 	Targets []Target
+
+	noSmithyDocumentSerde
 }
 
 // An S3 bucket where you want to store the results of this request.
@@ -4247,6 +4518,8 @@ type S3OutputLocation struct {
 	// Instead, Amazon Web Services Systems Manager automatically determines the Region
 	// of the S3 bucket.
 	OutputS3Region *string
+
+	noSmithyDocumentSerde
 }
 
 // A URL for the Amazon Web Services Systems Manager (Systems Manager) bucket where
@@ -4255,6 +4528,8 @@ type S3OutputUrl struct {
 
 	// A URL for an S3 bucket where you want to store the results of this request.
 	OutputUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a scheduled execution for a maintenance window.
@@ -4269,6 +4544,8 @@ type ScheduledWindowExecution struct {
 
 	// The ID of the maintenance window to be run.
 	WindowId *string
+
+	noSmithyDocumentSerde
 }
 
 // The service setting data structure. ServiceSetting is an account-level setting
@@ -4315,6 +4592,8 @@ type ServiceSetting struct {
 	// uses a default or custom value, but a setting change request is pending
 	// approval.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Session Manager connection to an instance.
@@ -4347,6 +4626,8 @@ type Session struct {
 
 	// The instance that the Session Manager session connected to.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter for Session Manager information.
@@ -4395,6 +4676,8 @@ type SessionFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Reserved for future use.
@@ -4405,6 +4688,8 @@ type SessionManagerOutputUrl struct {
 
 	// Reserved for future use.
 	S3OutputUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The number of managed instances found for each patch severity level defined in
@@ -4440,6 +4725,8 @@ type SeveritySummary struct {
 	// unspecified. Unspecified severity is determined by the organization that
 	// published the compliance items.
 	UnspecifiedCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an the execution state of an Automation step.
@@ -4519,6 +4806,8 @@ type StepExecution struct {
 	// step and allow automation to run the next step. With conditional branching, we
 	// add step:stepName to support the automation to go to another specific step.
 	ValidNextSteps []string
+
+	noSmithyDocumentSerde
 }
 
 // A filter to limit the amount of step execution information returned by the call.
@@ -4535,6 +4824,8 @@ type StepExecutionFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata that you assign to your Amazon Web Services resources. Tags enable you
@@ -4553,6 +4844,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An array of search criteria that targets instances using a key-value pair that
@@ -4631,6 +4924,8 @@ type Target struct {
 	// the maximum number of values for a key might be lower than the global maximum of
 	// 50.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The combination of Regions and accounts targeted by the current Automation
@@ -4654,4 +4949,8 @@ type TargetLocation struct {
 	// The maximum number of errors allowed before the system stops queueing additional
 	// Automation executions for the currently running Automation.
 	TargetLocationMaxErrors *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

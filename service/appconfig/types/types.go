@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -16,6 +17,8 @@ type Application struct {
 
 	// The application name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a configuration profile.
@@ -35,6 +38,8 @@ type ConfigurationProfileSummary struct {
 
 	// The types of validators in the configuration profile.
 	ValidatorTypes []ValidatorType
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes a deployment event.
@@ -57,6 +62,8 @@ type DeploymentEvent struct {
 	// The entity that triggered the deployment event. Events can be triggered by a
 	// user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
 	TriggeredBy TriggeredBy
+
+	noSmithyDocumentSerde
 }
 
 type DeploymentStrategy struct {
@@ -86,6 +93,8 @@ type DeploymentStrategy struct {
 
 	// Save the deployment strategy to a Systems Manager (SSM) document.
 	ReplicateTo ReplicateTo
+
+	noSmithyDocumentSerde
 }
 
 // Information about the deployment.
@@ -125,6 +134,8 @@ type DeploymentSummary struct {
 
 	// The state of the deployment.
 	State DeploymentState
+
+	noSmithyDocumentSerde
 }
 
 type Environment struct {
@@ -147,6 +158,8 @@ type Environment struct {
 	// The state of the environment. An environment can be in one of the following
 	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
 	State EnvironmentState
+
+	noSmithyDocumentSerde
 }
 
 // Information about the configuration.
@@ -168,6 +181,8 @@ type HostedConfigurationVersionSummary struct {
 
 	// The configuration version.
 	VersionNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Amazon CloudWatch alarms to monitor during the deployment process.
@@ -178,6 +193,8 @@ type Monitor struct {
 
 	// ARN of an IAM role for AppConfig to monitor AlarmArn.
 	AlarmRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A validator provides a syntactic or semantic check to ensure the configuration
@@ -197,4 +214,8 @@ type Validator struct {
 	//
 	// This member is required.
 	Type ValidatorType
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -37,6 +37,8 @@ type RestoreAnalysisInput struct {
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreAnalysisOutput struct {
@@ -55,6 +57,8 @@ type RestoreAnalysisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {

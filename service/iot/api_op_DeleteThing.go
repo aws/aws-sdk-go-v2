@@ -39,12 +39,16 @@ type DeleteThingInput struct {
 	// record in the registry does not match the expected version specified in the
 	// request, the DeleteThing request is rejected with a VersionConflictException.
 	ExpectedVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 // The output of the DeleteThing operation.
 type DeleteThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

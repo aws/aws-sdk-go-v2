@@ -112,6 +112,8 @@ type GetReservationPurchaseRecommendationInput struct {
 
 	// The reservation term that you want recommendations for.
 	TermInYears types.TermInYears
+
+	noSmithyDocumentSerde
 }
 
 type GetReservationPurchaseRecommendationOutput struct {
@@ -128,6 +130,8 @@ type GetReservationPurchaseRecommendationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReservationPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type CreateMultiplexProgramInput struct {
 	//
 	// This member is required.
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for CreateMultiplexProgramResponse
@@ -60,6 +62,8 @@ type CreateMultiplexProgramOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {

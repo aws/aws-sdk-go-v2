@@ -40,6 +40,8 @@ type ListTestGridSessionActionsInput struct {
 
 	// Pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTestGridSessionActionsOutput struct {
@@ -52,6 +54,8 @@ type ListTestGridSessionActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTestGridSessionActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

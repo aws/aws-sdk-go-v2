@@ -98,11 +98,15 @@ type CreateNetworkAclEntryInput struct {
 	// TCP or UDP protocols: The range of ports the rule applies to. Required if
 	// specifying protocol 6 (TCP) or 17 (UDP).
 	PortRange *types.PortRange
+
+	noSmithyDocumentSerde
 }
 
 type CreateNetworkAclEntryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNetworkAclEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type GetStatementResultInput struct {
 	// NextToken parameter and retrying the command. If the NextToken field is empty,
 	// all response records have been retrieved for the request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStatementResultOutput struct {
@@ -70,6 +72,8 @@ type GetStatementResultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStatementResultMiddlewares(stack *middleware.Stack, options Options) (err error) {

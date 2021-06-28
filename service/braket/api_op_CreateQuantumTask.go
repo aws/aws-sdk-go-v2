@@ -67,6 +67,8 @@ type CreateQuantumTaskInput struct {
 
 	// Tags to be added to the quantum task you're creating.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateQuantumTaskOutput struct {
@@ -78,6 +80,8 @@ type CreateQuantumTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

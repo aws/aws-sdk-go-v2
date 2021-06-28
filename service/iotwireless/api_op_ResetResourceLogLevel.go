@@ -39,11 +39,15 @@ type ResetResourceLogLevelInput struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetResourceLogLevelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetResourceLogLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {

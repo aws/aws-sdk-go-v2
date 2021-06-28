@@ -44,11 +44,15 @@ type DisassociateQueueQuickConnectsInput struct {
 	//
 	// This member is required.
 	QuickConnectIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateQueueQuickConnectsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateQueueQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type DeleteThreatIntelSetInput struct {
 	//
 	// This member is required.
 	ThreatIntelSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteThreatIntelSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

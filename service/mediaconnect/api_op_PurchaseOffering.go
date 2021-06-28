@@ -50,6 +50,8 @@ type PurchaseOfferingInput struct {
 	//
 	// This member is required.
 	Start *string
+
+	noSmithyDocumentSerde
 }
 
 type PurchaseOfferingOutput struct {
@@ -64,6 +66,8 @@ type PurchaseOfferingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {

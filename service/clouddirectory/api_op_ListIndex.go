@@ -53,6 +53,8 @@ type ListIndexInput struct {
 
 	// Specifies the ranges of indexed values that you want to query.
 	RangesOnIndexedValues []types.ObjectAttributeRange
+
+	noSmithyDocumentSerde
 }
 
 type ListIndexOutput struct {
@@ -65,6 +67,8 @@ type ListIndexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

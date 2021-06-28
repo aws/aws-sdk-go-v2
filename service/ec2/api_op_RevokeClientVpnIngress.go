@@ -52,6 +52,8 @@ type RevokeClientVpnIngressInput struct {
 
 	// Indicates whether access should be revoked for all clients.
 	RevokeAllGroups *bool
+
+	noSmithyDocumentSerde
 }
 
 type RevokeClientVpnIngressOutput struct {
@@ -61,6 +63,8 @@ type RevokeClientVpnIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeClientVpnIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

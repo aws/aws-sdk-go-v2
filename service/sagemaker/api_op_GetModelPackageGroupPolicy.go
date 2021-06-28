@@ -35,6 +35,8 @@ type GetModelPackageGroupPolicyInput struct {
 	//
 	// This member is required.
 	ModelPackageGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetModelPackageGroupPolicyOutput struct {
@@ -46,6 +48,8 @@ type GetModelPackageGroupPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

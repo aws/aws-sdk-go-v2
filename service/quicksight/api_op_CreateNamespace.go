@@ -54,6 +54,8 @@ type CreateNamespaceInput struct {
 
 	// The tags that you want to associate with the namespace that you're creating.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateNamespaceOutput struct {
@@ -86,6 +88,8 @@ type CreateNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

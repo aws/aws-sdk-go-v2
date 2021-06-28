@@ -75,6 +75,8 @@ type CreateAcceleratorInput struct {
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
 	// in the AWS Global Accelerator Developer Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAcceleratorOutput struct {
@@ -85,6 +87,8 @@ type CreateAcceleratorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

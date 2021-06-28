@@ -44,6 +44,8 @@ type CreateCollectionInput struct {
 
 	// A set of tags (key-value pairs) that you want to attach to the collection.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCollectionOutput struct {
@@ -61,6 +63,8 @@ type CreateCollectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

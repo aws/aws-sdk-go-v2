@@ -39,6 +39,8 @@ type DeletePortalInput struct {
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePortalOutput struct {
@@ -51,6 +53,8 @@ type DeletePortalOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {

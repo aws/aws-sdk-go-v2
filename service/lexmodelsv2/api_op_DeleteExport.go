@@ -33,6 +33,8 @@ type DeleteExportInput struct {
 	//
 	// This member is required.
 	ExportId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteExportOutput struct {
@@ -47,6 +49,8 @@ type DeleteExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

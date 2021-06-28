@@ -67,6 +67,8 @@ type ImportWorkspaceImageInput struct {
 
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type ImportWorkspaceImageOutput struct {
@@ -76,6 +78,8 @@ type ImportWorkspaceImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

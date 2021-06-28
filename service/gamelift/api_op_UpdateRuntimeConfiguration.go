@@ -60,6 +60,8 @@ type UpdateRuntimeConfigurationInput struct {
 	//
 	// This member is required.
 	RuntimeConfiguration *types.RuntimeConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -71,6 +73,8 @@ type UpdateRuntimeConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

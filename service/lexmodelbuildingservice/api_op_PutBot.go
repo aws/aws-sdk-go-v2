@@ -239,6 +239,8 @@ type PutBotInput struct {
 	// (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) in the Amazon Polly
 	// Developer Guide.
 	VoiceId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutBotOutput struct {
@@ -351,6 +353,8 @@ type PutBotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

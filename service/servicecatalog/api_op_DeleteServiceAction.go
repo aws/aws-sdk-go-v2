@@ -41,11 +41,15 @@ type DeleteServiceActionInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteServiceActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

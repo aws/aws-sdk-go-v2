@@ -56,6 +56,8 @@ type UpdateFleetPortSettingsInput struct {
 
 	// A collection of port settings to be removed from the fleet resource.
 	InboundPermissionRevocations []types.IpPermission
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -66,6 +68,8 @@ type UpdateFleetPortSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFleetPortSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

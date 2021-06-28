@@ -54,6 +54,8 @@ type SubmitContainerStateChangeInput struct {
 	// The task ID or full Amazon Resource Name (ARN) of the task that hosts the
 	// container.
 	Task *string
+
+	noSmithyDocumentSerde
 }
 
 type SubmitContainerStateChangeOutput struct {
@@ -63,6 +65,8 @@ type SubmitContainerStateChangeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubmitContainerStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {

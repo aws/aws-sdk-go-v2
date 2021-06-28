@@ -55,11 +55,15 @@ type PutAnomalyDetectorInput struct {
 
 	// The metric dimensions to create the anomaly detection model for.
 	Dimensions []types.Dimension
+
+	noSmithyDocumentSerde
 }
 
 type PutAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

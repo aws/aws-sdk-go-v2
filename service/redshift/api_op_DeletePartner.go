@@ -48,6 +48,8 @@ type DeletePartnerInput struct {
 	//
 	// This member is required.
 	PartnerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePartnerOutput struct {
@@ -60,6 +62,8 @@ type DeletePartnerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {

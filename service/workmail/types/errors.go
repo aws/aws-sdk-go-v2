@@ -11,6 +11,8 @@ import (
 // account and Region.
 type DirectoryInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryInUseException) Error() string {
@@ -28,6 +30,8 @@ func (e *DirectoryInUseException) ErrorFault() smithy.ErrorFault { return smithy
 // The directory service doesn't recognize the credentials supplied by WorkMail.
 type DirectoryServiceAuthenticationFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryServiceAuthenticationFailedException) Error() string {
@@ -49,6 +53,8 @@ func (e *DirectoryServiceAuthenticationFailedException) ErrorFault() smithy.Erro
 // The directory is unavailable. It might be located in another Region or deleted.
 type DirectoryUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryUnavailableException) Error() string {
@@ -67,6 +73,8 @@ func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return 
 // different user, group, or resource.
 type EmailAddressInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EmailAddressInUseException) Error() string {
@@ -85,6 +93,8 @@ func (e *EmailAddressInUseException) ErrorFault() smithy.ErrorFault { return smi
 // registered.
 type EntityAlreadyRegisteredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityAlreadyRegisteredException) Error() string {
@@ -105,6 +115,8 @@ func (e *EntityAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { retu
 // organization.
 type EntityNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityNotFoundException) Error() string {
@@ -123,6 +135,8 @@ func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // expected state, such as trying to delete an active user.
 type EntityStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityStateException) Error() string {
@@ -142,6 +156,8 @@ func (e *EntityStateException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // on its behalf.
 type InvalidConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConfigurationException) Error() string {
@@ -159,6 +175,8 @@ func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return 
 // One or more of the input parameters don't match the service's restrictions.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -177,6 +195,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // length or use of special characters.
 type InvalidPasswordException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPasswordException) Error() string {
@@ -194,6 +214,8 @@ func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smith
 // The request exceeds the limit of the resource.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -212,6 +234,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // be defined in the organization.
 type MailDomainNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MailDomainNotFoundException) Error() string {
@@ -230,6 +254,8 @@ func (e *MailDomainNotFoundException) ErrorFault() smithy.ErrorFault { return sm
 // domain is not yet verified.
 type MailDomainStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MailDomainStateException) Error() string {
@@ -247,6 +273,8 @@ func (e *MailDomainStateException) ErrorFault() smithy.ErrorFault { return smith
 // The user, group, or resource name isn't unique in Amazon WorkMail.
 type NameAvailabilityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NameAvailabilityException) Error() string {
@@ -265,6 +293,8 @@ func (e *NameAvailabilityException) ErrorFault() smithy.ErrorFault { return smit
 // or exist in the system.
 type OrganizationNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationNotFoundException) Error() string {
@@ -283,6 +313,8 @@ func (e *OrganizationNotFoundException) ErrorFault() smithy.ErrorFault { return 
 // organization or its members.
 type OrganizationStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationStateException) Error() string {
@@ -300,6 +332,8 @@ func (e *OrganizationStateException) ErrorFault() smithy.ErrorFault { return smi
 // This user, group, or resource name is not allowed in Amazon WorkMail.
 type ReservedNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedNameException) Error() string {
@@ -317,6 +351,8 @@ func (e *ReservedNameException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The resource cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -334,6 +370,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The resource can have up to 50 user-applied tags.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -351,6 +389,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // You can't perform a write operation against a read-only directory.
 type UnsupportedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {

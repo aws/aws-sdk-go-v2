@@ -40,6 +40,8 @@ type DescribeExportTasksInput struct {
 
 	// the filters for the export tasks.
 	Filters []types.Filter
+
+	noSmithyDocumentSerde
 }
 
 type DescribeExportTasksOutput struct {
@@ -49,6 +51,8 @@ type DescribeExportTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

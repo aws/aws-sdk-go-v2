@@ -46,6 +46,8 @@ type CreateProjectInput struct {
 	// ClientToken is considered a new call to CreateProject. An idempotency token is
 	// active for 8 hours.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateProjectOutput struct {
@@ -55,6 +57,8 @@ type CreateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

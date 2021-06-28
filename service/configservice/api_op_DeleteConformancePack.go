@@ -35,11 +35,15 @@ type DeleteConformancePackInput struct {
 	//
 	// This member is required.
 	ConformancePackName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConformancePackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {

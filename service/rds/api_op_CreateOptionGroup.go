@@ -88,6 +88,8 @@ type CreateOptionGroupInput struct {
 
 	// Tags to assign to the option group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateOptionGroupOutput struct {
@@ -97,6 +99,8 @@ type CreateOptionGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -100,6 +100,8 @@ type CreateReplicationConfigurationTemplateInput struct {
 
 	// Request to configure tags during Replication Settings template creation.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateReplicationConfigurationTemplateOutput struct {
@@ -154,6 +156,8 @@ type CreateReplicationConfigurationTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReplicationConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

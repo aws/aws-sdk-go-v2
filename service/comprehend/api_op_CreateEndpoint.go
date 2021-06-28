@@ -64,6 +64,8 @@ type CreateEndpointInput struct {
 	// adds metadata to the endpoint. For example, a tag with "Sales" as the key might
 	// be added to an endpoint to indicate its use by the sales department.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateEndpointOutput struct {
@@ -73,6 +75,8 @@ type CreateEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

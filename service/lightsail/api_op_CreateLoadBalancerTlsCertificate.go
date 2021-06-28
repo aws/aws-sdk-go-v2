@@ -62,6 +62,8 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateLoadBalancerTlsCertificateOutput struct {
@@ -73,6 +75,8 @@ type CreateLoadBalancerTlsCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLoadBalancerTlsCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

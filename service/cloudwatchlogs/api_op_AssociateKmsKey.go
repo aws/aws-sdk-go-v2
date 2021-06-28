@@ -55,11 +55,15 @@ type AssociateKmsKeyInput struct {
 	//
 	// This member is required.
 	LogGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateKmsKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateKmsKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

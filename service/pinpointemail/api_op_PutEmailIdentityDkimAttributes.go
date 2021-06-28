@@ -40,6 +40,8 @@ type PutEmailIdentityDkimAttributesInput struct {
 	// DKIM-signed. When you set this value to false, then the messages that Amazon
 	// Pinpoint sends from the identity aren't DKIM-signed.
 	SigningEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -47,6 +49,8 @@ type PutEmailIdentityDkimAttributesInput struct {
 type PutEmailIdentityDkimAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEmailIdentityDkimAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -30,6 +30,7 @@ func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountI
 }
 
 type GetMasterAccountInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetMasterAccountOutput struct {
@@ -42,6 +43,8 @@ type GetMasterAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMasterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

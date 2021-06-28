@@ -111,6 +111,8 @@ type PutEventSelectorsInput struct {
 	// apply EventSelectors to a trail, any existing AdvancedEventSelectors are
 	// overwritten.
 	EventSelectors []types.EventSelector
+
+	noSmithyDocumentSerde
 }
 
 type PutEventSelectorsOutput struct {
@@ -127,6 +129,8 @@ type PutEventSelectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEventSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type AddPartnerInput struct {
 	//
 	// This member is required.
 	PartnerName *string
+
+	noSmithyDocumentSerde
 }
 
 type AddPartnerOutput struct {
@@ -61,6 +63,8 @@ type AddPartnerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddPartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {

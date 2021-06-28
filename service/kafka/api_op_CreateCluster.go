@@ -70,6 +70,8 @@ type CreateClusterInput struct {
 
 	// Create tags when creating the cluster.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterOutput struct {
@@ -86,6 +88,8 @@ type CreateClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

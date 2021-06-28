@@ -87,6 +87,8 @@ type GetCostAndUsageInput struct {
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCostAndUsageOutput struct {
@@ -108,6 +110,8 @@ type GetCostAndUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCostAndUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

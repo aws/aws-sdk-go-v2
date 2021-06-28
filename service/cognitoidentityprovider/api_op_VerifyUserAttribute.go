@@ -42,6 +42,8 @@ type VerifyUserAttributeInput struct {
 	//
 	// This member is required.
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 // A container representing the response from the server from the request to verify
@@ -49,6 +51,8 @@ type VerifyUserAttributeInput struct {
 type VerifyUserAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVerifyUserAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

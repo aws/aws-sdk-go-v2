@@ -48,6 +48,8 @@ type GetCampaignVersionsInput struct {
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCampaignVersionsOutput struct {
@@ -60,6 +62,8 @@ type GetCampaignVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCampaignVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

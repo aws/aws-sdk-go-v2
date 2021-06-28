@@ -37,6 +37,8 @@ type DeleteEvaluationResultsInput struct {
 	//
 	// This member is required.
 	ConfigRuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output when you delete the evaluation results for the specified AWS Config
@@ -44,6 +46,8 @@ type DeleteEvaluationResultsInput struct {
 type DeleteEvaluationResultsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEvaluationResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {

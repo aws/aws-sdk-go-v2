@@ -30,6 +30,7 @@ func (c *Client) GetTrafficPolicyInstanceCount(ctx context.Context, params *GetT
 // Request to get the number of traffic policy instances that are associated with
 // the current AWS account.
 type GetTrafficPolicyInstanceCountInput struct {
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the resource record sets that
@@ -44,6 +45,8 @@ type GetTrafficPolicyInstanceCountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTrafficPolicyInstanceCountMiddlewares(stack *middleware.Stack, options Options) (err error) {

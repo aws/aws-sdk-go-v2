@@ -50,6 +50,8 @@ type UpdateServerInput struct {
 	// use coordinated universal time (UTC). Valid strings for day of week (DDD) are:
 	// Mon, Tue, Wed, Thr, Fri, Sat, or Sun.
 	PreferredMaintenanceWindow *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServerOutput struct {
@@ -59,6 +61,8 @@ type UpdateServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

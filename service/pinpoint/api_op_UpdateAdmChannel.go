@@ -41,6 +41,8 @@ type UpdateAdmChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAdmChannelOutput struct {
@@ -53,6 +55,8 @@ type UpdateAdmChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAdmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

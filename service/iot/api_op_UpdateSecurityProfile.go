@@ -76,6 +76,8 @@ type UpdateSecurityProfileInput struct {
 
 	// A description of the security profile.
 	SecurityProfileDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSecurityProfileOutput struct {
@@ -120,6 +122,8 @@ type UpdateSecurityProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

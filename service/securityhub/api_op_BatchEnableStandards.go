@@ -37,6 +37,8 @@ type BatchEnableStandardsInput struct {
 	//
 	// This member is required.
 	StandardsSubscriptionRequests []types.StandardsSubscriptionRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchEnableStandardsOutput struct {
@@ -46,6 +48,8 @@ type BatchEnableStandardsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchEnableStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {

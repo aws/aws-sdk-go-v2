@@ -43,6 +43,8 @@ type GetTypeInput struct {
 	//
 	// This member is required.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTypeOutput struct {
@@ -52,6 +54,8 @@ type GetTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,6 +32,8 @@ type DeletePatchBaselineInput struct {
 	//
 	// This member is required.
 	BaselineId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePatchBaselineOutput struct {
@@ -41,6 +43,8 @@ type DeletePatchBaselineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {

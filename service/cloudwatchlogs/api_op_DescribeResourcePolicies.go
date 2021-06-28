@@ -35,6 +35,8 @@ type DescribeResourcePoliciesInput struct {
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeResourcePoliciesOutput struct {
@@ -47,6 +49,8 @@ type DescribeResourcePoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeResourcePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

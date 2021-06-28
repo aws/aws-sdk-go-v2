@@ -38,11 +38,15 @@ type CreateOrUpdateTagsInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateOrUpdateTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOrUpdateTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

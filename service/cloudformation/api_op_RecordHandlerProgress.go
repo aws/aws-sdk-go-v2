@@ -63,11 +63,15 @@ type RecordHandlerProgressInput struct {
 	// Reserved for use by the CloudFormation CLI
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 type RecordHandlerProgressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRecordHandlerProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {

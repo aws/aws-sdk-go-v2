@@ -103,6 +103,8 @@ type CopyPackageVersionsInput struct {
 	// The versions of the package to copy. You must specify versions or
 	// versionRevisions. You cannot specify both.
 	Versions []string
+
+	noSmithyDocumentSerde
 }
 
 type CopyPackageVersionsOutput struct {
@@ -130,6 +132,8 @@ type CopyPackageVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyPackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type ListAssociatedFleetsInput struct {
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssociatedFleetsOutput struct {
@@ -49,6 +51,8 @@ type ListAssociatedFleetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssociatedFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

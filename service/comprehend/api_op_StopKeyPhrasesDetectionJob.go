@@ -39,6 +39,8 @@ type StopKeyPhrasesDetectionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopKeyPhrasesDetectionJobOutput struct {
@@ -52,6 +54,8 @@ type StopKeyPhrasesDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

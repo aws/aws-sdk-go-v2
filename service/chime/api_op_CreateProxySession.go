@@ -61,6 +61,8 @@ type CreateProxySessionInput struct {
 	// The preference for proxy phone number reuse, or stickiness, between the same
 	// participants across sessions.
 	NumberSelectionBehavior types.NumberSelectionBehavior
+
+	noSmithyDocumentSerde
 }
 
 type CreateProxySessionOutput struct {
@@ -70,6 +72,8 @@ type CreateProxySessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

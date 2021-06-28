@@ -47,6 +47,8 @@ type DescribeResourcePermissionsInput struct {
 
 	// The ID of the principal to filter permissions by.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeResourcePermissionsOutput struct {
@@ -60,6 +62,8 @@ type DescribeResourcePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeResourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

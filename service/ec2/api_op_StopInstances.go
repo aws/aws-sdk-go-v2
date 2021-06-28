@@ -87,6 +87,8 @@ type StopInstancesInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the
 	// Amazon EC2 User Guide. Default: false
 	Hibernate *bool
+
+	noSmithyDocumentSerde
 }
 
 type StopInstancesOutput struct {
@@ -96,6 +98,8 @@ type StopInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

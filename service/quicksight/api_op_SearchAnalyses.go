@@ -45,6 +45,8 @@ type SearchAnalysesInput struct {
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchAnalysesOutput struct {
@@ -63,6 +65,8 @@ type SearchAnalysesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchAnalysesMiddlewares(stack *middleware.Stack, options Options) (err error) {

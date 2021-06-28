@@ -40,6 +40,8 @@ type RebootClusterInput struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type RebootClusterOutput struct {
@@ -49,6 +51,8 @@ type RebootClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

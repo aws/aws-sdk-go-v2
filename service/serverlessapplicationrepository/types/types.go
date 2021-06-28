@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A nested application summary.
 type ApplicationDependencySummary struct {
 
@@ -14,6 +18,8 @@ type ApplicationDependencySummary struct {
 	//
 	// This member is required.
 	SemanticVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Policy statement applied to the application.
@@ -38,6 +44,8 @@ type ApplicationPolicyStatement struct {
 
 	// A unique ID for the statement.
 	StatementId *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of details about the application.
@@ -78,6 +86,8 @@ type ApplicationSummary struct {
 
 	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/).
 	SpdxLicenseId *string
+
+	noSmithyDocumentSerde
 }
 
 // Parameters supported by the application.
@@ -154,6 +164,8 @@ type ParameterDefinition struct {
 	// space-trimmed.For example, users might specify "test,dev,prod", and then Ref
 	// results in ["test","dev","prod"].
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Parameter value of the application.
@@ -170,6 +182,8 @@ type ParameterValue struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // This property corresponds to the AWS CloudFormation RollbackConfiguration
@@ -188,6 +202,8 @@ type RollbackConfiguration struct {
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 	// Data Type.
 	RollbackTriggers []RollbackTrigger
+
+	noSmithyDocumentSerde
 }
 
 // This property corresponds to the AWS CloudFormation RollbackTrigger
@@ -210,6 +226,8 @@ type RollbackTrigger struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // This property corresponds to the AWS CloudFormation Tag
@@ -232,6 +250,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Application version details.
@@ -315,6 +335,8 @@ type Version struct {
 	// A link to a public repository for the source code of your application, for
 	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // An application version summary.
@@ -339,4 +361,8 @@ type VersionSummary struct {
 	// A link to a public repository for the source code of your application, for
 	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

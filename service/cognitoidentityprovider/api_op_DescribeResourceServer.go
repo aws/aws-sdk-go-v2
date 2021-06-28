@@ -38,6 +38,8 @@ type DescribeResourceServerInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeResourceServerOutput struct {
@@ -49,6 +51,8 @@ type DescribeResourceServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeResourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type SearchQuantumTasksInput struct {
 	// returned from the previous request continue results where the previous request
 	// ended.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchQuantumTasksOutput struct {
@@ -59,6 +61,8 @@ type SearchQuantumTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchQuantumTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

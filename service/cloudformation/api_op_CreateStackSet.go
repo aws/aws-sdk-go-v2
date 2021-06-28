@@ -208,6 +208,8 @@ type CreateStackSetInput struct {
 	// in the AWS CloudFormation User Guide. Conditional: You must specify either the
 	// TemplateBody or the TemplateURL parameter, but not both.
 	TemplateURL *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateStackSetOutput struct {
@@ -217,6 +219,8 @@ type CreateStackSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

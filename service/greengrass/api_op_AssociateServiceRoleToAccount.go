@@ -35,6 +35,8 @@ type AssociateServiceRoleToAccountInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateServiceRoleToAccountOutput struct {
@@ -44,6 +46,8 @@ type AssociateServiceRoleToAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateServiceRoleToAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

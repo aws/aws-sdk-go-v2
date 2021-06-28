@@ -65,6 +65,8 @@ type PurchaseReservedInstancesOfferingInput struct {
 	// The time at which to purchase the Reserved Instance, in UTC format (for example,
 	// YYYY-MM-DDTHH:MM:SSZ).
 	PurchaseTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of PurchaseReservedInstancesOffering.
@@ -79,6 +81,8 @@ type PurchaseReservedInstancesOfferingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseReservedInstancesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {

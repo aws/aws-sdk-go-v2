@@ -75,6 +75,8 @@ type DescribeTrafficMirrorSessionsInput struct {
 
 	// The ID of the Traffic Mirror session.
 	TrafficMirrorSessionIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTrafficMirrorSessionsOutput struct {
@@ -89,6 +91,8 @@ type DescribeTrafficMirrorSessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrafficMirrorSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

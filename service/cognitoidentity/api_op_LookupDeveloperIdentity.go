@@ -65,6 +65,8 @@ type LookupDeveloperIdentityInput struct {
 	// response. This token can be used to call the API again and get results starting
 	// from the 11th match.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Returned in response to a successful LookupDeveloperIdentity action.
@@ -88,6 +90,8 @@ type LookupDeveloperIdentityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationLookupDeveloperIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

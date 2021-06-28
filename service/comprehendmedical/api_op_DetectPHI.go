@@ -36,6 +36,8 @@ type DetectPHIInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectPHIOutput struct {
@@ -61,6 +63,8 @@ type DetectPHIOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, options Options) (err error) {

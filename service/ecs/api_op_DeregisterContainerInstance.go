@@ -64,6 +64,8 @@ type DeregisterContainerInstanceInput struct {
 	// Balancer target group are deregistered. They begin connection draining according
 	// to the settings on the load balancer or target group.
 	Force *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterContainerInstanceOutput struct {
@@ -73,6 +75,8 @@ type DeregisterContainerInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterContainerInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type DeleteResolverQueryLogConfigInput struct {
 	//
 	// This member is required.
 	ResolverQueryLogConfigId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResolverQueryLogConfigOutput struct {
@@ -56,6 +58,8 @@ type DeleteResolverQueryLogConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type DescribeBackupsInput struct {
 
 	// Returns backups for the server with the specified ServerName.
 	ServerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBackupsOutput struct {
@@ -57,6 +59,8 @@ type DescribeBackupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

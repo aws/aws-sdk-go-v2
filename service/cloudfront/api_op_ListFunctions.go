@@ -48,6 +48,8 @@ type ListFunctionsInput struct {
 	// An optional filter to return only the functions that are in the specified stage,
 	// either DEVELOPMENT or LIVE.
 	Stage types.FunctionStage
+
+	noSmithyDocumentSerde
 }
 
 type ListFunctionsOutput struct {
@@ -57,6 +59,8 @@ type ListFunctionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

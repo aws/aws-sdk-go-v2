@@ -86,6 +86,8 @@ type ListTasksInput struct {
 	// The startedBy value with which to filter the task results. Specifying a
 	// startedBy value limits the results to tasks that were started with that value.
 	StartedBy *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTasksOutput struct {
@@ -101,6 +103,8 @@ type ListTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

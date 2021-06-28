@@ -34,6 +34,8 @@ type GetPatchBaselineInput struct {
 	//
 	// This member is required.
 	BaselineId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPatchBaselineOutput struct {
@@ -91,6 +93,8 @@ type GetPatchBaselineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPatchBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {

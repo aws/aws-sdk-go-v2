@@ -79,6 +79,8 @@ type ModifyInstancePlacementInput struct {
 
 	// The tenancy for the instance.
 	Tenancy types.HostTenancy
+
+	noSmithyDocumentSerde
 }
 
 type ModifyInstancePlacementOutput struct {
@@ -88,6 +90,8 @@ type ModifyInstancePlacementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyInstancePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,11 +47,15 @@ type DeleteStudioMemberInput struct {
 	// but one or more of the parameters are different, the retry fails with a
 	// ValidationException error.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStudioMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStudioMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type GetIntrospectionSchemaInput struct {
 	// A flag that specifies whether the schema introspection should contain
 	// directives.
 	IncludeDirectives *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetIntrospectionSchemaOutput struct {
@@ -53,6 +55,8 @@ type GetIntrospectionSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIntrospectionSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

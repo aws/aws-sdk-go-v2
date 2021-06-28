@@ -49,6 +49,8 @@ type CreateBackupPlanInput struct {
 	// matches an existing backup plan, that plan is returned. This parameter is
 	// optional.
 	CreatorRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBackupPlanOutput struct {
@@ -77,6 +79,8 @@ type CreateBackupPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,15 @@ type UpdateIndexingConfigurationInput struct {
 
 	// Thing indexing configuration.
 	ThingIndexingConfiguration *types.ThingIndexingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIndexingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIndexingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

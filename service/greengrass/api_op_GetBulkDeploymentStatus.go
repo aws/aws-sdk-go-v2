@@ -33,6 +33,8 @@ type GetBulkDeploymentStatusInput struct {
 	//
 	// This member is required.
 	BulkDeploymentId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBulkDeploymentStatusOutput struct {
@@ -57,6 +59,8 @@ type GetBulkDeploymentStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBulkDeploymentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

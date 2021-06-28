@@ -38,6 +38,8 @@ type DescribeStateMachineForExecutionInput struct {
 	//
 	// This member is required.
 	ExecutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStateMachineForExecutionOutput struct {
@@ -80,6 +82,8 @@ type DescribeStateMachineForExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStateMachineForExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

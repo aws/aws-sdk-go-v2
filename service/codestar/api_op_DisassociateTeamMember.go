@@ -41,11 +41,15 @@ type DisassociateTeamMemberInput struct {
 	//
 	// This member is required.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateTeamMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateTeamMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

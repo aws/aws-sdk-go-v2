@@ -41,6 +41,8 @@ type DescribeImportTasksInput struct {
 
 	// The token to request a specific page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImportTasksOutput struct {
@@ -54,6 +56,8 @@ type DescribeImportTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

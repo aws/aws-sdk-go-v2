@@ -42,6 +42,8 @@ type DeleteLunaClientInput struct {
 	//
 	// This member is required.
 	ClientArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLunaClientOutput struct {
@@ -53,6 +55,8 @@ type DeleteLunaClientOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

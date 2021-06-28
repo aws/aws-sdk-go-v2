@@ -114,6 +114,8 @@ type CreateMLModelInput struct {
 	// contains the MLModel recipe. You must specify either the recipe or its URI. If
 	// you don't specify a recipe or its URI, Amazon ML creates a default.
 	RecipeUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateMLModel operation, and is an acknowledgement
@@ -128,6 +130,8 @@ type CreateMLModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

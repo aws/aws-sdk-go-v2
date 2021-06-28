@@ -34,6 +34,8 @@ type StopRemoteAccessSessionInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server that describes the remote access session
@@ -46,6 +48,8 @@ type StopRemoteAccessSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

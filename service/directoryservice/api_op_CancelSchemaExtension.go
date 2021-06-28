@@ -40,11 +40,15 @@ type CancelSchemaExtensionInput struct {
 	//
 	// This member is required.
 	SchemaExtensionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelSchemaExtensionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {

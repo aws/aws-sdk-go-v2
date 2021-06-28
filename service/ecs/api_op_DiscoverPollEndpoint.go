@@ -40,6 +40,8 @@ type DiscoverPollEndpointInput struct {
 	// container-instance namespace, and then the container instance ID. For example,
 	// arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
 	ContainerInstance *string
+
+	noSmithyDocumentSerde
 }
 
 type DiscoverPollEndpointOutput struct {
@@ -52,6 +54,8 @@ type DiscoverPollEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDiscoverPollEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type CreateGlobalNetworkInput struct {
 
 	// The tags to apply to the resource during creation.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateGlobalNetworkOutput struct {
@@ -44,6 +46,8 @@ type CreateGlobalNetworkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

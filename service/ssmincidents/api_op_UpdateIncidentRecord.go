@@ -78,11 +78,15 @@ type UpdateIncidentRecordInput struct {
 
 	// The title of the incident is a brief and easily recognizable.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIncidentRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIncidentRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {

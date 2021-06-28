@@ -87,11 +87,15 @@ type ReplaceRouteInput struct {
 
 	// The ID of a VPC peering connection.
 	VpcPeeringConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type ReplaceRouteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReplaceRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

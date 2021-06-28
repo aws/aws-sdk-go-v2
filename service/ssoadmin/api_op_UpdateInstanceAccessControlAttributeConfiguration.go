@@ -45,11 +45,15 @@ type UpdateInstanceAccessControlAttributeConfigurationInput struct {
 	//
 	// This member is required.
 	InstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInstanceAccessControlAttributeConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInstanceAccessControlAttributeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

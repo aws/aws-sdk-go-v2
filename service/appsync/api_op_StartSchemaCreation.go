@@ -39,6 +39,8 @@ type StartSchemaCreationInput struct {
 	//
 	// This member is required.
 	Definition []byte
+
+	noSmithyDocumentSerde
 }
 
 type StartSchemaCreationOutput struct {
@@ -49,6 +51,8 @@ type StartSchemaCreationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSchemaCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {

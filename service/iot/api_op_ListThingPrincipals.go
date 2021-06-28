@@ -43,6 +43,8 @@ type ListThingPrincipalsInput struct {
 	// To retrieve the next set of results, the nextToken value from a previous
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the ListThingPrincipals operation.
@@ -57,6 +59,8 @@ type ListThingPrincipalsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThingPrincipalsMiddlewares(stack *middleware.Stack, options Options) (err error) {

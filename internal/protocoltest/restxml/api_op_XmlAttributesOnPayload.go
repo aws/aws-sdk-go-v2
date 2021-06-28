@@ -28,6 +28,8 @@ func (c *Client) XmlAttributesOnPayload(ctx context.Context, params *XmlAttribut
 
 type XmlAttributesOnPayloadInput struct {
 	Payload *types.XmlAttributesInputOutput
+
+	noSmithyDocumentSerde
 }
 
 type XmlAttributesOnPayloadOutput struct {
@@ -35,6 +37,8 @@ type XmlAttributesOnPayloadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlAttributesOnPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {

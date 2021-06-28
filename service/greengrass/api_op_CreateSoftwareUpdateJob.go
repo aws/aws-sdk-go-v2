@@ -65,6 +65,8 @@ type CreateSoftwareUpdateJobInput struct {
 	// The minimum level of log statements that should be logged by the OTA Agent
 	// during an update.
 	UpdateAgentLogLevel types.UpdateAgentLogLevel
+
+	noSmithyDocumentSerde
 }
 
 type CreateSoftwareUpdateJobOutput struct {
@@ -80,6 +82,8 @@ type CreateSoftwareUpdateJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSoftwareUpdateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

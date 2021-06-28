@@ -45,6 +45,8 @@ type ListContainerRecipesInput struct {
 	// shared with you. You can omit this field to return container recipes belonging
 	// to your account.
 	Owner types.Ownership
+
+	noSmithyDocumentSerde
 }
 
 type ListContainerRecipesOutput struct {
@@ -63,6 +65,8 @@ type ListContainerRecipesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContainerRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {

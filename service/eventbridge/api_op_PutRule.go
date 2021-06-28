@@ -97,6 +97,8 @@ type PutRuleInput struct {
 
 	// The list of key-value pairs to associate with the rule.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutRuleOutput struct {
@@ -106,6 +108,8 @@ type PutRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

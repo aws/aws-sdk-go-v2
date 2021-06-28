@@ -97,6 +97,8 @@ type StartSpeechSynthesisTaskInput struct {
 	// Specifies whether the input text is plain text or SSML. The default value is
 	// plain text.
 	TextType types.TextType
+
+	noSmithyDocumentSerde
 }
 
 type StartSpeechSynthesisTaskOutput struct {
@@ -107,6 +109,8 @@ type StartSpeechSynthesisTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSpeechSynthesisTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

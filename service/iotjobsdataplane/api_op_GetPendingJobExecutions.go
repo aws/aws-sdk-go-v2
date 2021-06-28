@@ -33,6 +33,8 @@ type GetPendingJobExecutionsInput struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPendingJobExecutionsOutput struct {
@@ -45,6 +47,8 @@ type GetPendingJobExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPendingJobExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

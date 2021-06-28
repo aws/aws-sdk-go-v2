@@ -67,6 +67,8 @@ type PutMethodResponseInput struct {
 	// integration.response.body.{JSON-expression}, where JSON-expression is a valid
 	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -127,6 +129,8 @@ type PutMethodResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

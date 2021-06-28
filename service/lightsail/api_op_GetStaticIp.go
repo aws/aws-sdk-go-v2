@@ -33,6 +33,8 @@ type GetStaticIpInput struct {
 	//
 	// This member is required.
 	StaticIpName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStaticIpOutput struct {
@@ -43,6 +45,8 @@ type GetStaticIpOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

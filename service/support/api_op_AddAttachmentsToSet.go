@@ -56,6 +56,8 @@ type AddAttachmentsToSetInput struct {
 	// an attachmentSetId is specified, the attachments are added to the specified set,
 	// if it exists.
 	AttachmentSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // The ID and expiry time of the attachment set returned by the AddAttachmentsToSet
@@ -73,6 +75,8 @@ type AddAttachmentsToSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddAttachmentsToSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,11 +44,15 @@ type DisassociateAddressInput struct {
 
 	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
 	PublicIp *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type AddNotificationChannelInput struct {
 	//
 	// This member is required.
 	Config *types.NotificationChannelConfig
+
+	noSmithyDocumentSerde
 }
 
 type AddNotificationChannelOutput struct {
@@ -57,6 +59,8 @@ type AddNotificationChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

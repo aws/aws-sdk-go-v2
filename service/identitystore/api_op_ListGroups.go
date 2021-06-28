@@ -54,6 +54,8 @@ type ListGroupsInput struct {
 	// the total results are more than the size of one page, and when this token is
 	// used in the API request to search for the next page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGroupsOutput struct {
@@ -71,6 +73,8 @@ type ListGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

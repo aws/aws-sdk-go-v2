@@ -49,6 +49,8 @@ type CreateRoomInput struct {
 
 	// The tags for the room.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateRoomOutput struct {
@@ -58,6 +60,8 @@ type CreateRoomOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteOpsMetadataInput struct {
 	//
 	// This member is required.
 	OpsMetadataArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOpsMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOpsMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

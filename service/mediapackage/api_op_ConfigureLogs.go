@@ -40,6 +40,8 @@ type ConfigureLogsInput struct {
 
 	// Configure ingress access logging.
 	IngressAccessLogs *types.IngressAccessLogs
+
+	noSmithyDocumentSerde
 }
 
 type ConfigureLogsOutput struct {
@@ -67,6 +69,8 @@ type ConfigureLogsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfigureLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {

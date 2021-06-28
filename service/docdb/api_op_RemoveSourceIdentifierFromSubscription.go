@@ -42,6 +42,8 @@ type RemoveSourceIdentifierFromSubscriptionInput struct {
 	//
 	// This member is required.
 	SubscriptionName *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveSourceIdentifierFromSubscriptionOutput struct {
@@ -51,6 +53,8 @@ type RemoveSourceIdentifierFromSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

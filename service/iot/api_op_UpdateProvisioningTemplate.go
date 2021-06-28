@@ -52,11 +52,15 @@ type UpdateProvisioningTemplateInput struct {
 
 	// Removes pre-provisioning hook template.
 	RemovePreProvisioningHook *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProvisioningTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

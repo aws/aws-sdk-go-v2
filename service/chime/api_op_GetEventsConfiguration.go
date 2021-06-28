@@ -39,6 +39,8 @@ type GetEventsConfigurationInput struct {
 	//
 	// This member is required.
 	BotId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEventsConfigurationOutput struct {
@@ -48,6 +50,8 @@ type GetEventsConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEventsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

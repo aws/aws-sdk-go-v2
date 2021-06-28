@@ -42,6 +42,8 @@ type ListTagsInput struct {
 	// returns this token. To retrieve the next set of tags, use it in the subsequent
 	// request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsOutput struct {
@@ -55,6 +57,8 @@ type ListTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

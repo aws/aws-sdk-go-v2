@@ -76,6 +76,8 @@ type InitiateVaultLockInput struct {
 
 	// The vault lock policy as a JSON string, which uses "\" as an escape character.
 	Policy *types.VaultLockPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -86,6 +88,8 @@ type InitiateVaultLockOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInitiateVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {

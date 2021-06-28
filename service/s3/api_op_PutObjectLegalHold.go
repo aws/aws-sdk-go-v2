@@ -73,6 +73,8 @@ type PutObjectLegalHoldInput struct {
 
 	// The version ID of the object that you want to place a Legal Hold on.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutObjectLegalHoldOutput struct {
@@ -83,6 +85,8 @@ type PutObjectLegalHoldOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutObjectLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {

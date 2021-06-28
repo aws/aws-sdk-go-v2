@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type Account struct {
 	//
 	// This member is required.
 	EmailAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // A behavior graph in Detective.
@@ -30,6 +33,8 @@ type Graph struct {
 	// The date and time that the behavior graph was created. The value is in
 	// milliseconds since the epoch.
 	CreatedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details about a member account that was invited to contribute to a behavior
@@ -124,6 +129,8 @@ type MemberDetail struct {
 
 	// The data and time when the member account data volume was last updated.
 	VolumeUsageUpdatedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A member account that was included in a request but for which the request could
@@ -135,4 +142,8 @@ type UnprocessedAccount struct {
 
 	// The reason that the member account request could not be processed.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

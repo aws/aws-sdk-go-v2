@@ -71,6 +71,8 @@ type CreateStageInput struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateStageOutput struct {
@@ -127,6 +129,8 @@ type CreateStageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStageMiddlewares(stack *middleware.Stack, options Options) (err error) {

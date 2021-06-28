@@ -176,6 +176,8 @@ type UpdateIntegrationInput struct {
 	// configuration, private integration traffic uses the HTTPS protocol. Supported
 	// only for HTTP APIs.
 	TlsConfig *types.TlsConfigInput
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIntegrationOutput struct {
@@ -332,6 +334,8 @@ type UpdateIntegrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

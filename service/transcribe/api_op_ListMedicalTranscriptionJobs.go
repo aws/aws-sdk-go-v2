@@ -49,6 +49,8 @@ type ListMedicalTranscriptionJobsInput struct {
 	// If you don't specify a status, Amazon Transcribe Medical returns all
 	// transcription jobs ordered by creation date.
 	Status types.TranscriptionJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListMedicalTranscriptionJobsOutput struct {
@@ -68,6 +70,8 @@ type ListMedicalTranscriptionJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMedicalTranscriptionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

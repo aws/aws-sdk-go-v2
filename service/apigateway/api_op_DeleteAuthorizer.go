@@ -39,11 +39,15 @@ type DeleteAuthorizerInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAuthorizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteDomainConfigurationInput struct {
 	//
 	// This member is required.
 	DomainConfigurationName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDomainConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

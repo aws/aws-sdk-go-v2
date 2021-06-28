@@ -56,6 +56,8 @@ type GetSSHPublicKeyInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetSSHPublicKey request.
@@ -66,6 +68,8 @@ type GetSSHPublicKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type DescribeNodeAssociationStatusInput struct {
 	//
 	// This member is required.
 	ServerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNodeAssociationStatusOutput struct {
@@ -70,6 +72,8 @@ type DescribeNodeAssociationStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNodeAssociationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

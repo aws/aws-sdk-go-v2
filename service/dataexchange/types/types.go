@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -21,12 +22,16 @@ type AssetDestinationEntry struct {
 
 	// The name of the object in Amazon S3 for the asset.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 type AssetDetails struct {
 
 	// The S3 object that is the asset.
 	S3SnapshotAsset *S3SnapshotAsset
+
+	noSmithyDocumentSerde
 }
 
 // An asset in AWS Data Exchange is a piece of data that can be stored as an S3
@@ -87,6 +92,8 @@ type AssetEntry struct {
 	// viewed. This parameter is returned when an asset owner is viewing the entitled
 	// copy of its owned asset.
 	SourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // The source of the assets.
@@ -101,6 +108,8 @@ type AssetSourceEntry struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // A data set is an AWS resource with one or more revisions.
@@ -156,6 +165,8 @@ type DataSetEntry struct {
 	// being viewed. This parameter is returned when a data set owner is viewing the
 	// entitled copy of its owned data set.
 	SourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type Details struct {
@@ -163,6 +174,8 @@ type Details struct {
 
 	// The list of sources for the assets.
 	ImportAssetsFromS3JobErrorDetails []AssetSourceEntry
+
+	noSmithyDocumentSerde
 }
 
 // Details of the operation to be performed by the job.
@@ -185,6 +198,8 @@ type ExportAssetsToS3RequestDetails struct {
 
 	// Encryption configuration for the export job.
 	Encryption *ExportServerSideEncryption
+
+	noSmithyDocumentSerde
 }
 
 // Details about the export to Amazon S3 response.
@@ -207,6 +222,8 @@ type ExportAssetsToS3ResponseDetails struct {
 
 	// Encryption configuration of the export job.
 	Encryption *ExportServerSideEncryption
+
+	noSmithyDocumentSerde
 }
 
 // Details of the operation to be performed by the job.
@@ -226,6 +243,8 @@ type ExportAssetToSignedUrlRequestDetails struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the export to signed URL response.
@@ -251,6 +270,8 @@ type ExportAssetToSignedUrlResponseDetails struct {
 
 	// The date and time that the signed URL expires, in ISO 8601 format.
 	SignedUrlExpiresAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details of the operation to be performed by the job.
@@ -268,6 +289,8 @@ type ExportRevisionsToS3RequestDetails struct {
 
 	// Encryption configuration for the export job.
 	Encryption *ExportServerSideEncryption
+
+	noSmithyDocumentSerde
 }
 
 // Details about the export revisions to Amazon S3 response.
@@ -285,6 +308,8 @@ type ExportRevisionsToS3ResponseDetails struct {
 
 	// Encryption configuration of the export job.
 	Encryption *ExportServerSideEncryption
+
+	noSmithyDocumentSerde
 }
 
 // Encryption configuration of the export job. Includes the encryption type as well
@@ -301,6 +326,8 @@ type ExportServerSideEncryption struct {
 	// the Amazon S3 objects. This parameter is required if you choose aws:kms as an
 	// encryption type.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ImportAssetFromSignedUrlJobErrorDetails struct {
@@ -311,6 +338,8 @@ type ImportAssetFromSignedUrlJobErrorDetails struct {
 	//
 	// This member is required.
 	AssetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the operation to be performed by the job.
@@ -337,6 +366,8 @@ type ImportAssetFromSignedUrlRequestDetails struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The details in the response for an import request, including the signed URL and
@@ -367,6 +398,8 @@ type ImportAssetFromSignedUrlResponseDetails struct {
 
 	// The time and date at which the signed URL expires, in ISO 8601 format.
 	SignedUrlExpiresAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details of the operation to be performed by the job.
@@ -386,6 +419,8 @@ type ImportAssetsFromS3RequestDetails struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details from an import from Amazon S3 response.
@@ -405,6 +440,8 @@ type ImportAssetsFromS3ResponseDetails struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // AWS Data Exchange Jobs are asynchronous import or export operations used to
@@ -451,6 +488,8 @@ type JobEntry struct {
 
 	// Errors for jobs.
 	Errors []JobError
+
+	noSmithyDocumentSerde
 }
 
 // An error that occurred with the job request.
@@ -479,12 +518,16 @@ type JobError struct {
 
 	// The type of resource related to the error.
 	ResourceType JobErrorResourceTypes
+
+	noSmithyDocumentSerde
 }
 
 type OriginDetails struct {
 
 	// This member is required.
 	ProductId *string
+
+	noSmithyDocumentSerde
 }
 
 // The details for the request.
@@ -504,6 +547,8 @@ type RequestDetails struct {
 
 	// Details about the import from Amazon S3 request.
 	ImportAssetsFromS3 *ImportAssetsFromS3RequestDetails
+
+	noSmithyDocumentSerde
 }
 
 // Details for the response.
@@ -523,6 +568,8 @@ type ResponseDetails struct {
 
 	// Details for the import from Amazon S3 response.
 	ImportAssetsFromS3 *ImportAssetsFromS3ResponseDetails
+
+	noSmithyDocumentSerde
 }
 
 // The destination where the assets in the revision will be exported.
@@ -543,6 +590,8 @@ type RevisionDestinationEntry struct {
 	// exporting revisions
 	// (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns).
 	KeyPattern *string
+
+	noSmithyDocumentSerde
 }
 
 // A revision is a container for one or more assets.
@@ -589,6 +638,8 @@ type RevisionEntry struct {
 	// being viewed. This parameter is returned when a revision owner is viewing the
 	// entitled copy of its owned revision.
 	SourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // The S3 object that is the asset.
@@ -598,4 +649,8 @@ type S3SnapshotAsset struct {
 	//
 	// This member is required.
 	Size float64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

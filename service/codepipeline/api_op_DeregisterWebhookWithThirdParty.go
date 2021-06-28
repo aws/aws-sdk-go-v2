@@ -32,11 +32,15 @@ type DeregisterWebhookWithThirdPartyInput struct {
 
 	// The name of the webhook you want to deregister.
 	WebhookName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterWebhookWithThirdPartyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterWebhookWithThirdPartyMiddlewares(stack *middleware.Stack, options Options) (err error) {

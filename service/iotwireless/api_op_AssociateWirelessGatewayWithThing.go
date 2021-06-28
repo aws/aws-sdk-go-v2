@@ -37,11 +37,15 @@ type AssociateWirelessGatewayWithThingInput struct {
 	//
 	// This member is required.
 	ThingArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateWirelessGatewayWithThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateWirelessGatewayWithThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

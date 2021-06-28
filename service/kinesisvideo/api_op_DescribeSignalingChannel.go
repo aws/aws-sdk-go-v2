@@ -36,6 +36,8 @@ type DescribeSignalingChannelInput struct {
 
 	// The name of the signaling channel that you want to describe.
 	ChannelName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSignalingChannelOutput struct {
@@ -46,6 +48,8 @@ type DescribeSignalingChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

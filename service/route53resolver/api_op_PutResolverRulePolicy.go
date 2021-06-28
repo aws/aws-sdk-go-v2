@@ -60,6 +60,8 @@ type PutResolverRulePolicyInput struct {
 	//
 	// This member is required.
 	ResolverRulePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a PutResolverRulePolicy request.
@@ -70,6 +72,8 @@ type PutResolverRulePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutResolverRulePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -85,6 +85,8 @@ type StartBackupJobInput struct {
 	// it doesn't start successfully. This value is optional, and the default is 8
 	// hours.
 	StartWindowMinutes *int64
+
+	noSmithyDocumentSerde
 }
 
 type StartBackupJobOutput struct {
@@ -104,6 +106,8 @@ type StartBackupJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

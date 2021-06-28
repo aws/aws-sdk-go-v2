@@ -10,6 +10,8 @@ import (
 // The provided iterator exceeds the maximum age allowed.
 type ExpiredIteratorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredIteratorException) Error() string {
@@ -27,6 +29,8 @@ func (e *ExpiredIteratorException) ErrorFault() smithy.ErrorFault { return smith
 // The pagination token passed to the operation is expired.
 type ExpiredNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredNextTokenException) Error() string {
@@ -45,6 +49,8 @@ func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // used. For more information, see the returned message.
 type InvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgumentException) Error() string {
@@ -63,6 +69,8 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // to.
 type KMSAccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSAccessDeniedException) Error() string {
@@ -81,6 +89,8 @@ func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smith
 // enabled.
 type KMSDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSDisabledException) Error() string {
@@ -102,6 +112,8 @@ func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // AWS Key Management Service Developer Guide.
 type KMSInvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSInvalidStateException) Error() string {
@@ -120,6 +132,8 @@ func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smith
 // found.
 type KMSNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSNotFoundException) Error() string {
@@ -137,6 +151,8 @@ func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The AWS access key ID needs a subscription for the service.
 type KMSOptInRequired struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSOptInRequired) Error() string {
@@ -157,6 +173,8 @@ func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // in the AWS Key Management Service Developer Guide.
 type KMSThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSThrottlingException) Error() string {
@@ -175,6 +193,8 @@ func (e *KMSThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.
 // concurrent stream requests exceeds the maximum number allowed.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -199,6 +219,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // General Reference.
 type ProvisionedThroughputExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProvisionedThroughputExceededException) Error() string {
@@ -221,6 +243,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 // resource must be in the ACTIVE state.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -239,6 +263,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // correctly.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

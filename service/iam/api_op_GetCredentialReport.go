@@ -32,6 +32,7 @@ func (c *Client) GetCredentialReport(ctx context.Context, params *GetCredentialR
 }
 
 type GetCredentialReportInput struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetCredentialReport request.
@@ -49,6 +50,8 @@ type GetCredentialReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCredentialReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

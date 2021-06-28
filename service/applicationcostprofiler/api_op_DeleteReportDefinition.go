@@ -33,6 +33,8 @@ type DeleteReportDefinitionInput struct {
 	//
 	// This member is required.
 	ReportId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteReportDefinitionOutput struct {
@@ -42,6 +44,8 @@ type DeleteReportDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

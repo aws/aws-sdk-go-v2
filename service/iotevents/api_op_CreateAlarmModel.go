@@ -81,6 +81,8 @@ type CreateAlarmModelInput struct {
 	// in the AWS IoT Events Developer Guide. You can create up to 50 tags for one
 	// alarm model.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAlarmModelOutput struct {
@@ -119,6 +121,8 @@ type CreateAlarmModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAlarmModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

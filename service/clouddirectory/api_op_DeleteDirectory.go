@@ -33,6 +33,8 @@ type DeleteDirectoryInput struct {
 	//
 	// This member is required.
 	DirectoryArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDirectoryOutput struct {
@@ -44,6 +46,8 @@ type DeleteDirectoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

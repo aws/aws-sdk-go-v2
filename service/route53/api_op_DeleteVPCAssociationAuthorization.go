@@ -53,12 +53,16 @@ type DeleteVPCAssociationAuthorizationInput struct {
 	//
 	// This member is required.
 	VPC *types.VPC
+
+	noSmithyDocumentSerde
 }
 
 // Empty response for the request.
 type DeleteVPCAssociationAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVPCAssociationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

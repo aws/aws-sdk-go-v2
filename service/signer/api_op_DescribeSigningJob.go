@@ -40,6 +40,8 @@ type DescribeSigningJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSigningJobOutput struct {
@@ -107,6 +109,8 @@ type DescribeSigningJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

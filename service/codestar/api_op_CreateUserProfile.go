@@ -53,6 +53,8 @@ type CreateUserProfileInput struct {
 	// allows the user remote access to project resources, this public key will be used
 	// along with the user's private key for SSH access.
 	SshPublicKey *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserProfileOutput struct {
@@ -82,6 +84,8 @@ type CreateUserProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -68,6 +68,8 @@ type CreateWebACLMigrationStackInput struct {
 	//
 	// This member is required.
 	WebACLId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateWebACLMigrationStackOutput struct {
@@ -79,6 +81,8 @@ type CreateWebACLMigrationStackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWebACLMigrationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

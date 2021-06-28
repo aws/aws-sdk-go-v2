@@ -51,6 +51,8 @@ type ListImagesInput struct {
 	// want to view images owned by yourself, by Amazon, or those images that have been
 	// shared with you by other customers.
 	Owner types.Ownership
+
+	noSmithyDocumentSerde
 }
 
 type ListImagesOutput struct {
@@ -68,6 +70,8 @@ type ListImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

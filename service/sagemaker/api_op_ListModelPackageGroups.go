@@ -54,6 +54,8 @@ type ListModelPackageGroupsInput struct {
 
 	// The sort order for results. The default is Ascending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListModelPackageGroupsOutput struct {
@@ -69,6 +71,8 @@ type ListModelPackageGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListModelPackageGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type StopEdgePackagingJobInput struct {
 	//
 	// This member is required.
 	EdgePackagingJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopEdgePackagingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

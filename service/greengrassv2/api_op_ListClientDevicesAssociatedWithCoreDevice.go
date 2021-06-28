@@ -41,6 +41,8 @@ type ListClientDevicesAssociatedWithCoreDeviceInput struct {
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListClientDevicesAssociatedWithCoreDeviceOutput struct {
@@ -55,6 +57,8 @@ type ListClientDevicesAssociatedWithCoreDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListClientDevicesAssociatedWithCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

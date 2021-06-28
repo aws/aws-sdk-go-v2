@@ -28,6 +28,7 @@ func (c *Client) GetNotificationChannel(ctx context.Context, params *GetNotifica
 }
 
 type GetNotificationChannelInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetNotificationChannelOutput struct {
@@ -40,6 +41,8 @@ type GetNotificationChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

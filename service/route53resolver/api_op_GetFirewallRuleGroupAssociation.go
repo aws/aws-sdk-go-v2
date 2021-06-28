@@ -35,6 +35,8 @@ type GetFirewallRuleGroupAssociationInput struct {
 	//
 	// This member is required.
 	FirewallRuleGroupAssociationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFirewallRuleGroupAssociationOutput struct {
@@ -44,6 +46,8 @@ type GetFirewallRuleGroupAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFirewallRuleGroupAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

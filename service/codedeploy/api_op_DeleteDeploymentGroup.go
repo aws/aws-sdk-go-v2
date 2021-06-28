@@ -40,6 +40,8 @@ type DeleteDeploymentGroupInput struct {
 	//
 	// This member is required.
 	DeploymentGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteDeploymentGroup operation.
@@ -55,6 +57,8 @@ type DeleteDeploymentGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

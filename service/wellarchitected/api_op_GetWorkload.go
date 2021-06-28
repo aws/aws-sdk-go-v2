@@ -34,6 +34,8 @@ type GetWorkloadInput struct {
 	//
 	// This member is required.
 	WorkloadId *string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a get workload call.
@@ -44,6 +46,8 @@ type GetWorkloadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,11 +45,15 @@ type PutDestinationPolicyInput struct {
 	//
 	// This member is required.
 	DestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 type PutDestinationPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDestinationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

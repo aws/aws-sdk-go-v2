@@ -34,6 +34,8 @@ type ListJobTemplatesInput struct {
 
 	// The token to use to return the next set of results in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListJobTemplatesOutput struct {
@@ -47,6 +49,8 @@ type ListJobTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

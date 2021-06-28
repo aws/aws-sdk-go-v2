@@ -39,6 +39,8 @@ type RebalanceSlotsInGlobalReplicationGroupInput struct {
 	//
 	// This member is required.
 	GlobalReplicationGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type RebalanceSlotsInGlobalReplicationGroupOutput struct {
@@ -54,6 +56,8 @@ type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebalanceSlotsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

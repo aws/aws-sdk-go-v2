@@ -47,11 +47,15 @@ type UpdateUserDefinedFunctionInput struct {
 	// The ID of the Data Catalog where the function to be updated is located. If none
 	// is provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserDefinedFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

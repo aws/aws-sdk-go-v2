@@ -101,6 +101,8 @@ type CreateModelPackageInput struct {
 	// Specifies configurations for one or more transform jobs that Amazon SageMaker
 	// runs to test the model package.
 	ValidationSpecification *types.ModelPackageValidationSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateModelPackageOutput struct {
@@ -112,6 +114,8 @@ type CreateModelPackageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {

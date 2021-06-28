@@ -41,6 +41,8 @@ type DescribeScheduleInput struct {
 
 	// Placeholder documentation for __string
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DescribeScheduleResponse
@@ -54,6 +56,8 @@ type DescribeScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,11 +40,15 @@ type TerminateJobFlowsInput struct {
 	//
 	// This member is required.
 	JobFlowIds []string
+
+	noSmithyDocumentSerde
 }
 
 type TerminateJobFlowsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateJobFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

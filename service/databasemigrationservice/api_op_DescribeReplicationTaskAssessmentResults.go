@@ -51,6 +51,8 @@ type DescribeReplicationTaskAssessmentResultsInput struct {
 	// this input parameter is specified, the API returns only one result and ignore
 	// the values of the MaxRecords and Marker parameters.
 	ReplicationTaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -69,6 +71,8 @@ type DescribeReplicationTaskAssessmentResultsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReplicationTaskAssessmentResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type RegisterOrganizationAdminAccountInput struct {
 	//
 	// This member is required.
 	AdminAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterOrganizationAdminAccountOutput struct {
@@ -45,6 +47,8 @@ type RegisterOrganizationAdminAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

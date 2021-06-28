@@ -53,6 +53,8 @@ type UpdateChannelInput struct {
 
 	// The metadata for the update request.
 	Metadata *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateChannelOutput struct {
@@ -62,6 +64,8 @@ type UpdateChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

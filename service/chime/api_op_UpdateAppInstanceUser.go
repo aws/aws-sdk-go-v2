@@ -41,6 +41,8 @@ type UpdateAppInstanceUserInput struct {
 
 	// The metadata of the AppInstanceUser.
 	Metadata *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAppInstanceUserOutput struct {
@@ -50,6 +52,8 @@ type UpdateAppInstanceUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

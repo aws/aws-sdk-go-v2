@@ -48,6 +48,8 @@ type DescribeElasticIpsInput struct {
 	// description of the Elastic IP addresses that are registered with the specified
 	// stack.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeElasticIps request.
@@ -58,6 +60,8 @@ type DescribeElasticIpsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeElasticIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {

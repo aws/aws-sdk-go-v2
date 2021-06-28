@@ -34,11 +34,15 @@ type DeleteMonitoringScheduleInput struct {
 	//
 	// This member is required.
 	MonitoringScheduleName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMonitoringScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

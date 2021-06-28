@@ -37,6 +37,8 @@ type DescribeImageVersionInput struct {
 
 	// The version of the image. If not specified, the latest version is described.
 	Version *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImageVersionOutput struct {
@@ -70,6 +72,8 @@ type DescribeImageVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type ListSmartHomeAppliancesInput struct {
 
 	// The tokens used for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSmartHomeAppliancesOutput struct {
@@ -52,6 +54,8 @@ type ListSmartHomeAppliancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSmartHomeAppliancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

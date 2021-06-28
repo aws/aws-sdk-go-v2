@@ -101,6 +101,8 @@ type PutMetricStreamInput struct {
 	// granting a user permission to access or change only resources with certain tag
 	// values.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutMetricStreamOutput struct {
@@ -110,6 +112,8 @@ type PutMetricStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMetricStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

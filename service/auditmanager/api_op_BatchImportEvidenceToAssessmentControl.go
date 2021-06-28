@@ -49,6 +49,8 @@ type BatchImportEvidenceToAssessmentControlInput struct {
 	//
 	// This member is required.
 	ManualEvidence []types.ManualEvidence
+
+	noSmithyDocumentSerde
 }
 
 type BatchImportEvidenceToAssessmentControlOutput struct {
@@ -58,6 +60,8 @@ type BatchImportEvidenceToAssessmentControlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchImportEvidenceToAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {

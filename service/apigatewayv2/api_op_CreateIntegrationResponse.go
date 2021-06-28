@@ -75,6 +75,8 @@ type CreateIntegrationResponseInput struct {
 	// The template selection expression for the integration response. Supported only
 	// for WebSocket APIs.
 	TemplateSelectionExpression *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateIntegrationResponseOutput struct {
@@ -118,6 +120,8 @@ type CreateIntegrationResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

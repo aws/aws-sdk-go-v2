@@ -31,6 +31,8 @@ type DescribeHubInput struct {
 
 	// The ARN of the Hub resource to retrieve.
 	HubArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHubOutput struct {
@@ -48,6 +50,8 @@ type DescribeHubOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHubMiddlewares(stack *middleware.Stack, options Options) (err error) {

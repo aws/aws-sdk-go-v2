@@ -50,6 +50,8 @@ type CancelStepsInput struct {
 	// The option to choose to cancel RUNNING steps. By default, the value is
 	// SEND_INTERRUPT.
 	StepCancellationOption types.StepCancellationOption
+
+	noSmithyDocumentSerde
 }
 
 // The output for the CancelSteps operation.
@@ -61,6 +63,8 @@ type CancelStepsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {

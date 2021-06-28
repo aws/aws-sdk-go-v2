@@ -73,6 +73,8 @@ type DescribeEventSubscriptionsInput struct {
 	// request, Amazon Redshift returns a response with the subscriptions that have
 	// either or both of these tag values associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -90,6 +92,8 @@ type DescribeEventSubscriptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

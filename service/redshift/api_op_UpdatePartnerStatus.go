@@ -57,6 +57,8 @@ type UpdatePartnerStatusInput struct {
 
 	// The status message provided by the partner.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePartnerStatusOutput struct {
@@ -69,6 +71,8 @@ type UpdatePartnerStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePartnerStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

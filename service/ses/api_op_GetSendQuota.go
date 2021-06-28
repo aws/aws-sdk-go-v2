@@ -28,6 +28,7 @@ func (c *Client) GetSendQuota(ctx context.Context, params *GetSendQuotaInput, op
 }
 
 type GetSendQuotaInput struct {
+	noSmithyDocumentSerde
 }
 
 // Represents your Amazon SES daily sending quota, maximum send rate, and the
@@ -48,6 +49,8 @@ type GetSendQuotaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSendQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {

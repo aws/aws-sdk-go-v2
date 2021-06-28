@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -16,6 +17,8 @@ type HumanLoopDataAttributes struct {
 	//
 	// This member is required.
 	ContentClassifiers []ContentClassifier
+
+	noSmithyDocumentSerde
 }
 
 // An object containing the human loop input in JSON format.
@@ -26,6 +29,8 @@ type HumanLoopInput struct {
 	//
 	// This member is required.
 	InputContent *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about where the human output will be stored.
@@ -36,6 +41,8 @@ type HumanLoopOutput struct {
 	//
 	// This member is required.
 	OutputS3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about the human loop.
@@ -57,4 +64,8 @@ type HumanLoopSummary struct {
 
 	// The status of the human loop.
 	HumanLoopStatus HumanLoopStatus
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

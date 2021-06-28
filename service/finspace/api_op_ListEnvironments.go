@@ -36,6 +36,8 @@ type ListEnvironmentsInput struct {
 	// previous request was truncated. To get the next set of pages, pass in the
 	// nextToken value from the response object of the previous page call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEnvironmentsOutput struct {
@@ -49,6 +51,8 @@ type ListEnvironmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

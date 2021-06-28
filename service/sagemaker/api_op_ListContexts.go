@@ -56,6 +56,8 @@ type ListContextsInput struct {
 
 	// A filter that returns only contexts with the specified source URI.
 	SourceUri *string
+
+	noSmithyDocumentSerde
 }
 
 type ListContextsOutput struct {
@@ -68,6 +70,8 @@ type ListContextsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContextsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type UpdateJobQueueInput struct {
 	// ENABLED, it can accept jobs. If the job queue state is DISABLED, new jobs can't
 	// be added to the queue, but jobs already in the queue can finish.
 	State types.JQState
+
+	noSmithyDocumentSerde
 }
 
 type UpdateJobQueueOutput struct {
@@ -71,6 +73,8 @@ type UpdateJobQueueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

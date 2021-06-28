@@ -45,6 +45,8 @@ type BatchDetectSyntaxInput struct {
 	//
 	// This member is required.
 	TextList []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDetectSyntaxOutput struct {
@@ -67,6 +69,8 @@ type BatchDetectSyntaxOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {

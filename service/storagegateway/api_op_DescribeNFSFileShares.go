@@ -36,6 +36,8 @@ type DescribeNFSFileSharesInput struct {
 	//
 	// This member is required.
 	FileShareARNList []string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeNFSFileSharesOutput
@@ -46,6 +48,8 @@ type DescribeNFSFileSharesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNFSFileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {

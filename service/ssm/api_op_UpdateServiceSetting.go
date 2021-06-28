@@ -88,12 +88,16 @@ type UpdateServiceSettingInput struct {
 	//
 	// This member is required.
 	SettingValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The result body of the UpdateServiceSetting API operation.
 type UpdateServiceSettingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {

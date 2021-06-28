@@ -152,6 +152,8 @@ type GenerateOrganizationsAccessReportInput struct {
 	// principal that is limited by the SCP attempted to access an Amazon Web Services
 	// service.
 	OrganizationsPolicyId *string
+
+	noSmithyDocumentSerde
 }
 
 type GenerateOrganizationsAccessReportOutput struct {
@@ -162,6 +164,8 @@ type GenerateOrganizationsAccessReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateOrganizationsAccessReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

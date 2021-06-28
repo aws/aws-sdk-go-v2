@@ -46,6 +46,8 @@ type DescribeStreamConsumerInput struct {
 	// more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
 	StreamARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStreamConsumerOutput struct {
@@ -57,6 +59,8 @@ type DescribeStreamConsumerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {

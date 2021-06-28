@@ -48,6 +48,8 @@ type PublishSchemaInput struct {
 	// The new name under which the schema will be published. If this is not provided,
 	// the development schema is considered.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type PublishSchemaOutput struct {
@@ -58,6 +60,8 @@ type PublishSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

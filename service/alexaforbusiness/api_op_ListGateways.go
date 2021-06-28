@@ -40,6 +40,8 @@ type ListGatewaysInput struct {
 
 	// The token used to paginate though multiple pages of gateway summaries.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGatewaysOutput struct {
@@ -52,6 +54,8 @@ type ListGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

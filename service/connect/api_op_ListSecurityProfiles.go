@@ -46,6 +46,8 @@ type ListSecurityProfilesInput struct {
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSecurityProfilesOutput struct {
@@ -58,6 +60,8 @@ type ListSecurityProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSecurityProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

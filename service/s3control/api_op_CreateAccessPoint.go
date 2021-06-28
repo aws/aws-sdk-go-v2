@@ -90,6 +90,8 @@ type CreateAccessPointInput struct {
 	// requests from the specified virtual private cloud (VPC). This is required for
 	// creating an access point for Amazon S3 on Outposts buckets.
 	VpcConfiguration *types.VpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type CreateAccessPointOutput struct {
@@ -99,6 +101,8 @@ type CreateAccessPointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {

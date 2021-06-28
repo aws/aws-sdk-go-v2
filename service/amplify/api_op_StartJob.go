@@ -64,6 +64,8 @@ type StartJobInput struct {
 
 	// A descriptive reason for starting this job.
 	JobReason *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the run job request.
@@ -76,6 +78,8 @@ type StartJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

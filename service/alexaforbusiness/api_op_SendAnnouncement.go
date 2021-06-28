@@ -52,6 +52,8 @@ type SendAnnouncementInput struct {
 	// The time to live for an announcement. Default is 300. If delivery doesn't occur
 	// within this time, the announcement is not delivered.
 	TimeToLiveInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 type SendAnnouncementOutput struct {
@@ -61,6 +63,8 @@ type SendAnnouncementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendAnnouncementMiddlewares(stack *middleware.Stack, options Options) (err error) {

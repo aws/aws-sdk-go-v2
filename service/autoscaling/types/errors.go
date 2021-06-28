@@ -11,6 +11,8 @@ import (
 // Scaling group was not found.
 type ActiveInstanceRefreshNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActiveInstanceRefreshNotFoundFault) Error() string {
@@ -32,6 +34,8 @@ func (e *ActiveInstanceRefreshNotFoundFault) ErrorFault() smithy.ErrorFault {
 // You already have an Auto Scaling group or launch configuration with this name.
 type AlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsFault) Error() string {
@@ -50,6 +54,8 @@ func (e *AlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // for the specified Auto Scaling group.
 type InstanceRefreshInProgressFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceRefreshInProgressFault) Error() string {
@@ -67,6 +73,8 @@ func (e *InstanceRefreshInProgressFault) ErrorFault() smithy.ErrorFault { return
 // The NextToken value is not valid.
 type InvalidNextToken struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextToken) Error() string {
@@ -88,6 +96,8 @@ func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // in the Amazon EC2 Auto Scaling API Reference.
 type LimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededFault) Error() string {
@@ -106,6 +116,8 @@ func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // example, an Auto Scaling group, instance, or load balancer).
 type ResourceContentionFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceContentionFault) Error() string {
@@ -123,6 +135,8 @@ func (e *ResourceContentionFault) ErrorFault() smithy.ErrorFault { return smithy
 // The operation can't be performed because the resource is in use.
 type ResourceInUseFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseFault) Error() string {
@@ -141,6 +155,8 @@ func (e *ResourceInUseFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // progress.
 type ScalingActivityInProgressFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ScalingActivityInProgressFault) Error() string {
@@ -158,6 +174,8 @@ func (e *ScalingActivityInProgressFault) ErrorFault() smithy.ErrorFault { return
 // The service-linked role is not yet ready for use.
 type ServiceLinkedRoleFailure struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceLinkedRoleFailure) Error() string {

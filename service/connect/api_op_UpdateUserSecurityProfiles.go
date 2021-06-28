@@ -43,11 +43,15 @@ type UpdateUserSecurityProfilesInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserSecurityProfilesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserSecurityProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

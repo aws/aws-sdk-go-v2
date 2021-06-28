@@ -42,6 +42,8 @@ type StopActivityStreamInput struct {
 	// Specifies whether or not the database activity stream is to stop as soon as
 	// possible, regardless of the maintenance window for the database.
 	ApplyImmediately *bool
+
+	noSmithyDocumentSerde
 }
 
 type StopActivityStreamOutput struct {
@@ -61,6 +63,8 @@ type StopActivityStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

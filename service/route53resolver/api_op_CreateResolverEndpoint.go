@@ -77,6 +77,8 @@ type CreateResolverEndpointInput struct {
 
 	// A list of the tag keys and values that you want to associate with the endpoint.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateResolverEndpointOutput struct {
@@ -87,6 +89,8 @@ type CreateResolverEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

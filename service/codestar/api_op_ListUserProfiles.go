@@ -35,6 +35,8 @@ type ListUserProfilesInput struct {
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListUserProfilesOutput struct {
@@ -50,6 +52,8 @@ type ListUserProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

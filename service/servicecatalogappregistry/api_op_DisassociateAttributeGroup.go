@@ -40,6 +40,8 @@ type DisassociateAttributeGroupInput struct {
 	//
 	// This member is required.
 	AttributeGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateAttributeGroupOutput struct {
@@ -52,6 +54,8 @@ type DisassociateAttributeGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

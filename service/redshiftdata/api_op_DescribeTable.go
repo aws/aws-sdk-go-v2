@@ -86,6 +86,8 @@ type DescribeTableInput struct {
 	// schemas are returned. If no table and no schema is specified, then all tables
 	// for all schemas in the database are returned
 	Table *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTableOutput struct {
@@ -105,6 +107,8 @@ type DescribeTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

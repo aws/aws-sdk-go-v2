@@ -63,6 +63,8 @@ type ListFirewallRuleGroupAssociationsInput struct {
 	// The unique identifier of the VPC that you want to retrieve the associations for.
 	// Leave this blank to retrieve associations for any VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFirewallRuleGroupAssociationsOutput struct {
@@ -78,6 +80,8 @@ type ListFirewallRuleGroupAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFirewallRuleGroupAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

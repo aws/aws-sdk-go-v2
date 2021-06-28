@@ -51,6 +51,8 @@ type StartSchemaExtensionInput struct {
 	//
 	// This member is required.
 	LdifContent *string
+
+	noSmithyDocumentSerde
 }
 
 type StartSchemaExtensionOutput struct {
@@ -60,6 +62,8 @@ type StartSchemaExtensionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {

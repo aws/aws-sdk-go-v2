@@ -48,6 +48,8 @@ type ListTapePoolsInput struct {
 	// list. If you don't specify a custom tape pool ARN, the response lists all custom
 	// tape pools.
 	PoolARNs []string
+
+	noSmithyDocumentSerde
 }
 
 type ListTapePoolsOutput struct {
@@ -64,6 +66,8 @@ type ListTapePoolsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTapePoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {

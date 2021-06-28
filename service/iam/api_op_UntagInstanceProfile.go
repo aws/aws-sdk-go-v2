@@ -44,11 +44,15 @@ type UntagInstanceProfileInput struct {
 	//
 	// This member is required.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 type UntagInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

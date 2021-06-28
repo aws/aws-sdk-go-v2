@@ -53,6 +53,8 @@ type UpdateDynamicThingGroupInput struct {
 	// supported: "2017-09-30". If not specified, the query version defaults to this
 	// value.
 	QueryVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDynamicThingGroupOutput struct {
@@ -62,6 +64,8 @@ type UpdateDynamicThingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

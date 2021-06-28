@@ -38,6 +38,8 @@ type DetachCertificateFromDistributionInput struct {
 	//
 	// This member is required.
 	DistributionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DetachCertificateFromDistributionOutput struct {
@@ -49,6 +51,8 @@ type DetachCertificateFromDistributionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachCertificateFromDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

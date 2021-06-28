@@ -36,6 +36,8 @@ type GetBackupVaultAccessPolicyInput struct {
 	//
 	// This member is required.
 	BackupVaultName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBackupVaultAccessPolicyOutput struct {
@@ -55,6 +57,8 @@ type GetBackupVaultAccessPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackupVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

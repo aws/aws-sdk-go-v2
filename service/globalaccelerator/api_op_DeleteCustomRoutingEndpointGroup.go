@@ -32,11 +32,15 @@ type DeleteCustomRoutingEndpointGroupInput struct {
 	//
 	// This member is required.
 	EndpointGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomRoutingEndpointGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomRoutingEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

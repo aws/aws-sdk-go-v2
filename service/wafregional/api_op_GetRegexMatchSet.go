@@ -40,6 +40,8 @@ type GetRegexMatchSetInput struct {
 	//
 	// This member is required.
 	RegexMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRegexMatchSetOutput struct {
@@ -50,6 +52,8 @@ type GetRegexMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

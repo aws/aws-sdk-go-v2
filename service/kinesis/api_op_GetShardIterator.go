@@ -107,6 +107,8 @@ type GetShardIteratorInput struct {
 	// horizon, the iterator returned is for the oldest untrimmed data record
 	// (TRIM_HORIZON).
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for GetShardIterator.
@@ -119,6 +121,8 @@ type GetShardIteratorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetShardIteratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

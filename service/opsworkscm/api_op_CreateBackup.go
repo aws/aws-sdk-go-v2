@@ -64,6 +64,8 @@ type CreateBackupInput struct {
 	// * A maximum of 50 user-applied tags is
 	// allowed for tag-supported AWS OpsWorks-CM resources.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateBackupOutput struct {
@@ -73,6 +75,8 @@ type CreateBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

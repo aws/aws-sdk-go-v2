@@ -44,6 +44,8 @@ type ModifyDBProxyEndpointInput struct {
 	// uses a different VPC than the original proxy, you also specify a different set
 	// of security group IDs than for the original proxy.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBProxyEndpointOutput struct {
@@ -54,6 +56,8 @@ type ModifyDBProxyEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBProxyEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

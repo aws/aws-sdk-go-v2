@@ -54,6 +54,8 @@ type ListLensReviewImprovementsInput struct {
 	// The ID used to identify a pillar, for example, security. A pillar is identified
 	// by its PillarReviewSummary$PillarId.
 	PillarId *string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a list lens review improvements call.
@@ -77,6 +79,8 @@ type ListLensReviewImprovementsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLensReviewImprovementsMiddlewares(stack *middleware.Stack, options Options) (err error) {

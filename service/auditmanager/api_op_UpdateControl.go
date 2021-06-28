@@ -55,6 +55,8 @@ type UpdateControlInput struct {
 
 	// The steps that to follow to determine if the control has been satisfied.
 	TestingInformation *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateControlOutput struct {
@@ -64,6 +66,8 @@ type UpdateControlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateControlMiddlewares(stack *middleware.Stack, options Options) (err error) {

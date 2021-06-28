@@ -41,11 +41,15 @@ type PutItemsInput struct {
 	//
 	// This member is required.
 	Items []types.Item
+
+	noSmithyDocumentSerde
 }
 
 type PutItemsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

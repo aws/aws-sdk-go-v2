@@ -50,6 +50,8 @@ type CreateModelInput struct {
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 (https://tools.ietf.org/html/draft-zyp-json-schema-04) model.
 	Schema *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the data structure of a method's request or response payload. A
@@ -84,6 +86,8 @@ type CreateModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type DeleteEmailIdentityPolicyInput struct {
 	//
 	// This member is required.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -58,6 +60,8 @@ type DeleteEmailIdentityPolicyInput struct {
 type DeleteEmailIdentityPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEmailIdentityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

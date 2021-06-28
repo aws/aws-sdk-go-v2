@@ -41,6 +41,8 @@ type CreateDeploymentInput struct {
 
 	// The name of the Stage resource for the Deployment resource to create.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeploymentOutput struct {
@@ -65,6 +67,8 @@ type CreateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

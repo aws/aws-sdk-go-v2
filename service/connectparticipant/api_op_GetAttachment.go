@@ -38,6 +38,8 @@ type GetAttachmentInput struct {
 	//
 	// This member is required.
 	ConnectionToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAttachmentOutput struct {
@@ -52,6 +54,8 @@ type GetAttachmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -72,6 +72,8 @@ type CreateNetworkInsightsPathInput struct {
 
 	// The tags to add to the path.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateNetworkInsightsPathOutput struct {
@@ -81,6 +83,8 @@ type CreateNetworkInsightsPathOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNetworkInsightsPathMiddlewares(stack *middleware.Stack, options Options) (err error) {

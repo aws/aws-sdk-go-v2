@@ -37,6 +37,8 @@ type CreateImageBuilderStreamingURLInput struct {
 	// The time that the streaming URL will be valid, in seconds. Specify a value
 	// between 1 and 604800 seconds. The default is 3600 seconds.
 	Validity *int64
+
+	noSmithyDocumentSerde
 }
 
 type CreateImageBuilderStreamingURLOutput struct {
@@ -49,6 +51,8 @@ type CreateImageBuilderStreamingURLOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateImageBuilderStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {

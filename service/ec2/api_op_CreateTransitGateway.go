@@ -58,6 +58,8 @@ type CreateTransitGatewayInput struct {
 
 	// The tags to apply to the transit gateway.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateTransitGatewayOutput struct {
@@ -67,6 +69,8 @@ type CreateTransitGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

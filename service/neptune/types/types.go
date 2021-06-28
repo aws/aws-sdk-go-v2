@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type AvailabilityZone struct {
 
 	// The name of the availability zone.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a character set.
@@ -21,6 +24,8 @@ type CharacterSet struct {
 
 	// The name of the character set.
 	CharacterSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration setting for the log types to be enabled for export to
@@ -34,6 +39,8 @@ type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to enable.
 	EnableLogTypes []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon Neptune DB cluster. This data type is used as
@@ -189,6 +196,8 @@ type DBCluster struct {
 
 	// Provides a list of VPC security groups that the DB cluster belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -245,6 +254,8 @@ type DBClusterEndpoint struct {
 	// used for a certain kind of cluster, such as a writer endpoint for a read-only
 	// secondary cluster in a global database.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an instance that is part of a DB cluster.
@@ -264,6 +275,8 @@ type DBClusterMember struct {
 	// A value that specifies the order in which a Read Replica is promoted to the
 	// primary instance after a failure of the existing primary instance.
 	PromotionTier *int32
+
+	noSmithyDocumentSerde
 }
 
 // Not supported by Neptune.
@@ -274,6 +287,8 @@ type DBClusterOptionGroupStatus struct {
 
 	// Not supported by Neptune.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon Neptune DB cluster parameter group. This data
@@ -293,6 +308,8 @@ type DBClusterParameterGroup struct {
 
 	// Provides the customer-specified description for this DB cluster parameter group.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Identity and Access Management (IAM) role that is associated
@@ -322,6 +339,8 @@ type DBClusterRole struct {
 	// but the DB cluster is unable to assume the IAM role in order to access other
 	// Amazon services on your behalf.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details for an Amazon Neptune DB cluster snapshot This data type is
@@ -406,6 +425,8 @@ type DBClusterSnapshot struct {
 
 	// Provides the VPC ID associated with the DB cluster snapshot.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name and values of a manual DB cluster snapshot attribute. Manual
@@ -426,6 +447,8 @@ type DBClusterSnapshotAttribute struct {
 	// If a value of all is in the list, then the manual DB cluster snapshot is public
 	// and available for any Amazon account to copy or restore.
 	AttributeValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of a successful call to the
@@ -440,6 +463,8 @@ type DBClusterSnapshotAttributesResult struct {
 
 	// The identifier of the manual DB cluster snapshot that the attributes apply to.
 	DBClusterSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the action
@@ -484,6 +509,8 @@ type DBEngineVersion struct {
 
 	// A list of engine versions that this database engine version can be upgraded to.
 	ValidUpgradeTarget []UpgradeTarget
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon Neptune DB instance. This data type is used as
@@ -678,6 +705,8 @@ type DBInstance struct {
 
 	// Provides a list of VPC security group elements that the DB instance belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 // Provides a list of status information for a DB instance.
@@ -697,6 +726,8 @@ type DBInstanceStatusInfo struct {
 
 	// This value is currently "read replication."
 	StatusType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon Neptune DB parameter group. This data type is
@@ -715,6 +746,8 @@ type DBParameterGroup struct {
 
 	// Provides the customer-specified description for this DB parameter group.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the DB parameter group. This data type is used as a response
@@ -735,6 +768,8 @@ type DBParameterGroupStatus struct {
 
 	// The status of parameter updates.
 	ParameterApplyStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies membership in a designated DB security group.
@@ -745,6 +780,8 @@ type DBSecurityGroupMembership struct {
 
 	// The status of the DB security group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an Amazon Neptune DB subnet group. This data type is
@@ -768,6 +805,8 @@ type DBSubnetGroup struct {
 
 	// Provides the VpcId of the DB subnet group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // An Active Directory Domain membership record associated with a DB instance.
@@ -786,6 +825,8 @@ type DomainMembership struct {
 	// The status of the DB instance's Active Directory Domain membership, such as
 	// joined, pending-join, failed etc).
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A range of double values.
@@ -796,6 +837,8 @@ type DoubleRange struct {
 
 	// The maximum value in the range.
 	To float64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a connection endpoint. For the data structure that represents Amazon
@@ -810,6 +853,8 @@ type Endpoint struct {
 
 	// Specifies the port that the database engine is listening on.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of a successful invocation of the
@@ -827,6 +872,8 @@ type EngineDefaults struct {
 
 	// Contains a list of engine default parameters.
 	Parameters []Parameter
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the DescribeEvents action.
@@ -849,6 +896,8 @@ type Event struct {
 
 	// Specifies the source type for this event.
 	SourceType SourceType
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of a successful invocation of the DescribeEventCategories
@@ -860,6 +909,8 @@ type EventCategoriesMap struct {
 
 	// The source type that the returned categories belong to
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of a successful invocation of the
@@ -900,6 +951,8 @@ type EventSubscription struct {
 
 	// The time the event notification subscription was created.
 	SubscriptionCreationTime *string
+
+	noSmithyDocumentSerde
 }
 
 // This type is not currently supported.
@@ -914,6 +967,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Not supported by Neptune.
@@ -924,6 +979,8 @@ type OptionGroupMembership struct {
 
 	// Not supported by Neptune.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of available options for a DB instance. This data type is used
@@ -990,6 +1047,8 @@ type OrderableDBInstanceOption struct {
 
 	// Indicates whether a DB instance is in a VPC.
 	Vpc bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a parameter.
@@ -1026,6 +1085,8 @@ type Parameter struct {
 
 	// Indicates the source of the parameter value.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of the log types whose configuration is still pending. In other words,
@@ -1039,6 +1100,8 @@ type PendingCloudwatchLogsExports struct {
 	// Log types that are in the process of being deactivated. After they are
 	// deactivated, these log types aren't exported to CloudWatch Logs.
 	LogTypesToEnable []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a pending maintenance action for a resource.
@@ -1071,6 +1134,8 @@ type PendingMaintenanceAction struct {
 
 	// Indicates the type of opt-in request that has been received for the resource.
 	OptInStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element in the ModifyDBInstance action.
@@ -1122,6 +1187,8 @@ type PendingModifiedValues struct {
 
 	// Specifies the storage type to be associated with the DB instance.
 	StorageType *string
+
+	noSmithyDocumentSerde
 }
 
 // A range of integer values.
@@ -1138,6 +1205,8 @@ type Range struct {
 
 	// The maximum value in the range.
 	To int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the pending maintenance actions for a resource.
@@ -1149,6 +1218,8 @@ type ResourcePendingMaintenanceActions struct {
 
 	// The ARN of the resource that has pending maintenance actions.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a subnet. This data type is used as a response element in the
@@ -1163,6 +1234,8 @@ type Subnet struct {
 
 	// Specifies the status of the subnet.
 	SubnetStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata assigned to an Amazon Neptune resource consisting of a key-value pair.
@@ -1179,6 +1252,8 @@ type Tag struct {
 	// string can only contain only the set of Unicode letters, digits, white-space,
 	// '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A time zone associated with a DBInstance.
@@ -1186,6 +1261,8 @@ type Timezone struct {
 
 	// The name of the time zone.
 	TimezoneName *string
+
+	noSmithyDocumentSerde
 }
 
 // The version of the database engine that a DB instance can be upgraded to.
@@ -1206,6 +1283,8 @@ type UpgradeTarget struct {
 
 	// A value that indicates whether a database engine is upgraded to a major version.
 	IsMajorVersionUpgrade bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about valid modifications that you can make to your DB instance.
@@ -1216,6 +1295,8 @@ type ValidDBInstanceModificationsMessage struct {
 
 	// Valid storage options for your DB instance.
 	Storage []ValidStorageOptions
+
+	noSmithyDocumentSerde
 }
 
 // Information about valid modifications that you can make to your DB instance.
@@ -1236,6 +1317,8 @@ type ValidStorageOptions struct {
 
 	// The valid storage types for your DB instance. For example, gp2, io1.
 	StorageType *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element for queries on VPC security group
@@ -1247,4 +1330,8 @@ type VpcSecurityGroupMembership struct {
 
 	// The name of the VPC security group.
 	VpcSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

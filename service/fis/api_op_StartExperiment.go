@@ -43,6 +43,8 @@ type StartExperimentInput struct {
 
 	// The tags to apply to the experiment.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type StartExperimentOutput struct {
@@ -52,6 +54,8 @@ type StartExperimentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type StopSuiteRunInput struct {
 	//
 	// This member is required.
 	SuiteRunId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopSuiteRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

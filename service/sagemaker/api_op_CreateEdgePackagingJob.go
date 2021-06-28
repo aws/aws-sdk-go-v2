@@ -69,11 +69,15 @@ type CreateEdgePackagingJobInput struct {
 
 	// Creates tags for the packaging job.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateEdgePackagingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

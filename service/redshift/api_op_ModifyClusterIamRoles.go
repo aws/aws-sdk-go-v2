@@ -46,6 +46,8 @@ type ModifyClusterIamRolesInput struct {
 	// Zero or more IAM roles in ARN format to disassociate from the cluster. You can
 	// disassociate up to 10 IAM roles from a single cluster in a single request.
 	RemoveIamRoles []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterIamRolesOutput struct {
@@ -55,6 +57,8 @@ type ModifyClusterIamRolesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterIamRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {

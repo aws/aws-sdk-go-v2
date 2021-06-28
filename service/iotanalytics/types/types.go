@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -24,6 +25,8 @@ type AddAttributesActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains informations about errors.
@@ -38,6 +41,8 @@ type BatchPutMessageErrorEntry struct {
 	// The ID of the message that caused the error. See the value corresponding to the
 	// messageId key in the message object.
 	MessageId *string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of data from an MQTT topic. Channels archive the raw, unprocessed
@@ -72,6 +77,8 @@ type Channel struct {
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
 	// You cannot change this storage option after the channel is created.
 	Storage *ChannelStorage
+
+	noSmithyDocumentSerde
 }
 
 // The activity that determines the source of the messages to be processed.
@@ -89,6 +96,8 @@ type ChannelActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one or more sets of channel messages.
@@ -99,6 +108,8 @@ type ChannelMessages struct {
 	// for the key. Example path: channel/mychannel/__dt=2020-02-29
 	// 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz
 	S3Paths []string
+
+	noSmithyDocumentSerde
 }
 
 // Statistics information about the channel.
@@ -106,6 +117,8 @@ type ChannelStatistics struct {
 
 	// The estimated size of the channel.
 	Size *EstimatedResourceSize
+
+	noSmithyDocumentSerde
 }
 
 // Where channel data is stored. You may choose one of serviceManagedS3 or
@@ -123,6 +136,8 @@ type ChannelStorage struct {
 	// cannot change the choice of service-managed or customer-managed S3 storage after
 	// the channel is created.
 	ServiceManagedS3 *ServiceManagedChannelS3Storage
+
+	noSmithyDocumentSerde
 }
 
 // Where channel data is stored.
@@ -133,6 +148,8 @@ type ChannelStorageSummary struct {
 
 	// Used to store channel data in an S3 bucket managed by AWS IoT Analytics.
 	ServiceManagedS3 *ServiceManagedChannelS3StorageSummary
+
+	noSmithyDocumentSerde
 }
 
 // A summary of information about a channel.
@@ -158,6 +175,8 @@ type ChannelSummary struct {
 
 	// The status of the channel.
 	Status ChannelStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a column that stores your data.
@@ -175,6 +194,8 @@ type Column struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Information required to run the containerAction to produce dataset contents.
@@ -205,6 +226,8 @@ type ContainerDatasetAction struct {
 	// Each variable must have a name and a value given by one of stringValue,
 	// datasetContentVersionValue, or outputFileUriValue.
 	Variables []Variable
+
+	noSmithyDocumentSerde
 }
 
 // Use this to store channel data in an S3 bucket that you manage. If customer
@@ -229,6 +252,8 @@ type CustomerManagedChannelS3Storage struct {
 	// Each object in a bucket has exactly one key. The prefix must end with a forward
 	// slash (/).
 	KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to store channel data in an S3 bucket that you manage.
@@ -246,6 +271,8 @@ type CustomerManagedChannelS3StorageSummary struct {
 	// The ARN of the role that grants AWS IoT Analytics permission to interact with
 	// your Amazon S3 resources.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Use this to store data store data in an S3 bucket that you manage. When
@@ -270,6 +297,8 @@ type CustomerManagedDatastoreS3Storage struct {
 	// bucket. Each object in a bucket has exactly one key. The prefix must end with a
 	// forward slash (/).
 	KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to store data store data in an S3 bucket that you manage.
@@ -287,6 +316,8 @@ type CustomerManagedDatastoreS3StorageSummary struct {
 	// The ARN of the role that grants AWS IoT Analytics permission to interact with
 	// your Amazon S3 resources.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a data set.
@@ -335,6 +366,8 @@ type Dataset struct {
 	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
 	// in the AWS IoT Analytics User Guide.
 	VersioningConfiguration *VersioningConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A DatasetAction object that specifies how data set contents are automatically
@@ -353,6 +386,8 @@ type DatasetAction struct {
 	// An SqlQueryDatasetAction object that uses an SQL query to automatically create
 	// data set contents.
 	QueryAction *SqlQueryDatasetAction
+
+	noSmithyDocumentSerde
 }
 
 // Information about the action that automatically creates the dataset's contents.
@@ -363,6 +398,8 @@ type DatasetActionSummary struct {
 
 	// The type of action by which the dataset's contents are automatically created.
 	ActionType DatasetActionType
+
+	noSmithyDocumentSerde
 }
 
 // The destination to which dataset contents are delivered.
@@ -373,6 +410,8 @@ type DatasetContentDeliveryDestination struct {
 
 	// Configuration information for delivery of dataset contents to Amazon S3.
 	S3DestinationConfiguration *S3DestinationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // When dataset contents are created, they are delivered to destination specified
@@ -386,6 +425,8 @@ type DatasetContentDeliveryRule struct {
 
 	// The name of the dataset content delivery rules entry.
 	EntryName *string
+
+	noSmithyDocumentSerde
 }
 
 // The state of the data set contents and the reason they are in this state.
@@ -397,6 +438,8 @@ type DatasetContentStatus struct {
 	// The state of the data set contents. Can be one of READY, CREATING, SUCCEEDED, or
 	// FAILED.
 	State DatasetContentState
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about dataset contents.
@@ -416,6 +459,8 @@ type DatasetContentSummary struct {
 
 	// The version of the dataset contents.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // The dataset whose latest contents are used as input to the notebook or
@@ -427,6 +472,8 @@ type DatasetContentVersionValue struct {
 	//
 	// This member is required.
 	DatasetName *string
+
+	noSmithyDocumentSerde
 }
 
 // The reference to a data set entry.
@@ -437,6 +484,8 @@ type DatasetEntry struct {
 
 	// The name of the data set item.
 	EntryName *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of information about a data set.
@@ -461,6 +510,8 @@ type DatasetSummary struct {
 	// specified time interval or when another data set is populated. The list of
 	// triggers can be empty or contain up to five DataSetTrigger objects
 	Triggers []DatasetTrigger
+
+	noSmithyDocumentSerde
 }
 
 // The DatasetTrigger that specifies when the data set is automatically updated.
@@ -472,6 +523,8 @@ type DatasetTrigger struct {
 
 	// The Schedule when the trigger is initiated.
 	Schedule *Schedule
+
+	noSmithyDocumentSerde
 }
 
 // Information about a data store.
@@ -517,6 +570,8 @@ type Datastore struct {
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
 	// You cannot change this storage option after the data store is created.
 	Storage DatastoreStorage
+
+	noSmithyDocumentSerde
 }
 
 // The datastore activity that specifies where to store the processed data.
@@ -531,6 +586,8 @@ type DatastoreActivity struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A single partition in a data store.
@@ -541,6 +598,8 @@ type DatastorePartition struct {
 
 	// A partition defined by an attributeName and a timestamp format.
 	TimestampPartition *TimestampPartition
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about partitions in a data store.
@@ -548,6 +607,8 @@ type DatastorePartitions struct {
 
 	// A list of partitions in a data store.
 	Partitions []DatastorePartition
+
+	noSmithyDocumentSerde
 }
 
 // Statistical information about the data store.
@@ -555,6 +616,8 @@ type DatastoreStatistics struct {
 
 	// The estimated size of the data store.
 	Size *EstimatedResourceSize
+
+	noSmithyDocumentSerde
 }
 
 // Where data store data is stored. You can choose one of serviceManagedS3 or
@@ -573,6 +636,8 @@ type DatastoreStorage interface {
 // after the data store is created.
 type DatastoreStorageMemberServiceManagedS3 struct {
 	Value ServiceManagedDatastoreS3Storage
+
+	noSmithyDocumentSerde
 }
 
 func (*DatastoreStorageMemberServiceManagedS3) isDatastoreStorage() {}
@@ -583,6 +648,8 @@ func (*DatastoreStorageMemberServiceManagedS3) isDatastoreStorage() {}
 // creation of the data store.
 type DatastoreStorageMemberCustomerManagedS3 struct {
 	Value CustomerManagedDatastoreS3Storage
+
+	noSmithyDocumentSerde
 }
 
 func (*DatastoreStorageMemberCustomerManagedS3) isDatastoreStorage() {}
@@ -595,6 +662,8 @@ type DatastoreStorageSummary struct {
 
 	// Used to store data store data in an S3 bucket managed by AWS IoT Analytics.
 	ServiceManagedS3 *ServiceManagedDatastoreS3StorageSummary
+
+	noSmithyDocumentSerde
 }
 
 // A summary of information about a data store.
@@ -626,6 +695,8 @@ type DatastoreSummary struct {
 
 	// The status of the data store.
 	Status DatastoreStatus
+
+	noSmithyDocumentSerde
 }
 
 // Used to limit data to that which has arrived since the last execution of the
@@ -650,6 +721,8 @@ type DeltaTime struct {
 	//
 	// This member is required.
 	TimeExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains the configuration information of a delta time session
@@ -672,6 +745,8 @@ type DeltaTimeSessionWindowConfiguration struct {
 	//
 	// This member is required.
 	TimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // An activity that adds data from the AWS IoT device registry to your message.
@@ -699,6 +774,8 @@ type DeviceRegistryEnrichActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // An activity that adds information from the AWS IoT Device Shadow service to a
@@ -727,6 +804,8 @@ type DeviceShadowEnrichActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // The estimated size of the resource.
@@ -737,6 +816,8 @@ type EstimatedResourceSize struct {
 
 	// The estimated size of the resource, in bytes.
 	EstimatedSizeInBytes *float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of file formats. AWS IoT Analytics data
@@ -750,6 +831,8 @@ type FileFormatConfiguration struct {
 
 	// Contains the configuration information of the Parquet format.
 	ParquetConfiguration *ParquetConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // An activity that filters a message based on its attributes.
@@ -768,6 +851,8 @@ type FilterActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for coordination with AWS Glue, a fully managed
@@ -786,6 +871,8 @@ type GlueConfiguration struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for delivery of dataset contents to AWS IoT Events.
@@ -801,10 +888,13 @@ type IotEventsDestinationConfiguration struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of the JSON format.
 type JsonConfiguration struct {
+	noSmithyDocumentSerde
 }
 
 // An activity that runs a Lambda function to modify the message.
@@ -829,6 +919,8 @@ type LambdaActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains the name and configuration information of a late data
@@ -842,6 +934,8 @@ type LateDataRule struct {
 
 	// The name of the late data rule.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // The information needed to configure a delta time session window.
@@ -849,6 +943,8 @@ type LateDataRuleConfiguration struct {
 
 	// The information needed to configure a delta time session window.
 	DeltaTimeSessionWindowConfiguration *DeltaTimeSessionWindowConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Information about logging options.
@@ -869,6 +965,8 @@ type LoggingOptions struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An activity that computes an arithmetic expression using the message's
@@ -893,6 +991,8 @@ type MathActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a message.
@@ -910,6 +1010,8 @@ type Message struct {
 	//
 	// This member is required.
 	Payload []byte
+
+	noSmithyDocumentSerde
 }
 
 // The value of the variable as a structure that specifies an output file URI.
@@ -920,6 +1022,8 @@ type OutputFileUriValue struct {
 	//
 	// This member is required.
 	FileName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of the Parquet format.
@@ -927,6 +1031,8 @@ type ParquetConfiguration struct {
 
 	// Information needed to define a schema.
 	SchemaDefinition *SchemaDefinition
+
+	noSmithyDocumentSerde
 }
 
 // A single partition.
@@ -936,6 +1042,8 @@ type Partition struct {
 	//
 	// This member is required.
 	AttributeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a pipeline.
@@ -958,6 +1066,8 @@ type Pipeline struct {
 
 	// A summary of information about the pipeline reprocessing.
 	ReprocessingSummaries []ReprocessingSummary
+
+	noSmithyDocumentSerde
 }
 
 // An activity that performs a transformation on a message.
@@ -994,6 +1104,8 @@ type PipelineActivity struct {
 	// Creates a new message using only the specified attributes from the original
 	// message.
 	SelectAttributes *SelectAttributesActivity
+
+	noSmithyDocumentSerde
 }
 
 // A summary of information about a pipeline.
@@ -1010,6 +1122,8 @@ type PipelineSummary struct {
 
 	// A summary of information about the pipeline reprocessing.
 	ReprocessingSummaries []ReprocessingSummary
+
+	noSmithyDocumentSerde
 }
 
 // Information that is used to filter message data, to segregate it according to
@@ -1019,6 +1133,8 @@ type QueryFilter struct {
 	// Used to limit data to that which has arrived since the last execution of the
 	// action.
 	DeltaTime *DeltaTime
+
+	noSmithyDocumentSerde
 }
 
 // An activity that removes attributes from a message.
@@ -1036,6 +1152,8 @@ type RemoveAttributesActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about pipeline reprocessing.
@@ -1049,6 +1167,8 @@ type ReprocessingSummary struct {
 
 	// The status of the pipeline reprocessing.
 	Status ReprocessingStatus
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of the resource used to execute the containerAction.
@@ -1065,6 +1185,8 @@ type ResourceConfiguration struct {
 	//
 	// This member is required.
 	VolumeSizeInGB int32
+
+	noSmithyDocumentSerde
 }
 
 // How long, in days, message data is kept.
@@ -1076,6 +1198,8 @@ type RetentionPeriod struct {
 
 	// If true, message data is kept indefinitely.
 	Unlimited bool
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for delivery of dataset contents to Amazon Simple
@@ -1120,6 +1244,8 @@ type S3DestinationConfiguration struct {
 	// Configuration information for coordination with AWS Glue, a fully managed
 	// extract, transform and load (ETL) service.
 	GlueConfiguration *GlueConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The schedule for when to trigger an update.
@@ -1130,6 +1256,8 @@ type Schedule struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
 	// in the Amazon CloudWatch Events User Guide.
 	Expression *string
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to define a schema.
@@ -1138,6 +1266,8 @@ type SchemaDefinition struct {
 	// Specifies one or more columns that store your data. Each schema can have up to
 	// 100 columns. Each column can have up to 100 nested types.
 	Columns []Column
+
+	noSmithyDocumentSerde
 }
 
 // Creates a new message using only the specified attributes from the original
@@ -1156,26 +1286,32 @@ type SelectAttributesActivity struct {
 
 	// The next activity in the pipeline.
 	Next *string
+
+	noSmithyDocumentSerde
 }
 
 // Use this to store channel data in an S3 bucket managed by AWS IoT Analytics. You
 // cannot change the choice of service-managed or customer-managed S3 storage after
 // the channel is created.
 type ServiceManagedChannelS3Storage struct {
+	noSmithyDocumentSerde
 }
 
 // Used to store channel data in an S3 bucket managed by AWS IoT Analytics.
 type ServiceManagedChannelS3StorageSummary struct {
+	noSmithyDocumentSerde
 }
 
 // Use this to store data store data in an S3 bucket managed by AWS IoT Analytics.
 // You cannot change the choice of service-managed or customer-managed S3 storage
 // after the data store is created.
 type ServiceManagedDatastoreS3Storage struct {
+	noSmithyDocumentSerde
 }
 
 // Used to store data store data in an S3 bucket managed by AWS IoT Analytics.
 type ServiceManagedDatastoreS3StorageSummary struct {
+	noSmithyDocumentSerde
 }
 
 // The SQL query to modify the message.
@@ -1188,6 +1324,8 @@ type SqlQueryDatasetAction struct {
 
 	// Prefilters applied to message data.
 	Filters []QueryFilter
+
+	noSmithyDocumentSerde
 }
 
 // A set of key-value pairs that are used to manage the resource.
@@ -1202,6 +1340,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A partition defined by a timestamp.
@@ -1214,6 +1354,8 @@ type TimestampPartition struct {
 
 	// The timestamp format of a partition defined by a timestamp.
 	TimestampFormat *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the dataset whose content generation triggers the new dataset
@@ -1225,6 +1367,8 @@ type TriggeringDataset struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An instance of a variable to be passed to the containerAction execution. Each
@@ -1249,6 +1393,8 @@ type Variable struct {
 
 	// The value of the variable as a string.
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the versioning of dataset contents.
@@ -1260,13 +1406,19 @@ type VersioningConfiguration struct {
 
 	// If true, unlimited versions of dataset contents are kept.
 	Unlimited bool
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isDatastoreStorage() {}

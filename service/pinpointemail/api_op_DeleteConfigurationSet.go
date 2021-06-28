@@ -37,6 +37,8 @@ type DeleteConfigurationSetInput struct {
 	//
 	// This member is required.
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -44,6 +46,8 @@ type DeleteConfigurationSetInput struct {
 type DeleteConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

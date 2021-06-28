@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Describes an additional authentication provider.
 type AdditionalAuthenticationProvider struct {
 
@@ -13,6 +17,8 @@ type AdditionalAuthenticationProvider struct {
 
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *CognitoUserPoolConfig
+
+	noSmithyDocumentSerde
 }
 
 // The ApiCache object.
@@ -95,6 +101,8 @@ type ApiCache struct {
 	//
 	// * R4_8XLARGE: A r4.8xlarge instance type.
 	Type ApiCacheType
+
+	noSmithyDocumentSerde
 }
 
 // Describes an API key. Customers invoke AWS AppSync GraphQL API operations with
@@ -159,6 +167,8 @@ type ApiKey struct {
 
 	// The API key ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The authorization config in case the HTTP endpoint requires authorization.
@@ -174,6 +184,8 @@ type AuthorizationConfig struct {
 
 	// The AWS IAM settings.
 	AwsIamConfig *AwsIamConfig
+
+	noSmithyDocumentSerde
 }
 
 // The AWS IAM configuration.
@@ -184,6 +196,8 @@ type AwsIamConfig struct {
 
 	// The signing service name for AWS IAM authorization.
 	SigningServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // The caching configuration for a resolver that has caching enabled.
@@ -197,6 +211,8 @@ type CachingConfig struct {
 	// The TTL in seconds for a resolver that has caching enabled. Valid values are
 	// between 1 and 3600 seconds.
 	Ttl int64
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Cognito user pool configuration.
@@ -215,6 +231,8 @@ type CognitoUserPoolConfig struct {
 	// A regular expression for validating the incoming Amazon Cognito user pool app
 	// client ID.
 	AppIdClientRegex *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a data source.
@@ -269,6 +287,8 @@ type DataSource struct {
 	// *
 	// RELATIONAL_DATABASE: The data source is a relational database.
 	Type DataSourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a Delta Sync configuration.
@@ -282,6 +302,8 @@ type DeltaSyncConfig struct {
 
 	// The number of minutes a Delta Sync log entry is stored in the Delta Sync table.
 	DeltaSyncTableTTL int64
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon DynamoDB data source configuration.
@@ -305,6 +327,8 @@ type DynamodbDataSourceConfig struct {
 
 	// Set to TRUE to use Conflict Detection and Resolution with this data source.
 	Versioned bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Elasticsearch data source configuration.
@@ -319,6 +343,8 @@ type ElasticsearchDataSourceConfig struct {
 	//
 	// This member is required.
 	Endpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // A function is a reusable entity. Multiple functions can be used to compose the
@@ -355,6 +381,8 @@ type FunctionConfiguration struct {
 	// Conflict Detection as well as Resolution strategy should be performed when the
 	// resolver is invoked.
 	SyncConfig *SyncConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes a GraphQL API.
@@ -396,6 +424,8 @@ type GraphqlApi struct {
 
 	// A flag representing whether X-Ray tracing is enabled for this GraphqlApi.
 	XrayEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes an HTTP data source configuration.
@@ -409,6 +439,8 @@ type HttpDataSourceConfig struct {
 	// specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port
 	// 443 for HTTPS endpoints.
 	Endpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // The LambdaConflictHandlerConfig object when configuring LAMBDA as the Conflict
@@ -417,6 +449,8 @@ type LambdaConflictHandlerConfig struct {
 
 	// The Arn for the Lambda function to use as the Conflict Handler.
 	LambdaConflictHandlerArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an AWS Lambda data source configuration.
@@ -426,6 +460,8 @@ type LambdaDataSourceConfig struct {
 	//
 	// This member is required.
 	LambdaFunctionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The CloudWatch Logs configuration.
@@ -467,6 +503,8 @@ type LogConfig struct {
 	// Set to TRUE to exclude sections that contain information such as headers,
 	// context, and evaluated mapping templates, regardless of logging level.
 	ExcludeVerboseContent bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes an OpenID Connect configuration.
@@ -489,6 +527,8 @@ type OpenIDConnectConfig struct {
 
 	// The number of milliseconds a token is valid after being issued to a user.
 	IatTTL int64
+
+	noSmithyDocumentSerde
 }
 
 // The pipeline configuration for a resolver of kind PIPELINE.
@@ -496,6 +536,8 @@ type PipelineConfig struct {
 
 	// A list of Function objects.
 	Functions []string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon RDS HTTP endpoint configuration.
@@ -515,6 +557,8 @@ type RdsHttpEndpointConfig struct {
 
 	// Logical schema name.
 	Schema *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a relational database data source configuration.
@@ -528,6 +572,8 @@ type RelationalDatabaseDataSourceConfig struct {
 	// * RDS_HTTP_ENDPOINT: The relational
 	// database source type is an Amazon RDS HTTP endpoint.
 	RelationalDatabaseSourceType RelationalDatabaseSourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resolver.
@@ -570,6 +616,8 @@ type Resolver struct {
 
 	// The resolver type name.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a Sync configuration for a resolver. Contains information on which
@@ -601,6 +649,8 @@ type SyncConfig struct {
 
 	// The LambdaConflictHandlerConfig when configuring LAMBDA as the Conflict Handler.
 	LambdaConflictHandlerConfig *LambdaConflictHandlerConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes a type.
@@ -620,6 +670,8 @@ type Type struct {
 
 	// The type name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Cognito user pool configuration.
@@ -645,4 +697,8 @@ type UserPoolConfig struct {
 	// A regular expression for validating the incoming Amazon Cognito user pool app
 	// client ID.
 	AppIdClientRegex *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

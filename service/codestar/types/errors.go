@@ -11,6 +11,8 @@ import (
 // can make your change.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -30,6 +32,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // The next token is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -47,6 +51,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // The service role is not valid.
 type InvalidServiceRoleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidServiceRoleException) Error() string {
@@ -64,6 +70,8 @@ func (e *InvalidServiceRoleException) ErrorFault() smithy.ErrorFault { return sm
 // A resource limit has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -83,6 +91,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // account.
 type ProjectAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProjectAlreadyExistsException) Error() string {
@@ -100,6 +110,8 @@ func (e *ProjectAlreadyExistsException) ErrorFault() smithy.ErrorFault { return 
 // Project configuration information is required but not specified.
 type ProjectConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProjectConfigurationException) Error() string {
@@ -119,6 +131,8 @@ func (e *ProjectConfigurationException) ErrorFault() smithy.ErrorFault { return 
 // CodeStar.
 type ProjectCreationFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProjectCreationFailedException) Error() string {
@@ -136,6 +150,8 @@ func (e *ProjectCreationFailedException) ErrorFault() smithy.ErrorFault { return
 // The specified AWS CodeStar project was not found.
 type ProjectNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProjectNotFoundException) Error() string {
@@ -153,6 +169,8 @@ func (e *ProjectNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // The team member is already associated with a role in this project.
 type TeamMemberAlreadyAssociatedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TeamMemberAlreadyAssociatedException) Error() string {
@@ -174,6 +192,8 @@ func (e *TeamMemberAlreadyAssociatedException) ErrorFault() smithy.ErrorFault {
 // The specified team member was not found.
 type TeamMemberNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TeamMemberNotFoundException) Error() string {
@@ -193,6 +213,8 @@ func (e *TeamMemberNotFoundException) ErrorFault() smithy.ErrorFault { return sm
 // account.
 type UserProfileAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserProfileAlreadyExistsException) Error() string {
@@ -212,6 +234,8 @@ func (e *UserProfileAlreadyExistsException) ErrorFault() smithy.ErrorFault { ret
 // The user profile was not found.
 type UserProfileNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserProfileNotFoundException) Error() string {
@@ -229,6 +253,8 @@ func (e *UserProfileNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // The specified input is either not valid, or it could not be validated.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

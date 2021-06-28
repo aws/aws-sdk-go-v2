@@ -44,6 +44,8 @@ type DescribeConnectionAliasesInput struct {
 
 	// The identifier of the directory associated with the connection alias.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConnectionAliasesOutput struct {
@@ -57,6 +59,8 @@ type DescribeConnectionAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConnectionAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

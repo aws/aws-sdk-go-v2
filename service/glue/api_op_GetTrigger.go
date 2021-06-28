@@ -33,6 +33,8 @@ type GetTriggerInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTriggerOutput struct {
@@ -42,6 +44,8 @@ type GetTriggerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {

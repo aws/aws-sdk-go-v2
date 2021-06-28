@@ -33,11 +33,15 @@ type StopCrawlerScheduleInput struct {
 	//
 	// This member is required.
 	CrawlerName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopCrawlerScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -56,6 +56,8 @@ type CreateSimulationApplicationInput struct {
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// application.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSimulationApplicationOutput struct {
@@ -93,6 +95,8 @@ type CreateSimulationApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSimulationApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

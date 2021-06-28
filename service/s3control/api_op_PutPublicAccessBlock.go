@@ -54,11 +54,15 @@ type PutPublicAccessBlockInput struct {
 	//
 	// This member is required.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutPublicAccessBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutPublicAccessBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

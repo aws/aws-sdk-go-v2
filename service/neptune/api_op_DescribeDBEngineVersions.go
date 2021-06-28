@@ -69,6 +69,8 @@ type DescribeDBEngineVersionsInput struct {
 	// the response so that the following results can be retrieved. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDBEngineVersionsOutput struct {
@@ -83,6 +85,8 @@ type DescribeDBEngineVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

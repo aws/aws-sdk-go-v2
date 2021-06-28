@@ -60,6 +60,8 @@ type GetComplianceDetailInput struct {
 	//
 	// This member is required.
 	PolicyId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetComplianceDetailOutput struct {
@@ -70,6 +72,8 @@ type GetComplianceDetailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetComplianceDetailMiddlewares(stack *middleware.Stack, options Options) (err error) {

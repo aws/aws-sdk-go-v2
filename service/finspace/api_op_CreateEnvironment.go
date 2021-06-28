@@ -54,6 +54,8 @@ type CreateEnvironmentInput struct {
 
 	// Add tags to your FinSpace environment.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentOutput struct {
@@ -69,6 +71,8 @@ type CreateEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

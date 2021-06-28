@@ -52,6 +52,8 @@ type DescribeMaintenanceWindowScheduleInput struct {
 
 	// The ID of the maintenance window to retrieve information about.
 	WindowId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMaintenanceWindowScheduleOutput struct {
@@ -66,6 +68,8 @@ type DescribeMaintenanceWindowScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMaintenanceWindowScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

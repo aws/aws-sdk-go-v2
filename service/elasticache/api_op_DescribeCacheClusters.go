@@ -73,6 +73,8 @@ type DescribeCacheClustersInput struct {
 	// An optional flag that can be included in the DescribeCacheCluster request to
 	// retrieve information about the individual cache nodes.
 	ShowCacheNodeInfo *bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeCacheClusters operation.
@@ -87,6 +89,8 @@ type DescribeCacheClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCacheClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

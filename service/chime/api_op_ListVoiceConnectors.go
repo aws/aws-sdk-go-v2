@@ -35,6 +35,8 @@ type ListVoiceConnectorsInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListVoiceConnectorsOutput struct {
@@ -47,6 +49,8 @@ type ListVoiceConnectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVoiceConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

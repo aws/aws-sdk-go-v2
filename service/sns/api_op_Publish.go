@@ -155,6 +155,8 @@ type PublishInput struct {
 	// The topic you want to publish to. If you don't specify a value for the TopicArn
 	// parameter, you must specify a value for the PhoneNumber or TargetArn parameters.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Response for Publish action.
@@ -172,6 +174,8 @@ type PublishOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {

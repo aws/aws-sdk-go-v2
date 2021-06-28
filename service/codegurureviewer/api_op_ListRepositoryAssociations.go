@@ -104,6 +104,8 @@ type ListRepositoryAssociationsInput struct {
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
 	// in the Amazon CodeGuru Reviewer User Guide.
 	States []types.RepositoryAssociationState
+
+	noSmithyDocumentSerde
 }
 
 type ListRepositoryAssociationsOutput struct {
@@ -119,6 +121,8 @@ type ListRepositoryAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRepositoryAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

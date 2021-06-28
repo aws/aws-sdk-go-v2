@@ -39,6 +39,8 @@ type DescribePolicyInput struct {
 	//
 	// This member is required.
 	PolicyId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePolicyOutput struct {
@@ -48,6 +50,8 @@ type DescribePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type DescribePublicIpv4PoolsInput struct {
 
 	// The IDs of the address pools.
 	PoolIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePublicIpv4PoolsOutput struct {
@@ -65,6 +67,8 @@ type DescribePublicIpv4PoolsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePublicIpv4PoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {

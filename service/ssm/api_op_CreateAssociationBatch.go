@@ -39,6 +39,8 @@ type CreateAssociationBatchInput struct {
 	//
 	// This member is required.
 	Entries []types.CreateAssociationBatchRequestEntry
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssociationBatchOutput struct {
@@ -51,6 +53,8 @@ type CreateAssociationBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssociationBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

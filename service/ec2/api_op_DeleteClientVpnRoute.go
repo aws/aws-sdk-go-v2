@@ -51,6 +51,8 @@ type DeleteClientVpnRouteInput struct {
 
 	// The ID of the target subnet used by the route.
 	TargetVpcSubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteClientVpnRouteOutput struct {
@@ -60,6 +62,8 @@ type DeleteClientVpnRouteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteClientVpnRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

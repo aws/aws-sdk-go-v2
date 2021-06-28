@@ -57,6 +57,8 @@ type CreateOrganizationInput struct {
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all)
 	// in the AWS Organizations User Guide.
 	FeatureSet types.OrganizationFeatureSet
+
+	noSmithyDocumentSerde
 }
 
 type CreateOrganizationOutput struct {
@@ -66,6 +68,8 @@ type CreateOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

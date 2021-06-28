@@ -52,6 +52,8 @@ type EnableFastSnapshotRestoresInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type EnableFastSnapshotRestoresOutput struct {
@@ -66,6 +68,8 @@ type EnableFastSnapshotRestoresOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableFastSnapshotRestoresMiddlewares(stack *middleware.Stack, options Options) (err error) {

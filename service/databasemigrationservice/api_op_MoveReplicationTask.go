@@ -42,6 +42,8 @@ type MoveReplicationTaskInput struct {
 	//
 	// This member is required.
 	TargetReplicationInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -52,6 +54,8 @@ type MoveReplicationTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMoveReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type ListJobExecutionsForThingInput struct {
 
 	// An optional filter that lets you search for jobs that have the specified status.
 	Status types.JobExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListJobExecutionsForThingOutput struct {
@@ -63,6 +65,8 @@ type ListJobExecutionsForThingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobExecutionsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

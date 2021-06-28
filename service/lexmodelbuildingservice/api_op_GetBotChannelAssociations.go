@@ -57,6 +57,8 @@ type GetBotChannelAssociationsInput struct {
 	// response. To fetch the next page of associations, specify the pagination token
 	// in the next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBotChannelAssociationsOutput struct {
@@ -73,6 +75,8 @@ type GetBotChannelAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBotChannelAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

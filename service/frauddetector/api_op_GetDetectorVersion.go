@@ -38,6 +38,8 @@ type GetDetectorVersionInput struct {
 	//
 	// This member is required.
 	DetectorVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDetectorVersionOutput struct {
@@ -82,6 +84,8 @@ type GetDetectorVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

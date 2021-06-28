@@ -38,6 +38,8 @@ type ListBootstrapActionsInput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // This output contains the bootstrap actions detail.
@@ -51,6 +53,8 @@ type ListBootstrapActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBootstrapActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

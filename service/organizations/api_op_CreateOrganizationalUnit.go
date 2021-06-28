@@ -68,6 +68,8 @@ type CreateOrganizationalUnitInput struct {
 	// exceed the allowed number of tags for an OU, then the entire request fails and
 	// the OU is not created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateOrganizationalUnitOutput struct {
@@ -77,6 +79,8 @@ type CreateOrganizationalUnitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {

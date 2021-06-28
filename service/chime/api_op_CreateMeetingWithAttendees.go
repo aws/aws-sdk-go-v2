@@ -66,6 +66,8 @@ type CreateMeetingWithAttendeesInput struct {
 
 	// The tag key-value pairs.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateMeetingWithAttendeesOutput struct {
@@ -82,6 +84,8 @@ type CreateMeetingWithAttendeesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMeetingWithAttendeesMiddlewares(stack *middleware.Stack, options Options) (err error) {

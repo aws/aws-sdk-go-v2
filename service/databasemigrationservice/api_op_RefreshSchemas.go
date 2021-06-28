@@ -41,6 +41,8 @@ type RefreshSchemasInput struct {
 	//
 	// This member is required.
 	ReplicationInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -51,6 +53,8 @@ type RefreshSchemasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRefreshSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {

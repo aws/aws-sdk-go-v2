@@ -42,6 +42,8 @@ type UpdateDirectoryConfigInput struct {
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.
 	ServiceAccountCredentials *types.ServiceAccountCredentials
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDirectoryConfigOutput struct {
@@ -51,6 +53,8 @@ type UpdateDirectoryConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDirectoryConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

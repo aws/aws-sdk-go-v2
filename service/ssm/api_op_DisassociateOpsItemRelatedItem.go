@@ -41,11 +41,15 @@ type DisassociateOpsItemRelatedItemInput struct {
 	//
 	// This member is required.
 	OpsItemId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateOpsItemRelatedItemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateOpsItemRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

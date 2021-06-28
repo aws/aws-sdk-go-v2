@@ -49,11 +49,15 @@ type DeleteRolePolicyInput struct {
 	//
 	// This member is required.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRolePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

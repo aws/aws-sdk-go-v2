@@ -50,6 +50,8 @@ type UpdateFirewallRuleGroupAssociationInput struct {
 	// the numbers, for example, use 100, 200, and so on. You can change the priority
 	// setting for a rule group association after you create it.
 	Priority *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFirewallRuleGroupAssociationOutput struct {
@@ -59,6 +61,8 @@ type UpdateFirewallRuleGroupAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFirewallRuleGroupAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

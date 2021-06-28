@@ -40,6 +40,8 @@ type ListDevicesInput struct {
 
 	// The pagination token for the list request.
 	PaginationToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response to list devices.
@@ -53,6 +55,8 @@ type ListDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

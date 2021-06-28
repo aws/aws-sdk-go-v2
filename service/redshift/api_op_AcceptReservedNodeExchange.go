@@ -42,6 +42,8 @@ type AcceptReservedNodeExchangeInput struct {
 	//
 	// This member is required.
 	TargetReservedNodeOfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 type AcceptReservedNodeExchangeOutput struct {
@@ -51,6 +53,8 @@ type AcceptReservedNodeExchangeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptReservedNodeExchangeMiddlewares(stack *middleware.Stack, options Options) (err error) {

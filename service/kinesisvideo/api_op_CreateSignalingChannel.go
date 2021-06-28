@@ -45,6 +45,8 @@ type CreateSignalingChannelInput struct {
 
 	// A set of tags (key-value pairs) that you want to associate with this channel.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateSignalingChannelOutput struct {
@@ -54,6 +56,8 @@ type CreateSignalingChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

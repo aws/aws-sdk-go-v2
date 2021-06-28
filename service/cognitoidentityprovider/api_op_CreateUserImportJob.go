@@ -44,6 +44,8 @@ type CreateUserImportJobInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to the request to create the user import
@@ -55,6 +57,8 @@ type CreateUserImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

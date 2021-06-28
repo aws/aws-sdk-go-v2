@@ -30,6 +30,7 @@ func (c *Client) GetAccountSettings(ctx context.Context, params *GetAccountSetti
 
 // Represents the request sent to retrieve the account settings.
 type GetAccountSettingsInput struct {
+	noSmithyDocumentSerde
 }
 
 // Represents the account settings return values from the GetAccountSettings
@@ -41,6 +42,8 @@ type GetAccountSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

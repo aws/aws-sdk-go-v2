@@ -53,6 +53,8 @@ type CreateComputerInput struct {
 	// The fully-qualified distinguished name of the organizational unit to place the
 	// computer account in.
 	OrganizationalUnitDistinguishedName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results for the CreateComputer operation.
@@ -63,6 +65,8 @@ type CreateComputerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateComputerMiddlewares(stack *middleware.Stack, options Options) (err error) {

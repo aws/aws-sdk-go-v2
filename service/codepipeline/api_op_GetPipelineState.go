@@ -37,6 +37,8 @@ type GetPipelineStateInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetPipelineState action.
@@ -61,6 +63,8 @@ type GetPipelineStateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPipelineStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

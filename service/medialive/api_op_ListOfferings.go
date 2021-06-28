@@ -67,6 +67,8 @@ type ListOfferingsInput struct {
 
 	// Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
 	VideoQuality *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ListOfferingsResponse
@@ -80,6 +82,8 @@ type ListOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

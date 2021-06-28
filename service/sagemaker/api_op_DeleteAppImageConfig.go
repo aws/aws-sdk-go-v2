@@ -32,11 +32,15 @@ type DeleteAppImageConfigInput struct {
 	//
 	// This member is required.
 	AppImageConfigName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAppImageConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

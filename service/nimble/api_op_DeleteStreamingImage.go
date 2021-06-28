@@ -48,6 +48,8 @@ type DeleteStreamingImageInput struct {
 	// but one or more of the parameters are different, the retry fails with a
 	// ValidationException error.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStreamingImageOutput struct {
@@ -57,6 +59,8 @@ type DeleteStreamingImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

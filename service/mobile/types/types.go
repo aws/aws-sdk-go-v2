@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -26,6 +27,8 @@ type BundleDetails struct {
 
 	// Version of the download bundle.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an AWS Mobile Hub project.
@@ -54,6 +57,8 @@ type ProjectDetails struct {
 
 	// Synchronization state for a project.
 	State ProjectState
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about an AWS Mobile Hub project.
@@ -64,6 +69,8 @@ type ProjectSummary struct {
 
 	// Unique project identifier.
 	ProjectId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an instance of an AWS resource associated with a project.
@@ -84,4 +91,8 @@ type Resource struct {
 
 	// Simplified name for type of AWS resource (e.g., bucket is an Amazon S3 bucket).
 	Type *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

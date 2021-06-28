@@ -55,6 +55,8 @@ type DeleteBucketInput struct {
 	// other resources that rely on the bucket, such as instances, distributions, or
 	// software that use the issued access keys.
 	ForceDelete *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBucketOutput struct {
@@ -66,6 +68,8 @@ type DeleteBucketOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {

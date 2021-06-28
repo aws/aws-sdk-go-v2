@@ -51,6 +51,8 @@ type CreateVPCEConfigurationInput struct {
 	// An optional description that provides details about your VPC endpoint
 	// configuration.
 	VpceConfigurationDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVPCEConfigurationOutput struct {
@@ -60,6 +62,8 @@ type CreateVPCEConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

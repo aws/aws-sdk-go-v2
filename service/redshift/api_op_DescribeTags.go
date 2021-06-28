@@ -113,6 +113,8 @@ type DescribeTagsInput struct {
 	// these tag values in the request, Amazon Redshift returns a response with all
 	// resources that have either or both of these tag values associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -130,6 +132,8 @@ type DescribeTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

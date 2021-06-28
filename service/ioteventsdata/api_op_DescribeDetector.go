@@ -38,6 +38,8 @@ type DescribeDetectorInput struct {
 	// A filter used to limit results to detectors (instances) created because of the
 	// given key ID.
 	KeyValue *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDetectorOutput struct {
@@ -47,6 +49,8 @@ type DescribeDetectorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

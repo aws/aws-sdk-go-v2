@@ -50,6 +50,8 @@ type ListJobsInput struct {
 	// Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or
 	// ERROR.
 	Status types.JobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListJobsOutput struct {
@@ -62,6 +64,8 @@ type ListJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

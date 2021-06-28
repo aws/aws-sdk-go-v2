@@ -46,6 +46,8 @@ type ListImportJobsInput struct {
 	// NextToken element is sent in the response. Use the NextToken value in subsequent
 	// requests to retrieve additional addresses.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -62,6 +64,8 @@ type ListImportJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type ListLunaClientsInput struct {
 	// The NextToken value from a previous call to ListLunaClients. Pass null if this
 	// is the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLunaClientsOutput struct {
@@ -59,6 +61,8 @@ type ListLunaClientsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLunaClientsMiddlewares(stack *middleware.Stack, options Options) (err error) {

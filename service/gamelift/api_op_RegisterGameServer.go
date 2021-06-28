@@ -75,6 +75,8 @@ type RegisterGameServerInput struct {
 	// data is passed to a game client or service when it requests information on game
 	// servers using ListGameServers or ClaimGameServer.
 	GameServerData *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterGameServerOutput struct {
@@ -84,6 +86,8 @@ type RegisterGameServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

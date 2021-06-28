@@ -55,11 +55,15 @@ type DeleteSlotInput struct {
 	//
 	// This member is required.
 	SlotId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSlotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -54,6 +54,8 @@ type DescribeDocumentVersionsInput struct {
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDocumentVersionsOutput struct {
@@ -67,6 +69,8 @@ type DescribeDocumentVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDocumentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

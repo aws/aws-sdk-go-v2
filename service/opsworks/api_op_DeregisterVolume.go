@@ -40,11 +40,15 @@ type DeregisterVolumeInput struct {
 	//
 	// This member is required.
 	VolumeId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

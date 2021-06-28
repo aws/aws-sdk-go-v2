@@ -64,6 +64,8 @@ type CreateFlowDefinitionInput struct {
 	// organize a flow definition. Each tag consists of a key and a value, both of
 	// which you define.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateFlowDefinitionOutput struct {
@@ -75,6 +77,8 @@ type CreateFlowDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -106,6 +106,8 @@ type RestoreTableToPointInTimeInput struct {
 	// Restore the table to the latest possible time. LatestRestorableDateTime is
 	// typically 5 minutes before the current time.
 	UseLatestRestorableTime *bool
+
+	noSmithyDocumentSerde
 }
 
 type RestoreTableToPointInTimeOutput struct {
@@ -115,6 +117,8 @@ type RestoreTableToPointInTimeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreTableToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {

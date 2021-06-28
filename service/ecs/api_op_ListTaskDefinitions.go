@@ -68,6 +68,8 @@ type ListTaskDefinitionsInput struct {
 	// active task or service still references them. If you paginate the resulting
 	// output, be sure to keep the status value constant in each subsequent request.
 	Status types.TaskDefinitionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListTaskDefinitionsOutput struct {
@@ -84,6 +86,8 @@ type ListTaskDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTaskDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

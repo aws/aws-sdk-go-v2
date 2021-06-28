@@ -43,6 +43,8 @@ type CreateRevisionInput struct {
 	// define. When you use tagging, you can also use tag-based access control in IAM
 	// policies to control access to these data sets and revisions.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRevisionOutput struct {
@@ -84,6 +86,8 @@ type CreateRevisionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetDirectoryInput struct {
 	//
 	// This member is required.
 	DirectoryArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDirectoryOutput struct {
@@ -44,6 +46,8 @@ type GetDirectoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

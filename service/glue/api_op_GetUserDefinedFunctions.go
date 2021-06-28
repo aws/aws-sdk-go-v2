@@ -49,6 +49,8 @@ type GetUserDefinedFunctionsInput struct {
 
 	// A continuation token, if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetUserDefinedFunctionsOutput struct {
@@ -62,6 +64,8 @@ type GetUserDefinedFunctionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUserDefinedFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

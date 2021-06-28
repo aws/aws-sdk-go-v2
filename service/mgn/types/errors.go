@@ -12,6 +12,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -34,6 +36,8 @@ type ConflictException struct {
 	Code         *string
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -54,6 +58,8 @@ type InternalServerException struct {
 	Message *string
 
 	RetryAfterSeconds int64
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -75,6 +81,8 @@ type ResourceNotFoundException struct {
 	Code         *string
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -96,6 +104,8 @@ type ThrottlingException struct {
 	ServiceCode       *string
 	QuotaCode         *string
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -115,6 +125,8 @@ type UninitializedAccountException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UninitializedAccountException) Error() string {
@@ -136,6 +148,8 @@ type ValidationException struct {
 	Code      *string
 	Reason    ValidationExceptionReason
 	FieldList []ValidationExceptionField
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

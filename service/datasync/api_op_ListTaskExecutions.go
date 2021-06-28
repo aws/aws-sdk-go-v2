@@ -40,6 +40,8 @@ type ListTaskExecutionsInput struct {
 
 	// The Amazon Resource Name (ARN) of the task whose tasks you want to list.
 	TaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 // ListTaskExecutionsResponse
@@ -54,6 +56,8 @@ type ListTaskExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTaskExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

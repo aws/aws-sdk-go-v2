@@ -45,6 +45,8 @@ type UpdateAccountSettingsInput struct {
 	// The email address that you want QuickSight to send notifications to regarding
 	// your AWS account or QuickSight subscription.
 	NotificationEmail *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccountSettingsOutput struct {
@@ -57,6 +59,8 @@ type UpdateAccountSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -58,12 +58,16 @@ type SetIdentityHeadersInNotificationsEnabledInput struct {
 	//
 	// This member is required.
 	NotificationType types.NotificationType
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type SetIdentityHeadersInNotificationsEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {

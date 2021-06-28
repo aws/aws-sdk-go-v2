@@ -49,6 +49,8 @@ type StartSyncExecutionInput struct {
 	// Passes the AWS X-Ray trace header. The trace header can also be passed in the
 	// request payload.
 	TraceHeader *string
+
+	noSmithyDocumentSerde
 }
 
 type StartSyncExecutionOutput struct {
@@ -110,6 +112,8 @@ type StartSyncExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSyncExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteChannelInput struct {
 	//
 	// This member is required.
 	ChannelName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

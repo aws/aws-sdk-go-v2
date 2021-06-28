@@ -35,6 +35,8 @@ type GetDeploymentInput struct {
 	//
 	// This member is required.
 	DeploymentId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDeploymentOutput struct {
@@ -95,6 +97,8 @@ type GetDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

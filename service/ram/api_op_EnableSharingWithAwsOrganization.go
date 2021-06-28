@@ -28,6 +28,7 @@ func (c *Client) EnableSharingWithAwsOrganization(ctx context.Context, params *E
 }
 
 type EnableSharingWithAwsOrganizationInput struct {
+	noSmithyDocumentSerde
 }
 
 type EnableSharingWithAwsOrganizationOutput struct {
@@ -37,6 +38,8 @@ type EnableSharingWithAwsOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableSharingWithAwsOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

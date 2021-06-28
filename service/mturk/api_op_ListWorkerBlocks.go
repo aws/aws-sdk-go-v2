@@ -34,6 +34,8 @@ type ListWorkerBlocksInput struct {
 
 	// Pagination token
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListWorkerBlocksOutput struct {
@@ -53,6 +55,8 @@ type ListWorkerBlocksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkerBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {

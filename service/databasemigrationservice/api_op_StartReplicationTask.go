@@ -70,6 +70,8 @@ type StartReplicationTaskInput struct {
 	// --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example:
 	// --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
 	CdcStopPosition *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -80,6 +82,8 @@ type StartReplicationTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

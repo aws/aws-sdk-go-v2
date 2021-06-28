@@ -35,6 +35,8 @@ type GetContactReachabilityStatusInput struct {
 	// The name of the domain for which you want to know whether the registrant contact
 	// has confirmed that the email address is valid.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetContactReachabilityStatusOutput struct {
@@ -50,6 +52,8 @@ type GetContactReachabilityStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContactReachabilityStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

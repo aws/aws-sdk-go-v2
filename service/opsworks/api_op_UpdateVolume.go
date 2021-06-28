@@ -44,11 +44,15 @@ type UpdateVolumeInput struct {
 
 	// The new name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

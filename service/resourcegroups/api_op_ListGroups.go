@@ -68,6 +68,8 @@ type ListGroupsInput struct {
 	// is available. Set this parameter to the value provided by a previous call's
 	// NextToken response to indicate where the output should continue from.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGroupsOutput struct {
@@ -90,6 +92,8 @@ type ListGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

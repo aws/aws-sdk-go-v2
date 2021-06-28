@@ -47,6 +47,8 @@ type GetResourceInput struct {
 	// single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources/{resource_id}?embed=methods.
 	Embed []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an API resource. Create an API
@@ -148,6 +150,8 @@ type GetResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

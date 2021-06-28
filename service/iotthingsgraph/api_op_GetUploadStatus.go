@@ -35,6 +35,8 @@ type GetUploadStatusInput struct {
 	//
 	// This member is required.
 	UploadId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetUploadStatusOutput struct {
@@ -70,6 +72,8 @@ type GetUploadStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUploadStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

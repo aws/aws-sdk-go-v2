@@ -53,6 +53,8 @@ type StopTaskInput struct {
 	// stopping the task here, and the message appears in subsequent DescribeTasks API
 	// operations on this task. Up to 255 characters are allowed in this message.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type StopTaskOutput struct {
@@ -62,6 +64,8 @@ type StopTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

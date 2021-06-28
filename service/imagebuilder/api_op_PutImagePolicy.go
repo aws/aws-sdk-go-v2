@@ -45,6 +45,8 @@ type PutImagePolicyInput struct {
 	//
 	// This member is required.
 	Policy *string
+
+	noSmithyDocumentSerde
 }
 
 type PutImagePolicyOutput struct {
@@ -57,6 +59,8 @@ type PutImagePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutImagePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

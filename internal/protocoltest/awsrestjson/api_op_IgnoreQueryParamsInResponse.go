@@ -28,6 +28,7 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 }
 
 type IgnoreQueryParamsInResponseInput struct {
+	noSmithyDocumentSerde
 }
 
 type IgnoreQueryParamsInResponseOutput struct {
@@ -35,6 +36,8 @@ type IgnoreQueryParamsInResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIgnoreQueryParamsInResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

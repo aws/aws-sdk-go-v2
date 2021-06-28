@@ -34,6 +34,8 @@ type DeleteInterconnectInput struct {
 	//
 	// This member is required.
 	InterconnectId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInterconnectOutput struct {
@@ -64,6 +66,8 @@ type DeleteInterconnectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {

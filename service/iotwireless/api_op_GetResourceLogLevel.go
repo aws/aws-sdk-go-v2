@@ -40,6 +40,8 @@ type GetResourceLogLevelInput struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceLogLevelOutput struct {
@@ -49,6 +51,8 @@ type GetResourceLogLevelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceLogLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {

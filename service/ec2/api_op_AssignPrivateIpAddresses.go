@@ -65,6 +65,8 @@ type AssignPrivateIpAddressesInput struct {
 	// The number of secondary IP addresses to assign to the network interface. You
 	// can't specify this parameter when also specifying private IP addresses.
 	SecondaryPrivateIpAddressCount *int32
+
+	noSmithyDocumentSerde
 }
 
 type AssignPrivateIpAddressesOutput struct {
@@ -77,6 +79,8 @@ type AssignPrivateIpAddressesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssignPrivateIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type GetConformancePackComplianceSummaryInput struct {
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetConformancePackComplianceSummaryOutput struct {
@@ -55,6 +57,8 @@ type GetConformancePackComplianceSummaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConformancePackComplianceSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

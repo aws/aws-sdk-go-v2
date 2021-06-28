@@ -60,6 +60,8 @@ type ListTrialsInput struct {
 	// A filter that returns only trials that are associated with the specified trial
 	// component.
 	TrialComponentName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTrialsOutput struct {
@@ -72,6 +74,8 @@ type ListTrialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTrialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

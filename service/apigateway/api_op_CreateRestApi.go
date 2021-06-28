@@ -85,6 +85,8 @@ type CreateRestApiInput struct {
 
 	// A version identifier for the API.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a REST API. Create an API
@@ -152,6 +154,8 @@ type CreateRestApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

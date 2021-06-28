@@ -38,6 +38,8 @@ type RegisterInstanceEventNotificationAttributesInput struct {
 
 	// Information about the tag keys to register.
 	InstanceTagAttribute *types.RegisterInstanceTagAttributeRequest
+
+	noSmithyDocumentSerde
 }
 
 type RegisterInstanceEventNotificationAttributesOutput struct {
@@ -47,6 +49,8 @@ type RegisterInstanceEventNotificationAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterInstanceEventNotificationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

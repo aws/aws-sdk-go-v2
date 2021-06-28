@@ -16,6 +16,8 @@ type AlreadyExistsException struct {
 	Arn              *string
 	Type             *string
 	Context          *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsException) Error() string {
@@ -38,6 +40,8 @@ type DependencyFailureException struct {
 	Code    *string
 	Type    *string
 	Context *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependencyFailureException) Error() string {
@@ -60,6 +64,8 @@ type InvalidParameterValueException struct {
 	Code    *string
 	Type    *string
 	Context *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -82,6 +88,8 @@ type InvalidRequestException struct {
 	Code    *string
 	Type    *string
 	Context *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -105,6 +113,8 @@ type InvalidResourceStateException struct {
 	Code    *string
 	Type    *string
 	Context *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceStateException) Error() string {
@@ -127,6 +137,8 @@ type LimitExceededException struct {
 	Code    *string
 	Type    *string
 	Context *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -148,6 +160,8 @@ type MissingParameterValueException struct {
 	Code    *string
 	Type    *string
 	Context *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingParameterValueException) Error() string {
@@ -169,6 +183,8 @@ type ResourceNotFoundException struct {
 	Code    *string
 	Type    *string
 	Context *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -190,6 +206,8 @@ type ServiceUnavailableException struct {
 	Code    *string
 	Type    *string
 	Context *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {

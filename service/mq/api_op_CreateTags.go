@@ -36,11 +36,15 @@ type CreateTagsInput struct {
 
 	// The key-value pair for the resource tag.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

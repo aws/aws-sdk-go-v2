@@ -67,6 +67,8 @@ type ListGeoLocationsInput struct {
 	// startsubdivisioncode to return the next page of results. To list subdivisions
 	// (U.S. states), you must include both startcountrycode and startsubdivisioncode.
 	StartSubdivisionCode *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type containing the response information for the request.
@@ -109,6 +111,8 @@ type ListGeoLocationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGeoLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

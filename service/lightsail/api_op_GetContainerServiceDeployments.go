@@ -40,6 +40,8 @@ type GetContainerServiceDeploymentsInput struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetContainerServiceDeploymentsOutput struct {
@@ -49,6 +51,8 @@ type GetContainerServiceDeploymentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContainerServiceDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

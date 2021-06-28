@@ -42,11 +42,15 @@ type SetCognitoEventsInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 type SetCognitoEventsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetCognitoEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

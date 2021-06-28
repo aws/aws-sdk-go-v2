@@ -90,6 +90,8 @@ type UpdateFlowSourceInput struct {
 	// source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFlowSourceOutput struct {
@@ -102,6 +104,8 @@ type UpdateFlowSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFlowSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

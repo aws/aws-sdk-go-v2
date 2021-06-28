@@ -69,6 +69,8 @@ type UpdateCustomVerificationEmailTemplateInput struct {
 	//
 	// This member is required.
 	TemplateSubject *string
+
+	noSmithyDocumentSerde
 }
 
 // If the action is successful, the service sends back an HTTP 200 response with an
@@ -76,6 +78,8 @@ type UpdateCustomVerificationEmailTemplateInput struct {
 type UpdateCustomVerificationEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

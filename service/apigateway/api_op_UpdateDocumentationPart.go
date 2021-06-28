@@ -42,6 +42,8 @@ type UpdateDocumentationPartInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // A documentation part for a targeted API entity. A documentation part consists of
@@ -79,6 +81,8 @@ type UpdateDocumentationPartOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,11 +44,15 @@ type UpdateComponentInput struct {
 
 	// The list of resource ARNs that belong to the component.
 	ResourceList []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateComponentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

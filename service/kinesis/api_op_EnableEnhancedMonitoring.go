@@ -64,6 +64,8 @@ type EnableEnhancedMonitoringInput struct {
 	//
 	// This member is required.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for EnableEnhancedMonitoring and
@@ -83,6 +85,8 @@ type EnableEnhancedMonitoringOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableEnhancedMonitoringMiddlewares(stack *middleware.Stack, options Options) (err error) {

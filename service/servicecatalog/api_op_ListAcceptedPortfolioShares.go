@@ -57,6 +57,8 @@ type ListAcceptedPortfolioSharesInput struct {
 	// *
 	// IMPORTED - List imported portfolios
 	PortfolioShareType types.PortfolioShareType
+
+	noSmithyDocumentSerde
 }
 
 type ListAcceptedPortfolioSharesOutput struct {
@@ -70,6 +72,8 @@ type ListAcceptedPortfolioSharesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAcceptedPortfolioSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {

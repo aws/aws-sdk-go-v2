@@ -38,6 +38,8 @@ type GetMinuteUsageInput struct {
 	//
 	// This member is required.
 	Year *int32
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -64,6 +66,8 @@ type GetMinuteUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMinuteUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

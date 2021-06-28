@@ -28,6 +28,7 @@ func (c *Client) DescribeDefaultAuthorizer(ctx context.Context, params *Describe
 }
 
 type DescribeDefaultAuthorizerInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeDefaultAuthorizerOutput struct {
@@ -37,6 +38,8 @@ type DescribeDefaultAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDefaultAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

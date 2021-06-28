@@ -35,11 +35,15 @@ type RejectSkillInput struct {
 	//
 	// This member is required.
 	SkillId *string
+
+	noSmithyDocumentSerde
 }
 
 type RejectSkillOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectSkillMiddlewares(stack *middleware.Stack, options Options) (err error) {

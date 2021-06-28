@@ -44,11 +44,15 @@ type UpdateQuickConnectConfigInput struct {
 	//
 	// This member is required.
 	QuickConnectId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQuickConnectConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQuickConnectConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

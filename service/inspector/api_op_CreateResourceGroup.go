@@ -38,6 +38,8 @@ type CreateResourceGroupInput struct {
 	//
 	// This member is required.
 	ResourceGroupTags []types.ResourceGroupTag
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourceGroupOutput struct {
@@ -49,6 +51,8 @@ type CreateResourceGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourceGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

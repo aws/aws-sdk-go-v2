@@ -137,11 +137,15 @@ type UpdateInstanceInput struct {
 
 	// The instance's Amazon EC2 key name.
 	SshKeyName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

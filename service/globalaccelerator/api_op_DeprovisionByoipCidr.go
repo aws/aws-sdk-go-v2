@@ -43,6 +43,8 @@ type DeprovisionByoipCidrInput struct {
 	//
 	// This member is required.
 	Cidr *string
+
+	noSmithyDocumentSerde
 }
 
 type DeprovisionByoipCidrOutput struct {
@@ -52,6 +54,8 @@ type DeprovisionByoipCidrOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeprovisionByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {

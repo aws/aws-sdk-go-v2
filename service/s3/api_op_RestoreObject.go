@@ -290,6 +290,8 @@ type RestoreObjectInput struct {
 
 	// VersionId used to reference a specific version of the object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreObjectOutput struct {
@@ -304,6 +306,8 @@ type RestoreObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

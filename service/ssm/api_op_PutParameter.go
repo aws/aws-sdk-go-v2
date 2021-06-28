@@ -220,6 +220,8 @@ type PutParameterInput struct {
 	// when updating a parameter. You must specify a parameter type when creating a
 	// parameter.
 	Type types.ParameterType
+
+	noSmithyDocumentSerde
 }
 
 type PutParameterOutput struct {
@@ -237,6 +239,8 @@ type PutParameterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type StartOnDemandAuditTaskInput struct {
 	//
 	// This member is required.
 	TargetCheckNames []string
+
+	noSmithyDocumentSerde
 }
 
 type StartOnDemandAuditTaskOutput struct {
@@ -45,6 +47,8 @@ type StartOnDemandAuditTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartOnDemandAuditTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

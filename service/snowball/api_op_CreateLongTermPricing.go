@@ -43,6 +43,8 @@ type CreateLongTermPricingInput struct {
 
 	// The type of AWS Snow Family device to use for the long-term pricing job.
 	SnowballType types.SnowballType
+
+	noSmithyDocumentSerde
 }
 
 type CreateLongTermPricingOutput struct {
@@ -52,6 +54,8 @@ type CreateLongTermPricingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLongTermPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {

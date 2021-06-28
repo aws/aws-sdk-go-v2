@@ -35,11 +35,15 @@ type DeleteTargetGroupInput struct {
 	//
 	// This member is required.
 	TargetGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTargetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type GetEvidenceFoldersByAssessmentControlInput struct {
 
 	// The pagination token used to fetch the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEvidenceFoldersByAssessmentControlOutput struct {
@@ -64,6 +66,8 @@ type GetEvidenceFoldersByAssessmentControlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEvidenceFoldersByAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,11 +41,15 @@ type RegisterDevicesInput struct {
 
 	// The tags associated with devices.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type RegisterDevicesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

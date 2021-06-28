@@ -47,6 +47,8 @@ type SearchRoomsInput struct {
 	// The sort order to use in listing the specified set of rooms. The supported sort
 	// keys are RoomName and ProfileName.
 	SortCriteria []types.Sort
+
+	noSmithyDocumentSerde
 }
 
 type SearchRoomsOutput struct {
@@ -62,6 +64,8 @@ type SearchRoomsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchRoomsMiddlewares(stack *middleware.Stack, options Options) (err error) {

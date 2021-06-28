@@ -43,6 +43,8 @@ type DeploySystemInstanceInput struct {
 	// CreateSystemInstance action. The ID should be in the following format.
 	// urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeploySystemInstanceOutput struct {
@@ -58,6 +60,8 @@ type DeploySystemInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeploySystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

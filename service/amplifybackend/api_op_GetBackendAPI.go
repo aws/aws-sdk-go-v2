@@ -47,6 +47,8 @@ type GetBackendAPIInput struct {
 
 	// Defines the resource configuration for the data model in your Amplify project.
 	ResourceConfig *types.BackendAPIResourceConfig
+
+	noSmithyDocumentSerde
 }
 
 type GetBackendAPIOutput struct {
@@ -68,6 +70,8 @@ type GetBackendAPIOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {

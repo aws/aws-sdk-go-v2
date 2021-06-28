@@ -59,11 +59,15 @@ type UpdateStreamInput struct {
 	// The name of the stream whose metadata you want to update. The stream name is an
 	// identifier for the stream, and must be unique for each account and region.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

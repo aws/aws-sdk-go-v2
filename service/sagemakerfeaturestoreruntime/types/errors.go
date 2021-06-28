@@ -10,6 +10,8 @@ import (
 // You do not have permission to perform an action.
 type AccessForbidden struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessForbidden) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessForbidden) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // contact AWS customer support.
 type InternalFailure struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailure) Error() string {
@@ -45,6 +49,8 @@ func (e *InternalFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultSe
 // A resource that is required to perform an action was not found.
 type ResourceNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFound) Error() string {
@@ -62,6 +68,8 @@ func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // The service is currently unavailable.
 type ServiceUnavailable struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailable) Error() string {
@@ -79,6 +87,8 @@ func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // There was an error validating your request.
 type ValidationError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationError) Error() string {

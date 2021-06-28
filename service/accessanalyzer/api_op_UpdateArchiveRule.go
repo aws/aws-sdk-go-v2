@@ -48,11 +48,15 @@ type UpdateArchiveRuleInput struct {
 
 	// A client token.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

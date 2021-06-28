@@ -236,6 +236,8 @@ type PutObjectAclInput struct {
 
 	// VersionId used to reference a specific version of the object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutObjectAclOutput struct {
@@ -246,6 +248,8 @@ type PutObjectAclOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutObjectAclMiddlewares(stack *middleware.Stack, options Options) (err error) {

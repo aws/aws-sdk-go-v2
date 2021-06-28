@@ -62,6 +62,8 @@ type PublishLayerVersionInput struct {
 	//
 	// * The full text of the license.
 	LicenseInfo *string
+
+	noSmithyDocumentSerde
 }
 
 type PublishLayerVersionOutput struct {
@@ -93,6 +95,8 @@ type PublishLayerVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

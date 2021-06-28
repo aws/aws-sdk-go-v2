@@ -57,6 +57,8 @@ type DeleteRuleInput struct {
 	//
 	// This member is required.
 	RuleId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRuleOutput struct {
@@ -68,6 +70,8 @@ type DeleteRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

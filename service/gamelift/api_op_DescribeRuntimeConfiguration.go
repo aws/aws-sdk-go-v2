@@ -48,6 +48,8 @@ type DescribeRuntimeConfigurationInput struct {
 	//
 	// This member is required.
 	FleetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -59,6 +61,8 @@ type DescribeRuntimeConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

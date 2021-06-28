@@ -53,6 +53,8 @@ type GetAttributeValuesInput struct {
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAttributeValuesOutput struct {
@@ -66,6 +68,8 @@ type GetAttributeValuesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAttributeValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

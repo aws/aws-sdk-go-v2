@@ -37,11 +37,15 @@ type DeleteAccessControlRuleInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccessControlRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccessControlRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

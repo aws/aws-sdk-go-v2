@@ -41,6 +41,8 @@ type DescribeConditionalForwardersInput struct {
 	// the list of associated conditional forwarders. If this member is null, all
 	// conditional forwarders are returned.
 	RemoteDomainNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeConditionalForwarder request.
@@ -51,6 +53,8 @@ type DescribeConditionalForwardersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConditionalForwardersMiddlewares(stack *middleware.Stack, options Options) (err error) {

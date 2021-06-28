@@ -31,6 +31,8 @@ type DeleteFHIRDatastoreInput struct {
 
 	// The AWS-generated ID for the Data Store to be deleted.
 	DatastoreId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFHIRDatastoreOutput struct {
@@ -57,6 +59,8 @@ type DeleteFHIRDatastoreOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

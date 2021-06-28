@@ -44,6 +44,8 @@ type RemoveSchemaVersionMetadataInput struct {
 
 	// The version number of the schema.
 	SchemaVersionNumber *types.SchemaVersionNumber
+
+	noSmithyDocumentSerde
 }
 
 type RemoveSchemaVersionMetadataOutput struct {
@@ -74,6 +76,8 @@ type RemoveSchemaVersionMetadataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveSchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

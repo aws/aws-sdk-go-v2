@@ -38,6 +38,8 @@ type DeleteNodegroupInput struct {
 	//
 	// This member is required.
 	NodegroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNodegroupOutput struct {
@@ -47,6 +49,8 @@ type DeleteNodegroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

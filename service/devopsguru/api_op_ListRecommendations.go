@@ -42,6 +42,8 @@ type ListRecommendationsInput struct {
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRecommendationsOutput struct {
@@ -55,6 +57,8 @@ type ListRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

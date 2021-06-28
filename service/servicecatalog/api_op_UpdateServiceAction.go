@@ -51,6 +51,8 @@ type UpdateServiceActionInput struct {
 
 	// The self-service action name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceActionOutput struct {
@@ -60,6 +62,8 @@ type UpdateServiceActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

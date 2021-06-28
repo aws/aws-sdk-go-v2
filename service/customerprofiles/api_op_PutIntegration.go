@@ -51,6 +51,8 @@ type PutIntegrationInput struct {
 
 	// The URI of the S3 bucket or any other type of data source.
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 type PutIntegrationOutput struct {
@@ -85,6 +87,8 @@ type PutIntegrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

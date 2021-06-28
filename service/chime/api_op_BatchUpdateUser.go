@@ -40,6 +40,8 @@ type BatchUpdateUserInput struct {
 	//
 	// This member is required.
 	UpdateUserRequestItems []types.UpdateUserRequestItem
+
+	noSmithyDocumentSerde
 }
 
 type BatchUpdateUserOutput struct {
@@ -51,6 +53,8 @@ type BatchUpdateUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,11 +46,15 @@ type AssociateTrackerConsumerInput struct {
 	//
 	// This member is required.
 	TrackerName *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateTrackerConsumerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -79,11 +79,15 @@ type UpdateResponsePlanInput struct {
 
 	// The short format name of the incident. Can't contain spaces.
 	IncidentTemplateTitle *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResponsePlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResponsePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type ExpireSessionInput struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	noSmithyDocumentSerde
 }
 
 type ExpireSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExpireSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

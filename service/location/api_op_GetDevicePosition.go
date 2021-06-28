@@ -39,6 +39,8 @@ type GetDevicePositionInput struct {
 	//
 	// This member is required.
 	TrackerName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDevicePositionOutput struct {
@@ -67,6 +69,8 @@ type GetDevicePositionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {

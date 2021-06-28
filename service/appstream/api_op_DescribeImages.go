@@ -46,6 +46,8 @@ type DescribeImagesInput struct {
 
 	// The type of image (public, private, or shared) to describe.
 	Type types.VisibilityType
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImagesOutput struct {
@@ -59,6 +61,8 @@ type DescribeImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

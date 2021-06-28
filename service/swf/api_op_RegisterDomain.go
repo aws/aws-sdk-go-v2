@@ -76,11 +76,15 @@ type RegisterDomainInput struct {
 	// Tags to be added when registering a domain. Tags may only contain unicode
 	// letters, digits, whitespace, or these symbols: _ . : / = + - @.
 	Tags []types.ResourceTag
+
+	noSmithyDocumentSerde
 }
 
 type RegisterDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

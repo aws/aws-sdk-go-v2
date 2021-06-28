@@ -12,6 +12,8 @@ import (
 // exception.
 type AddFlowOutputs420Exception struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AddFlowOutputs420Exception) Error() string {
@@ -31,6 +33,8 @@ func (e *AddFlowOutputs420Exception) ErrorFault() smithy.ErrorFault { return smi
 // exception.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -50,6 +54,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // exception.
 type CreateFlow420Exception struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CreateFlow420Exception) Error() string {
@@ -69,6 +75,8 @@ func (e *CreateFlow420Exception) ErrorFault() smithy.ErrorFault { return smithy.
 // exception.
 type ForbiddenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -88,6 +96,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // exception.
 type GrantFlowEntitlements420Exception struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GrantFlowEntitlements420Exception) Error() string {
@@ -109,6 +119,8 @@ func (e *GrantFlowEntitlements420Exception) ErrorFault() smithy.ErrorFault { ret
 // exception.
 type InternalServerErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -128,6 +140,8 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // exception.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -147,6 +161,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // exception.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -166,6 +182,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // exception.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

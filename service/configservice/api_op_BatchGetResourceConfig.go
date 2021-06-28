@@ -44,6 +44,8 @@ type BatchGetResourceConfigInput struct {
 	//
 	// This member is required.
 	ResourceKeys []types.ResourceKey
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetResourceConfigOutput struct {
@@ -60,6 +62,8 @@ type BatchGetResourceConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

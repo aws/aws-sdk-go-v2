@@ -48,11 +48,15 @@ type AdminSetUserMFAPreferenceInput struct {
 
 	// The time-based one-time password software token MFA settings.
 	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
+
+	noSmithyDocumentSerde
 }
 
 type AdminSetUserMFAPreferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminSetUserMFAPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

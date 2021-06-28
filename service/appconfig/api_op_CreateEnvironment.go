@@ -55,6 +55,8 @@ type CreateEnvironmentInput struct {
 	// AppConfig resources. Each tag consists of a key and an optional value, both of
 	// which you define.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentOutput struct {
@@ -80,6 +82,8 @@ type CreateEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

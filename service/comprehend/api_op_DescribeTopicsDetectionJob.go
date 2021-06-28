@@ -34,6 +34,8 @@ type DescribeTopicsDetectionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTopicsDetectionJobOutput struct {
@@ -43,6 +45,8 @@ type DescribeTopicsDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTopicsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type BatchDeleteTableVersionInput struct {
 	// The ID of the Data Catalog where the tables reside. If none is provided, the
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteTableVersionOutput struct {
@@ -59,6 +61,8 @@ type BatchDeleteTableVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

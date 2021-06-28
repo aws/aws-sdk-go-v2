@@ -56,6 +56,8 @@ type ListAvailableManagedRuleGroupsInput struct {
 	// NextMarker value in the response. To retrieve the next batch of objects, provide
 	// the marker from the prior call in your next request.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAvailableManagedRuleGroupsOutput struct {
@@ -71,6 +73,8 @@ type ListAvailableManagedRuleGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAvailableManagedRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

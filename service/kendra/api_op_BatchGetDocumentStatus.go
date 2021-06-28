@@ -51,6 +51,8 @@ type BatchGetDocumentStatusInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetDocumentStatusOutput struct {
@@ -67,6 +69,8 @@ type BatchGetDocumentStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetDocumentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -143,6 +143,8 @@ type CalculateRouteInput struct {
 	// Specifying more than 23 waypoints returns a 400 ValidationException error. Valid
 	// Values: [-180 to 180,-90 to 90]
 	WaypointPositions [][]float64
+
+	noSmithyDocumentSerde
 }
 
 // Returns the result of the route calculation. Metadata includes legs and route
@@ -184,6 +186,8 @@ type CalculateRouteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCalculateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

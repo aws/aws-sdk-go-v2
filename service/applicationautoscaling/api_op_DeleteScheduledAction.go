@@ -178,11 +178,15 @@ type DeleteScheduledActionInput struct {
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
+	noSmithyDocumentSerde
 }
 
 type DeleteScheduledActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

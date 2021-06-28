@@ -57,6 +57,8 @@ type CreateProgramInput struct {
 
 	// The ad break configuration settings.
 	AdBreaks []types.AdBreak
+
+	noSmithyDocumentSerde
 }
 
 type CreateProgramOutput struct {
@@ -84,6 +86,8 @@ type CreateProgramOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {

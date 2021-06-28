@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -12,6 +13,8 @@ type AbortIncompleteMultipartUpload struct {
 	// Specifies the number of days after which Amazon S3 aborts an incomplete
 	// multipart upload to the Outposts bucket.
 	DaysAfterInitiation int32
+
+	noSmithyDocumentSerde
 }
 
 // An access point used to access a bucket.
@@ -43,6 +46,8 @@ type AccessPoint struct {
 	// exists. This element is empty if this access point is an Amazon S3 on Outposts
 	// access point that is used by other AWS services.
 	VpcConfiguration *VpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A container for the account level Amazon S3 Storage Lens configuration.
@@ -55,6 +60,8 @@ type AccountLevel struct {
 
 	// A container for the S3 Storage Lens activity metrics.
 	ActivityMetrics *ActivityMetrics
+
+	noSmithyDocumentSerde
 }
 
 // A container for the activity metrics.
@@ -62,6 +69,8 @@ type ActivityMetrics struct {
 
 	// A container for whether the activity metrics are enabled.
 	IsEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // AWS Lambda function used to transform objects through an Object Lambda Access
@@ -76,6 +85,8 @@ type AwsLambdaTransformation struct {
 	// Additional JSON that provides supplemental data to the Lambda function used to
 	// transform objects.
 	FunctionPayload *string
+
+	noSmithyDocumentSerde
 }
 
 // A container for the bucket-level configuration.
@@ -86,6 +97,8 @@ type BucketLevel struct {
 
 	// A container for the bucket-level prefix-level metrics for S3 Storage Lens
 	PrefixLevel *PrefixLevel
+
+	noSmithyDocumentSerde
 }
 
 // The container for the bucket configuration. This is not supported by Amazon S3
@@ -96,6 +109,8 @@ type CreateBucketConfiguration struct {
 	// bucket on the US East (N. Virginia) Region (us-east-1), you do not need to
 	// specify the location. This is not supported by Amazon S3 on Outposts buckets.
 	LocationConstraint BucketLocationConstraint
+
+	noSmithyDocumentSerde
 }
 
 // A container for what Amazon S3 Storage Lens will exclude.
@@ -106,6 +121,8 @@ type Exclude struct {
 
 	// A container for the S3 Storage Lens Region excludes.
 	Regions []string
+
+	noSmithyDocumentSerde
 }
 
 // A container for what Amazon S3 Storage Lens configuration includes.
@@ -116,6 +133,8 @@ type Include struct {
 
 	// A container for the S3 Storage Lens Region includes.
 	Regions []string
+
+	noSmithyDocumentSerde
 }
 
 // A container element for the job configuration and status information returned by
@@ -184,6 +203,8 @@ type JobDescriptor struct {
 	// A timestamp indicating when this job terminated. A job's termination date is the
 	// date and time when it succeeded, failed, or was canceled.
 	TerminationDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // If this job failed, this element indicates why the job failed.
@@ -194,6 +215,8 @@ type JobFailure struct {
 
 	// The failure reason, if any, for the specified job.
 	FailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration and status information for a single job retrieved as
@@ -227,6 +250,8 @@ type JobListDescriptor struct {
 	// A timestamp indicating when the specified job terminated. A job's termination
 	// date is the date and time when it succeeded, failed, or was canceled.
 	TerminationDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information for a job's manifest.
@@ -242,6 +267,8 @@ type JobManifest struct {
 	//
 	// This member is required.
 	Spec *JobManifestSpec
+
+	noSmithyDocumentSerde
 }
 
 // Contains the information required to locate a manifest object.
@@ -263,6 +290,8 @@ type JobManifestLocation struct {
 
 	// The optional version ID to identify a specific version of the manifest object.
 	ObjectVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the format of a manifest. If the manifest is in CSV format, also
@@ -277,6 +306,8 @@ type JobManifestSpec struct {
 	// If the specified manifest object is in the S3BatchOperations_CSV_20180820
 	// format, this element describes which columns contain the required data.
 	Fields []JobManifestFieldName
+
+	noSmithyDocumentSerde
 }
 
 // The operation that you want this job to perform on every object listed in the
@@ -324,6 +355,8 @@ type JobOperation struct {
 	// Directs the specified job to run a PUT Object tagging call on every object in
 	// the manifest.
 	S3PutObjectTagging *S3SetObjectTaggingOperation
+
+	noSmithyDocumentSerde
 }
 
 // Describes the total number of tasks that the specified job has started, the
@@ -338,6 +371,8 @@ type JobProgressSummary struct {
 
 	//
 	TotalNumberOfTasks int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration parameters for a job-completion report.
@@ -363,6 +398,8 @@ type JobReport struct {
 	// Indicates whether the job-completion report will include details of all tasks or
 	// only failed tasks.
 	ReportScope JobReportScope
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration parameters for a Lambda Invoke operation.
@@ -371,6 +408,8 @@ type LambdaInvokeOperation struct {
 	// The Amazon Resource Name (ARN) for the AWS Lambda function that the specified
 	// job will invoke on every object in the manifest.
 	FunctionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The container for the Outposts bucket lifecycle configuration.
@@ -378,6 +417,8 @@ type LifecycleConfiguration struct {
 
 	// A lifecycle rule for individual objects in an Outposts bucket.
 	Rules []LifecycleRule
+
+	noSmithyDocumentSerde
 }
 
 // The container of the Outposts bucket lifecycle expiration.
@@ -396,6 +437,8 @@ type LifecycleExpiration struct {
 	// the policy takes no action. This cannot be specified with Days or Date in a
 	// Lifecycle Expiration Policy.
 	ExpiredObjectDeleteMarker bool
+
+	noSmithyDocumentSerde
 }
 
 // The container for the Outposts bucket lifecycle rule.
@@ -440,6 +483,8 @@ type LifecycleRule struct {
 	// Specifies when an Amazon S3 object transitions to a specified storage class.
 	// This is not supported by Amazon S3 on Outposts buckets.
 	Transitions []Transition
+
+	noSmithyDocumentSerde
 }
 
 // The container for the Outposts bucket lifecycle rule and operator.
@@ -451,6 +496,8 @@ type LifecycleRuleAndOperator struct {
 	// All of these tags must exist in the object's tag set in order for the rule to
 	// apply.
 	Tags []S3Tag
+
+	noSmithyDocumentSerde
 }
 
 // The container for the filter of the lifecycle rule.
@@ -468,6 +515,8 @@ type LifecycleRuleFilter struct {
 
 	//
 	Tag *S3Tag
+
+	noSmithyDocumentSerde
 }
 
 // Part of ListStorageLensConfigurationResult. Each entry includes the description
@@ -494,6 +543,8 @@ type ListStorageLensConfigurationEntry struct {
 	// A container for whether the S3 Storage Lens configuration is enabled. This
 	// property is required.
 	IsEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // The container of the noncurrent version expiration.
@@ -505,6 +556,8 @@ type NoncurrentVersionExpiration struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
 	// in the Amazon S3 User Guide.
 	NoncurrentDays int32
+
+	noSmithyDocumentSerde
 }
 
 // The container for the noncurrent version transition.
@@ -520,6 +573,8 @@ type NoncurrentVersionTransition struct {
 
 	// The class of storage used to store the object.
 	StorageClass TransitionStorageClass
+
+	noSmithyDocumentSerde
 }
 
 // An access point with an attached AWS Lambda function used to access transformed
@@ -533,6 +588,8 @@ type ObjectLambdaAccessPoint struct {
 
 	// Specifies the ARN for the Object Lambda Access Point.
 	ObjectLambdaAccessPointArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration used when creating an Object Lambda Access Point.
@@ -554,6 +611,8 @@ type ObjectLambdaConfiguration struct {
 
 	// A container for whether the CloudWatch metrics configuration is enabled.
 	CloudWatchMetricsEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // A container for AwsLambdaTransformation.
@@ -567,6 +626,8 @@ type ObjectLambdaContentTransformation interface {
 // A container for an AWS Lambda function.
 type ObjectLambdaContentTransformationMemberAwsLambda struct {
 	Value AwsLambdaTransformation
+
+	noSmithyDocumentSerde
 }
 
 func (*ObjectLambdaContentTransformationMemberAwsLambda) isObjectLambdaContentTransformation() {}
@@ -585,6 +646,8 @@ type ObjectLambdaTransformationConfiguration struct {
 	//
 	// This member is required.
 	ContentTransformation ObjectLambdaContentTransformation
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether this access point policy is public. For more information about
@@ -596,6 +659,8 @@ type PolicyStatus struct {
 
 	//
 	IsPublic bool
+
+	noSmithyDocumentSerde
 }
 
 // A container for the prefix-level configuration.
@@ -605,6 +670,8 @@ type PrefixLevel struct {
 	//
 	// This member is required.
 	StorageMetrics *PrefixLevelStorageMetrics
+
+	noSmithyDocumentSerde
 }
 
 // A container for the prefix-level storage metrics for S3 Storage Lens.
@@ -615,6 +682,8 @@ type PrefixLevelStorageMetrics struct {
 
 	//
 	SelectionCriteria *SelectionCriteria
+
+	noSmithyDocumentSerde
 }
 
 // The PublicAccessBlock configuration that you want to apply to this Amazon S3
@@ -664,6 +733,8 @@ type PublicAccessBlockConfiguration struct {
 	// including non-public delegation to specific accounts, is blocked. This is not
 	// supported for Amazon S3 on Outposts.
 	RestrictPublicBuckets bool
+
+	noSmithyDocumentSerde
 }
 
 // The container for the regional bucket.
@@ -689,6 +760,8 @@ type RegionalBucket struct {
 
 	// The AWS Outposts ID of the regional bucket.
 	OutpostId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -701,6 +774,8 @@ type S3AccessControlList struct {
 
 	//
 	Grants []S3Grant
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -711,6 +786,8 @@ type S3AccessControlPolicy struct {
 
 	//
 	CannedAccessControlList S3CannedAccessControlList
+
+	noSmithyDocumentSerde
 }
 
 // A container for the bucket where the Amazon S3 Storage Lens metrics export files
@@ -744,6 +821,8 @@ type S3BucketDestination struct {
 
 	// The prefix of the destination bucket where the metrics export will be delivered.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration parameters for a PUT Copy object operation. S3 Batch
@@ -813,12 +892,15 @@ type S3CopyObjectOperation struct {
 
 	//
 	UnModifiedSinceConstraint *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains no configuration parameters because the DELETE Object tagging API only
 // accepts the bucket name and key name as parameters, which are defined in the
 // job's manifest.
 type S3DeleteObjectTaggingOperation struct {
+	noSmithyDocumentSerde
 }
 
 //
@@ -829,6 +911,8 @@ type S3Grant struct {
 
 	//
 	Permission S3Permission
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -842,6 +926,8 @@ type S3Grantee struct {
 
 	//
 	TypeIdentifier S3GranteeTypeIdentifier
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration parameters for an S3 Initiate Restore Object job. S3
@@ -867,6 +953,8 @@ type S3InitiateRestoreObjectOperation struct {
 	// S3 Batch Operations supports STANDARD and BULK retrieval tiers, but not the
 	// EXPEDITED retrieval tier.
 	GlacierJobTier S3GlacierJobTier
+
+	noSmithyDocumentSerde
 }
 
 // Whether S3 Object Lock legal hold will be applied to objects in an S3 Batch
@@ -878,6 +966,8 @@ type S3ObjectLockLegalHold struct {
 	//
 	// This member is required.
 	Status S3ObjectLockLegalHoldStatus
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -915,6 +1005,8 @@ type S3ObjectMetadata struct {
 
 	//
 	UserMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -925,6 +1017,8 @@ type S3ObjectOwner struct {
 
 	//
 	ID *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the S3 Object Lock retention mode to be applied to all objects in the
@@ -942,6 +1036,8 @@ type S3Retention struct {
 	// The date when the applied Object Lock retention will expire on all objects set
 	// by the Batch Operations job.
 	RetainUntilDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration parameters for a Set Object ACL operation. S3 Batch
@@ -952,6 +1048,8 @@ type S3SetObjectAclOperation struct {
 
 	//
 	AccessControlPolicy *S3AccessControlPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration for an S3 Object Lock legal hold operation that an S3
@@ -967,6 +1065,8 @@ type S3SetObjectLegalHoldOperation struct {
 	//
 	// This member is required.
 	LegalHold *S3ObjectLockLegalHold
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration parameters for the Object Lock retention action for
@@ -989,6 +1089,8 @@ type S3SetObjectRetentionOperation struct {
 	// Indicates if the action should be applied to objects in the Batch Operations job
 	// even if they have Object Lock  GOVERNANCE type in place.
 	BypassGovernanceRetention bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration parameters for a Set Object Tagging operation. S3
@@ -1000,6 +1102,8 @@ type S3SetObjectTaggingOperation struct {
 
 	//
 	TagSet []S3Tag
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -1014,6 +1118,8 @@ type S3Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -1028,6 +1134,8 @@ type SelectionCriteria struct {
 	// The minimum number of storage bytes percentage whose metrics will be selected.
 	// You must choose a value greater than or equal to 1.0.
 	MinStorageBytesPercentage float64
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -1039,10 +1147,13 @@ type SSEKMS struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 //
 type SSES3 struct {
+	noSmithyDocumentSerde
 }
 
 // The AWS organization for your S3 Storage Lens.
@@ -1054,6 +1165,8 @@ type StorageLensAwsOrg struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // A container for the Amazon S3 Storage Lens configuration.
@@ -1094,6 +1207,8 @@ type StorageLensConfiguration struct {
 	// property is read-only and follows the following format:
 	// arn:aws:s3:us-east-1:example-account-id:storage-lens/your-dashboard-name
 	StorageLensArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A container to specify the properties of your S3 Storage Lens metrics export,
@@ -1106,6 +1221,8 @@ type StorageLensDataExport struct {
 	//
 	// This member is required.
 	S3BucketDestination *S3BucketDestination
+
+	noSmithyDocumentSerde
 }
 
 // A container for the encryption of the S3 Storage Lens metrics exports.
@@ -1116,6 +1233,8 @@ type StorageLensDataExportEncryption struct {
 
 	//
 	SSES3 *SSES3
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -1130,6 +1249,8 @@ type StorageLensTag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -1139,6 +1260,8 @@ type Tagging struct {
 	//
 	// This member is required.
 	TagSet []S3Tag
+
+	noSmithyDocumentSerde
 }
 
 // Specifies when an object transitions to a specified storage class. For more
@@ -1158,6 +1281,8 @@ type Transition struct {
 
 	// The storage class to which you want the object to transition.
 	StorageClass TransitionStorageClass
+
+	noSmithyDocumentSerde
 }
 
 // The virtual private cloud (VPC) configuration for an access point.
@@ -1168,13 +1293,19 @@ type VpcConfiguration struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isObjectLambdaContentTransformation() {}

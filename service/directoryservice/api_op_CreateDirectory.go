@@ -92,6 +92,8 @@ type CreateDirectoryInput struct {
 	// A DirectoryVpcSettings object that contains additional information for the
 	// operation.
 	VpcSettings *types.DirectoryVpcSettings
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the CreateDirectory operation.
@@ -102,6 +104,8 @@ type CreateDirectoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

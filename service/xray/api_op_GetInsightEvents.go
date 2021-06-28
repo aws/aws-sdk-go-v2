@@ -44,6 +44,8 @@ type GetInsightEventsInput struct {
 	// Specify the pagination token returned by a previous request to retrieve the next
 	// page of events.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInsightEventsOutput struct {
@@ -58,6 +60,8 @@ type GetInsightEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInsightEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

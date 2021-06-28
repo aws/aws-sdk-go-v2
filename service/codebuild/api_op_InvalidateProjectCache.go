@@ -32,11 +32,15 @@ type InvalidateProjectCacheInput struct {
 	//
 	// This member is required.
 	ProjectName *string
+
+	noSmithyDocumentSerde
 }
 
 type InvalidateProjectCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInvalidateProjectCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type DeleteEndpointInput struct {
 	//
 	// This member is required.
 	EndpointName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

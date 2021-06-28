@@ -80,6 +80,8 @@ type ModifyTargetGroupInput struct {
 	// target unhealthy. For target groups with a protocol of TCP or TLS, this value
 	// must be the same as the healthy threshold count.
 	UnhealthyThresholdCount *int32
+
+	noSmithyDocumentSerde
 }
 
 type ModifyTargetGroupOutput struct {
@@ -89,6 +91,8 @@ type ModifyTargetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

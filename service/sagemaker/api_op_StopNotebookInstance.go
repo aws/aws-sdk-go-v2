@@ -39,11 +39,15 @@ type StopNotebookInstanceInput struct {
 	//
 	// This member is required.
 	NotebookInstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopNotebookInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

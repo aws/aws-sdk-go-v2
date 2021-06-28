@@ -34,6 +34,8 @@ type GetProjectInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a get project request.
@@ -44,6 +46,8 @@ type GetProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

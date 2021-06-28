@@ -54,6 +54,8 @@ type UpdateSecurityGroupRuleDescriptionsIngressInput struct {
 	// [VPC only] The description for the ingress security group rules. You must
 	// specify either a description or IP permissions.
 	SecurityGroupRuleDescriptions []types.SecurityGroupRuleDescription
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
@@ -63,6 +65,8 @@ type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSecurityGroupRuleDescriptionsIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

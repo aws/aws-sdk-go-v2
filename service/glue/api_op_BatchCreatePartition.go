@@ -47,6 +47,8 @@ type BatchCreatePartitionInput struct {
 	// The ID of the catalog in which the partition is to be created. Currently, this
 	// should be the Amazon Web Services account ID.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchCreatePartitionOutput struct {
@@ -56,6 +58,8 @@ type BatchCreatePartitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchCreatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

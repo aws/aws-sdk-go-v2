@@ -53,6 +53,8 @@ type DescribeUserStackAssociationsInput struct {
 	// The email address of the user who is associated with the stack. Users' email
 	// addresses are case-sensitive.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUserStackAssociationsOutput struct {
@@ -66,6 +68,8 @@ type DescribeUserStackAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUserStackAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

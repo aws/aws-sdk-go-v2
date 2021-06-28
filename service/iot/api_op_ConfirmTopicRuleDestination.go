@@ -37,11 +37,15 @@ type ConfirmTopicRuleDestinationInput struct {
 	//
 	// This member is required.
 	ConfirmationToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ConfirmTopicRuleDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

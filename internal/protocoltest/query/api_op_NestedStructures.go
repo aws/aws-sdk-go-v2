@@ -28,11 +28,15 @@ func (c *Client) NestedStructures(ctx context.Context, params *NestedStructuresI
 
 type NestedStructuresInput struct {
 	Nested *types.StructArg
+
+	noSmithyDocumentSerde
 }
 
 type NestedStructuresOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNestedStructuresMiddlewares(stack *middleware.Stack, options Options) (err error) {

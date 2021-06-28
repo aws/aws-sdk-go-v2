@@ -31,6 +31,8 @@ type DeletePlatformVersionInput struct {
 
 	// The ARN of the version of the custom platform.
 	PlatformArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePlatformVersionOutput struct {
@@ -40,6 +42,8 @@ type DeletePlatformVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

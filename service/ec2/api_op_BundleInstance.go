@@ -50,6 +50,8 @@ type BundleInstanceInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of BundleInstance.
@@ -60,6 +62,8 @@ type BundleInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBundleInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

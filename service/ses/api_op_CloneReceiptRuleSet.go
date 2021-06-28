@@ -55,12 +55,16 @@ type CloneReceiptRuleSetInput struct {
 	//
 	// This member is required.
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type CloneReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCloneReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

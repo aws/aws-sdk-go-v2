@@ -84,6 +84,8 @@ type CreateProfileInput struct {
 
 	// The tags for the profile.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateProfileOutput struct {
@@ -93,6 +95,8 @@ type CreateProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

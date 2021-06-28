@@ -37,11 +37,15 @@ type PostToConnectionInput struct {
 	//
 	// This member is required.
 	Data []byte
+
+	noSmithyDocumentSerde
 }
 
 type PostToConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPostToConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

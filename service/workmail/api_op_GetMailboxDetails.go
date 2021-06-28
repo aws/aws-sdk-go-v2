@@ -38,6 +38,8 @@ type GetMailboxDetailsInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMailboxDetailsOutput struct {
@@ -50,6 +52,8 @@ type GetMailboxDetailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMailboxDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

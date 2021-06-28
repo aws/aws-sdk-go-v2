@@ -43,6 +43,8 @@ type StartInstanceInput struct {
 	//
 	// This member is required.
 	InstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 type StartInstanceOutput struct {
@@ -54,6 +56,8 @@ type StartInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

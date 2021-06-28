@@ -11,6 +11,8 @@ import (
 // IAM policy associated with this account.
 type AuthorizationErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationErrorException) Error() string {
@@ -28,6 +30,8 @@ func (e *AuthorizationErrorException) ErrorFault() smithy.ErrorFault { return sm
 //
 type ConflictErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictErrorException) Error() string {
@@ -45,6 +49,8 @@ func (e *ConflictErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 // The home region is not set. Set the home region to continue.
 type HomeRegionNotSetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HomeRegionNotSetException) Error() string {
@@ -62,6 +68,8 @@ func (e *HomeRegionNotSetException) ErrorFault() smithy.ErrorFault { return smit
 // One or more parameters are not valid. Verify the parameters and try again.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -80,6 +88,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // the parameter values and try again.
 type InvalidParameterValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -97,6 +107,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // This operation is not permitted.
 type OperationNotPermittedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotPermittedException) Error() string {
@@ -118,6 +130,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // clientRequestToken, and try again.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -136,6 +150,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // try again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -153,6 +169,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The server experienced an internal error. Try again.
 type ServerInternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServerInternalErrorException) Error() string {

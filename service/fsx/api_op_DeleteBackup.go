@@ -43,6 +43,8 @@ type DeleteBackupInput struct {
 	// deletion. This is automatically filled on your behalf when using the AWS CLI or
 	// SDK.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The response object for DeleteBackup operation.
@@ -56,6 +58,8 @@ type DeleteBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

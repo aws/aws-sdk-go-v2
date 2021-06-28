@@ -116,6 +116,8 @@ type CreateApplicationInput struct {
 	// is 50. For more information, see Using Tagging
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // TBD
@@ -130,6 +132,8 @@ type CreateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

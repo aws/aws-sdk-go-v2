@@ -40,6 +40,8 @@ type ListLogSubscriptionsInput struct {
 
 	// The token for the next set of items to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLogSubscriptionsOutput struct {
@@ -52,6 +54,8 @@ type ListLogSubscriptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLogSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

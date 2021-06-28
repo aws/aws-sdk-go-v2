@@ -81,6 +81,8 @@ type CreateLocationNfsInput struct {
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []types.TagListEntry
+
+	noSmithyDocumentSerde
 }
 
 // CreateLocationNfsResponse
@@ -92,6 +94,8 @@ type CreateLocationNfsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {

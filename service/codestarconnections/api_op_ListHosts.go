@@ -37,6 +37,8 @@ type ListHostsInput struct {
 	// The token that was returned from the previous ListHosts call, which can be used
 	// to return the next set of hosts in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListHostsOutput struct {
@@ -52,6 +54,8 @@ type ListHostsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {

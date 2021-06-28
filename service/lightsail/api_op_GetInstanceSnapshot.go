@@ -33,6 +33,8 @@ type GetInstanceSnapshotInput struct {
 	//
 	// This member is required.
 	InstanceSnapshotName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInstanceSnapshotOutput struct {
@@ -43,6 +45,8 @@ type GetInstanceSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInstanceSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type ListLongTermPricingInput struct {
 	// Because HTTP requests are stateless, this is the starting point for your next
 	// list of ListLongTermPricing to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLongTermPricingOutput struct {
@@ -49,6 +51,8 @@ type ListLongTermPricingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLongTermPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {

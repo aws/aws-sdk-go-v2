@@ -69,11 +69,15 @@ type AcceptMatchInput struct {
 	//
 	// This member is required.
 	TicketId *string
+
+	noSmithyDocumentSerde
 }
 
 type AcceptMatchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptMatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

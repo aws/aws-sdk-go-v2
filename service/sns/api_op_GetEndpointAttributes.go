@@ -36,6 +36,8 @@ type GetEndpointAttributesInput struct {
 	//
 	// This member is required.
 	EndpointArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Response from GetEndpointAttributes of the EndpointArn.
@@ -61,6 +63,8 @@ type GetEndpointAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEndpointAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -20,6 +21,8 @@ type AutoScalingGroupConfiguration struct {
 
 	// The minimum size, or minimum number of instances, for the Auto Scaling group.
 	MinSize int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Auto Scaling group recommendation.
@@ -66,6 +69,8 @@ type AutoScalingGroupRecommendation struct {
 	// An array of objects that describe the utilization metrics of the Auto Scaling
 	// group.
 	UtilizationMetrics []UtilizationMetric
+
+	noSmithyDocumentSerde
 }
 
 // Describes a recommendation option for an Auto Scaling group.
@@ -100,6 +105,8 @@ type AutoScalingGroupRecommendationOption struct {
 	// The rank of the Auto Scaling group recommendation option. The top recommendation
 	// option is ranked as 1.
 	Rank int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter that returns a more specific list of Amazon Elastic Block
@@ -117,6 +124,8 @@ type EBSFilter struct {
 
 	// The value of the filter. The valid values are Optimized, or NotOptimized.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a utilization metric of an Amazon Elastic Block Store (Amazon EBS)
@@ -159,6 +168,8 @@ type EBSUtilizationMetric struct {
 
 	// The value of the utilization metric.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes the destination of the recommendations export and metadata files.
@@ -168,6 +179,8 @@ type ExportDestination struct {
 	// S3) bucket name and object keys of a recommendations export file, and its
 	// associated metadata file.
 	S3 *S3Destination
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter that returns a more specific list of recommendations. Use
@@ -277,6 +290,8 @@ type Filter struct {
 	// there is an alternative instance type that provides better disk throughput
 	// performance.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an error experienced when getting recommendations. For example, an
@@ -293,6 +308,8 @@ type GetRecommendationError struct {
 
 	// The message, or reason, for the error.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon EC2 instance recommendation.
@@ -466,6 +483,8 @@ type InstanceRecommendation struct {
 
 	// An array of objects that describe the utilization metrics of the instance.
 	UtilizationMetrics []UtilizationMetric
+
+	noSmithyDocumentSerde
 }
 
 // Describes a recommendation option for an Amazon EC2 instance.
@@ -583,6 +602,8 @@ type InstanceRecommendationOption struct {
 	// The rank of the instance recommendation option. The top recommendation option is
 	// ranked as 1.
 	Rank int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter that returns a more specific list of recommendation export
@@ -609,6 +630,8 @@ type JobFilter struct {
 	// * Specify Queued, InProgress, Complete, or Failed if you specify the name
 	// parameter as JobStatus.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a projected utilization metric of an AWS Lambda function
@@ -623,6 +646,8 @@ type LambdaFunctionMemoryProjectedMetric struct {
 
 	// The values of the projected utilization metrics.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a recommendation option for an AWS Lambda function.
@@ -638,6 +663,8 @@ type LambdaFunctionMemoryRecommendationOption struct {
 	// The rank of the function recommendation option. The top recommendation option is
 	// ranked as 1.
 	Rank int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an AWS Lambda function recommendation.
@@ -724,6 +751,8 @@ type LambdaFunctionRecommendation struct {
 
 	// An array of objects that describe the utilization metrics of the function.
 	UtilizationMetrics []LambdaFunctionUtilizationMetric
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter that returns a more specific list of AWS Lambda function
@@ -749,6 +778,8 @@ type LambdaFunctionRecommendationFilter struct {
 	// Specify MemoryOverprovisioned, MemoryUnderprovisioned, InsufficientData, or
 	// Inconclusive if you specify the name parameter as FindingReasonCode.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a utilization metric of an AWS Lambda function.
@@ -779,6 +810,8 @@ type LambdaFunctionUtilizationMetric struct {
 
 	// The value of the utilization metric.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a projected utilization metric of a recommendation option, such as an
@@ -820,6 +853,8 @@ type ProjectedMetric struct {
 
 	// The values of the projected utilization metrics.
 	Values []float64
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a finding reason code.
@@ -830,6 +865,8 @@ type ReasonCodeSummary struct {
 
 	// The value of the finding reason code summary.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a recommendation export job. Use the DescribeRecommendationExportJobs
@@ -858,6 +895,8 @@ type RecommendationExportJob struct {
 
 	// The status of the export job.
 	Status JobStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes the source of a recommendation, such as an Amazon EC2 instance or Auto
@@ -869,6 +908,8 @@ type RecommendationSource struct {
 
 	// The resource type of the recommendation source.
 	RecommendationSourceType RecommendationSourceType
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a recommendation.
@@ -882,6 +923,8 @@ type RecommendationSummary struct {
 
 	// An array of objects that describe a recommendation summary.
 	Summaries []Summary
+
+	noSmithyDocumentSerde
 }
 
 // Describes a projected utilization metric of a recommendation option. The Cpu and
@@ -905,6 +948,8 @@ type RecommendedOptionProjectedMetric struct {
 
 	// The recommended instance type.
 	RecommendedInstanceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
@@ -922,6 +967,8 @@ type S3Destination struct {
 	// The Amazon S3 bucket key of a metadata file. The key uniquely identifies the
 	// object, or metadata file, in the S3 bucket.
 	MetadataKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
@@ -942,6 +989,8 @@ type S3DestinationConfig struct {
 
 	// The Amazon S3 bucket prefix for an export job.
 	KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of a recommendation.
@@ -955,6 +1004,8 @@ type Summary struct {
 
 	// The value of the recommendation summary.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a utilization metric of a resource, such as an Amazon EC2 instance.
@@ -1056,6 +1107,8 @@ type UtilizationMetric struct {
 
 	// The value of the utilization metric.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of an Amazon Elastic Block Store (Amazon EBS)
@@ -1081,6 +1134,8 @@ type VolumeConfiguration struct {
 	// Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or
 	// standard for Magnetic volumes.
 	VolumeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
@@ -1119,6 +1174,8 @@ type VolumeRecommendation struct {
 
 	// An array of objects that describe the recommendation options for the volume.
 	VolumeRecommendationOptions []VolumeRecommendationOption
+
+	noSmithyDocumentSerde
 }
 
 // Describes a recommendation option for an Amazon Elastic Block Store (Amazon EBS)
@@ -1140,4 +1197,8 @@ type VolumeRecommendationOption struct {
 	// The rank of the volume recommendation option. The top recommendation option is
 	// ranked as 1.
 	Rank int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

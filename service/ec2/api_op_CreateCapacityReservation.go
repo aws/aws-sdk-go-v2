@@ -153,6 +153,8 @@ type CreateCapacityReservationInput struct {
 	// dedicated - The Capacity Reservation is created on single-tenant hardware that
 	// is dedicated to a single account.
 	Tenancy types.CapacityReservationTenancy
+
+	noSmithyDocumentSerde
 }
 
 type CreateCapacityReservationOutput struct {
@@ -162,6 +164,8 @@ type CreateCapacityReservationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {

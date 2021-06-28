@@ -56,6 +56,8 @@ type DescribeScheduledActionsInput struct {
 	// The earliest scheduled start time to return. If scheduled action names are
 	// provided, this parameter is ignored.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type DescribeScheduledActionsOutput struct {
@@ -71,6 +73,8 @@ type DescribeScheduledActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

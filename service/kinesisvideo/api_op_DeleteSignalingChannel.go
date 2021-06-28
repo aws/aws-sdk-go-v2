@@ -39,11 +39,15 @@ type DeleteSignalingChannelInput struct {
 	// obtain the current version by invoking the DescribeSignalingChannel or
 	// ListSignalingChannels API operations.
 	CurrentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSignalingChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

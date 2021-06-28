@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -35,6 +36,8 @@ type Entitlement struct {
 	// The EntitlementValue represents the amount of capacity that the customer is
 	// entitled to for the product.
 	Value EntitlementValue
+
+	noSmithyDocumentSerde
 }
 
 // The EntitlementValue represents the amount of capacity that the customer is
@@ -53,6 +56,8 @@ type EntitlementValue interface {
 // entitlement is an integer type. Otherwise, the field will not be set.
 type EntitlementValueMemberIntegerValue struct {
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 func (*EntitlementValueMemberIntegerValue) isEntitlementValue() {}
@@ -61,6 +66,8 @@ func (*EntitlementValueMemberIntegerValue) isEntitlementValue() {}
 // is a double type. Otherwise, the field will not be set.
 type EntitlementValueMemberDoubleValue struct {
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 func (*EntitlementValueMemberDoubleValue) isEntitlementValue() {}
@@ -69,6 +76,8 @@ func (*EntitlementValueMemberDoubleValue) isEntitlementValue() {}
 // entitlement is a boolean type. Otherwise, the field will not be set.
 type EntitlementValueMemberBooleanValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*EntitlementValueMemberBooleanValue) isEntitlementValue() {}
@@ -77,15 +86,21 @@ func (*EntitlementValueMemberBooleanValue) isEntitlementValue() {}
 // is a string type. Otherwise, the field will not be set.
 type EntitlementValueMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*EntitlementValueMemberStringValue) isEntitlementValue() {}
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isEntitlementValue() {}

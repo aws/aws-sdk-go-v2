@@ -42,6 +42,8 @@ type UpdateDomainEntryInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDomainEntryOutput struct {
@@ -53,6 +55,8 @@ type UpdateDomainEntryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {

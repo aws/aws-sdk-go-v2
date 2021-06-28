@@ -39,6 +39,8 @@ type GetApplicationRevisionInput struct {
 	//
 	// This member is required.
 	Revision *types.RevisionLocation
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetApplicationRevision operation.
@@ -55,6 +57,8 @@ type GetApplicationRevisionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApplicationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

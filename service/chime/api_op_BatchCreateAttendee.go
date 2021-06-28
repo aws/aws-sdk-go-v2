@@ -41,6 +41,8 @@ type BatchCreateAttendeeInput struct {
 	//
 	// This member is required.
 	MeetingId *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchCreateAttendeeOutput struct {
@@ -54,6 +56,8 @@ type BatchCreateAttendeeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchCreateAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type ListResourcesInput struct {
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourcesOutput struct {
@@ -53,6 +55,8 @@ type ListResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

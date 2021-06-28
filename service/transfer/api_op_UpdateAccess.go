@@ -115,6 +115,8 @@ type UpdateAccessInput struct {
 	// system. The IAM role should also contain a trust relationship that allows the
 	// server to access your resources when servicing your users' transfer requests.
 	Role *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccessOutput struct {
@@ -133,6 +135,8 @@ type UpdateAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type AssignIpv6AddressesInput struct {
 	// One or more specific IPv6 addresses to be assigned to the network interface. You
 	// can't use this option if you're specifying a number of IPv6 addresses.
 	Ipv6Addresses []string
+
+	noSmithyDocumentSerde
 }
 
 type AssignIpv6AddressesOutput struct {
@@ -65,6 +67,8 @@ type AssignIpv6AddressesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssignIpv6AddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

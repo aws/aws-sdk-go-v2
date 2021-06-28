@@ -42,6 +42,8 @@ type UpdateFieldLevelEncryptionConfigInput struct {
 	// The value of the ETag header that you received when retrieving the configuration
 	// identity to update. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFieldLevelEncryptionConfigOutput struct {
@@ -55,6 +57,8 @@ type UpdateFieldLevelEncryptionConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFieldLevelEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type ListServerNeighborsInput struct {
 	// Flag to indicate if port and protocol information is needed as part of the
 	// response.
 	PortInformationNeeded bool
+
+	noSmithyDocumentSerde
 }
 
 type ListServerNeighborsOutput struct {
@@ -72,6 +74,8 @@ type ListServerNeighborsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListServerNeighborsMiddlewares(stack *middleware.Stack, options Options) (err error) {

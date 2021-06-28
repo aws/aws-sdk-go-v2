@@ -70,6 +70,8 @@ type UpdateBrokerInput struct {
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBrokerOutput struct {
@@ -115,6 +117,8 @@ type UpdateBrokerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {

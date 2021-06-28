@@ -60,6 +60,8 @@ type PutFileSystemPolicyInput struct {
 	// principal that is making the request from making a subsequent
 	// PutFileSystemPolicy request on the file system. The default value is False.
 	BypassPolicyLockoutSafetyCheck bool
+
+	noSmithyDocumentSerde
 }
 
 type PutFileSystemPolicyOutput struct {
@@ -72,6 +74,8 @@ type PutFileSystemPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type ListJourneysInput struct {
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 type ListJourneysOutput struct {
@@ -55,6 +57,8 @@ type ListJourneysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJourneysMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,6 +69,8 @@ type CreateCustomActionTypeInput struct {
 
 	// The tags for the custom action.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateCustomActionType operation.
@@ -84,6 +86,8 @@ type CreateCustomActionTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCustomActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type DescribeAddressesAttributeInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAddressesAttributeOutput struct {
@@ -63,6 +65,8 @@ type DescribeAddressesAttributeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAddressesAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -89,6 +89,8 @@ type CreateHsmInput struct {
 	// The IP address for the syslog monitoring server. The AWS CloudHSM service only
 	// supports one syslog monitoring server.
 	SyslogIp *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the CreateHsm operation.
@@ -99,6 +101,8 @@ type CreateHsmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {

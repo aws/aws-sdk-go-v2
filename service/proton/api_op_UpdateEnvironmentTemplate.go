@@ -40,6 +40,8 @@ type UpdateEnvironmentTemplateInput struct {
 	// The name of the environment template to update as displayed in the developer
 	// interface.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEnvironmentTemplateOutput struct {
@@ -51,6 +53,8 @@ type UpdateEnvironmentTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEnvironmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

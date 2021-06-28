@@ -40,6 +40,8 @@ type GrantAccessInput struct {
 	// credentials to log in. If the user is logged in at the time, he or she
 	// automatically will be logged out.
 	ValidForInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a GrantAccess request.
@@ -51,6 +53,8 @@ type GrantAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGrantAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

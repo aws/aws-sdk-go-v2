@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -23,6 +24,8 @@ type AccessPoliciesStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Synonyms, stopwords, and stemming options for an analysis scheme. Includes
@@ -66,6 +69,8 @@ type AnalysisOptions struct {
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms)
 	// in the Amazon CloudSearch Developer Guide.
 	Synonyms *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for an analysis scheme. Each analysis scheme has a
@@ -89,6 +94,8 @@ type AnalysisScheme struct {
 	// Synonyms, stopwords, and stemming options for an analysis scheme. Includes
 	// tokenization dictionary for Japanese.
 	AnalysisOptions *AnalysisOptions
+
+	noSmithyDocumentSerde
 }
 
 // The status and configuration of an AnalysisScheme.
@@ -106,6 +113,8 @@ type AnalysisSchemeStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // The status and configuration of the domain's availability options.
@@ -120,6 +129,8 @@ type AvailabilityOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Options for a field that contains an array of dates. Present if IndexFieldType
@@ -140,6 +151,8 @@ type DateArrayOptions struct {
 
 	// A list of source fields to map to the field.
 	SourceFields *string
+
+	noSmithyDocumentSerde
 }
 
 // Options for a date field. Dates and times are specified in UTC (Coordinated
@@ -175,6 +188,8 @@ type DateOptions struct {
 	// score is reserved and cannot be used as a field name. To reference a document's
 	// ID, you can use the name _id.
 	SourceField *string
+
+	noSmithyDocumentSerde
 }
 
 // Options for a search suggester.
@@ -200,6 +215,8 @@ type DocumentSuggesterOptions struct {
 	// expression. If no expression is configured for the suggester, the suggestions
 	// are sorted with the closest matches listed first.
 	SortExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // The domain's endpoint options.
@@ -210,6 +227,8 @@ type DomainEndpointOptions struct {
 
 	// The minimum required TLS version
 	TLSSecurityPolicy TLSSecurityPolicy
+
+	noSmithyDocumentSerde
 }
 
 // The configuration and status of the domain's endpoint options.
@@ -224,6 +243,8 @@ type DomainEndpointOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // The current status of the search domain.
@@ -285,6 +306,8 @@ type DomainStatus struct {
 
 	// The service endpoint for requesting search results from a search domain.
 	SearchService *ServiceEndpoint
+
+	noSmithyDocumentSerde
 }
 
 // Options for a field that contains an array of double-precision 64-bit floating
@@ -306,6 +329,8 @@ type DoubleArrayOptions struct {
 
 	// A list of source fields to map to the field.
 	SourceFields *string
+
+	noSmithyDocumentSerde
 }
 
 // Options for a double-precision 64-bit floating point field. Present if
@@ -332,6 +357,8 @@ type DoubleOptions struct {
 
 	// The name of the source field to map to the field.
 	SourceField *string
+
+	noSmithyDocumentSerde
 }
 
 // A named expression that can be evaluated at search time. Can be used to sort the
@@ -353,6 +380,8 @@ type Expression struct {
 	//
 	// This member is required.
 	ExpressionValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The value of an Expression and its current status.
@@ -367,6 +396,8 @@ type ExpressionStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for a field in the index, including its name, type,
@@ -447,6 +478,8 @@ type IndexField struct {
 	// Options for text field. Present if IndexFieldType specifies the field is of type
 	// text. A text field is always searchable. All options are enabled by default.
 	TextOptions *TextOptions
+
+	noSmithyDocumentSerde
 }
 
 // The value of an IndexField and its current status.
@@ -462,6 +495,8 @@ type IndexFieldStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Options for a field that contains an array of 64-bit signed integers. Present if
@@ -483,6 +518,8 @@ type IntArrayOptions struct {
 
 	// A list of source fields to map to the field.
 	SourceFields *string
+
+	noSmithyDocumentSerde
 }
 
 // Options for a 64-bit signed integer field. Present if IndexFieldType specifies
@@ -508,6 +545,8 @@ type IntOptions struct {
 
 	// The name of the source field to map to the field.
 	SourceField *string
+
+	noSmithyDocumentSerde
 }
 
 // Options for a latlon field. A latlon field contains a location stored as a
@@ -542,6 +581,8 @@ type LatLonOptions struct {
 	// score is reserved and cannot be used as a field name. To reference a document's
 	// ID, you can use the name _id.
 	SourceField *string
+
+	noSmithyDocumentSerde
 }
 
 type Limits struct {
@@ -551,6 +592,8 @@ type Limits struct {
 
 	// This member is required.
 	MaximumReplicationCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Options for a field that contains an array of literal strings. Present if
@@ -572,6 +615,8 @@ type LiteralArrayOptions struct {
 
 	// A list of source fields to map to the field.
 	SourceFields *string
+
+	noSmithyDocumentSerde
 }
 
 // Options for literal field. Present if IndexFieldType specifies the field is of
@@ -605,6 +650,8 @@ type LiteralOptions struct {
 	// score is reserved and cannot be used as a field name. To reference a document's
 	// ID, you can use the name _id.
 	SourceField *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of domain configuration option.
@@ -645,6 +692,8 @@ type OptionStatus struct {
 
 	// A unique integer that indicates when this option was last updated.
 	UpdateVersion int32
+
+	noSmithyDocumentSerde
 }
 
 // The desired instance type and desired number of replicas of each index
@@ -661,6 +710,8 @@ type ScalingParameters struct {
 
 	// The number of replicas you want to preconfigure for each index partition.
 	DesiredReplicationCount int32
+
+	noSmithyDocumentSerde
 }
 
 // The status and configuration of a search domain's scaling parameters.
@@ -676,6 +727,8 @@ type ScalingParametersStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // The endpoint to which service requests can be submitted.
@@ -686,6 +739,8 @@ type ServiceEndpoint struct {
 	// or
 	// doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com.
 	Endpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for a search suggester. Each suggester has a unique
@@ -703,6 +758,8 @@ type Suggester struct {
 	//
 	// This member is required.
 	SuggesterName *string
+
+	noSmithyDocumentSerde
 }
 
 // The value of a Suggester and its current status.
@@ -719,6 +776,8 @@ type SuggesterStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Options for a field that contains an array of text strings. Present if
@@ -740,6 +799,8 @@ type TextArrayOptions struct {
 
 	// A list of source fields to map to the field.
 	SourceFields *string
+
+	noSmithyDocumentSerde
 }
 
 // Options for text field. Present if IndexFieldType specifies the field is of type
@@ -773,4 +834,8 @@ type TextOptions struct {
 	// score is reserved and cannot be used as a field name. To reference a document's
 	// ID, you can use the name _id.
 	SourceField *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

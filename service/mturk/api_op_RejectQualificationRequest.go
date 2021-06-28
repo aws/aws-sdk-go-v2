@@ -39,11 +39,15 @@ type RejectQualificationRequestInput struct {
 	// A text message explaining why the request was rejected, to be shown to the
 	// Worker who made the request.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type RejectQualificationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectQualificationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {

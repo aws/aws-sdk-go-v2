@@ -97,6 +97,8 @@ type ListUsersInput struct {
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	PaginationToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The response from the request to list users.
@@ -111,6 +113,8 @@ type ListUsersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {

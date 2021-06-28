@@ -10,6 +10,8 @@ import (
 // The resource with the name requested already exists.
 type AlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsException) Error() string {
@@ -27,6 +29,8 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 // An error occurred during a CloudFormation registry operation.
 type CFNRegistryException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CFNRegistryException) Error() string {
@@ -45,6 +49,8 @@ func (e *CFNRegistryException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // a stack, use the ListChangeSets action.
 type ChangeSetNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ChangeSetNotFoundException) Error() string {
@@ -62,6 +68,8 @@ func (e *ChangeSetNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 // The specified resource exists, but has been changed.
 type CreatedButModifiedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CreatedButModifiedException) Error() string {
@@ -80,6 +88,8 @@ func (e *CreatedButModifiedException) ErrorFault() smithy.ErrorFault { return sm
 // Capabilities parameter.
 type InsufficientCapabilitiesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientCapabilitiesException) Error() string {
@@ -101,6 +111,8 @@ func (e *InsufficientCapabilitiesException) ErrorFault() smithy.ErrorFault { ret
 // UPDATE_IN_PROGRESS.
 type InvalidChangeSetStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidChangeSetStatusException) Error() string {
@@ -118,6 +130,8 @@ func (e *InvalidChangeSetStatusException) ErrorFault() smithy.ErrorFault { retur
 // The specified operation isn't valid.
 type InvalidOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOperationException) Error() string {
@@ -137,6 +151,8 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 // CloudFormation does not return this error to users.
 type InvalidStateTransitionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStateTransitionException) Error() string {
@@ -157,6 +173,8 @@ func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { retur
 // in the AWS CloudFormation User Guide.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -174,6 +192,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified name is already in use.
 type NameAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NameAlreadyExistsException) Error() string {
@@ -191,6 +211,8 @@ func (e *NameAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smi
 // The specified operation ID already exists.
 type OperationIdAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationIdAlreadyExistsException) Error() string {
@@ -211,6 +233,8 @@ func (e *OperationIdAlreadyExistsException) ErrorFault() smithy.ErrorFault { ret
 // operation can be performed for a stack set at a given time.
 type OperationInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationInProgressException) Error() string {
@@ -228,6 +252,8 @@ func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return s
 // The specified ID refers to an operation that doesn't exist.
 type OperationNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotFoundException) Error() string {
@@ -247,6 +273,8 @@ func (e *OperationNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 // CloudFormation does not return this error to users.
 type OperationStatusCheckFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationStatusCheckFailedException) Error() string {
@@ -266,6 +294,8 @@ func (e *OperationStatusCheckFailedException) ErrorFault() smithy.ErrorFault {
 // The specified stack instance doesn't exist.
 type StackInstanceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StackInstanceNotFoundException) Error() string {
@@ -285,6 +315,8 @@ func (e *StackInstanceNotFoundException) ErrorFault() smithy.ErrorFault { return
 // stack set.
 type StackSetNotEmptyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StackSetNotEmptyException) Error() string {
@@ -302,6 +334,8 @@ func (e *StackSetNotEmptyException) ErrorFault() smithy.ErrorFault { return smit
 // The specified stack set doesn't exist.
 type StackSetNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StackSetNotFoundException) Error() string {
@@ -320,6 +354,8 @@ func (e *StackSetNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // operation was performed.
 type StaleRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StaleRequestException) Error() string {
@@ -337,6 +373,8 @@ func (e *StaleRequestException) ErrorFault() smithy.ErrorFault { return smithy.F
 // A client request token already exists.
 type TokenAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TokenAlreadyExistsException) Error() string {
@@ -354,6 +392,8 @@ func (e *TokenAlreadyExistsException) ErrorFault() smithy.ErrorFault { return sm
 // The specified extension configuration cannot be found.
 type TypeConfigurationNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TypeConfigurationNotFoundException) Error() string {
@@ -375,6 +415,8 @@ func (e *TypeConfigurationNotFoundException) ErrorFault() smithy.ErrorFault {
 // The specified extension does not exist in the CloudFormation registry.
 type TypeNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TypeNotFoundException) Error() string {

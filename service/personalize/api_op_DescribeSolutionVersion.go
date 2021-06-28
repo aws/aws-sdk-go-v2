@@ -34,6 +34,8 @@ type DescribeSolutionVersionInput struct {
 	//
 	// This member is required.
 	SolutionVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSolutionVersionOutput struct {
@@ -43,6 +45,8 @@ type DescribeSolutionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSolutionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

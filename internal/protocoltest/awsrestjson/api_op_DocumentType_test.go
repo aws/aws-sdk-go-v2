@@ -7,6 +7,8 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
@@ -24,8 +26,6 @@ import (
 )
 
 func TestClient_DocumentType_awsRestjson1Serialize(t *testing.T) {
-	t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#DocumentType")
-
 	cases := map[string]struct {
 		Params        *DocumentTypeInput
 		ExpectMethod  string
@@ -42,8 +42,10 @@ func TestClient_DocumentType_awsRestjson1Serialize(t *testing.T) {
 		// Serializes document types as part of the JSON request payload with no escaping.
 		"DocumentTypeInputWithObject": {
 			Params: &DocumentTypeInput{
-				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				StringValue: ptr.String("string"),
+				DocumentValue: document.NewLazyDocument(map[string]interface{}{
+					"foo": "bar",
+				}),
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/DocumentType",
@@ -65,7 +67,7 @@ func TestClient_DocumentType_awsRestjson1Serialize(t *testing.T) {
 		"DocumentInputWithString": {
 			Params: &DocumentTypeInput{
 				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument("hello"),
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/DocumentType",
@@ -85,7 +87,7 @@ func TestClient_DocumentType_awsRestjson1Serialize(t *testing.T) {
 		"DocumentInputWithNumber": {
 			Params: &DocumentTypeInput{
 				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument(10),
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/DocumentType",
@@ -105,7 +107,7 @@ func TestClient_DocumentType_awsRestjson1Serialize(t *testing.T) {
 		"DocumentInputWithBoolean": {
 			Params: &DocumentTypeInput{
 				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument(true),
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/DocumentType",
@@ -124,8 +126,23 @@ func TestClient_DocumentType_awsRestjson1Serialize(t *testing.T) {
 		// Serializes document types using a list.
 		"DocumentInputWithList": {
 			Params: &DocumentTypeInput{
-				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				StringValue: ptr.String("string"),
+				DocumentValue: document.NewLazyDocument([]interface{}{
+					true,
+					"hi",
+					[]interface{}{
+						1,
+						2,
+					},
+					map[string]interface{}{
+						"foo": map[string]interface{}{
+							"baz": []interface{}{
+								3,
+								4,
+							},
+						},
+					},
+				}),
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/DocumentType",
@@ -245,8 +262,10 @@ func TestClient_DocumentType_awsRestjson1Deserialize(t *testing.T) {
 			    }
 			}`),
 			ExpectResult: &DocumentTypeOutput{
-				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				StringValue: ptr.String("string"),
+				DocumentValue: document.NewLazyDocument(map[string]interface{}{
+					"foo": "bar",
+				}),
 			},
 		},
 		// Document types can be JSON scalars too.
@@ -262,7 +281,7 @@ func TestClient_DocumentType_awsRestjson1Deserialize(t *testing.T) {
 			}`),
 			ExpectResult: &DocumentTypeOutput{
 				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument("hello"),
 			},
 		},
 		// Document types can be JSON scalars too.
@@ -278,7 +297,7 @@ func TestClient_DocumentType_awsRestjson1Deserialize(t *testing.T) {
 			}`),
 			ExpectResult: &DocumentTypeOutput{
 				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument(10),
 			},
 		},
 		// Document types can be JSON scalars too.
@@ -294,7 +313,7 @@ func TestClient_DocumentType_awsRestjson1Deserialize(t *testing.T) {
 			}`),
 			ExpectResult: &DocumentTypeOutput{
 				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument(false),
 			},
 		},
 		// Document types can be JSON arrays.
@@ -312,8 +331,11 @@ func TestClient_DocumentType_awsRestjson1Deserialize(t *testing.T) {
 			    ]
 			}`),
 			ExpectResult: &DocumentTypeOutput{
-				StringValue:   ptr.String("string"),
-				DocumentValue: nil,
+				StringValue: ptr.String("string"),
+				DocumentValue: document.NewLazyDocument([]interface{}{
+					true,
+					false,
+				}),
 			},
 		},
 	}
@@ -377,6 +399,7 @@ func TestClient_DocumentType_awsRestjson1Deserialize(t *testing.T) {
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)

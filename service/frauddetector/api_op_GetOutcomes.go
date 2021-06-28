@@ -42,6 +42,8 @@ type GetOutcomesInput struct {
 
 	// The next page token for the request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetOutcomesOutput struct {
@@ -54,6 +56,8 @@ type GetOutcomesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOutcomesMiddlewares(stack *middleware.Stack, options Options) (err error) {

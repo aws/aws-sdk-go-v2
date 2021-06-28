@@ -51,6 +51,8 @@ type PutProfileObjectInput struct {
 	//
 	// This member is required.
 	ObjectTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type PutProfileObjectOutput struct {
@@ -60,6 +62,8 @@ type PutProfileObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutProfileObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

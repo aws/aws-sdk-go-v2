@@ -46,11 +46,15 @@ type UpdateFindingsFeedbackInput struct {
 
 	// Additional feedback about the GuardDuty findings.
 	Comments *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFindingsFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFindingsFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetBackupPlanFromTemplateInput struct {
 	//
 	// This member is required.
 	BackupPlanTemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBackupPlanFromTemplateOutput struct {
@@ -43,6 +45,8 @@ type GetBackupPlanFromTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackupPlanFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

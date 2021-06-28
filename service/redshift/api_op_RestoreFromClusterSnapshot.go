@@ -220,6 +220,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// cluster. Default: The default VPC security group is associated with the cluster.
 	// VPC security groups only apply to clusters in VPCs.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreFromClusterSnapshotOutput struct {
@@ -229,6 +231,8 @@ type RestoreFromClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreFromClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

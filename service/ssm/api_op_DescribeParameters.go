@@ -49,6 +49,8 @@ type DescribeParametersInput struct {
 
 	// Filters to limit the request results.
 	ParameterFilters []types.ParameterStringFilter
+
+	noSmithyDocumentSerde
 }
 
 type DescribeParametersOutput struct {
@@ -61,6 +63,8 @@ type DescribeParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

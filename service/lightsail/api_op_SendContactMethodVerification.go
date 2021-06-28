@@ -44,6 +44,8 @@ type SendContactMethodVerificationInput struct {
 	//
 	// This member is required.
 	Protocol types.ContactMethodVerificationProtocol
+
+	noSmithyDocumentSerde
 }
 
 type SendContactMethodVerificationOutput struct {
@@ -55,6 +57,8 @@ type SendContactMethodVerificationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendContactMethodVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type NotifyApplicationStateInput struct {
 
 	// The timestamp when the application state changed.
 	UpdateDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type NotifyApplicationStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNotifyApplicationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

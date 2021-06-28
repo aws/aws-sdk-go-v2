@@ -49,6 +49,8 @@ type GetBotVersionsInput struct {
 	// response. To fetch the next page of versions, specify the pagination token in
 	// the next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBotVersionsOutput struct {
@@ -65,6 +67,8 @@ type GetBotVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBotVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

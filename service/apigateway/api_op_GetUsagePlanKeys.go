@@ -49,6 +49,8 @@ type GetUsagePlanKeysInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the collection of usage plan keys added to usage plans for the
@@ -65,6 +67,8 @@ type GetUsagePlanKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUsagePlanKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

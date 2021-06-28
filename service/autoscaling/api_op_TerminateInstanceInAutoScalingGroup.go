@@ -52,6 +52,8 @@ type TerminateInstanceInAutoScalingGroupInput struct {
 	//
 	// This member is required.
 	ShouldDecrementDesiredCapacity *bool
+
+	noSmithyDocumentSerde
 }
 
 type TerminateInstanceInAutoScalingGroupOutput struct {
@@ -61,6 +63,8 @@ type TerminateInstanceInAutoScalingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateInstanceInAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

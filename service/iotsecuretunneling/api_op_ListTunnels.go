@@ -39,6 +39,8 @@ type ListTunnelsInput struct {
 
 	// The name of the IoT thing associated with the destination device.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTunnelsOutput struct {
@@ -51,6 +53,8 @@ type ListTunnelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTunnelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

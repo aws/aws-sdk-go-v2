@@ -53,11 +53,15 @@ type UpdateUserInput struct {
 	// contain at least 4 unique characters, and must not contain commas, colons, or
 	// equal signs (,:=).
 	Password *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

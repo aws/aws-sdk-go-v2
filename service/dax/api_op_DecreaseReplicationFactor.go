@@ -46,6 +46,8 @@ type DecreaseReplicationFactorInput struct {
 
 	// The unique identifiers of the nodes to be removed from the cluster.
 	NodeIdsToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type DecreaseReplicationFactorOutput struct {
@@ -56,6 +58,8 @@ type DecreaseReplicationFactorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDecreaseReplicationFactorMiddlewares(stack *middleware.Stack, options Options) (err error) {

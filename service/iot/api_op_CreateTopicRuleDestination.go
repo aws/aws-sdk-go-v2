@@ -34,6 +34,8 @@ type CreateTopicRuleDestinationInput struct {
 	//
 	// This member is required.
 	DestinationConfiguration *types.TopicRuleDestinationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type CreateTopicRuleDestinationOutput struct {
@@ -43,6 +45,8 @@ type CreateTopicRuleDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

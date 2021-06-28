@@ -52,6 +52,8 @@ type UpdateDetectorModelInput struct {
 	// Information about the order in which events are evaluated and how actions are
 	// executed.
 	EvaluationMethod types.EvaluationMethod
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDetectorModelOutput struct {
@@ -61,6 +63,8 @@ type UpdateDetectorModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDetectorModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

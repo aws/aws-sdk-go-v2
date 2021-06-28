@@ -33,11 +33,15 @@ type DeprecateSystemTemplateInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeprecateSystemTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeprecateSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

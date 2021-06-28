@@ -348,6 +348,8 @@ type QueryInput struct {
 	// you use the ProjectionExpression parameter, then the value for Select can only
 	// be SPECIFIC_ATTRIBUTES. Any other value for Select will return an error.
 	Select types.Select
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a Query operation.
@@ -392,6 +394,8 @@ type QueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

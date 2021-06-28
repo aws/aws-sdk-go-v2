@@ -43,6 +43,8 @@ type RegisterVolumeInput struct {
 
 	// The Amazon EBS volume ID.
 	Ec2VolumeId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a RegisterVolume request.
@@ -53,6 +55,8 @@ type RegisterVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

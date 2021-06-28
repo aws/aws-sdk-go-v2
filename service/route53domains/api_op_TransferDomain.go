@@ -143,6 +143,8 @@ type TransferDomainInput struct {
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the technical contact. Default: true
 	PrivacyProtectTechContact *bool
+
+	noSmithyDocumentSerde
 }
 
 // The TransferDomain response includes the following element.
@@ -157,6 +159,8 @@ type TransferDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

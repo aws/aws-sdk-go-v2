@@ -35,6 +35,8 @@ type DescribeWorkspacesConnectionStatusInput struct {
 
 	// The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
 	WorkspaceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorkspacesConnectionStatusOutput struct {
@@ -48,6 +50,8 @@ type DescribeWorkspacesConnectionStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkspacesConnectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

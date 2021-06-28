@@ -37,6 +37,8 @@ type StopDBClusterInput struct {
 	//
 	// This member is required.
 	DBClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type StopDBClusterOutput struct {
@@ -47,6 +49,8 @@ type StopDBClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

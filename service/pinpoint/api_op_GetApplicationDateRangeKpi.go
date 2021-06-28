@@ -69,6 +69,8 @@ type GetApplicationDateRangeKpiInput struct {
 	// 8:00 PM UTC July 19, 2019. This value should also be fewer than 90 days from the
 	// current day.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type GetApplicationDateRangeKpiOutput struct {
@@ -81,6 +83,8 @@ type GetApplicationDateRangeKpiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApplicationDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {

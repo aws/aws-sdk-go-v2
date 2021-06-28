@@ -36,6 +36,8 @@ type UpdateAppImageConfigInput struct {
 
 	// The new KernelGateway app to run on the image.
 	KernelGatewayImageConfig *types.KernelGatewayImageConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAppImageConfigOutput struct {
@@ -45,6 +47,8 @@ type UpdateAppImageConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

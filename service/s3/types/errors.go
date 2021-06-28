@@ -11,6 +11,8 @@ import (
 // all users of the system. Select a different name and try again.
 type BucketAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BucketAlreadyExists) Error() string {
@@ -32,6 +34,8 @@ func (e *BucketAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // control lists (ACLs).
 type BucketAlreadyOwnedByYou struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BucketAlreadyOwnedByYou) Error() string {
@@ -52,6 +56,8 @@ type InvalidObjectState struct {
 
 	StorageClass StorageClass
 	AccessTier   IntelligentTieringAccessTier
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidObjectState) Error() string {
@@ -69,6 +75,8 @@ func (e *InvalidObjectState) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The specified bucket does not exist.
 type NoSuchBucket struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchBucket) Error() string {
@@ -86,6 +94,8 @@ func (e *NoSuchBucket) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // The specified key does not exist.
 type NoSuchKey struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchKey) Error() string {
@@ -103,6 +113,8 @@ func (e *NoSuchKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 // The specified multipart upload does not exist.
 type NoSuchUpload struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchUpload) Error() string {
@@ -120,6 +132,8 @@ func (e *NoSuchUpload) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // The specified content does not exist.
 type NotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFound) Error() string {
@@ -137,6 +151,8 @@ func (e *NotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 // This action is not allowed against this storage tier.
 type ObjectAlreadyInActiveTierError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ObjectAlreadyInActiveTierError) Error() string {
@@ -155,6 +171,8 @@ func (e *ObjectAlreadyInActiveTierError) ErrorFault() smithy.ErrorFault { return
 // stored in Amazon S3 Glacier.
 type ObjectNotInActiveTierError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ObjectNotInActiveTierError) Error() string {

@@ -36,6 +36,8 @@ type DescribeBackupInput struct {
 	//
 	// This member is required.
 	BackupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBackupOutput struct {
@@ -45,6 +47,8 @@ type DescribeBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

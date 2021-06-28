@@ -41,6 +41,8 @@ type DetachLoadBalancerFromSubnetsInput struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DetachLoadBalancerFromSubnets.
@@ -51,6 +53,8 @@ type DetachLoadBalancerFromSubnetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachLoadBalancerFromSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

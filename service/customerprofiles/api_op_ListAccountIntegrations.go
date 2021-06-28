@@ -39,6 +39,8 @@ type ListAccountIntegrationsInput struct {
 
 	// The pagination token from the previous ListAccountIntegrations API call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAccountIntegrationsOutput struct {
@@ -51,6 +53,8 @@ type ListAccountIntegrationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccountIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -58,6 +58,8 @@ type GetSchemaVersionsDiffInput struct {
 	//
 	// This member is required.
 	SecondSchemaVersionNumber *types.SchemaVersionNumber
+
+	noSmithyDocumentSerde
 }
 
 type GetSchemaVersionsDiffOutput struct {
@@ -67,6 +69,8 @@ type GetSchemaVersionsDiffOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSchemaVersionsDiffMiddlewares(stack *middleware.Stack, options Options) (err error) {

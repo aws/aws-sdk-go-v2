@@ -109,6 +109,8 @@ type CreateJobInput struct {
 	// A set of tags to associate with the S3 Batch Operations job. This is an optional
 	// parameter.
 	Tags []types.S3Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateJobOutput struct {
@@ -119,6 +121,8 @@ type CreateJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

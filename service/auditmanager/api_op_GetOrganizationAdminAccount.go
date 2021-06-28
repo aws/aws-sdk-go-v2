@@ -28,6 +28,7 @@ func (c *Client) GetOrganizationAdminAccount(ctx context.Context, params *GetOrg
 }
 
 type GetOrganizationAdminAccountInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetOrganizationAdminAccountOutput struct {
@@ -40,6 +41,8 @@ type GetOrganizationAdminAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type PutSchemaFromJsonInput struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutSchemaFromJsonOutput struct {
@@ -49,6 +51,8 @@ type PutSchemaFromJsonOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSchemaFromJsonMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -63,6 +63,8 @@ type CreateServiceTemplateVersionInput struct {
 
 	// Create tags for a new version of a service template.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceTemplateVersionOutput struct {
@@ -75,6 +77,8 @@ type CreateServiceTemplateVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

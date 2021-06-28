@@ -50,6 +50,8 @@ type ListEnvironmentAccountConnectionsInput struct {
 
 	// The status details for each listed environment account connection.
 	Statuses []types.EnvironmentAccountConnectionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListEnvironmentAccountConnectionsOutput struct {
@@ -67,6 +69,8 @@ type ListEnvironmentAccountConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEnvironmentAccountConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

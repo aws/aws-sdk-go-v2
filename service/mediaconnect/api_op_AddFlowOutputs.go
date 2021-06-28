@@ -39,6 +39,8 @@ type AddFlowOutputsInput struct {
 	//
 	// This member is required.
 	Outputs []types.AddOutputRequest
+
+	noSmithyDocumentSerde
 }
 
 type AddFlowOutputsOutput struct {
@@ -51,6 +53,8 @@ type AddFlowOutputsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddFlowOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {

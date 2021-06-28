@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type AddressBook struct {
 
 	// The name of the address book.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information related to an address book.
@@ -30,6 +33,8 @@ type AddressBookData struct {
 
 	// The name of the address book.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The audio message. There is a 1 MB limit on the audio file input and the only
@@ -53,6 +58,8 @@ type Audio struct {
 	//
 	// This member is required.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Usage report with specified parameters.
@@ -72,6 +79,8 @@ type BusinessReport struct {
 
 	// The status of the report generation execution (RUNNING, SUCCEEDED, or FAILED).
 	Status BusinessReportStatus
+
+	noSmithyDocumentSerde
 }
 
 // The content range of the report.
@@ -81,6 +90,8 @@ type BusinessReportContentRange struct {
 	//
 	// This member is required.
 	Interval BusinessReportInterval
+
+	noSmithyDocumentSerde
 }
 
 // The recurrence of the reports.
@@ -88,6 +99,8 @@ type BusinessReportRecurrence struct {
 
 	// The start date.
 	StartDate *string
+
+	noSmithyDocumentSerde
 }
 
 // The S3 location of the output reports.
@@ -98,6 +111,8 @@ type BusinessReportS3Location struct {
 
 	// The path of the business report.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // The schedule of the usage report.
@@ -127,6 +142,8 @@ type BusinessReportSchedule struct {
 
 	// The name identifier of the schedule.
 	ScheduleName *string
+
+	noSmithyDocumentSerde
 }
 
 // The skill store category that is shown. Alexa skills are assigned a specific
@@ -138,6 +155,8 @@ type Category struct {
 
 	// The name of the skill store category.
 	CategoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // The default conference provider that is used if no other scheduled meetings are
@@ -146,6 +165,8 @@ type ConferencePreference struct {
 
 	// The ARN of the default conference provider.
 	DefaultConferenceProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An entity that provides a conferencing solution. Alexa for Business acts as the
@@ -171,6 +192,8 @@ type ConferenceProvider struct {
 
 	// The type of conference providers.
 	Type ConferenceProviderType
+
+	noSmithyDocumentSerde
 }
 
 // A contact with attributes.
@@ -198,6 +221,8 @@ type Contact struct {
 
 	// The list of SIP addresses for the contact.
 	SipAddresses []SipAddress
+
+	noSmithyDocumentSerde
 }
 
 // Information related to a contact.
@@ -225,6 +250,8 @@ type ContactData struct {
 
 	// The list of SIP addresses for the contact.
 	SipAddresses []SipAddress
+
+	noSmithyDocumentSerde
 }
 
 // The content definition. This can contain only one text, SSML, or audio list
@@ -239,6 +266,8 @@ type Content struct {
 
 	// The list of text messages.
 	TextList []Text
+
+	noSmithyDocumentSerde
 }
 
 // Creates settings for the end of meeting reminder feature that are applied to a
@@ -260,6 +289,8 @@ type CreateEndOfMeetingReminder struct {
 	//
 	// This member is required.
 	ReminderType EndOfMeetingReminderType
+
+	noSmithyDocumentSerde
 }
 
 // Creates settings for the instant booking feature that are applied to a room
@@ -277,6 +308,8 @@ type CreateInstantBooking struct {
 	//
 	// This member is required.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Creates meeting room settings of a room profile.
@@ -299,6 +332,8 @@ type CreateMeetingRoomConfiguration struct {
 
 	// Whether room utilization metrics are enabled or not.
 	RoomUtilizationMetricsEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Creates settings for the require check in feature that are applied to a room
@@ -316,6 +351,8 @@ type CreateRequireCheckIn struct {
 	//
 	// This member is required.
 	ReleaseAfterMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // The details about the developer that published the skill.
@@ -332,6 +369,8 @@ type DeveloperInfo struct {
 
 	// The website of the developer.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // A device with attributes.
@@ -367,6 +406,8 @@ type Device struct {
 
 	// The software version of a device.
 	SoftwareVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Device attributes.
@@ -410,6 +451,8 @@ type DeviceData struct {
 
 	// The software version of a device.
 	SoftwareVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The list of device events.
@@ -423,6 +466,8 @@ type DeviceEvent struct {
 
 	// The value of the event.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a device's network profile.
@@ -436,6 +481,8 @@ type DeviceNetworkProfileInfo struct {
 
 	// The ARN of the network profile associated with a device.
 	NetworkProfileArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of a device’s status.
@@ -446,6 +493,8 @@ type DeviceStatusDetail struct {
 
 	// The list of available features on the device.
 	Feature Feature
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a device's status.
@@ -459,6 +508,8 @@ type DeviceStatusInfo struct {
 
 	// One or more device status detail descriptions.
 	DeviceStatusDetails []DeviceStatusDetail
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the end of meeting reminder feature that are applied to a room
@@ -474,6 +525,8 @@ type EndOfMeetingReminder struct {
 
 	// The type of sound that users hear during the end of meeting reminder.
 	ReminderType EndOfMeetingReminderType
+
+	noSmithyDocumentSerde
 }
 
 // A filter name and value pair that is used to return a more specific list of
@@ -489,6 +542,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the gateway.
@@ -509,6 +564,8 @@ type Gateway struct {
 	// The software version of the gateway. The gateway automatically updates its
 	// software version during normal operation.
 	SoftwareVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the gateway group.
@@ -522,6 +579,8 @@ type GatewayGroup struct {
 
 	// The name of the gateway group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of a gateway group.
@@ -535,6 +594,8 @@ type GatewayGroupSummary struct {
 
 	// The name of the gateway group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of a gateway.
@@ -555,6 +616,8 @@ type GatewaySummary struct {
 	// The software version of the gateway. The gateway automatically updates its
 	// software version during normal operation.
 	SoftwareVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the instant booking feature that are applied to a room profile.
@@ -568,6 +631,8 @@ type InstantBooking struct {
 
 	// Whether instant booking is enabled or not.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // The IP endpoint and protocol for calling.
@@ -582,6 +647,8 @@ type IPDialIn struct {
 	//
 	// This member is required.
 	Endpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Meeting room settings of a room profile.
@@ -604,6 +671,8 @@ type MeetingRoomConfiguration struct {
 
 	// Whether room utilization metrics are enabled or not.
 	RoomUtilizationMetricsEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // The values that indicate whether a pin is always required (YES), never required
@@ -623,6 +692,8 @@ type MeetingSetting struct {
 	//
 	// This member is required.
 	RequirePin RequirePin
+
+	noSmithyDocumentSerde
 }
 
 // The network profile associated with a device.
@@ -663,6 +734,8 @@ type NetworkProfile struct {
 	// The root certificates of your authentication server, which is installed on your
 	// devices and used to trust your authentication server during EAP negotiation.
 	TrustAnchors []string
+
+	noSmithyDocumentSerde
 }
 
 // The data associated with a network profile.
@@ -691,6 +764,8 @@ type NetworkProfileData struct {
 
 	// The SSID of the Wi-Fi network.
 	Ssid *string
+
+	noSmithyDocumentSerde
 }
 
 // The phone number for the contact containing the raw number and phone number
@@ -706,6 +781,8 @@ type PhoneNumber struct {
 	//
 	// This member is required.
 	Type PhoneNumberType
+
+	noSmithyDocumentSerde
 }
 
 // A room profile with attributes.
@@ -756,6 +833,8 @@ type Profile struct {
 
 	// The wake word of a room profile.
 	WakeWord WakeWord
+
+	noSmithyDocumentSerde
 }
 
 // The data of a room profile.
@@ -788,6 +867,8 @@ type ProfileData struct {
 
 	// The wake word of a room profile.
 	WakeWord WakeWord
+
+	noSmithyDocumentSerde
 }
 
 // The information for public switched telephone network (PSTN) conferencing.
@@ -816,6 +897,8 @@ type PSTNDialIn struct {
 	//
 	// This member is required.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the require check in feature that are applied to a room profile.
@@ -829,6 +912,8 @@ type RequireCheckIn struct {
 	// Duration between 5 and 20 minutes to determine when to release the room if it's
 	// not checked into.
 	ReleaseAfterMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // A room with attributes.
@@ -848,6 +933,8 @@ type Room struct {
 
 	// The name of a room.
 	RoomName *string
+
+	noSmithyDocumentSerde
 }
 
 // The data of a room.
@@ -870,6 +957,8 @@ type RoomData struct {
 
 	// The name of a room.
 	RoomName *string
+
+	noSmithyDocumentSerde
 }
 
 // A skill parameter associated with a room.
@@ -885,6 +974,8 @@ type RoomSkillParameter struct {
 	//
 	// This member is required.
 	ParameterValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The SIP address for the contact containing the URI and SIP address type.
@@ -899,6 +990,8 @@ type SipAddress struct {
 	//
 	// This member is required.
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Granular information about the skill.
@@ -934,6 +1027,8 @@ type SkillDetails struct {
 
 	// The types of skills.
 	SkillTypes []string
+
+	noSmithyDocumentSerde
 }
 
 // A skill group with attributes.
@@ -947,6 +1042,8 @@ type SkillGroup struct {
 
 	// The name of a skill group.
 	SkillGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The attributes of a skill group.
@@ -960,6 +1057,8 @@ type SkillGroupData struct {
 
 	// The skill group name of a skill group.
 	SkillGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The detailed information about an Alexa skill.
@@ -985,6 +1084,8 @@ type SkillsStoreSkill struct {
 
 	// Linking support for a skill.
 	SupportsLinking bool
+
+	noSmithyDocumentSerde
 }
 
 // The summary of skills.
@@ -1005,6 +1106,8 @@ type SkillSummary struct {
 
 	// Linking support for a skill.
 	SupportsLinking bool
+
+	noSmithyDocumentSerde
 }
 
 // A smart home appliance that can connect to a central system. Any domestic device
@@ -1019,6 +1122,8 @@ type SmartHomeAppliance struct {
 
 	// The name of the manufacturer of the smart home appliance.
 	ManufacturerName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a sort criteria.
@@ -1033,6 +1138,8 @@ type Sort struct {
 	//
 	// This member is required.
 	Value SortValue
+
+	noSmithyDocumentSerde
 }
 
 // The SSML message. For more information, see SSML Reference
@@ -1049,6 +1156,8 @@ type Ssml struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair that can be associated with a resource.
@@ -1063,6 +1172,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The text message.
@@ -1077,6 +1188,8 @@ type Text struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for the end of meeting reminder feature that are applied to a room
@@ -1094,6 +1207,8 @@ type UpdateEndOfMeetingReminder struct {
 
 	// The type of sound that users hear during the end of meeting reminder.
 	ReminderType EndOfMeetingReminderType
+
+	noSmithyDocumentSerde
 }
 
 // Updates settings for the instant booking feature that are applied to a room
@@ -1107,6 +1222,8 @@ type UpdateInstantBooking struct {
 
 	// Whether instant booking is enabled or not.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Updates meeting room settings of a room profile.
@@ -1129,6 +1246,8 @@ type UpdateMeetingRoomConfiguration struct {
 
 	// Whether room utilization metrics are enabled or not.
 	RoomUtilizationMetricsEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Updates settings for the require check in feature that are applied to a room
@@ -1142,6 +1261,8 @@ type UpdateRequireCheckIn struct {
 	// Duration between 5 and 20 minutes to determine when to release the room if it's
 	// not checked into.
 	ReleaseAfterMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information related to a user.
@@ -1164,4 +1285,8 @@ type UserData struct {
 
 	// The ARN of a user.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

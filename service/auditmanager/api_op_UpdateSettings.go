@@ -41,6 +41,8 @@ type UpdateSettingsInput struct {
 	// The Amazon Simple Notification Service (Amazon SNS) topic to which AWS Audit
 	// Manager sends notifications.
 	SnsTopic *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSettingsOutput struct {
@@ -50,6 +52,8 @@ type UpdateSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

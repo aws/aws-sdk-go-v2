@@ -40,6 +40,8 @@ type RemoveNotificationChannelInput struct {
 	//
 	// This member is required.
 	ProfilingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the RemoveNotificationChannelResponse.
@@ -50,6 +52,8 @@ type RemoveNotificationChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

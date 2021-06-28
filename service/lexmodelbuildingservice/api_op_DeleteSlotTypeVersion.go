@@ -40,11 +40,15 @@ type DeleteSlotTypeVersionInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSlotTypeVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSlotTypeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

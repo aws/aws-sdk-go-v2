@@ -58,6 +58,8 @@ type UpdateSubnetChangeProtectionInput struct {
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSubnetChangeProtectionOutput struct {
@@ -91,6 +93,8 @@ type UpdateSubnetChangeProtectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSubnetChangeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

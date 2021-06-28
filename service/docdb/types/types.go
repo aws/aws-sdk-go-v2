@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type AvailabilityZone struct {
 
 	// The name of the Availability Zone.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A certificate authority (CA) certificate for an account.
@@ -36,6 +39,8 @@ type Certificate struct {
 	// The date-time after which the certificate is no longer valid. Example:
 	// 2024-07-31T17:57:09Z
 	ValidTill *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The configuration setting for the log types to be enabled for export to Amazon
@@ -50,6 +55,8 @@ type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to enable.
 	EnableLogTypes []string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a cluster.
@@ -175,6 +182,8 @@ type DBCluster struct {
 	// Provides a list of virtual private cloud (VPC) security groups that the cluster
 	// belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an instance that is part of a cluster.
@@ -195,6 +204,8 @@ type DBClusterMember struct {
 	// promoted to the primary instance after a failure of the existing primary
 	// instance.
 	PromotionTier *int32
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a cluster parameter group.
@@ -212,6 +223,8 @@ type DBClusterParameterGroup struct {
 
 	// Provides the customer-specified description for this cluster parameter group.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Identity and Access Management (IAM) role that is associated with a
@@ -236,6 +249,8 @@ type DBClusterRole struct {
 	// cluster, but the cluster cannot assume the IAMrole to access other Amazon Web
 	// Services services on your behalf.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a cluster snapshot.
@@ -298,6 +313,8 @@ type DBClusterSnapshot struct {
 	// Provides the virtual private cloud (VPC) ID that is associated with the cluster
 	// snapshot.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name and values of a manual cluster snapshot attribute. Manual
@@ -316,6 +333,8 @@ type DBClusterSnapshotAttribute struct {
 	// is in the list, then the manual cluster snapshot is public and available for any
 	// account to copy or restore.
 	AttributeValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about the attributes that are associated with a cluster
@@ -327,6 +346,8 @@ type DBClusterSnapshotAttributesResult struct {
 
 	// The identifier of the cluster snapshot that the attributes apply to.
 	DBClusterSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an engine version.
@@ -357,6 +378,8 @@ type DBEngineVersion struct {
 
 	// A list of engine versions that this database engine version can be upgraded to.
 	ValidUpgradeTarget []UpgradeTarget
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an instance.
@@ -454,6 +477,8 @@ type DBInstance struct {
 
 	// Provides a list of VPC security group elements that the instance belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 // Provides a list of status information for an instance.
@@ -473,6 +498,8 @@ type DBInstanceStatusInfo struct {
 
 	// This value is currently "read replication."
 	StatusType *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a subnet group.
@@ -495,6 +522,8 @@ type DBSubnetGroup struct {
 
 	// Provides the virtual private cloud (VPC) ID of the subnet group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Network information for accessing a cluster or instance. Client programs must
@@ -509,6 +538,8 @@ type Endpoint struct {
 
 	// Specifies the port that the database engine is listening on.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of a successful invocation of the
@@ -526,6 +557,8 @@ type EngineDefaults struct {
 
 	// The parameters of a particular cluster parameter group family.
 	Parameters []Parameter
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an event.
@@ -548,6 +581,8 @@ type Event struct {
 
 	// Specifies the source type for this event.
 	SourceType SourceType
+
+	noSmithyDocumentSerde
 }
 
 // An event source type, accompanied by one or more event category names.
@@ -558,6 +593,8 @@ type EventCategoriesMap struct {
 
 	// The source type that the returned categories belong to.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an event to which you have subscribed.
@@ -601,6 +638,8 @@ type EventSubscription struct {
 	// The time at which the Amazon DocumentDB event notification subscription was
 	// created.
 	SubscriptionCreationTime *string
+
+	noSmithyDocumentSerde
 }
 
 // A named set of filter values, used to return a more specific list of results.
@@ -617,6 +656,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A data type representing an Amazon DocumentDB global cluster.
@@ -655,6 +696,8 @@ type GlobalCluster struct {
 
 	// The storage encryption setting for the global cluster.
 	StorageEncrypted *bool
+
+	noSmithyDocumentSerde
 }
 
 // A data structure with information about any primary and secondary clusters
@@ -672,6 +715,8 @@ type GlobalClusterMember struct {
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
 	// with the Aurora global cluster.
 	Readers []string
+
+	noSmithyDocumentSerde
 }
 
 // The options that are available for an instance.
@@ -694,6 +739,8 @@ type OrderableDBInstanceOption struct {
 
 	// Indicates whether an instance is in a virtual private cloud (VPC).
 	Vpc bool
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an individual parameter.
@@ -730,6 +777,8 @@ type Parameter struct {
 
 	// Indicates the source of the parameter value.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of the log types whose configuration is still pending. These log types
@@ -743,6 +792,8 @@ type PendingCloudwatchLogsExports struct {
 	// Log types that are in the process of being deactivated. After they are
 	// deactivated, these log types aren't exported to CloudWatch Logs.
 	LogTypesToEnable []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a pending maintenance action for a resource.
@@ -772,6 +823,8 @@ type PendingMaintenanceAction struct {
 
 	// Indicates the type of opt-in request that has been received for the resource.
 	OptInStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // One or more modified settings for an instance. These modified settings have been
@@ -827,6 +880,8 @@ type PendingModifiedValues struct {
 
 	// Specifies the storage type to be associated with the instance.
 	StorageType *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of ApplyPendingMaintenanceAction.
@@ -839,6 +894,8 @@ type ResourcePendingMaintenanceActions struct {
 	// The Amazon Resource Name (ARN) of the resource that has pending maintenance
 	// actions.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a subnet.
@@ -852,6 +909,8 @@ type Subnet struct {
 
 	// Specifies the status of the subnet.
 	SubnetStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata assigned to an Amazon DocumentDB resource consisting of a key-value
@@ -869,6 +928,8 @@ type Tag struct {
 	// contain only the set of Unicode letters, digits, white space, '_', '.', '/',
 	// '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The version of the database engine that an instance can be upgraded to.
@@ -889,6 +950,8 @@ type UpgradeTarget struct {
 
 	// A value that indicates whether a database engine is upgraded to a major version.
 	IsMajorVersionUpgrade bool
+
+	noSmithyDocumentSerde
 }
 
 // Used as a response element for queries on virtual private cloud (VPC) security
@@ -900,4 +963,8 @@ type VpcSecurityGroupMembership struct {
 
 	// The name of the VPC security group.
 	VpcSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -85,6 +85,8 @@ type StartDocumentAnalysisInput struct {
 	// Textract will save the results internally to be accessed by the
 	// GetDocumentAnalysis operation.
 	OutputConfig *types.OutputConfig
+
+	noSmithyDocumentSerde
 }
 
 type StartDocumentAnalysisOutput struct {
@@ -96,6 +98,8 @@ type StartDocumentAnalysisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {

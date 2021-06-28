@@ -41,6 +41,8 @@ type DescribeInputDeviceThumbnailInput struct {
 	//
 	// This member is required.
 	InputDeviceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DescribeInputDeviceThumbnailResponse
@@ -64,6 +66,8 @@ type DescribeInputDeviceThumbnailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInputDeviceThumbnailMiddlewares(stack *middleware.Stack, options Options) (err error) {

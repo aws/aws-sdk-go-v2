@@ -38,11 +38,15 @@ type DeregisterDevicesInput struct {
 	//
 	// This member is required.
 	DeviceNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterDevicesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

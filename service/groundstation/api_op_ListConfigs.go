@@ -37,6 +37,8 @@ type ListConfigsInput struct {
 	// Next token returned in the request of a previous ListConfigs call. Used to get
 	// the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -51,6 +53,8 @@ type ListConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

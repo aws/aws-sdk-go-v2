@@ -36,6 +36,8 @@ type BatchDeletePhoneNumberInput struct {
 	//
 	// This member is required.
 	PhoneNumberIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeletePhoneNumberOutput struct {
@@ -46,6 +48,8 @@ type BatchDeletePhoneNumberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeletePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

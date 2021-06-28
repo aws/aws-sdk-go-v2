@@ -60,6 +60,8 @@ type CreatePresignedDomainUrlInput struct {
 
 	// The session expiration duration in seconds. This value defaults to 43200.
 	SessionExpirationDurationInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 type CreatePresignedDomainUrlOutput struct {
@@ -69,6 +71,8 @@ type CreatePresignedDomainUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePresignedDomainUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

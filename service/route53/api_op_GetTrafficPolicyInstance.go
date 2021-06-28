@@ -39,6 +39,8 @@ type GetTrafficPolicyInstanceInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the resource record sets that
@@ -52,6 +54,8 @@ type GetTrafficPolicyInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTrafficPolicyInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

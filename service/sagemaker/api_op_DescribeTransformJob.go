@@ -40,6 +40,8 @@ type DescribeTransformJobInput struct {
 	//
 	// This member is required.
 	TransformJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTransformJobOutput struct {
@@ -153,6 +155,8 @@ type DescribeTransformJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

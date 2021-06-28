@@ -83,6 +83,8 @@ type PutRecordBatchInput struct {
 	//
 	// This member is required.
 	Records []types.Record
+
+	noSmithyDocumentSerde
 }
 
 type PutRecordBatchOutput struct {
@@ -106,6 +108,8 @@ type PutRecordBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRecordBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

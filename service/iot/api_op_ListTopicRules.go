@@ -43,6 +43,8 @@ type ListTopicRulesInput struct {
 
 	// The topic.
 	Topic *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the ListTopicRules operation.
@@ -57,6 +59,8 @@ type ListTopicRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTopicRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

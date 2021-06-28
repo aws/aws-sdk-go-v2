@@ -34,6 +34,8 @@ type ListDevelopmentSchemaArnsInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDevelopmentSchemaArnsOutput struct {
@@ -46,6 +48,8 @@ type ListDevelopmentSchemaArnsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDevelopmentSchemaArnsMiddlewares(stack *middleware.Stack, options Options) (err error) {

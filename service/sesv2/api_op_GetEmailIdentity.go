@@ -36,6 +36,8 @@ type GetEmailIdentityInput struct {
 	//
 	// This member is required.
 	EmailIdentity *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an email identity.
@@ -79,6 +81,8 @@ type GetEmailIdentityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

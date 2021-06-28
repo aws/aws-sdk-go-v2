@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type DeviceUnderTest struct {
 
 	// Lists devices thing arn
 	ThingArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Show Group Result.
@@ -27,6 +30,8 @@ type GroupResult struct {
 
 	// Tests under Group Result.
 	Tests []TestCaseRun
+
+	noSmithyDocumentSerde
 }
 
 // Gets Suite Definition Configuration.
@@ -46,6 +51,8 @@ type SuiteDefinitionConfiguration struct {
 
 	// Gets Suite Definition Configuration name.
 	SuiteDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the suite definition.
@@ -65,6 +72,8 @@ type SuiteDefinitionInformation struct {
 
 	// Suite name of the test suite.
 	SuiteDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Gets suite run configuration.
@@ -75,6 +84,8 @@ type SuiteRunConfiguration struct {
 
 	// Gets test case list.
 	SelectedTestList []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the suite run.
@@ -109,6 +120,8 @@ type SuiteRunInformation struct {
 
 	// Suite run Id of the suite run.
 	SuiteRunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides test case run.
@@ -140,6 +153,8 @@ type TestCaseRun struct {
 
 	// Provides test case run warnings.
 	Warnings *string
+
+	noSmithyDocumentSerde
 }
 
 // Show each group result.
@@ -147,4 +162,8 @@ type TestResult struct {
 
 	// Show each group of test results.
 	Groups []GroupResult
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

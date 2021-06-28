@@ -35,6 +35,8 @@ type DeclineInvitationsInput struct {
 	//
 	// This member is required.
 	AccountIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DeclineInvitationsOutput struct {
@@ -47,6 +49,8 @@ type DeclineInvitationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeclineInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,11 +50,15 @@ type UpdateThesaurusInput struct {
 
 	// Information required to find a specific file in an Amazon S3 bucket.
 	SourceS3Path *types.S3Path
+
+	noSmithyDocumentSerde
 }
 
 type UpdateThesaurusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {

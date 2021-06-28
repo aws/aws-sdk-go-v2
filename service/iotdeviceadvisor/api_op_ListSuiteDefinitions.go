@@ -35,6 +35,8 @@ type ListSuiteDefinitionsInput struct {
 
 	// A token used to get the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSuiteDefinitionsOutput struct {
@@ -48,6 +50,8 @@ type ListSuiteDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSuiteDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

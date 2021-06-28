@@ -32,6 +32,8 @@ type DescribeDevicePolicyConfigurationInput struct {
 	//
 	// This member is required.
 	FleetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDevicePolicyConfigurationOutput struct {
@@ -42,6 +44,8 @@ type DescribeDevicePolicyConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDevicePolicyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

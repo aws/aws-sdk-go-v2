@@ -51,6 +51,8 @@ type StartSessionInput struct {
 
 	// Reserved for future use.
 	Parameters map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 type StartSessionOutput struct {
@@ -76,6 +78,8 @@ type StartSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

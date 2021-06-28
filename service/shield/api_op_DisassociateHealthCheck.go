@@ -47,11 +47,15 @@ type DisassociateHealthCheckInput struct {
 	//
 	// This member is required.
 	ProtectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateHealthCheckOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {

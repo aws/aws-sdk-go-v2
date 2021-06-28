@@ -48,6 +48,8 @@ type DeleteClusterSnapshotInput struct {
 	// resource element that specifies anything other than * for the cluster name.
 	// Constraints: Must be the name of valid cluster.
 	SnapshotClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteClusterSnapshotOutput struct {
@@ -57,6 +59,8 @@ type DeleteClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

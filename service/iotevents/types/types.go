@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type AcknowledgeFlow struct {
 	//
 	// This member is required.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // An action to be performed when the condition is TRUE.
@@ -81,6 +84,8 @@ type Action struct {
 	// Sends information about the detector model instance and the event that triggered
 	// the action to an Amazon SQS queue.
 	Sqs *SqsAction
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one of the following actions to receive notifications when the alarm
@@ -215,6 +220,8 @@ type AlarmAction struct {
 	// Sends information about the detector model instance and the event that triggered
 	// the action to an Amazon SQS queue.
 	Sqs *SqsAction
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of alarm state changes.
@@ -226,6 +233,8 @@ type AlarmCapabilities struct {
 	// Specifies the default alarm state. The configuration applies to all alarms that
 	// were created based on this alarm model.
 	InitializationConfiguration *InitializationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about one or more alarm actions.
@@ -234,6 +243,8 @@ type AlarmEventActions struct {
 	// Specifies one or more supported actions to receive notifications when the alarm
 	// state changes.
 	AlarmActions []AlarmAction
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of an alarm model.
@@ -247,6 +258,8 @@ type AlarmModelSummary struct {
 
 	// The time the alarm model was created, in the Unix epoch format.
 	CreationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of an alarm model version.
@@ -295,6 +308,8 @@ type AlarmModelVersionSummary struct {
 
 	// Contains information about the status of the alarm model version.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about one or more notification actions.
@@ -303,6 +318,8 @@ type AlarmNotification struct {
 	// Contains the notification settings of an alarm model. The settings apply to all
 	// alarms that were created based on this alarm model.
 	NotificationActions []NotificationAction
+
+	noSmithyDocumentSerde
 }
 
 // Defines when your alarm is invoked.
@@ -311,6 +328,8 @@ type AlarmRule struct {
 	// A rule that compares an input property value to a threshold value with a
 	// comparison operator.
 	SimpleRule *SimpleRule
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of the analysis.
@@ -372,6 +391,8 @@ type AnalysisResult struct {
 	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html)
 	// in the AWS IoT Events Developer Guide.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information that you can use to locate the field in your detector model
@@ -381,6 +402,8 @@ type AnalysisResultLocation struct {
 	// A JsonPath (https://github.com/json-path/JsonPath) expression that identifies
 	// the error field in your detector model.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains timestamp information. For more information, see
@@ -420,6 +443,8 @@ type AssetPropertyTimestamp struct {
 	// The nanosecond offset converted from timeInSeconds. The valid range is between
 	// 0-999999999.
 	OffsetInNanos *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains value information. For more information, see
@@ -453,6 +478,8 @@ type AssetPropertyValue struct {
 
 	// The value to send to an asset property.
 	Value *AssetPropertyVariant
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains an asset property value. For more information, see
@@ -502,6 +529,8 @@ type AssetPropertyVariant struct {
 	// The asset property value is a string. You must use an expression, and the
 	// evaluated result should be a string.
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The attributes from the JSON payload that are made available by the input.
@@ -520,6 +549,8 @@ type Attribute struct {
 	//
 	// This member is required.
 	JsonPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to clear the timer.
@@ -529,6 +560,8 @@ type ClearTimerAction struct {
 	//
 	// This member is required.
 	TimerName *string
+
+	noSmithyDocumentSerde
 }
 
 // The detector model and the specific detectors (instances) for which the logging
@@ -543,6 +576,8 @@ type DetectorDebugOption struct {
 	// The value of the input attribute key used to create the detector (the instance
 	// of the detector model).
 	KeyValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the detector model.
@@ -553,6 +588,8 @@ type DetectorModel struct {
 
 	// Information that defines how a detector operates.
 	DetectorModelDefinition *DetectorModelDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Information about how the detector model is configured.
@@ -595,6 +632,8 @@ type DetectorModelConfiguration struct {
 
 	// The status of the detector model.
 	Status DetectorModelVersionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information that defines how a detector operates.
@@ -609,6 +648,8 @@ type DetectorModelDefinition struct {
 	//
 	// This member is required.
 	States []State
+
+	noSmithyDocumentSerde
 }
 
 // Information about the detector model.
@@ -622,6 +663,8 @@ type DetectorModelSummary struct {
 
 	// The name of the detector model.
 	DetectorModelName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the detector model version.
@@ -652,6 +695,8 @@ type DetectorModelVersionSummary struct {
 
 	// The status of the detector model version.
 	Status DetectorModelVersionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Defines an action to write to the Amazon DynamoDB table that you created. The
@@ -771,6 +816,8 @@ type DynamoDBAction struct {
 
 	// The value of the range key (also called the sort key).
 	RangeKeyValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines an action to write to the Amazon DynamoDB table that you created. The
@@ -822,6 +869,8 @@ type DynamoDBv2Action struct {
 	// model instance and the event triggered the action. To configure the action
 	// payload, you can use contentExpression.
 	Payload *Payload
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of email notifications.
@@ -844,6 +893,8 @@ type EmailConfiguration struct {
 
 	// Contains the subject and message of an email.
 	Content *EmailContent
+
+	noSmithyDocumentSerde
 }
 
 // Contains the subject and message of an email.
@@ -854,6 +905,8 @@ type EmailContent struct {
 
 	// The subject of the email.
 	Subject *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the information of one or more recipients who receive the emails. You
@@ -863,6 +916,8 @@ type EmailRecipients struct {
 
 	// Specifies one or more recipients who receive the email.
 	To []RecipientDetail
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the actions to be performed when the condition evaluates to TRUE.
@@ -880,6 +935,8 @@ type Event struct {
 	// performed. If not present, the actions are performed (=TRUE). If the expression
 	// result is not a Boolean value, the actions are not performed (=FALSE).
 	Condition *string
+
+	noSmithyDocumentSerde
 }
 
 // Sends information about the detector model instance and the event that triggered
@@ -899,6 +956,8 @@ type FirehoseAction struct {
 	// Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab),
 	// '\r\n' (Windows newline), ',' (comma).
 	Separator *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default alarm state. The configuration applies to all alarms that
@@ -910,6 +969,8 @@ type InitializationConfiguration struct {
 	//
 	// This member is required.
 	DisabledOnInitialization *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the input.
@@ -920,6 +981,8 @@ type Input struct {
 
 	// The definition of the input.
 	InputDefinition *InputDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Information about the configuration of an input.
@@ -952,6 +1015,8 @@ type InputConfiguration struct {
 
 	// A brief description of the input.
 	InputDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // The definition of the input.
@@ -965,6 +1030,8 @@ type InputDefinition struct {
 	//
 	// This member is required.
 	Attributes []Attribute
+
+	noSmithyDocumentSerde
 }
 
 // The identifer of the input.
@@ -975,6 +1042,8 @@ type InputIdentifier struct {
 
 	// The identifer of the input routed from AWS IoT SiteWise.
 	IotSiteWiseInputIdentifier *IotSiteWiseInputIdentifier
+
+	noSmithyDocumentSerde
 }
 
 // Information about the input.
@@ -997,6 +1066,8 @@ type InputSummary struct {
 
 	// The status of the input.
 	Status InputStatus
+
+	noSmithyDocumentSerde
 }
 
 // Sends an AWS IoT Events input, passing in information about the detector model
@@ -1011,6 +1082,8 @@ type IotEventsAction struct {
 	// You can configure the action payload when you send a message to an AWS IoT
 	// Events input.
 	Payload *Payload
+
+	noSmithyDocumentSerde
 }
 
 // The identifier of the input routed to AWS IoT Events.
@@ -1020,6 +1093,8 @@ type IotEventsInputIdentifier struct {
 	//
 	// This member is required.
 	InputName *string
+
+	noSmithyDocumentSerde
 }
 
 // Sends information about the detector model instance and the event that triggered
@@ -1068,6 +1143,8 @@ type IotSiteWiseAction struct {
 	// The value to send to the asset property. This value contains timestamp, quality,
 	// and value (TQV) information.
 	PropertyValue *AssetPropertyValue
+
+	noSmithyDocumentSerde
 }
 
 // The asset model property identifer of the input routed from AWS IoT SiteWise.
@@ -1082,6 +1159,8 @@ type IotSiteWiseAssetModelPropertyIdentifier struct {
 	//
 	// This member is required.
 	PropertyId *string
+
+	noSmithyDocumentSerde
 }
 
 // The identifer of the input routed from AWS IoT SiteWise.
@@ -1089,6 +1168,8 @@ type IotSiteWiseInputIdentifier struct {
 
 	// The identifier of the AWS IoT SiteWise asset model property.
 	IotSiteWiseAssetModelPropertyIdentifier *IotSiteWiseAssetModelPropertyIdentifier
+
+	noSmithyDocumentSerde
 }
 
 // Information required to publish the MQTT message through the AWS IoT message
@@ -1104,6 +1185,8 @@ type IotTopicPublishAction struct {
 	// You can configure the action payload when you publish a message to an AWS IoT
 	// Core topic.
 	Payload *Payload
+
+	noSmithyDocumentSerde
 }
 
 // Calls a Lambda function, passing in information about the detector model
@@ -1118,6 +1201,8 @@ type LambdaAction struct {
 	// You can configure the action payload when you send a message to a Lambda
 	// function.
 	Payload *Payload
+
+	noSmithyDocumentSerde
 }
 
 // The values of the AWS IoT Events logging options.
@@ -1141,6 +1226,8 @@ type LoggingOptions struct {
 	// Information that identifies those detector models and their detectors
 	// (instances) for which the logging level is given.
 	DetectorDebugOptions []DetectorDebugOption
+
+	noSmithyDocumentSerde
 }
 
 // Contains the notification settings of an alarm model. The settings apply to all
@@ -1159,6 +1246,8 @@ type NotificationAction struct {
 
 	// Contains the configuration information of SMS notifications.
 	SmsConfigurations []SMSConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an AWS Lambda function to manage alarm notifications. You can create
@@ -1169,6 +1258,8 @@ type NotificationTargetActions struct {
 	// Calls a Lambda function, passing in information about the detector model
 	// instance and the event that triggered the action.
 	LambdaAction *LambdaAction
+
+	noSmithyDocumentSerde
 }
 
 // When entering this state, perform these actions if the condition is TRUE.
@@ -1177,6 +1268,8 @@ type OnEnterLifecycle struct {
 	// Specifies the actions that are performed when the state is entered and the
 	// condition is TRUE.
 	Events []Event
+
+	noSmithyDocumentSerde
 }
 
 // When exiting this state, perform these actions if the specified condition is
@@ -1186,6 +1279,8 @@ type OnExitLifecycle struct {
 	// Specifies the actions that are performed when the state is exited and the
 	// condition is TRUE.
 	Events []Event
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the actions performed when the condition evaluates to TRUE.
@@ -1197,6 +1292,8 @@ type OnInputLifecycle struct {
 	// Specifies the actions performed, and the next state entered, when a condition
 	// evaluates to TRUE.
 	TransitionEvents []TransitionEvent
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to configure the payload. By default, AWS IoT Events
@@ -1218,6 +1315,8 @@ type Payload struct {
 	//
 	// This member is required.
 	Type PayloadType
+
+	noSmithyDocumentSerde
 }
 
 // The information that identifies the recipient.
@@ -1225,6 +1324,8 @@ type RecipientDetail struct {
 
 	// The AWS Single Sign-On (AWS SSO) authentication information.
 	SsoIdentity *SSOIdentity
+
+	noSmithyDocumentSerde
 }
 
 // Information required to reset the timer. The timer is reset to the previously
@@ -1236,6 +1337,8 @@ type ResetTimerAction struct {
 	//
 	// This member is required.
 	TimerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the routed resource.
@@ -1249,6 +1352,8 @@ type RoutedResource struct {
 
 	// The name of the routed resource.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to set the timer.
@@ -1273,6 +1378,8 @@ type SetTimerAction struct {
 	// SetTimerAction. The value of seconds can be used as a string expression for
 	// durationExpression.
 	Seconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the variable and its new value.
@@ -1287,6 +1394,8 @@ type SetVariableAction struct {
 	//
 	// This member is required.
 	VariableName *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule that compares an input property value to a threshold value with a
@@ -1309,6 +1418,8 @@ type SimpleRule struct {
 	//
 	// This member is required.
 	Threshold *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of SMS notifications.
@@ -1326,6 +1437,8 @@ type SMSConfiguration struct {
 
 	// The sender ID.
 	SenderId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information required to publish the Amazon SNS message.
@@ -1339,6 +1452,8 @@ type SNSTopicPublishAction struct {
 	// You can configure the action payload when you send a message as an Amazon SNS
 	// push notification.
 	Payload *Payload
+
+	noSmithyDocumentSerde
 }
 
 // Sends information about the detector model instance and the event that triggered
@@ -1357,6 +1472,8 @@ type SqsAction struct {
 	// Set this to TRUE if you want the data to be base-64 encoded before it is written
 	// to the queue. Otherwise, set this to FALSE.
 	UseBase64 *bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about your identity source in AWS Single Sign-On. For more
@@ -1371,6 +1488,8 @@ type SSOIdentity struct {
 
 	// The user ID.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information that defines a state of a detector.
@@ -1391,6 +1510,8 @@ type State struct {
 	// When an input is received and the condition is TRUE, perform the specified
 	// actions.
 	OnInput *OnInputLifecycle
+
+	noSmithyDocumentSerde
 }
 
 // Metadata that can be used to manage the resource.
@@ -1405,6 +1526,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the actions performed and the next state entered when a condition
@@ -1429,4 +1552,8 @@ type TransitionEvent struct {
 
 	// The actions to be performed.
 	Actions []Action
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

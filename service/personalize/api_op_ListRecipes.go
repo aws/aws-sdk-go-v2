@@ -40,6 +40,8 @@ type ListRecipesInput struct {
 
 	// The default is SERVICE.
 	RecipeProvider types.RecipeProvider
+
+	noSmithyDocumentSerde
 }
 
 type ListRecipesOutput struct {
@@ -52,6 +54,8 @@ type ListRecipesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {

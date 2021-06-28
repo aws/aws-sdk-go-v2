@@ -83,6 +83,8 @@ type CreateDataSourceFromS3Input struct {
 
 	// A user-supplied name or description of the DataSource.
 	DataSourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateDataSourceFromS3 operation, and is an
@@ -97,6 +99,8 @@ type CreateDataSourceFromS3Output struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataSourceFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type UpdateWebhookInput struct {
 
 	// The description for a webhook.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the update webhook request.
@@ -52,6 +54,8 @@ type UpdateWebhookOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {

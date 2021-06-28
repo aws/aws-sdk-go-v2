@@ -31,6 +31,7 @@ func (c *Client) GetEnrollmentStatus(ctx context.Context, params *GetEnrollmentS
 }
 
 type GetEnrollmentStatusInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetEnrollmentStatusOutput struct {
@@ -49,6 +50,8 @@ type GetEnrollmentStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEnrollmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

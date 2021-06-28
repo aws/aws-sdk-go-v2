@@ -50,6 +50,8 @@ type DetectEntitiesInput struct {
 	// model, Amazon Comprehend uses the language of your custom model, and it ignores
 	// any language code that you specify here.
 	LanguageCode types.LanguageCode
+
+	noSmithyDocumentSerde
 }
 
 type DetectEntitiesOutput struct {
@@ -65,6 +67,8 @@ type DetectEntitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -58,6 +58,8 @@ type ListIdentityPoolUsageInput struct {
 
 	// A pagination token for obtaining the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Returned for a successful ListIdentityPoolUsage request.
@@ -77,6 +79,8 @@ type ListIdentityPoolUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIdentityPoolUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

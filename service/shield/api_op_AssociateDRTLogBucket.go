@@ -37,11 +37,15 @@ type AssociateDRTLogBucketInput struct {
 	//
 	// This member is required.
 	LogBucket *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateDRTLogBucketOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateDRTLogBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type CancelJobInput struct {
 
 	// (Optional)A reason code string that explains why the job was canceled.
 	ReasonCode *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelJobOutput struct {
@@ -61,6 +63,8 @@ type CancelJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

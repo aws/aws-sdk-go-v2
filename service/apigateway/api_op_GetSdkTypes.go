@@ -35,6 +35,8 @@ type GetSdkTypesInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // The collection of SdkType instances.
@@ -45,6 +47,8 @@ type GetSdkTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSdkTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

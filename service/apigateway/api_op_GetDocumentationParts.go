@@ -55,6 +55,8 @@ type GetDocumentationPartsInput struct {
 
 	// The type of API entities of the to-be-retrieved documentation parts.
 	Type types.DocumentationPartType
+
+	noSmithyDocumentSerde
 }
 
 // The collection of documentation parts of an API. Documenting an API
@@ -70,6 +72,8 @@ type GetDocumentationPartsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDocumentationPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {

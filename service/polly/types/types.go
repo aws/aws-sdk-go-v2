@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type Lexicon struct {
 
 	// Name of the lexicon.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata describing the lexicon such as the number of lexemes, language
@@ -43,6 +46,8 @@ type LexiconAttributes struct {
 
 	// Total size of the lexicon, in characters.
 	Size int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the content of the lexicon.
@@ -53,6 +58,8 @@ type LexiconDescription struct {
 
 	// Name of the lexicon.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // SynthesisTask object that provides information about a speech synthesis task.
@@ -120,6 +127,8 @@ type SynthesisTask struct {
 
 	// Voice ID to use for the synthesis.
 	VoiceId VoiceId
+
+	noSmithyDocumentSerde
 }
 
 // Description of the voice.
@@ -152,4 +161,8 @@ type Voice struct {
 	// Specifies which engines (standard or neural) that are supported by a given
 	// voice.
 	SupportedEngines []Engine
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -28,6 +28,7 @@ func (c *Client) DisassociateServiceRoleFromAccount(ctx context.Context, params 
 }
 
 type DisassociateServiceRoleFromAccountInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisassociateServiceRoleFromAccountOutput struct {
@@ -37,6 +38,8 @@ type DisassociateServiceRoleFromAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateServiceRoleFromAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

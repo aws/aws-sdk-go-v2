@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -26,6 +27,8 @@ type AlarmHistoryItem struct {
 
 	// The time stamp for the alarm history item.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An anomaly detection model associated with a particular CloudWatch metric and
@@ -53,6 +56,8 @@ type AnomalyDetector struct {
 	// The current status of the anomaly detector's training. The possible values are
 	// TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA
 	StateValue AnomalyDetectorStateValue
+
+	noSmithyDocumentSerde
 }
 
 // The configuration specifies details about how the anomaly detection model is to
@@ -71,6 +76,8 @@ type AnomalyDetectorConfiguration struct {
 	// zone as specified in the standard tz database. For more information, see tz
 	// database (https://en.wikipedia.org/wiki/Tz_database).
 	MetricTimezone *string
+
+	noSmithyDocumentSerde
 }
 
 // The details about a composite alarm.
@@ -119,6 +126,8 @@ type CompositeAlarm struct {
 
 	// The state value for the alarm.
 	StateValue StateValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents a specific dashboard.
@@ -137,6 +146,8 @@ type DashboardEntry struct {
 
 	// The size of the dashboard, in bytes.
 	Size int64
+
+	noSmithyDocumentSerde
 }
 
 // An error or warning for the operation.
@@ -147,6 +158,8 @@ type DashboardValidationMessage struct {
 
 	// A message describing the error or warning.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Encapsulates the statistical data that CloudWatch computes from metric data.
@@ -176,6 +189,8 @@ type Datapoint struct {
 
 	// The standard unit for the data point.
 	Unit StandardUnit
+
+	noSmithyDocumentSerde
 }
 
 // A dimension is a name/value pair that is part of the identity of a metric. You
@@ -195,6 +210,8 @@ type Dimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents filters for a dimension.
@@ -207,6 +224,8 @@ type DimensionFilter struct {
 
 	// The value of the dimension to be matched.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains the definition for a Contributor Insights rule.
@@ -237,6 +256,8 @@ type InsightRule struct {
 	//
 	// This member is required.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // One of the unique contributors found by a Contributor Insights rule. If the rule
@@ -263,6 +284,8 @@ type InsightRuleContributor struct {
 	//
 	// This member is required.
 	Keys []string
+
+	noSmithyDocumentSerde
 }
 
 // One data point related to one contributor. For more information, see
@@ -281,6 +304,8 @@ type InsightRuleContributorDatapoint struct {
 	//
 	// This member is required.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // One data point from the metric time series returned in a Contributor Insights
@@ -328,6 +353,8 @@ type InsightRuleMetricDatapoint struct {
 	// statistic is returned only if you included it in the Metrics array in your
 	// request.
 	UniqueContributors *float64
+
+	noSmithyDocumentSerde
 }
 
 // This structure includes the Timezone parameter, which you can use to specify
@@ -344,6 +371,8 @@ type LabelOptions struct {
 	// example, +0130 indicates a time zone that is 1 hour and 30 minutes ahead of UTC.
 	// The default is +0000.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 // A message returned by the GetMetricDataAPI, including a code and a description.
@@ -354,6 +383,8 @@ type MessageData struct {
 
 	// The message text.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a specific metric.
@@ -367,6 +398,8 @@ type Metric struct {
 
 	// The namespace of the metric.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 // The details about a metric alarm.
@@ -469,6 +502,8 @@ type MetricAlarm struct {
 
 	// The unit of the metric associated with the alarm.
 	Unit StandardUnit
+
+	noSmithyDocumentSerde
 }
 
 // This structure is used in both GetMetricData and PutMetricAlarm. The supported
@@ -544,6 +579,8 @@ type MetricDataQuery struct {
 	// For all other metrics and expressions in the same PutMetricAlarm operation,
 	// specify ReturnData as False.
 	ReturnData *bool
+
+	noSmithyDocumentSerde
 }
 
 // A GetMetricData call returns an array of MetricDataResult structures. Each of
@@ -577,6 +614,8 @@ type MetricDataResult struct {
 	// always matches the number of timestamps and the timestamp for Values[x] is
 	// Timestamps[x].
 	Values []float64
+
+	noSmithyDocumentSerde
 }
 
 // Encapsulates the information sent to either create a metric or add new values to
@@ -636,6 +675,8 @@ type MetricDatum struct {
 	// must be in the range of -2^360 to 2^360. In addition, special values (for
 	// example, NaN, +Infinity, -Infinity) are not supported.
 	Values []float64
+
+	noSmithyDocumentSerde
 }
 
 // This structure defines the metric to be returned, along with the statistics,
@@ -683,6 +724,8 @@ type MetricStat struct {
 	// you specify a unit that does not match the data collected, the results of the
 	// operation are null. CloudWatch does not perform unit conversions.
 	Unit StandardUnit
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains the configuration information about one metric stream.
@@ -710,6 +753,8 @@ type MetricStreamEntry struct {
 
 	// The current state of this stream. Valid values are running and stopped.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains the name of one of the metric namespaces that is listed
@@ -718,6 +763,8 @@ type MetricStreamFilter struct {
 
 	// The name of the metric namespace in the filter.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 // This array is empty if the API operation was successful for all the rules
@@ -736,6 +783,8 @@ type PartialFailure struct {
 
 	// The specified rule that could not be deleted.
 	FailureResource *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one range of days or times to exclude from use for training an anomaly
@@ -753,6 +802,8 @@ type Range struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents a set of statistics that describes a specific metric.
@@ -777,6 +828,8 @@ type StatisticSet struct {
 	//
 	// This member is required.
 	Sum *float64
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair associated with a CloudWatch resource.
@@ -792,4 +845,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

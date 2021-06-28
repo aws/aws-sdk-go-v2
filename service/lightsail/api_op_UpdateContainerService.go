@@ -65,6 +65,8 @@ type UpdateContainerServiceInput struct {
 	// service, multiply the base price of the power with the scale (the number of
 	// nodes) of the service.
 	Scale *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContainerServiceOutput struct {
@@ -74,6 +76,8 @@ type UpdateContainerServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContainerServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

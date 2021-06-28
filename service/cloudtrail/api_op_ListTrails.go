@@ -36,6 +36,8 @@ type ListTrailsInput struct {
 	// 'Username' with a value of 'root', the call with NextToken should include those
 	// same parameters.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTrailsOutput struct {
@@ -52,6 +54,8 @@ type ListTrailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTrailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

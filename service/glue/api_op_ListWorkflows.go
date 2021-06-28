@@ -34,6 +34,8 @@ type ListWorkflowsInput struct {
 
 	// A continuation token, if this is a continuation request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListWorkflowsOutput struct {
@@ -46,6 +48,8 @@ type ListWorkflowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

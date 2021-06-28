@@ -38,11 +38,15 @@ type DeleteUserPoolClientInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserPoolClientOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserPoolClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,14 @@ func (c *Client) EnableAWSOrganizationsAccess(ctx context.Context, params *Enabl
 }
 
 type EnableAWSOrganizationsAccessInput struct {
+	noSmithyDocumentSerde
 }
 
 type EnableAWSOrganizationsAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableAWSOrganizationsAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -58,6 +58,8 @@ type GetMergeCommitInput struct {
 	// requires any conflicts to be resolved manually before the merge operation is
 	// successful.
 	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 type GetMergeCommitOutput struct {
@@ -80,6 +82,8 @@ type GetMergeCommitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMergeCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {

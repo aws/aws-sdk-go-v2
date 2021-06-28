@@ -78,6 +78,8 @@ type ListStatementsInput struct {
 	//
 	// * SUBMITTED - The query was submitted, but not yet processed.
 	Status types.StatusString
+
+	noSmithyDocumentSerde
 }
 
 type ListStatementsOutput struct {
@@ -96,6 +98,8 @@ type ListStatementsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStatementsMiddlewares(stack *middleware.Stack, options Options) (err error) {

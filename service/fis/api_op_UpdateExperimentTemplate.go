@@ -49,6 +49,8 @@ type UpdateExperimentTemplateInput struct {
 
 	// The targets for the experiment.
 	Targets map[string]types.UpdateExperimentTemplateTargetInput
+
+	noSmithyDocumentSerde
 }
 
 type UpdateExperimentTemplateOutput struct {
@@ -58,6 +60,8 @@ type UpdateExperimentTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

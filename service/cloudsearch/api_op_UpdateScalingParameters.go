@@ -52,6 +52,8 @@ type UpdateScalingParametersInput struct {
 	//
 	// This member is required.
 	ScalingParameters *types.ScalingParameters
+
+	noSmithyDocumentSerde
 }
 
 // The result of a UpdateScalingParameters request. Contains the status of the
@@ -65,6 +67,8 @@ type UpdateScalingParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateScalingParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListDataSetsInput struct {
 	// A property that defines the data set as OWNED by the account (for providers) or
 	// ENTITLED to the account (for subscribers).
 	Origin *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDataSetsOutput struct {
@@ -55,6 +57,8 @@ type ListDataSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDataSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

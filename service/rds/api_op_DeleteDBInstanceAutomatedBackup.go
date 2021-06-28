@@ -38,6 +38,8 @@ type DeleteDBInstanceAutomatedBackupInput struct {
 	// The identifier for the source DB instance, which can't be changed and which is
 	// unique to an Amazon Web Services Region.
 	DbiResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBInstanceAutomatedBackupOutput struct {
@@ -49,6 +51,8 @@ type DeleteDBInstanceAutomatedBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBInstanceAutomatedBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

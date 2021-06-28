@@ -38,11 +38,15 @@ type DeletePreparedStatementInput struct {
 	//
 	// This member is required.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePreparedStatementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

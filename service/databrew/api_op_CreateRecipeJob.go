@@ -89,6 +89,8 @@ type CreateRecipeJobInput struct {
 	// The job's timeout in minutes. A job that attempts to run longer than this
 	// timeout period ends with a status of TIMEOUT.
 	Timeout int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateRecipeJobOutput struct {
@@ -100,6 +102,8 @@ type CreateRecipeJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRecipeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

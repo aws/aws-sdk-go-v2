@@ -52,6 +52,8 @@ type ListChannelMembershipsInput struct {
 	// the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden
 	// members are not returned.
 	Type types.ChannelMembershipType
+
+	noSmithyDocumentSerde
 }
 
 type ListChannelMembershipsOutput struct {
@@ -68,6 +70,8 @@ type ListChannelMembershipsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {

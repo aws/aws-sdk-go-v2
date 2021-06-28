@@ -34,6 +34,8 @@ type GetPhoneNumberInput struct {
 	//
 	// This member is required.
 	PhoneNumberId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPhoneNumberOutput struct {
@@ -43,6 +45,8 @@ type GetPhoneNumberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

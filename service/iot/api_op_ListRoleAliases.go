@@ -37,6 +37,8 @@ type ListRoleAliasesInput struct {
 
 	// The maximum number of results to return at one time.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListRoleAliasesOutput struct {
@@ -49,6 +51,8 @@ type ListRoleAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRoleAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

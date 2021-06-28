@@ -44,6 +44,8 @@ type ResolveRoomInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type ResolveRoomOutput struct {
@@ -59,6 +61,8 @@ type ResolveRoomOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResolveRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

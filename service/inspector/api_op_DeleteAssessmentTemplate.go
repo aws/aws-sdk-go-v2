@@ -33,11 +33,15 @@ type DeleteAssessmentTemplateInput struct {
 	//
 	// This member is required.
 	AssessmentTemplateArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAssessmentTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAssessmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

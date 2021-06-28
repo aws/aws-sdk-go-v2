@@ -105,6 +105,8 @@ type ForgotPasswordInput struct {
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
+	noSmithyDocumentSerde
 }
 
 // Respresents the response from the server regarding the request to reset a
@@ -117,6 +119,8 @@ type ForgotPasswordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

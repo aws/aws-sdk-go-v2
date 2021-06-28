@@ -39,6 +39,8 @@ type ListTagsInput struct {
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsOutput struct {
@@ -52,6 +54,8 @@ type ListTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

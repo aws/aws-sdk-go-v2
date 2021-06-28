@@ -41,6 +41,8 @@ type GetSchemaInput struct {
 	//
 	// This member is required.
 	SchemaId *types.SchemaId
+
+	noSmithyDocumentSerde
 }
 
 type GetSchemaOutput struct {
@@ -87,6 +89,8 @@ type GetSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

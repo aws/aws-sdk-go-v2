@@ -52,6 +52,8 @@ type ListAssetRelationshipsInput struct {
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssetRelationshipsOutput struct {
@@ -67,6 +69,8 @@ type ListAssetRelationshipsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssetRelationshipsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type DeleteElasticsearchDomainInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DeleteElasticsearchDomain request. Contains the status of the
@@ -48,6 +50,8 @@ type DeleteElasticsearchDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetLicenseUsageInput struct {
 	//
 	// This member is required.
 	LicenseArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLicenseUsageOutput struct {
@@ -42,6 +44,8 @@ type GetLicenseUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLicenseUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

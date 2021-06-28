@@ -34,11 +34,15 @@ type DeletePredictorInput struct {
 	//
 	// This member is required.
 	PredictorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePredictorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {

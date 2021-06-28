@@ -16,6 +16,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -36,6 +38,8 @@ type ConcurrentUpdatingException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentUpdatingException) Error() string {
@@ -55,6 +59,8 @@ type ConflictException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -75,6 +81,8 @@ type DomainNotWhitelistedException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DomainNotWhitelistedException) Error() string {
@@ -95,6 +103,8 @@ type IdentityTypeNotSupportedException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdentityTypeNotSupportedException) Error() string {
@@ -116,6 +126,8 @@ type InternalFailureException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -135,6 +147,8 @@ type InvalidNextTokenException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -154,6 +168,8 @@ type InvalidParameterValueException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -174,6 +190,8 @@ type LimitExceededException struct {
 
 	ResourceType ExceptionResourceType
 	RequestId    *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -193,6 +211,8 @@ type PreconditionNotMetException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PreconditionNotMetException) Error() string {
@@ -214,6 +234,8 @@ type QuickSightUserNotFoundException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *QuickSightUserNotFoundException) Error() string {
@@ -236,6 +258,8 @@ type ResourceExistsException struct {
 
 	ResourceType ExceptionResourceType
 	RequestId    *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceExistsException) Error() string {
@@ -256,6 +280,8 @@ type ResourceNotFoundException struct {
 
 	ResourceType ExceptionResourceType
 	RequestId    *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -276,6 +302,8 @@ type ResourceUnavailableException struct {
 
 	ResourceType ExceptionResourceType
 	RequestId    *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceUnavailableException) Error() string {
@@ -296,6 +324,8 @@ type SessionLifetimeInMinutesInvalidException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SessionLifetimeInMinutesInvalidException) Error() string {
@@ -319,6 +349,8 @@ type ThrottlingException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -343,6 +375,8 @@ type UnsupportedPricingPlanException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedPricingPlanException) Error() string {
@@ -367,6 +401,8 @@ type UnsupportedUserEditionException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedUserEditionException) Error() string {

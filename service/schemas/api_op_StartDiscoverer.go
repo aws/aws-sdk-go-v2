@@ -33,6 +33,8 @@ type StartDiscovererInput struct {
 	//
 	// This member is required.
 	DiscovererId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartDiscovererOutput struct {
@@ -45,6 +47,8 @@ type StartDiscovererOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {

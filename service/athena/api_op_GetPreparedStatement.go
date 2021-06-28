@@ -39,6 +39,8 @@ type GetPreparedStatementInput struct {
 	//
 	// This member is required.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPreparedStatementOutput struct {
@@ -48,6 +50,8 @@ type GetPreparedStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

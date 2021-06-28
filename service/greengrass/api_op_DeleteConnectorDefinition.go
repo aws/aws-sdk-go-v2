@@ -32,11 +32,15 @@ type DeleteConnectorDefinitionInput struct {
 	//
 	// This member is required.
 	ConnectorDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConnectorDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

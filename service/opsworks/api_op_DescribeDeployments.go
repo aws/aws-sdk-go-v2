@@ -51,6 +51,8 @@ type DescribeDeploymentsInput struct {
 	// The stack ID. If you include this parameter, the command returns a description
 	// of the commands associated with the specified stack.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeDeployments request.
@@ -61,6 +63,8 @@ type DescribeDeploymentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

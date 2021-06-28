@@ -38,6 +38,8 @@ type GetThreatIntelSetInput struct {
 	//
 	// This member is required.
 	ThreatIntelSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetThreatIntelSetOutput struct {
@@ -69,6 +71,8 @@ type GetThreatIntelSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

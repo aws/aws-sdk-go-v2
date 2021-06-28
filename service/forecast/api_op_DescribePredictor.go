@@ -52,6 +52,8 @@ type DescribePredictorInput struct {
 	//
 	// This member is required.
 	PredictorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePredictorOutput struct {
@@ -167,6 +169,8 @@ type DescribePredictorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {

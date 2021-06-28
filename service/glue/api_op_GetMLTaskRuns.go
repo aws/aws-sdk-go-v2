@@ -51,6 +51,8 @@ type GetMLTaskRunsInput struct {
 
 	// The sorting criteria, in the TaskRunSortCriteria structure, for the task run.
 	Sort *types.TaskRunSortCriteria
+
+	noSmithyDocumentSerde
 }
 
 type GetMLTaskRunsOutput struct {
@@ -63,6 +65,8 @@ type GetMLTaskRunsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMLTaskRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {

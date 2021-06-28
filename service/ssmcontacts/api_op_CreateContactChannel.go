@@ -76,6 +76,8 @@ type CreateContactChannelInput struct {
 
 	// A token ensuring that the action is called only once with the specified details.
 	IdempotencyToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateContactChannelOutput struct {
@@ -87,6 +89,8 @@ type CreateContactChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -47,6 +48,8 @@ type ColumnMetadata struct {
 
 	// The database-specific data type of the column.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // A data value in a column.
@@ -65,6 +68,8 @@ type Field interface {
 // A value that indicates whether the data is NULL.
 type FieldMemberIsNull struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberIsNull) isField() {}
@@ -72,6 +77,8 @@ func (*FieldMemberIsNull) isField() {}
 // A value of the Boolean data type.
 type FieldMemberBooleanValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberBooleanValue) isField() {}
@@ -79,6 +86,8 @@ func (*FieldMemberBooleanValue) isField() {}
 // A value of the long data type.
 type FieldMemberLongValue struct {
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberLongValue) isField() {}
@@ -86,6 +95,8 @@ func (*FieldMemberLongValue) isField() {}
 // A value of the double data type.
 type FieldMemberDoubleValue struct {
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberDoubleValue) isField() {}
@@ -93,6 +104,8 @@ func (*FieldMemberDoubleValue) isField() {}
 // A value of the string data type.
 type FieldMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberStringValue) isField() {}
@@ -100,6 +113,8 @@ func (*FieldMemberStringValue) isField() {}
 // A value of the BLOB data type.
 type FieldMemberBlobValue struct {
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberBlobValue) isField() {}
@@ -119,6 +134,8 @@ type SqlParameter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The SQL statement to run.
@@ -152,6 +169,8 @@ type StatementData struct {
 
 	// The date and time (UTC) that the statement metadata was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The properties of a table.
@@ -166,13 +185,19 @@ type TableMember struct {
 	// The type of the table. Possible values include TABLE, VIEW, SYSTEM TABLE, GLOBAL
 	// TEMPORARY, LOCAL TEMPORARY, ALIAS, and SYNONYM.
 	Type *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isField() {}

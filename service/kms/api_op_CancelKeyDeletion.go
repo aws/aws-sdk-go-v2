@@ -55,6 +55,8 @@ type CancelKeyDeletionInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelKeyDeletionOutput struct {
@@ -66,6 +68,8 @@ type CancelKeyDeletionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelKeyDeletionMiddlewares(stack *middleware.Stack, options Options) (err error) {

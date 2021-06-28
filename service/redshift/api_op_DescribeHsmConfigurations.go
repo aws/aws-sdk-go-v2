@@ -74,6 +74,8 @@ type DescribeHsmConfigurationsInput struct {
 	// Amazon Redshift returns a response with the HSM configurations that have either
 	// or both of these tag values associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -91,6 +93,8 @@ type DescribeHsmConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHsmConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

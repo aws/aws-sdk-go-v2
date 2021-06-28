@@ -44,6 +44,8 @@ type ListConfigurationRevisionsInput struct {
 	// call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListConfigurationRevisionsOutput struct {
@@ -56,6 +58,8 @@ type ListConfigurationRevisionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConfigurationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

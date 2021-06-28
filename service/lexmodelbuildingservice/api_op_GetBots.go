@@ -52,6 +52,8 @@ type GetBotsInput struct {
 	// call is truncated, Amazon Lex returns a pagination token in the response. To
 	// fetch the next page of bots, specify the pagination token in the next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBotsOutput struct {
@@ -65,6 +67,8 @@ type GetBotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

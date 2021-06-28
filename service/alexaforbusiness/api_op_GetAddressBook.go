@@ -33,6 +33,8 @@ type GetAddressBookInput struct {
 	//
 	// This member is required.
 	AddressBookArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAddressBookOutput struct {
@@ -42,6 +44,8 @@ type GetAddressBookOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {

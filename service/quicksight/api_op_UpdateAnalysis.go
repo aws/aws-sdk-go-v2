@@ -61,6 +61,8 @@ type UpdateAnalysisInput struct {
 	// you're creating. To see the theme in the QuickSight console, make sure that you
 	// have access to it.
 	ThemeArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAnalysisOutput struct {
@@ -82,6 +84,8 @@ type UpdateAnalysisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type DescribeEnvironmentStatusInput struct {
 	//
 	// This member is required.
 	EnvironmentId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEnvironmentStatusOutput struct {
@@ -67,6 +69,8 @@ type DescribeEnvironmentStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEnvironmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

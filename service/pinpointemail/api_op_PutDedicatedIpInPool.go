@@ -44,6 +44,8 @@ type PutDedicatedIpInPoolInput struct {
 	//
 	// This member is required.
 	Ip *string
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -51,6 +53,8 @@ type PutDedicatedIpInPoolInput struct {
 type PutDedicatedIpInPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDedicatedIpInPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -67,6 +67,8 @@ type ModifyDBProxyInput struct {
 
 	// The new list of security groups for the DBProxy.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBProxyOutput struct {
@@ -76,6 +78,8 @@ type ModifyDBProxyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {

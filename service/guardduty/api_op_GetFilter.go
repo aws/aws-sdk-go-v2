@@ -38,6 +38,8 @@ type GetFilterInput struct {
 	//
 	// This member is required.
 	FilterName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFilterOutput struct {
@@ -70,6 +72,8 @@ type GetFilterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

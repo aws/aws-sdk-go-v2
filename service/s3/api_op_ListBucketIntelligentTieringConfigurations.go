@@ -65,6 +65,8 @@ type ListBucketIntelligentTieringConfigurationsInput struct {
 	// The ContinuationToken that represents a placeholder from where this request
 	// should begin.
 	ContinuationToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBucketIntelligentTieringConfigurationsOutput struct {
@@ -88,6 +90,8 @@ type ListBucketIntelligentTieringConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBucketIntelligentTieringConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

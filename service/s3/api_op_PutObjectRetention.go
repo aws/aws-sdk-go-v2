@@ -77,6 +77,8 @@ type PutObjectRetentionInput struct {
 	// The version ID for the object that you want to apply this Object Retention
 	// configuration to.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutObjectRetentionOutput struct {
@@ -87,6 +89,8 @@ type PutObjectRetentionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutObjectRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {

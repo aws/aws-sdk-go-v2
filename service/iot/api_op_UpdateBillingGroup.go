@@ -43,6 +43,8 @@ type UpdateBillingGroupInput struct {
 	// does not match the expected version specified in the request, the
 	// UpdateBillingGroup request is rejected with a VersionConflictException.
 	ExpectedVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBillingGroupOutput struct {
@@ -52,6 +54,8 @@ type UpdateBillingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

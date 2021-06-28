@@ -42,6 +42,8 @@ type UpdateFieldLevelEncryptionProfileInput struct {
 	// The value of the ETag header that you received when retrieving the profile
 	// identity to update. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFieldLevelEncryptionProfileOutput struct {
@@ -54,6 +56,8 @@ type UpdateFieldLevelEncryptionProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFieldLevelEncryptionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

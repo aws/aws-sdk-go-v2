@@ -42,11 +42,15 @@ type RejectCertificateTransferInput struct {
 
 	// The reason the certificate transfer was rejected.
 	RejectReason *string
+
+	noSmithyDocumentSerde
 }
 
 type RejectCertificateTransferOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectCertificateTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {

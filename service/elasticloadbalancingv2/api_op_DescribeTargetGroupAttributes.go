@@ -46,6 +46,8 @@ type DescribeTargetGroupAttributesInput struct {
 	//
 	// This member is required.
 	TargetGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTargetGroupAttributesOutput struct {
@@ -55,6 +57,8 @@ type DescribeTargetGroupAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTargetGroupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type GetProfileObjectTypeInput struct {
 	//
 	// This member is required.
 	ObjectTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetProfileObjectTypeOutput struct {
@@ -87,6 +89,8 @@ type GetProfileObjectTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProfileObjectTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

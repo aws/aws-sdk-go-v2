@@ -36,6 +36,8 @@ type DescribeStacksInput struct {
 	// An array of stack IDs that specify the stacks to be described. If you omit this
 	// parameter, DescribeStacks returns a description of every stack.
 	StackIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeStacks request.
@@ -46,6 +48,8 @@ type DescribeStacksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {

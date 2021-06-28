@@ -93,6 +93,8 @@ type ProvisionProductInput struct {
 
 	// One or more tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type ProvisionProductOutput struct {
@@ -102,6 +104,8 @@ type ProvisionProductOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationProvisionProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

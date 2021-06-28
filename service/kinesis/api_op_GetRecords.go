@@ -89,6 +89,8 @@ type GetRecordsInput struct {
 	// specify a value that is greater than 10,000, GetRecords throws
 	// InvalidArgumentException. The default value is 10,000.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for GetRecords.
@@ -114,6 +116,8 @@ type GetRecordsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

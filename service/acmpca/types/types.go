@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -20,6 +21,8 @@ type AccessDescription struct {
 	//
 	// This member is required.
 	AccessMethod *AccessMethod
+
+	noSmithyDocumentSerde
 }
 
 // Describes the type and format of extension access. Only one of
@@ -34,6 +37,8 @@ type AccessMethod struct {
 	// regular expression shown below. For more information, see NIST's definition of
 	// Object Identifier (OID) (https://csrc.nist.gov/glossary/term/Object_Identifier).
 	CustomObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains X.509 certificate information to be placed in an issued certificate. An
@@ -53,6 +58,8 @@ type ApiPassthrough struct {
 	// must contain an X.500 distinguished name (DN). A DN is a sequence of relative
 	// distinguished names (RDNs). The RDNs are separated by commas in the certificate.
 	Subject *ASN1Subject
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the certificate subject. The Subject field in the
@@ -115,6 +122,8 @@ type ASN1Subject struct {
 	// A title such as Mr. or Ms., which is pre-pended to the name to refer formally to
 	// the certificate subject.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about your private certificate authority (CA). Your private
@@ -186,6 +195,8 @@ type CertificateAuthority struct {
 
 	// Type of your private CA.
 	Type CertificateAuthorityType
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information for your private certificate authority (CA).
@@ -221,6 +232,8 @@ type CertificateAuthorityConfiguration struct {
 	// Specifies information to be added to the extension section of the certificate
 	// signing request (CSR).
 	CsrExtensions *CsrExtensions
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information for a certificate revocation list (CRL). Your
@@ -334,6 +347,8 @@ type CrlConfiguration struct {
 	// the S3 bucket
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa).
 	S3ObjectAcl S3ObjectAcl
+
+	noSmithyDocumentSerde
 }
 
 // Describes the certificate extensions to be added to the certificate signing
@@ -348,6 +363,8 @@ type CsrExtensions struct {
 	// CA, such as revocation and policy. For more information, see Subject Information
 	// Access (https://tools.ietf.org/html/rfc5280#section-4.2.2.2) in RFC 5280.
 	SubjectInformationAccess []AccessDescription
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Electronic Data Interchange (EDI) entity as described in as defined
@@ -361,6 +378,8 @@ type EdiPartyName struct {
 
 	// Specifies the name assigner.
 	NameAssigner *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies additional purposes for which the certified public key may be used
@@ -373,6 +392,8 @@ type ExtendedKeyUsage struct {
 	// Specifies a standard ExtendedKeyUsage as defined as in RFC 5280
 	// (https://tools.ietf.org/html/rfc5280#section-4.2.1.12).
 	ExtendedKeyUsageType ExtendedKeyUsageType
+
+	noSmithyDocumentSerde
 }
 
 // Contains X.509 extension information for a certificate.
@@ -400,6 +421,8 @@ type Extensions struct {
 	// subject of the certificate. These identities may be included in addition to or
 	// in place of the identity in the subject field of the certificate.
 	SubjectAlternativeNames []GeneralName
+
+	noSmithyDocumentSerde
 }
 
 // Describes an ASN.1 X.400 GeneralName as defined in RFC 5280
@@ -436,6 +459,8 @@ type GeneralName struct {
 
 	// Represents GeneralName as a URI.
 	UniformResourceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines one or more purposes for which the key contained in the certificate can
@@ -468,6 +493,8 @@ type KeyUsage struct {
 
 	// Key can be used for non-repudiation.
 	NonRepudiation bool
+
+	noSmithyDocumentSerde
 }
 
 // Defines a custom ASN.1 X.400 GeneralName using an object identifier (OID) and
@@ -485,6 +512,8 @@ type OtherName struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Permissions designate which private CA actions can be performed by an AWS
@@ -519,6 +548,8 @@ type Permission struct {
 
 	// The ID of the account that assigned the permission.
 	SourceAccount *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the X.509 CertificatePolicies extension.
@@ -534,6 +565,8 @@ type PolicyInformation struct {
 	// Modifies the given CertPolicyId with a qualifier. ACM Private CA supports the
 	// certification practice statement (CPS) qualifier.
 	PolicyQualifiers []PolicyQualifierInfo
+
+	noSmithyDocumentSerde
 }
 
 // Modifies the CertPolicyId of a PolicyInformation object with a qualifier. ACM
@@ -550,6 +583,8 @@ type PolicyQualifierInfo struct {
 	//
 	// This member is required.
 	Qualifier *Qualifier
+
+	noSmithyDocumentSerde
 }
 
 // Defines a PolicyInformation qualifier. ACM Private CA supports the certification
@@ -562,6 +597,8 @@ type Qualifier struct {
 	//
 	// This member is required.
 	CpsUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Certificate revocation information used by the CreateCertificateAuthority
@@ -577,6 +614,8 @@ type RevocationConfiguration struct {
 	// Configuration of the certificate revocation list (CRL), if any, maintained by
 	// your private CA.
 	CrlConfiguration *CrlConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Tags are labels that you can use to identify and organize your private CAs. Each
@@ -596,6 +635,8 @@ type Tag struct {
 
 	// Value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Validity specifies the period of time during which a certificate is valid.
@@ -654,4 +695,8 @@ type Validity struct {
 	//
 	// This member is required.
 	Value *int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

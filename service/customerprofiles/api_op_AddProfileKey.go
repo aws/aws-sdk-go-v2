@@ -50,6 +50,8 @@ type AddProfileKeyInput struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 type AddProfileKeyOutput struct {
@@ -62,6 +64,8 @@ type AddProfileKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddProfileKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

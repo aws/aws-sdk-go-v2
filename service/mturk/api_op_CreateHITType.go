@@ -78,6 +78,8 @@ type CreateHITTypeInput struct {
 	// can be restricted using the ActionsGuarded field on each
 	// QualificationRequirement structure.
 	QualificationRequirements []types.QualificationRequirement
+
+	noSmithyDocumentSerde
 }
 
 type CreateHITTypeOutput struct {
@@ -87,6 +89,8 @@ type CreateHITTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHITTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

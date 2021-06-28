@@ -107,6 +107,8 @@ type GetBucketMetricDataInput struct {
 	//
 	// This member is required.
 	Unit types.MetricUnit
+
+	noSmithyDocumentSerde
 }
 
 type GetBucketMetricDataOutput struct {
@@ -119,6 +121,8 @@ type GetBucketMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBucketMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

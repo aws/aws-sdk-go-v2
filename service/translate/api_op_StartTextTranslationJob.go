@@ -83,6 +83,8 @@ type StartTextTranslationJobInput struct {
 	// The name of the terminology to use in the batch translation job. For a list of
 	// available terminologies, use the ListTerminologies operation.
 	TerminologyNames []string
+
+	noSmithyDocumentSerde
 }
 
 type StartTextTranslationJobOutput struct {
@@ -117,6 +119,8 @@ type StartTextTranslationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

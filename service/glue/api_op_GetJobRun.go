@@ -41,6 +41,8 @@ type GetJobRunInput struct {
 
 	// True if a list of predecessor runs should be returned.
 	PredecessorsIncluded bool
+
+	noSmithyDocumentSerde
 }
 
 type GetJobRunOutput struct {
@@ -50,6 +52,8 @@ type GetJobRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

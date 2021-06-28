@@ -77,6 +77,8 @@ type ListFleetsInput struct {
 	// parameter to return only fleets using a specified script. Use either the script
 	// ID or ARN value.
 	ScriptId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -95,6 +97,8 @@ type ListFleetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

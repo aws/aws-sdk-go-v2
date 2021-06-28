@@ -77,6 +77,8 @@ type CreateJobQueueInput struct {
 	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in AWS
 	// Batch User Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateJobQueueOutput struct {
@@ -93,6 +95,8 @@ type CreateJobQueueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

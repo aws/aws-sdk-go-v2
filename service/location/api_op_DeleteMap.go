@@ -34,11 +34,15 @@ type DeleteMapInput struct {
 	//
 	// This member is required.
 	MapName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMapOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMapMiddlewares(stack *middleware.Stack, options Options) (err error) {

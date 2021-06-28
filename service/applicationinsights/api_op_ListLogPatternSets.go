@@ -40,6 +40,8 @@ type ListLogPatternSetsInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLogPatternSetsOutput struct {
@@ -56,6 +58,8 @@ type ListLogPatternSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLogPatternSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

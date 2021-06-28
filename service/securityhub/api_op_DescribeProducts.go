@@ -44,6 +44,8 @@ type DescribeProductsInput struct {
 
 	// The ARN of the integration to return.
 	ProductArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProductsOutput struct {
@@ -58,6 +60,8 @@ type DescribeProductsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {

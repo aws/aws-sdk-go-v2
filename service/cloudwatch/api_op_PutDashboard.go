@@ -58,6 +58,8 @@ type PutDashboardInput struct {
 	//
 	// This member is required.
 	DashboardName *string
+
+	noSmithyDocumentSerde
 }
 
 type PutDashboardOutput struct {
@@ -71,6 +73,8 @@ type PutDashboardOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {

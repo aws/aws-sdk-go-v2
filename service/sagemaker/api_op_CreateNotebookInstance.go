@@ -161,6 +161,8 @@ type CreateNotebookInstanceInput struct {
 	// The size, in GB, of the ML storage volume to attach to the notebook instance.
 	// The default value is 5 GB.
 	VolumeSizeInGB *int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateNotebookInstanceOutput struct {
@@ -170,6 +172,8 @@ type CreateNotebookInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

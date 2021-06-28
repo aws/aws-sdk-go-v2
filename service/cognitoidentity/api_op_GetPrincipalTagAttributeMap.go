@@ -39,6 +39,8 @@ type GetPrincipalTagAttributeMapInput struct {
 	//
 	// This member is required.
 	IdentityProviderName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPrincipalTagAttributeMapOutput struct {
@@ -59,6 +61,8 @@ type GetPrincipalTagAttributeMapOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPrincipalTagAttributeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {

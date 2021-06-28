@@ -89,6 +89,8 @@ type UpdateRegexPatternSetInput struct {
 	//
 	// This member is required.
 	Updates []types.RegexPatternSetUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRegexPatternSetOutput struct {
@@ -100,6 +102,8 @@ type UpdateRegexPatternSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

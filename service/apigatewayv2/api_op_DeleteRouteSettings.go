@@ -43,11 +43,15 @@ type DeleteRouteSettingsInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRouteSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRouteSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

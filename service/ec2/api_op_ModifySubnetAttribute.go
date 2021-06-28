@@ -55,11 +55,15 @@ type ModifySubnetAttributeInput struct {
 	// Specify true to indicate that network interfaces attached to instances created
 	// in the specified subnet should be assigned a public IPv4 address.
 	MapPublicIpOnLaunch *types.AttributeBooleanValue
+
+	noSmithyDocumentSerde
 }
 
 type ModifySubnetAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifySubnetAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

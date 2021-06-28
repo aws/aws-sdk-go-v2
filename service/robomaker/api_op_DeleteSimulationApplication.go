@@ -35,11 +35,15 @@ type DeleteSimulationApplicationInput struct {
 
 	// The version of the simulation application to delete.
 	ApplicationVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSimulationApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSimulationApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

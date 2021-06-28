@@ -55,11 +55,15 @@ type UpdateTimelineEventInput struct {
 
 	// The type of the event. You can update events of type Custom Event.
 	EventType *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTimelineEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {

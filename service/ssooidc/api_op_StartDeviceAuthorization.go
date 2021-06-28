@@ -48,6 +48,8 @@ type StartDeviceAuthorizationInput struct {
 	//
 	// This member is required.
 	StartUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type StartDeviceAuthorizationOutput struct {
@@ -78,6 +80,8 @@ type StartDeviceAuthorizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDeviceAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

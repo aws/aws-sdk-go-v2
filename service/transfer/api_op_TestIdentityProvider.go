@@ -61,6 +61,8 @@ type TestIdentityProviderInput struct {
 
 	// The password of the user account to be tested.
 	UserPassword *string
+
+	noSmithyDocumentSerde
 }
 
 type TestIdentityProviderOutput struct {
@@ -83,6 +85,8 @@ type TestIdentityProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

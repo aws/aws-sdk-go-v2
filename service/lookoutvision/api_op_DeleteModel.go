@@ -52,6 +52,8 @@ type DeleteModelInput struct {
 	// as in the first request. Using a different value for ClientToken is considered a
 	// new call to DeleteModel. An idempotency token is active for 8 hours.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteModelOutput struct {
@@ -61,6 +63,8 @@ type DeleteModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

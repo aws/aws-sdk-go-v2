@@ -44,6 +44,8 @@ type DescribeListenersInput struct {
 
 	// The maximum number of results to return with this call.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeListenersOutput struct {
@@ -57,6 +59,8 @@ type DescribeListenersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {

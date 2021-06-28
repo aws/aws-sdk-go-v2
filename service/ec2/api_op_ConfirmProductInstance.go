@@ -45,6 +45,8 @@ type ConfirmProductInstanceInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type ConfirmProductInstanceOutput struct {
@@ -59,6 +61,8 @@ type ConfirmProductInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmProductInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

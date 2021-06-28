@@ -39,11 +39,15 @@ type StartCostEstimationInput struct {
 
 	// The idempotency token used to identify each cost estimate request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type StartCostEstimationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartCostEstimationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -65,11 +65,15 @@ type DeleteStackInput struct {
 	// stack. If no role is available, AWS CloudFormation uses a temporary session that
 	// is generated from your user credentials.
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type CreatePublicVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	NewPublicVirtualInterface *types.NewPublicVirtualInterface
+
+	noSmithyDocumentSerde
 }
 
 // Information about a virtual interface.
@@ -167,6 +169,8 @@ type CreatePublicVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

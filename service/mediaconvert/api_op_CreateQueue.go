@@ -57,6 +57,8 @@ type CreateQueueInput struct {
 	// The tags that you want to add to the resource. You can tag resources with a
 	// key-value pair or with only a key.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateQueueOutput struct {
@@ -70,6 +72,8 @@ type CreateQueueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

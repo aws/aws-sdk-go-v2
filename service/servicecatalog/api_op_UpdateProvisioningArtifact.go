@@ -68,6 +68,8 @@ type UpdateProvisioningArtifactInput struct {
 
 	// The updated name of the provisioning artifact.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProvisioningArtifactOutput struct {
@@ -83,6 +85,8 @@ type UpdateProvisioningArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

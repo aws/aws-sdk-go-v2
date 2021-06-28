@@ -57,6 +57,8 @@ type StartFHIRImportJobInput struct {
 
 	// The name of the FHIR Import job in the StartFHIRImport job request.
 	JobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StartFHIRImportJobOutput struct {
@@ -76,6 +78,8 @@ type StartFHIRImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartFHIRImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

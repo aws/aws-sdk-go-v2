@@ -50,6 +50,8 @@ type GetAccessControlEffectInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAccessControlEffectOutput struct {
@@ -62,6 +64,8 @@ type GetAccessControlEffectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccessControlEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {

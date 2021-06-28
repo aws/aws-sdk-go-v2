@@ -124,6 +124,8 @@ type CreateUserInput struct {
 	// Key-value pairs that can be used to group and search for users. Tags are
 	// metadata attached to users for any purpose.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserOutput struct {
@@ -140,6 +142,8 @@ type CreateUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

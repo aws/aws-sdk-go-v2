@@ -51,6 +51,8 @@ type ListActivatedRulesInRuleGroupInput struct {
 	// The RuleGroupId of the RuleGroup for which you want to get a list of
 	// ActivatedRule objects.
 	RuleGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListActivatedRulesInRuleGroupOutput struct {
@@ -67,6 +69,8 @@ type ListActivatedRulesInRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListActivatedRulesInRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

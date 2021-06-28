@@ -25,6 +25,7 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 }
 
 type SimpleScalarXmlPropertiesInput struct {
+	noSmithyDocumentSerde
 }
 
 type SimpleScalarXmlPropertiesOutput struct {
@@ -50,6 +51,8 @@ type SimpleScalarXmlPropertiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSimpleScalarXmlPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

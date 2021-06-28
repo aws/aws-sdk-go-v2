@@ -53,6 +53,8 @@ type CreateControlInput struct {
 
 	// The steps to follow to determine if the control has been satisfied.
 	TestingInformation *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateControlOutput struct {
@@ -62,6 +64,8 @@ type CreateControlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateControlMiddlewares(stack *middleware.Stack, options Options) (err error) {

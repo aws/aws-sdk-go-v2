@@ -41,11 +41,15 @@ type RevokeSignatureInput struct {
 
 	// AWS account ID of the job owner.
 	JobOwner *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeSignatureOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeSignatureMiddlewares(stack *middleware.Stack, options Options) (err error) {

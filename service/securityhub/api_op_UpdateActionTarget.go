@@ -38,11 +38,15 @@ type UpdateActionTargetInput struct {
 
 	// The updated name of the custom action target.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateActionTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateActionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

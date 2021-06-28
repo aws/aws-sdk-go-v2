@@ -30,6 +30,7 @@ func (c *Client) GetHostedZoneCount(ctx context.Context, params *GetHostedZoneCo
 // A request to retrieve a count of all the hosted zones that are associated with
 // the current AWS account.
 type GetHostedZoneCountInput struct {
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to a GetHostedZoneCount request.
@@ -43,6 +44,8 @@ type GetHostedZoneCountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHostedZoneCountMiddlewares(stack *middleware.Stack, options Options) (err error) {

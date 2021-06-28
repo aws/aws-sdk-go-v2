@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -16,6 +17,8 @@ type AudioLogDestination struct {
 	//
 	// This member is required.
 	S3Bucket *S3BucketLogDestination
+
+	noSmithyDocumentSerde
 }
 
 // Settings for logging audio of conversations between Amazon Lex and a user. You
@@ -33,6 +36,8 @@ type AudioLogSetting struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides a record of an event that affects a bot alias. For example, when the
@@ -47,6 +52,8 @@ type BotAliasHistoryEvent struct {
 
 	// The date and time that the event started.
 	StartDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies settings that are unique to a locale. For example, you can use
@@ -61,6 +68,8 @@ type BotAliasLocaleSettings struct {
 
 	// Specifies the Lambda function that should be used in the locale.
 	CodeHookSpecification *CodeHookSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about bot aliases returned from the ListBotAliases
@@ -89,6 +98,8 @@ type BotAliasSummary struct {
 
 	// A timestamp of the date and time that the bot alias was last updated.
 	LastUpdatedDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provided the identity of a the bot that was exported.
@@ -104,6 +115,8 @@ type BotExportSpecification struct {
 	//
 	// This member is required.
 	BotVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters the responses returned by the ListBots operation.
@@ -125,6 +138,8 @@ type BotFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the bot parameters required for importing a bot.
@@ -163,6 +178,8 @@ type BotImportSpecification struct {
 	// you import a bot. You can't use the UpdateAlias operation to update tags. To
 	// update tags on the test alias, use the TagResource operation.
 	TestBotAliasTags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the bot locale parameters required for exporting a bot locale.
@@ -183,6 +200,8 @@ type BotLocaleExportSpecification struct {
 	//
 	// This member is required.
 	LocaleId *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters responses returned by the ListBotLocales operation.
@@ -204,6 +223,8 @@ type BotLocaleFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an event that occurred affecting the bot locale.
@@ -218,6 +239,8 @@ type BotLocaleHistoryEvent struct {
 	//
 	// This member is required.
 	EventDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides the bot locale parameters required for importing a bot locale.
@@ -263,6 +286,8 @@ type BotLocaleImportSpecification struct {
 
 	// Defines settings for using an Amazon Polly voice to communicate with a user.
 	VoiceSettings *VoiceSettings
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attributes for sorting a list of bot locales.
@@ -277,6 +302,8 @@ type BotLocaleSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about bot locales returned by the ListBotLocales operation.
@@ -300,6 +327,8 @@ type BotLocaleSummary struct {
 
 	// The name of the bot locale.
 	LocaleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attributes for sorting a list of bots.
@@ -314,6 +343,8 @@ type BotSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a bot returned by the ListBots operation.
@@ -338,6 +369,8 @@ type BotSummary struct {
 
 	// The latest numerical version in use for the bot.
 	LatestBotVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The version of a bot used for a bot locale.
@@ -347,6 +380,8 @@ type BotVersionLocaleDetails struct {
 	//
 	// This member is required.
 	SourceBotVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attributes for sorting a list of bot versions.
@@ -361,6 +396,8 @@ type BotVersionSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a bot version returned by the ListBotVersions
@@ -383,6 +420,8 @@ type BotVersionSummary struct {
 
 	// The description of the version.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attributes for sorting a list of built-in intents.
@@ -397,6 +436,8 @@ type BuiltInIntentSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a built-in intent for the ListBuiltInIntents
@@ -409,6 +450,8 @@ type BuiltInIntentSummary struct {
 	// The signature of the built-in intent. Use this to specify the parent intent of a
 	// derived intent.
 	IntentSignature *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attributes for sorting a list of built-in slot types.
@@ -423,6 +466,8 @@ type BuiltInSlotTypeSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a built-in slot type for the
@@ -435,6 +480,8 @@ type BuiltInSlotTypeSummary struct {
 	// The signature of the built-in slot type. Use this to specify the parent slot
 	// type of a derived slot type.
 	SlotTypeSignature *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a button to use on a response card used to gather slot values from a
@@ -452,6 +499,8 @@ type Button struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon CloudWatch Logs log group where the text and metadata logs are
@@ -468,6 +517,8 @@ type CloudWatchLogGroupLogDestination struct {
 	//
 	// This member is required.
 	LogPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about code hooks that Amazon Lex calls during a
@@ -479,6 +530,8 @@ type CodeHookSpecification struct {
 	//
 	// This member is required.
 	LambdaCodeHook *LambdaCodeHook
+
+	noSmithyDocumentSerde
 }
 
 // Configures conversation logging that saves audio, text, and metadata for the
@@ -490,6 +543,8 @@ type ConversationLogSettings struct {
 
 	// The Amazon CloudWatch Logs settings for logging text and metadata.
 	TextLogSettings []TextLogSetting
+
+	noSmithyDocumentSerde
 }
 
 // A custom response string that Amazon Lex sends to your application. You define
@@ -500,6 +555,8 @@ type CustomPayload struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // By default, data stored by Amazon Lex is encrypted. The DataPrivacy structure
@@ -531,6 +588,8 @@ type DataPrivacy struct {
 	//
 	// This member is required.
 	ChildDirected bool
+
+	noSmithyDocumentSerde
 }
 
 // Settings that determine the Lambda function that Amazon Lex uses for processing
@@ -541,6 +600,8 @@ type DialogCodeHookSettings struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Filtes the response form the operation
@@ -563,6 +624,8 @@ type ExportFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the bot or bot locale that you want to export. You
@@ -575,6 +638,8 @@ type ExportResourceSpecification struct {
 
 	// Parameters for exporting a bot locale.
 	BotLocaleExportSpecification *BotLocaleExportSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about sorting a list of exports.
@@ -589,6 +654,8 @@ type ExportSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about an export in an export list.
@@ -612,6 +679,8 @@ type ExportSummary struct {
 
 	// Information about the bot or bot locale that was exported.
 	ResourceSpecification *ExportResourceSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Determines if a Lambda function should be invoked for a specific intent.
@@ -622,6 +691,8 @@ type FulfillmentCodeHookSettings struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // A card that is shown to the user by a messaging platform. You define the
@@ -648,6 +719,8 @@ type ImageResponseCard struct {
 	// The subtitle to display on the response card. The format of the subtitle is
 	// determined by the platform displaying the response card.
 	Subtitle *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters the response from the operation.
@@ -670,6 +743,8 @@ type ImportFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the bot or bot locale that you want to import. You
@@ -682,6 +757,8 @@ type ImportResourceSpecification struct {
 
 	// Parameters for importing a bot locale.
 	BotLocaleImportSpecification *BotLocaleImportSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for sorting a list of imports.
@@ -696,6 +773,8 @@ type ImportSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about an import in an import list.
@@ -723,6 +802,8 @@ type ImportSummary struct {
 	// The strategy used to merge existing bot or bot locale definitions with the
 	// imported definition.
 	MergeStrategy MergeStrategy
+
+	noSmithyDocumentSerde
 }
 
 // The name of a context that must be active for an intent to be selected by Amazon
@@ -733,6 +814,8 @@ type InputContext struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a statement the Amazon Lex conveys to the user when the intent is
@@ -743,6 +826,8 @@ type IntentClosingSetting struct {
 	//
 	// This member is required.
 	ClosingResponse *ResponseSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Provides a prompt for making sure that the user is ready for the intent to be
@@ -765,6 +850,8 @@ type IntentConfirmationSetting struct {
 	//
 	// This member is required.
 	PromptSpecification *PromptSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Filters the response from the ListIntents operation.
@@ -786,6 +873,8 @@ type IntentFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attributes for sorting a list of intents.
@@ -800,6 +889,8 @@ type IntentSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about an intent returned by the ListIntents operation.
@@ -827,6 +918,8 @@ type IntentSummary struct {
 
 	// If this intent is derived from a built-in intent, the name of the parent intent.
 	ParentIntentSignature *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for the AMAZON.KendraSearchIntent intent.
@@ -850,6 +943,8 @@ type KendraConfiguration struct {
 	// Determines whether the AMAZON.KendraSearchIntent intent uses a custom query
 	// string to query the Amazon Kendra index.
 	QueryFilterStringEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a Lambda function that verifies requests to a bot or fulfilles the
@@ -866,6 +961,8 @@ type LambdaCodeHook struct {
 	//
 	// This member is required.
 	LambdaARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The object that provides message text and it's type.
@@ -883,6 +980,8 @@ type Message struct {
 
 	// A message in Speech Synthesis Markup Language (SSML).
 	SsmlMessage *SSMLMessage
+
+	noSmithyDocumentSerde
 }
 
 // Provides one or more messages that Amazon Lex should send to the user.
@@ -896,6 +995,8 @@ type MessageGroup struct {
 	// Message variations to send to the user. When variations are defined, Amazon Lex
 	// chooses the primary message or one of the variations to send to the user.
 	Variations []Message
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether a slot can return multiple values.
@@ -908,6 +1009,8 @@ type MultipleValuesSetting struct {
 	// ValidationException. If the allowMutlipleValues is not set, the default value is
 	// false.
 	AllowMultipleValues bool
+
+	noSmithyDocumentSerde
 }
 
 // Determines whether Amazon Lex obscures slot values in conversation logs.
@@ -918,6 +1021,8 @@ type ObfuscationSetting struct {
 	//
 	// This member is required.
 	ObfuscationSettingType ObfuscationSettingType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a session context that is activated when an intent is fulfilled.
@@ -940,6 +1045,8 @@ type OutputContext struct {
 	//
 	// This member is required.
 	TurnsToLive *int32
+
+	noSmithyDocumentSerde
 }
 
 // Defines an ASCII text message to send to the user.
@@ -949,6 +1056,8 @@ type PlainTextMessage struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The IAM principal that you allowing or denying access to an Amazon Lex action.
@@ -963,6 +1072,8 @@ type Principal struct {
 	// The name of the AWS service that should allowed or denied access to an Amazon
 	// Lex action.
 	Service *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a list of message groups that Amazon Lex sends to a user to elicit a
@@ -983,6 +1094,8 @@ type PromptSpecification struct {
 
 	// Indicates whether the user can interrupt a speech prompt from the bot.
 	AllowInterrupt *bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a list of message groups that Amazon Lex uses to respond the user
@@ -997,6 +1110,8 @@ type ResponseSpecification struct {
 
 	// Indicates whether the user can interrupt a speech response from Amazon Lex.
 	AllowInterrupt *bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an Amazon S3 bucket for logging audio conversations
@@ -1016,6 +1131,8 @@ type S3BucketLogDestination struct {
 	// The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for
 	// encrypting audio log files stored in an S3 bucket.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A sample utterance that invokes an intent or respond to a slot elicitation
@@ -1027,6 +1144,8 @@ type SampleUtterance struct {
 	//
 	// This member is required.
 	Utterance *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines one of the values for a slot type.
@@ -1036,6 +1155,8 @@ type SampleValue struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment
@@ -1047,6 +1168,8 @@ type SentimentAnalysisSettings struct {
 	//
 	// This member is required.
 	DetectSentiment bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default value to use when a user doesn't provide a value for a
@@ -1057,6 +1180,8 @@ type SlotDefaultValue struct {
 	//
 	// This member is required.
 	DefaultValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a list of values that Amazon Lex should use as the default value for a
@@ -1068,6 +1193,8 @@ type SlotDefaultValueSpecification struct {
 	//
 	// This member is required.
 	DefaultValueList []SlotDefaultValue
+
+	noSmithyDocumentSerde
 }
 
 // Filters the response from the ListSlots operation.
@@ -1089,6 +1216,8 @@ type SlotFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Sets the priority that Amazon Lex should use when eliciting slot values from a
@@ -1104,6 +1233,8 @@ type SlotPriority struct {
 	//
 	// This member is required.
 	SlotId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attributes for sorting a list of bots.
@@ -1118,6 +1249,8 @@ type SlotSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a slot, a value that the bot elicits from the user.
@@ -1144,6 +1277,8 @@ type SlotSummary struct {
 
 	// Prompts that are sent to the user to elicit a value for the slot.
 	ValueElicitationPromptSpecification *PromptSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Filters the response from the ListSlotTypes operation.
@@ -1165,6 +1300,8 @@ type SlotTypeFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies attributes for sorting a list of slot types.
@@ -1179,6 +1316,8 @@ type SlotTypeSortBy struct {
 	//
 	// This member is required.
 	Order SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a slot type.
@@ -1199,6 +1338,8 @@ type SlotTypeSummary struct {
 
 	// The name of the slot type.
 	SlotTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Each slot type can have a set of values. Each SlotTypeValue represents a value
@@ -1210,6 +1351,8 @@ type SlotTypeValue struct {
 
 	// Additional values releated to the slot type entry.
 	Synonyms []SampleValue
+
+	noSmithyDocumentSerde
 }
 
 // Settings that you can use for eliciting a slot value.
@@ -1236,6 +1379,8 @@ type SlotValueElicitationSetting struct {
 	// Specifies the prompts that Amazon Lex uses while a bot is waiting for customer
 	// input.
 	WaitAndContinueSpecification *WaitAndContinueSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Provides a regular expression used to validate the value of a slot.
@@ -1262,6 +1407,8 @@ type SlotValueRegexFilter struct {
 	//
 	// This member is required.
 	Pattern *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains settings used by Amazon Lex to select a slot value.
@@ -1286,6 +1433,8 @@ type SlotValueSelectionSetting struct {
 
 	// A regular expression used to validate the value of a slot.
 	RegexFilter *SlotValueRegexFilter
+
+	noSmithyDocumentSerde
 }
 
 // Defines a Speech Synthesis Markup Language (SSML) prompt.
@@ -1295,6 +1444,8 @@ type SSMLMessage struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the messages that Amazon Lex sends to a user to remind them that the bot
@@ -1322,6 +1473,8 @@ type StillWaitingResponseSpecification struct {
 	// Indicates that the user can interrupt the response by speaking while the message
 	// is being played.
 	AllowInterrupt *bool
+
+	noSmithyDocumentSerde
 }
 
 // Defines the Amazon CloudWatch Logs destination log group for conversation text
@@ -1333,6 +1486,8 @@ type TextLogDestination struct {
 	//
 	// This member is required.
 	CloudWatch *CloudWatchLogGroupLogDestination
+
+	noSmithyDocumentSerde
 }
 
 // Defines settings to enable text conversation logs.
@@ -1348,6 +1503,8 @@ type TextLogSetting struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Defines settings for using an Amazon Polly voice to communicate with a user.
@@ -1357,6 +1514,8 @@ type VoiceSettings struct {
 	//
 	// This member is required.
 	VoiceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the prompts that Amazon Lex uses while a bot is waiting for customer
@@ -1378,4 +1537,8 @@ type WaitAndContinueSpecification struct {
 	// A response that Amazon Lex sends periodically to the user to indicate that the
 	// bot is still waiting for input from the user.
 	StillWaitingResponse *StillWaitingResponseSpecification
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

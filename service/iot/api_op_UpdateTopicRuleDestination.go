@@ -51,11 +51,15 @@ type UpdateTopicRuleDestinationInput struct {
 	//
 	// This member is required.
 	Status types.TopicRuleDestinationStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTopicRuleDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -87,6 +87,8 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
 	// in VPC Endpoints for Amazon Elasticsearch Service Domains
 	VPCOptions *types.VPCOptions
+
+	noSmithyDocumentSerde
 }
 
 // The result of an UpdateElasticsearchDomain request. Contains the status of the
@@ -100,6 +102,8 @@ type UpdateElasticsearchDomainConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateElasticsearchDomainConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

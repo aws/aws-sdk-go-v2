@@ -13,6 +13,8 @@ import (
 // already exists.
 type AliasExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AliasExistsException) Error() string {
@@ -30,6 +32,8 @@ func (e *AliasExistsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // This exception is thrown when a verification code fails to deliver successfully.
 type CodeDeliveryFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CodeDeliveryFailureException) Error() string {
@@ -48,6 +52,8 @@ func (e *CodeDeliveryFailureException) ErrorFault() smithy.ErrorFault { return s
 // expecting.
 type CodeMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CodeMismatchException) Error() string {
@@ -66,6 +72,8 @@ func (e *CodeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.F
 // concurrently.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -86,6 +94,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // pool.
 type DuplicateProviderException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateProviderException) Error() string {
@@ -104,6 +114,8 @@ func (e *DuplicateProviderException) ErrorFault() smithy.ErrorFault { return smi
 // configure the software token TOTP multi-factor authentication (MFA).
 type EnableSoftwareTokenMFAException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EnableSoftwareTokenMFAException) Error() string {
@@ -123,6 +135,8 @@ func (e *EnableSoftwareTokenMFAException) ErrorFault() smithy.ErrorFault { retur
 // This exception is thrown if a code has expired.
 type ExpiredCodeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredCodeException) Error() string {
@@ -141,6 +155,8 @@ func (e *ExpiredCodeException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // exists in the user pool.
 type GroupExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GroupExistsException) Error() string {
@@ -158,6 +174,8 @@ func (e *GroupExistsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // This exception is thrown when Amazon Cognito encounters an internal error.
 type InternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalErrorException) Error() string {
@@ -176,6 +194,8 @@ func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 // identity. HTTP status code: 400.
 type InvalidEmailRoleAccessPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEmailRoleAccessPolicyException) Error() string {
@@ -198,6 +218,8 @@ func (e *InvalidEmailRoleAccessPolicyException) ErrorFault() smithy.ErrorFault {
 // AWS Lambda response.
 type InvalidLambdaResponseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLambdaResponseException) Error() string {
@@ -215,6 +237,8 @@ func (e *InvalidLambdaResponseException) ErrorFault() smithy.ErrorFault { return
 // This exception is thrown when the specified OAuth flow is invalid.
 type InvalidOAuthFlowException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOAuthFlowException) Error() string {
@@ -233,6 +257,8 @@ func (e *InvalidOAuthFlowException) ErrorFault() smithy.ErrorFault { return smit
 // parameter.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -251,6 +277,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // password.
 type InvalidPasswordException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPasswordException) Error() string {
@@ -269,6 +297,8 @@ func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smith
 // have permission to publish using Amazon SNS.
 type InvalidSmsRoleAccessPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSmsRoleAccessPolicyException) Error() string {
@@ -293,6 +323,8 @@ func (e *InvalidSmsRoleAccessPolicyException) ErrorFault() smithy.ErrorFault {
 // what is provided in the SMS configuration for the user pool.
 type InvalidSmsRoleTrustRelationshipException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSmsRoleTrustRelationshipException) Error() string {
@@ -314,6 +346,8 @@ func (e *InvalidSmsRoleTrustRelationshipException) ErrorFault() smithy.ErrorFaul
 // This exception is thrown when the user pool configuration is invalid.
 type InvalidUserPoolConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUserPoolConfigurationException) Error() string {
@@ -336,6 +370,8 @@ func (e *InvalidUserPoolConfigurationException) ErrorFault() smithy.ErrorFault {
 // resource.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -354,6 +390,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // authentication (MFA) method.
 type MFAMethodNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MFAMethodNotFoundException) Error() string {
@@ -371,6 +409,8 @@ func (e *MFAMethodNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 // This exception is thrown when a user is not authorized.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {
@@ -388,6 +428,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // This exception is thrown when a password reset is required.
 type PasswordResetRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PasswordResetRequiredException) Error() string {
@@ -405,6 +447,8 @@ func (e *PasswordResetRequiredException) ErrorFault() smithy.ErrorFault { return
 // This exception is thrown when a precondition is not met.
 type PreconditionNotMetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PreconditionNotMetException) Error() string {
@@ -423,6 +467,8 @@ func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return sm
 // requested resource.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -440,6 +486,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // This exception is thrown when the specified scope does not exist.
 type ScopeDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ScopeDoesNotExistException) Error() string {
@@ -458,6 +506,8 @@ func (e *ScopeDoesNotExistException) ErrorFault() smithy.ErrorFault { return smi
 // authentication (MFA) is not enabled for the user pool.
 type SoftwareTokenMFANotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SoftwareTokenMFANotFoundException) Error() string {
@@ -478,6 +528,8 @@ func (e *SoftwareTokenMFANotFoundException) ErrorFault() smithy.ErrorFault { ret
 // given action (e.g., sign in).
 type TooManyFailedAttemptsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyFailedAttemptsException) Error() string {
@@ -496,6 +548,8 @@ func (e *TooManyFailedAttemptsException) ErrorFault() smithy.ErrorFault { return
 // operation.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -514,6 +568,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // to an invalid access token in the request.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {
@@ -532,6 +588,8 @@ func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // unexpected exception with the AWS Lambda service.
 type UnexpectedLambdaException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnexpectedLambdaException) Error() string {
@@ -549,6 +607,8 @@ func (e *UnexpectedLambdaException) ErrorFault() smithy.ErrorFault { return smit
 // This exception is thrown when the specified identifier is not supported.
 type UnsupportedIdentityProviderException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedIdentityProviderException) Error() string {
@@ -571,6 +631,8 @@ func (e *UnsupportedIdentityProviderException) ErrorFault() smithy.ErrorFault {
 // enabled for the user pool client.
 type UnsupportedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {
@@ -588,6 +650,8 @@ func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return 
 // This exception is thrown when an unsupported token is passed to an operation.
 type UnsupportedTokenTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedTokenTypeException) Error() string {
@@ -605,6 +669,8 @@ func (e *UnsupportedTokenTypeException) ErrorFault() smithy.ErrorFault { return 
 // The request failed because the user is in an unsupported state.
 type UnsupportedUserStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedUserStateException) Error() string {
@@ -623,6 +689,8 @@ func (e *UnsupportedUserStateException) ErrorFault() smithy.ErrorFault { return 
 // import job is in progress for that pool.
 type UserImportInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserImportInProgressException) Error() string {
@@ -641,6 +709,8 @@ func (e *UserImportInProgressException) ErrorFault() smithy.ErrorFault { return 
 // validation exception with the AWS Lambda service.
 type UserLambdaValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserLambdaValidationException) Error() string {
@@ -659,6 +729,8 @@ func (e *UserLambdaValidationException) ErrorFault() smithy.ErrorFault { return 
 // exists in the user pool.
 type UsernameExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UsernameExistsException) Error() string {
@@ -676,6 +748,8 @@ func (e *UsernameExistsException) ErrorFault() smithy.ErrorFault { return smithy
 // This exception is thrown when a user is not confirmed successfully.
 type UserNotConfirmedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserNotConfirmedException) Error() string {
@@ -693,6 +767,8 @@ func (e *UserNotConfirmedException) ErrorFault() smithy.ErrorFault { return smit
 // This exception is thrown when a user is not found.
 type UserNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserNotFoundException) Error() string {
@@ -710,6 +786,8 @@ func (e *UserNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.F
 // This exception is thrown when user pool add-ons are not enabled.
 type UserPoolAddOnNotEnabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserPoolAddOnNotEnabledException) Error() string {
@@ -729,6 +807,8 @@ func (e *UserPoolAddOnNotEnabledException) ErrorFault() smithy.ErrorFault { retu
 // This exception is thrown when a user pool tag cannot be set or updated.
 type UserPoolTaggingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserPoolTaggingException) Error() string {

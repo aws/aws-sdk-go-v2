@@ -40,6 +40,8 @@ type PutVoiceConnectorOriginationInput struct {
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutVoiceConnectorOriginationOutput struct {
@@ -49,6 +51,8 @@ type PutVoiceConnectorOriginationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutVoiceConnectorOriginationMiddlewares(stack *middleware.Stack, options Options) (err error) {

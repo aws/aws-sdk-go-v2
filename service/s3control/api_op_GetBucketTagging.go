@@ -81,6 +81,8 @@ type GetBucketTaggingInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBucketTaggingOutput struct {
@@ -92,6 +94,8 @@ type GetBucketTaggingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBucketTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

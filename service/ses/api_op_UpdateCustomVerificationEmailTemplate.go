@@ -59,11 +59,15 @@ type UpdateCustomVerificationEmailTemplateInput struct {
 
 	// The subject line of the custom verification email.
 	TemplateSubject *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCustomVerificationEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

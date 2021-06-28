@@ -35,6 +35,8 @@ type GetLayerVersionByArnInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLayerVersionByArnOutput struct {
@@ -66,6 +68,8 @@ type GetLayerVersionByArnOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLayerVersionByArnMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,11 +44,15 @@ type UpdateQueueMaxContactsInput struct {
 	// The maximum number of contacts that can be in the queue before it is considered
 	// full.
 	MaxContacts int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQueueMaxContactsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQueueMaxContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

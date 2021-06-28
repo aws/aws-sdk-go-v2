@@ -30,6 +30,7 @@ func (c *Client) GetMacieSession(ctx context.Context, params *GetMacieSessionInp
 }
 
 type GetMacieSessionInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetMacieSessionOutput struct {
@@ -59,6 +60,8 @@ type GetMacieSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMacieSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

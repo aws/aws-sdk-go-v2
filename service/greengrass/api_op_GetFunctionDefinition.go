@@ -33,6 +33,8 @@ type GetFunctionDefinitionInput struct {
 	//
 	// This member is required.
 	FunctionDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFunctionDefinitionOutput struct {
@@ -63,6 +65,8 @@ type GetFunctionDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFunctionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

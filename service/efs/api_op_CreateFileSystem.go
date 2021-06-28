@@ -162,6 +162,8 @@ type CreateFileSystemInput struct {
 	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput)
 	// in the Amazon EFS User Guide. Default is bursting.
 	ThroughputMode types.ThroughputMode
+
+	noSmithyDocumentSerde
 }
 
 // A description of the file system.
@@ -266,6 +268,8 @@ type CreateFileSystemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {

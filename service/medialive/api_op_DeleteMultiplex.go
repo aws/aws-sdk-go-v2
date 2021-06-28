@@ -34,6 +34,8 @@ type DeleteMultiplexInput struct {
 	//
 	// This member is required.
 	MultiplexId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DeleteMultiplexResponse
@@ -71,6 +73,8 @@ type DeleteMultiplexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {

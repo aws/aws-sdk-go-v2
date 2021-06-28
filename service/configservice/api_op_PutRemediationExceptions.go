@@ -53,6 +53,8 @@ type PutRemediationExceptionsInput struct {
 
 	// The message contains an explanation of the exception.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 type PutRemediationExceptionsOutput struct {
@@ -63,6 +65,8 @@ type PutRemediationExceptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

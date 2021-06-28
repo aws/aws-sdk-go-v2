@@ -47,6 +47,8 @@ type DescribeConnectorProfilesInput struct {
 
 	// The pagination token for the next page of data.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConnectorProfilesOutput struct {
@@ -60,6 +62,8 @@ type DescribeConnectorProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConnectorProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

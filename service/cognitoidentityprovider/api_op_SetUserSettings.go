@@ -43,12 +43,16 @@ type SetUserSettingsInput struct {
 	//
 	// This member is required.
 	MFAOptions []types.MFAOptionType
+
+	noSmithyDocumentSerde
 }
 
 // The response from the server for a set user settings request.
 type SetUserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -30,6 +30,7 @@ func (c *Client) DescribeServiceIntegration(ctx context.Context, params *Describ
 }
 
 type DescribeServiceIntegrationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeServiceIntegrationOutput struct {
@@ -40,6 +41,8 @@ type DescribeServiceIntegrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServiceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

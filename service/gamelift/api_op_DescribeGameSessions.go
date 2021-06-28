@@ -89,6 +89,8 @@ type DescribeGameSessionsInput struct {
 	// states: ACTIVE, TERMINATED, ACTIVATING, and TERMINATING. The last two are
 	// transitory and used for only very brief periods of time.
 	StatusFilter *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -104,6 +106,8 @@ type DescribeGameSessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGameSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

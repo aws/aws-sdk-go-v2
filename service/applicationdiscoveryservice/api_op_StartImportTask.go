@@ -82,6 +82,8 @@ type StartImportTaskInput struct {
 	// same client request token will return information about the original import task
 	// with that client request token.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type StartImportTaskOutput struct {
@@ -92,6 +94,8 @@ type StartImportTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

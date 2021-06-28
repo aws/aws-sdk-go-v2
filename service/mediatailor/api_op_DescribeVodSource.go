@@ -39,6 +39,8 @@ type DescribeVodSourceInput struct {
 	//
 	// This member is required.
 	VodSourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVodSourceOutput struct {
@@ -66,6 +68,8 @@ type DescribeVodSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type ListAssignmentsForHITInput struct {
 
 	// Pagination token
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssignmentsForHITOutput struct {
@@ -73,6 +75,8 @@ type ListAssignmentsForHITOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {

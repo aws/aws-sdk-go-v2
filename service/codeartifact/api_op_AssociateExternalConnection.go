@@ -66,6 +66,8 @@ type AssociateExternalConnectionInput struct {
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateExternalConnectionOutput struct {
@@ -75,6 +77,8 @@ type AssociateExternalConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateExternalConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

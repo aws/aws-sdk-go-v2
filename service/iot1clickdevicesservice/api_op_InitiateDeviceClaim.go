@@ -35,6 +35,8 @@ type InitiateDeviceClaimInput struct {
 	//
 	// This member is required.
 	DeviceId *string
+
+	noSmithyDocumentSerde
 }
 
 type InitiateDeviceClaimOutput struct {
@@ -44,6 +46,8 @@ type InitiateDeviceClaimOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInitiateDeviceClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {

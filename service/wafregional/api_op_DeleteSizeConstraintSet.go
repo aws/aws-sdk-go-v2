@@ -59,6 +59,8 @@ type DeleteSizeConstraintSetInput struct {
 	//
 	// This member is required.
 	SizeConstraintSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSizeConstraintSetOutput struct {
@@ -70,6 +72,8 @@ type DeleteSizeConstraintSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

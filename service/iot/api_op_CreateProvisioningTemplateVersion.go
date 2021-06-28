@@ -40,6 +40,8 @@ type CreateProvisioningTemplateVersionInput struct {
 
 	// Sets a fleet provision template version as the default version.
 	SetAsDefault bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateProvisioningTemplateVersionOutput struct {
@@ -59,6 +61,8 @@ type CreateProvisioningTemplateVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

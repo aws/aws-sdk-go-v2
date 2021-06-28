@@ -86,6 +86,8 @@ type ListPoliciesGrantingServiceAccessInput struct {
 	// Marker element in the response that you received to indicate where the next call
 	// should start.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPoliciesGrantingServiceAccessOutput struct {
@@ -108,6 +110,8 @@ type ListPoliciesGrantingServiceAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPoliciesGrantingServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

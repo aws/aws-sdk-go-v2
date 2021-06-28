@@ -37,6 +37,8 @@ type GetSuiteDefinitionInput struct {
 
 	// Suite definition version of the test suite to get.
 	SuiteDefinitionVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSuiteDefinitionOutput struct {
@@ -67,6 +69,8 @@ type GetSuiteDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

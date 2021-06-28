@@ -38,6 +38,8 @@ type DeleteTrustInput struct {
 
 	// Delete a conditional forwarder as part of a DeleteTrustRequest.
 	DeleteAssociatedConditionalForwarder bool
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DeleteTrust request.
@@ -48,6 +50,8 @@ type DeleteTrustOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {

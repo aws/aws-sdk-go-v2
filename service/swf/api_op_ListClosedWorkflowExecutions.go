@@ -121,6 +121,8 @@ type ListClosedWorkflowExecutionsInput struct {
 	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
 	// exclusive. You can specify at most one of these in a request.
 	TypeFilter *types.WorkflowTypeFilter
+
+	noSmithyDocumentSerde
 }
 
 // Contains a paginated list of information about workflow executions.
@@ -140,6 +142,8 @@ type ListClosedWorkflowExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListClosedWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListBranchesInput struct {
 	// non-null pagination token is returned in a result, pass its value in here to
 	// list more branches.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the list branches request.
@@ -58,6 +60,8 @@ type ListBranchesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {

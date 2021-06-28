@@ -41,6 +41,8 @@ type ListMailboxExportJobsInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMailboxExportJobsOutput struct {
@@ -53,6 +55,8 @@ type ListMailboxExportJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMailboxExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

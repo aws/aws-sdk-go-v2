@@ -37,11 +37,15 @@ type PutChannelPolicyInput struct {
 	//
 	// This member is required.
 	Policy *string
+
+	noSmithyDocumentSerde
 }
 
 type PutChannelPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

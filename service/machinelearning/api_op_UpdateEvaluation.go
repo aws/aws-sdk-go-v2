@@ -39,6 +39,8 @@ type UpdateEvaluationInput struct {
 	//
 	// This member is required.
 	EvaluationName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an UpdateEvaluation operation. You can see the updated
@@ -51,6 +53,8 @@ type UpdateEvaluationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {

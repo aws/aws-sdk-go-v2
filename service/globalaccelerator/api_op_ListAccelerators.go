@@ -37,6 +37,8 @@ type ListAcceleratorsInput struct {
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAcceleratorsOutput struct {
@@ -50,6 +52,8 @@ type ListAcceleratorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAcceleratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

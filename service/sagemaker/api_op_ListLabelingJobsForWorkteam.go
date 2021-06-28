@@ -62,6 +62,8 @@ type ListLabelingJobsForWorkteamInput struct {
 
 	// The sort order for results. The default is Ascending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListLabelingJobsForWorkteamOutput struct {
@@ -77,6 +79,8 @@ type ListLabelingJobsForWorkteamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLabelingJobsForWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {

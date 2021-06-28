@@ -38,6 +38,8 @@ type GetLFTagInput struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLFTagOutput struct {
@@ -56,6 +58,8 @@ type GetLFTagOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {

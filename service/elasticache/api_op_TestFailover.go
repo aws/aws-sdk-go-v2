@@ -90,6 +90,8 @@ type TestFailoverInput struct {
 	//
 	// This member is required.
 	ReplicationGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type TestFailoverOutput struct {
@@ -99,6 +101,8 @@ type TestFailoverOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestFailoverMiddlewares(stack *middleware.Stack, options Options) (err error) {

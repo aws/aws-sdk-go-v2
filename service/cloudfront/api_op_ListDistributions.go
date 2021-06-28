@@ -40,6 +40,8 @@ type ListDistributionsInput struct {
 
 	// The maximum number of distributions you want in the response body.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -50,6 +52,8 @@ type ListDistributionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDistributionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

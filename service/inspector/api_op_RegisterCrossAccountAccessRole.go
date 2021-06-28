@@ -34,11 +34,15 @@ type RegisterCrossAccountAccessRoleInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterCrossAccountAccessRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterCrossAccountAccessRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

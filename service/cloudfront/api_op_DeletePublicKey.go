@@ -36,11 +36,15 @@ type DeletePublicKeyInput struct {
 	// The value of the ETag header that you received when retrieving the public key
 	// identity to delete. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePublicKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

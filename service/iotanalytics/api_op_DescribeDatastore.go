@@ -38,6 +38,8 @@ type DescribeDatastoreInput struct {
 	// the response. This feature cannot be used with a data store whose S3 storage is
 	// customer-managed.
 	IncludeStatistics bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDatastoreOutput struct {
@@ -51,6 +53,8 @@ type DescribeDatastoreOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

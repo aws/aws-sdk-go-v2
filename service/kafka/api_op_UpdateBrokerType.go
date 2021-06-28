@@ -44,6 +44,8 @@ type UpdateBrokerTypeInput struct {
 	//
 	// This member is required.
 	TargetInstanceType *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBrokerTypeOutput struct {
@@ -56,6 +58,8 @@ type UpdateBrokerTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBrokerTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

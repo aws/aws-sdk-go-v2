@@ -7,6 +7,8 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -23,8 +25,6 @@ import (
 )
 
 func TestClient_DocumentTypeAsPayload_awsRestjson1Serialize(t *testing.T) {
-	t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#DocumentTypeAsPayload")
-
 	cases := map[string]struct {
 		Params        *DocumentTypeAsPayloadInput
 		ExpectMethod  string
@@ -41,7 +41,9 @@ func TestClient_DocumentTypeAsPayload_awsRestjson1Serialize(t *testing.T) {
 		// Serializes a document as the target of the httpPayload trait.
 		"DocumentTypeAsPayloadInput": {
 			Params: &DocumentTypeAsPayloadInput{
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument(map[string]interface{}{
+					"foo": "bar",
+				}),
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/DocumentTypeAsPayload",
@@ -59,7 +61,7 @@ func TestClient_DocumentTypeAsPayload_awsRestjson1Serialize(t *testing.T) {
 		// Serializes a document as the target of the httpPayload trait using a string.
 		"DocumentTypeAsPayloadInputString": {
 			Params: &DocumentTypeAsPayloadInput{
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument("hello"),
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/DocumentTypeAsPayload",
@@ -158,7 +160,9 @@ func TestClient_DocumentTypeAsPayload_awsRestjson1Deserialize(t *testing.T) {
 			    "foo": "bar"
 			}`),
 			ExpectResult: &DocumentTypeAsPayloadOutput{
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument(map[string]interface{}{
+					"foo": "bar",
+				}),
 			},
 		},
 		// Serializes a document as a payload string.
@@ -170,7 +174,7 @@ func TestClient_DocumentTypeAsPayload_awsRestjson1Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`"hello"`),
 			ExpectResult: &DocumentTypeAsPayloadOutput{
-				DocumentValue: nil,
+				DocumentValue: document.NewLazyDocument("hello"),
 			},
 		},
 	}
@@ -234,6 +238,7 @@ func TestClient_DocumentTypeAsPayload_awsRestjson1Deserialize(t *testing.T) {
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)

@@ -39,6 +39,8 @@ type ModifyUserGroupInput struct {
 
 	// The list of user IDs to remove from the user group.
 	UserIdsToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyUserGroupOutput struct {
@@ -67,6 +69,8 @@ type ModifyUserGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

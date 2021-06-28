@@ -27,11 +27,14 @@ func (c *Client) ClearDefaultAuthorizer(ctx context.Context, params *ClearDefaul
 }
 
 type ClearDefaultAuthorizerInput struct {
+	noSmithyDocumentSerde
 }
 
 type ClearDefaultAuthorizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationClearDefaultAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

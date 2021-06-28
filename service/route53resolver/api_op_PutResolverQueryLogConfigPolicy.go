@@ -58,6 +58,8 @@ type PutResolverQueryLogConfigPolicyInput struct {
 	//
 	// This member is required.
 	ResolverQueryLogConfigPolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a PutResolverQueryLogConfigPolicy request.
@@ -68,6 +70,8 @@ type PutResolverQueryLogConfigPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutResolverQueryLogConfigPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

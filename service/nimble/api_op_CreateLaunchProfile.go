@@ -76,6 +76,8 @@ type CreateLaunchProfileInput struct {
 	// A collection of labels, in the form of key:value pairs, that apply to this
 	// resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLaunchProfileOutput struct {
@@ -85,6 +87,8 @@ type CreateLaunchProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLaunchProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type UpdateApplicationResourceLifecycleInput struct {
 	//
 	// This member is required.
 	ResourceLifecycleConfig *types.ApplicationResourceLifecycleConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApplicationResourceLifecycleOutput struct {
@@ -50,6 +52,8 @@ type UpdateApplicationResourceLifecycleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationResourceLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {

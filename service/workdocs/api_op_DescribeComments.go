@@ -49,6 +49,8 @@ type DescribeCommentsInput struct {
 	// The marker for the next set of results. This marker was received from a previous
 	// call.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCommentsOutput struct {
@@ -62,6 +64,8 @@ type DescribeCommentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCommentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -67,6 +67,8 @@ type EnableLoggingInput struct {
 	//
 	// * x7f or larger
 	S3KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of logging for a cluster.
@@ -92,6 +94,8 @@ type EnableLoggingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

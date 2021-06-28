@@ -37,6 +37,8 @@ type CancelReservedInstancesListingInput struct {
 	//
 	// This member is required.
 	ReservedInstancesListingId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CancelReservedInstancesListing.
@@ -47,6 +49,8 @@ type CancelReservedInstancesListingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelReservedInstancesListingMiddlewares(stack *middleware.Stack, options Options) (err error) {

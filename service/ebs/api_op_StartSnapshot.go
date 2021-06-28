@@ -98,6 +98,8 @@ type StartSnapshotInput struct {
 	// If no value is specified, the
 	// timeout defaults to 60 minutes.
 	Timeout *int32
+
+	noSmithyDocumentSerde
 }
 
 type StartSnapshotOutput struct {
@@ -138,6 +140,8 @@ type StartSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

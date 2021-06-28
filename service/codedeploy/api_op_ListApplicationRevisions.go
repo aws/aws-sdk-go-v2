@@ -85,6 +85,8 @@ type ListApplicationRevisionsInput struct {
 	// If not specified, the results are sorted in
 	// ascending order. If set to null, the results are sorted in an arbitrary order.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListApplicationRevisions operation.
@@ -100,6 +102,8 @@ type ListApplicationRevisionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListApplicationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

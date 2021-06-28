@@ -43,6 +43,8 @@ type GetConsoleScreenshotInput struct {
 	// When set to true, acts as keystroke input and wakes up an instance that's in
 	// standby or "sleep" mode.
 	WakeUp *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetConsoleScreenshotOutput struct {
@@ -55,6 +57,8 @@ type GetConsoleScreenshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConsoleScreenshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

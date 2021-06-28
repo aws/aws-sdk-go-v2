@@ -42,11 +42,15 @@ type ModifyInstanceFleetInput struct {
 	//
 	// This member is required.
 	InstanceFleet *types.InstanceFleetModifyConfig
+
+	noSmithyDocumentSerde
 }
 
 type ModifyInstanceFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyInstanceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

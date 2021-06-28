@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -39,6 +40,8 @@ type AffectedEntity struct {
 	// A map of entity tags attached to the affected entity. Currently, the tags
 	// property isn't supported.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A range of dates and times that is used by the EventFilter
@@ -57,6 +60,8 @@ type DateTimeRange struct {
 
 	// The ending date and time of a time range.
 	To *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The number of entities that are affected by one or more events. Returned by the
@@ -73,6 +78,8 @@ type EntityAggregate struct {
 	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The values to use to filter results from the EntityFilter
@@ -102,6 +109,8 @@ type EntityFilter struct {
 	// A map of entity tags attached to the affected entity. Currently, the tags
 	// property isn't supported.
 	Tags []map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about an AWS Health event. AWS Health events can be public
@@ -175,6 +184,8 @@ type Event struct {
 	// The most recent status of the event. Possible values are open, closed, and
 	// upcoming.
 	StatusCode EventStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // The values used to filter results from the DescribeEventDetailsForOrganization
@@ -194,6 +205,8 @@ type EventAccountFilter struct {
 
 	// The 12-digit AWS account numbers that contains the affected entities.
 	AwsAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // The number of events of each issue type. Returned by the DescribeEventAggregates
@@ -206,6 +219,8 @@ type EventAggregate struct {
 
 	// The number of events of the associated issue type.
 	Count int32
+
+	noSmithyDocumentSerde
 }
 
 // The detailed description of the event. Included in the information returned by
@@ -216,6 +231,8 @@ type EventDescription struct {
 
 	// The most recent description of the event.
 	LatestDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an event. A combination of an Event
@@ -236,6 +253,8 @@ type EventDetails struct {
 
 	// Additional metadata about the event.
 	EventMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Error information returned when a DescribeEventDetails
@@ -254,6 +273,8 @@ type EventDetailsErrorItem struct {
 	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The values to use to filter results from the DescribeEvents
@@ -307,6 +328,8 @@ type EventFilter struct {
 	// A map of entity tags attached to the affected entity. Currently, the tags
 	// property isn't supported.
 	Tags []map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the metadata about a type of event that is reported by AWS Health. The
@@ -334,6 +357,8 @@ type EventType struct {
 
 	// The AWS service that is affected by the event. For example, EC2, RDS.
 	Service *string
+
+	noSmithyDocumentSerde
 }
 
 // The values to use to filter results from the DescribeEventTypes
@@ -350,6 +375,8 @@ type EventTypeFilter struct {
 
 	// The AWS services associated with the event. For example, EC2, RDS.
 	Services []string
+
+	noSmithyDocumentSerde
 }
 
 // Error information returned when a DescribeAffectedEntitiesForOrganization
@@ -372,6 +399,8 @@ type OrganizationAffectedEntitiesErrorItem struct {
 	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about an event, returned by the
@@ -428,6 +457,8 @@ type OrganizationEvent struct {
 	// The most recent status of the event. Possible values are open, closed, and
 	// upcoming.
 	StatusCode EventStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an event. A combination of an Event
@@ -470,6 +501,8 @@ type OrganizationEventDetails struct {
 
 	// Additional metadata about the event.
 	EventMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Error information returned when a DescribeEventDetailsForOrganization
@@ -507,6 +540,8 @@ type OrganizationEventDetailsErrorItem struct {
 	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The values to filter results from the DescribeEventsForOrganization
@@ -573,4 +608,8 @@ type OrganizationEventFilter struct {
 	// or after from. If from is not set and to is set: match items where the timestamp
 	// value is equal to or before to.
 	StartTime *DateTimeRange
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

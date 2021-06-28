@@ -38,6 +38,8 @@ type GetDocumentationVersionInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -58,6 +60,8 @@ type GetDocumentationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDocumentationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

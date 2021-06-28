@@ -59,6 +59,8 @@ type ImportFirewallDomainsInput struct {
 	//
 	// This member is required.
 	Operation types.FirewallDomainImportOperation
+
+	noSmithyDocumentSerde
 }
 
 type ImportFirewallDomainsOutput struct {
@@ -77,6 +79,8 @@ type ImportFirewallDomainsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {

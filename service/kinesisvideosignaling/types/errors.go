@@ -11,6 +11,8 @@ import (
 // calls. Try making the call later.
 type ClientLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientLimitExceededException) Error() string {
@@ -28,6 +30,8 @@ func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return s
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgumentException) Error() string {
@@ -45,6 +49,8 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // The specified client is invalid.
 type InvalidClientException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClientException) Error() string {
@@ -62,6 +68,8 @@ func (e *InvalidClientException) ErrorFault() smithy.ErrorFault { return smithy.
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {
@@ -79,6 +87,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -98,6 +108,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // sending/receiving messages.
 type SessionExpiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SessionExpiredException) Error() string {

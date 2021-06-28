@@ -41,6 +41,8 @@ type ListThingGroupsForThingInput struct {
 	// To retrieve the next set of results, the nextToken value from a previous
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListThingGroupsForThingOutput struct {
@@ -54,6 +56,8 @@ type ListThingGroupsForThingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThingGroupsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

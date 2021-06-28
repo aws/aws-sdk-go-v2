@@ -64,6 +64,8 @@ type GetObjectLegalHoldInput struct {
 
 	// The version ID of the object whose Legal Hold status you want to retrieve.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectLegalHoldOutput struct {
@@ -73,6 +75,8 @@ type GetObjectLegalHoldOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {

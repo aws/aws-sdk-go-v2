@@ -33,6 +33,8 @@ type DescribeOriginEndpointInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeOriginEndpointOutput struct {
@@ -94,6 +96,8 @@ type DescribeOriginEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

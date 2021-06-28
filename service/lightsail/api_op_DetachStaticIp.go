@@ -33,6 +33,8 @@ type DetachStaticIpInput struct {
 	//
 	// This member is required.
 	StaticIpName *string
+
+	noSmithyDocumentSerde
 }
 
 type DetachStaticIpOutput struct {
@@ -44,6 +46,8 @@ type DetachStaticIpOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type RollbackApplicationInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
+
+	noSmithyDocumentSerde
 }
 
 type RollbackApplicationOutput struct {
@@ -57,6 +59,8 @@ type RollbackApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRollbackApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

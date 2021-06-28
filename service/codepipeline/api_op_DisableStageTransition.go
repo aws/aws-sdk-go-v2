@@ -57,11 +57,15 @@ type DisableStageTransitionInput struct {
 	//
 	// This member is required.
 	TransitionType types.StageTransitionType
+
+	noSmithyDocumentSerde
 }
 
 type DisableStageTransitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableStageTransitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

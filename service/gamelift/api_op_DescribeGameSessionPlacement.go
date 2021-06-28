@@ -41,6 +41,8 @@ type DescribeGameSessionPlacementInput struct {
 	//
 	// This member is required.
 	PlacementId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -51,6 +53,8 @@ type DescribeGameSessionPlacementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {

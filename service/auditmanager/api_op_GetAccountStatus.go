@@ -28,6 +28,7 @@ func (c *Client) GetAccountStatus(ctx context.Context, params *GetAccountStatusI
 }
 
 type GetAccountStatusInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetAccountStatusOutput struct {
@@ -37,6 +38,8 @@ type GetAccountStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

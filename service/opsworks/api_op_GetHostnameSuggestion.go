@@ -37,6 +37,8 @@ type GetHostnameSuggestionInput struct {
 	//
 	// This member is required.
 	LayerId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a GetHostnameSuggestion request.
@@ -50,6 +52,8 @@ type GetHostnameSuggestionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHostnameSuggestionMiddlewares(stack *middleware.Stack, options Options) (err error) {

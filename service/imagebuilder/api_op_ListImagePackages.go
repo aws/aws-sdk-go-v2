@@ -42,6 +42,8 @@ type ListImagePackagesInput struct {
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListImagePackagesOutput struct {
@@ -58,6 +60,8 @@ type ListImagePackagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListImagePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

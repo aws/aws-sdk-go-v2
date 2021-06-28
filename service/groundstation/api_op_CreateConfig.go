@@ -43,6 +43,8 @@ type CreateConfigInput struct {
 
 	// Tags assigned to a Config.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -59,6 +61,8 @@ type CreateConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

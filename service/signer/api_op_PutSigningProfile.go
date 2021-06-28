@@ -61,6 +61,8 @@ type PutSigningProfileInput struct {
 
 	// Tags to be associated with the signing profile that is being created.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type PutSigningProfileOutput struct {
@@ -76,6 +78,8 @@ type PutSigningProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

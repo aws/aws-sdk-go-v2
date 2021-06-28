@@ -58,6 +58,8 @@ type ListThingsInput struct {
 	// returns only the thing resources with attribute values that match the entire
 	// attributeValue provided.
 	UsePrefixAttributeValue bool
+
+	noSmithyDocumentSerde
 }
 
 // The output from the ListThings operation.
@@ -72,6 +74,8 @@ type ListThingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

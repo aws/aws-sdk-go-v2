@@ -41,6 +41,8 @@ type FinalizeDeviceClaimInput struct {
 	// Tagging Strategies
 	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type FinalizeDeviceClaimOutput struct {
@@ -50,6 +52,8 @@ type FinalizeDeviceClaimOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFinalizeDeviceClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {

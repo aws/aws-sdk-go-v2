@@ -95,6 +95,8 @@ type UpdatePackageVersionsStatusInput struct {
 	// package version (for example, 3.5.2), and the map value is the package version
 	// revision.
 	VersionRevisions map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePackageVersionsStatusOutput struct {
@@ -109,6 +111,8 @@ type UpdatePackageVersionsStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePackageVersionsStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

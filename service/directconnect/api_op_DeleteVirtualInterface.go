@@ -33,6 +33,8 @@ type DeleteVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVirtualInterfaceOutput struct {
@@ -76,6 +78,8 @@ type DeleteVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

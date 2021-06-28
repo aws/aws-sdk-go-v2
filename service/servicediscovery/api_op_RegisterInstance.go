@@ -172,6 +172,8 @@ type RegisterInstanceInput struct {
 	// the same namespace and service. CreatorRequestId can be any unique string (for
 	// example, a date/time stamp).
 	CreatorRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterInstanceOutput struct {
@@ -183,6 +185,8 @@ type RegisterInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

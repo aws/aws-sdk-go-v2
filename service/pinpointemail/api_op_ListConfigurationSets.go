@@ -45,6 +45,8 @@ type ListConfigurationSetsInput struct {
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of configuration sets in your Amazon Pinpoint account in the current AWS
@@ -62,6 +64,8 @@ type ListConfigurationSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

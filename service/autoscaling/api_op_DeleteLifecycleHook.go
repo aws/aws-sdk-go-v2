@@ -39,11 +39,15 @@ type DeleteLifecycleHookInput struct {
 	//
 	// This member is required.
 	LifecycleHookName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLifecycleHookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLifecycleHookMiddlewares(stack *middleware.Stack, options Options) (err error) {

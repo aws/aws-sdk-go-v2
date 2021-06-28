@@ -35,11 +35,15 @@ type StopBulkDeploymentInput struct {
 	//
 	// This member is required.
 	BulkDeploymentId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopBulkDeploymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopBulkDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

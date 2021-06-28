@@ -35,11 +35,15 @@ type DeleteCacheSubnetGroupInput struct {
 	//
 	// This member is required.
 	CacheSubnetGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCacheSubnetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCacheSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

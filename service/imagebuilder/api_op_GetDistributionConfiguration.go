@@ -34,6 +34,8 @@ type GetDistributionConfigurationInput struct {
 	//
 	// This member is required.
 	DistributionConfigurationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDistributionConfigurationOutput struct {
@@ -46,6 +48,8 @@ type GetDistributionConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

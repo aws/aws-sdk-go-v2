@@ -44,6 +44,8 @@ type CreateRequestValidatorInput struct {
 	// A Boolean flag to indicate whether to validate request parameters, true, or not
 	// false.
 	ValidateRequestParameters bool
+
+	noSmithyDocumentSerde
 }
 
 // A set of validation rules for incoming Method requests. In OpenAPI, a
@@ -72,6 +74,8 @@ type CreateRequestValidatorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {

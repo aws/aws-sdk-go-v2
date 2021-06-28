@@ -43,11 +43,15 @@ type RemoveFacetFromObjectInput struct {
 	//
 	// This member is required.
 	SchemaFacet *types.SchemaFacet
+
+	noSmithyDocumentSerde
 }
 
 type RemoveFacetFromObjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveFacetFromObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

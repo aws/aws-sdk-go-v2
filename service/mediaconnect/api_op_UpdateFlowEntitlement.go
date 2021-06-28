@@ -61,6 +61,8 @@ type UpdateFlowEntitlementInput struct {
 	// accounts (subscribers) will be allowed to create their own flow using your
 	// content as the source.
 	Subscribers []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFlowEntitlementOutput struct {
@@ -73,6 +75,8 @@ type UpdateFlowEntitlementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,11 +39,15 @@ type DeleteFlowInput struct {
 	// Indicates whether Amazon AppFlow should delete the flow, even if it is currently
 	// in use.
 	ForceDelete bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteDeviceInput struct {
 	//
 	// This member is required.
 	DeviceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

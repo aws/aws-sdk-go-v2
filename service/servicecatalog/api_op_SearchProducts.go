@@ -55,6 +55,8 @@ type SearchProductsInput struct {
 
 	// The sort order. If no value is specified, the results are not sorted.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type SearchProductsOutput struct {
@@ -71,6 +73,8 @@ type SearchProductsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {

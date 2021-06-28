@@ -50,6 +50,8 @@ type DescribeClustersInput struct {
 	// The NextToken value that you received in the previous response. Use this value
 	// to get more clusters.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClustersOutput struct {
@@ -64,6 +66,8 @@ type DescribeClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type DescribeRaidArraysInput struct {
 
 	// The stack ID.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeRaidArrays request.
@@ -55,6 +57,8 @@ type DescribeRaidArraysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRaidArraysMiddlewares(stack *middleware.Stack, options Options) (err error) {

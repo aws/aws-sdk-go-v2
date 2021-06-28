@@ -65,6 +65,8 @@ type DeleteAccountAssignmentInput struct {
 	//
 	// This member is required.
 	TargetType types.TargetType
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccountAssignmentOutput struct {
@@ -74,6 +76,8 @@ type DeleteAccountAssignmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccountAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

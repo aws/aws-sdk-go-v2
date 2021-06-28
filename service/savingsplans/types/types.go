@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Information about a Savings Plan offering.
 type ParentSavingsPlanOffering struct {
 
@@ -22,6 +26,8 @@ type ParentSavingsPlanOffering struct {
 
 	// The plan type.
 	PlanType SavingsPlanType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Savings Plan.
@@ -80,6 +86,8 @@ type SavingsPlan struct {
 
 	// The up-front payment amount.
 	UpfrontPaymentAmount *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter.
@@ -90,6 +98,8 @@ type SavingsPlanFilter struct {
 
 	// The filter value.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Savings Plan offering.
@@ -127,6 +137,8 @@ type SavingsPlanOffering struct {
 
 	// The usage details of the line item in the billing report.
 	UsageType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter.
@@ -137,6 +149,8 @@ type SavingsPlanOfferingFilterElement struct {
 
 	// The filter values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a property.
@@ -147,6 +161,8 @@ type SavingsPlanOfferingProperty struct {
 
 	// The property value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Savings Plan offering rate.
@@ -175,6 +191,8 @@ type SavingsPlanOfferingRate struct {
 
 	// The usage details of the line item in the billing report.
 	UsageType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter.
@@ -185,6 +203,8 @@ type SavingsPlanOfferingRateFilterElement struct {
 
 	// The filter values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a property.
@@ -195,6 +215,8 @@ type SavingsPlanOfferingRateProperty struct {
 
 	// The property value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Savings Plan rate.
@@ -223,6 +245,8 @@ type SavingsPlanRate struct {
 
 	// The usage details of the line item in the billing report.
 	UsageType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter.
@@ -233,6 +257,8 @@ type SavingsPlanRateFilter struct {
 
 	// The filter values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a property.
@@ -243,4 +269,8 @@ type SavingsPlanRateProperty struct {
 
 	// The property value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

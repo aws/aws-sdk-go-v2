@@ -38,6 +38,8 @@ type ListTagsForProjectInput struct {
 
 	// Reserved for future use.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsForProjectOutput struct {
@@ -50,6 +52,8 @@ type ListTagsForProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

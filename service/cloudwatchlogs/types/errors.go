@@ -12,6 +12,8 @@ type DataAlreadyAcceptedException struct {
 	Message *string
 
 	ExpectedSequenceToken *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DataAlreadyAcceptedException) Error() string {
@@ -29,6 +31,8 @@ func (e *DataAlreadyAcceptedException) ErrorFault() smithy.ErrorFault { return s
 // The operation is not valid on the specified resource.
 type InvalidOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOperationException) Error() string {
@@ -46,6 +50,8 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 // A parameter is specified incorrectly.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -66,6 +72,8 @@ type InvalidSequenceTokenException struct {
 	Message *string
 
 	ExpectedSequenceToken *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSequenceTokenException) Error() string {
@@ -83,6 +91,8 @@ func (e *InvalidSequenceTokenException) ErrorFault() smithy.ErrorFault { return 
 // You have reached the maximum number of resources that can be created.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -107,6 +117,8 @@ type MalformedQueryException struct {
 	Message *string
 
 	QueryCompileError *QueryCompileError
+
+	noSmithyDocumentSerde
 }
 
 func (e *MalformedQueryException) Error() string {
@@ -124,6 +136,8 @@ func (e *MalformedQueryException) ErrorFault() smithy.ErrorFault { return smithy
 // Multiple requests to update the same resource were in conflict.
 type OperationAbortedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationAbortedException) Error() string {
@@ -141,6 +155,8 @@ func (e *OperationAbortedException) ErrorFault() smithy.ErrorFault { return smit
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -158,6 +174,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -175,6 +193,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The service cannot complete the request.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -192,6 +212,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // The most likely cause is an invalid AWS access key ID or secret key.
 type UnrecognizedClientException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnrecognizedClientException) Error() string {

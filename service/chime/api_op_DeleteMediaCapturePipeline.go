@@ -32,11 +32,15 @@ type DeleteMediaCapturePipelineInput struct {
 	//
 	// This member is required.
 	MediaPipelineId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMediaCapturePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMediaCapturePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DeleteDeviceInput struct {
 	//
 	// This member is required.
 	GlobalNetworkId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDeviceOutput struct {
@@ -48,6 +50,8 @@ type DeleteDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

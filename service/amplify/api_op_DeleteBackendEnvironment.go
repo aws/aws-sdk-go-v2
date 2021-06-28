@@ -39,6 +39,8 @@ type DeleteBackendEnvironmentInput struct {
 	//
 	// This member is required.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure of the delete backend environment result.
@@ -51,6 +53,8 @@ type DeleteBackendEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBackendEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

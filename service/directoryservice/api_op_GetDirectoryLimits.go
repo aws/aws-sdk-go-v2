@@ -29,6 +29,7 @@ func (c *Client) GetDirectoryLimits(ctx context.Context, params *GetDirectoryLim
 
 // Contains the inputs for the GetDirectoryLimits operation.
 type GetDirectoryLimitsInput struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the GetDirectoryLimits operation.
@@ -40,6 +41,8 @@ type GetDirectoryLimitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDirectoryLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

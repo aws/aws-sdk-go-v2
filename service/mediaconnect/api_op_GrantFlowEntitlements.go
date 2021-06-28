@@ -39,6 +39,8 @@ type GrantFlowEntitlementsInput struct {
 	//
 	// This member is required.
 	FlowArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GrantFlowEntitlementsOutput struct {
@@ -51,6 +53,8 @@ type GrantFlowEntitlementsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGrantFlowEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type CreateEgressOnlyInternetGatewayInput struct {
 
 	// The tags to assign to the egress-only internet gateway.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateEgressOnlyInternetGatewayOutput struct {
@@ -63,6 +65,8 @@ type CreateEgressOnlyInternetGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEgressOnlyInternetGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

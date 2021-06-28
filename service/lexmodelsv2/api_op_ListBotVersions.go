@@ -52,6 +52,8 @@ type ListBotVersionsInput struct {
 	// Specifies sorting parameters for the list of versions. You can specify that the
 	// list be sorted by version name in either ascending or descending order.
 	SortBy *types.BotVersionSortBy
+
+	noSmithyDocumentSerde
 }
 
 type ListBotVersionsOutput struct {
@@ -73,6 +75,8 @@ type ListBotVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBotVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

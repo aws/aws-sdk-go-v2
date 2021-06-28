@@ -46,11 +46,15 @@ type DeleteAnomalyDetectorInput struct {
 
 	// The metric dimensions associated with the anomaly detection model to delete.
 	Dimensions []types.Dimension
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

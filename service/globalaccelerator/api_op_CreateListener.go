@@ -70,6 +70,8 @@ type CreateListenerInput struct {
 	// (2-tuple) properties— source (client) IP address and destination IP address—to
 	// select the hash value. The default value is NONE.
 	ClientAffinity types.ClientAffinity
+
+	noSmithyDocumentSerde
 }
 
 type CreateListenerOutput struct {
@@ -79,6 +81,8 @@ type CreateListenerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

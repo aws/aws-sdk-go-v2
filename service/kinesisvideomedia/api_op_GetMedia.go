@@ -80,6 +80,8 @@ type GetMediaInput struct {
 	// The Kinesis video stream name from where you want to get the media content. If
 	// you don't specify the streamName, you must specify the streamARN.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMediaOutput struct {
@@ -151,6 +153,8 @@ type GetMediaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {

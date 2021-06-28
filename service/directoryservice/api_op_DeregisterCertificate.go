@@ -38,11 +38,15 @@ type DeregisterCertificateInput struct {
 	//
 	// This member is required.
 	DirectoryId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

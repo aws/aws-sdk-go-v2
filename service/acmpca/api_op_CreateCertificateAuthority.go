@@ -90,6 +90,8 @@ type CreateCertificateAuthorityInput struct {
 	// permissions, see Controlling Access Using IAM Tags
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateCertificateAuthorityOutput struct {
@@ -102,6 +104,8 @@ type CreateCertificateAuthorityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

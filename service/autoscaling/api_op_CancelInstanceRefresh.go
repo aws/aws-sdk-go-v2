@@ -38,6 +38,8 @@ type CancelInstanceRefreshInput struct {
 	//
 	// This member is required.
 	AutoScalingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelInstanceRefreshOutput struct {
@@ -47,6 +49,8 @@ type CancelInstanceRefreshOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {

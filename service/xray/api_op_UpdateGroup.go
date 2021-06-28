@@ -48,6 +48,8 @@ type UpdateGroupInput struct {
 	// be set to true to enable insights notifications for the group. Notifications can
 	// only be enabled on a group with InsightsEnabled set to true.
 	InsightsConfiguration *types.InsightsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGroupOutput struct {
@@ -59,6 +61,8 @@ type UpdateGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

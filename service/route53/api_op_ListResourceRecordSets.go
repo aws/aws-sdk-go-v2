@@ -114,6 +114,8 @@ type ListResourceRecordSetsInput struct {
 	// Constraint: Specifying type without specifying name
 	// returns an InvalidInput error.
 	StartRecordType types.RRType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains list information for the resource record set.
@@ -154,6 +156,8 @@ type ListResourceRecordSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourceRecordSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

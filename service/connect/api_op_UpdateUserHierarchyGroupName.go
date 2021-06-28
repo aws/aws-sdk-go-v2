@@ -43,11 +43,15 @@ type UpdateUserHierarchyGroupNameInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserHierarchyGroupNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserHierarchyGroupNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -64,6 +64,8 @@ type ListImagesInput struct {
 	// which to list images. If you do not specify a registry, the default registry is
 	// assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListImagesOutput struct {
@@ -79,6 +81,8 @@ type ListImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,11 +48,15 @@ type UntagSAMLProviderInput struct {
 	//
 	// This member is required.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 type UntagSAMLProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,11 +39,15 @@ type AssociateLensesInput struct {
 	//
 	// This member is required.
 	WorkloadId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateLensesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {

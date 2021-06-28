@@ -44,11 +44,15 @@ type AcceptInvitationInput struct {
 	//
 	// This member is required.
 	MasterId *string
+
+	noSmithyDocumentSerde
 }
 
 type AcceptInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type NotifyWhenUploadedInput struct {
 	//
 	// This member is required.
 	FileShareARN *string
+
+	noSmithyDocumentSerde
 }
 
 type NotifyWhenUploadedOutput struct {
@@ -56,6 +58,8 @@ type NotifyWhenUploadedOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNotifyWhenUploadedMiddlewares(stack *middleware.Stack, options Options) (err error) {

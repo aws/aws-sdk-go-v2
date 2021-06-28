@@ -36,6 +36,8 @@ type DescribeHumanTaskUiInput struct {
 	//
 	// This member is required.
 	HumanTaskUiName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHumanTaskUiOutput struct {
@@ -67,6 +69,8 @@ type DescribeHumanTaskUiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {

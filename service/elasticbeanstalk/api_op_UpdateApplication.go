@@ -41,6 +41,8 @@ type UpdateApplicationInput struct {
 	// A new description for the application. Default: If not specified, AWS Elastic
 	// Beanstalk does not update the description.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Result message containing a single description of an application.
@@ -51,6 +53,8 @@ type UpdateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

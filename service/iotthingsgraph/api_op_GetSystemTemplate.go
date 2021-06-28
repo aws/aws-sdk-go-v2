@@ -38,6 +38,8 @@ type GetSystemTemplateInput struct {
 
 	// The number that specifies the revision of the system to get.
 	RevisionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type GetSystemTemplateOutput struct {
@@ -47,6 +49,8 @@ type GetSystemTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

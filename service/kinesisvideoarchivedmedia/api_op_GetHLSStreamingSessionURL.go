@@ -306,6 +306,8 @@ type GetHLSStreamingSessionURLInput struct {
 	// The name of the stream for which to retrieve the HLS master playlist URL. You
 	// must specify either the StreamName or the StreamARN.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetHLSStreamingSessionURLOutput struct {
@@ -316,6 +318,8 @@ type GetHLSStreamingSessionURLOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHLSStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {

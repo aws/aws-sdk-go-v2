@@ -49,11 +49,15 @@ type PutCorsPolicyInput struct {
 	//
 	// This member is required.
 	CorsPolicy []types.CorsRule
+
+	noSmithyDocumentSerde
 }
 
 type PutCorsPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

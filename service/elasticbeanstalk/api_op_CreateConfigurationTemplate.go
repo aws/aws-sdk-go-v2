@@ -105,6 +105,8 @@ type CreateConfigurationTemplateInput struct {
 
 	// Specifies the tags applied to the configuration template.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes the settings for a configuration set.
@@ -157,6 +159,8 @@ type CreateConfigurationTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

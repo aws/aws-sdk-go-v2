@@ -36,6 +36,8 @@ type CancelReplicationTaskAssessmentRunInput struct {
 	//
 	// This member is required.
 	ReplicationTaskAssessmentRunArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -46,6 +48,8 @@ type CancelReplicationTaskAssessmentRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

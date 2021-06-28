@@ -27,6 +27,8 @@ func (c *Client) JsonBlobs(ctx context.Context, params *JsonBlobsInput, optFns .
 
 type JsonBlobsInput struct {
 	Data []byte
+
+	noSmithyDocumentSerde
 }
 
 type JsonBlobsOutput struct {
@@ -34,6 +36,8 @@ type JsonBlobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationJsonBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -82,6 +82,8 @@ type CreatePredictorBacktestExportJobInput struct {
 	// limit of 50 tags. Tags with only the key prefix of aws do not count against your
 	// tags per resource limit. You cannot edit or delete tag keys with this prefix.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePredictorBacktestExportJobOutput struct {
@@ -92,6 +94,8 @@ type CreatePredictorBacktestExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

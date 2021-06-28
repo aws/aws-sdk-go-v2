@@ -38,11 +38,15 @@ type DisassociateSigninDelegateGroupsFromAccountInput struct {
 	//
 	// This member is required.
 	GroupNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateSigninDelegateGroupsFromAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateSigninDelegateGroupsFromAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

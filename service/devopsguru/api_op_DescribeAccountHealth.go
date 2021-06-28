@@ -29,6 +29,7 @@ func (c *Client) DescribeAccountHealth(ctx context.Context, params *DescribeAcco
 }
 
 type DescribeAccountHealthInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountHealthOutput struct {
@@ -59,6 +60,8 @@ type DescribeAccountHealthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {

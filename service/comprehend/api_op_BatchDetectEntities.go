@@ -44,6 +44,8 @@ type BatchDetectEntitiesInput struct {
 	//
 	// This member is required.
 	TextList []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDetectEntitiesOutput struct {
@@ -66,6 +68,8 @@ type BatchDetectEntitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type AssociateSoftwareTokenInput struct {
 	// service. This allows authentication of the user as part of the MFA setup
 	// process.
 	Session *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateSoftwareTokenOutput struct {
@@ -57,6 +59,8 @@ type AssociateSoftwareTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateSoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

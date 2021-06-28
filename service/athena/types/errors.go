@@ -10,6 +10,8 @@ import (
 // Indicates a platform issue, which may be due to a transient condition or outage.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -30,6 +32,8 @@ type InvalidRequestException struct {
 	Message *string
 
 	AthenaErrorCode *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -51,6 +55,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // MetadataException.
 type MetadataException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MetadataException) Error() string {
@@ -70,6 +76,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -89,6 +97,8 @@ type TooManyRequestsException struct {
 	Message *string
 
 	Reason ThrottleReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

@@ -17,6 +17,7 @@
         "serializers.go",
         "types/enums.go",
         "types/errors.go",
+        "types/types.go",
         "validators.go"
     ],
     "go": "1.15",

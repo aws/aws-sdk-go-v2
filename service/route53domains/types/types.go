@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -29,6 +30,8 @@ type BillingRecord struct {
 	// The price that you were charged for the operation, in US dollars. Example value:
 	// 12.0
 	Price float64
+
+	noSmithyDocumentSerde
 }
 
 // ContactDetail includes the following elements.
@@ -93,6 +96,8 @@ type ContactDetail struct {
 
 	// The zip or postal code of the contact's address.
 	ZipCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about one suggested domain name.
@@ -115,6 +120,8 @@ type DomainSuggestion struct {
 
 	// A suggested domain name.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about one domain.
@@ -135,6 +142,8 @@ type DomainSummary struct {
 	// Indicates whether a domain is locked from unauthorized transfer to another
 	// party.
 	TransferLock *bool
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about whether the specified domain can
@@ -146,6 +155,8 @@ type DomainTransferability struct {
 	// TRANSFERABLE The domain name can be transferred to Route 53. UNTRANSFERRABLE The
 	// domain name can't be transferred to Route 53. DONT_KNOW Reserved for future use.
 	Transferable Transferable
+
+	noSmithyDocumentSerde
 }
 
 // ExtraParam includes the following elements.
@@ -548,6 +559,8 @@ type ExtraParam struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Nameserver includes the following elements.
@@ -565,6 +578,8 @@ type Nameserver struct {
 	// need to specify the IP address for ns.example.com. Constraints: The list can
 	// contain only one IPv4 and one IPv6 address.
 	GlueIps []string
+
+	noSmithyDocumentSerde
 }
 
 // OperationSummary includes the following elements.
@@ -589,6 +604,8 @@ type OperationSummary struct {
 	//
 	// This member is required.
 	Type OperationType
+
+	noSmithyDocumentSerde
 }
 
 // Each tag includes the following elements.
@@ -601,4 +618,8 @@ type Tag struct {
 	// The value of a tag. Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@" Constraints:
 	// Each value can be 0-256 characters long.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

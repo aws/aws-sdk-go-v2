@@ -40,6 +40,8 @@ type CreateJobInput struct {
 	//
 	// This member is required.
 	Type types.Type
+
+	noSmithyDocumentSerde
 }
 
 type CreateJobOutput struct {
@@ -70,6 +72,8 @@ type CreateJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

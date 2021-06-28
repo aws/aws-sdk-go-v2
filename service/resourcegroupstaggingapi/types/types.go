@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Information that shows whether a resource is compliant with the effective tag
 // policy, including details on any noncompliant tag keys.
 type ComplianceDetails struct {
@@ -15,6 +19,8 @@ type ComplianceDetails struct {
 
 	// These tag keys on the resource are noncompliant with the effective tag policy.
 	NoncompliantKeys []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the errors that are returned for each failed resource. This
@@ -54,6 +60,8 @@ type FailureInfo struct {
 
 	// The HTTP status code of the common error.
 	StatusCode int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of resource ARNs and the tags (keys and values) that are associated with
@@ -69,6 +77,8 @@ type ResourceTagMapping struct {
 
 	// The tags that have been applied to one or more AWS resources.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // A count of noncompliant resources.
@@ -94,6 +104,8 @@ type Summary struct {
 
 	// Whether the target is an account, an OU, or the organization root.
 	TargetIdType TargetIdType
+
+	noSmithyDocumentSerde
 }
 
 // The metadata that you apply to AWS resources to help you categorize and organize
@@ -114,6 +126,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of tags (keys and values) that are used to specify the associated
@@ -127,4 +141,8 @@ type TagFilter struct {
 	// One part of a key-value pair that make up a tag. A value acts as a descriptor
 	// within a tag category (key). The value can be empty or null.
 	Values []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

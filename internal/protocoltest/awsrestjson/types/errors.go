@@ -14,6 +14,8 @@ type ComplexError struct {
 	Header   *string
 	TopLevel *string
 	Nested   *ComplexNestedErrorData
+
+	noSmithyDocumentSerde
 }
 
 func (e *ComplexError) Error() string {
@@ -32,6 +34,8 @@ func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // framework history. It should only be implemented by clients.
 type FooError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FooError) Error() string {
@@ -49,6 +53,8 @@ func (e *FooError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGreeting) Error() string {

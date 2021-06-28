@@ -41,6 +41,8 @@ type PutApplicationPolicyInput struct {
 	//
 	// This member is required.
 	Statements []types.ApplicationPolicyStatement
+
+	noSmithyDocumentSerde
 }
 
 type PutApplicationPolicyOutput struct {
@@ -50,6 +52,8 @@ type PutApplicationPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutApplicationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

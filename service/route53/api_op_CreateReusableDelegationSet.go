@@ -88,6 +88,8 @@ type CreateReusableDelegationSetInput struct {
 	// If you want to mark the delegation set for an existing hosted zone as reusable,
 	// the ID for that hosted zone.
 	HostedZoneId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateReusableDelegationSetOutput struct {
@@ -104,6 +106,8 @@ type CreateReusableDelegationSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReusableDelegationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

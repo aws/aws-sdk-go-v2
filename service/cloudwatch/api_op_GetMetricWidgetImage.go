@@ -68,6 +68,8 @@ type GetMetricWidgetImageInput struct {
 	// should use png. If you specify image/png, the HTTP response has a content-type
 	// set to image/png, and the body of the response is a PNG image.
 	OutputFormat *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMetricWidgetImageOutput struct {
@@ -78,6 +80,8 @@ type GetMetricWidgetImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMetricWidgetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -90,6 +90,8 @@ type CreateEndpointGroupInput struct {
 	// percentage is applied to the traffic that would otherwise have been routed to
 	// the Region based on optimal routing. The default value is 100.
 	TrafficDialPercentage *float32
+
+	noSmithyDocumentSerde
 }
 
 type CreateEndpointGroupOutput struct {
@@ -99,6 +101,8 @@ type CreateEndpointGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

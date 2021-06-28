@@ -40,6 +40,8 @@ type RemoveFlowVpcInterfaceInput struct {
 	//
 	// This member is required.
 	VpcInterfaceName *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveFlowVpcInterfaceOutput struct {
@@ -56,6 +58,8 @@ type RemoveFlowVpcInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveFlowVpcInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DeleteAttributeGroupInput struct {
 	//
 	// This member is required.
 	AttributeGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAttributeGroupOutput struct {
@@ -43,6 +45,8 @@ type DeleteAttributeGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

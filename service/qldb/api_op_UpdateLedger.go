@@ -41,6 +41,8 @@ type UpdateLedgerInput struct {
 	// ledger. You can disable it by calling the UpdateLedger operation to set the flag
 	// to false.
 	DeletionProtection *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLedgerOutput struct {
@@ -68,6 +70,8 @@ type UpdateLedgerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {

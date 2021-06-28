@@ -46,6 +46,8 @@ type ListResolverEndpointIpAddressesInput struct {
 	// IP addresses. In the next request, specify the value of NextToken from the
 	// previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResolverEndpointIpAddressesOutput struct {
@@ -66,6 +68,8 @@ type ListResolverEndpointIpAddressesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResolverEndpointIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

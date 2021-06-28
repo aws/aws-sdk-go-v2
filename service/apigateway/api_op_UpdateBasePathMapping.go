@@ -44,6 +44,8 @@ type UpdateBasePathMappingInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
@@ -65,6 +67,8 @@ type UpdateBasePathMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

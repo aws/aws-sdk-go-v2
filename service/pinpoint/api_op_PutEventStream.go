@@ -42,6 +42,8 @@ type PutEventStreamInput struct {
 	//
 	// This member is required.
 	WriteEventStream *types.WriteEventStream
+
+	noSmithyDocumentSerde
 }
 
 type PutEventStreamOutput struct {
@@ -54,6 +56,8 @@ type PutEventStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

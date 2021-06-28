@@ -55,6 +55,8 @@ type UpdateThemeInput struct {
 	// UpdateTheme, you create a new version of the theme. Each version of the theme
 	// maintains a description of the version in VersionDescription.
 	VersionDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateThemeOutput struct {
@@ -79,6 +81,8 @@ type UpdateThemeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {

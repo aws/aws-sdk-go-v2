@@ -49,6 +49,8 @@ type ListTrafficPoliciesInput struct {
 	// ListTrafficPolicies. For the value of TrafficPolicyIdMarker, specify the value
 	// of TrafficPolicyIdMarker that was returned in the previous response.
 	TrafficPolicyIdMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the request.
@@ -82,6 +84,8 @@ type ListTrafficPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTrafficPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type CreateConfigurationInput struct {
 
 	// The versions of Apache Kafka with which you can use this MSK configuration.
 	KafkaVersions []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateConfigurationOutput struct {
@@ -70,6 +72,8 @@ type CreateConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

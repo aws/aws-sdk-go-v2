@@ -45,6 +45,8 @@ type ListChannelMembershipsForAppInstanceUserInput struct {
 	// The token returned from previous API requests until the number of channel
 	// memberships is reached.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListChannelMembershipsForAppInstanceUserOutput struct {
@@ -57,6 +59,8 @@ type ListChannelMembershipsForAppInstanceUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelMembershipsForAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

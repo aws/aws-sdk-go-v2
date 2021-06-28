@@ -50,6 +50,8 @@ type ListGatewaysInput struct {
 	// An opaque string that indicates the position at which to begin the returned list
 	// of gateways.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGatewaysOutput struct {
@@ -64,6 +66,8 @@ type ListGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

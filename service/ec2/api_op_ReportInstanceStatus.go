@@ -92,11 +92,15 @@ type ReportInstanceStatusInput struct {
 
 	// The time at which the reported instance health state began.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ReportInstanceStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReportInstanceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

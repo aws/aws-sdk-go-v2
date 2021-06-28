@@ -125,6 +125,8 @@ type ModifyDBClusterInput struct {
 	// A list of virtual private cloud (VPC) security groups that the cluster will
 	// belong to.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBClusterOutput struct {
@@ -134,6 +136,8 @@ type ModifyDBClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

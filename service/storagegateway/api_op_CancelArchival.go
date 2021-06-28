@@ -42,6 +42,8 @@ type CancelArchivalInput struct {
 	//
 	// This member is required.
 	TapeARN *string
+
+	noSmithyDocumentSerde
 }
 
 // CancelArchivalOutput
@@ -53,6 +55,8 @@ type CancelArchivalOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelArchivalMiddlewares(stack *middleware.Stack, options Options) (err error) {

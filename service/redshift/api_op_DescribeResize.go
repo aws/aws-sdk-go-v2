@@ -40,6 +40,8 @@ type DescribeResizeInput struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the result of a cluster resize operation.
@@ -115,6 +117,8 @@ type DescribeResizeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeResizeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -91,6 +91,8 @@ type UpdateFleetCapacityInput struct {
 	// The minimum number of instances that are allowed in the specified fleet
 	// location. If this parameter is not set, the default is 0.
 	MinSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -112,6 +114,8 @@ type UpdateFleetCapacityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFleetCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {

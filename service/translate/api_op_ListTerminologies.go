@@ -36,6 +36,8 @@ type ListTerminologiesInput struct {
 	// If the result of the request to ListTerminologies was truncated, include the
 	// NextToken to fetch the next group of custom terminologies.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTerminologiesOutput struct {
@@ -49,6 +51,8 @@ type ListTerminologiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTerminologiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

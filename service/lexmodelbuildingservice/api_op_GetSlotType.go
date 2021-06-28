@@ -41,6 +41,8 @@ type GetSlotTypeInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSlotTypeOutput struct {
@@ -80,6 +82,8 @@ type GetSlotTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

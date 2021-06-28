@@ -83,6 +83,8 @@ type CreateSimulationJobInput struct {
 	// identifying the list of security group IDs and subnet IDs. These must belong to
 	// the same VPC. You must provide at least one security group and one subnet ID.
 	VpcConfig *types.VPCConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateSimulationJobOutput struct {
@@ -162,6 +164,8 @@ type CreateSimulationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSimulationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

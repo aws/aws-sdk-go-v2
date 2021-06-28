@@ -65,6 +65,8 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// The VPC filter value. Specify this parameter to show only the available VPC or
 	// non-VPC offerings.
 	Vpc *bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeOrderableDBInstanceOptionsOutput struct {
@@ -80,6 +82,8 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

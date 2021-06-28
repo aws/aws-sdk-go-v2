@@ -36,6 +36,8 @@ type DeleteVirtualClusterInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVirtualClusterOutput struct {
@@ -45,6 +47,8 @@ type DeleteVirtualClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

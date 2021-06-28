@@ -67,6 +67,8 @@ type CreateVaultInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -77,6 +79,8 @@ type CreateVaultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

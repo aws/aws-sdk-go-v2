@@ -40,6 +40,8 @@ type BatchGrantPermissionsInput struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGrantPermissionsOutput struct {
@@ -49,6 +51,8 @@ type BatchGrantPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

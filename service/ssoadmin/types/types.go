@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -25,6 +26,8 @@ type AccessControlAttribute struct {
 	//
 	// This member is required.
 	Value *AccessControlAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // The value used for mapping a specified attribute to an identity source.
@@ -34,6 +37,8 @@ type AccessControlAttributeValue struct {
 	//
 	// This member is required.
 	Source []string
+
+	noSmithyDocumentSerde
 }
 
 // The assignment that indicates a principal's limited access to a specified AWS
@@ -56,6 +61,8 @@ type AccountAssignment struct {
 
 	// The entity type for which the assignment will be created.
 	PrincipalType PrincipalType
+
+	noSmithyDocumentSerde
 }
 
 // The status of the creation or deletion operation of an assignment that a
@@ -94,6 +101,8 @@ type AccountAssignmentOperationStatus struct {
 
 	// The entity type for which the assignment will be created.
 	TargetType TargetType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the AccountAssignment creation request.
@@ -108,6 +117,8 @@ type AccountAssignmentOperationStatusMetadata struct {
 
 	// The status of the permission set provisioning process.
 	Status StatusValues
+
+	noSmithyDocumentSerde
 }
 
 // A structure that stores the details of the IAM managed policy.
@@ -119,6 +130,8 @@ type AttachedManagedPolicy struct {
 
 	// The name of the IAM managed policy.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the attributes to add to your attribute-based access control (ABAC)
@@ -130,6 +143,8 @@ type InstanceAccessControlAttributeConfiguration struct {
 	//
 	// This member is required.
 	AccessControlAttributes []AccessControlAttribute
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the SSO instance.
@@ -142,6 +157,8 @@ type InstanceMetadata struct {
 	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces in the AWS General Reference.
 	InstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters he operation status list based on the passed attribute value.
@@ -149,6 +166,8 @@ type OperationStatusFilter struct {
 
 	// Filters the list operations result based on the status attribute.
 	Status StatusValues
+
+	noSmithyDocumentSerde
 }
 
 // An entity that contains IAM policies.
@@ -174,6 +193,8 @@ type PermissionSet struct {
 	// The length of time that the application user sessions are valid for in the
 	// ISO-8601 standard.
 	SessionDuration *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that is used to provide the status of the provisioning operation for
@@ -200,6 +221,8 @@ type PermissionSetProvisioningStatus struct {
 
 	// The status of the permission set provisioning process.
 	Status StatusValues
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the permission set provisioning status.
@@ -214,6 +237,8 @@ type PermissionSetProvisioningStatusMetadata struct {
 
 	// The status of the permission set provisioning process.
 	Status StatusValues
+
+	noSmithyDocumentSerde
 }
 
 // A set of key-value pairs that are used to manage the resource. Tags can only be
@@ -226,4 +251,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

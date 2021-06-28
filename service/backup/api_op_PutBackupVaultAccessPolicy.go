@@ -40,11 +40,15 @@ type PutBackupVaultAccessPolicyInput struct {
 
 	// The backup vault access policy document in JSON format.
 	Policy *string
+
+	noSmithyDocumentSerde
 }
 
 type PutBackupVaultAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBackupVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

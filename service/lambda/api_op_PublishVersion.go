@@ -67,6 +67,8 @@ type PublishVersionInput struct {
 	// this option to avoid publishing a version if the function configuration has
 	// changed since you last updated it.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a function's configuration.
@@ -177,6 +179,8 @@ type PublishVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

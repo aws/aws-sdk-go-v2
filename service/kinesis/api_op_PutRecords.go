@@ -91,6 +91,8 @@ type PutRecordsInput struct {
 	//
 	// This member is required.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // PutRecords results.
@@ -118,6 +120,8 @@ type PutRecordsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

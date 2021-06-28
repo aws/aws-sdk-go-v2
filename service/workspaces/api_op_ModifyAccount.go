@@ -39,11 +39,15 @@ type ModifyAccountInput struct {
 
 	// The status of BYOL.
 	DedicatedTenancySupport types.DedicatedTenancySupportEnum
+
+	noSmithyDocumentSerde
 }
 
 type ModifyAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

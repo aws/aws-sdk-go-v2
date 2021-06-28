@@ -49,6 +49,8 @@ type DescribeServicesInput struct {
 	// AmazonEC2. You can use the ServiceCode to filter the results in a GetProducts
 	// call. To retrieve a list of all services, leave this blank.
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeServicesOutput struct {
@@ -64,6 +66,8 @@ type DescribeServicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

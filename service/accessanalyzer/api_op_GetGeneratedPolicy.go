@@ -48,6 +48,8 @@ type GetGeneratedPolicyInput struct {
 	// identify services that have been used recently to create this service-level
 	// template.
 	IncludeServiceLevelTemplate *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetGeneratedPolicyOutput struct {
@@ -66,6 +68,8 @@ type GetGeneratedPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGeneratedPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

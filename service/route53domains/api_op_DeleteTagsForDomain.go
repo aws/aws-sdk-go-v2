@@ -40,11 +40,15 @@ type DeleteTagsForDomainInput struct {
 	//
 	// This member is required.
 	TagsToDelete []string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTagsForDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

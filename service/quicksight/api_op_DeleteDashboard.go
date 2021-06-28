@@ -41,6 +41,8 @@ type DeleteDashboardInput struct {
 	// The version number of the dashboard. If the version number property is provided,
 	// only the specified version of the dashboard is deleted.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDashboardOutput struct {
@@ -59,6 +61,8 @@ type DeleteDashboardOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {

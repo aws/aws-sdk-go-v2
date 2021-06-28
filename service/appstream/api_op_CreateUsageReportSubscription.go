@@ -28,6 +28,7 @@ func (c *Client) CreateUsageReportSubscription(ctx context.Context, params *Crea
 }
 
 type CreateUsageReportSubscriptionInput struct {
+	noSmithyDocumentSerde
 }
 
 type CreateUsageReportSubscriptionOutput struct {
@@ -46,6 +47,8 @@ type CreateUsageReportSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUsageReportSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type UpdateGlobalNetworkInput struct {
 	// A description of the global network. Length Constraints: Maximum length of 256
 	// characters.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGlobalNetworkOutput struct {
@@ -47,6 +49,8 @@ type UpdateGlobalNetworkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

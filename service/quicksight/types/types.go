@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -12,6 +13,8 @@ type AccountCustomization struct {
 
 	// The default theme for this QuickSight subscription.
 	DefaultTheme *string
+
+	noSmithyDocumentSerde
 }
 
 // The QuickSight settings associated with your AWS account.
@@ -31,6 +34,8 @@ type AccountSettings struct {
 
 	// The main notification email for your QuickSight subscription.
 	NotificationEmail *string
+
+	noSmithyDocumentSerde
 }
 
 // The active AWS Identity and Access Management (IAM) policy assignment.
@@ -41,6 +46,8 @@ type ActiveIAMPolicyAssignment struct {
 
 	// The Amazon Resource Name (ARN) of the resource.
 	PolicyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Ad hoc (one-time) filtering option.
@@ -48,6 +55,8 @@ type AdHocFilteringOption struct {
 
 	// Availability status.
 	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
 }
 
 // Amazon Elasticsearch Service parameters.
@@ -57,6 +66,8 @@ type AmazonElasticsearchParameters struct {
 	//
 	// This member is required.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata structure for an analysis in Amazon QuickSight
@@ -92,6 +103,8 @@ type Analysis struct {
 
 	// The ARN of the theme of the analysis.
 	ThemeArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A metadata error structure for an analysis.
@@ -102,6 +115,8 @@ type AnalysisError struct {
 
 	// The type of the analysis error.
 	Type AnalysisErrorType
+
+	noSmithyDocumentSerde
 }
 
 // A filter that you apply when searching for one or more analyses.
@@ -119,6 +134,8 @@ type AnalysisSearchFilter struct {
 	// as a filter, for example "Value". An example is
 	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The source entity of an analysis.
@@ -126,6 +143,8 @@ type AnalysisSourceEntity struct {
 
 	// The source template for the source entity of the analysis.
 	SourceTemplate *AnalysisSourceTemplate
+
+	noSmithyDocumentSerde
 }
 
 // The source template of an analysis.
@@ -140,6 +159,8 @@ type AnalysisSourceTemplate struct {
 	//
 	// This member is required.
 	DataSetReferences []DataSetReference
+
+	noSmithyDocumentSerde
 }
 
 // The summary metadata that describes an analysis.
@@ -162,6 +183,8 @@ type AnalysisSummary struct {
 
 	// The last known status for the analysis.
 	Status ResourceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Amazon Athena parameters.
@@ -169,6 +192,8 @@ type AthenaParameters struct {
 
 	// The workgroup that Amazon Athena uses.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Amazon Aurora parameters.
@@ -188,6 +213,8 @@ type AuroraParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Amazon Aurora with PostgreSQL compatibility parameters.
@@ -207,6 +234,8 @@ type AuroraPostgreSqlParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // AWS IoT Analytics parameters.
@@ -216,6 +245,8 @@ type AwsIotAnalyticsParameters struct {
 	//
 	// This member is required.
 	DataSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // The display options for tile borders for visuals.
@@ -223,6 +254,8 @@ type BorderStyle struct {
 
 	// The option to enable display of borders for visuals.
 	Show bool
+
+	noSmithyDocumentSerde
 }
 
 // A calculated column for a dataset.
@@ -244,6 +277,8 @@ type CalculatedColumn struct {
 	//
 	// This member is required.
 	Expression *string
+
+	noSmithyDocumentSerde
 }
 
 // A transform operation that casts a column to a different type.
@@ -262,6 +297,8 @@ type CastColumnTypeOperation struct {
 	// When casting a column from string to datetime type, you can supply a string in a
 	// format supported by Amazon QuickSight to denote the source data format.
 	Format *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata that contains a description for a column.
@@ -269,6 +306,8 @@ type ColumnDescription struct {
 
 	// The text of a description for a column.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 // Groupings of columns that work together in certain Amazon QuickSight features.
@@ -278,6 +317,8 @@ type ColumnGroup struct {
 
 	// Geospatial column group that denotes a hierarchy.
 	GeoSpatialColumnGroup *GeoSpatialColumnGroup
+
+	noSmithyDocumentSerde
 }
 
 // A structure describing the name, data type, and geographic role of the columns.
@@ -285,6 +326,8 @@ type ColumnGroupColumnSchema struct {
 
 	// The name of the column group's column schema.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The column group schema.
@@ -295,6 +338,8 @@ type ColumnGroupSchema struct {
 
 	// The name of the column group schema.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule defined to grant access on one or more restricted columns. Each dataset
@@ -309,6 +354,8 @@ type ColumnLevelPermissionRule struct {
 
 	// An array of Amazon Resource Names (ARNs) for QuickSight users or groups.
 	Principals []string
+
+	noSmithyDocumentSerde
 }
 
 // The column schema.
@@ -322,6 +369,8 @@ type ColumnSchema struct {
 
 	// The name of the column schema.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag for a column in a TagColumnOperation structure. This is a variant type
@@ -334,6 +383,8 @@ type ColumnTag struct {
 
 	// A geospatial role for a column.
 	ColumnGeographicRole GeoSpatialDataRole
+
+	noSmithyDocumentSerde
 }
 
 // A transform operation that creates calculated columns. Columns created in one
@@ -344,6 +395,8 @@ type CreateColumnsOperation struct {
 	//
 	// This member is required.
 	Columns []CalculatedColumn
+
+	noSmithyDocumentSerde
 }
 
 // The combination of user name and password that are used as credentials.
@@ -369,6 +422,8 @@ type CredentialPair struct {
 	// null, the DataSourceParameters originally used with these Credentials is
 	// automatically allowed.
 	AlternateDataSourceParameters []DataSourceParameters
+
+	noSmithyDocumentSerde
 }
 
 // A physical table type built from the results of the custom SQL query.
@@ -391,6 +446,8 @@ type CustomSql struct {
 
 	// The column schema from the SQL query result set.
 	Columns []InputColumn
+
+	noSmithyDocumentSerde
 }
 
 // Dashboard.
@@ -416,6 +473,8 @@ type Dashboard struct {
 
 	// Version.
 	Version *DashboardVersion
+
+	noSmithyDocumentSerde
 }
 
 // Dashboard error.
@@ -426,6 +485,8 @@ type DashboardError struct {
 
 	// Type.
 	Type DashboardErrorType
+
+	noSmithyDocumentSerde
 }
 
 // Dashboard publish options.
@@ -439,6 +500,8 @@ type DashboardPublishOptions struct {
 
 	// Sheet controls option.
 	SheetControlsOption *SheetControlsOption
+
+	noSmithyDocumentSerde
 }
 
 // A filter that you apply when searching for dashboards.
@@ -458,6 +521,8 @@ type DashboardSearchFilter struct {
 	// as a filter, for example, "Value":
 	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Dashboard source entity.
@@ -465,6 +530,8 @@ type DashboardSourceEntity struct {
 
 	// Source template.
 	SourceTemplate *DashboardSourceTemplate
+
+	noSmithyDocumentSerde
 }
 
 // Dashboard source template.
@@ -479,6 +546,8 @@ type DashboardSourceTemplate struct {
 	//
 	// This member is required.
 	DataSetReferences []DataSetReference
+
+	noSmithyDocumentSerde
 }
 
 // Dashboard summary.
@@ -504,6 +573,8 @@ type DashboardSummary struct {
 
 	// Published version number.
 	PublishedVersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // Dashboard version.
@@ -540,6 +611,8 @@ type DashboardVersion struct {
 
 	// Version number for this version of the dashboard.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // Dashboard version summary.
@@ -562,6 +635,8 @@ type DashboardVersionSummary struct {
 
 	// Version number.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // The theme colors that are used for data colors in charts. The colors description
@@ -578,6 +653,8 @@ type DataColorPalette struct {
 
 	// The minimum and maximum hexadecimal codes that describe a color gradient.
 	MinMaxGradient []string
+
+	noSmithyDocumentSerde
 }
 
 // Dataset.
@@ -628,6 +705,8 @@ type DataSet struct {
 
 	// The row-level security configuration for the dataset.
 	RowLevelPermissionDataSet *RowLevelPermissionDataSet
+
+	noSmithyDocumentSerde
 }
 
 // Dataset configuration.
@@ -641,6 +720,8 @@ type DataSetConfiguration struct {
 
 	// Placeholder.
 	Placeholder *string
+
+	noSmithyDocumentSerde
 }
 
 // Dataset reference.
@@ -655,6 +736,8 @@ type DataSetReference struct {
 	//
 	// This member is required.
 	DataSetPlaceholder *string
+
+	noSmithyDocumentSerde
 }
 
 // Dataset schema.
@@ -662,6 +745,8 @@ type DataSetSchema struct {
 
 	// A structure containing the list of column schemas.
 	ColumnSchemaList []ColumnSchema
+
+	noSmithyDocumentSerde
 }
 
 // Dataset summary.
@@ -690,6 +775,8 @@ type DataSetSummary struct {
 
 	// The row-level security configuration for the dataset.
 	RowLevelPermissionDataSet *RowLevelPermissionDataSet
+
+	noSmithyDocumentSerde
 }
 
 // The structure of a data source.
@@ -745,6 +832,8 @@ type DataSource struct {
 	// want QuickSight to use a VPC connection when connecting to your underlying
 	// source.
 	VpcConnectionProperties *VpcConnectionProperties
+
+	noSmithyDocumentSerde
 }
 
 // Data source credentials. This is a variant type structure. For this structure to
@@ -759,6 +848,8 @@ type DataSourceCredentials struct {
 
 	// Credential pair. For more information, see CredentialPair.
 	CredentialPair *CredentialPair
+
+	noSmithyDocumentSerde
 }
 
 // Error information for the data source creation or update.
@@ -769,6 +860,8 @@ type DataSourceErrorInfo struct {
 
 	// Error type.
 	Type DataSourceErrorInfoType
+
+	noSmithyDocumentSerde
 }
 
 // The parameters that Amazon QuickSight uses to connect to your underlying data
@@ -803,6 +896,8 @@ type DataSourceParameters interface {
 // Amazon Elasticsearch Service parameters.
 type DataSourceParametersMemberAmazonElasticsearchParameters struct {
 	Value AmazonElasticsearchParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberAmazonElasticsearchParameters) isDataSourceParameters() {}
@@ -810,6 +905,8 @@ func (*DataSourceParametersMemberAmazonElasticsearchParameters) isDataSourcePara
 // Amazon Athena parameters.
 type DataSourceParametersMemberAthenaParameters struct {
 	Value AthenaParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberAthenaParameters) isDataSourceParameters() {}
@@ -817,6 +914,8 @@ func (*DataSourceParametersMemberAthenaParameters) isDataSourceParameters() {}
 // Amazon Aurora MySQL parameters.
 type DataSourceParametersMemberAuroraParameters struct {
 	Value AuroraParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberAuroraParameters) isDataSourceParameters() {}
@@ -824,6 +923,8 @@ func (*DataSourceParametersMemberAuroraParameters) isDataSourceParameters() {}
 // Aurora PostgreSQL parameters.
 type DataSourceParametersMemberAuroraPostgreSqlParameters struct {
 	Value AuroraPostgreSqlParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberAuroraPostgreSqlParameters) isDataSourceParameters() {}
@@ -831,6 +932,8 @@ func (*DataSourceParametersMemberAuroraPostgreSqlParameters) isDataSourceParamet
 // AWS IoT Analytics parameters.
 type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
 	Value AwsIotAnalyticsParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberAwsIotAnalyticsParameters) isDataSourceParameters() {}
@@ -838,6 +941,8 @@ func (*DataSourceParametersMemberAwsIotAnalyticsParameters) isDataSourceParamete
 // Jira parameters.
 type DataSourceParametersMemberJiraParameters struct {
 	Value JiraParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberJiraParameters) isDataSourceParameters() {}
@@ -845,6 +950,8 @@ func (*DataSourceParametersMemberJiraParameters) isDataSourceParameters() {}
 // MariaDB parameters.
 type DataSourceParametersMemberMariaDbParameters struct {
 	Value MariaDbParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberMariaDbParameters) isDataSourceParameters() {}
@@ -852,6 +959,8 @@ func (*DataSourceParametersMemberMariaDbParameters) isDataSourceParameters() {}
 // MySQL parameters.
 type DataSourceParametersMemberMySqlParameters struct {
 	Value MySqlParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberMySqlParameters) isDataSourceParameters() {}
@@ -859,6 +968,8 @@ func (*DataSourceParametersMemberMySqlParameters) isDataSourceParameters() {}
 // Oracle parameters.
 type DataSourceParametersMemberOracleParameters struct {
 	Value OracleParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberOracleParameters) isDataSourceParameters() {}
@@ -866,6 +977,8 @@ func (*DataSourceParametersMemberOracleParameters) isDataSourceParameters() {}
 // PostgreSQL parameters.
 type DataSourceParametersMemberPostgreSqlParameters struct {
 	Value PostgreSqlParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberPostgreSqlParameters) isDataSourceParameters() {}
@@ -873,6 +986,8 @@ func (*DataSourceParametersMemberPostgreSqlParameters) isDataSourceParameters() 
 // Presto parameters.
 type DataSourceParametersMemberPrestoParameters struct {
 	Value PrestoParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberPrestoParameters) isDataSourceParameters() {}
@@ -880,6 +995,8 @@ func (*DataSourceParametersMemberPrestoParameters) isDataSourceParameters() {}
 // Amazon RDS parameters.
 type DataSourceParametersMemberRdsParameters struct {
 	Value RdsParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberRdsParameters) isDataSourceParameters() {}
@@ -887,6 +1004,8 @@ func (*DataSourceParametersMemberRdsParameters) isDataSourceParameters() {}
 // Amazon Redshift parameters.
 type DataSourceParametersMemberRedshiftParameters struct {
 	Value RedshiftParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberRedshiftParameters) isDataSourceParameters() {}
@@ -894,6 +1013,8 @@ func (*DataSourceParametersMemberRedshiftParameters) isDataSourceParameters() {}
 // S3 parameters.
 type DataSourceParametersMemberS3Parameters struct {
 	Value S3Parameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberS3Parameters) isDataSourceParameters() {}
@@ -901,6 +1022,8 @@ func (*DataSourceParametersMemberS3Parameters) isDataSourceParameters() {}
 // ServiceNow parameters.
 type DataSourceParametersMemberServiceNowParameters struct {
 	Value ServiceNowParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberServiceNowParameters) isDataSourceParameters() {}
@@ -908,6 +1031,8 @@ func (*DataSourceParametersMemberServiceNowParameters) isDataSourceParameters() 
 // Snowflake parameters.
 type DataSourceParametersMemberSnowflakeParameters struct {
 	Value SnowflakeParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberSnowflakeParameters) isDataSourceParameters() {}
@@ -915,6 +1040,8 @@ func (*DataSourceParametersMemberSnowflakeParameters) isDataSourceParameters() {
 // Spark parameters.
 type DataSourceParametersMemberSparkParameters struct {
 	Value SparkParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberSparkParameters) isDataSourceParameters() {}
@@ -922,6 +1049,8 @@ func (*DataSourceParametersMemberSparkParameters) isDataSourceParameters() {}
 // SQL Server parameters.
 type DataSourceParametersMemberSqlServerParameters struct {
 	Value SqlServerParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberSqlServerParameters) isDataSourceParameters() {}
@@ -929,6 +1058,8 @@ func (*DataSourceParametersMemberSqlServerParameters) isDataSourceParameters() {
 // Teradata parameters.
 type DataSourceParametersMemberTeradataParameters struct {
 	Value TeradataParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberTeradataParameters) isDataSourceParameters() {}
@@ -936,6 +1067,8 @@ func (*DataSourceParametersMemberTeradataParameters) isDataSourceParameters() {}
 // Twitter parameters.
 type DataSourceParametersMemberTwitterParameters struct {
 	Value TwitterParameters
+
+	noSmithyDocumentSerde
 }
 
 func (*DataSourceParametersMemberTwitterParameters) isDataSourceParameters() {}
@@ -952,6 +1085,8 @@ type DateTimeParameter struct {
 	//
 	// This member is required.
 	Values []time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A decimal parameter.
@@ -966,6 +1101,8 @@ type DecimalParameter struct {
 	//
 	// This member is required.
 	Values []float64
+
+	noSmithyDocumentSerde
 }
 
 // Error information for the SPICE ingestion of a dataset.
@@ -976,6 +1113,8 @@ type ErrorInfo struct {
 
 	// Error type.
 	Type IngestionErrorType
+
+	noSmithyDocumentSerde
 }
 
 // Export to .csv option.
@@ -983,6 +1122,8 @@ type ExportToCSVOption struct {
 
 	// Availability status.
 	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
 }
 
 // A FieldFolder element is a folder that contains fields and nested subfolders.
@@ -993,6 +1134,8 @@ type FieldFolder struct {
 
 	// The description for a field folder.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // A transform operation that filters rows based on a condition.
@@ -1003,6 +1146,8 @@ type FilterOperation struct {
 	//
 	// This member is required.
 	ConditionExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // A folder.
@@ -1028,6 +1173,8 @@ type Folder struct {
 
 	// A display name for the folder.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An asset in a folder, such as a dashboard, analysis, or dataset.
@@ -1038,6 +1185,8 @@ type FolderMember struct {
 
 	// The type of the asset.
 	MemberType MemberType
+
+	noSmithyDocumentSerde
 }
 
 // Searches a folder by a filter.
@@ -1055,6 +1204,8 @@ type FolderSearchFilter struct {
 	// to use as a filter. For example, "Value":
 	// "arn:aws:quicksight:us-east-1:1:folder/folderId".
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the folder.
@@ -1077,6 +1228,8 @@ type FolderSummary struct {
 
 	// The display name of the folder.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Geospatial column group that denotes a hierarchy.
@@ -1096,6 +1249,8 @@ type GeoSpatialColumnGroup struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A group in Amazon QuickSight consists of a set of users. You can use groups to
@@ -1113,6 +1268,8 @@ type Group struct {
 
 	// The principal ID of the group.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
 
 // A member of an Amazon QuickSight group. Currently, group members must be users.
@@ -1124,6 +1281,8 @@ type GroupMember struct {
 
 	// The name of the group member (user).
 	MemberName *string
+
+	noSmithyDocumentSerde
 }
 
 // The display options for gutter spacing between tiles on a sheet.
@@ -1132,6 +1291,8 @@ type GutterStyle struct {
 	// This Boolean value controls whether to display a gutter space between sheet
 	// tiles.
 	Show bool
+
+	noSmithyDocumentSerde
 }
 
 // An AWS Identity and Access Management (IAM) policy assignment.
@@ -1154,6 +1315,8 @@ type IAMPolicyAssignment struct {
 
 	// The Amazon Resource Name (ARN) for the IAM policy.
 	PolicyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // IAM policy assignment summary.
@@ -1164,6 +1327,8 @@ type IAMPolicyAssignmentSummary struct {
 
 	// Assignment status.
 	AssignmentStatus AssignmentStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about the SPICE ingestion for a dataset.
@@ -1207,6 +1372,8 @@ type Ingestion struct {
 
 	// Information about rows for a data set SPICE ingestion.
 	RowInfo *RowInfo
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for a column that is used as the input of a transform operation.
@@ -1221,6 +1388,8 @@ type InputColumn struct {
 	//
 	// This member is required.
 	Type InputColumnDataType
+
+	noSmithyDocumentSerde
 }
 
 // An integer parameter.
@@ -1235,6 +1404,8 @@ type IntegerParameter struct {
 	//
 	// This member is required.
 	Values []int64
+
+	noSmithyDocumentSerde
 }
 
 // Jira parameters.
@@ -1244,6 +1415,8 @@ type JiraParameters struct {
 	//
 	// This member is required.
 	SiteBaseUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The instructions associated with a join.
@@ -1274,6 +1447,8 @@ type JoinInstruction struct {
 
 	// Join key properties of the right operand.
 	RightJoinKeyProperties *JoinKeyProperties
+
+	noSmithyDocumentSerde
 }
 
 // Properties associated with the columns participating in a join.
@@ -1282,6 +1457,8 @@ type JoinKeyProperties struct {
 	// A value that indicates that a row in a table is uniquely identified by the
 	// columns in a join key. This is used by QuickSight to optimize query performance.
 	UniqueKey bool
+
+	noSmithyDocumentSerde
 }
 
 // A logical table is a unit that joins and that data transformations operate on. A
@@ -1302,6 +1479,8 @@ type LogicalTable struct {
 
 	// Transform operations that act on this logical table.
 	DataTransforms []TransformOperation
+
+	noSmithyDocumentSerde
 }
 
 // Information about the source of a logical table. This is a variant type
@@ -1314,6 +1493,8 @@ type LogicalTableSource struct {
 
 	// Physical table ID.
 	PhysicalTableId *string
+
+	noSmithyDocumentSerde
 }
 
 // Amazon S3 manifest file location.
@@ -1328,6 +1509,8 @@ type ManifestFileLocation struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // The display options for margins around the outside edge of sheets.
@@ -1335,6 +1518,8 @@ type MarginStyle struct {
 
 	// This Boolean value controls whether to display sheet margins.
 	Show bool
+
+	noSmithyDocumentSerde
 }
 
 // MariaDB parameters.
@@ -1354,6 +1539,8 @@ type MariaDbParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that consists of the member Amazon Resource Name (ARN) and member ID.
@@ -1364,6 +1551,8 @@ type MemberIdArnPair struct {
 
 	// The ID of the member.
 	MemberId *string
+
+	noSmithyDocumentSerde
 }
 
 // MySQL parameters.
@@ -1383,6 +1572,8 @@ type MySqlParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Errors that occur during namespace creation.
@@ -1393,6 +1584,8 @@ type NamespaceError struct {
 
 	// The error type.
 	Type NamespaceErrorType
+
+	noSmithyDocumentSerde
 }
 
 // The error type.
@@ -1415,6 +1608,8 @@ type NamespaceInfoV2 struct {
 
 	// An error that occurred when the namespace was created.
 	NamespaceError *NamespaceError
+
+	noSmithyDocumentSerde
 }
 
 // Oracle parameters.
@@ -1434,6 +1629,8 @@ type OracleParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Output column.
@@ -1447,6 +1644,8 @@ type OutputColumn struct {
 
 	// Type.
 	Type ColumnDataType
+
+	noSmithyDocumentSerde
 }
 
 // A list of QuickSight parameters and the list's override values.
@@ -1463,6 +1662,8 @@ type Parameters struct {
 
 	// String parameters.
 	StringParameters []StringParameter
+
+	noSmithyDocumentSerde
 }
 
 // A view of a data source that contains information about the shape of the data in
@@ -1480,6 +1681,8 @@ type PhysicalTable interface {
 // A physical table type for relational data sources.
 type PhysicalTableMemberRelationalTable struct {
 	Value RelationalTable
+
+	noSmithyDocumentSerde
 }
 
 func (*PhysicalTableMemberRelationalTable) isPhysicalTable() {}
@@ -1487,6 +1690,8 @@ func (*PhysicalTableMemberRelationalTable) isPhysicalTable() {}
 // A physical table type built from the results of the custom SQL query.
 type PhysicalTableMemberCustomSql struct {
 	Value CustomSql
+
+	noSmithyDocumentSerde
 }
 
 func (*PhysicalTableMemberCustomSql) isPhysicalTable() {}
@@ -1494,6 +1699,8 @@ func (*PhysicalTableMemberCustomSql) isPhysicalTable() {}
 // A physical table type for as S3 data source.
 type PhysicalTableMemberS3Source struct {
 	Value S3Source
+
+	noSmithyDocumentSerde
 }
 
 func (*PhysicalTableMemberS3Source) isPhysicalTable() {}
@@ -1515,6 +1722,8 @@ type PostgreSqlParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Presto parameters.
@@ -1534,6 +1743,8 @@ type PrestoParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // A transform operation that projects columns. Operations that come after a
@@ -1544,6 +1755,8 @@ type ProjectOperation struct {
 	//
 	// This member is required.
 	ProjectedColumns []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a queued dataset SPICE ingestion.
@@ -1559,6 +1772,8 @@ type QueueInfo struct {
 	//
 	// This member is required.
 	WaitingOnIngestion *string
+
+	noSmithyDocumentSerde
 }
 
 // Amazon RDS parameters.
@@ -1573,6 +1788,8 @@ type RdsParameters struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Amazon Redshift parameters. The ClusterId field can be blank if Host and Port
@@ -1593,6 +1810,8 @@ type RedshiftParameters struct {
 
 	// Port. This field can be blank if the ClusterId is provided.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // A physical table type for relational data sources.
@@ -1618,6 +1837,8 @@ type RelationalTable struct {
 
 	// The schema name. This name applies to certain relational database engines.
 	Schema *string
+
+	noSmithyDocumentSerde
 }
 
 // A transform operation that renames a column.
@@ -1632,6 +1853,8 @@ type RenameColumnOperation struct {
 	//
 	// This member is required.
 	NewColumnName *string
+
+	noSmithyDocumentSerde
 }
 
 // Permission for the resource.
@@ -1658,6 +1881,8 @@ type ResourcePermission struct {
 	//
 	// This member is required.
 	Principal *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about rows for a data set SPICE ingestion.
@@ -1668,6 +1893,8 @@ type RowInfo struct {
 
 	// The number of rows that were ingested.
 	RowsIngested int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a dataset that contains permissions for row-level security
@@ -1697,6 +1924,8 @@ type RowLevelPermissionDataSet struct {
 
 	// The namespace associated with the dataset that contains permissions for RLS.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 // S3 parameters.
@@ -1707,6 +1936,8 @@ type S3Parameters struct {
 	//
 	// This member is required.
 	ManifestFileLocation *ManifestFileLocation
+
+	noSmithyDocumentSerde
 }
 
 // A physical table type for an S3 data source.
@@ -1725,6 +1956,8 @@ type S3Source struct {
 
 	// Information about the format for the S3 source file or files.
 	UploadSettings *UploadSettings
+
+	noSmithyDocumentSerde
 }
 
 // ServiceNow parameters.
@@ -1734,6 +1967,8 @@ type ServiceNowParameters struct {
 	//
 	// This member is required.
 	SiteBaseUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // A sheet, which is an object that contains a set of visuals that are viewed
@@ -1750,6 +1985,8 @@ type Sheet struct {
 
 	// The unique identifier associated with a sheet.
 	SheetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Sheet controls option.
@@ -1757,6 +1994,8 @@ type SheetControlsOption struct {
 
 	// Visibility state.
 	VisibilityState DashboardUIState
+
+	noSmithyDocumentSerde
 }
 
 // The theme display options for sheets.
@@ -1767,6 +2006,8 @@ type SheetStyle struct {
 
 	// The layout options for tiles.
 	TileLayout *TileLayoutStyle
+
+	noSmithyDocumentSerde
 }
 
 // Snowflake parameters.
@@ -1786,6 +2027,8 @@ type SnowflakeParameters struct {
 	//
 	// This member is required.
 	Warehouse *string
+
+	noSmithyDocumentSerde
 }
 
 // Spark parameters.
@@ -1800,6 +2043,8 @@ type SparkParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // SQL Server parameters.
@@ -1819,6 +2064,8 @@ type SqlServerParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
@@ -1827,6 +2074,8 @@ type SslProperties struct {
 
 	// A Boolean option to control whether SSL should be disabled.
 	DisableSsl bool
+
+	noSmithyDocumentSerde
 }
 
 // A string parameter.
@@ -1841,6 +2090,8 @@ type StringParameter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The key or keys of the key-value pairs for the resource tag or tags assigned to
@@ -1856,6 +2107,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A transform operation that tags a column with additional information.
@@ -1871,6 +2124,8 @@ type TagColumnOperation struct {
 	//
 	// This member is required.
 	Tags []ColumnTag
+
+	noSmithyDocumentSerde
 }
 
 // A template object. A template is an entity in QuickSight that encapsulates the
@@ -1900,6 +2155,8 @@ type Template struct {
 
 	// A structure describing the versions of the template.
 	Version *TemplateVersion
+
+	noSmithyDocumentSerde
 }
 
 // The template alias.
@@ -1913,6 +2170,8 @@ type TemplateAlias struct {
 
 	// The version number of the template alias.
 	TemplateVersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // List of errors that occurred when the template version creation failed.
@@ -1923,6 +2182,8 @@ type TemplateError struct {
 
 	// Type of error.
 	Type TemplateErrorType
+
+	noSmithyDocumentSerde
 }
 
 // The source analysis of the template.
@@ -1938,6 +2199,8 @@ type TemplateSourceAnalysis struct {
 	//
 	// This member is required.
 	DataSetReferences []DataSetReference
+
+	noSmithyDocumentSerde
 }
 
 // The source entity of the template.
@@ -1948,6 +2211,8 @@ type TemplateSourceEntity struct {
 
 	// The source template, if it is based on an template.
 	SourceTemplate *TemplateSourceTemplate
+
+	noSmithyDocumentSerde
 }
 
 // The source template of the template.
@@ -1957,6 +2222,8 @@ type TemplateSourceTemplate struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // The template summary.
@@ -1979,6 +2246,8 @@ type TemplateSummary struct {
 
 	// The ID of the template. This ID is unique per AWS Region for each AWS account.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 // A version of a template.
@@ -2014,6 +2283,8 @@ type TemplateVersion struct {
 
 	// The version number of the template version.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // The template version.
@@ -2033,6 +2304,8 @@ type TemplateVersionSummary struct {
 
 	// The version number of the template version.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // Teradata parameters.
@@ -2052,6 +2325,8 @@ type TeradataParameters struct {
 	//
 	// This member is required.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a theme.
@@ -2078,6 +2353,8 @@ type Theme struct {
 
 	// A version of a theme.
 	Version *ThemeVersion
+
+	noSmithyDocumentSerde
 }
 
 // An alias for a theme.
@@ -2091,6 +2368,8 @@ type ThemeAlias struct {
 
 	// The version number of the theme alias.
 	ThemeVersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // The theme configuration. This configuration contains all of the display
@@ -2106,6 +2385,8 @@ type ThemeConfiguration struct {
 	// Color properties that apply to the UI and to charts, excluding the colors that
 	// apply to data.
 	UIColorPalette *UIColorPalette
+
+	noSmithyDocumentSerde
 }
 
 // Theme error.
@@ -2116,6 +2397,8 @@ type ThemeError struct {
 
 	// The type of error.
 	Type ThemeErrorType
+
+	noSmithyDocumentSerde
 }
 
 // The theme summary.
@@ -2138,6 +2421,8 @@ type ThemeSummary struct {
 
 	// The ID of the theme. This ID is unique per AWS Region for each AWS account.
 	ThemeId *string
+
+	noSmithyDocumentSerde
 }
 
 // A version of a theme.
@@ -2167,6 +2452,8 @@ type ThemeVersion struct {
 
 	// The version number of the theme.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // The theme version.
@@ -2186,6 +2473,8 @@ type ThemeVersionSummary struct {
 
 	// The version number of the theme version.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // The display options for the layout of tiles on a sheet.
@@ -2196,6 +2485,8 @@ type TileLayoutStyle struct {
 
 	// The margin settings that apply around the outside edge of sheets.
 	Margin *MarginStyle
+
+	noSmithyDocumentSerde
 }
 
 // Display options related to tiles on a sheet.
@@ -2203,6 +2494,8 @@ type TileStyle struct {
 
 	// The border around a tile.
 	Border *BorderStyle
+
+	noSmithyDocumentSerde
 }
 
 // A data transformation on a logical table. This is a variant type structure. For
@@ -2223,6 +2516,8 @@ type TransformOperation interface {
 // only refer to projected columns.
 type TransformOperationMemberProjectOperation struct {
 	Value ProjectOperation
+
+	noSmithyDocumentSerde
 }
 
 func (*TransformOperationMemberProjectOperation) isTransformOperation() {}
@@ -2230,6 +2525,8 @@ func (*TransformOperationMemberProjectOperation) isTransformOperation() {}
 // An operation that filters rows based on some condition.
 type TransformOperationMemberFilterOperation struct {
 	Value FilterOperation
+
+	noSmithyDocumentSerde
 }
 
 func (*TransformOperationMemberFilterOperation) isTransformOperation() {}
@@ -2238,6 +2535,8 @@ func (*TransformOperationMemberFilterOperation) isTransformOperation() {}
 // operation form a lexical closure.
 type TransformOperationMemberCreateColumnsOperation struct {
 	Value CreateColumnsOperation
+
+	noSmithyDocumentSerde
 }
 
 func (*TransformOperationMemberCreateColumnsOperation) isTransformOperation() {}
@@ -2245,6 +2544,8 @@ func (*TransformOperationMemberCreateColumnsOperation) isTransformOperation() {}
 // An operation that renames a column.
 type TransformOperationMemberRenameColumnOperation struct {
 	Value RenameColumnOperation
+
+	noSmithyDocumentSerde
 }
 
 func (*TransformOperationMemberRenameColumnOperation) isTransformOperation() {}
@@ -2252,6 +2553,8 @@ func (*TransformOperationMemberRenameColumnOperation) isTransformOperation() {}
 // A transform operation that casts a column to a different type.
 type TransformOperationMemberCastColumnTypeOperation struct {
 	Value CastColumnTypeOperation
+
+	noSmithyDocumentSerde
 }
 
 func (*TransformOperationMemberCastColumnTypeOperation) isTransformOperation() {}
@@ -2259,6 +2562,8 @@ func (*TransformOperationMemberCastColumnTypeOperation) isTransformOperation() {
 // An operation that tags a column with additional information.
 type TransformOperationMemberTagColumnOperation struct {
 	Value TagColumnOperation
+
+	noSmithyDocumentSerde
 }
 
 func (*TransformOperationMemberTagColumnOperation) isTransformOperation() {}
@@ -2275,6 +2580,8 @@ type TwitterParameters struct {
 	//
 	// This member is required.
 	Query *string
+
+	noSmithyDocumentSerde
 }
 
 // The theme colors that apply to UI and to charts, excluding data colors. The
@@ -2342,6 +2649,8 @@ type UIColorPalette struct {
 	// The foreground color that applies to any text or other elements that appear over
 	// the warning color.
 	WarningForeground *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the format for a source file or files.
@@ -2361,6 +2670,8 @@ type UploadSettings struct {
 
 	// Text qualifier.
 	TextQualifier TextQualifier
+
+	noSmithyDocumentSerde
 }
 
 // A registered user of Amazon QuickSight.
@@ -2423,6 +2734,8 @@ type User struct {
 
 	// The user's user name.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // VPC connection properties.
@@ -2432,13 +2745,19 @@ type VpcConnectionProperties struct {
 	//
 	// This member is required.
 	VpcConnectionArn *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isDataSourceParameters() {}

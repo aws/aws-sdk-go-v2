@@ -188,6 +188,8 @@ type PutScalingPolicyInput struct {
 
 	// Metric value used to trigger a scaling event.
 	Threshold float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -199,6 +201,8 @@ type PutScalingPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

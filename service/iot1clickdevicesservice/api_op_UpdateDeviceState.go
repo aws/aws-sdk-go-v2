@@ -36,11 +36,15 @@ type UpdateDeviceStateInput struct {
 
 	// If true, the device is enabled. If false, the device is disabled.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDeviceStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeviceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

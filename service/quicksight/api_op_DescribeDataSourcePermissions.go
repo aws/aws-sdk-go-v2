@@ -39,6 +39,8 @@ type DescribeDataSourcePermissionsInput struct {
 	//
 	// This member is required.
 	DataSourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDataSourcePermissionsOutput struct {
@@ -61,6 +63,8 @@ type DescribeDataSourcePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

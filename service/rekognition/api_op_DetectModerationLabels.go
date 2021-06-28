@@ -56,6 +56,8 @@ type DetectModerationLabelsInput struct {
 	// specified value. If you don't specify MinConfidence, the operation returns
 	// labels with confidence values greater than or equal to 50 percent.
 	MinConfidence *float32
+
+	noSmithyDocumentSerde
 }
 
 type DetectModerationLabelsOutput struct {
@@ -73,6 +75,8 @@ type DetectModerationLabelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectModerationLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

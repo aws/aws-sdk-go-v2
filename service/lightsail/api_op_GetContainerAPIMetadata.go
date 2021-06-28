@@ -28,6 +28,7 @@ func (c *Client) GetContainerAPIMetadata(ctx context.Context, params *GetContain
 }
 
 type GetContainerAPIMetadataInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetContainerAPIMetadataOutput struct {
@@ -38,6 +39,8 @@ type GetContainerAPIMetadataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContainerAPIMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

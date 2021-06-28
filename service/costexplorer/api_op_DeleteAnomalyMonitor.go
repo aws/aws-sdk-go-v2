@@ -32,11 +32,15 @@ type DeleteAnomalyMonitorInput struct {
 	//
 	// This member is required.
 	MonitorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAnomalyMonitorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {

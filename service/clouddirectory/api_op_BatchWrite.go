@@ -40,6 +40,8 @@ type BatchWriteInput struct {
 	//
 	// This member is required.
 	Operations []types.BatchWriteOperation
+
+	noSmithyDocumentSerde
 }
 
 type BatchWriteOutput struct {
@@ -49,6 +51,8 @@ type BatchWriteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchWriteMiddlewares(stack *middleware.Stack, options Options) (err error) {

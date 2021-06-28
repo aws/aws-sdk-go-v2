@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // An unusual cost pattern. This consists of the detailed metadata and the current
 // status of the anomaly object.
 type Anomaly struct {
@@ -40,6 +44,8 @@ type Anomaly struct {
 
 	// The list of identified root causes for the anomaly.
 	RootCauses []RootCause
+
+	noSmithyDocumentSerde
 }
 
 // The time period for an anomaly.
@@ -52,6 +58,8 @@ type AnomalyDateInterval struct {
 
 	// The last date an anomaly was observed.
 	EndDate *string
+
+	noSmithyDocumentSerde
 }
 
 // This object continuously inspects your account's cost data for anomalies, based
@@ -120,6 +128,8 @@ type AnomalyMonitor struct {
 	// the GetReservationPurchaseRecommendation action, only NOT is supported. AND and
 	// OR are not supported. Dimensions are limited to LINKED_ACCOUNT.
 	MonitorSpecification *Expression
+
+	noSmithyDocumentSerde
 }
 
 // Quantifies the anomaly. The higher score means that it is more anomalous.
@@ -134,6 +144,8 @@ type AnomalyScore struct {
 	//
 	// This member is required.
 	MaxScore float64
+
+	noSmithyDocumentSerde
 }
 
 // The association between a monitor, threshold, and list of subscribers used to
@@ -172,6 +184,8 @@ type AnomalySubscription struct {
 
 	// The AnomalySubscription Amazon Resource Name (ARN).
 	SubscriptionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure of Cost Categories. This includes detailed metadata and the set of
@@ -214,6 +228,8 @@ type CostCategory struct {
 	// The list of processing statuses for Cost Management products for a specific cost
 	// category.
 	ProcessingStatus []CostCategoryProcessingStatus
+
+	noSmithyDocumentSerde
 }
 
 // When creating or updating a cost category, you can define the CostCategoryRule
@@ -233,6 +249,8 @@ type CostCategoryInheritedValueDimension struct {
 	// you specify TAG, the cost category value will be based on the value of the
 	// specified tag key.
 	DimensionName CostCategoryInheritedValueDimensionName
+
+	noSmithyDocumentSerde
 }
 
 // The list of processing statuses for Cost Management products for a specific cost
@@ -244,6 +262,8 @@ type CostCategoryProcessingStatus struct {
 
 	// The process status for a specific cost category.
 	Status CostCategoryStatus
+
+	noSmithyDocumentSerde
 }
 
 // A reference to a Cost Category containing only enough information to identify
@@ -275,6 +295,8 @@ type CostCategoryReference struct {
 
 	// A list of unique cost category values in a specific cost category.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Rules are processed in order. If there are multiple rules that match the line
@@ -311,6 +333,8 @@ type CostCategoryRule struct {
 
 	// The default value for the cost category.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The Cost Categories values used for filtering the costs. If Values and Key are
@@ -331,6 +355,8 @@ type CostCategoryValues struct {
 
 	// The specific value of the Cost Category.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The amount of instance usage that a reservation covered.
@@ -344,6 +370,8 @@ type Coverage struct {
 
 	// The amount of instance usage that the reservation covered, in normalized units.
 	CoverageNormalizedUnits *CoverageNormalizedUnits
+
+	noSmithyDocumentSerde
 }
 
 // Reservation coverage for a specified period, in hours.
@@ -357,6 +385,8 @@ type CoverageByTime struct {
 
 	// The total reservation coverage, in hours.
 	Total *Coverage
+
+	noSmithyDocumentSerde
 }
 
 // How much it costs to run an instance.
@@ -364,6 +394,8 @@ type CoverageCost struct {
 
 	// How much an On-Demand Instance costs.
 	OnDemandCost *string
+
+	noSmithyDocumentSerde
 }
 
 // How long a running instance either used a reservation or was On-Demand.
@@ -380,6 +412,8 @@ type CoverageHours struct {
 
 	// The total instance usage, in hours.
 	TotalRunningHours *string
+
+	noSmithyDocumentSerde
 }
 
 // The amount of instance usage, in normalized units. Normalized units enable you
@@ -406,6 +440,8 @@ type CoverageNormalizedUnits struct {
 
 	// The total number of normalized units that you used.
 	TotalRunningNormalizedUnits *string
+
+	noSmithyDocumentSerde
 }
 
 // Context about the current instance.
@@ -444,6 +480,8 @@ type CurrentInstance struct {
 
 	// The total number of hours the instance ran during the lookback period.
 	TotalRunningHoursInLookbackPeriod *string
+
+	noSmithyDocumentSerde
 }
 
 // The time period of the request.
@@ -463,6 +501,8 @@ type DateInterval struct {
 	//
 	// This member is required.
 	Start *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata that you can use to filter and group your results. You can use
@@ -481,6 +521,8 @@ type DimensionValues struct {
 	// The metadata values that you can use to filter and group your results. You can
 	// use GetDimensionValues to find specific values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata of a specific type that you can use to filter and group your
@@ -492,6 +534,8 @@ type DimensionValuesWithAttributes struct {
 
 	// The value of a dimension with a specific attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The field that contains a list of disk (local storage) metrics associated with
@@ -509,6 +553,8 @@ type DiskResourceUtilization struct {
 
 	// The maximum number of write operations per second.
 	DiskWriteOpsPerSecond *string
+
+	noSmithyDocumentSerde
 }
 
 // The EBS field that contains a list of EBS metrics associated with the current
@@ -526,6 +572,8 @@ type EBSResourceUtilization struct {
 
 	// The maximum number of write operations per second.
 	EbsWriteOpsPerSecond *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the Amazon EC2 instances that AWS recommends that you purchase.
@@ -555,6 +603,8 @@ type EC2InstanceDetails struct {
 
 	// Whether the recommended reservation is dedicated or shared.
 	Tenancy *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on the Amazon EC2 Resource.
@@ -587,6 +637,8 @@ type EC2ResourceDetails struct {
 
 	// Number of VCPU cores in the AWS instance type.
 	Vcpu *string
+
+	noSmithyDocumentSerde
 }
 
 // Utilization metrics of the instance.
@@ -613,6 +665,8 @@ type EC2ResourceUtilization struct {
 	// The network field that contains a list of network metrics associated with the
 	// current instance.
 	NetworkResourceUtilization *NetworkResourceUtilization
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon EC2 hardware specifications that you want AWS to provide
@@ -621,6 +675,8 @@ type EC2Specification struct {
 
 	// Whether you want a recommendation for standard or convertible reservations.
 	OfferingClass OfferingClass
+
+	noSmithyDocumentSerde
 }
 
 // Details about the Amazon ElastiCache instances that AWS recommends that you
@@ -644,6 +700,8 @@ type ElastiCacheInstanceDetails struct {
 
 	// Whether the recommended reservation is size flexible.
 	SizeFlexEligible bool
+
+	noSmithyDocumentSerde
 }
 
 // Details about the Amazon ES instances that AWS recommends that you purchase.
@@ -663,6 +721,8 @@ type ESInstanceDetails struct {
 
 	// Whether the recommended reservation is size flexible.
 	SizeFlexEligible bool
+
+	noSmithyDocumentSerde
 }
 
 // Use Expression to filter by cost or by usage. There are two patterns:
@@ -716,6 +776,8 @@ type Expression struct {
 
 	// The specific Tag to use for Expression.
 	Tags *TagValues
+
+	noSmithyDocumentSerde
 }
 
 // The forecast created for your query.
@@ -732,6 +794,8 @@ type ForecastResult struct {
 
 	// The period of time that the forecast covers.
 	TimePeriod *DateInterval
+
+	noSmithyDocumentSerde
 }
 
 // One level of grouped data in the results.
@@ -742,6 +806,8 @@ type Group struct {
 
 	// The metrics that are included in this group.
 	Metrics map[string]MetricValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents a group when you specify a group by criteria or in the response to a
@@ -753,6 +819,8 @@ type GroupDefinition struct {
 
 	// The string that represents the type of group.
 	Type GroupDefinitionType
+
+	noSmithyDocumentSerde
 }
 
 // The anomaly's dollar value.
@@ -765,6 +833,8 @@ type Impact struct {
 
 	// The cumulative dollar value observed for an anomaly.
 	TotalImpact float64
+
+	noSmithyDocumentSerde
 }
 
 // Details about the instances that AWS recommends that you purchase.
@@ -784,6 +854,8 @@ type InstanceDetails struct {
 
 	// The Amazon Redshift instances that AWS recommends that you purchase.
 	RedshiftInstanceDetails *RedshiftInstanceDetails
+
+	noSmithyDocumentSerde
 }
 
 // The aggregated value for a metric.
@@ -794,6 +866,8 @@ type MetricValue struct {
 
 	// The unit that the metric is given in.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on the modification recommendation.
@@ -801,6 +875,8 @@ type ModifyRecommendationDetail struct {
 
 	// Identifies whether this instance type is the AWS default recommendation.
 	TargetInstances []TargetInstance
+
+	noSmithyDocumentSerde
 }
 
 // The network field that contains a list of network metrics associated with the
@@ -818,6 +894,8 @@ type NetworkResourceUtilization struct {
 
 	// The network outgress packets measured in packets per second.
 	NetworkPacketsOutPerSecond *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the Amazon RDS instances that AWS recommends that you purchase.
@@ -850,6 +928,8 @@ type RDSInstanceDetails struct {
 
 	// Whether the recommended reservation is size flexible.
 	SizeFlexEligible bool
+
+	noSmithyDocumentSerde
 }
 
 // Details about the Amazon Redshift instances that AWS recommends that you
@@ -870,6 +950,8 @@ type RedshiftInstanceDetails struct {
 
 	// Whether the recommended reservation is size flexible.
 	SizeFlexEligible bool
+
+	noSmithyDocumentSerde
 }
 
 // The aggregated numbers for your reservation usage.
@@ -934,6 +1016,8 @@ type ReservationAggregates struct {
 	// normalized units. Normalized units are available only for Amazon EC2 usage after
 	// November 11, 2017.
 	UtilizationPercentageInUnits *string
+
+	noSmithyDocumentSerde
 }
 
 // A group of reservations that share a set of attributes.
@@ -944,6 +1028,8 @@ type ReservationCoverageGroup struct {
 
 	// How much instance usage this group of reservations covered.
 	Coverage *Coverage
+
+	noSmithyDocumentSerde
 }
 
 // A specific reservation that AWS recommends for purchase.
@@ -972,6 +1058,8 @@ type ReservationPurchaseRecommendation struct {
 
 	// The term of the reservation that you want recommendations for, in years.
 	TermInYears TermInYears
+
+	noSmithyDocumentSerde
 }
 
 // Details about your recommended reservation purchase.
@@ -1047,6 +1135,8 @@ type ReservationPurchaseRecommendationDetail struct {
 
 	// How much purchasing this instance costs you upfront.
 	UpfrontCost *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about this specific recommendation, such as the timestamp for when
@@ -1058,6 +1148,8 @@ type ReservationPurchaseRecommendationMetadata struct {
 
 	// The ID for this specific recommendation.
 	RecommendationId *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary about this recommendation, such as the currency code, the amount that
@@ -1075,6 +1167,8 @@ type ReservationPurchaseRecommendationSummary struct {
 	// The total amount that AWS estimates that this recommendation could save you in a
 	// month, as a percentage of your costs.
 	TotalEstimatedMonthlySavingsPercentage *string
+
+	noSmithyDocumentSerde
 }
 
 // A group of reservations that share a set of attributes.
@@ -1091,6 +1185,8 @@ type ReservationUtilizationGroup struct {
 
 	// The value of a specific reservation attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on the resource.
@@ -1098,6 +1194,8 @@ type ResourceDetails struct {
 
 	// Details on the Amazon EC2 resource.
 	EC2ResourceDetails *EC2ResourceDetails
+
+	noSmithyDocumentSerde
 }
 
 // Resource utilization of current resource.
@@ -1105,6 +1203,8 @@ type ResourceUtilization struct {
 
 	// Utilization of current Amazon EC2 instance.
 	EC2ResourceUtilization *EC2ResourceUtilization
+
+	noSmithyDocumentSerde
 }
 
 // The result that is associated with a time period.
@@ -1121,6 +1221,8 @@ type ResultByTime struct {
 
 	// The total amount of cost or usage accrued during the time period.
 	Total map[string]MetricValue
+
+	noSmithyDocumentSerde
 }
 
 // Recommendations to rightsize resources.
@@ -1144,6 +1246,8 @@ type RightsizingRecommendation struct {
 
 	// Details for termination recommendations.
 	TerminateRecommendationDetail *TerminateRecommendationDetail
+
+	noSmithyDocumentSerde
 }
 
 // Enables you to customize recommendations across two attributes. You can choose
@@ -1165,6 +1269,8 @@ type RightsizingRecommendationConfiguration struct {
 	//
 	// This member is required.
 	RecommendationTarget RecommendationTarget
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for this recommendation set.
@@ -1182,6 +1288,8 @@ type RightsizingRecommendationMetadata struct {
 
 	// The ID for this specific recommendation.
 	RecommendationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of rightsizing recommendations
@@ -1199,6 +1307,8 @@ type RightsizingRecommendationSummary struct {
 
 	// Total number of instance recommendations.
 	TotalRecommendationCount *string
+
+	noSmithyDocumentSerde
 }
 
 // The combination of AWS service, linked account, Region, and usage type where a
@@ -1216,6 +1326,8 @@ type RootCause struct {
 
 	// The UsageType value associated with the cost anomaly.
 	UsageType *string
+
+	noSmithyDocumentSerde
 }
 
 // The amortized amount of Savings Plans purchased in a specific account during a
@@ -1233,6 +1345,8 @@ type SavingsPlansAmortizedCommitment struct {
 	// The total amortized amount of your Savings Plans commitment, regardless of your
 	// Savings Plans purchase method.
 	TotalAmortizedCommitment *string
+
+	noSmithyDocumentSerde
 }
 
 // The amount of Savings Plans eligible usage that is covered by Savings Plans. All
@@ -1247,6 +1361,8 @@ type SavingsPlansCoverage struct {
 
 	// The time period of the request.
 	TimePeriod *DateInterval
+
+	noSmithyDocumentSerde
 }
 
 // Specific coverage percentage, On-Demand costs, and spend covered by Savings
@@ -1265,6 +1381,8 @@ type SavingsPlansCoverageData struct {
 
 	// The total cost of your AWS usage, regardless of your purchase option.
 	TotalCost *string
+
+	noSmithyDocumentSerde
 }
 
 // Attribute details on a specific Savings Plan.
@@ -1279,6 +1397,8 @@ type SavingsPlansDetails struct {
 	// A collection of AWS resources in a geographic area. Each AWS Region is isolated
 	// and independent of the other Regions.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains your request parameters, Savings Plan Recommendations Summary, and
@@ -1310,6 +1430,8 @@ type SavingsPlansPurchaseRecommendation struct {
 	// The Savings Plans recommendation term in years, used to generate the
 	// recommendation.
 	TermInYears TermInYears
+
+	noSmithyDocumentSerde
 }
 
 // Details for your recommended Savings Plans.
@@ -1374,6 +1496,8 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 	// The upfront cost of the recommended Savings Plans, based on the selected payment
 	// option.
 	UpfrontCost *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata about your Savings Plans Purchase Recommendations.
@@ -1387,6 +1511,8 @@ type SavingsPlansPurchaseRecommendationMetadata struct {
 
 	// The unique identifier for the recommendation set.
 	RecommendationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary metrics for your Savings Plans Purchase Recommendations.
@@ -1435,6 +1561,8 @@ type SavingsPlansPurchaseRecommendationSummary struct {
 	// The aggregate number of Savings Plans recommendations that exist for your
 	// account.
 	TotalRecommendationCount *string
+
+	noSmithyDocumentSerde
 }
 
 // The amount of savings you're accumulating, against the public On-Demand rate of
@@ -1448,6 +1576,8 @@ type SavingsPlansSavings struct {
 	// How much the amount that the usage would have cost if it was accrued at the
 	// On-Demand rate.
 	OnDemandCostEquivalent *string
+
+	noSmithyDocumentSerde
 }
 
 // The measurement of how well you are using your existing Savings Plans.
@@ -1468,6 +1598,8 @@ type SavingsPlansUtilization struct {
 	// The amount of UsedCommitment divided by the TotalCommitment for your Savings
 	// Plans.
 	UtilizationPercentage *string
+
+	noSmithyDocumentSerde
 }
 
 // The aggregated utilization metrics for your Savings Plans usage.
@@ -1487,6 +1619,8 @@ type SavingsPlansUtilizationAggregates struct {
 	// savings from Savings Plans, as well as the onDemandCostEquivalent of the Savings
 	// Plans when considering the utilization rate.
 	Savings *SavingsPlansSavings
+
+	noSmithyDocumentSerde
 }
 
 // The amount of Savings Plans utilization, in hours.
@@ -1511,6 +1645,8 @@ type SavingsPlansUtilizationByTime struct {
 	// savings from Savings Plans as well as the onDemandCostEquivalent of the Savings
 	// Plans when considering the utilization rate.
 	Savings *SavingsPlansSavings
+
+	noSmithyDocumentSerde
 }
 
 // A single daily or monthly Savings Plans utilization rate, and details for your
@@ -1536,6 +1672,8 @@ type SavingsPlansUtilizationDetail struct {
 	// A ratio of your effectiveness of using existing Savings Plans to apply to
 	// workloads that are Savings Plans eligible.
 	Utilization *SavingsPlansUtilization
+
+	noSmithyDocumentSerde
 }
 
 // Hardware specifications for the service that you want recommendations for.
@@ -1544,6 +1682,8 @@ type ServiceSpecification struct {
 	// The Amazon EC2 hardware specifications that you want AWS to provide
 	// recommendations for.
 	EC2Specification *EC2Specification
+
+	noSmithyDocumentSerde
 }
 
 // The details of how to sort the data.
@@ -1556,6 +1696,8 @@ type SortDefinition struct {
 
 	// The order in which to sort the data.
 	SortOrder SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // The recipient of AnomalySubscription notifications.
@@ -1569,6 +1711,8 @@ type Subscriber struct {
 
 	// The notification delivery channel.
 	Type SubscriberType
+
+	noSmithyDocumentSerde
 }
 
 // The values that are available for a tag. If Values and Key are not specified,
@@ -1588,6 +1732,8 @@ type TagValues struct {
 
 	// The specific value of the tag.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Details on recommended instance.
@@ -1614,6 +1760,8 @@ type TargetInstance struct {
 
 	// Details on the target instance type.
 	ResourceDetails *ResourceDetails
+
+	noSmithyDocumentSerde
 }
 
 // Details on termination recommendation.
@@ -1624,6 +1772,8 @@ type TerminateRecommendationDetail struct {
 
 	// Estimated savings resulting from modification, on a monthly basis.
 	EstimatedMonthlySavings *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters cost anomalies based on the total impact.
@@ -1641,6 +1791,8 @@ type TotalImpactFilter struct {
 
 	// The upper bound dollar value used in the filter.
 	EndValue float64
+
+	noSmithyDocumentSerde
 }
 
 // The amount of utilization, in hours.
@@ -1654,4 +1806,8 @@ type UtilizationByTime struct {
 
 	// The total number of reservation hours that were used.
 	Total *ReservationAggregates
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

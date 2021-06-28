@@ -40,6 +40,8 @@ type StopGameSessionPlacementInput struct {
 	//
 	// This member is required.
 	PlacementId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -51,6 +53,8 @@ type StopGameSessionPlacementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {

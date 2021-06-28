@@ -98,6 +98,8 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// Folder within an Amazon S3 bucket where you want DMS to store the results of
 	// this assessment run.
 	ResultLocationFolder *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -108,6 +110,8 @@ type StartReplicationTaskAssessmentRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

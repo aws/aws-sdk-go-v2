@@ -48,6 +48,8 @@ type ListQuickConnectsInput struct {
 	// quick connect, you are prompted to assign one of the following types: Agent
 	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 	QuickConnectTypes []types.QuickConnectType
+
+	noSmithyDocumentSerde
 }
 
 type ListQuickConnectsOutput struct {
@@ -60,6 +62,8 @@ type ListQuickConnectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

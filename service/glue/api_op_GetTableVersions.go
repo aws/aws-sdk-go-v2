@@ -51,6 +51,8 @@ type GetTableVersionsInput struct {
 
 	// A continuation token, if this is not the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTableVersionsOutput struct {
@@ -64,6 +66,8 @@ type GetTableVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTableVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

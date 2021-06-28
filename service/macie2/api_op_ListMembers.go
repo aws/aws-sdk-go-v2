@@ -43,6 +43,8 @@ type ListMembersInput struct {
 	// includes only current member accounts. To include all accounts, set this value
 	// to false.
 	OnlyAssociated *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMembersOutput struct {
@@ -58,6 +60,8 @@ type ListMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

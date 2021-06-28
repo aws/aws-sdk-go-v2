@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -30,6 +31,8 @@ type ActivityTaskCanceledEventAttributes struct {
 	// for this activity task. This information can be useful for diagnosing problems
 	// by tracing back the chain of events leading up to this event.
 	LatestCancelRequestedEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ActivityTaskCancelRequested event.
@@ -47,6 +50,8 @@ type ActivityTaskCancelRequestedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ActivityTaskCompleted event.
@@ -68,6 +73,8 @@ type ActivityTaskCompletedEventAttributes struct {
 
 	// The results of the activity task.
 	Result *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ActivityTaskFailed event.
@@ -92,6 +99,8 @@ type ActivityTaskFailedEventAttributes struct {
 
 	// The reason provided for the failure.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ActivityTaskScheduled event.
@@ -152,6 +161,8 @@ type ActivityTaskScheduledEventAttributes struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ActivityTaskStarted event.
@@ -167,6 +178,8 @@ type ActivityTaskStartedEventAttributes struct {
 	// Identity of the worker that was assigned this task. This aids diagnostics when
 	// problems arise. The form of this identity is user defined.
 	Identity *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ActivityTaskTimedOut event.
@@ -194,6 +207,8 @@ type ActivityTaskTimedOutEventAttributes struct {
 	// Contains the content of the details parameter for the last call made by the
 	// activity to RecordActivityTaskHeartbeat.
 	Details *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an activity type.
@@ -210,6 +225,8 @@ type ActivityType struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration settings registered with the activity type.
@@ -263,6 +280,8 @@ type ActivityTypeConfiguration struct {
 	// seconds, an integer greater than or equal to 0. You can use NONE to specify
 	// unlimited duration.
 	DefaultTaskStartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an activity type.
@@ -288,6 +307,8 @@ type ActivityTypeInfo struct {
 
 	// The description of the activity type provided in RegisterActivityType.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the CancelTimer decision. Access Control You can use IAM
@@ -316,6 +337,8 @@ type CancelTimerDecisionAttributes struct {
 	//
 	// This member is required.
 	TimerId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the CancelTimerFailed event.
@@ -343,6 +366,8 @@ type CancelTimerFailedEventAttributes struct {
 	//
 	// This member is required.
 	TimerId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the CancelWorkflowExecution decision. Access Control You
@@ -369,6 +394,8 @@ type CancelWorkflowExecutionDecisionAttributes struct {
 
 	// Details of the cancellation.
 	Details *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the CancelWorkflowExecutionFailed event.
@@ -391,6 +418,8 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Provide details of the ChildWorkflowExecutionCanceled event.
@@ -423,6 +452,8 @@ type ChildWorkflowExecutionCanceledEventAttributes struct {
 
 	// Details of the cancellation (if provided).
 	Details *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ChildWorkflowExecutionCompleted event.
@@ -455,6 +486,8 @@ type ChildWorkflowExecutionCompletedEventAttributes struct {
 
 	// The result of the child workflow execution.
 	Result *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ChildWorkflowExecutionFailed event.
@@ -490,6 +523,8 @@ type ChildWorkflowExecutionFailedEventAttributes struct {
 
 	// The reason for the failure (if provided).
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ChildWorkflowExecutionStarted event.
@@ -512,6 +547,8 @@ type ChildWorkflowExecutionStartedEventAttributes struct {
 	//
 	// This member is required.
 	WorkflowType *WorkflowType
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ChildWorkflowExecutionTerminated event.
@@ -541,6 +578,8 @@ type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	//
 	// This member is required.
 	WorkflowType *WorkflowType
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ChildWorkflowExecutionTimedOut event.
@@ -575,6 +614,8 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	//
 	// This member is required.
 	WorkflowType *WorkflowType
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter the closed workflow executions in visibility APIs by their close
@@ -586,6 +627,8 @@ type CloseStatusFilter struct {
 	//
 	// This member is required.
 	Status CloseStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the CompleteWorkflowExecution decision. Access Control
@@ -613,6 +656,8 @@ type CompleteWorkflowExecutionDecisionAttributes struct {
 	// The result of the workflow execution. The form of the result is implementation
 	// defined.
 	Result *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the CompleteWorkflowExecutionFailed event.
@@ -635,6 +680,8 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ContinueAsNewWorkflowExecution decision. Access
@@ -740,6 +787,8 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 
 	// The version of the workflow to start.
 	WorkflowTypeVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ContinueAsNewWorkflowExecutionFailed event.
@@ -762,6 +811,8 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a decision made by the decider. A decision can be one of these
@@ -1006,6 +1057,8 @@ type Decision struct {
 	// Provides the details of the StartTimer decision. It isn't set for other decision
 	// types.
 	StartTimerDecisionAttributes *StartTimerDecisionAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the DecisionTaskCompleted event.
@@ -1027,6 +1080,8 @@ type DecisionTaskCompletedEventAttributes struct {
 
 	// User defined context for the workflow execution.
 	ExecutionContext *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about the DecisionTaskScheduled event.
@@ -1050,6 +1105,8 @@ type DecisionTaskScheduledEventAttributes struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the DecisionTaskStarted event.
@@ -1065,6 +1122,8 @@ type DecisionTaskStartedEventAttributes struct {
 	// Identity of the decider making the request. This enables diagnostic tracing when
 	// problems arise. The form of this identity is user defined.
 	Identity *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the DecisionTaskTimedOut event.
@@ -1088,6 +1147,8 @@ type DecisionTaskTimedOutEventAttributes struct {
 	//
 	// This member is required.
 	TimeoutType DecisionTaskTimeoutType
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration settings of a domain.
@@ -1097,6 +1158,8 @@ type DomainConfiguration struct {
 	//
 	// This member is required.
 	WorkflowExecutionRetentionPeriodInDays *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains general information about a domain.
@@ -1125,6 +1188,8 @@ type DomainInfo struct {
 
 	// The description of the domain provided through RegisterDomain.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter the workflow executions in visibility APIs by various time-based
@@ -1141,6 +1206,8 @@ type ExecutionTimeFilter struct {
 
 	// Specifies the latest start or close date and time to return.
 	LatestDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ExternalWorkflowExecutionCancelRequested event.
@@ -1158,6 +1225,8 @@ type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 	//
 	// This member is required.
 	WorkflowExecution *WorkflowExecution
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ExternalWorkflowExecutionSignaled event.
@@ -1175,6 +1244,8 @@ type ExternalWorkflowExecutionSignaledEventAttributes struct {
 	//
 	// This member is required.
 	WorkflowExecution *WorkflowExecution
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the FailWorkflowExecution decision. Access Control You
@@ -1204,6 +1275,8 @@ type FailWorkflowExecutionDecisionAttributes struct {
 
 	// A descriptive reason for the failure that may help in diagnostics.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the FailWorkflowExecutionFailed event.
@@ -1226,6 +1299,8 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Event within a workflow execution. A history event can be one of these types:
@@ -1665,6 +1740,8 @@ type HistoryEvent struct {
 	// provides detailed information about the event. It isn't set for other event
 	// types.
 	WorkflowExecutionTimedOutEventAttributes *WorkflowExecutionTimedOutEventAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the LambdaFunctionCompleted event. It isn't set for
@@ -1687,6 +1764,8 @@ type LambdaFunctionCompletedEventAttributes struct {
 
 	// The results of the Lambda task.
 	Result *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the LambdaFunctionFailed event. It isn't set for other
@@ -1712,6 +1791,8 @@ type LambdaFunctionFailedEventAttributes struct {
 
 	// The reason provided for the failure.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the LambdaFunctionScheduled event. It isn't set for
@@ -1744,6 +1825,8 @@ type LambdaFunctionScheduledEventAttributes struct {
 
 	// The maximum amount of time a worker can take to process the Lambda task.
 	StartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the LambdaFunctionStarted event. It isn't set for other
@@ -1756,6 +1839,8 @@ type LambdaFunctionStartedEventAttributes struct {
 	//
 	// This member is required.
 	ScheduledEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides details of the LambdaFunctionTimedOut event.
@@ -1777,6 +1862,8 @@ type LambdaFunctionTimedOutEventAttributes struct {
 
 	// The type of the timeout that caused this event.
 	TimeoutType LambdaFunctionTimeoutType
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the MarkerRecorded event.
@@ -1797,6 +1884,8 @@ type MarkerRecordedEventAttributes struct {
 
 	// The details of the marker.
 	Details *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the RecordMarker decision. Access Control You can use
@@ -1828,6 +1917,8 @@ type RecordMarkerDecisionAttributes struct {
 
 	// The details of the marker.
 	Details *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the RecordMarkerFailed event.
@@ -1855,6 +1946,8 @@ type RecordMarkerFailedEventAttributes struct {
 	//
 	// This member is required.
 	MarkerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the RequestCancelActivityTask decision. Access Control
@@ -1883,6 +1976,8 @@ type RequestCancelActivityTaskDecisionAttributes struct {
 	//
 	// This member is required.
 	ActivityId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the RequestCancelActivityTaskFailed event.
@@ -1910,6 +2005,8 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the RequestCancelExternalWorkflowExecution decision.
@@ -1945,6 +2042,8 @@ type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
 
 	// The runId of the external workflow execution to cancel.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the RequestCancelExternalWorkflowExecutionFailed event.
@@ -1988,6 +2087,8 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 
 	// The runId of the external workflow execution.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the RequestCancelExternalWorkflowExecutionInitiated
@@ -2013,6 +2114,8 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 
 	// The runId of the external workflow execution to be canceled.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Tags are key-value pairs that can be associated with Amazon SWF state machines
@@ -2027,6 +2130,8 @@ type ResourceTag struct {
 
 	// The value of a tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ScheduleActivityTask decision. Access Control You
@@ -2138,6 +2243,8 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ScheduleActivityTaskFailed event.
@@ -2170,6 +2277,8 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Decision attributes specified in scheduleLambdaFunctionDecisionAttributes within
@@ -2197,6 +2306,8 @@ type ScheduleLambdaFunctionDecisionAttributes struct {
 	// be failed once it has started. This can be any integer from 1-300 (1s-5m). If no
 	// value is supplied, than a default value of 300s is assumed.
 	StartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set for
@@ -2230,6 +2341,8 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the SignalExternalWorkflowExecution decision. Access
@@ -2275,6 +2388,8 @@ type SignalExternalWorkflowExecutionDecisionAttributes struct {
 
 	// The runId of the workflow execution to be signaled.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the SignalExternalWorkflowExecutionFailed event.
@@ -2319,6 +2434,8 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	// The runId of the external workflow execution that the signal was being delivered
 	// to.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the SignalExternalWorkflowExecutionInitiated event.
@@ -2351,6 +2468,8 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 
 	// The runId of the external workflow execution to send the signal to.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the StartChildWorkflowExecution decision. Access Control
@@ -2480,6 +2599,8 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// start-to-close timeout was specified at registration time then a fault is
 	// returned.
 	TaskStartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the StartChildWorkflowExecutionFailed event.
@@ -2528,6 +2649,8 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	// The data attached to the event that the decider can use in subsequent workflow
 	// tasks. This data isn't sent to the child workflow execution.
 	Control *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the StartChildWorkflowExecutionInitiated event.
@@ -2606,6 +2729,8 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	// The duration is specified in seconds, an integer greater than or equal to 0. You
 	// can use NONE to specify unlimited duration.
 	TaskStartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the StartLambdaFunctionFailed event. It isn't set for
@@ -2628,6 +2753,8 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	// task was scheduled. To help diagnose issues, use this information to trace back
 	// the chain of events leading up to this event.
 	ScheduledEventId int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the StartTimer decision. Access Control You can use IAM
@@ -2669,6 +2796,8 @@ type StartTimerDecisionAttributes struct {
 	// The data attached to the event that can be used by the decider in subsequent
 	// workflow tasks.
 	Control *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the StartTimerFailed event.
@@ -2696,6 +2825,8 @@ type StartTimerFailedEventAttributes struct {
 	//
 	// This member is required.
 	TimerId *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter the workflow executions in visibility APIs based on a tag.
@@ -2707,6 +2838,8 @@ type TagFilter struct {
 	//
 	// This member is required.
 	Tag *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a task list.
@@ -2716,6 +2849,8 @@ type TaskList struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the TimerCanceled event.
@@ -2740,6 +2875,8 @@ type TimerCanceledEventAttributes struct {
 	//
 	// This member is required.
 	TimerId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the TimerFired event.
@@ -2756,6 +2893,8 @@ type TimerFiredEventAttributes struct {
 	//
 	// This member is required.
 	TimerId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the TimerStarted event.
@@ -2783,6 +2922,8 @@ type TimerStartedEventAttributes struct {
 	// Data attached to the event that can be used by the decider in subsequent
 	// workflow tasks.
 	Control *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a workflow execution.
@@ -2797,6 +2938,8 @@ type WorkflowExecution struct {
 	//
 	// This member is required.
 	WorkflowId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the WorkflowExecutionCanceled event.
@@ -2812,6 +2955,8 @@ type WorkflowExecutionCanceledEventAttributes struct {
 
 	// The details of the cancellation.
 	Details *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the WorkflowExecutionCancelRequested event.
@@ -2833,6 +2978,8 @@ type WorkflowExecutionCancelRequestedEventAttributes struct {
 
 	// The external workflow execution for which the cancellation was requested.
 	ExternalWorkflowExecution *WorkflowExecution
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the WorkflowExecutionCompleted event.
@@ -2848,6 +2995,8 @@ type WorkflowExecutionCompletedEventAttributes struct {
 
 	// The result produced by the workflow execution upon successful completion.
 	Result *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration settings for a workflow execution including timeout values,
@@ -2903,6 +3052,8 @@ type WorkflowExecutionConfiguration struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the WorkflowExecutionContinuedAsNew event.
@@ -2972,6 +3123,8 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	// duration is specified in seconds, an integer greater than or equal to 0. You can
 	// use NONE to specify unlimited duration.
 	TaskStartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the WorkflowExecutionFailed event.
@@ -2990,6 +3143,8 @@ type WorkflowExecutionFailedEventAttributes struct {
 
 	// The descriptive reason provided for the failure.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter the workflow executions in visibility APIs by their workflowId.
@@ -2999,6 +3154,8 @@ type WorkflowExecutionFilter struct {
 	//
 	// This member is required.
 	WorkflowId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a workflow execution.
@@ -3062,6 +3219,8 @@ type WorkflowExecutionInfo struct {
 	// identify and list workflow executions of interest through the visibility APIs. A
 	// workflow execution can have a maximum of 5 tags.
 	TagList []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the counts of open tasks, child workflow executions and timers for a
@@ -3091,6 +3250,8 @@ type WorkflowExecutionOpenCounts struct {
 
 	// The count of Lambda tasks whose status is OPEN.
 	OpenLambdaFunctions int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the WorkflowExecutionSignaled event.
@@ -3117,6 +3278,8 @@ type WorkflowExecutionSignaledEventAttributes struct {
 	// The inputs provided with the signal. The decider can use the signal name and
 	// inputs to determine how to process the signal.
 	Input *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details of WorkflowExecutionStarted event.
@@ -3189,6 +3352,8 @@ type WorkflowExecutionStartedEventAttributes struct {
 	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
 	// specify unlimited duration.
 	TaskStartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the WorkflowExecutionTerminated event.
@@ -3221,6 +3386,8 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 
 	// The reason provided for the termination.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of the WorkflowExecutionTimedOut event.
@@ -3247,6 +3414,8 @@ type WorkflowExecutionTimedOutEventAttributes struct {
 	//
 	// This member is required.
 	TimeoutType WorkflowExecutionTimeoutType
+
+	noSmithyDocumentSerde
 }
 
 // Represents a workflow type.
@@ -3263,6 +3432,8 @@ type WorkflowType struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration settings of a workflow type.
@@ -3330,6 +3501,8 @@ type WorkflowTypeConfiguration struct {
 	// an integer greater than or equal to 0. You can use NONE to specify unlimited
 	// duration.
 	DefaultTaskStartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter workflow execution query results by type. Each parameter, if
@@ -3343,6 +3516,8 @@ type WorkflowTypeFilter struct {
 
 	// Version of the workflow type.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a workflow type.
@@ -3369,4 +3544,8 @@ type WorkflowTypeInfo struct {
 
 	// The description of the type registered through RegisterWorkflowType.
 	Description *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

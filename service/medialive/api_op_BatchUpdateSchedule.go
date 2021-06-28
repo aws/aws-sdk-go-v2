@@ -40,6 +40,8 @@ type BatchUpdateScheduleInput struct {
 
 	// Schedule actions to delete from the schedule.
 	Deletes *types.BatchScheduleActionDeleteRequest
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for BatchUpdateScheduleResponse
@@ -53,6 +55,8 @@ type BatchUpdateScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUpdateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

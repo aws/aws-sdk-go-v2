@@ -57,6 +57,8 @@ type GetCommentsForPullRequestInput struct {
 
 	// The name of the repository that contains the pull request.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCommentsForPullRequestOutput struct {
@@ -70,6 +72,8 @@ type GetCommentsForPullRequestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCommentsForPullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Represents a single entry in a list of agents. AgentListEntry returns an array
 // that contains a list of agents when the ListAgents
 // (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html)
@@ -16,6 +20,8 @@ type AgentListEntry struct {
 
 	// The status of the agent.
 	Status AgentStatus
+
+	noSmithyDocumentSerde
 }
 
 // The subnet and the security group that DataSync uses to access target EFS file
@@ -35,6 +41,8 @@ type Ec2Config struct {
 	//
 	// This member is required.
 	SubnetArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies which files, folders, and objects to include or exclude when
@@ -48,6 +56,8 @@ type FilterRule struct {
 	// A single filter string that consists of the patterns to include or exclude. The
 	// patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // You can use API filters to narrow down the list of resources returned by
@@ -74,6 +84,8 @@ type LocationFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single entry in a list of locations. LocationListEntry returns an
@@ -100,6 +112,8 @@ type LocationListEntry struct {
 	// export path to mount the location. For Amazon S3, it's the prefix path that you
 	// mount to and treat as the root of the location.
 	LocationUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the mount options that are available for DataSync to access an NFS
@@ -125,6 +139,8 @@ type NfsMountOptions struct {
 	// sessions, directory delegations, and parallel data processing. Version 4.1 also
 	// includes all features available in version 4.0.
 	Version NfsVersion
+
+	noSmithyDocumentSerde
 }
 
 // A list of Amazon Resource Names (ARNs) of agents to use for a Network File
@@ -135,6 +151,8 @@ type OnPremConfig struct {
 	//
 	// This member is required.
 	AgentArns []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the options that are available to control the behavior of a
@@ -309,6 +327,8 @@ type Options struct {
 	// at the end of the transfer, but all data transmissions are integrity-checked
 	// with checksum verification during the transfer.
 	VerifyMode VerifyMode
+
+	noSmithyDocumentSerde
 }
 
 // The VPC endpoint, subnet, and security group that an agent uses to access IP
@@ -334,6 +354,8 @@ type PrivateLinkConfig struct {
 	// The ID of the VPC endpoint that is configured for an agent. An agent that is
 	// configured with a VPC endpoint will not be accessible over the public internet.
 	VpcEndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
@@ -349,6 +371,8 @@ type S3Config struct {
 	//
 	// This member is required.
 	BucketAccessRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the mount options that are available for DataSync to access an SMB
@@ -360,6 +384,8 @@ type SmbMountOptions struct {
 	// DataSync automatically selects a version based on negotiation with the SMB
 	// server.
 	Version SmbVersion
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single entry in a list of AWS resource tags. TagListEntry returns
@@ -375,6 +401,8 @@ type TagListEntry struct {
 
 	// The value for an AWS resource tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single entry in a list of task executions. TaskExecutionListEntry
@@ -389,6 +417,8 @@ type TaskExecutionListEntry struct {
 
 	// The Amazon Resource Name (ARN) of the task that was executed.
 	TaskExecutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the detailed result of a TaskExecution operation. This result includes
@@ -426,6 +456,8 @@ type TaskExecutionResultDetail struct {
 
 	// The status of the VERIFYING phase.
 	VerifyStatus PhaseStatus
+
+	noSmithyDocumentSerde
 }
 
 // You can use API filters to narrow down the list of resources returned by
@@ -453,6 +485,8 @@ type TaskFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single entry in a list of tasks. TaskListEntry returns an array
@@ -470,6 +504,8 @@ type TaskListEntry struct {
 
 	// The Amazon Resource Name (ARN) of the task.
 	TaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the schedule you want your task to use for repeated executions. For
@@ -482,4 +518,8 @@ type TaskSchedule struct {
 	//
 	// This member is required.
 	ScheduleExpression *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

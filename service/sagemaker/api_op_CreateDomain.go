@@ -119,6 +119,8 @@ type CreateDomainInput struct {
 	// Search API. Tags that you specify for the Domain are also added to all Apps that
 	// the Domain launches.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDomainOutput struct {
@@ -131,6 +133,8 @@ type CreateDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

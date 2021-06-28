@@ -51,6 +51,8 @@ type EnterStandbyInput struct {
 
 	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type EnterStandbyOutput struct {
@@ -60,6 +62,8 @@ type EnterStandbyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnterStandbyMiddlewares(stack *middleware.Stack, options Options) (err error) {

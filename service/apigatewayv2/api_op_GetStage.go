@@ -40,6 +40,8 @@ type GetStageInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStageOutput struct {
@@ -96,6 +98,8 @@ type GetStageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type DeleteDBClusterSnapshotInput struct {
 	//
 	// This member is required.
 	DBClusterSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBClusterSnapshotOutput struct {
@@ -46,6 +48,8 @@ type DeleteDBClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

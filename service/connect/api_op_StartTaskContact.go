@@ -71,6 +71,8 @@ type StartTaskContactInput struct {
 
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
 	References map[string]types.Reference
+
+	noSmithyDocumentSerde
 }
 
 type StartTaskContactOutput struct {
@@ -80,6 +82,8 @@ type StartTaskContactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTaskContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

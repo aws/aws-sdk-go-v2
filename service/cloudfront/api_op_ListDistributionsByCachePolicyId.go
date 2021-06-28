@@ -48,6 +48,8 @@ type ListDistributionsByCachePolicyIdInput struct {
 
 	// The maximum number of distribution IDs that you want in the response.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListDistributionsByCachePolicyIdOutput struct {
@@ -57,6 +59,8 @@ type ListDistributionsByCachePolicyIdOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDistributionsByCachePolicyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {

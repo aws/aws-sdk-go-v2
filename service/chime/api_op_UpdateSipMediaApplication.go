@@ -39,6 +39,8 @@ type UpdateSipMediaApplicationInput struct {
 
 	// The new name for the specified SIP media application.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSipMediaApplicationOutput struct {
@@ -48,6 +50,8 @@ type UpdateSipMediaApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSipMediaApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -71,6 +71,8 @@ type CreateGroupInput struct {
 
 	// The tags to add to the group. A tag is key-value pair string.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGroupOutput struct {
@@ -93,6 +95,8 @@ type CreateGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

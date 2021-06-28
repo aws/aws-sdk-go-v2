@@ -44,6 +44,8 @@ type DescribePublisherInput struct {
 	// have registered as an extension publisher, DescribePublisher returns information
 	// about your own publisher account.
 	PublisherId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePublisherOutput struct {
@@ -64,6 +66,8 @@ type DescribePublisherOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePublisherMiddlewares(stack *middleware.Stack, options Options) (err error) {

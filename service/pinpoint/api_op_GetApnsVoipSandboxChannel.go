@@ -35,6 +35,8 @@ type GetApnsVoipSandboxChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetApnsVoipSandboxChannelOutput struct {
@@ -47,6 +49,8 @@ type GetApnsVoipSandboxChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApnsVoipSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

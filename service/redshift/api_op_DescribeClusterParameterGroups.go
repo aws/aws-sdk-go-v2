@@ -78,6 +78,8 @@ type DescribeClusterParameterGroupsInput struct {
 	// Amazon Redshift returns a response with the parameter groups that have either or
 	// both of these tag values associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output from the DescribeClusterParameterGroups action.
@@ -96,6 +98,8 @@ type DescribeClusterParameterGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClusterParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

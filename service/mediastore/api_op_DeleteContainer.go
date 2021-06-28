@@ -34,11 +34,15 @@ type DeleteContainerInput struct {
 	//
 	// This member is required.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteContainerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteContainerMiddlewares(stack *middleware.Stack, options Options) (err error) {

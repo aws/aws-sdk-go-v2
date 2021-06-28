@@ -76,6 +76,8 @@ type DescribeApplicableIndividualAssessmentsInput struct {
 	// Name of a database engine that the specified replication instance supports as a
 	// target.
 	TargetEngineName *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -98,6 +100,8 @@ type DescribeApplicableIndividualAssessmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

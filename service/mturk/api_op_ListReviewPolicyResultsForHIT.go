@@ -57,6 +57,8 @@ type ListReviewPolicyResultsForHITInput struct {
 	// Specify if the operation should retrieve a list of the results computed by the
 	// Review Policies.
 	RetrieveResults *bool
+
+	noSmithyDocumentSerde
 }
 
 type ListReviewPolicyResultsForHITOutput struct {
@@ -85,6 +87,8 @@ type ListReviewPolicyResultsForHITOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {

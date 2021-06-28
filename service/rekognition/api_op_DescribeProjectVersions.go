@@ -60,6 +60,8 @@ type DescribeProjectVersionsInput struct {
 	// following ARN.
 	// arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123.
 	VersionNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProjectVersionsOutput struct {
@@ -75,6 +77,8 @@ type DescribeProjectVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProjectVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -26,11 +26,14 @@ func (c *Client) EmptyOperation(ctx context.Context, params *EmptyOperationInput
 }
 
 type EmptyOperationInput struct {
+	noSmithyDocumentSerde
 }
 
 type EmptyOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEmptyOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {

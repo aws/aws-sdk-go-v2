@@ -147,6 +147,8 @@ type CreateFileSystemInput struct {
 
 	// The Microsoft Windows configuration for the file system being created.
 	WindowsConfiguration *types.CreateFileSystemWindowsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The response object returned after the file system is created.
@@ -157,6 +159,8 @@ type CreateFileSystemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {

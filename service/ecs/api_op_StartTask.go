@@ -125,6 +125,8 @@ type StartTaskInput struct {
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type StartTaskOutput struct {
@@ -138,6 +140,8 @@ type StartTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

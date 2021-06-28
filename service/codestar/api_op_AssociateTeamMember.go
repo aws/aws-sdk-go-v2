@@ -53,6 +53,8 @@ type AssociateTeamMemberInput struct {
 	// Whether the team member is allowed to use an SSH public/private key pair to
 	// remotely access project resources, for example Amazon EC2 instances.
 	RemoteAccessAllowed bool
+
+	noSmithyDocumentSerde
 }
 
 type AssociateTeamMemberOutput struct {
@@ -63,6 +65,8 @@ type AssociateTeamMemberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateTeamMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

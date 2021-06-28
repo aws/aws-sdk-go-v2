@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type AccountAggregationSource struct {
 
 	// The source regions being aggregated.
 	AwsRegions []string
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether an AWS Config rule is compliant based on account ID, region,
@@ -39,6 +42,8 @@ type AggregateComplianceByConfigRule struct {
 
 	// The name of the AWS Config rule.
 	ConfigRuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides aggregate compliance of the conformance pack. Indicates whether a
@@ -63,6 +68,8 @@ type AggregateComplianceByConformancePack struct {
 
 	// The name of the conformance pack.
 	ConformancePackName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the number of compliant and noncompliant rules for one or more accounts
@@ -74,6 +81,8 @@ type AggregateComplianceCount struct {
 
 	// The 12-digit account ID or region based on the GroupByKey value.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the number of compliant and noncompliant rules within a conformance
@@ -100,6 +109,8 @@ type AggregateConformancePackCompliance struct {
 	// Total number of compliant rules, noncompliant rules, and the rules that do not
 	// have any applicable resources to evaluate upon resulting in insufficient data.
 	TotalRuleCount int32
+
+	noSmithyDocumentSerde
 }
 
 // The number of conformance packs that are compliant and noncompliant.
@@ -110,6 +121,8 @@ type AggregateConformancePackComplianceCount struct {
 
 	// Number of noncompliant conformance packs.
 	NonCompliantConformancePackCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Filters the conformance packs based on an account ID, region, compliance type,
@@ -127,6 +140,8 @@ type AggregateConformancePackComplianceFilters struct {
 
 	// The name of the conformance pack.
 	ConformancePackName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of compliance based on either account ID or region.
@@ -137,6 +152,8 @@ type AggregateConformancePackComplianceSummary struct {
 
 	// Groups the result based on AWS Account ID or AWS Region.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters the results based on account ID and region.
@@ -147,6 +164,8 @@ type AggregateConformancePackComplianceSummaryFilters struct {
 
 	// The source AWS Region from where the data is aggregated.
 	AwsRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // The current sync status between the source and the aggregator account.
@@ -182,6 +201,8 @@ type AggregatedSourceStatus struct {
 
 	// The source account or an organization.
 	SourceType AggregatedSourceType
+
+	noSmithyDocumentSerde
 }
 
 // The details of an AWS Config evaluation for an account ID and region in an
@@ -212,6 +233,8 @@ type AggregateEvaluationResult struct {
 
 	// The time when AWS Config recorded the aggregate evaluation result.
 	ResultRecordedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The details that identify a resource that is collected by AWS Config aggregator,
@@ -241,6 +264,8 @@ type AggregateResourceIdentifier struct {
 
 	// The name of the AWS resource.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the authorizations granted to aggregator accounts and
@@ -258,6 +283,8 @@ type AggregationAuthorization struct {
 
 	// The time stamp when the aggregation authorization was created.
 	CreationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The detailed configuration of a specified resource.
@@ -325,6 +352,8 @@ type BaseConfigurationItem struct {
 
 	// The version number of the resource configuration.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether an AWS resource or AWS Config rule is compliant and provides
@@ -345,6 +374,8 @@ type Compliance struct {
 	// supports only COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA values. AWS Config
 	// does not support the NOT_APPLICABLE value for the Compliance data type.
 	ComplianceType ComplianceType
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether an AWS Config rule is compliant. A rule is compliant if all of
@@ -357,6 +388,8 @@ type ComplianceByConfigRule struct {
 
 	// The name of the AWS Config rule.
 	ConfigRuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether an AWS resource that is evaluated according to one or more AWS
@@ -374,6 +407,8 @@ type ComplianceByResource struct {
 
 	// The type of the AWS resource that was evaluated.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // The number of AWS resources or AWS Config rules responsible for the current
@@ -386,6 +421,8 @@ type ComplianceContributorCount struct {
 	// The number of AWS resources or AWS Config rules responsible for the current
 	// compliance of the item.
 	CappedCount int32
+
+	noSmithyDocumentSerde
 }
 
 // The number of AWS Config rules or AWS resources that are compliant and
@@ -402,6 +439,8 @@ type ComplianceSummary struct {
 	// The number of AWS Config rules or AWS resources that are noncompliant, up to a
 	// maximum of 25 for rules and 100 for resources.
 	NonCompliantResourceCount *ComplianceContributorCount
+
+	noSmithyDocumentSerde
 }
 
 // The number of AWS resources of a specific type that are compliant or
@@ -414,6 +453,8 @@ type ComplianceSummaryByResourceType struct {
 
 	// The type of AWS resource.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides status of the delivery of the snapshot or the configuration history to
@@ -438,6 +479,8 @@ type ConfigExportDeliveryInfo struct {
 
 	// The time that the next delivery occurs.
 	NextDeliveryTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An AWS Config rule represents an AWS Lambda function that you create for a
@@ -516,6 +559,8 @@ type ConfigRule struct {
 	// not specify a scope, evaluations are triggered when any resource in the
 	// recording group changes. The scope can be empty.
 	Scope *Scope
+
+	noSmithyDocumentSerde
 }
 
 // Filters the compliance results based on account ID, region, compliance type, and
@@ -535,6 +580,8 @@ type ConfigRuleComplianceFilters struct {
 
 	// The name of the AWS Config rule.
 	ConfigRuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters the results based on the account IDs and regions.
@@ -545,6 +592,8 @@ type ConfigRuleComplianceSummaryFilters struct {
 
 	// The source region where the data is aggregated.
 	AwsRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Status information for your AWS managed Config rules. The status includes
@@ -599,6 +648,8 @@ type ConfigRuleEvaluationStatus struct {
 	// The time that AWS Config last successfully invoked the AWS Config rule to
 	// evaluate your AWS resources.
 	LastSuccessfulInvocationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides options for how often AWS Config delivers configuration snapshots to
@@ -643,6 +694,8 @@ type ConfigSnapshotDeliveryProperties struct {
 
 	// The frequency with which AWS Config delivers configuration snapshots.
 	DeliveryFrequency MaximumExecutionFrequency
+
+	noSmithyDocumentSerde
 }
 
 // A list that contains the status of the delivery of the configuration stream
@@ -664,6 +717,8 @@ type ConfigStreamDeliveryInfo struct {
 
 	// The time from the last status change.
 	LastStatusChangeTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The details about the configuration aggregator, including information about
@@ -690,6 +745,8 @@ type ConfigurationAggregator struct {
 
 	// Provides an organization and list of regions to be aggregated.
 	OrganizationAggregationSource *OrganizationAggregationSource
+
+	noSmithyDocumentSerde
 }
 
 // A list that contains detailed configurations of a specified resource.
@@ -779,6 +836,8 @@ type ConfigurationItem struct {
 
 	// The version number of the resource configuration.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the recording of configuration changes of an AWS
@@ -797,6 +856,8 @@ type ConfigurationRecorder struct {
 	// Amazon Resource Name (ARN) of the IAM role used to describe the AWS resources
 	// associated with the account.
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The current status of the configuration recorder.
@@ -825,6 +886,8 @@ type ConfigurationRecorderStatus struct {
 
 	// Specifies whether or not the recorder is currently recording.
 	Recording bool
+
+	noSmithyDocumentSerde
 }
 
 // Filters the conformance pack by compliance types and AWS Config rule names.
@@ -836,6 +899,8 @@ type ConformancePackComplianceFilters struct {
 
 	// Filters the results by AWS Config rule names.
 	ConfigRuleNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Summary includes the name and status of the conformance pack.
@@ -851,6 +916,8 @@ type ConformancePackComplianceSummary struct {
 	//
 	// This member is required.
 	ConformancePackName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns details of a conformance pack. A conformance pack is a collection of AWS
@@ -888,6 +955,8 @@ type ConformancePackDetail struct {
 
 	// Last time when conformation pack update was requested.
 	LastUpdateRequestedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Filters a conformance pack by AWS Config rule names, compliance types, AWS
@@ -907,6 +976,8 @@ type ConformancePackEvaluationFilters struct {
 
 	// Filters the results by the resource type (for example, "AWS::EC2::Instance").
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a conformance pack evaluation. Provides AWS Config rule and AWS
@@ -937,6 +1008,8 @@ type ConformancePackEvaluationResult struct {
 
 	// Supplementary information about how the evaluation determined the compliance.
 	Annotation *string
+
+	noSmithyDocumentSerde
 }
 
 // Input parameters in the form of key-value pairs for the conformance pack, both
@@ -953,6 +1026,8 @@ type ConformancePackInputParameter struct {
 	//
 	// This member is required.
 	ParameterValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Compliance information of one or more AWS Config rules within a conformance
@@ -970,6 +1045,8 @@ type ConformancePackRuleCompliance struct {
 	// problems while meeting objectives. A control can align with a specific
 	// compliance regime or map to internal controls defined by an organization.
 	Controls []string
+
+	noSmithyDocumentSerde
 }
 
 // Status details of a conformance pack.
@@ -1026,6 +1103,8 @@ type ConformancePackStatusDetail struct {
 
 	// Last time when conformation pack creation and update was successful.
 	LastUpdateCompletedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The channel through which AWS Config delivers notifications and updated
@@ -1067,6 +1146,8 @@ type DeliveryChannel struct {
 	// (https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html)
 	// in the AWS Config Developer Guide.
 	SnsTopicARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of a specified delivery channel. Valid values: Success | Failure
@@ -1086,6 +1167,8 @@ type DeliveryChannelStatus struct {
 
 	// The name of the delivery channel.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies an AWS resource and indicates whether it complies with the AWS Config
@@ -1124,6 +1207,8 @@ type Evaluation struct {
 
 	// Supplementary information about how the evaluation determined the compliance.
 	Annotation *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of an AWS Config evaluation. Provides the AWS resource that was
@@ -1153,6 +1238,8 @@ type EvaluationResult struct {
 	// token identifies the rule, the AWS resource being evaluated, and the event that
 	// triggered the evaluation.
 	ResultToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Uniquely identifies an evaluation result.
@@ -1167,6 +1254,8 @@ type EvaluationResultIdentifier struct {
 	// notification, or it can indicate when AWS Config delivered the configuration
 	// snapshot, depending on which event triggered the evaluation.
 	OrderingTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Identifies an AWS Config rule that evaluated an AWS resource, and provides the
@@ -1181,6 +1270,8 @@ type EvaluationResultQualifier struct {
 
 	// The type of AWS resource that was evaluated.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // The controls that AWS Config uses for executing remediations.
@@ -1188,6 +1279,8 @@ type ExecutionControls struct {
 
 	// A SsmControls object.
 	SsmControls *SsmControls
+
+	noSmithyDocumentSerde
 }
 
 // Identifies an AWS resource and indicates whether it complies with the AWS Config
@@ -1219,6 +1312,8 @@ type ExternalEvaluation struct {
 	// Supplementary information about the reason of compliance. For example, this task
 	// was completed on a specific date.
 	Annotation *string
+
+	noSmithyDocumentSerde
 }
 
 // List of each of the failed delete remediation exceptions with specific reasons.
@@ -1230,6 +1325,8 @@ type FailedDeleteRemediationExceptionsBatch struct {
 	// Returns a failure message for delete remediation exception. For example, AWS
 	// Config creates an exception due to an internal error.
 	FailureMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // List of each of the failed remediations with specific reasons.
@@ -1240,6 +1337,8 @@ type FailedRemediationBatch struct {
 
 	// Returns a failure message. For example, the resource is already compliant.
 	FailureMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // List of each of the failed remediation exceptions with specific reasons.
@@ -1250,6 +1349,8 @@ type FailedRemediationExceptionBatch struct {
 
 	// Returns a failure message. For example, the auto-remediation has failed.
 	FailureMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the fields such as name of the field.
@@ -1257,6 +1358,8 @@ type FieldInfo struct {
 
 	// Name of the field.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The count of resources that are grouped by the group name.
@@ -1272,6 +1375,8 @@ type GroupedResourceCount struct {
 	//
 	// This member is required.
 	ResourceCount int64
+
+	noSmithyDocumentSerde
 }
 
 // Organization config rule creation or deletion status in each member account.
@@ -1338,6 +1443,8 @@ type MemberAccountStatus struct {
 
 	// The timestamp of the last status update.
 	LastUpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // This object contains regions to set up the aggregator and an IAM role to
@@ -1355,6 +1462,8 @@ type OrganizationAggregationSource struct {
 
 	// The source regions being aggregated.
 	AwsRegions []string
+
+	noSmithyDocumentSerde
 }
 
 // An organization config rule that has information about config rules that AWS
@@ -1382,6 +1491,8 @@ type OrganizationConfigRule struct {
 
 	// An OrganizationManagedRuleMetadata object.
 	OrganizationManagedRuleMetadata *OrganizationManagedRuleMetadata
+
+	noSmithyDocumentSerde
 }
 
 // Returns the status for an organization config rule in an organization.
@@ -1446,6 +1557,8 @@ type OrganizationConfigRuleStatus struct {
 
 	// The timestamp of the last update.
 	LastUpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An organization conformance pack that has information about conformance packs
@@ -1480,6 +1593,8 @@ type OrganizationConformancePack struct {
 
 	// A comma-separated list of accounts excluded from organization conformance pack.
 	ExcludedAccounts []string
+
+	noSmithyDocumentSerde
 }
 
 // Organization conformance pack creation or deletion status in each member
@@ -1547,6 +1662,8 @@ type OrganizationConformancePackDetailedStatus struct {
 
 	// The timestamp of the last status update.
 	LastUpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Returns the status for an organization conformance pack in an organization.
@@ -1612,6 +1729,8 @@ type OrganizationConformancePackStatus struct {
 
 	// The timestamp of the last update.
 	LastUpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object that specifies organization custom rule metadata such as resource
@@ -1672,6 +1791,8 @@ type OrganizationCustomRuleMetadata struct {
 	// The optional part of a key-value pair that make up a tag. A value acts as a
 	// descriptor within a tag category (key).
 	TagValueScope *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that specifies organization managed rule metadata such as resource
@@ -1714,6 +1835,8 @@ type OrganizationManagedRuleMetadata struct {
 	// The optional part of a key-value pair that make up a tag. A value acts as a
 	// descriptor within a tag category (key).
 	TagValueScope *string
+
+	noSmithyDocumentSerde
 }
 
 // Status filter object to filter results based on specific member account ID or
@@ -1760,6 +1883,8 @@ type OrganizationResourceDetailedStatusFilters struct {
 	// * UPDATE_FAILED when conformance pack deletion has failed in
 	// the member account.
 	Status OrganizationResourceDetailedStatus
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the account ID and region of an aggregator account
@@ -1771,6 +1896,8 @@ type PendingAggregationRequest struct {
 
 	// The region requesting to aggregate data.
 	RequesterAwsRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the query.
@@ -1778,6 +1905,8 @@ type QueryInfo struct {
 
 	// Returns a FieldInfo object.
 	SelectFields []FieldInfo
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the types of AWS resource for which AWS Config records configuration
@@ -1831,6 +1960,8 @@ type RecordingGroup struct {
 	// Resource Types
 	// (https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources).
 	ResourceTypes []ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // The relationship of the related resource to the main resource.
@@ -1847,6 +1978,8 @@ type Relationship struct {
 
 	// The resource type of the related resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the details about the remediation configuration that
@@ -1904,6 +2037,8 @@ type RemediationConfiguration struct {
 	// backward incompatible changes to the SSM document, you must call
 	// PutRemediationConfiguration API again to ensure the remediations can run.
 	TargetVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the details about the remediation exception. The
@@ -1931,6 +2066,8 @@ type RemediationException struct {
 
 	// An explanation of an remediation exception.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The details that identify a resource within AWS Config, including the resource
@@ -1942,6 +2079,8 @@ type RemediationExceptionResourceKey struct {
 
 	// The type of a resource.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details of the current status of the invoked remediation action for
@@ -1963,6 +2102,8 @@ type RemediationExecutionStatus struct {
 
 	// Details of every step.
 	StepDetails []RemediationExecutionStep
+
+	noSmithyDocumentSerde
 }
 
 // Name of the step from the SSM document.
@@ -1982,6 +2123,8 @@ type RemediationExecutionStep struct {
 
 	// The time when the step stopped.
 	StopTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The value is either a dynamic (resource) value or a static value. You must
@@ -1993,6 +2136,8 @@ type RemediationParameterValue struct {
 
 	// The value is static and does not change at run-time.
 	StaticValue *StaticValue
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the resource type and the number of resources.
@@ -2003,6 +2148,8 @@ type ResourceCount struct {
 
 	// The resource type (for example, "AWS::EC2::Instance").
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Filters the resource count based on account ID, region, and resource type.
@@ -2016,6 +2163,8 @@ type ResourceCountFilters struct {
 
 	// The type of the AWS resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Filters the results by resource account ID, region, resource ID, and resource
@@ -2033,6 +2182,8 @@ type ResourceFilters struct {
 
 	// The name of the resource.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // The details that identify a resource that is discovered by AWS Config, including
@@ -2050,6 +2201,8 @@ type ResourceIdentifier struct {
 
 	// The type of resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // The details that identify a resource within AWS Config, including the resource
@@ -2065,6 +2218,8 @@ type ResourceKey struct {
 	//
 	// This member is required.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // The dynamic value of the resource.
@@ -2074,6 +2229,8 @@ type ResourceValue struct {
 	//
 	// This member is required.
 	Value ResourceValueType
+
+	noSmithyDocumentSerde
 }
 
 // An object with the name of the retention configuration and the retention period
@@ -2090,6 +2247,8 @@ type RetentionConfiguration struct {
 	//
 	// This member is required.
 	RetentionPeriodInDays int32
+
+	noSmithyDocumentSerde
 }
 
 // Defines which resources trigger an evaluation for an AWS Config rule. The scope
@@ -2118,6 +2277,8 @@ type Scope struct {
 	// evaluation for the rule. If you specify a value for TagValue, you must also
 	// specify a value for TagKey.
 	TagValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the AWS Config rule owner (AWS or customer), the rule identifier, and
@@ -2143,6 +2304,8 @@ type Source struct {
 	// Provides the source and type of the event that causes AWS Config to evaluate
 	// your AWS resources.
 	SourceDetails []SourceDetail
+
+	noSmithyDocumentSerde
 }
 
 // Provides the source and the message types that trigger AWS Config to evaluate
@@ -2190,6 +2353,8 @@ type SourceDetail struct {
 	// ConfigurationItemChangeNotification and one for
 	// OversizedConfigurationItemChangeNotification.
 	MessageType MessageType
+
+	noSmithyDocumentSerde
 }
 
 // AWS Systems Manager (SSM) specific remediation controls.
@@ -2207,6 +2372,8 @@ type SsmControls struct {
 	// resources, then SSM stops running the automations when the fifth error is
 	// received.
 	ErrorPercentage *int32
+
+	noSmithyDocumentSerde
 }
 
 // The static value of the resource.
@@ -2216,6 +2383,8 @@ type StaticValue struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Status filter object to filter results based on specific member account ID or
@@ -2261,6 +2430,8 @@ type StatusDetailFilters struct {
 	// * UPDATE_FAILED when config rule deletion has failed in the member
 	// account.
 	MemberAccountRuleStatus MemberAccountRuleStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of a stored query.
@@ -2286,6 +2457,8 @@ type StoredQuery struct {
 
 	// The ID of the query.
 	QueryId *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns details of a specific query.
@@ -2309,6 +2482,8 @@ type StoredQueryMetadata struct {
 
 	// A unique description for the query.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // The tags for the resource. The metadata that you apply to a resource to help you
@@ -2324,4 +2499,8 @@ type Tag struct {
 	// The optional part of a key-value pair that make up a tag. A value acts as a
 	// descriptor within a tag category (key).
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

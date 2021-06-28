@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -22,6 +23,8 @@ type ContentRedaction struct {
 	//
 	// This member is required.
 	RedactionType RedactionType
+
+	noSmithyDocumentSerde
 }
 
 // The object that contains the Amazon S3 object location and access role required
@@ -44,6 +47,8 @@ type InputDataConfig struct {
 	// The Amazon S3 prefix you specify to access the plain text files that you use to
 	// tune your custom language model.
 	TuningDataS3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about when a transcription job should be executed.
@@ -64,6 +69,8 @@ type JobExecutionSettings struct {
 	// specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn
 	// field.
 	DataAccessRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure used to describe a custom language model.
@@ -100,6 +107,8 @@ type LanguageModel struct {
 	// field is true then you are running the most up-to-date version of the base model
 	// in your custom language model.
 	UpgradeAvailability *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes the input media file in a transcription request.
@@ -111,6 +120,8 @@ type Media struct {
 	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide.
 	MediaFileUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the location of a medical transcript.
@@ -120,6 +131,8 @@ type MedicalTranscript struct {
 	// medical transcript. This URI points to the S3 bucket you created to store the
 	// medical transcript.
 	TranscriptFileUri *string
+
+	noSmithyDocumentSerde
 }
 
 // The data structure that contains the information for a medical transcription
@@ -222,6 +235,8 @@ type MedicalTranscriptionJob struct {
 	// patient-physician dialogues. DICTATION is the setting for physicians speaking
 	// their notes after seeing a patient. For more information, see how-it-works-med
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a transcription job.
@@ -263,6 +278,8 @@ type MedicalTranscriptionJobSummary struct {
 
 	// The speech of the clinician in the input audio.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // Optional settings for the StartMedicalTranscriptionJob operation.
@@ -305,6 +322,8 @@ type MedicalTranscriptionSetting struct {
 
 	// The name of the vocabulary to use when processing a medical transcription job.
 	VocabularyName *string
+
+	noSmithyDocumentSerde
 }
 
 // The object used to call your custom language model to your transcription job.
@@ -312,6 +331,8 @@ type ModelSettings struct {
 
 	// The name of your custom language model.
 	LanguageModelName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides optional settings for the StartTranscriptionJob operation.
@@ -365,6 +386,8 @@ type Settings struct {
 
 	// The name of a vocabulary to use when processing the transcription job.
 	VocabularyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the location of a transcription.
@@ -383,6 +406,8 @@ type Transcript struct {
 	// Amazon Transcribe, this is a shareable URL that provides secure access to that
 	// location.
 	TranscriptFileUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an asynchronous transcription job that was created with the
@@ -483,6 +508,8 @@ type TranscriptionJob struct {
 
 	// The status of the transcription job.
 	TranscriptionJobStatus TranscriptionJobStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of information about a transcription job.
@@ -531,6 +558,8 @@ type TranscriptionJobSummary struct {
 	// The status of the transcription job. When the status is COMPLETED, use the
 	// GetTranscriptionJob operation to get the results of the transcription.
 	TranscriptionJobStatus TranscriptionJobStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a vocabulary filter.
@@ -545,6 +574,8 @@ type VocabularyFilterInfo struct {
 	// The name of the vocabulary filter. The name must be unique in the account that
 	// holds the filter.
 	VocabularyFilterName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a custom vocabulary.
@@ -562,4 +593,8 @@ type VocabularyInfo struct {
 	// The processing state of the vocabulary. If the state is READY you can use the
 	// vocabulary in a StartTranscriptionJob request.
 	VocabularyState VocabularyState
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

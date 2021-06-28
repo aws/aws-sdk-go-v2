@@ -36,6 +36,8 @@ type GetJobBookmarkInput struct {
 
 	// The unique run identifier associated with this job run.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetJobBookmarkOutput struct {
@@ -45,6 +47,8 @@ type GetJobBookmarkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetJobBookmarkMiddlewares(stack *middleware.Stack, options Options) (err error) {

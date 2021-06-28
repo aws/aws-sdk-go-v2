@@ -39,6 +39,8 @@ type UpdateSMBFileShareVisibilityInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSMBFileShareVisibilityOutput struct {
@@ -49,6 +51,8 @@ type UpdateSMBFileShareVisibilityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSMBFileShareVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {

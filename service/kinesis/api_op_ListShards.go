@@ -80,6 +80,8 @@ type ListShardsInput struct {
 	// The name of the data stream whose shards you want to list. You cannot specify
 	// this parameter if you specify the NextToken parameter.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListShardsOutput struct {
@@ -104,6 +106,8 @@ type ListShardsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListShardsMiddlewares(stack *middleware.Stack, options Options) (err error) {

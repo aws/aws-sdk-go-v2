@@ -37,6 +37,8 @@ type BatchDeleteConnectionInput struct {
 	// The ID of the Data Catalog in which the connections reside. If none is provided,
 	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteConnectionOutput struct {
@@ -50,6 +52,8 @@ type BatchDeleteConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

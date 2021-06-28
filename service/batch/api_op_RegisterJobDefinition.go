@@ -102,6 +102,8 @@ type RegisterJobDefinitionInput struct {
 	// (https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html) in the
 	// AWS Batch User Guide.
 	Timeout *types.JobTimeout
+
+	noSmithyDocumentSerde
 }
 
 type RegisterJobDefinitionOutput struct {
@@ -123,6 +125,8 @@ type RegisterJobDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

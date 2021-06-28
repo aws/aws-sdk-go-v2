@@ -37,6 +37,8 @@ type InferICD10CMInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type InferICD10CMOutput struct {
@@ -59,6 +61,8 @@ type InferICD10CMOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInferICD10CMMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type GetIPSetInput struct {
 	//
 	// This member is required.
 	IPSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIPSetOutput struct {
@@ -56,6 +58,8 @@ type GetIPSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

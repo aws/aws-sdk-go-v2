@@ -53,6 +53,8 @@ type UpdateGatewayInformationInput struct {
 
 	// A value that indicates the time zone of the gateway.
 	GatewayTimezone *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
@@ -68,6 +70,8 @@ type UpdateGatewayInformationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGatewayInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {

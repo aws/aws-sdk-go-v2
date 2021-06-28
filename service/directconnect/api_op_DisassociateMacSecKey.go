@@ -43,6 +43,8 @@ type DisassociateMacSecKeyInput struct {
 	//
 	// This member is required.
 	SecretARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateMacSecKeyOutput struct {
@@ -57,6 +59,8 @@ type DisassociateMacSecKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateMacSecKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

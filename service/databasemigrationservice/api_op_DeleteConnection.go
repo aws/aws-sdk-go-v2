@@ -39,6 +39,8 @@ type DeleteConnectionInput struct {
 	//
 	// This member is required.
 	ReplicationInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -49,6 +51,8 @@ type DeleteConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

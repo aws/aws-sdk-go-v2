@@ -32,11 +32,15 @@ type DeleteBusinessReportScheduleInput struct {
 	//
 	// This member is required.
 	ScheduleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBusinessReportScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBusinessReportScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

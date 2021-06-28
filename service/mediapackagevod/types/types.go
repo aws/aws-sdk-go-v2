@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A MediaPackage VOD Asset resource.
 type AssetShallow struct {
 
@@ -28,6 +32,8 @@ type AssetShallow struct {
 
 	// A collection of tags associated with a resource
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // CDN Authorization credentials
@@ -44,6 +50,8 @@ type Authorization struct {
 	//
 	// This member is required.
 	SecretsRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A CMAF encryption configuration.
@@ -59,6 +67,8 @@ type CmafEncryption struct {
 	// used in conjunction with the key for encrypting blocks. If you don't specify a
 	// value, then MediaPackage creates the constant initialization vector (IV).
 	ConstantInitializationVector *string
+
+	noSmithyDocumentSerde
 }
 
 // A CMAF packaging configuration.
@@ -82,6 +92,8 @@ type CmafPackage struct {
 	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
 	// nearest multiple of the source fragment duration.
 	SegmentDurationSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
@@ -92,6 +104,8 @@ type DashEncryption struct {
 	//
 	// This member is required.
 	SpekeKeyProvider *SpekeKeyProvider
+
+	noSmithyDocumentSerde
 }
 
 // A DASH manifest configuration.
@@ -116,6 +130,8 @@ type DashManifest struct {
 
 	// A StreamSelection configuration.
 	StreamSelection *StreamSelection
+
+	noSmithyDocumentSerde
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
@@ -154,6 +170,8 @@ type DashPackage struct {
 	// $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included
 	// in each SegmentTemplate, with $Number$ media URLs.
 	SegmentTemplateFormat SegmentTemplateFormat
+
+	noSmithyDocumentSerde
 }
 
 // Configure egress access logging.
@@ -161,6 +179,8 @@ type EgressAccessLogs struct {
 
 	// Customize the log group name.
 	LogGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The endpoint URL used to access an Asset using one PackagingConfiguration.
@@ -171,6 +191,8 @@ type EgressEndpoint struct {
 
 	// The URL of the parent manifest for the repackaged Asset.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP Live Streaming (HLS) encryption configuration.
@@ -188,6 +210,8 @@ type HlsEncryption struct {
 
 	// The encryption method to use.
 	EncryptionMethod EncryptionMethod
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP Live Streaming (HLS) manifest configuration.
@@ -222,6 +246,8 @@ type HlsManifest struct {
 
 	// A StreamSelection configuration.
 	StreamSelection *StreamSelection
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP Live Streaming (HLS) packaging configuration.
@@ -241,6 +267,8 @@ type HlsPackage struct {
 
 	// When enabled, audio streams will be placed in rendition groups in the output.
 	UseAudioRenditionGroup bool
+
+	noSmithyDocumentSerde
 }
 
 // A Microsoft Smooth Streaming (MSS) encryption configuration.
@@ -251,6 +279,8 @@ type MssEncryption struct {
 	//
 	// This member is required.
 	SpekeKeyProvider *SpekeKeyProvider
+
+	noSmithyDocumentSerde
 }
 
 // A Microsoft Smooth Streaming (MSS) manifest configuration.
@@ -261,6 +291,8 @@ type MssManifest struct {
 
 	// A StreamSelection configuration.
 	StreamSelection *StreamSelection
+
+	noSmithyDocumentSerde
 }
 
 // A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
@@ -276,6 +308,8 @@ type MssPackage struct {
 
 	// The duration (in seconds) of each segment.
 	SegmentDurationSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // A MediaPackage VOD PackagingConfiguration resource.
@@ -304,6 +338,8 @@ type PackagingConfiguration struct {
 
 	// A collection of tags associated with a resource
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A MediaPackage VOD PackagingGroup resource.
@@ -326,6 +362,8 @@ type PackagingGroup struct {
 
 	// A collection of tags associated with a resource
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration for accessing an external Secure Packager and Encoder Key
@@ -347,6 +385,8 @@ type SpekeKeyProvider struct {
 	//
 	// This member is required.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // A StreamSelection configuration.
@@ -360,4 +400,8 @@ type StreamSelection struct {
 
 	// A directive that determines the order of streams in the output.
 	StreamOrder StreamOrder
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

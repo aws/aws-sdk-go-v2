@@ -50,11 +50,15 @@ type UpdateRoleInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the IAM
 	// User Guide.
 	MaxSessionDuration *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

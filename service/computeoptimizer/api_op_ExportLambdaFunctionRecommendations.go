@@ -89,6 +89,8 @@ type ExportLambdaFunctionRecommendationsInput struct {
 	// accounts are not included in the export if this parameter, or the account IDs
 	// parameter, is omitted.
 	IncludeMemberAccounts bool
+
+	noSmithyDocumentSerde
 }
 
 type ExportLambdaFunctionRecommendationsOutput struct {
@@ -105,6 +107,8 @@ type ExportLambdaFunctionRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

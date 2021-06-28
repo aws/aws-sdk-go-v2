@@ -39,6 +39,8 @@ type DeleteSegmentInput struct {
 	//
 	// This member is required.
 	SegmentId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSegmentOutput struct {
@@ -51,6 +53,8 @@ type DeleteSegmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

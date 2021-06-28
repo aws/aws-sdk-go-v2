@@ -35,6 +35,8 @@ type DeleteEmailChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEmailChannelOutput struct {
@@ -47,6 +49,8 @@ type DeleteEmailChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEmailChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

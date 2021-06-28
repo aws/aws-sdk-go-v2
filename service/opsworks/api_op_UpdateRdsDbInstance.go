@@ -42,11 +42,15 @@ type UpdateRdsDbInstanceInput struct {
 
 	// The master user name.
 	DbUser *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRdsDbInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRdsDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

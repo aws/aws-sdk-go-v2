@@ -50,6 +50,8 @@ type CreateSnapshotScheduleInput struct {
 
 	// An optional set of tags you can use to search for the schedule.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a snapshot schedule. You can set a regular interval for creating
@@ -80,6 +82,8 @@ type CreateSnapshotScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

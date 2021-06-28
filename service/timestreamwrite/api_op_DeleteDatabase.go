@@ -39,11 +39,15 @@ type DeleteDatabaseInput struct {
 	//
 	// This member is required.
 	DatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDatabaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

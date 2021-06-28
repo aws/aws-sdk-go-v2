@@ -42,11 +42,15 @@ type UpdateReplicationSetInput struct {
 
 	// A token ensuring that the action is called only once with the specified details.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateReplicationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateReplicationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

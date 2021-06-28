@@ -49,6 +49,8 @@ type UpdateGroupQueryInput struct {
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGroupQueryOutput struct {
@@ -58,6 +60,8 @@ type UpdateGroupQueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGroupQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

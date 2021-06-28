@@ -79,6 +79,8 @@ type CreateAssetModelInput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssetModelOutput struct {
@@ -105,6 +107,8 @@ type CreateAssetModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

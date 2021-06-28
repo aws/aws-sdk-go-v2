@@ -45,11 +45,15 @@ type UpdateInstanceAttributeInput struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInstanceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

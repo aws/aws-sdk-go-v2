@@ -42,6 +42,8 @@ type PutAggregationAuthorizationInput struct {
 
 	// An array of tag object.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutAggregationAuthorizationOutput struct {
@@ -51,6 +53,8 @@ type PutAggregationAuthorizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAggregationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

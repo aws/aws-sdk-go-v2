@@ -55,11 +55,15 @@ type UpdateTagsForResourceInput struct {
 	// A list of tag keys to remove. If a tag key doesn't exist, it is silently
 	// ignored. Specify at least one of these parameters: TagsToAdd, TagsToRemove.
 	TagsToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTagsForResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

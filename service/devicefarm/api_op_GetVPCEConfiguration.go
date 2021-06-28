@@ -35,6 +35,8 @@ type GetVPCEConfigurationInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetVPCEConfigurationOutput struct {
@@ -44,6 +46,8 @@ type GetVPCEConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -89,6 +89,8 @@ type CopySnapshotInput struct {
 	// manual snapshot. For more information, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool
+
+	noSmithyDocumentSerde
 }
 
 type CopySnapshotOutput struct {
@@ -100,6 +102,8 @@ type CopySnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

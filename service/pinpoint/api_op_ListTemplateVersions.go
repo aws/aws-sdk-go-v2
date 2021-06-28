@@ -51,6 +51,8 @@ type ListTemplateVersionsInput struct {
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTemplateVersionsOutput struct {
@@ -62,6 +64,8 @@ type ListTemplateVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

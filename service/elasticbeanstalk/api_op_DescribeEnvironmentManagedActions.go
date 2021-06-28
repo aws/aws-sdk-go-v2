@@ -38,6 +38,8 @@ type DescribeEnvironmentManagedActionsInput struct {
 
 	// To show only actions with a particular status, specify a status.
 	Status types.ActionStatus
+
+	noSmithyDocumentSerde
 }
 
 // The result message containing a list of managed actions.
@@ -48,6 +50,8 @@ type DescribeEnvironmentManagedActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEnvironmentManagedActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

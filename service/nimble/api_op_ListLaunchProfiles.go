@@ -45,6 +45,8 @@ type ListLaunchProfilesInput struct {
 
 	// A list of states.
 	States []string
+
+	noSmithyDocumentSerde
 }
 
 type ListLaunchProfilesOutput struct {
@@ -57,6 +59,8 @@ type ListLaunchProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLaunchProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

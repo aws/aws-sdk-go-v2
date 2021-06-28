@@ -71,6 +71,8 @@ type ListFirewallRulesInput struct {
 	// processes the rules in a rule group by order of priority, starting from the
 	// lowest setting.
 	Priority *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListFirewallRulesOutput struct {
@@ -86,6 +88,8 @@ type ListFirewallRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFirewallRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

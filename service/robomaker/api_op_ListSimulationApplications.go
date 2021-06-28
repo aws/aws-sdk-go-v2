@@ -54,6 +54,8 @@ type ListSimulationApplicationsInput struct {
 
 	// The version qualifier of the simulation application.
 	VersionQualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSimulationApplicationsOutput struct {
@@ -71,6 +73,8 @@ type ListSimulationApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSimulationApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

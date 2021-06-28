@@ -39,6 +39,8 @@ type ListOriginEndpointsInput struct {
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListOriginEndpointsOutput struct {
@@ -51,6 +53,8 @@ type ListOriginEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOriginEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

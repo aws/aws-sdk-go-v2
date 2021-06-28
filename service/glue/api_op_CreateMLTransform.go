@@ -161,6 +161,8 @@ type CreateMLTransformInput struct {
 	//
 	// * MaxCapacity and NumberOfWorkers must both be at least 1.
 	WorkerType types.WorkerType
+
+	noSmithyDocumentSerde
 }
 
 type CreateMLTransformOutput struct {
@@ -170,6 +172,8 @@ type CreateMLTransformOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DescribeContactFlowInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeContactFlowOutput struct {
@@ -49,6 +51,8 @@ type DescribeContactFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeContactFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

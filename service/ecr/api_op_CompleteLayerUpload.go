@@ -53,6 +53,8 @@ type CompleteLayerUploadInput struct {
 	// The AWS account ID associated with the registry to which to upload layers. If
 	// you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type CompleteLayerUploadOutput struct {
@@ -71,6 +73,8 @@ type CompleteLayerUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCompleteLayerUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

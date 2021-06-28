@@ -39,6 +39,8 @@ type DeactivateKeySigningKeyInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeactivateKeySigningKeyOutput struct {
@@ -51,6 +53,8 @@ type DeactivateKeySigningKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeactivateKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

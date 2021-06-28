@@ -44,6 +44,8 @@ type ListSuiteRunsInput struct {
 	// Must be passed along with suiteDefinitionId. Lists the test suite runs of the
 	// specified test suite based on suite definition version.
 	SuiteDefinitionVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSuiteRunsOutput struct {
@@ -57,6 +59,8 @@ type ListSuiteRunsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSuiteRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {

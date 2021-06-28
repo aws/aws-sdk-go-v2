@@ -42,11 +42,15 @@ type DisassociateBotInput struct {
 
 	// The Amazon Lex V2 bot to disassociate from the instance.
 	LexV2Bot *types.LexV2Bot
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

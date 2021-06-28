@@ -87,6 +87,8 @@ type CreateTaskInput struct {
 	// The key-value pair that represents the tag that you want to add to the resource.
 	// The value can be an empty string.
 	Tags []types.TagListEntry
+
+	noSmithyDocumentSerde
 }
 
 // CreateTaskResponse
@@ -97,6 +99,8 @@ type CreateTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

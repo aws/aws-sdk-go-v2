@@ -42,6 +42,8 @@ type ListFunctionsByCodeSigningConfigInput struct {
 
 	// Maximum number of items to return.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListFunctionsByCodeSigningConfigOutput struct {
@@ -54,6 +56,8 @@ type ListFunctionsByCodeSigningConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFunctionsByCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

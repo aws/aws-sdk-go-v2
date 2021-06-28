@@ -39,6 +39,8 @@ type UpdateProjectInput struct {
 	// be the contents of the file downloaded from the URL provided in an export
 	// project operation.
 	Contents []byte
+
+	noSmithyDocumentSerde
 }
 
 // Result structure used for requests to updated project configuration.
@@ -49,6 +51,8 @@ type UpdateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

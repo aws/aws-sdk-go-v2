@@ -29,6 +29,7 @@ func (c *Client) ListBuckets(ctx context.Context, params *ListBucketsInput, optF
 }
 
 type ListBucketsInput struct {
+	noSmithyDocumentSerde
 }
 
 type ListBucketsOutput struct {
@@ -41,6 +42,8 @@ type ListBucketsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {

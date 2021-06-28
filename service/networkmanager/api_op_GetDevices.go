@@ -46,6 +46,8 @@ type GetDevicesInput struct {
 
 	// The ID of the site.
 	SiteId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDevicesOutput struct {
@@ -58,6 +60,8 @@ type GetDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

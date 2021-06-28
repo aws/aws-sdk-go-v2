@@ -52,6 +52,8 @@ type UpdateRepositoryInput struct {
 	// Working with upstream repositories
 	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
 	Upstreams []types.UpstreamRepository
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRepositoryOutput struct {
@@ -61,6 +63,8 @@ type UpdateRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

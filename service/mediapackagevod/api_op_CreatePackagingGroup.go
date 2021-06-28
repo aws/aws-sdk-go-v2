@@ -43,6 +43,8 @@ type CreatePackagingGroupInput struct {
 
 	// A collection of tags associated with a resource
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePackagingGroupOutput struct {
@@ -67,6 +69,8 @@ type CreatePackagingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

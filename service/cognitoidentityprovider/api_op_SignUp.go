@@ -106,6 +106,8 @@ type SignUpInput struct {
 
 	// The validation data in the request to register a user.
 	ValidationData []types.AttributeType
+
+	noSmithyDocumentSerde
 }
 
 // The response from the server for a registration request.
@@ -128,6 +130,8 @@ type SignUpOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {

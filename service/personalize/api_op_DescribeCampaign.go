@@ -43,6 +43,8 @@ type DescribeCampaignInput struct {
 	//
 	// This member is required.
 	CampaignArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCampaignOutput struct {
@@ -52,6 +54,8 @@ type DescribeCampaignOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {

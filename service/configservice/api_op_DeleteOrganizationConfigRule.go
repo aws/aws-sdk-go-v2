@@ -38,11 +38,15 @@ type DeleteOrganizationConfigRuleInput struct {
 	//
 	// This member is required.
 	OrganizationConfigRuleName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOrganizationConfigRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOrganizationConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

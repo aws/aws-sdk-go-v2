@@ -48,6 +48,8 @@ type ListDistributionsByKeyGroupInput struct {
 
 	// The maximum number of distribution IDs that you want in the response.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListDistributionsByKeyGroupOutput struct {
@@ -57,6 +59,8 @@ type ListDistributionsByKeyGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDistributionsByKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

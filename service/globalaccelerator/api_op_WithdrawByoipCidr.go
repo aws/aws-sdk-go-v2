@@ -39,6 +39,8 @@ type WithdrawByoipCidrInput struct {
 	//
 	// This member is required.
 	Cidr *string
+
+	noSmithyDocumentSerde
 }
 
 type WithdrawByoipCidrOutput struct {
@@ -48,6 +50,8 @@ type WithdrawByoipCidrOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationWithdrawByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {

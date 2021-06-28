@@ -60,6 +60,8 @@ type CountPendingDecisionTasksInput struct {
 	//
 	// This member is required.
 	TaskList *types.TaskList
+
+	noSmithyDocumentSerde
 }
 
 // Contains the count of tasks in a task list.
@@ -76,6 +78,8 @@ type CountPendingDecisionTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCountPendingDecisionTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

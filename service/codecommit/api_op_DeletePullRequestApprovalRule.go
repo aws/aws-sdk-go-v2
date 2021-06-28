@@ -43,6 +43,8 @@ type DeletePullRequestApprovalRuleInput struct {
 	//
 	// This member is required.
 	PullRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePullRequestApprovalRuleOutput struct {
@@ -55,6 +57,8 @@ type DeletePullRequestApprovalRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePullRequestApprovalRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,11 +38,15 @@ type DeleteDatasetContentInput struct {
 	// successfully completed data set. If not specified, "$LATEST_SUCCEEDED" is the
 	// default.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDatasetContentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDatasetContentMiddlewares(stack *middleware.Stack, options Options) (err error) {

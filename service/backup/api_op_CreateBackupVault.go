@@ -52,6 +52,8 @@ type CreateBackupVaultInput struct {
 	// example,
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	EncryptionKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBackupVaultOutput struct {
@@ -74,6 +76,8 @@ type CreateBackupVaultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

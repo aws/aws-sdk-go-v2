@@ -48,6 +48,8 @@ type DescribeAssociationInput struct {
 
 	// The name of the SSM document.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAssociationOutput struct {
@@ -57,6 +59,8 @@ type DescribeAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

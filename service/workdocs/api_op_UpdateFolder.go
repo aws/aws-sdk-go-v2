@@ -48,11 +48,15 @@ type UpdateFolderInput struct {
 	// The resource state of the folder. Only ACTIVE and RECYCLED are accepted values
 	// from the API.
 	ResourceState types.ResourceStateType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFolderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

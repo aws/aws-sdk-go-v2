@@ -38,6 +38,8 @@ type ListAttendeeTagsInput struct {
 	//
 	// This member is required.
 	MeetingId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAttendeeTagsOutput struct {
@@ -47,6 +49,8 @@ type ListAttendeeTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAttendeeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

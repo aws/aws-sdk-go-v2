@@ -58,11 +58,15 @@ type RejectPortfolioShareInput struct {
 	// example, aws servicecatalog reject-portfolio-share --portfolio-id
 	// "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS
 	PortfolioShareType types.PortfolioShareType
+
+	noSmithyDocumentSerde
 }
 
 type RejectPortfolioShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectPortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

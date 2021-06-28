@@ -33,6 +33,8 @@ type GetOutpostInput struct {
 	//
 	// This member is required.
 	OutpostId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetOutpostOutput struct {
@@ -42,6 +44,8 @@ type GetOutpostOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {

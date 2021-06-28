@@ -33,6 +33,8 @@ type GetPresetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPresetOutput struct {
@@ -43,6 +45,8 @@ type GetPresetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPresetMiddlewares(stack *middleware.Stack, options Options) (err error) {

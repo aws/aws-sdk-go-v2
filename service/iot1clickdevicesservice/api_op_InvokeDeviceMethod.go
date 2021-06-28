@@ -40,6 +40,8 @@ type InvokeDeviceMethodInput struct {
 
 	// A JSON encoded string containing the device method request parameters.
 	DeviceMethodParameters *string
+
+	noSmithyDocumentSerde
 }
 
 type InvokeDeviceMethodOutput struct {
@@ -49,6 +51,8 @@ type InvokeDeviceMethodOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInvokeDeviceMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {

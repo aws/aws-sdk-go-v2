@@ -53,6 +53,8 @@ type UpdateCustomRoutingAcceleratorAttributesInput struct {
 	// the S3 bucket prefix, the log file bucket folder structure will include a double
 	// slash (//), like the following: DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCustomRoutingAcceleratorAttributesOutput struct {
@@ -62,6 +64,8 @@ type UpdateCustomRoutingAcceleratorAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCustomRoutingAcceleratorAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

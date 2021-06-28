@@ -49,6 +49,8 @@ type DescribeSnapshotsInput struct {
 	// member is null or empty, all snapshots are returned using the Limit and
 	// NextToken members.
 	SnapshotIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the DescribeSnapshots operation.
@@ -66,6 +68,8 @@ type DescribeSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

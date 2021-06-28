@@ -58,6 +58,8 @@ type UpdateDatabaseInput struct {
 	//
 	// This member is required.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDatabaseOutput struct {
@@ -69,6 +71,8 @@ type UpdateDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

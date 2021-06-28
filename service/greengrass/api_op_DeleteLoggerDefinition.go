@@ -32,11 +32,15 @@ type DeleteLoggerDefinitionInput struct {
 	//
 	// This member is required.
 	LoggerDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLoggerDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

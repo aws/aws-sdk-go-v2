@@ -75,6 +75,8 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	// The number of recommendations that you want returned in a single response
 	// object.
 	PageSize int32
+
+	noSmithyDocumentSerde
 }
 
 type GetSavingsPlansPurchaseRecommendationOutput struct {
@@ -92,6 +94,8 @@ type GetSavingsPlansPurchaseRecommendationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSavingsPlansPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {

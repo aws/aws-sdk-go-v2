@@ -64,11 +64,15 @@ type DeleteVaultInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

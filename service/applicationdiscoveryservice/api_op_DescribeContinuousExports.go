@@ -41,6 +41,8 @@ type DescribeContinuousExportsInput struct {
 
 	// The token from the previous call to DescribeExportTasks.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeContinuousExportsOutput struct {
@@ -53,6 +55,8 @@ type DescribeContinuousExportsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeContinuousExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {

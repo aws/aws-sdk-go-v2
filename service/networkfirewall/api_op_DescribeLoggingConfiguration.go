@@ -37,6 +37,8 @@ type DescribeLoggingConfigurationInput struct {
 	// after you create it. You must specify the ARN or the name, and you can specify
 	// both.
 	FirewallName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLoggingConfigurationOutput struct {
@@ -49,6 +51,8 @@ type DescribeLoggingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

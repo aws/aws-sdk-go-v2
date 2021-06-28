@@ -32,6 +32,8 @@ type DescribeRegistryInput struct {
 	//
 	// This member is required.
 	RegistryName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRegistryOutput struct {
@@ -50,6 +52,8 @@ type DescribeRegistryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {

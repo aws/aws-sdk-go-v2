@@ -35,6 +35,8 @@ type RotateEncryptionKeyInput struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type RotateEncryptionKeyOutput struct {
@@ -44,6 +46,8 @@ type RotateEncryptionKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRotateEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

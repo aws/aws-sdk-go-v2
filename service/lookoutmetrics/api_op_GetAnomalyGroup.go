@@ -38,6 +38,8 @@ type GetAnomalyGroupInput struct {
 	//
 	// This member is required.
 	AnomalyGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAnomalyGroupOutput struct {
@@ -47,6 +49,8 @@ type GetAnomalyGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAnomalyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

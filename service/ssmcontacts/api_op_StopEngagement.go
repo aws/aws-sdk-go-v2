@@ -36,11 +36,15 @@ type StopEngagementInput struct {
 
 	// The reason that you're stopping the engagement.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type StopEngagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {

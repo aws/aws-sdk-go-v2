@@ -39,11 +39,15 @@ type UpdateLogLevelsByResourceTypesInput struct {
 
 	// The list of wireless gateway log options.
 	WirelessGatewayLogOptions []types.WirelessGatewayLogOption
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLogLevelsByResourceTypesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLogLevelsByResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

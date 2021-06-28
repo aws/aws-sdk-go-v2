@@ -33,6 +33,8 @@ type CreateFieldLevelEncryptionConfigInput struct {
 	//
 	// This member is required.
 	FieldLevelEncryptionConfig *types.FieldLevelEncryptionConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateFieldLevelEncryptionConfigOutput struct {
@@ -49,6 +51,8 @@ type CreateFieldLevelEncryptionConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFieldLevelEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type UpdateMultiplexInput struct {
 
 	// Name of the multiplex.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for UpdateMultiplexResponse
@@ -50,6 +52,8 @@ type UpdateMultiplexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {

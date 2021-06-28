@@ -150,6 +150,8 @@ type CreateBucketInput struct {
 
 	// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
 	ObjectLockEnabledForBucket bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateBucketOutput struct {
@@ -161,6 +163,8 @@ type CreateBucketOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {

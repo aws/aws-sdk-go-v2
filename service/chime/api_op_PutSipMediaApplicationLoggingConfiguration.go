@@ -36,6 +36,8 @@ type PutSipMediaApplicationLoggingConfigurationInput struct {
 
 	// The actual logging configuration.
 	SipMediaApplicationLoggingConfiguration *types.SipMediaApplicationLoggingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutSipMediaApplicationLoggingConfigurationOutput struct {
@@ -45,6 +47,8 @@ type PutSipMediaApplicationLoggingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSipMediaApplicationLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

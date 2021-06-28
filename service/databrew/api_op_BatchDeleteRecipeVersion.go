@@ -72,6 +72,8 @@ type BatchDeleteRecipeVersionInput struct {
 	//
 	// This member is required.
 	RecipeVersions []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteRecipeVersionOutput struct {
@@ -86,6 +88,8 @@ type BatchDeleteRecipeVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteRecipeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

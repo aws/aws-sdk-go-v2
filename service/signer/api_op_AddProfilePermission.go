@@ -54,6 +54,8 @@ type AddProfilePermissionInput struct {
 
 	// A unique identifier for the current profile revision.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type AddProfilePermissionOutput struct {
@@ -63,6 +65,8 @@ type AddProfilePermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddProfilePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

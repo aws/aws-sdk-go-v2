@@ -46,6 +46,8 @@ type TagInput struct {
 	//
 	// This member is required.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type TagOutput struct {
@@ -58,6 +60,8 @@ type TagOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagMiddlewares(stack *middleware.Stack, options Options) (err error) {

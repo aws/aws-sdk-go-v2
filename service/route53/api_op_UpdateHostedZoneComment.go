@@ -38,6 +38,8 @@ type UpdateHostedZoneCommentInput struct {
 	// The new comment for the hosted zone. If you don't specify a value for Comment,
 	// Amazon Route 53 deletes the existing value of the Comment element, if any.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to the UpdateHostedZoneComment
@@ -52,6 +54,8 @@ type UpdateHostedZoneCommentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateHostedZoneCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type GetInsightSummariesInput struct {
 
 	// The list of insight states.
 	States []types.InsightState
+
+	noSmithyDocumentSerde
 }
 
 type GetInsightSummariesOutput struct {
@@ -74,6 +76,8 @@ type GetInsightSummariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInsightSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

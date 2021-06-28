@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type ApplicationSource struct {
 
 	// A set of tags (up to 50).
 	TagFilters []TagFilter
+
+	noSmithyDocumentSerde
 }
 
 // Represents a CloudWatch metric of your choosing that can be used for predictive
@@ -64,6 +67,8 @@ type CustomizedLoadMetricSpecification struct {
 
 	// The unit of the metric.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a CloudWatch metric of your choosing that can be used for dynamic
@@ -111,6 +116,8 @@ type CustomizedScalingMetricSpecification struct {
 
 	// The unit of the metric.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single value in the forecast data used for predictive scaling.
@@ -121,6 +128,8 @@ type Datapoint struct {
 
 	// The value of the data point.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a dimension for a customized metric.
@@ -135,6 +144,8 @@ type MetricDimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a predefined metric that can be used for predictive scaling. After
@@ -172,6 +183,8 @@ type PredefinedLoadMetricSpecification struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	ResourceLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a predefined metric that can be used for dynamic scaling as part of a
@@ -207,6 +220,8 @@ type PredefinedScalingMetricSpecification struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	ResourceLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a scaling instruction for a scalable resource in a scaling plan. Each
@@ -388,6 +403,8 @@ type ScalingInstruction struct {
 	// seconds (60 minutes). The default is 300 seconds. Only valid when configuring
 	// predictive scaling.
 	ScheduledActionBufferTime *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents a scaling plan.
@@ -450,6 +467,8 @@ type ScalingPlan struct {
 
 	// The Unix time stamp when the scaling plan entered the current status.
 	StatusStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents a scalable resource.
@@ -555,6 +574,8 @@ type ScalingPlanResource struct {
 
 	// A simple message about the current scaling status of the resource.
 	ScalingStatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a scaling policy.
@@ -573,6 +594,8 @@ type ScalingPolicy struct {
 	// The target tracking scaling policy. Includes support for predefined or
 	// customized metrics.
 	TargetTrackingConfiguration *TargetTrackingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Represents a tag.
@@ -583,6 +606,8 @@ type TagFilter struct {
 
 	// The tag values (0 to 20).
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a target tracking configuration to use with AWS Auto Scaling. Used
@@ -634,4 +659,8 @@ type TargetTrackingConfiguration struct {
 	// cooldown time. The scaling policy won't increase the desired capacity again
 	// unless either a larger scale out is triggered or the cooldown period ends.
 	ScaleOutCooldown *int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

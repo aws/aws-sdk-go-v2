@@ -46,6 +46,8 @@ type CreateChannelInput struct {
 
 	// Metadata which can be used to manage the channel.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateChannelOutput struct {
@@ -61,6 +63,8 @@ type CreateChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

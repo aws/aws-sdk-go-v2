@@ -41,11 +41,15 @@ type AcceptInvitationInput struct {
 	// invitation. This property has been replaced by the administratorAccountId
 	// property and is retained only for backward compatibility.
 	MasterAccount *string
+
+	noSmithyDocumentSerde
 }
 
 type AcceptInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {

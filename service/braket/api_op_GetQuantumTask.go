@@ -34,6 +34,8 @@ type GetQuantumTaskInput struct {
 	//
 	// This member is required.
 	QuantumTaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetQuantumTaskOutput struct {
@@ -91,6 +93,8 @@ type GetQuantumTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

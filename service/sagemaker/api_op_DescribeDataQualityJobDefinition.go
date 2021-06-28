@@ -34,6 +34,8 @@ type DescribeDataQualityJobDefinitionInput struct {
 	//
 	// This member is required.
 	JobDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDataQualityJobDefinitionOutput struct {
@@ -91,6 +93,8 @@ type DescribeDataQualityJobDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDataQualityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

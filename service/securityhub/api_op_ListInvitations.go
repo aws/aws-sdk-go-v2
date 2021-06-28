@@ -41,6 +41,8 @@ type ListInvitationsInput struct {
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListInvitationsOutput struct {
@@ -53,6 +55,8 @@ type ListInvitationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

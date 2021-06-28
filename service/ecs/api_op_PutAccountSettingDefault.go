@@ -48,6 +48,8 @@ type PutAccountSettingDefaultInput struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type PutAccountSettingDefaultOutput struct {
@@ -57,6 +59,8 @@ type PutAccountSettingDefaultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccountSettingDefaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -53,6 +53,8 @@ type GetOpsSummaryInput struct {
 
 	// Specify the name of a resource data sync to get.
 	SyncName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetOpsSummaryOutput struct {
@@ -66,6 +68,8 @@ type GetOpsSummaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOpsSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

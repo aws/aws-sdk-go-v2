@@ -51,6 +51,8 @@ type DeleteStreamingSessionInput struct {
 	// but one or more of the parameters are different, the retry fails with a
 	// ValidationException error.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStreamingSessionOutput struct {
@@ -60,6 +62,8 @@ type DeleteStreamingSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStreamingSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

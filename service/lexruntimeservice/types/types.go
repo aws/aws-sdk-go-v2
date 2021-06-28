@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A context is a variable that contains information about the current state of the
 // conversation between a user and Amazon Lex. Context can be set automatically by
 // Amazon Lex when an intent is fulfilled, or it can be set at runtime using the
@@ -23,6 +27,8 @@ type ActiveContext struct {
 	//
 	// This member is required.
 	TimeToLive *ActiveContextTimeToLive
+
+	noSmithyDocumentSerde
 }
 
 // The length of time or number of turns that a context remains active.
@@ -37,6 +43,8 @@ type ActiveContextTimeToLive struct {
 	// conversation turn is one PostContent or PostText request and the corresponding
 	// response from Amazon Lex.
 	TurnsToLive *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents an option to be shown on the client platform (Facebook, Slack, etc.)
@@ -53,6 +61,8 @@ type Button struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the next action that the bot should take in its interaction with the
@@ -122,6 +132,8 @@ type DialogAction struct {
 
 	// Map of the slots that have been gathered and their values.
 	Slots map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an option rendered to the user when a prompt is shown. It could be an
@@ -142,6 +154,8 @@ type GenericAttachment struct {
 
 	// The title of the option.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a score that indicates the confidence that Amazon Lex has that an
@@ -152,6 +166,8 @@ type IntentConfidence struct {
 	// user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher
 	// confidence.
 	Score float64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the state of an intent. You can use this information
@@ -223,6 +239,8 @@ type IntentSummary struct {
 
 	// Map of the slots that have been gathered and their values.
 	Slots map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An intent that Amazon Lex suggests satisfies the user's intent. Includes the
@@ -239,6 +257,8 @@ type PredictedIntent struct {
 
 	// The slot and slot values associated with the predicted intent.
 	Slots map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // If you configure a response card when creating your bots, Amazon Lex substitutes
@@ -255,6 +275,8 @@ type ResponseCard struct {
 
 	// The version of the response card format.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // The sentiment expressed in an utterance. When the bot is configured to send
@@ -267,4 +289,8 @@ type SentimentResponse struct {
 
 	// The likelihood that the sentiment was correctly inferred.
 	SentimentScore *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

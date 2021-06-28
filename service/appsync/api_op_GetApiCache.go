@@ -34,6 +34,8 @@ type GetApiCacheInput struct {
 	//
 	// This member is required.
 	ApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetApiCache operation.
@@ -44,6 +46,8 @@ type GetApiCacheOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

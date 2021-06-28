@@ -33,11 +33,15 @@ type DeleteVPCEConfigurationInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVPCEConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

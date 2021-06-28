@@ -52,6 +52,8 @@ type PutEncryptionConfigInput struct {
 	// Omit this key if you
 	// set Type to NONE.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutEncryptionConfigOutput struct {
@@ -61,6 +63,8 @@ type PutEncryptionConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

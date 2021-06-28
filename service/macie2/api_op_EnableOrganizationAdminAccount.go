@@ -39,11 +39,15 @@ type EnableOrganizationAdminAccountInput struct {
 	// A unique, case-sensitive token that you provide to ensure the idempotency of the
 	// request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableOrganizationAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

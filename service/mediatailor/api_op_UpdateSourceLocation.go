@@ -46,6 +46,8 @@ type UpdateSourceLocationInput struct {
 
 	// The optional configuration for the host server that serves segments.
 	DefaultSegmentDeliveryConfiguration *types.DefaultSegmentDeliveryConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSourceLocationOutput struct {
@@ -76,6 +78,8 @@ type UpdateSourceLocationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {

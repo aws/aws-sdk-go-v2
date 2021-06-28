@@ -44,6 +44,8 @@ type DescribeQueriesInput struct {
 	// Limits the returned queries to only those that have the specified status. Valid
 	// values are Cancelled, Complete, Failed, Running, and Scheduled.
 	Status types.QueryStatus
+
+	noSmithyDocumentSerde
 }
 
 type DescribeQueriesOutput struct {
@@ -56,6 +58,8 @@ type DescribeQueriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

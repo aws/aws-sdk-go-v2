@@ -53,6 +53,8 @@ type GetColumnStatisticsForPartitionInput struct {
 	// The ID of the Data Catalog where the partitions in question reside. If none is
 	// supplied, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetColumnStatisticsForPartitionOutput struct {
@@ -65,6 +67,8 @@ type GetColumnStatisticsForPartitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetColumnStatisticsForPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

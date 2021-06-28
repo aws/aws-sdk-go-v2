@@ -73,6 +73,8 @@ type CreateInputInput struct {
 	// addresses. This property requires setting the roleArn property on Input
 	// creation. Not compatible with the inputSecurityGroups property.
 	Vpc *types.InputVpcRequest
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for CreateInputResponse
@@ -83,6 +85,8 @@ type CreateInputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInputMiddlewares(stack *middleware.Stack, options Options) (err error) {

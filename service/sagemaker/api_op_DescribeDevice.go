@@ -42,6 +42,8 @@ type DescribeDeviceInput struct {
 
 	// Next token of device description.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDeviceOutput struct {
@@ -86,6 +88,8 @@ type DescribeDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

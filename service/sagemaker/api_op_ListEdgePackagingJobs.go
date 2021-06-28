@@ -64,6 +64,8 @@ type ListEdgePackagingJobsInput struct {
 
 	// The job status to filter for.
 	StatusEquals types.EdgePackagingJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListEdgePackagingJobsOutput struct {
@@ -78,6 +80,8 @@ type ListEdgePackagingJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEdgePackagingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

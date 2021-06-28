@@ -222,6 +222,8 @@ type PutScalingPolicyInput struct {
 	// metrics. This parameter is required if you are creating a policy and the policy
 	// type is TargetTrackingScaling.
 	TargetTrackingScalingPolicyConfiguration *types.TargetTrackingScalingPolicyConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutScalingPolicyOutput struct {
@@ -236,6 +238,8 @@ type PutScalingPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

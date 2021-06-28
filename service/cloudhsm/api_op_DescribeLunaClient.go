@@ -43,6 +43,8 @@ type DescribeLunaClientInput struct {
 
 	// The ARN of the client.
 	ClientArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLunaClientOutput struct {
@@ -64,6 +66,8 @@ type DescribeLunaClientOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

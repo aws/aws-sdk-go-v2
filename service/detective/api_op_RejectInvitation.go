@@ -34,11 +34,15 @@ type RejectInvitationInput struct {
 	//
 	// This member is required.
 	GraphArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RejectInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {

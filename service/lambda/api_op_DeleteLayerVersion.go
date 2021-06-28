@@ -41,11 +41,15 @@ type DeleteLayerVersionInput struct {
 	//
 	// This member is required.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLayerVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLayerVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

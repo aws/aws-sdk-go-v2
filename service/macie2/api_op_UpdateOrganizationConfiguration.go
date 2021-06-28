@@ -34,11 +34,15 @@ type UpdateOrganizationConfigurationInput struct {
 	//
 	// This member is required.
 	AutoEnable bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateOrganizationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

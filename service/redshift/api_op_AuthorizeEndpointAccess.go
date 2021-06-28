@@ -40,6 +40,8 @@ type AuthorizeEndpointAccessInput struct {
 
 	// The virtual private cloud (VPC) identifiers to grant access to.
 	VpcIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
@@ -76,6 +78,8 @@ type AuthorizeEndpointAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAuthorizeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

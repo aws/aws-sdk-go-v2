@@ -10,6 +10,8 @@ import (
 // You are not authorized to perform the action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -30,6 +32,8 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -49,6 +53,8 @@ type InternalServerException struct {
 	Message *string
 
 	RetryAfterSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -69,6 +75,8 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -92,6 +100,8 @@ type ServiceQuotaExceededException struct {
 	ResourceType ResourceType
 	QuotaCode    *string
 	ServiceCode  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -114,6 +124,8 @@ type ThrottlingException struct {
 	QuotaCode         *string
 	ServiceCode       *string
 	RetryAfterSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -132,6 +144,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // name, or if a pagination token is invalid.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

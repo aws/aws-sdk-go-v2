@@ -52,6 +52,8 @@ type GetHostedZoneLimitInput struct {
 	//
 	// This member is required.
 	Type types.HostedZoneLimitType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the requested limit.
@@ -74,6 +76,8 @@ type GetHostedZoneLimitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHostedZoneLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

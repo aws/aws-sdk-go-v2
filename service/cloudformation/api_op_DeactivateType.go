@@ -46,11 +46,15 @@ type DeactivateTypeInput struct {
 	// type name alias when enabling the extension, use the type name alias.
 	// Conditional: You must specify either Arn, or TypeName and Type.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeactivateTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeactivateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

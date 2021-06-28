@@ -43,6 +43,8 @@ type UpdateCodeSigningConfigInput struct {
 
 	// Descriptive name for this code signing configuration.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCodeSigningConfigOutput struct {
@@ -54,6 +56,8 @@ type UpdateCodeSigningConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

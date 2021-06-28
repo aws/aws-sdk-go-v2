@@ -44,12 +44,16 @@ type TagResourceInput struct {
 	//
 	// This member is required.
 	Tags []types.TagRef
+
+	noSmithyDocumentSerde
 }
 
 //
 type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

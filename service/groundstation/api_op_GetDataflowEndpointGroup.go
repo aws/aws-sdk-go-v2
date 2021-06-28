@@ -34,6 +34,8 @@ type GetDataflowEndpointGroupInput struct {
 	//
 	// This member is required.
 	DataflowEndpointGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -53,6 +55,8 @@ type GetDataflowEndpointGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataflowEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

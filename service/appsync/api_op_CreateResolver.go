@@ -79,6 +79,8 @@ type CreateResolverInput struct {
 
 	// The SyncConfig for a resolver attached to a versioned datasource.
 	SyncConfig *types.SyncConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateResolverOutput struct {
@@ -88,6 +90,8 @@ type CreateResolverOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {

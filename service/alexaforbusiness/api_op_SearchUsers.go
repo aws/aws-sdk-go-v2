@@ -48,6 +48,8 @@ type SearchUsersInput struct {
 	// The sort order to use in listing the filtered set of users. Required. Supported
 	// sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.
 	SortCriteria []types.Sort
+
+	noSmithyDocumentSerde
 }
 
 type SearchUsersOutput struct {
@@ -63,6 +65,8 @@ type SearchUsersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {

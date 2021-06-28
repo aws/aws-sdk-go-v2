@@ -46,6 +46,8 @@ type ListBuildsInput struct {
 	// * DESCENDING: List the build IDs in
 	// descending order by build ID.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type ListBuildsOutput struct {
@@ -61,6 +63,8 @@ type ListBuildsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBuildsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -87,6 +87,8 @@ type CreateHealthCheckInput struct {
 	//
 	// This member is required.
 	HealthCheckConfig *types.HealthCheckConfig
+
+	noSmithyDocumentSerde
 }
 
 // A complex type containing the response information for the new health check.
@@ -104,6 +106,8 @@ type CreateHealthCheckOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {

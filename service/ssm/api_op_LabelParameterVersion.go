@@ -75,6 +75,8 @@ type LabelParameterVersionInput struct {
 	// labels. If no version is specified, the system attaches the label to the latest
 	// version.
 	ParameterVersion int64
+
+	noSmithyDocumentSerde
 }
 
 type LabelParameterVersionOutput struct {
@@ -90,6 +92,8 @@ type LabelParameterVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationLabelParameterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

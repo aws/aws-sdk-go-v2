@@ -58,6 +58,8 @@ type StartAttachmentUploadInput struct {
 	//
 	// This member is required.
 	ContentType *string
+
+	noSmithyDocumentSerde
 }
 
 type StartAttachmentUploadOutput struct {
@@ -70,6 +72,8 @@ type StartAttachmentUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartAttachmentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

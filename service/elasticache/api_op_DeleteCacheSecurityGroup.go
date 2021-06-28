@@ -35,11 +35,15 @@ type DeleteCacheSecurityGroupInput struct {
 	//
 	// This member is required.
 	CacheSecurityGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCacheSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCacheSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

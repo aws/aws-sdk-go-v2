@@ -60,6 +60,8 @@ type ListFHIRExportJobsInput struct {
 	// This parameter limits the response to FHIR export jobs submitted before a user
 	// specified date.
 	SubmittedBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ListFHIRExportJobsOutput struct {
@@ -76,6 +78,8 @@ type ListFHIRExportJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFHIRExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

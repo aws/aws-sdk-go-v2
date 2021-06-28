@@ -49,11 +49,15 @@ type ModifyVpcAttributeInput struct {
 	// and DNS hostnames attributes in the same request. Use separate requests for each
 	// attribute.
 	EnableDnsSupport *types.AttributeBooleanValue
+
+	noSmithyDocumentSerde
 }
 
 type ModifyVpcAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyVpcAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

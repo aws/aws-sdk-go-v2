@@ -71,11 +71,15 @@ type UpdateLicenseManagerReportGeneratorInput struct {
 
 	// Description of the report generator.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLicenseManagerReportGeneratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

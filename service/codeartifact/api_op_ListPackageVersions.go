@@ -103,6 +103,8 @@ type ListPackageVersionsInput struct {
 	//
 	// * Disposed
 	Status types.PackageVersionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListPackageVersionsOutput struct {
@@ -153,6 +155,8 @@ type ListPackageVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

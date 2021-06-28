@@ -61,6 +61,8 @@ type UploadSSHPublicKeyInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful UploadSSHPublicKey request.
@@ -71,6 +73,8 @@ type UploadSSHPublicKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUploadSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

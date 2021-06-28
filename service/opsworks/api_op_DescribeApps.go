@@ -46,6 +46,8 @@ type DescribeAppsInput struct {
 	// The app stack ID. If you use this parameter, DescribeApps returns a description
 	// of the apps in the specified stack.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeApps request.
@@ -56,6 +58,8 @@ type DescribeAppsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type ListSMSSandboxPhoneNumbersInput struct {
 
 	// Token that the previous ListSMSSandboxPhoneNumbersInput request returns.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSMSSandboxPhoneNumbersOutput struct {
@@ -59,6 +61,8 @@ type ListSMSSandboxPhoneNumbersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSMSSandboxPhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {

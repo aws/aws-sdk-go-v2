@@ -10,6 +10,8 @@ import (
 // Placeholder documentation for BadGatewayException
 type BadGatewayException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadGatewayException) Error() string {
@@ -27,6 +29,8 @@ func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Placeholder documentation for BadRequestException
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -44,6 +48,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Placeholder documentation for ConflictException
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -61,6 +67,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Placeholder documentation for ForbiddenException
 type ForbiddenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -78,6 +86,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Placeholder documentation for GatewayTimeoutException
 type GatewayTimeoutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GatewayTimeoutException) Error() string {
@@ -95,6 +105,8 @@ func (e *GatewayTimeoutException) ErrorFault() smithy.ErrorFault { return smithy
 // Placeholder documentation for InternalServerErrorException
 type InternalServerErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -112,6 +124,8 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // Placeholder documentation for NotFoundException
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -129,6 +143,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Placeholder documentation for TooManyRequestsException
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -148,6 +164,8 @@ type UnprocessableEntityException struct {
 	Message *string
 
 	ValidationErrors []ValidationError
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnprocessableEntityException) Error() string {

@@ -43,11 +43,15 @@ type PutDeliveryChannelInput struct {
 	//
 	// This member is required.
 	DeliveryChannel *types.DeliveryChannel
+
+	noSmithyDocumentSerde
 }
 
 type PutDeliveryChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDeliveryChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

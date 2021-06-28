@@ -39,6 +39,8 @@ type BatchDisassociateClientDeviceFromCoreDeviceInput struct {
 
 	// The list of client devices to disassociate.
 	Entries []types.DisassociateClientDeviceFromCoreDeviceEntry
+
+	noSmithyDocumentSerde
 }
 
 type BatchDisassociateClientDeviceFromCoreDeviceOutput struct {
@@ -49,6 +51,8 @@ type BatchDisassociateClientDeviceFromCoreDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDisassociateClientDeviceFromCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

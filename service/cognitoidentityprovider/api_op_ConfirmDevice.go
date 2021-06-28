@@ -46,6 +46,8 @@ type ConfirmDeviceInput struct {
 
 	// The configuration of the device secret verifier.
 	DeviceSecretVerifierConfig *types.DeviceSecretVerifierConfigType
+
+	noSmithyDocumentSerde
 }
 
 // Confirms the device response.
@@ -57,6 +59,8 @@ type ConfirmDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

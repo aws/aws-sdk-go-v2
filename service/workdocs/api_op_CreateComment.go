@@ -62,6 +62,8 @@ type CreateCommentInput struct {
 	// visible only to the comment author and document owner and co-owners, or PUBLIC,
 	// where the comment is visible to document owners, co-owners, and contributors.
 	Visibility types.CommentVisibilityType
+
+	noSmithyDocumentSerde
 }
 
 type CreateCommentOutput struct {
@@ -71,6 +73,8 @@ type CreateCommentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {

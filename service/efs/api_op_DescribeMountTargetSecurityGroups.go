@@ -43,6 +43,8 @@ type DescribeMountTargetSecurityGroupsInput struct {
 	//
 	// This member is required.
 	MountTargetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMountTargetSecurityGroupsOutput struct {
@@ -54,6 +56,8 @@ type DescribeMountTargetSecurityGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMountTargetSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

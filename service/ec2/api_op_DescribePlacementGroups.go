@@ -66,6 +66,8 @@ type DescribePlacementGroupsInput struct {
 	// The names of the placement groups. Default: Describes all your placement groups,
 	// or only those otherwise specified.
 	GroupNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePlacementGroupsOutput struct {
@@ -75,6 +77,8 @@ type DescribePlacementGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePlacementGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

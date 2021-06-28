@@ -39,11 +39,15 @@ type AssociateSigninDelegateGroupsWithAccountInput struct {
 	//
 	// This member is required.
 	SigninDelegateGroups []types.SigninDelegateGroup
+
+	noSmithyDocumentSerde
 }
 
 type AssociateSigninDelegateGroupsWithAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateSigninDelegateGroupsWithAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

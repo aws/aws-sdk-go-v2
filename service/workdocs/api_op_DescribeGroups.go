@@ -48,6 +48,8 @@ type DescribeGroupsInput struct {
 
 	// The ID of the organization.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeGroupsOutput struct {
@@ -61,6 +63,8 @@ type DescribeGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

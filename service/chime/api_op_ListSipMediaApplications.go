@@ -35,6 +35,8 @@ type ListSipMediaApplicationsInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSipMediaApplicationsOutput struct {
@@ -47,6 +49,8 @@ type ListSipMediaApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSipMediaApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

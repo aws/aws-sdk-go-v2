@@ -46,6 +46,8 @@ type GetDataEndpointInput struct {
 	// The name of the stream that you want to get the endpoint for. You must specify
 	// either this parameter or a StreamARN in the request.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDataEndpointOutput struct {
@@ -56,6 +58,8 @@ type GetDataEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

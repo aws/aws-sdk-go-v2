@@ -12,6 +12,8 @@ type CloudHsmInternalException struct {
 	Message *string
 
 	Retryable bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmInternalException) Error() string {
@@ -31,6 +33,8 @@ type CloudHsmServiceException struct {
 	Message *string
 
 	Retryable bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmServiceException) Error() string {
@@ -50,6 +54,8 @@ type InvalidRequestException struct {
 	Message *string
 
 	Retryable bool
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {

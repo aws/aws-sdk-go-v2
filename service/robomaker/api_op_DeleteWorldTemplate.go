@@ -32,11 +32,15 @@ type DeleteWorldTemplateInput struct {
 	//
 	// This member is required.
 	Template *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorldTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

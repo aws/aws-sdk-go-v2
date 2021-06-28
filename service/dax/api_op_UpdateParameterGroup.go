@@ -43,6 +43,8 @@ type UpdateParameterGroupInput struct {
 	//
 	// This member is required.
 	ParameterNameValues []types.ParameterNameValue
+
+	noSmithyDocumentSerde
 }
 
 type UpdateParameterGroupOutput struct {
@@ -52,6 +54,8 @@ type UpdateParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

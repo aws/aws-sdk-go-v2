@@ -46,12 +46,16 @@ type DeleteHealthCheckInput struct {
 	//
 	// This member is required.
 	HealthCheckId *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element.
 type DeleteHealthCheckOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {

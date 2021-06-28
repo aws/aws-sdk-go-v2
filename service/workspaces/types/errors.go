@@ -10,6 +10,8 @@ import (
 // The user is not authorized to access a resource.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // One or more parameter values are not valid.
 type InvalidParameterValuesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValuesException) Error() string {
@@ -46,6 +50,8 @@ func (e *InvalidParameterValuesException) ErrorFault() smithy.ErrorFault { retur
 // The state of the resource is not valid for this operation.
 type InvalidResourceStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceStateException) Error() string {
@@ -64,6 +70,8 @@ func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return 
 // moment.
 type OperationInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationInProgressException) Error() string {
@@ -81,6 +89,8 @@ func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return s
 // This operation is not supported.
 type OperationNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotSupportedException) Error() string {
@@ -98,6 +108,8 @@ func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -115,6 +127,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // The resource is associated with a directory.
 type ResourceAssociatedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAssociatedException) Error() string {
@@ -132,6 +146,8 @@ func (e *ResourceAssociatedException) ErrorFault() smithy.ErrorFault { return sm
 // The resource could not be created.
 type ResourceCreationFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceCreationFailedException) Error() string {
@@ -151,6 +167,8 @@ func (e *ResourceCreationFailedException) ErrorFault() smithy.ErrorFault { retur
 // Your resource limits have been exceeded.
 type ResourceLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceededException) Error() string {
@@ -170,6 +188,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -189,6 +209,8 @@ type ResourceUnavailableException struct {
 	Message *string
 
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceUnavailableException) Error() string {
@@ -209,6 +231,8 @@ func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return s
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
 type UnsupportedNetworkConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedNetworkConfigurationException) Error() string {
@@ -233,6 +257,8 @@ func (e *UnsupportedNetworkConfigurationException) ErrorFault() smithy.ErrorFaul
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html).
 type UnsupportedWorkspaceConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedWorkspaceConfigurationException) Error() string {
@@ -258,6 +284,8 @@ func (e *UnsupportedWorkspaceConfigurationException) ErrorFault() smithy.ErrorFa
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role).
 type WorkspacesDefaultRoleNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WorkspacesDefaultRoleNotFoundException) Error() string {

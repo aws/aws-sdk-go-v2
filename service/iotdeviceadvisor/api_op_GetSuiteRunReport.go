@@ -38,6 +38,8 @@ type GetSuiteRunReportInput struct {
 	//
 	// This member is required.
 	SuiteRunId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSuiteRunReportOutput struct {
@@ -47,6 +49,8 @@ type GetSuiteRunReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSuiteRunReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

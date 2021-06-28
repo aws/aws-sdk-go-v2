@@ -48,6 +48,8 @@ type SearchContactsInput struct {
 	// The sort order to use in listing the specified set of contacts. The supported
 	// sort keys are DisplayName, FirstName, and LastName.
 	SortCriteria []types.Sort
+
+	noSmithyDocumentSerde
 }
 
 type SearchContactsOutput struct {
@@ -63,6 +65,8 @@ type SearchContactsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

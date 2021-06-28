@@ -35,11 +35,15 @@ type DeleteMetricPolicyInput struct {
 	//
 	// This member is required.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMetricPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteLogSubscriptionInput struct {
 	//
 	// This member is required.
 	DirectoryId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLogSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLogSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

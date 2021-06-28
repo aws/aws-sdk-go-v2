@@ -35,6 +35,8 @@ type DescribeLocationS3Input struct {
 	//
 	// This member is required.
 	LocationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeLocationS3Response
@@ -72,6 +74,8 @@ type DescribeLocationS3Output struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocationS3Middlewares(stack *middleware.Stack, options Options) (err error) {

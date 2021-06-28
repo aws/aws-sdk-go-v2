@@ -58,6 +58,8 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEgressOnlyInternetGatewaysOutput struct {
@@ -71,6 +73,8 @@ type DescribeEgressOnlyInternetGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEgressOnlyInternetGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

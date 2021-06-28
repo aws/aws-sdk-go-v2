@@ -44,6 +44,8 @@ type UpdateResourceShareInput struct {
 
 	// The name of the resource share.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResourceShareOutput struct {
@@ -57,6 +59,8 @@ type UpdateResourceShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

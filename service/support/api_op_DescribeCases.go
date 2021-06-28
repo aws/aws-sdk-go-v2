@@ -87,6 +87,8 @@ type DescribeCasesInput struct {
 
 	// A resumption point for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns an array of CaseDetails
@@ -102,6 +104,8 @@ type DescribeCasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

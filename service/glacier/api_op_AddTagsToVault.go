@@ -53,11 +53,15 @@ type AddTagsToVaultInput struct {
 	// The tags to add to the vault. Each tag is composed of a key and a value. The
 	// value can be an empty string.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type AddTagsToVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddTagsToVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

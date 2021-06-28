@@ -39,6 +39,8 @@ type GetInlinePolicyForPermissionSetInput struct {
 	//
 	// This member is required.
 	PermissionSetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInlinePolicyForPermissionSetOutput struct {
@@ -48,6 +50,8 @@ type GetInlinePolicyForPermissionSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInlinePolicyForPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

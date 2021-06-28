@@ -47,6 +47,8 @@ type ListGeoMatchSetsInput struct {
 	// ListGeoMatchSets requests, specify the value of NextMarker from the previous
 	// response to get information about another batch of GeoMatchSet objects.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGeoMatchSetsOutput struct {
@@ -62,6 +64,8 @@ type ListGeoMatchSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGeoMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

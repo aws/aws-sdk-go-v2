@@ -109,11 +109,15 @@ type UpdateLayerInput struct {
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
 	VolumeConfigurations []types.VolumeConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLayerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {

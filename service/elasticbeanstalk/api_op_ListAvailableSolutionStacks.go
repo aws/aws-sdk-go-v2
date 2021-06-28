@@ -29,6 +29,7 @@ func (c *Client) ListAvailableSolutionStacks(ctx context.Context, params *ListAv
 }
 
 type ListAvailableSolutionStacksInput struct {
+	noSmithyDocumentSerde
 }
 
 // A list of available AWS Elastic Beanstalk solution stacks.
@@ -42,6 +43,8 @@ type ListAvailableSolutionStacksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAvailableSolutionStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {

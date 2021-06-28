@@ -80,6 +80,8 @@ type ValidatePipelineDefinitionInput struct {
 
 	// The parameter values used with the pipeline.
 	ParameterValues []types.ParameterValue
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of ValidatePipelineDefinition.
@@ -98,6 +100,8 @@ type ValidatePipelineDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationValidatePipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

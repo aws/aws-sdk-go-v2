@@ -46,6 +46,8 @@ type GetTestGridSessionInput struct {
 
 	// An ID associated with this session.
 	SessionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTestGridSessionOutput struct {
@@ -55,6 +57,8 @@ type GetTestGridSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTestGridSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

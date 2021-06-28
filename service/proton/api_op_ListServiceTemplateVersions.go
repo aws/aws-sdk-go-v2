@@ -47,6 +47,8 @@ type ListServiceTemplateVersionsInput struct {
 	// of major or minor versions of a service template, after the list of major or
 	// minor versions that was previously requested.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListServiceTemplateVersionsOutput struct {
@@ -63,6 +65,8 @@ type ListServiceTemplateVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListServiceTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

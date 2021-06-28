@@ -30,6 +30,8 @@ type HttpPayloadTraitsInput struct {
 	Blob []byte
 
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type HttpPayloadTraitsOutput struct {
@@ -39,6 +41,8 @@ type HttpPayloadTraitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpPayloadTraitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

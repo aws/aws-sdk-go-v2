@@ -200,6 +200,8 @@ type ModifyReplicationGroupInput struct {
 	// The user group to remove, meaning the users in the group no longer can access
 	// the replication group.
 	UserGroupIdsToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyReplicationGroupOutput struct {
@@ -209,6 +211,8 @@ type ModifyReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

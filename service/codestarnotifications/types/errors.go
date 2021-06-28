@@ -11,6 +11,8 @@ import (
 // have sufficient permissions.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -29,6 +31,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // being modified by another process. Wait a few minutes and try again.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -48,6 +52,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // Some or all of the configuration is incomplete, missing, or not valid.
 type ConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConfigurationException) Error() string {
@@ -66,6 +72,8 @@ func (e *ConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.
 // of the results is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -85,6 +93,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // information, see Limits.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -103,6 +113,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // be unique in your AWS account.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -120,6 +132,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // AWS CodeStar Notifications can't find a resource that matches the provided ARN.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -137,6 +151,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // One or more parameter values are not valid.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

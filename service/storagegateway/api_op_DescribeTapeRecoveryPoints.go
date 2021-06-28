@@ -48,6 +48,8 @@ type DescribeTapeRecoveryPointsInput struct {
 	// An opaque string that indicates the position at which to begin describing the
 	// virtual tape recovery points.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeTapeRecoveryPointsOutput
@@ -69,6 +71,8 @@ type DescribeTapeRecoveryPointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

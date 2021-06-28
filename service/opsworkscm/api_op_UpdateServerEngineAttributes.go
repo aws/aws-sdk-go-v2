@@ -48,6 +48,8 @@ type UpdateServerEngineAttributesInput struct {
 
 	// The value to set for the attribute.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServerEngineAttributesOutput struct {
@@ -57,6 +59,8 @@ type UpdateServerEngineAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServerEngineAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

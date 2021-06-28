@@ -48,6 +48,8 @@ type UpdateTemplateActiveVersionInput struct {
 	//
 	// This member is required.
 	TemplateType *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTemplateActiveVersionOutput struct {
@@ -59,6 +61,8 @@ type UpdateTemplateActiveVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTemplateActiveVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

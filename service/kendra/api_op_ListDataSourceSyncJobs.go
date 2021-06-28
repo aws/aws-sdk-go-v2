@@ -55,6 +55,8 @@ type ListDataSourceSyncJobsInput struct {
 	// When specified, only returns synchronization jobs with the Status field equal to
 	// the specified status.
 	StatusFilter types.DataSourceSyncJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListDataSourceSyncJobsOutput struct {
@@ -71,6 +73,8 @@ type ListDataSourceSyncJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDataSourceSyncJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

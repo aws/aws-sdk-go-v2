@@ -35,11 +35,15 @@ type AssociateSkillWithSkillGroupInput struct {
 
 	// The ARN of the skill group to associate the skill to. Required.
 	SkillGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateSkillWithSkillGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateSkillWithSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

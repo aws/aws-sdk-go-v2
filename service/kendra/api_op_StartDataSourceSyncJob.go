@@ -38,6 +38,8 @@ type StartDataSourceSyncJobInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartDataSourceSyncJobOutput struct {
@@ -47,6 +49,8 @@ type StartDataSourceSyncJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDataSourceSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type DescribeFileSystemAssociationsInput struct {
 	//
 	// This member is required.
 	FileSystemAssociationARNList []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFileSystemAssociationsOutput struct {
@@ -45,6 +47,8 @@ type DescribeFileSystemAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFileSystemAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -20,6 +21,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Usage allocations allow you to split usage into buckets by tags. Each
@@ -34,6 +37,8 @@ type UsageAllocation struct {
 	// The set of tags that define the bucket of usage. For the bucket of items with no
 	// tags, this parameter can be left out.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // A UsageRecord indicates a quantity of usage for a given product, customer,
@@ -68,6 +73,8 @@ type UsageRecord struct {
 	// The set of UsageAllocations to submit. The sum of all UsageAllocation quantities
 	// must equal the Quantity of the UsageRecord.
 	UsageAllocations []UsageAllocation
+
+	noSmithyDocumentSerde
 }
 
 // A UsageRecordResult indicates the status of a given UsageRecord processed by
@@ -95,4 +102,8 @@ type UsageRecordResult struct {
 
 	// The UsageRecord that was part of the BatchMeterUsage request.
 	UsageRecord *UsageRecord
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

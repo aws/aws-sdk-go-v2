@@ -30,6 +30,7 @@ func (c *Client) DescribeHealthServiceStatusForOrganization(ctx context.Context,
 }
 
 type DescribeHealthServiceStatusForOrganizationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeHealthServiceStatusForOrganizationOutput struct {
@@ -40,6 +41,8 @@ type DescribeHealthServiceStatusForOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHealthServiceStatusForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

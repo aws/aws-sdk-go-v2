@@ -124,6 +124,8 @@ type CreateDeploymentGroupInput struct {
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 	// in the AWS CodeDeploy User Guide.
 	TriggerConfigurations []types.TriggerConfig
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateDeploymentGroup operation.
@@ -134,6 +136,8 @@ type CreateDeploymentGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

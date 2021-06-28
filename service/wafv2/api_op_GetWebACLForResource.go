@@ -33,6 +33,8 @@ type GetWebACLForResourceInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetWebACLForResourceOutput struct {
@@ -43,6 +45,8 @@ type GetWebACLForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWebACLForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

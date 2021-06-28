@@ -47,6 +47,8 @@ type ListInvalidationsInput struct {
 
 	// The maximum number of invalidation batches that you want in the response body.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -57,6 +59,8 @@ type ListInvalidationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInvalidationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type GetPolicyVersionInput struct {
 	//
 	// This member is required.
 	PolicyVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the GetPolicyVersion operation.
@@ -70,6 +72,8 @@ type GetPolicyVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

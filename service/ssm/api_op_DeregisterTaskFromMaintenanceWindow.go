@@ -37,6 +37,8 @@ type DeregisterTaskFromMaintenanceWindowInput struct {
 	//
 	// This member is required.
 	WindowTaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterTaskFromMaintenanceWindowOutput struct {
@@ -49,6 +51,8 @@ type DeregisterTaskFromMaintenanceWindowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterTaskFromMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type UpdateReservationInput struct {
 
 	// Name of the reservation
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for UpdateReservationResponse
@@ -47,6 +49,8 @@ type UpdateReservationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {

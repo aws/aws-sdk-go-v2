@@ -36,11 +36,15 @@ type DeleteFieldLevelEncryptionConfigInput struct {
 	// The value of the ETag header that you received when retrieving the configuration
 	// identity to delete. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFieldLevelEncryptionConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFieldLevelEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

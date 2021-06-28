@@ -48,6 +48,8 @@ type DescribeTemplateInput struct {
 	// (Optional) The number for the version to describe. If a VersionNumber parameter
 	// value isn't provided, the latest version of the template is described.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTemplateOutput struct {
@@ -63,6 +65,8 @@ type DescribeTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

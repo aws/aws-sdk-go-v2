@@ -43,11 +43,15 @@ type ResetNetworkInterfaceAttributeInput struct {
 
 	// The source/destination checking attribute. Resets the value to true.
 	SourceDestCheck *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetNetworkInterfaceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetNetworkInterfaceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type ListDeliverabilityTestReportsInput struct {
 	// obtain additional results. The value you specify has to be at least 0, and can
 	// be no more than 1000.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of the predictive inbox placement test reports that are available for
@@ -65,6 +67,8 @@ type ListDeliverabilityTestReportsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeliverabilityTestReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {

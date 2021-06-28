@@ -41,6 +41,8 @@ type DescribeLayersInput struct {
 
 	// The stack ID.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeLayers request.
@@ -51,6 +53,8 @@ type DescribeLayersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLayersMiddlewares(stack *middleware.Stack, options Options) (err error) {

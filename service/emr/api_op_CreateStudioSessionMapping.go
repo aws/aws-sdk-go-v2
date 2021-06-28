@@ -64,11 +64,15 @@ type CreateStudioSessionMappingInput struct {
 	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId
 	// must be specified.
 	IdentityName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateStudioSessionMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -100,6 +100,8 @@ type CompleteMultipartUploadInput struct {
 	// match the SHA256 tree hash of the final assembled archive as computed by Amazon
 	// S3 Glacier (Glacier), Glacier returns an error and the request fails.
 	Checksum *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request. For information about
@@ -120,6 +122,8 @@ type CompleteMultipartUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCompleteMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type DeregisterStreamConsumerInput struct {
 	// more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
 	StreamARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterStreamConsumerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {

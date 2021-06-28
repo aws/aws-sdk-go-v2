@@ -38,6 +38,8 @@ type DeleteAutoScalingConfigurationInput struct {
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAutoScalingConfigurationOutput struct {
@@ -50,6 +52,8 @@ type DeleteAutoScalingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

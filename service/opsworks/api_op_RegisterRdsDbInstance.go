@@ -51,11 +51,15 @@ type RegisterRdsDbInstanceInput struct {
 	//
 	// This member is required.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterRdsDbInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterRdsDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DescribeAccountAssignmentDeletionStatusInput struct {
 	//
 	// This member is required.
 	InstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountAssignmentDeletionStatusOutput struct {
@@ -49,6 +51,8 @@ type DescribeAccountAssignmentDeletionStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountAssignmentDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

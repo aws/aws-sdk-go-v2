@@ -42,11 +42,15 @@ type UpdateChannelInput struct {
 	// How long, in days, message data is kept for the channel. The retention period
 	// cannot be updated if the channel's S3 storage is customer-managed.
 	RetentionPeriod *types.RetentionPeriod
+
+	noSmithyDocumentSerde
 }
 
 type UpdateChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -133,6 +133,8 @@ type DescribeInstanceStatusInput struct {
 
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInstanceStatusOutput struct {
@@ -146,6 +148,8 @@ type DescribeInstanceStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstanceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

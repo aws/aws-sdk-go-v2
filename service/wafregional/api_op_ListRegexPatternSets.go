@@ -48,6 +48,8 @@ type ListRegexPatternSetsInput struct {
 	// the previous response to get information about another batch of RegexPatternSet
 	// objects.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRegexPatternSetsOutput struct {
@@ -64,6 +66,8 @@ type ListRegexPatternSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRegexPatternSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

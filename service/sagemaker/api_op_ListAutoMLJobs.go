@@ -61,6 +61,8 @@ type ListAutoMLJobsInput struct {
 
 	// Request a list of jobs, using a filter for status.
 	StatusEquals types.AutoMLJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListAutoMLJobsOutput struct {
@@ -76,6 +78,8 @@ type ListAutoMLJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAutoMLJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

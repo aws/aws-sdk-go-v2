@@ -120,6 +120,8 @@ type SignInput struct {
 	// digest. The default value, RAW, indicates a message. To indicate a message
 	// digest, enter DIGEST.
 	MessageType types.MessageType
+
+	noSmithyDocumentSerde
 }
 
 type SignOutput struct {
@@ -151,6 +153,8 @@ type SignOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSignMiddlewares(stack *middleware.Stack, options Options) (err error) {

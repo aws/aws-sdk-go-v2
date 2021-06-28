@@ -66,6 +66,8 @@ type ModifyHsmInput struct {
 	// The new IP address for the syslog monitoring server. The AWS CloudHSM service
 	// only supports one syslog monitoring server.
 	SyslogIp *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the ModifyHsm operation.
@@ -76,6 +78,8 @@ type ModifyHsmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -350,6 +350,8 @@ type CreateDBClusterInput struct {
 	// Used by the SDK's PresignURL autofill customization to specify the region the of
 	// the client's request.
 	destinationRegion *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBClusterOutput struct {
@@ -361,6 +363,8 @@ type CreateDBClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

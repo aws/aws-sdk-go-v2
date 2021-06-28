@@ -53,6 +53,8 @@ type CreateHttpNamespaceInput struct {
 	// value that you define. Tags keys can be up to 128 characters in length, and tag
 	// values can be up to 256 characters in length.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateHttpNamespaceOutput struct {
@@ -64,6 +66,8 @@ type CreateHttpNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHttpNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

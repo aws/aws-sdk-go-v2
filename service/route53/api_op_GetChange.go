@@ -49,6 +49,8 @@ type GetChangeInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the ChangeInfo element.
@@ -61,6 +63,8 @@ type GetChangeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {

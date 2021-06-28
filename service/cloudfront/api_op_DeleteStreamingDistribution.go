@@ -77,11 +77,15 @@ type DeleteStreamingDistributionInput struct {
 	// The value of the ETag header that you received when you disabled the streaming
 	// distribution. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStreamingDistributionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

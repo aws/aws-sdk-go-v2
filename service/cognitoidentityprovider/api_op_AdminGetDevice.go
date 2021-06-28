@@ -45,6 +45,8 @@ type AdminGetDeviceInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Gets the device response, as an administrator.
@@ -57,6 +59,8 @@ type AdminGetDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminGetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,11 +41,15 @@ type RemovePermissionInput struct {
 	// The statement ID corresponding to the account that is no longer allowed to put
 	// events to the default event bus.
 	StatementId *string
+
+	noSmithyDocumentSerde
 }
 
 type RemovePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemovePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

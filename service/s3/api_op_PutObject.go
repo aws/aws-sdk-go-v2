@@ -282,6 +282,8 @@ type PutObjectInput struct {
 	// Configure Website Page Redirects
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html).
 	WebsiteRedirectLocation *string
+
+	noSmithyDocumentSerde
 }
 
 type PutObjectOutput struct {
@@ -335,6 +337,8 @@ type PutObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

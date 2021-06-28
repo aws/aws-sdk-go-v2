@@ -34,6 +34,8 @@ type DescribeModelPackageGroupInput struct {
 	//
 	// This member is required.
 	ModelPackageGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeModelPackageGroupOutput struct {
@@ -69,6 +71,8 @@ type DescribeModelPackageGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeModelPackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

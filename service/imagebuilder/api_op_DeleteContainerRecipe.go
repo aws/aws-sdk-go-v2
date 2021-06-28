@@ -32,6 +32,8 @@ type DeleteContainerRecipeInput struct {
 	//
 	// This member is required.
 	ContainerRecipeArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteContainerRecipeOutput struct {
@@ -44,6 +46,8 @@ type DeleteContainerRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

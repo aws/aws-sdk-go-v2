@@ -58,6 +58,8 @@ type ListTypeRegistrationsInput struct {
 	// The name of the extension. Conditional: You must specify either TypeName and
 	// Type, or Arn.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTypeRegistrationsOutput struct {
@@ -74,6 +76,8 @@ type ListTypeRegistrationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTypeRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

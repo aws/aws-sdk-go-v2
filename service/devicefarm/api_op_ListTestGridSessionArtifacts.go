@@ -43,6 +43,8 @@ type ListTestGridSessionArtifactsInput struct {
 
 	// Limit results to a specified type of artifact.
 	Type types.TestGridSessionArtifactCategory
+
+	noSmithyDocumentSerde
 }
 
 type ListTestGridSessionArtifactsOutput struct {
@@ -55,6 +57,8 @@ type ListTestGridSessionArtifactsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTestGridSessionArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -56,6 +57,8 @@ type Address struct {
 
 	// The third line in a street address that a Snow device is to be delivered to.
 	Street3 *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a cluster's state, a cluster's ID, and other important information.
@@ -75,6 +78,8 @@ type ClusterListEntry struct {
 	// Defines an optional description of the cluster, for example Environmental Data
 	// Cluster-01.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata about a specific cluster.
@@ -153,6 +158,8 @@ type ClusterMetadata struct {
 
 	// The tax documents required in your AWS Region.
 	TaxDocuments *TaxDocuments
+
+	noSmithyDocumentSerde
 }
 
 // A JSON-formatted object that describes a compatible Amazon Machine Image (AMI),
@@ -166,6 +173,8 @@ type CompatibleImage struct {
 
 	// The optional name of a compatible image.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the real-time status of a Snow device's data transfer while the device
@@ -188,6 +197,8 @@ type DataTransfer struct {
 	// This value is set to 0 (zero) until all the keys that will be transferred have
 	// been listed.
 	TotalObjects int64
+
+	noSmithyDocumentSerde
 }
 
 // The container for SnowconeDeviceConfiguration.
@@ -195,6 +206,8 @@ type DeviceConfiguration struct {
 
 	// Returns information about the device configuration for an AWS Snowcone job.
 	SnowconeDeviceConfiguration *SnowconeDeviceConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),
@@ -209,6 +222,8 @@ type Ec2AmiResource struct {
 
 	// The ID of the AMI on the Snow device.
 	SnowballAmiId *string
+
+	noSmithyDocumentSerde
 }
 
 // The container for the EventTriggerDefinition$EventResourceARN.
@@ -217,6 +232,8 @@ type EventTriggerDefinition struct {
 	// The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS
 	// Lambda function's event trigger associated with this job.
 	EventResourceARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The tax documents required in AWS Regions in India.
@@ -224,6 +241,8 @@ type INDTaxDocuments struct {
 
 	// The Goods and Services Tax (GST) documents required in AWS Regions in India.
 	GSTIN *string
+
+	noSmithyDocumentSerde
 }
 
 // Each JobListEntry object contains a job's state, a job's ID, and a value that
@@ -257,6 +276,8 @@ type JobListEntry struct {
 
 	// The type of device used with this job.
 	SnowballType SnowballType
+
+	noSmithyDocumentSerde
 }
 
 // Contains job logs. Whenever a Snow device is used to import data into or export
@@ -284,6 +305,8 @@ type JobLogs struct {
 
 	// A link to an Amazon S3 presigned URL where the job success log is located.
 	JobSuccessLogURI *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a specific job including shipping information, job
@@ -383,6 +406,8 @@ type JobMetadata struct {
 
 	// The metadata associated with the tax documents required in your AWS Region.
 	TaxDocuments *TaxDocuments
+
+	noSmithyDocumentSerde
 }
 
 // Contains an array of AWS resource objects. Each object represents an Amazon S3
@@ -398,6 +423,8 @@ type JobResource struct {
 
 	// An array of S3Resource objects.
 	S3Resources []S3Resource
+
+	noSmithyDocumentSerde
 }
 
 // Contains a key range. For export jobs, a S3Resource object can have an optional
@@ -413,6 +440,8 @@ type KeyRange struct {
 	// The key that ends an optional key range for an export job. Ranges are inclusive
 	// and UTF-8 binary sorted.
 	EndMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies
@@ -425,6 +454,8 @@ type LambdaResource struct {
 	// An Amazon Resource Name (ARN) that represents an AWS Lambda function to be
 	// triggered by PUT object actions on the associated local Amazon S3 resource.
 	LambdaArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Each LongTermPricingListEntry object contains information about a long-term
@@ -461,6 +492,8 @@ type LongTermPricingListEntry struct {
 
 	// The type of AWS Snow Family device associated with this long-term pricing job.
 	SnowballType SnowballType
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents metadata and configuration settings for NFS service on
@@ -472,6 +505,8 @@ type NFSOnDeviceServiceConfiguration struct {
 
 	// The scale unit of the NFS storage on the device. Valid values: TB.
 	StorageUnit StorageUnit
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) notification settings
@@ -497,6 +532,8 @@ type Notification struct {
 	// (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html) Amazon Simple
 	// Notification Service (Amazon SNS) API action.
 	SnsTopicARN *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents metadata and configuration settings for services on an
@@ -505,6 +542,8 @@ type OnDeviceServiceConfiguration struct {
 
 	// Represents the NFS service on a Snow Family device.
 	NFSOnDeviceService *NFSOnDeviceServiceConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Each S3Resource object represents an Amazon S3 bucket that your transferred data
@@ -527,6 +566,8 @@ type S3Resource struct {
 	// transferred data will be exported from or imported into. AWS Snow Family
 	// supports Amazon S3 and NFS (Network File System).
 	TargetOnDeviceServices []TargetOnDeviceService
+
+	noSmithyDocumentSerde
 }
 
 // The Status and TrackingNumber information for an inbound or outbound shipment.
@@ -540,6 +581,8 @@ type Shipment struct {
 	// India, the carrier is Amazon Logistics. For all other regions, UPS is the
 	// carrier.
 	TrackingNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // A job's shipping information, including inbound and outbound tracking numbers
@@ -574,6 +617,8 @@ type ShippingDetails struct {
 	// * In the United States of America (US), you have access to one-day
 	// shipping and two-day shipping.
 	ShippingOption ShippingOption
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the device configuration for an AWS Snowcone job.
@@ -581,6 +626,8 @@ type SnowconeDeviceConfiguration struct {
 
 	// Configures the wireless connection for the AWS Snowcone device.
 	WirelessConnection *WirelessConnection
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the service or services on the Snow Family device that
@@ -595,6 +642,8 @@ type TargetOnDeviceService struct {
 	// Specifies whether the data is being imported or exported. You can import or
 	// export the data, or use it locally on the device.
 	TransferOption TransferOption
+
+	noSmithyDocumentSerde
 }
 
 // The tax documents required in your AWS Region.
@@ -602,6 +651,8 @@ type TaxDocuments struct {
 
 	// The tax documents required in AWS Regions in India.
 	IND *INDTaxDocuments
+
+	noSmithyDocumentSerde
 }
 
 // Configures the wireless connection on an AWS Snowcone device.
@@ -609,4 +660,8 @@ type WirelessConnection struct {
 
 	// Enables the Wi-Fi adapter on an AWS Snowcone device.
 	IsWifiEnabled bool
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

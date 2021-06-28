@@ -57,6 +57,8 @@ type AssociateCustomerGatewayInput struct {
 
 	// The ID of the link.
 	LinkId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateCustomerGatewayOutput struct {
@@ -66,6 +68,8 @@ type AssociateCustomerGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

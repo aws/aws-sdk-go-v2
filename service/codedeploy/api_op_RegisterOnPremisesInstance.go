@@ -40,11 +40,15 @@ type RegisterOnPremisesInstanceInput struct {
 
 	// The ARN of the IAM user to associate with the on-premises instance.
 	IamUserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterOnPremisesInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

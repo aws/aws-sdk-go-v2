@@ -51,6 +51,8 @@ type StopPipelineExecutionInput struct {
 
 	// Use this option to enter comments, such as the reason the pipeline was stopped.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type StopPipelineExecutionOutput struct {
@@ -60,6 +62,8 @@ type StopPipelineExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

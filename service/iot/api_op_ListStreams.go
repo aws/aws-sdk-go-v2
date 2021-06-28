@@ -38,6 +38,8 @@ type ListStreamsInput struct {
 
 	// A token used to get the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStreamsOutput struct {
@@ -50,6 +52,8 @@ type ListStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

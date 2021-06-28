@@ -45,11 +45,15 @@ type DeleteDBSecurityGroupInput struct {
 	//
 	// This member is required.
 	DBSecurityGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

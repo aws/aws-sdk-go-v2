@@ -35,6 +35,8 @@ type StartReplicationTaskAssessmentInput struct {
 	//
 	// This member is required.
 	ReplicationTaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -45,6 +47,8 @@ type StartReplicationTaskAssessmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartReplicationTaskAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

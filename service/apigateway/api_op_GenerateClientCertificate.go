@@ -37,6 +37,8 @@ type GenerateClientCertificateInput struct {
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -68,6 +70,8 @@ type GenerateClientCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

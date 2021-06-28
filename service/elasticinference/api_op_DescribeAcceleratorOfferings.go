@@ -42,6 +42,8 @@ type DescribeAcceleratorOfferingsInput struct {
 
 	// The list of accelerator types to describe.
 	AcceleratorTypes []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAcceleratorOfferingsOutput struct {
@@ -51,6 +53,8 @@ type DescribeAcceleratorOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAcceleratorOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

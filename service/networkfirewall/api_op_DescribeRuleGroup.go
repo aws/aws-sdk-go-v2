@@ -43,6 +43,8 @@ type DescribeRuleGroupInput struct {
 	// rules. This setting is required for requests that do not include the
 	// RuleGroupARN.
 	Type types.RuleGroupType
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRuleGroupOutput struct {
@@ -80,6 +82,8 @@ type DescribeRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

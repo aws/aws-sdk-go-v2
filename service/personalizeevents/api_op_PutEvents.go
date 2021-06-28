@@ -54,11 +54,15 @@ type PutEventsInput struct {
 
 	// The user associated with the event.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutEventsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

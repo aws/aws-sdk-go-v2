@@ -34,6 +34,8 @@ type DeleteChannelInput struct {
 	//
 	// This member is required.
 	ChannelId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DeleteChannelResponse
@@ -95,6 +97,8 @@ type DeleteChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

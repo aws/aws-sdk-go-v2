@@ -42,6 +42,8 @@ type GetOriginRequestPolicyConfigInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetOriginRequestPolicyConfigOutput struct {
@@ -54,6 +56,8 @@ type GetOriginRequestPolicyConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOriginRequestPolicyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

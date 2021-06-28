@@ -86,6 +86,8 @@ type CreateSlotTypeInput struct {
 	// take. Each value can have a list of synonyms, additional values that help train
 	// the machine learning model about the values that it resolves for a slot.
 	SlotTypeValues []types.SlotTypeValue
+
+	noSmithyDocumentSerde
 }
 
 type CreateSlotTypeOutput struct {
@@ -124,6 +126,8 @@ type CreateSlotTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

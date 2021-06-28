@@ -15,6 +15,7 @@
         "protocol_test.go",
         "serializers.go",
         "types/errors.go",
+        "types/types.go",
         "validators.go"
     ],
     "go": "1.15",

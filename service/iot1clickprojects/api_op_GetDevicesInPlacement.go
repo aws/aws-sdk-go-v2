@@ -37,6 +37,8 @@ type GetDevicesInPlacementInput struct {
 	//
 	// This member is required.
 	ProjectName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDevicesInPlacementOutput struct {
@@ -48,6 +50,8 @@ type GetDevicesInPlacementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDevicesInPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {

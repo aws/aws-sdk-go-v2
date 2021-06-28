@@ -54,6 +54,8 @@ type GetInsightImpactGraphInput struct {
 	// Specify the pagination token returned by a previous request to retrieve the next
 	// page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInsightImpactGraphOutput struct {
@@ -81,6 +83,8 @@ type GetInsightImpactGraphOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInsightImpactGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,6 +57,8 @@ type DescribeWorkspacesInput struct {
 	// identifier it returns is not immediately available. If you immediately call
 	// DescribeWorkspaces with this identifier, no information is returned.
 	WorkspaceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorkspacesOutput struct {
@@ -71,6 +73,8 @@ type DescribeWorkspacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

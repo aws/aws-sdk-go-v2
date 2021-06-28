@@ -39,6 +39,8 @@ type PutBackupPolicyInput struct {
 	//
 	// This member is required.
 	FileSystemId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutBackupPolicyOutput struct {
@@ -49,6 +51,8 @@ type PutBackupPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBackupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

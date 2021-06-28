@@ -50,12 +50,16 @@ type CreateReceiptRuleInput struct {
 	// parameter is null, the new rule will be inserted at the beginning of the rule
 	// list.
 	After *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type CreateReceiptRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReceiptRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

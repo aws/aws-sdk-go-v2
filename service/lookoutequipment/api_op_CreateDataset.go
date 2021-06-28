@@ -57,6 +57,8 @@ type CreateDatasetInput struct {
 
 	// Any tags associated with the ingested data described in the dataset.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetOutput struct {
@@ -72,6 +74,8 @@ type CreateDatasetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

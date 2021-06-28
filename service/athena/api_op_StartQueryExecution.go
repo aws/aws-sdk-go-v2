@@ -62,6 +62,8 @@ type StartQueryExecutionInput struct {
 
 	// The name of the workgroup in which the query is being started.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type StartQueryExecutionOutput struct {
@@ -71,6 +73,8 @@ type StartQueryExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

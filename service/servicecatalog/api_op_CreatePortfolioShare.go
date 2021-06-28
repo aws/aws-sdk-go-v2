@@ -66,6 +66,8 @@ type CreatePortfolioShareInput struct {
 	// Enables or disables TagOptions  sharing when creating the portfolio share. If
 	// this flag is not provided, TagOptions sharing is disabled.
 	ShareTagOptions bool
+
+	noSmithyDocumentSerde
 }
 
 type CreatePortfolioShareOutput struct {
@@ -76,6 +78,8 @@ type CreatePortfolioShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

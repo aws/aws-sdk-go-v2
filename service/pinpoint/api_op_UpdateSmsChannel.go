@@ -40,6 +40,8 @@ type UpdateSmsChannelInput struct {
 	//
 	// This member is required.
 	SMSChannelRequest *types.SMSChannelRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSmsChannelOutput struct {
@@ -52,6 +54,8 @@ type UpdateSmsChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSmsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

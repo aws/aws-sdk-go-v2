@@ -70,11 +70,15 @@ type CreateResourceDataSyncInput struct {
 	// listed in Organizations for Explorer. If you specify SyncFromSource, you must
 	// provide a value for SyncSource. The default value is SyncToDestination.
 	SyncType *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourceDataSyncOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {

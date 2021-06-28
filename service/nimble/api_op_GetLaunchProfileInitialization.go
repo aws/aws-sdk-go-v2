@@ -53,6 +53,8 @@ type GetLaunchProfileInitializationInput struct {
 	//
 	// This member is required.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLaunchProfileInitializationOutput struct {
@@ -62,6 +64,8 @@ type GetLaunchProfileInitializationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLaunchProfileInitializationMiddlewares(stack *middleware.Stack, options Options) (err error) {

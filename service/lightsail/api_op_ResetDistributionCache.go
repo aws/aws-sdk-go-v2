@@ -35,6 +35,8 @@ type ResetDistributionCacheInput struct {
 	// The name of the distribution for which to reset cache. Use the GetDistributions
 	// action to get a list of distribution names that you can specify.
 	DistributionName *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetDistributionCacheOutput struct {
@@ -53,6 +55,8 @@ type ResetDistributionCacheOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetDistributionCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,6 +61,8 @@ type CreateUserInput struct {
 	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
 	// number of tags, then the entire request fails and the resource is not created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful CreateUser request.
@@ -71,6 +73,8 @@ type CreateUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

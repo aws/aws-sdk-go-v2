@@ -37,6 +37,8 @@ type DescribeConnectionsOnInterconnectInput struct {
 	//
 	// This member is required.
 	InterconnectId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConnectionsOnInterconnectOutput struct {
@@ -46,6 +48,8 @@ type DescribeConnectionsOnInterconnectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConnectionsOnInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {

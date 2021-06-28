@@ -41,6 +41,8 @@ type CancelJournalKinesisStreamInput struct {
 	//
 	// This member is required.
 	StreamId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelJournalKinesisStreamOutput struct {
@@ -50,6 +52,8 @@ type CancelJournalKinesisStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelJournalKinesisStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

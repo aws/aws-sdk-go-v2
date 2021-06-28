@@ -61,6 +61,8 @@ type GetEC2RecommendationProjectedMetricsInput struct {
 	//
 	// This member is required.
 	Stat types.MetricStatistic
+
+	noSmithyDocumentSerde
 }
 
 type GetEC2RecommendationProjectedMetricsOutput struct {
@@ -70,6 +72,8 @@ type GetEC2RecommendationProjectedMetricsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEC2RecommendationProjectedMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {

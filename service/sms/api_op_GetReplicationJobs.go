@@ -40,6 +40,8 @@ type GetReplicationJobsInput struct {
 
 	// The ID of the replication job.
 	ReplicationJobId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetReplicationJobsOutput struct {
@@ -53,6 +55,8 @@ type GetReplicationJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReplicationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

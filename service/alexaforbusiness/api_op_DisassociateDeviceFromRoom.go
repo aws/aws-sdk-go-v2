@@ -32,11 +32,15 @@ type DisassociateDeviceFromRoomInput struct {
 
 	// The ARN of the device to disassociate from a room. Required.
 	DeviceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateDeviceFromRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateDeviceFromRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

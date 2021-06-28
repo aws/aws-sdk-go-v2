@@ -39,6 +39,8 @@ type PutConfigurationSetTrackingOptionsInput struct {
 
 	// The domain that you want to use to track open and click events.
 	CustomRedirectDomain *string
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -46,6 +48,8 @@ type PutConfigurationSetTrackingOptionsInput struct {
 type PutConfigurationSetTrackingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConfigurationSetTrackingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

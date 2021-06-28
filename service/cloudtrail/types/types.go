@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -38,6 +39,8 @@ type AdvancedEventSelector struct {
 	// An optional, descriptive name for an advanced event selector, such as "Log data
 	// events for only two S3 buckets".
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A single selector statement in an advanced event selector.
@@ -146,6 +149,8 @@ type AdvancedFieldSelector struct {
 	// An operator that includes events that match the first few characters of the
 	// event record field specified as the value of Field.
 	StartsWith []string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon S3 buckets, AWS Lambda functions, or Amazon DynamoDB tables that you
@@ -241,6 +246,8 @@ type DataResource struct {
 	// events for all DynamoDB tables in your AWS account, specify the prefix as
 	// arn:aws:dynamodb.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an event that was returned by a lookup request. The
@@ -276,6 +283,8 @@ type Event struct {
 	// A user name or role name of the requester that called the API in the event
 	// returned.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Use event selectors to further specify the management and data event settings
@@ -322,6 +331,8 @@ type EventSelector struct {
 	// all. For example, the EC2 GetConsoleOutput is a read-only API operation and
 	// RunInstances is a write-only API operation. By default, the value is All.
 	ReadWriteType ReadWriteType
+
+	noSmithyDocumentSerde
 }
 
 // A JSON string that contains a list of insight types that are logged on a trail.
@@ -330,6 +341,8 @@ type InsightSelector struct {
 	// The type of insights to log on a trail. In this release, only ApiCallRateInsight
 	// is supported as an insight type.
 	InsightType InsightType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an attribute and value that filter the events returned.
@@ -344,6 +357,8 @@ type LookupAttribute struct {
 	//
 	// This member is required.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a returned public key.
@@ -360,6 +375,8 @@ type PublicKey struct {
 
 	// The DER encoded public key value in PKCS#1 format.
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the type and name of a resource referenced by an event.
@@ -378,6 +395,8 @@ type Resource struct {
 	// supported for a service, see Filtering CloudTrail Events
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-console.html#filtering-cloudtrail-events).
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // A resource tag.
@@ -388,6 +407,8 @@ type ResourceTag struct {
 
 	// A list of tags.
 	TagsList []Tag
+
+	noSmithyDocumentSerde
 }
 
 // A custom key-value pair associated with a resource such as a CloudTrail trail.
@@ -402,6 +423,8 @@ type Tag struct {
 	// The value in a key-value pair of a tag. The value must be no longer than 256
 	// Unicode characters.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a trail.
@@ -472,6 +495,8 @@ type Trail struct {
 	// Specifies the ARN of the trail. The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	TrailARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a CloudTrail trail, including the trail's name, home region,
@@ -486,4 +511,8 @@ type TrailInfo struct {
 
 	// The ARN of a trail.
 	TrailARN *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

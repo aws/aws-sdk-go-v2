@@ -33,11 +33,15 @@ type CancelAuditMitigationActionsTaskInput struct {
 	//
 	// This member is required.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelAuditMitigationActionsTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelAuditMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

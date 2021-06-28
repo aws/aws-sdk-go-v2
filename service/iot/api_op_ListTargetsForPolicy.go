@@ -39,6 +39,8 @@ type ListTargetsForPolicyInput struct {
 
 	// The maximum number of results to return at one time.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListTargetsForPolicyOutput struct {
@@ -51,6 +53,8 @@ type ListTargetsForPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTargetsForPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

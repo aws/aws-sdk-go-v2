@@ -45,11 +45,15 @@ type UpdateDestinationInput struct {
 
 	// The ARN of the IAM Role that authorizes the destination.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

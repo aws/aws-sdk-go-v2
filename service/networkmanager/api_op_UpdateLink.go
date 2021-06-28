@@ -51,6 +51,8 @@ type UpdateLinkInput struct {
 
 	// The type of the link. Length Constraints: Maximum length of 128 characters.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLinkOutput struct {
@@ -60,6 +62,8 @@ type UpdateLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

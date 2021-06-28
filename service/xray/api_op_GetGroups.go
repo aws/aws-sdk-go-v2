@@ -32,6 +32,8 @@ type GetGroupsInput struct {
 
 	// Pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGroupsOutput struct {
@@ -44,6 +46,8 @@ type GetGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

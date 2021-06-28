@@ -54,6 +54,8 @@ type DescribeServicesInput struct {
 
 	// A JSON-formatted list of service codes available for AWS services.
 	ServiceCodeList []string
+
+	noSmithyDocumentSerde
 }
 
 // The list of AWS services returned by the DescribeServices operation.
@@ -64,6 +66,8 @@ type DescribeServicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

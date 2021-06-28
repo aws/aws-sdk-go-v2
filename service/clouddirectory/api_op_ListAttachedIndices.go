@@ -48,6 +48,8 @@ type ListAttachedIndicesInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAttachedIndicesOutput struct {
@@ -60,6 +62,8 @@ type ListAttachedIndicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAttachedIndicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

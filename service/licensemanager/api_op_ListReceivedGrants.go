@@ -51,6 +51,8 @@ type ListReceivedGrantsInput struct {
 
 	// Token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListReceivedGrantsOutput struct {
@@ -63,6 +65,8 @@ type ListReceivedGrantsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReceivedGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -96,6 +96,8 @@ type CreateInferenceSchedulerInput struct {
 
 	// Any tags associated with the inference scheduler.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateInferenceSchedulerOutput struct {
@@ -111,6 +113,8 @@ type CreateInferenceSchedulerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {

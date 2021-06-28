@@ -40,6 +40,8 @@ type PutModelPackageGroupPolicyInput struct {
 	//
 	// This member is required.
 	ResourcePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 type PutModelPackageGroupPolicyOutput struct {
@@ -51,6 +53,8 @@ type PutModelPackageGroupPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

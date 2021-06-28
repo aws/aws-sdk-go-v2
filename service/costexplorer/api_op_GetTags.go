@@ -110,6 +110,8 @@ type GetTagsInput struct {
 
 	// The key of the tag that you want to return values for.
 	TagKey *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTagsOutput struct {
@@ -135,6 +137,8 @@ type GetTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -58,6 +58,8 @@ type CreateTrialInput struct {
 	// A list of tags to associate with the trial. You can use Search API to search on
 	// the tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateTrialOutput struct {
@@ -67,6 +69,8 @@ type CreateTrialOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTrialMiddlewares(stack *middleware.Stack, options Options) (err error) {

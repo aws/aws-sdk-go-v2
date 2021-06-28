@@ -43,6 +43,8 @@ type CreateSegmentInput struct {
 	//
 	// This member is required.
 	WriteSegmentRequest *types.WriteSegmentRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateSegmentOutput struct {
@@ -55,6 +57,8 @@ type CreateSegmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,12 +57,16 @@ type StartApplicationInput struct {
 	//
 	// This member is required.
 	InputConfigurations []types.InputConfiguration
+
+	noSmithyDocumentSerde
 }
 
 //
 type StartApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

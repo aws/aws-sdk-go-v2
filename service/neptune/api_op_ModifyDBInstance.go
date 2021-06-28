@@ -256,6 +256,8 @@ type ModifyDBInstanceInput struct {
 	// * If supplied, must match
 	// existing VpcSecurityGroupIds.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBInstanceOutput struct {
@@ -266,6 +268,8 @@ type ModifyDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

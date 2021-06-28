@@ -61,6 +61,8 @@ type StartCelebrityRecognitionInput struct {
 	// The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the
 	// completion status of the celebrity recognition analysis to.
 	NotificationChannel *types.NotificationChannel
+
+	noSmithyDocumentSerde
 }
 
 type StartCelebrityRecognitionOutput struct {
@@ -71,6 +73,8 @@ type StartCelebrityRecognitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartCelebrityRecognitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

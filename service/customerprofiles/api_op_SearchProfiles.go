@@ -53,6 +53,8 @@ type SearchProfilesInput struct {
 
 	// The pagination token from the previous SearchProfiles API call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchProfilesOutput struct {
@@ -65,6 +67,8 @@ type SearchProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

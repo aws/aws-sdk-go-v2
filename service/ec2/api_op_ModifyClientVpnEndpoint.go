@@ -89,6 +89,8 @@ type ModifyClientVpnEndpointInput struct {
 	// The port number to assign to the Client VPN endpoint for TCP and UDP traffic.
 	// Valid Values: 443 | 1194 Default Value: 443
 	VpnPort *int32
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClientVpnEndpointOutput struct {
@@ -98,6 +100,8 @@ type ModifyClientVpnEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClientVpnEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

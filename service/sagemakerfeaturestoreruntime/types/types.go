@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The error that has occurred when attempting to retrieve a batch of Records.
 type BatchGetRecordError struct {
 
@@ -28,6 +32,8 @@ type BatchGetRecordError struct {
 	//
 	// This member is required.
 	RecordIdentifierValueAsString *string
+
+	noSmithyDocumentSerde
 }
 
 // The identifier that identifies the batch of Records you are retrieving in a
@@ -47,6 +53,8 @@ type BatchGetRecordIdentifier struct {
 	// List of names of Features to be retrieved. If not specified, the latest value
 	// for all the Features are returned.
 	FeatureNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The output of Records that have been retrieved in a batch.
@@ -66,6 +74,8 @@ type BatchGetRecordResultDetail struct {
 	//
 	// This member is required.
 	RecordIdentifierValueAsString *string
+
+	noSmithyDocumentSerde
 }
 
 // The value associated with a feature.
@@ -82,4 +92,8 @@ type FeatureValue struct {
 	//
 	// This member is required.
 	ValueAsString *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

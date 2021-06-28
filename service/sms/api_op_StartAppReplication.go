@@ -31,11 +31,15 @@ type StartAppReplicationInput struct {
 
 	// The ID of the application.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartAppReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartAppReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

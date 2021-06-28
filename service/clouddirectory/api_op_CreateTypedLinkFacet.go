@@ -40,11 +40,15 @@ type CreateTypedLinkFacetInput struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTypedLinkFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {

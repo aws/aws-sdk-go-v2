@@ -80,6 +80,8 @@ type ListEntitiesForPolicyInput struct {
 	// PermissionsBoundary. This parameter is optional. If it is not included, all
 	// policies are returned.
 	PolicyUsageFilter types.PolicyUsageType
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful ListEntitiesForPolicy request.
@@ -108,6 +110,8 @@ type ListEntitiesForPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEntitiesForPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

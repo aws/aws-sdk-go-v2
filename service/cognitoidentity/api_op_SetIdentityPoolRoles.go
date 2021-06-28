@@ -49,11 +49,15 @@ type SetIdentityPoolRolesInput struct {
 	// "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Up to
 	// 25 rules can be specified per identity provider.
 	RoleMappings map[string]types.RoleMapping
+
+	noSmithyDocumentSerde
 }
 
 type SetIdentityPoolRolesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetIdentityPoolRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {

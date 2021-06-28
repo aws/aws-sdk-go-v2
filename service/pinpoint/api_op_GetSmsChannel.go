@@ -35,6 +35,8 @@ type GetSmsChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSmsChannelOutput struct {
@@ -47,6 +49,8 @@ type GetSmsChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSmsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

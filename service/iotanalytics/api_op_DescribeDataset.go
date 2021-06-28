@@ -33,6 +33,8 @@ type DescribeDatasetInput struct {
 	//
 	// This member is required.
 	DatasetName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDatasetOutput struct {
@@ -42,6 +44,8 @@ type DescribeDatasetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

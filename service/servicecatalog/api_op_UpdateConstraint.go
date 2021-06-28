@@ -72,6 +72,8 @@ type UpdateConstraintInput struct {
 	// more information, see Template Constraint Rules
 	// (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html).
 	Parameters *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConstraintOutput struct {
@@ -87,6 +89,8 @@ type UpdateConstraintOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {

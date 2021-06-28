@@ -116,11 +116,15 @@ type UpdateOpsItemInput struct {
 	// A short heading that describes the nature of the OpsItem and the impacted
 	// resource.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateOpsItemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateOpsItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

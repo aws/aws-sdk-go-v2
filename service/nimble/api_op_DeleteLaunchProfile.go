@@ -48,6 +48,8 @@ type DeleteLaunchProfileInput struct {
 	// but one or more of the parameters are different, the retry fails with a
 	// ValidationException error.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLaunchProfileOutput struct {
@@ -57,6 +59,8 @@ type DeleteLaunchProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLaunchProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

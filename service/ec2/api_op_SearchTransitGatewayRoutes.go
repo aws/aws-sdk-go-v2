@@ -80,6 +80,8 @@ type SearchTransitGatewayRoutesInput struct {
 
 	// The maximum number of routes to return.
 	MaxResults *int32
+
+	noSmithyDocumentSerde
 }
 
 type SearchTransitGatewayRoutesOutput struct {
@@ -92,6 +94,8 @@ type SearchTransitGatewayRoutesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchTransitGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {

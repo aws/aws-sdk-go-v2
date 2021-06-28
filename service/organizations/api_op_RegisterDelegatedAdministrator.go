@@ -48,11 +48,15 @@ type RegisterDelegatedAdministratorInput struct {
 	//
 	// This member is required.
 	ServicePrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterDelegatedAdministratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterDelegatedAdministratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type PhoneNumberValidateInput struct {
 	//
 	// This member is required.
 	NumberValidateRequest *types.NumberValidateRequest
+
+	noSmithyDocumentSerde
 }
 
 type PhoneNumberValidateOutput struct {
@@ -44,6 +46,8 @@ type PhoneNumberValidateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPhoneNumberValidateMiddlewares(stack *middleware.Stack, options Options) (err error) {

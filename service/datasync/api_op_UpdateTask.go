@@ -67,11 +67,15 @@ type UpdateTaskInput struct {
 	// information, see Scheduling your task
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html).
 	Schedule *types.TaskSchedule
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

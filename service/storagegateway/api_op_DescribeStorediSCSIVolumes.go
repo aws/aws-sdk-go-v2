@@ -39,6 +39,8 @@ type DescribeStorediSCSIVolumesInput struct {
 	//
 	// This member is required.
 	VolumeARNs []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStorediSCSIVolumesOutput struct {
@@ -103,6 +105,8 @@ type DescribeStorediSCSIVolumesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStorediSCSIVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {

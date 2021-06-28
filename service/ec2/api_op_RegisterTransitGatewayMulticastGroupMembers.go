@@ -52,6 +52,8 @@ type RegisterTransitGatewayMulticastGroupMembersInput struct {
 
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterTransitGatewayMulticastGroupMembersOutput struct {
@@ -61,6 +63,8 @@ type RegisterTransitGatewayMulticastGroupMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterTransitGatewayMulticastGroupMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

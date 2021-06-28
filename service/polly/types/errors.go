@@ -12,6 +12,8 @@ import (
 // the operation.
 type EngineNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EngineNotSupportedException) Error() string {
@@ -30,6 +32,8 @@ func (e *EngineNotSupportedException) ErrorFault() smithy.ErrorFault { return sm
 // spelled correctly, and then try again.
 type InvalidLexiconException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLexiconException) Error() string {
@@ -48,6 +52,8 @@ func (e *InvalidLexiconException) ErrorFault() smithy.ErrorFault { return smithy
 // again.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -66,6 +72,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // bucket naming requirements and try again.
 type InvalidS3BucketException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3BucketException) Error() string {
@@ -84,6 +92,8 @@ func (e *InvalidS3BucketException) ErrorFault() smithy.ErrorFault { return smith
 // key name.
 type InvalidS3KeyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3KeyException) Error() string {
@@ -101,6 +111,8 @@ func (e *InvalidS3KeyException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The specified sample rate is not valid.
 type InvalidSampleRateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSampleRateException) Error() string {
@@ -119,6 +131,8 @@ func (e *InvalidSampleRateException) ErrorFault() smithy.ErrorFault { return smi
 // try again.
 type InvalidSnsTopicArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSnsTopicArnException) Error() string {
@@ -137,6 +151,8 @@ func (e *InvalidSnsTopicArnException) ErrorFault() smithy.ErrorFault { return sm
 // values, and then try again.
 type InvalidSsmlException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSsmlException) Error() string {
@@ -154,6 +170,8 @@ func (e *InvalidSsmlException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The provided Task ID is not valid. Please provide a valid Task ID and try again.
 type InvalidTaskIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTaskIdException) Error() string {
@@ -172,6 +190,8 @@ func (e *InvalidTaskIdException) ErrorFault() smithy.ErrorFault { return smithy.
 // capacity.
 type LanguageNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LanguageNotSupportedException) Error() string {
@@ -193,6 +213,8 @@ func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return 
 // again.
 type LexiconNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LexiconNotFoundException) Error() string {
@@ -210,6 +232,8 @@ func (e *LexiconNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // The maximum size of the specified lexicon would be exceeded by this operation.
 type LexiconSizeExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LexiconSizeExceededException) Error() string {
@@ -228,6 +252,8 @@ func (e *LexiconSizeExceededException) ErrorFault() smithy.ErrorFault { return s
 // only available for content in json format.
 type MarksNotSupportedForFormatException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MarksNotSupportedForFormatException) Error() string {
@@ -249,6 +275,8 @@ func (e *MarksNotSupportedForFormatException) ErrorFault() smithy.ErrorFault {
 // The maximum size of the lexeme would be exceeded by this operation.
 type MaxLexemeLengthExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxLexemeLengthExceededException) Error() string {
@@ -268,6 +296,8 @@ func (e *MaxLexemeLengthExceededException) ErrorFault() smithy.ErrorFault { retu
 // The maximum number of lexicons would be exceeded by this operation.
 type MaxLexiconsNumberExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxLexiconsNumberExceededException) Error() string {
@@ -289,6 +319,8 @@ func (e *MaxLexiconsNumberExceededException) ErrorFault() smithy.ErrorFault {
 // An unknown condition has caused a service failure.
 type ServiceFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceFailureException) Error() string {
@@ -306,6 +338,8 @@ func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy
 // SSML speech marks are not supported for plain text-type input.
 type SsmlMarksNotSupportedForTextTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SsmlMarksNotSupportedForTextTypeException) Error() string {
@@ -327,6 +361,8 @@ func (e *SsmlMarksNotSupportedForTextTypeException) ErrorFault() smithy.ErrorFau
 // The Speech Synthesis task with requested Task ID cannot be found.
 type SynthesisTaskNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SynthesisTaskNotFoundException) Error() string {
@@ -349,6 +385,8 @@ func (e *SynthesisTaskNotFoundException) ErrorFault() smithy.ErrorFault { return
 // characters.
 type TextLengthExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TextLengthExceededException) Error() string {
@@ -367,6 +405,8 @@ func (e *TextLengthExceededException) ErrorFault() smithy.ErrorFault { return sm
 // are x-sampa and ipa.
 type UnsupportedPlsAlphabetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedPlsAlphabetException) Error() string {
@@ -388,6 +428,8 @@ func (e *UnsupportedPlsAlphabetException) ErrorFault() smithy.ErrorFault { retur
 // (https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html).
 type UnsupportedPlsLanguageException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedPlsLanguageException) Error() string {

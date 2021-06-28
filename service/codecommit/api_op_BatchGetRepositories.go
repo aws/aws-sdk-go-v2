@@ -40,6 +40,8 @@ type BatchGetRepositoriesInput struct {
 	//
 	// This member is required.
 	RepositoryNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a batch get repositories operation.
@@ -53,6 +55,8 @@ type BatchGetRepositoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

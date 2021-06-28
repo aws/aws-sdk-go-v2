@@ -35,11 +35,15 @@ type DeleteSkillAuthorizationInput struct {
 
 	// The room that the skill is authorized for.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSkillAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSkillAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

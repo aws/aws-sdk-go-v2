@@ -78,6 +78,8 @@ type CreateDatasetInput struct {
 	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
 	// in the AWS IoT Analytics User Guide.
 	VersioningConfiguration *types.VersioningConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetOutput struct {
@@ -93,6 +95,8 @@ type CreateDatasetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

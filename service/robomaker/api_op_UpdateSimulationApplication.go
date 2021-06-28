@@ -55,6 +55,8 @@ type UpdateSimulationApplicationInput struct {
 
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSimulationApplicationOutput struct {
@@ -89,6 +91,8 @@ type UpdateSimulationApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSimulationApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

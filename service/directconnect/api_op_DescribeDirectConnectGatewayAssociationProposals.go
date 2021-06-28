@@ -46,6 +46,8 @@ type DescribeDirectConnectGatewayAssociationProposalsInput struct {
 
 	// The ID of the proposal.
 	ProposalId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDirectConnectGatewayAssociationProposalsOutput struct {
@@ -59,6 +61,8 @@ type DescribeDirectConnectGatewayAssociationProposalsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDirectConnectGatewayAssociationProposalsMiddlewares(stack *middleware.Stack, options Options) (err error) {

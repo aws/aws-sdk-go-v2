@@ -37,6 +37,8 @@ type GetClientCertificatesInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of ClientCertificate resources. Use Client-Side
@@ -52,6 +54,8 @@ type GetClientCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetClientCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type ListSitesInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSitesOutput struct {
@@ -47,6 +49,8 @@ type ListSitesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSitesMiddlewares(stack *middleware.Stack, options Options) (err error) {

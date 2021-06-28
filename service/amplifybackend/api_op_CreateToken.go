@@ -33,6 +33,8 @@ type CreateTokenInput struct {
 	//
 	// This member is required.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTokenOutput struct {
@@ -51,6 +53,8 @@ type CreateTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

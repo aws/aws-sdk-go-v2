@@ -38,6 +38,8 @@ type GetWirelessDeviceInput struct {
 	//
 	// This member is required.
 	IdentifierType types.WirelessDeviceIdType
+
+	noSmithyDocumentSerde
 }
 
 type GetWirelessDeviceOutput struct {
@@ -75,6 +77,8 @@ type GetWirelessDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

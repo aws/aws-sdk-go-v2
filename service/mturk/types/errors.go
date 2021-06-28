@@ -12,6 +12,8 @@ type RequestError struct {
 	Message *string
 
 	TurkErrorCode *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestError) Error() string {
@@ -32,6 +34,8 @@ type ServiceFault struct {
 	Message *string
 
 	TurkErrorCode *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceFault) Error() string {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type ActionSource struct {
 
 	// The type of the source.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists the properties of an action. An action represents an action or activity.
@@ -46,6 +49,8 @@ type ActionSummary struct {
 
 	// The status of the action.
 	Status ActionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Edge Manager agent version.
@@ -60,6 +65,8 @@ type AgentVersion struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // This API is not supported.
@@ -67,6 +74,8 @@ type Alarm struct {
 
 	//
 	AlarmName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the training algorithm to use in a CreateTrainingJob request. For more
@@ -139,6 +148,8 @@ type AlgorithmSpecification struct {
 	// Your Own Algorithms with Amazon SageMaker
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
 	TrainingImage *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the validation and image scan statuses of the algorithm.
@@ -149,6 +160,8 @@ type AlgorithmStatusDetails struct {
 
 	// The status of algorithm validation.
 	ValidationStatuses []AlgorithmStatusItem
+
+	noSmithyDocumentSerde
 }
 
 // Represents the overall status of an algorithm.
@@ -166,6 +179,8 @@ type AlgorithmStatusItem struct {
 
 	// if the overall status is Failed, the reason for the failure.
 	FailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about an algorithm.
@@ -193,6 +208,8 @@ type AlgorithmSummary struct {
 
 	// A brief description of the algorithm.
 	AlgorithmDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a training job and a batch transform job that Amazon SageMaker runs to
@@ -215,6 +232,8 @@ type AlgorithmValidationProfile struct {
 	// The TransformJobDefinition object that describes the transform job that Amazon
 	// SageMaker runs to validate your algorithm.
 	TransformJobDefinition *TransformJobDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configurations for one or more training jobs that Amazon SageMaker
@@ -232,6 +251,8 @@ type AlgorithmValidationSpecification struct {
 	//
 	// This member is required.
 	ValidationRole *string
+
+	noSmithyDocumentSerde
 }
 
 // Configures how labels are consolidated across human workers and processes output
@@ -1158,6 +1179,8 @@ type AnnotationConsolidationConfig struct {
 	//
 	// This member is required.
 	AnnotationConsolidationLambdaArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an Amazon SageMaker app.
@@ -1180,6 +1203,8 @@ type AppDetails struct {
 
 	// The user profile name.
 	UserProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for running a SageMaker image as a KernelGateway app.
@@ -1199,6 +1224,8 @@ type AppImageConfigDetails struct {
 
 	// When the AppImageConfig was last modified.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Configuration to run a processing job in a specified container image.
@@ -1214,6 +1241,8 @@ type AppSpecification struct {
 
 	// The entrypoint for a container used to run a processing job.
 	ContainerEntrypoint []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure describing the source of an artifact.
@@ -1226,6 +1255,8 @@ type ArtifactSource struct {
 
 	// A list of source types.
 	SourceTypes []ArtifactSourceType
+
+	noSmithyDocumentSerde
 }
 
 // The ID and ID type of an artifact source.
@@ -1240,6 +1271,8 @@ type ArtifactSourceType struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists a summary of the properties of an artifact. An artifact represents a URI
@@ -1263,6 +1296,8 @@ type ArtifactSummary struct {
 
 	// The source of the artifact.
 	Source *ArtifactSource
+
+	noSmithyDocumentSerde
 }
 
 // Lists a summary of the properties of an association. An association is an entity
@@ -1297,6 +1332,8 @@ type AssociationSummary struct {
 
 	// The source type.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for Athena Dataset Definition input.
@@ -1337,6 +1374,8 @@ type AthenaDatasetDefinition struct {
 
 	// The name of the workgroup in which the Athena query is being started.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // An Autopilot job returns recommendations, or candidates. Each candidate has
@@ -1387,6 +1426,8 @@ type AutoMLCandidate struct {
 
 	// Information about the inference container definitions.
 	InferenceContainers []AutoMLContainerDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Information about the steps for a candidate and what step it is working on.
@@ -1406,6 +1447,8 @@ type AutoMLCandidateStep struct {
 	//
 	// This member is required.
 	CandidateStepType CandidateStepType
+
+	noSmithyDocumentSerde
 }
 
 // A channel is a named input source that training algorithms can consume. For more
@@ -1425,6 +1468,8 @@ type AutoMLChannel struct {
 
 	// You can use Gzip or None. The default value is None.
 	CompressionType CompressionType
+
+	noSmithyDocumentSerde
 }
 
 // A list of container definitions that describe the different containers that make
@@ -1443,6 +1488,8 @@ type AutoMLContainerDefinition struct {
 
 	// The environment variables to set in the container. For more information, see .
 	Environment map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The data source for the Autopilot job.
@@ -1453,6 +1500,8 @@ type AutoMLDataSource struct {
 	//
 	// This member is required.
 	S3DataSource *AutoMLS3DataSource
+
+	noSmithyDocumentSerde
 }
 
 // The artifacts that are generated during an AutoML job.
@@ -1463,6 +1512,8 @@ type AutoMLJobArtifacts struct {
 
 	// The URL of the notebook location.
 	DataExplorationNotebookLocation *string
+
+	noSmithyDocumentSerde
 }
 
 // How long a job is allowed to run, or how many candidates a job is allowed to
@@ -1478,6 +1529,8 @@ type AutoMLJobCompletionCriteria struct {
 	// The maximum time, in seconds, a training job is allowed to run as part of an
 	// AutoML job.
 	MaxRuntimePerTrainingJobInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // A collection of settings used for an AutoML job.
@@ -1489,6 +1542,8 @@ type AutoMLJobConfig struct {
 
 	// The security configuration for traffic encryption or Amazon VPC settings.
 	SecurityConfig *AutoMLSecurityConfig
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a metric to minimize or maximize as the objective of a job.
@@ -1565,6 +1620,8 @@ type AutoMLJobObjective struct {
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary about an AutoML job.
@@ -1608,6 +1665,8 @@ type AutoMLJobSummary struct {
 
 	// The list of reasons for partial failures within an AutoML job.
 	PartialFailureReasons []AutoMLPartialFailureReason
+
+	noSmithyDocumentSerde
 }
 
 // The output data configuration.
@@ -1620,6 +1679,8 @@ type AutoMLOutputDataConfig struct {
 
 	// The Amazon Web Services KMS encryption key ID.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // The reason for a partial failure of an AutoML job.
@@ -1627,6 +1688,8 @@ type AutoMLPartialFailureReason struct {
 
 	// The message containing the reason for a partial failure of an AutoML job.
 	PartialFailureMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon S3 data source.
@@ -1641,6 +1704,8 @@ type AutoMLS3DataSource struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Security options.
@@ -1654,6 +1719,8 @@ type AutoMLSecurityConfig struct {
 
 	// The VPC configuration.
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Currently, the AutoRollbackConfig API is not supported.
@@ -1661,6 +1728,8 @@ type AutoRollbackConfig struct {
 
 	//
 	Alarms []Alarm
+
+	noSmithyDocumentSerde
 }
 
 // Contains bias metrics for a model.
@@ -1668,6 +1737,8 @@ type Bias struct {
 
 	// The bias report for a model
 	Report *MetricsSource
+
+	noSmithyDocumentSerde
 }
 
 // Currently, the BlueGreenUpdatePolicy API is not supported.
@@ -1683,6 +1754,8 @@ type BlueGreenUpdatePolicy struct {
 
 	//
 	TerminationWaitInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Details on the cache hit of a pipeline execution step.
@@ -1690,6 +1763,8 @@ type CacheHitResult struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.
 	SourcePipelineExecutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata about a callback step.
@@ -1704,6 +1779,8 @@ type CallbackStepMetadata struct {
 	// The URL of the Amazon Simple Queue Service (Amazon SQS) queue used by the
 	// callback step.
 	SqsQueueUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The location of artifacts for an AutoML candidate job.
@@ -1714,6 +1791,8 @@ type CandidateArtifactLocations struct {
 	//
 	// This member is required.
 	Explainability *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties of an AutoML candidate job.
@@ -1721,6 +1800,8 @@ type CandidateProperties struct {
 
 	// The Amazon S3 prefix to the artifacts generated for an AutoML candidate.
 	CandidateArtifactLocations *CandidateArtifactLocations
+
+	noSmithyDocumentSerde
 }
 
 // Currently, the CapacitySize API is not supported.
@@ -1735,6 +1816,8 @@ type CapacitySize struct {
 	//
 	// This member is required.
 	Value *int32
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -1745,6 +1828,8 @@ type CaptureContentTypeHeader struct {
 
 	//
 	JsonContentTypes []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -1754,6 +1839,8 @@ type CaptureOption struct {
 	//
 	// This member is required.
 	CaptureMode CaptureMode
+
+	noSmithyDocumentSerde
 }
 
 // A list of categorical hyperparameters to tune.
@@ -1768,6 +1855,8 @@ type CategoricalParameterRange struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the possible values for a categorical hyperparameter.
@@ -1777,6 +1866,8 @@ type CategoricalParameterRangeSpecification struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A channel is a named input source that training algorithms can consume.
@@ -1833,6 +1924,8 @@ type Channel struct {
 	// that the content sent to a particular node on the first epoch might be sent to a
 	// different node on the second epoch.
 	ShuffleConfig *ShuffleConfig
+
+	noSmithyDocumentSerde
 }
 
 // Defines a named input source, called a channel, to be used by an algorithm.
@@ -1865,6 +1958,8 @@ type ChannelSpecification struct {
 
 	// The allowed compression types, if data compression is used.
 	SupportedCompressionTypes []CompressionType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the output location for managed spot training
@@ -1880,6 +1975,8 @@ type CheckpointConfig struct {
 	// (Optional) The local directory where checkpoints are written. The default
 	// directory is /opt/ml/checkpoints/.
 	LocalPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies summary information about a Git repository.
@@ -1909,6 +2006,8 @@ type CodeRepositorySummary struct {
 	// located and the ARN of the Amazon Web Services Secrets Manager secret that
 	// contains the credentials used to access the repository.
 	GitConfig *GitConfig
+
+	noSmithyDocumentSerde
 }
 
 // Use this parameter to configure your Amazon Cognito workforce. A single Cognito
@@ -1930,6 +2029,8 @@ type CognitoConfig struct {
 	//
 	// This member is required.
 	UserPool *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a Amazon Cognito user group. A user group can be used in on or more
@@ -1952,6 +2053,8 @@ type CognitoMemberDefinition struct {
 	//
 	// This member is required.
 	UserPool *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for the Debugger output tensor collections.
@@ -1965,6 +2068,8 @@ type CollectionConfiguration struct {
 	// "include_regex", "reduction_config", "save_config", "tensor_names", and
 	// "save_histogram".
 	CollectionParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a model compilation job.
@@ -2014,6 +2119,8 @@ type CompilationJobSummary struct {
 
 	// The time when the model compilation job was last modified.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for a Condition step.
@@ -2021,6 +2128,8 @@ type ConditionStepMetadata struct {
 
 	// The outcome of the Condition step evaluation.
 	Outcome ConditionOutcome
+
+	noSmithyDocumentSerde
 }
 
 // Describes the container, as part of model definition.
@@ -2091,6 +2200,8 @@ type ContainerDefinition struct {
 
 	// Specifies additional configuration for multi-model endpoints.
 	MultiModelConfig *MultiModelConfig
+
+	noSmithyDocumentSerde
 }
 
 // A structure describing the source of a context.
@@ -2106,6 +2217,8 @@ type ContextSource struct {
 
 	// The type of the source.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists a summary of the properties of a context. A context provides a logical
@@ -2129,6 +2242,8 @@ type ContextSummary struct {
 
 	// The source of the context.
 	Source *ContextSource
+
+	noSmithyDocumentSerde
 }
 
 // A list of continuous hyperparameters to tune.
@@ -2165,6 +2280,8 @@ type ContinuousParameterRange struct {
 	// logarithmic scaling works only for ranges that are entirely within the range
 	// 0<=x<1.0.
 	ScalingType HyperParameterScalingType
+
+	noSmithyDocumentSerde
 }
 
 // Defines the possible values for a continuous hyperparameter.
@@ -2179,6 +2296,8 @@ type ContinuousParameterRangeSpecification struct {
 	//
 	// This member is required.
 	MinValue *string
+
+	noSmithyDocumentSerde
 }
 
 // A custom SageMaker image. For more information, see Bring your own SageMaker
@@ -2197,6 +2316,8 @@ type CustomImage struct {
 
 	// The version number of the CustomImage.
 	ImageVersionNumber *int32
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -2225,6 +2346,8 @@ type DataCaptureConfig struct {
 
 	//
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -2254,6 +2377,8 @@ type DataCaptureConfigSummary struct {
 	//
 	// This member is required.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // The meta data of the Glue table which serves as data catalog for the
@@ -2274,6 +2399,8 @@ type DataCatalogConfig struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // The data structure used to specify the data to be used for inference in a batch
@@ -2321,6 +2448,8 @@ type DataProcessing struct {
 	// indexes that aren't within the dimension size of the joined dataset, you get an
 	// error. Examples: "$", "$[0,5:]", "$['id','SageMakerOutput']"
 	OutputFilter *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the container that a data quality monitoring job runs.
@@ -2349,6 +2478,8 @@ type DataQualityAppSpecification struct {
 	// built-in container can use the converted data. Applicable only for the built-in
 	// (first party) containers.
 	RecordPreprocessorSourceUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for monitoring constraints and monitoring statistics. These
@@ -2365,6 +2496,8 @@ type DataQualityBaselineConfig struct {
 
 	// The statistics resource for a monitoring job.
 	StatisticsResource *MonitoringStatisticsResource
+
+	noSmithyDocumentSerde
 }
 
 // The input for the data quality monitoring job. Currently endpoints are supported
@@ -2375,6 +2508,8 @@ type DataQualityJobInput struct {
 	//
 	// This member is required.
 	EndpointInput *EndpointInput
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for Dataset Definition inputs. The Dataset Definition input must
@@ -2402,6 +2537,8 @@ type DatasetDefinition struct {
 
 	// Configuration for Redshift Dataset Definition input.
 	RedshiftDatasetDefinition *RedshiftDatasetDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Describes the location of the channel data.
@@ -2412,6 +2549,8 @@ type DataSource struct {
 
 	// The S3 location of the data source that is associated with a channel.
 	S3DataSource *S3DataSource
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for the Debugger hook parameters, metric and tensor
@@ -2439,6 +2578,8 @@ type DebugHookConfig struct {
 	// Path to local storage location for metrics and tensors. Defaults to
 	// /opt/ml/output/tensors/.
 	LocalPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for SageMaker Debugger rules for debugging. To learn
@@ -2474,6 +2615,8 @@ type DebugRuleConfiguration struct {
 
 	// The size, in GB, of the ML storage volume attached to the processing instance.
 	VolumeSizeInGB int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the status of the rule evaluation.
@@ -2493,6 +2636,8 @@ type DebugRuleEvaluationStatus struct {
 
 	// Details from the rule evaluation.
 	StatusDetails *string
+
+	noSmithyDocumentSerde
 }
 
 // Gets the Amazon EC2 Container Registry path of the docker image of the model
@@ -2515,6 +2660,8 @@ type DeployedImage struct {
 
 	// The image path you specified when you created the model.
 	SpecifiedImage *string
+
+	noSmithyDocumentSerde
 }
 
 // Currently, the DeploymentConfig API is not supported.
@@ -2527,6 +2674,8 @@ type DeploymentConfig struct {
 
 	//
 	AutoRollbackConfiguration *AutoRollbackConfig
+
+	noSmithyDocumentSerde
 }
 
 // Specifies weight and capacity values for a production variant.
@@ -2542,6 +2691,8 @@ type DesiredWeightAndCapacity struct {
 
 	// The variant's weight.
 	DesiredWeight *float32
+
+	noSmithyDocumentSerde
 }
 
 // Information of a particular device.
@@ -2557,6 +2708,8 @@ type Device struct {
 
 	// Amazon Web Services Internet of Things (IoT) object name.
 	IotThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the device fleet.
@@ -2577,6 +2730,8 @@ type DeviceFleetSummary struct {
 
 	// Timestamp of when the device fleet was last updated.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Status of devices.
@@ -2591,6 +2746,8 @@ type DeviceStats struct {
 	//
 	// This member is required.
 	RegisteredDeviceCount int64
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the device.
@@ -2624,6 +2781,8 @@ type DeviceSummary struct {
 
 	// The timestamp of the last registration or de-reregistration.
 	RegistrationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The domain's details.
@@ -2649,6 +2808,8 @@ type DomainDetails struct {
 
 	// The domain's URL.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // The model on the edge device.
@@ -2669,6 +2830,8 @@ type EdgeModel struct {
 
 	// The timestamp of the last data sample taken.
 	LatestSampleTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Status of edge devices with this model.
@@ -2704,6 +2867,8 @@ type EdgeModelStat struct {
 	//
 	// This member is required.
 	SamplingDeviceCount int64
+
+	noSmithyDocumentSerde
 }
 
 // Summary of model on edge device.
@@ -2718,6 +2883,8 @@ type EdgeModelSummary struct {
 	//
 	// This member is required.
 	ModelVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The output configuration.
@@ -2764,6 +2931,8 @@ type EdgeOutputConfig struct {
 	// The deployment type SageMaker Edge Manager will create. Currently only supports
 	// Amazon Web Services IoT Greengrass Version 2 components.
 	PresetDeploymentType EdgePresetDeploymentType
+
+	noSmithyDocumentSerde
 }
 
 // Summary of edge packaging job.
@@ -2798,6 +2967,8 @@ type EdgePackagingJobSummary struct {
 
 	// The version of the model.
 	ModelVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The output of a SageMaker Edge Manager deployable resource.
@@ -2817,6 +2988,8 @@ type EdgePresetDeploymentOutput struct {
 
 	// Returns a message describing the status of the deployed resource.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // A hosted endpoint for real-time inference.
@@ -2872,6 +3045,8 @@ type Endpoint struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 	// Web Services General Reference Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information for an endpoint configuration.
@@ -2891,6 +3066,8 @@ type EndpointConfigSummary struct {
 	//
 	// This member is required.
 	EndpointConfigName *string
+
+	noSmithyDocumentSerde
 }
 
 // Input object for the endpoint
@@ -2939,6 +3116,8 @@ type EndpointInput struct {
 	// Model Quality Monitoring Jobs
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
 	StartTimeOffset *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information for an endpoint.
@@ -3004,6 +3183,8 @@ type EndpointSummary struct {
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The properties of an experiment as returned by the Search API.
@@ -3042,6 +3223,8 @@ type Experiment struct {
 	// The list of tags that are associated with the experiment. You can use Search API
 	// to search on the tags.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Associates a SageMaker job as a trial component with an experiment and trial.
@@ -3065,6 +3248,8 @@ type ExperimentConfig struct {
 	// The name of an existing trial to associate the trial component with. If not
 	// specified, a new trial is created.
 	TrialName *string
+
+	noSmithyDocumentSerde
 }
 
 // The source of the experiment.
@@ -3077,6 +3262,8 @@ type ExperimentSource struct {
 
 	// The source type.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the properties of an experiment. To get the complete set of
@@ -3101,6 +3288,8 @@ type ExperimentSummary struct {
 
 	// When the experiment was last modified.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains explainability metrics for a model.
@@ -3108,6 +3297,8 @@ type Explainability struct {
 
 	// The explainability report for a model.
 	Report *MetricsSource
+
+	noSmithyDocumentSerde
 }
 
 // A list of features. You must include FeatureName and FeatureType. Valid feature
@@ -3120,6 +3311,8 @@ type FeatureDefinition struct {
 
 	// The value type of a feature. Valid values are Integral, Fractional, or String.
 	FeatureType FeatureType
+
+	noSmithyDocumentSerde
 }
 
 // Amazon SageMaker Feature Store stores features in a collection called Feature
@@ -3185,6 +3378,8 @@ type FeatureGroup struct {
 
 	// Tags used to define a FeatureGroup.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // The name, Arn, CreationTime, FeatureGroup values, LastUpdatedTime and
@@ -3213,6 +3408,8 @@ type FeatureGroupSummary struct {
 	// Notifies you if replicating data into the OfflineStore has failed. Returns
 	// either: Active or Blocked.
 	OfflineStoreStatus *OfflineStoreStatus
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Elastic File System (EFS) storage configuration for a SageMaker
@@ -3228,6 +3425,8 @@ type FileSystemConfig struct {
 	// The path within the image to mount the user's EFS home directory. The directory
 	// should be empty. If not specified, defaults to /home/sagemaker-user.
 	MountPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a file system data source for a channel.
@@ -3253,6 +3452,8 @@ type FileSystemDataSource struct {
 	//
 	// This member is required.
 	FileSystemType FileSystemType
+
+	noSmithyDocumentSerde
 }
 
 // A conditional statement for a search expression that includes a resource
@@ -3345,6 +3546,8 @@ type Filter struct {
 	// floating-point decimal. For timestamp properties, Value must be an ISO 8601
 	// date-time string of the following format: YYYY-mm-dd'T'HH:MM:SS.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The best candidate result from an AutoML training job.
@@ -3363,6 +3566,8 @@ type FinalAutoMLJobObjectiveMetric struct {
 
 	// The type of metric with the best result.
 	Type AutoMLJobObjectiveType
+
+	noSmithyDocumentSerde
 }
 
 // Shows the final value for the objective metric for a training job that was
@@ -3383,6 +3588,8 @@ type FinalHyperParameterTuningJobObjectiveMetric struct {
 	// Whether to minimize or maximize the objective metric. Valid values are Minimize
 	// and Maximize.
 	Type HyperParameterTuningJobObjectiveType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about where human output will be stored.
@@ -3398,6 +3605,8 @@ type FlowDefinitionOutputConfig struct {
 
 	// The Amazon Key Management Service (KMS) key ID for server-side encryption.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains summary information about the flow definition.
@@ -3426,6 +3635,8 @@ type FlowDefinitionSummary struct {
 	// The reason why the flow definition creation failed. A failure reason is returned
 	// only when the flow definition status is Failed.
 	FailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration details for a Git repository in your Amazon Web Services
@@ -3445,6 +3656,8 @@ type GitConfig struct {
 	// have a staging label of AWSCURRENT and must be in the following format:
 	// {"username": UserName, "password": Password}
 	SecretArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration details for a Git repository when the repository is
@@ -3456,6 +3669,8 @@ type GitConfigForUpdate struct {
 	// have a staging label of AWSCURRENT and must be in the following format:
 	// {"username": UserName, "password": Password}
 	SecretArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines under what conditions SageMaker creates a human loop. Used within . See
@@ -3474,6 +3689,8 @@ type HumanLoopActivationConditionsConfig struct {
 	//
 	// This member is required.
 	HumanLoopActivationConditions *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about how and under what conditions SageMaker creates a
@@ -3486,6 +3703,8 @@ type HumanLoopActivationConfig struct {
 	//
 	// This member is required.
 	HumanLoopActivationConditionsConfig *HumanLoopActivationConditionsConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the work to be performed by human workers.
@@ -3757,6 +3976,8 @@ type HumanLoopConfig struct {
 	// The amount of time that a worker has to complete a task. The default value is
 	// 3,600 seconds (1 hour).
 	TaskTimeLimitInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Container for configuring the source of human task requests.
@@ -3768,6 +3989,8 @@ type HumanLoopRequestSource struct {
 	//
 	// This member is required.
 	AwsManagedHumanLoopRequestSource AwsManagedHumanLoopRequestSource
+
+	noSmithyDocumentSerde
 }
 
 // Information required for human workers to complete a labeling task.
@@ -4766,6 +4989,8 @@ type HumanTaskConfig struct {
 	// Keywords used to describe the task so that workers on Amazon Mechanical Turk can
 	// discover the task.
 	TaskKeywords []string
+
+	noSmithyDocumentSerde
 }
 
 // Container for human task user interface information.
@@ -4785,6 +5010,8 @@ type HumanTaskUiSummary struct {
 	//
 	// This member is required.
 	HumanTaskUiName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies which training algorithm to use for training jobs that a
@@ -4823,6 +5050,8 @@ type HyperParameterAlgorithmSpecification struct {
 	// Your Own Algorithms with Amazon SageMaker
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
 	TrainingImage *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a hyperparameter to be used by an algorithm.
@@ -4854,6 +5083,8 @@ type HyperParameterSpecification struct {
 
 	// The allowed range for this hyperparameter.
 	Range *ParameterRange
+
+	noSmithyDocumentSerde
 }
 
 // Defines the training jobs launched by a hyperparameter tuning job.
@@ -4955,6 +5186,8 @@ type HyperParameterTrainingJobDefinition struct {
 	// Protect Training Jobs by Using an Amazon Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Specifies summary information about a training job.
@@ -5022,6 +5255,8 @@ type HyperParameterTrainingJobSummary struct {
 
 	// The HyperParameter tuning job that launched the training job.
 	TuningJobName *string
+
+	noSmithyDocumentSerde
 }
 
 // Configures a hyperparameter tuning job.
@@ -5062,6 +5297,8 @@ type HyperParameterTuningJobConfig struct {
 
 	// The tuning job's completion criteria.
 	TuningJobCompletionCriteria *TuningJobCompletionCriteria
+
+	noSmithyDocumentSerde
 }
 
 // Defines the objective metric for a hyperparameter tuning job. Hyperparameter
@@ -5079,6 +5316,8 @@ type HyperParameterTuningJobObjective struct {
 	//
 	// This member is required.
 	Type HyperParameterTuningJobObjectiveType
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a hyperparameter tuning job.
@@ -5132,6 +5371,8 @@ type HyperParameterTuningJobSummary struct {
 	// The ResourceLimits object that specifies the maximum number of training jobs and
 	// parallel training jobs allowed for this tuning job.
 	ResourceLimits *ResourceLimits
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration for a hyperparameter tuning job that uses one or
@@ -5180,6 +5421,8 @@ type HyperParameterTuningJobWarmStartConfig struct {
 	//
 	// This member is required.
 	WarmStartType HyperParameterTuningJobWarmStartType
+
+	noSmithyDocumentSerde
 }
 
 // A SageMaker image. A SageMaker image represents a set of container images that
@@ -5220,6 +5463,8 @@ type Image struct {
 
 	// When a create, update, or delete operation fails, the reason for the failure.
 	FailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies whether the model container is in Amazon ECR or a private Docker
@@ -5243,6 +5488,8 @@ type ImageConfig struct {
 	// the private Docker registry where the model image is hosted requires
 	// authentication.
 	RepositoryAuthConfig *RepositoryAuthConfig
+
+	noSmithyDocumentSerde
 }
 
 // A version of a SageMaker Image. A version represents an existing container
@@ -5281,6 +5528,8 @@ type ImageVersion struct {
 
 	// When a create or delete operation fails, the reason for the failure.
 	FailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies details about how containers in a multi-container endpoint are run.
@@ -5296,6 +5545,8 @@ type InferenceExecutionConfig struct {
 	//
 	// This member is required.
 	Mode InferenceExecutionMode
+
+	noSmithyDocumentSerde
 }
 
 // Defines how to perform inference generation after a training job is run.
@@ -5326,6 +5577,8 @@ type InferenceSpecification struct {
 	// which an endpoint can be deployed. This parameter is required for unversioned
 	// models, and optional for versioned models.
 	SupportedTransformInstanceTypes []TransformInstanceType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the location of input model artifacts, the name and
@@ -5550,6 +5803,8 @@ type InputConfig struct {
 	// PyTorch framework versions 1.4, 1.5, and 1.6 for cloud instance target devices:
 	// ml_c4, ml_c5, ml_m4, ml_m5, ml_p2, ml_p3, and ml_g4dn.
 	FrameworkVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // For a hyperparameter of the integer type, specifies the range that a
@@ -5582,6 +5837,8 @@ type IntegerParameterRange struct {
 	// logarithmic scale. Logarithmic scaling works only for ranges that have only
 	// values greater than 0.
 	ScalingType HyperParameterScalingType
+
+	noSmithyDocumentSerde
 }
 
 // Defines the possible values for an integer hyperparameter.
@@ -5596,6 +5853,8 @@ type IntegerParameterRangeSpecification struct {
 	//
 	// This member is required.
 	MinValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The JupyterServer app settings.
@@ -5604,6 +5863,8 @@ type JupyterServerAppSettings struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the default
 	// SageMaker image used by the JupyterServer app.
 	DefaultResourceSpec *ResourceSpec
+
+	noSmithyDocumentSerde
 }
 
 // The KernelGateway app settings.
@@ -5616,6 +5877,8 @@ type KernelGatewayAppSettings struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the default
 	// SageMaker image used by the KernelGateway app.
 	DefaultResourceSpec *ResourceSpec
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for the file system and kernels in a SageMaker image running
@@ -5630,6 +5893,8 @@ type KernelGatewayImageConfig struct {
 	// The Amazon Elastic File System (EFS) storage configuration for a SageMaker
 	// image.
 	FileSystemConfig *FileSystemConfig
+
+	noSmithyDocumentSerde
 }
 
 // The specification of a Jupyter kernel.
@@ -5642,6 +5907,8 @@ type KernelSpec struct {
 
 	// The display name of the kernel.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a breakdown of the number of objects labeled.
@@ -5661,6 +5928,8 @@ type LabelCounters struct {
 
 	// The total number of objects not yet labeled.
 	Unlabeled int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides counts for human-labeled tasks in the labeling job.
@@ -5674,6 +5943,8 @@ type LabelCountersForWorkteam struct {
 
 	// The total number of tasks in the labeling job.
 	Total int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for auto-labeling of your data objects. A
@@ -5711,6 +5982,8 @@ type LabelingJobAlgorithmsConfig struct {
 
 	// Provides configuration information for a labeling job.
 	LabelingJobResourceConfig *LabelingJobResourceConfig
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of the data specified by the customer. Use these to describe the data
@@ -5721,6 +5994,8 @@ type LabelingJobDataAttributes struct {
 	// adult content. Amazon SageMaker may restrict the Amazon Mechanical Turk workers
 	// that can view your task based on this information.
 	ContentClassifiers []ContentClassifier
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the location of input data. You must specify at least
@@ -5739,6 +6014,8 @@ type LabelingJobDataSource struct {
 	// Send Data to a Streaming Labeling Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-send-data).
 	SnsDataSource *LabelingJobSnsDataSource
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information for a work team.
@@ -5769,6 +6046,8 @@ type LabelingJobForWorkteamSummary struct {
 
 	// The configured number of workers per data object.
 	NumberOfHumanWorkersPerDataObject *int32
+
+	noSmithyDocumentSerde
 }
 
 // Input configuration information for a labeling job.
@@ -5781,6 +6060,8 @@ type LabelingJobInputConfig struct {
 
 	// Attributes of the data specified by the customer.
 	DataAttributes *LabelingJobDataAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the location of the output produced by the labeling job.
@@ -5794,6 +6075,8 @@ type LabelingJobOutput struct {
 	// The Amazon Resource Name (ARN) for the most recent Amazon SageMaker model
 	// trained as part of automated data labeling.
 	FinalActiveLearningModelArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Output configuration information for a labeling job.
@@ -5828,6 +6111,8 @@ type LabelingJobOutputConfig struct {
 	// Streaming Labeling Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data).
 	SnsTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Configure encryption on the storage volume attached to the ML compute instance
@@ -5853,6 +6138,8 @@ type LabelingJobResourceConfig struct {
 	// Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon S3 location of the input data objects.
@@ -5878,6 +6165,8 @@ type LabelingJobS3DataSource struct {
 	//
 	// This member is required.
 	ManifestS3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // An Amazon SNS data source used for streaming labeling jobs.
@@ -5888,6 +6177,8 @@ type LabelingJobSnsDataSource struct {
 	//
 	// This member is required.
 	SnsTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A set of conditions for stopping a labeling job. If any of the conditions are
@@ -5901,6 +6192,8 @@ type LabelingJobStoppingConditions struct {
 
 	// The maximum number of input data objects that should be labeled.
 	MaxPercentageOfInputDatasetLabeled *int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a labeling job.
@@ -5962,6 +6255,8 @@ type LabelingJobSummary struct {
 
 	// The location of the output produced by the labeling job.
 	LabelingJobOutput *LabelingJobOutput
+
+	noSmithyDocumentSerde
 }
 
 // Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work
@@ -5977,6 +6272,8 @@ type MemberDefinition struct {
 	// work teams. If you add a user group to a private work team, all workers in that
 	// user group are added to the work team.
 	OidcMemberDefinition *OidcMemberDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Metadata properties of the tracking entity, trial, or trial component.
@@ -5993,6 +6290,8 @@ type MetadataProperties struct {
 
 	// The repository.
 	Repository *string
+
+	noSmithyDocumentSerde
 }
 
 // The name, value, and date and time of a metric that was emitted to Amazon
@@ -6007,6 +6306,8 @@ type MetricData struct {
 
 	// The value of the metric.
 	Value float32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a metric that the training algorithm writes to stderr or stdout.
@@ -6027,6 +6328,8 @@ type MetricDefinition struct {
 	//
 	// This member is required.
 	Regex *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -6044,6 +6347,8 @@ type MetricsSource struct {
 
 	//
 	ContentDigest *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the location that is configured for storing model
@@ -6057,6 +6362,8 @@ type ModelArtifacts struct {
 	//
 	// This member is required.
 	S3ModelArtifacts *string
+
+	noSmithyDocumentSerde
 }
 
 // Docker container image configuration object for the model bias job.
@@ -6076,6 +6383,8 @@ type ModelBiasAppSpecification struct {
 
 	// Sets the environment variables in the Docker container.
 	Environment map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a baseline model bias job.
@@ -6086,6 +6395,8 @@ type ModelBiasBaselineConfig struct {
 
 	// The constraints resource for a monitoring job.
 	ConstraintsResource *MonitoringConstraintsResource
+
+	noSmithyDocumentSerde
 }
 
 // Inputs for the model bias job.
@@ -6100,6 +6411,8 @@ type ModelBiasJobInput struct {
 	//
 	// This member is required.
 	GroundTruthS3Input *MonitoringGroundTruthS3Input
+
+	noSmithyDocumentSerde
 }
 
 // Configures the timeout and maximum number of retries for processing a transform
@@ -6111,6 +6424,8 @@ type ModelClientConfig struct {
 
 	// The timeout value in seconds for an invocation request.
 	InvocationsTimeoutInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Data quality constraints and statistics for a model.
@@ -6121,6 +6436,8 @@ type ModelDataQuality struct {
 
 	// Data quality statistics for a model.
 	Statistics *MetricsSource
+
+	noSmithyDocumentSerde
 }
 
 // Specifies how to generate the endpoint name for an automatic one-click Autopilot
@@ -6138,6 +6455,8 @@ type ModelDeployConfig struct {
 	// and only if you set AutoGenerateEndpointName to False; otherwise a 400 error is
 	// thrown.
 	EndpointName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the endpoint of the model deployment.
@@ -6146,6 +6465,8 @@ type ModelDeployResult struct {
 	// The name of the endpoint to which the model has been deployed. If model
 	// deployment fails, this field is omitted from the response.
 	EndpointName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information to verify the integrity of stored model artifacts.
@@ -6153,6 +6474,8 @@ type ModelDigests struct {
 
 	// Provides a hash value that uniquely identifies the stored model artifacts.
 	ArtifactDigest *string
+
+	noSmithyDocumentSerde
 }
 
 // Docker container image configuration object for the model explainability job.
@@ -6173,6 +6496,8 @@ type ModelExplainabilityAppSpecification struct {
 
 	// Sets the environment variables in the Docker container.
 	Environment map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a baseline model explainability job.
@@ -6183,6 +6508,8 @@ type ModelExplainabilityBaselineConfig struct {
 
 	// The constraints resource for a monitoring job.
 	ConstraintsResource *MonitoringConstraintsResource
+
+	noSmithyDocumentSerde
 }
 
 // Inputs for the model explainability job.
@@ -6192,6 +6519,8 @@ type ModelExplainabilityJobInput struct {
 	//
 	// This member is required.
 	EndpointInput *EndpointInput
+
+	noSmithyDocumentSerde
 }
 
 // Contains metrics captured from a model.
@@ -6208,6 +6537,8 @@ type ModelMetrics struct {
 
 	// Metrics that measure the quality of a model.
 	ModelQuality *ModelQuality
+
+	noSmithyDocumentSerde
 }
 
 // A versioned model that can be deployed for SageMaker inference.
@@ -6304,6 +6635,8 @@ type ModelPackage struct {
 	// Specifies batch transform jobs that Amazon SageMaker runs to validate your model
 	// package.
 	ValidationSpecification *ModelPackageValidationSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Docker container for the model package.
@@ -6340,6 +6673,8 @@ type ModelPackageContainerDefinition struct {
 
 	// The Amazon Web Services Marketplace product ID of the model package.
 	ProductId *string
+
+	noSmithyDocumentSerde
 }
 
 // A group of versioned models in the model registry.
@@ -6386,6 +6721,8 @@ type ModelPackageGroup struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 	// Web Services General Reference Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a model group.
@@ -6413,6 +6750,8 @@ type ModelPackageGroupSummary struct {
 
 	// A description of the model group.
 	ModelPackageGroupDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the validation and image scan statuses of the model package.
@@ -6425,6 +6764,8 @@ type ModelPackageStatusDetails struct {
 
 	// The status of the scan of the Docker image container for the model package.
 	ImageScanStatuses []ModelPackageStatusItem
+
+	noSmithyDocumentSerde
 }
 
 // Represents the overall status of a model package.
@@ -6442,6 +6783,8 @@ type ModelPackageStatusItem struct {
 
 	// if the overall status is Failed, the reason for the failure.
 	FailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a model package.
@@ -6487,6 +6830,8 @@ type ModelPackageSummary struct {
 
 	// If the model package is a versioned model, the version of the model.
 	ModelPackageVersion *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains data, such as the inputs and targeted instance types that are used in
@@ -6504,6 +6849,8 @@ type ModelPackageValidationProfile struct {
 	//
 	// This member is required.
 	TransformJobDefinition *TransformJobDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Specifies batch transform jobs that Amazon SageMaker runs to validate your model
@@ -6520,6 +6867,8 @@ type ModelPackageValidationSpecification struct {
 	//
 	// This member is required.
 	ValidationRole *string
+
+	noSmithyDocumentSerde
 }
 
 // Model quality statistics and constraints.
@@ -6530,6 +6879,8 @@ type ModelQuality struct {
 
 	// Model quality statistics.
 	Statistics *MetricsSource
+
+	noSmithyDocumentSerde
 }
 
 // Container image configuration object for the monitoring job.
@@ -6561,6 +6912,8 @@ type ModelQualityAppSpecification struct {
 	// built-in container can use the converted data. Applicable only for the built-in
 	// (first party) containers.
 	RecordPreprocessorSourceUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for monitoring constraints and monitoring statistics. These
@@ -6573,6 +6926,8 @@ type ModelQualityBaselineConfig struct {
 
 	// The constraints resource for a monitoring job.
 	ConstraintsResource *MonitoringConstraintsResource
+
+	noSmithyDocumentSerde
 }
 
 // The input for the model quality monitoring job. Currently endponts are supported
@@ -6588,6 +6943,8 @@ type ModelQualityJobInput struct {
 	//
 	// This member is required.
 	GroundTruthS3Input *MonitoringGroundTruthS3Input
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for Model steps.
@@ -6595,6 +6952,8 @@ type ModelStepMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the created model.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a model.
@@ -6614,6 +6973,8 @@ type ModelSummary struct {
 	//
 	// This member is required.
 	ModelName *string
+
+	noSmithyDocumentSerde
 }
 
 // Container image configuration object for the monitoring job.
@@ -6639,6 +7000,8 @@ type MonitoringAppSpecification struct {
 	// built-in container can use the converted data. Applicable only for the built-in
 	// (first party) containers.
 	RecordPreprocessorSourceUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for monitoring constraints and monitoring statistics. These
@@ -6656,6 +7019,8 @@ type MonitoringBaselineConfig struct {
 	// The baseline statistics file in Amazon S3 that the current monitoring job should
 	// be validated against.
 	StatisticsResource *MonitoringStatisticsResource
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for the cluster used to run model monitoring jobs.
@@ -6683,6 +7048,8 @@ type MonitoringClusterConfig struct {
 	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
 	// ML compute instance(s) that run the model monitoring job.
 	VolumeKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // The constraints resource for a monitoring job.
@@ -6690,6 +7057,8 @@ type MonitoringConstraintsResource struct {
 
 	// The Amazon S3 URI for the constraints resource.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of information about the last monitoring job to run.
@@ -6734,6 +7103,8 @@ type MonitoringExecutionSummary struct {
 
 	// The Amazon Resource Name (ARN) of the monitoring job.
 	ProcessingJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The ground truth labels for the dataset used for the monitoring job.
@@ -6741,6 +7112,8 @@ type MonitoringGroundTruthS3Input struct {
 
 	// The address of the Amazon S3 location of the ground truth labels.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // The inputs for a monitoring job.
@@ -6750,6 +7123,8 @@ type MonitoringInput struct {
 	//
 	// This member is required.
 	EndpointInput *EndpointInput
+
+	noSmithyDocumentSerde
 }
 
 // Defines the monitoring job.
@@ -6797,6 +7172,8 @@ type MonitoringJobDefinition struct {
 
 	// Specifies a time limit for how long the monitoring job is allowed to run.
 	StoppingCondition *MonitoringStoppingCondition
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a monitoring job.
@@ -6821,6 +7198,8 @@ type MonitoringJobDefinitionSummary struct {
 	//
 	// This member is required.
 	MonitoringJobDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 // The networking configuration for the monitoring job.
@@ -6842,6 +7221,8 @@ type MonitoringNetworkConfig struct {
 	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // The output object for a monitoring job.
@@ -6851,6 +7232,8 @@ type MonitoringOutput struct {
 	//
 	// This member is required.
 	S3Output *MonitoringS3Output
+
+	noSmithyDocumentSerde
 }
 
 // The output configuration for monitoring jobs.
@@ -6866,6 +7249,8 @@ type MonitoringOutputConfig struct {
 	// that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon
 	// S3 server-side encryption.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the resources to deploy for a monitoring job.
@@ -6875,6 +7260,8 @@ type MonitoringResources struct {
 	//
 	// This member is required.
 	ClusterConfig *MonitoringClusterConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about where and how you want to store the results of a monitoring
@@ -6897,6 +7284,8 @@ type MonitoringS3Output struct {
 	// Whether to upload the results of the monitoring job continuously or after the
 	// job completes.
 	S3UploadMode ProcessingS3UploadMode
+
+	noSmithyDocumentSerde
 }
 
 // A schedule for a model monitoring job. For information about model monitor, see
@@ -6950,6 +7339,8 @@ type MonitoringSchedule struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 	// Web Services General Reference Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Configures the monitoring schedule and defines the monitoring job.
@@ -6966,6 +7357,8 @@ type MonitoringScheduleConfig struct {
 
 	// Configures the monitoring schedule.
 	ScheduleConfig *ScheduleConfig
+
+	noSmithyDocumentSerde
 }
 
 // Summarizes the monitoring schedule.
@@ -7004,6 +7397,8 @@ type MonitoringScheduleSummary struct {
 
 	// The type of the monitoring job definition that the schedule is for.
 	MonitoringType MonitoringType
+
+	noSmithyDocumentSerde
 }
 
 // The statistics resource for a monitoring job.
@@ -7011,6 +7406,8 @@ type MonitoringStatisticsResource struct {
 
 	// The Amazon S3 URI for the statistics resource.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // A time limit for how long the monitoring job is allowed to run before stopping.
@@ -7023,6 +7420,8 @@ type MonitoringStoppingCondition struct {
 	//
 	// This member is required.
 	MaxRuntimeInSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies additional configuration for hosting multi-model endpoints.
@@ -7035,6 +7434,8 @@ type MultiModelConfig struct {
 	// infrequently, the endpoint might perform better if you disable model caching. To
 	// disable model caching, set the value of this parameter to Disabled.
 	ModelCacheSetting ModelCacheSetting
+
+	noSmithyDocumentSerde
 }
 
 // The VpcConfig configuration object that specifies the VPC that you want the
@@ -7055,6 +7456,8 @@ type NeoVpcConfig struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	noSmithyDocumentSerde
 }
 
 // A list of nested Filter objects. A resource must satisfy the conditions of all
@@ -7083,6 +7486,8 @@ type NestedFilters struct {
 	//
 	// This member is required.
 	NestedPropertyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Networking options for a job, such as network traffic encryption between
@@ -7106,6 +7511,8 @@ type NetworkConfig struct {
 	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of a notebook instance lifecycle configuration.
@@ -7126,6 +7533,8 @@ type NotebookInstanceLifecycleConfigSummary struct {
 
 	// A timestamp that tells when the lifecycle configuration was last modified.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the notebook instance lifecycle configuration script. Each lifecycle
@@ -7144,6 +7553,8 @@ type NotebookInstanceLifecycleHook struct {
 	// A base64-encoded string that contains a shell script for a notebook instance
 	// lifecycle configuration.
 	Content *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information for an Amazon SageMaker notebook instance.
@@ -7201,6 +7612,8 @@ type NotebookInstanceSummary struct {
 	// The URL that you use to connect to the Jupyter instance running in your notebook
 	// instance.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Configures SNS notifications of available or expiring work items for work teams.
@@ -7208,6 +7621,8 @@ type NotificationConfiguration struct {
 
 	// The ARN for the SNS topic to which notifications should be published.
 	NotificationTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the number of training jobs that this hyperparameter tuning job
@@ -7228,6 +7643,8 @@ type ObjectiveStatusCounters struct {
 	// The number of training jobs whose final objective metric was evaluated by the
 	// hyperparameter tuning job and used in the hyperparameter tuning process.
 	Succeeded int32
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of an OfflineStore. Provide an OfflineStoreConfig in a request
@@ -7248,6 +7665,8 @@ type OfflineStoreConfig struct {
 	// Set to True to disable the automatic creation of an Amazon Web Services Glue
 	// table when configuring an OfflineStore.
 	DisableGlueTableCreation bool
+
+	noSmithyDocumentSerde
 }
 
 // The status of OfflineStore.
@@ -7260,6 +7679,8 @@ type OfflineStoreStatus struct {
 
 	// The justification for why the OfflineStoreStatus is Blocked (if applicable).
 	BlockedReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Use this parameter to configure your OIDC Identity Provider (IdP).
@@ -7305,6 +7726,8 @@ type OidcConfig struct {
 	//
 	// This member is required.
 	UserInfoEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Your OIDC IdP workforce configuration.
@@ -7331,6 +7754,8 @@ type OidcConfigForResponse struct {
 
 	// The OIDC IdP user information endpoint used to configure your private workforce.
 	UserInfoEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of user groups that exist in your OIDC Identity Provider (IdP). One to
@@ -7345,6 +7770,8 @@ type OidcMemberDefinition struct {
 	//
 	// This member is required.
 	Groups []string
+
+	noSmithyDocumentSerde
 }
 
 // Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID,
@@ -7360,6 +7787,8 @@ type OnlineStoreConfig struct {
 
 	// Use to specify KMS Key ID (KMSKeyId) for at-rest encryption of your OnlineStore.
 	SecurityConfig *OnlineStoreSecurityConfig
+
+	noSmithyDocumentSerde
 }
 
 // The security configuration for OnlineStore.
@@ -7402,6 +7831,8 @@ type OnlineStoreSecurityConfig struct {
 	//
 	// * "kms:Decrypt"
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the output location for the compiled model and the
@@ -7568,6 +7999,8 @@ type OutputConfig struct {
 	// (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"}, "CompilerOptions":
 	// {'ANDROID_PLATFORM': 29}
 	TargetPlatform *TargetPlatform
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about how to store model training results (model
@@ -7614,6 +8047,8 @@ type OutputDataConfig struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
 	// Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // An output parameter of a pipeline step.
@@ -7628,6 +8063,8 @@ type OutputParameter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Assigns a value to a named Pipeline parameter.
@@ -7643,6 +8080,8 @@ type Parameter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the possible values for categorical, continuous, and integer
@@ -7660,6 +8099,8 @@ type ParameterRange struct {
 	// A IntegerParameterRangeSpecification object that defines the possible values for
 	// an integer hyperparameter.
 	IntegerParameterRangeSpecification *IntegerParameterRangeSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Specifies ranges of integer, continuous, and categorical hyperparameters that a
@@ -7683,6 +8124,8 @@ type ParameterRanges struct {
 	// The array of IntegerParameterRange objects that specify ranges of integer
 	// hyperparameters that a hyperparameter tuning job searches.
 	IntegerParameterRanges []IntegerParameterRange
+
+	noSmithyDocumentSerde
 }
 
 // The trial that a trial component is associated with and the experiment the trial
@@ -7695,6 +8138,8 @@ type Parent struct {
 
 	// The name of the trial.
 	TrialName *string
+
+	noSmithyDocumentSerde
 }
 
 // A previously completed or stopped hyperparameter tuning job to be used as a
@@ -7704,6 +8149,8 @@ type ParentHyperParameterTuningJob struct {
 	// The name of the hyperparameter tuning job to be used as a starting point for a
 	// new hyperparameter tuning job.
 	HyperParameterTuningJobName *string
+
+	noSmithyDocumentSerde
 }
 
 // A SageMaker Model Building Pipeline instance.
@@ -7746,6 +8193,8 @@ type Pipeline struct {
 
 	// A list of tags that apply to the pipeline.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // An execution of a pipeline.
@@ -7788,6 +8237,8 @@ type PipelineExecution struct {
 
 	// Contains a list of pipeline parameters. This list can be empty.
 	PipelineParameters []Parameter
+
+	noSmithyDocumentSerde
 }
 
 // An execution of a step in a pipeline.
@@ -7814,6 +8265,8 @@ type PipelineExecutionStep struct {
 
 	// The status of the step execution.
 	StepStatus StepStatus
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for a step execution.
@@ -7846,6 +8299,8 @@ type PipelineExecutionStepMetadata struct {
 	// The Amazon Resource Name (ARN) of the tuning job that was run by this step
 	// execution.
 	TuningJob *TuningJobStepMetaData
+
+	noSmithyDocumentSerde
 }
 
 // A pipeline execution summary.
@@ -7865,6 +8320,8 @@ type PipelineExecutionSummary struct {
 
 	// The start time of the pipeline execution.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the names of the experiment and trial created by a pipeline.
@@ -7875,6 +8332,8 @@ type PipelineExperimentConfig struct {
 
 	// The name of the trial.
 	TrialName *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a pipeline.
@@ -7903,6 +8362,8 @@ type PipelineSummary struct {
 
 	// The Amazon Resource Name (ARN) that the pipeline used to execute.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for the cluster used to run a processing job.
@@ -7944,6 +8405,8 @@ type ProcessingClusterConfig struct {
 	// Store Volumes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
 	VolumeKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for processing job outputs in Amazon SageMaker Feature Store.
@@ -7955,6 +8418,8 @@ type ProcessingFeatureStoreOutput struct {
 	//
 	// This member is required.
 	FeatureGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The inputs for a processing job. The processing input must specify exactly one
@@ -7977,6 +8442,8 @@ type ProcessingInput struct {
 	// Configuration for downloading input data from Amazon S3 into the processing
 	// container.
 	S3Input *ProcessingS3Input
+
+	noSmithyDocumentSerde
 }
 
 // An Amazon SageMaker processing job that is used to analyze data and evaluate
@@ -8070,6 +8537,8 @@ type ProcessingJob struct {
 
 	// The ARN of the training job associated with this processing job.
 	TrainingJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for a processing job step.
@@ -8077,6 +8546,8 @@ type ProcessingJobStepMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the processing job.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of information about a processing job.
@@ -8115,6 +8586,8 @@ type ProcessingJobSummary struct {
 
 	// The time at which the processing job completed.
 	ProcessingEndTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the results of a processing job. The processing output must specify
@@ -8137,6 +8610,8 @@ type ProcessingOutput struct {
 
 	// Configuration for processing job outputs in Amazon S3.
 	S3Output *ProcessingS3Output
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for uploading output from the processing container.
@@ -8153,6 +8628,8 @@ type ProcessingOutputConfig struct {
 	// an ID of a KMS key, ARN of a KMS key, alias of a KMS key, or alias of a KMS key.
 	// The KmsKeyId is applied to all outputs.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the resources, ML compute instances, and ML storage volumes to deploy
@@ -8164,6 +8641,8 @@ type ProcessingResources struct {
 	//
 	// This member is required.
 	ClusterConfig *ProcessingClusterConfig
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for downloading input data from Amazon S3 into the processing
@@ -8209,6 +8688,8 @@ type ProcessingS3Input struct {
 	// mode, Amazon SageMaker streams input data from the source directly to your
 	// processing container into named pipes without using the ML storage volume.
 	S3InputMode ProcessingS3InputMode
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for uploading output data to Amazon S3 from the processing
@@ -8234,6 +8715,8 @@ type ProcessingS3Output struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Configures conditions under which the processing job should be stopped, such as
@@ -8245,6 +8728,8 @@ type ProcessingStoppingCondition struct {
 	//
 	// This member is required.
 	MaxRuntimeInSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a model that you want to host and the resources chosen to deploy for
@@ -8288,6 +8773,8 @@ type ProductionVariant struct {
 	// by the ratio of the VariantWeight to the sum of all VariantWeight values across
 	// all ProductionVariants. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration for a core dump from the model container when the
@@ -8333,6 +8820,8 @@ type ProductionVariantCoreDumpConfig struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
 	// Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes weight and capacities for a production variant associated with an
@@ -8363,6 +8852,8 @@ type ProductionVariantSummary struct {
 	// The requested weight, as specified in the UpdateEndpointWeightsAndCapacities
 	// request.
 	DesiredWeight *float32
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for Debugger system monitoring, framework profiling,
@@ -8388,6 +8879,8 @@ type ProfilerConfig struct {
 	// Training Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
 	ProfilingParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for updating the Debugger profile parameters, system
@@ -8414,6 +8907,8 @@ type ProfilerConfigForUpdate struct {
 
 	// Path to Amazon S3 storage location for system and framework metrics.
 	S3OutputPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for profiling rules.
@@ -8445,6 +8940,8 @@ type ProfilerRuleConfiguration struct {
 
 	// The size, in GB, of the ML storage volume attached to the processing instance.
 	VolumeSizeInGB int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the status of the rule evaluation.
@@ -8464,6 +8961,8 @@ type ProfilerRuleEvaluationStatus struct {
 
 	// Details from the rule evaluation.
 	StatusDetails *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a project.
@@ -8496,6 +8995,8 @@ type ProjectSummary struct {
 
 	// The description of the project.
 	ProjectDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Part of the SuggestionQuery type. Specifies a hint for retrieving property names
@@ -8506,6 +9007,8 @@ type PropertyNameQuery struct {
 	//
 	// This member is required.
 	PropertyNameHint *string
+
+	noSmithyDocumentSerde
 }
 
 // A property name returned from a GetSearchSuggestions call that specifies a value
@@ -8515,6 +9018,8 @@ type PropertyNameSuggestion struct {
 	// A suggested property name based on what you entered in the search textbox in the
 	// Amazon SageMaker console.
 	PropertyName *string
+
+	noSmithyDocumentSerde
 }
 
 // A key value pair used when you provision a project as a service catalog product.
@@ -8527,6 +9032,8 @@ type ProvisioningParameter struct {
 
 	// The value of the provisioning parameter.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the amount of money paid to an Amazon Mechanical Turk worker for each
@@ -8751,6 +9258,8 @@ type PublicWorkforceTaskPrice struct {
 	// Defines the amount of money paid to an Amazon Mechanical Turk worker in United
 	// States dollars.
 	AmountInUsd *USD
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for Redshift Dataset Definition input.
@@ -8798,6 +9307,8 @@ type RedshiftDatasetDefinition struct {
 
 	// The compression used for Redshift query results.
 	OutputCompression RedshiftResultCompressionType
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for a register model job step.
@@ -8805,6 +9316,8 @@ type RegisterModelStepMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the model package.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains input values for a task.
@@ -8817,6 +9330,8 @@ type RenderableTask struct {
 	//
 	// This member is required.
 	Input *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of an error that occurred while rendering the template.
@@ -8831,6 +9346,8 @@ type RenderingError struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an authentication configuration for the private docker registry where
@@ -8849,6 +9366,8 @@ type RepositoryAuthConfig struct {
 	//
 	// This member is required.
 	RepositoryCredentialsProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The resolved attributes.
@@ -8863,6 +9382,8 @@ type ResolvedAttributes struct {
 
 	// The problem type.
 	ProblemType ProblemType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the resources, including ML compute instances and ML storage volumes,
@@ -8917,6 +9438,8 @@ type ResourceConfig struct {
 	// Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the maximum number of training jobs and parallel training jobs that a
@@ -8933,6 +9456,8 @@ type ResourceLimits struct {
 	//
 	// This member is required.
 	MaxParallelTrainingJobs int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the ARN's of a SageMaker image and SageMaker image version, and the
@@ -8947,6 +9472,8 @@ type ResourceSpec struct {
 
 	// The ARN of the image version created on the instance.
 	SageMakerImageVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The retention policy for data stored on an Amazon Elastic File System (EFS)
@@ -8956,6 +9483,8 @@ type RetentionPolicy struct {
 	// The default is Retain, which specifies to keep the data stored on the EFS
 	// volume. Specify Delete to delete the data stored on the EFS volume.
 	HomeEfsFileSystem RetentionType
+
+	noSmithyDocumentSerde
 }
 
 // The retry strategy to use when a training job fails due to an
@@ -8969,6 +9498,8 @@ type RetryStrategy struct {
 	//
 	// This member is required.
 	MaximumRetryAttempts int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the S3 data source.
@@ -9029,6 +9560,8 @@ type S3DataSource struct {
 	// storage volume (when TrainingInputMode is set to File), this copies 1/n of the
 	// number of objects.
 	S3DataDistributionType S3DataDistribution
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Simple Storage (Amazon S3) location and and security configuration
@@ -9051,6 +9584,8 @@ type S3StorageConfig struct {
 
 	// The S3 path where offline records are written.
 	ResolvedOutputS3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration details about the monitoring schedule.
@@ -9093,6 +9628,8 @@ type ScheduleConfig struct {
 	//
 	// This member is required.
 	ScheduleExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // A multi-expression that searches for the specified resource or resources in a
@@ -9132,6 +9669,8 @@ type SearchExpression struct {
 
 	// A list of search expression objects.
 	SubExpressions []SearchExpression
+
+	noSmithyDocumentSerde
 }
 
 // A single resource returned as part of the Search API response.
@@ -9169,6 +9708,8 @@ type SearchRecord struct {
 
 	// The properties of a trial component.
 	TrialComponent *TrialComponent
+
+	noSmithyDocumentSerde
 }
 
 // An array element of DescribeTrainingJobResponse$SecondaryStatusTransitions. It
@@ -9283,6 +9824,8 @@ type SecondaryStatusTransition struct {
 	// * StatusMessage -
 	// Downloading the training image
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of a provisioned service catalog product. For information about service
@@ -9318,6 +9861,8 @@ type ServiceCatalogProvisionedProductDetails struct {
 	// reviewing the list of resources to be created, execute the plan. Wait for an
 	// AVAILABLE status before performing operations.
 	ProvisionedProductStatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Details that you specify to provision a service catalog product. For information
@@ -9341,6 +9886,8 @@ type ServiceCatalogProvisioningDetails struct {
 
 	// A list of key value pairs that you specify when you provision a product.
 	ProvisioningParameters []ProvisioningParameter
+
+	noSmithyDocumentSerde
 }
 
 // Specifies options for sharing SageMaker Studio notebooks. These settings are
@@ -9361,6 +9908,8 @@ type SharingSettings struct {
 	// When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the
 	// shared notebook snapshots.
 	S3OutputPath *string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration for a shuffle option for input data in a channel. If you use
@@ -9381,6 +9930,8 @@ type ShuffleConfig struct {
 	//
 	// This member is required.
 	Seed int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an algorithm that was used to create the model package. The algorithm
@@ -9400,6 +9951,8 @@ type SourceAlgorithm struct {
 	// (.tar.gz suffix). The model artifacts must be in an S3 bucket that is in the
 	// same region as the algorithm.
 	ModelDataUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of algorithms that were used to create a model package.
@@ -9409,6 +9962,8 @@ type SourceAlgorithmSpecification struct {
 	//
 	// This member is required.
 	SourceAlgorithms []SourceAlgorithm
+
+	noSmithyDocumentSerde
 }
 
 // A list of IP address ranges (CIDRs
@@ -9425,6 +9980,8 @@ type SourceIpConfig struct {
 	//
 	// This member is required.
 	Cidrs []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a limit to how long a model training job, model compilation job, or
@@ -9460,6 +10017,8 @@ type StoppingCondition struct {
 	// MaxWaitTimeInSeconds specifies the maximum time for all of the attempts in
 	// total, not each individual attempt.
 	MaxWaitTimeInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a work team of a vendor that does the a labelling job.
@@ -9481,6 +10040,8 @@ type SubscribedWorkteam struct {
 
 	// The name of the vendor in the Amazon Marketplace.
 	SellerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specified in the GetSearchSuggestions request. Limits the property names that
@@ -9490,6 +10051,8 @@ type SuggestionQuery struct {
 	// Defines a property name hint. Only property names that begin with the specified
 	// hint are included in the response.
 	PropertyNameQuery *PropertyNameQuery
+
+	noSmithyDocumentSerde
 }
 
 // A tag object that consists of a key and an optional value, used to manage
@@ -9515,6 +10078,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a target platform that you want your model to run on,
@@ -9563,6 +10128,8 @@ type TargetPlatform struct {
 	// * INTEL_GRAPHICS: Integrated Intel
 	// graphics
 	Accelerator TargetPlatformAccelerator
+
+	noSmithyDocumentSerde
 }
 
 // The TensorBoard app settings.
@@ -9571,6 +10138,8 @@ type TensorBoardAppSettings struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
 	// image created on the instance.
 	DefaultResourceSpec *ResourceSpec
+
+	noSmithyDocumentSerde
 }
 
 // Configuration of storage locations for the Debugger TensorBoard output data.
@@ -9584,6 +10153,8 @@ type TensorBoardOutputConfig struct {
 	// Path to local storage location for tensorBoard output. Defaults to
 	// /opt/ml/output/tensorboard.
 	LocalPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Currently, the TrafficRoutingConfig API is not supported.
@@ -9601,6 +10172,8 @@ type TrafficRoutingConfig struct {
 
 	//
 	CanarySize *CapacitySize
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a training job.
@@ -9832,6 +10405,8 @@ type TrainingJob struct {
 	// For more information, see Protect Training Jobs by Using an Amazon Virtual
 	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Defines the input needed to run a training job using the algorithm.
@@ -9877,6 +10452,8 @@ type TrainingJobDefinition struct {
 
 	// The hyperparameters used for the training job.
 	HyperParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The numbers of training jobs launched by a hyperparameter tuning job,
@@ -9900,6 +10477,8 @@ type TrainingJobStatusCounters struct {
 	// The number of training jobs launched by a hyperparameter tuning job that were
 	// manually stopped.
 	Stopped int32
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for a training job step.
@@ -9908,6 +10487,8 @@ type TrainingJobStepMetadata struct {
 	// The Amazon Resource Name (ARN) of the training job that was run by this step
 	// execution.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about a training job.
@@ -9940,6 +10521,8 @@ type TrainingJobSummary struct {
 	// the training job has one of the terminal statuses (Completed, Failed, or
 	// Stopped).
 	TrainingEndTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Defines how the algorithm is used for a training job.
@@ -9982,6 +10565,8 @@ type TrainingSpecification struct {
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.
 	TrainingImageDigest *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the location of the channel data.
@@ -9991,6 +10576,8 @@ type TransformDataSource struct {
 	//
 	// This member is required.
 	S3DataSource *TransformS3DataSource
+
+	noSmithyDocumentSerde
 }
 
 // Describes the input source of a transform job and the way the transform job
@@ -10042,6 +10629,8 @@ type TransformInput struct {
 	// TFRecord data (https://www.tensorflow.org/guide/data#consuming_tfrecord_data) in
 	// the TensorFlow documentation.
 	SplitType SplitType
+
+	noSmithyDocumentSerde
 }
 
 // A batch transform job. For information about SageMaker batch transform, see Use
@@ -10163,6 +10752,8 @@ type TransformJob struct {
 	// Indicates when the transform job starts on ML instances. You are billed for the
 	// time interval between this time and the value of TransformEndTime.
 	TransformStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Defines the input needed to run a transform job using the inference
@@ -10202,6 +10793,8 @@ type TransformJobDefinition struct {
 	// The maximum payload size allowed, in MB. A payload is the data portion of a
 	// record (without metadata).
 	MaxPayloadInMB *int32
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for a transform job step.
@@ -10210,6 +10803,8 @@ type TransformJobStepMetadata struct {
 	// The Amazon Resource Name (ARN) of the transform job that was run by this step
 	// execution.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of a transform job. Multiple TransformJobSummary objects are
@@ -10247,6 +10842,8 @@ type TransformJobSummary struct {
 	// uploaded. For failed jobs, this is when Amazon SageMaker detected that the job
 	// failed.
 	TransformEndTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the results of a transform job.
@@ -10306,6 +10903,8 @@ type TransformOutput struct {
 	// (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
 	// Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the resources, including ML instance types and ML instance count, to
@@ -10351,6 +10950,8 @@ type TransformResources struct {
 	// * Alias name ARN:
 	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	VolumeKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the S3 data source.
@@ -10385,6 +10986,8 @@ type TransformS3DataSource struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties of a trial as returned by the Search API.
@@ -10430,6 +11033,8 @@ type Trial struct {
 
 	// The name of the trial.
 	TrialName *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties of a trial component as returned by the Search API.
@@ -10497,6 +11102,8 @@ type TrialComponent struct {
 
 	// The name of the trial component.
 	TrialComponentName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an input or output artifact of a trial component. You specify
@@ -10516,6 +11123,8 @@ type TrialComponentArtifact struct {
 	// (/) character, for example, text/csv, image/jpeg, and s3/uri. The type specifies
 	// the category of the media. The subtype specifies the kind of data.
 	MediaType *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the metrics of a trial component.
@@ -10547,6 +11156,8 @@ type TrialComponentMetricSummary struct {
 
 	// When the metric was last updated.
 	TimeStamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The value of a hyperparameter. Only one of NumberValue or StringValue can be
@@ -10563,6 +11174,8 @@ type TrialComponentParameterValue interface {
 // this parameter, you can't specify the NumberValue parameter.
 type TrialComponentParameterValueMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*TrialComponentParameterValueMemberStringValue) isTrialComponentParameterValue() {}
@@ -10571,6 +11184,8 @@ func (*TrialComponentParameterValueMemberStringValue) isTrialComponentParameterV
 // parameter, you can't specify the StringValue parameter.
 type TrialComponentParameterValueMemberNumberValue struct {
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 func (*TrialComponentParameterValueMemberNumberValue) isTrialComponentParameterValue() {}
@@ -10593,6 +11208,8 @@ type TrialComponentSimpleSummary struct {
 
 	// The Amazon Resource Name (ARN) and job type of the source of a trial component.
 	TrialComponentSource *TrialComponentSource
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Resource Name (ARN) and job type of the source of a trial component.
@@ -10605,6 +11222,8 @@ type TrialComponentSource struct {
 
 	// The source job type.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about the source of a trial component. Either ProcessingJob
@@ -10622,6 +11241,8 @@ type TrialComponentSourceDetail struct {
 
 	// Information about a transform job that's the source of a trial component.
 	TransformJob *TransformJob
+
+	noSmithyDocumentSerde
 }
 
 // The status of the trial component.
@@ -10632,6 +11253,8 @@ type TrialComponentStatus struct {
 
 	// The status of the trial component.
 	PrimaryStatus TrialComponentPrimaryStatus
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the properties of a trial component. To get all the properties,
@@ -10678,6 +11301,8 @@ type TrialComponentSummary struct {
 
 	// The Amazon Resource Name (ARN) and job type of the source of a trial component.
 	TrialComponentSource *TrialComponentSource
+
+	noSmithyDocumentSerde
 }
 
 // The source of the trial.
@@ -10690,6 +11315,8 @@ type TrialSource struct {
 
 	// The source job type.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the properties of a trial. To get the complete set of properties,
@@ -10714,6 +11341,8 @@ type TrialSummary struct {
 
 	// The source of the trial.
 	TrialSource *TrialSource
+
+	noSmithyDocumentSerde
 }
 
 // The job completion criteria.
@@ -10723,6 +11352,8 @@ type TuningJobCompletionCriteria struct {
 	//
 	// This member is required.
 	TargetObjectiveMetricValue *float32
+
+	noSmithyDocumentSerde
 }
 
 // Metadata for a tuning step.
@@ -10731,6 +11362,8 @@ type TuningJobStepMetaData struct {
 	// The Amazon Resource Name (ARN) of the tuning job that was run by this step
 	// execution.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Provided configuration information for the worker UI for a labeling job.
@@ -10783,6 +11416,8 @@ type UiConfig struct {
 	// Custom Labeling Task Template
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html).
 	UiTemplateS3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // The Liquid template for the worker user interface.
@@ -10792,6 +11427,8 @@ type UiTemplate struct {
 	//
 	// This member is required.
 	Content *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for user interface template information.
@@ -10802,6 +11439,8 @@ type UiTemplateInfo struct {
 
 	// The URL for the user interface template.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an amount of money in United States dollars.
@@ -10815,6 +11454,8 @@ type USD struct {
 
 	// Fractions of a cent, in tenths.
 	TenthFractionsOfACent int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the user who created or modified an experiment, trial, or
@@ -10829,6 +11470,8 @@ type UserContext struct {
 
 	// The name of the user's profile.
 	UserProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 // The user profile details.
@@ -10848,6 +11491,8 @@ type UserProfileDetails struct {
 
 	// The user profile name.
 	UserProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of settings that apply to users of Amazon SageMaker Studio. These
@@ -10881,6 +11526,8 @@ type UserSettings struct {
 
 	// The TensorBoard app settings.
 	TensorBoardAppSettings *TensorBoardAppSettings
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a production variant property type for an Endpoint. If you are
@@ -10906,6 +11553,8 @@ type VariantProperty struct {
 	//
 	// This member is required.
 	VariantPropertyType VariantPropertyType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a VPC that your training jobs and hosted models have access to.
@@ -10929,6 +11578,8 @@ type VpcConfig struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	noSmithyDocumentSerde
 }
 
 // A single private workforce, which is automatically created when you create your
@@ -10974,6 +11625,8 @@ type Workforce struct {
 
 	// The subdomain for your OIDC Identity Provider.
 	SubDomain *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about a labeling work team.
@@ -11021,13 +11674,19 @@ type Workteam struct {
 
 	// The Amazon Resource Name (ARN) of the workforce.
 	WorkforceArn *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isTrialComponentParameterValue() {}

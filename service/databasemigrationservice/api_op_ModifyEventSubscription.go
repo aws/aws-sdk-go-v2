@@ -50,6 +50,8 @@ type ModifyEventSubscriptionInput struct {
 	// The type of DMS resource that generates the events you want to subscribe to.
 	// Valid values: replication-instance | replication-task
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -60,6 +62,8 @@ type ModifyEventSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

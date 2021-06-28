@@ -43,6 +43,8 @@ type UpdateDeploymentInput struct {
 
 	// The description for the deployment resource.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDeploymentOutput struct {
@@ -67,6 +69,8 @@ type UpdateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -67,6 +67,8 @@ type DescribeDirectConnectGatewayAssociationsInput struct {
 
 	// The ID of the virtual private gateway or transit gateway.
 	VirtualGatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDirectConnectGatewayAssociationsOutput struct {
@@ -79,6 +81,8 @@ type DescribeDirectConnectGatewayAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDirectConnectGatewayAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

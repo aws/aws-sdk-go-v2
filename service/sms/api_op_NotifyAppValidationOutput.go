@@ -37,11 +37,15 @@ type NotifyAppValidationOutputInput struct {
 
 	// The notification information.
 	NotificationContext *types.NotificationContext
+
+	noSmithyDocumentSerde
 }
 
 type NotifyAppValidationOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNotifyAppValidationOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {

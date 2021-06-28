@@ -39,6 +39,8 @@ type CreateLoggerDefinitionVersionInput struct {
 
 	// A list of loggers.
 	Loggers []types.Logger
+
+	noSmithyDocumentSerde
 }
 
 type CreateLoggerDefinitionVersionOutput struct {
@@ -57,6 +59,8 @@ type CreateLoggerDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLoggerDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

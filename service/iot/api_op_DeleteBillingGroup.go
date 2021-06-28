@@ -37,11 +37,15 @@ type DeleteBillingGroupInput struct {
 	// does not match the expected version specified in the request, the
 	// DeleteBillingGroup request is rejected with a VersionConflictException.
 	ExpectedVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBillingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

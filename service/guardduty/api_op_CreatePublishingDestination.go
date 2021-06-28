@@ -50,6 +50,8 @@ type CreatePublishingDestinationInput struct {
 
 	// The idempotency token for the request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePublishingDestinationOutput struct {
@@ -61,6 +63,8 @@ type CreatePublishingDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePublishingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

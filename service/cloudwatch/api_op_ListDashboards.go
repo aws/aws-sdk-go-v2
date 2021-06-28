@@ -43,6 +43,8 @@ type ListDashboardsInput struct {
 	// The token returned by a previous call to indicate that there is more data
 	// available.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDashboardsOutput struct {
@@ -55,6 +57,8 @@ type ListDashboardsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {

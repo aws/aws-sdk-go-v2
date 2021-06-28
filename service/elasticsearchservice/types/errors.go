@@ -11,6 +11,8 @@ import (
 // Returns HTTP status code 403.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // An error occurred while processing the request.
 type BaseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BaseException) Error() string {
@@ -46,6 +50,8 @@ func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // currently in use. Returns HTTP status code 409.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -64,6 +70,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Gives http status code of 409.
 type DisabledOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DisabledOperationException) Error() string {
@@ -83,6 +91,8 @@ func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smi
 // 500.
 type InternalException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalException) Error() string {
@@ -101,6 +111,8 @@ func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // by customer. Returns an HTTP status code of 400.
 type InvalidPaginationTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPaginationTokenException) Error() string {
@@ -121,6 +133,8 @@ func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { retur
 // or not supported. Gives http status code of 409.
 type InvalidTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTypeException) Error() string {
@@ -139,6 +153,8 @@ func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Gives http status code of 409.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -157,6 +173,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // of 400.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -175,6 +193,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // http status code of 400.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -192,6 +212,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // An exception for missing / invalid input fields. Gives http status code of 400.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

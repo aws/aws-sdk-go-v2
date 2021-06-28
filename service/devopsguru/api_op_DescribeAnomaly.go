@@ -33,6 +33,8 @@ type DescribeAnomalyInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAnomalyOutput struct {
@@ -45,6 +47,8 @@ type DescribeAnomalyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAnomalyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -68,6 +68,8 @@ type ListAttributesInput struct {
 	// only used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAttributesOutput struct {
@@ -83,6 +85,8 @@ type ListAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

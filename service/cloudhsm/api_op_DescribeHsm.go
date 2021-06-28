@@ -48,6 +48,8 @@ type DescribeHsmInput struct {
 	// The serial number of the HSM. Either the HsmArn or the HsmSerialNumber parameter
 	// must be specified.
 	HsmSerialNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the DescribeHsm operation.
@@ -124,6 +126,8 @@ type DescribeHsmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {

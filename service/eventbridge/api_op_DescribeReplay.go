@@ -42,6 +42,8 @@ type DescribeReplayInput struct {
 	//
 	// This member is required.
 	ReplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeReplayOutput struct {
@@ -84,6 +86,8 @@ type DescribeReplayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type DescribeVTLDevicesInput struct {
 	// If no VTL devices are specified, the result will contain all devices on the
 	// specified gateway.
 	VTLDeviceARNs []string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeVTLDevicesOutput
@@ -73,6 +75,8 @@ type DescribeVTLDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

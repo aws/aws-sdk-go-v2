@@ -35,11 +35,15 @@ type DeleteCorsPolicyInput struct {
 	//
 	// This member is required.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCorsPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

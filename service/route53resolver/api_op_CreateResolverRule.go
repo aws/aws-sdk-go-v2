@@ -73,6 +73,8 @@ type CreateResolverRuleInput struct {
 	// IPv4 addresses. Separate IP addresses with a space. TargetIps is available only
 	// when the value of Rule type is FORWARD.
 	TargetIps []types.TargetAddress
+
+	noSmithyDocumentSerde
 }
 
 type CreateResolverRuleOutput struct {
@@ -83,6 +85,8 @@ type CreateResolverRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

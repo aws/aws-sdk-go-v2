@@ -43,6 +43,8 @@ type UpdateScheduleInput struct {
 
 	// The name or names of one or more jobs to be run for this schedule.
 	JobNames []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateScheduleOutput struct {
@@ -54,6 +56,8 @@ type UpdateScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

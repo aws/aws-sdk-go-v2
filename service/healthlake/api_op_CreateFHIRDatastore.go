@@ -51,6 +51,8 @@ type CreateFHIRDatastoreInput struct {
 
 	// Resource tags that are applied to a Data Store when it is created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateFHIRDatastoreOutput struct {
@@ -81,6 +83,8 @@ type CreateFHIRDatastoreOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

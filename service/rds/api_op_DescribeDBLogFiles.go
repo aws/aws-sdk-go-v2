@@ -63,6 +63,8 @@ type DescribeDBLogFilesInput struct {
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 // The response from a call to DescribeDBLogFiles.
@@ -76,6 +78,8 @@ type DescribeDBLogFilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBLogFilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

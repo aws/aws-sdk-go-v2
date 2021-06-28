@@ -31,6 +31,8 @@ type DescribeLagsInput struct {
 
 	// The ID of the LAG.
 	LagId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLagsOutput struct {
@@ -40,6 +42,8 @@ type DescribeLagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

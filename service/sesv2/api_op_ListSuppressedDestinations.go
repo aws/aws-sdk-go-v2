@@ -56,6 +56,8 @@ type ListSuppressedDestinationsInput struct {
 	// includes addresses that were added to the list after a specific date. The date
 	// that you specify should be in Unix time format.
 	StartDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A list of suppressed email addresses.
@@ -73,6 +75,8 @@ type ListSuppressedDestinationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSuppressedDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

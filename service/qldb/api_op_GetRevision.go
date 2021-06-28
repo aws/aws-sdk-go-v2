@@ -52,6 +52,8 @@ type GetRevisionInput struct {
 	// address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}.
 	DigestTipAddress *types.ValueHolder
+
+	noSmithyDocumentSerde
 }
 
 type GetRevisionOutput struct {
@@ -68,6 +70,8 @@ type GetRevisionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

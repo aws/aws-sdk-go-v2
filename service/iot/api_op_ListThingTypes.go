@@ -40,6 +40,8 @@ type ListThingTypesInput struct {
 
 	// The name of the thing type.
 	ThingTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the ListThingTypes operation.
@@ -54,6 +56,8 @@ type ListThingTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThingTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,11 +60,15 @@ type SignalResourceInput struct {
 	//
 	// This member is required.
 	UniqueId *string
+
+	noSmithyDocumentSerde
 }
 
 type SignalResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSignalResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

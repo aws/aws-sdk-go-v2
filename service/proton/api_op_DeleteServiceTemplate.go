@@ -34,6 +34,8 @@ type DeleteServiceTemplateInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteServiceTemplateOutput struct {
@@ -43,6 +45,8 @@ type DeleteServiceTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,6 +61,8 @@ type CreateFlowInput struct {
 
 	// The VPC interfaces you want on the flow.
 	VpcInterfaces []types.VpcInterfaceRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateFlowOutput struct {
@@ -70,6 +72,8 @@ type CreateFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

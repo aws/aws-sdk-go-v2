@@ -52,12 +52,16 @@ type ActivatePipelineInput struct {
 	// The date and time to resume the pipeline. By default, the pipeline resumes from
 	// the last completed execution.
 	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of ActivatePipeline.
 type ActivatePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationActivatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

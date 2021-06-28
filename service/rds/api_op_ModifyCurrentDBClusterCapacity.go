@@ -75,6 +75,8 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	// ignores the capacity change if a scaling point isn't found in the timeout
 	// period.
 	TimeoutAction *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyCurrentDBClusterCapacityOutput struct {
@@ -98,6 +100,8 @@ type ModifyCurrentDBClusterCapacityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyCurrentDBClusterCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {

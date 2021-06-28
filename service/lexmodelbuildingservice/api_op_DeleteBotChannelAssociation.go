@@ -44,11 +44,15 @@ type DeleteBotChannelAssociationInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBotChannelAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBotChannelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

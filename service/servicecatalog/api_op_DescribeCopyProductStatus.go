@@ -42,6 +42,8 @@ type DescribeCopyProductStatusInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCopyProductStatusOutput struct {
@@ -57,6 +59,8 @@ type DescribeCopyProductStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCopyProductStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

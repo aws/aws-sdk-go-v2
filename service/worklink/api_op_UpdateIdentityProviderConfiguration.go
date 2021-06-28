@@ -42,11 +42,15 @@ type UpdateIdentityProviderConfigurationInput struct {
 	// The SAML metadata document provided by the customer’s identity provider. The
 	// existing IdentityProviderSamlMetadata is unset if null is passed.
 	IdentityProviderSamlMetadata *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIdentityProviderConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIdentityProviderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

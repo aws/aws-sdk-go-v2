@@ -40,11 +40,15 @@ type DeregisterTargetsInput struct {
 	//
 	// This member is required.
 	Targets []types.TargetDescription
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterTargetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

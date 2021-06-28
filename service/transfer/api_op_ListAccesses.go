@@ -42,6 +42,8 @@ type ListAccessesInput struct {
 	// parameter is returned in the output. You can then pass in a subsequent command
 	// to the NextToken parameter to continue listing additional accesses.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAccessesOutput struct {
@@ -64,6 +66,8 @@ type ListAccessesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccessesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type TransferCertificateInput struct {
 
 	// The transfer message.
 	TransferMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the TransferCertificate operation.
@@ -58,6 +60,8 @@ type TransferCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTransferCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -89,6 +89,8 @@ type UpdateGatewayResponseInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // A gateway response of a given response type and status code, with optional
@@ -205,6 +207,8 @@ type UpdateGatewayResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

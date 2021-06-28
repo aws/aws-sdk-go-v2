@@ -41,6 +41,8 @@ type CreateBotInput struct {
 
 	// The domain of the Amazon Chime Enterprise account.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBotOutput struct {
@@ -50,6 +52,8 @@ type CreateBotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

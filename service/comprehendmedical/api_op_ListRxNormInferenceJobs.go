@@ -39,6 +39,8 @@ type ListRxNormInferenceJobsInput struct {
 
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRxNormInferenceJobsOutput struct {
@@ -51,6 +53,8 @@ type ListRxNormInferenceJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRxNormInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -179,6 +179,8 @@ type CreateNodegroupInput struct {
 	// support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
 	// in the Amazon EKS User Guide.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateNodegroupOutput struct {
@@ -188,6 +190,8 @@ type CreateNodegroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

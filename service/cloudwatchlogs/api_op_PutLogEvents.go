@@ -88,6 +88,8 @@ type PutLogEventsInput struct {
 	// If you call PutLogEvents twice within a narrow time period using the same value
 	// for sequenceToken, both calls might be successful or one might be rejected.
 	SequenceToken *string
+
+	noSmithyDocumentSerde
 }
 
 type PutLogEventsOutput struct {
@@ -100,6 +102,8 @@ type PutLogEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

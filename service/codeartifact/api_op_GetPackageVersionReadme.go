@@ -82,6 +82,8 @@ type GetPackageVersionReadmeInput struct {
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPackageVersionReadmeOutput struct {
@@ -123,6 +125,8 @@ type GetPackageVersionReadmeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPackageVersionReadmeMiddlewares(stack *middleware.Stack, options Options) (err error) {

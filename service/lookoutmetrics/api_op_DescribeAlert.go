@@ -35,6 +35,8 @@ type DescribeAlertInput struct {
 	//
 	// This member is required.
 	AlertArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAlertOutput struct {
@@ -44,6 +46,8 @@ type DescribeAlertOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {

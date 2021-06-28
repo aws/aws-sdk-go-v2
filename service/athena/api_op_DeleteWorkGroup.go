@@ -37,11 +37,15 @@ type DeleteWorkGroupInput struct {
 	// The option to delete the workgroup and its contents even if the workgroup
 	// contains any named queries or query executions.
 	RecursiveDeleteOption *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorkGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

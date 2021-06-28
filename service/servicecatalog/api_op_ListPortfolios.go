@@ -45,6 +45,8 @@ type ListPortfoliosInput struct {
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPortfoliosOutput struct {
@@ -58,6 +60,8 @@ type ListPortfoliosOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPortfoliosMiddlewares(stack *middleware.Stack, options Options) (err error) {

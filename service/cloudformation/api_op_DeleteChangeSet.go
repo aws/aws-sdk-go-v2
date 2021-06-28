@@ -44,12 +44,16 @@ type DeleteChangeSetInput struct {
 	// If you specified the name of a change set to delete, specify the stack name or
 	// ID (ARN) that is associated with it.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DeleteChangeSet action.
 type DeleteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

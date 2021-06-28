@@ -46,6 +46,8 @@ type DeleteOrganizationInput struct {
 
 	// The idempotency token associated with the request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOrganizationOutput struct {
@@ -58,6 +60,8 @@ type DeleteOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

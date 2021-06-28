@@ -33,11 +33,15 @@ type RevokeInvitationInput struct {
 
 	// The ARN of the user for whom to revoke an enrollment invitation. Required.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {

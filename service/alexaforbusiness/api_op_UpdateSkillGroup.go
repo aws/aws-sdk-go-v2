@@ -36,11 +36,15 @@ type UpdateSkillGroupInput struct {
 
 	// The updated name for the skill group.
 	SkillGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSkillGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type DescribePoliciesInput struct {
 	// One or more policy types. The valid values are SimpleScaling, StepScaling,
 	// TargetTrackingScaling, and PredictiveScaling.
 	PolicyTypes []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePoliciesOutput struct {
@@ -65,6 +67,8 @@ type DescribePoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

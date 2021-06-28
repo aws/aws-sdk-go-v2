@@ -60,6 +60,8 @@ type CreateLoginProfileInput struct {
 
 	// Specifies whether the user is required to set a new password on next sign-in.
 	PasswordResetRequired bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful CreateLoginProfile request.
@@ -72,6 +74,8 @@ type CreateLoginProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

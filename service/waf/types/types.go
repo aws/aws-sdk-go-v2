@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -108,6 +109,8 @@ type ActivatedRule struct {
 	// because the request tries to add a REGULAR rule with the specified ID, which
 	// does not exist.
 	Type WafRuleType
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -145,6 +148,8 @@ type ByteMatchSet struct {
 	// A friendly name or description of the ByteMatchSet. You can't change Name after
 	// you create a ByteMatchSet.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -170,6 +175,8 @@ type ByteMatchSetSummary struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -195,6 +202,8 @@ type ByteMatchSetUpdate struct {
 	//
 	// This member is required.
 	ByteMatchTuple *ByteMatchTuple
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -370,6 +379,8 @@ type ByteMatchTuple struct {
 	//
 	// This member is required.
 	TextTransformation TextTransformation
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -387,6 +398,8 @@ type ExcludedRule struct {
 	//
 	// This member is required.
 	RuleId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -444,6 +457,8 @@ type FieldToMatch struct {
 	// SalesRegion. The parameter name is not case sensitive. If the value of Type is
 	// any other value, omit Data.
 	Data *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -466,6 +481,8 @@ type GeoMatchConstraint struct {
 	//
 	// This member is required.
 	Value GeoMatchConstraintValue
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -495,6 +512,8 @@ type GeoMatchSet struct {
 	// A friendly name or description of the GeoMatchSet. You can't change the name of
 	// an GeoMatchSet after you create it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -517,6 +536,8 @@ type GeoMatchSetSummary struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -539,6 +560,8 @@ type GeoMatchSetUpdate struct {
 	//
 	// This member is required.
 	GeoMatchConstraint *GeoMatchConstraint
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -558,6 +581,8 @@ type HTTPHeader struct {
 
 	// The value of one of the headers in the sampled web request.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -602,6 +627,8 @@ type HTTPRequest struct {
 	// The part of a web request that identifies the resource, for example,
 	// /images/daily-ad.jpg.
 	URI *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -641,6 +668,8 @@ type IPSet struct {
 	// A friendly name or description of the IPSet. You can't change the name of an
 	// IPSet after you create it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -686,6 +715,8 @@ type IPSetDescriptor struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -708,6 +739,8 @@ type IPSetSummary struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -730,6 +763,8 @@ type IPSetUpdate struct {
 	//
 	// This member is required.
 	IPSetDescriptor *IPSetDescriptor
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -756,6 +791,8 @@ type LoggingConfiguration struct {
 	// The parts of the request that you want redacted from the logs. For example, if
 	// you redact the cookie field, the cookie field in the firehose will be xxx.
 	RedactedFields []FieldToMatch
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -795,6 +832,8 @@ type Predicate struct {
 	//
 	// This member is required.
 	Type PredicateType
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -862,6 +901,8 @@ type RateBasedRule struct {
 	// A friendly name or description for a RateBasedRule. You can't change the name of
 	// a RateBasedRule after you create it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -905,6 +946,8 @@ type RegexMatchSet struct {
 	// request, such as converting it to lowercase, before inspecting it for the
 	// specified string.
 	RegexMatchTuples []RegexMatchTuple
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -930,6 +973,8 @@ type RegexMatchSetSummary struct {
 	//
 	// This member is required.
 	RegexMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -956,6 +1001,8 @@ type RegexMatchSetUpdate struct {
 	//
 	// This member is required.
 	RegexMatchTuple *RegexMatchTuple
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1065,6 +1112,8 @@ type RegexMatchTuple struct {
 	//
 	// This member is required.
 	TextTransformation TextTransformation
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1096,6 +1145,8 @@ type RegexPatternSet struct {
 	// A friendly name or description of the RegexPatternSet. You can't change Name
 	// after you create a RegexPatternSet.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1122,6 +1173,8 @@ type RegexPatternSetSummary struct {
 	//
 	// This member is required.
 	RegexPatternSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1145,6 +1198,8 @@ type RegexPatternSetUpdate struct {
 	//
 	// This member is required.
 	RegexPatternString *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1193,6 +1248,8 @@ type Rule struct {
 	// The friendly name or description for the Rule. You can't change the name of a
 	// Rule after you create it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1232,6 +1289,8 @@ type RuleGroup struct {
 	// The friendly name or description for the RuleGroup. You can't change the name of
 	// a RuleGroup after you create it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1258,6 +1317,8 @@ type RuleGroupSummary struct {
 	//
 	// This member is required.
 	RuleGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1282,6 +1343,8 @@ type RuleGroupUpdate struct {
 	//
 	// This member is required.
 	ActivatedRule *ActivatedRule
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1307,6 +1370,8 @@ type RuleSummary struct {
 	//
 	// This member is required.
 	RuleId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1329,6 +1394,8 @@ type RuleUpdate struct {
 	//
 	// This member is required.
 	Predicate *Predicate
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1368,6 +1435,8 @@ type SampledHTTPRequest struct {
 	// The time at which AWS WAF received the request from your AWS resource, in Unix
 	// time format (in seconds).
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1483,6 +1552,8 @@ type SizeConstraint struct {
 	//
 	// This member is required.
 	TextTransformation TextTransformation
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1515,6 +1586,8 @@ type SizeConstraintSet struct {
 
 	// The name, if any, of the SizeConstraintSet.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1541,6 +1614,8 @@ type SizeConstraintSetSummary struct {
 	//
 	// This member is required.
 	SizeConstraintSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1567,6 +1642,8 @@ type SizeConstraintSetUpdate struct {
 	//
 	// This member is required.
 	SizeConstraint *SizeConstraint
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1602,6 +1679,8 @@ type SqlInjectionMatchSet struct {
 
 	// The name, if any, of the SqlInjectionMatchSet.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1628,6 +1707,8 @@ type SqlInjectionMatchSetSummary struct {
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1654,6 +1735,8 @@ type SqlInjectionMatchSetUpdate struct {
 	//
 	// This member is required.
 	SqlInjectionMatchTuple *SqlInjectionMatchTuple
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1741,6 +1824,8 @@ type SqlInjectionMatchTuple struct {
 	//
 	// This member is required.
 	TextTransformation TextTransformation
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1771,6 +1856,8 @@ type SubscribedRuleGroupSummary struct {
 	//
 	// This member is required.
 	RuleGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1798,6 +1885,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1821,6 +1910,8 @@ type TagInfoForResource struct {
 
 	//
 	TagList []Tag
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1859,6 +1950,8 @@ type TimeWindow struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1889,6 +1982,8 @@ type WafAction struct {
 	//
 	// This member is required.
 	Type WafActionType
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1906,6 +2001,8 @@ type WafOverrideAction struct {
 	//
 	// This member is required.
 	Type WafOverrideActionType
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1957,6 +2054,8 @@ type WebACL struct {
 
 	// Tha Amazon Resource Name (ARN) of the web ACL.
 	WebACLArn *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -1981,6 +2080,8 @@ type WebACLSummary struct {
 	//
 	// This member is required.
 	WebACLId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -2005,6 +2106,8 @@ type WebACLUpdate struct {
 	//
 	// This member is required.
 	ActivatedRule *ActivatedRule
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -2039,6 +2142,8 @@ type XssMatchSet struct {
 
 	// The name, if any, of the XssMatchSet.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -2064,6 +2169,8 @@ type XssMatchSetSummary struct {
 	//
 	// This member is required.
 	XssMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -2089,6 +2196,8 @@ type XssMatchSetUpdate struct {
 	//
 	// This member is required.
 	XssMatchTuple *XssMatchTuple
+
+	noSmithyDocumentSerde
 }
 
 // This is AWS WAF Classic documentation. For more information, see AWS WAF Classic
@@ -2176,4 +2285,8 @@ type XssMatchTuple struct {
 	//
 	// This member is required.
 	TextTransformation TextTransformation
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

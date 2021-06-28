@@ -48,6 +48,8 @@ type ListVocabulariesInput struct {
 	// When specified, only returns vocabularies with the VocabularyState field equal
 	// to the specified state.
 	StateEquals types.VocabularyState
+
+	noSmithyDocumentSerde
 }
 
 type ListVocabulariesOutput struct {
@@ -68,6 +70,8 @@ type ListVocabulariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

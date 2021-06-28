@@ -38,6 +38,8 @@ type GetStudioComponentInput struct {
 	//
 	// This member is required.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStudioComponentOutput struct {
@@ -47,6 +49,8 @@ type GetStudioComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStudioComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

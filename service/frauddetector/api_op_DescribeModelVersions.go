@@ -46,6 +46,8 @@ type DescribeModelVersionsInput struct {
 
 	// The next token from the previous results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeModelVersionsOutput struct {
@@ -58,6 +60,8 @@ type DescribeModelVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListClassificationJobsInput struct {
 
 	// The criteria to use to sort the results.
 	SortCriteria *types.ListJobsSortCriteria
+
+	noSmithyDocumentSerde
 }
 
 type ListClassificationJobsOutput struct {
@@ -56,6 +58,8 @@ type ListClassificationJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListClassificationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

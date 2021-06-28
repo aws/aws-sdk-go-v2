@@ -41,6 +41,8 @@ type ListStreamingImagesInput struct {
 
 	// The owner.
 	Owner *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStreamingImagesOutput struct {
@@ -53,6 +55,8 @@ type ListStreamingImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamingImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -102,6 +102,8 @@ type AuthorizeSecurityGroupIngressInput struct {
 	// types, you must specify all codes. Alternatively, use a set of IP permissions to
 	// specify multiple rules and a description for the rule.
 	ToPort *int32
+
+	noSmithyDocumentSerde
 }
 
 type AuthorizeSecurityGroupIngressOutput struct {
@@ -114,6 +116,8 @@ type AuthorizeSecurityGroupIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAuthorizeSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

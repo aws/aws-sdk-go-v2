@@ -68,6 +68,8 @@ type ListDiscoveredResourcesInput struct {
 	// response. If you do not specify this parameter, AWS Config lists all resources
 	// of the specified type that it has discovered.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -83,6 +85,8 @@ type ListDiscoveredResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

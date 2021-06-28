@@ -109,6 +109,8 @@ type DescribeDataSourcesInput struct {
 	// Results are sorted by
 	// FilterVariable.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Represents the query results from a DescribeDataSources operation. The content
@@ -124,6 +126,8 @@ type DescribeDataSourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

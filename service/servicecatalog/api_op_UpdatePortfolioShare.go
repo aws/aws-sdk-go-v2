@@ -63,6 +63,8 @@ type UpdatePortfolioShareInput struct {
 	// field is not provided, the current state of TagOptions sharing on the portfolio
 	// share will not be modified.
 	ShareTagOptions *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePortfolioShareOutput struct {
@@ -77,6 +79,8 @@ type UpdatePortfolioShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

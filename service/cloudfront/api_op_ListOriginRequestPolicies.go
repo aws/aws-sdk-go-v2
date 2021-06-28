@@ -53,6 +53,8 @@ type ListOriginRequestPoliciesInput struct {
 	//
 	// * custom – Returns only the custom policies created in your account.
 	Type types.OriginRequestPolicyType
+
+	noSmithyDocumentSerde
 }
 
 type ListOriginRequestPoliciesOutput struct {
@@ -62,6 +64,8 @@ type ListOriginRequestPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOriginRequestPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

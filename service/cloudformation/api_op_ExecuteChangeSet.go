@@ -53,12 +53,16 @@ type ExecuteChangeSetInput struct {
 	// If you specified the name of a change set, specify the stack name or ID (ARN)
 	// that is associated with the change set you want to execute.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the ExecuteChangeSet action.
 type ExecuteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

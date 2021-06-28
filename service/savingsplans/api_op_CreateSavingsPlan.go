@@ -56,6 +56,8 @@ type CreateSavingsPlanInput struct {
 	// the total value of the Savings Plan. This parameter is supported only if the
 	// payment option is Partial Upfront.
 	UpfrontPaymentAmount *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSavingsPlanOutput struct {
@@ -65,6 +67,8 @@ type CreateSavingsPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

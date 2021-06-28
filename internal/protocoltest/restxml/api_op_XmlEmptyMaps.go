@@ -27,6 +27,8 @@ func (c *Client) XmlEmptyMaps(ctx context.Context, params *XmlEmptyMapsInput, op
 
 type XmlEmptyMapsInput struct {
 	MyMap map[string]types.GreetingStruct
+
+	noSmithyDocumentSerde
 }
 
 type XmlEmptyMapsOutput struct {
@@ -34,6 +36,8 @@ type XmlEmptyMapsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlEmptyMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {

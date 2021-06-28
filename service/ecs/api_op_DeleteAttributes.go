@@ -41,6 +41,8 @@ type DeleteAttributesInput struct {
 	// the resource to delete attributes. If you do not specify a cluster, the default
 	// cluster is assumed.
 	Cluster *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAttributesOutput struct {
@@ -50,6 +52,8 @@ type DeleteAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

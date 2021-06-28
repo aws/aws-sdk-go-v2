@@ -49,6 +49,8 @@ type DescribeRecipeInput struct {
 	//
 	// This member is required.
 	RecipeArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRecipeOutput struct {
@@ -58,6 +60,8 @@ type DescribeRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

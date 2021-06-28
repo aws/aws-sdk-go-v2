@@ -121,6 +121,8 @@ type CreateFleetInput struct {
 	// able to fulfill the request. If no value is specified, the request remains until
 	// you cancel it.
 	ValidUntil *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type CreateFleetOutput struct {
@@ -138,6 +140,8 @@ type CreateFleetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

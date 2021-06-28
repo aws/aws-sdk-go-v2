@@ -56,6 +56,8 @@ type CreateVpnGatewayInput struct {
 
 	// The tags to apply to the virtual private gateway.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateVpnGateway.
@@ -66,6 +68,8 @@ type CreateVpnGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpnGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

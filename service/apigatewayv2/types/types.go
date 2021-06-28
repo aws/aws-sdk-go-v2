@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -15,6 +16,8 @@ type AccessLogSettings struct {
 	// A single line format of the access logs of data, as specified by selected
 	// $context variables. The format must include at least $context.requestId.
 	Format *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an API.
@@ -90,6 +93,8 @@ type Api struct {
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
 	Warnings []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an API mapping.
@@ -110,6 +115,8 @@ type ApiMapping struct {
 
 	// The API mapping key.
 	ApiMappingKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an authorizer.
@@ -193,6 +200,8 @@ type Authorizer struct {
 	// Represents the configuration of a JWT authorizer. Required for the JWT
 	// authorizer type. Supported only for HTTP APIs.
 	JwtConfiguration *JWTConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Represents a CORS configuration. Supported only for HTTP APIs. See Configuring
@@ -220,6 +229,8 @@ type Cors struct {
 	// The number of seconds that the browser should cache preflight request results.
 	// Supported only for HTTP APIs.
 	MaxAge int32
+
+	noSmithyDocumentSerde
 }
 
 // An immutable representation of an API that can be called by users. A Deployment
@@ -243,6 +254,8 @@ type Deployment struct {
 
 	// The description for the deployment.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a domain name.
@@ -264,6 +277,8 @@ type DomainName struct {
 
 	// The collection of tags associated with a domain name.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The domain name configuration.
@@ -303,6 +318,8 @@ type DomainNameConfiguration struct {
 	// The Transport Layer Security (TLS) version of the security policy for this
 	// domain name. The valid values are TLS_1_0 and TLS_1_2.
 	SecurityPolicy SecurityPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Represents an integration.
@@ -457,6 +474,8 @@ type Integration struct {
 	// configuration, private integration traffic uses the HTTPS protocol. Supported
 	// only for HTTP APIs.
 	TlsConfig *TlsConfig
+
+	noSmithyDocumentSerde
 }
 
 // Represents an integration response.
@@ -500,6 +519,8 @@ type IntegrationResponse struct {
 
 	// The template selection expressions for the integration response.
 	TemplateSelectionExpression *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the configuration of a JWT authorizer. Required for the JWT
@@ -517,6 +538,8 @@ type JWTConfiguration struct {
 	// https://cognito-idp.{region}.amazonaws.com/{userPoolId} . Required for the JWT
 	// authorizer type. Supported only for HTTP APIs.
 	Issuer *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a data model for an API. Supported only for WebSocket APIs. See
@@ -541,6 +564,8 @@ type Model struct {
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 model.
 	Schema *string
+
+	noSmithyDocumentSerde
 }
 
 type MutualTlsAuthentication struct {
@@ -562,6 +587,8 @@ type MutualTlsAuthentication struct {
 	// clients might not be able to access your API. To resolve warnings, upload a new
 	// truststore to S3, and then update you domain name to use the new version.
 	TruststoreWarnings []string
+
+	noSmithyDocumentSerde
 }
 
 type MutualTlsAuthenticationInput struct {
@@ -577,6 +604,8 @@ type MutualTlsAuthenticationInput struct {
 	// The version of the S3 object that contains your truststore. To specify a
 	// version, you must have versioning enabled for the S3 bucket.
 	TruststoreVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Validation constraints imposed on parameters of a request (path, query string,
@@ -585,6 +614,8 @@ type ParameterConstraints struct {
 
 	// Whether or not the parameter is required.
 	Required bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents a route.
@@ -646,6 +677,8 @@ type Route struct {
 
 	// The target for the route.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a route response.
@@ -668,6 +701,8 @@ type RouteResponse struct {
 
 	// Represents the identifier of a route response.
 	RouteResponseId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of route settings.
@@ -691,6 +726,8 @@ type RouteSettings struct {
 
 	// Specifies the throttling rate limit.
 	ThrottlingRateLimit float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents an API stage.
@@ -747,6 +784,8 @@ type Stage struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The TLS configuration for a private integration. If you specify a TLS
@@ -758,6 +797,8 @@ type TlsConfig struct {
 	// integration's certificate. The server name is also included in the TLS handshake
 	// to support Server Name Indication (SNI) or virtual hosting.
 	ServerNameToVerify *string
+
+	noSmithyDocumentSerde
 }
 
 // The TLS configuration for a private integration. If you specify a TLS
@@ -769,6 +810,8 @@ type TlsConfigInput struct {
 	// integration's certificate. The server name is also included in the TLS handshake
 	// to support Server Name Indication (SNI) or virtual hosting.
 	ServerNameToVerify *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a VPC link.
@@ -808,4 +851,8 @@ type VpcLink struct {
 
 	// The version of the VPC link.
 	VpcLinkVersion VpcLinkVersion
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

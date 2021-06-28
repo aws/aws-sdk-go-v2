@@ -42,12 +42,16 @@ type ChangePasswordInput struct {
 	//
 	// This member is required.
 	ProposedPassword *string
+
+	noSmithyDocumentSerde
 }
 
 // The response from the server to the change password request.
 type ChangePasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationChangePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

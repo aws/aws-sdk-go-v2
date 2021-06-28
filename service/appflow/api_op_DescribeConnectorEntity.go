@@ -41,6 +41,8 @@ type DescribeConnectorEntityInput struct {
 
 	// The type of connector application, such as Salesforce, Amplitude, and so on.
 	ConnectorType types.ConnectorType
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConnectorEntityOutput struct {
@@ -53,6 +55,8 @@ type DescribeConnectorEntityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConnectorEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {

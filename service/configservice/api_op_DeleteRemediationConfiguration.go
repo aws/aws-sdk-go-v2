@@ -36,11 +36,15 @@ type DeleteRemediationConfigurationInput struct {
 
 	// The type of a resource.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRemediationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRemediationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

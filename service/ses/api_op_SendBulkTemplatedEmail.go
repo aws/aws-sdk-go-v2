@@ -159,6 +159,8 @@ type SendBulkTemplatedEmailInput struct {
 
 	// The ARN of the template to use when sending this email.
 	TemplateArn *string
+
+	noSmithyDocumentSerde
 }
 
 type SendBulkTemplatedEmailOutput struct {
@@ -170,6 +172,8 @@ type SendBulkTemplatedEmailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendBulkTemplatedEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type UpdateTrialInput struct {
 	// The name of the trial as displayed. The name doesn't need to be unique. If
 	// DisplayName isn't specified, TrialName is displayed.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTrialOutput struct {
@@ -45,6 +47,8 @@ type UpdateTrialOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTrialMiddlewares(stack *middleware.Stack, options Options) (err error) {

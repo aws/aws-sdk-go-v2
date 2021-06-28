@@ -29,6 +29,8 @@ type MediaTypeHeaderInput struct {
 
 	// This value conforms to the media type: application/json
 	Json *string
+
+	noSmithyDocumentSerde
 }
 
 type MediaTypeHeaderOutput struct {
@@ -38,6 +40,8 @@ type MediaTypeHeaderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMediaTypeHeaderMiddlewares(stack *middleware.Stack, options Options) (err error) {

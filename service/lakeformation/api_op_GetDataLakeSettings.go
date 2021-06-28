@@ -35,6 +35,8 @@ type GetDataLakeSettingsInput struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDataLakeSettingsOutput struct {
@@ -45,6 +47,8 @@ type GetDataLakeSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type CancelDetectMitigationActionsTaskInput struct {
 	//
 	// This member is required.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelDetectMitigationActionsTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelDetectMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

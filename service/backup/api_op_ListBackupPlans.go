@@ -45,6 +45,8 @@ type ListBackupPlansInput struct {
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBackupPlansOutput struct {
@@ -61,6 +63,8 @@ type ListBackupPlansOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBackupPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {

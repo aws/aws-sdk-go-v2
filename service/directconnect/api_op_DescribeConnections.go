@@ -31,6 +31,8 @@ type DescribeConnectionsInput struct {
 
 	// The ID of the connection.
 	ConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConnectionsOutput struct {
@@ -40,6 +42,8 @@ type DescribeConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

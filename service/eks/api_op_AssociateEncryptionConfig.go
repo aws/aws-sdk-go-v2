@@ -45,6 +45,8 @@ type AssociateEncryptionConfigInput struct {
 
 	// The client request token you are using with the encryption configuration.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateEncryptionConfigOutput struct {
@@ -54,6 +56,8 @@ type AssociateEncryptionConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

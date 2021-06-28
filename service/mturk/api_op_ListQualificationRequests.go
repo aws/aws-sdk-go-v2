@@ -43,6 +43,8 @@ type ListQualificationRequestsInput struct {
 
 	// The ID of the QualificationType.
 	QualificationTypeId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListQualificationRequestsOutput struct {
@@ -62,6 +64,8 @@ type ListQualificationRequestsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListQualificationRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {

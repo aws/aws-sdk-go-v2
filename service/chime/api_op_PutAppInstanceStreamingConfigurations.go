@@ -38,6 +38,8 @@ type PutAppInstanceStreamingConfigurationsInput struct {
 	//
 	// This member is required.
 	AppInstanceStreamingConfigurations []types.AppInstanceStreamingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutAppInstanceStreamingConfigurationsOutput struct {
@@ -47,6 +49,8 @@ type PutAppInstanceStreamingConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAppInstanceStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type UpdateSystemTemplateInput struct {
 	// user's namespace. If no value is specified, the latest version is used by
 	// default.
 	CompatibleNamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSystemTemplateOutput struct {
@@ -55,6 +57,8 @@ type UpdateSystemTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

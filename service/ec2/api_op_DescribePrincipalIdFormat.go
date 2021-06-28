@@ -64,6 +64,8 @@ type DescribePrincipalIdFormatInput struct {
 	// vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection |
 	// vpn-connection | vpn-gateway
 	Resources []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePrincipalIdFormatOutput struct {
@@ -77,6 +79,8 @@ type DescribePrincipalIdFormatOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePrincipalIdFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {

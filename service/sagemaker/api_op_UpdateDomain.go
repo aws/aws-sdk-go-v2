@@ -36,6 +36,8 @@ type UpdateDomainInput struct {
 
 	// A collection of settings.
 	DefaultUserSettings *types.UserSettings
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDomainOutput struct {
@@ -45,6 +47,8 @@ type UpdateDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

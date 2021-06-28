@@ -52,6 +52,8 @@ type DescribeSuggestersInput struct {
 
 	// The suggesters you want to describe.
 	SuggesterNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeSuggesters request.
@@ -64,6 +66,8 @@ type DescribeSuggestersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSuggestersMiddlewares(stack *middleware.Stack, options Options) (err error) {

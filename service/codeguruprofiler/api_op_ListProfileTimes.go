@@ -79,6 +79,8 @@ type ListProfileTimesInput struct {
 	// The order (ascending or descending by start time of the profile) to use when
 	// listing profiles. Defaults to TIMESTAMP_DESCENDING.
 	OrderBy types.OrderBy
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the listProfileTimesResponse.
@@ -98,6 +100,8 @@ type ListProfileTimesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProfileTimesMiddlewares(stack *middleware.Stack, options Options) (err error) {

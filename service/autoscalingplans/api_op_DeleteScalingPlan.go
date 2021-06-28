@@ -40,11 +40,15 @@ type DeleteScalingPlanInput struct {
 	//
 	// This member is required.
 	ScalingPlanVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteScalingPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

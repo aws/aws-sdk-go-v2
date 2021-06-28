@@ -48,11 +48,15 @@ type UpdateDocumentVersionInput struct {
 
 	// The status of the version.
 	VersionStatus types.DocumentVersionStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDocumentVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDocumentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // For Resolver list operations (ListResolverEndpoints
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html),
 // ListResolverRules
@@ -195,6 +199,8 @@ type Filter struct {
 	// inbound Resolver endpoints, specify Direction for Name and specify INBOUND for
 	// Values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration of the firewall behavior provided by DNS Firewall for a single VPC
@@ -227,6 +233,8 @@ type FirewallConfig struct {
 
 	// The ID of the VPC that this firewall configuration applies to.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a list of firewall domains for use in a
@@ -269,6 +277,8 @@ type FirewallDomainList struct {
 
 	// Additional information about the status of the list, if available.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Minimal high-level information for a firewall domain list. The action
@@ -295,6 +305,8 @@ type FirewallDomainListMetadata struct {
 
 	// The name of the domain list.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A single firewall rule in a rule group.
@@ -367,6 +379,8 @@ type FirewallRule struct {
 	// rule group. DNS Firewall processes the rules in a rule group by order of
 	// priority, starting from the lowest setting.
 	Priority *int32
+
+	noSmithyDocumentSerde
 }
 
 // High-level information for a firewall rule group. A firewall rule group is a
@@ -414,6 +428,8 @@ type FirewallRuleGroup struct {
 
 	// Additional information about the status of the rule group, if available.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // An association between a firewall rule group and a VPC, which enables DNS
@@ -467,6 +483,8 @@ type FirewallRuleGroupAssociation struct {
 
 	// The unique identifier of the VPC that is associated with the rule group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Minimal high-level information for a firewall rule group. The action
@@ -498,6 +516,8 @@ type FirewallRuleGroupMetadata struct {
 	// current account by another AWS account. Sharing is configured through AWS
 	// Resource Access Manager (AWS RAM).
 	ShareStatus ShareStatus
+
+	noSmithyDocumentSerde
 }
 
 // In a CreateResolverEndpoint
@@ -514,6 +534,8 @@ type IpAddressRequest struct {
 
 	// The IP address that you want to use for DNS queries.
 	Ip *string
+
+	noSmithyDocumentSerde
 }
 
 // In the response to a GetResolverEndpoint
@@ -544,6 +566,8 @@ type IpAddressResponse struct {
 
 	// The ID of one subnet.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // In an UpdateResolverEndpoint
@@ -563,6 +587,8 @@ type IpAddressUpdate struct {
 	// get this ID, use GetResolverEndpoint
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html).
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about a configuration for DNSSEC
@@ -594,6 +620,8 @@ type ResolverDnssecConfig struct {
 	// * DISABLED DNSSEC validation
 	// is disabled.
 	ValidationStatus ResolverDNSSECValidationStatus
+
+	noSmithyDocumentSerde
 }
 
 // In the response to a CreateResolverEndpoint
@@ -699,6 +727,8 @@ type ResolverEndpoint struct {
 
 	// A detailed description of the status of the Resolver endpoint.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // In the response to a CreateResolverQueryLogConfig
@@ -768,6 +798,8 @@ type ResolverQueryLogConfig struct {
 	// * Permissions don't allow
 	// sending logs to the destination.
 	Status ResolverQueryLogConfigStatus
+
+	noSmithyDocumentSerde
 }
 
 // In the response to an AssociateResolverQueryLogConfig
@@ -829,6 +861,8 @@ type ResolverQueryLogConfigAssociation struct {
 	// * FAILED: Resolver either couldn't
 	// create or couldn't delete the query logging association.
 	Status ResolverQueryLogConfigAssociationStatus
+
+	noSmithyDocumentSerde
 }
 
 // For queries that originate in your VPC, detailed information about a Resolver
@@ -907,6 +941,8 @@ type ResolverRule struct {
 	// forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers
 	// on your network. Specify IPv4 addresses. IPv6 is not supported.
 	TargetIps []TargetAddress
+
+	noSmithyDocumentSerde
 }
 
 // In the response to an AssociateResolverRule
@@ -943,6 +979,8 @@ type ResolverRuleAssociation struct {
 
 	// The ID of the VPC that you associated the Resolver rule with.
 	VPCId *string
+
+	noSmithyDocumentSerde
 }
 
 // In an UpdateResolverRule
@@ -961,6 +999,8 @@ type ResolverRuleConfig struct {
 	// For DNS queries that originate in your VPC, the new IP addresses that you want
 	// to route outbound DNS queries to.
 	TargetIps []TargetAddress
+
+	noSmithyDocumentSerde
 }
 
 // One tag that you want to add to the specified resource. A tag consists of a Key
@@ -979,6 +1019,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // In a CreateResolverRule
@@ -994,4 +1036,8 @@ type TargetAddress struct {
 
 	// The port at Ip that you want to forward DNS queries to.
 	Port *int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -65,6 +65,8 @@ type CopyOptionGroupInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CopyOptionGroupOutput struct {
@@ -74,6 +76,8 @@ type CopyOptionGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

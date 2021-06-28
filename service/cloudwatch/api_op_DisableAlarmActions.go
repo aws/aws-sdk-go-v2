@@ -33,11 +33,15 @@ type DisableAlarmActionsInput struct {
 	//
 	// This member is required.
 	AlarmNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DisableAlarmActionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableAlarmActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

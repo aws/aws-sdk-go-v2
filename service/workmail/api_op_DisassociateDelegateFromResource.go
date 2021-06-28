@@ -43,11 +43,15 @@ type DisassociateDelegateFromResourceInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateDelegateFromResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateDelegateFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

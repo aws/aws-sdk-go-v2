@@ -58,6 +58,8 @@ type UpdateMedicalVocabularyInput struct {
 	// in Amazon Transcribe Medical, see Medical Custom Vocabularies
 	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
 	VocabularyFileUri *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMedicalVocabularyOutput struct {
@@ -80,6 +82,8 @@ type UpdateMedicalVocabularyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {

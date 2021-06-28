@@ -75,6 +75,8 @@ type DescribeComplianceByResourceInput struct {
 	// example, AWS::EC2::Instance). For this action, you can specify that the resource
 	// type is an AWS account by specifying AWS::::Account.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -90,6 +92,8 @@ type DescribeComplianceByResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeComplianceByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

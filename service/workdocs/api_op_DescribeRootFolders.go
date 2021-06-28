@@ -47,6 +47,8 @@ type DescribeRootFoldersInput struct {
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRootFoldersOutput struct {
@@ -59,6 +61,8 @@ type DescribeRootFoldersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRootFoldersMiddlewares(stack *middleware.Stack, options Options) (err error) {

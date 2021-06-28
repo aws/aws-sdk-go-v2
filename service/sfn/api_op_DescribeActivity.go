@@ -34,6 +34,8 @@ type DescribeActivityInput struct {
 	//
 	// This member is required.
 	ActivityArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeActivityOutput struct {
@@ -70,6 +72,8 @@ type DescribeActivityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {

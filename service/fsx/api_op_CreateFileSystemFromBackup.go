@@ -120,6 +120,8 @@ type CreateFileSystemFromBackupInput struct {
 
 	// The configuration for this Microsoft Windows file system.
 	WindowsConfiguration *types.CreateFileSystemWindowsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The response object for the CreateFileSystemFromBackup operation.
@@ -130,6 +132,8 @@ type CreateFileSystemFromBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFileSystemFromBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

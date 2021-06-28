@@ -128,6 +128,8 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// 256-bit symmetric keys), we recommend that you use the KeySpec field instead of
 	// this one.
 	NumberOfBytes *int32
+
+	noSmithyDocumentSerde
 }
 
 type GenerateDataKeyWithoutPlaintextOutput struct {
@@ -143,6 +145,8 @@ type GenerateDataKeyWithoutPlaintextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateDataKeyWithoutPlaintextMiddlewares(stack *middleware.Stack, options Options) (err error) {

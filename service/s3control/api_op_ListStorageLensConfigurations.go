@@ -48,6 +48,8 @@ type ListStorageLensConfigurationsInput struct {
 
 	// A pagination token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStorageLensConfigurationsOutput struct {
@@ -62,6 +64,8 @@ type ListStorageLensConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStorageLensConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

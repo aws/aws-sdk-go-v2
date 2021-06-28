@@ -66,6 +66,8 @@ type DescribeCommunicationsInput struct {
 
 	// A resumption point for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The communications returned by the DescribeCommunications operation.
@@ -79,6 +81,8 @@ type DescribeCommunicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCommunicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

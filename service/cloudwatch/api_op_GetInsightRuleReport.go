@@ -123,6 +123,8 @@ type GetInsightRuleReportInput struct {
 	// Determines what statistic to use to rank the contributors. Valid values are SUM
 	// and MAXIMUM.
 	OrderBy *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInsightRuleReportOutput struct {
@@ -154,6 +156,8 @@ type GetInsightRuleReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInsightRuleReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

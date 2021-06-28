@@ -101,11 +101,15 @@ type CreateAliasInput struct {
 	//
 	// This member is required.
 	TargetKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

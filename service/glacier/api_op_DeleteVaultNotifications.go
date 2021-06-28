@@ -59,11 +59,15 @@ type DeleteVaultNotificationsInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVaultNotificationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

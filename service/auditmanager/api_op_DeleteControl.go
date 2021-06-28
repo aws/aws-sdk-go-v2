@@ -32,11 +32,15 @@ type DeleteControlInput struct {
 	//
 	// This member is required.
 	ControlId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteControlOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteControlMiddlewares(stack *middleware.Stack, options Options) (err error) {

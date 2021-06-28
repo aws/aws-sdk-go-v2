@@ -67,6 +67,8 @@ type DescribeNodeConfigurationOptionsInput struct {
 
 	// The identifier of the snapshot to evaluate for possible node configurations.
 	SnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNodeConfigurationOptionsOutput struct {
@@ -83,6 +85,8 @@ type DescribeNodeConfigurationOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNodeConfigurationOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

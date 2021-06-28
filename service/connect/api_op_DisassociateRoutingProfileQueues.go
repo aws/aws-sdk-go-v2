@@ -44,11 +44,15 @@ type DisassociateRoutingProfileQueuesInput struct {
 	//
 	// This member is required.
 	RoutingProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateRoutingProfileQueuesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

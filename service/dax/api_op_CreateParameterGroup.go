@@ -38,6 +38,8 @@ type CreateParameterGroupInput struct {
 
 	// A description of the parameter group.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateParameterGroupOutput struct {
@@ -47,6 +49,8 @@ type CreateParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,7 @@ func (c *Client) ExportConfigurations(ctx context.Context, params *ExportConfigu
 }
 
 type ExportConfigurationsInput struct {
+	noSmithyDocumentSerde
 }
 
 type ExportConfigurationsOutput struct {
@@ -43,6 +44,8 @@ type ExportConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

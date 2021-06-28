@@ -37,6 +37,8 @@ type DeleteReplicationTaskAssessmentRunInput struct {
 	//
 	// This member is required.
 	ReplicationTaskAssessmentRunArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -47,6 +49,8 @@ type DeleteReplicationTaskAssessmentRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

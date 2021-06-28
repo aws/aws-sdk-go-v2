@@ -43,6 +43,8 @@ type DescribeSSLPoliciesInput struct {
 
 	// The maximum number of results to return with this call.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSSLPoliciesOutput struct {
@@ -56,6 +58,8 @@ type DescribeSSLPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSSLPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

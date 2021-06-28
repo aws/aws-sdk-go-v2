@@ -50,6 +50,8 @@ type CreateApplicationInput struct {
 	// value (Value). The maximum length of a tag key is 128 characters. The maximum
 	// length of a tag value is 256 characters.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateApplicationOutput struct {
@@ -59,6 +61,8 @@ type CreateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

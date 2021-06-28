@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -29,6 +31,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // VpcEndpointID is not in the available state.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -47,6 +51,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Family service.
 type InternalServiceError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceError) Error() string {
@@ -64,6 +70,8 @@ func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The NextToken parameter that was passed is invalid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -81,6 +89,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // This exception is thrown when the client submits a malformed request.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -101,6 +111,8 @@ type ResourceExistsException struct {
 
 	Resource     *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceExistsException) Error() string {
@@ -122,6 +134,8 @@ type ResourceNotFoundException struct {
 
 	Resource     *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -140,6 +154,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // not available.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -159,6 +175,8 @@ type ThrottlingException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

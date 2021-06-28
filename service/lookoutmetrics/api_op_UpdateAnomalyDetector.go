@@ -44,6 +44,8 @@ type UpdateAnomalyDetectorInput struct {
 
 	// The Amazon Resource Name (ARN) of an AWS KMS encryption key.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAnomalyDetectorOutput struct {
@@ -53,6 +55,8 @@ type UpdateAnomalyDetectorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

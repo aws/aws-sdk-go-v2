@@ -43,6 +43,8 @@ type ListPipelineExecutionStepsInput struct {
 
 	// The field by which to sort results. The default is CreatedTime.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListPipelineExecutionStepsOutput struct {
@@ -60,6 +62,8 @@ type ListPipelineExecutionStepsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPipelineExecutionStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {

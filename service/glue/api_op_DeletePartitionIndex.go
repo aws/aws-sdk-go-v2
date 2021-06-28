@@ -46,11 +46,15 @@ type DeletePartitionIndexInput struct {
 
 	// The catalog ID where the table resides.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePartitionIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePartitionIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type CreateBucketAccessKeyInput struct {
 	//
 	// This member is required.
 	BucketName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBucketAccessKeyOutput struct {
@@ -59,6 +61,8 @@ type CreateBucketAccessKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBucketAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

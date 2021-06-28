@@ -43,6 +43,8 @@ type InviteUsersInput struct {
 
 	// The user type.
 	UserType types.UserType
+
+	noSmithyDocumentSerde
 }
 
 type InviteUsersOutput struct {
@@ -52,6 +54,8 @@ type InviteUsersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInviteUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {

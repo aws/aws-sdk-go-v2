@@ -36,6 +36,8 @@ type DescribeReportDefinitionsInput struct {
 
 	// A generic string.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // If the action is successful, the service sends back an HTTP 200 response.
@@ -49,6 +51,8 @@ type DescribeReportDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReportDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

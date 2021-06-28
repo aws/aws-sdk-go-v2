@@ -28,6 +28,7 @@ func (c *Client) ListSourceCredentials(ctx context.Context, params *ListSourceCr
 }
 
 type ListSourceCredentialsInput struct {
+	noSmithyDocumentSerde
 }
 
 type ListSourceCredentialsOutput struct {
@@ -39,6 +40,8 @@ type ListSourceCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,11 +40,15 @@ type DeleteBotVersionInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBotVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

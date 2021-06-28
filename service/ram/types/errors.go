@@ -11,6 +11,8 @@ import (
 // the other input parameters is different from the previous call to the operation.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -32,6 +34,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // A client token is not valid.
 type InvalidClientTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClientTokenException) Error() string {
@@ -49,6 +53,8 @@ func (e *InvalidClientTokenException) ErrorFault() smithy.ErrorFault { return sm
 // The specified value for MaxResults is not valid.
 type InvalidMaxResultsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMaxResultsException) Error() string {
@@ -66,6 +72,8 @@ func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smi
 // The specified value for NextToken is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -83,6 +91,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // A parameter is not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -100,6 +110,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // The specified resource type is not valid.
 type InvalidResourceTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceTypeException) Error() string {
@@ -117,6 +129,8 @@ func (e *InvalidResourceTypeException) ErrorFault() smithy.ErrorFault { return s
 // The requested state transition is not valid.
 type InvalidStateTransitionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStateTransitionException) Error() string {
@@ -136,6 +150,8 @@ func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { retur
 // The format of an Amazon Resource Name (ARN) is not valid.
 type MalformedArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MalformedArnException) Error() string {
@@ -153,6 +169,8 @@ func (e *MalformedArnException) ErrorFault() smithy.ErrorFault { return smithy.F
 // A required input parameter is missing.
 type MissingRequiredParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingRequiredParameterException) Error() string {
@@ -172,6 +190,8 @@ func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { ret
 // The requested operation is not permitted.
 type OperationNotPermittedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotPermittedException) Error() string {
@@ -189,6 +209,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // An Amazon Resource Name (ARN) was not found.
 type ResourceArnNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceArnNotFoundException) Error() string {
@@ -206,6 +228,8 @@ func (e *ResourceArnNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // The invitation was already accepted.
 type ResourceShareInvitationAlreadyAcceptedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceShareInvitationAlreadyAcceptedException) Error() string {
@@ -227,6 +251,8 @@ func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorFault() smithy.Er
 // The invitation was already rejected.
 type ResourceShareInvitationAlreadyRejectedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceShareInvitationAlreadyRejectedException) Error() string {
@@ -248,6 +274,8 @@ func (e *ResourceShareInvitationAlreadyRejectedException) ErrorFault() smithy.Er
 // The Amazon Resource Name (ARN) for an invitation was not found.
 type ResourceShareInvitationArnNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceShareInvitationArnNotFoundException) Error() string {
@@ -269,6 +297,8 @@ func (e *ResourceShareInvitationArnNotFoundException) ErrorFault() smithy.ErrorF
 // The invitation is expired.
 type ResourceShareInvitationExpiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceShareInvitationExpiredException) Error() string {
@@ -290,6 +320,8 @@ func (e *ResourceShareInvitationExpiredException) ErrorFault() smithy.ErrorFault
 // The requested resource share exceeds the limit for your account.
 type ResourceShareLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceShareLimitExceededException) Error() string {
@@ -311,6 +343,8 @@ func (e *ResourceShareLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The service could not respond to the request due to an internal problem.
 type ServerInternalException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServerInternalException) Error() string {
@@ -328,6 +362,8 @@ func (e *ServerInternalException) ErrorFault() smithy.ErrorFault { return smithy
 // The service is not available.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -345,6 +381,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // The requested tags exceed the limit for your account.
 type TagLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagLimitExceededException) Error() string {
@@ -362,6 +400,8 @@ func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smit
 // The specified tag is a reserved word and cannot be used.
 type TagPolicyViolationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagPolicyViolationException) Error() string {
@@ -379,6 +419,8 @@ func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return sm
 // A specified resource was not found.
 type UnknownResourceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnknownResourceException) Error() string {

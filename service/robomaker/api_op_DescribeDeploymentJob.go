@@ -34,6 +34,8 @@ type DescribeDeploymentJobInput struct {
 	//
 	// This member is required.
 	Job *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDeploymentJobOutput struct {
@@ -70,6 +72,8 @@ type DescribeDeploymentJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDeploymentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

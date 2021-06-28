@@ -47,6 +47,8 @@ type DescribeInstanceStorageConfigInput struct {
 	//
 	// This member is required.
 	ResourceType types.InstanceStorageResourceType
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInstanceStorageConfigOutput struct {
@@ -56,6 +58,8 @@ type DescribeInstanceStorageConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

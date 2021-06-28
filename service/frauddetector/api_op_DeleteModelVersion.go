@@ -46,11 +46,15 @@ type DeleteModelVersionInput struct {
 	//
 	// This member is required.
 	ModelVersionNumber *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteModelVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type CreateDedicatedIpPoolInput struct {
 	// An object that defines the tags (keys and values) that you want to associate
 	// with the pool.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -49,6 +51,8 @@ type CreateDedicatedIpPoolInput struct {
 type CreateDedicatedIpPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDedicatedIpPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -32,6 +33,8 @@ type ApplicationComponent struct {
 
 	// The stack tier of the application component.
 	Tier Tier
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of the application.
@@ -65,6 +68,8 @@ type ApplicationInfo struct {
 
 	// The name of the resource group used for the application.
 	ResourceGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The event information.
@@ -89,6 +94,8 @@ type ConfigurationEvent struct {
 
 	// The resource monitored by Application Insights.
 	MonitoredResourceARN *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the log patterns that belongs to a LogPatternSet.
@@ -119,6 +126,8 @@ type LogPattern struct {
 	// rank. And a High severity pattern translates to a 250,000 rank. Rank values less
 	// than 1 or greater than 1,000,000 are reserved for AWS-provided patterns.
 	Rank int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an anomaly or error with the application.
@@ -264,6 +273,8 @@ type Observation struct {
 
 	// The X-Ray request throttle percentage for this node.
 	XRayThrottlePercent *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a problem that is detected by correlating observations.
@@ -298,6 +309,8 @@ type Problem struct {
 
 	// The name of the problem.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes observations related to the problem.
@@ -305,6 +318,8 @@ type RelatedObservations struct {
 
 	// The list of observations related to the problem.
 	ObservationList []Observation
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the tags associated with an application. A tag is a label
@@ -342,4 +357,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

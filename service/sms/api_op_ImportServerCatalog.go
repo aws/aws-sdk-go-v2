@@ -29,11 +29,14 @@ func (c *Client) ImportServerCatalog(ctx context.Context, params *ImportServerCa
 }
 
 type ImportServerCatalogInput struct {
+	noSmithyDocumentSerde
 }
 
 type ImportServerCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportServerCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {

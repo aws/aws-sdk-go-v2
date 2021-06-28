@@ -41,6 +41,8 @@ type ListWorkspacesInput struct {
 	// Pagination token to request the next page in a paginated list. This token is
 	// obtained from the output of the previous ListWorkspaces request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListWorkspaces operation.
@@ -57,6 +59,8 @@ type ListWorkspacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

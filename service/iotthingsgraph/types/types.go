@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type DefinitionDocument struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the ID and revision number of a workflow or system that
@@ -29,6 +32,8 @@ type DependencyRevision struct {
 
 	// The revision number of the workflow or system.
 	RevisionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of an entity.
@@ -48,6 +53,8 @@ type EntityDescription struct {
 
 	// The entity type.
 	Type EntityType
+
+	noSmithyDocumentSerde
 }
 
 // An object that filters an entity search. Multiple filters function as OR
@@ -64,6 +71,8 @@ type EntityFilter struct {
 	// An array of string values for the search filter field. Multiple values function
 	// as AND criteria in the search.
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about a flow event.
@@ -80,6 +89,8 @@ type FlowExecutionMessage struct {
 
 	// The date and time when the message was last updated.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains summary information about a flow execution.
@@ -102,6 +113,8 @@ type FlowExecutionSummary struct {
 
 	// The date and time when the flow execution summary was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains a workflow's definition and summary information.
@@ -116,6 +129,8 @@ type FlowTemplateDescription struct {
 	// The version of the user's namespace against which the workflow was validated.
 	// Use this value in your system instance.
 	ValidatedNamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that filters a workflow search.
@@ -131,6 +146,8 @@ type FlowTemplateFilter struct {
 	//
 	// This member is required.
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains summary information about a workflow.
@@ -147,6 +164,8 @@ type FlowTemplateSummary struct {
 
 	// The revision number of the workflow.
 	RevisionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that specifies whether cloud metrics are collected in a deployment
@@ -158,6 +177,8 @@ type MetricsConfiguration struct {
 
 	// The ARN of the role that is used to collect cloud metrics.
 	MetricRuleRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains a system instance definition and summary information.
@@ -190,6 +211,8 @@ type SystemInstanceDescription struct {
 	// The version of the user's namespace against which the system instance was
 	// validated.
 	ValidatedNamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that filters a system instance search. Multiple filters function as OR
@@ -204,6 +227,8 @@ type SystemInstanceFilter struct {
 	// An array of string values for the search filter field. Multiple values function
 	// as AND criteria in the search.
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains summary information about a system instance.
@@ -235,6 +260,8 @@ type SystemInstanceSummary struct {
 
 	// The date and time when the system instance was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains a system's definition document and summary information.
@@ -249,6 +276,8 @@ type SystemTemplateDescription struct {
 	// The namespace version against which the system was validated. Use this value in
 	// your system instance.
 	ValidatedNamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that filters a system search.
@@ -264,6 +293,8 @@ type SystemTemplateFilter struct {
 	//
 	// This member is required.
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about a system.
@@ -280,6 +311,8 @@ type SystemTemplateSummary struct {
 
 	// The revision number of the system.
 	RevisionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 // Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value
@@ -297,6 +330,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An AWS IoT thing.
@@ -307,4 +342,8 @@ type Thing struct {
 
 	// The name of the thing.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

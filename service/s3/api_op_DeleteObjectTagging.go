@@ -75,6 +75,8 @@ type DeleteObjectTaggingInput struct {
 
 	// The versionId of the object that the tag-set will be removed from.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteObjectTaggingOutput struct {
@@ -84,6 +86,8 @@ type DeleteObjectTaggingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteObjectTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

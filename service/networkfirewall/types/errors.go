@@ -11,6 +11,8 @@ import (
 // Try your request later.
 type InsufficientCapacityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientCapacityException) Error() string {
@@ -29,6 +31,8 @@ func (e *InsufficientCapacityException) ErrorFault() smithy.ErrorFault { return 
 // because of a system problem. Retry your request.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -47,6 +51,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // to delete a rule group or firewall policy that's in use.
 type InvalidOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOperationException) Error() string {
@@ -74,6 +80,8 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 // isn't valid in the context of the request.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -91,6 +99,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 //
 type InvalidResourcePolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourcePolicyException) Error() string {
@@ -108,6 +118,8 @@ func (e *InvalidResourcePolicyException) ErrorFault() smithy.ErrorFault { return
 // The token you provided is stale or isn't valid for the operation.
 type InvalidTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTokenException) Error() string {
@@ -125,6 +137,8 @@ func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 // Unable to perform the operation because doing so would violate a limit setting.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -142,6 +156,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Unable to send logs to a configured logging destination.
 type LogDestinationPermissionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LogDestinationPermissionException) Error() string {
@@ -161,6 +177,8 @@ func (e *LogDestinationPermissionException) ErrorFault() smithy.ErrorFault { ret
 // Unable to locate a resource using the parameters that you provided.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -178,6 +196,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 //
 type ResourceOwnerCheckException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceOwnerCheckException) Error() string {
@@ -195,6 +215,8 @@ func (e *ResourceOwnerCheckException) ErrorFault() smithy.ErrorFault { return sm
 // Unable to process the request due to throttling limitations.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -212,6 +234,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The operation you requested isn't supported by Network Firewall.
 type UnsupportedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {

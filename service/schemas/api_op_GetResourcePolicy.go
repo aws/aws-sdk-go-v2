@@ -30,6 +30,8 @@ type GetResourcePolicyInput struct {
 
 	// The name of the registry.
 	RegistryName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourcePolicyOutput struct {
@@ -44,6 +46,8 @@ type GetResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

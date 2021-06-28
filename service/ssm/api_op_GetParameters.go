@@ -38,6 +38,8 @@ type GetParametersInput struct {
 	// Return decrypted secure string value. Return decrypted values for secure string
 	// parameters. This flag is ignored for String and StringList parameter types.
 	WithDecryption bool
+
+	noSmithyDocumentSerde
 }
 
 type GetParametersOutput struct {
@@ -51,6 +53,8 @@ type GetParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

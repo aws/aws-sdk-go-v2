@@ -75,11 +75,15 @@ type CreateVpcPeeringConnectionInput struct {
 	//
 	// This member is required.
 	PeerVpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVpcPeeringConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

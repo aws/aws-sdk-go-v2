@@ -50,6 +50,8 @@ type CreateDBSubnetGroupInput struct {
 
 	// Tags to assign to the DB subnet group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBSubnetGroupOutput struct {
@@ -60,6 +62,8 @@ type CreateDBSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type CreateImportJobInput struct {
 	//
 	// This member is required.
 	ImportDestination *types.ImportDestination
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -51,6 +53,8 @@ type CreateImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

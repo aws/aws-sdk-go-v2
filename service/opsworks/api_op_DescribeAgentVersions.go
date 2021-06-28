@@ -36,6 +36,8 @@ type DescribeAgentVersionsInput struct {
 
 	// The stack ID.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeAgentVersions request.
@@ -48,6 +50,8 @@ type DescribeAgentVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAgentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

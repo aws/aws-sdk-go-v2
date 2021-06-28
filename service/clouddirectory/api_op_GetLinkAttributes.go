@@ -48,6 +48,8 @@ type GetLinkAttributesInput struct {
 
 	// The consistency level at which to retrieve the attributes on a typed link.
 	ConsistencyLevel types.ConsistencyLevel
+
+	noSmithyDocumentSerde
 }
 
 type GetLinkAttributesOutput struct {
@@ -57,6 +59,8 @@ type GetLinkAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLinkAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type DescribeReceiptRuleInput struct {
 	//
 	// This member is required.
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the details of a receipt rule.
@@ -57,6 +59,8 @@ type DescribeReceiptRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReceiptRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The case-insensitive input to indicate standard MIME type that describes the
 // format of the file that will be uploaded.
 type AttachmentItem struct {
@@ -20,6 +24,8 @@ type AttachmentItem struct {
 
 	// Status of the attachment.
 	Status ArtifactStatus
+
+	noSmithyDocumentSerde
 }
 
 // Connection credentials.
@@ -31,6 +37,8 @@ type ConnectionCredentials struct {
 	// The expiration of the token. It's specified in ISO 8601 format:
 	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	Expiry *string
+
+	noSmithyDocumentSerde
 }
 
 // An item - message or event - that has been sent.
@@ -63,6 +71,8 @@ type Item struct {
 
 	// Type of the item: message or event.
 	Type ChatItemType
+
+	noSmithyDocumentSerde
 }
 
 // A filtering option for where to start. For example, if you sent 100 messages,
@@ -78,6 +88,8 @@ type StartPosition struct {
 
 	// The start position of the most recent message where you want to start.
 	MostRecent int32
+
+	noSmithyDocumentSerde
 }
 
 // Fields to be used while uploading the attachment.
@@ -93,6 +105,8 @@ type UploadMetadata struct {
 	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601
 	// format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	UrlExpiry *string
+
+	noSmithyDocumentSerde
 }
 
 // The websocket for the participant's connection.
@@ -104,4 +118,8 @@ type Websocket struct {
 
 	// The URL of the websocket.
 	Url *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

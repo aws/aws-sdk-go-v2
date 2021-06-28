@@ -35,6 +35,8 @@ type DeleteInvitationsInput struct {
 	//
 	// This member is required.
 	AccountIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInvitationsOutput struct {
@@ -45,6 +47,8 @@ type DeleteInvitationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

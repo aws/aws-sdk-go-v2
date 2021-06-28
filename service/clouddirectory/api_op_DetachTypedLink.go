@@ -41,11 +41,15 @@ type DetachTypedLinkInput struct {
 	//
 	// This member is required.
 	TypedLinkSpecifier *types.TypedLinkSpecifier
+
+	noSmithyDocumentSerde
 }
 
 type DetachTypedLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachTypedLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

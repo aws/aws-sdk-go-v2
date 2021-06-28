@@ -38,11 +38,15 @@ type UpdateRuleMetadataInput struct {
 	//
 	// This member is required.
 	Rule *types.Rule
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRuleMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRuleMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

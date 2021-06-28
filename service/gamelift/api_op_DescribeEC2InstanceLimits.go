@@ -90,6 +90,8 @@ type DescribeEC2InstanceLimitsInput struct {
 	// The name of a remote location to request instance limits for, in the form of an
 	// AWS Region code such as us-west-2.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -100,6 +102,8 @@ type DescribeEC2InstanceLimitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEC2InstanceLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

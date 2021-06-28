@@ -42,11 +42,15 @@ type DeleteHostedConfigurationVersionInput struct {
 	//
 	// This member is required.
 	VersionNumber int32
+
+	noSmithyDocumentSerde
 }
 
 type DeleteHostedConfigurationVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

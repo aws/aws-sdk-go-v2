@@ -49,6 +49,8 @@ type ExportCertificateInput struct {
 	//
 	// This member is required.
 	Passphrase []byte
+
+	noSmithyDocumentSerde
 }
 
 type ExportCertificateOutput struct {
@@ -66,6 +68,8 @@ type ExportCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

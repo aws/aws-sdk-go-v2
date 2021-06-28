@@ -39,6 +39,8 @@ type ListVolumeRecoveryPointsInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type ListVolumeRecoveryPointsOutput struct {
@@ -52,6 +54,8 @@ type ListVolumeRecoveryPointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVolumeRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

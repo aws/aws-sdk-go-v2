@@ -126,11 +126,15 @@ type ImportKeyMaterialInput struct {
 	// omit this parameter when the ExpirationModel parameter is set to
 	// KEY_MATERIAL_DOES_NOT_EXPIRE. Otherwise it is required.
 	ValidTo *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ImportKeyMaterialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportKeyMaterialMiddlewares(stack *middleware.Stack, options Options) (err error) {

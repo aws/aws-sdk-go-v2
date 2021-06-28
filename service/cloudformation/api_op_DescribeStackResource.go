@@ -51,6 +51,8 @@ type DescribeStackResourceInput struct {
 	//
 	// This member is required.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for a DescribeStackResource action.
@@ -62,6 +64,8 @@ type DescribeStackResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStackResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type GetPlaybackKeyPairInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPlaybackKeyPairOutput struct {
@@ -47,6 +49,8 @@ type GetPlaybackKeyPairOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

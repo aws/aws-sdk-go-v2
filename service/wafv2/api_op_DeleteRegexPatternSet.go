@@ -65,11 +65,15 @@ type DeleteRegexPatternSetInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRegexPatternSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

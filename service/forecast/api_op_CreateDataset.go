@@ -126,6 +126,8 @@ type CreateDatasetInput struct {
 	// user tag and will count against the limit of 50 tags. Tags with only the key
 	// prefix of aws do not count against your tags per resource limit.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetOutput struct {
@@ -135,6 +137,8 @@ type CreateDatasetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

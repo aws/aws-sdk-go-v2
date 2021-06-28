@@ -55,6 +55,8 @@ type PutDeliverabilityDashboardOptionInput struct {
 	// An array of objects, one for each verified domain that you use to send email and
 	// enabled the Deliverability dashboard for.
 	SubscribedDomains []types.DomainDeliverabilityTrackingOption
+
+	noSmithyDocumentSerde
 }
 
 // A response that indicates whether the Deliverability dashboard is enabled for
@@ -62,6 +64,8 @@ type PutDeliverabilityDashboardOptionInput struct {
 type PutDeliverabilityDashboardOptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDeliverabilityDashboardOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

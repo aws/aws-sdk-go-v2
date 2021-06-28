@@ -68,11 +68,15 @@ type RespondActivityTaskFailedInput struct {
 
 	// Description of the error that may assist in diagnostics.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type RespondActivityTaskFailedOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRespondActivityTaskFailedMiddlewares(stack *middleware.Stack, options Options) (err error) {

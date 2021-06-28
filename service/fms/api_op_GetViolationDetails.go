@@ -55,6 +55,8 @@ type GetViolationDetailsInput struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type GetViolationDetailsOutput struct {
@@ -64,6 +66,8 @@ type GetViolationDetailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetViolationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

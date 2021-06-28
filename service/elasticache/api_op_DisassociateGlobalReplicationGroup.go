@@ -45,6 +45,8 @@ type DisassociateGlobalReplicationGroupInput struct {
 	//
 	// This member is required.
 	ReplicationGroupRegion *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateGlobalReplicationGroupOutput struct {
@@ -60,6 +62,8 @@ type DisassociateGlobalReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

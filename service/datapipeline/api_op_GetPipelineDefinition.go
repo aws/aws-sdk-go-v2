@@ -55,6 +55,8 @@ type GetPipelineDefinitionInput struct {
 	// (default) to use the last definition saved to the pipeline or active to use the
 	// last definition that was activated.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of GetPipelineDefinition.
@@ -71,6 +73,8 @@ type GetPipelineDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

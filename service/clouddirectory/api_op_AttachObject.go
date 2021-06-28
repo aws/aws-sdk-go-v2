@@ -54,6 +54,8 @@ type AttachObjectInput struct {
 	//
 	// This member is required.
 	ParentReference *types.ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 type AttachObjectOutput struct {
@@ -63,6 +65,8 @@ type AttachObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

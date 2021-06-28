@@ -28,6 +28,7 @@ func (c *Client) IgnoresWrappingXmlName(ctx context.Context, params *IgnoresWrap
 }
 
 type IgnoresWrappingXmlNameInput struct {
+	noSmithyDocumentSerde
 }
 
 type IgnoresWrappingXmlNameOutput struct {
@@ -35,6 +36,8 @@ type IgnoresWrappingXmlNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIgnoresWrappingXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

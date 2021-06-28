@@ -47,11 +47,15 @@ type DisassociateInstanceStorageConfigInput struct {
 	//
 	// This member is required.
 	ResourceType types.InstanceStorageResourceType
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateInstanceStorageConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

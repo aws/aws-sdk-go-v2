@@ -65,6 +65,8 @@ type QueryForecastInput struct {
 	// The start date for the forecast. Specify the date using this format:
 	// yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example, 2015-01-01T08:00:00.
 	StartDate *string
+
+	noSmithyDocumentSerde
 }
 
 type QueryForecastOutput struct {
@@ -74,6 +76,8 @@ type QueryForecastOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {

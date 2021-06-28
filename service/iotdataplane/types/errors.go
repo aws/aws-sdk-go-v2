@@ -10,6 +10,8 @@ import (
 // The specified version does not match the version of the document.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -27,6 +29,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // An unexpected error has occurred.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -44,6 +48,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 // The request is not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -61,6 +67,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified combination of HTTP verb and URI is not supported.
 type MethodNotAllowedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MethodNotAllowedException) Error() string {
@@ -78,6 +86,8 @@ func (e *MethodNotAllowedException) ErrorFault() smithy.ErrorFault { return smit
 // The payload exceeds the maximum size allowed.
 type RequestEntityTooLargeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestEntityTooLargeException) Error() string {
@@ -95,6 +105,8 @@ func (e *RequestEntityTooLargeException) ErrorFault() smithy.ErrorFault { return
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -112,6 +124,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -129,6 +143,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // The rate exceeds the limit.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -146,6 +162,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // You are not authorized to perform this operation.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {
@@ -163,6 +181,8 @@ func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The document encoding is not supported.
 type UnsupportedDocumentEncodingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedDocumentEncodingException) Error() string {

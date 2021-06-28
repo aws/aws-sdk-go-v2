@@ -46,6 +46,8 @@ type JsonMapsInput struct {
 	SparseStringMap map[string]*string
 
 	SparseStructMap map[string]*types.GreetingStruct
+
+	noSmithyDocumentSerde
 }
 
 type JsonMapsOutput struct {
@@ -71,6 +73,8 @@ type JsonMapsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationJsonMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {

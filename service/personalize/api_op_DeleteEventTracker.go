@@ -34,11 +34,15 @@ type DeleteEventTrackerInput struct {
 	//
 	// This member is required.
 	EventTrackerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEventTrackerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {

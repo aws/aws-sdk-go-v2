@@ -52,6 +52,8 @@ type DeleteApplicationOutputInput struct {
 	//
 	// This member is required.
 	OutputId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationOutputOutput struct {
@@ -64,6 +66,8 @@ type DeleteApplicationOutputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {

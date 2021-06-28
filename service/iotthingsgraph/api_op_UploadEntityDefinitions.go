@@ -57,6 +57,8 @@ type UploadEntityDefinitionsInput struct {
 	// public namespace. If set to true, the upload will create a new namespace
 	// version.
 	SyncWithPublicNamespace bool
+
+	noSmithyDocumentSerde
 }
 
 type UploadEntityDefinitionsOutput struct {
@@ -69,6 +71,8 @@ type UploadEntityDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUploadEntityDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

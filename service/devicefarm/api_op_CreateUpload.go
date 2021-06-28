@@ -131,6 +131,8 @@ type CreateUploadInput struct {
 
 	// The upload's content type (for example, application/octet-stream).
 	ContentType *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a create upload request.
@@ -141,6 +143,8 @@ type CreateUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

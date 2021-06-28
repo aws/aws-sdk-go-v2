@@ -37,6 +37,8 @@ type GetRestApisInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains references to your APIs and links that guide you in how to interact
@@ -53,6 +55,8 @@ type GetRestApisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRestApisMiddlewares(stack *middleware.Stack, options Options) (err error) {

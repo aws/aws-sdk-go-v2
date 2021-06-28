@@ -88,6 +88,8 @@ type TestTypeInput struct {
 	// uses the default version of the extension in this account and region for
 	// testing.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type TestTypeOutput struct {
@@ -97,6 +99,8 @@ type TestTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

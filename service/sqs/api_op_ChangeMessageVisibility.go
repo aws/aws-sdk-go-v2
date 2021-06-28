@@ -89,11 +89,15 @@ type ChangeMessageVisibilityInput struct {
 	//
 	// This member is required.
 	VisibilityTimeout int32
+
+	noSmithyDocumentSerde
 }
 
 type ChangeMessageVisibilityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationChangeMessageVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {

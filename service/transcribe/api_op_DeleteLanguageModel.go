@@ -32,11 +32,15 @@ type DeleteLanguageModelInput struct {
 	//
 	// This member is required.
 	ModelName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLanguageModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

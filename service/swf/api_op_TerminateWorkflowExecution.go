@@ -97,11 +97,15 @@ type TerminateWorkflowExecutionInput struct {
 
 	// The runId of the workflow execution to terminate.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type TerminateWorkflowExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

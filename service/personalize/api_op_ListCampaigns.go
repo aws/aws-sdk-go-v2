@@ -44,6 +44,8 @@ type ListCampaignsInput struct {
 	// solution is not specified, all the campaigns associated with the account are
 	// listed.
 	SolutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListCampaignsOutput struct {
@@ -56,6 +58,8 @@ type ListCampaignsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {

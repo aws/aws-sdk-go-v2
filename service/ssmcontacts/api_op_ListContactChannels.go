@@ -40,6 +40,8 @@ type ListContactChannelsInput struct {
 
 	// The pagination token to continue to the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListContactChannelsOutput struct {
@@ -54,6 +56,8 @@ type ListContactChannelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContactChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

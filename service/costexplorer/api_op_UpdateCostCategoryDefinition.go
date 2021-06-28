@@ -50,6 +50,8 @@ type UpdateCostCategoryDefinitionInput struct {
 
 	// The default value for the cost category.
 	DefaultValue *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCostCategoryDefinitionOutput struct {
@@ -62,6 +64,8 @@ type UpdateCostCategoryDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

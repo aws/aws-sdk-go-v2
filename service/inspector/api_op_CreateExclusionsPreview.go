@@ -35,6 +35,8 @@ type CreateExclusionsPreviewInput struct {
 	//
 	// This member is required.
 	AssessmentTemplateArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateExclusionsPreviewOutput struct {
@@ -48,6 +50,8 @@ type CreateExclusionsPreviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateExclusionsPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

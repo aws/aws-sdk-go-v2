@@ -65,6 +65,8 @@ type CreatePresetInput struct {
 
 	// A section of the request body that specifies the video parameters.
 	Video *types.VideoParameters
+
+	noSmithyDocumentSerde
 }
 
 // The CreatePresetResponse structure.
@@ -82,6 +84,8 @@ type CreatePresetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePresetMiddlewares(stack *middleware.Stack, options Options) (err error) {

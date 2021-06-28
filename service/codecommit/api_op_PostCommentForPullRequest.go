@@ -68,6 +68,8 @@ type PostCommentForPullRequestInput struct {
 	// is provided, the comment is posted as a general comment on the pull request
 	// difference between the before commit ID and the after commit ID.
 	Location *types.Location
+
+	noSmithyDocumentSerde
 }
 
 type PostCommentForPullRequestOutput struct {
@@ -101,6 +103,8 @@ type PostCommentForPullRequestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPostCommentForPullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {

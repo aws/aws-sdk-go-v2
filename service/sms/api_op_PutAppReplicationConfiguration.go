@@ -35,11 +35,15 @@ type PutAppReplicationConfigurationInput struct {
 	// Information about the replication configurations for server groups in the
 	// application.
 	ServerGroupReplicationConfigurations []types.ServerGroupReplicationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutAppReplicationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAppReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

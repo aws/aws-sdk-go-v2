@@ -45,6 +45,8 @@ type ListConnectionsInput struct {
 	// the ones specified in the initial request. If you don't specify NextToken, the
 	// request retrieves the first result page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListConnectionsOutput struct {
@@ -61,6 +63,8 @@ type ListConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

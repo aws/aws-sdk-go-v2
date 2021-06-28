@@ -110,6 +110,8 @@ type CreateSchemaInput struct {
 	// console, command line, or API. If specified, follows the Amazon Web Services
 	// tags-on-create pattern.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSchemaOutput struct {
@@ -159,6 +161,8 @@ type CreateSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

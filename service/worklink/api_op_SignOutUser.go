@@ -38,11 +38,15 @@ type SignOutUserInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 type SignOutUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSignOutUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

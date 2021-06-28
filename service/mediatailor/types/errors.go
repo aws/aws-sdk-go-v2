@@ -10,6 +10,8 @@ import (
 // Invalid request parameters.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {

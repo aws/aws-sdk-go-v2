@@ -79,6 +79,8 @@ type DescribeMergeConflictsInput struct {
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMergeConflictsOutput struct {
@@ -114,6 +116,8 @@ type DescribeMergeConflictsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMergeConflictsMiddlewares(stack *middleware.Stack, options Options) (err error) {

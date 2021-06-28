@@ -12,6 +12,8 @@ type DocumentServiceException struct {
 	Message *string
 
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DocumentServiceException) Error() string {
@@ -29,6 +31,8 @@ func (e *DocumentServiceException) ErrorFault() smithy.ErrorFault { return smith
 // Information about any problems encountered while processing a search request.
 type SearchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SearchException) Error() string {

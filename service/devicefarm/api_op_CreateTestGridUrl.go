@@ -40,6 +40,8 @@ type CreateTestGridUrlInput struct {
 	//
 	// This member is required.
 	ProjectArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTestGridUrlOutput struct {
@@ -53,6 +55,8 @@ type CreateTestGridUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTestGridUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

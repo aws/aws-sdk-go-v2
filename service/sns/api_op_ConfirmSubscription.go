@@ -48,6 +48,8 @@ type ConfirmSubscriptionInput struct {
 	// only the topic owner and the subscription owner can unsubscribe the endpoint.
 	// The unsubscribe action requires Amazon Web Services authentication.
 	AuthenticateOnUnsubscribe *string
+
+	noSmithyDocumentSerde
 }
 
 // Response for ConfirmSubscriptions action.
@@ -58,6 +60,8 @@ type ConfirmSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

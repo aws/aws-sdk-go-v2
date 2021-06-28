@@ -38,6 +38,8 @@ type DescribeAccountLimitsInput struct {
 
 	// The maximum number of results to return with this call.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountLimitsOutput struct {
@@ -51,6 +53,8 @@ type DescribeAccountLimitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

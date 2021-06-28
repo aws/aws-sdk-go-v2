@@ -32,11 +32,15 @@ type DeleteDataQualityJobDefinitionInput struct {
 	//
 	// This member is required.
 	JobDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDataQualityJobDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDataQualityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DeleteArtifactInput struct {
 
 	// The URI of the source.
 	Source *types.ArtifactSource
+
+	noSmithyDocumentSerde
 }
 
 type DeleteArtifactOutput struct {
@@ -43,6 +45,8 @@ type DeleteArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

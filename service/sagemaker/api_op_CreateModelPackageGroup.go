@@ -42,6 +42,8 @@ type CreateModelPackageGroupInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 	// Web Services General Reference Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateModelPackageGroupOutput struct {
@@ -53,6 +55,8 @@ type CreateModelPackageGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelPackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -13,6 +14,8 @@ type AggregationConfig struct {
 	// Specifies whether Amazon AppFlow aggregates the flow records into a single file,
 	// or leave them unaggregated.
 	AggregationType AggregationType
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific credentials required when using Amplitude.
@@ -28,14 +31,18 @@ type AmplitudeConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	SecretKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Amplitude.
 type AmplitudeConnectorProfileProperties struct {
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Amplitude.
 type AmplitudeMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Amplitude is being used as a source.
@@ -45,6 +52,8 @@ type AmplitudeSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration settings related to a given connector.
@@ -74,6 +83,8 @@ type ConnectorConfiguration struct {
 
 	// Specifies the supported trigger types for the flow.
 	SupportedTriggerTypes []TriggerType
+
+	noSmithyDocumentSerde
 }
 
 // The high-level entity that can be queried in Amazon AppFlow. For example, a
@@ -95,6 +106,8 @@ type ConnectorEntity struct {
 
 	// The label applied to the connector entity.
 	Label *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the data model of a connector field. For example, for an account
@@ -123,6 +136,8 @@ type ConnectorEntityField struct {
 	// Contains details regarding the supported FieldType, including the corresponding
 	// filterOperators and supportedValues.
 	SupportedFieldTypeDetails *SupportedFieldTypeDetails
+
+	noSmithyDocumentSerde
 }
 
 // A structure to specify connector-specific metadata such as oAuthScopes,
@@ -188,6 +203,8 @@ type ConnectorMetadata struct {
 
 	// The connector metadata specific to Zendesk.
 	Zendesk *ZendeskMetadata
+
+	noSmithyDocumentSerde
 }
 
 // Used by select connectors for which the OAuth workflow is supported, such as
@@ -201,6 +218,8 @@ type ConnectorOAuthRequest struct {
 	// The URL to which the authentication server redirects the browser after
 	// authorization has been granted.
 	RedirectUri *string
+
+	noSmithyDocumentSerde
 }
 
 // The operation to be performed on the provided source fields.
@@ -247,6 +266,8 @@ type ConnectorOperator struct {
 
 	// The operation to be performed on the provided Zendesk source fields.
 	Zendesk ZendeskConnectorOperator
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance of a connector. This includes the provided name,
@@ -280,6 +301,8 @@ type ConnectorProfile struct {
 
 	// Specifies when the connector profile was last updated.
 	LastUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Defines the connector-specific configuration and credentials for the connector
@@ -295,6 +318,8 @@ type ConnectorProfileConfig struct {
 	//
 	// This member is required.
 	ConnectorProfileProperties *ConnectorProfileProperties
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific credentials required by a connector.
@@ -347,6 +372,8 @@ type ConnectorProfileCredentials struct {
 
 	// The connector-specific credentials required when using Zendesk.
 	Zendesk *ZendeskConnectorProfileCredentials
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required by each connector.
@@ -399,6 +426,8 @@ type ConnectorProfileProperties struct {
 
 	// The connector-specific properties required by Zendesk.
 	Zendesk *ZendeskConnectorProfileProperties
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Amazon Connect Customer Profiles is used as
@@ -412,10 +441,13 @@ type CustomerProfilesDestinationProperties struct {
 
 	// The object specified in the Amazon Connect Customer Profiles flow destination.
 	ObjectTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Amazon Connect Customer Profiles.
 type CustomerProfilesMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The connector-specific credentials required by Datadog.
@@ -434,6 +466,8 @@ type DatadogConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	ApplicationKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required by Datadog.
@@ -443,10 +477,13 @@ type DatadogConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Datadog.
 type DatadogMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Datadog is being used as a source.
@@ -456,6 +493,8 @@ type DatadogSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // This stores the information that is required to query a particular connector.
@@ -490,6 +529,8 @@ type DestinationConnectorProperties struct {
 
 	// The properties required to query Zendesk.
 	Zendesk *ZendeskDestinationProperties
+
+	noSmithyDocumentSerde
 }
 
 // The properties that can be applied to a field when connector is being used as a
@@ -514,6 +555,8 @@ type DestinationFieldProperties struct {
 	// field can be used in idFieldNames when that write operation is present as a
 	// destination option.
 	SupportedWriteOperations []WriteOperationType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the configuration of destination connectors present
@@ -533,6 +576,8 @@ type DestinationFlowConfig struct {
 	// The name of the connector profile. This name must be unique for each connector
 	// profile in the AWS account.
 	ConnectorProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required by Dynatrace.
@@ -542,6 +587,8 @@ type DynatraceConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	ApiToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required by Dynatrace.
@@ -551,10 +598,13 @@ type DynatraceConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Dynatrace.
 type DynatraceMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Dynatrace is being used as a source.
@@ -564,6 +614,8 @@ type DynatraceSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings that determine how Amazon AppFlow handles an error when placing
@@ -582,6 +634,8 @@ type ErrorHandlingConfig struct {
 	// Specifies if the flow should fail after the first instance of a failure when
 	// attempting to place data in the destination.
 	FailOnFirstDestinationError bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides details in the event of a failed flow, including the failure count and
@@ -593,6 +647,8 @@ type ErrorInfo struct {
 
 	// Specifies the failure count for the attempted flow.
 	PutFailuresCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Amazon EventBridge is being used as a
@@ -610,10 +666,13 @@ type EventBridgeDestinationProperties struct {
 	// record regardless of the initial failure. ErrorHandlingConfig is a part of the
 	// destination connector details.
 	ErrorHandlingConfig *ErrorHandlingConfig
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Amazon EventBridge.
 type EventBridgeMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // Describes the details of the flow run, including the timestamp, status, and
@@ -628,6 +687,8 @@ type ExecutionDetails struct {
 
 	// Specifies the time of the most recent flow run.
 	MostRecentExecutionTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies information about the past flow run instances for a given flow.
@@ -656,6 +717,8 @@ type ExecutionRecord struct {
 
 	// Specifies the start time of the flow run.
 	StartedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the end result of the flow run.
@@ -672,6 +735,8 @@ type ExecutionResult struct {
 
 	// The number of records processed in the flow run.
 	RecordsProcessed *int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains details regarding the supported field type and the operators that can
@@ -691,6 +756,8 @@ type FieldTypeDetails struct {
 	// The list of values that a field can contain. For example, a Boolean fieldType
 	// can have two values: "true" and "false".
 	SupportedValues []string
+
+	noSmithyDocumentSerde
 }
 
 // The properties of the flow, such as its source, destination, trigger type, and
@@ -738,6 +805,8 @@ type FlowDefinition struct {
 
 	// Specifies the type of flow trigger. This can be OnDemand, Scheduled, or Event.
 	TriggerType TriggerType
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required by Google Analytics.
@@ -764,10 +833,13 @@ type GoogleAnalyticsConnectorProfileCredentials struct {
 	// The credentials used to acquire new access tokens. This is required only for
 	// OAuth2 access tokens, and is not required for OAuth1 access tokens.
 	RefreshToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required by Google Analytics.
 type GoogleAnalyticsConnectorProfileProperties struct {
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Google Analytics.
@@ -775,6 +847,8 @@ type GoogleAnalyticsMetadata struct {
 
 	// The desired authorization scope for the Google Analytics account.
 	OAuthScopes []string
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Google Analytics is being used as a source.
@@ -784,6 +858,8 @@ type GoogleAnalyticsSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific credentials required when using Amazon Honeycode.
@@ -798,10 +874,13 @@ type HoneycodeConnectorProfileCredentials struct {
 
 	// The credentials used to acquire new access tokens.
 	RefreshToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific properties required when using Amazon Honeycode.
 type HoneycodeConnectorProfileProperties struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Amazon Honeycode is used as a destination.
@@ -818,6 +897,8 @@ type HoneycodeDestinationProperties struct {
 	// record regardless of the initial failure. ErrorHandlingConfig is a part of the
 	// destination connector details.
 	ErrorHandlingConfig *ErrorHandlingConfig
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Amazon Honeycode.
@@ -825,6 +906,8 @@ type HoneycodeMetadata struct {
 
 	// The desired authorization scope for the Amazon Honeycode account.
 	OAuthScopes []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration used when importing incremental records from the
@@ -834,6 +917,8 @@ type IncrementalPullConfig struct {
 	// A field that specifies the date time or timestamp field as the criteria to use
 	// when importing incremental records from the source.
 	DatetimeTypeFieldName *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required by Infor Nexus.
@@ -858,6 +943,8 @@ type InforNexusConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required by Infor Nexus.
@@ -867,10 +954,13 @@ type InforNexusConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Infor Nexus.
 type InforNexusMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Infor Nexus is being used as a source.
@@ -880,11 +970,14 @@ type InforNexusSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Amazon Lookout for Metrics is used as a
 // destination.
 type LookoutMetricsDestinationProperties struct {
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required by Marketo.
@@ -907,6 +1000,8 @@ type MarketoConnectorProfileCredentials struct {
 	// The OAuth requirement needed to request security tokens from the connector
 	// endpoint.
 	OAuthRequest *ConnectorOAuthRequest
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Marketo.
@@ -916,10 +1011,13 @@ type MarketoConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Marketo.
 type MarketoMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Marketo is being used as a source.
@@ -929,6 +1027,8 @@ type MarketoSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // Determines the prefix that Amazon AppFlow applies to the destination folder
@@ -942,6 +1042,8 @@ type PrefixConfig struct {
 	// Determines the format of the prefix, and whether it applies to the file name,
 	// file path, or both.
 	PrefixType PrefixType
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using Amazon Redshift.
@@ -956,6 +1058,8 @@ type RedshiftConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties when using Amazon Redshift.
@@ -979,6 +1083,8 @@ type RedshiftConnectorProfileProperties struct {
 	// The object key for the destination bucket in which Amazon AppFlow places the
 	// files.
 	BucketPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Amazon Redshift is being used as a
@@ -1006,10 +1112,13 @@ type RedshiftDestinationProperties struct {
 	// attempt to insert every record regardless of the initial failure.
 	// ErrorHandlingConfig is a part of the destination connector details.
 	ErrorHandlingConfig *ErrorHandlingConfig
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Amazon Redshift.
 type RedshiftMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Amazon S3 is used as a destination.
@@ -1027,10 +1136,13 @@ type S3DestinationProperties struct {
 	// The configuration that determines how Amazon AppFlow should format the flow
 	// output data when Amazon S3 is used as the destination.
 	S3OutputFormatConfig *S3OutputFormatConfig
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Amazon S3.
 type S3Metadata struct {
+	noSmithyDocumentSerde
 }
 
 // The configuration that determines how Amazon AppFlow should format the flow
@@ -1047,6 +1159,8 @@ type S3OutputFormatConfig struct {
 	// Determines the prefix that Amazon AppFlow applies to the folder name in the
 	// Amazon S3 bucket. You can name folders according to the flow frequency and date.
 	PrefixConfig *PrefixConfig
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Amazon S3 is being used as the flow source.
@@ -1059,6 +1173,8 @@ type S3SourceProperties struct {
 
 	// The object key for the Amazon S3 bucket in which the source files are stored.
 	BucketPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using Salesforce.
@@ -1077,6 +1193,8 @@ type SalesforceConnectorProfileCredentials struct {
 
 	// The credentials used to acquire new access tokens.
 	RefreshToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Salesforce.
@@ -1088,6 +1206,8 @@ type SalesforceConnectorProfileProperties struct {
 	// Indicates whether the connector profile applies to a sandbox or production
 	// environment.
 	IsSandboxEnvironment bool
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Salesforce is being used as a destination.
@@ -1112,6 +1232,8 @@ type SalesforceDestinationProperties struct {
 	// This specifies the type of write operation to be performed in Salesforce. When
 	// the value is UPSERT, then idFieldNames is required.
 	WriteOperationType WriteOperationType
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Salesforce.
@@ -1119,6 +1241,8 @@ type SalesforceMetadata struct {
 
 	// The desired authorization scope for the Salesforce account.
 	OAuthScopes []string
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Salesforce is being used as a source.
@@ -1135,6 +1259,8 @@ type SalesforceSourceProperties struct {
 
 	// Indicates whether Amazon AppFlow includes deleted files in the flow run.
 	IncludeDeletedRecords bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration details of a schedule-triggered flow as defined by
@@ -1168,6 +1294,8 @@ type ScheduledTriggerProperties struct {
 	// Specifies the time zone used when referring to the date and time of a
 	// scheduled-triggered flow, such as America/New_York.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using ServiceNow.
@@ -1182,6 +1310,8 @@ type ServiceNowConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using ServiceNow.
@@ -1191,10 +1321,13 @@ type ServiceNowConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to ServiceNow.
 type ServiceNowMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when ServiceNow is being used as a source.
@@ -1204,6 +1337,8 @@ type ServiceNowSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using Singular.
@@ -1214,14 +1349,18 @@ type SingularConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	ApiKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Singular.
 type SingularConnectorProfileProperties struct {
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Singular.
 type SingularMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Singular is being used as a source.
@@ -1231,6 +1370,8 @@ type SingularSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using Slack.
@@ -1253,6 +1394,8 @@ type SlackConnectorProfileCredentials struct {
 	// The OAuth requirement needed to request security tokens from the connector
 	// endpoint.
 	OAuthRequest *ConnectorOAuthRequest
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Slack.
@@ -1262,6 +1405,8 @@ type SlackConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Slack.
@@ -1269,6 +1414,8 @@ type SlackMetadata struct {
 
 	// The desired authorization scope for the Slack account.
 	OAuthScopes []string
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Slack is being used as a source.
@@ -1278,6 +1425,8 @@ type SlackSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using Snowflake.
@@ -1292,6 +1441,8 @@ type SnowflakeConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Snowflake.
@@ -1325,6 +1476,8 @@ type SnowflakeConnectorProfileProperties struct {
 
 	// The AWS Region of the Snowflake account.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Snowflake is being used as a destination.
@@ -1351,6 +1504,8 @@ type SnowflakeDestinationProperties struct {
 	// insert every record regardless of the initial failure. ErrorHandlingConfig is a
 	// part of the destination connector details.
 	ErrorHandlingConfig *ErrorHandlingConfig
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Snowflake.
@@ -1358,6 +1513,8 @@ type SnowflakeMetadata struct {
 
 	// Specifies the supported AWS Regions when using Snowflake.
 	SupportedRegions []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the information that is required to query a particular connector.
@@ -1404,6 +1561,8 @@ type SourceConnectorProperties struct {
 
 	// Specifies the information that is required for querying Zendesk.
 	Zendesk *ZendeskSourceProperties
+
+	noSmithyDocumentSerde
 }
 
 // The properties that can be applied to a field when the connector is being used
@@ -1415,6 +1574,8 @@ type SourceFieldProperties struct {
 
 	// Indicates whether the field can be returned in a search result.
 	IsRetrievable bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the configuration of the source connector used in the
@@ -1440,6 +1601,8 @@ type SourceFlowConfig struct {
 	// configuration is provided, the fields specified in the configuration are used
 	// when querying for the incremental data pull.
 	IncrementalPullConfig *IncrementalPullConfig
+
+	noSmithyDocumentSerde
 }
 
 // Contains details regarding all the supported FieldTypes and their corresponding
@@ -1451,6 +1614,8 @@ type SupportedFieldTypeDetails struct {
 	//
 	// This member is required.
 	V1 *FieldTypeDetails
+
+	noSmithyDocumentSerde
 }
 
 // A class for modeling different type of tasks. Task implementation varies based
@@ -1477,6 +1642,8 @@ type Task struct {
 	// A map used to store task-related information. The execution service looks for
 	// particular information based on the TaskType.
 	TaskProperties map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using Trend Micro.
@@ -1486,14 +1653,18 @@ type TrendmicroConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	ApiSecretKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Trend Micro.
 type TrendmicroConnectorProfileProperties struct {
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Trend Micro.
 type TrendmicroMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when using Trend Micro as a flow source.
@@ -1503,6 +1674,8 @@ type TrendmicroSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The trigger settings that determine how and when Amazon AppFlow runs the
@@ -1517,6 +1690,8 @@ type TriggerConfig struct {
 	// Specifies the configuration details of a schedule-triggered flow as defined by
 	// the user. Currently, these settings only apply to the Scheduled trigger type.
 	TriggerProperties *TriggerProperties
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration details that control the trigger for a flow.
@@ -1526,6 +1701,8 @@ type TriggerProperties struct {
 	// Specifies the configuration details of a schedule-triggered flow as defined by
 	// the user.
 	Scheduled *ScheduledTriggerProperties
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Upsolver is used as a destination.
@@ -1546,10 +1723,13 @@ type UpsolverDestinationProperties struct {
 	// The object key for the destination Upsolver Amazon S3 bucket in which Amazon
 	// AppFlow places the files.
 	BucketPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Upsolver.
 type UpsolverMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The configuration that determines how Amazon AppFlow formats the flow output
@@ -1570,6 +1750,8 @@ type UpsolverS3OutputFormatConfig struct {
 	// Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3
 	// bucket.
 	FileType FileType
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using Veeva.
@@ -1584,6 +1766,8 @@ type VeevaConnectorProfileCredentials struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Veeva.
@@ -1593,10 +1777,13 @@ type VeevaConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Veeva.
 type VeevaMetadata struct {
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when using Veeva as a flow source.
@@ -1606,6 +1793,8 @@ type VeevaSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile credentials required when using Zendesk.
@@ -1628,6 +1817,8 @@ type ZendeskConnectorProfileCredentials struct {
 	// The OAuth requirement needed to request security tokens from the connector
 	// endpoint.
 	OAuthRequest *ConnectorOAuthRequest
+
+	noSmithyDocumentSerde
 }
 
 // The connector-specific profile properties required when using Zendesk.
@@ -1637,6 +1828,8 @@ type ZendeskConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when Zendesk is used as a destination.
@@ -1661,6 +1854,8 @@ type ZendeskDestinationProperties struct {
 	// The possible write operations in the destination connector. When this value is
 	// not provided, this defaults to the INSERT operation.
 	WriteOperationType WriteOperationType
+
+	noSmithyDocumentSerde
 }
 
 // The connector metadata specific to Zendesk.
@@ -1668,6 +1863,8 @@ type ZendeskMetadata struct {
 
 	// The desired authorization scope for the Zendesk account.
 	OAuthScopes []string
+
+	noSmithyDocumentSerde
 }
 
 // The properties that are applied when using Zendesk as a flow source.
@@ -1677,4 +1874,8 @@ type ZendeskSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

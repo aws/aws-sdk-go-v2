@@ -35,6 +35,8 @@ type CreateInputSecurityGroupInput struct {
 
 	// List of IPv4 CIDR addresses to whitelist
 	WhitelistRules []types.InputWhitelistRuleCidr
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for CreateInputSecurityGroupResponse
@@ -45,6 +47,8 @@ type CreateInputSecurityGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

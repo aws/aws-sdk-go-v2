@@ -51,6 +51,8 @@ type CreateTransitGatewayPrefixListReferenceInput struct {
 
 	// The ID of the attachment to which traffic is routed.
 	TransitGatewayAttachmentId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTransitGatewayPrefixListReferenceOutput struct {
@@ -60,6 +62,8 @@ type CreateTransitGatewayPrefixListReferenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTransitGatewayPrefixListReferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

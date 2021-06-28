@@ -37,6 +37,8 @@ type CreateWorkspaceInput struct {
 	// Optional, unique, case-sensitive, user-provided identifier to ensure the
 	// idempotency of the request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateWorkspace operation.
@@ -59,6 +61,8 @@ type CreateWorkspaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

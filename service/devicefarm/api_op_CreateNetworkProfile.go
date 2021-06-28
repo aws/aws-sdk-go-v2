@@ -73,6 +73,8 @@ type CreateNetworkProfileInput struct {
 
 	// Proportion of transmitted packets that fail to arrive from 0 to 100 percent.
 	UplinkLossPercent int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateNetworkProfileOutput struct {
@@ -82,6 +84,8 @@ type CreateNetworkProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

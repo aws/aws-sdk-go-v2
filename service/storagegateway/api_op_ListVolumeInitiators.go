@@ -36,6 +36,8 @@ type ListVolumeInitiatorsInput struct {
 	//
 	// This member is required.
 	VolumeARN *string
+
+	noSmithyDocumentSerde
 }
 
 // ListVolumeInitiatorsOutput
@@ -47,6 +49,8 @@ type ListVolumeInitiatorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVolumeInitiatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

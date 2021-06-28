@@ -55,6 +55,8 @@ type ListUpdatesInput struct {
 
 	// The name of the Amazon EKS managed node group to list updates for.
 	NodegroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListUpdatesOutput struct {
@@ -70,6 +72,8 @@ type ListUpdatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

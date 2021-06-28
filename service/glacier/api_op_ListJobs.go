@@ -90,6 +90,8 @@ type ListJobsInput struct {
 	// The type of job status to return. You can specify the following values:
 	// InProgress, Succeeded, or Failed.
 	Statuscode *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -106,6 +108,8 @@ type ListJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

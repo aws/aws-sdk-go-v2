@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Contains the meta data for query results such as the column names, data types,
 // and other attributes.
 type ColumnInfo struct {
@@ -16,6 +20,8 @@ type ColumnInfo struct {
 	// The name of the result set column. The name of the result set is available for
 	// columns of all data types except for arrays.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Datum represents a single data point in a query result.
@@ -36,6 +42,8 @@ type Datum struct {
 
 	// Indicates if the data point is of timeseries data type.
 	TimeSeriesValue []TimeSeriesDataPoint
+
+	noSmithyDocumentSerde
 }
 
 // Represents an available endpoint against which to make API calls agaisnt, as
@@ -51,6 +59,8 @@ type Endpoint struct {
 	//
 	// This member is required.
 	CachePeriodInMinutes int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about the status of the query, including progress and bytes
@@ -70,6 +80,8 @@ type QueryStatus struct {
 
 	// The progress of the query, expressed as a percentage.
 	ProgressPercentage float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single row in the query results.
@@ -79,6 +91,8 @@ type Row struct {
 	//
 	// This member is required.
 	Data []Datum
+
+	noSmithyDocumentSerde
 }
 
 // The timeseries datatype represents the values of a measure over time. A time
@@ -96,6 +110,8 @@ type TimeSeriesDataPoint struct {
 	//
 	// This member is required.
 	Value *Datum
+
+	noSmithyDocumentSerde
 }
 
 // Contains the data type of a column in a query result set. The data type can be
@@ -116,4 +132,8 @@ type Type struct {
 
 	// Indicates if the column is a timeseries data type.
 	TimeSeriesMeasureValueColumnInfo *ColumnInfo
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

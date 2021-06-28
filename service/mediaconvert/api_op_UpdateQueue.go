@@ -48,6 +48,8 @@ type UpdateQueueInput struct {
 	// you pause a queue, jobs in that queue won't begin. Jobs that are running when
 	// you pause the queue continue to run until they finish or result in an error.
 	Status types.QueueStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQueueOutput struct {
@@ -61,6 +63,8 @@ type UpdateQueueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

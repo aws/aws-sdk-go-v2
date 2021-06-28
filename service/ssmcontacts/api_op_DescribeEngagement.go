@@ -35,6 +35,8 @@ type DescribeEngagementInput struct {
 	//
 	// This member is required.
 	EngagementId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEngagementOutput struct {
@@ -85,6 +87,8 @@ type DescribeEngagementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {

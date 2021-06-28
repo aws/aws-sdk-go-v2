@@ -75,6 +75,8 @@ type StartDocumentTextDetectionInput struct {
 	// Textract will save the results internally to be accessed with the
 	// GetDocumentTextDetection operation.
 	OutputConfig *types.OutputConfig
+
+	noSmithyDocumentSerde
 }
 
 type StartDocumentTextDetectionOutput struct {
@@ -86,6 +88,8 @@ type StartDocumentTextDetectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDocumentTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

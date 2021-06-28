@@ -44,6 +44,8 @@ type AddLFTagsToResourceInput struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type AddLFTagsToResourceOutput struct {
@@ -53,6 +55,8 @@ type AddLFTagsToResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddLFTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

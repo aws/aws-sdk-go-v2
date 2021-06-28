@@ -55,6 +55,8 @@ type DescribeRemediationExceptionsInput struct {
 	// request. AWS Config adds exception for each resource key. For example, AWS
 	// Config adds 3 exceptions for 3 resource keys.
 	ResourceKeys []types.RemediationExceptionResourceKey
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRemediationExceptionsOutput struct {
@@ -68,6 +70,8 @@ type DescribeRemediationExceptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -30,6 +31,8 @@ type DatasetDescription struct {
 
 	// The status message for the dataset.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Location information about a manifest file. You can use a manifest file to
@@ -38,6 +41,8 @@ type DatasetGroundTruthManifest struct {
 
 	// The S3 bucket location for the manifest file.
 	S3Object *InputS3Object
+
+	noSmithyDocumentSerde
 }
 
 // Statistics about the images in a dataset.
@@ -54,6 +59,8 @@ type DatasetImageStats struct {
 
 	// The total number of images in the dataset.
 	Total *int32
+
+	noSmithyDocumentSerde
 }
 
 // Sumary information for an Amazon Lookout for Vision dataset.
@@ -70,6 +77,8 @@ type DatasetMetadata struct {
 
 	// The status message for the dataset.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the location of a manifest file that Amazon Lookout for Vision
@@ -78,6 +87,8 @@ type DatasetSource struct {
 
 	// Location information for the manifest file.
 	GroundTruthManifest *DatasetGroundTruthManifest
+
+	noSmithyDocumentSerde
 }
 
 // The prediction results from a call to DetectAnomalies.
@@ -93,6 +104,8 @@ type DetectAnomalyResult struct {
 	// The source of the image that was analyzed. direct means that the images was
 	// supplied from the local computer. No other values are supported.
 	Source *ImageSource
+
+	noSmithyDocumentSerde
 }
 
 // The source for an image.
@@ -100,6 +113,8 @@ type ImageSource struct {
 
 	// The type of the image.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Amazon S3 Location information for an input manifest file.
@@ -117,6 +132,8 @@ type InputS3Object struct {
 
 	// The version ID of the bucket.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Lookout for Vision model.
@@ -159,6 +176,8 @@ type ModelDescription struct {
 
 	// The status message for the model.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Lookout for Vision model.
@@ -185,6 +204,8 @@ type ModelMetadata struct {
 
 	// The status message for the model.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the evaluation performance of a trained model.
@@ -198,6 +219,8 @@ type ModelPerformance struct {
 
 	// The overall recall metric value for the trained model.
 	Recall *float32
+
+	noSmithyDocumentSerde
 }
 
 // The S3 location where Amazon Lookout for Vision saves model training files.
@@ -207,6 +230,8 @@ type OutputConfig struct {
 	//
 	// This member is required.
 	S3Location *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // The S3 location where Amazon Lookout for Vision saves training output.
@@ -221,6 +246,8 @@ type OutputS3Object struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Describe an Amazon Lookout for Vision project. For more information, see
@@ -238,6 +265,8 @@ type ProjectDescription struct {
 
 	// The name of the project.
 	ProjectName *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata about an Amazon Lookout for Vision project.
@@ -251,6 +280,8 @@ type ProjectMetadata struct {
 
 	// The name of the project.
 	ProjectName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the location training output.
@@ -263,6 +294,8 @@ type S3Location struct {
 
 	// The path of the folder, within the S3 bucket, that contains the training output.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // A key and value pair that is attached to the specified Amazon Lookout for Vision
@@ -278,4 +311,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

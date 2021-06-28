@@ -76,6 +76,8 @@ type CreateLedgerInput struct {
 	// The key-value pairs to add as tags to the ledger that you want to create. Tag
 	// keys are case sensitive. Tag values are case sensitive and can be null.
 	Tags map[string]*string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLedgerOutput struct {
@@ -106,6 +108,8 @@ type CreateLedgerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {

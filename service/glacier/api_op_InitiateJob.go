@@ -50,6 +50,8 @@ type InitiateJobInput struct {
 
 	// Provides options for specifying job information.
 	JobParameters *types.JobParameters
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -66,6 +68,8 @@ type InitiateJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInitiateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

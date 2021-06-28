@@ -136,6 +136,8 @@ type CreateDatasetImportJobInput struct {
 	// option is ideal for datasets that contain timestamps in multiple time zones and
 	// those timestamps are expressed in local time.
 	UseGeolocationForTimeZone bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetImportJobOutput struct {
@@ -145,6 +147,8 @@ type CreateDatasetImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

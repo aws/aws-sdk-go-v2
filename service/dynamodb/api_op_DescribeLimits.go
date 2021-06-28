@@ -83,6 +83,7 @@ func (c *Client) DescribeLimits(ctx context.Context, params *DescribeLimitsInput
 
 // Represents the input of a DescribeLimits operation. Has no content.
 type DescribeLimitsInput struct {
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeLimits operation.
@@ -108,6 +109,8 @@ type DescribeLimitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

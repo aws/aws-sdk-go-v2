@@ -89,6 +89,8 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// accounts are not included in the export if this parameter, or the account IDs
 	// parameter, is omitted.
 	IncludeMemberAccounts bool
+
+	noSmithyDocumentSerde
 }
 
 type ExportAutoScalingGroupRecommendationsOutput struct {
@@ -104,6 +106,8 @@ type ExportAutoScalingGroupRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportAutoScalingGroupRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

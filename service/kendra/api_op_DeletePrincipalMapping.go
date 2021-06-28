@@ -69,11 +69,15 @@ type DeletePrincipalMappingInput struct {
 	// processed. The default ordering ID is the current UNIX time in milliseconds that
 	// the action was received by Amazon Kendra.
 	OrderingId *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeletePrincipalMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePrincipalMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

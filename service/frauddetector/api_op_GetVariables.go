@@ -43,6 +43,8 @@ type GetVariablesInput struct {
 
 	// The next page token of the get variable request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetVariablesOutput struct {
@@ -55,6 +57,8 @@ type GetVariablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetVariablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

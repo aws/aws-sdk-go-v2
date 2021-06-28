@@ -49,6 +49,8 @@ type ListMembersInput struct {
 	// Specifies whether to only return associated members or to return all members
 	// (including members who haven't been invited yet or have been disassociated).
 	OnlyAssociated *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMembersOutput struct {
@@ -62,6 +64,8 @@ type ListMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

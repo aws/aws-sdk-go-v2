@@ -57,6 +57,8 @@ type UpdateMissionProfileInput struct {
 
 	// ARN of a tracking Config.
 	TrackingConfigArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -67,6 +69,8 @@ type UpdateMissionProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type DescribeTunnelInput struct {
 	//
 	// This member is required.
 	TunnelId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTunnelOutput struct {
@@ -42,6 +44,8 @@ type DescribeTunnelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {

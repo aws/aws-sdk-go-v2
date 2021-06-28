@@ -33,6 +33,8 @@ type GetSubscriptionAttributesInput struct {
 	//
 	// This member is required.
 	SubscriptionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Response for GetSubscriptionAttributes action.
@@ -102,6 +104,8 @@ type GetSubscriptionAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSubscriptionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

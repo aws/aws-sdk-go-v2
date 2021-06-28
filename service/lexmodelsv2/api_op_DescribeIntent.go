@@ -51,6 +51,8 @@ type DescribeIntentInput struct {
 	//
 	// This member is required.
 	LocaleId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeIntentOutput struct {
@@ -114,6 +116,8 @@ type DescribeIntentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {

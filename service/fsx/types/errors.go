@@ -13,6 +13,8 @@ type ActiveDirectoryError struct {
 
 	ActiveDirectoryId *string
 	Type              ActiveDirectoryErrorType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActiveDirectoryError) Error() string {
@@ -32,6 +34,8 @@ type BackupBeingCopied struct {
 	Message *string
 
 	BackupId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BackupBeingCopied) Error() string {
@@ -50,6 +54,8 @@ func (e *BackupBeingCopied) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // additional backups of this file system.
 type BackupInProgress struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BackupInProgress) Error() string {
@@ -67,6 +73,8 @@ func (e *BackupInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // No Amazon FSx backups were found based upon the supplied parameters.
 type BackupNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BackupNotFound) Error() string {
@@ -86,6 +94,8 @@ type BackupRestoring struct {
 	Message *string
 
 	FileSystemId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BackupRestoring) Error() string {
@@ -103,6 +113,8 @@ func (e *BackupRestoring) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // A generic error indicating a failure with a client request.
 type BadRequest struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequest) Error() string {
@@ -121,6 +133,8 @@ func (e *BadRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient 
 // ended.
 type DataRepositoryTaskEnded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DataRepositoryTaskEnded) Error() string {
@@ -139,6 +153,8 @@ func (e *DataRepositoryTaskEnded) ErrorFault() smithy.ErrorFault { return smithy
 // until the existing task has completed, then create the new task.
 type DataRepositoryTaskExecuting struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DataRepositoryTaskExecuting) Error() string {
@@ -156,6 +172,8 @@ func (e *DataRepositoryTaskExecuting) ErrorFault() smithy.ErrorFault { return sm
 // The data repository task or tasks you specified could not be found.
 type DataRepositoryTaskNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DataRepositoryTaskNotFound) Error() string {
@@ -173,6 +191,8 @@ func (e *DataRepositoryTaskNotFound) ErrorFault() smithy.ErrorFault { return smi
 // No Amazon FSx file systems were found based upon supplied parameters.
 type FileSystemNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileSystemNotFound) Error() string {
@@ -194,6 +214,8 @@ type IncompatibleParameterError struct {
 	Message *string
 
 	Parameter *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncompatibleParameterError) Error() string {
@@ -212,6 +234,8 @@ func (e *IncompatibleParameterError) ErrorFault() smithy.ErrorFault { return smi
 // destination Region, so the copied backup can't be restored.
 type IncompatibleRegionForMultiAZ struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncompatibleRegionForMultiAZ) Error() string {
@@ -229,6 +253,8 @@ func (e *IncompatibleRegionForMultiAZ) ErrorFault() smithy.ErrorFault { return s
 // A generic error indicating a server-side failure.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -247,6 +273,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // invalid.
 type InvalidDestinationKmsKey struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDestinationKmsKey) Error() string {
@@ -264,6 +292,8 @@ func (e *InvalidDestinationKmsKey) ErrorFault() smithy.ErrorFault { return smith
 // The path provided for data repository export isn't valid.
 type InvalidExportPath struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidExportPath) Error() string {
@@ -281,6 +311,8 @@ func (e *InvalidExportPath) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The path provided for data repository import isn't valid.
 type InvalidImportPath struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidImportPath) Error() string {
@@ -305,6 +337,8 @@ type InvalidNetworkSettings struct {
 
 	InvalidSubnetId        *string
 	InvalidSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNetworkSettings) Error() string {
@@ -323,6 +357,8 @@ func (e *InvalidNetworkSettings) ErrorFault() smithy.ErrorFault { return smithy.
 // file system again, using a valid value.
 type InvalidPerUnitStorageThroughput struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPerUnitStorageThroughput) Error() string {
@@ -343,6 +379,8 @@ func (e *InvalidPerUnitStorageThroughput) ErrorFault() smithy.ErrorFault { retur
 // partition.
 type InvalidRegion struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRegion) Error() string {
@@ -360,6 +398,8 @@ func (e *InvalidRegion) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The AWS Key Management Service (AWS KMS) key of the source backup is invalid.
 type InvalidSourceKmsKey struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSourceKmsKey) Error() string {
@@ -377,6 +417,8 @@ func (e *InvalidSourceKmsKey) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // A file system configuration is required for this operation.
 type MissingFileSystemConfiguration struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingFileSystemConfiguration) Error() string {
@@ -397,6 +439,8 @@ type NotServiceResourceError struct {
 	Message *string
 
 	ResourceARN *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotServiceResourceError) Error() string {
@@ -416,6 +460,8 @@ type ResourceDoesNotSupportTagging struct {
 	Message *string
 
 	ResourceARN *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceDoesNotSupportTagging) Error() string {
@@ -435,6 +481,8 @@ type ResourceNotFound struct {
 	Message *string
 
 	ResourceARN *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFound) Error() string {
@@ -455,6 +503,8 @@ type ServiceLimitExceeded struct {
 	Message *string
 
 	Limit ServiceLimit
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceLimitExceeded) Error() string {
@@ -475,6 +525,8 @@ type SourceBackupUnavailable struct {
 	Message *string
 
 	BackupId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SourceBackupUnavailable) Error() string {
@@ -492,6 +544,8 @@ func (e *SourceBackupUnavailable) ErrorFault() smithy.ErrorFault { return smithy
 // The requested operation is not supported for this resource or API.
 type UnsupportedOperation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperation) Error() string {

@@ -34,6 +34,8 @@ type DeleteLagInput struct {
 	//
 	// This member is required.
 	LagId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a link aggregation group (LAG).
@@ -132,6 +134,8 @@ type DeleteLagOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLagMiddlewares(stack *middleware.Stack, options Options) (err error) {

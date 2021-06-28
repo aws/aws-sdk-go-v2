@@ -37,6 +37,8 @@ type ListDataflowEndpointGroupsInput struct {
 	// Next token returned in the request of a previous ListDataflowEndpointGroups
 	// call. Used to get the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -51,6 +53,8 @@ type ListDataflowEndpointGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDataflowEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

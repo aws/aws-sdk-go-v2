@@ -39,6 +39,8 @@ type DescribeLifecycleConfigurationInput struct {
 	//
 	// This member is required.
 	FileSystemId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLifecycleConfigurationOutput struct {
@@ -49,6 +51,8 @@ type DescribeLifecycleConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

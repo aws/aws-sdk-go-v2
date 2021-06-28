@@ -50,6 +50,8 @@ type CreateConfigurationSetEventDestinationInput struct {
 	//
 	// This member is required.
 	EventDestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -57,6 +59,8 @@ type CreateConfigurationSetEventDestinationInput struct {
 type CreateConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

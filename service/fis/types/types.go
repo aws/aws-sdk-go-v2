@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -25,6 +26,8 @@ type Action struct {
 
 	// The supported targets for the action.
 	Targets map[string]ActionTarget
+
+	noSmithyDocumentSerde
 }
 
 // Describes a parameter for an action.
@@ -35,6 +38,8 @@ type ActionParameter struct {
 
 	// Indicates whether the parameter is required.
 	Required bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of an action.
@@ -51,6 +56,8 @@ type ActionSummary struct {
 
 	// The targets for the action.
 	Targets map[string]ActionTarget
+
+	noSmithyDocumentSerde
 }
 
 // Describes a target for an action.
@@ -58,6 +65,8 @@ type ActionTarget struct {
 
 	// The resource type of the target.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an action for an experiment template.
@@ -80,6 +89,8 @@ type CreateExperimentTemplateActionInput struct {
 
 	// The targets for the action.
 	Targets map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a stop condition for an experiment template.
@@ -95,6 +106,8 @@ type CreateExperimentTemplateStopConditionInput struct {
 	// The Amazon Resource Name (ARN) of the CloudWatch alarm. This is required if the
 	// source is a CloudWatch alarm.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a target for an experiment. You must specify at least one Amazon
@@ -134,6 +147,8 @@ type CreateExperimentTemplateTargetInput struct {
 
 	// The tags for the target resources.
 	ResourceTags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an experiment.
@@ -172,6 +187,8 @@ type Experiment struct {
 
 	// The targets for the experiment.
 	Targets map[string]ExperimentTarget
+
+	noSmithyDocumentSerde
 }
 
 // Describes the action for an experiment.
@@ -194,6 +211,8 @@ type ExperimentAction struct {
 
 	// The targets for the action.
 	Targets map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the state of an action.
@@ -204,6 +223,8 @@ type ExperimentActionState struct {
 
 	// The state of the action.
 	Status ExperimentActionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes the state of an experiment.
@@ -214,6 +235,8 @@ type ExperimentState struct {
 
 	// The state of the experiment.
 	Status ExperimentStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes the stop condition for an experiment.
@@ -224,6 +247,8 @@ type ExperimentStopCondition struct {
 
 	// The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of an experiment.
@@ -243,6 +268,8 @@ type ExperimentSummary struct {
 
 	// The tags for the experiment.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a target for an experiment.
@@ -262,6 +289,8 @@ type ExperimentTarget struct {
 
 	// Scopes the identified resources to a specific count or percentage.
 	SelectionMode *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter used for the target resources in an experiment.
@@ -272,6 +301,8 @@ type ExperimentTargetFilter struct {
 
 	// The attribute values for the filter.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an experiment template.
@@ -303,6 +334,8 @@ type ExperimentTemplate struct {
 
 	// The targets for the experiment.
 	Targets map[string]ExperimentTemplateTarget
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action for an experiment template.
@@ -322,6 +355,8 @@ type ExperimentTemplateAction struct {
 
 	// The targets for the action.
 	Targets map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a stop condition for an experiment template.
@@ -332,6 +367,8 @@ type ExperimentTemplateStopCondition struct {
 
 	// The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of an experiment template.
@@ -351,6 +388,8 @@ type ExperimentTemplateSummary struct {
 
 	// The tags for the experiment template.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a target for an experiment template.
@@ -370,6 +409,8 @@ type ExperimentTemplateTarget struct {
 
 	// Scopes the identified resources to a specific count or percentage.
 	SelectionMode *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter used for the target resources in an experiment template.
@@ -380,6 +421,8 @@ type ExperimentTemplateTargetFilter struct {
 
 	// The attribute values for the filter.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter used for the target resource input in an experiment template.
@@ -394,6 +437,8 @@ type ExperimentTemplateTargetInputFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an action for an experiment template.
@@ -414,6 +459,8 @@ type UpdateExperimentTemplateActionInputItem struct {
 
 	// The targets for the action.
 	Targets map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a stop condition for an experiment. You can define a stop condition as
@@ -429,6 +476,8 @@ type UpdateExperimentTemplateStopConditionInput struct {
 
 	// The Amazon Resource Name (ARN) of the CloudWatch alarm.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a target for an experiment. You must specify at least one Amazon
@@ -454,4 +503,8 @@ type UpdateExperimentTemplateTargetInput struct {
 
 	// The tags for the target resources.
 	ResourceTags map[string]string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

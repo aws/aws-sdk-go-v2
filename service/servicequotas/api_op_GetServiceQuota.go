@@ -40,6 +40,8 @@ type GetServiceQuotaInput struct {
 	//
 	// This member is required.
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
 
 type GetServiceQuotaOutput struct {
@@ -49,6 +51,8 @@ type GetServiceQuotaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {

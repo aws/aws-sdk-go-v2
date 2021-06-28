@@ -73,6 +73,8 @@ type ListTypeVersionsInput struct {
 	// The name of the extension for which you want version summary information.
 	// Conditional: You must specify either TypeName and Type, or Arn.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTypeVersionsOutput struct {
@@ -89,6 +91,8 @@ type ListTypeVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTypeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

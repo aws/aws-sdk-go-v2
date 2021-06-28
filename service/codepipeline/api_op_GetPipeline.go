@@ -41,6 +41,8 @@ type GetPipelineInput struct {
 	// The version number of the pipeline. If you do not specify a version, defaults to
 	// the current version.
 	Version *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetPipeline action.
@@ -55,6 +57,8 @@ type GetPipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

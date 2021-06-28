@@ -54,11 +54,15 @@ type CreateDeviceFleetInput struct {
 
 	// Creates tags for the specified fleet.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeviceFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeviceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

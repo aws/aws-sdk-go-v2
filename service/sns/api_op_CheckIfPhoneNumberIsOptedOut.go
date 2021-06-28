@@ -36,6 +36,8 @@ type CheckIfPhoneNumberIsOptedOutInput struct {
 	//
 	// This member is required.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // The response from the CheckIfPhoneNumberIsOptedOut action.
@@ -52,6 +54,8 @@ type CheckIfPhoneNumberIsOptedOutOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCheckIfPhoneNumberIsOptedOutMiddlewares(stack *middleware.Stack, options Options) (err error) {

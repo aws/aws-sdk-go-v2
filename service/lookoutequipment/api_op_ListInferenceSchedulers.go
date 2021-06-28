@@ -43,6 +43,8 @@ type ListInferenceSchedulersInput struct {
 	// An opaque pagination token indicating where to continue the listing of inference
 	// schedulers.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListInferenceSchedulersOutput struct {
@@ -57,6 +59,8 @@ type ListInferenceSchedulersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInferenceSchedulersMiddlewares(stack *middleware.Stack, options Options) (err error) {

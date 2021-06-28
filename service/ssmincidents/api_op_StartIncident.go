@@ -70,6 +70,8 @@ type StartIncidentInput struct {
 
 	// Details of what created the incident record in Incident Manager.
 	TriggerDetails *types.TriggerDetails
+
+	noSmithyDocumentSerde
 }
 
 type StartIncidentOutput struct {
@@ -81,6 +83,8 @@ type StartIncidentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartIncidentMiddlewares(stack *middleware.Stack, options Options) (err error) {

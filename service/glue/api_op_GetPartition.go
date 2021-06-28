@@ -47,6 +47,8 @@ type GetPartitionInput struct {
 	// The ID of the Data Catalog where the partition in question resides. If none is
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPartitionOutput struct {
@@ -56,6 +58,8 @@ type GetPartitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

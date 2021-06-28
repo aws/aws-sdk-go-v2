@@ -75,6 +75,8 @@ type CreateDataRepositoryTaskInput struct {
 
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDataRepositoryTaskOutput struct {
@@ -84,6 +86,8 @@ type CreateDataRepositoryTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListKeyGroupsInput struct {
 
 	// The maximum number of key groups that you want in the response.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListKeyGroupsOutput struct {
@@ -51,6 +53,8 @@ type ListKeyGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListKeyGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

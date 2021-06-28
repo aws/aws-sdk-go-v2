@@ -43,6 +43,8 @@ type GetResolverInput struct {
 	//
 	// This member is required.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResolverOutput struct {
@@ -52,6 +54,8 @@ type GetResolverOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {

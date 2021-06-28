@@ -99,6 +99,8 @@ type CreateDeploymentInput struct {
 	// Indicates whether to deploy to all instances or only to instances that are not
 	// running the latest application revision.
 	UpdateOutdatedInstancesOnly bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateDeployment operation.
@@ -109,6 +111,8 @@ type CreateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

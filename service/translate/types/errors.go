@@ -11,6 +11,8 @@ import (
 // can make your change.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -30,6 +32,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // There was a conflict processing the request. Try your request again.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -54,6 +58,8 @@ type DetectedLanguageLowConfidenceException struct {
 	Message *string
 
 	DetectedLanguageCode *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DetectedLanguageLowConfidenceException) Error() string {
@@ -75,6 +81,8 @@ func (e *DetectedLanguageLowConfidenceException) ErrorFault() smithy.ErrorFault 
 // An internal server error occurred. Retry your request.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -92,6 +100,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // The filter specified for the operation is invalid. Specify a different filter.
 type InvalidFilterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFilterException) Error() string {
@@ -110,6 +120,8 @@ func (e *InvalidFilterException) ErrorFault() smithy.ErrorFault { return smithy.
 // using to correct it, and then retry your operation.
 type InvalidParameterValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -128,6 +140,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // invalid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -146,6 +160,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // quantity below the stated limit.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -165,6 +181,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // retrying the revised request.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -183,6 +201,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // then retry your request.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -201,6 +221,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // the text or use a smaller document and then retry your request.
 type TextSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TextSizeLimitExceededException) Error() string {
@@ -219,6 +241,8 @@ func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // time and then try your request again.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -241,6 +265,8 @@ type UnsupportedLanguagePairException struct {
 
 	SourceLanguageCode *string
 	TargetLanguageCode *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedLanguagePairException) Error() string {

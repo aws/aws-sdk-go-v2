@@ -50,12 +50,16 @@ type UpdateNotificationInput struct {
 	//
 	// This member is required.
 	OldNotification *types.Notification
+
+	noSmithyDocumentSerde
 }
 
 // Response of UpdateNotification
 type UpdateNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {

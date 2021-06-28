@@ -10,6 +10,8 @@ import (
 // The specified resource is a duplicate.
 type DuplicateResourceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateResourceException) Error() string {
@@ -27,6 +29,8 @@ func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smi
 // One or more parameters provided to the operation are not valid.
 type InvalidParametersException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParametersException) Error() string {
@@ -46,6 +50,8 @@ func (e *InvalidParametersException) ErrorFault() smithy.ErrorFault { return smi
 // operation.
 type InvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStateException) Error() string {
@@ -65,6 +71,8 @@ func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.F
 // operation.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -82,6 +90,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The operation is not supported.
 type OperationNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotSupportedException) Error() string {
@@ -100,6 +110,8 @@ func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return
 // retry the operation.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -117,6 +129,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -136,6 +150,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // perform the migration process before retrying the operation.
 type TagOptionNotMigratedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagOptionNotMigratedException) Error() string {

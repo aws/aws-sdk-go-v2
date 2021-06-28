@@ -43,6 +43,8 @@ type ListUsersInput struct {
 	// parameter is returned in the output. You can then pass in a subsequent command
 	// to the NextToken parameter to continue listing additional users.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListUsersOutput struct {
@@ -65,6 +67,8 @@ type ListUsersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {

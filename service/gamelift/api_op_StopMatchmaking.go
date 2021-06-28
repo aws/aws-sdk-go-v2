@@ -46,11 +46,15 @@ type StopMatchmakingInput struct {
 	//
 	// This member is required.
 	TicketId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopMatchmakingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopMatchmakingMiddlewares(stack *middleware.Stack, options Options) (err error) {

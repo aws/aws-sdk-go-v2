@@ -52,6 +52,8 @@ type ListCustomRoutingPortMappingsByDestinationInput struct {
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListCustomRoutingPortMappingsByDestinationOutput struct {
@@ -65,6 +67,8 @@ type ListCustomRoutingPortMappingsByDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCustomRoutingPortMappingsByDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

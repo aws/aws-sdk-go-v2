@@ -75,6 +75,8 @@ type DescribeHsmClientCertificatesInput struct {
 	// request, Amazon Redshift returns a response with the HSM client certificates
 	// that have either or both of these tag values associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -93,6 +95,8 @@ type DescribeHsmClientCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHsmClientCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

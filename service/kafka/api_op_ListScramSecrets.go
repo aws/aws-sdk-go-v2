@@ -39,6 +39,8 @@ type ListScramSecretsInput struct {
 
 	// The nextToken of the query.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListScramSecretsOutput struct {
@@ -51,6 +53,8 @@ type ListScramSecretsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListScramSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {

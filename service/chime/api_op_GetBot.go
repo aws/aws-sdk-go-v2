@@ -39,6 +39,8 @@ type GetBotInput struct {
 	//
 	// This member is required.
 	BotId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBotOutput struct {
@@ -48,6 +50,8 @@ type GetBotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type CreateProvisioningClaimInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateProvisioningClaimOutput struct {
@@ -52,6 +54,8 @@ type CreateProvisioningClaimOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProvisioningClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -68,11 +68,15 @@ type CreateLogGroupInput struct {
 
 	// The key-value pairs to use for the tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLogGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLogGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

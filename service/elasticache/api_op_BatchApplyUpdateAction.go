@@ -41,6 +41,8 @@ type BatchApplyUpdateActionInput struct {
 
 	// The replication group IDs
 	ReplicationGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchApplyUpdateActionOutput struct {
@@ -53,6 +55,8 @@ type BatchApplyUpdateActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchApplyUpdateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

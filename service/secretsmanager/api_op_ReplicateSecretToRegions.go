@@ -43,6 +43,8 @@ type ReplicateSecretToRegionsInput struct {
 	// (Optional) If set, Secrets Manager replication overwrites a secret with the same
 	// name in the destination region.
 	ForceOverwriteReplicaSecret bool
+
+	noSmithyDocumentSerde
 }
 
 type ReplicateSecretToRegionsOutput struct {
@@ -57,6 +59,8 @@ type ReplicateSecretToRegionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReplicateSecretToRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

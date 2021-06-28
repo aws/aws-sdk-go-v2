@@ -60,6 +60,8 @@ type DescribeNetworkInterfacePermissionsInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output for DescribeNetworkInterfacePermissions.
@@ -73,6 +75,8 @@ type DescribeNetworkInterfacePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNetworkInterfacePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

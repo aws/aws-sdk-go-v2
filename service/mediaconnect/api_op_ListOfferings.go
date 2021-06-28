@@ -48,6 +48,8 @@ type ListOfferingsInput struct {
 	// see the next batch of results, you can submit the ListOfferings request a second
 	// time and specify the NextToken value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListOfferingsOutput struct {
@@ -65,6 +67,8 @@ type ListOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

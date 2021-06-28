@@ -50,11 +50,15 @@ type DeleteFunctionEventInvokeConfigInput struct {
 
 	// A version number or alias name.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFunctionEventInvokeConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

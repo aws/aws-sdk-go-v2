@@ -39,6 +39,8 @@ type ReadJobInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The ReadJobResponse structure.
@@ -49,6 +51,8 @@ type ReadJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReadJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type ListPermissionsInput struct {
 	// Specifies the resource type for which to list permissions. For example, to list
 	// only permissions that apply to EC2 subnets, specify ec2:Subnet.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPermissionsOutput struct {
@@ -53,6 +55,8 @@ type ListPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

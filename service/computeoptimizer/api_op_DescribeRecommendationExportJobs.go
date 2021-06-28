@@ -49,6 +49,8 @@ type DescribeRecommendationExportJobsInput struct {
 
 	// The token to advance to the next page of export jobs.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRecommendationExportJobsOutput struct {
@@ -62,6 +64,8 @@ type DescribeRecommendationExportJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRecommendationExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

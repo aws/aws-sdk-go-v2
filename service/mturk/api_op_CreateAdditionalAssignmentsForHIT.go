@@ -58,11 +58,15 @@ type CreateAdditionalAssignmentsForHITInput struct {
 	// using the same UniqueRequestToken, subsequent calls will return an error with a
 	// message containing the request ID.
 	UniqueRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAdditionalAssignmentsForHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAdditionalAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {

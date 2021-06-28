@@ -39,6 +39,8 @@ type CancelImageCreationInput struct {
 	//
 	// This member is required.
 	ImageBuildVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelImageCreationOutput struct {
@@ -54,6 +56,8 @@ type CancelImageCreationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelImageCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type DescribeBackupPolicyInput struct {
 	//
 	// This member is required.
 	FileSystemId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBackupPolicyOutput struct {
@@ -43,6 +45,8 @@ type DescribeBackupPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBackupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

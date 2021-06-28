@@ -52,6 +52,8 @@ type ListBuildBatchesForProjectInput struct {
 	// *
 	// DESCENDING: List the batch build identifiers in descending order by identifier.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type ListBuildBatchesForProjectOutput struct {
@@ -65,6 +67,8 @@ type ListBuildBatchesForProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBuildBatchesForProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

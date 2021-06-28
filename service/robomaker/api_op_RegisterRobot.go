@@ -37,6 +37,8 @@ type RegisterRobotInput struct {
 	//
 	// This member is required.
 	Robot *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterRobotOutput struct {
@@ -49,6 +51,8 @@ type RegisterRobotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterRobotMiddlewares(stack *middleware.Stack, options Options) (err error) {

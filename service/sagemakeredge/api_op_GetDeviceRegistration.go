@@ -37,6 +37,8 @@ type GetDeviceRegistrationInput struct {
 	//
 	// This member is required.
 	DeviceName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDeviceRegistrationOutput struct {
@@ -50,6 +52,8 @@ type GetDeviceRegistrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeviceRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

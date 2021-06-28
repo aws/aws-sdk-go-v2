@@ -32,11 +32,15 @@ type DeleteApplicationsInput struct {
 	//
 	// This member is required.
 	ConfigurationIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

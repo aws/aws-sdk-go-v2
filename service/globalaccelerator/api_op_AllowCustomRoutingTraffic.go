@@ -67,11 +67,15 @@ type AllowCustomRoutingTrafficInput struct {
 	// A list of specific Amazon EC2 instance ports (destination ports) that you want
 	// to allow to receive traffic.
 	DestinationPorts []int32
+
+	noSmithyDocumentSerde
 }
 
 type AllowCustomRoutingTrafficOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAllowCustomRoutingTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {

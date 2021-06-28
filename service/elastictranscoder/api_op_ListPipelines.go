@@ -40,6 +40,8 @@ type ListPipelinesInput struct {
 	// When Elastic Transcoder returns more than one page of results, use pageToken in
 	// subsequent GET requests to get each successive page of results.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of the pipelines associated with the current AWS account.
@@ -55,6 +57,8 @@ type ListPipelinesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {

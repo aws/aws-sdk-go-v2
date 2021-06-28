@@ -43,6 +43,8 @@ type RegisterClientInput struct {
 	// The list of scopes that are defined by the client. Upon authorization, this list
 	// is used to restrict permissions when granting an access token.
 	Scopes []string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterClientOutput struct {
@@ -69,6 +71,8 @@ type RegisterClientOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

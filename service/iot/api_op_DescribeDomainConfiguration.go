@@ -34,6 +34,8 @@ type DescribeDomainConfigurationInput struct {
 	//
 	// This member is required.
 	DomainConfigurationName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDomainConfigurationOutput struct {
@@ -68,6 +70,8 @@ type DescribeDomainConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

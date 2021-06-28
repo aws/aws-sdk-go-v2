@@ -44,11 +44,15 @@ type UpdateUserPhoneConfigInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserPhoneConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserPhoneConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

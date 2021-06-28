@@ -45,6 +45,8 @@ type UpdateHttpNamespaceInput struct {
 	// operation twice. UpdaterRequestId can be any unique string (for example, a
 	// date/timestamp).
 	UpdaterRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateHttpNamespaceOutput struct {
@@ -56,6 +58,8 @@ type UpdateHttpNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateHttpNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

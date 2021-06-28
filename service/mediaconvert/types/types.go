@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -61,6 +62,8 @@ type AacSettings struct {
 
 	// VBR Quality Level - Only used if rate_control_mode is VBR.
 	VbrQuality AacVbrQuality
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -126,6 +129,8 @@ type Ac3Settings struct {
 
 	// This value is always 48000. It represents the sample rate in Hz.
 	SampleRate int32
+
+	noSmithyDocumentSerde
 }
 
 // Accelerated transcoding can significantly speed up jobs with long, visually
@@ -137,6 +142,8 @@ type AccelerationSettings struct {
 	//
 	// This member is required.
 	Mode AccelerationMode
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -153,6 +160,8 @@ type AiffSettings struct {
 
 	// Sample rate in hz.
 	SampleRate int32
+
+	noSmithyDocumentSerde
 }
 
 // Settings for ancillary captions source.
@@ -173,6 +182,8 @@ type AncillarySourceSettings struct {
 	// input. If you want the caption to continue onto your next input, disable this
 	// setting.
 	TerminateCaptions AncillaryTerminateCaptions
+
+	noSmithyDocumentSerde
 }
 
 // When you mimic a multi-channel audio layout with multiple mono-channel tracks,
@@ -188,6 +199,8 @@ type AudioChannelTaggingSettings struct {
 	// multi-channel layout. For example, if this track is the left surround channel,
 	// choose Left surround (LS).
 	ChannelTag AudioChannelTag
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to audio encoding. The settings in this group vary depending on
@@ -251,6 +264,8 @@ type AudioCodecSettings struct {
 	// Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
 	// value WAV.
 	WavSettings *WavSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to one audio tab on the MediaConvert console. In your job JSON,
@@ -337,6 +352,8 @@ type AudioDescription struct {
 	// information into destination manifests for display on the end-viewer's player
 	// device. For outputs in other output groups, the service ignores this setting.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // Advanced audio normalization settings. Ignore these settings unless you need to
@@ -376,6 +393,8 @@ type AudioNormalizationSettings struct {
 	// Algorithm (algorithm). If you choose algorithm 1770-1, the encoder will choose
 	// -24 LKFS; otherwise, the encoder will choose -23 LKFS.
 	TargetLkfs float64
+
+	noSmithyDocumentSerde
 }
 
 // Use Audio selectors (AudioSelectors) to specify a track or set of tracks from
@@ -440,6 +459,8 @@ type AudioSelector struct {
 	// directly in your JSON job file, provide the track numbers in an array. For
 	// example, "tracks": [1,2,3].
 	Tracks []int32
+
+	noSmithyDocumentSerde
 }
 
 // Use audio selector groups to combine multiple sidecar audio inputs so that you
@@ -453,6 +474,8 @@ type AudioSelectorGroup struct {
 	// "Audio Selector 1"). The audio selector name parameter can be repeated to add
 	// any number of audio selectors to the group.
 	AudioSelectorNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Use automated ABR to have MediaConvert set up the renditions in your ABR package
@@ -480,6 +503,8 @@ type AutomatedAbrSettings struct {
 	// slow internet connections. If you don't specify a value, MediaConvert uses
 	// 600,000 (600 kb/s) by default.
 	MinAbrBitrate int32
+
+	noSmithyDocumentSerde
 }
 
 // Use automated encoding to have MediaConvert choose your encoding settings for
@@ -491,6 +516,8 @@ type AutomatedEncodingSettings struct {
 	// feature optimizes video quality while minimizing the overall size of your ABR
 	// package.
 	AbrSettings *AutomatedAbrSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
@@ -518,6 +545,8 @@ type Av1QvbrSettings struct {
 	// number. For example, if you set qvbrQualityLevel to 7 and you set
 	// qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
 	QvbrQualityLevelFineTune float64
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set Codec, under VideoDescription>CodecSettings to the value
@@ -613,6 +642,8 @@ type Av1Settings struct {
 	// content. For homogeneous content, such as cartoons and video games, set it to
 	// Low. For content with a wider variety of textures, set it to High or Higher.
 	SpatialAdaptiveQuantization Av1SpatialAdaptiveQuantization
+
+	noSmithyDocumentSerde
 }
 
 // Use ad avail blanking settings to specify your output content during SCTE-35
@@ -625,6 +656,8 @@ type AvailBlanking struct {
 	// Blanking image to be used. Leave empty for solid black. Only bmp and png images
 	// are supported.
 	AvailBlankingImage *string
+
+	noSmithyDocumentSerde
 }
 
 // Required when you choose AVC-Intra for your output video codec. For more
@@ -731,6 +764,8 @@ type AvcIntraSettings struct {
 	// None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without
 	// doing anything with the field polarity to create a smoother picture.
 	Telecine AvcIntraTelecine
+
+	noSmithyDocumentSerde
 }
 
 // Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K
@@ -745,6 +780,8 @@ type AvcIntraUhdSettings struct {
 	// bitrate defined in the specification. When you choose Single-pass (SINGLE_PASS),
 	// your encoding time is faster. The default behavior is Single-pass (SINGLE_PASS).
 	QualityTuningLevel AvcIntraUhdQualityTuningLevel
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to burn-in captions. Set up burn-in captions in the same output
@@ -852,6 +889,8 @@ type BurninDestinationSettings struct {
 	// are already pre-defined by the caption stream. All burn-in and DVB-Sub font
 	// settings must match.
 	YPosition int32
+
+	noSmithyDocumentSerde
 }
 
 // This object holds groups of settings related to captions for one output. For
@@ -896,6 +935,8 @@ type CaptionDescription struct {
 	// player device. For outputs in other output groups, the service ignores this
 	// setting.
 	LanguageDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Caption Description for preset
@@ -933,6 +974,8 @@ type CaptionDescriptionPreset struct {
 	// player device. For outputs in other output groups, the service ignores this
 	// setting.
 	LanguageDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to one captions tab on the MediaConvert console. In your job
@@ -1015,6 +1058,8 @@ type CaptionDestinationSettings struct {
 
 	// WEBVTT Destination Settings
 	WebvttDestinationSettings *WebvttDestinationSettings
+
+	noSmithyDocumentSerde
 }
 
 // Use captions selectors to specify the captions data from your input that you use
@@ -1042,6 +1087,8 @@ type CaptionSelector struct {
 	// specify the URI of the input captions source file. If your input captions are
 	// IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
 	SourceSettings *CaptionSourceSettings
+
+	noSmithyDocumentSerde
 }
 
 // Ignore this setting unless your input captions format is SCC. To have the
@@ -1062,6 +1109,8 @@ type CaptionSourceFramerate struct {
 	// setting Caption source frame rate (CaptionSourceFramerate). Use this setting
 	// along with the setting Framerate denominator (framerateDenominator).
 	FramerateNumerator int32
+
+	noSmithyDocumentSerde
 }
 
 // If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file,
@@ -1106,6 +1155,8 @@ type CaptionSourceSettings struct {
 	// subtitle track will be chosen. If your caption source is a sidecar file, use
 	// FileSourceSettings instead of WebvttHlsSourceSettings.
 	WebvttHlsSourceSettings *WebvttHlsSourceSettings
+
+	noSmithyDocumentSerde
 }
 
 // Channel mapping (ChannelMapping) contains the group of fields that hold the
@@ -1125,6 +1176,8 @@ type ChannelMapping struct {
 	// audio channel that you want in your output. Each child should contain one
 	// instance of InputChannels or InputChannelsFineTune.
 	OutputChannels []OutputChannelMapping
+
+	noSmithyDocumentSerde
 }
 
 // Specify the details for each pair of HLS and DASH additional manifests that you
@@ -1145,6 +1198,8 @@ type CmafAdditionalManifest struct {
 	// Specify the outputs that you want this additional top-level manifest to
 	// reference.
 	SelectedOutputs []string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for CMAF encryption
@@ -1175,6 +1230,8 @@ type CmafEncryptionSettings struct {
 	// follows the SPEKE standard. For more information about SPEKE, see
 	// https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.
 	Type CmafKeyProviderType
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to your CMAF output package. For more information, see
@@ -1331,6 +1388,8 @@ type CmafGroupSettings struct {
 	// segment duration information appears in the duration attribute of the
 	// SegmentTemplate element.
 	WriteSegmentTimelineInRepresentation CmafWriteSegmentTimelineInRepresentation
+
+	noSmithyDocumentSerde
 }
 
 // These settings relate to the fragmented MP4 container for the segments in your
@@ -1427,6 +1486,8 @@ type CmfcSettings struct {
 	// input to also appear in this output. Choose None (NONE) if you don't want those
 	// SCTE-35 markers in this output.
 	Scte35Source CmfcScte35Source
+
+	noSmithyDocumentSerde
 }
 
 // Settings for color correction.
@@ -1477,6 +1538,8 @@ type ColorCorrector struct {
 
 	// Saturation level.
 	Saturation int32
+
+	noSmithyDocumentSerde
 }
 
 // Container specific settings.
@@ -1523,6 +1586,8 @@ type ContainerSettings struct {
 
 	// These settings relate to your MXF output container.
 	MxfSettings *MxfSettings
+
+	noSmithyDocumentSerde
 }
 
 // Specify the details for each additional DASH manifest that you want the service
@@ -1540,6 +1605,8 @@ type DashAdditionalManifest struct {
 	// Specify the outputs that you want this additional top-level manifest to
 	// reference.
 	SelectedOutputs []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies DRM settings for DASH outputs.
@@ -1557,6 +1624,8 @@ type DashIsoEncryptionSettings struct {
 	// when doing DRM encryption with a SPEKE-compliant key provider. If your output
 	// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 	SpekeKeyProvider *SpekeKeyProvider
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to your DASH output package. For more information, see
@@ -1680,6 +1749,8 @@ type DashIsoGroupSettings struct {
 	// SegmentTemplate at the Representation level. When you don't enable this setting,
 	// the service writes approximate segment durations in your DASH manifest.
 	WriteSegmentTimelineInRepresentation DashIsoWriteSegmentTimelineInRepresentation
+
+	noSmithyDocumentSerde
 }
 
 // Settings for deinterlacer
@@ -1707,6 +1778,8 @@ type Deinterlacer struct {
 	// progressive. - Inverse telecine converts Hard Telecine 29.97i to progressive
 	// 23.976p. - Adaptive auto-detects and converts to progressive.
 	Mode DeinterlacerMode
+
+	noSmithyDocumentSerde
 }
 
 // Settings associated with the destination. Will vary based on the type of
@@ -1715,6 +1788,8 @@ type DestinationSettings struct {
 
 	// Settings associated with S3 destination
 	S3Settings *S3DestinationSettings
+
+	noSmithyDocumentSerde
 }
 
 // With AWS Elemental MediaConvert, you can create profile 5 Dolby Vision outputs
@@ -1734,6 +1809,8 @@ type DolbyVision struct {
 	// (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame
 	// interleaved data.
 	Profile DolbyVisionProfile
+
+	noSmithyDocumentSerde
 }
 
 // Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override the
@@ -1747,6 +1824,8 @@ type DolbyVisionLevel6Metadata struct {
 	// Maximum Frame-Average Light Level. Static HDR metadata that corresponds to the
 	// highest frame-average brightness in the entire stream. Measured in nits.
 	MaxFall int32
+
+	noSmithyDocumentSerde
 }
 
 // Use these settings to insert a DVB Network Information Table (NIT) in the
@@ -1765,6 +1844,8 @@ type DvbNitSettings struct {
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
 	NitInterval int32
+
+	noSmithyDocumentSerde
 }
 
 // Use these settings to insert a DVB Service Description Table (SDT) in the
@@ -1792,6 +1873,8 @@ type DvbSdtSettings struct {
 	// The service provider name placed in the service_descriptor in the Service
 	// Description Table. Maximum length is 256 characters.
 	ServiceProviderName *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same output
@@ -1953,6 +2036,8 @@ type DvbSubDestinationSettings struct {
 	// are already pre-defined by the caption stream. All burn-in and DVB-Sub font
 	// settings must match.
 	YPosition int32
+
+	noSmithyDocumentSerde
 }
 
 // DVB Sub Source Settings
@@ -1962,6 +2047,8 @@ type DvbSubSourceSettings struct {
 	// content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through,
 	// regardless of selectors.
 	Pid int32
+
+	noSmithyDocumentSerde
 }
 
 // Use these settings to insert a DVB Time and Date Table (TDT) in the transport
@@ -1973,6 +2060,8 @@ type DvbTdtSettings struct {
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
 	TdtInterval int32
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -2110,6 +2199,8 @@ type Eac3AtmosSettings struct {
 	// Specify whether your input audio has an additional center rear surround channel
 	// matrix encoded into your left and right surround channels.
 	SurroundExMode Eac3AtmosSurroundExMode
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -2236,6 +2327,8 @@ type Eac3Settings struct {
 	// When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the
 	// two channels.
 	SurroundMode Eac3SurroundMode
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to CEA/EIA-608 and CEA/EIA-708 (also called embedded or
@@ -2264,6 +2357,8 @@ type EmbeddedDestinationSettings struct {
 	// (destination608ChannelNumber) for the 708 service number. For more information,
 	// see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
 	Destination708ServiceNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Settings for embedded captions Source
@@ -2288,6 +2383,8 @@ type EmbeddedSourceSettings struct {
 	// input. If you want the caption to continue onto your next input, disable this
 	// setting.
 	TerminateCaptions EmbeddedTerminateCaptions
+
+	noSmithyDocumentSerde
 }
 
 // Describes an account-specific API endpoint.
@@ -2295,6 +2392,8 @@ type Endpoint struct {
 
 	// URL of endpoint
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // ESAM ManifestConfirmConditionNotification defined by OC-SP-ESAM-API-I03-131025.
@@ -2305,6 +2404,8 @@ type EsamManifestConfirmConditionNotification struct {
 	// transcoder will use the Manifest Conditioning instructions in the message that
 	// you supply.
 	MccXml *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion,
@@ -2326,6 +2427,8 @@ type EsamSettings struct {
 	// OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing
 	// instructions that you provide in the setting SCC XML (sccXml).
 	SignalProcessingNotification *EsamSignalProcessingNotification
+
+	noSmithyDocumentSerde
 }
 
 // ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025.
@@ -2340,6 +2443,8 @@ type EsamSignalProcessingNotification struct {
 	// must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an
 	// ESAM XML document or enable SCTE-35 passthrough. You can't do both.
 	SccXml *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for F4v container
@@ -2349,6 +2454,8 @@ type F4vSettings struct {
 	// the archive as required for progressive downloading. Otherwise it is placed
 	// normally at the end.
 	MoovPlacement F4vMoovPlacement
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to your File output group. MediaConvert uses this group of
@@ -2368,6 +2475,8 @@ type FileGroupSettings struct {
 	// Settings associated with the destination. Will vary based on the type of
 	// destination
 	DestinationSettings *DestinationSettings
+
+	noSmithyDocumentSerde
 }
 
 // If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an
@@ -2398,6 +2507,8 @@ type FileSourceSettings struct {
 
 	// Specifies a time delta in seconds to offset the captions from the source file.
 	TimeDelta int32
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -2424,6 +2535,8 @@ type FrameCaptureSettings struct {
 
 	// JPEG Quality - a higher value equals higher quality.
 	Quality int32
+
+	noSmithyDocumentSerde
 }
 
 // Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
@@ -2459,6 +2572,8 @@ type H264QvbrSettings struct {
 	// number. For example, if you set qvbrQualityLevel to 7 and you set
 	// qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
 	QvbrQualityLevelFineTune float64
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -2771,6 +2886,8 @@ type H264Settings struct {
 
 	// Inserts timecode for each frame as 4 bytes of an unregistered SEI message.
 	UnregisteredSeiTimecode H264UnregisteredSeiTimecode
+
+	noSmithyDocumentSerde
 }
 
 // Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
@@ -2806,6 +2923,8 @@ type H265QvbrSettings struct {
 	// number. For example, if you set qvbrQualityLevel to 7 and you set
 	// qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.
 	QvbrQualityLevelFineTune float64
+
+	noSmithyDocumentSerde
 }
 
 // Settings for H265 codec
@@ -3095,6 +3214,8 @@ type H265Settings struct {
 	// players. The service defaults to marking your output as HEV1. For these outputs,
 	// the service writes parameter set NAL units directly into the samples.
 	WriteMp4PackagingType H265WriteMp4PackagingType
+
+	noSmithyDocumentSerde
 }
 
 // Use these settings to specify static color calibration metadata, as defined by
@@ -3160,6 +3281,8 @@ type Hdr10Metadata struct {
 	// grading tools. Range is 0 to 50,000, each increment represents 0.00002 in
 	// CIE1931 color coordinate. Note that this setting is not for color correction.
 	WhitePointY int32
+
+	noSmithyDocumentSerde
 }
 
 // Setting for HDR10+ metadata insertion
@@ -3173,6 +3296,8 @@ type Hdr10Plus struct {
 	// Specify the HDR10+ target display nominal peak luminance, in nits. This is the
 	// nominal maximum luminance of the target display as defined by ST 2094-40.
 	TargetMonitorNits int32
+
+	noSmithyDocumentSerde
 }
 
 // Specify the details for each additional HLS manifest that you want the service
@@ -3193,6 +3318,8 @@ type HlsAdditionalManifest struct {
 	// Specify the outputs that you want this additional top-level manifest to
 	// reference.
 	SelectedOutputs []string
+
+	noSmithyDocumentSerde
 }
 
 // Caption Language Mapping
@@ -3211,6 +3338,8 @@ type HlsCaptionLanguageMapping struct {
 
 	// Caption language description.
 	LanguageDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for HLS encryption
@@ -3246,6 +3375,8 @@ type HlsEncryptionSettings struct {
 	// follows the SPEKE standard. For more information about SPEKE, see
 	// https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.
 	Type HlsKeyProviderType
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to your HLS output package. For more information, see
@@ -3402,6 +3533,8 @@ type HlsGroupSettings struct {
 
 	// Provides an extra millisecond delta offset to fine tune the timestamps.
 	TimestampDeltaMilliseconds int32
+
+	noSmithyDocumentSerde
 }
 
 // Settings specific to audio sources in an HLS alternate rendition group. Specify
@@ -3422,6 +3555,8 @@ type HlsRenditionGroupSettings struct {
 
 	// Optional. Specify media name
 	RenditionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for HLS output groups
@@ -3477,6 +3612,8 @@ type HlsSettings struct {
 	// You can use format identifiers in the string. For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html
 	SegmentModifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Optional. Configuration for a destination queue to which the job can hop once a
@@ -3499,6 +3636,8 @@ type HopDestination struct {
 	// until the job can hop to the destination queue. Valid range is 1 to 1440
 	// minutes, inclusive.
 	WaitMinutes int32
+
+	noSmithyDocumentSerde
 }
 
 // To insert ID3 tags in your output, specify two values. Use ID3 tag (Id3) to
@@ -3512,6 +3651,8 @@ type Id3Insertion struct {
 
 	// Provide a Timecode (TimeCode) in HH:MM:SS:FF or HH:MM:SS;FF format.
 	Timecode *string
+
+	noSmithyDocumentSerde
 }
 
 // Use the image inserter feature to include a graphic overlay on your video.
@@ -3524,6 +3665,8 @@ type ImageInserter struct {
 	// Specify the images that you want to overlay on your video. The images must be
 	// PNG or TGA files.
 	InsertableImages []InsertableImage
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to IMSC captions. IMSC is a sidecar format that holds captions
@@ -3540,6 +3683,8 @@ type ImscDestinationSettings struct {
 	// only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting
 	// for simplified output captions.
 	StylePassthrough ImscStylePassthrough
+
+	noSmithyDocumentSerde
 }
 
 // Use inputs to define the source files used in your transcoding job. For more
@@ -3681,6 +3826,8 @@ type Input struct {
 	// Input video selectors contain the video settings for the input. Each of your
 	// inputs can have up to one video selector.
 	VideoSelector *VideoSelector
+
+	noSmithyDocumentSerde
 }
 
 // To transcode only portions of your input, include one input clip for each part
@@ -3709,6 +3856,8 @@ type InputClipping struct {
 	// have embedded timecodes that start at 01:00:00:00 and you want your clip to
 	// begin five minutes into the video, use 01:05:00:00.
 	StartTimecode *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for decrypting any input files that you encrypt before you upload them
@@ -3738,6 +3887,8 @@ type InputDecryptionSettings struct {
 	// encrypt your data key, if that Region is different from the one you are using
 	// for AWS Elemental MediaConvert.
 	KmsKeyRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Specified video input in a template.
@@ -3851,6 +4002,8 @@ type InputTemplate struct {
 	// Input video selectors contain the video settings for the input. Each of your
 	// inputs can have up to one video selector.
 	VideoSelector *VideoSelector
+
+	noSmithyDocumentSerde
 }
 
 // These settings apply to a specific graphic overlay. You can include multiple
@@ -3909,6 +4062,8 @@ type InsertableImage struct {
 	// larger than the video resolution width, the service will crop your overlaid
 	// image to fit. To use the native width of the image, keep this setting blank.
 	Width int32
+
+	noSmithyDocumentSerde
 }
 
 // Each job converts an input file into an output file or files. For more
@@ -4030,6 +4185,8 @@ type Job struct {
 	// User-defined metadata that you want to associate with an MediaConvert job. You
 	// specify metadata in key/value pairs.
 	UserMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Provides messages from the service about jobs that you have already successfully
@@ -4043,6 +4200,8 @@ type JobMessages struct {
 	// List of messages that warn about conditions that might cause your job not to run
 	// or to fail.
 	Warning []string
+
+	noSmithyDocumentSerde
 }
 
 // JobSettings contains all the transcode settings for a job.
@@ -4118,6 +4277,8 @@ type JobSettings struct {
 	// in each output container, and specify tags and timecodes in ID3 insertion
 	// (Id3Insertion) objects.
 	TimedMetadataInsertion *TimedMetadataInsertion
+
+	noSmithyDocumentSerde
 }
 
 // A job template is a pre-made set of encoding instructions that you can use to
@@ -4174,6 +4335,8 @@ type JobTemplate struct {
 	// A job template can be of two types: system or custom. System or built-in job
 	// templates can't be modified or deleted by the user.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // JobTemplateSettings contains all the transcode settings saved in the template
@@ -4250,6 +4413,8 @@ type JobTemplateSettings struct {
 	// in each output container, and specify tags and timecodes in ID3 insertion
 	// (Id3Insertion) objects.
 	TimedMetadataInsertion *TimedMetadataInsertion
+
+	noSmithyDocumentSerde
 }
 
 // Use these settings only when you use Kantar watermarking. Specify the values
@@ -4320,6 +4485,8 @@ type KantarWatermarkSettings struct {
 	// Additional metadata that MediaConvert sends to Kantar. Maximum length is 50
 	// characters.
 	Metadata8 *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for SCTE-35 signals from ESAM. Include this in your job settings to put
@@ -4331,6 +4498,8 @@ type M2tsScte35Esam struct {
 	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream generated
 	// by ESAM.
 	Scte35EsamPid int32
+
+	noSmithyDocumentSerde
 }
 
 // MPEG-2 TS container settings. These apply to outputs in a File output group when
@@ -4546,6 +4715,8 @@ type M2tsSettings struct {
 	// Specify the packet identifier (PID) of the elementary video stream in the
 	// transport stream.
 	VideoPid int32
+
+	noSmithyDocumentSerde
 }
 
 // These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for
@@ -4635,6 +4806,8 @@ type M3u8Settings struct {
 
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
 	VideoPid int32
+
+	noSmithyDocumentSerde
 }
 
 // Overlay motion graphics on top of your video. The motion graphics that you
@@ -4691,6 +4864,8 @@ type MotionImageInserter struct {
 	// specification at settings>timecodeConfig>source and
 	// settings>inputs>timecodeSource.
 	StartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // For motion overlays that don't have a built-in frame rate, specify the frame
@@ -4706,6 +4881,8 @@ type MotionImageInsertionFramerate struct {
 	// The top of the fraction that expresses your overlay frame rate. For example, if
 	// your frame rate is 24 fps, set this value to 24.
 	FramerateNumerator int32
+
+	noSmithyDocumentSerde
 }
 
 // Specify the offset between the upper-left corner of the video frame and the top
@@ -4719,6 +4896,8 @@ type MotionImageInsertionOffset struct {
 	// Set the distance, in pixels, between the overlay and the top edge of the video
 	// frame.
 	ImageY int32
+
+	noSmithyDocumentSerde
 }
 
 // These settings relate to your QuickTime MOV output container.
@@ -4748,6 +4927,8 @@ type MovSettings struct {
 
 	// Always keep the default value (SELF_CONTAINED) for this setting.
 	Reference MovReference
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -4764,6 +4945,8 @@ type Mp2Settings struct {
 
 	// Sample rate in hz.
 	SampleRate int32
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
@@ -4788,6 +4971,8 @@ type Mp3Settings struct {
 	// Required when you set Bitrate control mode (rateControlMode) to VBR. Specify the
 	// audio quality of this MP3 output from 0 (highest quality) to 9 (lowest quality).
 	VbrQuality int32
+
+	noSmithyDocumentSerde
 }
 
 // These settings relate to your MP4 output container. You can create audio only
@@ -4835,6 +5020,8 @@ type Mp4Settings struct {
 	// Overrides the "Major Brand" field in the output file. Usually not necessary to
 	// specify.
 	Mp4MajorBrand *string
+
+	noSmithyDocumentSerde
 }
 
 // These settings relate to the fragmented MP4 container for the segments in your
@@ -4882,6 +5069,8 @@ type MpdSettings struct {
 	// input to also appear in this output. Choose None (NONE) if you don't want those
 	// SCTE-35 markers in this output.
 	Scte35Source MpdScte35Source
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -5126,6 +5315,8 @@ type Mpeg2Settings struct {
 	// adjust the strength of the filter with the setting Adaptive quantization
 	// (adaptiveQuantization).
 	TemporalAdaptiveQuantization Mpeg2TemporalAdaptiveQuantization
+
+	noSmithyDocumentSerde
 }
 
 // Specify the details for each additional Microsoft Smooth Streaming manifest that
@@ -5144,6 +5335,8 @@ type MsSmoothAdditionalManifest struct {
 	// Specify the outputs that you want this additional top-level manifest to
 	// reference.
 	SelectedOutputs []string
+
+	noSmithyDocumentSerde
 }
 
 // If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the
@@ -5154,6 +5347,8 @@ type MsSmoothEncryptionSettings struct {
 	// when doing DRM encryption with a SPEKE-compliant key provider. If your output
 	// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 	SpekeKeyProvider *SpekeKeyProvider
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to your Microsoft Smooth Streaming output package. For more
@@ -5197,6 +5392,8 @@ type MsSmoothGroupSettings struct {
 	// Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format
 	// for the server and client manifest. Valid options are utf8 and utf16.
 	ManifestEncoding MsSmoothManifestEncoding
+
+	noSmithyDocumentSerde
 }
 
 // These settings relate to your MXF output container.
@@ -5223,6 +5420,8 @@ type MxfSettings struct {
 	// Specify the XAVC profile settings for MXF outputs when you set your MXF profile
 	// to XAVC.
 	XavcProfileSettings *MxfXavcProfileSettings
+
+	noSmithyDocumentSerde
 }
 
 // Specify the XAVC profile settings for MXF outputs when you set your MXF profile
@@ -5245,6 +5444,8 @@ type MxfXavcProfileSettings struct {
 	// prevent overflow unless you have multiple pages of teletext captions data. If
 	// you have a large amount of teletext data, specify a larger number.
 	MaxAncDataSize int32
+
+	noSmithyDocumentSerde
 }
 
 // For forensic video watermarking, MediaConvert supports Nagra NexGuard File
@@ -5280,6 +5481,8 @@ type NexGuardFileMarkerSettings struct {
 	// value. When you don't specify a value here, the Nagra NexGuard library uses its
 	// default value.
 	Strength WatermarkingStrength
+
+	noSmithyDocumentSerde
 }
 
 // Settings for your Nielsen configuration. If you don't do Nielsen measurement and
@@ -5298,6 +5501,8 @@ type NielsenConfiguration struct {
 	// Use Distributor ID (DistributorID) to specify the distributor ID that is
 	// assigned to your organization by Neilsen.
 	DistributorId *string
+
+	noSmithyDocumentSerde
 }
 
 // Ignore these settings unless you are using Nielsen non-linear watermarking.
@@ -5375,6 +5580,8 @@ type NielsenNonLinearWatermarkSettings struct {
 	// unique TIC values for each audio track, choose Use unique TICs
 	// (RESERVE_UNIQUE_TICS_PER_TRACK).
 	UniqueTicPerAudioTrack NielsenUniqueTicPerAudioTrackType
+
+	noSmithyDocumentSerde
 }
 
 // Enable the Noise reducer (NoiseReducer) feature to remove noise from your video
@@ -5401,6 +5608,8 @@ type NoiseReducer struct {
 
 	// Noise reducer filter settings for temporal filter.
 	TemporalFilterSettings *NoiseReducerTemporalFilterSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings for a noise reducer filter
@@ -5409,6 +5618,8 @@ type NoiseReducerFilterSettings struct {
 	// Relative strength of noise reducing filter. Higher values produce stronger
 	// filtering.
 	Strength int32
+
+	noSmithyDocumentSerde
 }
 
 // Noise reducer filter settings for spatial filter.
@@ -5425,6 +5636,8 @@ type NoiseReducerSpatialFilterSettings struct {
 	// Relative strength of noise reducing filter. Higher values produce stronger
 	// filtering.
 	Strength int32
+
+	noSmithyDocumentSerde
 }
 
 // Noise reducer filter settings for temporal filter.
@@ -5454,6 +5667,8 @@ type NoiseReducerTemporalFilterSettings struct {
 	// sharpness loss * 2-8 for complexity reduction with image preservation * 8-16 for
 	// a high level of complexity reduction
 	Strength int32
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
@@ -5473,6 +5688,8 @@ type OpusSettings struct {
 	// Optional. Sample rate in hz. Valid values are 16000, 24000, and 48000. The
 	// default value is 48000.
 	SampleRate int32
+
+	noSmithyDocumentSerde
 }
 
 // Each output in your job is a collection of settings that describes how you want
@@ -5521,6 +5738,8 @@ type Output struct {
 	// settings depend on the video codec that you choose for the property codec.
 	// Include one instance of VideoDescription per output.
 	VideoDescription *VideoDescription
+
+	noSmithyDocumentSerde
 }
 
 // OutputChannel mapping settings.
@@ -5534,6 +5753,8 @@ type OutputChannelMapping struct {
 	// component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing
 	// values to the nearest thousandth.
 	InputChannelsFineTune []float64
+
+	noSmithyDocumentSerde
 }
 
 // Details regarding output
@@ -5544,6 +5765,8 @@ type OutputDetail struct {
 
 	// Contains details about the output's video stream
 	VideoDetails *VideoDetail
+
+	noSmithyDocumentSerde
 }
 
 // Group of outputs
@@ -5567,6 +5790,8 @@ type OutputGroup struct {
 
 	// This object holds groups of encoding settings, one group of settings per output.
 	Outputs []Output
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the output groups specified in the job settings.
@@ -5574,6 +5799,8 @@ type OutputGroupDetail struct {
 
 	// Details about the output
 	OutputDetails []OutputDetail
+
+	noSmithyDocumentSerde
 }
 
 // Output Group settings, including type
@@ -5618,6 +5845,8 @@ type OutputGroupSettings struct {
 	// Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth
 	// Streaming, CMAF)
 	Type OutputGroupType
+
+	noSmithyDocumentSerde
 }
 
 // Specific settings for this type of output.
@@ -5625,6 +5854,8 @@ type OutputSettings struct {
 
 	// Settings for HLS output groups
 	HlsSettings *HlsSettings
+
+	noSmithyDocumentSerde
 }
 
 // If you work with a third party video watermarking partner, use the group of
@@ -5636,6 +5867,8 @@ type PartnerWatermarking struct {
 	// Marker watermarking. MediaConvert supports both PreRelease Content (NGPR/G2) and
 	// OTT Streaming workflows.
 	NexguardFileMarkerSettings *NexGuardFileMarkerSettings
+
+	noSmithyDocumentSerde
 }
 
 // A preset is a collection of preconfigured media conversion settings that you
@@ -5670,6 +5903,8 @@ type Preset struct {
 	// A preset can be of two types: system or custom. System or built-in preset can't
 	// be modified or deleted by the user.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // Settings for preset
@@ -5691,6 +5926,8 @@ type PresetSettings struct {
 	// settings depend on the video codec that you choose for the property codec.
 	// Include one instance of VideoDescription per output.
 	VideoDescription *VideoDescription
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -5827,6 +6064,8 @@ type ProresSettings struct {
 	// None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without
 	// doing anything with the field polarity to create a smoother picture.
 	Telecine ProresTelecine
+
+	noSmithyDocumentSerde
 }
 
 // You can use queues to manage the resources that are available to your AWS
@@ -5879,6 +6118,8 @@ type Queue struct {
 	// built in. You can't modify or delete system queues. You can create and modify
 	// custom queues.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // Description of the source and destination queues between which the job has
@@ -5894,6 +6135,8 @@ type QueueTransition struct {
 	// The time, in Unix epoch format, that the job moved from the source queue to the
 	// destination queue.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Use Rectangle to identify a specific area of the video frame.
@@ -5912,6 +6155,8 @@ type Rectangle struct {
 	// The distance, in pixels, between the rectangle and the top edge of the video
 	// frame. Specify only even numbers.
 	Y int32
+
+	noSmithyDocumentSerde
 }
 
 // Use Manual audio remixing (RemixSettings) to adjust audio levels for each audio
@@ -5946,6 +6191,8 @@ type RemixSettings struct {
 	// your input mapping must be the same as the number of input channels in your
 	// output mapping.
 	ChannelsOut int32
+
+	noSmithyDocumentSerde
 }
 
 // Details about the pricing plan for your reserved queue. Required for reserved
@@ -5977,6 +6224,8 @@ type ReservationPlan struct {
 
 	// Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
 	Status ReservationPlanStatus
+
+	noSmithyDocumentSerde
 }
 
 // Details about the pricing plan for your reserved queue. Required for reserved
@@ -6007,6 +6256,8 @@ type ReservationPlanSettings struct {
 	//
 	// This member is required.
 	ReservedSlots int32
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
@@ -6018,6 +6269,8 @@ type ResourceTags struct {
 
 	// The tags for the resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Optional. Have MediaConvert automatically apply Amazon S3 access control for the
@@ -6027,6 +6280,8 @@ type S3DestinationAccessControl struct {
 
 	// Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
 	CannedAcl S3ObjectCannedAcl
+
+	noSmithyDocumentSerde
 }
 
 // Settings associated with S3 destination
@@ -6040,6 +6295,8 @@ type S3DestinationSettings struct {
 	// Settings for how your job outputs are encrypted as they are uploaded to Amazon
 	// S3.
 	Encryption *S3EncryptionSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings for how your job outputs are encrypted as they are uploaded to Amazon
@@ -6067,6 +6324,8 @@ type S3EncryptionSettings struct {
 	// don't specify a CMK here, AWS uses the AWS managed CMK associated with Amazon
 	// S3.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to SCC captions. SCC is a sidecar format that holds captions in
@@ -6085,6 +6344,8 @@ type SccDestinationSettings struct {
 	// video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97
 	// non-dropframe (FRAMERATE_29_97_NON_DROPFRAME).
 	Framerate SccDestinationFramerate
+
+	noSmithyDocumentSerde
 }
 
 // If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
@@ -6109,6 +6370,8 @@ type SpekeKeyProvider struct {
 	// Specify the URL to the key server that your SPEKE-compliant DRM key provider
 	// uses to provide keys for encrypting your content.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // If your output group type is CMAF, use these settings when doing DRM encryption
@@ -6140,6 +6403,8 @@ type SpekeKeyProviderCmaf struct {
 	// Specify the URL to the key server that your SPEKE-compliant DRM key provider
 	// uses to provide keys for encrypting your content.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // SRT Destination Settings
@@ -6149,6 +6414,8 @@ type SrtDestinationSettings struct {
 	// position information from the captions source in the input. Keep the default
 	// value, Disabled (DISABLED), for simplified output captions.
 	StylePassthrough SrtStylePassthrough
+
+	noSmithyDocumentSerde
 }
 
 // Use these settings to set up encryption with a static key provider.
@@ -6170,6 +6437,8 @@ type StaticKeyProvider struct {
 	// Relates to DRM implementation. The location of the license server used for
 	// protecting content.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to teletext captions. Set up teletext captions in the same
@@ -6191,6 +6460,8 @@ type TeletextDestinationSettings struct {
 	// use this field. When you pass through a set of Teletext pages, your output has
 	// the same page types as your input.
 	PageTypes []TeletextPageType
+
+	noSmithyDocumentSerde
 }
 
 // Settings specific to Teletext caption sources, including Page number.
@@ -6200,6 +6471,8 @@ type TeletextSourceSettings struct {
 	// that will be used for Teletext captions. Do not use this setting if you are
 	// passing through teletext from the input source to output.
 	PageNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for burning the output timecode and specified prefix into the output.
@@ -6219,6 +6492,8 @@ type TimecodeBurnin struct {
 	// range of characters is 0x20 through 0x7e. This includes letters, numbers, and
 	// all special characters represented on a standard English keyboard.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // These settings control how the service handles timecodes throughout the job.
@@ -6264,6 +6539,8 @@ type TimecodeConfig struct {
 	// if the date part of your timecodes is 2002-1-25 and you want to change it to one
 	// year later, set Timestamp offset (TimestampOffset) to 2003-1-25.
 	TimestampOffset *string
+
+	noSmithyDocumentSerde
 }
 
 // Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in
@@ -6274,6 +6551,8 @@ type TimedMetadataInsertion struct {
 
 	// Id3Insertions contains the array of Id3Insertion instances.
 	Id3Insertions []Id3Insertion
+
+	noSmithyDocumentSerde
 }
 
 // Information about when jobs are submitted, started, and finished is specified in
@@ -6288,6 +6567,8 @@ type Timing struct {
 
 	// The time, in Unix epoch format, that you submitted the job.
 	SubmitTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Settings specific to caption sources that are specified by track number.
@@ -6303,6 +6584,8 @@ type TrackSourceSettings struct {
 	// include more than one captions track in your job outputs, create multiple input
 	// captions selectors. Specify one track per selector.
 	TrackNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to TTML captions. TTML is a sidecar format that holds captions
@@ -6317,6 +6600,8 @@ type TtmlDestinationSettings struct {
 	// Pass through style and position information from a TTML-like input source (TTML,
 	// IMSC, SMPTE-TT) to the TTML output.
 	StylePassthrough TtmlStylePassthrough
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -6407,6 +6692,8 @@ type Vc3Settings struct {
 	// with a bitrate of approximately 220 Mbps. VC3 class also specifies the color bit
 	// depth of your output.
 	Vc3Class Vc3Class
+
+	noSmithyDocumentSerde
 }
 
 // Video codec settings, (CodecSettings) under (VideoDescription), contains the
@@ -6468,6 +6755,8 @@ type VideoCodecSettings struct {
 	// Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
 	// value XAVC.
 	XavcSettings *XavcSettings
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to video encoding of your output. The specific video settings
@@ -6575,6 +6864,8 @@ type VideoDescription struct {
 	// Use Width (Width) to define the video resolution width, in pixels, for this
 	// output. If you don't provide a value here, the service will use the input width.
 	Width int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the output's video stream
@@ -6585,6 +6876,8 @@ type VideoDetail struct {
 
 	// Width in pixels for the output
 	WidthInPx int32
+
+	noSmithyDocumentSerde
 }
 
 // Find additional transcoding features under Preprocessors (VideoPreprocessors).
@@ -6625,6 +6918,8 @@ type VideoPreprocessor struct {
 
 	// Settings for burning the output timecode and specified prefix into the output.
 	TimecodeBurnin *TimecodeBurnin
+
+	noSmithyDocumentSerde
 }
 
 // Input video selectors contain the video settings for the input. Each of your
@@ -6708,6 +7003,8 @@ type VideoSelector struct {
 	// range that you specify, MediaConvert uses the sample range for transcoding and
 	// also writes it to the output metadata.
 	SampleRange InputSampleRange
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set Codec, under AudioDescriptions>CodecSettings, to the value
@@ -6728,6 +7025,8 @@ type VorbisSettings struct {
 	// value is 4 (~128 kbit/s). Values 5 and 6 are approximately 160 and 192 kbit/s,
 	// respectively.
 	VbrQuality int32
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -6825,6 +7124,8 @@ type Vp8Settings struct {
 	// With the VP8 codec, you can use only the variable bitrate (VBR) rate control
 	// mode.
 	RateControlMode Vp8RateControlMode
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -6918,6 +7219,8 @@ type Vp9Settings struct {
 	// With the VP9 codec, you can use only the variable bitrate (VBR) rate control
 	// mode.
 	RateControlMode Vp9RateControlMode
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -6939,6 +7242,8 @@ type WavSettings struct {
 
 	// Sample rate in Hz.
 	SampleRate int32
+
+	noSmithyDocumentSerde
 }
 
 // WEBVTT Destination Settings
@@ -6948,6 +7253,8 @@ type WebvttDestinationSettings struct {
 	// position information from the captions source in the input. Keep the default
 	// value, Disabled (DISABLED), for simplified output captions.
 	StylePassthrough WebvttStylePassthrough
+
+	noSmithyDocumentSerde
 }
 
 // Settings specific to WebVTT sources in HLS alternative rendition group. Specify
@@ -6968,6 +7275,8 @@ type WebvttHlsSourceSettings struct {
 
 	// Optional. Specify media name
 	RenditionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Profile) under
@@ -6979,6 +7288,8 @@ type Xavc4kIntraCbgProfileSettings struct {
 	// of the same class have similar image quality over the operating points that are
 	// valid for that class.
 	XavcClass Xavc4kIntraCbgProfileClass
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Profile) under
@@ -6990,6 +7301,8 @@ type Xavc4kIntraVbrProfileSettings struct {
 	// of the same class have similar image quality over the operating points that are
 	// valid for that class.
 	XavcClass Xavc4kIntraVbrProfileClass
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Profile) under
@@ -7047,6 +7360,8 @@ type Xavc4kProfileSettings struct {
 	// macroblock rows for progressive pictures, and less than or equal to half the
 	// number of macroblock rows for interlaced pictures.
 	Slices int32
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Profile) under
@@ -7058,6 +7373,8 @@ type XavcHdIntraCbgProfileSettings struct {
 	// of the same class have similar image quality over the operating points that are
 	// valid for that class.
 	XavcClass XavcHdIntraCbgProfileClass
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Profile) under
@@ -7131,6 +7448,8 @@ type XavcHdProfileSettings struct {
 	// (HARD). Otherwise, keep the default value None (NONE). For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-telecine-and-inverse-telecine.html.
 	Telecine XavcHdProfileTelecine
+
+	noSmithyDocumentSerde
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -7285,4 +7604,8 @@ type XavcSettings struct {
 	// Required when you set (Profile) under
 	// (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD.
 	XavcHdProfileSettings *XavcHdProfileSettings
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -34,6 +34,8 @@ type StopReplicationTaskInput struct {
 	//
 	// This member is required.
 	ReplicationTaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -44,6 +46,8 @@ type StopReplicationTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

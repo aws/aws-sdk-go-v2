@@ -40,6 +40,8 @@ type UpdateEmailChannelInput struct {
 	//
 	// This member is required.
 	EmailChannelRequest *types.EmailChannelRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEmailChannelOutput struct {
@@ -52,6 +54,8 @@ type UpdateEmailChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEmailChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

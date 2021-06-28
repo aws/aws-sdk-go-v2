@@ -37,11 +37,15 @@ type DeleteProvisioningTemplateVersionInput struct {
 	//
 	// This member is required.
 	VersionId *int32
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProvisioningTemplateVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

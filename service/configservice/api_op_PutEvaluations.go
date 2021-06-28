@@ -49,6 +49,8 @@ type PutEvaluationsInput struct {
 	// sent to AWS Config. When TestMode is true, PutEvaluations doesn't require a
 	// valid value for the ResultToken parameter, but the value cannot be null.
 	TestMode bool
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -59,6 +61,8 @@ type PutEvaluationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type UpdateDomainNameInput struct {
 
 	// The mutual TLS authentication configuration for a custom domain name.
 	MutualTlsAuthentication *types.MutualTlsAuthenticationInput
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDomainNameOutput struct {
@@ -61,6 +63,8 @@ type UpdateDomainNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

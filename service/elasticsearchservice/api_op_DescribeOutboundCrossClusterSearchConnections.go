@@ -56,6 +56,8 @@ type DescribeOutboundCrossClusterSearchConnectionsInput struct {
 	// NextToken is sent in case the earlier API call results contain the NextToken. It
 	// is used for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeOutboundCrossClusterSearchConnections request. Contains
@@ -72,6 +74,8 @@ type DescribeOutboundCrossClusterSearchConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOutboundCrossClusterSearchConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

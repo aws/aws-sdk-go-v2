@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type Attribute struct {
 
 	// The value of the attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the certificate.
@@ -44,6 +47,8 @@ type Certificate struct {
 	// The function that the registered certificate performs. Valid values include
 	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
 	Type CertificateType
+
+	noSmithyDocumentSerde
 }
 
 // Contains general information about a certificate.
@@ -64,6 +69,8 @@ type CertificateInfo struct {
 	// The function that the registered certificate performs. Valid values include
 	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
 	Type CertificateType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the client certificate authentication settings for
@@ -74,6 +81,8 @@ type ClientCertAuthSettings struct {
 	// status. A secondary value to any OCSP address found in the AIA extension of the
 	// user certificate.
 	OCSPUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a computer account in a directory.
@@ -88,6 +97,8 @@ type Computer struct {
 
 	// The computer name.
 	ComputerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Points to a remote domain with which you are setting up a trust relationship.
@@ -107,6 +118,8 @@ type ConditionalForwarder struct {
 	// Domain, which will replicate the conditional forwarder to all of the domain
 	// controllers for your AWS directory.
 	ReplicationScope ReplicationScope
+
+	noSmithyDocumentSerde
 }
 
 // Contains information for the ConnectDirectory operation when an AD Connector
@@ -141,6 +154,8 @@ type DirectoryConnectSettings struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an AD Connector directory.
@@ -163,6 +178,8 @@ type DirectoryConnectSettingsDescription struct {
 
 	// The identifier of the VPC that the AD Connector is in.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an AWS Directory Service directory.
@@ -260,6 +277,8 @@ type DirectoryDescription struct {
 	// about a directory. This member is only present if the directory is a Simple AD
 	// or Managed AD directory.
 	VpcSettings *DirectoryVpcSettingsDescription
+
+	noSmithyDocumentSerde
 }
 
 // Contains directory limit information for a Region.
@@ -292,6 +311,8 @@ type DirectoryLimits struct {
 
 	// Indicates if the connected directory limit has been reached.
 	ConnectedDirectoriesLimitReached bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
@@ -308,6 +329,8 @@ type DirectoryVpcSettings struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the directory.
@@ -324,6 +347,8 @@ type DirectoryVpcSettingsDescription struct {
 
 	// The identifier of the VPC that the directory is in.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the domain controllers for a specified directory.
@@ -358,6 +383,8 @@ type DomainController struct {
 
 	// The identifier of the VPC that contains the domain controller.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about SNS topic and AWS Directory Service directory associations.
@@ -378,6 +405,8 @@ type EventTopic struct {
 
 	// The name of an AWS SNS topic the receives status messages from the directory.
 	TopicName *string
+
+	noSmithyDocumentSerde
 }
 
 // IP address block. This is often the address block of the DNS server used for
@@ -391,6 +420,8 @@ type IpRoute struct {
 
 	// Description of the address block.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about one or more IP address blocks.
@@ -413,6 +444,8 @@ type IpRouteInfo struct {
 
 	// The reason for the IpRouteStatusMsg.
 	IpRouteStatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains general information about the LDAPS settings.
@@ -426,6 +459,8 @@ type LDAPSSettingInfo struct {
 
 	// The date and time when the LDAPS settings were last updated.
 	LastUpdatedDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents a log subscription, which tracks real-time data from a chosen log
@@ -441,6 +476,8 @@ type LogSubscription struct {
 
 	// The date and time that the log subscription was created.
 	SubscriptionCreatedDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the directory owner account details that have been shared to the
@@ -465,6 +502,8 @@ type OwnerDirectoryDescription struct {
 
 	// Information about the VPC settings for the directory.
 	VpcSettings *DirectoryVpcSettingsDescription
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a Remote Authentication Dial In User Service (RADIUS)
@@ -499,6 +538,8 @@ type RadiusSettings struct {
 
 	// Not currently used.
 	UseSameUsername bool
+
+	noSmithyDocumentSerde
 }
 
 // The replicated Region information for a directory.
@@ -531,6 +572,8 @@ type RegionDescription struct {
 
 	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
 	VpcSettings *DirectoryVpcSettings
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the Regions that are configured for multi-Region
@@ -543,6 +586,8 @@ type RegionsInfo struct {
 
 	// The Region where the AWS Managed Microsoft AD directory was originally created.
 	PrimaryRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a schema extension.
@@ -569,6 +614,8 @@ type SchemaExtensionInfo struct {
 	// The date and time that the schema extension started being applied to the
 	// directory.
 	StartDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details about the shared directory in the directory owner account for which the
@@ -608,6 +655,8 @@ type SharedDirectory struct {
 	// Identifier of the shared directory in the directory consumer account. This
 	// identifier is different for each directory owner account.
 	SharedDirectoryId *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifier that contains details about the directory consumer account.
@@ -622,6 +671,8 @@ type ShareTarget struct {
 	//
 	// This member is required.
 	Type TargetType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a directory snapshot.
@@ -644,6 +695,8 @@ type Snapshot struct {
 
 	// The snapshot type.
 	Type SnapshotType
+
+	noSmithyDocumentSerde
 }
 
 // Contains manual snapshot limit information for a directory.
@@ -657,6 +710,8 @@ type SnapshotLimits struct {
 
 	// Indicates if the manual snapshot limit has been reached.
 	ManualSnapshotsLimitReached bool
+
+	noSmithyDocumentSerde
 }
 
 // Metadata assigned to a directory consisting of a key-value pair.
@@ -676,6 +731,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a trust relationship between an AWS Managed Microsoft AD directory and
@@ -715,6 +772,8 @@ type Trust struct {
 
 	// The trust relationship type. Forest is the default.
 	TrustType TrustType
+
+	noSmithyDocumentSerde
 }
 
 // Identifier that contains details about the directory consumer account with whom
@@ -730,4 +789,8 @@ type UnshareTarget struct {
 	//
 	// This member is required.
 	Type TargetType
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

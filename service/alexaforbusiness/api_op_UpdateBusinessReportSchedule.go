@@ -50,11 +50,15 @@ type UpdateBusinessReportScheduleInput struct {
 
 	// The name identifier of the schedule.
 	ScheduleName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBusinessReportScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBusinessReportScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

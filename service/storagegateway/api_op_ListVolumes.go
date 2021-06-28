@@ -57,6 +57,8 @@ type ListVolumesInput struct {
 	// volumes. Obtain the marker from the response of a previous List iSCSI Volumes
 	// request.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -82,6 +84,8 @@ type ListVolumesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {

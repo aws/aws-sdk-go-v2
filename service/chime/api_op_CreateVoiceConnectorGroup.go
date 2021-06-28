@@ -41,6 +41,8 @@ type CreateVoiceConnectorGroupInput struct {
 
 	// The Amazon Chime Voice Connectors to route inbound calls to.
 	VoiceConnectorItems []types.VoiceConnectorItem
+
+	noSmithyDocumentSerde
 }
 
 type CreateVoiceConnectorGroupOutput struct {
@@ -50,6 +52,8 @@ type CreateVoiceConnectorGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

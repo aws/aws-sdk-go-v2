@@ -58,6 +58,8 @@ type DescribeRepositoriesInput struct {
 	// A list of repositories to describe. If this parameter is omitted, then all
 	// repositories in a registry are described.
 	RepositoryNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRepositoriesOutput struct {
@@ -73,6 +75,8 @@ type DescribeRepositoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

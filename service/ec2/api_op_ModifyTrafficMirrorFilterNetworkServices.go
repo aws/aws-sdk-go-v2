@@ -53,6 +53,8 @@ type ModifyTrafficMirrorFilterNetworkServicesInput struct {
 
 	// The network service, for example Amazon DNS, that you no longer want to mirror.
 	RemoveNetworkServices []types.TrafficMirrorNetworkService
+
+	noSmithyDocumentSerde
 }
 
 type ModifyTrafficMirrorFilterNetworkServicesOutput struct {
@@ -62,6 +64,8 @@ type ModifyTrafficMirrorFilterNetworkServicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyTrafficMirrorFilterNetworkServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

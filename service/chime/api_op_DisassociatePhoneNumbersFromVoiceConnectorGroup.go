@@ -39,6 +39,8 @@ type DisassociatePhoneNumbersFromVoiceConnectorGroupInput struct {
 	//
 	// This member is required.
 	VoiceConnectorGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociatePhoneNumbersFromVoiceConnectorGroupOutput struct {
@@ -49,6 +51,8 @@ type DisassociatePhoneNumbersFromVoiceConnectorGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociatePhoneNumbersFromVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

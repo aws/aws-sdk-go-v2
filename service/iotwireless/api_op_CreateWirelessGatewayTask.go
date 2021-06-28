@@ -38,6 +38,8 @@ type CreateWirelessGatewayTaskInput struct {
 	//
 	// This member is required.
 	WirelessGatewayTaskDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateWirelessGatewayTaskOutput struct {
@@ -50,6 +52,8 @@ type CreateWirelessGatewayTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWirelessGatewayTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

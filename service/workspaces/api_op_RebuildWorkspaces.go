@@ -39,6 +39,8 @@ type RebuildWorkspacesInput struct {
 	//
 	// This member is required.
 	RebuildWorkspaceRequests []types.RebuildRequest
+
+	noSmithyDocumentSerde
 }
 
 type RebuildWorkspacesOutput struct {
@@ -48,6 +50,8 @@ type RebuildWorkspacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebuildWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

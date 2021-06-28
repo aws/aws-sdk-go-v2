@@ -36,6 +36,8 @@ type DescribeAuditFindingInput struct {
 	//
 	// This member is required.
 	FindingId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAuditFindingOutput struct {
@@ -45,6 +47,8 @@ type DescribeAuditFindingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAuditFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {

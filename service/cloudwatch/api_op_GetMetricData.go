@@ -137,6 +137,8 @@ type GetMetricDataInput struct {
 	// TimestampAscending returns the oldest data first and paginates when the
 	// MaxDatapoints limit is reached.
 	ScanBy types.ScanBy
+
+	noSmithyDocumentSerde
 }
 
 type GetMetricDataOutput struct {
@@ -159,6 +161,8 @@ type GetMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

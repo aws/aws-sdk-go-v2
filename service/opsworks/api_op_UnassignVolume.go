@@ -38,11 +38,15 @@ type UnassignVolumeInput struct {
 	//
 	// This member is required.
 	VolumeId *string
+
+	noSmithyDocumentSerde
 }
 
 type UnassignVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnassignVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteAlertInput struct {
 	//
 	// This member is required.
 	AlertArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAlertOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -87,6 +87,8 @@ type CreateLicenseVersionInput struct {
 
 	// Current version of the license.
 	SourceVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLicenseVersionOutput struct {
@@ -102,6 +104,8 @@ type CreateLicenseVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLicenseVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

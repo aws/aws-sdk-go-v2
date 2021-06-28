@@ -30,6 +30,7 @@ func (c *Client) GetAccountSummary(ctx context.Context, params *GetAccountSummar
 }
 
 type GetAccountSummaryInput struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetAccountSummary request.
@@ -41,6 +42,8 @@ type GetAccountSummaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

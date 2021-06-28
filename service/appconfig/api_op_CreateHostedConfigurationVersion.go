@@ -58,6 +58,8 @@ type CreateHostedConfigurationVersionInput struct {
 	// overwritten when creating multiple hosted configuration versions in rapid
 	// succession, specify the version of the latest hosted configuration version.
 	LatestVersionNumber int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateHostedConfigurationVersionOutput struct {
@@ -84,6 +86,8 @@ type CreateHostedConfigurationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

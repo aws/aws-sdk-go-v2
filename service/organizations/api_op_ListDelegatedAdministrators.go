@@ -55,6 +55,8 @@ type ListDelegatedAdministratorsInput struct {
 	// service principal, the operation lists all delegated administrators for all
 	// services in your organization.
 	ServicePrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDelegatedAdministratorsOutput struct {
@@ -70,6 +72,8 @@ type ListDelegatedAdministratorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDelegatedAdministratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

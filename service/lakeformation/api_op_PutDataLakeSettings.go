@@ -46,11 +46,15 @@ type PutDataLakeSettingsInput struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutDataLakeSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

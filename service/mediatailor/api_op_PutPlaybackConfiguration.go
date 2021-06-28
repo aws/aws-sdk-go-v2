@@ -98,6 +98,8 @@ type PutPlaybackConfigurationInput struct {
 	// The URL prefix for the parent manifest for the stream, minus the asset ID. The
 	// maximum length is 512 characters.
 	VideoContentSourceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type PutPlaybackConfigurationOutput struct {
@@ -188,6 +190,8 @@ type PutPlaybackConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutPlaybackConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,11 +44,15 @@ type CancelMailboxExportJobInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelMailboxExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -56,6 +56,8 @@ type DetectStackDriftInput struct {
 
 	// The logical names of any resources you want to use as filters.
 	LogicalResourceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DetectStackDriftOutput struct {
@@ -70,6 +72,8 @@ type DetectStackDriftOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectStackDriftMiddlewares(stack *middleware.Stack, options Options) (err error) {

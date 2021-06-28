@@ -52,6 +52,8 @@ type PurchaseScheduledInstancesInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of PurchaseScheduledInstances.
@@ -62,6 +64,8 @@ type PurchaseScheduledInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseScheduledInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

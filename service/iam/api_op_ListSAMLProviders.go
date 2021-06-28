@@ -33,6 +33,7 @@ func (c *Client) ListSAMLProviders(ctx context.Context, params *ListSAMLProvider
 }
 
 type ListSAMLProvidersInput struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful ListSAMLProviders request.
@@ -44,6 +45,8 @@ type ListSAMLProvidersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSAMLProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {

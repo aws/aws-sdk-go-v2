@@ -44,6 +44,8 @@ type DeleteThemeAliasInput struct {
 	//
 	// This member is required.
 	ThemeId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteThemeAliasOutput struct {
@@ -65,6 +67,8 @@ type DeleteThemeAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

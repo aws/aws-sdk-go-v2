@@ -42,11 +42,15 @@ type DeleteBuildInput struct {
 	//
 	// This member is required.
 	BuildId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBuildOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,11 +36,15 @@ type DeleteDBSubnetGroupInput struct {
 	//
 	// This member is required.
 	DBSubnetGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBSubnetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

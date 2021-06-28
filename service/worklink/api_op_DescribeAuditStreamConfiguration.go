@@ -33,6 +33,8 @@ type DescribeAuditStreamConfigurationInput struct {
 	//
 	// This member is required.
 	FleetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAuditStreamConfigurationOutput struct {
@@ -42,6 +44,8 @@ type DescribeAuditStreamConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAuditStreamConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

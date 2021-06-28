@@ -33,6 +33,8 @@ type DeleteFirewallDomainListInput struct {
 	//
 	// This member is required.
 	FirewallDomainListId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFirewallDomainListOutput struct {
@@ -42,6 +44,8 @@ type DeleteFirewallDomainListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {

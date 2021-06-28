@@ -45,11 +45,15 @@ type PutMetadataInput struct {
 	//
 	// This member is required.
 	Metadata *string
+
+	noSmithyDocumentSerde
 }
 
 type PutMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

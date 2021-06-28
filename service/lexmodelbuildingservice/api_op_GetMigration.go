@@ -37,6 +37,8 @@ type GetMigrationInput struct {
 	//
 	// This member is required.
 	MigrationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMigrationOutput struct {
@@ -89,6 +91,8 @@ type GetMigrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

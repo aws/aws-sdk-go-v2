@@ -55,6 +55,8 @@ type GetGroupPolicyInput struct {
 	//
 	// This member is required.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetGroupPolicy request.
@@ -80,6 +82,8 @@ type GetGroupPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

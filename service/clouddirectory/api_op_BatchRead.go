@@ -43,6 +43,8 @@ type BatchReadInput struct {
 	// Represents the manner and timing in which the successful write or update of an
 	// object is reflected in a subsequent read operation of that same object.
 	ConsistencyLevel types.ConsistencyLevel
+
+	noSmithyDocumentSerde
 }
 
 type BatchReadOutput struct {
@@ -52,6 +54,8 @@ type BatchReadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchReadMiddlewares(stack *middleware.Stack, options Options) (err error) {

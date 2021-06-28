@@ -43,6 +43,8 @@ type CreateDefaultSubnetInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateDefaultSubnetOutput struct {
@@ -52,6 +54,8 @@ type CreateDefaultSubnetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDefaultSubnetMiddlewares(stack *middleware.Stack, options Options) (err error) {

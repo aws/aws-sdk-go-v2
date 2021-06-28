@@ -32,11 +32,15 @@ type DeleteMitigationActionInput struct {
 	//
 	// This member is required.
 	ActionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMitigationActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type DescribeInstancesInput struct {
 	// A stack ID. If you use this parameter, DescribeInstances returns descriptions of
 	// the instances associated with the specified stack.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeInstances request.
@@ -62,6 +64,8 @@ type DescribeInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

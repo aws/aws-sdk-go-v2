@@ -39,6 +39,8 @@ type GetProxySessionInput struct {
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetProxySessionOutput struct {
@@ -48,6 +50,8 @@ type GetProxySessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

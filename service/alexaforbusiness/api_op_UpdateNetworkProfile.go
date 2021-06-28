@@ -55,11 +55,15 @@ type UpdateNetworkProfileInput struct {
 	// your devices and used to trust your authentication server during EAP
 	// negotiation.
 	TrustAnchors []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateNetworkProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

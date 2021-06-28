@@ -46,6 +46,8 @@ type CreateContainerInput struct {
 	// conventions, see Tagging Resources in MediaStore
 	// (https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateContainerOutput struct {
@@ -66,6 +68,8 @@ type CreateContainerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContainerMiddlewares(stack *middleware.Stack, options Options) (err error) {

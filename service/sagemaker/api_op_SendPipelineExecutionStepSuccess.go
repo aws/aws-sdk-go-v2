@@ -44,6 +44,8 @@ type SendPipelineExecutionStepSuccessInput struct {
 
 	// A list of the output parameters of the callback step.
 	OutputParameters []types.OutputParameter
+
+	noSmithyDocumentSerde
 }
 
 type SendPipelineExecutionStepSuccessOutput struct {
@@ -53,6 +55,8 @@ type SendPipelineExecutionStepSuccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendPipelineExecutionStepSuccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

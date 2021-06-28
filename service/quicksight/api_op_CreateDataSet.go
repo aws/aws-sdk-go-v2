@@ -78,6 +78,8 @@ type CreateDataSetInput struct {
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the dataset.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDataSetOutput struct {
@@ -105,6 +107,8 @@ type CreateDataSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

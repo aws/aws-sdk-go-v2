@@ -45,6 +45,8 @@ type UpdateBrokerStorageInput struct {
 	//
 	// This member is required.
 	TargetBrokerEBSVolumeInfo []types.BrokerEBSVolumeInfo
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBrokerStorageOutput struct {
@@ -57,6 +59,8 @@ type UpdateBrokerStorageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBrokerStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {

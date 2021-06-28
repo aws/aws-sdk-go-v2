@@ -65,6 +65,8 @@ type DescribePatchPropertiesInput struct {
 	// applications released by Microsoft. Not applicable for the Linux or macOS
 	// operating systems.
 	PatchSet types.PatchSet
+
+	noSmithyDocumentSerde
 }
 
 type DescribePatchPropertiesOutput struct {
@@ -78,6 +80,8 @@ type DescribePatchPropertiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePatchPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

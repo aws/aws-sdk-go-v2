@@ -43,11 +43,15 @@ type UpdateDetectorInput struct {
 	// An enum value that specifies how frequently findings are exported, such as to
 	// CloudWatch Events.
 	FindingPublishingFrequency types.FindingPublishingFrequency
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

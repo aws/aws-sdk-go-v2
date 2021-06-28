@@ -38,6 +38,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 }
 
 type GreetingWithErrorsInput struct {
+	noSmithyDocumentSerde
 }
 
 type GreetingWithErrorsOutput struct {
@@ -45,6 +46,8 @@ type GreetingWithErrorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGreetingWithErrorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

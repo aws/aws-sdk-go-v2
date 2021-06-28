@@ -41,6 +41,8 @@ type UpdateTrainingJobInput struct {
 	// Configuration information for Debugger rules for profiling system and framework
 	// metrics.
 	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTrainingJobOutput struct {
@@ -52,6 +54,8 @@ type UpdateTrainingJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

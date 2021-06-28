@@ -43,11 +43,15 @@ type DetachPrincipalPolicyInput struct {
 	//
 	// This member is required.
 	Principal *string
+
+	noSmithyDocumentSerde
 }
 
 type DetachPrincipalPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

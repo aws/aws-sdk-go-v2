@@ -106,11 +106,15 @@ type UpdateCustomKeyStoreInput struct {
 	// Changes the friendly name of the custom key store to the value that you specify.
 	// The custom key store name must be unique in the AWS account.
 	NewCustomKeyStoreName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCustomKeyStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

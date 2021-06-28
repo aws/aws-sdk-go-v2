@@ -41,6 +41,8 @@ type ModifyBackupAttributesInput struct {
 	//
 	// This member is required.
 	NeverExpires *bool
+
+	noSmithyDocumentSerde
 }
 
 type ModifyBackupAttributesOutput struct {
@@ -55,6 +57,8 @@ type ModifyBackupAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyBackupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

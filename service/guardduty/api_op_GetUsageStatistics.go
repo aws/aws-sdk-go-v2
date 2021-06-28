@@ -64,6 +64,8 @@ type GetUsageStatisticsInput struct {
 	// The currency unit you would like to view your usage statistics in. Current valid
 	// values are USD.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 type GetUsageStatisticsOutput struct {
@@ -78,6 +80,8 @@ type GetUsageStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUsageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

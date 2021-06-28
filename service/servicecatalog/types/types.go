@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -22,6 +23,8 @@ type AccessLevelFilter struct {
 
 	// The user to which the access level applies. The only supported value is Self.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a budget.
@@ -29,6 +32,8 @@ type BudgetDetail struct {
 
 	// Name of the associated budget.
 	BudgetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a CloudWatch dashboard.
@@ -36,6 +41,8 @@ type CloudWatchDashboard struct {
 
 	// The name of the CloudWatch dashboard.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a constraint.
@@ -68,6 +75,8 @@ type ConstraintDetail struct {
 	//
 	// * TEMPLATE
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a constraint.
@@ -86,6 +95,8 @@ type ConstraintSummary struct {
 	//
 	// * TEMPLATE
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of an execution parameter value that is passed to a self-service action
@@ -100,6 +111,8 @@ type ExecutionParameter struct {
 
 	// The execution parameter type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // An object containing information about the error, along with identifying
@@ -120,6 +133,8 @@ type FailedServiceActionAssociation struct {
 
 	// The self-service action identifier. For example, act-fs7abcd89wxyz.
 	ServiceActionId *string
+
+	noSmithyDocumentSerde
 }
 
 // A launch path object.
@@ -130,6 +145,8 @@ type LaunchPath struct {
 
 	// The name of the launch path.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a product path for a user.
@@ -146,6 +163,8 @@ type LaunchPathSummary struct {
 
 	// The tags associated with this product path.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // The search filter to use when listing history records.
@@ -162,6 +181,8 @@ type ListRecordHistorySearchFilter struct {
 
 	// The filter value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters to use when listing TagOptions.
@@ -175,6 +196,8 @@ type ListTagOptionsFilters struct {
 
 	// The TagOption value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the organization node.
@@ -185,6 +208,8 @@ type OrganizationNode struct {
 
 	// The identifier of the organization node.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The constraints that the administrator has put on the parameter.
@@ -222,6 +247,8 @@ type ParameterConstraints struct {
 	// A numeric value that determines the smallest numeric value you want to allow for
 	// Number types.
 	MinValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a portfolio.
@@ -244,6 +271,8 @@ type PortfolioDetail struct {
 
 	// The name of the portfolio provider.
 	ProviderName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the portfolio share.
@@ -266,6 +295,8 @@ type PortfolioShareDetail struct {
 
 	// The type of the portfolio share.
 	Type DescribePortfolioShareType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a principal.
@@ -276,6 +307,8 @@ type Principal struct {
 
 	// The principal type. The supported value is IAM.
 	PrincipalType PrincipalType
+
+	noSmithyDocumentSerde
 }
 
 // A single product view aggregation value/count pair, containing metadata about
@@ -287,6 +320,8 @@ type ProductViewAggregationValue struct {
 
 	// The value of the product view aggregation.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a product view.
@@ -311,6 +346,8 @@ type ProductViewDetail struct {
 	// *
 	// FAILED - An action failed.
 	Status Status
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a product view.
@@ -354,6 +391,8 @@ type ProductViewSummary struct {
 	// The product type. Contact the product administrator for the significance of this
 	// value. If this value is MARKETPLACE, the product was created by AWS Marketplace.
 	Type ProductType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a provisioned product.
@@ -463,6 +502,8 @@ type ProvisionedProductAttribute struct {
 
 	// The ARN of the IAM user in the session. This ARN might contain a session ID.
 	UserArnSession *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a provisioned product.
@@ -556,6 +597,8 @@ type ProvisionedProductDetail struct {
 	// The type of provisioned product. The supported values are CFN_STACK and
 	// CFN_STACKSET.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a plan.
@@ -609,6 +652,8 @@ type ProvisionedProductPlanDetails struct {
 
 	// The time when the plan was last updated.
 	UpdatedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a plan.
@@ -631,6 +676,8 @@ type ProvisionedProductPlanSummary struct {
 
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a provisioning artifact. A provisioning artifact is also known
@@ -652,6 +699,8 @@ type ProvisioningArtifact struct {
 
 	// The name of the provisioning artifact.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a provisioning artifact (also known as a version) for a
@@ -687,6 +736,8 @@ type ProvisioningArtifactDetail struct {
 	// *
 	// MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
 	Type ProvisioningArtifactType
+
+	noSmithyDocumentSerde
 }
 
 // Provisioning artifact output.
@@ -697,6 +748,8 @@ type ProvisioningArtifactOutput struct {
 
 	// The provisioning artifact output key.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a parameter used to provision a product.
@@ -721,6 +774,8 @@ type ProvisioningArtifactParameter struct {
 
 	// The parameter type.
 	ParameterType *string
+
+	noSmithyDocumentSerde
 }
 
 // The user-defined preferences that will be applied during product provisioning,
@@ -742,6 +797,8 @@ type ProvisioningArtifactPreferences struct {
 	// UpdateProvisioningPreferences$StackSetRegions. Applicable only to a CFN_STACKSET
 	// provisioned product type.
 	StackSetRegions []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a provisioning artifact (also known as a version) for a
@@ -783,6 +840,8 @@ type ProvisioningArtifactProperties struct {
 	// *
 	// MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
 	Type ProvisioningArtifactType
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a provisioning artifact (also known as a version) for
@@ -804,6 +863,8 @@ type ProvisioningArtifactSummary struct {
 	// The metadata for the provisioning artifact. This is used with AWS Marketplace
 	// products.
 	ProvisioningArtifactMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains summary information about a product view and a
@@ -816,6 +877,8 @@ type ProvisioningArtifactView struct {
 	// Information about a provisioning artifact. A provisioning artifact is also known
 	// as a product version.
 	ProvisioningArtifact *ProvisioningArtifact
+
+	noSmithyDocumentSerde
 }
 
 // Information about a parameter used to provision a product.
@@ -826,6 +889,8 @@ type ProvisioningParameter struct {
 
 	// The parameter value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The user-defined preferences that will be applied when updating a provisioned
@@ -895,6 +960,8 @@ type ProvisioningPreferences struct {
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all regions from the STACKSET constraint.
 	StackSetRegions []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a request operation.
@@ -965,6 +1032,8 @@ type RecordDetail struct {
 
 	// The time when the record was last updated.
 	UpdatedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The error code and description resulting from an operation.
@@ -975,6 +1044,8 @@ type RecordError struct {
 
 	// The description of the error.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the product created as the result of a request. For example, the
@@ -990,6 +1061,8 @@ type RecordOutput struct {
 
 	// The output value.
 	OutputValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tag, which is a key-value pair.
@@ -1000,6 +1073,8 @@ type RecordTag struct {
 
 	// The value for this tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a resource change that will occur when a plan is executed.
@@ -1026,6 +1101,8 @@ type ResourceChange struct {
 
 	// The change scope.
 	Scope []ResourceAttribute
+
+	noSmithyDocumentSerde
 }
 
 // Information about a change to a resource attribute.
@@ -1041,6 +1118,8 @@ type ResourceChangeDetail struct {
 
 	// Information about the resource attribute to be modified.
 	Target *ResourceTargetDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Information about a resource.
@@ -1060,6 +1139,8 @@ type ResourceDetail struct {
 
 	// The name of the resource.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a change to a resource attribute.
@@ -1075,6 +1156,8 @@ type ResourceTargetDefinition struct {
 	// If the attribute is Properties, indicates whether a change to this property
 	// causes the resource to be re-created.
 	RequiresRecreation RequiresRecreation
+
+	noSmithyDocumentSerde
 }
 
 // A self-service action association consisting of the Action ID, the Product ID,
@@ -1095,6 +1178,8 @@ type ServiceActionAssociation struct {
 	//
 	// This member is required.
 	ServiceActionId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object containing detailed information about the self-service action.
@@ -1105,6 +1190,8 @@ type ServiceActionDetail struct {
 
 	// Summary information about the self-service action.
 	ServiceActionSummary *ServiceActionSummary
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about the self-service action.
@@ -1121,6 +1208,8 @@ type ServiceActionSummary struct {
 
 	// The self-service action name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the portfolio share operation.
@@ -1131,6 +1220,8 @@ type ShareDetails struct {
 
 	// List of accounts for whom the operation succeeded.
 	SuccessfulShares []string
+
+	noSmithyDocumentSerde
 }
 
 // Errors that occurred during the portfolio share operation.
@@ -1144,6 +1235,8 @@ type ShareError struct {
 
 	// Information about the error.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // An AWS CloudFormation stack, in a specific account and region, that's part of a
@@ -1179,6 +1272,8 @@ type StackInstance struct {
 	// * CURRENT: The stack is currently up
 	// to date with the stack set.
 	StackInstanceStatus StackInstanceStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tag. A tag is a key-value pair. Tags are propagated to the
@@ -1194,6 +1289,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a TagOption.
@@ -1213,6 +1310,8 @@ type TagOptionDetail struct {
 
 	// The TagOption value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a TagOption.
@@ -1223,6 +1322,8 @@ type TagOptionSummary struct {
 
 	// The TagOption value.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The parameter key-value pair used to update a provisioned product.
@@ -1236,6 +1337,8 @@ type UpdateProvisioningParameter struct {
 
 	// The parameter value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The user-defined preferences that will be applied when updating a provisioned
@@ -1310,6 +1413,8 @@ type UpdateProvisioningPreferences struct {
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all regions from the STACKSET constraint.
 	StackSetRegions []string
+
+	noSmithyDocumentSerde
 }
 
 // Additional information provided by the administrator.
@@ -1320,4 +1425,8 @@ type UsageInstruction struct {
 
 	// The usage instruction value for this type.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

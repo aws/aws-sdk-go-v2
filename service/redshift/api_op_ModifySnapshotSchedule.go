@@ -41,6 +41,8 @@ type ModifySnapshotScheduleInput struct {
 	//
 	// This member is required.
 	ScheduleIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a snapshot schedule. You can set a regular interval for creating
@@ -71,6 +73,8 @@ type ModifySnapshotScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifySnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

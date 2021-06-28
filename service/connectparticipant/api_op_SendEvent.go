@@ -55,6 +55,8 @@ type SendEventInput struct {
 	// The content of the event to be sent (for example, message text). This is not yet
 	// supported.
 	Content *string
+
+	noSmithyDocumentSerde
 }
 
 type SendEventOutput struct {
@@ -68,6 +70,8 @@ type SendEventOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, options Options) (err error) {

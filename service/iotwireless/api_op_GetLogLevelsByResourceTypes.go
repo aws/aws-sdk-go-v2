@@ -29,6 +29,7 @@ func (c *Client) GetLogLevelsByResourceTypes(ctx context.Context, params *GetLog
 }
 
 type GetLogLevelsByResourceTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetLogLevelsByResourceTypesOutput struct {
@@ -44,6 +45,8 @@ type GetLogLevelsByResourceTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLogLevelsByResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -64,6 +64,8 @@ type ConnectDirectoryInput struct {
 
 	// The tags to be assigned to AD Connector.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the ConnectDirectory operation.
@@ -74,6 +76,8 @@ type ConnectDirectoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConnectDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

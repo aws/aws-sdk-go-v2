@@ -39,6 +39,8 @@ type DescribeFunctionInput struct {
 
 	// The function’s stage, either DEVELOPMENT or LIVE.
 	Stage types.FunctionStage
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFunctionOutput struct {
@@ -51,6 +53,8 @@ type DescribeFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

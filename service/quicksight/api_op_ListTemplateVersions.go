@@ -46,6 +46,8 @@ type ListTemplateVersionsInput struct {
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTemplateVersionsOutput struct {
@@ -64,6 +66,8 @@ type ListTemplateVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

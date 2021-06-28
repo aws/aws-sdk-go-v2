@@ -72,6 +72,8 @@ type GetTransitGatewayPrefixListReferencesInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTransitGatewayPrefixListReferencesOutput struct {
@@ -85,6 +87,8 @@ type GetTransitGatewayPrefixListReferencesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTransitGatewayPrefixListReferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {

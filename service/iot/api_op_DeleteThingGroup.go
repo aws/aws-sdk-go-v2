@@ -35,11 +35,15 @@ type DeleteThingGroupInput struct {
 
 	// The expected version of the thing group to delete.
 	ExpectedVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -30,11 +30,15 @@ type LaunchAppInput struct {
 
 	// The ID of the application.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type LaunchAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationLaunchAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

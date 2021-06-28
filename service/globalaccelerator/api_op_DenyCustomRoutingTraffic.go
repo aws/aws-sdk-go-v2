@@ -66,11 +66,15 @@ type DenyCustomRoutingTrafficInput struct {
 	// A list of specific Amazon EC2 instance ports (destination ports) in a subnet
 	// endpoint that you want to prevent from receiving traffic.
 	DestinationPorts []int32
+
+	noSmithyDocumentSerde
 }
 
 type DenyCustomRoutingTrafficOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDenyCustomRoutingTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {

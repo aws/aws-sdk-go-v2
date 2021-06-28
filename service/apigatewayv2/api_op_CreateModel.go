@@ -50,6 +50,8 @@ type CreateModelInput struct {
 
 	// The description of the model.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateModelOutput struct {
@@ -72,6 +74,8 @@ type CreateModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

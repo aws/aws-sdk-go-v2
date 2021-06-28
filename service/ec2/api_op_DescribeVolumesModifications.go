@@ -89,6 +89,8 @@ type DescribeVolumesModificationsInput struct {
 
 	// The IDs of the volumes.
 	VolumeIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVolumesModificationsOutput struct {
@@ -101,6 +103,8 @@ type DescribeVolumesModificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVolumesModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

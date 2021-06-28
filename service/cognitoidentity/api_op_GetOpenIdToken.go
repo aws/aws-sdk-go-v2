@@ -43,6 +43,8 @@ type GetOpenIdTokenInput struct {
 	// Cognito user pool provider, or any other OpenID Connect provider, always include
 	// the id_token.
 	Logins map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Returned in response to a successful GetOpenIdToken request.
@@ -57,6 +59,8 @@ type GetOpenIdTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOpenIdTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

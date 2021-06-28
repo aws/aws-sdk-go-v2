@@ -65,11 +65,15 @@ type DeleteCertificateAuthorityInput struct {
 	// The number of days to make a CA restorable after it has been deleted. This can
 	// be anywhere from 7 to 30 days, with 30 being the default.
 	PermanentDeletionTimeInDays *int32
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

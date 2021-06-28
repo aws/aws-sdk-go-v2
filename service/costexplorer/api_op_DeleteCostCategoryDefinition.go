@@ -33,6 +33,8 @@ type DeleteCostCategoryDefinitionInput struct {
 	//
 	// This member is required.
 	CostCategoryArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCostCategoryDefinitionOutput struct {
@@ -46,6 +48,8 @@ type DeleteCostCategoryDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

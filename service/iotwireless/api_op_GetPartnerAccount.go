@@ -39,6 +39,8 @@ type GetPartnerAccountInput struct {
 	//
 	// This member is required.
 	PartnerType types.PartnerType
+
+	noSmithyDocumentSerde
 }
 
 type GetPartnerAccountOutput struct {
@@ -51,6 +53,8 @@ type GetPartnerAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

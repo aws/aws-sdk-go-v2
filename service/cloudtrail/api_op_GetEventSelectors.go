@@ -68,6 +68,8 @@ type GetEventSelectorsInput struct {
 	//
 	// This member is required.
 	TrailName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEventSelectorsOutput struct {
@@ -83,6 +85,8 @@ type GetEventSelectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEventSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListElasticsearchVersionsInput struct {
 	// a NextToken output in the response which can be used by the client to retrieve
 	// more results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for the parameters for response received from
@@ -58,6 +60,8 @@ type ListElasticsearchVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

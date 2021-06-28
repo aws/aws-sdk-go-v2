@@ -34,6 +34,8 @@ type GetSuiteInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a get suite request.
@@ -44,6 +46,8 @@ type GetSuiteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSuiteMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type CreateMilestoneInput struct {
 	//
 	// This member is required.
 	WorkloadId *string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a create milestone call.
@@ -64,6 +66,8 @@ type CreateMilestoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMilestoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

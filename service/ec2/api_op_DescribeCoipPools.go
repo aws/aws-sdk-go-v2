@@ -54,6 +54,8 @@ type DescribeCoipPoolsInput struct {
 
 	// The IDs of the address pools.
 	PoolIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCoipPoolsOutput struct {
@@ -67,6 +69,8 @@ type DescribeCoipPoolsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCoipPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {

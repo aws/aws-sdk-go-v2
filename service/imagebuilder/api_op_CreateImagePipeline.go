@@ -78,6 +78,8 @@ type CreateImagePipelineInput struct {
 
 	// The tags of the image pipeline.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateImagePipelineOutput struct {
@@ -94,6 +96,8 @@ type CreateImagePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateImagePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

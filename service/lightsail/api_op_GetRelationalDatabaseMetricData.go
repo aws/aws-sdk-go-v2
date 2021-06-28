@@ -136,6 +136,8 @@ type GetRelationalDatabaseMetricDataInput struct {
 	//
 	// This member is required.
 	Unit types.MetricUnit
+
+	noSmithyDocumentSerde
 }
 
 type GetRelationalDatabaseMetricDataOutput struct {
@@ -148,6 +150,8 @@ type GetRelationalDatabaseMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRelationalDatabaseMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

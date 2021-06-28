@@ -51,6 +51,8 @@ type AssociateInstanceStorageConfigInput struct {
 	//
 	// This member is required.
 	StorageConfig *types.InstanceStorageConfig
+
+	noSmithyDocumentSerde
 }
 
 type AssociateInstanceStorageConfigOutput struct {
@@ -61,6 +63,8 @@ type AssociateInstanceStorageConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

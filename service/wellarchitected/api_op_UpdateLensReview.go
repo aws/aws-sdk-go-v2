@@ -46,6 +46,8 @@ type UpdateLensReviewInput struct {
 
 	// List of pillar notes of a lens review in a workload.
 	PillarNotes map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a update lens review call.
@@ -59,6 +61,8 @@ type UpdateLensReviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLensReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

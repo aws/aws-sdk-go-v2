@@ -38,6 +38,8 @@ type GetUpgradeStatusInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by GetUpgradeStatus operation.
@@ -71,6 +73,8 @@ type GetUpgradeStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUpgradeStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -64,6 +64,8 @@ type GetObjectRetentionInput struct {
 
 	// The version ID for the object whose retention settings you want to retrieve.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectRetentionOutput struct {
@@ -73,6 +75,8 @@ type GetObjectRetentionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {

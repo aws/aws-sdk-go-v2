@@ -37,6 +37,8 @@ type BatchGetDevEndpointsInput struct {
 	//
 	// This member is required.
 	DevEndpointNames []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetDevEndpointsOutput struct {
@@ -49,6 +51,8 @@ type BatchGetDevEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -99,6 +99,8 @@ type UpdateGameServerGroupInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
 	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGameServerGroupOutput struct {
@@ -108,6 +110,8 @@ type UpdateGameServerGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

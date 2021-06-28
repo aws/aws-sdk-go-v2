@@ -35,12 +35,16 @@ type OptInPhoneNumberInput struct {
 	//
 	// This member is required.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // The response for the OptInPhoneNumber action.
 type OptInPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationOptInPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

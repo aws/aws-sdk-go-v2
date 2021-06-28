@@ -47,6 +47,8 @@ type CreateTrafficPolicyInput struct {
 
 	// (Optional) Any comments that you want to include about the traffic policy.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the
@@ -65,6 +67,8 @@ type CreateTrafficPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

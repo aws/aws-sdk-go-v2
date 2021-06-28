@@ -52,6 +52,8 @@ type DeletePortfolioShareInput struct {
 
 	// The organization node to whom you are going to stop sharing.
 	OrganizationNode *types.OrganizationNode
+
+	noSmithyDocumentSerde
 }
 
 type DeletePortfolioShareOutput struct {
@@ -62,6 +64,8 @@ type DeletePortfolioShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

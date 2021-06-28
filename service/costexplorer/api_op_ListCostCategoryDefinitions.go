@@ -46,6 +46,8 @@ type ListCostCategoryDefinitionsInput struct {
 	// token when the response from a previous call has more results than the maximum
 	// page size.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListCostCategoryDefinitionsOutput struct {
@@ -61,6 +63,8 @@ type ListCostCategoryDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCostCategoryDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

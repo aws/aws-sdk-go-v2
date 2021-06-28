@@ -88,6 +88,8 @@ type DescribeReservedInstancesModificationsInput struct {
 
 	// IDs for the submitted modification request.
 	ReservedInstancesModificationIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeReservedInstancesModifications.
@@ -102,6 +104,8 @@ type DescribeReservedInstancesModificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedInstancesModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

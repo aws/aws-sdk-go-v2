@@ -41,6 +41,8 @@ type PollForThirdPartyJobsInput struct {
 
 	// The maximum number of jobs to return in a poll for jobs call.
 	MaxBatchSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a PollForThirdPartyJobs action.
@@ -51,6 +53,8 @@ type PollForThirdPartyJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPollForThirdPartyJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

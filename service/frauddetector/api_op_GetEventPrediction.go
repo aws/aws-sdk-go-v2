@@ -87,6 +87,8 @@ type GetEventPredictionInput struct {
 
 	// The Amazon SageMaker model endpoint input data blobs.
 	ExternalModelEndpointDataBlobs map[string]types.ModelEndpointDataBlob
+
+	noSmithyDocumentSerde
 }
 
 type GetEventPredictionOutput struct {
@@ -103,6 +105,8 @@ type GetEventPredictionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEventPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type GetAssessmentReportUrlInput struct {
 	//
 	// This member is required.
 	AssessmentReportId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAssessmentReportUrlOutput struct {
@@ -48,6 +50,8 @@ type GetAssessmentReportUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssessmentReportUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

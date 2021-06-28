@@ -48,6 +48,8 @@ type CreateFolderMembershipInput struct {
 	//
 	// This member is required.
 	MemberType types.MemberType
+
+	noSmithyDocumentSerde
 }
 
 type CreateFolderMembershipOutput struct {
@@ -63,6 +65,8 @@ type CreateFolderMembershipOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFolderMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

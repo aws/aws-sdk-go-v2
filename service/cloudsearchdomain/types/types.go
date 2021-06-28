@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A container for facet information.
 type Bucket struct {
 
@@ -10,6 +14,8 @@ type Bucket struct {
 
 	// The facet value being counted.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A container for the calculated facet values and counts.
@@ -17,6 +23,8 @@ type BucketInfo struct {
 
 	// A list of the calculated facet values and counts.
 	Buckets []Bucket
+
+	noSmithyDocumentSerde
 }
 
 // A warning returned by the document service when an issue is discovered while
@@ -25,6 +33,8 @@ type DocumentServiceWarning struct {
 
 	// The description for a warning returned by the document service.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The statistics for a field calculated in the request.
@@ -71,6 +81,8 @@ type FieldStats struct {
 
 	// The sum of all field values in the result set squared.
 	SumOfSquares float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a document that matches the search request.
@@ -87,6 +99,8 @@ type Hit struct {
 
 	// The document ID of a document that matches the search request.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The collection of documents that match the search request.
@@ -104,6 +118,8 @@ type Hits struct {
 
 	// The index of the first matching document.
 	Start int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the resource id (rid) and the time it took to process the request
@@ -115,6 +131,8 @@ type SearchStatus struct {
 
 	// How long it took to process the request, in milliseconds.
 	Timems int64
+
+	noSmithyDocumentSerde
 }
 
 // An autocomplete suggestion that matches the query string specified in a
@@ -129,6 +147,8 @@ type SuggestionMatch struct {
 
 	// The string that matches the query string specified in the SuggestRequest.
 	Suggestion *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for the suggestion information returned in a SuggestResponse.
@@ -142,6 +162,8 @@ type SuggestModel struct {
 
 	// The documents that match the query string.
 	Suggestions []SuggestionMatch
+
+	noSmithyDocumentSerde
 }
 
 // Contains the resource id (rid) and the time it took to process the request
@@ -153,4 +175,8 @@ type SuggestStatus struct {
 
 	// How long it took to process the request, in milliseconds.
 	Timems int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

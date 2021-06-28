@@ -42,6 +42,8 @@ type DeleteThemeInput struct {
 	// version number, you're using this call to DeleteTheme to delete all versions of
 	// the theme.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteThemeOutput struct {
@@ -60,6 +62,8 @@ type DeleteThemeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {

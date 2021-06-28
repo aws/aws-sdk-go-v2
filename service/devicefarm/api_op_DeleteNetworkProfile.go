@@ -32,11 +32,15 @@ type DeleteNetworkProfileInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNetworkProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type GetLensReviewInput struct {
 
 	// The milestone number. A workload can have a maximum of 100 milestones.
 	MilestoneNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Output of a get lens review call.
@@ -59,6 +61,8 @@ type GetLensReviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLensReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

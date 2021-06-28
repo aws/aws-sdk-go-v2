@@ -33,6 +33,8 @@ type GetStreamInput struct {
 	//
 	// This member is required.
 	ChannelArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStreamOutput struct {
@@ -42,6 +44,8 @@ type GetStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

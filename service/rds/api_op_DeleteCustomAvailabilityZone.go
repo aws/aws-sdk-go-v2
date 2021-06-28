@@ -36,6 +36,8 @@ type DeleteCustomAvailabilityZoneInput struct {
 	//
 	// This member is required.
 	CustomAvailabilityZoneId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomAvailabilityZoneOutput struct {
@@ -48,6 +50,8 @@ type DeleteCustomAvailabilityZoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomAvailabilityZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

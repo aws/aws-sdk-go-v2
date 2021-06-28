@@ -33,6 +33,8 @@ type GetSchemaCreationStatusInput struct {
 	//
 	// This member is required.
 	ApiId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSchemaCreationStatusOutput struct {
@@ -46,6 +48,8 @@ type GetSchemaCreationStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSchemaCreationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

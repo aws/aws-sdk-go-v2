@@ -39,6 +39,8 @@ type UpdateDataSourceInput struct {
 	//
 	// This member is required.
 	DataSourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an UpdateDataSource operation. You can see the updated
@@ -51,6 +53,8 @@ type UpdateDataSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

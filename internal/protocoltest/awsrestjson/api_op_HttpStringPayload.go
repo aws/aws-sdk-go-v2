@@ -26,6 +26,8 @@ func (c *Client) HttpStringPayload(ctx context.Context, params *HttpStringPayloa
 
 type HttpStringPayloadInput struct {
 	Payload *string
+
+	noSmithyDocumentSerde
 }
 
 type HttpStringPayloadOutput struct {
@@ -33,6 +35,8 @@ type HttpStringPayloadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpStringPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {

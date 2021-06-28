@@ -54,6 +54,8 @@ type GetReportGroupTrendInput struct {
 	// recent reports. If this parameter is omitted, the most recent 100 reports are
 	// analyzed.
 	NumOfReports *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetReportGroupTrendOutput struct {
@@ -66,6 +68,8 @@ type GetReportGroupTrendOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReportGroupTrendMiddlewares(stack *middleware.Stack, options Options) (err error) {

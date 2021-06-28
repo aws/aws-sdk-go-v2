@@ -32,11 +32,15 @@ type RegisterWebhookWithThirdPartyInput struct {
 	// The name of an existing webhook created with PutWebhook to register with a
 	// supported third party.
 	WebhookName *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterWebhookWithThirdPartyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterWebhookWithThirdPartyMiddlewares(stack *middleware.Stack, options Options) (err error) {

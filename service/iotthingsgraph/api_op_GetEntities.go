@@ -62,6 +62,8 @@ type GetEntitiesInput struct {
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace.
 	NamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type GetEntitiesOutput struct {
@@ -71,6 +73,8 @@ type GetEntitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

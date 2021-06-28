@@ -68,6 +68,8 @@ type ListConfigurationHistoryInput struct {
 
 	// The start time of the event.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ListConfigurationHistoryOutput struct {
@@ -83,6 +85,8 @@ type ListConfigurationHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConfigurationHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type StartMLEvaluationTaskRunInput struct {
 	//
 	// This member is required.
 	TransformId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartMLEvaluationTaskRunOutput struct {
@@ -45,6 +47,8 @@ type StartMLEvaluationTaskRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMLEvaluationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

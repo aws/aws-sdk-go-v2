@@ -52,6 +52,8 @@ type ListFleetsInput struct {
 	// be treated as an opaque identifier that is only used to retrieve the next items
 	// in a list and not for other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFleetsOutput struct {
@@ -68,6 +70,8 @@ type ListFleetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,6 +60,8 @@ type PostCommentForComparedCommitInput struct {
 
 	// The location of the comparison where you want to comment.
 	Location *types.Location
+
+	noSmithyDocumentSerde
 }
 
 type PostCommentForComparedCommitOutput struct {
@@ -88,6 +90,8 @@ type PostCommentForComparedCommitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPostCommentForComparedCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {

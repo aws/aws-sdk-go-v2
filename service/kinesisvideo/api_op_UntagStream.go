@@ -40,11 +40,15 @@ type UntagStreamInput struct {
 
 	// The name of the stream that you want to remove tags from.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type UntagStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

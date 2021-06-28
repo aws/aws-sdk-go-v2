@@ -87,6 +87,8 @@ type DescribeTransitGatewaysInput struct {
 
 	// The IDs of the transit gateways.
 	TransitGatewayIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTransitGatewaysOutput struct {
@@ -100,6 +102,8 @@ type DescribeTransitGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTransitGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

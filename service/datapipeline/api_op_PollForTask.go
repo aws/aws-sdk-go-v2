@@ -87,6 +87,8 @@ type PollForTaskInput struct {
 	// that your task runner is running on an EC2 instance, and ensures the proper AWS
 	// Data Pipeline service charges are applied to your pipeline.
 	InstanceIdentity *types.InstanceIdentity
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of PollForTask.
@@ -100,6 +102,8 @@ type PollForTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPollForTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type ImportApiKeysInput struct {
 	// A query parameter to indicate whether to rollback ApiKey importation (true) or
 	// not (false) when error is encountered.
 	FailOnWarnings bool
+
+	noSmithyDocumentSerde
 }
 
 // The identifier of an ApiKey used in a UsagePlan.
@@ -60,6 +62,8 @@ type ImportApiKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

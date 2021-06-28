@@ -47,6 +47,8 @@ type UpdateFileSystemInput struct {
 	// you are changing the ThroughputMode to provisioned, you must also set a value
 	// for ProvisionedThroughputInMibps.
 	ThroughputMode types.ThroughputMode
+
+	noSmithyDocumentSerde
 }
 
 // A description of the file system.
@@ -151,6 +153,8 @@ type UpdateFileSystemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {

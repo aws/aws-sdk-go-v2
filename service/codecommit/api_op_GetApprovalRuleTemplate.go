@@ -33,6 +33,8 @@ type GetApprovalRuleTemplateInput struct {
 	//
 	// This member is required.
 	ApprovalRuleTemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetApprovalRuleTemplateOutput struct {
@@ -44,6 +46,8 @@ type GetApprovalRuleTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

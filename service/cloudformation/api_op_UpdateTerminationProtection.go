@@ -46,6 +46,8 @@ type UpdateTerminationProtectionInput struct {
 	//
 	// This member is required.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTerminationProtectionOutput struct {
@@ -55,6 +57,8 @@ type UpdateTerminationProtectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTerminationProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

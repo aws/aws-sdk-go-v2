@@ -50,6 +50,8 @@ type DescribeStackEventsInput struct {
 	//
 	// Default: There is no default value.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for a DescribeStackEvents action.
@@ -64,6 +66,8 @@ type DescribeStackEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStackEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

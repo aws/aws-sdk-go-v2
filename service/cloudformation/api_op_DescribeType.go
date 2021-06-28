@@ -58,6 +58,8 @@ type DescribeTypeInput struct {
 	// about that specific extension version. Otherwise, it returns information about
 	// the default extension version.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTypeOutput struct {
@@ -275,6 +277,8 @@ type DescribeTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

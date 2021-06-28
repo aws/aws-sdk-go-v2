@@ -39,11 +39,15 @@ type DeleteIntegrationAssociationInput struct {
 	//
 	// This member is required.
 	IntegrationAssociationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteIntegrationAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

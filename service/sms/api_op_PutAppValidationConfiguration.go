@@ -39,11 +39,15 @@ type PutAppValidationConfigurationInput struct {
 
 	// The configuration for instance validation.
 	ServerGroupValidationConfigurations []types.ServerGroupValidationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutAppValidationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

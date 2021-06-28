@@ -41,6 +41,8 @@ type UpdateMeshInput struct {
 
 	// The service mesh specification to apply.
 	Spec *types.MeshSpec
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -53,6 +55,8 @@ type UpdateMeshOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {

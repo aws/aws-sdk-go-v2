@@ -65,6 +65,8 @@ type CreateFunctionInput struct {
 	// Conflict Detection as well as Resolution strategy should be performed when the
 	// resolver is invoked.
 	SyncConfig *types.SyncConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateFunctionOutput struct {
@@ -74,6 +76,8 @@ type CreateFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

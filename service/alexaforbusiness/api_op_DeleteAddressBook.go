@@ -32,11 +32,15 @@ type DeleteAddressBookInput struct {
 	//
 	// This member is required.
 	AddressBookArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAddressBookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {

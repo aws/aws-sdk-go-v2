@@ -58,6 +58,8 @@ type SearchAvailablePhoneNumbersInput struct {
 
 	// The toll-free prefix that you use to filter results. Only applies to the US.
 	TollFreePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchAvailablePhoneNumbersOutput struct {
@@ -70,6 +72,8 @@ type SearchAvailablePhoneNumbersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchAvailablePhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {

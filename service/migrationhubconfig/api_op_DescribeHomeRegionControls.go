@@ -48,6 +48,8 @@ type DescribeHomeRegionControlsInput struct {
 	// applied, which is always of type ACCOUNT. It applies the home region to the
 	// current ACCOUNT.
 	Target *types.Target
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHomeRegionControlsOutput struct {
@@ -62,6 +64,8 @@ type DescribeHomeRegionControlsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHomeRegionControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {

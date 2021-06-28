@@ -53,6 +53,8 @@ type DescribePullRequestEventsInput struct {
 	// Optional. The pull request event type about which you want to return
 	// information.
 	PullRequestEventType types.PullRequestEventType
+
+	noSmithyDocumentSerde
 }
 
 type DescribePullRequestEventsOutput struct {
@@ -68,6 +70,8 @@ type DescribePullRequestEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePullRequestEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

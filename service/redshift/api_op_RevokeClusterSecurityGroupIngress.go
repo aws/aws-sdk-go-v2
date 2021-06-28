@@ -55,6 +55,8 @@ type RevokeClusterSecurityGroupIngressInput struct {
 	// acceptable value. If EC2SecurityGroupOwnerId is specified, EC2SecurityGroupName
 	// must also be provided. and CIDRIP cannot be provided. Example: 111122223333
 	EC2SecurityGroupOwnerId *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeClusterSecurityGroupIngressOutput struct {
@@ -64,6 +66,8 @@ type RevokeClusterSecurityGroupIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

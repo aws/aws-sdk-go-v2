@@ -33,6 +33,8 @@ type ReleaseStaticIpInput struct {
 	//
 	// This member is required.
 	StaticIpName *string
+
+	noSmithyDocumentSerde
 }
 
 type ReleaseStaticIpOutput struct {
@@ -44,6 +46,8 @@ type ReleaseStaticIpOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReleaseStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

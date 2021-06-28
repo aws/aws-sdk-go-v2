@@ -56,6 +56,8 @@ type ImportInstanceInput struct {
 
 	// The launch specification.
 	LaunchSpecification *types.ImportInstanceLaunchSpecification
+
+	noSmithyDocumentSerde
 }
 
 type ImportInstanceOutput struct {
@@ -65,6 +67,8 @@ type ImportInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

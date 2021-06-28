@@ -42,11 +42,15 @@ type AssociateBotInput struct {
 
 	// The Amazon Lex V2 bot to associate with the instance.
 	LexV2Bot *types.LexV2Bot
+
+	noSmithyDocumentSerde
 }
 
 type AssociateBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

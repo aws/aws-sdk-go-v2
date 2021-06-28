@@ -34,6 +34,8 @@ type DescribeJobTemplateInput struct {
 	//
 	// This member is required.
 	JobTemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJobTemplateOutput struct {
@@ -73,6 +75,8 @@ type DescribeJobTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type SearchFlowExecutionsInput struct {
 
 	// The date and time of the earliest flow execution to return.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type SearchFlowExecutionsOutput struct {
@@ -64,6 +66,8 @@ type SearchFlowExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchFlowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

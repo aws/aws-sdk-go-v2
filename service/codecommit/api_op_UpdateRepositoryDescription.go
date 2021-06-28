@@ -42,11 +42,15 @@ type UpdateRepositoryDescriptionInput struct {
 	// The new comment or description for the specified repository. Repository
 	// descriptions are limited to 1,000 characters.
 	RepositoryDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRepositoryDescriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRepositoryDescriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

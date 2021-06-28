@@ -42,6 +42,8 @@ type ListDomainsInput struct {
 
 	// Number of domains to be returned. Default: 20
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // The ListDomains response includes the following elements.
@@ -58,6 +60,8 @@ type ListDomainsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {

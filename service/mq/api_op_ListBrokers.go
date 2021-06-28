@@ -37,6 +37,8 @@ type ListBrokersInput struct {
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBrokersOutput struct {
@@ -50,6 +52,8 @@ type ListBrokersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBrokersMiddlewares(stack *middleware.Stack, options Options) (err error) {

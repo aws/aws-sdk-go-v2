@@ -37,6 +37,8 @@ type DescribeRobotApplicationInput struct {
 
 	// The version of the robot application to describe.
 	ApplicationVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRobotApplicationOutput struct {
@@ -68,6 +70,8 @@ type DescribeRobotApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRobotApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

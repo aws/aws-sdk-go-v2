@@ -33,11 +33,15 @@ type DeleteRouteCalculatorInput struct {
 	//
 	// This member is required.
 	CalculatorName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRouteCalculatorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRouteCalculatorMiddlewares(stack *middleware.Stack, options Options) (err error) {

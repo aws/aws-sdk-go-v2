@@ -64,11 +64,15 @@ type UpdateQuerySuggestionsBlockListInput struct {
 	// suggestions with the latest content in the S3 file. This means changes might not
 	// take effect immediately.
 	SourceS3Path *types.S3Path
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQuerySuggestionsBlockListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {

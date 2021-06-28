@@ -181,6 +181,8 @@ type StartWorkflowExecutionInput struct {
 	// start-to-close timeout was specified at registration time then a fault is
 	// returned.
 	TaskStartToCloseTimeout *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the runId of a workflow execution.
@@ -192,6 +194,8 @@ type StartWorkflowExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

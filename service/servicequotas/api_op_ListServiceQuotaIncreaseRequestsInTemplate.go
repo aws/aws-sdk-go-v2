@@ -43,6 +43,8 @@ type ListServiceQuotaIncreaseRequestsInTemplateInput struct {
 
 	// The service identifier.
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
 
 type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
@@ -56,6 +58,8 @@ type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListServiceQuotaIncreaseRequestsInTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

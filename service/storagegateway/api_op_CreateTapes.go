@@ -91,6 +91,8 @@ type CreateTapesInput struct {
 	// Set to TRUE if the tape you are creating is to be configured as a
 	// write-once-read-many (WORM) tape.
 	Worm bool
+
+	noSmithyDocumentSerde
 }
 
 // CreateTapeOutput
@@ -102,6 +104,8 @@ type CreateTapesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {

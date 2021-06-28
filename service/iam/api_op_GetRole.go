@@ -50,6 +50,8 @@ type GetRoleInput struct {
 	//
 	// This member is required.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetRole request.
@@ -62,6 +64,8 @@ type GetRoleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type UpdatePackagingGroupInput struct {
 
 	// CDN Authorization credentials
 	Authorization *types.Authorization
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePackagingGroupOutput struct {
@@ -62,6 +64,8 @@ type UpdatePackagingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

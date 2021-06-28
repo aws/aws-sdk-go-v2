@@ -52,6 +52,8 @@ type GetFunctionEventInvokeConfigInput struct {
 
 	// A version number or alias name.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFunctionEventInvokeConfigOutput struct {
@@ -84,6 +86,8 @@ type GetFunctionEventInvokeConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

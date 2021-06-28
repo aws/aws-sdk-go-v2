@@ -42,6 +42,8 @@ type CreateConnectionAliasInput struct {
 
 	// The tags to associate with the connection alias.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateConnectionAliasOutput struct {
@@ -51,6 +53,8 @@ type CreateConnectionAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

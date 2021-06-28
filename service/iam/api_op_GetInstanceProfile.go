@@ -45,6 +45,8 @@ type GetInstanceProfileInput struct {
 	//
 	// This member is required.
 	InstanceProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetInstanceProfile request.
@@ -57,6 +59,8 @@ type GetInstanceProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

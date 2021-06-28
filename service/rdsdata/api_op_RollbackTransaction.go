@@ -45,6 +45,8 @@ type RollbackTransactionInput struct {
 	//
 	// This member is required.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response elements represent the output of a request to perform a rollback of
@@ -56,6 +58,8 @@ type RollbackTransactionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRollbackTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {

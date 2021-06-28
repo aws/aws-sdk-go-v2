@@ -37,11 +37,15 @@ type DeleteDocumentationPartInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDocumentationPartOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {

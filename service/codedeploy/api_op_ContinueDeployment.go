@@ -42,11 +42,15 @@ type ContinueDeploymentInput struct {
 	// deployment is ready to start shifting traffic. TERMINATION_WAIT indicates that
 	// the traffic is shifted, but the original target is not terminated.
 	DeploymentWaitType types.DeploymentWaitType
+
+	noSmithyDocumentSerde
 }
 
 type ContinueDeploymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationContinueDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

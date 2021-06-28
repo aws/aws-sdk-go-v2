@@ -79,6 +79,8 @@ type CreatePolicyVersionInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
 	SetAsDefault bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful CreatePolicyVersion request.
@@ -89,6 +91,8 @@ type CreatePolicyVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

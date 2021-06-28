@@ -82,6 +82,8 @@ type CreateAutoMLJobInput struct {
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAutoMLJobOutput struct {
@@ -93,6 +95,8 @@ type CreateAutoMLJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

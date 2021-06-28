@@ -141,6 +141,8 @@ type PostTextInput struct {
 	// application. For more information, see Setting Session Attributes
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
 	SessionAttributes map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type PostTextOutput struct {
@@ -275,6 +277,8 @@ type PostTextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPostTextMiddlewares(stack *middleware.Stack, options Options) (err error) {

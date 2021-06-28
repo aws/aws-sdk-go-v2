@@ -69,11 +69,15 @@ type UpdateDataCatalogInput struct {
 	// processes both metadata and data, use the following syntax to specify your
 	// Lambda function. function=lambda_arn
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDataCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {

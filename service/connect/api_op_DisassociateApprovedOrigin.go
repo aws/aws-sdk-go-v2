@@ -39,11 +39,15 @@ type DisassociateApprovedOriginInput struct {
 	//
 	// This member is required.
 	Origin *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateApprovedOriginOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateApprovedOriginMiddlewares(stack *middleware.Stack, options Options) (err error) {

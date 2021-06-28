@@ -53,6 +53,8 @@ type ListPipelinesInput struct {
 
 	// The sort order for results.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListPipelinesOutput struct {
@@ -70,6 +72,8 @@ type ListPipelinesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {

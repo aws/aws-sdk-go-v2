@@ -45,6 +45,8 @@ type ListArchivesInput struct {
 
 	// The state of the archive.
 	State types.ArchiveState
+
+	noSmithyDocumentSerde
 }
 
 type ListArchivesOutput struct {
@@ -57,6 +59,8 @@ type ListArchivesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {

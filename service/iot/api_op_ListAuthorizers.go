@@ -41,6 +41,8 @@ type ListAuthorizersInput struct {
 
 	// The status of the list authorizers request.
 	Status types.AuthorizerStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListAuthorizersOutput struct {
@@ -53,6 +55,8 @@ type ListAuthorizersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAuthorizersMiddlewares(stack *middleware.Stack, options Options) (err error) {

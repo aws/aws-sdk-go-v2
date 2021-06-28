@@ -48,6 +48,8 @@ type DescribePrincipalMappingInput struct {
 	// The identifier of the data source to check the processing of PUT and DELETE
 	// actions for mapping users to their groups.
 	DataSourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePrincipalMappingOutput struct {
@@ -85,6 +87,8 @@ type DescribePrincipalMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePrincipalMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

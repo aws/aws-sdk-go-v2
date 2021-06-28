@@ -57,6 +57,8 @@ type GetProvisionedProductOutputsInput struct {
 
 	// The name of the provisioned product that you want the outputs from.
 	ProvisionedProductName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetProvisionedProductOutputsOutput struct {
@@ -72,6 +74,8 @@ type GetProvisionedProductOutputsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProvisionedProductOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type UpdateJourneyInput struct {
 	//
 	// This member is required.
 	WriteJourneyRequest *types.WriteJourneyRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateJourneyOutput struct {
@@ -56,6 +58,8 @@ type UpdateJourneyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {

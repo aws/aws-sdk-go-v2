@@ -45,6 +45,8 @@ type GetStatisticsInput struct {
 
 	// The version of the query used to search.
 	QueryVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStatisticsOutput struct {
@@ -55,6 +57,8 @@ type GetStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

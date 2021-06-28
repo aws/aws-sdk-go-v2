@@ -81,11 +81,15 @@ type PutPermissionInput struct {
 	// to. If you later want to revoke the permission for this external account,
 	// specify this StatementId when you run RemovePermission.
 	StatementId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type BatchDetectKeyPhrasesInput struct {
 	//
 	// This member is required.
 	TextList []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDetectKeyPhrasesOutput struct {
@@ -64,6 +66,8 @@ type BatchDetectKeyPhrasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

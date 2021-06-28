@@ -40,6 +40,8 @@ type TimestampFormatHeadersInput struct {
 	TargetEpochSeconds *time.Time
 
 	TargetHttpDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type TimestampFormatHeadersOutput struct {
@@ -59,6 +61,8 @@ type TimestampFormatHeadersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTimestampFormatHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetInstanceStateInput struct {
 	//
 	// This member is required.
 	InstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInstanceStateOutput struct {
@@ -42,6 +44,8 @@ type GetInstanceStateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInstanceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

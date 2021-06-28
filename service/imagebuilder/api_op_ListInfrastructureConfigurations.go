@@ -39,6 +39,8 @@ type ListInfrastructureConfigurationsInput struct {
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListInfrastructureConfigurationsOutput struct {
@@ -56,6 +58,8 @@ type ListInfrastructureConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInfrastructureConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

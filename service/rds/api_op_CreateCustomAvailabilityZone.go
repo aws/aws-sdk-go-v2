@@ -50,6 +50,8 @@ type CreateCustomAvailabilityZoneInput struct {
 	// receives the network traffic. Specify this parameter only if ExistingVpnId isn't
 	// specified.
 	VpnTunnelOriginatorIP *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCustomAvailabilityZoneOutput struct {
@@ -62,6 +64,8 @@ type CreateCustomAvailabilityZoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCustomAvailabilityZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

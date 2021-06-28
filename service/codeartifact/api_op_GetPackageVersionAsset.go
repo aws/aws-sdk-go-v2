@@ -89,6 +89,8 @@ type GetPackageVersionAssetInput struct {
 
 	// The name of the package version revision that contains the requested asset.
 	PackageVersionRevision *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPackageVersionAssetOutput struct {
@@ -107,6 +109,8 @@ type GetPackageVersionAssetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPackageVersionAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {

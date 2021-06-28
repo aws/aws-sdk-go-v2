@@ -27,6 +27,7 @@ func (c *Client) GetServiceRoleForAccount(ctx context.Context, params *GetServic
 }
 
 type GetServiceRoleForAccountInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetServiceRoleForAccountOutput struct {
@@ -39,6 +40,8 @@ type GetServiceRoleForAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceRoleForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

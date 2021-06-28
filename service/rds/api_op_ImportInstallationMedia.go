@@ -75,6 +75,8 @@ type ImportInstallationMediaInput struct {
 	//
 	// This member is required.
 	OSInstallationMediaPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the installation media for a DB engine that requires an on-premises
@@ -108,6 +110,8 @@ type ImportInstallationMediaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {

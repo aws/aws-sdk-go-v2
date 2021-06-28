@@ -64,6 +64,8 @@ type DescribeEnvironmentMembershipsInput struct {
 	// information about. If no value is specified, information about all environment
 	// members are returned.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEnvironmentMembershipsOutput struct {
@@ -79,6 +81,8 @@ type DescribeEnvironmentMembershipsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEnvironmentMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {

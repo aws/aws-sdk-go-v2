@@ -37,6 +37,8 @@ type DescribeExclusionsInput struct {
 	// The locale into which you want to translate the exclusion's title, description,
 	// and recommendation.
 	Locale types.Locale
+
+	noSmithyDocumentSerde
 }
 
 type DescribeExclusionsOutput struct {
@@ -54,6 +56,8 @@ type DescribeExclusionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeExclusionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type ListStudioMembersInput struct {
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStudioMembersOutput struct {
@@ -51,6 +53,8 @@ type ListStudioMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStudioMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

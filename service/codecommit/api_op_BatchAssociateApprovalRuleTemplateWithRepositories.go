@@ -41,6 +41,8 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesInput struct {
 	//
 	// This member is required.
 	RepositoryNames []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
@@ -58,6 +60,8 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchAssociateApprovalRuleTemplateWithRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

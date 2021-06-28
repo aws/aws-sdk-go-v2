@@ -43,6 +43,8 @@ type ListScriptsInput struct {
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListScriptsOutput struct {
@@ -57,6 +59,8 @@ type ListScriptsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListScriptsMiddlewares(stack *middleware.Stack, options Options) (err error) {

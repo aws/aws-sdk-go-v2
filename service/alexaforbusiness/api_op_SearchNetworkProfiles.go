@@ -48,6 +48,8 @@ type SearchNetworkProfilesInput struct {
 	// The sort order to use to list the specified set of network profiles. Valid sort
 	// criteria includes NetworkProfileName, Ssid, and SecurityType.
 	SortCriteria []types.Sort
+
+	noSmithyDocumentSerde
 }
 
 type SearchNetworkProfilesOutput struct {
@@ -66,6 +68,8 @@ type SearchNetworkProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchNetworkProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

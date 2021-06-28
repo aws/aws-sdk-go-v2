@@ -46,6 +46,8 @@ type PutImageScanningConfigurationInput struct {
 	// which to update the image scanning configuration setting. If you do not specify
 	// a registry, the default registry is assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutImageScanningConfigurationOutput struct {
@@ -61,6 +63,8 @@ type PutImageScanningConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutImageScanningConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

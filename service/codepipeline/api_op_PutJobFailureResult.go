@@ -41,11 +41,15 @@ type PutJobFailureResultInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutJobFailureResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutJobFailureResultMiddlewares(stack *middleware.Stack, options Options) (err error) {

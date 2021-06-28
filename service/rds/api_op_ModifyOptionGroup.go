@@ -48,6 +48,8 @@ type ModifyOptionGroupInput struct {
 
 	// Options in this list are removed from the option group.
 	OptionsToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyOptionGroupOutput struct {
@@ -57,6 +59,8 @@ type ModifyOptionGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

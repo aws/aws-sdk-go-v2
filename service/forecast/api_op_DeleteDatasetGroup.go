@@ -35,11 +35,15 @@ type DeleteDatasetGroupInput struct {
 	//
 	// This member is required.
 	DatasetGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDatasetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

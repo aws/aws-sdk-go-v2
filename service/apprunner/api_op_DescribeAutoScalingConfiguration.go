@@ -37,6 +37,8 @@ type DescribeAutoScalingConfigurationInput struct {
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAutoScalingConfigurationOutput struct {
@@ -49,6 +51,8 @@ type DescribeAutoScalingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

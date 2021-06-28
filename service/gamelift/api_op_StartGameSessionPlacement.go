@@ -114,6 +114,8 @@ type StartGameSessionPlacementInput struct {
 	// used to try to place the new game session where it can offer the best possible
 	// gameplay experience for the players.
 	PlayerLatencies []types.PlayerLatency
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -126,6 +128,8 @@ type StartGameSessionPlacementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {

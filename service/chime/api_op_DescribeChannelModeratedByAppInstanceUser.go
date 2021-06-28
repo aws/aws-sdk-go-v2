@@ -45,6 +45,8 @@ type DescribeChannelModeratedByAppInstanceUserInput struct {
 
 	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeChannelModeratedByAppInstanceUserOutput struct {
@@ -54,6 +56,8 @@ type DescribeChannelModeratedByAppInstanceUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeChannelModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

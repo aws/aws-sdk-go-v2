@@ -58,6 +58,8 @@ type UpdateFlowInput struct {
 	// Contains information about the configuration of the source connector used in the
 	// flow.
 	SourceFlowConfig *types.SourceFlowConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFlowOutput struct {
@@ -67,6 +69,8 @@ type UpdateFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

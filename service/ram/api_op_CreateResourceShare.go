@@ -57,6 +57,8 @@ type CreateResourceShareInput struct {
 
 	// One or more tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourceShareOutput struct {
@@ -70,6 +72,8 @@ type CreateResourceShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

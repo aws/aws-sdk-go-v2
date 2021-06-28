@@ -112,6 +112,8 @@ type CreateFirewallRuleInput struct {
 	// This setting is required if the
 	// rule action setting is BLOCK.
 	BlockResponse types.BlockResponse
+
+	noSmithyDocumentSerde
 }
 
 type CreateFirewallRuleOutput struct {
@@ -121,6 +123,8 @@ type CreateFirewallRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

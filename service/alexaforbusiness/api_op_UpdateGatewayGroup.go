@@ -39,11 +39,15 @@ type UpdateGatewayGroupInput struct {
 
 	// The updated name of the gateway group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGatewayGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGatewayGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

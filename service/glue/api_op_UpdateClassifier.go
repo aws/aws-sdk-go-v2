@@ -41,11 +41,15 @@ type UpdateClassifierInput struct {
 
 	// An XMLClassifier object with updated fields.
 	XMLClassifier *types.UpdateXMLClassifierRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

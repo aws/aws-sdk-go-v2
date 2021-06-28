@@ -46,11 +46,15 @@ type UpdateSignalingChannelInput struct {
 	// The structure containing the configuration for the SINGLE_MASTER type of the
 	// signaling channel that you want to update.
 	SingleMasterConfiguration *types.SingleMasterConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSignalingChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

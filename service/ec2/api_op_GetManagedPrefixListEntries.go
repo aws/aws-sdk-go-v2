@@ -51,6 +51,8 @@ type GetManagedPrefixListEntriesInput struct {
 	// The version of the prefix list for which to return the entries. The default is
 	// the current version.
 	TargetVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type GetManagedPrefixListEntriesOutput struct {
@@ -64,6 +66,8 @@ type GetManagedPrefixListEntriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetManagedPrefixListEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

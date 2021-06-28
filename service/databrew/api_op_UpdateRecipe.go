@@ -40,6 +40,8 @@ type UpdateRecipeInput struct {
 	// One or more steps to be performed by the recipe. Each step consists of an
 	// action, and the conditions under which the action should succeed.
 	Steps []types.RecipeStep
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRecipeOutput struct {
@@ -51,6 +53,8 @@ type UpdateRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

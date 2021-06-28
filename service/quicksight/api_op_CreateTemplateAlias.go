@@ -51,6 +51,8 @@ type CreateTemplateAliasInput struct {
 	//
 	// This member is required.
 	TemplateVersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type CreateTemplateAliasOutput struct {
@@ -66,6 +68,8 @@ type CreateTemplateAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTemplateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

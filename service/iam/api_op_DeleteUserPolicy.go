@@ -49,11 +49,15 @@ type DeleteUserPolicyInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

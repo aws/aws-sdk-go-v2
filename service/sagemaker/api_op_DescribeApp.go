@@ -49,6 +49,8 @@ type DescribeAppInput struct {
 	//
 	// This member is required.
 	UserProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAppOutput struct {
@@ -89,6 +91,8 @@ type DescribeAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

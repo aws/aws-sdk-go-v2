@@ -33,6 +33,8 @@ type GetLicenseManagerReportGeneratorInput struct {
 	//
 	// This member is required.
 	LicenseManagerReportGeneratorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLicenseManagerReportGeneratorOutput struct {
@@ -42,6 +44,8 @@ type GetLicenseManagerReportGeneratorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

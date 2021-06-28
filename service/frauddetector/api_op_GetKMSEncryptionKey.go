@@ -29,6 +29,7 @@ func (c *Client) GetKMSEncryptionKey(ctx context.Context, params *GetKMSEncrypti
 }
 
 type GetKMSEncryptionKeyInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetKMSEncryptionKeyOutput struct {
@@ -38,6 +39,8 @@ type GetKMSEncryptionKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetKMSEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

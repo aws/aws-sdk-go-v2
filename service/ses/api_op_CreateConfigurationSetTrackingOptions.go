@@ -51,12 +51,16 @@ type CreateConfigurationSetTrackingOptionsInput struct {
 	//
 	// This member is required.
 	TrackingOptions *types.TrackingOptions
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type CreateConfigurationSetTrackingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationSetTrackingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

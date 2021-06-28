@@ -55,6 +55,8 @@ type UpdateApplicationMaintenanceConfigurationInput struct {
 	//
 	// This member is required.
 	ApplicationName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApplicationMaintenanceConfigurationOutput struct {
@@ -67,6 +69,8 @@ type UpdateApplicationMaintenanceConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationMaintenanceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

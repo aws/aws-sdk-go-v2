@@ -41,11 +41,15 @@ type QueryTimestampsInput struct {
 	EpochTarget *time.Time
 
 	NormalFormat *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type QueryTimestampsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type DisassociateTagOptionFromResourceInput struct {
 	//
 	// This member is required.
 	TagOptionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateTagOptionFromResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateTagOptionFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

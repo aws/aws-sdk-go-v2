@@ -74,6 +74,8 @@ type GetRandomPasswordInput struct {
 	// least one of every allowed character type. The default value is True and the
 	// operation requires at least one of every character type.
 	RequireEachIncludedType bool
+
+	noSmithyDocumentSerde
 }
 
 type GetRandomPasswordOutput struct {
@@ -83,6 +85,8 @@ type GetRandomPasswordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRandomPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

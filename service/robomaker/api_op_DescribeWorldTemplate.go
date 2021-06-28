@@ -33,6 +33,8 @@ type DescribeWorldTemplateInput struct {
 	//
 	// This member is required.
 	Template *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorldTemplateOutput struct {
@@ -60,6 +62,8 @@ type DescribeWorldTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

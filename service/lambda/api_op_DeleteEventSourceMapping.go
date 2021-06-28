@@ -38,6 +38,8 @@ type DeleteEventSourceMappingInput struct {
 	//
 	// This member is required.
 	UUID *string
+
+	noSmithyDocumentSerde
 }
 
 // A mapping between an Amazon Web Services resource and an Lambda function. See
@@ -128,6 +130,8 @@ type DeleteEventSourceMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

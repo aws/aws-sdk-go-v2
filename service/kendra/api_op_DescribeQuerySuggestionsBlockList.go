@@ -40,6 +40,8 @@ type DescribeQuerySuggestionsBlockListInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeQuerySuggestionsBlockListOutput struct {
@@ -90,6 +92,8 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {

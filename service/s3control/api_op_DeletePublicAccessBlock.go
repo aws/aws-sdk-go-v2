@@ -47,11 +47,15 @@ type DeletePublicAccessBlockInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePublicAccessBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePublicAccessBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

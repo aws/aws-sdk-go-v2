@@ -46,6 +46,8 @@ type ResetClusterParameterGroupInput struct {
 	// If true, all parameters in the specified parameter group will be reset to their
 	// default values. Default: true
 	ResetAllParameters bool
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -61,6 +63,8 @@ type ResetClusterParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,11 +40,15 @@ type ArchiveFindingsInput struct {
 	//
 	// This member is required.
 	FindingIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ArchiveFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationArchiveFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

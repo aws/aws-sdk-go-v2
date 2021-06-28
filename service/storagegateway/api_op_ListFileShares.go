@@ -46,6 +46,8 @@ type ListFileSharesInput struct {
 	// present, Marker specifies where to continue the list from after a previous call
 	// to ListFileShares. Optional.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // ListFileShareOutput
@@ -64,6 +66,8 @@ type ListFileSharesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {

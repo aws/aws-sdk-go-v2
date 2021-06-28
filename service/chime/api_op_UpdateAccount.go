@@ -40,6 +40,8 @@ type UpdateAccountInput struct {
 
 	// The new name for the specified Amazon Chime account.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccountOutput struct {
@@ -49,6 +51,8 @@ type UpdateAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

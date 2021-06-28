@@ -36,11 +36,15 @@ type DeleteHumanTaskUiInput struct {
 	//
 	// This member is required.
 	HumanTaskUiName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteHumanTaskUiOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {

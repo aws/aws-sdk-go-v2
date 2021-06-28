@@ -89,6 +89,8 @@ type CreateJobInput struct {
 	// job execution status is not set to another terminal state before the time
 	// expires, it will be automatically set to TIMED_OUT.
 	TimeoutConfig *types.TimeoutConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateJobOutput struct {
@@ -104,6 +106,8 @@ type CreateJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

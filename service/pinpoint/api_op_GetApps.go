@@ -37,6 +37,8 @@ type GetAppsInput struct {
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAppsOutput struct {
@@ -48,6 +50,8 @@ type GetAppsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {

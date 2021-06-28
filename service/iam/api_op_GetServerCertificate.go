@@ -41,6 +41,8 @@ type GetServerCertificateInput struct {
 	//
 	// This member is required.
 	ServerCertificateName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetServerCertificate request.
@@ -53,6 +55,8 @@ type GetServerCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

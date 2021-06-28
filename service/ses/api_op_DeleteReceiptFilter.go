@@ -39,12 +39,16 @@ type DeleteReceiptFilterInput struct {
 	//
 	// This member is required.
 	FilterName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type DeleteReceiptFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReceiptFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

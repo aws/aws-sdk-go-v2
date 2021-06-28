@@ -37,6 +37,8 @@ type DescribeFirewallPolicyInput struct {
 	// firewall policy after you create it. You must specify the ARN or the name, and
 	// you can specify both.
 	FirewallPolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFirewallPolicyOutput struct {
@@ -65,6 +67,8 @@ type DescribeFirewallPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,11 +43,15 @@ type DeleteServiceSpecificCredentialInput struct {
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteServiceSpecificCredentialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {

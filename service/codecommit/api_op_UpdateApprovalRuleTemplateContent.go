@@ -46,6 +46,8 @@ type UpdateApprovalRuleTemplateContentInput struct {
 	// The SHA-256 hash signature for the content of the approval rule. You can
 	// retrieve this information by using GetPullRequest.
 	ExistingRuleContentSha256 *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApprovalRuleTemplateContentOutput struct {
@@ -57,6 +59,8 @@ type UpdateApprovalRuleTemplateContentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApprovalRuleTemplateContentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,11 +45,15 @@ type RemoveResourcePermissionInput struct {
 
 	// The principal type of the resource.
 	PrincipalType types.PrincipalType
+
+	noSmithyDocumentSerde
 }
 
 type RemoveResourcePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveResourcePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

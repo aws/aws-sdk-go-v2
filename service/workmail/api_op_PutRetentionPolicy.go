@@ -49,11 +49,15 @@ type PutRetentionPolicyInput struct {
 
 	// The retention policy ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type PutRetentionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

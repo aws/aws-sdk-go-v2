@@ -39,6 +39,8 @@ type ResetDeploymentsInput struct {
 
 	// If true, performs a best-effort only core reset.
 	Force bool
+
+	noSmithyDocumentSerde
 }
 
 type ResetDeploymentsOutput struct {
@@ -51,6 +53,8 @@ type ResetDeploymentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type ListAllowedNodeTypeModificationsInput struct {
 	// types you can scale up to. You must provide a value for either the
 	// CacheClusterId or the ReplicationGroupId.
 	ReplicationGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the allowed node types you can use to modify your cluster or
@@ -65,6 +67,8 @@ type ListAllowedNodeTypeModificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAllowedNodeTypeModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

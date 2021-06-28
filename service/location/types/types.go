@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type BatchDeleteDevicePositionHistoryError struct {
 	//
 	// This member is required.
 	Error *BatchItemError
+
+	noSmithyDocumentSerde
 }
 
 // Contains error details for each geofence that failed to delete from the geofence
@@ -33,6 +36,8 @@ type BatchDeleteGeofenceError struct {
 	//
 	// This member is required.
 	GeofenceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains error details for each device that failed to evaluate its position
@@ -55,6 +60,8 @@ type BatchEvaluateGeofencesError struct {
 	//
 	// This member is required.
 	SampleTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains error details for each device that didn't return a position.
@@ -69,6 +76,8 @@ type BatchGetDevicePositionError struct {
 	//
 	// This member is required.
 	Error *BatchItemError
+
+	noSmithyDocumentSerde
 }
 
 // Contains the batch request error details associated with the request.
@@ -79,6 +88,8 @@ type BatchItemError struct {
 
 	// A message with the reason for the batch request error.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains error details for each geofence that failed to be stored in a given
@@ -94,6 +105,8 @@ type BatchPutGeofenceError struct {
 	//
 	// This member is required.
 	GeofenceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains geofence geometry details.
@@ -111,6 +124,8 @@ type BatchPutGeofenceRequestEntry struct {
 	//
 	// This member is required.
 	Geometry *GeofenceGeometry
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of each geofence that was successfully stored in a given
@@ -135,6 +150,8 @@ type BatchPutGeofenceSuccess struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains error details for each device that failed to update its position.
@@ -157,6 +174,8 @@ type BatchUpdateDevicePositionError struct {
 	//
 	// This member is required.
 	SampleTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about additional route preferences for requests that specify
@@ -170,6 +189,8 @@ type CalculateRouteCarModeOptions struct {
 	// Avoids tolls when calculating routes. Default Value: false Valid Values: false |
 	// true
 	AvoidTolls *bool
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the calculated route.
@@ -230,6 +251,8 @@ type CalculateRouteSummary struct {
 	//
 	// This member is required.
 	RouteBBox []float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about additional route preferences for requests that specify
@@ -252,6 +275,8 @@ type CalculateRouteTruckModeOptions struct {
 	// Specifies the truck's weight specifications including total weight and unit of
 	// measurement. Used to avoid roads that can't support the truck's weight.
 	Weight *TruckWeight
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the data storage option chosen for requesting Places.
@@ -270,6 +295,8 @@ type DataSourceConfiguration struct {
 	//
 	// Default value: SingleUse
 	IntendedUse IntendedUse
+
+	noSmithyDocumentSerde
 }
 
 // Contains the device position details.
@@ -296,6 +323,8 @@ type DevicePosition struct {
 
 	// The device whose position you retrieved.
 	DeviceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the position update details for a device.
@@ -319,6 +348,8 @@ type DevicePositionUpdate struct {
 	//
 	// This member is required.
 	SampleTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the geofence geometry details. Amazon Location doesn't currently
@@ -336,6 +367,8 @@ type GeofenceGeometry struct {
 	// rings must list their vertices in clockwise order, where the left side is the
 	// polygon's interior.
 	Polygon [][][]float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the calculated route's details for each path between a pair of
@@ -402,6 +435,8 @@ type Leg struct {
 
 	// Contains the calculated route's path as a linestring geometry.
 	Geometry *LegGeometry
+
+	noSmithyDocumentSerde
 }
 
 // Contains the geometry details for each path between a pair of positions. Used in
@@ -415,6 +450,8 @@ type LegGeometry struct {
 	// * For example, [[-123.117,
 	// 49.284],[-123.115, 49.285],[-123.115, 49.285]]
 	LineString [][]float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the tracker resource details.
@@ -436,6 +473,8 @@ type ListDevicePositionsResponseEntry struct {
 	//
 	// This member is required.
 	SampleTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the geofence collection details.
@@ -474,6 +513,8 @@ type ListGeofenceCollectionsResponseEntry struct {
 
 	// The specified data provider for the geofence collection.
 	PricingPlanDataSource *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of geofences stored in a given geofence collection.
@@ -521,6 +562,8 @@ type ListGeofenceResponseEntry struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains details of an existing map resource in your AWS account.
@@ -561,6 +604,8 @@ type ListMapsResponseEntry struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A place index resource listed in your AWS account.
@@ -610,6 +655,8 @@ type ListPlaceIndexesResponseEntry struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A route calculator resource listed in your AWS account.
@@ -663,6 +710,8 @@ type ListRouteCalculatorsResponseEntry struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the tracker resource details.
@@ -701,6 +750,8 @@ type ListTrackersResponseEntry struct {
 
 	// The specified data provider for the tracker resource.
 	PricingPlanDataSource *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the map tile style selected from an available provider.
@@ -716,6 +767,8 @@ type MapConfiguration struct {
 	//
 	// This member is required.
 	Style *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about addresses or points of interest that match the search
@@ -760,6 +813,8 @@ type Place struct {
 	// A country, or an area that's part of a larger region . For example, Metro
 	// Vancouver.
 	SubRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Places uses a point geometry to specify a location or a Place.
@@ -774,6 +829,8 @@ type PlaceGeometry struct {
 	// * y — Specifies the y coordinate or
 	// latitude.
 	Point []float64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a single point of interest, or Place as a result of a search query
@@ -784,6 +841,8 @@ type SearchForPositionResult struct {
 	//
 	// This member is required.
 	Place *Place
+
+	noSmithyDocumentSerde
 }
 
 // Contains relevant Places returned by calling SearchPlaceIndexForText.
@@ -793,6 +852,8 @@ type SearchForTextResult struct {
 	//
 	// This member is required.
 	Place *Place
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the reverse geocoding request sent using
@@ -821,6 +882,8 @@ type SearchPlaceIndexForPositionSummary struct {
 	// An optional parameter. The maximum number of results returned per request.
 	// Default value: 50
 	MaxResults int32
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the geocoding request sent using SearchPlaceIndexForText.
@@ -862,6 +925,8 @@ type SearchPlaceIndexForTextSummary struct {
 	// A bounding box that contains the search results within the specified area
 	// indicated by FilterBBox. A subset of bounding box specified using FilterBBox.
 	ResultBBox []float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents an element of a leg within a route. A step contains instructions for
@@ -896,6 +961,8 @@ type Step struct {
 	// line string geometry. For example, the index of the first step in a leg geometry
 	// is 0. Included in the response for queries that set IncludeLegGeometry to True.
 	GeometryOffset *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the truck dimensions in the unit of measurement that you
@@ -921,6 +988,8 @@ type TruckDimensions struct {
 	//
 	// * For example, 4.5.
 	Width *float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the truck's weight specifications. Used to avoid roads
@@ -935,6 +1004,8 @@ type TruckWeight struct {
 
 	// The unit of measurement to use for the truck weight. Default Value: Kilograms
 	Unit VehicleWeightUnit
+
+	noSmithyDocumentSerde
 }
 
 // The input failed to meet the constraints specified by the AWS service in a
@@ -950,4 +1021,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

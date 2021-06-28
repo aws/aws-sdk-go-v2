@@ -10,6 +10,8 @@ import (
 // The request is missing required parameters or has invalid parameters.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -30,6 +32,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -47,6 +51,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // You have reached the maximum number of sampling rules.
 type RuleLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RuleLimitExceededException) Error() string {
@@ -64,6 +70,8 @@ func (e *RuleLimitExceededException) ErrorFault() smithy.ErrorFault { return smi
 // The request exceeds the maximum number of requests per second.
 type ThrottledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottledException) Error() string {
@@ -83,6 +91,8 @@ type TooManyTagsException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

@@ -45,6 +45,8 @@ type CreateBackendEnvironmentInput struct {
 
 	// The AWS CloudFormation stack name of a backend environment.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the create backend environment request.
@@ -57,6 +59,8 @@ type CreateBackendEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackendEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

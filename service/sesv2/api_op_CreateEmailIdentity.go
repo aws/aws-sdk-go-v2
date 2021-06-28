@@ -77,6 +77,8 @@ type CreateEmailIdentityInput struct {
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the email identity.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // If the email identity is a domain, this object contains information about the
@@ -98,6 +100,8 @@ type CreateEmailIdentityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

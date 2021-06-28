@@ -43,6 +43,8 @@ type GetEventTypesInput struct {
 
 	// The next token for the subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEventTypesOutput struct {
@@ -55,6 +57,8 @@ type GetEventTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEventTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

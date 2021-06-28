@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -35,6 +36,8 @@ type ApiDestination struct {
 
 	// The name of the API destination.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An Archive object that contains details about an archive.
@@ -64,6 +67,8 @@ type Archive struct {
 
 	// A description for the reason that the archive is in the current state.
 	StateReason *string
+
+	noSmithyDocumentSerde
 }
 
 // This structure specifies the VPC subnets and security groups for the task, and
@@ -87,6 +92,8 @@ type AwsVpcConfiguration struct {
 	// you do not specify a security group, the default security group for the VPC is
 	// used.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 // The array properties for the submitted job, such as the size of the array. The
@@ -98,6 +105,8 @@ type BatchArrayProperties struct {
 	// The size of the array, if this is an array batch job. Valid values are integers
 	// between 2 and 10,000.
 	Size int32
+
+	noSmithyDocumentSerde
 }
 
 // The custom parameters to be used when the target is an AWS Batch job.
@@ -126,6 +135,8 @@ type BatchParameters struct {
 	// Valid values are 1–10. When you specify a retry strategy here, it overrides the
 	// retry strategy defined in the job definition.
 	RetryStrategy *BatchRetryStrategy
+
+	noSmithyDocumentSerde
 }
 
 // The retry strategy to use for failed jobs, if the target is an AWS Batch job. If
@@ -136,6 +147,8 @@ type BatchRetryStrategy struct {
 	// The number of times to attempt to retry, if the job fails. Valid values are
 	// 1–10.
 	Attempts int32
+
+	noSmithyDocumentSerde
 }
 
 // The details of a capacity provider strategy. To learn more, see
@@ -159,6 +172,8 @@ type CapacityProviderStrategyItem struct {
 	// launched that should use the specified capacity provider. The weight value is
 	// taken into consideration after the base value, if defined, is satisfied.
 	Weight int32
+
+	noSmithyDocumentSerde
 }
 
 // A JSON string which you can use to limit the event bus permissions you are
@@ -186,6 +201,8 @@ type Condition struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a connection.
@@ -214,6 +231,8 @@ type Connection struct {
 
 	// The reason that the connection is in the connection state.
 	StateReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the authorization parameters for the connection if API Key is specified
@@ -222,6 +241,8 @@ type ConnectionApiKeyAuthResponseParameters struct {
 
 	// The name of the header to use for the APIKeyValue used for authorization.
 	ApiKeyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the authorization parameters to use for the connection.
@@ -239,6 +260,8 @@ type ConnectionAuthResponseParameters struct {
 
 	// The OAuth parameters to use for authorization.
 	OAuthParameters *ConnectionOAuthResponseParameters
+
+	noSmithyDocumentSerde
 }
 
 // Contains the authorization parameters for the connection if Basic is specified
@@ -247,6 +270,8 @@ type ConnectionBasicAuthResponseParameters struct {
 
 	// The user name to use for Basic authorization.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Additional parameter included in the body. You can include up to 100 additional
@@ -261,6 +286,8 @@ type ConnectionBodyParameter struct {
 
 	// The value associated with the key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Additional parameter included in the header. You can include up to 100
@@ -275,6 +302,8 @@ type ConnectionHeaderParameter struct {
 
 	// The value associated with the key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains additional parameters for the connection.
@@ -288,6 +317,8 @@ type ConnectionHttpParameters struct {
 
 	// Contains additional query string parameters for the connection.
 	QueryStringParameters []ConnectionQueryStringParameter
+
+	noSmithyDocumentSerde
 }
 
 // Contains the client response parameters for the connection when OAuth is
@@ -296,6 +327,8 @@ type ConnectionOAuthClientResponseParameters struct {
 
 	// The client ID associated with the response to the connection request.
 	ClientID *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response parameters when OAuth is specified as the authorization
@@ -314,6 +347,8 @@ type ConnectionOAuthResponseParameters struct {
 
 	// The additional HTTP parameters used for the OAuth authorization request.
 	OAuthHttpParameters *ConnectionHttpParameters
+
+	noSmithyDocumentSerde
 }
 
 // Additional query string parameter for the connection. You can include up to 100
@@ -329,6 +364,8 @@ type ConnectionQueryStringParameter struct {
 
 	// The value associated with the key for the query string parameter.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the API key authorization parameters for the connection.
@@ -343,6 +380,8 @@ type CreateConnectionApiKeyAuthRequestParameters struct {
 	//
 	// This member is required.
 	ApiKeyValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the authorization parameters for the connection.
@@ -365,6 +404,8 @@ type CreateConnectionAuthRequestParameters struct {
 	// A CreateConnectionOAuthRequestParameters object that contains the OAuth
 	// authorization parameters to use for the connection.
 	OAuthParameters *CreateConnectionOAuthRequestParameters
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Basic authorization parameters to use for the connection.
@@ -379,6 +420,8 @@ type CreateConnectionBasicAuthRequestParameters struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Basic authorization parameters to use for the connection.
@@ -394,6 +437,8 @@ type CreateConnectionOAuthClientRequestParameters struct {
 	//
 	// This member is required.
 	ClientSecret *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the OAuth authorization parameters to use for the connection.
@@ -419,6 +464,8 @@ type CreateConnectionOAuthRequestParameters struct {
 	// A ConnectionHttpParameters object that contains details about the additional
 	// parameters to use for the connection.
 	OAuthHttpParameters *ConnectionHttpParameters
+
+	noSmithyDocumentSerde
 }
 
 // A DeadLetterConfig object that contains information about a dead-letter queue
@@ -427,6 +474,8 @@ type DeadLetterConfig struct {
 
 	// The ARN of the SQS queue specified as the target for the dead-letter queue.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // The custom parameters to be used when the target is an Amazon ECS task.
@@ -509,6 +558,8 @@ type EcsParameters struct {
 
 	// The number of tasks to create based on TaskDefinition. The default is 1.
 	TaskCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // An event bus receives events from a source and routes them to rules associated
@@ -528,6 +579,8 @@ type EventBus struct {
 	// The permissions policy of the event bus, describing which other AWS accounts can
 	// write events to this event bus.
 	Policy *string
+
+	noSmithyDocumentSerde
 }
 
 // A partner event source is created by an SaaS partner. If a customer creates a
@@ -557,6 +610,8 @@ type EventSource struct {
 	// is deactivated. If it is DELETED, you have created a matching event bus, but the
 	// event source has since been deleted.
 	State EventSourceState
+
+	noSmithyDocumentSerde
 }
 
 // These are custom parameter to be used when the target is an API Gateway REST
@@ -576,6 +631,8 @@ type HttpParameters struct {
 	// The query string keys/values that need to be sent as part of request invoking
 	// the API Gateway REST API or EventBridge ApiDestination.
 	QueryStringParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the parameters needed for you to provide custom input to a target based
@@ -634,6 +691,8 @@ type InputTransformer struct {
 	// JSON path. You can have as many as 100 key-value pairs. You must use JSON dot
 	// notation, not bracket notation. The keys cannot start with "AWS."
 	InputPathsMap map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // This object enables you to specify a JSON path to extract from the event and use
@@ -649,6 +708,8 @@ type KinesisParameters struct {
 	//
 	// This member is required.
 	PartitionKeyPath *string
+
+	noSmithyDocumentSerde
 }
 
 // This structure specifies the network configuration for an ECS task.
@@ -658,6 +719,8 @@ type NetworkConfiguration struct {
 	// and whether a public IP address is to be used. This structure is relevant only
 	// for ECS tasks that use the awsvpc network mode.
 	AwsvpcConfiguration *AwsVpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A partner event source is created by an SaaS partner. If a customer creates a
@@ -670,6 +733,8 @@ type PartnerEventSource struct {
 
 	// The name of the partner event source.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The AWS account that a partner event source has been offered to.
@@ -691,6 +756,8 @@ type PartnerEventSourceAccount struct {
 	// is deactivated. If it is DELETED, you have created a matching event bus, but the
 	// event source has since been deleted.
 	State EventSourceState
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a constraint on task placement. To learn more, see Task
@@ -710,6 +777,8 @@ type PlacementConstraint struct {
 	// particular group is running on a different container instance. Use memberOf to
 	// restrict the selection to a group of valid candidates.
 	Type PlacementConstraintType
+
+	noSmithyDocumentSerde
 }
 
 // The task placement strategy for a task or service. To learn more, see Task
@@ -734,6 +803,8 @@ type PlacementStrategy struct {
 	// if you binpack on memory, a task is placed on the instance with the least amount
 	// of remaining memory (but still enough to run the task).
 	Type PlacementStrategyType
+
+	noSmithyDocumentSerde
 }
 
 // Represents an event to be submitted.
@@ -769,6 +840,8 @@ type PutEventsRequestEntry struct {
 	// (https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader)
 	// in the AWS X-Ray Developer Guide.
 	TraceHeader *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an event that failed to be submitted.
@@ -782,6 +855,8 @@ type PutEventsResultEntry struct {
 
 	// The ID of the event.
 	EventId *string
+
+	noSmithyDocumentSerde
 }
 
 // The details about an event generated by an SaaS partner.
@@ -803,6 +878,8 @@ type PutPartnerEventsRequestEntry struct {
 
 	// The date and time of the event.
 	Time *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents an event that a partner tried to generate, but failed.
@@ -816,6 +893,8 @@ type PutPartnerEventsResultEntry struct {
 
 	// The ID of the event.
 	EventId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a target that failed to be added to a rule.
@@ -830,6 +909,8 @@ type PutTargetsResultEntry struct {
 
 	// The ID of the target.
 	TargetId *string
+
+	noSmithyDocumentSerde
 }
 
 // These are custom parameters to be used when the target is a Redshift cluster to
@@ -862,6 +943,8 @@ type RedshiftDataParameters struct {
 	// Indicates whether to send an event back to EventBridge after the SQL statement
 	// runs.
 	WithEvent bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents a target that failed to be removed from a rule.
@@ -876,6 +959,8 @@ type RemoveTargetsResultEntry struct {
 
 	// The ID of the target.
 	TargetId *string
+
+	noSmithyDocumentSerde
 }
 
 // A Replay object that contains details about a replay.
@@ -910,6 +995,8 @@ type Replay struct {
 
 	// A description of why the replay is in the current state.
 	StateReason *string
+
+	noSmithyDocumentSerde
 }
 
 // A ReplayDestination object that contains details about a replay.
@@ -923,6 +1010,8 @@ type ReplayDestination struct {
 
 	// A list of ARNs for rules to replay events to.
 	FilterArns []string
+
+	noSmithyDocumentSerde
 }
 
 // A RetryPolicy object that includes information about the retry policy settings.
@@ -935,6 +1024,8 @@ type RetryPolicy struct {
 	// attempts continue until either the maximum number of attempts is made or until
 	// the duration of the MaximumEventAgeInSeconds is met.
 	MaximumRetryAttempts *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a rule in Amazon EventBridge.
@@ -971,6 +1062,8 @@ type Rule struct {
 
 	// The state of the rule.
 	State RuleState
+
+	noSmithyDocumentSerde
 }
 
 // This parameter contains the criteria (either InstanceIds or a tag) used to
@@ -982,6 +1075,8 @@ type RunCommandParameters struct {
 	//
 	// This member is required.
 	RunCommandTargets []RunCommandTarget
+
+	noSmithyDocumentSerde
 }
 
 // Information about the EC2 instances that are to be sent the command, specified
@@ -999,6 +1094,8 @@ type RunCommandTarget struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Name/Value pair of a parameter to start execution of a SageMaker Model Building
@@ -1014,6 +1111,8 @@ type SageMakerPipelineParameter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // These are custom parameters to use when the target is a SageMaker Model Building
@@ -1023,6 +1122,8 @@ type SageMakerPipelineParameters struct {
 	// List of Parameter names and values for SageMaker Model Building Pipeline
 	// execution.
 	PipelineParameterList []SageMakerPipelineParameter
+
+	noSmithyDocumentSerde
 }
 
 // This structure includes the custom parameter to be used when the target is an
@@ -1031,6 +1132,8 @@ type SqsParameters struct {
 
 	// The FIFO message group ID to use as the target.
 	MessageGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair associated with an AWS resource. In EventBridge, rules and
@@ -1047,6 +1150,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Targets are the resources to be invoked when a rule is triggered. For a complete
@@ -1146,6 +1251,8 @@ type Target struct {
 	// specify an SQS FIFO queue as a target, the queue must have content-based
 	// deduplication enabled.
 	SqsParameters *SqsParameters
+
+	noSmithyDocumentSerde
 }
 
 // Contains the API key authorization parameters to use to update the connection.
@@ -1156,6 +1263,8 @@ type UpdateConnectionApiKeyAuthRequestParameters struct {
 
 	// The value associated with teh API key to use for authorization.
 	ApiKeyValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the additional parameters to use for the connection.
@@ -1176,6 +1285,8 @@ type UpdateConnectionAuthRequestParameters struct {
 	// A UpdateConnectionOAuthRequestParameters object that contains the authorization
 	// parameters for OAuth authorization.
 	OAuthParameters *UpdateConnectionOAuthRequestParameters
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Basic authorization parameters for the connection.
@@ -1186,6 +1297,8 @@ type UpdateConnectionBasicAuthRequestParameters struct {
 
 	// The user name to use for Basic authorization.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the OAuth authorization parameters to use for the connection.
@@ -1196,6 +1309,8 @@ type UpdateConnectionOAuthClientRequestParameters struct {
 
 	// The client secret assciated with the client ID to use for OAuth authorization.
 	ClientSecret *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the OAuth request parameters to use for the connection.
@@ -1215,4 +1330,8 @@ type UpdateConnectionOAuthRequestParameters struct {
 
 	// The additional HTTP parameters used for the OAuth authorization request.
 	OAuthHttpParameters *ConnectionHttpParameters
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

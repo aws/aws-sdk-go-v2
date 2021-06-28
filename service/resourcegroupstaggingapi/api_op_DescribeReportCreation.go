@@ -29,6 +29,7 @@ func (c *Client) DescribeReportCreation(ctx context.Context, params *DescribeRep
 }
 
 type DescribeReportCreationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeReportCreationOutput struct {
@@ -60,6 +61,8 @@ type DescribeReportCreationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReportCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {

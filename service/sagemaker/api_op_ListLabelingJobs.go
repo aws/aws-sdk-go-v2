@@ -67,6 +67,8 @@ type ListLabelingJobsInput struct {
 
 	// A filter that retrieves only labeling jobs with a specific status.
 	StatusEquals types.LabelingJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListLabelingJobsOutput struct {
@@ -80,6 +82,8 @@ type ListLabelingJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLabelingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

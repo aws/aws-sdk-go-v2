@@ -46,6 +46,8 @@ type DeleteBotLocaleInput struct {
 	//
 	// This member is required.
 	LocaleId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBotLocaleOutput struct {
@@ -66,6 +68,8 @@ type DeleteBotLocaleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {

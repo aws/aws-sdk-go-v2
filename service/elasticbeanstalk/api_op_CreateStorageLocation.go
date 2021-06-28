@@ -31,6 +31,7 @@ func (c *Client) CreateStorageLocation(ctx context.Context, params *CreateStorag
 }
 
 type CreateStorageLocationInput struct {
+	noSmithyDocumentSerde
 }
 
 // Results of a CreateStorageLocationResult call.
@@ -41,6 +42,8 @@ type CreateStorageLocationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStorageLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
