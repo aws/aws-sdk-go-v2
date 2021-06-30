@@ -23,6 +23,9 @@ func TestParser(t *testing.T) {
 	outputID, _, _ := newLitToken([]rune("output"))
 	outputLit, _, _ := newLitToken([]rune("json"))
 
+	sepInValueID, _, _ := newLitToken([]rune("sepInValue"))
+	sepInValueLit := newToken(TokenOp, []rune("=:[foo]]bar["), StringType)
+
 	equalOp, _, _ := newOpToken([]rune("= 1234"))
 	equalColonOp, _, _ := newOpToken([]rune(": 1234"))
 	numLit, _, _ := newLitToken([]rune("1234"))
@@ -51,6 +54,9 @@ func TestParser(t *testing.T) {
 	outputEQExpr := newEqualExpr(newExpression(outputID), equalOp)
 	outputEQExpr.AppendChild(newExpression(outputLit))
 
+	sepInValueExpr := newEqualExpr(newExpression(sepInValueID), equalOp)
+	sepInValueExpr.AppendChild(newExpression(sepInValueLit))
+
 	cases := []struct {
 		name          string
 		r             io.Reader
@@ -65,24 +71,48 @@ func TestParser(t *testing.T) {
 			},
 		},
 		{
-			name:          "0==0",
-			r:             bytes.NewBuffer([]byte(`0==0`)),
-			expectedError: true,
+			name: "0==0",
+			r:    bytes.NewBuffer([]byte(`0==0`)),
+			expectedStack: []AST{
+				func() AST {
+					equalExpr := newEqualExpr(newExpression(newToken(TokenLit, []rune("0"), StringType)), equalOp)
+					equalExpr.AppendChild(newExpression(newToken(TokenOp, []rune("=0"), StringType)))
+					return newExprStatement(equalExpr)
+				}(),
+			},
 		},
 		{
 			name:          "0=:0",
 			r:             bytes.NewBuffer([]byte(`0=:0`)),
-			expectedError: true,
+			expectedStack: []AST{
+				func() AST {
+					equalExpr := newEqualExpr(newExpression(newToken(TokenLit, []rune("0"), StringType)), equalOp)
+					equalExpr.AppendChild(newExpression(newToken(TokenOp, []rune(":0"), StringType)))
+					return newExprStatement(equalExpr)
+				}(),
+			},
 		},
 		{
 			name:          "0:=0",
 			r:             bytes.NewBuffer([]byte(`0:=0`)),
-			expectedError: true,
+			expectedStack: []AST{
+				func() AST {
+					equalExpr := newEqualExpr(newExpression(newToken(TokenLit, []rune("0"), StringType)), equalColonOp)
+					equalExpr.AppendChild(newExpression(newToken(TokenOp, []rune("=0"), StringType)))
+					return newExprStatement(equalExpr)
+				}(),
+			},
 		},
 		{
 			name:          "0::0",
 			r:             bytes.NewBuffer([]byte(`0::0`)),
-			expectedError: true,
+			expectedStack: []AST{
+				func() AST {
+					equalExpr := newEqualExpr(newExpression(newToken(TokenLit, []rune("0"), StringType)), equalColonOp)
+					equalExpr.AppendChild(newExpression(newToken(TokenOp, []rune(":0"), StringType)))
+					return newExprStatement(equalExpr)
+				}(),
+			},
 		},
 		{
 			name: "section with variable",
@@ -284,6 +314,25 @@ output = json
 				newCompletedSectionStatement(
 					assumeProfileStmt,
 				),
+				newExprStatement(outputEQExpr),
+			},
+		},
+		{
+			name: "token seperators [ and  ] in values",
+			r: bytes.NewBuffer([]byte(
+				`[default]
+sepInValue = =:[foo]]bar[
+output = json
+[assumerole]
+sepInValue==:[foo]]bar[
+output = json
+`)),
+			expectedStack: []AST{
+				newCompletedSectionStatement(defaultProfileStmt),
+				newExprStatement(sepInValueExpr),
+				newExprStatement(outputEQExpr),
+				newCompletedSectionStatement(assumeProfileStmt),
+				newExprStatement(sepInValueExpr),
 				newExprStatement(outputEQExpr),
 			},
 		},

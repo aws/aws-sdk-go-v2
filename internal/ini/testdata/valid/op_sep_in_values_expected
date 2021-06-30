@@ -1,0 +1,10 @@
+{
+  "default": {
+    "sepinvalue": "=:[foo]]bar[",
+    "output": "json"
+  },
+  "assumerole": {
+    "sepinvalue": "=:[foo]]bar[",
+    "output": "json"
+  }
+}

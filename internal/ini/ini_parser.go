@@ -5,9 +5,12 @@ import (
 	"io"
 )
 
+// ParseState represents the current state of the parser.
+type ParseState uint
+
 // State enums for the parse table
 const (
-	InvalidState = iota
+	InvalidState ParseState = iota
 	// stmt -> value stmt'
 	StatementState
 	// stmt' -> MarkComplete | op stmt
@@ -36,7 +39,7 @@ const (
 )
 
 // parseTable is a state machine to dictate the grammar above.
-var parseTable = map[ASTKind]map[TokenType]int{
+var parseTable = map[ASTKind]map[TokenType]ParseState{
 	ASTKindStart: {
 		TokenLit:     StatementState,
 		TokenSep:     OpenScopeState,
@@ -64,6 +67,8 @@ var parseTable = map[ASTKind]map[TokenType]int{
 	},
 	ASTKindEqualExpr: {
 		TokenLit: ValueState,
+		TokenSep: ValueState,
+		TokenOp:  ValueState,
 		TokenWS:  SkipTokenState,
 		TokenNL:  SkipState,
 	},
@@ -77,7 +82,7 @@ var parseTable = map[ASTKind]map[TokenType]int{
 	},
 	ASTKindExprStatement: {
 		TokenLit:     ValueState,
-		TokenSep:     OpenScopeState,
+		TokenSep:     ValueState,
 		TokenOp:      ValueState,
 		TokenWS:      ValueState,
 		TokenNL:      MarkCompleteState,
@@ -242,7 +247,7 @@ loop:
 				}
 
 				children[len(children)-1] = rhs
-				k.SetChildren(children)
+				root.SetChildren(children)
 
 				stack.Push(k)
 			}
