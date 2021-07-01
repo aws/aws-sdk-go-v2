@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Gets a list of the projects in an AWS account.
+// Gets a list of the projects in an Amazon Web Services account.
 func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, optFns ...func(*Options)) (*ListProjectsOutput, error) {
 	if params == nil {
 		params = &ListProjectsInput{}

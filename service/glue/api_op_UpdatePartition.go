@@ -52,7 +52,7 @@ type UpdatePartitionInput struct {
 	TableName *string
 
 	// The ID of the Data Catalog where the partition to be updated resides. If none is
-	// provided, the AWS account ID is used by default.
+	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 }
 

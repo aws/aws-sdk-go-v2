@@ -37,7 +37,7 @@ func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, op
 
 type CreateSchemaInput struct {
 
-	// The data format of the schema definition. Currently only AVRO is supported.
+	// The data format of the schema definition. Currently AVRO and JSON are supported.
 	//
 	// This member is required.
 	DataFormat types.DataFormat
@@ -106,8 +106,9 @@ type CreateSchemaInput struct {
 	// The schema definition using the DataFormat setting for SchemaName.
 	SchemaDefinition *string
 
-	// AWS tags that contain a key value pair and may be searched by console, command
-	// line, or API. If specified, follows the AWS tags-on-create pattern.
+	// Amazon Web Services tags that contain a key value pair and may be searched by
+	// console, command line, or API. If specified, follows the Amazon Web Services
+	// tags-on-create pattern.
 	Tags map[string]string
 }
 
@@ -116,7 +117,7 @@ type CreateSchemaOutput struct {
 	// The schema compatibility mode.
 	Compatibility types.Compatibility
 
-	// The data format of the schema definition. Currently only AVRO is supported.
+	// The data format of the schema definition. Currently AVRO and JSON are supported.
 	DataFormat types.DataFormat
 
 	// A description of the schema if specified when created.

@@ -634,9 +634,10 @@ type AudioSelectorType string
 
 // Enum values for AudioSelectorType
 const (
-	AudioSelectorTypePid          AudioSelectorType = "PID"
-	AudioSelectorTypeTrack        AudioSelectorType = "TRACK"
-	AudioSelectorTypeLanguageCode AudioSelectorType = "LANGUAGE_CODE"
+	AudioSelectorTypePid               AudioSelectorType = "PID"
+	AudioSelectorTypeTrack             AudioSelectorType = "TRACK"
+	AudioSelectorTypeLanguageCode      AudioSelectorType = "LANGUAGE_CODE"
+	AudioSelectorTypeHlsRenditionGroup AudioSelectorType = "HLS_RENDITION_GROUP"
 )
 
 // Values returns all known values for AudioSelectorType. Note that this can be
@@ -647,6 +648,7 @@ func (AudioSelectorType) Values() []AudioSelectorType {
 		"PID",
 		"TRACK",
 		"LANGUAGE_CODE",
+		"HLS_RENDITION_GROUP",
 	}
 }
 
@@ -1213,6 +1215,26 @@ func (CmafEncryptionType) Values() []CmafEncryptionType {
 	}
 }
 
+type CmafImageBasedTrickPlay string
+
+// Enum values for CmafImageBasedTrickPlay
+const (
+	CmafImageBasedTrickPlayNone                  CmafImageBasedTrickPlay = "NONE"
+	CmafImageBasedTrickPlayThumbnail             CmafImageBasedTrickPlay = "THUMBNAIL"
+	CmafImageBasedTrickPlayThumbnailAndFullframe CmafImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
+)
+
+// Values returns all known values for CmafImageBasedTrickPlay. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafImageBasedTrickPlay) Values() []CmafImageBasedTrickPlay {
+	return []CmafImageBasedTrickPlay{
+		"NONE",
+		"THUMBNAIL",
+		"THUMBNAIL_AND_FULLFRAME",
+	}
+}
+
 type CmafInitializationVectorInManifest string
 
 // Enum values for CmafInitializationVectorInManifest
@@ -1698,6 +1720,26 @@ func (DashIsoHbbtvCompliance) Values() []DashIsoHbbtvCompliance {
 	}
 }
 
+type DashIsoImageBasedTrickPlay string
+
+// Enum values for DashIsoImageBasedTrickPlay
+const (
+	DashIsoImageBasedTrickPlayNone                  DashIsoImageBasedTrickPlay = "NONE"
+	DashIsoImageBasedTrickPlayThumbnail             DashIsoImageBasedTrickPlay = "THUMBNAIL"
+	DashIsoImageBasedTrickPlayThumbnailAndFullframe DashIsoImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
+)
+
+// Values returns all known values for DashIsoImageBasedTrickPlay. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashIsoImageBasedTrickPlay) Values() []DashIsoImageBasedTrickPlay {
+	return []DashIsoImageBasedTrickPlay{
+		"NONE",
+		"THUMBNAIL",
+		"THUMBNAIL_AND_FULLFRAME",
+	}
+}
+
 type DashIsoMpdProfile string
 
 // Enum values for DashIsoMpdProfile
@@ -2129,7 +2171,10 @@ type Eac3AtmosCodingMode string
 
 // Enum values for Eac3AtmosCodingMode
 const (
-	Eac3AtmosCodingModeCodingMode916 Eac3AtmosCodingMode = "CODING_MODE_9_1_6"
+	Eac3AtmosCodingModeCodingModeAuto Eac3AtmosCodingMode = "CODING_MODE_AUTO"
+	Eac3AtmosCodingModeCodingMode514  Eac3AtmosCodingMode = "CODING_MODE_5_1_4"
+	Eac3AtmosCodingModeCodingMode714  Eac3AtmosCodingMode = "CODING_MODE_7_1_4"
+	Eac3AtmosCodingModeCodingMode916  Eac3AtmosCodingMode = "CODING_MODE_9_1_6"
 )
 
 // Values returns all known values for Eac3AtmosCodingMode. Note that this can be
@@ -2137,6 +2182,9 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (Eac3AtmosCodingMode) Values() []Eac3AtmosCodingMode {
 	return []Eac3AtmosCodingMode{
+		"CODING_MODE_AUTO",
+		"CODING_MODE_5_1_4",
+		"CODING_MODE_7_1_4",
 		"CODING_MODE_9_1_6",
 	}
 }
@@ -2157,6 +2205,24 @@ func (Eac3AtmosDialogueIntelligence) Values() []Eac3AtmosDialogueIntelligence {
 	return []Eac3AtmosDialogueIntelligence{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type Eac3AtmosDownmixControl string
+
+// Enum values for Eac3AtmosDownmixControl
+const (
+	Eac3AtmosDownmixControlSpecified            Eac3AtmosDownmixControl = "SPECIFIED"
+	Eac3AtmosDownmixControlInitializeFromSource Eac3AtmosDownmixControl = "INITIALIZE_FROM_SOURCE"
+)
+
+// Values returns all known values for Eac3AtmosDownmixControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosDownmixControl) Values() []Eac3AtmosDownmixControl {
+	return []Eac3AtmosDownmixControl{
+		"SPECIFIED",
+		"INITIALIZE_FROM_SOURCE",
 	}
 }
 
@@ -2211,6 +2277,24 @@ func (Eac3AtmosDynamicRangeCompressionRf) Values() []Eac3AtmosDynamicRangeCompre
 		"MUSIC_STANDARD",
 		"MUSIC_LIGHT",
 		"SPEECH",
+	}
+}
+
+type Eac3AtmosDynamicRangeControl string
+
+// Enum values for Eac3AtmosDynamicRangeControl
+const (
+	Eac3AtmosDynamicRangeControlSpecified            Eac3AtmosDynamicRangeControl = "SPECIFIED"
+	Eac3AtmosDynamicRangeControlInitializeFromSource Eac3AtmosDynamicRangeControl = "INITIALIZE_FROM_SOURCE"
+)
+
+// Values returns all known values for Eac3AtmosDynamicRangeControl. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosDynamicRangeControl) Values() []Eac3AtmosDynamicRangeControl {
+	return []Eac3AtmosDynamicRangeControl{
+		"SPECIFIED",
+		"INITIALIZE_FROM_SOURCE",
 	}
 }
 
@@ -3878,6 +3962,26 @@ func (HlsIFrameOnlyManifest) Values() []HlsIFrameOnlyManifest {
 	return []HlsIFrameOnlyManifest{
 		"INCLUDE",
 		"EXCLUDE",
+	}
+}
+
+type HlsImageBasedTrickPlay string
+
+// Enum values for HlsImageBasedTrickPlay
+const (
+	HlsImageBasedTrickPlayNone                  HlsImageBasedTrickPlay = "NONE"
+	HlsImageBasedTrickPlayThumbnail             HlsImageBasedTrickPlay = "THUMBNAIL"
+	HlsImageBasedTrickPlayThumbnailAndFullframe HlsImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
+)
+
+// Values returns all known values for HlsImageBasedTrickPlay. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsImageBasedTrickPlay) Values() []HlsImageBasedTrickPlay {
+	return []HlsImageBasedTrickPlay{
+		"NONE",
+		"THUMBNAIL",
+		"THUMBNAIL_AND_FULLFRAME",
 	}
 }
 
@@ -5732,6 +5836,7 @@ const (
 	MxfProfileD10   MxfProfile = "D_10"
 	MxfProfileXdcam MxfProfile = "XDCAM"
 	MxfProfileOp1a  MxfProfile = "OP1A"
+	MxfProfileXavc  MxfProfile = "XAVC"
 )
 
 // Values returns all known values for MxfProfile. Note that this can be expanded
@@ -5742,6 +5847,25 @@ func (MxfProfile) Values() []MxfProfile {
 		"D_10",
 		"XDCAM",
 		"OP1A",
+		"XAVC",
+	}
+}
+
+type MxfXavcDurationMode string
+
+// Enum values for MxfXavcDurationMode
+const (
+	MxfXavcDurationModeAllowAnyDuration        MxfXavcDurationMode = "ALLOW_ANY_DURATION"
+	MxfXavcDurationModeDropFramesForCompliance MxfXavcDurationMode = "DROP_FRAMES_FOR_COMPLIANCE"
+)
+
+// Values returns all known values for MxfXavcDurationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MxfXavcDurationMode) Values() []MxfXavcDurationMode {
+	return []MxfXavcDurationMode{
+		"ALLOW_ANY_DURATION",
+		"DROP_FRAMES_FOR_COMPLIANCE",
 	}
 }
 
@@ -5957,6 +6081,24 @@ func (PricingPlan) Values() []PricingPlan {
 	}
 }
 
+type ProresChromaSampling string
+
+// Enum values for ProresChromaSampling
+const (
+	ProresChromaSamplingPreserve444Sampling ProresChromaSampling = "PRESERVE_444_SAMPLING"
+	ProresChromaSamplingSubsampleTo422      ProresChromaSampling = "SUBSAMPLE_TO_422"
+)
+
+// Values returns all known values for ProresChromaSampling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProresChromaSampling) Values() []ProresChromaSampling {
+	return []ProresChromaSampling{
+		"PRESERVE_444_SAMPLING",
+		"SUBSAMPLE_TO_422",
+	}
+}
+
 type ProresCodecProfile string
 
 // Enum values for ProresCodecProfile
@@ -5965,6 +6107,8 @@ const (
 	ProresCodecProfileAppleProres422Hq    ProresCodecProfile = "APPLE_PRORES_422_HQ"
 	ProresCodecProfileAppleProres422Lt    ProresCodecProfile = "APPLE_PRORES_422_LT"
 	ProresCodecProfileAppleProres422Proxy ProresCodecProfile = "APPLE_PRORES_422_PROXY"
+	ProresCodecProfileAppleProres4444     ProresCodecProfile = "APPLE_PRORES_4444"
+	ProresCodecProfileAppleProres4444Xq   ProresCodecProfile = "APPLE_PRORES_4444_XQ"
 )
 
 // Values returns all known values for ProresCodecProfile. Note that this can be
@@ -5976,6 +6120,8 @@ func (ProresCodecProfile) Values() []ProresCodecProfile {
 		"APPLE_PRORES_422_HQ",
 		"APPLE_PRORES_422_LT",
 		"APPLE_PRORES_422_PROXY",
+		"APPLE_PRORES_4444",
+		"APPLE_PRORES_4444_XQ",
 	}
 }
 
@@ -6243,6 +6389,24 @@ func (S3ServerSideEncryptionType) Values() []S3ServerSideEncryptionType {
 	return []S3ServerSideEncryptionType{
 		"SERVER_SIDE_ENCRYPTION_S3",
 		"SERVER_SIDE_ENCRYPTION_KMS",
+	}
+}
+
+type SampleRangeConversion string
+
+// Enum values for SampleRangeConversion
+const (
+	SampleRangeConversionLimitedRangeSqueeze SampleRangeConversion = "LIMITED_RANGE_SQUEEZE"
+	SampleRangeConversionNone                SampleRangeConversion = "NONE"
+)
+
+// Values returns all known values for SampleRangeConversion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SampleRangeConversion) Values() []SampleRangeConversion {
+	return []SampleRangeConversion{
+		"LIMITED_RANGE_SQUEEZE",
+		"NONE",
 	}
 }
 
@@ -6625,6 +6789,7 @@ const (
 	VideoCodecVc3          VideoCodec = "VC3"
 	VideoCodecVp8          VideoCodec = "VP8"
 	VideoCodecVp9          VideoCodec = "VP9"
+	VideoCodecXavc         VideoCodec = "XAVC"
 )
 
 // Values returns all known values for VideoCodec. Note that this can be expanded
@@ -6642,6 +6807,7 @@ func (VideoCodec) Values() []VideoCodec {
 		"VC3",
 		"VP8",
 		"VP9",
+		"XAVC",
 	}
 }
 
@@ -6902,5 +7068,411 @@ func (WebvttStylePassthrough) Values() []WebvttStylePassthrough {
 	return []WebvttStylePassthrough{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type Xavc4kIntraCbgProfileClass string
+
+// Enum values for Xavc4kIntraCbgProfileClass
+const (
+	Xavc4kIntraCbgProfileClassClass100 Xavc4kIntraCbgProfileClass = "CLASS_100"
+	Xavc4kIntraCbgProfileClassClass300 Xavc4kIntraCbgProfileClass = "CLASS_300"
+	Xavc4kIntraCbgProfileClassClass480 Xavc4kIntraCbgProfileClass = "CLASS_480"
+)
+
+// Values returns all known values for Xavc4kIntraCbgProfileClass. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Xavc4kIntraCbgProfileClass) Values() []Xavc4kIntraCbgProfileClass {
+	return []Xavc4kIntraCbgProfileClass{
+		"CLASS_100",
+		"CLASS_300",
+		"CLASS_480",
+	}
+}
+
+type Xavc4kIntraVbrProfileClass string
+
+// Enum values for Xavc4kIntraVbrProfileClass
+const (
+	Xavc4kIntraVbrProfileClassClass100 Xavc4kIntraVbrProfileClass = "CLASS_100"
+	Xavc4kIntraVbrProfileClassClass300 Xavc4kIntraVbrProfileClass = "CLASS_300"
+	Xavc4kIntraVbrProfileClassClass480 Xavc4kIntraVbrProfileClass = "CLASS_480"
+)
+
+// Values returns all known values for Xavc4kIntraVbrProfileClass. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Xavc4kIntraVbrProfileClass) Values() []Xavc4kIntraVbrProfileClass {
+	return []Xavc4kIntraVbrProfileClass{
+		"CLASS_100",
+		"CLASS_300",
+		"CLASS_480",
+	}
+}
+
+type Xavc4kProfileBitrateClass string
+
+// Enum values for Xavc4kProfileBitrateClass
+const (
+	Xavc4kProfileBitrateClassBitrateClass100 Xavc4kProfileBitrateClass = "BITRATE_CLASS_100"
+	Xavc4kProfileBitrateClassBitrateClass140 Xavc4kProfileBitrateClass = "BITRATE_CLASS_140"
+	Xavc4kProfileBitrateClassBitrateClass200 Xavc4kProfileBitrateClass = "BITRATE_CLASS_200"
+)
+
+// Values returns all known values for Xavc4kProfileBitrateClass. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Xavc4kProfileBitrateClass) Values() []Xavc4kProfileBitrateClass {
+	return []Xavc4kProfileBitrateClass{
+		"BITRATE_CLASS_100",
+		"BITRATE_CLASS_140",
+		"BITRATE_CLASS_200",
+	}
+}
+
+type Xavc4kProfileCodecProfile string
+
+// Enum values for Xavc4kProfileCodecProfile
+const (
+	Xavc4kProfileCodecProfileHigh    Xavc4kProfileCodecProfile = "HIGH"
+	Xavc4kProfileCodecProfileHigh422 Xavc4kProfileCodecProfile = "HIGH_422"
+)
+
+// Values returns all known values for Xavc4kProfileCodecProfile. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Xavc4kProfileCodecProfile) Values() []Xavc4kProfileCodecProfile {
+	return []Xavc4kProfileCodecProfile{
+		"HIGH",
+		"HIGH_422",
+	}
+}
+
+type Xavc4kProfileQualityTuningLevel string
+
+// Enum values for Xavc4kProfileQualityTuningLevel
+const (
+	Xavc4kProfileQualityTuningLevelSinglePass   Xavc4kProfileQualityTuningLevel = "SINGLE_PASS"
+	Xavc4kProfileQualityTuningLevelSinglePassHq Xavc4kProfileQualityTuningLevel = "SINGLE_PASS_HQ"
+	Xavc4kProfileQualityTuningLevelMultiPassHq  Xavc4kProfileQualityTuningLevel = "MULTI_PASS_HQ"
+)
+
+// Values returns all known values for Xavc4kProfileQualityTuningLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Xavc4kProfileQualityTuningLevel) Values() []Xavc4kProfileQualityTuningLevel {
+	return []Xavc4kProfileQualityTuningLevel{
+		"SINGLE_PASS",
+		"SINGLE_PASS_HQ",
+		"MULTI_PASS_HQ",
+	}
+}
+
+type XavcAdaptiveQuantization string
+
+// Enum values for XavcAdaptiveQuantization
+const (
+	XavcAdaptiveQuantizationOff    XavcAdaptiveQuantization = "OFF"
+	XavcAdaptiveQuantizationAuto   XavcAdaptiveQuantization = "AUTO"
+	XavcAdaptiveQuantizationLow    XavcAdaptiveQuantization = "LOW"
+	XavcAdaptiveQuantizationMedium XavcAdaptiveQuantization = "MEDIUM"
+	XavcAdaptiveQuantizationHigh   XavcAdaptiveQuantization = "HIGH"
+	XavcAdaptiveQuantizationHigher XavcAdaptiveQuantization = "HIGHER"
+	XavcAdaptiveQuantizationMax    XavcAdaptiveQuantization = "MAX"
+)
+
+// Values returns all known values for XavcAdaptiveQuantization. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (XavcAdaptiveQuantization) Values() []XavcAdaptiveQuantization {
+	return []XavcAdaptiveQuantization{
+		"OFF",
+		"AUTO",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"HIGHER",
+		"MAX",
+	}
+}
+
+type XavcEntropyEncoding string
+
+// Enum values for XavcEntropyEncoding
+const (
+	XavcEntropyEncodingAuto  XavcEntropyEncoding = "AUTO"
+	XavcEntropyEncodingCabac XavcEntropyEncoding = "CABAC"
+	XavcEntropyEncodingCavlc XavcEntropyEncoding = "CAVLC"
+)
+
+// Values returns all known values for XavcEntropyEncoding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (XavcEntropyEncoding) Values() []XavcEntropyEncoding {
+	return []XavcEntropyEncoding{
+		"AUTO",
+		"CABAC",
+		"CAVLC",
+	}
+}
+
+type XavcFlickerAdaptiveQuantization string
+
+// Enum values for XavcFlickerAdaptiveQuantization
+const (
+	XavcFlickerAdaptiveQuantizationDisabled XavcFlickerAdaptiveQuantization = "DISABLED"
+	XavcFlickerAdaptiveQuantizationEnabled  XavcFlickerAdaptiveQuantization = "ENABLED"
+)
+
+// Values returns all known values for XavcFlickerAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (XavcFlickerAdaptiveQuantization) Values() []XavcFlickerAdaptiveQuantization {
+	return []XavcFlickerAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type XavcFramerateControl string
+
+// Enum values for XavcFramerateControl
+const (
+	XavcFramerateControlInitializeFromSource XavcFramerateControl = "INITIALIZE_FROM_SOURCE"
+	XavcFramerateControlSpecified            XavcFramerateControl = "SPECIFIED"
+)
+
+// Values returns all known values for XavcFramerateControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (XavcFramerateControl) Values() []XavcFramerateControl {
+	return []XavcFramerateControl{
+		"INITIALIZE_FROM_SOURCE",
+		"SPECIFIED",
+	}
+}
+
+type XavcFramerateConversionAlgorithm string
+
+// Enum values for XavcFramerateConversionAlgorithm
+const (
+	XavcFramerateConversionAlgorithmDuplicateDrop XavcFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	XavcFramerateConversionAlgorithmInterpolate   XavcFramerateConversionAlgorithm = "INTERPOLATE"
+	XavcFramerateConversionAlgorithmFrameformer   XavcFramerateConversionAlgorithm = "FRAMEFORMER"
+)
+
+// Values returns all known values for XavcFramerateConversionAlgorithm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (XavcFramerateConversionAlgorithm) Values() []XavcFramerateConversionAlgorithm {
+	return []XavcFramerateConversionAlgorithm{
+		"DUPLICATE_DROP",
+		"INTERPOLATE",
+		"FRAMEFORMER",
+	}
+}
+
+type XavcGopBReference string
+
+// Enum values for XavcGopBReference
+const (
+	XavcGopBReferenceDisabled XavcGopBReference = "DISABLED"
+	XavcGopBReferenceEnabled  XavcGopBReference = "ENABLED"
+)
+
+// Values returns all known values for XavcGopBReference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (XavcGopBReference) Values() []XavcGopBReference {
+	return []XavcGopBReference{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type XavcHdIntraCbgProfileClass string
+
+// Enum values for XavcHdIntraCbgProfileClass
+const (
+	XavcHdIntraCbgProfileClassClass50  XavcHdIntraCbgProfileClass = "CLASS_50"
+	XavcHdIntraCbgProfileClassClass100 XavcHdIntraCbgProfileClass = "CLASS_100"
+	XavcHdIntraCbgProfileClassClass200 XavcHdIntraCbgProfileClass = "CLASS_200"
+)
+
+// Values returns all known values for XavcHdIntraCbgProfileClass. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (XavcHdIntraCbgProfileClass) Values() []XavcHdIntraCbgProfileClass {
+	return []XavcHdIntraCbgProfileClass{
+		"CLASS_50",
+		"CLASS_100",
+		"CLASS_200",
+	}
+}
+
+type XavcHdProfileBitrateClass string
+
+// Enum values for XavcHdProfileBitrateClass
+const (
+	XavcHdProfileBitrateClassBitrateClass25 XavcHdProfileBitrateClass = "BITRATE_CLASS_25"
+	XavcHdProfileBitrateClassBitrateClass35 XavcHdProfileBitrateClass = "BITRATE_CLASS_35"
+	XavcHdProfileBitrateClassBitrateClass50 XavcHdProfileBitrateClass = "BITRATE_CLASS_50"
+)
+
+// Values returns all known values for XavcHdProfileBitrateClass. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (XavcHdProfileBitrateClass) Values() []XavcHdProfileBitrateClass {
+	return []XavcHdProfileBitrateClass{
+		"BITRATE_CLASS_25",
+		"BITRATE_CLASS_35",
+		"BITRATE_CLASS_50",
+	}
+}
+
+type XavcHdProfileQualityTuningLevel string
+
+// Enum values for XavcHdProfileQualityTuningLevel
+const (
+	XavcHdProfileQualityTuningLevelSinglePass   XavcHdProfileQualityTuningLevel = "SINGLE_PASS"
+	XavcHdProfileQualityTuningLevelSinglePassHq XavcHdProfileQualityTuningLevel = "SINGLE_PASS_HQ"
+	XavcHdProfileQualityTuningLevelMultiPassHq  XavcHdProfileQualityTuningLevel = "MULTI_PASS_HQ"
+)
+
+// Values returns all known values for XavcHdProfileQualityTuningLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (XavcHdProfileQualityTuningLevel) Values() []XavcHdProfileQualityTuningLevel {
+	return []XavcHdProfileQualityTuningLevel{
+		"SINGLE_PASS",
+		"SINGLE_PASS_HQ",
+		"MULTI_PASS_HQ",
+	}
+}
+
+type XavcHdProfileTelecine string
+
+// Enum values for XavcHdProfileTelecine
+const (
+	XavcHdProfileTelecineNone XavcHdProfileTelecine = "NONE"
+	XavcHdProfileTelecineHard XavcHdProfileTelecine = "HARD"
+)
+
+// Values returns all known values for XavcHdProfileTelecine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (XavcHdProfileTelecine) Values() []XavcHdProfileTelecine {
+	return []XavcHdProfileTelecine{
+		"NONE",
+		"HARD",
+	}
+}
+
+type XavcInterlaceMode string
+
+// Enum values for XavcInterlaceMode
+const (
+	XavcInterlaceModeProgressive       XavcInterlaceMode = "PROGRESSIVE"
+	XavcInterlaceModeTopField          XavcInterlaceMode = "TOP_FIELD"
+	XavcInterlaceModeBottomField       XavcInterlaceMode = "BOTTOM_FIELD"
+	XavcInterlaceModeFollowTopField    XavcInterlaceMode = "FOLLOW_TOP_FIELD"
+	XavcInterlaceModeFollowBottomField XavcInterlaceMode = "FOLLOW_BOTTOM_FIELD"
+)
+
+// Values returns all known values for XavcInterlaceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (XavcInterlaceMode) Values() []XavcInterlaceMode {
+	return []XavcInterlaceMode{
+		"PROGRESSIVE",
+		"TOP_FIELD",
+		"BOTTOM_FIELD",
+		"FOLLOW_TOP_FIELD",
+		"FOLLOW_BOTTOM_FIELD",
+	}
+}
+
+type XavcProfile string
+
+// Enum values for XavcProfile
+const (
+	XavcProfileXavcHdIntraCbg XavcProfile = "XAVC_HD_INTRA_CBG"
+	XavcProfileXavc4kIntraCbg XavcProfile = "XAVC_4K_INTRA_CBG"
+	XavcProfileXavc4kIntraVbr XavcProfile = "XAVC_4K_INTRA_VBR"
+	XavcProfileXavcHd         XavcProfile = "XAVC_HD"
+	XavcProfileXavc4k         XavcProfile = "XAVC_4K"
+)
+
+// Values returns all known values for XavcProfile. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (XavcProfile) Values() []XavcProfile {
+	return []XavcProfile{
+		"XAVC_HD_INTRA_CBG",
+		"XAVC_4K_INTRA_CBG",
+		"XAVC_4K_INTRA_VBR",
+		"XAVC_HD",
+		"XAVC_4K",
+	}
+}
+
+type XavcSlowPal string
+
+// Enum values for XavcSlowPal
+const (
+	XavcSlowPalDisabled XavcSlowPal = "DISABLED"
+	XavcSlowPalEnabled  XavcSlowPal = "ENABLED"
+)
+
+// Values returns all known values for XavcSlowPal. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (XavcSlowPal) Values() []XavcSlowPal {
+	return []XavcSlowPal{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type XavcSpatialAdaptiveQuantization string
+
+// Enum values for XavcSpatialAdaptiveQuantization
+const (
+	XavcSpatialAdaptiveQuantizationDisabled XavcSpatialAdaptiveQuantization = "DISABLED"
+	XavcSpatialAdaptiveQuantizationEnabled  XavcSpatialAdaptiveQuantization = "ENABLED"
+)
+
+// Values returns all known values for XavcSpatialAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (XavcSpatialAdaptiveQuantization) Values() []XavcSpatialAdaptiveQuantization {
+	return []XavcSpatialAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type XavcTemporalAdaptiveQuantization string
+
+// Enum values for XavcTemporalAdaptiveQuantization
+const (
+	XavcTemporalAdaptiveQuantizationDisabled XavcTemporalAdaptiveQuantization = "DISABLED"
+	XavcTemporalAdaptiveQuantizationEnabled  XavcTemporalAdaptiveQuantization = "ENABLED"
+)
+
+// Values returns all known values for XavcTemporalAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (XavcTemporalAdaptiveQuantization) Values() []XavcTemporalAdaptiveQuantization {
+	return []XavcTemporalAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
 	}
 }

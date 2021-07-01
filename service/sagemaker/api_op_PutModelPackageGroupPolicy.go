@@ -13,7 +13,7 @@ import (
 // Adds a resouce policy to control access to a model group. For information about
 // resoure policies, see Identity-based policies and resource-based policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html)
-// in the AWS Identity and Access Management User Guide..
+// in the Amazon Web Services Identity and Access Management User Guide..
 func (c *Client) PutModelPackageGroupPolicy(ctx context.Context, params *PutModelPackageGroupPolicyInput, optFns ...func(*Options)) (*PutModelPackageGroupPolicyOutput, error) {
 	if params == nil {
 		params = &PutModelPackageGroupPolicyInput{}

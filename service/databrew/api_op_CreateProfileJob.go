@@ -46,8 +46,8 @@ type CreateProfileJobInput struct {
 	// This member is required.
 	OutputLocation *types.S3Location
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role to be assumed when DataBrew runs the job.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
@@ -59,10 +59,10 @@ type CreateProfileJobInput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// SSE-KMS - Server-side encryption with AWS KMS-managed keys.
+	// SSE-KMS - Server-side encryption with KMS-managed keys.
 	//
-	// * SSE-S3 -
-	// Server-side encryption with keys managed by Amazon S3.
+	// * SSE-S3 - Server-side
+	// encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
 	// Sample configuration for profile jobs only. Determines the number of rows on

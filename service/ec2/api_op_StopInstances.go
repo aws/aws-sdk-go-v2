@@ -21,11 +21,7 @@ import (
 // Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data
 // transfer fees; however, your root partition Amazon EBS volume remains and
 // continues to persist your data, and you are charged for Amazon EBS volume usage.
-// Every time you start your Windows instance, Amazon EC2 charges you for a full
-// instance hour. If you stop and restart your Windows instance, a new instance
-// hour begins and Amazon EC2 charges you for another full instance hour even if
-// you are still within the same 60-minute period when it was stopped. Every time
-// you start your Linux instance, Amazon EC2 charges a one-minute minimum for
+// Every time you start your instance, Amazon EC2 charges a one-minute minimum for
 // instance usage, and thereafter charges per second for instance usage. You can't
 // stop or hibernate instance store-backed instances. You can't use the Stop action
 // to hibernate Spot Instances, but you can specify that Amazon EC2 should

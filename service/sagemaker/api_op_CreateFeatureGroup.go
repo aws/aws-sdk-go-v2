@@ -15,10 +15,12 @@ import (
 // FeatureStore to describe a Record. The FeatureGroup defines the schema and
 // features contained in the FeatureGroup. A FeatureGroup definition is composed of
 // a list of Features, a RecordIdentifierFeatureName, an EventTimeFeatureName and
-// configurations for its OnlineStore and OfflineStore. Check AWS service quotas
+// configurations for its OnlineStore and OfflineStore. Check Amazon Web Services
+// service quotas
 // (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) to see
-// the FeatureGroups quota for your AWS account. You must include at least one of
-// OnlineStoreConfig and OfflineStoreConfig to create a FeatureGroup.
+// the FeatureGroups quota for your Amazon Web Services account. You must include
+// at least one of OnlineStoreConfig and OfflineStoreConfig to create a
+// FeatureGroup.
 func (c *Client) CreateFeatureGroup(ctx context.Context, params *CreateFeatureGroupInput, optFns ...func(*Options)) (*CreateFeatureGroupOutput, error) {
 	if params == nil {
 		params = &CreateFeatureGroupInput{}
@@ -62,13 +64,14 @@ type CreateFeatureGroupInput struct {
 	// This member is required.
 	FeatureDefinitions []types.FeatureDefinition
 
-	// The name of the FeatureGroup. The name must be unique within an AWS Region in an
-	// AWS account. The name:
+	// The name of the FeatureGroup. The name must be unique within an Amazon Web
+	// Services Region in an Amazon Web Services account. The name:
 	//
-	// * Must start and end with an alphanumeric character.
+	// * Must start and
+	// end with an alphanumeric character.
 	//
-	// *
-	// Can only contain alphanumeric character and hyphens. Spaces are not allowed.
+	// * Can only contain alphanumeric character
+	// and hyphens. Spaces are not allowed.
 	//
 	// This member is required.
 	FeatureGroupName *string
@@ -96,19 +99,20 @@ type CreateFeatureGroupInput struct {
 	// * The Amazon Simple Storage Service (Amazon S3) location of an
 	// OfflineStore.
 	//
-	// * A configuration for an AWS Glue or AWS Hive data cataolgue.
+	// * A configuration for an Amazon Web Services Glue or Amazon Web
+	// Services Hive data cataolgue.
 	//
-	// *
-	// An KMS encryption key to encrypt the Amazon S3 location used for
-	// OfflineStore.
+	// * An KMS encryption key to encrypt the Amazon S3
+	// location used for OfflineStore.
 	//
-	// To learn more about this parameter, see OfflineStoreConfig.
+	// To learn more about this parameter, see
+	// OfflineStoreConfig.
 	OfflineStoreConfig *types.OfflineStoreConfig
 
 	// You can turn the OnlineStore on or off by specifying True for the
 	// EnableOnlineStore flag in OnlineStoreConfig; the default value is False. You can
-	// also include an AWS KMS key ID (KMSKeyId) for at-rest encryption of the
-	// OnlineStore.
+	// also include an Amazon Web Services KMS key ID (KMSKeyId) for at-rest encryption
+	// of the OnlineStore.
 	OnlineStoreConfig *types.OnlineStoreConfig
 
 	// The Amazon Resource Name (ARN) of the IAM execution role used to persist data

@@ -13,7 +13,7 @@ import (
 )
 
 // Lists summary information about the namespaces that were created by the current
-// AWS account.
+// account.
 func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput, optFns ...func(*Options)) (*ListNamespacesOutput, error) {
 	if params == nil {
 		params = &ListNamespacesInput{}
@@ -36,16 +36,16 @@ type ListNamespacesInput struct {
 	// be returned by ListNamespaces.
 	Filters []types.NamespaceFilter
 
-	// The maximum number of namespaces that you want AWS Cloud Map to return in the
+	// The maximum number of namespaces that you want Cloud Map to return in the
 	// response to a ListNamespaces request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 namespaces.
+	// MaxResults, Cloud Map returns up to 100 namespaces.
 	MaxResults *int32
 
 	// For the first ListNamespaces request, omit this value. If the response contains
 	// NextToken, submit another ListNamespaces request to get the next group of
 	// results. Specify the value of NextToken from the previous response in the next
-	// request. AWS Cloud Map gets MaxResults namespaces and then filters them based on
-	// the specified criteria. It's possible that no namespaces in the first MaxResults
+	// request. Cloud Map gets MaxResults namespaces and then filters them based on the
+	// specified criteria. It's possible that no namespaces in the first MaxResults
 	// namespaces matched the specified criteria but that subsequent groups of
 	// MaxResults namespaces do contain namespaces that match the criteria.
 	NextToken *string
@@ -59,7 +59,7 @@ type ListNamespacesOutput struct {
 
 	// If the response contains NextToken, submit another ListNamespaces request to get
 	// the next group of results. Specify the value of NextToken from the previous
-	// response in the next request. AWS Cloud Map gets MaxResults namespaces and then
+	// response in the next request. Cloud Map gets MaxResults namespaces and then
 	// filters them based on the specified criteria. It's possible that no namespaces
 	// in the first MaxResults namespaces matched the specified criteria but that
 	// subsequent groups of MaxResults namespaces do contain namespaces that match the
@@ -143,9 +143,9 @@ var _ ListNamespacesAPIClient = (*Client)(nil)
 
 // ListNamespacesPaginatorOptions is the paginator options for ListNamespaces
 type ListNamespacesPaginatorOptions struct {
-	// The maximum number of namespaces that you want AWS Cloud Map to return in the
+	// The maximum number of namespaces that you want Cloud Map to return in the
 	// response to a ListNamespaces request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 namespaces.
+	// MaxResults, Cloud Map returns up to 100 namespaces.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

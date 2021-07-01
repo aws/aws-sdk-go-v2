@@ -31,7 +31,7 @@ type DeleteResourcePolicyInput struct {
 	// The hash value returned when this policy was set.
 	PolicyHashCondition *string
 
-	// The ARN of the AWS Glue resource for the resource policy to be deleted.
+	// The ARN of the Glue resource for the resource policy to be deleted.
 	ResourceArn *string
 }
 

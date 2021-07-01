@@ -1297,6 +1297,11 @@ func awsRestjson1_serializeDocumentCmafEncryption(v *types.CmafEncryption, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConstantInitializationVector != nil {
+		ok := object.Key("constantInitializationVector")
+		ok.String(*v.ConstantInitializationVector)
+	}
+
 	if v.SpekeKeyProvider != nil {
 		ok := object.Key("spekeKeyProvider")
 		if err := awsRestjson1_serializeDocumentSpekeKeyProvider(v.SpekeKeyProvider, ok); err != nil {

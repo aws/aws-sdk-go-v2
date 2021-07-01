@@ -16,8 +16,8 @@ import (
 // control for the notebooks you create. The Git repository is a resource in your
 // Amazon SageMaker account, so it can be associated with more than one notebook
 // instance, and it persists independently from the lifecycle of any notebook
-// instances it is associated with. The repository can be hosted either in AWS
-// CodeCommit
+// instances it is associated with. The repository can be hosted either in Amazon
+// Web Services CodeCommit
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 // other Git repository.
 func (c *Client) CreateCodeRepository(ctx context.Context, params *CreateCodeRepositoryInput, optFns ...func(*Options)) (*CreateCodeRepositoryOutput, error) {
@@ -49,9 +49,9 @@ type CreateCodeRepositoryInput struct {
 	// This member is required.
 	GitConfig *types.GitConfig
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 }

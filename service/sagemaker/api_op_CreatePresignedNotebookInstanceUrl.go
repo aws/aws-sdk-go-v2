@@ -27,7 +27,7 @@ import (
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html#nbi-ip-filter).
 // The URL that you get from a call to CreatePresignedNotebookInstanceUrl is valid
 // only for 5 minutes. If you try to use the URL after the 5-minute limit expires,
-// you are directed to the AWS console sign-in page.
+// you are directed to the Amazon Web Services console sign-in page.
 func (c *Client) CreatePresignedNotebookInstanceUrl(ctx context.Context, params *CreatePresignedNotebookInstanceUrlInput, optFns ...func(*Options)) (*CreatePresignedNotebookInstanceUrlOutput, error) {
 	if params == nil {
 		params = &CreatePresignedNotebookInstanceUrlInput{}

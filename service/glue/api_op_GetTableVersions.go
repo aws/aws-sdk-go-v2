@@ -42,8 +42,8 @@ type GetTableVersionsInput struct {
 	// This member is required.
 	TableName *string
 
-	// The ID of the Data Catalog where the tables reside. If none is provided, the AWS
-	// account ID is used by default.
+	// The ID of the Data Catalog where the tables reside. If none is provided, the
+	// Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	// The maximum number of table versions to return in one response.

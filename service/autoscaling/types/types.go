@@ -128,6 +128,9 @@ type AutoScalingGroup struct {
 	// Indicates whether Capacity Rebalancing is enabled.
 	CapacityRebalance *bool
 
+	// Reserved.
+	Context *string
+
 	// The metrics enabled for the group.
 	EnabledMetrics []EnabledMetric
 
@@ -356,16 +359,16 @@ type Ebs struct {
 	// instance types. If you are creating a volume from a snapshot, you cannot specify
 	// an encryption value. Volumes that are created from encrypted snapshots are
 	// automatically encrypted, and volumes that are created from unencrypted snapshots
-	// are automatically unencrypted. By default, encrypted snapshots use the AWS
-	// managed CMK that is used for EBS encryption, but you can specify a custom CMK
-	// when you create the snapshot. The ability to encrypt a snapshot during copying
-	// also allows you to apply a new CMK to an already-encrypted snapshot. Volumes
-	// restored from the resulting copy are only accessible using the new CMK. Enabling
-	// encryption by default
+	// are automatically unencrypted. By default, encrypted snapshots use the Amazon
+	// Web Services managed CMK that is used for EBS encryption, but you can specify a
+	// custom CMK when you create the snapshot. The ability to encrypt a snapshot
+	// during copying also allows you to apply a new CMK to an already-encrypted
+	// snapshot. Volumes restored from the resulting copy are only accessible using the
+	// new CMK. Enabling encryption by default
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default)
-	// results in all EBS volumes being encrypted with the AWS managed CMK or a
-	// customer managed CMK, whether or not the snapshot was encrypted. For more
-	// information, see Using Encryption with EBS-Backed AMIs
+	// results in all EBS volumes being encrypted with the Amazon Web Services managed
+	// CMK or a customer managed CMK, whether or not the snapshot was encrypted. For
+	// more information, see Using Encryption with EBS-Backed AMIs
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html) in the
 	// Amazon EC2 User Guide for Linux Instances and Required CMK key policy for use
 	// with encrypted volumes
@@ -1331,22 +1334,23 @@ type PredefinedMetricSpecification struct {
 	// This member is required.
 	PredefinedMetricType MetricType
 
-	// Identifies the resource associated with the metric type. You can't specify a
-	// resource label unless the metric type is ALBRequestCountPerTarget and there is a
-	// target group attached to the Auto Scaling group. You create the resource label
-	// by appending the final portion of the load balancer ARN and the final portion of
-	// the target group ARN into a single value, separated by a forward slash (/). The
-	// format is app///targetgroup//, where:
+	// A label that uniquely identifies a specific Application Load Balancer target
+	// group from which to determine the average request count served by your Auto
+	// Scaling group. You can't specify a resource label unless the target group is
+	// attached to the Auto Scaling group. You create the resource label by appending
+	// the final portion of the load balancer ARN and the final portion of the target
+	// group ARN into a single value, separated by a forward slash (/). The format of
+	// the resource label is:
+	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
+	// Where:
 	//
-	// * app// is the final portion of the load
-	// balancer ARN
+	// * app// is the final portion of the load balancer ARN
 	//
-	// * targetgroup// is the final portion of the target group
-	// ARN.
+	// * targetgroup//
+	// is the final portion of the target group ARN.
 	//
-	// This is an example:
-	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
-	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers
+	// To find the ARN for an
+	// Application Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -1477,7 +1481,7 @@ type PredictiveScalingPredefinedLoadMetric struct {
 	// portion of the load balancer ARN and the final portion of the target group ARN
 	// into a single value, separated by a forward slash (/). The format of the
 	// resource label is:
-	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
 	// Where:
 	//
 	// * app// is the final portion of the load balancer ARN
@@ -1508,13 +1512,13 @@ type PredictiveScalingPredefinedMetricPair struct {
 	PredefinedMetricType PredefinedMetricPairType
 
 	// A label that uniquely identifies a specific Application Load Balancer target
-	// group from which to determine the request count served by your Auto Scaling
-	// group. You can't specify a resource label unless the target group is attached to
-	// the Auto Scaling group. You create the resource label by appending the final
-	// portion of the load balancer ARN and the final portion of the target group ARN
-	// into a single value, separated by a forward slash (/). The format of the
-	// resource label is:
-	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	// group from which to determine the total and average request count served by your
+	// Auto Scaling group. You can't specify a resource label unless the target group
+	// is attached to the Auto Scaling group. You create the resource label by
+	// appending the final portion of the load balancer ARN and the final portion of
+	// the target group ARN into a single value, separated by a forward slash (/). The
+	// format of the resource label is:
+	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
 	// Where:
 	//
 	// * app// is the final portion of the load balancer ARN
@@ -1543,13 +1547,13 @@ type PredictiveScalingPredefinedScalingMetric struct {
 	PredefinedMetricType PredefinedScalingMetricType
 
 	// A label that uniquely identifies a specific Application Load Balancer target
-	// group from which to determine the request count served by your Auto Scaling
-	// group. You can't specify a resource label unless the target group is attached to
-	// the Auto Scaling group. You create the resource label by appending the final
-	// portion of the load balancer ARN and the final portion of the target group ARN
-	// into a single value, separated by a forward slash (/). The format of the
-	// resource label is:
-	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	// group from which to determine the average request count served by your Auto
+	// Scaling group. You can't specify a resource label unless the target group is
+	// attached to the Auto Scaling group. You create the resource label by appending
+	// the final portion of the load balancer ARN and the final portion of the target
+	// group ARN into a single value, separated by a forward slash (/). The format of
+	// the resource label is:
+	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
 	// Where:
 	//
 	// * app// is the final portion of the load balancer ARN

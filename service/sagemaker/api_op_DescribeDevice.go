@@ -67,7 +67,8 @@ type DescribeDeviceOutput struct {
 	// The Amazon Resource Name (ARN) of the device.
 	DeviceArn *string
 
-	// The AWS Internet of Things (IoT) object thing name associated with the device.
+	// The Amazon Web Services Internet of Things (IoT) object thing name associated
+	// with the device.
 	IotThingName *string
 
 	// The last heartbeat received from the device.

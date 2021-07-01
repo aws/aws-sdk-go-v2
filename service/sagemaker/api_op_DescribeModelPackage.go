@@ -13,9 +13,9 @@ import (
 )
 
 // Returns a description of the specified model package, which is used to create
-// Amazon SageMaker models or list them on AWS Marketplace. To create models in
-// Amazon SageMaker, buyers can subscribe to model packages listed on AWS
-// Marketplace.
+// Amazon SageMaker models or list them on Amazon Web Services Marketplace. To
+// create models in Amazon SageMaker, buyers can subscribe to model packages listed
+// on Amazon Web Services Marketplace.
 func (c *Client) DescribeModelPackage(ctx context.Context, params *DescribeModelPackageInput, optFns ...func(*Options)) (*DescribeModelPackageOutput, error) {
 	if params == nil {
 		params = &DescribeModelPackageInput{}
@@ -71,7 +71,8 @@ type DescribeModelPackageOutput struct {
 	// A description provided for the model approval.
 	ApprovalDescription *string
 
-	// Whether the model package is certified for listing on AWS Marketplace.
+	// Whether the model package is certified for listing on Amazon Web Services
+	// Marketplace.
 	CertifyForMarketplace bool
 
 	// Information about the user who created or modified an experiment, trial, or

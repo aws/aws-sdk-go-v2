@@ -571,6 +571,13 @@ func awsRestjson1_serializeOpDocumentCreateRecipeJobInput(v *CreateRecipeJobInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataCatalogOutputs != nil {
+		ok := object.Key("DataCatalogOutputs")
+		if err := awsRestjson1_serializeDocumentDataCatalogOutputList(v.DataCatalogOutputs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DatasetName != nil {
 		ok := object.Key("DatasetName")
 		ok.String(*v.DatasetName)
@@ -2893,6 +2900,13 @@ func awsRestjson1_serializeOpDocumentUpdateRecipeJobInput(v *UpdateRecipeJobInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataCatalogOutputs != nil {
+		ok := object.Key("DataCatalogOutputs")
+		if err := awsRestjson1_serializeDocumentDataCatalogOutputList(v.DataCatalogOutputs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EncryptionKeyArn != nil {
 		ok := object.Key("EncryptionKeyArn")
 		ok.String(*v.EncryptionKeyArn)
@@ -3125,6 +3139,25 @@ func awsRestjson1_serializeDocumentDatabaseInputDefinition(v *types.DatabaseInpu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDatabaseTableOutputOptions(v *types.DatabaseTableOutputOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	if v.TempDirectory != nil {
+		ok := object.Key("TempDirectory")
+		if err := awsRestjson1_serializeDocumentS3Location(v.TempDirectory, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataCatalogInputDefinition(v *types.DataCatalogInputDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3151,6 +3184,60 @@ func awsRestjson1_serializeDocumentDataCatalogInputDefinition(v *types.DataCatal
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataCatalogOutput(v *types.DataCatalogOutput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.DatabaseOptions != nil {
+		ok := object.Key("DatabaseOptions")
+		if err := awsRestjson1_serializeDocumentDatabaseTableOutputOptions(v.DatabaseOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Overwrite {
+		ok := object.Key("Overwrite")
+		ok.Boolean(v.Overwrite)
+	}
+
+	if v.S3Options != nil {
+		ok := object.Key("S3Options")
+		if err := awsRestjson1_serializeDocumentS3TableOutputOptions(v.S3Options, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataCatalogOutputList(v []types.DataCatalogOutput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDataCatalogOutput(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -3602,6 +3689,20 @@ func awsRestjson1_serializeDocumentS3Location(v *types.S3Location, value smithyj
 	if v.Key != nil {
 		ok := object.Key("Key")
 		ok.String(*v.Key)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3TableOutputOptions(v *types.S3TableOutputOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		if err := awsRestjson1_serializeDocumentS3Location(v.Location, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

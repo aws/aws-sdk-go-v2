@@ -34,24 +34,23 @@ type StartJobRunInput struct {
 	// This member is required.
 	JobName *string
 
-	// This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data
+	// This field is deprecated. Use MaxCapacity instead. The number of Glue data
 	// processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be
 	// allocated; the default is 10. A DPU is a relative measure of processing power
 	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the AWS Glue pricing page
-	// (https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/).
+	// information, see the Glue pricing page (https://aws.amazon.com/glue/pricing/).
 	//
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
 	// The job arguments specifically for this run. For this job run, they replace the
 	// default arguments set in the job definition itself. You can specify arguments
-	// here that your own job-execution script consumes, as well as arguments that AWS
-	// Glue itself consumes. For information about how to specify and consume your own
-	// Job arguments, see the Calling AWS Glue APIs in Python
+	// here that your own job-execution script consumes, as well as arguments that Glue
+	// itself consumes. For information about how to specify and consume your own Job
+	// arguments, see the Calling Glue APIs in Python
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the key-value pairs that AWS
-	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
+	// topic in the developer guide. For information about the key-value pairs that
+	// Glue consumes to set up your job, see the Special Parameters Used by Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]string
@@ -59,12 +58,11 @@ type StartJobRunInput struct {
 	// The ID of a previous JobRun to retry.
 	JobRunId *string
 
-	// The number of AWS Glue data processing units (DPUs) that can be allocated when
-	// this job runs. A DPU is a relative measure of processing power that consists of
-	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
-	// AWS Glue pricing page
-	// (https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/). Do not set
-	// Max Capacity if using WorkerType and NumberOfWorkers. The value that can be
+	// The number of Glue data processing units (DPUs) that can be allocated when this
+	// job runs. A DPU is a relative measure of processing power that consists of 4
+	// vCPUs of compute capacity and 16 GB of memory. For more information, see the
+	// Glue pricing page (https://aws.amazon.com/glue/pricing/). Do not set Max
+	// Capacity if using WorkerType and NumberOfWorkers. The value that can be
 	// allocated for MaxCapacity depends on whether you are running a Python shell job,
 	// or an Apache Spark ETL job:
 	//

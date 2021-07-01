@@ -18,9 +18,9 @@ import (
 // the service is backend.example.com. You can discover instances that were
 // registered with a public DNS namespace by using either a DiscoverInstances
 // request or using DNS. For the current quota on the number of namespaces that you
-// can create using the same AWS account, see AWS Cloud Map Quotas
-// (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)in the
-// AWS Cloud Map Developer Guide.
+// can create using the same account, see Cloud Map quotas
+// (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
+// Cloud Map Developer Guide.
 func (c *Client) CreatePublicDnsNamespace(ctx context.Context, params *CreatePublicDnsNamespaceInput, optFns ...func(*Options)) (*CreatePublicDnsNamespaceOutput, error) {
 	if params == nil {
 		params = &CreatePublicDnsNamespaceInput{}
@@ -51,6 +51,9 @@ type CreatePublicDnsNamespaceInput struct {
 
 	// A description for the namespace.
 	Description *string
+
+	// Properties for the public DNS namespace.
+	Properties *types.PublicDnsNamespaceProperties
 
 	// The tags to add to the namespace. Each tag consists of a key and an optional
 	// value that you define. Tags keys can be up to 128 characters in length, and tag

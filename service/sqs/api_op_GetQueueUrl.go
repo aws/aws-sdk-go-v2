@@ -16,7 +16,7 @@ import (
 // access the queue. For more information about shared queue access, see
 // AddPermission or see Allow Developers to Write Messages to a Shared Queue
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
-// in the Amazon Simple Queue Service Developer Guide.
+// in the Amazon SQS Developer Guide.
 func (c *Client) GetQueueUrl(ctx context.Context, params *GetQueueUrlInput, optFns ...func(*Options)) (*GetQueueUrlOutput, error) {
 	if params == nil {
 		params = &GetQueueUrlInput{}
@@ -42,13 +42,13 @@ type GetQueueUrlInput struct {
 	// This member is required.
 	QueueName *string
 
-	// The AWS account ID of the account that created the queue.
+	// The account ID of the account that created the queue.
 	QueueOwnerAWSAccountId *string
 }
 
 // For more information, see Interpreting Responses
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html)
-// in the Amazon Simple Queue Service Developer Guide.
+// in the Amazon SQS Developer Guide.
 type GetQueueUrlOutput struct {
 
 	// The URL of the queue.

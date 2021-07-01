@@ -662,7 +662,7 @@ type CapacityReservation struct {
 	// was created.
 	OutpostArn *string
 
-	// The ID of the AWS account that owns the Capacity Reservation.
+	// The ID of the account that owns the Capacity Reservation.
 	OwnerId *string
 
 	// The date and time at which the Capacity Reservation was started.
@@ -698,11 +698,11 @@ type CapacityReservation struct {
 	// have one of the following tenancy settings:
 	//
 	// * default - The Capacity
-	// Reservation is created on hardware that is shared with other AWS accounts.
+	// Reservation is created on hardware that is shared with other accounts.
 	//
 	// *
 	// dedicated - The Capacity Reservation is created on single-tenant hardware that
-	// is dedicated to a single AWS account.
+	// is dedicated to a single account.
 	Tenancy CapacityReservationTenancy
 
 	// The total number of instances for which the Capacity Reservation reserves
@@ -716,7 +716,7 @@ type CapacityReservationGroup struct {
 	// The ARN of the resource group.
 	GroupArn *string
 
-	// The ID of the AWS account that owns the resource group.
+	// The ID of the account that owns the resource group.
 	OwnerId *string
 }
 
@@ -2307,21 +2307,24 @@ type EnableFastSnapshotRestoreSuccessItem struct {
 	StateTransitionReason *string
 }
 
-// Indicates whether the instance is enabled for AWS Nitro Enclaves.
+// Indicates whether the instance is enabled for Amazon Web Services Nitro
+// Enclaves.
 type EnclaveOptions struct {
 
-	// If this parameter is set to true, the instance is enabled for AWS Nitro
-	// Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
+	// If this parameter is set to true, the instance is enabled for Amazon Web
+	// Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services
+	// Nitro Enclaves.
 	Enabled *bool
 }
 
-// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
-// information, see  What is AWS Nitro Enclaves?
-// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the AWS
-// Nitro Enclaves User Guide.
+// Indicates whether the instance is enabled for Amazon Web Services Nitro
+// Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves?
+// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the
+// Amazon Web Services Nitro Enclaves User Guide.
 type EnclaveOptionsRequest struct {
 
-	// To enable the instance for AWS Nitro Enclaves, set this parameter to true.
+	// To enable the instance for Amazon Web Services Nitro Enclaves, set this
+	// parameter to true.
 	Enabled *bool
 }
 
@@ -2730,6 +2733,9 @@ type FleetData struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	// Constraints: Maximum 64 ASCII characters
 	ClientToken *string
+
+	// Reserved.
+	Context *string
 
 	// The creation date and time of the EC2 Fleet.
 	CreateTime *time.Time
@@ -3344,7 +3350,7 @@ type Host struct {
 	// group; otherwise, it is not.
 	MemberOfServiceLinkedResourceGroup *bool
 
-	// The ID of the AWS account that owns the Dedicated Host.
+	// The ID of the account that owns the Dedicated Host.
 	OwnerId *string
 
 	// The time that the Dedicated Host was released.
@@ -3366,7 +3372,7 @@ type HostInstance struct {
 	// The instance type (for example, m3.medium) of the running instance.
 	InstanceType *string
 
-	// The ID of the AWS account that owns the instance.
+	// The ID of the account that owns the instance.
 	OwnerId *string
 }
 
@@ -3928,7 +3934,8 @@ type Instance struct {
 	// Specifies whether enhanced networking with ENA is enabled.
 	EnaSupport *bool
 
-	// Indicates whether the instance is enabled for AWS Nitro Enclaves.
+	// Indicates whether the instance is enabled for Amazon Web Services Nitro
+	// Enclaves.
 	EnclaveOptions *EnclaveOptions
 
 	// Indicates whether the instance is enabled for hibernation.
@@ -4701,11 +4708,10 @@ type InstanceTypeOffering struct {
 // Information about the Capacity Reservation usage.
 type InstanceUsage struct {
 
-	// The ID of the AWS account that is making use of the Capacity Reservation.
+	// The ID of the account that is making use of the Capacity Reservation.
 	AccountId *string
 
-	// The number of instances the AWS account currently has in the Capacity
-	// Reservation.
+	// The number of instances the account currently has in the Capacity Reservation.
 	UsedInstanceCount *int32
 }
 
@@ -7640,11 +7646,11 @@ type Reservation struct {
 	// The instances.
 	Instances []Instance
 
-	// The ID of the AWS account that owns the reservation.
+	// The ID of the account that owns the reservation.
 	OwnerId *string
 
 	// The ID of the requester that launched the instances on your behalf (for example,
-	// AWS Management Console or Auto Scaling).
+	// Management Console or Auto Scaling).
 	RequesterId *string
 
 	// The ID of the reservation.
@@ -7882,8 +7888,8 @@ type ReservedInstancesOffering struct {
 	InstanceType InstanceType
 
 	// Indicates whether the offering is available through the Reserved Instance
-	// Marketplace (resale) or AWS. If it's a Reserved Instance Marketplace offering,
-	// this is true.
+	// Marketplace (resale) or Amazon Web Services. If it's a Reserved Instance
+	// Marketplace offering, this is true.
 	Marketplace *bool
 
 	// If convertible it can be exchanged for Reserved Instances of the same or higher
@@ -8935,7 +8941,7 @@ type SpotDatafeedSubscription struct {
 	// The fault codes for the Spot Instance request, if any.
 	Fault *SpotInstanceStateFault
 
-	// The AWS account ID of the account.
+	// The account ID of the account.
 	OwnerId *string
 
 	// The prefix for the data feed files.
@@ -8999,8 +9005,8 @@ type SpotFleetLaunchSpecification struct {
 
 	// The ID of the RAM disk. Some kernels require additional drivers at launch. Check
 	// the kernel requirements for information about whether you need to specify a RAM
-	// disk. To find kernel requirements, refer to the AWS Resource Center and search
-	// for the kernel ID.
+	// disk. To find kernel requirements, refer to the Amazon Web Services Resource
+	// Center and search for the kernel ID.
 	RamdiskId *string
 
 	// One or more security groups. When requesting instances in a VPC, you must
@@ -9070,10 +9076,9 @@ type SpotFleetRequestConfig struct {
 // Describes the configuration of a Spot Fleet request.
 type SpotFleetRequestConfigData struct {
 
-	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
-	// role that grants the Spot Fleet the permission to request, launch, terminate,
-	// and tag instances on your behalf. For more information, see Spot Fleet
-	// prerequisites
+	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
+	// that grants the Spot Fleet the permission to request, launch, terminate, and tag
+	// instances on your behalf. For more information, see Spot Fleet prerequisites
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html#spot-fleet-prerequisites)
 	// in the Amazon EC2 User Guide for Linux Instances. Spot Fleet can terminate Spot
 	// Instances on your behalf when you cancel its Spot Fleet request using
@@ -9118,6 +9123,9 @@ type SpotFleetRequestConfigData struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
 
+	// Reserved.
+	Context *string
+
 	// Indicates whether running Spot Instances should be terminated if you decrease
 	// the target capacity of the Spot Fleet request below the current size of the Spot
 	// Fleet.
@@ -9133,7 +9141,14 @@ type SpotFleetRequestConfigData struct {
 	// The number of Spot pools across which to allocate your target Spot capacity.
 	// Valid only when Spot AllocationStrategy is set to lowest-price. Spot Fleet
 	// selects the cheapest Spot pools and evenly allocates your target Spot capacity
-	// across the number of Spot pools that you specify.
+	// across the number of Spot pools that you specify. Note that Spot Fleet attempts
+	// to draw Spot Instances from the number of pools that you specify on a best
+	// effort basis. If a pool runs out of Spot capacity before fulfilling your target
+	// capacity, Spot Fleet will continue to fulfill your request by drawing from the
+	// next cheapest pool. To ensure that your target capacity is met, you might
+	// receive Spot Instances from more than the number of pools that you specified.
+	// Similarly, if most of the pools have no Spot capacity, you might receive your
+	// full target capacity from fewer than the number of pools that you specified.
 	InstancePoolsToUseCount *int32
 
 	// The launch specifications for the Spot Fleet request. If you specify
@@ -9255,8 +9270,7 @@ type SpotFleetTagSpecification struct {
 // Describes a Spot Instance request.
 type SpotInstanceRequest struct {
 
-	// If you specified a duration and your Spot Instance request was fulfilled, this
-	// is the fixed hourly price in effect for the Spot Instance while it runs.
+	// Deprecated.
 	ActualBlockHourlyPrice *string
 
 	// The Availability Zone group. If you specify the same Availability Zone group for
@@ -9264,7 +9278,7 @@ type SpotInstanceRequest struct {
 	// Availability Zone.
 	AvailabilityZoneGroup *string
 
-	// The duration for the Spot Instance, in minutes.
+	// Deprecated.
 	BlockDurationMinutes *int32
 
 	// The date and time when the Spot Instance request was created, in UTC format (for
@@ -9377,8 +9391,9 @@ type SpotMarketOptions struct {
 	// termination and provides a Spot Instance termination notice, which gives the
 	// instance a two-minute warning before it terminates. You can't specify an
 	// Availability Zone group or a launch group if you specify a duration. New
-	// accounts or accounts with no previous billing history with AWS are not eligible
-	// for Spot Instances with a defined duration (also known as Spot blocks).
+	// accounts or accounts with no previous billing history with Amazon Web Services
+	// are not eligible for Spot Instances with a defined duration (also known as Spot
+	// blocks).
 	BlockDurationMinutes *int32
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
@@ -9434,7 +9449,14 @@ type SpotOptions struct {
 	// The number of Spot pools across which to allocate your target Spot capacity.
 	// Valid only when AllocationStrategy is set to lowest-price. EC2 Fleet selects the
 	// cheapest Spot pools and evenly allocates your target Spot capacity across the
-	// number of Spot pools that you specify.
+	// number of Spot pools that you specify. Note that EC2 Fleet attempts to draw Spot
+	// Instances from the number of pools that you specify on a best effort basis. If a
+	// pool runs out of Spot capacity before fulfilling your target capacity, EC2 Fleet
+	// will continue to fulfill your request by drawing from the next cheapest pool. To
+	// ensure that your target capacity is met, you might receive Spot Instances from
+	// more than the number of pools that you specified. Similarly, if most of the
+	// pools have no Spot capacity, you might receive your full target capacity from
+	// fewer than the number of pools that you specified.
 	InstancePoolsToUseCount *int32
 
 	// The strategies for managing your workloads on your Spot Instances that will be
@@ -9484,7 +9506,14 @@ type SpotOptionsRequest struct {
 	// The number of Spot pools across which to allocate your target Spot capacity.
 	// Valid only when Spot AllocationStrategy is set to lowest-price. EC2 Fleet
 	// selects the cheapest Spot pools and evenly allocates your target Spot capacity
-	// across the number of Spot pools that you specify.
+	// across the number of Spot pools that you specify. Note that EC2 Fleet attempts
+	// to draw Spot Instances from the number of pools that you specify on a best
+	// effort basis. If a pool runs out of Spot capacity before fulfilling your target
+	// capacity, EC2 Fleet will continue to fulfill your request by drawing from the
+	// next cheapest pool. To ensure that your target capacity is met, you might
+	// receive Spot Instances from more than the number of pools that you specified.
+	// Similarly, if most of the pools have no Spot capacity, you might receive your
+	// full target capacity from fewer than the number of pools that you specified.
 	InstancePoolsToUseCount *int32
 
 	// The strategies for managing your Spot Instances that are at an elevated risk of

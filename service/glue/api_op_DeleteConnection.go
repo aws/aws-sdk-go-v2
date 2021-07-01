@@ -34,7 +34,7 @@ type DeleteConnectionInput struct {
 	ConnectionName *string
 
 	// The ID of the Data Catalog in which the connection resides. If none is provided,
-	// the AWS account ID is used by default.
+	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
 }
 

@@ -31,7 +31,7 @@ func (c *Client) GetDatabases(ctx context.Context, params *GetDatabasesInput, op
 type GetDatabasesInput struct {
 
 	// The ID of the Data Catalog from which to retrieve Databases. If none is
-	// provided, the AWS account ID is used by default.
+	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	// The maximum number of databases to return in one response.

@@ -13,7 +13,7 @@ import (
 )
 
 // Describes one or more of your Capacity Reservations. The results describe only
-// the Capacity Reservations in the AWS Region that you're currently using.
+// the Capacity Reservations in the Region that you're currently using.
 func (c *Client) DescribeCapacityReservations(ctx context.Context, params *DescribeCapacityReservationsInput, optFns ...func(*Options)) (*DescribeCapacityReservationsOutput, error) {
 	if params == nil {
 		params = &DescribeCapacityReservationsInput{}
@@ -45,14 +45,14 @@ type DescribeCapacityReservationsInput struct {
 	// * instance-type - The type of instance for which the
 	// Capacity Reservation reserves capacity.
 	//
-	// * owner-id - The ID of the AWS account
-	// that owns the Capacity Reservation.
+	// * owner-id - The ID of the account that
+	// owns the Capacity Reservation.
 	//
-	// * availability-zone-id - The Availability
-	// Zone ID of the Capacity Reservation.
+	// * availability-zone-id - The Availability Zone
+	// ID of the Capacity Reservation.
 	//
-	// * instance-platform - The type of
-	// operating system for which the Capacity Reservation reserves capacity.
+	// * instance-platform - The type of operating
+	// system for which the Capacity Reservation reserves capacity.
 	//
 	// *
 	// availability-zone - The Availability Zone ID of the Capacity Reservation.
@@ -62,11 +62,11 @@ type DescribeCapacityReservationsInput struct {
 	// Reservation can have one of the following tenancy settings:
 	//
 	// * default - The
-	// Capacity Reservation is created on hardware that is shared with other AWS
+	// Capacity Reservation is created on hardware that is shared with other
 	// accounts.
 	//
 	// * dedicated - The Capacity Reservation is created on single-tenant
-	// hardware that is dedicated to a single AWS account.
+	// hardware that is dedicated to a single account.
 	//
 	// * outpost-arn - The Amazon
 	// Resource Name (ARN) of the Outpost on which the Capacity Reservation was

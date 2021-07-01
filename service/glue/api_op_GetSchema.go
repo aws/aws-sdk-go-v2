@@ -51,7 +51,7 @@ type GetSchemaOutput struct {
 	// The date and time the schema was created.
 	CreatedTime *string
 
-	// The data format of the schema definition. Currently only AVRO is supported.
+	// The data format of the schema definition. Currently AVRO and JSON are supported.
 	DataFormat types.DataFormat
 
 	// A description of schema if specified when created

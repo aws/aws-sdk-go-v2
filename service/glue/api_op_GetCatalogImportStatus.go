@@ -29,7 +29,8 @@ func (c *Client) GetCatalogImportStatus(ctx context.Context, params *GetCatalogI
 
 type GetCatalogImportStatusInput struct {
 
-	// The ID of the catalog to migrate. Currently, this should be the AWS account ID.
+	// The ID of the catalog to migrate. Currently, this should be the Amazon Web
+	// Services account ID.
 	CatalogId *string
 }
 

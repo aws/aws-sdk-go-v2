@@ -38,8 +38,8 @@ type CreateRegistryInput struct {
 	// any default value for this.
 	Description *string
 
-	// AWS tags that contain a key value pair and may be searched by console, command
-	// line, or API.
+	// Amazon Web Services tags that contain a key value pair and may be searched by
+	// console, command line, or API.
 	Tags map[string]string
 }
 

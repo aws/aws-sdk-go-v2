@@ -4,15 +4,18 @@ package ec2
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"github.com/jmespath/go-jmespath"
+	"strconv"
 	"time"
 )
 
@@ -254,7 +257,7 @@ type DescribeInstancesInput struct {
 	// for the network interface.
 	//
 	// * network-interface.requester-managed - Indicates
-	// whether the network interface is being managed by AWS.
+	// whether the network interface is being managed by Amazon Web Services.
 	//
 	// *
 	// network-interface.status - The status of the network interface (available) |
@@ -275,13 +278,13 @@ type DescribeInstancesInput struct {
 	// * outpost-arn - The Amazon Resource Name (ARN) of the Outpost.
 	//
 	// *
-	// owner-id - The AWS account ID of the instance owner.
+	// owner-id - The account ID of the instance owner.
 	//
-	// * placement-group-name -
-	// The name of the placement group for the instance.
+	// * placement-group-name - The
+	// name of the placement group for the instance.
 	//
-	// * placement-partition-number
-	// - The partition in which the instance is located.
+	// * placement-partition-number -
+	// The partition in which the instance is located.
 	//
 	// * platform - The platform. To
 	// list only Windows instances, use windows.
@@ -306,30 +309,30 @@ type DescribeInstancesInput struct {
 	//
 	// *
 	// requester-id - The ID of the entity that launched the instance on your behalf
-	// (for example, AWS Management Console, Auto Scaling, and so on).
+	// (for example, Management Console, Auto Scaling, and so on).
+	//
+	// * reservation-id -
+	// The ID of the instance's reservation. A reservation ID is created any time you
+	// launch an instance. A reservation ID has a one-to-one relationship with an
+	// instance launch request, but can be associated with more than one instance if
+	// you launch multiple instances using the same launch request. For example, if you
+	// launch one instance, you get one reservation ID. If you launch ten instances
+	// using the same launch request, you also get one reservation ID.
 	//
 	// *
-	// reservation-id - The ID of the instance's reservation. A reservation ID is
-	// created any time you launch an instance. A reservation ID has a one-to-one
-	// relationship with an instance launch request, but can be associated with more
-	// than one instance if you launch multiple instances using the same launch
-	// request. For example, if you launch one instance, you get one reservation ID. If
-	// you launch ten instances using the same launch request, you also get one
-	// reservation ID.
+	// root-device-name - The device name of the root device volume (for example,
+	// /dev/sda1).
 	//
-	// * root-device-name - The device name of the root device volume
-	// (for example, /dev/sda1).
+	// * root-device-type - The type of the root device volume (ebs |
+	// instance-store).
 	//
-	// * root-device-type - The type of the root device
-	// volume (ebs | instance-store).
+	// * source-dest-check - Indicates whether the instance performs
+	// source/destination checking. A value of true means that checking is enabled, and
+	// false means that checking is disabled. The value must be false for the instance
+	// to perform network address translation (NAT) in your VPC.
 	//
-	// * source-dest-check - Indicates whether the
-	// instance performs source/destination checking. A value of true means that
-	// checking is enabled, and false means that checking is disabled. The value must
-	// be false for the instance to perform network address translation (NAT) in your
-	// VPC.
-	//
-	// * spot-instance-request-id - The ID of the Spot Instance request.
+	// *
+	// spot-instance-request-id - The ID of the Spot Instance request.
 	//
 	// *
 	// state-reason-code - The reason code for the state change.
@@ -533,6 +536,423 @@ func (p *DescribeInstancesPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 
 	return result, nil
+}
+
+// InstanceExistsWaiterOptions are waiter options for InstanceExistsWaiter
+type InstanceExistsWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// InstanceExistsWaiter will use default minimum delay of 5 seconds. Note that
+	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, InstanceExistsWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeInstancesInput, *DescribeInstancesOutput, error) (bool, error)
+}
+
+// InstanceExistsWaiter defines the waiters for InstanceExists
+type InstanceExistsWaiter struct {
+	client DescribeInstancesAPIClient
+
+	options InstanceExistsWaiterOptions
+}
+
+// NewInstanceExistsWaiter constructs a InstanceExistsWaiter.
+func NewInstanceExistsWaiter(client DescribeInstancesAPIClient, optFns ...func(*InstanceExistsWaiterOptions)) *InstanceExistsWaiter {
+	options := InstanceExistsWaiterOptions{}
+	options.MinDelay = 5 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = instanceExistsStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &InstanceExistsWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for InstanceExists waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
+func (w *InstanceExistsWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceExistsWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeInstances(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for InstanceExists waiter")
+}
+
+func instanceExistsStateRetryable(ctx context.Context, input *DescribeInstancesInput, output *DescribeInstancesOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("length(Reservations[]) > `0`", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "true"
+		bv, err := strconv.ParseBool(expectedValue)
+		if err != nil {
+			return false, fmt.Errorf("error parsing boolean from string %w", err)
+		}
+		value, ok := pathValue.(bool)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected bool value got %T", pathValue)
+		}
+
+		if value == bv {
+			return false, nil
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "InvalidInstanceID.NotFound" == apiErr.ErrorCode() {
+			return true, nil
+		}
+	}
+
+	return true, nil
+}
+
+// InstanceRunningWaiterOptions are waiter options for InstanceRunningWaiter
+type InstanceRunningWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// InstanceRunningWaiter will use default minimum delay of 15 seconds. Note that
+	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, InstanceRunningWaiter will use default max delay of 120 seconds. Note
+	// that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeInstancesInput, *DescribeInstancesOutput, error) (bool, error)
+}
+
+// InstanceRunningWaiter defines the waiters for InstanceRunning
+type InstanceRunningWaiter struct {
+	client DescribeInstancesAPIClient
+
+	options InstanceRunningWaiterOptions
+}
+
+// NewInstanceRunningWaiter constructs a InstanceRunningWaiter.
+func NewInstanceRunningWaiter(client DescribeInstancesAPIClient, optFns ...func(*InstanceRunningWaiterOptions)) *InstanceRunningWaiter {
+	options := InstanceRunningWaiterOptions{}
+	options.MinDelay = 15 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = instanceRunningStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &InstanceRunningWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for InstanceRunning waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
+func (w *InstanceRunningWaiter) Wait(ctx context.Context, params *DescribeInstancesInput, maxWaitDur time.Duration, optFns ...func(*InstanceRunningWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeInstances(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for InstanceRunning waiter")
+}
+
+func instanceRunningStateRetryable(ctx context.Context, input *DescribeInstancesInput, output *DescribeInstancesOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Reservations[].Instances[].State.Name", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "running"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Reservations[].Instances[].State.Name", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "shutting-down"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Reservations[].Instances[].State.Name", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "terminated"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Reservations[].Instances[].State.Name", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "stopping"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "InvalidInstanceID.NotFound" == apiErr.ErrorCode() {
+			return true, nil
+		}
+	}
+
+	return true, nil
 }
 
 // InstanceStoppedWaiterOptions are waiter options for InstanceStoppedWaiter

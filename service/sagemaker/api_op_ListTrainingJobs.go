@@ -21,8 +21,8 @@ import (
 // ... } First, 100 trainings jobs with any status, including those other than
 // InProgress, are selected (sorted according to the creation time, from the most
 // current to the oldest). Next, those with a status of InProgress are returned.
-// You can quickly test the API using the following AWS CLI code. aws sagemaker
-// list-training-jobs --max-results 100 --status-equals InProgress
+// You can quickly test the API using the following Amazon Web Services CLI code.
+// aws sagemaker list-training-jobs --max-results 100 --status-equals InProgress
 func (c *Client) ListTrainingJobs(ctx context.Context, params *ListTrainingJobsInput, optFns ...func(*Options)) (*ListTrainingJobsOutput, error) {
 	if params == nil {
 		params = &ListTrainingJobsInput{}

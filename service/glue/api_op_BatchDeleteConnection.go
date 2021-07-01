@@ -35,7 +35,7 @@ type BatchDeleteConnectionInput struct {
 	ConnectionNameList []string
 
 	// The ID of the Data Catalog in which the connections reside. If none is provided,
-	// the AWS account ID is used by default.
+	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
 }
 

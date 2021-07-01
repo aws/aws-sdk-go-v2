@@ -14,15 +14,16 @@ import (
 // Creates a Domain used by Amazon SageMaker Studio. A domain consists of an
 // associated Amazon Elastic File System (EFS) volume, a list of authorized users,
 // and a variety of security, application, policy, and Amazon Virtual Private Cloud
-// (VPC) configurations. An AWS account is limited to one domain per region. Users
-// within a domain can share notebook files and other artifacts with each other.
-// EFS storage When a domain is created, an EFS volume is created for use by all of
-// the users within the domain. Each user receives a private home directory within
-// the EFS volume for notebooks, Git repositories, and data files. SageMaker uses
-// the AWS Key Management Service (AWS KMS) to encrypt the EFS volume attached to
-// the domain with an AWS managed customer master key (CMK) by default. For more
-// control, you can specify a customer managed CMK. For more information, see
-// Protect Data at Rest Using Encryption
+// (VPC) configurations. An Amazon Web Services account is limited to one domain
+// per region. Users within a domain can share notebook files and other artifacts
+// with each other. EFS storage When a domain is created, an EFS volume is created
+// for use by all of the users within the domain. Each user receives a private home
+// directory within the EFS volume for notebooks, Git repositories, and data files.
+// SageMaker uses the Amazon Web Services Key Management Service (Amazon Web
+// Services KMS) to encrypt the EFS volume attached to the domain with an Amazon
+// Web Services managed customer master key (CMK) by default. For more control, you
+// can specify a customer managed CMK. For more information, see Protect Data at
+// Rest Using Encryption
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html). VPC
 // configuration All SageMaker Studio traffic between the domain and the EFS volume
 // is through the specified VPC and subnets. For other Studio traffic, you can
@@ -41,8 +42,10 @@ import (
 // interface endpoint to the SageMaker API and runtime or a NAT gateway and your
 // security groups allow outbound connections.
 //
-// For more information, see Connect
-// SageMaker Studio Notebooks to Resources in a VPC
+// NFS traffic over TCP on port 2049
+// needs to be allowed in both inbound and outbound rules in order to launch a
+// SageMaker Studio app successfully. For more information, see Connect SageMaker
+// Studio Notebooks to Resources in a VPC
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html).
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
@@ -106,9 +109,9 @@ type CreateDomainInput struct {
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string
 
-	// SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an
-	// AWS managed customer master key (CMK) by default. For more control, specify a
-	// customer managed CMK.
+	// SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to the
+	// domain with an Amazon Web Services managed customer master key (CMK) by default.
+	// For more control, specify a customer managed CMK.
 	KmsKeyId *string
 
 	// Tags to associated with the Domain. Each tag consists of a key and an optional

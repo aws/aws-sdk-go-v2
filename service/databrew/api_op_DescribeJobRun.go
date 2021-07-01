@@ -54,6 +54,10 @@ type DescribeJobRunOutput struct {
 	// The date and time when the job completed processing.
 	CompletedOn *time.Time
 
+	// One or more artifacts that represent the AWS Glue Data Catalog output from
+	// running the job.
+	DataCatalogOutputs []types.DataCatalogOutput
+
 	// The name of the dataset for the job to process.
 	DatasetName *string
 

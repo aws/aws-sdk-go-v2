@@ -31,7 +31,7 @@ import (
 // configuration from an UpdateService request, the configuration isn't deleted
 // from the service.
 //
-// When you update settings for a service, AWS Cloud Map also
+// When you update settings for a service, Cloud Map also
 // updates the corresponding settings in all the records and health checks that
 // were created by using the specified service.
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {

@@ -30,7 +30,7 @@ import (
 // request must complete before you can submit another request and specify the same
 // service ID and instance ID. For more information, see CreateService
 // (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html). When
-// AWS Cloud Map receives a DNS query for the specified DNS name, it returns the
+// Cloud Map receives a DNS query for the specified DNS name, it returns the
 // applicable value:
 //
 // * If the health check is healthy: returns all the records
@@ -43,9 +43,9 @@ import (
 // all the records
 //
 // For the current quota on the number of instances that you can
-// register using the same namespace and using the same service, see AWS Cloud Map
-// Limits (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the AWS Cloud Map Developer Guide.
+// register using the same namespace and using the same service, see Cloud Map
+// quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the Cloud Map Developer Guide.
 func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceInput, optFns ...func(*Options)) (*RegisterInstanceOutput, error) {
 	if params == nil {
 		params = &RegisterInstanceInput{}
@@ -72,11 +72,11 @@ type RegisterInstanceInput struct {
 	// * For each attribute, the applicable value.
 	//
 	// Supported
-	// attribute keys include the following: AWS_ALIAS_DNS_NAME If you want AWS Cloud
-	// Map to create an Amazon Route 53 alias record that routes traffic to an Elastic
-	// Load Balancing load balancer, specify the DNS name that's associated with the
-	// load balancer. For information about how to get the DNS name, see "DNSName" in
-	// the topic AliasTarget
+	// attribute keys include the following: AWS_ALIAS_DNS_NAME If you want Cloud Map
+	// to create an Amazon Route 53 alias record that routes traffic to an Elastic Load
+	// Balancing load balancer, specify the DNS name that's associated with the load
+	// balancer. For information about how to get the DNS name, see "DNSName" in the
+	// topic AliasTarget
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)
 	// in the Route 53 API Reference. Note the following:
 	//
@@ -88,13 +88,13 @@ type RegisterInstanceInput struct {
 	// of RoutingPolicy must be WEIGHTED.
 	//
 	// * If the service that's specified by
-	// ServiceId includes HealthCheckConfig settings, AWS Cloud Map will create the
-	// Route 53 health check, but it doesn't associate the health check with the alias
+	// ServiceId includes HealthCheckConfig settings, Cloud Map will create the Route
+	// 53 health check, but it doesn't associate the health check with the alias
 	// record.
 	//
 	// * Auto naming currently doesn't support creating alias records that
-	// route traffic to AWS resources other than Elastic Load Balancing load
-	// balancers.
+	// route traffic to Amazon Web Services resources other than Elastic Load Balancing
+	// load balancers.
 	//
 	// * If you specify a value for AWS_ALIAS_DNS_NAME, don't specify
 	// values for any of the AWS_INSTANCE attributes.
@@ -152,10 +152,10 @@ type RegisterInstanceInput struct {
 	// register by using the same service.
 	//
 	// * If you specify an existing InstanceId and
-	// ServiceId, AWS Cloud Map updates the existing DNS records, if any. If there's
-	// also an existing health check, AWS Cloud Map deletes the old health check and
-	// creates a new one. The health check isn't deleted immediately, so it will still
-	// appear for a while if you submit a ListHealthChecks request, for example.
+	// ServiceId, Cloud Map updates the existing DNS records, if any. If there's also
+	// an existing health check, Cloud Map deletes the old health check and creates a
+	// new one. The health check isn't deleted immediately, so it will still appear for
+	// a while if you submit a ListHealthChecks request, for example.
 	//
 	// This member is required.
 	InstanceId *string

@@ -18,11 +18,12 @@ import (
 // following:
 //
 // * TransformJobName - Identifies the transform job. The name must be
-// unique within an AWS Region in an AWS account.
+// unique within an Amazon Web Services Region in an Amazon Web Services
+// account.
 //
-// * ModelName - Identifies the
-// model to use. ModelName must be the name of an existing Amazon SageMaker model
-// in the same AWS Region and AWS account. For information on creating a model, see
+// * ModelName - Identifies the model to use. ModelName must be the name
+// of an existing Amazon SageMaker model in the same Amazon Web Services Region and
+// Amazon Web Services account. For information on creating a model, see
 // CreateModel.
 //
 // * TransformInput - Describes the dataset to be transformed and the
@@ -56,8 +57,8 @@ func (c *Client) CreateTransformJob(ctx context.Context, params *CreateTransform
 type CreateTransformJobInput struct {
 
 	// The name of the model that you want to use for the transform job. ModelName must
-	// be the name of an existing Amazon SageMaker model within an AWS Region in an AWS
-	// account.
+	// be the name of an existing Amazon SageMaker model within an Amazon Web Services
+	// Region in an Amazon Web Services account.
 	//
 	// This member is required.
 	ModelName *string
@@ -67,8 +68,8 @@ type CreateTransformJobInput struct {
 	// This member is required.
 	TransformInput *types.TransformInput
 
-	// The name of the transform job. The name must be unique within an AWS Region in
-	// an AWS account.
+	// The name of the transform job. The name must be unique within an Amazon Web
+	// Services Region in an Amazon Web Services account.
 	//
 	// This member is required.
 	TransformJobName *string
@@ -148,7 +149,7 @@ type CreateTransformJobInput struct {
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
+	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 }
 

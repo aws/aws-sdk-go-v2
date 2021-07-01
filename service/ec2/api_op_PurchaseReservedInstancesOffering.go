@@ -70,7 +70,11 @@ type PurchaseReservedInstancesOfferingInput struct {
 // Contains the output of PurchaseReservedInstancesOffering.
 type PurchaseReservedInstancesOfferingOutput struct {
 
-	// The IDs of the purchased Reserved Instances.
+	// The IDs of the purchased Reserved Instances. If your purchase crosses into a
+	// discounted pricing tier, the final Reserved Instances IDs might change. For more
+	// information, see Crossing pricing tiers
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-reserved-instances-application.html#crossing-pricing-tiers)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	ReservedInstancesId *string
 
 	// Metadata pertaining to the operation's result.

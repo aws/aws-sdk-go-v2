@@ -15,23 +15,23 @@ import (
 // WaitTimeSeconds parameter enables long-poll support. For more information, see
 // Amazon SQS Long Polling
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html)
-// in the Amazon Simple Queue Service Developer Guide. Short poll is the default
-// behavior where a weighted random set of machines is sampled on a ReceiveMessage
-// call. Thus, only the messages on the sampled machines are returned. If the
-// number of messages in the queue is small (fewer than 1,000), you most likely get
-// fewer messages than you requested per ReceiveMessage call. If the number of
-// messages in the queue is extremely small, you might not receive any messages in
-// a particular ReceiveMessage response. If this happens, repeat the request. For
-// each message returned, the response includes the following:
+// in the Amazon SQS Developer Guide. Short poll is the default behavior where a
+// weighted random set of machines is sampled on a ReceiveMessage call. Thus, only
+// the messages on the sampled machines are returned. If the number of messages in
+// the queue is small (fewer than 1,000), you most likely get fewer messages than
+// you requested per ReceiveMessage call. If the number of messages in the queue is
+// extremely small, you might not receive any messages in a particular
+// ReceiveMessage response. If this happens, repeat the request. For each message
+// returned, the response includes the following:
 //
-// * The message
-// body.
+// * The message body.
 //
-// * An MD5 digest of the message body. For information about MD5, see
-// RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
+// * An MD5
+// digest of the message body. For information about MD5, see RFC1321
+// (https://www.ietf.org/rfc/rfc1321.txt).
 //
-// * The MessageId you received
-// when you sent the message to the queue.
+// * The MessageId you received when you
+// sent the message to the queue.
 //
 // * The receipt handle.
 //
@@ -44,19 +44,18 @@ import (
 // the identifier you must provide when deleting the message. For more information,
 // see Queue and Message Identifiers
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)
-// in the Amazon Simple Queue Service Developer Guide. You can provide the
-// VisibilityTimeout parameter in your request. The parameter is applied to the
-// messages that Amazon SQS returns in the response. If you don't include the
-// parameter, the overall visibility timeout for the queue is used for the returned
-// messages. For more information, see Visibility Timeout
+// in the Amazon SQS Developer Guide. You can provide the VisibilityTimeout
+// parameter in your request. The parameter is applied to the messages that Amazon
+// SQS returns in the response. If you don't include the parameter, the overall
+// visibility timeout for the queue is used for the returned messages. For more
+// information, see Visibility Timeout
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
-// in the Amazon Simple Queue Service Developer Guide. A message that isn't deleted
-// or a message whose visibility isn't extended before the visibility timeout
-// expires counts as a failed receive. Depending on the configuration of the queue,
-// the message might be sent to the dead-letter queue. In the future, new
-// attributes might be added. If you write code that calls this action, we
-// recommend that you structure your code so that it can handle new attributes
-// gracefully.
+// in the Amazon SQS Developer Guide. A message that isn't deleted or a message
+// whose visibility isn't extended before the visibility timeout expires counts as
+// a failed receive. Depending on the configuration of the queue, the message might
+// be sent to the dead-letter queue. In the future, new attributes might be added.
+// If you write code that calls this action, we recommend that you structure your
+// code so that it can handle new attributes gracefully.
 func (c *Client) ReceiveMessage(ctx context.Context, params *ReceiveMessageInput, optFns ...func(*Options)) (*ReceiveMessageOutput, error) {
 	if params == nil {
 		params = &ReceiveMessageInput{}
@@ -95,18 +94,18 @@ type ReceiveMessageInput struct {
 	// message has been received across all queues but not deleted.
 	//
 	// * AWSTraceHeader –
-	// Returns the AWS X-Ray trace header string.
+	// Returns the X-Ray trace header string.
 	//
 	// * SenderId
 	//
-	// * For an IAM user,
-	// returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R.
+	// * For an IAM user, returns
+	// the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R.
 	//
-	// * For an IAM role,
-	// returns the IAM role ID, for example ABCDE1F2GH3I4JK5LMNOP:i-a123b456.
+	// * For an IAM role, returns
+	// the IAM role ID, for example ABCDE1F2GH3I4JK5LMNOP:i-a123b456.
 	//
-	// *
-	// SentTimestamp – Returns the time the message was sent to the queue (epoch time
+	// * SentTimestamp
+	// – Returns the time the message was sent to the queue (epoch time
 	// (http://en.wikipedia.org/wiki/Unix_time) in milliseconds).
 	//
 	// *
@@ -177,33 +176,33 @@ type ReceiveMessageInput struct {
 	// deduplication interval, it resets the visibility timeout. For more information,
 	// see Visibility Timeout
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
-	// in the Amazon Simple Queue Service Developer Guide. If a caller of the
-	// ReceiveMessage action still processes messages when the visibility timeout
-	// expires and messages become visible, another worker consuming from the same
-	// queue can receive the same messages and therefore process duplicates. Also, if a
-	// consumer whose message processing time is longer than the visibility timeout
-	// tries to delete the processed messages, the action fails with an error. To
-	// mitigate this effect, ensure that your application observes a safe threshold
-	// before the visibility timeout expires and extend the visibility timeout as
-	// necessary.
+	// in the Amazon SQS Developer Guide. If a caller of the ReceiveMessage action
+	// still processes messages when the visibility timeout expires and messages become
+	// visible, another worker consuming from the same queue can receive the same
+	// messages and therefore process duplicates. Also, if a consumer whose message
+	// processing time is longer than the visibility timeout tries to delete the
+	// processed messages, the action fails with an error. To mitigate this effect,
+	// ensure that your application observes a safe threshold before the visibility
+	// timeout expires and extend the visibility timeout as necessary.
 	//
-	// * While messages with a particular MessageGroupId are invisible, no
-	// more messages belonging to the same MessageGroupId are returned until the
-	// visibility timeout expires. You can still receive messages with another
-	// MessageGroupId as long as it is also visible.
+	// * While
+	// messages with a particular MessageGroupId are invisible, no more messages
+	// belonging to the same MessageGroupId are returned until the visibility timeout
+	// expires. You can still receive messages with another MessageGroupId as long as
+	// it is also visible.
 	//
-	// * If a caller of ReceiveMessage
-	// can't track the ReceiveRequestAttemptId, no retries work until the original
-	// visibility timeout expires. As a result, delays might occur but the messages in
-	// the queue remain in a strict order.
+	// * If a caller of ReceiveMessage can't track the
+	// ReceiveRequestAttemptId, no retries work until the original visibility timeout
+	// expires. As a result, delays might occur but the messages in the queue remain in
+	// a strict order.
 	//
-	// The maximum length of
-	// ReceiveRequestAttemptId is 128 characters. ReceiveRequestAttemptId can contain
-	// alphanumeric characters (a-z, A-Z, 0-9) and punctuation
-	// (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~). For best practices of using
-	// ReceiveRequestAttemptId, see Using the ReceiveRequestAttemptId Request Parameter
+	// The maximum length of ReceiveRequestAttemptId is 128
+	// characters. ReceiveRequestAttemptId can contain alphanumeric characters (a-z,
+	// A-Z, 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~). For best practices
+	// of using ReceiveRequestAttemptId, see Using the ReceiveRequestAttemptId Request
+	// Parameter
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	ReceiveRequestAttemptId *string
 
 	// The duration (in seconds) that the received messages are hidden from subsequent

@@ -21,18 +21,18 @@ import (
 // specific set of skills is required.
 //
 // * One or more vendors that you select from
-// the AWS Marketplace. Vendors provide expertise in specific areas.
+// the Amazon Web Services Marketplace. Vendors provide expertise in specific
+// areas.
 //
-// * The Amazon
-// Mechanical Turk workforce. This is the largest workforce, but it should only be
-// used for public data or data that has been stripped of any personally
-// identifiable information.
+// * The Amazon Mechanical Turk workforce. This is the largest workforce,
+// but it should only be used for public data or data that has been stripped of any
+// personally identifiable information.
 //
-// You can also use automated data labeling to reduce
-// the number of data objects that need to be labeled by a human. Automated data
-// labeling uses active learning to determine if a data object can be labeled by
-// machine or if it needs to be sent to a human worker. For more information, see
-// Using Automated Data Labeling
+// You can also use automated data labeling
+// to reduce the number of data objects that need to be labeled by a human.
+// Automated data labeling uses active learning to determine if a data object can
+// be labeled by machine or if it needs to be sent to a human worker. For more
+// information, see Using Automated Data Labeling
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-automated-labeling.html).
 // The data objects to be labeled are contained in an Amazon S3 bucket. You create
 // a manifest file that describes the location of each object. For more
@@ -143,15 +143,16 @@ type CreateLabelingJobInput struct {
 	LabelAttributeName *string
 
 	// The name of the labeling job. This name is used to identify the job in a list of
-	// labeling jobs. Labeling job names must be unique within an AWS account and
-	// region. LabelingJobName is not case sensitive. For example, Example-job and
-	// example-job are considered the same labeling job name by Ground Truth.
+	// labeling jobs. Labeling job names must be unique within an Amazon Web Services
+	// account and region. LabelingJobName is not case sensitive. For example,
+	// Example-job and example-job are considered the same labeling job name by Ground
+	// Truth.
 	//
 	// This member is required.
 	LabelingJobName *string
 
-	// The location of the output data and the AWS Key Management Service key ID for
-	// the key used to encrypt the output data, if any.
+	// The location of the output data and the Amazon Web Services Key Management
+	// Service key ID for the key used to encrypt the output data, if any.
 	//
 	// This member is required.
 	OutputConfig *types.LabelingJobOutputConfig
@@ -211,7 +212,7 @@ type CreateLabelingJobInput struct {
 	// An array of key/value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
+	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 }
 

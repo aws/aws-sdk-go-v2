@@ -88,8 +88,8 @@ type DescribeLabelingJobOutput struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The location of the job's output data and the AWS Key Management Service key ID
-	// for the key used to encrypt the output data, if any.
+	// The location of the job's output data and the Amazon Web Services Key Management
+	// Service key ID for the key used to encrypt the output data, if any.
 	//
 	// This member is required.
 	OutputConfig *types.LabelingJobOutputConfig
@@ -158,9 +158,9 @@ type DescribeLabelingJobOutput struct {
 	// met, the job is automatically stopped.
 	StoppingConditions *types.LabelingJobStoppingConditions
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 

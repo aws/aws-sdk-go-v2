@@ -7742,6 +7742,9 @@ func awsAwsquery_deserializeOpErrorDisableLogging(response *smithyhttp.Response,
 	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("InvalidClusterState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,

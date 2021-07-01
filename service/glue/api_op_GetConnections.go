@@ -31,7 +31,7 @@ func (c *Client) GetConnections(ctx context.Context, params *GetConnectionsInput
 type GetConnectionsInput struct {
 
 	// The ID of the Data Catalog in which the connections reside. If none is provided,
-	// the AWS account ID is used by default.
+	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	// A filter that controls which connections are returned.
@@ -40,7 +40,7 @@ type GetConnectionsInput struct {
 	// Allows you to retrieve the connection metadata without returning the password.
 	// For instance, the AWS Glue console uses this flag to retrieve the connection,
 	// and does not display the password. Set this parameter when the caller might not
-	// have permission to use the AWS KMS key to decrypt the password, but it does have
+	// have permission to use the KMS key to decrypt the password, but it does have
 	// permission to access the rest of the connection properties.
 	HidePassword bool
 

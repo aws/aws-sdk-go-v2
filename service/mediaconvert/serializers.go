@@ -2706,6 +2706,13 @@ func awsRestjson1_serializeDocumentAudioSelector(v *types.AudioSelector, value s
 		ok.String(*v.ExternalAudioFileInput)
 	}
 
+	if v.HlsRenditionGroupSettings != nil {
+		ok := object.Key("hlsRenditionGroupSettings")
+		if err := awsRestjson1_serializeDocumentHlsRenditionGroupSettings(v.HlsRenditionGroupSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("languageCode")
 		ok.String(string(v.LanguageCode))
@@ -3284,6 +3291,13 @@ func awsRestjson1_serializeDocumentCaptionSourceSettings(v *types.CaptionSourceS
 		}
 	}
 
+	if v.WebvttHlsSourceSettings != nil {
+		ok := object.Key("webvttHlsSourceSettings")
+		if err := awsRestjson1_serializeDocumentWebvttHlsSourceSettings(v.WebvttHlsSourceSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3409,6 +3423,11 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 	if v.FragmentLength != 0 {
 		ok := object.Key("fragmentLength")
 		ok.Integer(v.FragmentLength)
+	}
+
+	if len(v.ImageBasedTrickPlay) > 0 {
+		ok := object.Key("imageBasedTrickPlay")
+		ok.String(string(v.ImageBasedTrickPlay))
 	}
 
 	if len(v.ManifestCompression) > 0 {
@@ -3550,6 +3569,11 @@ func awsRestjson1_serializeDocumentColorCorrector(v *types.ColorCorrector, value
 	if v.Hue != 0 {
 		ok := object.Key("hue")
 		ok.Integer(v.Hue)
+	}
+
+	if len(v.SampleRangeConversion) > 0 {
+		ok := object.Key("sampleRangeConversion")
+		ok.String(string(v.SampleRangeConversion))
 	}
 
 	if v.Saturation != 0 {
@@ -3714,6 +3738,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 	if len(v.HbbtvCompliance) > 0 {
 		ok := object.Key("hbbtvCompliance")
 		ok.String(string(v.HbbtvCompliance))
+	}
+
+	if len(v.ImageBasedTrickPlay) > 0 {
+		ok := object.Key("imageBasedTrickPlay")
+		ok.String(string(v.ImageBasedTrickPlay))
 	}
 
 	if v.MinBufferTime != 0 {
@@ -4050,6 +4079,11 @@ func awsRestjson1_serializeDocumentEac3AtmosSettings(v *types.Eac3AtmosSettings,
 		ok.String(string(v.DialogueIntelligence))
 	}
 
+	if len(v.DownmixControl) > 0 {
+		ok := object.Key("downmixControl")
+		ok.String(string(v.DownmixControl))
+	}
+
 	if len(v.DynamicRangeCompressionLine) > 0 {
 		ok := object.Key("dynamicRangeCompressionLine")
 		ok.String(string(v.DynamicRangeCompressionLine))
@@ -4058,6 +4092,11 @@ func awsRestjson1_serializeDocumentEac3AtmosSettings(v *types.Eac3AtmosSettings,
 	if len(v.DynamicRangeCompressionRf) > 0 {
 		ok := object.Key("dynamicRangeCompressionRf")
 		ok.String(string(v.DynamicRangeCompressionRf))
+	}
+
+	if len(v.DynamicRangeControl) > 0 {
+		ok := object.Key("dynamicRangeControl")
+		ok.String(string(v.DynamicRangeControl))
 	}
 
 	if v.LoRoCenterMixLevel != 0 {
@@ -4930,6 +4969,23 @@ func awsRestjson1_serializeDocumentHdr10Metadata(v *types.Hdr10Metadata, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHdr10Plus(v *types.Hdr10Plus, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MasteringMonitorNits != 0 {
+		ok := object.Key("masteringMonitorNits")
+		ok.Integer(v.MasteringMonitorNits)
+	}
+
+	if v.TargetMonitorNits != 0 {
+		ok := object.Key("targetMonitorNits")
+		ok.Integer(v.TargetMonitorNits)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHlsAdditionalManifest(v *types.HlsAdditionalManifest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5096,6 +5152,11 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 		}
 	}
 
+	if len(v.ImageBasedTrickPlay) > 0 {
+		ok := object.Key("imageBasedTrickPlay")
+		ok.String(string(v.ImageBasedTrickPlay))
+	}
+
 	if len(v.ManifestCompression) > 0 {
 		ok := object.Key("manifestCompression")
 		ok.String(string(v.ManifestCompression))
@@ -5164,6 +5225,28 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 	if v.TimestampDeltaMilliseconds != 0 {
 		ok := object.Key("timestampDeltaMilliseconds")
 		ok.Integer(v.TimestampDeltaMilliseconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHlsRenditionGroupSettings(v *types.HlsRenditionGroupSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RenditionGroupId != nil {
+		ok := object.Key("renditionGroupId")
+		ok.String(*v.RenditionGroupId)
+	}
+
+	if len(v.RenditionLanguageCode) > 0 {
+		ok := object.Key("renditionLanguageCode")
+		ok.String(string(v.RenditionLanguageCode))
+	}
+
+	if v.RenditionName != nil {
+		ok := object.Key("renditionName")
+		ok.String(*v.RenditionName)
 	}
 
 	return nil
@@ -6660,6 +6743,30 @@ func awsRestjson1_serializeDocumentMxfSettings(v *types.MxfSettings, value smith
 		ok.String(string(v.Profile))
 	}
 
+	if v.XavcProfileSettings != nil {
+		ok := object.Key("xavcProfileSettings")
+		if err := awsRestjson1_serializeDocumentMxfXavcProfileSettings(v.XavcProfileSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMxfXavcProfileSettings(v *types.MxfXavcProfileSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DurationMode) > 0 {
+		ok := object.Key("durationMode")
+		ok.String(string(v.DurationMode))
+	}
+
+	if v.MaxAncDataSize != 0 {
+		ok := object.Key("maxAncDataSize")
+		ok.Integer(v.MaxAncDataSize)
+	}
+
 	return nil
 }
 
@@ -7114,6 +7221,11 @@ func awsRestjson1_serializeDocumentPresetSettings(v *types.PresetSettings, value
 func awsRestjson1_serializeDocumentProresSettings(v *types.ProresSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ChromaSampling) > 0 {
+		ok := object.Key("chromaSampling")
+		ok.String(string(v.ChromaSampling))
+	}
 
 	if len(v.CodecProfile) > 0 {
 		ok := object.Key("codecProfile")
@@ -7654,6 +7766,13 @@ func awsRestjson1_serializeDocumentVideoCodecSettings(v *types.VideoCodecSetting
 		}
 	}
 
+	if v.XavcSettings != nil {
+		ok := object.Key("xavcSettings")
+		if err := awsRestjson1_serializeDocumentXavcSettings(v.XavcSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7768,6 +7887,13 @@ func awsRestjson1_serializeDocumentVideoPreprocessor(v *types.VideoPreprocessor,
 	if v.DolbyVision != nil {
 		ok := object.Key("dolbyVision")
 		if err := awsRestjson1_serializeDocumentDolbyVision(v.DolbyVision, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Hdr10Plus != nil {
+		ok := object.Key("hdr10Plus")
+		if err := awsRestjson1_serializeDocumentHdr10Plus(v.Hdr10Plus, ok); err != nil {
 			return err
 		}
 	}
@@ -8052,6 +8178,260 @@ func awsRestjson1_serializeDocumentWebvttDestinationSettings(v *types.WebvttDest
 	if len(v.StylePassthrough) > 0 {
 		ok := object.Key("stylePassthrough")
 		ok.String(string(v.StylePassthrough))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWebvttHlsSourceSettings(v *types.WebvttHlsSourceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RenditionGroupId != nil {
+		ok := object.Key("renditionGroupId")
+		ok.String(*v.RenditionGroupId)
+	}
+
+	if len(v.RenditionLanguageCode) > 0 {
+		ok := object.Key("renditionLanguageCode")
+		ok.String(string(v.RenditionLanguageCode))
+	}
+
+	if v.RenditionName != nil {
+		ok := object.Key("renditionName")
+		ok.String(*v.RenditionName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentXavc4kIntraCbgProfileSettings(v *types.Xavc4kIntraCbgProfileSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.XavcClass) > 0 {
+		ok := object.Key("xavcClass")
+		ok.String(string(v.XavcClass))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentXavc4kIntraVbrProfileSettings(v *types.Xavc4kIntraVbrProfileSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.XavcClass) > 0 {
+		ok := object.Key("xavcClass")
+		ok.String(string(v.XavcClass))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentXavc4kProfileSettings(v *types.Xavc4kProfileSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BitrateClass) > 0 {
+		ok := object.Key("bitrateClass")
+		ok.String(string(v.BitrateClass))
+	}
+
+	if len(v.CodecProfile) > 0 {
+		ok := object.Key("codecProfile")
+		ok.String(string(v.CodecProfile))
+	}
+
+	if len(v.FlickerAdaptiveQuantization) > 0 {
+		ok := object.Key("flickerAdaptiveQuantization")
+		ok.String(string(v.FlickerAdaptiveQuantization))
+	}
+
+	if len(v.GopBReference) > 0 {
+		ok := object.Key("gopBReference")
+		ok.String(string(v.GopBReference))
+	}
+
+	if v.GopClosedCadence != 0 {
+		ok := object.Key("gopClosedCadence")
+		ok.Integer(v.GopClosedCadence)
+	}
+
+	if v.HrdBufferSize != 0 {
+		ok := object.Key("hrdBufferSize")
+		ok.Integer(v.HrdBufferSize)
+	}
+
+	if len(v.QualityTuningLevel) > 0 {
+		ok := object.Key("qualityTuningLevel")
+		ok.String(string(v.QualityTuningLevel))
+	}
+
+	if v.Slices != 0 {
+		ok := object.Key("slices")
+		ok.Integer(v.Slices)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentXavcHdIntraCbgProfileSettings(v *types.XavcHdIntraCbgProfileSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.XavcClass) > 0 {
+		ok := object.Key("xavcClass")
+		ok.String(string(v.XavcClass))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentXavcHdProfileSettings(v *types.XavcHdProfileSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BitrateClass) > 0 {
+		ok := object.Key("bitrateClass")
+		ok.String(string(v.BitrateClass))
+	}
+
+	if len(v.FlickerAdaptiveQuantization) > 0 {
+		ok := object.Key("flickerAdaptiveQuantization")
+		ok.String(string(v.FlickerAdaptiveQuantization))
+	}
+
+	if len(v.GopBReference) > 0 {
+		ok := object.Key("gopBReference")
+		ok.String(string(v.GopBReference))
+	}
+
+	if v.GopClosedCadence != 0 {
+		ok := object.Key("gopClosedCadence")
+		ok.Integer(v.GopClosedCadence)
+	}
+
+	if v.HrdBufferSize != 0 {
+		ok := object.Key("hrdBufferSize")
+		ok.Integer(v.HrdBufferSize)
+	}
+
+	if len(v.InterlaceMode) > 0 {
+		ok := object.Key("interlaceMode")
+		ok.String(string(v.InterlaceMode))
+	}
+
+	if len(v.QualityTuningLevel) > 0 {
+		ok := object.Key("qualityTuningLevel")
+		ok.String(string(v.QualityTuningLevel))
+	}
+
+	if v.Slices != 0 {
+		ok := object.Key("slices")
+		ok.Integer(v.Slices)
+	}
+
+	if len(v.Telecine) > 0 {
+		ok := object.Key("telecine")
+		ok.String(string(v.Telecine))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentXavcSettings(v *types.XavcSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AdaptiveQuantization) > 0 {
+		ok := object.Key("adaptiveQuantization")
+		ok.String(string(v.AdaptiveQuantization))
+	}
+
+	if len(v.EntropyEncoding) > 0 {
+		ok := object.Key("entropyEncoding")
+		ok.String(string(v.EntropyEncoding))
+	}
+
+	if len(v.FramerateControl) > 0 {
+		ok := object.Key("framerateControl")
+		ok.String(string(v.FramerateControl))
+	}
+
+	if len(v.FramerateConversionAlgorithm) > 0 {
+		ok := object.Key("framerateConversionAlgorithm")
+		ok.String(string(v.FramerateConversionAlgorithm))
+	}
+
+	if v.FramerateDenominator != 0 {
+		ok := object.Key("framerateDenominator")
+		ok.Integer(v.FramerateDenominator)
+	}
+
+	if v.FramerateNumerator != 0 {
+		ok := object.Key("framerateNumerator")
+		ok.Integer(v.FramerateNumerator)
+	}
+
+	if len(v.Profile) > 0 {
+		ok := object.Key("profile")
+		ok.String(string(v.Profile))
+	}
+
+	if len(v.SlowPal) > 0 {
+		ok := object.Key("slowPal")
+		ok.String(string(v.SlowPal))
+	}
+
+	if v.Softness != 0 {
+		ok := object.Key("softness")
+		ok.Integer(v.Softness)
+	}
+
+	if len(v.SpatialAdaptiveQuantization) > 0 {
+		ok := object.Key("spatialAdaptiveQuantization")
+		ok.String(string(v.SpatialAdaptiveQuantization))
+	}
+
+	if len(v.TemporalAdaptiveQuantization) > 0 {
+		ok := object.Key("temporalAdaptiveQuantization")
+		ok.String(string(v.TemporalAdaptiveQuantization))
+	}
+
+	if v.Xavc4kIntraCbgProfileSettings != nil {
+		ok := object.Key("xavc4kIntraCbgProfileSettings")
+		if err := awsRestjson1_serializeDocumentXavc4kIntraCbgProfileSettings(v.Xavc4kIntraCbgProfileSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Xavc4kIntraVbrProfileSettings != nil {
+		ok := object.Key("xavc4kIntraVbrProfileSettings")
+		if err := awsRestjson1_serializeDocumentXavc4kIntraVbrProfileSettings(v.Xavc4kIntraVbrProfileSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Xavc4kProfileSettings != nil {
+		ok := object.Key("xavc4kProfileSettings")
+		if err := awsRestjson1_serializeDocumentXavc4kProfileSettings(v.Xavc4kProfileSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.XavcHdIntraCbgProfileSettings != nil {
+		ok := object.Key("xavcHdIntraCbgProfileSettings")
+		if err := awsRestjson1_serializeDocumentXavcHdIntraCbgProfileSettings(v.XavcHdIntraCbgProfileSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.XavcHdProfileSettings != nil {
+		ok := object.Key("xavcHdProfileSettings")
+		if err := awsRestjson1_serializeDocumentXavcHdProfileSettings(v.XavcHdProfileSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

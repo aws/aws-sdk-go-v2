@@ -45,7 +45,7 @@ type UpdateUserDefinedFunctionInput struct {
 	FunctionName *string
 
 	// The ID of the Data Catalog where the function to be updated is located. If none
-	// is provided, the AWS account ID is used by default.
+	// is provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 }
 

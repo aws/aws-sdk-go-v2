@@ -181,18 +181,18 @@ type RunInstancesInput struct {
 	// specify accelerators from different generations in the same request.
 	ElasticInferenceAccelerators []types.ElasticInferenceAccelerator
 
-	// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
-	// information, see  What is AWS Nitro Enclaves?
-	// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the AWS
-	// Nitro Enclaves User Guide. You can't enable AWS Nitro Enclaves and hibernation
-	// on the same instance.
+	// Indicates whether the instance is enabled for Amazon Web Services Nitro
+	// Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves?
+	// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the
+	// Amazon Web Services Nitro Enclaves User Guide. You can't enable Amazon Web
+	// Services Nitro Enclaves and hibernation on the same instance.
 	EnclaveOptions *types.EnclaveOptionsRequest
 
 	// Indicates whether an instance is enabled for hibernation. For more information,
 	// see Hibernate your instance
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the
-	// Amazon EC2 User Guide. You can't enable hibernation and AWS Nitro Enclaves on
-	// the same instance.
+	// Amazon EC2 User Guide. You can't enable hibernation and Amazon Web Services
+	// Nitro Enclaves on the same instance.
 	HibernationOptions *types.HibernationOptionsRequest
 
 	// The name or Amazon Resource Name (ARN) of an IAM instance profile.
@@ -281,9 +281,9 @@ type RunInstancesInput struct {
 
 	// The ID of the RAM disk to select. Some kernels require additional drivers at
 	// launch. Check the kernel requirements for information about whether you need to
-	// specify a RAM disk. To find kernel requirements, go to the AWS Resource Center
-	// and search for the kernel ID. We recommend that you use PV-GRUB instead of
-	// kernels and RAM disks. For more information, see  PV-GRUB
+	// specify a RAM disk. To find kernel requirements, go to the Amazon Web Services
+	// Resource Center and search for the kernel ID. We recommend that you use PV-GRUB
+	// instead of kernels and RAM disks. For more information, see  PV-GRUB
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
 	// in the Amazon EC2 User Guide.
 	RamdiskId *string
@@ -335,11 +335,11 @@ type RunInstancesOutput struct {
 	// The instances.
 	Instances []types.Instance
 
-	// The ID of the AWS account that owns the reservation.
+	// The ID of the account that owns the reservation.
 	OwnerId *string
 
 	// The ID of the requester that launched the instances on your behalf (for example,
-	// AWS Management Console or Auto Scaling).
+	// Management Console or Auto Scaling).
 	RequesterId *string
 
 	// The ID of the reservation.

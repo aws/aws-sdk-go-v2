@@ -60,7 +60,7 @@ type CreateCrawlerInput struct {
 	// The name of the SecurityConfiguration structure to be used by this crawler.
 	CrawlerSecurityConfiguration *string
 
-	// The AWS Glue database where results are written, such as:
+	// The Glue database where results are written, such as:
 	// arn:aws:daylight:us-east-1::database/sometable/*.
 	DatabaseName *string
 
@@ -88,9 +88,9 @@ type CreateCrawlerInput struct {
 	TablePrefix *string
 
 	// The tags to use with this crawler request. You may use tags to limit access to
-	// the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS
-	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
-	// developer guide.
+	// the crawler. For more information about tags in Glue, see Amazon Web Services
+	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in
+	// the developer guide.
 	Tags map[string]string
 }
 

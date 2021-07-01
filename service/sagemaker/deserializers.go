@@ -7592,6 +7592,9 @@ func awsAwsjson11_deserializeOpErrorDeleteModelPackageGroup(response *smithyhttp
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -8225,6 +8228,9 @@ func awsAwsjson11_deserializeOpErrorDeleteProject(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -38543,6 +38549,11 @@ func awsAwsjson11_deserializeDocumentModelPackageContainerDefinition(v **types.M
 				sv.ContainerHostname = ptr.String(jtv)
 			}
 
+		case "Environment":
+			if err := awsAwsjson11_deserializeDocumentEnvironmentMap(&sv.Environment, value); err != nil {
+				return err
+			}
+
 		case "Image":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -41088,6 +41099,119 @@ func awsAwsjson11_deserializeDocumentMultiModelConfig(v **types.MultiModelConfig
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNeoVpcConfig(v **types.NeoVpcConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NeoVpcConfig
+	if *v == nil {
+		sv = &types.NeoVpcConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SecurityGroupIds":
+			if err := awsAwsjson11_deserializeDocumentNeoVpcSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
+				return err
+			}
+
+		case "Subnets":
+			if err := awsAwsjson11_deserializeDocumentNeoVpcSubnets(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNeoVpcSecurityGroupIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NeoVpcSecurityGroupId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNeoVpcSubnets(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NeoVpcSubnetId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -54400,6 +54524,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeCompilationJobOutput(v **Describe
 				sv.FailureReason = ptr.String(jtv)
 			}
 
+		case "InferenceImage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InferenceImage to be of type string, got %T instead", value)
+				}
+				sv.InferenceImage = ptr.String(jtv)
+			}
+
 		case "InputConfig":
 			if err := awsAwsjson11_deserializeDocumentInputConfig(&sv.InputConfig, value); err != nil {
 				return err
@@ -54444,6 +54577,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeCompilationJobOutput(v **Describe
 
 		case "StoppingCondition":
 			if err := awsAwsjson11_deserializeDocumentStoppingCondition(&sv.StoppingCondition, value); err != nil {
+				return err
+			}
+
+		case "VpcConfig":
+			if err := awsAwsjson11_deserializeDocumentNeoVpcConfig(&sv.VpcConfig, value); err != nil {
 				return err
 			}
 

@@ -49,6 +49,10 @@ type DescribeJobOutput struct {
 	// The identifier (user name) of the user associated with the creation of the job.
 	CreatedBy *string
 
+	// One or more artifacts that represent the AWS Glue Data Catalog output from
+	// running the job.
+	DataCatalogOutputs []types.DataCatalogOutput
+
 	// The dataset that the job acts upon.
 	DatasetName *string
 
@@ -59,7 +63,7 @@ type DescribeJobOutput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// Server-side encryption with keys managed by AWS KMS.
+	// Server-side encryption with keys managed by KMS.
 	//
 	// * SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
@@ -97,7 +101,7 @@ type DescribeJobOutput struct {
 	// The Amazon Resource Name (ARN) of the job.
 	ResourceArn *string
 
-	// The ARN of the AWS Identity and Access Management (IAM) role to be assumed when
+	// The ARN of the Identity and Access Management (IAM) role to be assumed when
 	// DataBrew runs the job.
 	RoleArn *string
 

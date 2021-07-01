@@ -57,6 +57,9 @@ type ModifySpotFleetRequestInput struct {
 	// This member is required.
 	SpotFleetRequestId *string
 
+	// Reserved.
+	Context *string
+
 	// Indicates whether running Spot Instances should be terminated if the target
 	// capacity of the Spot Fleet request is decreased below the current size of the
 	// Spot Fleet.

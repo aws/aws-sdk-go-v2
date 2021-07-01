@@ -25,8 +25,8 @@ import (
 // and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker
 // distributes two-thirds of the traffic to Model A, and one-third to model B. For
 // an example that calls this method when deploying a model to Amazon SageMaker
-// hosting services, see Deploy the Model to Amazon SageMaker Hosting Services (AWS
-// SDK for Python (Boto 3)).
+// hosting services, see Deploy the Model to Amazon SageMaker Hosting Services
+// (Amazon Web Services SDK for Python (Boto 3)).
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
 // When you call CreateEndpoint, a load call is made to DynamoDB to verify that
 // your endpoint configuration exists. When you read data from a DynamoDB table
@@ -71,10 +71,10 @@ type CreateEndpointConfigInput struct {
 	//
 	DataCaptureConfig *types.DataCaptureConfig
 
-	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
-	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
-	// instance that hosts the endpoint. The KmsKeyId can be any of the following
-	// formats:
+	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
+	// key that Amazon SageMaker uses to encrypt data on the storage volume attached to
+	// the ML compute instance that hosts the endpoint. The KmsKeyId can be any of the
+	// following formats:
 	//
 	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
@@ -89,8 +89,8 @@ type CreateEndpointConfigInput struct {
 	//
 	// The KMS key policy must
 	// grant permission to the IAM role that you specify in your CreateEndpoint,
-	// UpdateEndpoint requests. For more information, refer to the AWS Key Management
-	// Service section Using Key Policies in AWS KMS
+	// UpdateEndpoint requests. For more information, refer to the Amazon Web Services
+	// Key Management Service section Using Key Policies in Amazon Web Services KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 	// Certain Nitro-based instances include local storage, dependent on the instance
 	// type. Local storage volumes are encrypted using a hardware module on the
@@ -107,9 +107,9 @@ type CreateEndpointConfigInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
 	KmsKeyId *string
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 }

@@ -41,7 +41,7 @@ type GetPartitionsInput struct {
 	TableName *string
 
 	// The ID of the Data Catalog where the partitions in question reside. If none is
-	// provided, the AWS account ID is used by default.
+	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	ExcludeColumnSchema *bool
@@ -86,8 +86,8 @@ type GetPartitionsInput struct {
 	// *
 	// decimal
 	//
-	// If an invalid type is encountered, an exception is thrown. The
-	// following list shows the valid operators on each type. When you define a
+	// If an type is encountered that is not valid, an exception is thrown.
+	// The following list shows the valid operators on each type. When you define a
 	// crawler, the partitionKey type is created as a STRING, to be compatible with the
 	// catalog partitions. Sample API Call:
 	Expression *string

@@ -52,9 +52,9 @@ type DiscoverInstancesInput struct {
 	// return all instances. This is also called failing open.
 	HealthStatus types.HealthStatusFilter
 
-	// The maximum number of instances that you want AWS Cloud Map to return in the
+	// The maximum number of instances that you want Cloud Map to return in the
 	// response to a DiscoverInstances request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 instances.
+	// MaxResults, Cloud Map returns up to 100 instances.
 	MaxResults *int32
 
 	// Opportunistic filters to scope the results based on custom attributes. If there

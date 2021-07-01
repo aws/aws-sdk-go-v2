@@ -21,8 +21,8 @@ import (
 // create an endpoint with the CreateEndpoint API. Amazon SageMaker then deploys
 // all of the containers that you defined for the model in the hosting environment.
 // For an example that calls this method when deploying a model to Amazon SageMaker
-// hosting services, see Deploy the Model to Amazon SageMaker Hosting Services (AWS
-// SDK for Python (Boto 3)).
+// hosting services, see Deploy the Model to Amazon SageMaker Hosting Services
+// (Amazon Web Services SDK for Python (Boto 3)).
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
 // To run a batch transform using your model, you start a job with the
 // CreateTransformJob API. Amazon SageMaker uses your model and your dataset to get
@@ -32,7 +32,8 @@ import (
 // model artifacts and docker image for deployment on ML compute hosting instances
 // or for batch transform jobs. In addition, you also use the IAM role to manage
 // permissions the inference code needs. For example, if the inference code access
-// any other AWS resources, you grant necessary permissions via this role.
+// any other Amazon Web Services resources, you grant necessary permissions via
+// this role.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -81,9 +82,9 @@ type CreateModelInput struct {
 	// model is deployed for predictions.
 	PrimaryContainer *types.ContainerDefinition
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 

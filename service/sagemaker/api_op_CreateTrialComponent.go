@@ -17,13 +17,9 @@ import (
 // multiple trials. Trial components include pre-processing jobs, training jobs,
 // and batch transform jobs. When you use SageMaker Studio or the SageMaker Python
 // SDK, all experiments, trials, and trial components are automatically tracked,
-// logged, and indexed. When you use the AWS SDK for Python (Boto), you must use
-// the logging APIs provided by the SDK. You can add tags to a trial component and
-// then use the Search API to search for the tags. CreateTrialComponent can only be
-// invoked from within an SageMaker managed environment. This includes SageMaker
-// training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call
-// to CreateTrialComponent from outside one of these environments results in an
-// error.
+// logged, and indexed. When you use the Amazon Web Services SDK for Python (Boto),
+// you must use the logging APIs provided by the SDK. You can add tags to a trial
+// component and then use the Search API to search for the tags.
 func (c *Client) CreateTrialComponent(ctx context.Context, params *CreateTrialComponentInput, optFns ...func(*Options)) (*CreateTrialComponentOutput, error) {
 	if params == nil {
 		params = &CreateTrialComponentInput{}
@@ -41,8 +37,8 @@ func (c *Client) CreateTrialComponent(ctx context.Context, params *CreateTrialCo
 
 type CreateTrialComponentInput struct {
 
-	// The name of the component. The name must be unique in your AWS account and is
-	// not case-sensitive.
+	// The name of the component. The name must be unique in your Amazon Web Services
+	// account and is not case-sensitive.
 	//
 	// This member is required.
 	TrialComponentName *string

@@ -7154,6 +7154,19 @@ func awsAwsquery_deserializeDocumentAutoScalingGroup(v **types.AutoScalingGroup,
 				sv.CapacityRebalance = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("Context", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Context = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("CreatedTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

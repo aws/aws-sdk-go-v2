@@ -63,8 +63,8 @@ type DescribeEndpointConfigOutput struct {
 	//
 	DataCaptureConfig *types.DataCaptureConfig
 
-	// AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML
-	// storage volume attached to the instance.
+	// Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt data when
+	// storing it on the ML storage volume attached to the instance.
 	KmsKeyId *string
 
 	// Metadata pertaining to the operation's result.

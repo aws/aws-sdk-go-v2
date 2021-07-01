@@ -884,6 +884,26 @@ func validateDatabaseInputDefinition(v *types.DatabaseInputDefinition) error {
 	}
 }
 
+func validateDatabaseTableOutputOptions(v *types.DatabaseTableOutputOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatabaseTableOutputOptions"}
+	if v.TempDirectory != nil {
+		if err := validateS3Location(v.TempDirectory); err != nil {
+			invalidParams.AddNested("TempDirectory", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataCatalogInputDefinition(v *types.DataCatalogInputDefinition) error {
 	if v == nil {
 		return nil
@@ -898,6 +918,51 @@ func validateDataCatalogInputDefinition(v *types.DataCatalogInputDefinition) err
 	if v.TempDirectory != nil {
 		if err := validateS3Location(v.TempDirectory); err != nil {
 			invalidParams.AddNested("TempDirectory", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataCatalogOutput(v *types.DataCatalogOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataCatalogOutput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.S3Options != nil {
+		if err := validateS3TableOutputOptions(v.S3Options); err != nil {
+			invalidParams.AddNested("S3Options", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DatabaseOptions != nil {
+		if err := validateDatabaseTableOutputOptions(v.DatabaseOptions); err != nil {
+			invalidParams.AddNested("DatabaseOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataCatalogOutputList(v []types.DataCatalogOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataCatalogOutputList"}
+	for i := range v {
+		if err := validateDataCatalogOutput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1174,6 +1239,25 @@ func validateS3Location(v *types.S3Location) error {
 	}
 }
 
+func validateS3TableOutputOptions(v *types.S3TableOutputOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3TableOutputOptions"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	} else if v.Location != nil {
+		if err := validateS3Location(v.Location); err != nil {
+			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSample(v *types.Sample) error {
 	if v == nil {
 		return nil
@@ -1336,11 +1420,14 @@ func validateOpCreateRecipeJobInput(v *CreateRecipeJobInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Outputs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Outputs"))
-	} else if v.Outputs != nil {
+	if v.Outputs != nil {
 		if err := validateOutputList(v.Outputs); err != nil {
 			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataCatalogOutputs != nil {
+		if err := validateDataCatalogOutputList(v.DataCatalogOutputs); err != nil {
+			invalidParams.AddNested("DataCatalogOutputs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RecipeReference != nil {
@@ -1819,11 +1906,14 @@ func validateOpUpdateRecipeJobInput(v *UpdateRecipeJobInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Outputs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Outputs"))
-	} else if v.Outputs != nil {
+	if v.Outputs != nil {
 		if err := validateOutputList(v.Outputs); err != nil {
 			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataCatalogOutputs != nil {
+		if err := validateDataCatalogOutputList(v.DataCatalogOutputs); err != nil {
+			invalidParams.AddNested("DataCatalogOutputs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RoleArn == nil {

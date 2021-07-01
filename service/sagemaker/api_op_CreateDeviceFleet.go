@@ -42,13 +42,14 @@ type CreateDeviceFleetInput struct {
 	// A description of the fleet.
 	Description *string
 
-	// Whether to create an AWS IoT Role Alias during device fleet creation. The name
-	// of the role alias generated will match this pattern:
+	// Whether to create an Amazon Web Services IoT Role Alias during device fleet
+	// creation. The name of the role alias generated will match this pattern:
 	// "SageMakerEdge-{DeviceFleetName}". For example, if your device fleet is called
 	// "demo-fleet", the name of the role alias will be "SageMakerEdge-demo-fleet".
 	EnableIotRoleAlias *bool
 
-	// The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+	// The Amazon Resource Name (ARN) that has access to Amazon Web Services Internet
+	// of Things (IoT).
 	RoleArn *string
 
 	// Creates tags for the specified fleet.

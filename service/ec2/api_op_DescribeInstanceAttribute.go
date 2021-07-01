@@ -67,8 +67,8 @@ type DescribeInstanceAttributeOutput struct {
 	// Indicates whether enhanced networking with ENA is enabled.
 	EnaSupport *types.AttributeBooleanValue
 
-	// To enable the instance for AWS Nitro Enclaves, set this parameter to true;
-	// otherwise, set it to false.
+	// To enable the instance for Amazon Web Services Nitro Enclaves, set this
+	// parameter to true; otherwise, set it to false.
 	EnclaveOptions *types.EnclaveOptions
 
 	// The security groups associated with the instance.

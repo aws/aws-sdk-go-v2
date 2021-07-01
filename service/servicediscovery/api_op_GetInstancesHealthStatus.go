@@ -39,17 +39,17 @@ type GetInstancesHealthStatusInput struct {
 	ServiceId *string
 
 	// An array that contains the IDs of all the instances that you want to get the
-	// health status for. If you omit Instances, AWS Cloud Map returns the health
-	// status for all the instances that are associated with the specified service. To
-	// get the IDs for the instances that you've registered by using a specified
-	// service, submit a ListInstances
+	// health status for. If you omit Instances, Cloud Map returns the health status
+	// for all the instances that are associated with the specified service. To get the
+	// IDs for the instances that you've registered by using a specified service,
+	// submit a ListInstances
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html)
 	// request.
 	Instances []string
 
-	// The maximum number of instances that you want AWS Cloud Map to return in the
+	// The maximum number of instances that you want Cloud Map to return in the
 	// response to a GetInstancesHealthStatus request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 instances.
+	// MaxResults, Cloud Map returns up to 100 instances.
 	MaxResults *int32
 
 	// For the first GetInstancesHealthStatus request, omit this value. If more than
@@ -148,9 +148,9 @@ var _ GetInstancesHealthStatusAPIClient = (*Client)(nil)
 // GetInstancesHealthStatusPaginatorOptions is the paginator options for
 // GetInstancesHealthStatus
 type GetInstancesHealthStatusPaginatorOptions struct {
-	// The maximum number of instances that you want AWS Cloud Map to return in the
+	// The maximum number of instances that you want Cloud Map to return in the
 	// response to a GetInstancesHealthStatus request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 instances.
+	// MaxResults, Cloud Map returns up to 100 instances.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

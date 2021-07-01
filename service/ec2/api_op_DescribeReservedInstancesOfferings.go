@@ -66,18 +66,18 @@ type DescribeReservedInstancesOfferingsInput struct {
 	//
 	// * marketplace - Set to true to show only Reserved Instance
 	// Marketplace offerings. When this filter is not used, which is the default
-	// behavior, all offerings from both AWS and the Reserved Instance Marketplace are
-	// listed.
+	// behavior, all offerings from both Amazon Web Services and the Reserved Instance
+	// Marketplace are listed.
 	//
-	// * product-description - The Reserved Instance product platform
-	// description. Instances that include (Amazon VPC) in the product platform
-	// description will only be displayed to EC2-Classic account holders and are for
-	// use with Amazon VPC. (Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux | SUSE
-	// Linux (Amazon VPC) | Red Hat Enterprise Linux | Red Hat Enterprise Linux (Amazon
-	// VPC) | Red Hat Enterprise Linux with HA (Amazon VPC) | Windows | Windows (Amazon
-	// VPC) | Windows with SQL Server Standard | Windows with SQL Server Standard
-	// (Amazon VPC) | Windows with SQL Server Web |  Windows with SQL Server Web
-	// (Amazon VPC) | Windows with SQL Server Enterprise | Windows with SQL Server
+	// * product-description - The Reserved Instance product
+	// platform description. Instances that include (Amazon VPC) in the product
+	// platform description will only be displayed to EC2-Classic account holders and
+	// are for use with Amazon VPC. (Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux
+	// | SUSE Linux (Amazon VPC) | Red Hat Enterprise Linux | Red Hat Enterprise Linux
+	// (Amazon VPC) | Red Hat Enterprise Linux with HA (Amazon VPC) | Windows | Windows
+	// (Amazon VPC) | Windows with SQL Server Standard | Windows with SQL Server
+	// Standard (Amazon VPC) | Windows with SQL Server Web |  Windows with SQL Server
+	// Web (Amazon VPC) | Windows with SQL Server Enterprise | Windows with SQL Server
 	// Enterprise (Amazon VPC))
 	//
 	// * reserved-instances-offering-id - The Reserved

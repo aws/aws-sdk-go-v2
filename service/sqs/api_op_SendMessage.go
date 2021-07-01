@@ -59,9 +59,9 @@ type SendMessageInput struct {
 	DelaySeconds int32
 
 	// Each message attribute consists of a Name, Type, and Value. For more
-	// information, see Amazon SQS Message Attributes
+	// information, see Amazon SQS message attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	MessageAttributes map[string]types.MessageAttributeValue
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
@@ -71,10 +71,10 @@ type SendMessageInput struct {
 	// 5-minute deduplication interval. For more information, see  Exactly-once
 	// processing
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	//
-	// * Every message must have a
-	// unique MessageDeduplicationId,
+	// * Every message must have a unique
+	// MessageDeduplicationId,
 	//
 	// * You may provide a MessageDeduplicationId
 	// explicitly.
@@ -113,7 +113,7 @@ type SendMessageInput struct {
 	// A-Z, 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~). For best practices
 	// of using MessageDeduplicationId, see Using the MessageDeduplicationId Property
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	MessageDeduplicationId *string
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The tag that
@@ -138,8 +138,8 @@ type SendMessageInput struct {
 	// (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~). For best practices of using MessageGroupId,
 	// see Using the MessageGroupId Property
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)
-	// in the Amazon Simple Queue Service Developer Guide. MessageGroupId is required
-	// for FIFO queues. You can't use it for Standard queues.
+	// in the Amazon SQS Developer Guide. MessageGroupId is required for FIFO queues.
+	// You can't use it for Standard queues.
 	MessageGroupId *string
 
 	// The message system attribute to send. Each message system attribute consists of
@@ -147,10 +147,10 @@ type SendMessageInput struct {
 	//
 	// * Currently, the only supported message system
 	// attribute is AWSTraceHeader. Its type must be String and its value must be a
-	// correctly formatted AWS X-Ray trace header string.
+	// correctly formatted X-Ray trace header string.
 	//
-	// * The size of a message
-	// system attribute doesn't count towards the total size of a message.
+	// * The size of a message system
+	// attribute doesn't count towards the total size of a message.
 	MessageSystemAttributes map[string]types.MessageSystemAttributeValue
 }
 
@@ -177,7 +177,7 @@ type SendMessageOutput struct {
 	// An attribute containing the MessageId of the message sent to the queue. For more
 	// information, see Queue and Message Identifiers
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	MessageId *string
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The large,

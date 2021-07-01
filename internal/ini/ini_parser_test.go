@@ -82,8 +82,8 @@ func TestParser(t *testing.T) {
 			},
 		},
 		{
-			name:          "0=:0",
-			r:             bytes.NewBuffer([]byte(`0=:0`)),
+			name: "0=:0",
+			r:    bytes.NewBuffer([]byte(`0=:0`)),
 			expectedStack: []AST{
 				func() AST {
 					equalExpr := newEqualExpr(newExpression(newToken(TokenLit, []rune("0"), StringType)), equalOp)
@@ -93,8 +93,8 @@ func TestParser(t *testing.T) {
 			},
 		},
 		{
-			name:          "0:=0",
-			r:             bytes.NewBuffer([]byte(`0:=0`)),
+			name: "0:=0",
+			r:    bytes.NewBuffer([]byte(`0:=0`)),
 			expectedStack: []AST{
 				func() AST {
 					equalExpr := newEqualExpr(newExpression(newToken(TokenLit, []rune("0"), StringType)), equalColonOp)
@@ -104,8 +104,8 @@ func TestParser(t *testing.T) {
 			},
 		},
 		{
-			name:          "0::0",
-			r:             bytes.NewBuffer([]byte(`0::0`)),
+			name: "0::0",
+			r:    bytes.NewBuffer([]byte(`0::0`)),
 			expectedStack: []AST{
 				func() AST {
 					equalExpr := newEqualExpr(newExpression(newToken(TokenLit, []rune("0"), StringType)), equalColonOp)

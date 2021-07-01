@@ -12,7 +12,7 @@ import (
 
 // Removes a table definition from the Data Catalog. After completing this
 // operation, you no longer have access to the table versions and partitions that
-// belong to the deleted table. AWS Glue deletes these "orphaned" resources
+// belong to the deleted table. Glue deletes these "orphaned" resources
 // asynchronously in a timely manner, at the discretion of the service. To ensure
 // the immediate deletion of all related resources, before calling DeleteTable, use
 // DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or
@@ -46,8 +46,8 @@ type DeleteTableInput struct {
 	// This member is required.
 	Name *string
 
-	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
-	// account ID is used by default.
+	// The ID of the Data Catalog where the table resides. If none is provided, the
+	// Amazon Web Services account ID is used by default.
 	CatalogId *string
 }
 

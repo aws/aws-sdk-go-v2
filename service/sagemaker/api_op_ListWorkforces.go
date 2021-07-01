@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this operation to list all private and vendor workforces in an AWS Region.
-// Note that you can only have one private workforce per AWS Region.
+// Use this operation to list all private and vendor workforces in an Amazon Web
+// Services Region. Note that you can only have one private workforce per Amazon
+// Web Services Region.
 func (c *Client) ListWorkforces(ctx context.Context, params *ListWorkforcesInput, optFns ...func(*Options)) (*ListWorkforcesOutput, error) {
 	if params == nil {
 		params = &ListWorkforcesInput{}

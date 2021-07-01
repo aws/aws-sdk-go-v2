@@ -101,8 +101,8 @@ type DescribeFeatureGroupOutput struct {
 	FeatureGroupStatus types.FeatureGroupStatus
 
 	// The configuration of the OfflineStore, inducing the S3 location of the
-	// OfflineStore, AWS Glue or AWS Hive data catalogue configurations, and the
-	// security configuration.
+	// OfflineStore, Amazon Web Services Glue or Amazon Web Services Hive data
+	// catalogue configurations, and the security configuration.
 	OfflineStoreConfig *types.OfflineStoreConfig
 
 	// The status of the OfflineStore. Notifies you if replicating data into the

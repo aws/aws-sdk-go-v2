@@ -15,27 +15,28 @@ import (
 // SageMaker saves the resulting model artifacts to an Amazon Simple Storage
 // Service (Amazon S3) bucket that you specify. If you choose to host your model
 // using Amazon SageMaker hosting services, you can use the resulting model
-// artifacts as part of the model. You can also use the artifacts with AWS IoT
-// Greengrass. In that case, deploy them as an ML resource. In the request body,
-// you provide the following:
+// artifacts as part of the model. You can also use the artifacts with Amazon Web
+// Services IoT Greengrass. In that case, deploy them as an ML resource. In the
+// request body, you provide the following:
 //
 // * A name for the compilation job
 //
-// * Information
-// about the input model artifacts
+// *
+// Information about the input model artifacts
 //
-// * The output location for the compiled model
-// and the device (target) that the model runs on
+// * The output location for the
+// compiled model and the device (target) that the model runs on
 //
-// * The Amazon Resource Name (ARN)
-// of the IAM role that Amazon SageMaker assumes to perform the model compilation
-// job.
+// * The Amazon
+// Resource Name (ARN) of the IAM role that Amazon SageMaker assumes to perform the
+// model compilation job.
 //
-// You can also provide a Tag to track the model compilation job's resource
-// use and costs. The response body contains the CompilationJobArn for the compiled
-// job. To stop a model compilation job, use StopCompilationJob. To get information
-// about a particular model compilation job, use DescribeCompilationJob. To get
-// information about multiple model compilation jobs, use ListCompilationJobs.
+// You can also provide a Tag to track the model
+// compilation job's resource use and costs. The response body contains the
+// CompilationJobArn for the compiled job. To stop a model compilation job, use
+// StopCompilationJob. To get information about a particular model compilation job,
+// use DescribeCompilationJob. To get information about multiple model compilation
+// jobs, use ListCompilationJobs.
 func (c *Client) CreateCompilationJob(ctx context.Context, params *CreateCompilationJobInput, optFns ...func(*Options)) (*CreateCompilationJobOutput, error) {
 	if params == nil {
 		params = &CreateCompilationJobInput{}
@@ -53,8 +54,8 @@ func (c *Client) CreateCompilationJob(ctx context.Context, params *CreateCompila
 
 type CreateCompilationJobInput struct {
 
-	// A name for the model compilation job. The name must be unique within the AWS
-	// Region and within your AWS account.
+	// A name for the model compilation job. The name must be unique within the Amazon
+	// Web Services Region and within your Amazon Web Services account.
 	//
 	// This member is required.
 	CompilationJobName *string
@@ -101,11 +102,17 @@ type CreateCompilationJobInput struct {
 	// This member is required.
 	StoppingCondition *types.StoppingCondition
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
+
+	// A VpcConfig object that specifies the VPC that you want your compilation job to
+	// connect to. Control access to your models by configuring the VPC. For more
+	// information, see Protect Compilation Jobs by Using an Amazon Virtual Private
+	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html).
+	VpcConfig *types.NeoVpcConfig
 }
 
 type CreateCompilationJobOutput struct {

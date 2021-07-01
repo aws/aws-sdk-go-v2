@@ -12,7 +12,7 @@ import (
 )
 
 // Gets information about a work team provided by a vendor. It returns details
-// about the subscription with a vendor in the AWS Marketplace.
+// about the subscription with a vendor in the Amazon Web Services Marketplace.
 func (c *Client) DescribeSubscribedWorkteam(ctx context.Context, params *DescribeSubscribedWorkteamInput, optFns ...func(*Options)) (*DescribeSubscribedWorkteamOutput, error) {
 	if params == nil {
 		params = &DescribeSubscribedWorkteamInput{}
