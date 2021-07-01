@@ -133,7 +133,7 @@ type LoadOptions struct {
 	EC2IMDSClientEnableState imds.ClientEnableState
 
 	// Specifies the EC2 Instance Metadata Service default endpoint selection mode (IPv4 or IPv6)
-	EC2IMDSEndpointMode imds.EndpointMode
+	EC2IMDSEndpointMode imds.EndpointModeState
 
 	// Specifies the EC2 Instance Metadata Service endpoint to use. If specified it overrides EC2IMDSEndpointMode.
 	EC2IMDSEndpoint string
@@ -664,9 +664,9 @@ func (o LoadOptions) GetEC2IMDSClientEnableState() (imds.ClientEnableState, bool
 }
 
 // GetEC2IMDSEndpointMode implements a EC2IMDSEndpointMode option resolver interface.
-func (o LoadOptions) GetEC2IMDSEndpointMode() (imds.EndpointMode, bool, error) {
-	if o.EC2IMDSEndpointMode == imds.EndpointModeUnset {
-		return imds.EndpointModeUnset, false, nil
+func (o LoadOptions) GetEC2IMDSEndpointMode() (imds.EndpointModeState, bool, error) {
+	if o.EC2IMDSEndpointMode == imds.EndpointModeStateUnset {
+		return imds.EndpointModeStateUnset, false, nil
 	}
 
 	return o.EC2IMDSEndpointMode, true, nil
@@ -690,7 +690,7 @@ func WithEC2IMDSClientEnableState(v imds.ClientEnableState) LoadOptionsFunc {
 }
 
 // WithEC2IMDSEndpointMode is a helper function to construct functional options that sets the EC2IMDSEndpointMode.
-func WithEC2IMDSEndpointMode(v imds.EndpointMode) LoadOptionsFunc {
+func WithEC2IMDSEndpointMode(v imds.EndpointModeState) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.EC2IMDSEndpointMode = v
 		return nil

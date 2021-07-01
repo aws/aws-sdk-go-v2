@@ -39,15 +39,15 @@ const (
 	ClientEnabled            ClientEnableState = internalconfig.ClientEnabled            // client enabled
 )
 
-// EndpointMode is an enum configuration variable describing the client endpoint mode.
+// EndpointModeState is an enum configuration variable describing the client endpoint mode.
 // Not configurable directly, but used when using the NewFromConfig.
-type EndpointMode = internalconfig.EndpointMode
+type EndpointModeState = internalconfig.EndpointModeState
 
-// Enumeration values for EndpointMode
+// Enumeration values for EndpointModeState
 const (
-	EndpointModeUnset EndpointMode = internalconfig.EndpointModeUnset
-	EndpointModeIPv4  EndpointMode = internalconfig.EndpointModeIPv4
-	EndpointModeIPv6  EndpointMode = internalconfig.EndpointModeIPv6
+	EndpointModeStateUnset EndpointModeState = internalconfig.EndpointModeStateUnset
+	EndpointModeStateIPv4  EndpointModeState = internalconfig.EndpointModeStateIPv4
+	EndpointModeStateIPv6  EndpointModeState = internalconfig.EndpointModeStateIPv6
 )
 
 const (
@@ -141,11 +141,11 @@ type Options struct {
 
 	// The endpoint selection mode the client will use if no explicit endpoint is provided using the Endpoint field.
 	//
-	// Setting EndpointMode to EndpointModeIPv4 will configure the client to use the default EC2 IPv4 endpoint.
-	// Setting EndpointMode to EndpointModeIPv6 will configure the client to use the default EC2 IPv6 endpoint.
+	// Setting EndpointMode to EndpointModeStateIPv4 will configure the client to use the default EC2 IPv4 endpoint.
+	// Setting EndpointMode to EndpointModeStateIPv6 will configure the client to use the default EC2 IPv6 endpoint.
 	//
-	// By default if EndpointMode is not set (EndpointModeUnset) than the default endpoint selection mode EndpointModeIPv4.
-	EndpointMode EndpointMode
+	// By default if EndpointMode is not set (EndpointModeStateUnset) than the default endpoint selection mode EndpointModeStateIPv4.
+	EndpointMode EndpointModeState
 
 	// The HTTP client to invoke API calls with. Defaults to client's default
 	// HTTP implementation if nil.
@@ -294,7 +294,7 @@ func resolveClientEnableState(cfg aws.Config, options *Options) error {
 }
 
 func resolveEndpointModeConfig(cfg aws.Config, options *Options) error {
-	if options.EndpointMode != EndpointModeUnset {
+	if options.EndpointMode != EndpointModeStateUnset {
 		return nil
 	}
 	value, found, err := internalconfig.ResolveEndpointModeConfig(cfg.ConfigSources)

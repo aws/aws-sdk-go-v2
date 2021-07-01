@@ -167,7 +167,7 @@ func (m *deserializeResponse) HandleDeserialize(
 
 type resolveEndpoint struct {
 	Endpoint     string
-	EndpointMode EndpointMode
+	EndpointMode EndpointModeState
 }
 
 func (*resolveEndpoint) ID() string {
@@ -190,11 +190,11 @@ func (m *resolveEndpoint) HandleSerialize(
 		endpoint = m.Endpoint
 	} else {
 		switch m.EndpointMode {
-		case EndpointModeIPv6:
+		case EndpointModeStateIPv6:
 			endpoint = defaultIPv6Endpoint
-		case EndpointModeIPv4:
+		case EndpointModeStateIPv4:
 			fallthrough
-		case EndpointModeUnset:
+		case EndpointModeStateUnset:
 			endpoint = defaultIPv4Endpoint
 		default:
 			return out, metadata, fmt.Errorf("unsupported IMDS endpoint mode")

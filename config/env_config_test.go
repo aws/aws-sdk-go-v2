@@ -258,7 +258,7 @@ func TestNewEnvConfig(t *testing.T) {
 				"AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE": "IPv6",
 			},
 			Config: EnvConfig{
-				EC2IMDSEndpointMode: imds.EndpointModeIPv6,
+				EC2IMDSEndpointMode: imds.EndpointModeStateIPv6,
 			},
 		},
 		17: {
@@ -266,7 +266,7 @@ func TestNewEnvConfig(t *testing.T) {
 				"AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE": "IPv4",
 			},
 			Config: EnvConfig{
-				EC2IMDSEndpointMode: imds.EndpointModeIPv4,
+				EC2IMDSEndpointMode: imds.EndpointModeStateIPv4,
 			},
 		},
 		18: {
@@ -291,7 +291,7 @@ func TestNewEnvConfig(t *testing.T) {
 			},
 			Config: EnvConfig{
 				EC2IMDSEndpoint:     "http://endpoint.localhost",
-				EC2IMDSEndpointMode: imds.EndpointModeIPv6,
+				EC2IMDSEndpointMode: imds.EndpointModeStateIPv6,
 			},
 		},
 		21: {

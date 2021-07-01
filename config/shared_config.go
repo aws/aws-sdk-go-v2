@@ -161,7 +161,7 @@ type SharedConfig struct {
 	// Specifies the EC2 Instance Metadata Service default endpoint selection mode (IPv4 or IPv6)
 	//
 	// ec2_metadata_service_endpoint_mode=IPv6
-	EC2IMDSEndpointMode imds.EndpointMode
+	EC2IMDSEndpointMode imds.EndpointModeState
 
 	// Specifies the EC2 Instance Metadata Service endpoint to use. If specified it overrides EC2IMDSEndpointMode.
 	//
@@ -202,9 +202,9 @@ func (c SharedConfig) getCredentialsProvider() (aws.Credentials, bool, error) {
 }
 
 // GetEC2IMDSEndpointMode implements a EC2IMDSEndpointMode option resolver interface.
-func (c SharedConfig) GetEC2IMDSEndpointMode() (imds.EndpointMode, bool, error) {
-	if c.EC2IMDSEndpointMode == imds.EndpointModeUnset {
-		return imds.EndpointModeUnset, false, nil
+func (c SharedConfig) GetEC2IMDSEndpointMode() (imds.EndpointModeState, bool, error) {
+	if c.EC2IMDSEndpointMode == imds.EndpointModeStateUnset {
+		return imds.EndpointModeStateUnset, false, nil
 	}
 
 	return c.EC2IMDSEndpointMode, true, nil
@@ -908,7 +908,7 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	updateBoolPtr(&c.S3UseARNRegion, section, s3UseARNRegionKey)
 
 	if err := updateEC2MetadataServiceEndpointMode(&c.EC2IMDSEndpointMode, section, ec2MetadataServiceEndpointModeKey); err != nil {
-		return err
+		return fmt.Errorf("failed to load %s from shared config, %v", ec2MetadataServiceEndpointModeKey, err)
 	}
 	updateString(&c.EC2IMDSEndpoint, section, ec2MetadataServiceEndpointKey)
 
@@ -927,7 +927,7 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	return nil
 }
 
-func updateEC2MetadataServiceEndpointMode(endpointMode *imds.EndpointMode, section ini.Section, key string) error {
+func updateEC2MetadataServiceEndpointMode(endpointMode *imds.EndpointModeState, section ini.Section, key string) error {
 	if !section.Has(key) {
 		return nil
 	}

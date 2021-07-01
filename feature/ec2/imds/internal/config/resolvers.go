@@ -16,39 +16,41 @@ const (
 	ClientEnabled
 )
 
-// EndpointMode is the EC2 IMDS Endpoint Configuration Mode
-type EndpointMode uint
-
-// SetFromString sets the EndpointMode based on the provided string value. Unknown values will default to EndpointModeUnset
-func (e *EndpointMode) SetFromString(v string) error {
-	switch {
-	case len(v) == 0:
-		*e = EndpointModeUnset
-	case strings.EqualFold(v, "IPv6"):
-		*e = EndpointModeIPv6
-	case strings.EqualFold(v, "IPv4"):
-		*e = EndpointModeIPv4
-	default:
-		return fmt.Errorf("unknown EC2 IMDS endpoint mode")
-	}
-	return nil
-}
+// EndpointModeState is the EC2 IMDS Endpoint Configuration Mode
+type EndpointModeState uint
 
 // Enumeration values for ClientEnableState
 const (
-	EndpointModeUnset EndpointMode = iota
-	EndpointModeIPv4
-	EndpointModeIPv6
+	EndpointModeStateUnset EndpointModeState = iota
+	EndpointModeStateIPv4
+	EndpointModeStateIPv6
 )
+
+// SetFromString sets the EndpointModeState based on the provided string value. Unknown values will default to EndpointModeStateUnset
+func (e *EndpointModeState) SetFromString(v string) error {
+	v = strings.TrimSpace(v)
+
+	switch {
+	case len(v) == 0:
+		*e = EndpointModeStateUnset
+	case strings.EqualFold(v, "IPv6"):
+		*e = EndpointModeStateIPv6
+	case strings.EqualFold(v, "IPv4"):
+		*e = EndpointModeStateIPv4
+	default:
+		return fmt.Errorf("unknown EC2 IMDS endpoint mode, must be either IPv6 or IPv4")
+	}
+	return nil
+}
 
 // ClientEnableStateResolver is a config resolver interface for retrieving whether the IMDS client is disabled.
 type ClientEnableStateResolver interface {
 	GetEC2IMDSClientEnableState() (ClientEnableState, bool, error)
 }
 
-// EndpointModeResolver is a config resolver interface for retrieving the EndpointMode configuration.
+// EndpointModeResolver is a config resolver interface for retrieving the EndpointModeState configuration.
 type EndpointModeResolver interface {
-	GetEC2IMDSEndpointMode() (EndpointMode, bool, error)
+	GetEC2IMDSEndpointMode() (EndpointModeState, bool, error)
 }
 
 // EndpointResolver is a config resolver interface for retrieving the endpoint.
@@ -69,8 +71,8 @@ func ResolveClientEnableState(sources []interface{}) (value ClientEnableState, f
 	return value, found, err
 }
 
-// ResolveEndpointModeConfig resolves the EndpointMode from a list of configuration sources.
-func ResolveEndpointModeConfig(sources []interface{}) (value EndpointMode, found bool, err error) {
+// ResolveEndpointModeConfig resolves the EndpointModeState from a list of configuration sources.
+func ResolveEndpointModeConfig(sources []interface{}) (value EndpointModeState, found bool, err error) {
 	for _, source := range sources {
 		if resolver, ok := source.(EndpointModeResolver); ok {
 			value, found, err = resolver.GetEC2IMDSEndpointMode()

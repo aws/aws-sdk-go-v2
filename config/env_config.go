@@ -196,7 +196,7 @@ type EnvConfig struct {
 	// Specifies the EC2 Instance Metadata Service default endpoint selection mode (IPv4 or IPv6)
 	//
 	// AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE=IPv6
-	EC2IMDSEndpointMode imds.EndpointMode
+	EC2IMDSEndpointMode imds.EndpointModeState
 
 	// Specifies the EC2 Instance Metadata Service endpoint to use. If specified it overrides EC2IMDSEndpointMode.
 	//
@@ -277,13 +277,15 @@ func setEC2IMDSClientEnableState(state *imds.ClientEnableState, keys []string) {
 	}
 }
 
-func setEC2IMDSEndpointMode(mode *imds.EndpointMode, keys []string) error {
+func setEC2IMDSEndpointMode(mode *imds.EndpointModeState, keys []string) error {
 	for _, k := range keys {
 		value := os.Getenv(k)
 		if len(value) == 0 {
 			continue
 		}
-		return mode.SetFromString(value)
+		if err := mode.SetFromString(value); err != nil {
+			return fmt.Errorf("invalid value for environment variable, %s=%s, %v", k, value, err)
+		}
 	}
 	return nil
 }
@@ -439,9 +441,9 @@ func (c EnvConfig) GetEC2IMDSClientEnableState() (imds.ClientEnableState, bool, 
 }
 
 // GetEC2IMDSEndpointMode implements a EC2IMDSEndpointMode option resolver interface.
-func (c EnvConfig) GetEC2IMDSEndpointMode() (imds.EndpointMode, bool, error) {
-	if c.EC2IMDSEndpointMode == imds.EndpointModeUnset {
-		return imds.EndpointModeUnset, false, nil
+func (c EnvConfig) GetEC2IMDSEndpointMode() (imds.EndpointModeState, bool, error) {
+	if c.EC2IMDSEndpointMode == imds.EndpointModeStateUnset {
+		return imds.EndpointModeStateUnset, false, nil
 	}
 
 	return c.EC2IMDSEndpointMode, true, nil

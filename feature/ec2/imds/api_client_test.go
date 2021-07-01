@@ -19,7 +19,7 @@ import (
 func TestClientEndpoint(t *testing.T) {
 	cases := map[string]struct {
 		Endpoint     string
-		EndpointMode EndpointMode
+		EndpointMode EndpointModeState
 		EnvVar       map[string]string
 		Expect       string
 		WantErr      bool
@@ -28,21 +28,21 @@ func TestClientEndpoint(t *testing.T) {
 			Expect: defaultIPv4Endpoint,
 		},
 		"options endpoint mode IPv4": {
-			EndpointMode: EndpointModeIPv4,
+			EndpointMode: EndpointModeStateIPv4,
 			Expect:       defaultIPv4Endpoint,
 		},
 		"options endpoint mode IPv6": {
-			EndpointMode: EndpointModeIPv6,
+			EndpointMode: EndpointModeStateIPv6,
 			Expect:       defaultIPv6Endpoint,
 		},
 		"options endpoint mode IPv6 AND options endpoint": {
 			Endpoint:     "http://endpoint.localhost",
-			EndpointMode: EndpointModeIPv6,
+			EndpointMode: EndpointModeStateIPv6,
 			Expect:       "http://endpoint.localhost",
 		},
 		"options endpoint mode IPv4 AND options endpoint": {
 			Endpoint:     "http://endpoint.localhost",
-			EndpointMode: EndpointModeIPv4,
+			EndpointMode: EndpointModeStateIPv4,
 			Expect:       "http://endpoint.localhost",
 		},
 		"options endpoint": {
@@ -165,10 +165,10 @@ func TestClientEnableState(t *testing.T) {
 	}
 }
 
-type WithEndpointModeSource EndpointMode
+type WithEndpointModeSource EndpointModeState
 
-func (w WithEndpointModeSource) GetEC2IMDSEndpointMode() (config.EndpointMode, bool, error) {
-	return config.EndpointMode(w), true, nil
+func (w WithEndpointModeSource) GetEC2IMDSEndpointMode() (config.EndpointModeState, bool, error) {
+	return config.EndpointModeState(w), true, nil
 }
 
 type WithEndpoint string
@@ -193,19 +193,19 @@ func TestNewFromConfig(t *testing.T) {
 		},
 		"endpoint mode IPv6": {
 			Sources: []interface{}{
-				WithEndpointModeSource(EndpointModeIPv6),
+				WithEndpointModeSource(EndpointModeStateIPv6),
 			},
 			Expect: defaultIPv6Endpoint,
 		},
 		"endpoint mode IPv4": {
 			Sources: []interface{}{
-				WithEndpointModeSource(EndpointModeIPv4),
+				WithEndpointModeSource(EndpointModeStateIPv4),
 			},
 			Expect: defaultIPv4Endpoint,
 		},
 		"endpoint mode unknown": {
 			Sources: []interface{}{
-				WithEndpointModeSource(func() (v EndpointMode) {
+				WithEndpointModeSource(func() (v EndpointModeState) {
 					v.SetFromString("foobar")
 					return v
 				}()),
@@ -220,7 +220,7 @@ func TestNewFromConfig(t *testing.T) {
 		},
 		"endpoint mode && endpoint": {
 			Sources: []interface{}{
-				WithEndpointModeSource(EndpointModeIPv6),
+				WithEndpointModeSource(EndpointModeStateIPv6),
 				WithEndpoint("http://endpoint.localhost"),
 			},
 			Expect: "http://endpoint.localhost",
