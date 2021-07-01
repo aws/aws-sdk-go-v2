@@ -719,14 +719,14 @@
                 "StorageCapacityUnits": {
                     "target": "com.amazonaws.kendra#StorageCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. A single capacity\n            unit for an index provides 150 GB of storage space or \n            500,000 documents, whichever is reached first.</p>",
+                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. \n            A single capacity unit provides 30 GB of storage space or 100,000 documents, \n            whichever is reached first.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QueryCapacityUnits": {
                     "target": "com.amazonaws.kendra#QueryCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.5 queries per second or \n            approximately 40,000 queries per day.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query \n            capacity for an index. For example, the base capacity for an index is 0.5 \n            queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. \n            If adding another 0.5 queries per second to total 1 queries per second for an \n            index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>",
+                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.1 queries per second or approximately \n            8,000 queries per day.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is five times the \n            provisioned query capacity for an index, or the base capacity of 2.5 calls per second, \n            whichever is higher. For example, the base capacity for an index is 0.1 queries per \n            second, and <code>GetQuerySuggestions</code> capacity has a base of 2.5 calls per second. \n            If you add another 0.1 queries per second to total 0.2 queries per second for an index, the \n            <code>GetQuerySuggestions</code> capacity is 2.5 calls per second \n            (higher than five times 0.2 queries per second).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1761,7 +1761,7 @@
                 "Edition": {
                     "target": "com.amazonaws.kendra#IndexEdition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Kendra edition to use for the index. Choose\n        <code>DEVELOPER_EDITION</code> for indexes intended for development,\n      testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your\n      production databases. Once you set the edition for an index, it can't be\n      changed. </p>\n         <p>The <code>Edition</code> parameter is optional. If you don't supply a\n      value, the default is <code>ENTERPRISE_EDITION</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Kendra edition to use for the index. Choose\n        <code>DEVELOPER_EDITION</code> for indexes intended for development,\n      testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your\n      production databases. Once you set the edition for an index, it can't be\n      changed. </p>\n         <p>The <code>Edition</code> parameter is optional. If you don't supply a\n      value, the default is <code>ENTERPRISE_EDITION</code>.</p>\n         <p>For more information on quota limits for enterprise and developer editions, \n      see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
                     }
                 },
                 "RoleArn": {
@@ -7050,7 +7050,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. \n            If you use SharePoint Sever, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i>AWS Secrets\n                Manager</i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i>AWS Secrets\n                Manager</i> user guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
