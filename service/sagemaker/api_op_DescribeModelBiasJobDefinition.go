@@ -30,8 +30,8 @@ func (c *Client) DescribeModelBiasJobDefinition(ctx context.Context, params *Des
 
 type DescribeModelBiasJobDefinitionInput struct {
 
-	// The name of the model bias job definition. The name must be unique within an AWS
-	// Region in the AWS account.
+	// The name of the model bias job definition. The name must be unique within an
+	// Amazon Web Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
 	JobDefinitionName *string
@@ -49,8 +49,8 @@ type DescribeModelBiasJobDefinitionOutput struct {
 	// This member is required.
 	JobDefinitionArn *string
 
-	// The name of the bias job definition. The name must be unique within an AWS
-	// Region in the AWS account.
+	// The name of the bias job definition. The name must be unique within an Amazon
+	// Web Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
 	JobDefinitionName *string
@@ -75,9 +75,9 @@ type DescribeModelBiasJobDefinitionOutput struct {
 	// This member is required.
 	ModelBiasJobOutputConfig *types.MonitoringOutputConfig
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that has read permission to the input data location and write permission to
-	// the output data location in Amazon S3.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that has read permission to the input data location and
+	// write permission to the output data location in Amazon S3.
 	//
 	// This member is required.
 	RoleArn *string

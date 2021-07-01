@@ -234,7 +234,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\s\\.]*$"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.\\-]*$"
             }
         },
         "com.amazonaws.ssmcontacts#ChannelTargetInfo": {
@@ -425,10 +425,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\s\\.]*$"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.\\-]*$"
             }
         },
         "com.amazonaws.ssmcontacts#ContactTargetInfo": {
@@ -1886,6 +1886,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
                 }
             ],
             "traits": {
@@ -2023,7 +2026,7 @@
                     "min": 1,
                     "max": 395000
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.ssmcontacts#PublicContent": {
@@ -2442,7 +2445,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:(aws|aws-cn|aws-us-gov):ssm-contacts:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*"
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):ssm-contacts:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*$"
             }
         },
         "com.amazonaws.ssmcontacts#Stage": {
@@ -2604,6 +2607,9 @@
                     "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.ssmcontacts#ValidationException"
                 }
             ],
@@ -2681,7 +2687,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 255
+                    "max": 128
                 },
                 "smithy.api#pattern": "^[\\\\\\/a-zA-Z0-9_+=\\-]*$"
             }
@@ -2758,7 +2764,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 255
+                    "max": 256
                 },
                 "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*$"
             }
@@ -2876,6 +2882,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
                 }
             ],
             "traits": {

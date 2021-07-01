@@ -35,8 +35,8 @@ type UpdateMonitoringScheduleInput struct {
 	// This member is required.
 	MonitoringScheduleConfig *types.MonitoringScheduleConfig
 
-	// The name of the monitoring schedule. The name must be unique within an AWS
-	// Region within an AWS account.
+	// The name of the monitoring schedule. The name must be unique within an Amazon
+	// Web Services Region within an Amazon Web Services account.
 	//
 	// This member is required.
 	MonitoringScheduleName *string

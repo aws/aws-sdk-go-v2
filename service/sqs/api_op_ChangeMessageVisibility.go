@@ -14,8 +14,8 @@ import (
 // The default visibility timeout for a message is 30 seconds. The minimum is 0
 // seconds. The maximum is 12 hours. For more information, see Visibility Timeout
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
-// in the Amazon Simple Queue Service Developer Guide. For example, you have a
-// message with a visibility timeout of 5 minutes. After 3 minutes, you call
+// in the Amazon SQS Developer Guide. For example, you have a message with a
+// visibility timeout of 5 minutes. After 3 minutes, you call
 // ChangeMessageVisibility with a timeout of 10 minutes. You can continue to call
 // ChangeMessageVisibility to extend the visibility timeout to the maximum allowed
 // time. If you try to extend the visibility timeout beyond the maximum, your

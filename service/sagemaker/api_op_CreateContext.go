@@ -37,7 +37,8 @@ func (c *Client) CreateContext(ctx context.Context, params *CreateContextInput, 
 
 type CreateContextInput struct {
 
-	// The name of the context. Must be unique to your account in an AWS Region.
+	// The name of the context. Must be unique to your account in an Amazon Web
+	// Services Region.
 	//
 	// This member is required.
 	ContextName *string

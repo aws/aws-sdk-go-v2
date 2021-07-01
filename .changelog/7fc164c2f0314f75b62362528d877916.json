@@ -1,0 +1,22 @@
+{
+    "id": "7fc164c2-f031-4f75-b623-62528d877916",
+    "type": "feature",
+    "description": "API client updated",
+    "modules": [
+        "internal/ini",
+        "service/autoscaling",
+        "service/databrew",
+        "service/ec2",
+        "service/glue",
+        "service/kendra",
+        "service/mediaconvert",
+        "service/mediapackage",
+        "service/mediapackagevod",
+        "service/redshift",
+        "service/sagemaker",
+        "service/servicediscovery",
+        "service/sqs",
+        "service/ssm",
+        "service/ssmcontacts"
+    ]
+}

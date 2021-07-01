@@ -430,6 +430,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateHttpNamespace struct {
+}
+
+func (*validateOpUpdateHttpNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHttpNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHttpNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHttpNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateInstanceCustomHealthStatus struct {
 }
 
@@ -445,6 +465,46 @@ func (m *validateOpUpdateInstanceCustomHealthStatus) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateInstanceCustomHealthStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePrivateDnsNamespace struct {
+}
+
+func (*validateOpUpdatePrivateDnsNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePrivateDnsNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePrivateDnsNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePrivateDnsNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePublicDnsNamespace struct {
+}
+
+func (*validateOpUpdatePublicDnsNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePublicDnsNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePublicDnsNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePublicDnsNamespaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -554,8 +614,20 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateHttpNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHttpNamespace{}, middleware.After)
+}
+
 func addOpUpdateInstanceCustomHealthStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstanceCustomHealthStatus{}, middleware.After)
+}
+
+func addOpUpdatePrivateDnsNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePrivateDnsNamespace{}, middleware.After)
+}
+
+func addOpUpdatePublicDnsNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePublicDnsNamespace{}, middleware.After)
 }
 
 func addOpUpdateServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -650,6 +722,21 @@ func validateHealthCheckConfig(v *types.HealthCheckConfig) error {
 	}
 }
 
+func validateHttpNamespaceChange(v *types.HttpNamespaceChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpNamespaceChange"}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNamespaceFilter(v *types.NamespaceFilter) error {
 	if v == nil {
 		return nil
@@ -720,6 +807,192 @@ func validateOperationFilters(v []types.OperationFilter) error {
 	}
 }
 
+func validatePrivateDnsNamespaceChange(v *types.PrivateDnsNamespaceChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateDnsNamespaceChange"}
+	if v.Properties != nil {
+		if err := validatePrivateDnsNamespacePropertiesChange(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateDnsNamespaceProperties(v *types.PrivateDnsNamespaceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateDnsNamespaceProperties"}
+	if v.DnsProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsProperties"))
+	} else if v.DnsProperties != nil {
+		if err := validatePrivateDnsPropertiesMutable(v.DnsProperties); err != nil {
+			invalidParams.AddNested("DnsProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateDnsNamespacePropertiesChange(v *types.PrivateDnsNamespacePropertiesChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateDnsNamespacePropertiesChange"}
+	if v.DnsProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsProperties"))
+	} else if v.DnsProperties != nil {
+		if err := validatePrivateDnsPropertiesMutableChange(v.DnsProperties); err != nil {
+			invalidParams.AddNested("DnsProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateDnsPropertiesMutable(v *types.PrivateDnsPropertiesMutable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateDnsPropertiesMutable"}
+	if v.SOA == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SOA"))
+	} else if v.SOA != nil {
+		if err := validateSOA(v.SOA); err != nil {
+			invalidParams.AddNested("SOA", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateDnsPropertiesMutableChange(v *types.PrivateDnsPropertiesMutableChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateDnsPropertiesMutableChange"}
+	if v.SOA == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SOA"))
+	} else if v.SOA != nil {
+		if err := validateSOAChange(v.SOA); err != nil {
+			invalidParams.AddNested("SOA", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublicDnsNamespaceChange(v *types.PublicDnsNamespaceChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublicDnsNamespaceChange"}
+	if v.Properties != nil {
+		if err := validatePublicDnsNamespacePropertiesChange(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublicDnsNamespaceProperties(v *types.PublicDnsNamespaceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublicDnsNamespaceProperties"}
+	if v.DnsProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsProperties"))
+	} else if v.DnsProperties != nil {
+		if err := validatePublicDnsPropertiesMutable(v.DnsProperties); err != nil {
+			invalidParams.AddNested("DnsProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublicDnsNamespacePropertiesChange(v *types.PublicDnsNamespacePropertiesChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublicDnsNamespacePropertiesChange"}
+	if v.DnsProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsProperties"))
+	} else if v.DnsProperties != nil {
+		if err := validatePublicDnsPropertiesMutableChange(v.DnsProperties); err != nil {
+			invalidParams.AddNested("DnsProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublicDnsPropertiesMutable(v *types.PublicDnsPropertiesMutable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublicDnsPropertiesMutable"}
+	if v.SOA == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SOA"))
+	} else if v.SOA != nil {
+		if err := validateSOA(v.SOA); err != nil {
+			invalidParams.AddNested("SOA", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublicDnsPropertiesMutableChange(v *types.PublicDnsPropertiesMutableChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublicDnsPropertiesMutableChange"}
+	if v.SOA == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SOA"))
+	} else if v.SOA != nil {
+		if err := validateSOAChange(v.SOA); err != nil {
+			invalidParams.AddNested("SOA", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceChange(v *types.ServiceChange) error {
 	if v == nil {
 		return nil
@@ -769,6 +1042,36 @@ func validateServiceFilters(v []types.ServiceFilter) error {
 		if err := validateServiceFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSOA(v *types.SOA) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SOA"}
+	if v.TTL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TTL"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSOAChange(v *types.SOAChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SOAChange"}
+	if v.TTL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TTL"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -848,6 +1151,11 @@ func validateOpCreatePrivateDnsNamespaceInput(v *CreatePrivateDnsNamespaceInput)
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Properties != nil {
+		if err := validatePrivateDnsNamespaceProperties(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -866,6 +1174,11 @@ func validateOpCreatePublicDnsNamespaceInput(v *CreatePublicDnsNamespaceInput) e
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Properties != nil {
+		if err := validatePublicDnsNamespaceProperties(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1191,6 +1504,28 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateHttpNamespaceInput(v *UpdateHttpNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHttpNamespaceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	} else if v.Namespace != nil {
+		if err := validateHttpNamespaceChange(v.Namespace); err != nil {
+			invalidParams.AddNested("Namespace", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateInstanceCustomHealthStatusInput(v *UpdateInstanceCustomHealthStatusInput) error {
 	if v == nil {
 		return nil
@@ -1204,6 +1539,50 @@ func validateOpUpdateInstanceCustomHealthStatusInput(v *UpdateInstanceCustomHeal
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePrivateDnsNamespaceInput(v *UpdatePrivateDnsNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePrivateDnsNamespaceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	} else if v.Namespace != nil {
+		if err := validatePrivateDnsNamespaceChange(v.Namespace); err != nil {
+			invalidParams.AddNested("Namespace", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePublicDnsNamespaceInput(v *UpdatePublicDnsNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePublicDnsNamespaceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	} else if v.Namespace != nil {
+		if err := validatePublicDnsNamespaceChange(v.Namespace); err != nil {
+			invalidParams.AddNested("Namespace", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -49,8 +49,8 @@ type ConfirmProductInstanceInput struct {
 
 type ConfirmProductInstanceOutput struct {
 
-	// The AWS account ID of the instance owner. This is only present if the product
-	// code is attached to the instance.
+	// The account ID of the instance owner. This is only present if the product code
+	// is attached to the instance.
 	OwnerId *string
 
 	// The return value of the request. Returns true if the specified product code is

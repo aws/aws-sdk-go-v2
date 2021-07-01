@@ -130,13 +130,13 @@ type Message struct {
 	MD5OfMessageAttributes *string
 
 	// Each message attribute consists of a Name, Type, and Value. For more
-	// information, see Amazon SQS Message Attributes
+	// information, see Amazon SQS message attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue
 
 	// A unique identifier for the message. A MessageIdis considered unique across all
-	// AWS accounts for an extended period of time.
+	// accounts for an extended period of time.
 	MessageId *string
 
 	// An identifier associated with the act of receiving the message. A new receipt
@@ -156,7 +156,7 @@ type MessageAttributeValue struct {
 	// Binary. For the Number data type, you must use StringValue. You can also append
 	// custom labels. For more information, see Amazon SQS Message Attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	//
 	// This member is required.
 	DataType *string
@@ -187,7 +187,7 @@ type MessageSystemAttributeValue struct {
 	// Binary. For the Number data type, you must use StringValue. You can also append
 	// custom labels. For more information, see Amazon SQS Message Attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	//
 	// This member is required.
 	DataType *string
@@ -233,9 +233,9 @@ type SendMessageBatchRequestEntry struct {
 	DelaySeconds int32
 
 	// Each message attribute consists of a Name, Type, and Value. For more
-	// information, see Amazon SQS Message Attributes
+	// information, see Amazon SQS message attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
@@ -245,10 +245,10 @@ type SendMessageBatchRequestEntry struct {
 	// successfully but aren't delivered. For more information, see  Exactly-once
 	// processing
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	//
-	// * Every message must have a
-	// unique MessageDeduplicationId,
+	// * Every message must have a unique
+	// MessageDeduplicationId,
 	//
 	// * You may provide a MessageDeduplicationId
 	// explicitly.
@@ -287,7 +287,7 @@ type SendMessageBatchRequestEntry struct {
 	// punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~). For best practices of using
 	// MessageDeduplicationId, see Using the MessageDeduplicationId Property
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	MessageDeduplicationId *string
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The tag that
@@ -312,8 +312,8 @@ type SendMessageBatchRequestEntry struct {
 	// (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~). For best practices of using MessageGroupId,
 	// see Using the MessageGroupId Property
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)
-	// in the Amazon Simple Queue Service Developer Guide. MessageGroupId is required
-	// for FIFO queues. You can't use it for Standard queues.
+	// in the Amazon SQS Developer Guide. MessageGroupId is required for FIFO queues.
+	// You can't use it for Standard queues.
 	MessageGroupId *string
 
 	// The message system attribute to send Each message system attribute consists of a
@@ -321,10 +321,10 @@ type SendMessageBatchRequestEntry struct {
 	//
 	// * Currently, the only supported message system attribute
 	// is AWSTraceHeader. Its type must be String and its value must be a correctly
-	// formatted AWS X-Ray trace header string.
+	// formatted X-Ray trace header string.
 	//
-	// * The size of a message system
-	// attribute doesn't count towards the total size of a message.
+	// * The size of a message system attribute
+	// doesn't count towards the total size of a message.
 	MessageSystemAttributes map[string]MessageSystemAttributeValue
 }
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports an existing Amazon Athena Data Catalog to AWS Glue
+// Imports an existing Amazon Athena Data Catalog to Glue.
 func (c *Client) ImportCatalogToGlue(ctx context.Context, params *ImportCatalogToGlueInput, optFns ...func(*Options)) (*ImportCatalogToGlueOutput, error) {
 	if params == nil {
 		params = &ImportCatalogToGlueInput{}
@@ -28,7 +28,8 @@ func (c *Client) ImportCatalogToGlue(ctx context.Context, params *ImportCatalogT
 
 type ImportCatalogToGlueInput struct {
 
-	// The ID of the catalog to import. Currently, this should be the AWS account ID.
+	// The ID of the catalog to import. Currently, this should be the Amazon Web
+	// Services account ID.
 	CatalogId *string
 }
 

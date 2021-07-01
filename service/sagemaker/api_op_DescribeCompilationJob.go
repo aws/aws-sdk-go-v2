@@ -116,9 +116,19 @@ type DescribeCompilationJobOutput struct {
 	// job container.
 	CompilationStartTime *time.Time
 
+	// The inference image to use when compiling a model. Specify an image only if the
+	// target device is a cloud instance.
+	InferenceImage *string
+
 	// Provides a BLAKE2 hash value that identifies the compiled model artifacts in
 	// Amazon S3.
 	ModelDigests *types.ModelDigests
+
+	// A VpcConfig object that specifies the VPC that you want your compilation job to
+	// connect to. Control access to your models by configuring the VPC. For more
+	// information, see Protect Compilation Jobs by Using an Amazon Virtual Private
+	// Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html).
+	VpcConfig *types.NeoVpcConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

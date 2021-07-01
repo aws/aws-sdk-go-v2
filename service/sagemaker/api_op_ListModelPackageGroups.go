@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Gets a list of the model groups in your AWS account.
+// Gets a list of the model groups in your Amazon Web Services account.
 func (c *Client) ListModelPackageGroups(ctx context.Context, params *ListModelPackageGroupsInput, optFns ...func(*Options)) (*ListModelPackageGroupsOutput, error) {
 	if params == nil {
 		params = &ListModelPackageGroupsInput{}
@@ -58,7 +58,7 @@ type ListModelPackageGroupsInput struct {
 
 type ListModelPackageGroupsOutput struct {
 
-	// A list of summaries of the model groups in your AWS account.
+	// A list of summaries of the model groups in your Amazon Web Services account.
 	//
 	// This member is required.
 	ModelPackageGroupSummaryList []types.ModelPackageGroupSummary

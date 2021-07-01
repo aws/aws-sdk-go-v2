@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the Amazon Route 53 DNS records and health check, if any, that AWS Cloud
-// Map created for the specified instance.
+// Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud Map
+// created for the specified instance.
 func (c *Client) DeregisterInstance(ctx context.Context, params *DeregisterInstanceInput, optFns ...func(*Options)) (*DeregisterInstanceOutput, error) {
 	if params == nil {
 		params = &DeregisterInstanceInput{}
@@ -45,7 +45,7 @@ type DeregisterInstanceInput struct {
 type DeregisterInstanceOutput struct {
 
 	// A value that you can use to determine whether the request completed
-	// successfully. For more information, see GetOperation
+	// successfully. To get the status of the operation, see GetOperation
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html).
 	OperationId *string
 

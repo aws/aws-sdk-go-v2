@@ -12,7 +12,7 @@ import (
 )
 
 // Create a machine learning algorithm that you can use in Amazon SageMaker and
-// list in the AWS Marketplace.
+// list in the Amazon Web Services Marketplace.
 func (c *Client) CreateAlgorithm(ctx context.Context, params *CreateAlgorithmInput, optFns ...func(*Options)) (*CreateAlgorithmOutput, error) {
 	if params == nil {
 		params = &CreateAlgorithmInput{}
@@ -65,7 +65,8 @@ type CreateAlgorithmInput struct {
 	// A description of the algorithm.
 	AlgorithmDescription *string
 
-	// Whether to certify the algorithm so that it can be listed in AWS Marketplace.
+	// Whether to certify the algorithm so that it can be listed in Amazon Web Services
+	// Marketplace.
 	CertifyForMarketplace bool
 
 	// Specifies details about inference jobs that the algorithm runs, including the
@@ -81,9 +82,9 @@ type CreateAlgorithmInput struct {
 	// output content formats that the algorithm supports for inference.
 	InferenceSpecification *types.InferenceSpecification
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 

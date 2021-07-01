@@ -54772,6 +54772,19 @@ func awsEc2query_deserializeDocumentFleetData(v **types.FleetData, decoder smith
 				sv.ClientToken = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("context", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Context = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("createTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -86050,6 +86063,19 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 			{
 				xtv := string(val)
 				sv.ClientToken = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("context", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Context = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("excessCapacityTerminationPolicy", t.Name.Local):

@@ -99,8 +99,9 @@ type AlgorithmSpecification struct {
 	TrainingInputMode TrainingInputMode
 
 	// The name of the algorithm resource to use for the training job. This must be an
-	// algorithm resource that you created or subscribe to on AWS Marketplace. If you
-	// specify a value for this parameter, you can't specify a value for TrainingImage.
+	// algorithm resource that you created or subscribe to on Amazon Web Services
+	// Marketplace. If you specify a value for this parameter, you can't specify a
+	// value for TrainingImage.
 	AlgorithmName *string
 
 	// To generate and save time-series metrics during training, set to true. The
@@ -196,7 +197,7 @@ type AlgorithmSummary struct {
 
 // Defines a training job and a batch transform job that Amazon SageMaker runs to
 // validate your algorithm. The data provided in the validation profile is made
-// available to your buyers on AWS Marketplace.
+// available to your buyers on Amazon Web Services Marketplace.
 type AlgorithmValidationProfile struct {
 
 	// The name of the profile for the algorithm. The name must have 1 to 63
@@ -1326,8 +1327,9 @@ type AthenaDatasetDefinition struct {
 	// This member is required.
 	QueryString *string
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data generated from an Athena query execution.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt data generated from an Athena query
+	// execution.
 	KmsKeyId *string
 
 	// The compression used for Athena query results.
@@ -1616,7 +1618,7 @@ type AutoMLOutputDataConfig struct {
 	// This member is required.
 	S3OutputPath *string
 
-	// The AWS KMS encryption key ID.
+	// The Amazon Web Services KMS encryption key ID.
 	KmsKeyId *string
 }
 
@@ -1904,8 +1906,8 @@ type CodeRepositorySummary struct {
 	LastModifiedTime *time.Time
 
 	// Configuration details for the Git repository, including the URL where it is
-	// located and the ARN of the AWS Secrets Manager secret that contains the
-	// credentials used to access the repository.
+	// located and the ARN of the Amazon Web Services Secrets Manager secret that
+	// contains the credentials used to access the repository.
 	GitConfig *GitConfig
 }
 
@@ -2071,15 +2073,16 @@ type ContainerDefinition struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
 	// The model artifacts must be in an S3 bucket that is in the same region as the
 	// model or endpoint you are creating. If you provide a value for this parameter,
-	// Amazon SageMaker uses AWS Security Token Service to download model artifacts
-	// from the S3 path you provide. AWS STS is activated in your IAM user account by
-	// default. If you previously deactivated AWS STS for a region, you need to
-	// reactivate AWS STS for that region. For more information, see Activating and
-	// Deactivating AWS STS in an AWS Region
+	// Amazon SageMaker uses Amazon Web Services Security Token Service to download
+	// model artifacts from the S3 path you provide. Amazon Web Services STS is
+	// activated in your IAM user account by default. If you previously deactivated
+	// Amazon Web Services STS for a region, you need to reactivate Amazon Web Services
+	// STS for that region. For more information, see Activating and Deactivating
+	// Amazon Web Services STS in an Amazon Web Services Region
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-	// in the AWS Identity and Access Management User Guide. If you use a built-in
-	// algorithm to create a model, Amazon SageMaker requires that you provide a S3
-	// path to the model artifacts in ModelDataUrl.
+	// in the Amazon Web Services Identity and Access Management User Guide. If you use
+	// a built-in algorithm to create a model, Amazon SageMaker requires that you
+	// provide a S3 path to the model artifacts in ModelDataUrl.
 	ModelDataUrl *string
 
 	// The name or Amazon Resource Name (ARN) of the model package to use to create the
@@ -2552,7 +2555,7 @@ type Device struct {
 	// Description of the device.
 	Description *string
 
-	// AWS Internet of Things (IoT) object name.
+	// Amazon Web Services Internet of Things (IoT) object name.
 	IotThingName *string
 }
 
@@ -2609,7 +2612,8 @@ type DeviceSummary struct {
 	// The name of the fleet the device belongs to.
 	DeviceFleetName *string
 
-	// The AWS Internet of Things (IoT) object thing name associated with the device..
+	// The Amazon Web Services Internet of Things (IoT) object thing name associated
+	// with the device..
 	IotThingName *string
 
 	// The last heartbeat received from the device.
@@ -2724,10 +2728,10 @@ type EdgeOutputConfig struct {
 	// This member is required.
 	S3OutputLocation *string
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data on the storage volume after compilation job. If you don't provide a
-	// KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your
-	// role's account.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt data on the storage volume after
+	// compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the
+	// default KMS key for Amazon S3 for your role's account.
 	KmsKeyId *string
 
 	// The configuration used to create deployment artifacts. Specify configuration
@@ -2742,10 +2746,10 @@ type EdgeOutputConfig struct {
 	// (optional) - Description of the component.
 	//
 	// * ComponentVersion (optional) - The
-	// version of the component. AWS IoT Greengrass uses semantic versions for
-	// components. Semantic versions follow a major.minor.patch number system. For
-	// example, version 1.0.0 represents the first major release for a component. For
-	// more information, see the semantic version specification
+	// version of the component. Amazon Web Services IoT Greengrass uses semantic
+	// versions for components. Semantic versions follow a major.minor.patch number
+	// system. For example, version 1.0.0 represents the first major release for a
+	// component. For more information, see the semantic version specification
 	// (https://semver.org/).
 	//
 	// * PlatformOS (optional) - The name of the operating
@@ -2758,7 +2762,7 @@ type EdgeOutputConfig struct {
 	PresetDeploymentConfig *string
 
 	// The deployment type SageMaker Edge Manager will create. Currently only supports
-	// AWS IoT Greengrass Version 2 components.
+	// Amazon Web Services IoT Greengrass Version 2 components.
 	PresetDeploymentType EdgePresetDeploymentType
 }
 
@@ -2800,7 +2804,7 @@ type EdgePackagingJobSummary struct {
 type EdgePresetDeploymentOutput struct {
 
 	// The deployment type created by SageMaker Edge Manager. Currently only supports
-	// AWS IoT Greengrass Version 2 components.
+	// Amazon Web Services IoT Greengrass Version 2 components.
 	//
 	// This member is required.
 	Type EdgePresetDeploymentType
@@ -2864,9 +2868,9 @@ type Endpoint struct {
 	ProductionVariants []ProductionVariantSummary
 
 	// A list of the tags associated with the endpoint. For more information, see
-	// Tagging AWS resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference Guide.
+	// Tagging Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference Guide.
 	Tags []Tag
 }
 
@@ -3158,16 +3162,17 @@ type FeatureGroup struct {
 
 	// The configuration of an OfflineStore. Provide an OfflineStoreConfig in a request
 	// to CreateFeatureGroup to create an OfflineStore. To encrypt an OfflineStore
-	// using at rest data encryption, specify AWS Key Management Service (KMS) key ID,
-	// or KMSKeyId, in S3StorageConfig.
+	// using at rest data encryption, specify Amazon Web Services Key Management
+	// Service (KMS) key ID, or KMSKeyId, in S3StorageConfig.
 	OfflineStoreConfig *OfflineStoreConfig
 
 	// The status of OfflineStore.
 	OfflineStoreStatus *OfflineStoreStatus
 
-	// Use this to specify the AWS Key Management Service (KMS) Key ID, or KMSKeyId,
-	// for at rest data encryption. You can turn OnlineStore on or off by specifying
-	// the EnableOnlineStore flag at General Assembly; the default value is False.
+	// Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID,
+	// or KMSKeyId, for at rest data encryption. You can turn OnlineStore on or off by
+	// specifying the EnableOnlineStore flag at General Assembly; the default value is
+	// False.
 	OnlineStoreConfig *OnlineStoreConfig
 
 	// The name of the Feature whose value uniquely identifies a Record defined in the
@@ -3423,7 +3428,8 @@ type FlowDefinitionSummary struct {
 	FailureReason *string
 }
 
-// Specifies configuration details for a Git repository in your AWS account.
+// Specifies configuration details for a Git repository in your Amazon Web Services
+// account.
 type GitConfig struct {
 
 	// The URL where the Git repository is located.
@@ -3434,10 +3440,10 @@ type GitConfig struct {
 	// The default branch for the Git repository.
 	Branch *string
 
-	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains
-	// the credentials used to access the git repository. The secret must have a
-	// staging label of AWSCURRENT and must be in the following format: {"username":
-	// UserName, "password": Password}
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret
+	// that contains the credentials used to access the git repository. The secret must
+	// have a staging label of AWSCURRENT and must be in the following format:
+	// {"username": UserName, "password": Password}
 	SecretArn *string
 }
 
@@ -3445,10 +3451,10 @@ type GitConfig struct {
 // updated.
 type GitConfigForUpdate struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains
-	// the credentials used to access the git repository. The secret must have a
-	// staging label of AWSCURRENT and must be in the following format: {"username":
-	// UserName, "password": Password}
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret
+	// that contains the credentials used to access the git repository. The secret must
+	// have a staging label of AWSCURRENT and must be in the following format:
+	// {"username": UserName, "password": Password}
 	SecretArn *string
 }
 
@@ -4714,7 +4720,7 @@ type HumanTaskConfig struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html) and video
 	// frame (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html) labeling
 	// jobs, the maximum is 7 days (604,800 seconds). If you want to change these
-	// limits, contact AWS Support.
+	// limits, contact Amazon Web Services Support.
 	//
 	// This member is required.
 	TaskTimeLimitInSeconds *int32
@@ -4754,7 +4760,7 @@ type HumanTaskConfig struct {
 	//
 	// * If you choose a private or vendor workforce, the default value is
 	// 10 days (864,000 seconds). For most users, the maximum is also 10 days. If you
-	// want to change this limit, contact AWS Support.
+	// want to change this limit, contact Amazon Web Services Support.
 	TaskAvailabilityLifetimeInSeconds *int32
 
 	// Keywords used to describe the task so that workers on Amazon Mechanical Turk can
@@ -5749,7 +5755,8 @@ type LabelingJobForWorkteamSummary struct {
 	// This member is required.
 	JobReferenceCode *string
 
-	// The AWS account ID of the account used to start the labeling job.
+	// The Amazon Web Services account ID of the account used to start the labeling
+	// job.
 	//
 	// This member is required.
 	WorkRequesterAccountId *string
@@ -5797,15 +5804,17 @@ type LabelingJobOutputConfig struct {
 	// This member is required.
 	S3OutputPath *string
 
-	// The AWS Key Management Service ID of the key used to encrypt the output data, if
-	// any. If you provide your own KMS key ID, you must add the required permissions
-	// to your KMS key described in Encrypt Output Data and Storage Volume with AWS KMS
+	// The Amazon Web Services Key Management Service ID of the key used to encrypt the
+	// output data, if any. If you provide your own KMS key ID, you must add the
+	// required permissions to your KMS key described in Encrypt Output Data and
+	// Storage Volume with Amazon Web Services KMS
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-permission.html#sms-security-kms-permissions).
-	// If you don't provide a KMS key ID, Amazon SageMaker uses the default AWS KMS key
-	// for Amazon S3 for your role's account to encrypt your output data. If you use a
-	// bucket policy with an s3:PutObject permission that only allows objects with
-	// server-side encryption, set the condition key of s3:x-amz-server-side-encryption
-	// to "aws:kms". For more information, see KMS-Managed Encryption Keys
+	// If you don't provide a KMS key ID, Amazon SageMaker uses the default Amazon Web
+	// Services KMS key for Amazon S3 for your role's account to encrypt your output
+	// data. If you use a bucket policy with an s3:PutObject permission that only
+	// allows objects with server-side encryption, set the condition key of
+	// s3:x-amz-server-side-encryption to "aws:kms". For more information, see
+	// KMS-Managed Encryption Keys
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	KmsKeyId *string
@@ -5825,14 +5834,15 @@ type LabelingJobOutputConfig struct {
 // used to run automated data labeling model training and inference.
 type LabelingJobResourceConfig struct {
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// run the training and inference jobs used for automated data labeling. You can
-	// only specify a VolumeKmsKeyId when you create a labeling job with automated data
-	// labeling enabled using the API operation CreateLabelingJob. You cannot specify
-	// an AWS KMS customer managed CMK to encrypt the storage volume used for automated
-	// data labeling model training and inference when you create a labeling job using
-	// the console. To learn more, see Output Data and Storage Volume Encryption
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
+	// ML compute instance(s) that run the training and inference jobs used for
+	// automated data labeling. You can only specify a VolumeKmsKeyId when you create a
+	// labeling job with automated data labeling enabled using the API operation
+	// CreateLabelingJob. You cannot specify an Amazon Web Services KMS customer
+	// managed CMK to encrypt the storage volume used for automated data labeling model
+	// training and inference when you create a labeling job using the console. To
+	// learn more, see Output Data and Storage Volume Encryption
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html). The
 	// VolumeKmsKeyId can be any of the following formats:
 	//
@@ -6206,9 +6216,10 @@ type ModelPackage struct {
 	// A description provided when the model approval is set.
 	ApprovalDescription *string
 
-	// Whether the model package is to be certified to be listed on AWS Marketplace.
-	// For information about listing model packages on AWS Marketplace, see List Your
-	// Algorithm or Model Package on AWS Marketplace
+	// Whether the model package is to be certified to be listed on Amazon Web Services
+	// Marketplace. For information about listing model packages on Amazon Web Services
+	// Marketplace, see List Your Algorithm or Model Package on Amazon Web Services
+	// Marketplace
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html).
 	CertifyForMarketplace bool
 
@@ -6285,9 +6296,9 @@ type ModelPackage struct {
 	SourceAlgorithmSpecification *SourceAlgorithmSpecification
 
 	// A list of the tags associated with the model package. For more information, see
-	// Tagging AWS resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference Guide.
+	// Tagging Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference Guide.
 	Tags []Tag
 
 	// Specifies batch transform jobs that Amazon SageMaker runs to validate your model
@@ -6312,6 +6323,11 @@ type ModelPackageContainerDefinition struct {
 	// The DNS host name for the Docker container.
 	ContainerHostname *string
 
+	// The environment variables to set in the Docker container. Each key and value in
+	// the Environment string to string map can have length of up to 1024. We support
+	// up to 16 entries in the map.
+	Environment map[string]string
+
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.
 	ImageDigest *string
@@ -6322,7 +6338,7 @@ type ModelPackageContainerDefinition struct {
 	// same region as the model package.
 	ModelDataUrl *string
 
-	// The AWS Marketplace product ID of the model package.
+	// The Amazon Web Services Marketplace product ID of the model package.
 	ProductId *string
 }
 
@@ -6366,9 +6382,9 @@ type ModelPackageGroup struct {
 	ModelPackageGroupStatus ModelPackageGroupStatus
 
 	// A list of the tags associated with the model group. For more information, see
-	// Tagging AWS resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference Guide.
+	// Tagging Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference Guide.
 	Tags []Tag
 }
 
@@ -6475,7 +6491,7 @@ type ModelPackageSummary struct {
 
 // Contains data, such as the inputs and targeted instance types that are used in
 // the process of validating the model package. The data provided in the validation
-// profile is made available to your buyers on AWS Marketplace.
+// profile is made available to your buyers on Amazon Web Services Marketplace.
 type ModelPackageValidationProfile struct {
 
 	// The name of the profile for the model package.
@@ -6663,9 +6679,9 @@ type MonitoringClusterConfig struct {
 	// This member is required.
 	VolumeSizeInGB *int32
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// run the model monitoring job.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
+	// ML compute instance(s) that run the model monitoring job.
 	VolumeKmsKeyId *string
 }
 
@@ -6846,8 +6862,9 @@ type MonitoringOutputConfig struct {
 	// This member is required.
 	MonitoringOutputs []MonitoringOutput
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon
+	// S3 server-side encryption.
 	KmsKeyId *string
 }
 
@@ -6929,9 +6946,9 @@ type MonitoringSchedule struct {
 	MonitoringType MonitoringType
 
 	// A list of the tags associated with the monitoring schedlue. For more
-	// information, see Tagging AWS resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference Guide.
+	// information, see Tagging Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference Guide.
 	Tags []Tag
 }
 
@@ -7018,6 +7035,26 @@ type MultiModelConfig struct {
 	// infrequently, the endpoint might perform better if you disable model caching. To
 	// disable model caching, set the value of this parameter to Disabled.
 	ModelCacheSetting ModelCacheSetting
+}
+
+// The VpcConfig configuration object that specifies the VPC that you want the
+// compilation jobs to connect to. For more information on controlling access to
+// your Amazon S3 buckets used for compilation job, see Give Amazon SageMaker
+// Compilation Jobs Access to Resources in Your Amazon VPC
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html).
+type NeoVpcConfig struct {
+
+	// The VPC security group IDs. IDs have the form of sg-xxxxxxxx. Specify the
+	// security groups for the VPC that is specified in the Subnets field.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// The ID of the subnets in the VPC that you want to connect the compilation job to
+	// for accessing the model in Amazon S3.
+	//
+	// This member is required.
+	Subnets []string
 }
 
 // A list of nested Filter objects. A resource must satisfy the conditions of all
@@ -7124,7 +7161,7 @@ type NotebookInstanceSummary struct {
 
 	// An array of up to three Git repositories associated with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your
-	// account, or the URL of Git repositories in AWS CodeCommit
+	// account, or the URL of Git repositories in Amazon Web Services CodeCommit
 	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 	// other Git repository. These repositories are cloned at the same level as the
 	// default repository of your notebook instance. For more information, see
@@ -7137,7 +7174,8 @@ type NotebookInstanceSummary struct {
 
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
-	// in your account, or the URL of a Git repository in AWS CodeCommit
+	// in your account, or the URL of a Git repository in Amazon Web Services
+	// CodeCommit
 	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 	// other Git repository. When you open a notebook instance, it opens in the
 	// directory that contains this repository. For more information, see Associating
@@ -7194,8 +7232,8 @@ type ObjectiveStatusCounters struct {
 
 // The configuration of an OfflineStore. Provide an OfflineStoreConfig in a request
 // to CreateFeatureGroup to create an OfflineStore. To encrypt an OfflineStore
-// using at rest data encryption, specify AWS Key Management Service (KMS) key ID,
-// or KMSKeyId, in S3StorageConfig.
+// using at rest data encryption, specify Amazon Web Services Key Management
+// Service (KMS) key ID, or KMSKeyId, in S3StorageConfig.
 type OfflineStoreConfig struct {
 
 	// The Amazon Simple Storage (Amazon S3) location of OfflineStore.
@@ -7207,8 +7245,8 @@ type OfflineStoreConfig struct {
 	// created.
 	DataCatalogConfig *DataCatalogConfig
 
-	// Set to True to disable the automatic creation of an AWS Glue table when
-	// configuring an OfflineStore.
+	// Set to True to disable the automatic creation of an Amazon Web Services Glue
+	// table when configuring an OfflineStore.
 	DisableGlueTableCreation bool
 }
 
@@ -7309,9 +7347,10 @@ type OidcMemberDefinition struct {
 	Groups []string
 }
 
-// Use this to specify the AWS Key Management Service (KMS) Key ID, or KMSKeyId,
-// for at rest data encryption. You can turn OnlineStore on or off by specifying
-// the EnableOnlineStore flag at General Assembly; the default value is False.
+// Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID,
+// or KMSKeyId, for at rest data encryption. You can turn OnlineStore on or off by
+// specifying the EnableOnlineStore flag at General Assembly; the default value is
+// False.
 type OnlineStoreConfig struct {
 
 	// Turn OnlineStore off by specifying False for the EnableOnlineStore flag. Turn
@@ -7326,42 +7365,42 @@ type OnlineStoreConfig struct {
 // The security configuration for OnlineStore.
 type OnlineStoreSecurityConfig struct {
 
-	// The ID of the AWS Key Management Service (AWS KMS) key that SageMaker Feature
-	// Store uses to encrypt the Amazon S3 objects at rest using Amazon S3 server-side
-	// encryption. The caller (either IAM user or IAM role) of CreateFeatureGroup must
-	// have below permissions to the OnlineStoreKmsKeyId:
+	// The ID of the Amazon Web Services Key Management Service (Amazon Web Services
+	// KMS) key that SageMaker Feature Store uses to encrypt the Amazon S3 objects at
+	// rest using Amazon S3 server-side encryption. The caller (either IAM user or IAM
+	// role) of CreateFeatureGroup must have below permissions to the
+	// OnlineStoreKmsKeyId:
 	//
 	// * "kms:Encrypt"
 	//
-	// *
-	// "kms:Decrypt"
+	// * "kms:Decrypt"
 	//
 	// * "kms:DescribeKey"
 	//
-	// * "kms:CreateGrant"
+	// *
+	// "kms:CreateGrant"
 	//
 	// * "kms:RetireGrant"
 	//
-	// *
-	// "kms:ReEncryptFrom"
+	// * "kms:ReEncryptFrom"
 	//
-	// * "kms:ReEncryptTo"
+	// *
+	// "kms:ReEncryptTo"
 	//
 	// * "kms:GenerateDataKey"
 	//
-	// *
-	// "kms:ListAliases"
+	// * "kms:ListAliases"
 	//
-	// * "kms:ListGrants"
+	// *
+	// "kms:ListGrants"
 	//
 	// * "kms:RevokeGrant"
 	//
-	// The caller (either
-	// IAM user or IAM role) to all DataPlane operations (PutRecord, GetRecord,
-	// DeleteRecord) must have the following permissions to the KmsKeyId:
+	// The caller (either IAM user or IAM role)
+	// to all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the
+	// following permissions to the KmsKeyId:
 	//
-	// *
-	// "kms:Decrypt"
+	// * "kms:Decrypt"
 	KmsKeyId *string
 }
 
@@ -7473,15 +7512,19 @@ type OutputConfig struct {
 	// ["output:0"]}
 	CompilerOptions *string
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data on the storage volume after compilation job. If you don't provide a
-	// KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your
-	// role's account The KmsKeyId can be any of the following formats:
+	// The Amazon Web Services Key Management Service key (Amazon Web Services KMS)
+	// that Amazon SageMaker uses to encrypt your output models with Amazon S3
+	// server-side encryption after compilation job. If you don't provide a KMS key ID,
+	// Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
+	// For more information, see KMS-Managed Encryption Keys
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+	// in the Amazon Simple Storage Service Developer Guide. The KmsKeyId can be any of
+	// the following formats:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// * Key ARN:
+	// * Key
+	// ARN:
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// *
@@ -7537,15 +7580,15 @@ type OutputDataConfig struct {
 	// This member is required.
 	S3OutputPath *string
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt the model artifacts at rest using Amazon S3 server-side encryption. The
-	// KmsKeyId can be any of the following formats:
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon
+	// S3 server-side encryption. The KmsKeyId can be any of the following formats:
 	//
-	// * // KMS Key ID
-	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// *
+	// // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * // Amazon Resource Name (ARN) of a KMS
-	// Key
+	// * // Amazon Resource Name
+	// (ARN) of a KMS Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	// *
@@ -7567,9 +7610,9 @@ type OutputDataConfig struct {
 	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
 	// grant permission to the IAM role that you specify in your CreateTrainingJob,
 	// CreateTransformJob, or CreateHyperParameterTuningJob requests. For more
-	// information, see Using Key Policies in AWS KMS
+	// information, see Using Key Policies in Amazon Web Services KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// AWS Key Management Service Developer Guide.
+	// Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 }
 
@@ -7885,13 +7928,13 @@ type ProcessingClusterConfig struct {
 	// This member is required.
 	VolumeSizeInGB *int32
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// run the processing job. Certain Nitro-based instances include local storage,
-	// dependent on the instance type. Local storage volumes are encrypted using a
-	// hardware module on the instance. You can't request a VolumeKmsKeyId when using
-	// an instance type with local storage. For a list of instance types that support
-	// local instance storage, see Instance Store Volumes
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
+	// ML compute instance(s) that run the processing job. Certain Nitro-based
+	// instances include local storage, dependent on the instance type. Local storage
+	// volumes are encrypted using a hardware module on the instance. You can't request
+	// a VolumeKmsKeyId when using an instance type with local storage. For a list of
+	// instance types that support local instance storage, see Instance Store Volumes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
 	// For more information about local instance storage encryption, see SSD Instance
 	// Store Volumes
@@ -8018,7 +8061,7 @@ type ProcessingJob struct {
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the AWS Billing and Cost Management User Guide.
+	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []Tag
 
 	// The ARN of the training job associated with this processing job.
@@ -8101,10 +8144,10 @@ type ProcessingOutputConfig struct {
 	// This member is required.
 	Outputs []ProcessingOutput
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt the processing job output. KmsKeyId can be an ID of a KMS key, ARN of a
-	// KMS key, alias of a KMS key, or alias of a KMS key. The KmsKeyId is applied to
-	// all outputs.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt the processing job output. KmsKeyId can be
+	// an ID of a KMS key, ARN of a KMS key, alias of a KMS key, or alias of a KMS key.
+	// The KmsKeyId is applied to all outputs.
 	KmsKeyId *string
 }
 
@@ -8252,15 +8295,15 @@ type ProductionVariantCoreDumpConfig struct {
 	// This member is required.
 	DestinationS3Uri *string
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt the core dump data at rest using Amazon S3 server-side encryption. The
-	// KmsKeyId can be any of the following formats:
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt the core dump data at rest using Amazon S3
+	// server-side encryption. The KmsKeyId can be any of the following formats:
 	//
-	// * // KMS Key ID
-	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * //
+	// KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * // Amazon Resource Name (ARN) of a KMS
-	// Key
+	// * // Amazon Resource Name
+	// (ARN) of a KMS Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	// *
@@ -8281,9 +8324,10 @@ type ProductionVariantCoreDumpConfig struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
 	// Amazon Simple Storage Service Developer Guide. The KMS key policy must grant
 	// permission to the IAM role that you specify in your CreateEndpoint and
-	// UpdateEndpoint requests. For more information, see Using Key Policies in AWS KMS
+	// UpdateEndpoint requests. For more information, see Using Key Policies in Amazon
+	// Web Services KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// AWS Key Management Service Developer Guide.
+	// Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 }
 
@@ -8470,7 +8514,7 @@ type PropertyNameSuggestion struct {
 }
 
 // A key value pair used when you provision a project as a service catalog product.
-// For information, see What is AWS Service Catalog
+// For information, see What is Amazon Web Services Service Catalog
 // (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
 type ProvisioningParameter struct {
 
@@ -8744,8 +8788,8 @@ type RedshiftDatasetDefinition struct {
 	// This member is required.
 	QueryString *string
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt data from a Redshift execution.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt data from a Redshift execution.
 	KmsKeyId *string
 
 	// The compression used for Redshift query results.
@@ -8792,12 +8836,12 @@ type RenderingError struct {
 // where the model image is hosted requires authentication.
 type RepositoryAuthConfig struct {
 
-	// The Amazon Resource Name (ARN) of an AWS Lambda function that provides
-	// credentials to authenticate to the private Docker registry where your model
-	// image is hosted. For information about how to create an AWS Lambda function, see
-	// Create a Lambda function with the console
+	// The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function that
+	// provides credentials to authenticate to the private Docker registry where your
+	// model image is hosted. For information about how to create an Amazon Web
+	// Services Lambda function, see Create a Lambda function with the console
 	// (https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html)
-	// in the AWS Lambda Developer Guide.
+	// in the Amazon Web Services Lambda Developer Guide.
 	//
 	// This member is required.
 	RepositoryCredentialsProviderArn *string
@@ -8849,13 +8893,13 @@ type ResourceConfig struct {
 	// This member is required.
 	VolumeSizeInGB int32
 
-	// The AWS KMS key that Amazon SageMaker uses to encrypt data on the storage volume
-	// attached to the ML compute instance(s) that run the training job. Certain
-	// Nitro-based instances include local storage, dependent on the instance type.
-	// Local storage volumes are encrypted using a hardware module on the instance. You
-	// can't request a VolumeKmsKeyId when using an instance type with local storage.
-	// For a list of instance types that support local instance storage, see Instance
-	// Store Volumes
+	// The Amazon Web Services KMS key that Amazon SageMaker uses to encrypt data on
+	// the storage volume attached to the ML compute instance(s) that run the training
+	// job. Certain Nitro-based instances include local storage, dependent on the
+	// instance type. Local storage volumes are encrypted using a hardware module on
+	// the instance. You can't request a VolumeKmsKeyId when using an instance type
+	// with local storage. For a list of instance types that support local instance
+	// storage, see Instance Store Volumes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
 	// For more information about local instance storage encryption, see SSD Instance
 	// Store Volumes
@@ -8993,10 +9037,10 @@ type S3StorageConfig struct {
 	// This member is required.
 	S3Uri *string
 
-	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any
-	// objects written into the OfflineStore S3 location. The IAM roleARN that is
-	// passed as a parameter to CreateFeatureGroup must have below permissions to the
-	// KmsKeyId:
+	// The Amazon Web Services Key Management Service (KMS) key ID of the key used to
+	// encrypt any objects written into the OfflineStore S3 location. The IAM roleARN
+	// that is passed as a parameter to CreateFeatureGroup must have below permissions
+	// to the KmsKeyId:
 	//
 	// * "kms:GenerateDataKey"
 	KmsKeyId *string
@@ -9238,7 +9282,7 @@ type SecondaryStatusTransition struct {
 }
 
 // Details of a provisioned service catalog product. For information about service
-// catalog, see What is AWS Service Catalog
+// catalog, see What is Amazon Web Services Service Catalog
 // (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
 type ServiceCatalogProvisionedProductDetails struct {
 
@@ -9273,7 +9317,7 @@ type ServiceCatalogProvisionedProductDetails struct {
 }
 
 // Details that you specify to provision a service catalog product. For information
-// about service catalog, see .What is AWS Service Catalog
+// about service catalog, see .What is Amazon Web Services Service Catalog
 // (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
 type ServiceCatalogProvisioningDetails struct {
 
@@ -9305,9 +9349,9 @@ type SharingSettings struct {
 	// default is Disabled.
 	NotebookOutputOption NotebookOutputOption
 
-	// When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS)
-	// encryption key ID used to encrypt the notebook cell output in the Amazon S3
-	// bucket.
+	// When NotebookOutputOption is Allowed, the Amazon Web Services Key Management
+	// Service (KMS) encryption key ID used to encrypt the notebook cell output in the
+	// Amazon S3 bucket.
 	S3KmsKeyId *string
 
 	// When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the
@@ -9337,12 +9381,12 @@ type ShuffleConfig struct {
 
 // Specifies an algorithm that was used to create the model package. The algorithm
 // must be either an algorithm resource in your Amazon SageMaker account or an
-// algorithm in AWS Marketplace that you are subscribed to.
+// algorithm in Amazon Web Services Marketplace that you are subscribed to.
 type SourceAlgorithm struct {
 
 	// The name of an algorithm that was used to create the model package. The
 	// algorithm must be either an algorithm resource in your Amazon SageMaker account
-	// or an algorithm in AWS Marketplace that you are subscribed to.
+	// or an algorithm in Amazon Web Services Marketplace that you are subscribed to.
 	//
 	// This member is required.
 	AlgorithmName *string
@@ -9445,15 +9489,16 @@ type SuggestionQuery struct {
 }
 
 // A tag object that consists of a key and an optional value, used to manage
-// metadata for Amazon SageMaker AWS resources. You can add tags to notebook
-// instances, training jobs, hyperparameter tuning jobs, batch transform jobs,
-// models, labeling jobs, work teams, endpoint configurations, and endpoints. For
-// more information on adding tags to Amazon SageMaker resources, see AddTags. For
-// more information on adding metadata to your AWS resources with tagging, see
-// Tagging AWS resources
+// metadata for Amazon SageMaker Amazon Web Services resources. You can add tags to
+// notebook instances, training jobs, hyperparameter tuning jobs, batch transform
+// jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints.
+// For more information on adding tags to Amazon SageMaker resources, see AddTags.
+// For more information on adding metadata to your Amazon Web Services resources
+// with tagging, see Tagging Amazon Web Services resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). For advice on
-// best practices for managing AWS resources with tagging, see Tagging Best
-// Practices: Implement an Effective AWS Resource Tagging Strategy
+// best practices for managing Amazon Web Services resources with tagging, see
+// Tagging Best Practices: Implement an Effective Amazon Web Services Resource
+// Tagging Strategy
 // (https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf).
 type Tag struct {
 
@@ -9654,8 +9699,8 @@ type TrainingJob struct {
 	// InternalServerError.
 	RetryStrategy *RetryStrategy
 
-	// The AWS Identity and Access Management (IAM) role configured for the training
-	// job.
+	// The Amazon Web Services Identity and Access Management (IAM) role configured for
+	// the training job.
 	RoleArn *string
 
 	// Provides detailed information about the state of the training job. For detailed
@@ -9723,9 +9768,9 @@ type TrainingJob struct {
 	// not lost.
 	StoppingCondition *StoppingCondition
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []Tag
 
@@ -10231,12 +10276,12 @@ type TransformOutput struct {
 	// transformed record, specify Line.
 	AssembleWith AssemblyType
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt the model artifacts at rest using Amazon S3 server-side encryption. The
-	// KmsKeyId can be any of the following formats:
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon
+	// S3 server-side encryption. The KmsKeyId can be any of the following formats:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// *
+	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
@@ -10253,9 +10298,9 @@ type TransformOutput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
 	// Amazon Simple Storage Service Developer Guide. The KMS key policy must grant
 	// permission to the IAM role that you specify in your CreateModel request. For
-	// more information, see Using Key Policies in AWS KMS
+	// more information, see Using Key Policies in Amazon Web Services KMS
 	// (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// AWS Key Management Service Developer Guide.
+	// Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 }
 
@@ -10276,13 +10321,14 @@ type TransformResources struct {
 	// This member is required.
 	InstanceType TransformInstanceType
 
-	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
-	// encrypt model data on the storage volume attached to the ML compute instance(s)
-	// that run the batch transform job. Certain Nitro-based instances include local
-	// storage, dependent on the instance type. Local storage volumes are encrypted
-	// using a hardware module on the instance. You can't request a VolumeKmsKeyId when
-	// using an instance type with local storage. For a list of instance types that
-	// support local instance storage, see Instance Store Volumes
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt model data on the storage volume attached
+	// to the ML compute instance(s) that run the batch transform job. Certain
+	// Nitro-based instances include local storage, dependent on the instance type.
+	// Local storage volumes are encrypted using a hardware module on the instance. You
+	// can't request a VolumeKmsKeyId when using an instance type with local storage.
+	// For a list of instance types that support local instance storage, see Instance
+	// Store Volumes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
 	// For more information about local instance storage encryption, see SSD Instance
 	// Store Volumes
@@ -10682,10 +10728,10 @@ type UiConfig struct {
 	// labeling job tasks. Use this parameter when you are creating a labeling job for
 	// 3D point cloud and video fram labeling jobs. Use your labeling job task type to
 	// select one of the following ARNs and use it with this parameter when you create
-	// a labeling job. Replace aws-region with the AWS region you are creating your
-	// labeling job in. 3D Point Cloud HumanTaskUiArns Use this HumanTaskUiArn for 3D
-	// point cloud object detection and 3D point cloud object detection adjustment
-	// labeling jobs.
+	// a labeling job. Replace aws-region with the Amazon Web Services region you are
+	// creating your labeling job in. 3D Point Cloud HumanTaskUiArns Use this
+	// HumanTaskUiArn for 3D point cloud object detection and 3D point cloud object
+	// detection adjustment labeling jobs.
 	//
 	// *
 	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectDetection
@@ -10874,10 +10920,10 @@ type VpcConfig struct {
 }
 
 // A single private workforce, which is automatically created when you create your
-// first private work team. You can create one private work force in each AWS
-// Region. By default, any workforce-related API operation used in a specific
-// region will apply to the workforce created in that region. To learn how to
-// create a private workforce, see Create a Private Workforce
+// first private work team. You can create one private work force in each Amazon
+// Web Services Region. By default, any workforce-related API operation used in a
+// specific region will apply to the workforce created in that region. To learn how
+// to create a private workforce, see Create a Private Workforce
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
 type Workforce struct {
 

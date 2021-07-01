@@ -38,8 +38,8 @@ type DescribeDatasetInput struct {
 
 type DescribeDatasetOutput struct {
 
-	// Represents information on how DataBrew can find data, in either the AWS Glue
-	// Data Catalog or Amazon S3.
+	// Represents information on how DataBrew can find data, in either the Glue Data
+	// Catalog or Amazon S3.
 	//
 	// This member is required.
 	Input *types.Input
@@ -55,7 +55,7 @@ type DescribeDatasetOutput struct {
 	// The identifier (user name) of the user who created the dataset.
 	CreatedBy *string
 
-	// The file format of a dataset that is created from an S3 file or folder.
+	// The file format of a dataset that is created from an Amazon S3 file or folder.
 	Format types.InputFormat
 
 	// Represents a set of options that define the structure of either comma-separated
@@ -68,14 +68,14 @@ type DescribeDatasetOutput struct {
 	// The date and time that the dataset was last modified.
 	LastModifiedDate *time.Time
 
-	// A set of options that defines how DataBrew interprets an S3 path of the dataset.
+	// A set of options that defines how DataBrew interprets an Amazon S3 path of the
+	// dataset.
 	PathOptions *types.PathOptions
 
 	// The Amazon Resource Name (ARN) of the dataset.
 	ResourceArn *string
 
-	// The location of the data for this dataset, Amazon S3 or the AWS Glue Data
-	// Catalog.
+	// The location of the data for this dataset, Amazon S3 or the Glue Data Catalog.
 	Source types.Source
 
 	// Metadata tags associated with this dataset.

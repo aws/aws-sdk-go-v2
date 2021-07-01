@@ -13,7 +13,7 @@ import (
 
 // Deletes multiple tables at once. After completing this operation, you no longer
 // have access to the table versions and partitions that belong to the deleted
-// table. AWS Glue deletes these "orphaned" resources asynchronously in a timely
+// table. Glue deletes these "orphaned" resources asynchronously in a timely
 // manner, at the discretion of the service. To ensure the immediate deletion of
 // all related resources, before calling BatchDeleteTable, use DeleteTableVersion
 // or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to
@@ -46,8 +46,8 @@ type BatchDeleteTableInput struct {
 	// This member is required.
 	TablesToDelete []string
 
-	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
-	// account ID is used by default.
+	// The ID of the Data Catalog where the table resides. If none is provided, the
+	// Amazon Web Services account ID is used by default.
 	CatalogId *string
 }
 

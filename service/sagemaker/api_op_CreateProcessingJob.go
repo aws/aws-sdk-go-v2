@@ -34,8 +34,8 @@ type CreateProcessingJobInput struct {
 	// This member is required.
 	AppSpecification *types.AppSpecification
 
-	// The name of the processing job. The name must be unique within an AWS Region in
-	// the AWS account.
+	// The name of the processing job. The name must be unique within an Amazon Web
+	// Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
 	ProcessingJobName *string
@@ -86,7 +86,7 @@ type CreateProcessingJobInput struct {
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the AWS Billing and Cost Management User Guide.
+	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 }
 

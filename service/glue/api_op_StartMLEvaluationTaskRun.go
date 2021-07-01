@@ -11,10 +11,10 @@ import (
 )
 
 // Starts a task to estimate the quality of the transform. When you provide label
-// sets as examples of truth, AWS Glue machine learning uses some of those examples
-// to learn from them. The rest of the labels are used as a test to estimate
-// quality. Returns a unique identifier for the run. You can call GetMLTaskRun to
-// get more information about the stats of the EvaluationTaskRun.
+// sets as examples of truth, Glue machine learning uses some of those examples to
+// learn from them. The rest of the labels are used as a test to estimate quality.
+// Returns a unique identifier for the run. You can call GetMLTaskRun to get more
+// information about the stats of the EvaluationTaskRun.
 func (c *Client) StartMLEvaluationTaskRun(ctx context.Context, params *StartMLEvaluationTaskRunInput, optFns ...func(*Options)) (*StartMLEvaluationTaskRunOutput, error) {
 	if params == nil {
 		params = &StartMLEvaluationTaskRunInput{}

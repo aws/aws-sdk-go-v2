@@ -6073,6 +6073,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidClusterStateFault"
                 }
             ],
             "traits": {

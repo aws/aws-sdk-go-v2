@@ -34,12 +34,11 @@ import (
 // After you create the service, you
 // can submit a RegisterInstance
 // (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
-// request, and AWS Cloud Map uses the values in the configuration to create the
+// request, and Cloud Map uses the values in the configuration to create the
 // specified entities. For the current quota on the number of instances that you
-// can register using the same namespace and using the same service, see AWS Cloud
-// Map Limits
-// (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
-// AWS Cloud Map Developer Guide.
+// can register using the same namespace and using the same service, see Cloud Map
+// quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the Cloud Map Developer Guide.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -57,9 +56,9 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 
 type CreateServiceInput struct {
 
-	// The name that you want to assign to the service. If you want AWS Cloud Map to
-	// create an SRV record when you register an instance and you're using a system
-	// that requires a specific SRV format, such as HAProxy (http://www.haproxy.org/),
+	// The name that you want to assign to the service. If you want Cloud Map to create
+	// an SRV record when you register an instance and you're using a system that
+	// requires a specific SRV format, such as HAProxy (http://www.haproxy.org/),
 	// specify the following for Name:
 	//
 	// * Start the name with an underscore (_), such
@@ -68,12 +67,12 @@ type CreateServiceInput struct {
 	// * End the name with ._protocol, such as ._tcp.
 	//
 	// When you
-	// register an instance, AWS Cloud Map creates an SRV record and assigns a name to
-	// the record by concatenating the service name and the namespace name (for
-	// example, _exampleservice._tcp.example.com). For services that are accessible by
-	// DNS queries, you can't create multiple services with names that differ only by
-	// case (such as EXAMPLE and example). Otherwise, these services have the same DNS
-	// name and can't be distinguished. However, if you use a namespace that's only
+	// register an instance, Cloud Map creates an SRV record and assigns a name to the
+	// record by concatenating the service name and the namespace name (for example,
+	// _exampleservice._tcp.example.com). For services that are accessible by DNS
+	// queries, you can't create multiple services with names that differ only by case
+	// (such as EXAMPLE and example). Otherwise, these services have the same DNS name
+	// and can't be distinguished. However, if you use a namespace that's only
 	// accessible by API calls, then you can create services that with names that
 	// differ only by case.
 	//
@@ -89,15 +88,15 @@ type CreateServiceInput struct {
 	Description *string
 
 	// A complex type that contains information about the Amazon Route 53 records that
-	// you want AWS Cloud Map to create when you register an instance.
+	// you want Cloud Map to create when you register an instance.
 	DnsConfig *types.DnsConfig
 
 	// Public DNS and HTTP namespaces only. A complex type that contains settings for
 	// an optional Route 53 health check. If you specify settings for a health check,
-	// AWS Cloud Map associates the health check with all the Route 53 DNS records that
-	// you specify in DnsConfig. If you specify a health check configuration, you can
+	// Cloud Map associates the health check with all the Route 53 DNS records that you
+	// specify in DnsConfig. If you specify a health check configuration, you can
 	// specify either HealthCheckCustomConfig or HealthCheckConfig but not both. For
-	// information about the charges for health checks, see AWS Cloud Map Pricing
+	// information about the charges for health checks, see Cloud Map Pricing
 	// (http://aws.amazon.com/cloud-map/pricing/).
 	HealthCheckConfig *types.HealthCheckConfig
 

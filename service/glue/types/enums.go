@@ -333,6 +333,7 @@ type DataFormat string
 // Enum values for DataFormat
 const (
 	DataFormatAvro DataFormat = "AVRO"
+	DataFormatJson DataFormat = "JSON"
 )
 
 // Values returns all known values for DataFormat. Note that this can be expanded
@@ -341,6 +342,7 @@ const (
 func (DataFormat) Values() []DataFormat {
 	return []DataFormat{
 		"AVRO",
+		"JSON",
 	}
 }
 

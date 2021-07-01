@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes a model package. A model package is used to create Amazon SageMaker
-// models or list on AWS Marketplace. Buyers can subscribe to model packages listed
-// on AWS Marketplace to create models in Amazon SageMaker.
+// models or list on Amazon Web Services Marketplace. Buyers can subscribe to model
+// packages listed on Amazon Web Services Marketplace to create models in Amazon
+// SageMaker.
 func (c *Client) DeleteModelPackage(ctx context.Context, params *DeleteModelPackageInput, optFns ...func(*Options)) (*DeleteModelPackageOutput, error) {
 	if params == nil {
 		params = &DeleteModelPackageInput{}

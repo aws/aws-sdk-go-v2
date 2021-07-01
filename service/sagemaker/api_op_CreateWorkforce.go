@@ -12,14 +12,15 @@ import (
 )
 
 // Use this operation to create a workforce. This operation will return an error if
-// a workforce already exists in the AWS Region that you specify. You can only
-// create one workforce in each AWS Region per AWS account. If you want to create a
-// new workforce in an AWS Region where a workforce already exists, use the API
-// operation to delete the existing workforce and then use CreateWorkforce to
-// create a new workforce. To create a private workforce using Amazon Cognito, you
-// must specify a Cognito user pool in CognitoConfig. You can also create an Amazon
-// Cognito workforce using the Amazon SageMaker console. For more information, see
-// Create a Private Workforce (Amazon Cognito)
+// a workforce already exists in the Amazon Web Services Region that you specify.
+// You can only create one workforce in each Amazon Web Services Region per Amazon
+// Web Services account. If you want to create a new workforce in an Amazon Web
+// Services Region where a workforce already exists, use the API operation to
+// delete the existing workforce and then use CreateWorkforce to create a new
+// workforce. To create a private workforce using Amazon Cognito, you must specify
+// a Cognito user pool in CognitoConfig. You can also create an Amazon Cognito
+// workforce using the Amazon SageMaker console. For more information, see  Create
+// a Private Workforce (Amazon Cognito)
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html).
 // To create a private workforce using your own OIDC Identity Provider (IdP),
 // specify your IdP configuration in OidcConfig. Your OIDC IdP must support groups

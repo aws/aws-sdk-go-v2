@@ -69,8 +69,8 @@ type DescribeFlowDefinitionOutput struct {
 	// This member is required.
 	OutputConfig *types.FlowDefinitionOutputConfig
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// execution role for the flow definition.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) execution role for the flow definition.
 	//
 	// This member is required.
 	RoleArn *string

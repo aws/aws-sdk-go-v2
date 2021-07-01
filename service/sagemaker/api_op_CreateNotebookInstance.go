@@ -72,10 +72,10 @@ type CreateNotebookInstanceInput struct {
 	// This member is required.
 	NotebookInstanceName *string
 
-	// When you send any requests to AWS resources from the notebook instance, Amazon
-	// SageMaker assumes this role to perform tasks on your behalf. You must grant this
-	// role necessary permissions so Amazon SageMaker can perform these tasks. The
-	// policy must allow the Amazon SageMaker service principal
+	// When you send any requests to Amazon Web Services resources from the notebook
+	// instance, Amazon SageMaker assumes this role to perform tasks on your behalf.
+	// You must grant this role necessary permissions so Amazon SageMaker can perform
+	// these tasks. The policy must allow the Amazon SageMaker service principal
 	// (sagemaker.amazonaws.com) permissions to assume this role. For more information,
 	// see Amazon SageMaker Roles
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
@@ -93,7 +93,8 @@ type CreateNotebookInstanceInput struct {
 
 	// An array of up to three Git repositories to associate with the notebook
 	// instance. These can be either the names of Git repositories stored as resources
-	// in your account, or the URL of Git repositories in AWS CodeCommit
+	// in your account, or the URL of Git repositories in Amazon Web Services
+	// CodeCommit
 	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 	// other Git repository. These repositories are cloned at the same level as the
 	// default repository of your notebook instance. For more information, see
@@ -103,7 +104,8 @@ type CreateNotebookInstanceInput struct {
 
 	// A Git repository to associate with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
-	// in your account, or the URL of a Git repository in AWS CodeCommit
+	// in your account, or the URL of a Git repository in Amazon Web Services
+	// CodeCommit
 	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 	// other Git repository. When you open a notebook instance, it opens in the
 	// directory that contains this repository. For more information, see Associating
@@ -121,12 +123,12 @@ type CreateNotebookInstanceInput struct {
 	// the SubnetId parameter.
 	DirectInternetAccess types.DirectInternetAccess
 
-	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
-	// SageMaker uses to encrypt data on the storage volume attached to your notebook
-	// instance. The KMS key you provide must be enabled. For information, see Enabling
-	// and Disabling Keys
+	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
+	// key that Amazon SageMaker uses to encrypt data on the storage volume attached to
+	// your notebook instance. The KMS key you provide must be enabled. For
+	// information, see Enabling and Disabling Keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html) in
-	// the AWS Key Management Service Developer Guide.
+	// the Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 
 	// The name of a lifecycle configuration to associate with the notebook instance.
@@ -150,9 +152,9 @@ type CreateNotebookInstanceInput struct {
 	// from your ML compute instance.
 	SubnetId *string
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 

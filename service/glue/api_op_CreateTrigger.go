@@ -63,9 +63,9 @@ type CreateTriggerInput struct {
 	StartOnCreation bool
 
 	// The tags to use with this trigger. You may use tags to limit access to the
-	// trigger. For more information about tags in AWS Glue, see AWS Tags in AWS Glue
-	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
-	// guide.
+	// trigger. For more information about tags in Glue, see Amazon Web Services Tags
+	// in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
+	// developer guide.
 	Tags map[string]string
 
 	// The name of the workflow associated with the trigger.

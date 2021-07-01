@@ -37,7 +37,7 @@ type GetUserDefinedFunctionsInput struct {
 	Pattern *string
 
 	// The ID of the Data Catalog where the functions to be retrieved are located. If
-	// none is provided, the AWS account ID is used by default.
+	// none is provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
 	// The name of the catalog database where the functions are located. If none is

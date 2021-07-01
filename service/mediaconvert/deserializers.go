@@ -6031,9 +6031,14 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS to be of type string, got %T instead", value)
 				}
 				sv.ExternalAudioFileInput = ptr.String(jtv)
+			}
+
+		case "hlsRenditionGroupSettings":
+			if err := awsRestjson1_deserializeDocumentHlsRenditionGroupSettings(&sv.HlsRenditionGroupSettings, value); err != nil {
+				return err
 			}
 
 		case "languageCode":
@@ -7318,6 +7323,11 @@ func awsRestjson1_deserializeDocumentCaptionSourceSettings(v **types.CaptionSour
 				return err
 			}
 
+		case "webvttHlsSourceSettings":
+			if err := awsRestjson1_deserializeDocumentWebvttHlsSourceSettings(&sv.WebvttHlsSourceSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7569,6 +7579,15 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 					return err
 				}
 				sv.FragmentLength = int32(i64)
+			}
+
+		case "imageBasedTrickPlay":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafImageBasedTrickPlay to be of type string, got %T instead", value)
+				}
+				sv.ImageBasedTrickPlay = types.CmafImageBasedTrickPlay(jtv)
 			}
 
 		case "manifestCompression":
@@ -7876,6 +7895,15 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 					return err
 				}
 				sv.Hue = int32(i64)
+			}
+
+		case "sampleRangeConversion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SampleRangeConversion to be of type string, got %T instead", value)
+				}
+				sv.SampleRangeConversion = types.SampleRangeConversion(jtv)
 			}
 
 		case "saturation":
@@ -8194,6 +8222,15 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 					return fmt.Errorf("expected DashIsoHbbtvCompliance to be of type string, got %T instead", value)
 				}
 				sv.HbbtvCompliance = types.DashIsoHbbtvCompliance(jtv)
+			}
+
+		case "imageBasedTrickPlay":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashIsoImageBasedTrickPlay to be of type string, got %T instead", value)
+				}
+				sv.ImageBasedTrickPlay = types.DashIsoImageBasedTrickPlay(jtv)
 			}
 
 		case "minBufferTime":
@@ -9030,7 +9067,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin384000Max768000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin384000Max1024000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -9066,6 +9103,15 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				sv.DialogueIntelligence = types.Eac3AtmosDialogueIntelligence(jtv)
 			}
 
+		case "downmixControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Eac3AtmosDownmixControl to be of type string, got %T instead", value)
+				}
+				sv.DownmixControl = types.Eac3AtmosDownmixControl(jtv)
+			}
+
 		case "dynamicRangeCompressionLine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9082,6 +9128,15 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 					return fmt.Errorf("expected Eac3AtmosDynamicRangeCompressionRf to be of type string, got %T instead", value)
 				}
 				sv.DynamicRangeCompressionRf = types.Eac3AtmosDynamicRangeCompressionRf(jtv)
+			}
+
+		case "dynamicRangeControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Eac3AtmosDynamicRangeControl to be of type string, got %T instead", value)
+				}
+				sv.DynamicRangeControl = types.Eac3AtmosDynamicRangeControl(jtv)
 			}
 
 		case "loRoCenterMixLevel":
@@ -9162,7 +9217,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin1Max100 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max100 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -9877,7 +9932,7 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT to be of type string, got %T instead", value)
 				}
 				sv.SourceFile = ptr.String(jtv)
 			}
@@ -11244,6 +11299,63 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHdr10Plus(v **types.Hdr10Plus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Hdr10Plus
+	if *v == nil {
+		sv = &types.Hdr10Plus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "masteringMonitorNits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max4000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MasteringMonitorNits = int32(i64)
+			}
+
+		case "targetMonitorNits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max4000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetMonitorNits = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHlsAdditionalManifest(v **types.HlsAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11556,6 +11668,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				return err
 			}
 
+		case "imageBasedTrickPlay":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsImageBasedTrickPlay to be of type string, got %T instead", value)
+				}
+				sv.ImageBasedTrickPlay = types.HlsImageBasedTrickPlay(jtv)
+			}
+
 		case "manifestCompression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11708,6 +11829,64 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 					return err
 				}
 				sv.TimestampDeltaMilliseconds = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHlsRenditionGroupSettings(v **types.HlsRenditionGroupSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HlsRenditionGroupSettings
+	if *v == nil {
+		sv = &types.HlsRenditionGroupSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "renditionGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RenditionGroupId = ptr.String(jtv)
+			}
+
+		case "renditionLanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.RenditionLanguageCode = types.LanguageCode(jtv)
+			}
+
+		case "renditionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RenditionName = ptr.String(jtv)
 			}
 
 		default:
@@ -12073,7 +12252,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS to be of type string, got %T instead", value)
 				}
 				sv.FileInput = ptr.String(jtv)
 			}
@@ -15307,6 +15486,64 @@ func awsRestjson1_deserializeDocumentMxfSettings(v **types.MxfSettings, value in
 				sv.Profile = types.MxfProfile(jtv)
 			}
 
+		case "xavcProfileSettings":
+			if err := awsRestjson1_deserializeDocumentMxfXavcProfileSettings(&sv.XavcProfileSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMxfXavcProfileSettings(v **types.MxfXavcProfileSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MxfXavcProfileSettings
+	if *v == nil {
+		sv = &types.MxfXavcProfileSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "durationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MxfXavcDurationMode to be of type string, got %T instead", value)
+				}
+				sv.DurationMode = types.MxfXavcDurationMode(jtv)
+			}
+
+		case "maxAncDataSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAncDataSize = int32(i64)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16522,6 +16759,15 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 
 	for key, value := range shape {
 		switch key {
+		case "chromaSampling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProresChromaSampling to be of type string, got %T instead", value)
+				}
+				sv.ChromaSampling = types.ProresChromaSampling(jtv)
+			}
+
 		case "codecProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18159,6 +18405,11 @@ func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSett
 				return err
 			}
 
+		case "xavcSettings":
+			if err := awsRestjson1_deserializeDocumentXavcSettings(&sv.XavcSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18425,6 +18676,11 @@ func awsRestjson1_deserializeDocumentVideoPreprocessor(v **types.VideoPreprocess
 
 		case "dolbyVision":
 			if err := awsRestjson1_deserializeDocumentDolbyVision(&sv.DolbyVision, value); err != nil {
+				return err
+			}
+
+		case "hdr10Plus":
+			if err := awsRestjson1_deserializeDocumentHdr10Plus(&sv.Hdr10Plus, value); err != nil {
 				return err
 			}
 
@@ -19102,6 +19358,590 @@ func awsRestjson1_deserializeDocumentWebvttDestinationSettings(v **types.WebvttD
 					return fmt.Errorf("expected WebvttStylePassthrough to be of type string, got %T instead", value)
 				}
 				sv.StylePassthrough = types.WebvttStylePassthrough(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWebvttHlsSourceSettings(v **types.WebvttHlsSourceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebvttHlsSourceSettings
+	if *v == nil {
+		sv = &types.WebvttHlsSourceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "renditionGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RenditionGroupId = ptr.String(jtv)
+			}
+
+		case "renditionLanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.RenditionLanguageCode = types.LanguageCode(jtv)
+			}
+
+		case "renditionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RenditionName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentXavc4kIntraCbgProfileSettings(v **types.Xavc4kIntraCbgProfileSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Xavc4kIntraCbgProfileSettings
+	if *v == nil {
+		sv = &types.Xavc4kIntraCbgProfileSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "xavcClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Xavc4kIntraCbgProfileClass to be of type string, got %T instead", value)
+				}
+				sv.XavcClass = types.Xavc4kIntraCbgProfileClass(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentXavc4kIntraVbrProfileSettings(v **types.Xavc4kIntraVbrProfileSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Xavc4kIntraVbrProfileSettings
+	if *v == nil {
+		sv = &types.Xavc4kIntraVbrProfileSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "xavcClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Xavc4kIntraVbrProfileClass to be of type string, got %T instead", value)
+				}
+				sv.XavcClass = types.Xavc4kIntraVbrProfileClass(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentXavc4kProfileSettings(v **types.Xavc4kProfileSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Xavc4kProfileSettings
+	if *v == nil {
+		sv = &types.Xavc4kProfileSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bitrateClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Xavc4kProfileBitrateClass to be of type string, got %T instead", value)
+				}
+				sv.BitrateClass = types.Xavc4kProfileBitrateClass(jtv)
+			}
+
+		case "codecProfile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Xavc4kProfileCodecProfile to be of type string, got %T instead", value)
+				}
+				sv.CodecProfile = types.Xavc4kProfileCodecProfile(jtv)
+			}
+
+		case "flickerAdaptiveQuantization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcFlickerAdaptiveQuantization to be of type string, got %T instead", value)
+				}
+				sv.FlickerAdaptiveQuantization = types.XavcFlickerAdaptiveQuantization(jtv)
+			}
+
+		case "gopBReference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcGopBReference to be of type string, got %T instead", value)
+				}
+				sv.GopBReference = types.XavcGopBReference(jtv)
+			}
+
+		case "gopClosedCadence":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GopClosedCadence = int32(i64)
+			}
+
+		case "hrdBufferSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max1152000000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HrdBufferSize = int32(i64)
+			}
+
+		case "qualityTuningLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Xavc4kProfileQualityTuningLevel to be of type string, got %T instead", value)
+				}
+				sv.QualityTuningLevel = types.Xavc4kProfileQualityTuningLevel(jtv)
+			}
+
+		case "slices":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin8Max12 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Slices = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentXavcHdIntraCbgProfileSettings(v **types.XavcHdIntraCbgProfileSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.XavcHdIntraCbgProfileSettings
+	if *v == nil {
+		sv = &types.XavcHdIntraCbgProfileSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "xavcClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcHdIntraCbgProfileClass to be of type string, got %T instead", value)
+				}
+				sv.XavcClass = types.XavcHdIntraCbgProfileClass(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentXavcHdProfileSettings(v **types.XavcHdProfileSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.XavcHdProfileSettings
+	if *v == nil {
+		sv = &types.XavcHdProfileSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bitrateClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcHdProfileBitrateClass to be of type string, got %T instead", value)
+				}
+				sv.BitrateClass = types.XavcHdProfileBitrateClass(jtv)
+			}
+
+		case "flickerAdaptiveQuantization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcFlickerAdaptiveQuantization to be of type string, got %T instead", value)
+				}
+				sv.FlickerAdaptiveQuantization = types.XavcFlickerAdaptiveQuantization(jtv)
+			}
+
+		case "gopBReference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcGopBReference to be of type string, got %T instead", value)
+				}
+				sv.GopBReference = types.XavcGopBReference(jtv)
+			}
+
+		case "gopClosedCadence":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GopClosedCadence = int32(i64)
+			}
+
+		case "hrdBufferSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max1152000000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HrdBufferSize = int32(i64)
+			}
+
+		case "interlaceMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcInterlaceMode to be of type string, got %T instead", value)
+				}
+				sv.InterlaceMode = types.XavcInterlaceMode(jtv)
+			}
+
+		case "qualityTuningLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcHdProfileQualityTuningLevel to be of type string, got %T instead", value)
+				}
+				sv.QualityTuningLevel = types.XavcHdProfileQualityTuningLevel(jtv)
+			}
+
+		case "slices":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin4Max12 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Slices = int32(i64)
+			}
+
+		case "telecine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcHdProfileTelecine to be of type string, got %T instead", value)
+				}
+				sv.Telecine = types.XavcHdProfileTelecine(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentXavcSettings(v **types.XavcSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.XavcSettings
+	if *v == nil {
+		sv = &types.XavcSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adaptiveQuantization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcAdaptiveQuantization to be of type string, got %T instead", value)
+				}
+				sv.AdaptiveQuantization = types.XavcAdaptiveQuantization(jtv)
+			}
+
+		case "entropyEncoding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcEntropyEncoding to be of type string, got %T instead", value)
+				}
+				sv.EntropyEncoding = types.XavcEntropyEncoding(jtv)
+			}
+
+		case "framerateControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcFramerateControl to be of type string, got %T instead", value)
+				}
+				sv.FramerateControl = types.XavcFramerateControl(jtv)
+			}
+
+		case "framerateConversionAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcFramerateConversionAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.FramerateConversionAlgorithm = types.XavcFramerateConversionAlgorithm(jtv)
+			}
+
+		case "framerateDenominator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max1001 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateDenominator = int32(i64)
+			}
+
+		case "framerateNumerator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin24Max60000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateNumerator = int32(i64)
+			}
+
+		case "profile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcProfile to be of type string, got %T instead", value)
+				}
+				sv.Profile = types.XavcProfile(jtv)
+			}
+
+		case "slowPal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcSlowPal to be of type string, got %T instead", value)
+				}
+				sv.SlowPal = types.XavcSlowPal(jtv)
+			}
+
+		case "softness":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max128 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Softness = int32(i64)
+			}
+
+		case "spatialAdaptiveQuantization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcSpatialAdaptiveQuantization to be of type string, got %T instead", value)
+				}
+				sv.SpatialAdaptiveQuantization = types.XavcSpatialAdaptiveQuantization(jtv)
+			}
+
+		case "temporalAdaptiveQuantization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcTemporalAdaptiveQuantization to be of type string, got %T instead", value)
+				}
+				sv.TemporalAdaptiveQuantization = types.XavcTemporalAdaptiveQuantization(jtv)
+			}
+
+		case "xavc4kIntraCbgProfileSettings":
+			if err := awsRestjson1_deserializeDocumentXavc4kIntraCbgProfileSettings(&sv.Xavc4kIntraCbgProfileSettings, value); err != nil {
+				return err
+			}
+
+		case "xavc4kIntraVbrProfileSettings":
+			if err := awsRestjson1_deserializeDocumentXavc4kIntraVbrProfileSettings(&sv.Xavc4kIntraVbrProfileSettings, value); err != nil {
+				return err
+			}
+
+		case "xavc4kProfileSettings":
+			if err := awsRestjson1_deserializeDocumentXavc4kProfileSettings(&sv.Xavc4kProfileSettings, value); err != nil {
+				return err
+			}
+
+		case "xavcHdIntraCbgProfileSettings":
+			if err := awsRestjson1_deserializeDocumentXavcHdIntraCbgProfileSettings(&sv.XavcHdIntraCbgProfileSettings, value); err != nil {
+				return err
+			}
+
+		case "xavcHdProfileSettings":
+			if err := awsRestjson1_deserializeDocumentXavcHdProfileSettings(&sv.XavcHdProfileSettings, value); err != nil {
+				return err
 			}
 
 		default:

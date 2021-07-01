@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new job to transform input data, using steps defined in an existing
-// AWS Glue DataBrew recipe
+// Glue DataBrew recipe
 func (c *Client) CreateRecipeJob(ctx context.Context, params *CreateRecipeJobInput, optFns ...func(*Options)) (*CreateRecipeJobOutput, error) {
 	if params == nil {
 		params = &CreateRecipeJobInput{}
@@ -36,16 +36,15 @@ type CreateRecipeJobInput struct {
 	// This member is required.
 	Name *string
 
-	// One or more artifacts that represent the output from running the job.
-	//
-	// This member is required.
-	Outputs []types.Output
-
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role to be assumed when DataBrew runs the job.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
+
+	// One or more artifacts that represent the AWS Glue Data Catalog output from
+	// running the job.
+	DataCatalogOutputs []types.DataCatalogOutput
 
 	// The name of the dataset that this job processes.
 	DatasetName *string
@@ -57,7 +56,7 @@ type CreateRecipeJobInput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// Server-side encryption with keys managed by AWS KMS.
+	// Server-side encryption with keys managed by KMS.
 	//
 	// * SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
@@ -73,6 +72,9 @@ type CreateRecipeJobInput struct {
 
 	// The maximum number of times to retry the job after a job run fails.
 	MaxRetries int32
+
+	// One or more artifacts that represent the output from running the job.
+	Outputs []types.Output
 
 	// Either the name of an existing project, or a combination of a recipe and a
 	// dataset to associate with the recipe.

@@ -23,11 +23,11 @@ import (
 // * Cross-account permissions don't apply to this action. For more
 // information, see Grant cross-account permissions to a role and a user name
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
-// in the Amazon Simple Queue Service Developer Guide.
+// in the Amazon SQS Developer Guide.
 //
-// * To remove the ability to
-// change queue permissions, you must deny permission to the AddPermission,
-// RemovePermission, and SetQueueAttributes actions in your IAM policy.
+// * To remove the ability to change queue
+// permissions, you must deny permission to the AddPermission, RemovePermission,
+// and SetQueueAttributes actions in your IAM policy.
 func (c *Client) SetQueueAttributes(ctx context.Context, params *SetQueueAttributesInput, optFns ...func(*Options)) (*SetQueueAttributesOutput, error) {
 	if params == nil {
 		params = &SetQueueAttributesInput{}
@@ -64,64 +64,65 @@ type SetQueueAttributesInput struct {
 	// from 60 (1 minute) to 1,209,600 (14 days). Default: 345,600 (4 days).
 	//
 	// * Policy
-	// – The queue's policy. A valid AWS policy. For more information about policy
-	// structure, see Overview of AWS IAM Policies
+	// – The queue's policy. A valid Amazon Web Services policy. For more information
+	// about policy structure, see Overview of Amazon Web Services IAM Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html) in the
-	// Amazon IAM User Guide.
+	// Identity and Access Management User Guide.
 	//
-	// * ReceiveMessageWaitTimeSeconds – The length of time, in
-	// seconds, for which a ReceiveMessage action waits for a message to arrive. Valid
-	// values: An integer from 0 to 20 (seconds). Default: 0.
+	// * ReceiveMessageWaitTimeSeconds –
+	// The length of time, in seconds, for which a ReceiveMessage action waits for a
+	// message to arrive. Valid values: An integer from 0 to 20 (seconds). Default:
+	// 0.
 	//
-	// * RedrivePolicy – The
-	// string that includes the parameters for the dead-letter queue functionality of
-	// the source queue as a JSON object. For more information about the redrive policy
-	// and dead-letter queues, see Using Amazon SQS Dead-Letter Queues
+	// * RedrivePolicy – The string that includes the parameters for the
+	// dead-letter queue functionality of the source queue as a JSON object. For more
+	// information about the redrive policy and dead-letter queues, see Using Amazon
+	// SQS Dead-Letter Queues
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	//
-	// * deadLetterTargetArn – The
-	// Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves
-	// messages after the value of maxReceiveCount is exceeded.
+	// * deadLetterTargetArn – The Amazon Resource
+	// Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the
+	// value of maxReceiveCount is exceeded.
 	//
-	// * maxReceiveCount –
-	// The number of times a message is delivered to the source queue before being
-	// moved to the dead-letter queue. When the ReceiveCount for a message exceeds the
-	// maxReceiveCount for a queue, Amazon SQS moves the message to the
-	// dead-letter-queue.
+	// * maxReceiveCount – The number of times a
+	// message is delivered to the source queue before being moved to the dead-letter
+	// queue. When the ReceiveCount for a message exceeds the maxReceiveCount for a
+	// queue, Amazon SQS moves the message to the dead-letter-queue.
 	//
-	// The dead-letter queue of a FIFO queue must also be a FIFO
-	// queue. Similarly, the dead-letter queue of a standard queue must also be a
-	// standard queue.
+	// The dead-letter
+	// queue of a FIFO queue must also be a FIFO queue. Similarly, the dead-letter
+	// queue of a standard queue must also be a standard queue.
 	//
-	// * VisibilityTimeout – The visibility timeout for the queue, in
-	// seconds. Valid values: An integer from 0 to 43,200 (12 hours). Default: 30. For
-	// more information about the visibility timeout, see Visibility Timeout
+	// * VisibilityTimeout –
+	// The visibility timeout for the queue, in seconds. Valid values: An integer from
+	// 0 to 43,200 (12 hours). Default: 30. For more information about the visibility
+	// timeout, see Visibility Timeout
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	//
-	// The following attributes
-	// apply only to server-side-encryption
+	// The following attributes apply only to
+	// server-side-encryption
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):
 	//
 	// *
-	// KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon
-	// SQS or a custom CMK. For more information, see Key Terms
+	// KmsMasterKeyId – The ID of an Amazon Web Services managed customer master key
+	// (CMK) for Amazon SQS or a custom CMK. For more information, see Key Terms
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).
 	// While the alias of the AWS-managed CMK for Amazon SQS is always alias/aws/sqs,
 	// the alias of a custom CMK can, for example, be alias/MyAlias . For more
 	// examples, see KeyId
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
-	// in the AWS Key Management Service API Reference.
+	// in the Key Management Service API Reference.
 	//
-	// * KmsDataKeyReusePeriodSeconds
-	// – The length of time, in seconds, for which Amazon SQS can reuse a data key
+	// * KmsDataKeyReusePeriodSeconds –
+	// The length of time, in seconds, for which Amazon SQS can reuse a data key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys)
-	// to encrypt or decrypt messages before calling AWS KMS again. An integer
-	// representing seconds, between 60 seconds (1 minute) and 86,400 seconds (24
-	// hours). Default: 300 (5 minutes). A shorter time period provides better security
-	// but results in more calls to KMS which might incur charges after Free Tier. For
-	// more information, see How Does the Data Key Reuse Period Work?
+	// to encrypt or decrypt messages before calling KMS again. An integer representing
+	// seconds, between 60 seconds (1 minute) and 86,400 seconds (24 hours). Default:
+	// 300 (5 minutes). A shorter time period provides better security but results in
+	// more calls to KMS which might incur charges after Free Tier. For more
+	// information, see How Does the Data Key Reuse Period Work?
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).
 	//
 	// The
@@ -132,10 +133,10 @@ type SetQueueAttributesInput struct {
 	// ContentBasedDeduplication – Enables content-based deduplication. For more
 	// information, see Exactly-once processing
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html)
-	// in the Amazon Simple Queue Service Developer Guide. Note the following:
+	// in the Amazon SQS Developer Guide. Note the following:
 	//
-	// * Every
-	// message must have a unique MessageDeduplicationId.
+	// * Every message must
+	// have a unique MessageDeduplicationId.
 	//
 	// * You may provide a
 	// MessageDeduplicationId explicitly.
@@ -190,7 +191,7 @@ type SetQueueAttributesInput struct {
 	// throughput is in effect and deduplication occurs as specified. For information
 	// on throughput quotas, see Quotas related to messages
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon SQS Developer Guide.
 	//
 	// This member is required.
 	Attributes map[string]string

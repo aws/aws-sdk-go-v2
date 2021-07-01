@@ -45,7 +45,7 @@ type BatchCreatePartitionInput struct {
 	TableName *string
 
 	// The ID of the catalog in which the partition is to be created. Currently, this
-	// should be the AWS account ID.
+	// should be the Amazon Web Services account ID.
 	CatalogId *string
 }
 

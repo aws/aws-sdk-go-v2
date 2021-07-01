@@ -12,11 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a sortable, filterable list of existing AWS Glue machine learning
-// transforms in this AWS account, or the resources with the specified tag. This
-// operation takes the optional Tags field, which you can use as a filter of the
-// responses so that tagged resources can be retrieved as a group. If you choose to
-// use tag filtering, only resources with the tags are retrieved.
+// Retrieves a sortable, filterable list of existing Glue machine learning
+// transforms in this Amazon Web Services account, or the resources with the
+// specified tag. This operation takes the optional Tags field, which you can use
+// as a filter of the responses so that tagged resources can be retrieved as a
+// group. If you choose to use tag filtering, only resources with the tags are
+// retrieved.
 func (c *Client) ListMLTransforms(ctx context.Context, params *ListMLTransformsInput, optFns ...func(*Options)) (*ListMLTransformsOutput, error) {
 	if params == nil {
 		params = &ListMLTransformsInput{}

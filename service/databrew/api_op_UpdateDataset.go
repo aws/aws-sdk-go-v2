@@ -29,8 +29,8 @@ func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, 
 
 type UpdateDatasetInput struct {
 
-	// Represents information on how DataBrew can find data, in either the AWS Glue
-	// Data Catalog or Amazon S3.
+	// Represents information on how DataBrew can find data, in either the Glue Data
+	// Catalog or Amazon S3.
 	//
 	// This member is required.
 	Input *types.Input
@@ -40,14 +40,15 @@ type UpdateDatasetInput struct {
 	// This member is required.
 	Name *string
 
-	// The file format of a dataset that is created from an S3 file or folder.
+	// The file format of a dataset that is created from an Amazon S3 file or folder.
 	Format types.InputFormat
 
 	// Represents a set of options that define the structure of either comma-separated
 	// value (CSV), Excel, or JSON input.
 	FormatOptions *types.FormatOptions
 
-	// A set of options that defines how DataBrew interprets an S3 path of the dataset.
+	// A set of options that defines how DataBrew interprets an Amazon S3 path of the
+	// dataset.
 	PathOptions *types.PathOptions
 }
 

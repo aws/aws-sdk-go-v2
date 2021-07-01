@@ -16,7 +16,7 @@ import (
 // jobs, batch transform jobs, models, labeling jobs, work teams, endpoint
 // configurations, and endpoints. Each tag consists of a key and an optional value.
 // Tag keys must be unique per resource. For more information about tags, see For
-// more information, see AWS Tagging Strategies
+// more information, see Amazon Web Services Tagging Strategies
 // (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
 // Tags that you add to a hyperparameter tuning job by calling this API are also
 // added to any training jobs that the hyperparameter tuning job launches after you
@@ -55,9 +55,9 @@ type AddTagsInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	//
 	// This member is required.

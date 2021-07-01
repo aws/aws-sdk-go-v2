@@ -48,7 +48,7 @@ type UpdateCrawlerInput struct {
 	// The name of the SecurityConfiguration structure to be used by this crawler.
 	CrawlerSecurityConfiguration *string
 
-	// The AWS Glue database where results are stored, such as:
+	// The Glue database where results are stored, such as:
 	// arn:aws:daylight:us-east-1::database/sometable/*.
 	DatabaseName *string
 

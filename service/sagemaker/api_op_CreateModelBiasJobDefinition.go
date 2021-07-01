@@ -29,8 +29,8 @@ func (c *Client) CreateModelBiasJobDefinition(ctx context.Context, params *Creat
 
 type CreateModelBiasJobDefinitionInput struct {
 
-	// The name of the bias job definition. The name must be unique within an AWS
-	// Region in the AWS account.
+	// The name of the bias job definition. The name must be unique within an Amazon
+	// Web Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
 	JobDefinitionName *string
@@ -73,7 +73,7 @@ type CreateModelBiasJobDefinitionInput struct {
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the AWS Billing and Cost Management User Guide.
+	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 }
 

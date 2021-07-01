@@ -45,8 +45,8 @@ type CreateProjectInput struct {
 	// This member is required.
 	RecipeName *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role to be assumed for this request.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// to be assumed for this request.
 	//
 	// This member is required.
 	RoleArn *string

@@ -163,7 +163,7 @@
                     "name": "databrew"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew\n            simplifies data preparation tasks, targeting data issues that are hard to spot and\n            time-consuming to fix. DataBrew empowers users of all technical levels to visualize the\n            data and perform one-click data transformations, with no coding required.</p>",
+                "smithy.api#documentation": "<p>Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew\n            simplifies data preparation tasks, targeting data issues that are hard to spot and\n            time-consuming to fix. DataBrew empowers users of all technical levels to visualize the\n            data and perform one-click data transformations, with no coding required.</p>",
                 "smithy.api#title": "AWS Glue DataBrew"
             }
         },
@@ -394,7 +394,7 @@
                 "Condition": {
                     "target": "com.amazonaws.databrew#Condition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A specific condition to apply to a recipe action. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure\">Recipe\n                structure</a> in the <i>AWS Glue DataBrew Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>A specific condition to apply to a recipe action. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure\">Recipe\n            structure</a> in the <i>Glue DataBrew Developer\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -413,7 +413,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an individual condition that evaluates to true or false.</p>\n        <p>Conditions are used with recipe actions. The action is only performed for column values where the condition evaluates to true.</p>\n        <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>"
+                "smithy.api#documentation": "<p>Represents an individual condition that evaluates to true or false.</p>\n        <p>Conditions are used with recipe actions. The action is only performed for column values where the \n            condition evaluates to true.</p>\n        <p>If a recipe requires more than one condition, then the recipe must specify multiple \n            <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before \n            the recipe action is performed.</p>"
             }
         },
         "com.amazonaws.databrew#ConditionExpressionList": {
@@ -491,7 +491,7 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an Amazon S3 file or folder.</p>"
                     }
                 },
                 "FormatOptions": {
@@ -506,7 +506,7 @@
                 "PathOptions": {
                     "target": "com.amazonaws.databrew#PathOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -582,7 +582,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with AWS\n                    KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with \n                    KMS-managed keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -619,7 +619,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed when DataBrew runs the job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to\n            be assumed when DataBrew runs the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -716,7 +716,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed for this request.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to\n            be assumed for this request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -794,7 +794,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new job to transform input data, using steps defined in an existing AWS Glue\n            DataBrew recipe</p>",
+                "smithy.api#documentation": "<p>Creates a new job to transform input data, using steps defined in an existing Glue DataBrew recipe</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/recipeJobs",
@@ -820,7 +820,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS\n                    KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -851,8 +851,13 @@
                 "Outputs": {
                     "target": "com.amazonaws.databrew#OutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more artifacts that represent the output from running the job.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the output from running the job.</p>"
+                    }
+                },
+                "DataCatalogOutputs": {
+                    "target": "com.amazonaws.databrew#DataCatalogOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output from running the job.</p>"
                     }
                 },
                 "ProjectName": {
@@ -867,7 +872,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed when DataBrew runs the job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to\n            be assumed when DataBrew runs the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -980,7 +985,7 @@
                 "CronExpression": {
                     "target": "com.amazonaws.databrew#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date or dates and time or times when the jobs are to be run. For more information,\n            see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron\n                expressions</a> in the <i>AWS Glue DataBrew Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The date or dates and time or times when the jobs are to be run. For more information,\n            see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron\n                expressions</a> in the <i>Glue DataBrew Developer\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1040,7 +1045,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew will read a comma-separated value (CSV) file when creating a dataset from that file.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew will read a \n            comma-separated value (CSV) file when creating a dataset from that file.</p>"
             }
         },
         "com.amazonaws.databrew#CsvOutputOptions": {
@@ -1063,7 +1068,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.databrew#CatalogId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the AWS account that holds the Data Catalog that stores the\n            data.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Web Services account that holds the Data Catalog that stores the\n            data.</p>"
                     }
                 },
                 "DatabaseName": {
@@ -1083,12 +1088,69 @@
                 "TempDirectory": {
                     "target": "com.amazonaws.databrew#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon location that AWS Glue Data Catalog can use as a temporary directory.</p>"
+                        "smithy.api#documentation": "<p>Represents an Amazon location where DataBrew can store intermediate results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents how metadata stored in the AWS Glue Data Catalog is defined in a DataBrew\n            dataset. </p>"
+                "smithy.api#documentation": "<p>Represents how metadata stored in the Glue Data Catalog is defined in a DataBrew\n            dataset. </p>"
+            }
+        },
+        "com.amazonaws.databrew#DataCatalogOutput": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.databrew#CatalogId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the AWS account that holds the Data Catalog that stores the data.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databrew#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a database in the Data Catalog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.databrew#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a table in the Data Catalog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Options": {
+                    "target": "com.amazonaws.databrew#S3TableOutputOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the S3 output generated \n            by recipe jobs.</p>"
+                    }
+                },
+                "DatabaseOptions": {
+                    "target": "com.amazonaws.databrew#DatabaseTableOutputOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the database output \n            generated by recipe jobs.</p>"
+                    }
+                },
+                "Overwrite": {
+                    "target": "com.amazonaws.databrew#OverwriteOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that, if true, means that any data in the location specified for output \n            is overwritten with new output. Not supported with DatabaseOptions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the output generated by recipe \n            jobs.</p>"
+            }
+        },
+        "com.amazonaws.databrew#DataCatalogOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#DataCatalogOutput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.databrew#DatabaseInputDefinition": {
@@ -1097,7 +1159,7 @@
                 "GlueConnectionName": {
                     "target": "com.amazonaws.databrew#GlueConnectionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Glue Connection that stores the connection information for the target\n            database.</p>",
+                        "smithy.api#documentation": "<p>The Glue Connection that stores the connection information for the target\n            database.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1134,13 +1196,34 @@
                 }
             }
         },
+        "com.amazonaws.databrew#DatabaseTableOutputOptions": {
+            "type": "structure",
+            "members": {
+                "TempDirectory": {
+                    "target": "com.amazonaws.databrew#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can store \n            intermediate results.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.databrew#DatabaseTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A prefix for the name of a table DataBrew will create in the database.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the database output generated by recipe \n            jobs.</p>"
+            }
+        },
         "com.amazonaws.databrew#Dataset": {
             "type": "structure",
             "members": {
                 "AccountId": {
                     "target": "com.amazonaws.databrew#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the dataset.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the dataset.</p>"
                     }
                 },
                 "CreatedBy": {
@@ -1165,7 +1248,7 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an Amazon S3 file or folder.</p>"
                     }
                 },
                 "FormatOptions": {
@@ -1177,7 +1260,7 @@
                 "Input": {
                     "target": "com.amazonaws.databrew#Input",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information on how DataBrew can find the dataset, in either the AWS Glue Data Catalog\n            or Amazon S3.</p>",
+                        "smithy.api#documentation": "<p>Information on how DataBrew can find the dataset, in either the Glue Data Catalog\n            or Amazon S3.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1196,13 +1279,13 @@
                 "Source": {
                     "target": "com.amazonaws.databrew#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the data for the dataset, either Amazon S3 or the AWS Glue Data\n            Catalog.</p>"
+                        "smithy.api#documentation": "<p>The location of the data for the dataset, either Amazon S3 or the Glue Data Catalog.</p>"
                     }
                 },
                 "PathOptions": {
                     "target": "com.amazonaws.databrew#PathOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -1243,7 +1326,7 @@
                 "Name": {
                     "target": "com.amazonaws.databrew#PathParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter that is used in the dataset's S3 path.</p>",
+                        "smithy.api#documentation": "<p>The name of the parameter that is used in the dataset's Amazon S3 path.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1263,7 +1346,7 @@
                 "CreateColumn": {
                     "target": "com.amazonaws.databrew#CreateColumn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional boolean value that defines whether the captured value of this parameter should be loaded as an additional column in the dataset.</p>"
+                        "smithy.api#documentation": "<p>Optional boolean value that defines whether the captured value of this parameter \n            should be used to create a new column in a dataset.</p>"
                     }
                 },
                 "Filter": {
@@ -1274,7 +1357,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a dataset paramater that defines type and conditions for a parameter in the S3 path of the dataset.</p>"
+                "smithy.api#documentation": "<p>Represents a dataset paramater that defines type and conditions for a parameter in the Amazon S3 \n            path of the dataset.</p>"
             }
         },
         "com.amazonaws.databrew#Date": {
@@ -1295,14 +1378,14 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#DatetimeFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required option, that defines the datetime format used for a date parameter in the S3 path. Should use only supported datetime specifiers and separation characters, all \n            litera a-z or A-Z character should be escaped with single quotes. E.g. \"MM.dd.yyyy-'at'-HH:mm\".</p>",
+                        "smithy.api#documentation": "<p>Required option, that defines the datetime format used for a date parameter in the \n            Amazon S3 path. Should use only supported datetime specifiers and separation characters, all \n            literal a-z or A-Z characters should be escaped with single quotes. E.g. \"MM.dd.yyyy-'at'-HH:mm\".</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TimezoneOffset": {
                     "target": "com.amazonaws.databrew#TimezoneOffset",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional value for a timezone offset of the datetime parameter value in the S3 path. Shouldn't be used if Format for this parameter includes timezone fields.\n            If no offset specified, UTC is assumed.</p>"
+                        "smithy.api#documentation": "<p>Optional value for a timezone offset of the datetime parameter value in the Amazon S3 \n            path. Shouldn't be used if Format for this parameter includes timezone fields.\n            If no offset specified, UTC is assumed.</p>"
                     }
                 },
                 "LocaleCode": {
@@ -1313,7 +1396,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents additional options for correct interpretation of datetime parameters used in the S3 path of a dataset.</p>"
+                "smithy.api#documentation": "<p>Represents additional options for correct interpretation of datetime parameters used in \n            the Amazon S3 path of a dataset.</p>"
             }
         },
         "com.amazonaws.databrew#DeleteDataset": {
@@ -1665,7 +1748,7 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an Amazon S3 file or folder.</p>"
                     }
                 },
                 "FormatOptions": {
@@ -1692,13 +1775,13 @@
                 "Source": {
                     "target": "com.amazonaws.databrew#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the data for this dataset, Amazon S3 or the AWS Glue Data\n            Catalog.</p>"
+                        "smithy.api#documentation": "<p>The location of the data for this dataset, Amazon S3 or the Glue Data Catalog.</p>"
                     }
                 },
                 "PathOptions": {
                     "target": "com.amazonaws.databrew#PathOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -1783,7 +1866,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS\n                    KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -1835,6 +1918,12 @@
                         "smithy.api#documentation": "<p>One or more artifacts that represent the output from running the job.</p>"
                     }
                 },
+                "DataCatalogOutputs": {
+                    "target": "com.amazonaws.databrew#DataCatalogOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output from running the job.</p>"
+                    }
+                },
                 "ProjectName": {
                     "target": "com.amazonaws.databrew#ProjectName",
                     "traits": {
@@ -1853,7 +1942,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role to be assumed when\n            DataBrew runs the job.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) role to be assumed when\n            DataBrew runs the job.</p>"
                     }
                 },
                 "Tags": {
@@ -1992,6 +2081,12 @@
                         "smithy.api#documentation": "<p>One or more output artifacts from a job run.</p>"
                     }
                 },
+                "DataCatalogOutputs": {
+                    "target": "com.amazonaws.databrew#DataCatalogOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output from running the job.</p>"
+                    }
+                },
                 "RecipeReference": {
                     "target": "com.amazonaws.databrew#RecipeReference"
                 },
@@ -2111,7 +2206,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role to be assumed when\n            DataBrew runs the job.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) role to be assumed when\n            DataBrew runs the job.</p>"
                     }
                 },
                 "Tags": {
@@ -2349,7 +2444,7 @@
                 "CronExpression": {
                     "target": "com.amazonaws.databrew#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date or dates and time or times when the jobs are to be run for the schedule. For\n            more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron expressions</a> in the\n                <i>AWS Glue DataBrew Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The date or dates and time or times when the jobs are to be run for the schedule. For\n            more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron expressions</a> in the\n            <i>Glue DataBrew Developer Guide</i>.</p>"
                     }
                 },
                 "Tags": {
@@ -2442,25 +2537,25 @@
                 "MaxFiles": {
                     "target": "com.amazonaws.databrew#MaxFiles",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of S3 files to select.</p>",
+                        "smithy.api#documentation": "<p>The number of Amazon S3 files to select.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OrderedBy": {
                     "target": "com.amazonaws.databrew#OrderedBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A criteria to use for S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as \n            a sorting criteria. Currently it's the only allowed value.</p>"
+                        "smithy.api#documentation": "<p>A criteria to use for Amazon S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as \n            a sorting criteria. Currently it's the only allowed value.</p>"
                     }
                 },
                 "Order": {
                     "target": "com.amazonaws.databrew#Order",
                     "traits": {
-                        "smithy.api#documentation": "<p>A criteria to use for S3 files sorting before their selection. By default uses DESCENDING order, \n            i.e. most recent files are selected first. Anotherpossible value is ASCENDING.</p>"
+                        "smithy.api#documentation": "<p>A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, \n            i.e. most recent files are selected first. Anotherpossible value is ASCENDING.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a limit imposed on number of S3 files that should be selected for a dataset from a connected \n            S3 path.</p>"
+                "smithy.api#documentation": "<p>Represents a limit imposed on number of Amazon S3 files that should be selected for a dataset from a connected \n            Amazon S3 path.</p>"
             }
         },
         "com.amazonaws.databrew#FilterExpression": {
@@ -2482,7 +2577,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a structure for defining parameter conditions.</p>"
+                "smithy.api#documentation": "<p>Represents a structure for defining parameter conditions. Supported conditions are described\n            here: <a href=\"https://docs-aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets\">Supported \n                conditions for dynamic datasets</a> in the \n            <i>Glue DataBrew Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.databrew#FormatOptions": {
@@ -2508,7 +2603,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define the structure of either comma-separated value (CSV),\n            Excel, or JSON input.</p>"
             }
         },
         "com.amazonaws.databrew#GlueConnectionName": {
@@ -2544,7 +2639,7 @@
                 "DataCatalogInputDefinition": {
                     "target": "com.amazonaws.databrew#DataCatalogInputDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Glue Data Catalog parameters for the data.</p>"
+                        "smithy.api#documentation": "<p>The Glue Data Catalog parameters for the data.</p>"
                     }
                 },
                 "DatabaseInputDefinition": {
@@ -2555,7 +2650,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or\n            Amazon S3.</p>"
+                "smithy.api#documentation": "<p>Represents information on how DataBrew can find data, in either the Glue Data Catalog or\n            Amazon S3.</p>"
             }
         },
         "com.amazonaws.databrew#InputFormat": {
@@ -2600,7 +2695,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.databrew#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the job.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the job.</p>"
                     }
                 },
                 "CreatedBy": {
@@ -2630,7 +2725,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -2680,6 +2775,12 @@
                     "target": "com.amazonaws.databrew#OutputList",
                     "traits": {
                         "smithy.api#documentation": "<p>One or more artifacts that represent output from running the job.</p>"
+                    }
+                },
+                "DataCatalogOutputs": {
+                    "target": "com.amazonaws.databrew#DataCatalogOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output \n            from running the job.</p>"
                     }
                 },
                 "ProjectName": {
@@ -2825,6 +2926,12 @@
                         "smithy.api#documentation": "<p>One or more output artifacts from a job run.</p>"
                     }
                 },
+                "DataCatalogOutputs": {
+                    "target": "com.amazonaws.databrew#DataCatalogOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output \n            from running the job.</p>"
+                    }
+                },
                 "RecipeReference": {
                     "target": "com.amazonaws.databrew#RecipeReference",
                     "traits": {
@@ -2959,7 +3066,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the JSON-specific options that define how input is to be interpreted by AWS\n            Glue DataBrew.</p>"
+                "smithy.api#documentation": "<p>Represents the JSON-specific options that define how input is to be interpreted by Glue DataBrew.</p>"
             }
         },
         "com.amazonaws.databrew#Key": {
@@ -3806,7 +3913,7 @@
                 "LastModifiedDateCondition": {
                     "target": "com.amazonaws.databrew#FilterExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.</p>"
+                        "smithy.api#documentation": "<p>If provided, this structure defines a date range for matching Amazon S3 objects based on their \n            LastModifiedDate attribute in Amazon S3.</p>"
                     }
                 },
                 "FilesLimit": {
@@ -3818,12 +3925,12 @@
                 "Parameters": {
                     "target": "com.amazonaws.databrew#PathParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that maps names of parameters used in the S3 path of a dataset to their definitions.</p>"
+                        "smithy.api#documentation": "<p>A structure that maps names of parameters used in the Amazon S3 path of a dataset to their definitions.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew selects files for a given Amazon S3 \n            path in a dataset.</p>"
             }
         },
         "com.amazonaws.databrew#PathParameterName": {
@@ -3844,7 +3951,7 @@
                 "target": "com.amazonaws.databrew#DatasetParameter"
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that map names of parameters used in the S3 path of a dataset to their definitions. A definition includes parameter type and conditions.</p>",
+                "smithy.api#documentation": "<p>A structure that map names of parameters used in the Amazon S3 path of a dataset to their definitions. \n            A definition includes parameter type and conditions.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10
@@ -3860,7 +3967,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.databrew#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the project.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the project.</p>"
                     }
                 },
                 "CreateDate": {
@@ -4130,7 +4237,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a transformation and associated parameters that are used to apply a change\n            to a DataBrew dataset. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html\">Recipe structure</a> and <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html\">Recipe\n                actions reference</a>.</p>"
+                "smithy.api#documentation": "<p>Represents a transformation and associated parameters that are used to apply a change\n            to a DataBrew dataset. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html\">Recipe\n                actions reference</a>.</p>"
             }
         },
         "com.amazonaws.databrew#RecipeDescription": {
@@ -4283,7 +4390,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.databrew#Bucket",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 bucket name.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket name.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4296,6 +4403,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can read\n            input data, or write output from a job.</p>"
+            }
+        },
+        "com.amazonaws.databrew#S3TableOutputOptions": {
+            "type": "structure",
+            "members": {
+                "Location": {
+                    "target": "com.amazonaws.databrew#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can write output \n            from a job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the S3 output generated by \n            recipe jobs.</p>"
             }
         },
         "com.amazonaws.databrew#Sample": {
@@ -4369,7 +4491,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.databrew#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the schedule.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the schedule.</p>"
                     }
                 },
                 "CreatedBy": {
@@ -4411,7 +4533,7 @@
                 "CronExpression": {
                     "target": "com.amazonaws.databrew#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dates and times when the job is to run. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron\n                expressions</a> in the <i>AWS Glue DataBrew Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The dates and times when the job is to run. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron\n            expressions</a> in the <i>Glue DataBrew Developer\n            Guide</i>.</p>"
                     }
                 },
                 "Tags": {
@@ -5089,7 +5211,7 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an Amazon S3 file or folder.</p>"
                     }
                 },
                 "FormatOptions": {
@@ -5104,7 +5226,7 @@
                 "PathOptions": {
                     "target": "com.amazonaws.databrew#PathOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>"
                     }
                 }
             }
@@ -5161,7 +5283,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS\n                    KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -5199,7 +5321,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed when DataBrew runs the job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to\n            be assumed when DataBrew runs the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5360,7 +5482,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS\n                    KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -5392,14 +5514,19 @@
                 "Outputs": {
                     "target": "com.amazonaws.databrew#OutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more artifacts that represent the output from running the job. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the output from running the job. </p>"
+                    }
+                },
+                "DataCatalogOutputs": {
+                    "target": "com.amazonaws.databrew#DataCatalogOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output from running the job.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to\n            be assumed when DataBrew runs the job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to\n            be assumed when DataBrew runs the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5500,7 +5627,7 @@
                 "CronExpression": {
                     "target": "com.amazonaws.databrew#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date or dates and time or times when the jobs are to be run. For more information,\n            see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron\n                expressions</a> in the <i>AWS Glue DataBrew Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The date or dates and time or times when the jobs are to be run. For more information,\n            see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron\n                expressions</a> in the <i>Glue DataBrew Developer\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },

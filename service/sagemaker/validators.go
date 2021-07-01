@@ -6933,6 +6933,24 @@ func validateMonitoringStoppingCondition(v *types.MonitoringStoppingCondition) e
 	}
 }
 
+func validateNeoVpcConfig(v *types.NeoVpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NeoVpcConfig"}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNestedFilters(v *types.NestedFilters) error {
 	if v == nil {
 		return nil
@@ -8590,6 +8608,11 @@ func validateOpCreateCompilationJobInput(v *CreateCompilationJobInput) error {
 	} else if v.OutputConfig != nil {
 		if err := validateOutputConfig(v.OutputConfig); err != nil {
 			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfig != nil {
+		if err := validateNeoVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.StoppingCondition == nil {

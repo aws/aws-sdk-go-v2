@@ -47,7 +47,8 @@ type CreateArtifactInput struct {
 	// This member is required.
 	Source *types.ArtifactSource
 
-	// The name of the artifact. Must be unique to your account in an AWS Region.
+	// The name of the artifact. Must be unique to your account in an Amazon Web
+	// Services Region.
 	ArtifactName *string
 
 	// Metadata properties of the tracking entity, trial, or trial component.

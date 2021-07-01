@@ -36,18 +36,18 @@ type ListServicesInput struct {
 	// all filters to be returned by ListServices.
 	Filters []types.ServiceFilter
 
-	// The maximum number of services that you want AWS Cloud Map to return in the
-	// response to a ListServices request. If you don't specify a value for MaxResults,
-	// AWS Cloud Map returns up to 100 services.
+	// The maximum number of services that you want Cloud Map to return in the response
+	// to a ListServices request. If you don't specify a value for MaxResults, Cloud
+	// Map returns up to 100 services.
 	MaxResults *int32
 
 	// For the first ListServices request, omit this value. If the response contains
 	// NextToken, submit another ListServices request to get the next group of results.
 	// Specify the value of NextToken from the previous response in the next request.
-	// AWS Cloud Map gets MaxResults services and then filters them based on the
-	// specified criteria. It's possible that no services in the first MaxResults
-	// services matched the specified criteria but that subsequent groups of MaxResults
-	// services do contain services that match the criteria.
+	// Cloud Map gets MaxResults services and then filters them based on the specified
+	// criteria. It's possible that no services in the first MaxResults services
+	// matched the specified criteria but that subsequent groups of MaxResults services
+	// do contain services that match the criteria.
 	NextToken *string
 }
 
@@ -55,7 +55,7 @@ type ListServicesOutput struct {
 
 	// If the response contains NextToken, submit another ListServices request to get
 	// the next group of results. Specify the value of NextToken from the previous
-	// response in the next request. AWS Cloud Map gets MaxResults services and then
+	// response in the next request. Cloud Map gets MaxResults services and then
 	// filters them based on the specified criteria. It's possible that no services in
 	// the first MaxResults services matched the specified criteria but that subsequent
 	// groups of MaxResults services do contain services that match the criteria.
@@ -141,9 +141,9 @@ var _ ListServicesAPIClient = (*Client)(nil)
 
 // ListServicesPaginatorOptions is the paginator options for ListServices
 type ListServicesPaginatorOptions struct {
-	// The maximum number of services that you want AWS Cloud Map to return in the
-	// response to a ListServices request. If you don't specify a value for MaxResults,
-	// AWS Cloud Map returns up to 100 services.
+	// The maximum number of services that you want Cloud Map to return in the response
+	// to a ListServices request. If you don't specify a value for MaxResults, Cloud
+	// Map returns up to 100 services.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

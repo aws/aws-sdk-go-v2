@@ -36,8 +36,8 @@ type CreateMonitoringScheduleInput struct {
 	// This member is required.
 	MonitoringScheduleConfig *types.MonitoringScheduleConfig
 
-	// The name of the monitoring schedule. The name must be unique within an AWS
-	// Region within an AWS account.
+	// The name of the monitoring schedule. The name must be unique within an Amazon
+	// Web Services Region within an Amazon Web Services account.
 	//
 	// This member is required.
 	MonitoringScheduleName *string
@@ -45,7 +45,7 @@ type CreateMonitoringScheduleInput struct {
 	// (Optional) An array of key-value pairs. For more information, see Using Cost
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the AWS Billing and Cost Management User Guide.
+	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 }
 

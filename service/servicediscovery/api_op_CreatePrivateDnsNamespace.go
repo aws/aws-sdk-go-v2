@@ -18,9 +18,9 @@ import (
 // the resulting DNS name for the service is backend.example.com. Service instances
 // that are registered using a private DNS namespace can be discovered using either
 // a DiscoverInstances request or using DNS. For the current quota on the number of
-// namespaces that you can create using the same AWS account, see AWS Cloud Map
-// Limits (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the AWS Cloud Map Developer Guide.
+// namespaces that you can create using the same account, see Cloud Map quotas
+// (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
+// Cloud Map Developer Guide.
 func (c *Client) CreatePrivateDnsNamespace(ctx context.Context, params *CreatePrivateDnsNamespaceInput, optFns ...func(*Options)) (*CreatePrivateDnsNamespaceOutput, error) {
 	if params == nil {
 		params = &CreatePrivateDnsNamespaceInput{}
@@ -39,8 +39,8 @@ func (c *Client) CreatePrivateDnsNamespace(ctx context.Context, params *CreatePr
 type CreatePrivateDnsNamespaceInput struct {
 
 	// The name that you want to assign to this namespace. When you create a private
-	// DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private
-	// hosted zone that has the same name as the namespace.
+	// DNS namespace, Cloud Map automatically creates an Amazon Route 53 private hosted
+	// zone that has the same name as the namespace.
 	//
 	// This member is required.
 	Name *string
@@ -58,6 +58,9 @@ type CreatePrivateDnsNamespaceInput struct {
 
 	// A description for the namespace.
 	Description *string
+
+	// Properties for the private DNS namespace.
+	Properties *types.PrivateDnsNamespaceProperties
 
 	// The tags to add to the namespace. Each tag consists of a key and an optional
 	// value that you define. Tags keys can be up to 128 characters in length, and tag

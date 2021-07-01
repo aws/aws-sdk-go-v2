@@ -54,10 +54,10 @@ type CreateDevEndpointInput struct {
 	// data analysis library, are not yet supported.
 	ExtraPythonLibsS3Path *string
 
-	// Glue version determines the versions of Apache Spark and Python that AWS Glue
+	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for running your
 	// ETL scripts on development endpoints. For more information about the available
-	// AWS Glue versions and corresponding Spark and Python versions, see Glue version
+	// Glue versions and corresponding Spark and Python versions, see Glue version
 	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
 	// guide. Development endpoints that are created without specifying a Glue version
 	// default to Glue 0.9. You can specify a version of Python support for development
@@ -66,8 +66,7 @@ type CreateDevEndpointInput struct {
 	// Python 2.
 	GlueVersion *string
 
-	// The number of AWS Glue Data Processing Units (DPUs) to allocate to this
-	// DevEndpoint.
+	// The number of Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
 	NumberOfNodes int32
 
 	// The number of workers of a defined workerType that are allocated to the
@@ -100,9 +99,9 @@ type CreateDevEndpointInput struct {
 	SubnetId *string
 
 	// The tags to use with this DevEndpoint. You may use tags to limit access to the
-	// DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS
-	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
-	// developer guide.
+	// DevEndpoint. For more information about tags in Glue, see Amazon Web Services
+	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in
+	// the developer guide.
 	Tags map[string]string
 
 	// The type of predefined worker that is allocated to the development endpoint.
@@ -134,11 +133,6 @@ type CreateDevEndpointOutput struct {
 	// *
 	// "--enable-glue-datacatalog": ""
 	//
-	// * "GLUE_PYTHON_VERSION": "3"
-	//
-	// *
-	// "GLUE_PYTHON_VERSION": "2"
-	//
 	// You can specify a version of Python support for
 	// development endpoints by using the Arguments parameter in the CreateDevEndpoint
 	// or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to
@@ -165,13 +159,15 @@ type CreateDevEndpointOutput struct {
 	// The reason for a current failure in this DevEndpoint.
 	FailureReason *string
 
-	// Glue version determines the versions of Apache Spark and Python that AWS Glue
+	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for running your
-	// ETL scripts on development endpoints.
+	// ETL scripts on development endpoints. For more information about the available
+	// Glue versions and corresponding Spark and Python versions, see Glue version
+	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
+	// guide.
 	GlueVersion *string
 
-	// The number of AWS Glue Data Processing Units (DPUs) allocated to this
-	// DevEndpoint.
+	// The number of Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
 	NumberOfNodes int32
 
 	// The number of workers of a defined workerType that are allocated to the

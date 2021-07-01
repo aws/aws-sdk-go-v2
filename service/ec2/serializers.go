@@ -30861,6 +30861,11 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 		objectKey.String(*v.ClientToken)
 	}
 
+	if v.Context != nil {
+		objectKey := object.Key("Context")
+		objectKey.String(*v.Context)
+	}
+
 	if len(v.ExcessCapacityTerminationPolicy) > 0 {
 		objectKey := object.Key("ExcessCapacityTerminationPolicy")
 		objectKey.String(string(v.ExcessCapacityTerminationPolicy))
@@ -33771,6 +33776,11 @@ func awsEc2query_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value 
 	if v.ClientToken != nil {
 		objectKey := object.Key("ClientToken")
 		objectKey.String(*v.ClientToken)
+	}
+
+	if v.Context != nil {
+		objectKey := object.Key("Context")
+		objectKey.String(*v.Context)
 	}
 
 	if v.DryRun != nil {
@@ -42980,6 +42990,11 @@ func awsEc2query_serializeOpDocumentModifyFleetInput(v *ModifyFleetInput, value 
 	object := value.Object()
 	_ = object
 
+	if v.Context != nil {
+		objectKey := object.Key("Context")
+		objectKey.String(*v.Context)
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
@@ -43672,6 +43687,11 @@ func awsEc2query_serializeOpDocumentModifySnapshotAttributeInput(v *ModifySnapsh
 func awsEc2query_serializeOpDocumentModifySpotFleetRequestInput(v *ModifySpotFleetRequestInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.Context != nil {
+		objectKey := object.Key("Context")
+		objectKey.String(*v.Context)
+	}
 
 	if len(v.ExcessCapacityTerminationPolicy) > 0 {
 		objectKey := object.Key("ExcessCapacityTerminationPolicy")

@@ -16,18 +16,18 @@ import (
 // create the endpoint configuration with the CreateEndpointConfig API. Use this
 // API to deploy models using Amazon SageMaker hosting services. For an example
 // that calls this method when deploying a model to Amazon SageMaker hosting
-// services, see Deploy the Model to Amazon SageMaker Hosting Services (AWS SDK for
-// Python (Boto 3)).
+// services, see Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web
+// Services SDK for Python (Boto 3)).
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
 // You must not delete an EndpointConfig that is in use by an endpoint that is live
 // or while the UpdateEndpoint or CreateEndpoint operations are being performed on
 // the endpoint. To update an endpoint, you must create a new EndpointConfig. The
-// endpoint name must be unique within an AWS Region in your AWS account. When it
-// receives the request, Amazon SageMaker creates the endpoint, launches the
-// resources (ML compute instances), and deploys the model(s) on them. When you
-// call CreateEndpoint, a load call is made to DynamoDB to verify that your
-// endpoint configuration exists. When you read data from a DynamoDB table
-// supporting Eventually Consistent Reads
+// endpoint name must be unique within an Amazon Web Services Region in your Amazon
+// Web Services account. When it receives the request, Amazon SageMaker creates the
+// endpoint, launches the resources (ML compute instances), and deploys the
+// model(s) on them. When you call CreateEndpoint, a load call is made to DynamoDB
+// to verify that your endpoint configuration exists. When you read data from a
+// DynamoDB table supporting Eventually Consistent Reads
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html),
 // the response might not reflect the results of a recently completed write
 // operation. The response might include some stale data. If the dependent entities
@@ -40,15 +40,16 @@ import (
 // it creates the endpoint, it sets the status to InService. Amazon SageMaker can
 // then process incoming requests for inferences. To check the status of an
 // endpoint, use the DescribeEndpoint API. If any of the models hosted at this
-// endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS
-// Security Token Service to download model artifacts from the S3 path you
-// provided. AWS STS is activated in your IAM user account by default. If you
-// previously deactivated AWS STS for a region, you need to reactivate AWS STS for
-// that region. For more information, see Activating and Deactivating AWS STS in an
-// AWS Region
+// endpoint get model data from an Amazon S3 location, Amazon SageMaker uses Amazon
+// Web Services Security Token Service to download model artifacts from the S3 path
+// you provided. Amazon Web Services STS is activated in your IAM user account by
+// default. If you previously deactivated Amazon Web Services STS for a region, you
+// need to reactivate Amazon Web Services STS for that region. For more
+// information, see Activating and Deactivating Amazon Web Services STS in an
+// Amazon Web Services Region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-// in the AWS Identity and Access Management User Guide. To add the IAM role
-// policies for using this API operation, go to the IAM console
+// in the Amazon Web Services Identity and Access Management User Guide. To add the
+// IAM role policies for using this API operation, go to the IAM console
 // (https://console.aws.amazon.com/iam/), and choose Roles in the left navigation
 // pane. Search the IAM role that you want to grant access to use the
 // CreateEndpoint and CreateEndpointConfig API operations, add the following
@@ -88,16 +89,16 @@ type CreateEndpointInput struct {
 	// This member is required.
 	EndpointConfigName *string
 
-	// The name of the endpoint.The name must be unique within an AWS Region in your
-	// AWS account. The name is case-insensitive in CreateEndpoint, but the case is
-	// preserved and must be matched in .
+	// The name of the endpoint.The name must be unique within an Amazon Web Services
+	// Region in your Amazon Web Services account. The name is case-insensitive in
+	// CreateEndpoint, but the case is preserved and must be matched in .
 	//
 	// This member is required.
 	EndpointName *string
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Tagging AWS Resources
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 }

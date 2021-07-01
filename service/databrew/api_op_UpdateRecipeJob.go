@@ -34,16 +34,15 @@ type UpdateRecipeJobInput struct {
 	// This member is required.
 	Name *string
 
-	// One or more artifacts that represent the output from running the job.
-	//
-	// This member is required.
-	Outputs []types.Output
-
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role to be assumed when DataBrew runs the job.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
+
+	// One or more artifacts that represent the AWS Glue Data Catalog output from
+	// running the job.
+	DataCatalogOutputs []types.DataCatalogOutput
 
 	// The Amazon Resource Name (ARN) of an encryption key that is used to protect the
 	// job.
@@ -52,7 +51,7 @@ type UpdateRecipeJobInput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// Server-side encryption with keys managed by AWS KMS.
+	// Server-side encryption with keys managed by KMS.
 	//
 	// * SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
@@ -68,6 +67,9 @@ type UpdateRecipeJobInput struct {
 
 	// The maximum number of times to retry the job after a job run fails.
 	MaxRetries int32
+
+	// One or more artifacts that represent the output from running the job.
+	Outputs []types.Output
 
 	// The job's timeout in minutes. A job that attempts to run longer than this
 	// timeout period ends with a status of TIMEOUT.

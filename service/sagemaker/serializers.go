@@ -14173,6 +14173,13 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinition(v *types.Mode
 		ok.String(*v.ContainerHostname)
 	}
 
+	if v.Environment != nil {
+		ok := object.Key("Environment")
+		if err := awsAwsjson11_serializeDocumentEnvironmentMap(v.Environment, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Image != nil {
 		ok := object.Key("Image")
 		ok.String(*v.Image)
@@ -14769,6 +14776,49 @@ func awsAwsjson11_serializeDocumentMultiModelConfig(v *types.MultiModelConfig, v
 		ok.String(string(v.ModelCacheSetting))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNeoVpcConfig(v *types.NeoVpcConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("SecurityGroupIds")
+		if err := awsAwsjson11_serializeDocumentNeoVpcSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subnets != nil {
+		ok := object.Key("Subnets")
+		if err := awsAwsjson11_serializeDocumentNeoVpcSubnets(v.Subnets, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNeoVpcSecurityGroupIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNeoVpcSubnets(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -17267,6 +17317,13 @@ func awsAwsjson11_serializeOpDocumentCreateCompilationJobInput(v *CreateCompilat
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("VpcConfig")
+		if err := awsAwsjson11_serializeDocumentNeoVpcConfig(v.VpcConfig, ok); err != nil {
 			return err
 		}
 	}

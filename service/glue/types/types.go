@@ -12,11 +12,11 @@ type Action struct {
 	// The job arguments used when this trigger fires. For this job run, they replace
 	// the default arguments set in the job definition itself. You can specify
 	// arguments here that your own job-execution script consumes, as well as arguments
-	// that AWS Glue itself consumes. For information about how to specify and consume
-	// your own Job arguments, see the Calling AWS Glue APIs in Python
+	// that Glue itself consumes. For information about how to specify and consume your
+	// own Job arguments, see the Calling Glue APIs in Python
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the key-value pairs that AWS
-	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
+	// topic in the developer guide. For information about the key-value pairs that
+	// Glue consumes to set up your job, see the Special Parameters Used by Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]string
@@ -24,7 +24,7 @@ type Action struct {
 	// The name of the crawler to be used with this action.
 	CrawlerName *string
 
-	// The name of a job to be executed.
+	// The name of a job to be run.
 	JobName *string
 
 	// Specifies configuration properties of a job run notification.
@@ -156,7 +156,7 @@ type BooleanColumnStatisticsData struct {
 	NumberOfTrues int64
 }
 
-// Specifies a table definition in the AWS Glue Data Catalog.
+// Specifies a table definition in the Glue Data Catalog.
 type CatalogEntry struct {
 
 	// The database in which the table metadata resides.
@@ -183,7 +183,7 @@ type CatalogImportStatus struct {
 	ImportedBy *string
 }
 
-// Specifies an AWS Glue Data Catalog target.
+// Specifies an Glue Data Catalog target.
 type CatalogTarget struct {
 
 	// The name of the database to be synchronized.
@@ -200,7 +200,7 @@ type CatalogTarget struct {
 // Classifiers are triggered during a crawl task. A classifier checks whether a
 // given file is in a format it can handle. If it is, the classifier creates a
 // schema in the form of a StructType object that matches that data format. You can
-// use the standard classifiers that AWS Glue provides, or you can write your own
+// use the standard classifiers that Glue provides, or you can write your own
 // classifiers to best categorize your data sources and specify the appropriate
 // schemas to use for them. A classifier can be a grok classifier, an XML
 // classifier, a JSON classifier, or a custom CSV classifier, as specified in one
@@ -484,17 +484,17 @@ type Connection struct {
 	// false.
 	//
 	// * CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's
-	// root certificate. AWS Glue uses this root certificate to validate the customer’s
-	// certificate when connecting to the customer database. AWS Glue only handles
-	// X.509 certificates. The certificate provided must be DER-encoded and supplied in
+	// root certificate. Glue uses this root certificate to validate the customer’s
+	// certificate when connecting to the customer database. Glue only handles X.509
+	// certificates. The certificate provided must be DER-encoded and supplied in
 	// Base64 encoding PEM format.
 	//
 	// * SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default,
-	// this is false. AWS Glue validates the Signature algorithm and Subject Public Key
+	// this is false. Glue validates the Signature algorithm and Subject Public Key
 	// Algorithm for the customer certificate. The only permitted algorithms for the
 	// Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the
 	// Subject Public Key Algorithm, the key length must be at least 2048. You can set
-	// the value of this property to true to skip AWS Glue’s validation of the customer
+	// the value of this property to true to skip Glue’s validation of the customer
 	// certificate.
 	//
 	// * CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which
@@ -519,7 +519,7 @@ type Connection struct {
 	//
 	// *
 	// KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA
-	// cert file or not. AWS Glue validates for three algorithms: SHA256withRSA,
+	// cert file or not. Glue validates for three algorithms: SHA256withRSA,
 	// SHA384withRSA and SHA512withRSA. Default value is "false".
 	//
 	// * SECRET_ID - The
@@ -547,11 +547,11 @@ type Connection struct {
 	// (Optional).
 	//
 	// * ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD - The encrypted version
-	// of the Kafka client keystore password (if the user has the AWS Glue encrypt
+	// of the Kafka client keystore password (if the user has the Glue encrypt
 	// passwords setting selected).
 	//
 	// * ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The
-	// encrypted version of the Kafka client key password (if the user has the AWS Glue
+	// encrypted version of the Kafka client key password (if the user has the Glue
 	// encrypt passwords setting selected).
 	ConnectionProperties map[string]string
 
@@ -605,15 +605,15 @@ type ConnectionInput struct {
 	// an Amazon Virtual Private Cloud environment (Amazon VPC).
 	//
 	// * MARKETPLACE - Uses
-	// configuration settings contained in a connector purchased from AWS Marketplace
-	// to read from and write to data stores that are not natively supported by AWS
-	// Glue.
+	// configuration settings contained in a connector purchased from Marketplace to
+	// read from and write to data stores that are not natively supported by Glue.
 	//
-	// * CUSTOM - Uses configuration settings contained in a custom connector to
-	// read from and write to data stores that are not natively supported by AWS
-	// Glue.
+	// *
+	// CUSTOM - Uses configuration settings contained in a custom connector to read
+	// from and write to data stores that are not natively supported by Glue.
 	//
-	// SFTP is not supported.
+	// SFTP is
+	// not supported.
 	//
 	// This member is required.
 	ConnectionType ConnectionType
@@ -638,12 +638,12 @@ type ConnectionInput struct {
 // CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD
 // field in the connection properties. You can enable catalog encryption or only
 // password encryption. When a CreationConnection request arrives containing a
-// password, the Data Catalog first encrypts the password using your AWS KMS key.
-// It then encrypts the whole connection object again if catalog encryption is also
-// enabled. This encryption requires that you set AWS KMS key permissions to enable
-// or restrict access on the password key according to your security requirements.
-// For example, you might want only administrators to have decrypt permission on
-// the password key.
+// password, the Data Catalog first encrypts the password using your KMS key. It
+// then encrypts the whole connection object again if catalog encryption is also
+// enabled. This encryption requires that you set KMS key permissions to enable or
+// restrict access on the password key according to your security requirements. For
+// example, you might want only administrators to have decrypt permission on the
+// password key.
 type ConnectionPasswordEncryption struct {
 
 	// When the ReturnConnectionPasswordEncrypted flag is set to "true", passwords
@@ -653,12 +653,12 @@ type ConnectionPasswordEncryption struct {
 	// This member is required.
 	ReturnConnectionPasswordEncrypted bool
 
-	// An AWS KMS key that is used to encrypt the connection password. If connection
+	// An KMS key that is used to encrypt the connection password. If connection
 	// password protection is enabled, the caller of CreateConnection and
-	// UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS
-	// key, to encrypt passwords before storing them in the Data Catalog. You can set
-	// the decrypt permission to enable or restrict access on the password key
-	// according to your security requirements.
+	// UpdateConnection needs at least kms:Encrypt permission on the specified KMS key,
+	// to encrypt passwords before storing them in the Data Catalog. You can set the
+	// decrypt permission to enable or restrict access on the password key according to
+	// your security requirements.
 	AwsKmsKeyId *string
 }
 
@@ -693,7 +693,7 @@ type Crawl struct {
 
 // Specifies a crawler program that examines a data source and uses classifiers to
 // try to determine its schema. If successful, the crawler records metadata
-// concerning the data source in the AWS Glue Data Catalog.
+// concerning the data source in the Glue Data Catalog.
 type Crawler struct {
 
 	// A list of UTF-8 strings that specify the custom classifiers that are associated
@@ -801,7 +801,7 @@ type CrawlerNodeDetails struct {
 // Specifies data stores to crawl.
 type CrawlerTargets struct {
 
-	// Specifies AWS Glue Data Catalog targets.
+	// Specifies Glue Data Catalog targets.
 	CatalogTargets []CatalogTarget
 
 	// Specifies Amazon DynamoDB targets.
@@ -872,8 +872,8 @@ type CreateGrokClassifierRequest struct {
 // Specifies a JSON classifier for CreateClassifier to create.
 type CreateJsonClassifierRequest struct {
 
-	// A JsonPath string defining the JSON data for the classifier to classify. AWS
-	// Glue supports a subset of JsonPath, as described in Writing JsonPath Custom
+	// A JsonPath string defining the JSON data for the classifier to classify. Glue
+	// supports a subset of JsonPath, as described in Writing JsonPath Custom
 	// Classifiers
 	// (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json).
 	//
@@ -1027,10 +1027,10 @@ type DataCatalogEncryptionSettings struct {
 	EncryptionAtRest *EncryptionAtRest
 }
 
-// The AWS Lake Formation principal.
+// The Lake Formation principal.
 type DataLakePrincipal struct {
 
-	// An identifier for the AWS Lake Formation principal.
+	// An identifier for the Lake Formation principal.
 	DataLakePrincipalIdentifier *string
 }
 
@@ -1097,11 +1097,6 @@ type DevEndpoint struct {
 	// *
 	// "--enable-glue-datacatalog": ""
 	//
-	// * "GLUE_PYTHON_VERSION": "3"
-	//
-	// *
-	// "GLUE_PYTHON_VERSION": "2"
-	//
 	// You can specify a version of Python support for
 	// development endpoints by using the Arguments parameter in the CreateDevEndpoint
 	// or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to
@@ -1131,10 +1126,10 @@ type DevEndpoint struct {
 	// The reason for a current failure in this DevEndpoint.
 	FailureReason *string
 
-	// Glue version determines the versions of Apache Spark and Python that AWS Glue
+	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for running your
 	// ETL scripts on development endpoints. For more information about the available
-	// AWS Glue versions and corresponding Spark and Python versions, see Glue version
+	// Glue versions and corresponding Spark and Python versions, see Glue version
 	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
 	// guide. Development endpoints that are created without specifying a Glue version
 	// default to Glue 0.9. You can specify a version of Python support for development
@@ -1149,8 +1144,7 @@ type DevEndpoint struct {
 	// The status of the last update.
 	LastUpdateStatus *string
 
-	// The number of AWS Glue Data Processing Units (DPUs) allocated to this
-	// DevEndpoint.
+	// The number of Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
 	NumberOfNodes int32
 
 	// The number of workers of a defined workerType that are allocated to the
@@ -1277,18 +1271,18 @@ type DynamoDBTarget struct {
 	// to true.
 	ScanAll *bool
 
-	// The percentage of the configured read capacity units to use by the AWS Glue
-	// crawler. Read capacity units is a term defined by DynamoDB, and is a numeric
-	// value that acts as rate limiter for the number of reads that can be performed on
-	// that table per second. The valid values are null or a value between 0.1 to 1.5.
-	// A null value is used when user does not provide a value, and defaults to 0.5 of
-	// the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max
+	// The percentage of the configured read capacity units to use by the Glue crawler.
+	// Read capacity units is a term defined by DynamoDB, and is a numeric value that
+	// acts as rate limiter for the number of reads that can be performed on that table
+	// per second. The valid values are null or a value between 0.1 to 1.5. A null
+	// value is used when user does not provide a value, and defaults to 0.5 of the
+	// configured Read Capacity Unit (for provisioned tables), or 0.25 of the max
 	// configured Read Capacity Unit (for tables using on-demand mode).
 	ScanRate *float64
 }
 
-// An edge represents a directed connection between two AWS Glue components that
-// are part of the workflow the edge belongs to.
+// An edge represents a directed connection between two Glue components that are
+// part of the workflow the edge belongs to.
 type Edge struct {
 
 	// The unique of the node within the workflow where the edge ends.
@@ -1306,7 +1300,7 @@ type EncryptionAtRest struct {
 	// This member is required.
 	CatalogEncryptionMode CatalogEncryptionMode
 
-	// The ID of the AWS KMS key to use for encryption at rest.
+	// The ID of the KMS key to use for encryption at rest.
 	SseAwsKmsKeyId *string
 }
 
@@ -1494,24 +1488,24 @@ type GluePolicy struct {
 	UpdateTime *time.Time
 }
 
-// The database and table in the AWS Glue Data Catalog that is used for input or
-// output data.
+// The database and table in the Glue Data Catalog that is used for input or output
+// data.
 type GlueTable struct {
 
-	// A database name in the AWS Glue Data Catalog.
+	// A database name in the Glue Data Catalog.
 	//
 	// This member is required.
 	DatabaseName *string
 
-	// A table name in the AWS Glue Data Catalog.
+	// A table name in the Glue Data Catalog.
 	//
 	// This member is required.
 	TableName *string
 
-	// A unique identifier for the AWS Glue Data Catalog.
+	// A unique identifier for the Glue Data Catalog.
 	CatalogId *string
 
-	// The name of the connection to the AWS Glue Data Catalog.
+	// The name of the connection to the Glue Data Catalog.
 	ConnectionName *string
 }
 
@@ -1580,17 +1574,16 @@ type JdbcTarget struct {
 // Specifies a job definition.
 type Job struct {
 
-	// This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data
+	// This field is deprecated. Use MaxCapacity instead. The number of Glue data
 	// processing units (DPUs) allocated to runs of this job. You can allocate from 2
 	// to 100 DPUs; the default is 10. A DPU is a relative measure of processing power
 	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the AWS Glue pricing page
-	// (https://aws.amazon.com/glue/pricing/).
+	// information, see the Glue pricing page (https://aws.amazon.com/glue/pricing/).
 	//
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
-	// The JobCommand that executes this job.
+	// The JobCommand that runs this job.
 	Command *JobCommand
 
 	// The connections used for this job.
@@ -1601,11 +1594,11 @@ type Job struct {
 
 	// The default arguments for this job, specified as name-value pairs. You can
 	// specify arguments here that your own job-execution script consumes, as well as
-	// arguments that AWS Glue itself consumes. For information about how to specify
-	// and consume your own Job arguments, see the Calling AWS Glue APIs in Python
+	// arguments that Glue itself consumes. For information about how to specify and
+	// consume your own Job arguments, see the Calling Glue APIs in Python
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the key-value pairs that AWS
-	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
+	// topic in the developer guide. For information about the key-value pairs that
+	// Glue consumes to set up your job, see the Special Parameters Used by Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string
@@ -1617,10 +1610,10 @@ type Job struct {
 	// for this job.
 	ExecutionProperty *ExecutionProperty
 
-	// Glue version determines the versions of Apache Spark and Python that AWS Glue
+	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for jobs of type
-	// Spark. For more information about the available AWS Glue versions and
-	// corresponding Spark and Python versions, see Glue version
+	// Spark. For more information about the available Glue versions and corresponding
+	// Spark and Python versions, see Glue version
 	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
 	// guide. Jobs that are created without specifying a Glue version default to Glue
 	// 0.9.
@@ -1632,22 +1625,27 @@ type Job struct {
 	// This field is reserved for future use.
 	LogUri *string
 
-	// The number of AWS Glue data processing units (DPUs) that can be allocated when
-	// this job runs. A DPU is a relative measure of processing power that consists of
-	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
-	// AWS Glue pricing page (https://aws.amazon.com/glue/pricing/). Do not set Max
-	// Capacity if using WorkerType and NumberOfWorkers. The value that can be
-	// allocated for MaxCapacity depends on whether you are running a Python shell job,
-	// an Apache Spark ETL job, or an Apache Spark streaming ETL job:
+	// For Glue version 1.0 or earlier jobs, using the standard worker type, the number
+	// of Glue data processing units (DPUs) that can be allocated when this job runs. A
+	// DPU is a relative measure of processing power that consists of 4 vCPUs of
+	// compute capacity and 16 GB of memory. For more information, see the Glue pricing
+	// page (https://aws.amazon.com/glue/pricing/). Do not set Max Capacity if using
+	// WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity
+	// depends on whether you are running a Python shell job, an Apache Spark ETL job,
+	// or an Apache Spark streaming ETL job:
 	//
-	// * When you
-	// specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate
-	// either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	// * When you specify a Python shell job
+	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
+	// default is 0.0625 DPU.
 	//
-	// * When you specify an Apache
-	// Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
+	// * When you specify an Apache Spark ETL job
+	// (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
 	// (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
 	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
+	//
+	// For
+	// Glue version 2.0 jobs, you cannot instead specify a Maximum capacity. Instead,
+	// you should specify a Worker type and the Number of workers.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry this job after a JobRun fails.
@@ -1730,7 +1728,7 @@ type JobBookmarksEncryption struct {
 	KmsKeyArn *string
 }
 
-// Specifies code executed when a job is run.
+// Specifies code that runs when a job is run.
 type JobCommand struct {
 
 	// The name of the job command. For an Apache Spark ETL job, this must be glueetl.
@@ -1738,12 +1736,12 @@ type JobCommand struct {
 	// ETL job, this must be gluestreaming.
 	Name *string
 
-	// The Python version being used to execute a Python shell job. Allowed values are
-	// 2 or 3.
+	// The Python version being used to run a Python shell job. Allowed values are 2 or
+	// 3.
 	PythonVersion *string
 
 	// Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that
-	// executes a job.
+	// runs a job.
 	ScriptLocation *string
 }
 
@@ -1757,24 +1755,23 @@ type JobNodeDetails struct {
 // Contains information about a job run.
 type JobRun struct {
 
-	// This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data
+	// This field is deprecated. Use MaxCapacity instead. The number of Glue data
 	// processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be
 	// allocated; the default is 10. A DPU is a relative measure of processing power
 	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the AWS Glue pricing page
-	// (https://aws.amazon.com/glue/pricing/).
+	// information, see the Glue pricing page (https://aws.amazon.com/glue/pricing/).
 	//
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
 	// The job arguments associated with this run. For this job run, they replace the
 	// default arguments set in the job definition itself. You can specify arguments
-	// here that your own job-execution script consumes, as well as arguments that AWS
-	// Glue itself consumes. For information about how to specify and consume your own
-	// job arguments, see the Calling AWS Glue APIs in Python
+	// here that your own job-execution script consumes, as well as arguments that Glue
+	// itself consumes. For information about how to specify and consume your own job
+	// arguments, see the Calling Glue APIs in Python
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the key-value pairs that AWS
-	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
+	// topic in the developer guide. For information about the key-value pairs that
+	// Glue consumes to set up your job, see the Special Parameters Used by Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]string
@@ -1791,10 +1788,10 @@ type JobRun struct {
 	// The amount of time (in seconds) that the job run consumed resources.
 	ExecutionTime int32
 
-	// Glue version determines the versions of Apache Spark and Python that AWS Glue
+	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for jobs of type
-	// Spark. For more information about the available AWS Glue versions and
-	// corresponding Spark and Python versions, see Glue version
+	// Spark. For more information about the available Glue versions and corresponding
+	// Spark and Python versions, see Glue version
 	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
 	// guide. Jobs that are created without specifying a Glue version default to Glue
 	// 0.9.
@@ -1807,7 +1804,7 @@ type JobRun struct {
 	JobName *string
 
 	// The current state of the job run. For more information about the statuses of
-	// jobs that have terminated abnormally, see AWS Glue Job Run Statuses
+	// jobs that have terminated abnormally, see Glue Job Run Statuses
 	// (https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html).
 	JobRunState JobRunState
 
@@ -1815,19 +1812,18 @@ type JobRun struct {
 	LastModifiedOn *time.Time
 
 	// The name of the log group for secure logging that can be server-side encrypted
-	// in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in which
-	// case the default encryption is NONE. If you add a role name and
-	// SecurityConfiguration name (in other words,
+	// in Amazon CloudWatch using KMS. This name can be /aws-glue/jobs/, in which case
+	// the default encryption is NONE. If you add a role name and SecurityConfiguration
+	// name (in other words,
 	// /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security
 	// configuration is used to encrypt the log group.
 	LogGroupName *string
 
-	// The number of AWS Glue data processing units (DPUs) that can be allocated when
-	// this job runs. A DPU is a relative measure of processing power that consists of
-	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
-	// AWS Glue pricing page
-	// (https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/). Do not set
-	// Max Capacity if using WorkerType and NumberOfWorkers. The value that can be
+	// The number of Glue data processing units (DPUs) that can be allocated when this
+	// job runs. A DPU is a relative measure of processing power that consists of 4
+	// vCPUs of compute capacity and 16 GB of memory. For more information, see the
+	// Glue pricing page (https://aws.amazon.com/glue/pricing/). Do not set Max
+	// Capacity if using WorkerType and NumberOfWorkers. The value that can be
 	// allocated for MaxCapacity depends on whether you are running a Python shell job
 	// or an Apache Spark ETL job:
 	//
@@ -1889,29 +1885,28 @@ type JobRun struct {
 // job definition is completely overwritten by this information.
 type JobUpdate struct {
 
-	// This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data
+	// This field is deprecated. Use MaxCapacity instead. The number of Glue data
 	// processing units (DPUs) to allocate to this job. You can allocate from 2 to 100
 	// DPUs; the default is 10. A DPU is a relative measure of processing power that
 	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the AWS Glue pricing page
-	// (https://aws.amazon.com/glue/pricing/).
+	// information, see the Glue pricing page (https://aws.amazon.com/glue/pricing/).
 	//
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
-	// The JobCommand that executes this job (required).
+	// The JobCommand that runs this job (required).
 	Command *JobCommand
 
 	// The connections used for this job.
 	Connections *ConnectionsList
 
 	// The default arguments for this job. You can specify arguments here that your own
-	// job-execution script consumes, as well as arguments that AWS Glue itself
-	// consumes. For information about how to specify and consume your own Job
-	// arguments, see the Calling AWS Glue APIs in Python
+	// job-execution script consumes, as well as arguments that Glue itself consumes.
+	// For information about how to specify and consume your own Job arguments, see the
+	// Calling Glue APIs in Python
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the key-value pairs that AWS
-	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
+	// topic in the developer guide. For information about the key-value pairs that
+	// Glue consumes to set up your job, see the Special Parameters Used by Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string
@@ -1923,10 +1918,10 @@ type JobUpdate struct {
 	// for this job.
 	ExecutionProperty *ExecutionProperty
 
-	// Glue version determines the versions of Apache Spark and Python that AWS Glue
+	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for jobs of type
-	// Spark. For more information about the available AWS Glue versions and
-	// corresponding Spark and Python versions, see Glue version
+	// Spark. For more information about the available Glue versions and corresponding
+	// Spark and Python versions, see Glue version
 	// (https://docs.aws.amazon.com/glue/latest/dg/add-job.html) in the developer
 	// guide.
 	GlueVersion *string
@@ -1934,22 +1929,26 @@ type JobUpdate struct {
 	// This field is reserved for future use.
 	LogUri *string
 
-	// The number of AWS Glue data processing units (DPUs) that can be allocated when
-	// this job runs. A DPU is a relative measure of processing power that consists of
-	// 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the
-	// AWS Glue pricing page (https://aws.amazon.com/glue/pricing/). Do not set Max
-	// Capacity if using WorkerType and NumberOfWorkers. The value that can be
-	// allocated for MaxCapacity depends on whether you are running a Python shell job
-	// or an Apache Spark ETL job:
+	// For Glue version 1.0 or earlier jobs, using the standard worker type, the number
+	// of Glue data processing units (DPUs) that can be allocated when this job runs. A
+	// DPU is a relative measure of processing power that consists of 4 vCPUs of
+	// compute capacity and 16 GB of memory. For more information, see the Glue pricing
+	// page (https://aws.amazon.com/glue/pricing/). Do not set Max Capacity if using
+	// WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity
+	// depends on whether you are running a Python shell job or an Apache Spark ETL
+	// job:
 	//
-	// * When you specify a Python shell job
-	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
-	// default is 0.0625 DPU.
+	// * When you specify a Python shell job (JobCommand.Name="pythonshell"), you
+	// can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
 	//
-	// * When you specify an Apache Spark ETL job
-	// (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
-	// (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
-	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
+	// * When you
+	// specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark
+	// streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to
+	// 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
+	// allocation.
+	//
+	// For Glue version 2.0 jobs, you cannot instead specify a Maximum
+	// capacity. Instead, you should specify a Worker type and the Number of workers.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry this job if it fails.
@@ -1998,8 +1997,8 @@ type JobUpdate struct {
 // A classifier for JSON content.
 type JsonClassifier struct {
 
-	// A JsonPath string defining the JSON data for the classifier to classify. AWS
-	// Glue supports a subset of JsonPath, as described in Writing JsonPath Custom
+	// A JsonPath string defining the JSON data for the classifier to classify. Glue
+	// supports a subset of JsonPath, as described in Writing JsonPath Custom
 	// Classifiers
 	// (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json).
 	//
@@ -2170,48 +2169,47 @@ type MLTransform struct {
 	// quality of your machine learning transform.
 	EvaluationMetrics *EvaluationMetrics
 
-	// This value determines which version of AWS Glue this machine learning transform
-	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
-	// not set, the Glue compatibility defaults to Glue 0.9. For more information, see
-	// AWS Glue Versions
+	// This value determines which version of Glue this machine learning transform is
+	// compatible with. Glue 1.0 is recommended for most customers. If the value is not
+	// set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue
+	// Versions
 	// (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
 	// in the developer guide.
 	GlueVersion *string
 
-	// A list of AWS Glue table definitions used by the transform.
+	// A list of Glue table definitions used by the transform.
 	InputRecordTables []GlueTable
 
-	// A count identifier for the labeling files generated by AWS Glue for this
-	// transform. As you create a better transform, you can iteratively download,
-	// label, and upload the labeling file.
+	// A count identifier for the labeling files generated by Glue for this transform.
+	// As you create a better transform, you can iteratively download, label, and
+	// upload the labeling file.
 	LabelCount int32
 
 	// A timestamp. The last point in time when this machine learning transform was
 	// modified.
 	LastModifiedOn *time.Time
 
-	// The number of AWS Glue data processing units (DPUs) that are allocated to task
-	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
-	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
-	// compute capacity and 16 GB of memory. For more information, see the AWS Glue
-	// pricing page (http://aws.amazon.com/glue/pricing/). MaxCapacity is a mutually
-	// exclusive option with NumberOfWorkers and WorkerType.
+	// The number of Glue data processing units (DPUs) that are allocated to task runs
+	// for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A
+	// DPU is a relative measure of processing power that consists of 4 vCPUs of
+	// compute capacity and 16 GB of memory. For more information, see the Glue pricing
+	// page (http://aws.amazon.com/glue/pricing/). MaxCapacity is a mutually exclusive
+	// option with NumberOfWorkers and WorkerType.
 	//
-	// * If either
-	// NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.
+	// * If either NumberOfWorkers or
+	// WorkerType is set, then MaxCapacity cannot be set.
 	//
-	// * If
-	// MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
+	// * If MaxCapacity is set then
+	// neither NumberOfWorkers or WorkerType can be set.
 	//
-	// * If
-	// WorkerType is set, then NumberOfWorkers is required (and vice versa).
+	// * If WorkerType is set, then
+	// NumberOfWorkers is required (and vice versa).
 	//
-	// *
-	// MaxCapacity and NumberOfWorkers must both be at least 1.
+	// * MaxCapacity and NumberOfWorkers
+	// must both be at least 1.
 	//
-	// When the WorkerType
-	// field is set to a value other than Standard, the MaxCapacity field is set
-	// automatically and becomes read-only.
+	// When the WorkerType field is set to a value other than
+	// Standard, the MaxCapacity field is set automatically and becomes read-only.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry after an MLTaskRun of the machine learning
@@ -2234,12 +2232,12 @@ type MLTransform struct {
 	Parameters *TransformParameters
 
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
-	// permissions. The required permissions include both AWS Glue service role
-	// permissions to AWS Glue resources, and Amazon S3 permissions required by the
-	// transform.
+	// permissions. The required permissions include both Glue service role permissions
+	// to Glue resources, and Amazon S3 permissions required by the transform.
 	//
-	// * This role needs AWS Glue service role permissions to allow access
-	// to resources in AWS Glue. See Attach a Policy to IAM Users That Access AWS Glue
+	// * This
+	// role needs Glue service role permissions to allow access to resources in Glue.
+	// See Attach a Policy to IAM Users That Access Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html).
 	//
 	// *
@@ -2307,7 +2305,7 @@ type MLUserDataEncryption struct {
 	// * DISABLED:
 	// encryption is disabled
 	//
-	// * SSEKMS: use of server-side encryption with AWS Key
+	// * SSEKMS: use of server-side encryption with Key
 	// Management Service (SSE-KMS) for user data stored in Amazon S3.
 	//
 	// This member is required.
@@ -2335,7 +2333,7 @@ type MongoDBTarget struct {
 	ScanAll *bool
 }
 
-// A node represents an AWS Glue component such as a trigger, or job, etc., that is
+// A node represents an Glue component such as a trigger, or job, etc., that is
 // part of a workflow.
 type Node struct {
 
@@ -2345,13 +2343,13 @@ type Node struct {
 	// Details of the Job when the node represents a Job.
 	JobDetails *JobNodeDetails
 
-	// The name of the AWS Glue component represented by the node.
+	// The name of the Glue component represented by the node.
 	Name *string
 
 	// Details of the Trigger when the node represents a Trigger.
 	TriggerDetails *TriggerNodeDetails
 
-	// The type of AWS Glue component represented by the node.
+	// The type of Glue component represented by the node.
 	Type NodeType
 
 	// The unique Id assigned to the node within the workflow.
@@ -2503,7 +2501,7 @@ type PartitionInput struct {
 	// you must specify this parameter for a valid input. The values for the keys for
 	// the new partition must be passed as an array of String objects that must be
 	// ordered in the same order as the partition keys appearing in the Amazon S3
-	// prefix. Otherwise AWS Glue will add the values to the wrong keys.
+	// prefix. Otherwise Glue will add the values to the wrong keys.
 	Values []string
 }
 
@@ -2579,7 +2577,7 @@ type PropertyPredicate struct {
 // When crawling an Amazon S3 data source after the first crawl is complete,
 // specifies whether to crawl the entire dataset again or to crawl only folders
 // that were added since the last crawler run. For more information, see
-// Incremental Crawls in AWS Glue
+// Incremental Crawls in Glue
 // (https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html) in the
 // developer guide.
 type RecrawlPolicy struct {
@@ -2704,7 +2702,7 @@ type SchemaColumn struct {
 	Name *string
 }
 
-// The unique ID of the schema in the AWS Glue schema registry.
+// The unique ID of the schema in the Glue schema registry.
 type SchemaId struct {
 
 	// The name of the schema registry that contains the schema.
@@ -2743,7 +2741,7 @@ type SchemaListItem struct {
 	UpdatedTime *string
 }
 
-// An object that references a schema stored in the AWS Glue Schema Registry.
+// An object that references a schema stored in the Glue Schema Registry.
 type SchemaReference struct {
 
 	// A structure that contains schema identity fields. Either this or the
@@ -2811,7 +2809,7 @@ type SecurityConfiguration struct {
 }
 
 // Defines a non-overlapping region of a table's partitions, allowing multiple
-// requests to be executed in parallel.
+// requests to be run in parallel.
 type Segment struct {
 
 	// The zero-based index number of the segment. For example, if the total number of
@@ -2897,7 +2895,7 @@ type StorageDescriptor struct {
 	// The user-supplied properties in key-value form.
 	Parameters map[string]string
 
-	// An object that references a schema stored in the AWS Glue Schema Registry. When
+	// An object that references a schema stored in the Glue Schema Registry. When
 	// creating a table, you can pass an empty list of columns for the schema, and
 	// instead use a schema reference.
 	SchemaReference *SchemaReference
@@ -2963,7 +2961,7 @@ type Table struct {
 	// A description of the table.
 	Description *string
 
-	// Indicates whether the table has been registered with AWS Lake Formation.
+	// Indicates whether the table has been registered with Lake Formation.
 	IsRegisteredWithLakeFormation bool
 
 	// The last time that the table was accessed. This is usually taken from HDFS, and
@@ -3216,10 +3214,10 @@ type TransformFilterCriteria struct {
 	// The time and date before which the transforms were created.
 	CreatedBefore *time.Time
 
-	// This value determines which version of AWS Glue this machine learning transform
-	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
-	// not set, the Glue compatibility defaults to Glue 0.9. For more information, see
-	// AWS Glue Versions
+	// This value determines which version of Glue this machine learning transform is
+	// compatible with. Glue 1.0 is recommended for most customers. If the value is not
+	// set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue
+	// Versions
 	// (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
 	// in the developer guide.
 	GlueVersion *string
@@ -3402,8 +3400,8 @@ type UpdateJsonClassifierRequest struct {
 	// This member is required.
 	Name *string
 
-	// A JsonPath string defining the JSON data for the classifier to classify. AWS
-	// Glue supports a subset of JsonPath, as described in Writing JsonPath Custom
+	// A JsonPath string defining the JSON data for the classifier to classify. Glue
+	// supports a subset of JsonPath, as described in Writing JsonPath Custom
 	// Classifiers
 	// (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json).
 	JsonPath *string
@@ -3474,8 +3472,8 @@ type UserDefinedFunctionInput struct {
 	ResourceUris []ResourceUri
 }
 
-// A workflow represents a flow in which AWS Glue components should be executed to
-// complete a logical task.
+// A workflow represents a flow in which Glue components should be run to complete
+// a logical task.
 type Workflow struct {
 
 	// The date and time when the workflow was created.
@@ -3487,8 +3485,8 @@ type Workflow struct {
 	// A description of the workflow.
 	Description *string
 
-	// The graph representing all the AWS Glue components that belong to the workflow
-	// as nodes and directed connections between them as edges.
+	// The graph representing all the Glue components that belong to the workflow as
+	// nodes and directed connections between them as edges.
 	Graph *WorkflowGraph
 
 	// The date and time when the workflow was last modified.
@@ -3507,7 +3505,7 @@ type Workflow struct {
 	Name *string
 }
 
-// A workflow graph represents the complete workflow containing all the AWS Glue
+// A workflow graph represents the complete workflow containing all the Glue
 // components present in the workflow and all the directed connections between
 // them.
 type WorkflowGraph struct {
@@ -3516,8 +3514,7 @@ type WorkflowGraph struct {
 	// workflow.
 	Edges []Edge
 
-	// A list of the the AWS Glue components belong to the workflow represented as
-	// nodes.
+	// A list of the the Glue components belong to the workflow represented as nodes.
 	Nodes []Node
 }
 
@@ -3533,11 +3530,11 @@ type WorkflowRun struct {
 	// workflow: foo."
 	ErrorMessage *string
 
-	// The graph representing all the AWS Glue components that belong to the workflow
-	// as nodes and directed connections between them as edges.
+	// The graph representing all the Glue components that belong to the workflow as
+	// nodes and directed connections between them as edges.
 	Graph *WorkflowGraph
 
-	// Name of the workflow that was executed.
+	// Name of the workflow that was run.
 	Name *string
 
 	// The ID of the previous workflow run.

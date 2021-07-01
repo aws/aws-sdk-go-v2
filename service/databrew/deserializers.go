@@ -2335,6 +2335,11 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				sv.CreatedBy = ptr.String(jtv)
 			}
 
+		case "DataCatalogOutputs":
+			if err := awsRestjson1_deserializeDocumentDataCatalogOutputList(&sv.DataCatalogOutputs, value); err != nil {
+				return err
+			}
+
 		case "DatasetName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2666,6 +2671,11 @@ func awsRestjson1_deserializeOpDocumentDescribeJobRunOutput(v **DescribeJobRunOu
 					return err
 				}
 				sv.CompletedOn = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "DataCatalogOutputs":
+			if err := awsRestjson1_deserializeDocumentDataCatalogOutputList(&sv.DataCatalogOutputs, value); err != nil {
+				return err
 			}
 
 		case "DatasetName":
@@ -7318,6 +7328,51 @@ func awsRestjson1_deserializeDocumentDatabaseInputDefinition(v **types.DatabaseI
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDatabaseTableOutputOptions(v **types.DatabaseTableOutputOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatabaseTableOutputOptions
+	if *v == nil {
+		sv = &types.DatabaseTableOutputOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseTableName to be of type string, got %T instead", value)
+				}
+				sv.TableName = ptr.String(jtv)
+			}
+
+		case "TempDirectory":
+			if err := awsRestjson1_deserializeDocumentS3Location(&sv.TempDirectory, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDataCatalogInputDefinition(v **types.DataCatalogInputDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7378,6 +7433,117 @@ func awsRestjson1_deserializeDocumentDataCatalogInputDefinition(v **types.DataCa
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataCatalogOutput(v **types.DataCatalogOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataCatalogOutput
+	if *v == nil {
+		sv = &types.DataCatalogOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CatalogId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CatalogId to be of type string, got %T instead", value)
+				}
+				sv.CatalogId = ptr.String(jtv)
+			}
+
+		case "DatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "DatabaseOptions":
+			if err := awsRestjson1_deserializeDocumentDatabaseTableOutputOptions(&sv.DatabaseOptions, value); err != nil {
+				return err
+			}
+
+		case "Overwrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected OverwriteOutput to be of type *bool, got %T instead", value)
+				}
+				sv.Overwrite = jtv
+			}
+
+		case "S3Options":
+			if err := awsRestjson1_deserializeDocumentS3TableOutputOptions(&sv.S3Options, value); err != nil {
+				return err
+			}
+
+		case "TableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TableName to be of type string, got %T instead", value)
+				}
+				sv.TableName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataCatalogOutputList(v *[]types.DataCatalogOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DataCatalogOutput
+	if *v == nil {
+		cv = []types.DataCatalogOutput{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DataCatalogOutput
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDataCatalogOutput(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8023,6 +8189,11 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.CreatedBy = ptr.String(jtv)
 			}
 
+		case "DataCatalogOutputs":
+			if err := awsRestjson1_deserializeDocumentDataCatalogOutputList(&sv.DataCatalogOutputs, value); err != nil {
+				return err
+			}
+
 		case "DatasetName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8310,6 +8481,11 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 					return err
 				}
 				sv.CompletedOn = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "DataCatalogOutputs":
+			if err := awsRestjson1_deserializeDocumentDataCatalogOutputList(&sv.DataCatalogOutputs, value); err != nil {
+				return err
 			}
 
 		case "DatasetName":
@@ -9541,6 +9717,42 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 					return fmt.Errorf("expected Key to be of type string, got %T instead", value)
 				}
 				sv.Key = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3TableOutputOptions(v **types.S3TableOutputOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3TableOutputOptions
+	if *v == nil {
+		sv = &types.S3TableOutputOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Location":
+			if err := awsRestjson1_deserializeDocumentS3Location(&sv.Location, value); err != nil {
+				return err
 			}
 
 		default:

@@ -38,9 +38,9 @@ type CreateModelPackageGroupInput struct {
 	ModelPackageGroupDescription *string
 
 	// A list of key value pairs associated with the model group. For more information,
-	// see Tagging AWS resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference Guide.
+	// see Tagging Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference Guide.
 	Tags []types.Tag
 }
 

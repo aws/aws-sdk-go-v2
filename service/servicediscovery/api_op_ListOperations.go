@@ -36,16 +36,16 @@ type ListOperationsInput struct {
 	// filters to be returned by ListOperations.
 	Filters []types.OperationFilter
 
-	// The maximum number of items that you want AWS Cloud Map to return in the
-	// response to a ListOperations request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 operations.
+	// The maximum number of items that you want Cloud Map to return in the response to
+	// a ListOperations request. If you don't specify a value for MaxResults, Cloud Map
+	// returns up to 100 operations.
 	MaxResults *int32
 
 	// For the first ListOperations request, omit this value. If the response contains
 	// NextToken, submit another ListOperations request to get the next group of
 	// results. Specify the value of NextToken from the previous response in the next
-	// request. AWS Cloud Map gets MaxResults operations and then filters them based on
-	// the specified criteria. It's possible that no operations in the first MaxResults
+	// request. Cloud Map gets MaxResults operations and then filters them based on the
+	// specified criteria. It's possible that no operations in the first MaxResults
 	// operations matched the specified criteria but that subsequent groups of
 	// MaxResults operations do contain operations that match the criteria.
 	NextToken *string
@@ -55,7 +55,7 @@ type ListOperationsOutput struct {
 
 	// If the response contains NextToken, submit another ListOperations request to get
 	// the next group of results. Specify the value of NextToken from the previous
-	// response in the next request. AWS Cloud Map gets MaxResults operations and then
+	// response in the next request. Cloud Map gets MaxResults operations and then
 	// filters them based on the specified criteria. It's possible that no operations
 	// in the first MaxResults operations matched the specified criteria but that
 	// subsequent groups of MaxResults operations do contain operations that match the
@@ -142,9 +142,9 @@ var _ ListOperationsAPIClient = (*Client)(nil)
 
 // ListOperationsPaginatorOptions is the paginator options for ListOperations
 type ListOperationsPaginatorOptions struct {
-	// The maximum number of items that you want AWS Cloud Map to return in the
-	// response to a ListOperations request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 operations.
+	// The maximum number of items that you want Cloud Map to return in the response to
+	// a ListOperations request. If you don't specify a value for MaxResults, Cloud Map
+	// returns up to 100 operations.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

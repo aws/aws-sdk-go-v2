@@ -1001,6 +1001,53 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateHttpNamespace struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateHttpNamespace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateHttpNamespace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateHttpNamespaceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53AutoNaming_v20170314.UpdateHttpNamespace")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateHttpNamespaceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateInstanceCustomHealthStatus struct {
 }
 
@@ -1033,6 +1080,100 @@ func (m *awsAwsjson11_serializeOpUpdateInstanceCustomHealthStatus) HandleSeriali
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUpdateInstanceCustomHealthStatusInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdatePrivateDnsNamespace struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdatePrivateDnsNamespace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdatePrivateDnsNamespace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdatePrivateDnsNamespaceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53AutoNaming_v20170314.UpdatePrivateDnsNamespace")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdatePrivateDnsNamespaceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdatePublicDnsNamespace struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdatePublicDnsNamespace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdatePublicDnsNamespace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdatePublicDnsNamespaceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53AutoNaming_v20170314.UpdatePublicDnsNamespace")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdatePublicDnsNamespaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1218,6 +1359,18 @@ func awsAwsjson11_serializeDocumentHealthCheckCustomConfig(v *types.HealthCheckC
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentHttpNamespaceChange(v *types.HttpNamespaceChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInstanceIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1303,6 +1456,156 @@ func awsAwsjson11_serializeDocumentOperationFilters(v []types.OperationFilter, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPrivateDnsNamespaceChange(v *types.PrivateDnsNamespaceChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentPrivateDnsNamespacePropertiesChange(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPrivateDnsNamespaceProperties(v *types.PrivateDnsNamespaceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsProperties != nil {
+		ok := object.Key("DnsProperties")
+		if err := awsAwsjson11_serializeDocumentPrivateDnsPropertiesMutable(v.DnsProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPrivateDnsNamespacePropertiesChange(v *types.PrivateDnsNamespacePropertiesChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsProperties != nil {
+		ok := object.Key("DnsProperties")
+		if err := awsAwsjson11_serializeDocumentPrivateDnsPropertiesMutableChange(v.DnsProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPrivateDnsPropertiesMutable(v *types.PrivateDnsPropertiesMutable, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SOA != nil {
+		ok := object.Key("SOA")
+		if err := awsAwsjson11_serializeDocumentSOA(v.SOA, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPrivateDnsPropertiesMutableChange(v *types.PrivateDnsPropertiesMutableChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SOA != nil {
+		ok := object.Key("SOA")
+		if err := awsAwsjson11_serializeDocumentSOAChange(v.SOA, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPublicDnsNamespaceChange(v *types.PublicDnsNamespaceChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentPublicDnsNamespacePropertiesChange(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPublicDnsNamespaceProperties(v *types.PublicDnsNamespaceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsProperties != nil {
+		ok := object.Key("DnsProperties")
+		if err := awsAwsjson11_serializeDocumentPublicDnsPropertiesMutable(v.DnsProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPublicDnsNamespacePropertiesChange(v *types.PublicDnsNamespacePropertiesChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsProperties != nil {
+		ok := object.Key("DnsProperties")
+		if err := awsAwsjson11_serializeDocumentPublicDnsPropertiesMutableChange(v.DnsProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPublicDnsPropertiesMutable(v *types.PublicDnsPropertiesMutable, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SOA != nil {
+		ok := object.Key("SOA")
+		if err := awsAwsjson11_serializeDocumentSOA(v.SOA, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPublicDnsPropertiesMutableChange(v *types.PublicDnsPropertiesMutableChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SOA != nil {
+		ok := object.Key("SOA")
+		if err := awsAwsjson11_serializeDocumentSOAChange(v.SOA, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentServiceChange(v *types.ServiceChange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1363,6 +1666,30 @@ func awsAwsjson11_serializeDocumentServiceFilters(v []types.ServiceFilter, value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSOA(v *types.SOA, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TTL != nil {
+		ok := object.Key("TTL")
+		ok.Long(*v.TTL)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSOAChange(v *types.SOAChange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TTL != nil {
+		ok := object.Key("TTL")
+		ok.Long(*v.TTL)
+	}
+
 	return nil
 }
 
@@ -1455,6 +1782,13 @@ func awsAwsjson11_serializeOpDocumentCreatePrivateDnsNamespaceInput(v *CreatePri
 		ok.String(*v.Name)
 	}
 
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentPrivateDnsNamespaceProperties(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -1487,6 +1821,13 @@ func awsAwsjson11_serializeOpDocumentCreatePublicDnsNamespaceInput(v *CreatePubl
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsAwsjson11_serializeDocumentPublicDnsNamespaceProperties(v.Properties, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -1896,6 +2237,30 @@ func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentUpdateHttpNamespaceInput(v *UpdateHttpNamespaceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("Namespace")
+		if err := awsAwsjson11_serializeDocumentHttpNamespaceChange(v.Namespace, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UpdaterRequestId != nil {
+		ok := object.Key("UpdaterRequestId")
+		ok.String(*v.UpdaterRequestId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentUpdateInstanceCustomHealthStatusInput(v *UpdateInstanceCustomHealthStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1913,6 +2278,54 @@ func awsAwsjson11_serializeOpDocumentUpdateInstanceCustomHealthStatusInput(v *Up
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdatePrivateDnsNamespaceInput(v *UpdatePrivateDnsNamespaceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("Namespace")
+		if err := awsAwsjson11_serializeDocumentPrivateDnsNamespaceChange(v.Namespace, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UpdaterRequestId != nil {
+		ok := object.Key("UpdaterRequestId")
+		ok.String(*v.UpdaterRequestId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdatePublicDnsNamespaceInput(v *UpdatePublicDnsNamespaceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("Namespace")
+		if err := awsAwsjson11_serializeDocumentPublicDnsNamespaceChange(v.Namespace, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UpdaterRequestId != nil {
+		ok := object.Key("UpdaterRequestId")
+		ok.String(*v.UpdaterRequestId)
 	}
 
 	return nil

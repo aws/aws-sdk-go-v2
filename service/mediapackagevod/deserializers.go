@@ -3548,6 +3548,15 @@ func awsRestjson1_deserializeDocumentCmafEncryption(v **types.CmafEncryption, va
 
 	for key, value := range shape {
 		switch key {
+		case "constantInitializationVector":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ConstantInitializationVector = ptr.String(jtv)
+			}
+
 		case "spekeKeyProvider":
 			if err := awsRestjson1_deserializeDocumentSpekeKeyProvider(&sv.SpekeKeyProvider, value); err != nil {
 				return err

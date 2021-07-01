@@ -11,16 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS Glue machine learning transform. This operation creates the
-// transform and all the necessary parameters to train it. Call this operation as
-// the first step in the process of using a machine learning transform (such as the
+// Creates an Glue machine learning transform. This operation creates the transform
+// and all the necessary parameters to train it. Call this operation as the first
+// step in the process of using a machine learning transform (such as the
 // FindMatches transform) for deduplicating data. You can provide an optional
 // Description, in addition to the parameters that you want to use for your
-// algorithm. You must also specify certain parameters for the tasks that AWS Glue
-// runs on your behalf as part of learning from your data and creating a
-// high-quality machine learning transform. These parameters include Role, and
-// optionally, AllocatedCapacity, Timeout, and MaxRetries. For more information,
-// see Jobs
+// algorithm. You must also specify certain parameters for the tasks that Glue runs
+// on your behalf as part of learning from your data and creating a high-quality
+// machine learning transform. These parameters include Role, and optionally,
+// AllocatedCapacity, Timeout, and MaxRetries. For more information, see Jobs
 // (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html).
 func (c *Client) CreateMLTransform(ctx context.Context, params *CreateMLTransformInput, optFns ...func(*Options)) (*CreateMLTransformOutput, error) {
 	if params == nil {
@@ -39,7 +38,7 @@ func (c *Client) CreateMLTransform(ctx context.Context, params *CreateMLTransfor
 
 type CreateMLTransformInput struct {
 
-	// A list of AWS Glue table definitions used by the transform.
+	// A list of Glue table definitions used by the transform.
 	//
 	// This member is required.
 	InputRecordTables []types.GlueTable
@@ -56,12 +55,12 @@ type CreateMLTransformInput struct {
 	Parameters *types.TransformParameters
 
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
-	// permissions. The required permissions include both AWS Glue service role
-	// permissions to AWS Glue resources, and Amazon S3 permissions required by the
-	// transform.
+	// permissions. The required permissions include both Glue service role permissions
+	// to Glue resources, and Amazon S3 permissions required by the transform.
 	//
-	// * This role needs AWS Glue service role permissions to allow access
-	// to resources in AWS Glue. See Attach a Policy to IAM Users That Access AWS Glue
+	// * This
+	// role needs Glue service role permissions to allow access to resources in Glue.
+	// See Attach a Policy to IAM Users That Access Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html).
 	//
 	// *
@@ -76,38 +75,37 @@ type CreateMLTransformInput struct {
 	// default is an empty string.
 	Description *string
 
-	// This value determines which version of AWS Glue this machine learning transform
-	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
-	// not set, the Glue compatibility defaults to Glue 0.9. For more information, see
-	// AWS Glue Versions
+	// This value determines which version of Glue this machine learning transform is
+	// compatible with. Glue 1.0 is recommended for most customers. If the value is not
+	// set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue
+	// Versions
 	// (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
 	// in the developer guide.
 	GlueVersion *string
 
-	// The number of AWS Glue data processing units (DPUs) that are allocated to task
-	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
-	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
-	// compute capacity and 16 GB of memory. For more information, see the AWS Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/). MaxCapacity is a mutually
-	// exclusive option with NumberOfWorkers and WorkerType.
+	// The number of Glue data processing units (DPUs) that are allocated to task runs
+	// for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A
+	// DPU is a relative measure of processing power that consists of 4 vCPUs of
+	// compute capacity and 16 GB of memory. For more information, see the Glue pricing
+	// page (https://aws.amazon.com/glue/pricing/). MaxCapacity is a mutually exclusive
+	// option with NumberOfWorkers and WorkerType.
 	//
-	// * If either
-	// NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.
+	// * If either NumberOfWorkers or
+	// WorkerType is set, then MaxCapacity cannot be set.
 	//
-	// * If
-	// MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
+	// * If MaxCapacity is set then
+	// neither NumberOfWorkers or WorkerType can be set.
 	//
-	// * If
-	// WorkerType is set, then NumberOfWorkers is required (and vice versa).
+	// * If WorkerType is set, then
+	// NumberOfWorkers is required (and vice versa).
 	//
-	// *
-	// MaxCapacity and NumberOfWorkers must both be at least 1.
+	// * MaxCapacity and NumberOfWorkers
+	// must both be at least 1.
 	//
-	// When the WorkerType
-	// field is set to a value other than Standard, the MaxCapacity field is set
-	// automatically and becomes read-only. When the WorkerType field is set to a value
-	// other than Standard, the MaxCapacity field is set automatically and becomes
-	// read-only.
+	// When the WorkerType field is set to a value other than
+	// Standard, the MaxCapacity field is set automatically and becomes read-only. When
+	// the WorkerType field is set to a value other than Standard, the MaxCapacity
+	// field is set automatically and becomes read-only.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry a task for this transform after a task run
@@ -119,8 +117,8 @@ type CreateMLTransformInput struct {
 	NumberOfWorkers *int32
 
 	// The tags to use with this machine learning transform. You may use tags to limit
-	// access to the machine learning transform. For more information about tags in AWS
-	// Glue, see AWS Tags in AWS Glue
+	// access to the machine learning transform. For more information about tags in
+	// Glue, see Amazon Web Services Tags in Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
 	// guide.
 	Tags map[string]string

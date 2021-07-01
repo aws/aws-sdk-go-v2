@@ -69,7 +69,7 @@ type CreateWorkteamInput struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html)
 	// and Using Cost Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
+	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
 
 	// The name of the workforce.

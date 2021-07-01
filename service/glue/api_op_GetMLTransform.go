@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-// Gets an AWS Glue machine learning transform artifact and all its corresponding
+// Gets an Glue machine learning transform artifact and all its corresponding
 // metadata. Machine learning transforms are a special type of transform that use
 // machine learning to learn the details of the transformation to be performed by
 // learning from examples provided by humans. These transformations are then saved
-// by AWS Glue. You can retrieve their metadata by calling GetMLTransform.
+// by Glue. You can retrieve their metadata by calling GetMLTransform.
 func (c *Client) GetMLTransform(ctx context.Context, params *GetMLTransformInput, optFns ...func(*Options)) (*GetMLTransformOutput, error) {
 	if params == nil {
 		params = &GetMLTransformInput{}
@@ -52,15 +52,15 @@ type GetMLTransformOutput struct {
 	// The latest evaluation metrics.
 	EvaluationMetrics *types.EvaluationMetrics
 
-	// This value determines which version of AWS Glue this machine learning transform
-	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
-	// not set, the Glue compatibility defaults to Glue 0.9. For more information, see
-	// AWS Glue Versions
+	// This value determines which version of Glue this machine learning transform is
+	// compatible with. Glue 1.0 is recommended for most customers. If the value is not
+	// set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue
+	// Versions
 	// (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
 	// in the developer guide.
 	GlueVersion *string
 
-	// A list of AWS Glue table definitions used by the transform.
+	// A list of Glue table definitions used by the transform.
 	InputRecordTables []types.GlueTable
 
 	// The number of labels available for this transform.
@@ -69,13 +69,13 @@ type GetMLTransformOutput struct {
 	// The date and time when the transform was last modified.
 	LastModifiedOn *time.Time
 
-	// The number of AWS Glue data processing units (DPUs) that are allocated to task
-	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
-	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
-	// compute capacity and 16 GB of memory. For more information, see the AWS Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/). When the WorkerType field
-	// is set to a value other than Standard, the MaxCapacity field is set
-	// automatically and becomes read-only.
+	// The number of Glue data processing units (DPUs) that are allocated to task runs
+	// for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A
+	// DPU is a relative measure of processing power that consists of 4 vCPUs of
+	// compute capacity and 16 GB of memory. For more information, see the Glue pricing
+	// page (https://aws.amazon.com/glue/pricing/). When the WorkerType field is set to
+	// a value other than Standard, the MaxCapacity field is set automatically and
+	// becomes read-only.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry a task for this transform after a task run

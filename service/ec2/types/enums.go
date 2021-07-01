@@ -3997,6 +3997,7 @@ const (
 	ResourceTypeNetworkAcl                           ResourceType = "network-acl"
 	ResourceTypeNetworkInterface                     ResourceType = "network-interface"
 	ResourceTypeNetworkInsightsAnalysis              ResourceType = "network-insights-analysis"
+	ResourceTypeNetworkInsightsBoundary              ResourceType = "network-insights-boundary"
 	ResourceTypeNetworkInsightsPath                  ResourceType = "network-insights-path"
 	ResourceTypePlacementGroup                       ResourceType = "placement-group"
 	ResourceTypeReservedInstances                    ResourceType = "reserved-instances"
@@ -4051,6 +4052,7 @@ func (ResourceType) Values() []ResourceType {
 		"network-acl",
 		"network-interface",
 		"network-insights-analysis",
+		"network-insights-boundary",
 		"network-insights-path",
 		"placement-group",
 		"reserved-instances",

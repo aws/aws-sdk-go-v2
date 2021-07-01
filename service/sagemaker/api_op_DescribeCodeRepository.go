@@ -60,8 +60,8 @@ type DescribeCodeRepositoryOutput struct {
 
 	// Configuration details about the repository, including the URL where the
 	// repository is located, the default branch, and the Amazon Resource Name (ARN) of
-	// the AWS Secrets Manager secret that contains the credentials used to access the
-	// repository.
+	// the Amazon Web Services Secrets Manager secret that contains the credentials
+	// used to access the repository.
 	GitConfig *types.GitConfig
 
 	// Metadata pertaining to the operation's result.

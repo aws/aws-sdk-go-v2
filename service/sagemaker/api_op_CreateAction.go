@@ -37,7 +37,8 @@ func (c *Client) CreateAction(ctx context.Context, params *CreateActionInput, op
 
 type CreateActionInput struct {
 
-	// The name of the action. Must be unique to your account in an AWS Region.
+	// The name of the action. Must be unique to your account in an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	ActionName *string

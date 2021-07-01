@@ -80,6 +80,9 @@ type UpdateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	CapacityRebalance *bool
 
+	// Reserved.
+	Context *string
+
 	// The amount of time, in seconds, after a scaling activity completes before
 	// another scaling activity can start. The default value is 300. This setting
 	// applies when using simple scaling policies, but not when using other scaling

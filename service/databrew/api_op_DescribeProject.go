@@ -70,7 +70,7 @@ type DescribeProjectOutput struct {
 	// The Amazon Resource Name (ARN) of the project.
 	ResourceArn *string
 
-	// The ARN of the AWS Identity and Access Management (IAM) role to be assumed when
+	// The ARN of the Identity and Access Management (IAM) role to be assumed when
 	// DataBrew runs the job.
 	RoleArn *string
 

@@ -42,7 +42,7 @@ type UpdateDatabaseInput struct {
 	Name *string
 
 	// The ID of the Data Catalog in which the metadata database resides. If none is
-	// provided, the AWS account ID is used by default.
+	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 }
 

@@ -210,6 +210,7 @@ type OperationType string
 const (
 	OperationTypeCreateNamespace    OperationType = "CREATE_NAMESPACE"
 	OperationTypeDeleteNamespace    OperationType = "DELETE_NAMESPACE"
+	OperationTypeUpdateNamespace    OperationType = "UPDATE_NAMESPACE"
 	OperationTypeUpdateService      OperationType = "UPDATE_SERVICE"
 	OperationTypeRegisterInstance   OperationType = "REGISTER_INSTANCE"
 	OperationTypeDeregisterInstance OperationType = "DEREGISTER_INSTANCE"
@@ -222,6 +223,7 @@ func (OperationType) Values() []OperationType {
 	return []OperationType{
 		"CREATE_NAMESPACE",
 		"DELETE_NAMESPACE",
+		"UPDATE_NAMESPACE",
 		"UPDATE_SERVICE",
 		"REGISTER_INSTANCE",
 		"DEREGISTER_INSTANCE",
