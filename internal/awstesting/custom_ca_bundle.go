@@ -1,6 +1,7 @@
 package awstesting
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -9,12 +10,19 @@ import (
 	"time"
 )
 
-func availableLocalAddr(ip string) (string, error) {
+func availableLocalAddr(ip string) (v string, err error) {
 	l, err := net.Listen("tcp", ip+":0")
 	if err != nil {
 		return "", err
 	}
-	defer l.Close()
+	defer func() {
+		closeErr := l.Close()
+		if err == nil {
+			err = closeErr
+		} else if closeErr != nil {
+			err = fmt.Errorf("ip listener close error: %v, original error: %w", closeErr, err)
+		}
+	}()
 
 	return l.Addr().String(), nil
 }
@@ -82,7 +90,7 @@ func CleanupTLSBundleFiles(files ...string) error {
 	return nil
 }
 
-func createTmpFile(b []byte) (string, error) {
+func createTmpFile(b []byte) (v string, err error) {
 	bundleFile, err := ioutil.TempFile(os.TempDir(), "aws-sdk-go-session-test")
 	if err != nil {
 		return "", err
@@ -93,7 +101,15 @@ func createTmpFile(b []byte) (string, error) {
 		return "", err
 	}
 
-	defer bundleFile.Close()
+	defer func() {
+		closeErr := bundleFile.Close()
+		if err == nil {
+			err = closeErr
+		} else if closeErr != nil {
+			err = fmt.Errorf("file close error: %v, original error: %w", closeErr, err)
+		}
+	}()
+
 	return bundleFile.Name(), nil
 }
 

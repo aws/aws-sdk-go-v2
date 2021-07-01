@@ -121,7 +121,7 @@ func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolver, func()) {
 	}
 }
 
-func ssoTestSetup() (func(), error) {
+func ssoTestSetup() (fn func(), err error) {
 	dir, err := ioutil.TempDir("", "sso-test")
 	if err != nil {
 		return nil, err
@@ -139,7 +139,15 @@ func ssoTestSetup() (func(), error) {
 		os.RemoveAll(dir)
 		return nil, err
 	}
-	defer tokenFile.Close()
+
+	defer func() {
+		closeErr := tokenFile.Close()
+		if err == nil {
+			err = closeErr
+		} else if closeErr != nil {
+			err = fmt.Errorf("close error: %v, original error: %w", closeErr, err)
+		}
+	}()
 
 	_, err = tokenFile.WriteString(fmt.Sprintf(ssoTokenCacheFile, time.Now().
 		Add(15*time.Minute).

@@ -2,6 +2,7 @@ package ini
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -11,86 +12,95 @@ import (
 
 func TestValidDataFiles(t *testing.T) {
 	const expectedFileSuffix = "_expected"
-	err := filepath.Walk(filepath.Join("testdata", "valid"), func(path string, info os.FileInfo, err error) error {
-		if strings.HasSuffix(path, expectedFileSuffix) {
-			return nil
-		}
-
-		if info.IsDir() {
-			return nil
-		}
-
-		f, err := os.Open(path)
-		if err != nil {
-			t.Errorf("%s: unexpected error, %v", path, err)
-		}
-		defer f.Close()
-
-		tree, err := ParseAST(f)
-		if err != nil {
-			t.Errorf("%s: unexpected parse error, %v", path, err)
-		}
-
-		v := NewDefaultVisitor(path)
-		err = Walk(tree, v)
-		if err != nil {
-			t.Errorf("%s: unexpected walk error, %v", path, err)
-		}
-
-		expectedPath := path + "_expected"
-		e := map[string]interface{}{}
-
-		b, err := ioutil.ReadFile(expectedPath)
-		if err != nil {
-			// ignore files that do not have an expected file
-			return nil
-		}
-
-		err = json.Unmarshal(b, &e)
-		if err != nil {
-			t.Errorf("unexpected error during deserialization, %v", err)
-		}
-
-		for profile, tableIface := range e {
-			p, ok := v.Sections.GetSection(profile)
-			if !ok {
-				t.Fatal("could not find profile " + profile)
+	err := filepath.Walk(filepath.Join("testdata", "valid"),
+		func(path string, info os.FileInfo, fnErr error) (err error) {
+			if strings.HasSuffix(path, expectedFileSuffix) {
+				return nil
 			}
 
-			table := tableIface.(map[string]interface{})
-			for k, v := range table {
-				switch e := v.(type) {
-				case string:
-					a := p.String(k)
-					if e != a {
-						t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
-					}
-				case int:
-					a := p.Int(k)
-					if int64(e) != a {
-						t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
-					}
-				case float64:
-					v := p.values[k]
-					if v.Type == IntegerType {
+			if info.IsDir() {
+				return nil
+			}
+
+			f, err := os.Open(path)
+			if err != nil {
+				t.Errorf("%s: unexpected error, %v", path, err)
+			}
+
+			defer func() {
+				closeErr := f.Close()
+				if err == nil {
+					err = closeErr
+				} else if closeErr != nil {
+					err = fmt.Errorf("file close error: %v, original error: %w", closeErr, err)
+				}
+			}()
+
+			tree, err := ParseAST(f)
+			if err != nil {
+				t.Errorf("%s: unexpected parse error, %v", path, err)
+			}
+
+			v := NewDefaultVisitor(path)
+			err = Walk(tree, v)
+			if err != nil {
+				t.Errorf("%s: unexpected walk error, %v", path, err)
+			}
+
+			expectedPath := path + "_expected"
+			e := map[string]interface{}{}
+
+			b, err := ioutil.ReadFile(expectedPath)
+			if err != nil {
+				// ignore files that do not have an expected file
+				return nil
+			}
+
+			err = json.Unmarshal(b, &e)
+			if err != nil {
+				t.Errorf("unexpected error during deserialization, %v", err)
+			}
+
+			for profile, tableIface := range e {
+				p, ok := v.Sections.GetSection(profile)
+				if !ok {
+					t.Fatal("could not find profile " + profile)
+				}
+
+				table := tableIface.(map[string]interface{})
+				for k, v := range table {
+					switch e := v.(type) {
+					case string:
+						a := p.String(k)
+						if e != a {
+							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
+						}
+					case int:
 						a := p.Int(k)
 						if int64(e) != a {
 							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
 						}
-					} else {
-						a := p.Float64(k)
-						if e != a {
-							t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
+					case float64:
+						v := p.values[k]
+						if v.Type == IntegerType {
+							a := p.Int(k)
+							if int64(e) != a {
+								t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
+							}
+						} else {
+							a := p.Float64(k)
+							if e != a {
+								t.Errorf("%s: expected %v, but received %v for profile %v", path, e, a, profile)
+							}
 						}
+					default:
+						t.Errorf("unexpected type: %T", e)
 					}
-				default:
-					t.Errorf("unexpected type: %T", e)
 				}
 			}
-		}
 
-		return nil
-	})
+			return nil
+		})
 	if err != nil {
 		t.Fatalf("Error while walking the file tree rooted at root, %d", err)
 	}
@@ -122,7 +132,12 @@ func TestInvalidDataFiles(t *testing.T) {
 			if err != nil {
 				t.Errorf("unexpected error, %v", err)
 			}
-			defer f.Close()
+			defer func() {
+				closeErr := f.Close()
+				if closeErr != nil {
+					t.Errorf("unexpected file close error: %v", closeErr)
+				}
+			}()
 
 			tree, err := ParseAST(f)
 			if err != nil && !c.expectedParseError {

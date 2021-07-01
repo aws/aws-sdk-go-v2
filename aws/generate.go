@@ -24,14 +24,22 @@ func main() {
 	}
 }
 
-func generateFile(filename string, tmplName string, types ptr.Scalars) error {
+func generateFile(filename string, tmplName string, types ptr.Scalars) (err error) {
 	f, err := os.Create(filename)
 	if err != nil {
 		return fmt.Errorf("failed to create %s file, %v", filename, err)
 	}
-	defer f.Close()
 
-	if err := ptrTmpl.ExecuteTemplate(f, tmplName, types); err != nil {
+	defer func() {
+		closeErr := f.Close()
+		if err == nil {
+			err = closeErr
+		} else if closeErr != nil {
+			err = fmt.Errorf("close error: %v, original error: %w", closeErr, err)
+		}
+	}()
+
+	if err = ptrTmpl.ExecuteTemplate(f, tmplName, types); err != nil {
 		return fmt.Errorf("failed to generate %s file, %v", filename, err)
 	}
 
