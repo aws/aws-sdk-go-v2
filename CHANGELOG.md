@@ -1,3 +1,36 @@
+# Release (2021-07-01)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.1.0](internal/ini/CHANGELOG.md#v110-2021-07-01)
+  * **Feature**: Support for `:`, `=`, `[`, `]` being present in expression values.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.9.0](service/autoscaling/CHANGELOG.md#v190-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.6.0](service/databrew/CHANGELOG.md#v160-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.11.0](service/ec2/CHANGELOG.md#v1110-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.8.0](service/glue/CHANGELOG.md#v180-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.8.0](service/kendra/CHANGELOG.md#v180-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.7.0](service/mediaconvert/CHANGELOG.md#v170-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.6.0](service/mediapackagevod/CHANGELOG.md#v160-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.8.0](service/redshift/CHANGELOG.md#v180-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.9.0](service/sagemaker/CHANGELOG.md#v190-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.7.0](service/servicediscovery/CHANGELOG.md#v170-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.6.0](service/sqs/CHANGELOG.md#v160-2021-07-01)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.2.0](service/ssmcontacts/CHANGELOG.md#v120-2021-07-01)
+  * **Feature**: API client updated
+
 # Release (2021-06-25)
 
 ## General Highlights

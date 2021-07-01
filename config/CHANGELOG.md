@@ -1,3 +1,7 @@
+# v1.4.1 (2021-07-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2021-06-25)
 
 * **Feature**: Adds configuration setting for enabling endpoint discovery.

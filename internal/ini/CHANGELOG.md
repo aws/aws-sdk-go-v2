@@ -1,3 +1,7 @@
+# v1.1.0 (2021-07-01)
+
+* **Feature**: Support for `:`, `=`, `[`, `]` being present in expression values.
+
 # v1.0.1 (2021-06-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

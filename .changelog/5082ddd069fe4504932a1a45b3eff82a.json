@@ -1,8 +1,0 @@
-{
-    "id": "5082ddd0-69fe-4504-932a-1a45b3eff82a",
-    "type": "feature",
-    "description": "Support for `:`, `=`, `[`, `]` being present in expression values.",
-    "modules": [
-        "internal/ini"
-    ]
-}

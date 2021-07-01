@@ -1,3 +1,7 @@
+# v1.2.0 (2021-07-01)
+
+* **Feature**: API client updated
+
 # v1.1.0 (2021-06-25)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version
