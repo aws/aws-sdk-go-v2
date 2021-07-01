@@ -306,6 +306,27 @@ ci-test-generate-validate:
 	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
 	git update-index --no-assume-unchanged go.mod go.sum
 
+ci-lint: ci-lint-.
+
+ci-lint-%:
+	@# Run golangci-lint command that uses the pattern to define the root path that the
+	@# module check will start from. Strips off the "ci-lint-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. ci-lint-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst ci-lint-,,$@)) \
+			-fail-fast=false \
+			-c 1 \
+			-skip="internal/repotools" \
+			"golangci-lint run"
+
+ci-lint-install:
+	@# Installs golangci-lint at GoPATH.
+	@# This should be used to run golangci-lint locally.
+	@#
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
 #######################
 # Integration Testing #
 #######################
