@@ -3,7 +3,6 @@
     "type": "feature",
     "description": "API client updated",
     "modules": [
-        "internal/ini",
         "service/autoscaling",
         "service/databrew",
         "service/ec2",
