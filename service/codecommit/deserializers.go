@@ -17954,28 +17954,34 @@ func awsAwsjson11_deserializeDocumentApprovalRule(v **types.ApprovalRule, value 
 
 		case "creationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreationDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreationDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "lastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LastModifiedDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastModifiedDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "lastModifiedUser":
@@ -18443,28 +18449,34 @@ func awsAwsjson11_deserializeDocumentApprovalRuleTemplate(v **types.ApprovalRule
 
 		case "creationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreationDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreationDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "lastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LastModifiedDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastModifiedDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "lastModifiedUser":
@@ -19871,15 +19883,18 @@ func awsAwsjson11_deserializeDocumentComment(v **types.Comment, value interface{
 
 		case "creationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreationDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreationDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "deleted":
@@ -19902,15 +19917,18 @@ func awsAwsjson11_deserializeDocumentComment(v **types.Comment, value interface{
 
 		case "lastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LastModifiedDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastModifiedDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "reactionCounts":
@@ -26553,15 +26571,18 @@ func awsAwsjson11_deserializeDocumentPullRequest(v **types.PullRequest, value in
 
 		case "creationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreationDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreationDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "description":
@@ -26575,15 +26596,18 @@ func awsAwsjson11_deserializeDocumentPullRequest(v **types.PullRequest, value in
 
 		case "lastActivityDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LastModifiedDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastActivityDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastModifiedDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastActivityDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "pullRequestId":
@@ -26911,15 +26935,18 @@ func awsAwsjson11_deserializeDocumentPullRequestEvent(v **types.PullRequestEvent
 
 		case "eventDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected EventDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EventDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected EventDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.EventDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "pullRequestCreatedEventMetadata":
@@ -28086,15 +28113,18 @@ func awsAwsjson11_deserializeDocumentRepositoryMetadata(v **types.RepositoryMeta
 
 		case "creationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreationDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreationDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "defaultBranch":
@@ -28108,15 +28138,18 @@ func awsAwsjson11_deserializeDocumentRepositoryMetadata(v **types.RepositoryMeta
 
 		case "lastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LastModifiedDate to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastModifiedDate to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "repositoryDescription":

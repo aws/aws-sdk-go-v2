@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"sort"
 )
 
@@ -1577,6 +1578,34 @@ func awsAwsquery_serializeDocumentMapWithXmlName(v map[string]string, value quer
 	return nil
 }
 
+func awsAwsquery_serializeDocumentNestedStructWithList(v *types.NestedStructWithList, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ListArg != nil {
+		objectKey := object.Key("ListArg")
+		if err := awsAwsquery_serializeDocumentStringList(v.ListArg, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentNestedStructWithMap(v *types.NestedStructWithMap, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MapArg != nil {
+		objectKey := object.Key("MapArg")
+		if err := awsAwsquery_serializeDocumentStringMap(v.MapArg, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentStructArg(v *types.StructArg, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -1751,6 +1780,13 @@ func awsAwsquery_serializeOpDocumentQueryListsInput(v *QueryListsInput, value qu
 		}
 	}
 
+	if v.NestedWithList != nil {
+		objectKey := object.Key("NestedWithList")
+		if err := awsAwsquery_serializeDocumentNestedStructWithList(v.NestedWithList, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1796,6 +1832,13 @@ func awsAwsquery_serializeOpDocumentQueryMapsInput(v *QueryMapsInput, value quer
 	if v.MapWithXmlMemberName != nil {
 		objectKey := object.Key("MapWithXmlMemberName")
 		if err := awsAwsquery_serializeDocumentMapWithXmlName(v.MapWithXmlMemberName, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NestedStructWithMap != nil {
+		objectKey := object.Key("NestedStructWithMap")
+		if err := awsAwsquery_serializeDocumentNestedStructWithMap(v.NestedStructWithMap, objectKey); err != nil {
 			return err
 		}
 	}
@@ -1853,7 +1896,38 @@ func awsAwsquery_serializeOpDocumentSimpleInputParamsInput(v *SimpleInputParamsI
 
 	if v.Boo != nil {
 		objectKey := object.Key("Boo")
-		objectKey.Double(*v.Boo)
+		switch {
+		case math.IsNaN(*v.Boo):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Boo, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Boo, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Boo)
+
+		}
+	}
+
+	if v.FloatValue != nil {
+		objectKey := object.Key("FloatValue")
+		switch {
+		case math.IsNaN(float64(*v.FloatValue)):
+			objectKey.String("NaN")
+
+		case math.IsInf(float64(*v.FloatValue), 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(float64(*v.FloatValue), -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Float(*v.FloatValue)
+
+		}
 	}
 
 	if v.Foo != nil {

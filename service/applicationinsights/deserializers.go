@@ -16,6 +16,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"math"
 	"strings"
 )
 
@@ -3859,15 +3860,18 @@ func awsAwsjson11_deserializeDocumentConfigurationEvent(v **types.ConfigurationE
 
 		case "EventTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected ConfigurationEventTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EventTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected ConfigurationEventTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.EventTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "MonitoredResourceARN":
@@ -4314,15 +4318,18 @@ func awsAwsjson11_deserializeDocumentObservation(v **types.Observation, value in
 
 		case "EndTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected EndTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected EndTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "HealthEventArn":
@@ -4381,15 +4388,18 @@ func awsAwsjson11_deserializeDocumentObservation(v **types.Observation, value in
 
 		case "LineTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LineTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LineTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LineTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LineTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "LogFilter":
@@ -4484,15 +4494,18 @@ func awsAwsjson11_deserializeDocumentObservation(v **types.Observation, value in
 
 		case "StartTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected StartTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected StartTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "StatesArn":
@@ -4542,15 +4555,36 @@ func awsAwsjson11_deserializeDocumentObservation(v **types.Observation, value in
 
 		case "Value":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Value to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Value to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.Value = ptr.Float64(f64)
 			}
 
 		case "XRayErrorPercent":
@@ -4712,15 +4746,18 @@ func awsAwsjson11_deserializeDocumentProblem(v **types.Problem, value interface{
 
 		case "EndTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected EndTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected EndTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Feedback":
@@ -4766,15 +4803,18 @@ func awsAwsjson11_deserializeDocumentProblem(v **types.Problem, value interface{
 
 		case "StartTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected StartTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected StartTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Status":

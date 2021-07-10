@@ -10,9 +10,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -217,7 +219,18 @@ func TestClient_NoInputAndNoOutput_awsAwsjson10Deserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+			opts := cmp.Options{
+				cmpopts.IgnoreUnexported(
+					middleware.Metadata{},
+				),
+				cmp.FilterValues(func(x, y float64) bool {
+					return math.IsNaN(x) && math.IsNaN(y)
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmp.FilterValues(func(x, y float32) bool {
+					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+			}
+			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

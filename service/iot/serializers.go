@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAcceptCertificateTransfer struct {
@@ -16425,7 +16426,20 @@ func awsRestjson1_serializeDocumentAbortCriteria(v *types.AbortCriteria, value s
 
 	if v.ThresholdPercentage != nil {
 		ok := object.Key("thresholdPercentage")
-		ok.Double(*v.ThresholdPercentage)
+		switch {
+		case math.IsNaN(*v.ThresholdPercentage):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ThresholdPercentage, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ThresholdPercentage, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ThresholdPercentage)
+
+		}
 	}
 
 	return nil
@@ -17025,7 +17039,20 @@ func awsRestjson1_serializeDocumentAwsJobAbortCriteria(v *types.AwsJobAbortCrite
 
 	if v.ThresholdPercentage != nil {
 		ok := object.Key("thresholdPercentage")
-		ok.Double(*v.ThresholdPercentage)
+		switch {
+		case math.IsNaN(*v.ThresholdPercentage):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ThresholdPercentage, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ThresholdPercentage, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ThresholdPercentage)
+
+		}
 	}
 
 	return nil
@@ -17074,7 +17101,20 @@ func awsRestjson1_serializeDocumentAwsJobExponentialRolloutRate(v *types.AwsJobE
 
 	{
 		ok := object.Key("incrementFactor")
-		ok.Double(v.IncrementFactor)
+		switch {
+		case math.IsNaN(v.IncrementFactor):
+			ok.String("NaN")
+
+		case math.IsInf(v.IncrementFactor, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.IncrementFactor, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.IncrementFactor)
+
+		}
 	}
 
 	if v.RateIncreaseCriteria != nil {
@@ -17659,7 +17699,20 @@ func awsRestjson1_serializeDocumentExponentialRolloutRate(v *types.ExponentialRo
 
 	{
 		ok := object.Key("incrementFactor")
-		ok.Double(v.IncrementFactor)
+		switch {
+		case math.IsNaN(v.IncrementFactor):
+			ok.String("NaN")
+
+		case math.IsInf(v.IncrementFactor, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.IncrementFactor, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.IncrementFactor)
+
+		}
 	}
 
 	if v.RateIncreaseCriteria != nil {
@@ -18149,7 +18202,20 @@ func awsRestjson1_serializeDocumentMetricValue(v *types.MetricValue, value smith
 
 	if v.Number != nil {
 		ok := object.Key("number")
-		ok.Double(*v.Number)
+		switch {
+		case math.IsNaN(*v.Number):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Number, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Number, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Number)
+
+		}
 	}
 
 	if v.Numbers != nil {
@@ -18264,7 +18330,20 @@ func awsRestjson1_serializeDocumentNumberList(v []float64, value smithyjson.Valu
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }
@@ -18342,7 +18421,20 @@ func awsRestjson1_serializeDocumentPercentList(v []float64, value smithyjson.Val
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }

@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAcceptAdministratorInvitation struct {
@@ -3756,7 +3757,20 @@ func awsRestjson1_serializeDocumentAwsApiGatewayCanarySettings(v *types.AwsApiGa
 
 	if v.PercentTraffic != 0 {
 		ok := object.Key("PercentTraffic")
-		ok.Double(v.PercentTraffic)
+		switch {
+		case math.IsNaN(v.PercentTraffic):
+			ok.String("NaN")
+
+		case math.IsInf(v.PercentTraffic, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.PercentTraffic, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.PercentTraffic)
+
+		}
 	}
 
 	if v.StageVariableOverrides != nil {
@@ -3844,7 +3858,20 @@ func awsRestjson1_serializeDocumentAwsApiGatewayMethodSettings(v *types.AwsApiGa
 
 	if v.ThrottlingRateLimit != 0 {
 		ok := object.Key("ThrottlingRateLimit")
-		ok.Double(v.ThrottlingRateLimit)
+		switch {
+		case math.IsNaN(v.ThrottlingRateLimit):
+			ok.String("NaN")
+
+		case math.IsInf(v.ThrottlingRateLimit, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ThrottlingRateLimit, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ThrottlingRateLimit)
+
+		}
 	}
 
 	if v.UnauthorizedCacheControlHeaderStrategy != nil {
@@ -4104,7 +4131,20 @@ func awsRestjson1_serializeDocumentAwsApiGatewayV2RouteSettings(v *types.AwsApiG
 
 	if v.ThrottlingRateLimit != 0 {
 		ok := object.Key("ThrottlingRateLimit")
-		ok.Double(v.ThrottlingRateLimit)
+		switch {
+		case math.IsNaN(v.ThrottlingRateLimit):
+			ok.String("NaN")
+
+		case math.IsInf(v.ThrottlingRateLimit, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ThrottlingRateLimit, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ThrottlingRateLimit)
+
+		}
 	}
 
 	return nil
@@ -9493,7 +9533,20 @@ func awsRestjson1_serializeDocumentAwsKmsKeyDetails(v *types.AwsKmsKeyDetails, v
 
 	if v.CreationDate != 0 {
 		ok := object.Key("CreationDate")
-		ok.Double(v.CreationDate)
+		switch {
+		case math.IsNaN(v.CreationDate):
+			ok.String("NaN")
+
+		case math.IsInf(v.CreationDate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.CreationDate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.CreationDate)
+
+		}
 	}
 
 	if v.Description != nil {
@@ -11749,7 +11802,20 @@ func awsRestjson1_serializeDocumentAwsRedshiftClusterRestoreStatus(v *types.AwsR
 
 	if v.CurrentRestoreRateInMegaBytesPerSecond != 0 {
 		ok := object.Key("CurrentRestoreRateInMegaBytesPerSecond")
-		ok.Double(v.CurrentRestoreRateInMegaBytesPerSecond)
+		switch {
+		case math.IsNaN(v.CurrentRestoreRateInMegaBytesPerSecond):
+			ok.String("NaN")
+
+		case math.IsInf(v.CurrentRestoreRateInMegaBytesPerSecond, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.CurrentRestoreRateInMegaBytesPerSecond, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.CurrentRestoreRateInMegaBytesPerSecond)
+
+		}
 	}
 
 	if v.ElapsedTimeInSeconds != 0 {
@@ -13818,7 +13884,20 @@ func awsRestjson1_serializeDocumentCvss(v *types.Cvss, value smithyjson.Value) e
 
 	if v.BaseScore != 0 {
 		ok := object.Key("BaseScore")
-		ok.Double(v.BaseScore)
+		switch {
+		case math.IsNaN(v.BaseScore):
+			ok.String("NaN")
+
+		case math.IsInf(v.BaseScore, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.BaseScore, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.BaseScore)
+
+		}
 	}
 
 	if v.BaseVector != nil {
@@ -14014,12 +14093,38 @@ func awsRestjson1_serializeDocumentGeoLocation(v *types.GeoLocation, value smith
 
 	if v.Lat != 0 {
 		ok := object.Key("Lat")
-		ok.Double(v.Lat)
+		switch {
+		case math.IsNaN(v.Lat):
+			ok.String("NaN")
+
+		case math.IsInf(v.Lat, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Lat, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Lat)
+
+		}
 	}
 
 	if v.Lon != 0 {
 		ok := object.Key("Lon")
-		ok.Double(v.Lon)
+		switch {
+		case math.IsNaN(v.Lon):
+			ok.String("NaN")
+
+		case math.IsInf(v.Lon, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Lon, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Lon)
+
+		}
 	}
 
 	return nil
@@ -14505,17 +14610,56 @@ func awsRestjson1_serializeDocumentNumberFilter(v *types.NumberFilter, value smi
 
 	if v.Eq != 0 {
 		ok := object.Key("Eq")
-		ok.Double(v.Eq)
+		switch {
+		case math.IsNaN(v.Eq):
+			ok.String("NaN")
+
+		case math.IsInf(v.Eq, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Eq, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Eq)
+
+		}
 	}
 
 	if v.Gte != 0 {
 		ok := object.Key("Gte")
-		ok.Double(v.Gte)
+		switch {
+		case math.IsNaN(v.Gte):
+			ok.String("NaN")
+
+		case math.IsInf(v.Gte, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Gte, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Gte)
+
+		}
 	}
 
 	if v.Lte != 0 {
 		ok := object.Key("Lte")
-		ok.Double(v.Lte)
+		switch {
+		case math.IsNaN(v.Lte):
+			ok.String("NaN")
+
+		case math.IsInf(v.Lte, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Lte, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Lte)
+
+		}
 	}
 
 	return nil
@@ -15466,7 +15610,20 @@ func awsRestjson1_serializeDocumentSeverity(v *types.Severity, value smithyjson.
 
 	if v.Product != 0 {
 		ok := object.Key("Product")
-		ok.Double(v.Product)
+		switch {
+		case math.IsNaN(v.Product):
+			ok.String("NaN")
+
+		case math.IsInf(v.Product, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Product, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Product)
+
+		}
 	}
 
 	return nil
@@ -15488,7 +15645,20 @@ func awsRestjson1_serializeDocumentSeverityUpdate(v *types.SeverityUpdate, value
 
 	if v.Product != 0 {
 		ok := object.Key("Product")
-		ok.Double(v.Product)
+		switch {
+		case math.IsNaN(v.Product):
+			ok.String("NaN")
+
+		case math.IsInf(v.Product, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Product, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Product)
+
+		}
 	}
 
 	return nil

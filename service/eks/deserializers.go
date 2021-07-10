@@ -5494,15 +5494,18 @@ func awsRestjson1_deserializeDocumentAddon(v **types.Addon, value interface{}) e
 
 		case "createdAt":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "health":
@@ -5512,15 +5515,18 @@ func awsRestjson1_deserializeDocumentAddon(v **types.Addon, value interface{}) e
 
 		case "modifiedAt":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ModifiedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.ModifiedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "serviceAccountRoleArn":
@@ -6119,15 +6125,18 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 
 		case "createdAt":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "encryptionConfig":
@@ -6507,15 +6516,18 @@ func awsRestjson1_deserializeDocumentFargateProfile(v **types.FargateProfile, va
 
 		case "createdAt":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "fargateProfileArn":
@@ -7415,15 +7427,18 @@ func awsRestjson1_deserializeDocumentNodegroup(v **types.Nodegroup, value interf
 
 		case "createdAt":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "diskSize":
@@ -7461,15 +7476,18 @@ func awsRestjson1_deserializeDocumentNodegroup(v **types.Nodegroup, value interf
 
 		case "modifiedAt":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ModifiedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.ModifiedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "nodegroupArn":
@@ -8669,15 +8687,18 @@ func awsRestjson1_deserializeDocumentUpdate(v **types.Update, value interface{})
 		switch key {
 		case "createdAt":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "errors":

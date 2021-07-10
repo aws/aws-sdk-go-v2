@@ -15,6 +15,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -159,6 +160,54 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 			ExpectURIPath: "/AllQueryStringTypesInput",
 			ExpectQuery: []smithytesting.QueryItem{
 				{Key: "String", Value: "%25%3A%2F%3F%23%5B%5D%40%21%24%26%27%28%29%2A%2B%2C%3B%3D%F0%9F%98%B9"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling NaN float query values.
+		"RestJsonSupportsNaNFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.NaN())),
+				QueryDouble: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "NaN"},
+				{Key: "Double", Value: "NaN"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling Infinity float query values.
+		"RestJsonSupportsInfinityFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.Inf(1))),
+				QueryDouble: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "Infinity"},
+				{Key: "Double", Value: "Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling -Infinity float query values.
+		"RestJsonSupportsNegativeInfinityFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.Inf(-1))),
+				QueryDouble: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "-Infinity"},
+				{Key: "Double", Value: "-Infinity"},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)

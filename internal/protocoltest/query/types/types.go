@@ -6,6 +6,14 @@ type ComplexNestedErrorData struct {
 	Foo *string
 }
 
+type NestedStructWithList struct {
+	ListArg []string
+}
+
+type NestedStructWithMap struct {
+	MapArg map[string]string
+}
+
 type RecursiveXmlShapesOutputNested1 struct {
 	Foo *string
 

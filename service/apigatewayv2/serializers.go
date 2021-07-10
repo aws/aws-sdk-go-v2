@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateApi struct {
@@ -6389,7 +6390,20 @@ func awsRestjson1_serializeDocumentRouteSettings(v *types.RouteSettings, value s
 
 	if v.ThrottlingRateLimit != 0 {
 		ok := object.Key("throttlingRateLimit")
-		ok.Double(v.ThrottlingRateLimit)
+		switch {
+		case math.IsNaN(v.ThrottlingRateLimit):
+			ok.String("NaN")
+
+		case math.IsInf(v.ThrottlingRateLimit, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ThrottlingRateLimit, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ThrottlingRateLimit)
+
+		}
 	}
 
 	return nil

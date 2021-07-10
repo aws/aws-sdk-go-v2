@@ -26,6 +26,8 @@
         "api_op_OperationWithOptionalInputOutput_test.go",
         "api_op_PutAndGetInlineDocuments.go",
         "api_op_PutAndGetInlineDocuments_test.go",
+        "api_op_SimpleScalarProperties.go",
+        "api_op_SimpleScalarProperties_test.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAssociateTrackerConsumer struct {
@@ -3514,7 +3515,20 @@ func awsRestjson1_serializeDocumentBoundingBox(v []float64, value smithyjson.Val
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }
@@ -3713,7 +3727,20 @@ func awsRestjson1_serializeDocumentPosition(v []float64, value smithyjson.Value)
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }
@@ -3735,12 +3762,38 @@ func awsRestjson1_serializeDocumentTruckDimensions(v *types.TruckDimensions, val
 
 	if v.Height != nil {
 		ok := object.Key("Height")
-		ok.Double(*v.Height)
+		switch {
+		case math.IsNaN(*v.Height):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Height, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Height, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Height)
+
+		}
 	}
 
 	if v.Length != nil {
 		ok := object.Key("Length")
-		ok.Double(*v.Length)
+		switch {
+		case math.IsNaN(*v.Length):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Length, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Length, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Length)
+
+		}
 	}
 
 	if len(v.Unit) > 0 {
@@ -3750,7 +3803,20 @@ func awsRestjson1_serializeDocumentTruckDimensions(v *types.TruckDimensions, val
 
 	if v.Width != nil {
 		ok := object.Key("Width")
-		ok.Double(*v.Width)
+		switch {
+		case math.IsNaN(*v.Width):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Width, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Width, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Width)
+
+		}
 	}
 
 	return nil
@@ -3762,7 +3828,20 @@ func awsRestjson1_serializeDocumentTruckWeight(v *types.TruckWeight, value smith
 
 	if v.Total != nil {
 		ok := object.Key("Total")
-		ok.Double(*v.Total)
+		switch {
+		case math.IsNaN(*v.Total):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Total, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Total, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Total)
+
+		}
 	}
 
 	if len(v.Unit) > 0 {

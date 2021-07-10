@@ -11273,15 +11273,18 @@ func awsAwsjson11_deserializeDocumentBusinessReport(v **types.BusinessReport, va
 		switch key {
 		case "DeliveryTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected BusinessReportDeliveryTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DeliveryTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected BusinessReportDeliveryTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DeliveryTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DownloadUrl":
@@ -12263,15 +12266,18 @@ func awsAwsjson11_deserializeDocumentDeviceData(v **types.DeviceData, value inte
 		switch key {
 		case "CreatedTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DeviceDataCreatedTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DeviceDataCreatedTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DeviceArn":
@@ -12445,15 +12451,18 @@ func awsAwsjson11_deserializeDocumentDeviceEvent(v **types.DeviceEvent, value in
 		switch key {
 		case "Timestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DeviceEventTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DeviceEventTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Type":
@@ -12550,15 +12559,18 @@ func awsAwsjson11_deserializeDocumentDeviceNetworkProfileInfo(v **types.DeviceNe
 
 		case "CertificateExpirationTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CertificateTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CertificateExpirationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CertificateTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CertificateExpirationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "NetworkProfileArn":
@@ -12735,15 +12747,18 @@ func awsAwsjson11_deserializeDocumentDeviceStatusInfo(v **types.DeviceStatusInfo
 
 		case "ConnectionStatusUpdatedTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected ConnectionStatusUpdatedTime to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ConnectionStatusUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected ConnectionStatusUpdatedTime to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.ConnectionStatusUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DeviceStatusDetails":

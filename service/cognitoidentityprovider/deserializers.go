@@ -15066,15 +15066,18 @@ func awsAwsjson11_deserializeDocumentAuthEventType(v **types.AuthEventType, valu
 
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "EventContextData":
@@ -15898,15 +15901,18 @@ func awsAwsjson11_deserializeDocumentDeviceType(v **types.DeviceType, value inte
 
 		case "DeviceCreateDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DeviceCreateDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DeviceCreateDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DeviceKey":
@@ -15920,28 +15926,34 @@ func awsAwsjson11_deserializeDocumentDeviceType(v **types.DeviceType, value inte
 
 		case "DeviceLastAuthenticatedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DeviceLastAuthenticatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DeviceLastAuthenticatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DeviceLastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DeviceLastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DeviceLastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		default:
@@ -16308,15 +16320,18 @@ func awsAwsjson11_deserializeDocumentEventFeedbackType(v **types.EventFeedbackTy
 		switch key {
 		case "FeedbackDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.FeedbackDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.FeedbackDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "FeedbackValue":
@@ -16614,15 +16629,18 @@ func awsAwsjson11_deserializeDocumentGroupType(v **types.GroupType, value interf
 		switch key {
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Description":
@@ -16645,15 +16663,18 @@ func awsAwsjson11_deserializeDocumentGroupType(v **types.GroupType, value interf
 
 		case "LastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Precedence":
@@ -16725,15 +16746,18 @@ func awsAwsjson11_deserializeDocumentIdentityProviderType(v **types.IdentityProv
 
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "IdpIdentifiers":
@@ -16743,15 +16767,18 @@ func awsAwsjson11_deserializeDocumentIdentityProviderType(v **types.IdentityProv
 
 		case "LastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "ProviderDetails":
@@ -18126,28 +18153,34 @@ func awsAwsjson11_deserializeDocumentProviderDescription(v **types.ProviderDescr
 		switch key {
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "LastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "ProviderName":
@@ -18597,15 +18630,18 @@ func awsAwsjson11_deserializeDocumentRiskConfigurationType(v **types.RiskConfigu
 
 		case "LastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "RiskExceptionConfiguration":
@@ -19334,15 +19370,18 @@ func awsAwsjson11_deserializeDocumentUICustomizationType(v **types.UICustomizati
 
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "CSS":
@@ -19374,15 +19413,18 @@ func awsAwsjson11_deserializeDocumentUICustomizationType(v **types.UICustomizati
 
 		case "LastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "UserPoolId":
@@ -19750,15 +19792,18 @@ func awsAwsjson11_deserializeDocumentUserImportJobType(v **types.UserImportJobTy
 
 		case "CompletionDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CompletionDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CompletionDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "CompletionMessage":
@@ -19772,15 +19817,18 @@ func awsAwsjson11_deserializeDocumentUserImportJobType(v **types.UserImportJobTy
 
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "FailedUsers":
@@ -19851,15 +19899,18 @@ func awsAwsjson11_deserializeDocumentUserImportJobType(v **types.UserImportJobTy
 
 		case "StartDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.StartDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Status":
@@ -20426,15 +20477,18 @@ func awsAwsjson11_deserializeDocumentUserPoolClientType(v **types.UserPoolClient
 
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DefaultRedirectURI":
@@ -20475,15 +20529,18 @@ func awsAwsjson11_deserializeDocumentUserPoolClientType(v **types.UserPoolClient
 
 		case "LastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "LogoutURLs":
@@ -20575,15 +20632,18 @@ func awsAwsjson11_deserializeDocumentUserPoolDescriptionType(v **types.UserPoolD
 		switch key {
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Id":
@@ -20602,15 +20662,18 @@ func awsAwsjson11_deserializeDocumentUserPoolDescriptionType(v **types.UserPoolD
 
 		case "LastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Name":
@@ -20839,15 +20902,18 @@ func awsAwsjson11_deserializeDocumentUserPoolType(v **types.UserPoolType, value 
 
 		case "CreationDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "CustomDomain":
@@ -20934,15 +21000,18 @@ func awsAwsjson11_deserializeDocumentUserPoolType(v **types.UserPoolType, value 
 
 		case "LastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "MfaConfiguration":
@@ -21125,28 +21194,34 @@ func awsAwsjson11_deserializeDocumentUserType(v **types.UserType, value interfac
 
 		case "UserCreateDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UserCreateDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.UserCreateDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "UserLastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UserLastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.UserLastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Username":
@@ -21607,28 +21682,34 @@ func awsAwsjson11_deserializeOpDocumentAdminGetUserOutput(v **AdminGetUserOutput
 
 		case "UserCreateDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UserCreateDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.UserCreateDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "UserLastModifiedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UserLastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.UserLastModifiedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "UserMFASettingList":

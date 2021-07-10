@@ -12,6 +12,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsquery_serializeOpBuildSuggesters struct {
@@ -1648,7 +1649,20 @@ func awsAwsquery_serializeDocumentDoubleArrayOptions(v *types.DoubleArrayOptions
 
 	if v.DefaultValue != nil {
 		objectKey := object.Key("DefaultValue")
-		objectKey.Double(*v.DefaultValue)
+		switch {
+		case math.IsNaN(*v.DefaultValue):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.DefaultValue, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.DefaultValue, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.DefaultValue)
+
+		}
 	}
 
 	if v.FacetEnabled != nil {
@@ -1680,7 +1694,20 @@ func awsAwsquery_serializeDocumentDoubleOptions(v *types.DoubleOptions, value qu
 
 	if v.DefaultValue != nil {
 		objectKey := object.Key("DefaultValue")
-		objectKey.Double(*v.DefaultValue)
+		switch {
+		case math.IsNaN(*v.DefaultValue):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.DefaultValue, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.DefaultValue, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.DefaultValue)
+
+		}
 	}
 
 	if v.FacetEnabled != nil {

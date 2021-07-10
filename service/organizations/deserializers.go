@@ -8136,15 +8136,18 @@ func awsAwsjson11_deserializeDocumentAccount(v **types.Account, value interface{
 
 		case "JoinedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.JoinedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.JoinedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Name":
@@ -8702,15 +8705,18 @@ func awsAwsjson11_deserializeDocumentCreateAccountStatus(v **types.CreateAccount
 
 		case "CompletedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CompletedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CompletedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "FailureReason":
@@ -8742,15 +8748,18 @@ func awsAwsjson11_deserializeDocumentCreateAccountStatus(v **types.CreateAccount
 
 		case "RequestedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RequestedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.RequestedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "State":
@@ -8878,15 +8887,18 @@ func awsAwsjson11_deserializeDocumentDelegatedAdministrator(v **types.DelegatedA
 
 		case "DelegationEnabledDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DelegationEnabledDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DelegationEnabledDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Email":
@@ -8918,15 +8930,18 @@ func awsAwsjson11_deserializeDocumentDelegatedAdministrator(v **types.DelegatedA
 
 		case "JoinedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.JoinedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.JoinedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Name":
@@ -9014,15 +9029,18 @@ func awsAwsjson11_deserializeDocumentDelegatedService(v **types.DelegatedService
 		switch key {
 		case "DelegationEnabledDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DelegationEnabledDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DelegationEnabledDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "ServicePrincipal":
@@ -9341,15 +9359,18 @@ func awsAwsjson11_deserializeDocumentEffectivePolicy(v **types.EffectivePolicy, 
 		switch key {
 		case "LastUpdatedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdatedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastUpdatedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "PolicyContent":
@@ -9452,15 +9473,18 @@ func awsAwsjson11_deserializeDocumentEnabledServicePrincipal(v **types.EnabledSe
 		switch key {
 		case "DateEnabled":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DateEnabled = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DateEnabled = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "ServicePrincipal":
@@ -9597,15 +9621,18 @@ func awsAwsjson11_deserializeDocumentHandshake(v **types.Handshake, value interf
 
 		case "ExpirationTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ExpirationTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.ExpirationTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Id":
@@ -9624,15 +9651,18 @@ func awsAwsjson11_deserializeDocumentHandshake(v **types.Handshake, value interf
 
 		case "RequestedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RequestedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.RequestedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Resources":

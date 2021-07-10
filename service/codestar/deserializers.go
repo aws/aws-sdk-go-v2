@@ -3693,15 +3693,18 @@ func awsAwsjson11_deserializeOpDocumentCreateUserProfileOutput(v **CreateUserPro
 		switch key {
 		case "createdTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreatedTimestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreatedTimestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "displayName":
@@ -3724,15 +3727,18 @@ func awsAwsjson11_deserializeOpDocumentCreateUserProfileOutput(v **CreateUserPro
 
 		case "lastModifiedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LastModifiedTimestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastModifiedTimestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "sshPublicKey":
@@ -3893,15 +3899,18 @@ func awsAwsjson11_deserializeOpDocumentDescribeProjectOutput(v **DescribeProject
 
 		case "createdTimeStamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreatedTimestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedTimeStamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreatedTimestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedTimeStamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "description":
@@ -3987,15 +3996,18 @@ func awsAwsjson11_deserializeOpDocumentDescribeUserProfileOutput(v **DescribeUse
 		switch key {
 		case "createdTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreatedTimestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreatedTimestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "displayName":
@@ -4018,15 +4030,18 @@ func awsAwsjson11_deserializeOpDocumentDescribeUserProfileOutput(v **DescribeUse
 
 		case "lastModifiedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LastModifiedTimestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastModifiedTimestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "sshPublicKey":
@@ -4492,15 +4507,18 @@ func awsAwsjson11_deserializeOpDocumentUpdateUserProfileOutput(v **UpdateUserPro
 		switch key {
 		case "createdTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected CreatedTimestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreatedTimestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "displayName":
@@ -4523,15 +4541,18 @@ func awsAwsjson11_deserializeOpDocumentUpdateUserProfileOutput(v **UpdateUserPro
 
 		case "lastModifiedTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected LastModifiedTimestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastModifiedTimestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastModifiedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "sshPublicKey":

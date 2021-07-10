@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"time"
 )
 
@@ -10257,7 +10258,20 @@ func awsRestjson1_serializeDocumentDoubleList(v []float64, value smithyjson.Valu
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }

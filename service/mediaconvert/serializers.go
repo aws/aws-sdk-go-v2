@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAssociateCertificate struct {
@@ -1932,7 +1933,20 @@ func awsRestjson1_serializeDocument__listOf__doubleMinNegative60Max6(v []float64
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }
@@ -2681,7 +2695,20 @@ func awsRestjson1_serializeDocumentAudioNormalizationSettings(v *types.AudioNorm
 
 	if v.TargetLkfs != 0 {
 		ok := object.Key("targetLkfs")
-		ok.Double(v.TargetLkfs)
+		switch {
+		case math.IsNaN(v.TargetLkfs):
+			ok.String("NaN")
+
+		case math.IsInf(v.TargetLkfs, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.TargetLkfs, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.TargetLkfs)
+
+		}
 	}
 
 	return nil
@@ -2818,7 +2845,20 @@ func awsRestjson1_serializeDocumentAv1QvbrSettings(v *types.Av1QvbrSettings, val
 
 	if v.QvbrQualityLevelFineTune != 0 {
 		ok := object.Key("qvbrQualityLevelFineTune")
-		ok.Double(v.QvbrQualityLevelFineTune)
+		switch {
+		case math.IsNaN(v.QvbrQualityLevelFineTune):
+			ok.String("NaN")
+
+		case math.IsInf(v.QvbrQualityLevelFineTune, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.QvbrQualityLevelFineTune, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.QvbrQualityLevelFineTune)
+
+		}
 	}
 
 	return nil
@@ -2855,7 +2895,20 @@ func awsRestjson1_serializeDocumentAv1Settings(v *types.Av1Settings, value smith
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if v.MaxBitrate != 0 {
@@ -3447,7 +3500,20 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 
 	if v.MinFinalSegmentLength != 0 {
 		ok := object.Key("minFinalSegmentLength")
-		ok.Double(v.MinFinalSegmentLength)
+		switch {
+		case math.IsNaN(v.MinFinalSegmentLength):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinFinalSegmentLength, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinFinalSegmentLength, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinFinalSegmentLength)
+
+		}
 	}
 
 	if len(v.MpdProfile) > 0 {
@@ -3752,7 +3818,20 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 
 	if v.MinFinalSegmentLength != 0 {
 		ok := object.Key("minFinalSegmentLength")
-		ok.Double(v.MinFinalSegmentLength)
+		switch {
+		case math.IsNaN(v.MinFinalSegmentLength):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinFinalSegmentLength, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinFinalSegmentLength, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinFinalSegmentLength)
+
+		}
 	}
 
 	if len(v.MpdProfile) > 0 {
@@ -4101,22 +4180,74 @@ func awsRestjson1_serializeDocumentEac3AtmosSettings(v *types.Eac3AtmosSettings,
 
 	if v.LoRoCenterMixLevel != 0 {
 		ok := object.Key("loRoCenterMixLevel")
-		ok.Double(v.LoRoCenterMixLevel)
+		switch {
+		case math.IsNaN(v.LoRoCenterMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LoRoCenterMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LoRoCenterMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LoRoCenterMixLevel)
+
+		}
 	}
 
 	if v.LoRoSurroundMixLevel != 0 {
 		ok := object.Key("loRoSurroundMixLevel")
-		ok.Double(v.LoRoSurroundMixLevel)
+		switch {
+		case math.IsNaN(v.LoRoSurroundMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LoRoSurroundMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LoRoSurroundMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LoRoSurroundMixLevel)
+
+		}
 	}
 
 	if v.LtRtCenterMixLevel != 0 {
 		ok := object.Key("ltRtCenterMixLevel")
-		ok.Double(v.LtRtCenterMixLevel)
+		switch {
+		case math.IsNaN(v.LtRtCenterMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LtRtCenterMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LtRtCenterMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LtRtCenterMixLevel)
+
+		}
 	}
 
 	if v.LtRtSurroundMixLevel != 0 {
 		ok := object.Key("ltRtSurroundMixLevel")
-		ok.Double(v.LtRtSurroundMixLevel)
+		switch {
+		case math.IsNaN(v.LtRtSurroundMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LtRtSurroundMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LtRtSurroundMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LtRtSurroundMixLevel)
+
+		}
 	}
 
 	if len(v.MeteringMode) > 0 {
@@ -4203,22 +4334,74 @@ func awsRestjson1_serializeDocumentEac3Settings(v *types.Eac3Settings, value smi
 
 	if v.LoRoCenterMixLevel != 0 {
 		ok := object.Key("loRoCenterMixLevel")
-		ok.Double(v.LoRoCenterMixLevel)
+		switch {
+		case math.IsNaN(v.LoRoCenterMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LoRoCenterMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LoRoCenterMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LoRoCenterMixLevel)
+
+		}
 	}
 
 	if v.LoRoSurroundMixLevel != 0 {
 		ok := object.Key("loRoSurroundMixLevel")
-		ok.Double(v.LoRoSurroundMixLevel)
+		switch {
+		case math.IsNaN(v.LoRoSurroundMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LoRoSurroundMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LoRoSurroundMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LoRoSurroundMixLevel)
+
+		}
 	}
 
 	if v.LtRtCenterMixLevel != 0 {
 		ok := object.Key("ltRtCenterMixLevel")
-		ok.Double(v.LtRtCenterMixLevel)
+		switch {
+		case math.IsNaN(v.LtRtCenterMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LtRtCenterMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LtRtCenterMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LtRtCenterMixLevel)
+
+		}
 	}
 
 	if v.LtRtSurroundMixLevel != 0 {
 		ok := object.Key("ltRtSurroundMixLevel")
-		ok.Double(v.LtRtSurroundMixLevel)
+		switch {
+		case math.IsNaN(v.LtRtSurroundMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LtRtSurroundMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LtRtSurroundMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LtRtSurroundMixLevel)
+
+		}
 	}
 
 	if len(v.MetadataControl) > 0 {
@@ -4456,7 +4639,20 @@ func awsRestjson1_serializeDocumentH264QvbrSettings(v *types.H264QvbrSettings, v
 
 	if v.QvbrQualityLevelFineTune != 0 {
 		ok := object.Key("qvbrQualityLevelFineTune")
-		ok.Double(v.QvbrQualityLevelFineTune)
+		switch {
+		case math.IsNaN(v.QvbrQualityLevelFineTune):
+			ok.String("NaN")
+
+		case math.IsInf(v.QvbrQualityLevelFineTune, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.QvbrQualityLevelFineTune, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.QvbrQualityLevelFineTune)
+
+		}
 	}
 
 	return nil
@@ -4538,7 +4734,20 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if len(v.GopSizeUnits) > 0 {
@@ -4687,7 +4896,20 @@ func awsRestjson1_serializeDocumentH265QvbrSettings(v *types.H265QvbrSettings, v
 
 	if v.QvbrQualityLevelFineTune != 0 {
 		ok := object.Key("qvbrQualityLevelFineTune")
-		ok.Double(v.QvbrQualityLevelFineTune)
+		switch {
+		case math.IsNaN(v.QvbrQualityLevelFineTune):
+			ok.String("NaN")
+
+		case math.IsInf(v.QvbrQualityLevelFineTune, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.QvbrQualityLevelFineTune, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.QvbrQualityLevelFineTune)
+
+		}
 	}
 
 	return nil
@@ -4764,7 +4986,20 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if len(v.GopSizeUnits) > 0 {
@@ -5169,7 +5404,20 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 
 	if v.MinFinalSegmentLength != 0 {
 		ok := object.Key("minFinalSegmentLength")
-		ok.Double(v.MinFinalSegmentLength)
+		switch {
+		case math.IsNaN(v.MinFinalSegmentLength):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinFinalSegmentLength, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinFinalSegmentLength, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinFinalSegmentLength)
+
+		}
 	}
 
 	if v.MinSegmentLength != 0 {
@@ -5885,7 +6133,20 @@ func awsRestjson1_serializeDocumentKantarWatermarkSettings(v *types.KantarWaterm
 
 	if v.FileOffset != 0 {
 		ok := object.Key("fileOffset")
-		ok.Double(v.FileOffset)
+		switch {
+		case math.IsNaN(v.FileOffset):
+			ok.String("NaN")
+
+		case math.IsInf(v.FileOffset, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.FileOffset, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.FileOffset)
+
+		}
 	}
 
 	if v.KantarLicenseId != 0 {
@@ -6039,7 +6300,20 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 
 	if v.FragmentTime != 0 {
 		ok := object.Key("fragmentTime")
-		ok.Double(v.FragmentTime)
+		switch {
+		case math.IsNaN(v.FragmentTime):
+			ok.String("NaN")
+
+		case math.IsInf(v.FragmentTime, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.FragmentTime, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.FragmentTime)
+
+		}
 	}
 
 	if v.MaxPcrInterval != 0 {
@@ -6059,7 +6333,20 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 
 	if v.NullPacketBitrate != 0 {
 		ok := object.Key("nullPacketBitrate")
-		ok.Double(v.NullPacketBitrate)
+		switch {
+		case math.IsNaN(v.NullPacketBitrate):
+			ok.String("NaN")
+
+		case math.IsInf(v.NullPacketBitrate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.NullPacketBitrate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.NullPacketBitrate)
+
+		}
 	}
 
 	if v.PatInterval != 0 {
@@ -6131,7 +6418,20 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 
 	if v.SegmentationTime != 0 {
 		ok := object.Key("segmentationTime")
-		ok.Double(v.SegmentationTime)
+		switch {
+		case math.IsNaN(v.SegmentationTime):
+			ok.String("NaN")
+
+		case math.IsInf(v.SegmentationTime, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.SegmentationTime, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.SegmentationTime)
+
+		}
 	}
 
 	if v.TimedMetadataPid != 0 {
@@ -6537,7 +6837,20 @@ func awsRestjson1_serializeDocumentMpeg2Settings(v *types.Mpeg2Settings, value s
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if len(v.GopSizeUnits) > 0 {
@@ -8031,7 +8344,20 @@ func awsRestjson1_serializeDocumentVp8Settings(v *types.Vp8Settings, value smith
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if v.HrdBufferSize != 0 {
@@ -8103,7 +8429,20 @@ func awsRestjson1_serializeDocumentVp9Settings(v *types.Vp9Settings, value smith
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if v.HrdBufferSize != 0 {

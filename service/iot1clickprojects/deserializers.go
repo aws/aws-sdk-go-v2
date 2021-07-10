@@ -2394,15 +2394,18 @@ func awsRestjson1_deserializeDocumentPlacementDescription(v **types.PlacementDes
 
 		case "createdDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Time to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "placementName":
@@ -2425,15 +2428,18 @@ func awsRestjson1_deserializeDocumentPlacementDescription(v **types.PlacementDes
 
 		case "updatedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Time to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.UpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		default:
@@ -2469,15 +2475,18 @@ func awsRestjson1_deserializeDocumentPlacementSummary(v **types.PlacementSummary
 		switch key {
 		case "createdDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Time to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "placementName":
@@ -2500,15 +2509,18 @@ func awsRestjson1_deserializeDocumentPlacementSummary(v **types.PlacementSummary
 
 		case "updatedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Time to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.UpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		default:
@@ -2628,15 +2640,18 @@ func awsRestjson1_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 
 		case "createdDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Time to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "description":
@@ -2669,15 +2684,18 @@ func awsRestjson1_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 
 		case "updatedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Time to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.UpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		default:
@@ -2722,15 +2740,18 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 
 		case "createdDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Time to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "projectName":
@@ -2749,15 +2770,18 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 
 		case "updatedDate":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Time to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.UpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		default:

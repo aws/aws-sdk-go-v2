@@ -12,9 +12,11 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -85,6 +87,66 @@ func TestClient_SimpleScalarProperties_awsRestjson1Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
+			},
+		},
+		// Supports handling NaN float values.
+		"RestJsonSupportsNaNFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+				DoubleValue: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "floatValue": "NaN",
+			    "DoubleDribble": "NaN"
+			}`))
+			},
+		},
+		// Supports handling Infinity float values.
+		"RestJsonSupportsInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+				DoubleValue: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "floatValue": "Infinity",
+			    "DoubleDribble": "Infinity"
+			}`))
+			},
+		},
+		// Supports handling -Infinity float values.
+		"RestJsonSupportsNegativeInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "floatValue": "-Infinity",
+			    "DoubleDribble": "-Infinity"
+			}`))
 			},
 		},
 	}
@@ -206,6 +268,54 @@ func TestClient_SimpleScalarProperties_awsRestjson1Deserialize(t *testing.T) {
 			}`),
 			ExpectResult: &SimpleScalarPropertiesOutput{},
 		},
+		// Supports handling NaN float values.
+		"RestJsonSupportsNaNFloatInputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "floatValue": "NaN",
+			    "DoubleDribble": "NaN"
+			}`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+				DoubleValue: ptr.Float64(math.NaN()),
+			},
+		},
+		// Supports handling Infinity float values.
+		"RestJsonSupportsInfinityFloatInputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "floatValue": "Infinity",
+			    "DoubleDribble": "Infinity"
+			}`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+				DoubleValue: ptr.Float64(math.Inf(1)),
+			},
+		},
+		// Supports handling -Infinity float values.
+		"RestJsonSupportsNegativeInfinityFloatInputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "floatValue": "-Infinity",
+			    "DoubleDribble": "-Infinity"
+			}`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -257,7 +367,18 @@ func TestClient_SimpleScalarProperties_awsRestjson1Deserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+			opts := cmp.Options{
+				cmpopts.IgnoreUnexported(
+					middleware.Metadata{},
+				),
+				cmp.FilterValues(func(x, y float64) bool {
+					return math.IsNaN(x) && math.IsNaN(y)
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmp.FilterValues(func(x, y float32) bool {
+					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+			}
+			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

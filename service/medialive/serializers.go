@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAcceptInputDeviceTransfer struct {
@@ -4540,7 +4541,20 @@ func awsRestjson1_serializeDocumentAacSettings(v *types.AacSettings, value smith
 
 	if v.Bitrate != 0 {
 		ok := object.Key("bitrate")
-		ok.Double(v.Bitrate)
+		switch {
+		case math.IsNaN(v.Bitrate):
+			ok.String("NaN")
+
+		case math.IsInf(v.Bitrate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Bitrate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Bitrate)
+
+		}
 	}
 
 	if len(v.CodingMode) > 0 {
@@ -4570,7 +4584,20 @@ func awsRestjson1_serializeDocumentAacSettings(v *types.AacSettings, value smith
 
 	if v.SampleRate != 0 {
 		ok := object.Key("sampleRate")
-		ok.Double(v.SampleRate)
+		switch {
+		case math.IsNaN(v.SampleRate):
+			ok.String("NaN")
+
+		case math.IsInf(v.SampleRate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.SampleRate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.SampleRate)
+
+		}
 	}
 
 	if len(v.Spec) > 0 {
@@ -4592,7 +4619,20 @@ func awsRestjson1_serializeDocumentAc3Settings(v *types.Ac3Settings, value smith
 
 	if v.Bitrate != 0 {
 		ok := object.Key("bitrate")
-		ok.Double(v.Bitrate)
+		switch {
+		case math.IsNaN(v.Bitrate):
+			ok.String("NaN")
+
+		case math.IsInf(v.Bitrate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Bitrate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Bitrate)
+
+		}
 	}
 
 	if len(v.BitstreamMode) > 0 {
@@ -4915,7 +4955,20 @@ func awsRestjson1_serializeDocumentAudioNormalizationSettings(v *types.AudioNorm
 
 	if v.TargetLkfs != 0 {
 		ok := object.Key("targetLkfs")
-		ok.Double(v.TargetLkfs)
+		switch {
+		case math.IsNaN(v.TargetLkfs):
+			ok.String("NaN")
+
+		case math.IsInf(v.TargetLkfs, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.TargetLkfs, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.TargetLkfs)
+
+		}
 	}
 
 	return nil
@@ -5453,22 +5506,74 @@ func awsRestjson1_serializeDocumentCaptionRectangle(v *types.CaptionRectangle, v
 
 	{
 		ok := object.Key("height")
-		ok.Double(v.Height)
+		switch {
+		case math.IsNaN(v.Height):
+			ok.String("NaN")
+
+		case math.IsInf(v.Height, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Height, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Height)
+
+		}
 	}
 
 	{
 		ok := object.Key("leftOffset")
-		ok.Double(v.LeftOffset)
+		switch {
+		case math.IsNaN(v.LeftOffset):
+			ok.String("NaN")
+
+		case math.IsInf(v.LeftOffset, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LeftOffset, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LeftOffset)
+
+		}
 	}
 
 	{
 		ok := object.Key("topOffset")
-		ok.Double(v.TopOffset)
+		switch {
+		case math.IsNaN(v.TopOffset):
+			ok.String("NaN")
+
+		case math.IsInf(v.TopOffset, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.TopOffset, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.TopOffset)
+
+		}
 	}
 
 	{
 		ok := object.Key("width")
-		ok.Double(v.Width)
+		switch {
+		case math.IsNaN(v.Width):
+			ok.String("NaN")
+
+		case math.IsInf(v.Width, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Width, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Width)
+
+		}
 	}
 
 	return nil
@@ -5756,7 +5861,20 @@ func awsRestjson1_serializeDocumentEac3Settings(v *types.Eac3Settings, value smi
 
 	if v.Bitrate != 0 {
 		ok := object.Key("bitrate")
-		ok.Double(v.Bitrate)
+		switch {
+		case math.IsNaN(v.Bitrate):
+			ok.String("NaN")
+
+		case math.IsInf(v.Bitrate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Bitrate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Bitrate)
+
+		}
 	}
 
 	if len(v.BitstreamMode) > 0 {
@@ -5801,22 +5919,74 @@ func awsRestjson1_serializeDocumentEac3Settings(v *types.Eac3Settings, value smi
 
 	if v.LoRoCenterMixLevel != 0 {
 		ok := object.Key("loRoCenterMixLevel")
-		ok.Double(v.LoRoCenterMixLevel)
+		switch {
+		case math.IsNaN(v.LoRoCenterMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LoRoCenterMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LoRoCenterMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LoRoCenterMixLevel)
+
+		}
 	}
 
 	if v.LoRoSurroundMixLevel != 0 {
 		ok := object.Key("loRoSurroundMixLevel")
-		ok.Double(v.LoRoSurroundMixLevel)
+		switch {
+		case math.IsNaN(v.LoRoSurroundMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LoRoSurroundMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LoRoSurroundMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LoRoSurroundMixLevel)
+
+		}
 	}
 
 	if v.LtRtCenterMixLevel != 0 {
 		ok := object.Key("ltRtCenterMixLevel")
-		ok.Double(v.LtRtCenterMixLevel)
+		switch {
+		case math.IsNaN(v.LtRtCenterMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LtRtCenterMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LtRtCenterMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LtRtCenterMixLevel)
+
+		}
 	}
 
 	if v.LtRtSurroundMixLevel != 0 {
 		ok := object.Key("ltRtSurroundMixLevel")
-		ok.Double(v.LtRtSurroundMixLevel)
+		switch {
+		case math.IsNaN(v.LtRtSurroundMixLevel):
+			ok.String("NaN")
+
+		case math.IsInf(v.LtRtSurroundMixLevel, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.LtRtSurroundMixLevel, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.LtRtSurroundMixLevel)
+
+		}
 	}
 
 	if len(v.MetadataControl) > 0 {
@@ -6402,7 +6572,20 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if len(v.GopSizeUnits) > 0 {
@@ -6642,7 +6825,20 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if len(v.GopSizeUnits) > 0 {
@@ -7823,7 +8019,20 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 
 	if v.FragmentTime != 0 {
 		ok := object.Key("fragmentTime")
-		ok.Double(v.FragmentTime)
+		switch {
+		case math.IsNaN(v.FragmentTime):
+			ok.String("NaN")
+
+		case math.IsInf(v.FragmentTime, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.FragmentTime, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.FragmentTime)
+
+		}
 	}
 
 	if len(v.Klv) > 0 {
@@ -7843,7 +8052,20 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 
 	if v.NullPacketBitrate != 0 {
 		ok := object.Key("nullPacketBitrate")
-		ok.Double(v.NullPacketBitrate)
+		switch {
+		case math.IsNaN(v.NullPacketBitrate):
+			ok.String("NaN")
+
+		case math.IsInf(v.NullPacketBitrate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.NullPacketBitrate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.NullPacketBitrate)
+
+		}
 	}
 
 	if v.PatInterval != 0 {
@@ -7913,7 +8135,20 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 
 	if v.SegmentationTime != 0 {
 		ok := object.Key("segmentationTime")
-		ok.Double(v.SegmentationTime)
+		switch {
+		case math.IsNaN(v.SegmentationTime):
+			ok.String("NaN")
+
+		case math.IsInf(v.SegmentationTime, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.SegmentationTime, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.SegmentationTime)
+
+		}
 	}
 
 	if len(v.TimedMetadataBehavior) > 0 {
@@ -8149,7 +8384,20 @@ func awsRestjson1_serializeDocumentMp2Settings(v *types.Mp2Settings, value smith
 
 	if v.Bitrate != 0 {
 		ok := object.Key("bitrate")
-		ok.Double(v.Bitrate)
+		switch {
+		case math.IsNaN(v.Bitrate):
+			ok.String("NaN")
+
+		case math.IsInf(v.Bitrate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Bitrate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Bitrate)
+
+		}
 	}
 
 	if len(v.CodingMode) > 0 {
@@ -8159,7 +8407,20 @@ func awsRestjson1_serializeDocumentMp2Settings(v *types.Mp2Settings, value smith
 
 	if v.SampleRate != 0 {
 		ok := object.Key("sampleRate")
-		ok.Double(v.SampleRate)
+		switch {
+		case math.IsNaN(v.SampleRate):
+			ok.String("NaN")
+
+		case math.IsInf(v.SampleRate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.SampleRate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.SampleRate)
+
+		}
 	}
 
 	return nil
@@ -8242,7 +8503,20 @@ func awsRestjson1_serializeDocumentMpeg2Settings(v *types.Mpeg2Settings, value s
 
 	if v.GopSize != 0 {
 		ok := object.Key("gopSize")
-		ok.Double(v.GopSize)
+		switch {
+		case math.IsNaN(v.GopSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.GopSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.GopSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.GopSize)
+
+		}
 	}
 
 	if len(v.GopSizeUnits) > 0 {
@@ -9706,7 +9980,20 @@ func awsRestjson1_serializeDocumentVideoBlackFailoverSettings(v *types.VideoBlac
 
 	if v.BlackDetectThreshold != 0 {
 		ok := object.Key("blackDetectThreshold")
-		ok.Double(v.BlackDetectThreshold)
+		switch {
+		case math.IsNaN(v.BlackDetectThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(v.BlackDetectThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.BlackDetectThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.BlackDetectThreshold)
+
+		}
 	}
 
 	if v.VideoBlackThresholdMsec != 0 {
@@ -9920,7 +10207,20 @@ func awsRestjson1_serializeDocumentWavSettings(v *types.WavSettings, value smith
 
 	if v.BitDepth != 0 {
 		ok := object.Key("bitDepth")
-		ok.Double(v.BitDepth)
+		switch {
+		case math.IsNaN(v.BitDepth):
+			ok.String("NaN")
+
+		case math.IsInf(v.BitDepth, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.BitDepth, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.BitDepth)
+
+		}
 	}
 
 	if len(v.CodingMode) > 0 {
@@ -9930,7 +10230,20 @@ func awsRestjson1_serializeDocumentWavSettings(v *types.WavSettings, value smith
 
 	if v.SampleRate != 0 {
 		ok := object.Key("sampleRate")
-		ok.Double(v.SampleRate)
+		switch {
+		case math.IsNaN(v.SampleRate):
+			ok.String("NaN")
+
+		case math.IsInf(v.SampleRate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.SampleRate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.SampleRate)
+
+		}
 	}
 
 	return nil

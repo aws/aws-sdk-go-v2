@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpBatchDeleteBuilds struct {
@@ -3261,7 +3262,20 @@ func awsAwsjson11_serializeOpDocumentDescribeCodeCoveragesInput(v *DescribeCodeC
 
 	if v.MaxLineCoveragePercentage != nil {
 		ok := object.Key("maxLineCoveragePercentage")
-		ok.Double(*v.MaxLineCoveragePercentage)
+		switch {
+		case math.IsNaN(*v.MaxLineCoveragePercentage):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxLineCoveragePercentage, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxLineCoveragePercentage, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxLineCoveragePercentage)
+
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -3271,7 +3285,20 @@ func awsAwsjson11_serializeOpDocumentDescribeCodeCoveragesInput(v *DescribeCodeC
 
 	if v.MinLineCoveragePercentage != nil {
 		ok := object.Key("minLineCoveragePercentage")
-		ok.Double(*v.MinLineCoveragePercentage)
+		switch {
+		case math.IsNaN(*v.MinLineCoveragePercentage):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MinLineCoveragePercentage, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MinLineCoveragePercentage, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MinLineCoveragePercentage)
+
+		}
 	}
 
 	if v.NextToken != nil {

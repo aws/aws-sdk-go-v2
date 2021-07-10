@@ -46,6 +46,8 @@
         "api_op_HttpPayloadWithXmlNamespace_test.go",
         "api_op_HttpPrefixHeaders.go",
         "api_op_HttpPrefixHeaders_test.go",
+        "api_op_HttpRequestWithFloatLabels.go",
+        "api_op_HttpRequestWithFloatLabels_test.go",
         "api_op_HttpRequestWithGreedyLabelInPath.go",
         "api_op_HttpRequestWithGreedyLabelInPath_test.go",
         "api_op_HttpRequestWithLabels.go",

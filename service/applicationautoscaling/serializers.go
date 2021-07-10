@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpDeleteScalingPolicy struct {
@@ -599,12 +600,38 @@ func awsAwsjson11_serializeDocumentStepAdjustment(v *types.StepAdjustment, value
 
 	if v.MetricIntervalLowerBound != nil {
 		ok := object.Key("MetricIntervalLowerBound")
-		ok.Double(*v.MetricIntervalLowerBound)
+		switch {
+		case math.IsNaN(*v.MetricIntervalLowerBound):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MetricIntervalLowerBound, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MetricIntervalLowerBound, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MetricIntervalLowerBound)
+
+		}
 	}
 
 	if v.MetricIntervalUpperBound != nil {
 		ok := object.Key("MetricIntervalUpperBound")
-		ok.Double(*v.MetricIntervalUpperBound)
+		switch {
+		case math.IsNaN(*v.MetricIntervalUpperBound):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MetricIntervalUpperBound, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MetricIntervalUpperBound, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MetricIntervalUpperBound)
+
+		}
 	}
 
 	if v.ScalingAdjustment != nil {
@@ -719,7 +746,20 @@ func awsAwsjson11_serializeDocumentTargetTrackingScalingPolicyConfiguration(v *t
 
 	if v.TargetValue != nil {
 		ok := object.Key("TargetValue")
-		ok.Double(*v.TargetValue)
+		switch {
+		case math.IsNaN(*v.TargetValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.TargetValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.TargetValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.TargetValue)
+
+		}
 	}
 
 	return nil

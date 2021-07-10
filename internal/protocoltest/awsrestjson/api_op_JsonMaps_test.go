@@ -13,9 +13,11 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -160,6 +162,89 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			    },
 			    "sparseBooleanMap": {
 			        "x": false
+			    }
+			}`))
+			},
+		},
+		// A request that contains a sparse map of sets
+		"RestJsonSerializesSparseSetMap": {
+			Params: &JsonMapsInput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "sparseSetMap": {
+			        "x": [],
+			        "y": ["a", "b"]
+			    }
+			}`))
+			},
+		},
+		// A request that contains a dense map of sets.
+		"RestJsonSerializesDenseSetMap": {
+			Params: &JsonMapsInput{
+				DenseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "denseSetMap": {
+			        "x": [],
+			        "y": ["a", "b"]
+			    }
+			}`))
+			},
+		},
+		// A request that contains a sparse map of sets.
+		"RestJsonSerializesSparseSetMapAndRetainsNull": {
+			Params: &JsonMapsInput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+					"z": nil,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/JsonMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "sparseSetMap": {
+			        "x": [],
+			        "y": ["a", "b"],
+			        "z": null
 			    }
 			}`))
 			},
@@ -359,9 +444,109 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 				},
 			},
 		},
+		// A response that contains a sparse map of sets
+		"RestJsonDeserializesSparseSetMap": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "sparseSetMap": {
+			        "x": [],
+			        "y": ["a", "b"]
+			    }
+			}`),
+			ExpectResult: &JsonMapsOutput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+		},
+		// A response that contains a dense map of sets.
+		"RestJsonDeserializesDenseSetMap": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "denseSetMap": {
+			        "x": [],
+			        "y": ["a", "b"]
+			    }
+			}`),
+			ExpectResult: &JsonMapsOutput{
+				DenseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+		},
+		// A response that contains a sparse map of sets.
+		"RestJsonDeserializesSparseSetMapAndRetainsNull": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "sparseSetMap": {
+			        "x": [],
+			        "y": ["a", "b"],
+			        "z": null
+			    }
+			}`),
+			ExpectResult: &JsonMapsOutput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+					"z": nil,
+				},
+			},
+		},
+		// Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD drop
+		// the null key-value pair.
+		"RestJsonDeserializesDenseSetMapAndSkipsNull": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "denseSetMap": {
+			        "x": [],
+			        "y": ["a", "b"],
+			        "z": null
+			    }
+			}`),
+			ExpectResult: &JsonMapsOutput{
+				DenseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "RestJsonDeserializesDenseSetMapAndSkipsNull" {
+				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#JsonMaps")
+			}
+
 			url := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
@@ -410,7 +595,18 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+			opts := cmp.Options{
+				cmpopts.IgnoreUnexported(
+					middleware.Metadata{},
+				),
+				cmp.FilterValues(func(x, y float64) bool {
+					return math.IsNaN(x) && math.IsNaN(y)
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmp.FilterValues(func(x, y float32) bool {
+					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+			}
+			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

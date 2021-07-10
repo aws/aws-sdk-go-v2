@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateCliToken struct {
@@ -1069,7 +1070,20 @@ func awsRestjson1_serializeDocumentMetricDatum(v *types.MetricDatum, value smith
 
 	if v.Value != nil {
 		ok := object.Key("Value")
-		ok.Double(*v.Value)
+		switch {
+		case math.IsNaN(*v.Value):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Value, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Value, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Value)
+
+		}
 	}
 
 	return nil
@@ -1130,12 +1144,38 @@ func awsRestjson1_serializeDocumentStatisticSet(v *types.StatisticSet, value smi
 
 	if v.Maximum != nil {
 		ok := object.Key("Maximum")
-		ok.Double(*v.Maximum)
+		switch {
+		case math.IsNaN(*v.Maximum):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Maximum, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Maximum, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Maximum)
+
+		}
 	}
 
 	if v.Minimum != nil {
 		ok := object.Key("Minimum")
-		ok.Double(*v.Minimum)
+		switch {
+		case math.IsNaN(*v.Minimum):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Minimum, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Minimum, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Minimum)
+
+		}
 	}
 
 	if v.SampleCount != nil {
@@ -1145,7 +1185,20 @@ func awsRestjson1_serializeDocumentStatisticSet(v *types.StatisticSet, value smi
 
 	if v.Sum != nil {
 		ok := object.Key("Sum")
-		ok.Double(*v.Sum)
+		switch {
+		case math.IsNaN(*v.Sum):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Sum, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Sum, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Sum)
+
+		}
 	}
 
 	return nil

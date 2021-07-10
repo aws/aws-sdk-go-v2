@@ -52,11 +52,7 @@ func TestClient_QueryTimestamps_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryTimestamps
-			&Version=2020-01-08
-			&NormalFormat=2015-01-25T08%3A00%3A00Z
-			&EpochMember=1422172800
-			&EpochTarget=1422172800`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryTimestamps&Version=2020-01-08&NormalFormat=2015-01-25T08%3A00%3A00Z&EpochMember=1422172800&EpochTarget=1422172800`))
 			},
 		},
 	}

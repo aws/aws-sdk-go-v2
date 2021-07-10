@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpCreateBudget struct {
@@ -1059,7 +1060,20 @@ func awsAwsjson11_serializeDocumentActionThreshold(v *types.ActionThreshold, val
 
 	{
 		ok := object.Key("ActionThresholdValue")
-		ok.Double(v.ActionThresholdValue)
+		switch {
+		case math.IsNaN(v.ActionThresholdValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.ActionThresholdValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ActionThresholdValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ActionThresholdValue)
+
+		}
 	}
 
 	return nil
@@ -1348,7 +1362,20 @@ func awsAwsjson11_serializeDocumentNotification(v *types.Notification, value smi
 
 	{
 		ok := object.Key("Threshold")
-		ok.Double(v.Threshold)
+		switch {
+		case math.IsNaN(v.Threshold):
+			ok.String("NaN")
+
+		case math.IsInf(v.Threshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Threshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Threshold)
+
+		}
 	}
 
 	if len(v.ThresholdType) > 0 {

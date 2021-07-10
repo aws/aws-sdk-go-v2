@@ -15,6 +15,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -145,6 +146,54 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 			ExpectQuery: []smithytesting.QueryItem{
 				{Key: "QueryParamsStringKeyA", Value: "Foo"},
 				{Key: "QueryParamsStringKeyB", Value: "Bar"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling NaN float query values.
+		"RestXmlSupportsNaNFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.NaN())),
+				QueryDouble: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "NaN"},
+				{Key: "Double", Value: "NaN"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling Infinity float query values.
+		"RestXmlSupportsInfinityFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.Inf(1))),
+				QueryDouble: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "Infinity"},
+				{Key: "Double", Value: "Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling -Infinity float query values.
+		"RestXmlSupportsNegativeInfinityFloatQueryValues": {
+			Params: &AllQueryStringTypesInput{
+				QueryFloat:  ptr.Float32(float32(math.Inf(-1))),
+				QueryDouble: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
+				{Key: "Float", Value: "-Infinity"},
+				{Key: "Double", Value: "-Infinity"},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpAddInstanceFleet struct {
@@ -2401,7 +2402,20 @@ func awsAwsjson11_serializeDocumentCloudWatchAlarmDefinition(v *types.CloudWatch
 
 	if v.Threshold != nil {
 		ok := object.Key("Threshold")
-		ok.Double(*v.Threshold)
+		switch {
+		case math.IsNaN(*v.Threshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Threshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Threshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Threshold)
+
+		}
 	}
 
 	if len(v.Unit) > 0 {
@@ -2898,7 +2912,20 @@ func awsAwsjson11_serializeDocumentInstanceTypeConfig(v *types.InstanceTypeConfi
 
 	if v.BidPriceAsPercentageOfOnDemandPrice != nil {
 		ok := object.Key("BidPriceAsPercentageOfOnDemandPrice")
-		ok.Double(*v.BidPriceAsPercentageOfOnDemandPrice)
+		switch {
+		case math.IsNaN(*v.BidPriceAsPercentageOfOnDemandPrice):
+			ok.String("NaN")
+
+		case math.IsInf(*v.BidPriceAsPercentageOfOnDemandPrice, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.BidPriceAsPercentageOfOnDemandPrice, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.BidPriceAsPercentageOfOnDemandPrice)
+
+		}
 	}
 
 	if v.Configurations != nil {

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpAddAssociation struct {
@@ -12482,7 +12483,20 @@ func awsAwsjson11_serializeDocumentDesiredWeightAndCapacity(v *types.DesiredWeig
 
 	if v.DesiredWeight != nil {
 		ok := object.Key("DesiredWeight")
-		ok.Float(*v.DesiredWeight)
+		switch {
+		case math.IsNaN(float64(*v.DesiredWeight)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.DesiredWeight), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.DesiredWeight), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.DesiredWeight)
+
+		}
 	}
 
 	if v.VariantName != nil {
@@ -12615,7 +12629,20 @@ func awsAwsjson11_serializeDocumentEndpointInput(v *types.EndpointInput, value s
 
 	if v.ProbabilityThresholdAttribute != nil {
 		ok := object.Key("ProbabilityThresholdAttribute")
-		ok.Double(*v.ProbabilityThresholdAttribute)
+		switch {
+		case math.IsNaN(*v.ProbabilityThresholdAttribute):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ProbabilityThresholdAttribute, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ProbabilityThresholdAttribute, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ProbabilityThresholdAttribute)
+
+		}
 	}
 
 	if len(v.S3DataDistributionType) > 0 {
@@ -15512,7 +15539,20 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 
 	if v.InitialVariantWeight != nil {
 		ok := object.Key("InitialVariantWeight")
-		ok.Float(*v.InitialVariantWeight)
+		switch {
+		case math.IsNaN(float64(*v.InitialVariantWeight)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.InitialVariantWeight), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.InitialVariantWeight), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.InitialVariantWeight)
+
+		}
 	}
 
 	if len(v.InstanceType) > 0 {
@@ -16712,7 +16752,20 @@ func awsAwsjson11_serializeDocumentTrialComponentParameterValue(v types.TrialCom
 	switch uv := v.(type) {
 	case *types.TrialComponentParameterValueMemberNumberValue:
 		av := object.Key("NumberValue")
-		av.Double(uv.Value)
+		switch {
+		case math.IsNaN(uv.Value):
+			av.String("NaN")
+
+		case math.IsInf(uv.Value, 1):
+			av.String("Infinity")
+
+		case math.IsInf(uv.Value, -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(uv.Value)
+
+		}
 
 	case *types.TrialComponentParameterValueMemberStringValue:
 		av := object.Key("StringValue")
@@ -16748,7 +16801,20 @@ func awsAwsjson11_serializeDocumentTuningJobCompletionCriteria(v *types.TuningJo
 
 	if v.TargetObjectiveMetricValue != nil {
 		ok := object.Key("TargetObjectiveMetricValue")
-		ok.Float(*v.TargetObjectiveMetricValue)
+		switch {
+		case math.IsNaN(float64(*v.TargetObjectiveMetricValue)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.TargetObjectiveMetricValue), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.TargetObjectiveMetricValue), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.TargetObjectiveMetricValue)
+
+		}
 	}
 
 	return nil

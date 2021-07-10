@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsEc2query_serializeOpEmptyInputAndEmptyOutput struct {
@@ -1091,6 +1092,20 @@ func awsEc2query_serializeDocumentListWithXmlName(v []string, value query.Value)
 	return nil
 }
 
+func awsEc2query_serializeDocumentNestedStructWithList(v *types.NestedStructWithList, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ListArg != nil {
+		objectKey := object.FlatKey("ListArg")
+		if err := awsEc2query_serializeDocumentStringList(v.ListArg, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentStructArg(v *types.StructArg, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -1232,6 +1247,13 @@ func awsEc2query_serializeOpDocumentQueryListsInput(v *QueryListsInput, value qu
 		}
 	}
 
+	if v.NestedWithList != nil {
+		objectKey := object.Key("NestedWithList")
+		if err := awsEc2query_serializeDocumentNestedStructWithList(v.NestedWithList, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1278,7 +1300,38 @@ func awsEc2query_serializeOpDocumentSimpleInputParamsInput(v *SimpleInputParamsI
 
 	if v.Boo != nil {
 		objectKey := object.Key("Boo")
-		objectKey.Double(*v.Boo)
+		switch {
+		case math.IsNaN(*v.Boo):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Boo, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Boo, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Boo)
+
+		}
+	}
+
+	if v.FloatValue != nil {
+		objectKey := object.Key("FloatValue")
+		switch {
+		case math.IsNaN(float64(*v.FloatValue)):
+			objectKey.String("NaN")
+
+		case math.IsInf(float64(*v.FloatValue), 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(float64(*v.FloatValue), -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Float(*v.FloatValue)
+
+		}
 	}
 
 	if v.Foo != nil {

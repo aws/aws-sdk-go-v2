@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpCreateDevicePool struct {
@@ -3840,12 +3841,38 @@ func awsAwsjson11_serializeDocumentLocation(v *types.Location, value smithyjson.
 
 	if v.Latitude != nil {
 		ok := object.Key("latitude")
-		ok.Double(*v.Latitude)
+		switch {
+		case math.IsNaN(*v.Latitude):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Latitude, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Latitude, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Latitude)
+
+		}
 	}
 
 	if v.Longitude != nil {
 		ok := object.Key("longitude")
-		ok.Double(*v.Longitude)
+		switch {
+		case math.IsNaN(*v.Longitude):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Longitude, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Longitude, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Longitude)
+
+		}
 	}
 
 	return nil

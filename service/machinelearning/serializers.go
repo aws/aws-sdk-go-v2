@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpAddTags struct {
@@ -2346,7 +2347,20 @@ func awsAwsjson11_serializeOpDocumentUpdateMLModelInput(v *UpdateMLModelInput, v
 
 	if v.ScoreThreshold != nil {
 		ok := object.Key("ScoreThreshold")
-		ok.Float(*v.ScoreThreshold)
+		switch {
+		case math.IsNaN(float64(*v.ScoreThreshold)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.ScoreThreshold), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.ScoreThreshold), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.ScoreThreshold)
+
+		}
 	}
 
 	return nil

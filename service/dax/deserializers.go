@@ -3996,15 +3996,18 @@ func awsAwsjson11_deserializeDocumentEvent(v **types.Event, value interface{}) e
 		switch key {
 		case "Date":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected TStamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Date = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.Date = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Message":
@@ -4435,15 +4438,18 @@ func awsAwsjson11_deserializeDocumentNode(v **types.Node, value interface{}) err
 
 		case "NodeCreateTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected TStamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.NodeCreateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.NodeCreateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "NodeId":

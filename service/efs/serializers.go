@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateAccessPoint struct {
@@ -200,7 +201,20 @@ func awsRestjson1_serializeOpDocumentCreateFileSystemInput(v *CreateFileSystemIn
 
 	if v.ProvisionedThroughputInMibps != nil {
 		ok := object.Key("ProvisionedThroughputInMibps")
-		ok.Double(*v.ProvisionedThroughputInMibps)
+		switch {
+		case math.IsNaN(*v.ProvisionedThroughputInMibps):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ProvisionedThroughputInMibps, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ProvisionedThroughputInMibps, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ProvisionedThroughputInMibps)
+
+		}
 	}
 
 	if v.Tags != nil {
@@ -1962,7 +1976,20 @@ func awsRestjson1_serializeOpDocumentUpdateFileSystemInput(v *UpdateFileSystemIn
 
 	if v.ProvisionedThroughputInMibps != nil {
 		ok := object.Key("ProvisionedThroughputInMibps")
-		ok.Double(*v.ProvisionedThroughputInMibps)
+		switch {
+		case math.IsNaN(*v.ProvisionedThroughputInMibps):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ProvisionedThroughputInMibps, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ProvisionedThroughputInMibps, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ProvisionedThroughputInMibps)
+
+		}
 	}
 
 	if len(v.ThroughputMode) > 0 {

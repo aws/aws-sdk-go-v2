@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpBatchExecuteStatement struct {
@@ -633,7 +634,20 @@ func awsRestjson1_serializeDocumentDoubleArray(v []float64, value smithyjson.Val
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }
@@ -659,7 +673,20 @@ func awsRestjson1_serializeDocumentField(v types.Field, value smithyjson.Value) 
 
 	case *types.FieldMemberDoubleValue:
 		av := object.Key("doubleValue")
-		av.Double(uv.Value)
+		switch {
+		case math.IsNaN(uv.Value):
+			av.String("NaN")
+
+		case math.IsInf(uv.Value, 1):
+			av.String("Infinity")
+
+		case math.IsInf(uv.Value, -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(uv.Value)
+
+		}
 
 	case *types.FieldMemberIsNull:
 		av := object.Key("isNull")

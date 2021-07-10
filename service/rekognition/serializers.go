@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpCompareFaces struct {
@@ -2454,22 +2455,74 @@ func awsAwsjson11_serializeDocumentBoundingBox(v *types.BoundingBox, value smith
 
 	if v.Height != nil {
 		ok := object.Key("Height")
-		ok.Float(*v.Height)
+		switch {
+		case math.IsNaN(float64(*v.Height)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Height), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Height), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Height)
+
+		}
 	}
 
 	if v.Left != nil {
 		ok := object.Key("Left")
-		ok.Float(*v.Left)
+		switch {
+		case math.IsNaN(float64(*v.Left)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Left), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Left), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Left)
+
+		}
 	}
 
 	if v.Top != nil {
 		ok := object.Key("Top")
-		ok.Float(*v.Top)
+		switch {
+		case math.IsNaN(float64(*v.Top)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Top), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Top), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Top)
+
+		}
 	}
 
 	if v.Width != nil {
 		ok := object.Key("Width")
-		ok.Float(*v.Width)
+		switch {
+		case math.IsNaN(float64(*v.Width)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Width), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Width), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Width)
+
+		}
 	}
 
 	return nil
@@ -2492,17 +2545,56 @@ func awsAwsjson11_serializeDocumentDetectionFilter(v *types.DetectionFilter, val
 
 	if v.MinBoundingBoxHeight != nil {
 		ok := object.Key("MinBoundingBoxHeight")
-		ok.Float(*v.MinBoundingBoxHeight)
+		switch {
+		case math.IsNaN(float64(*v.MinBoundingBoxHeight)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinBoundingBoxHeight), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinBoundingBoxHeight), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinBoundingBoxHeight)
+
+		}
 	}
 
 	if v.MinBoundingBoxWidth != nil {
 		ok := object.Key("MinBoundingBoxWidth")
-		ok.Float(*v.MinBoundingBoxWidth)
+		switch {
+		case math.IsNaN(float64(*v.MinBoundingBoxWidth)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinBoundingBoxWidth), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinBoundingBoxWidth), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinBoundingBoxWidth)
+
+		}
 	}
 
 	if v.MinConfidence != nil {
 		ok := object.Key("MinConfidence")
-		ok.Float(*v.MinConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
+
+		}
 	}
 
 	return nil
@@ -2551,7 +2643,20 @@ func awsAwsjson11_serializeDocumentFaceSearchSettings(v *types.FaceSearchSetting
 
 	if v.FaceMatchThreshold != nil {
 		ok := object.Key("FaceMatchThreshold")
-		ok.Float(*v.FaceMatchThreshold)
+		switch {
+		case math.IsNaN(float64(*v.FaceMatchThreshold)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.FaceMatchThreshold), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.FaceMatchThreshold), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.FaceMatchThreshold)
+
+		}
 	}
 
 	return nil
@@ -2692,7 +2797,20 @@ func awsAwsjson11_serializeDocumentProtectiveEquipmentSummarizationAttributes(v 
 
 	if v.MinConfidence != nil {
 		ok := object.Key("MinConfidence")
-		ok.Float(*v.MinConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
+
+		}
 	}
 
 	if v.RequiredEquipmentTypes != nil {
@@ -2803,7 +2921,20 @@ func awsAwsjson11_serializeDocumentStartShotDetectionFilter(v *types.StartShotDe
 
 	if v.MinSegmentConfidence != nil {
 		ok := object.Key("MinSegmentConfidence")
-		ok.Float(*v.MinSegmentConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinSegmentConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinSegmentConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinSegmentConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinSegmentConfidence)
+
+		}
 	}
 
 	return nil
@@ -2815,7 +2946,20 @@ func awsAwsjson11_serializeDocumentStartTechnicalCueDetectionFilter(v *types.Sta
 
 	if v.MinSegmentConfidence != nil {
 		ok := object.Key("MinSegmentConfidence")
-		ok.Float(*v.MinSegmentConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinSegmentConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinSegmentConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinSegmentConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinSegmentConfidence)
+
+		}
 	}
 
 	return nil
@@ -2975,7 +3119,20 @@ func awsAwsjson11_serializeOpDocumentCompareFacesInput(v *CompareFacesInput, val
 
 	if v.SimilarityThreshold != nil {
 		ok := object.Key("SimilarityThreshold")
-		ok.Float(*v.SimilarityThreshold)
+		switch {
+		case math.IsNaN(float64(*v.SimilarityThreshold)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.SimilarityThreshold), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.SimilarityThreshold), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.SimilarityThreshold)
+
+		}
 	}
 
 	if v.SourceImage != nil {
@@ -3276,7 +3433,20 @@ func awsAwsjson11_serializeOpDocumentDetectCustomLabelsInput(v *DetectCustomLabe
 
 	if v.MinConfidence != nil {
 		ok := object.Key("MinConfidence")
-		ok.Float(*v.MinConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
+
+		}
 	}
 
 	if v.ProjectVersionArn != nil {
@@ -3326,7 +3496,20 @@ func awsAwsjson11_serializeOpDocumentDetectLabelsInput(v *DetectLabelsInput, val
 
 	if v.MinConfidence != nil {
 		ok := object.Key("MinConfidence")
-		ok.Float(*v.MinConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
+
+		}
 	}
 
 	return nil
@@ -3352,7 +3535,20 @@ func awsAwsjson11_serializeOpDocumentDetectModerationLabelsInput(v *DetectModera
 
 	if v.MinConfidence != nil {
 		ok := object.Key("MinConfidence")
-		ok.Float(*v.MinConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
+
+		}
 	}
 
 	return nil
@@ -3747,7 +3943,20 @@ func awsAwsjson11_serializeOpDocumentSearchFacesByImageInput(v *SearchFacesByIma
 
 	if v.FaceMatchThreshold != nil {
 		ok := object.Key("FaceMatchThreshold")
-		ok.Float(*v.FaceMatchThreshold)
+		switch {
+		case math.IsNaN(float64(*v.FaceMatchThreshold)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.FaceMatchThreshold), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.FaceMatchThreshold), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.FaceMatchThreshold)
+
+		}
 	}
 
 	if v.Image != nil {
@@ -3786,7 +3995,20 @@ func awsAwsjson11_serializeOpDocumentSearchFacesInput(v *SearchFacesInput, value
 
 	if v.FaceMatchThreshold != nil {
 		ok := object.Key("FaceMatchThreshold")
-		ok.Float(*v.FaceMatchThreshold)
+		switch {
+		case math.IsNaN(float64(*v.FaceMatchThreshold)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.FaceMatchThreshold), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.FaceMatchThreshold), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.FaceMatchThreshold)
+
+		}
 	}
 
 	if v.MaxFaces != nil {
@@ -3844,7 +4066,20 @@ func awsAwsjson11_serializeOpDocumentStartContentModerationInput(v *StartContent
 
 	if v.MinConfidence != nil {
 		ok := object.Key("MinConfidence")
-		ok.Float(*v.MinConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
+
+		}
 	}
 
 	if v.NotificationChannel != nil {
@@ -3916,7 +4151,20 @@ func awsAwsjson11_serializeOpDocumentStartFaceSearchInput(v *StartFaceSearchInpu
 
 	if v.FaceMatchThreshold != nil {
 		ok := object.Key("FaceMatchThreshold")
-		ok.Float(*v.FaceMatchThreshold)
+		switch {
+		case math.IsNaN(float64(*v.FaceMatchThreshold)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.FaceMatchThreshold), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.FaceMatchThreshold), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.FaceMatchThreshold)
+
+		}
 	}
 
 	if v.JobTag != nil {
@@ -3957,7 +4205,20 @@ func awsAwsjson11_serializeOpDocumentStartLabelDetectionInput(v *StartLabelDetec
 
 	if v.MinConfidence != nil {
 		ok := object.Key("MinConfidence")
-		ok.Float(*v.MinConfidence)
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
+
+		}
 	}
 
 	if v.NotificationChannel != nil {

@@ -11,20 +11,22 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
 	"testing"
 )
 
-func TestClient_InlineDocumentAsPayload_awsRestjson1Serialize(t *testing.T) {
-	t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#InlineDocumentAsPayload")
+func TestClient_DocumentTypeAsPayload_awsRestjson1Serialize(t *testing.T) {
+	t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#DocumentTypeAsPayload")
 
 	cases := map[string]struct {
-		Params        *InlineDocumentAsPayloadInput
+		Params        *DocumentTypeAsPayloadInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -36,13 +38,13 @@ func TestClient_InlineDocumentAsPayload_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Serializes an inline document as the target of the httpPayload trait.
-		"InlineDocumentAsPayloadInput": {
-			Params: &InlineDocumentAsPayloadInput{
+		// Serializes a document as the target of the httpPayload trait.
+		"DocumentTypeAsPayloadInput": {
+			Params: &DocumentTypeAsPayloadInput{
 				DocumentValue: nil,
 			},
 			ExpectMethod:  "PUT",
-			ExpectURIPath: "/InlineDocumentAsPayload",
+			ExpectURIPath: "/DocumentTypeAsPayload",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/json"},
@@ -52,6 +54,22 @@ func TestClient_InlineDocumentAsPayload_awsRestjson1Serialize(t *testing.T) {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
 			    "foo": "bar"
 			}`))
+			},
+		},
+		// Serializes a document as the target of the httpPayload trait using a string.
+		"DocumentTypeAsPayloadInputString": {
+			Params: &DocumentTypeAsPayloadInput{
+				DocumentValue: nil,
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/DocumentTypeAsPayload",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`"hello"`))
 			},
 		},
 	}
@@ -92,7 +110,7 @@ func TestClient_InlineDocumentAsPayload_awsRestjson1Serialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			result, err := client.InlineDocumentAsPayload(context.Background(), c.Params)
+			result, err := client.DocumentTypeAsPayload(context.Background(), c.Params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}
@@ -121,16 +139,16 @@ func TestClient_InlineDocumentAsPayload_awsRestjson1Serialize(t *testing.T) {
 	}
 }
 
-func TestClient_InlineDocumentAsPayload_awsRestjson1Deserialize(t *testing.T) {
+func TestClient_DocumentTypeAsPayload_awsRestjson1Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *InlineDocumentAsPayloadOutput
+		ExpectResult  *DocumentTypeAsPayloadOutput
 	}{
-		// Serializes an inline document as the target of the httpPayload trait.
-		"InlineDocumentAsPayloadInputOutput": {
+		// Serializes a document as the target of the httpPayload trait.
+		"DocumentTypeAsPayloadOutput": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/json"},
@@ -139,7 +157,19 @@ func TestClient_InlineDocumentAsPayload_awsRestjson1Deserialize(t *testing.T) {
 			Body: []byte(`{
 			    "foo": "bar"
 			}`),
-			ExpectResult: &InlineDocumentAsPayloadOutput{
+			ExpectResult: &DocumentTypeAsPayloadOutput{
+				DocumentValue: nil,
+			},
+		},
+		// Serializes a document as a payload string.
+		"DocumentTypeAsPayloadOutputString": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body:          []byte(`"hello"`),
+			ExpectResult: &DocumentTypeAsPayloadOutput{
 				DocumentValue: nil,
 			},
 		},
@@ -186,15 +216,26 @@ func TestClient_InlineDocumentAsPayload_awsRestjson1Deserialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			var params InlineDocumentAsPayloadInput
-			result, err := client.InlineDocumentAsPayload(context.Background(), &params)
+			var params DocumentTypeAsPayloadInput
+			result, err := client.DocumentTypeAsPayload(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+			opts := cmp.Options{
+				cmpopts.IgnoreUnexported(
+					middleware.Metadata{},
+				),
+				cmp.FilterValues(func(x, y float64) bool {
+					return math.IsNaN(x) && math.IsNaN(y)
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmp.FilterValues(func(x, y float32) bool {
+					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+			}
+			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

@@ -47,9 +47,7 @@ func TestClient_QueryIdempotencyTokenAutoFill_awsEc2querySerialize(t *testing.T)
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryIdempotencyTokenAutoFill
-			&Version=2020-01-08
-			&Token=00000000-0000-4000-8000-000000000000`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryIdempotencyTokenAutoFill&Version=2020-01-08&Token=00000000-0000-4000-8000-000000000000`))
 			},
 		},
 		// Uses the given idempotency token as-is
@@ -68,9 +66,7 @@ func TestClient_QueryIdempotencyTokenAutoFill_awsEc2querySerialize(t *testing.T)
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryIdempotencyTokenAutoFill
-			&Version=2020-01-08
-			&Token=00000000-0000-4000-8000-000000000123`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryIdempotencyTokenAutoFill&Version=2020-01-08&Token=00000000-0000-4000-8000-000000000123`))
 			},
 		},
 	}

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsEc2query_serializeOpAcceptReservedInstancesExchangeQuote struct {
@@ -25888,7 +25889,20 @@ func awsEc2query_serializeDocumentClientData(v *types.ClientData, value query.Va
 
 	if v.UploadSize != nil {
 		objectKey := object.Key("UploadSize")
-		objectKey.Double(*v.UploadSize)
+		switch {
+		case math.IsNaN(*v.UploadSize):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.UploadSize, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.UploadSize, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.UploadSize)
+
+		}
 	}
 
 	if v.UploadStart != nil {
@@ -26731,7 +26745,20 @@ func awsEc2query_serializeDocumentFleetLaunchTemplateOverridesRequest(v *types.F
 
 	if v.Priority != nil {
 		objectKey := object.Key("Priority")
-		objectKey.Double(*v.Priority)
+		switch {
+		case math.IsNaN(*v.Priority):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Priority, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Priority, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Priority)
+
+		}
 	}
 
 	if v.SubnetId != nil {
@@ -26741,7 +26768,20 @@ func awsEc2query_serializeDocumentFleetLaunchTemplateOverridesRequest(v *types.F
 
 	if v.WeightedCapacity != nil {
 		objectKey := object.Key("WeightedCapacity")
-		objectKey.Double(*v.WeightedCapacity)
+		switch {
+		case math.IsNaN(*v.WeightedCapacity):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.WeightedCapacity, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.WeightedCapacity, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.WeightedCapacity)
+
+		}
 	}
 
 	return nil
@@ -28284,7 +28324,20 @@ func awsEc2query_serializeDocumentLaunchTemplateOverrides(v *types.LaunchTemplat
 
 	if v.Priority != nil {
 		objectKey := object.Key("Priority")
-		objectKey.Double(*v.Priority)
+		switch {
+		case math.IsNaN(*v.Priority):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Priority, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Priority, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Priority)
+
+		}
 	}
 
 	if v.SpotPrice != nil {
@@ -28299,7 +28352,20 @@ func awsEc2query_serializeDocumentLaunchTemplateOverrides(v *types.LaunchTemplat
 
 	if v.WeightedCapacity != nil {
 		objectKey := object.Key("WeightedCapacity")
-		objectKey.Double(*v.WeightedCapacity)
+		switch {
+		case math.IsNaN(*v.WeightedCapacity):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.WeightedCapacity, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.WeightedCapacity, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.WeightedCapacity)
+
+		}
 	}
 
 	return nil
@@ -29359,7 +29425,20 @@ func awsEc2query_serializeDocumentPriceScheduleSpecification(v *types.PriceSched
 
 	if v.Price != nil {
 		objectKey := object.Key("Price")
-		objectKey.Double(*v.Price)
+		switch {
+		case math.IsNaN(*v.Price):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Price, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Price, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Price)
+
+		}
 	}
 
 	if v.Term != nil {
@@ -29977,7 +30056,20 @@ func awsEc2query_serializeDocumentReservedInstanceLimitPrice(v *types.ReservedIn
 
 	if v.Amount != nil {
 		objectKey := object.Key("Amount")
-		objectKey.Double(*v.Amount)
+		switch {
+		case math.IsNaN(*v.Amount):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Amount, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Amount, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Amount)
+
+		}
 	}
 
 	if len(v.CurrencyCode) > 0 {
@@ -30829,7 +30921,20 @@ func awsEc2query_serializeDocumentSpotFleetLaunchSpecification(v *types.SpotFlee
 
 	if v.WeightedCapacity != nil {
 		objectKey := object.Key("WeightedCapacity")
-		objectKey.Double(*v.WeightedCapacity)
+		switch {
+		case math.IsNaN(*v.WeightedCapacity):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.WeightedCapacity, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.WeightedCapacity, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.WeightedCapacity)
+
+		}
 	}
 
 	return nil
@@ -30873,7 +30978,20 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 
 	if v.FulfilledCapacity != nil {
 		objectKey := object.Key("FulfilledCapacity")
-		objectKey.Double(*v.FulfilledCapacity)
+		switch {
+		case math.IsNaN(*v.FulfilledCapacity):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.FulfilledCapacity, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.FulfilledCapacity, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.FulfilledCapacity)
+
+		}
 	}
 
 	if v.IamFleetRole != nil {
@@ -30919,7 +31037,20 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 
 	if v.OnDemandFulfilledCapacity != nil {
 		objectKey := object.Key("OnDemandFulfilledCapacity")
-		objectKey.Double(*v.OnDemandFulfilledCapacity)
+		switch {
+		case math.IsNaN(*v.OnDemandFulfilledCapacity):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.OnDemandFulfilledCapacity, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.OnDemandFulfilledCapacity, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.OnDemandFulfilledCapacity)
+
+		}
 	}
 
 	if v.OnDemandMaxTotalPrice != nil {

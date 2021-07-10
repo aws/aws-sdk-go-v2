@@ -4904,15 +4904,18 @@ func awsAwsjson11_deserializeDocumentSshPublicKey(v **types.SshPublicKey, value 
 		switch key {
 		case "DateImported":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DateImported to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DateImported = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateImported to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DateImported = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "SshPublicKeyBody":

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsquery_serializeOpAttachInstances struct {
@@ -4079,7 +4080,20 @@ func awsAwsquery_serializeDocumentPredictiveScalingMetricSpecification(v *types.
 
 	if v.TargetValue != nil {
 		objectKey := object.Key("TargetValue")
-		objectKey.Double(*v.TargetValue)
+		switch {
+		case math.IsNaN(*v.TargetValue):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.TargetValue, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.TargetValue, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.TargetValue)
+
+		}
 	}
 
 	return nil
@@ -4287,12 +4301,38 @@ func awsAwsquery_serializeDocumentStepAdjustment(v *types.StepAdjustment, value 
 
 	if v.MetricIntervalLowerBound != nil {
 		objectKey := object.Key("MetricIntervalLowerBound")
-		objectKey.Double(*v.MetricIntervalLowerBound)
+		switch {
+		case math.IsNaN(*v.MetricIntervalLowerBound):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.MetricIntervalLowerBound, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.MetricIntervalLowerBound, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.MetricIntervalLowerBound)
+
+		}
 	}
 
 	if v.MetricIntervalUpperBound != nil {
 		objectKey := object.Key("MetricIntervalUpperBound")
-		objectKey.Double(*v.MetricIntervalUpperBound)
+		switch {
+		case math.IsNaN(*v.MetricIntervalUpperBound):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.MetricIntervalUpperBound, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.MetricIntervalUpperBound, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.MetricIntervalUpperBound)
+
+		}
 	}
 
 	if v.ScalingAdjustment != nil {
@@ -4403,7 +4443,20 @@ func awsAwsquery_serializeDocumentTargetTrackingConfiguration(v *types.TargetTra
 
 	if v.TargetValue != nil {
 		objectKey := object.Key("TargetValue")
-		objectKey.Double(*v.TargetValue)
+		switch {
+		case math.IsNaN(*v.TargetValue):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.TargetValue, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.TargetValue, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.TargetValue)
+
+		}
 	}
 
 	return nil
@@ -5454,7 +5507,20 @@ func awsAwsquery_serializeOpDocumentExecutePolicyInput(v *ExecutePolicyInput, va
 
 	if v.BreachThreshold != nil {
 		objectKey := object.Key("BreachThreshold")
-		objectKey.Double(*v.BreachThreshold)
+		switch {
+		case math.IsNaN(*v.BreachThreshold):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.BreachThreshold, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.BreachThreshold, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.BreachThreshold)
+
+		}
 	}
 
 	if v.HonorCooldown != nil {
@@ -5464,7 +5530,20 @@ func awsAwsquery_serializeOpDocumentExecutePolicyInput(v *ExecutePolicyInput, va
 
 	if v.MetricValue != nil {
 		objectKey := object.Key("MetricValue")
-		objectKey.Double(*v.MetricValue)
+		switch {
+		case math.IsNaN(*v.MetricValue):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.MetricValue, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.MetricValue, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.MetricValue)
+
+		}
 	}
 
 	if v.PolicyName != nil {

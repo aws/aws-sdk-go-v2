@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAddLayerVersionPermission struct {
@@ -4575,7 +4576,20 @@ func awsRestjson1_serializeDocumentAdditionalVersionWeights(v map[string]float64
 
 	for key := range v {
 		om := object.Key(key)
-		om.Double(v[key])
+		switch {
+		case math.IsNaN(v[key]):
+			om.String("NaN")
+
+		case math.IsInf(v[key], 1):
+			om.String("Infinity")
+
+		case math.IsInf(v[key], -1):
+			om.String("-Infinity")
+
+		default:
+			om.Double(v[key])
+
+		}
 	}
 	return nil
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson10_serializeOpBatchExecuteStatement struct {
@@ -2590,7 +2591,20 @@ func awsAwsjson10_serializeDocumentAutoScalingTargetTrackingScalingPolicyConfigu
 
 	if v.TargetValue != nil {
 		ok := object.Key("TargetValue")
-		ok.Double(*v.TargetValue)
+		switch {
+		case math.IsNaN(*v.TargetValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.TargetValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.TargetValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.TargetValue)
+
+		}
 	}
 
 	return nil

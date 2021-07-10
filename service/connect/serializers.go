@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAssociateApprovedOrigin struct {
@@ -8867,7 +8868,20 @@ func awsRestjson1_serializeDocumentThreshold(v *types.Threshold, value smithyjso
 
 	if v.ThresholdValue != nil {
 		ok := object.Key("ThresholdValue")
-		ok.Double(*v.ThresholdValue)
+		switch {
+		case math.IsNaN(*v.ThresholdValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ThresholdValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ThresholdValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ThresholdValue)
+
+		}
 	}
 
 	return nil

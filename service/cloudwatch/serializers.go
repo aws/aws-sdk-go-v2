@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsquery_serializeOpDeleteAlarms struct {
@@ -2098,7 +2099,20 @@ func awsAwsquery_serializeDocumentCounts(v []float64, value query.Value) error {
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }
@@ -2371,7 +2385,20 @@ func awsAwsquery_serializeDocumentMetricDatum(v *types.MetricDatum, value query.
 
 	if v.Value != nil {
 		objectKey := object.Key("Value")
-		objectKey.Double(*v.Value)
+		switch {
+		case math.IsNaN(*v.Value):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Value, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Value, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Value)
+
+		}
 	}
 
 	if v.Values != nil {
@@ -2502,22 +2529,74 @@ func awsAwsquery_serializeDocumentStatisticSet(v *types.StatisticSet, value quer
 
 	if v.Maximum != nil {
 		objectKey := object.Key("Maximum")
-		objectKey.Double(*v.Maximum)
+		switch {
+		case math.IsNaN(*v.Maximum):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Maximum, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Maximum, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Maximum)
+
+		}
 	}
 
 	if v.Minimum != nil {
 		objectKey := object.Key("Minimum")
-		objectKey.Double(*v.Minimum)
+		switch {
+		case math.IsNaN(*v.Minimum):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Minimum, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Minimum, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Minimum)
+
+		}
 	}
 
 	if v.SampleCount != nil {
 		objectKey := object.Key("SampleCount")
-		objectKey.Double(*v.SampleCount)
+		switch {
+		case math.IsNaN(*v.SampleCount):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.SampleCount, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.SampleCount, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.SampleCount)
+
+		}
 	}
 
 	if v.Sum != nil {
 		objectKey := object.Key("Sum")
-		objectKey.Double(*v.Sum)
+		switch {
+		case math.IsNaN(*v.Sum):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Sum, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Sum, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Sum)
+
+		}
 	}
 
 	return nil
@@ -2576,7 +2655,20 @@ func awsAwsquery_serializeDocumentValues(v []float64, value query.Value) error {
 
 	for i := range v {
 		av := array.Value()
-		av.Double(v[i])
+		switch {
+		case math.IsNaN(v[i]):
+			av.String("NaN")
+
+		case math.IsInf(v[i], 1):
+			av.String("Infinity")
+
+		case math.IsInf(v[i], -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(v[i])
+
+		}
 	}
 	return nil
 }
@@ -3434,7 +3526,20 @@ func awsAwsquery_serializeOpDocumentPutMetricAlarmInput(v *PutMetricAlarmInput, 
 
 	if v.Threshold != nil {
 		objectKey := object.Key("Threshold")
-		objectKey.Double(*v.Threshold)
+		switch {
+		case math.IsNaN(*v.Threshold):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Threshold, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Threshold, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Threshold)
+
+		}
 	}
 
 	if v.ThresholdMetricId != nil {

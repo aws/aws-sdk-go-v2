@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateApiKey struct {
@@ -9666,7 +9667,20 @@ func awsRestjson1_serializeDocumentCanarySettings(v *types.CanarySettings, value
 
 	if v.PercentTraffic != 0 {
 		ok := object.Key("percentTraffic")
-		ok.Double(v.PercentTraffic)
+		switch {
+		case math.IsNaN(v.PercentTraffic):
+			ok.String("NaN")
+
+		case math.IsInf(v.PercentTraffic, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.PercentTraffic, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.PercentTraffic)
+
+		}
 	}
 
 	if v.StageVariableOverrides != nil {
@@ -9690,7 +9704,20 @@ func awsRestjson1_serializeDocumentDeploymentCanarySettings(v *types.DeploymentC
 
 	if v.PercentTraffic != 0 {
 		ok := object.Key("percentTraffic")
-		ok.Double(v.PercentTraffic)
+		switch {
+		case math.IsNaN(v.PercentTraffic):
+			ok.String("NaN")
+
+		case math.IsInf(v.PercentTraffic, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.PercentTraffic, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.PercentTraffic)
+
+		}
 	}
 
 	if v.StageVariableOverrides != nil {
@@ -9979,7 +10006,20 @@ func awsRestjson1_serializeDocumentThrottleSettings(v *types.ThrottleSettings, v
 
 	if v.RateLimit != 0 {
 		ok := object.Key("rateLimit")
-		ok.Double(v.RateLimit)
+		switch {
+		case math.IsNaN(v.RateLimit):
+			ok.String("NaN")
+
+		case math.IsInf(v.RateLimit, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.RateLimit, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.RateLimit)
+
+		}
 	}
 
 	return nil
