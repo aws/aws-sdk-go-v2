@@ -62,7 +62,9 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     private final Format timestampFormat;
     private final GoPointableIndex pointableIndex;
 
-    public JsonMemberDeserVisitor(GenerationContext context, MemberShape member, String dataDest, Format timestampFormat) {
+    public JsonMemberDeserVisitor(
+            GenerationContext context, MemberShape member, String dataDest, Format timestampFormat
+    ) {
         this.context = context;
         this.member = member;
         this.dataDest = dataDest;
@@ -147,11 +149,11 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
 
     /**
      * Deserializes a number without a fractional value.
-     *
+     * <p>
      * The 64-bit integer representation of the number is stored in the variable {@code i64}.
      *
      * @param shape The shape being deserialized.
-     * @param cast A wrapping of {@code i64} to cast it to the proper type.
+     * @param cast  A wrapping of {@code i64} to cast it to the proper type.
      */
     private void handleInteger(Shape shape, String cast) {
         GoWriter writer = context.getWriter();
@@ -164,11 +166,11 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
 
     /**
      * Deserializes a json number into a json token.
-     *
+     * <p>
      * The number token is stored under the variable {@code jtv}.
      *
      * @param shape The shape being deserialized.
-     * @param r A runnable that runs after the value has been parsed, before the scope closes.
+     * @param r     A runnable that runs after the value has been parsed, before the scope closes.
      */
     private void handleNumber(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
@@ -185,35 +187,91 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
         });
     }
 
+    /**
+     * Deserializes a json arbitrary precision number into a json token.
+     * <p>
+     * The number token is stored under the variable {@code jtv}.
+     *
+     * @param shape      The shape being deserialized.
+     * @param jsonNumber A runnable that runs after the value has been parsed to a json.Number, before the scope closes.
+     * @param jsonString A runnable that runs after the value has been parsed to a string, before the scope closes.
+     */
+    private void handleDecimal(Shape shape, Runnable jsonNumber, Runnable jsonString) {
+        GoWriter writer = context.getWriter();
+        ServiceShape service = context.getService();
+
+        writer.addUseImports(SmithyGoDependency.FMT);
+        writer.openBlock("if value != nil {", "}", () -> {
+            writer.openBlock("switch jtv := value.(type) {", "}", () -> {
+                writer.openBlock("case json.Number:", "", jsonNumber);
+                if (jsonString != null) {
+                    writer.openBlock("case string:", "", jsonString);
+                }
+                writer.openBlock("default:", "", () -> {
+                    writer.write("return fmt.Errorf(\"expected $L to be a JSON Number, got %T instead\", value)",
+                            shape.getId().getName(service));
+                });
+            });
+        });
+    }
+
     @Override
     public Void floatShape(FloatShape shape) {
         handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
-                pointableIndex, member, "float32(f64)"));
+                pointableIndex, member, "float32(f64)"), true);
         return null;
     }
 
     @Override
     public Void doubleShape(DoubleShape shape) {
         handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
-                pointableIndex, member, "f64"));
+                pointableIndex, member, "f64"), true);
         return null;
     }
 
     /**
      * Deserializes a number with a fractional value.
-     *
+     * <p>
      * The 64-bit float representation of the number is stored in the variable {@code f64}.
      *
      * @param shape The shape being deserialized.
-     * @param cast A wrapping of {@code f64} to cast it to the proper type.
+     * @param cast  A wrapping of {@code f64} to cast it to the proper type.
      */
-    private void handleFloat(Shape shape, String cast) {
+    private void handleFloat(Shape shape, String cast, boolean handleNonNumbers) {
         GoWriter writer = context.getWriter();
-        handleNumber(shape, () -> {
+
+        Runnable jsonString = null;
+
+        if (handleNonNumbers) {
+            jsonString = () -> {
+                writer.addUseImports(SmithyGoDependency.STRINGS);
+                writer.addUseImports(SmithyGoDependency.MATH);
+
+                writer.write("var f64 float64");
+                writer.openBlock("switch {", "}", () -> {
+                    writer.openBlock("case strings.EqualFold(jtv, \"NaN\"):", "", () -> {
+                        writer.write("f64 = math.NaN()");
+                    });
+                    writer.openBlock("case strings.EqualFold(jtv, \"Infinity\"):", "", () -> {
+                        writer.write("f64 = math.Inf(1)");
+                    });
+                    writer.openBlock("case strings.EqualFold(jtv, \"-Infinity\"):", "", () -> {
+                        writer.write("f64 = math.Inf(-1)");
+                    });
+                    writer.openBlock("default:", "", () -> {
+                        writer.addUseImports(SmithyGoDependency.FMT);
+                        writer.write("return fmt.Errorf(\"unknown JSON number value: %s\", jtv)");
+                    });
+                });
+                writer.write("$L = $L", dataDest, cast);
+            };
+        }
+
+        handleDecimal(shape, () -> {
             writer.write("f64, err := jtv.Float64()");
             writer.write("if err != nil { return err }");
             writer.write("$L = $L", dataDest, cast);
-        });
+        }, jsonString);
     }
 
     @Override
@@ -233,11 +291,11 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
 
     /**
      * Deserializes a json string into a json token.
-     *
+     * <p>
      * The number token is stored under the variable {@code jtv}.
      *
      * @param shape The shape being deserialized.
-     * @param r A runnable that runs after the value has been parsed, before the scope closes.
+     * @param r     A runnable that runs after the value has been parsed, before the scope closes.
      */
     private void handleString(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
@@ -279,7 +337,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
             case EPOCH_SECONDS:
                 writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
                 handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
-                        pointableIndex, member, "smithytime.ParseEpochSeconds(f64)"));
+                        pointableIndex, member, "smithytime.ParseEpochSeconds(f64)"), false);
                 break;
             default:
                 throw new CodegenException(String.format("Unknown timestamp format %s", timestampFormat));

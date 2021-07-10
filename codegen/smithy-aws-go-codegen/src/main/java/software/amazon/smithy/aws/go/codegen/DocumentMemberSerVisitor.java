@@ -121,15 +121,34 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     @Override
     public Void floatShape(FloatShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        context.getWriter().write("$L.Float($L)", dataDest, source);
+        GoWriter writer = context.getWriter();
+        handleDecimal(writer, dataDest, "float64(" + source + ")",
+                () -> writer.write("$L.Float($L)", dataDest, source));
         return null;
     }
 
     @Override
     public Void doubleShape(DoubleShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        context.getWriter().write("$L.Double($L)", dataDest, source);
+        GoWriter writer = context.getWriter();
+        handleDecimal(writer, dataDest, source, () -> writer.write("$L.Double($L)", dataDest, source));
         return null;
+    }
+
+    private void handleDecimal(GoWriter writer, String dataDest, String source, Runnable defaultCase) {
+        writer.addUseImports(SmithyGoDependency.MATH);
+        writer.openBlock("switch {", "}", () -> {
+            writer.openBlock("case math.IsNaN($L):", "", source, () -> {
+                writer.write("$L.String(\"NaN\")", dataDest);
+            });
+            writer.openBlock("case math.IsInf($L, 1):", "", source, () -> {
+                writer.write("$L.String(\"Infinity\")", dataDest);
+            });
+            writer.openBlock("case math.IsInf($L, -1):", "", source, () -> {
+                writer.write("$L.String(\"-Infinity\")", dataDest);
+            });
+            writer.openBlock("default:", "", defaultCase);
+        });
     }
 
     @Override

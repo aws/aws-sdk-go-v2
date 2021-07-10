@@ -195,6 +195,14 @@ final class AwsProtocolUtils {
                         .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
                         .operation(ShapeId.from("aws.protocoltests.restjson#InlineDocumentAsPayload"))
                         .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#DocumentType"))
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#DocumentTypeAsPayload"))
+                        .build(),
 
                 // Null lists/maps without sparse tag
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
@@ -226,9 +234,16 @@ final class AwsProtocolUtils {
                         .operation(ShapeId.from("aws.protocoltests.json10#EmptyInputAndEmptyOutput"))
                         .addTestName("AwsJson10EmptyInputAndEmptyOutput")
                         .build()
-                ));
+        ));
 
         Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
+                // REST-JSON optional (SHOULD) test cases
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#JsonMaps"))
+                        .addTestName("RestJsonDeserializesDenseSetMapAndSkipsNull")
+                        .build(),
+
                 // REST-XML opinionated test - prefix headers as empty vs nil map
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
