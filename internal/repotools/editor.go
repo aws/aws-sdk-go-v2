@@ -11,6 +11,7 @@ var allowedEditors = map[string]struct{}{
 	"vi":    {},
 	"vim":   {},
 	"gvim":  {},
+	"nvim":  {},
 	"nano":  {},
 	"edit":  {},
 	"gedit": {},
