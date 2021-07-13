@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpAcceptMatch struct {
@@ -4485,7 +4486,20 @@ func awsAwsjson11_serializeDocumentAttributeValue(v *types.AttributeValue, value
 
 	if v.N != nil {
 		ok := object.Key("N")
-		ok.Double(*v.N)
+		switch {
+		case math.IsNaN(*v.N):
+			ok.String("NaN")
+
+		case math.IsInf(*v.N, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.N, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.N)
+
+		}
 	}
 
 	if v.S != nil {
@@ -4951,7 +4965,20 @@ func awsAwsjson11_serializeDocumentPlayerLatency(v *types.PlayerLatency, value s
 
 	if v.LatencyInMilliseconds != 0 {
 		ok := object.Key("LatencyInMilliseconds")
-		ok.Float(v.LatencyInMilliseconds)
+		switch {
+		case math.IsNaN(float64(v.LatencyInMilliseconds)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(v.LatencyInMilliseconds), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(v.LatencyInMilliseconds), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(v.LatencyInMilliseconds)
+
+		}
 	}
 
 	if v.PlayerId != nil {
@@ -5197,7 +5224,20 @@ func awsAwsjson11_serializeDocumentStringDoubleMap(v map[string]float64, value s
 
 	for key := range v {
 		om := object.Key(key)
-		om.Double(v[key])
+		switch {
+		case math.IsNaN(v[key]):
+			om.String("NaN")
+
+		case math.IsInf(v[key], 1):
+			om.String("Infinity")
+
+		case math.IsInf(v[key], -1):
+			om.String("-Infinity")
+
+		default:
+			om.Double(v[key])
+
+		}
 	}
 	return nil
 }
@@ -5260,7 +5300,20 @@ func awsAwsjson11_serializeDocumentTargetConfiguration(v *types.TargetConfigurat
 
 	{
 		ok := object.Key("TargetValue")
-		ok.Double(v.TargetValue)
+		switch {
+		case math.IsNaN(v.TargetValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.TargetValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.TargetValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.TargetValue)
+
+		}
 	}
 
 	return nil
@@ -5272,7 +5325,20 @@ func awsAwsjson11_serializeDocumentTargetTrackingConfiguration(v *types.TargetTr
 
 	if v.TargetValue != nil {
 		ok := object.Key("TargetValue")
-		ok.Double(*v.TargetValue)
+		switch {
+		case math.IsNaN(*v.TargetValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.TargetValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.TargetValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.TargetValue)
+
+		}
 	}
 
 	return nil
@@ -7005,7 +7071,20 @@ func awsAwsjson11_serializeOpDocumentPutScalingPolicyInput(v *PutScalingPolicyIn
 
 	if v.Threshold != 0 {
 		ok := object.Key("Threshold")
-		ok.Double(v.Threshold)
+		switch {
+		case math.IsNaN(v.Threshold):
+			ok.String("NaN")
+
+		case math.IsInf(v.Threshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Threshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Threshold)
+
+		}
 	}
 
 	return nil

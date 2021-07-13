@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpCreateCapacityProvider struct {
@@ -4157,7 +4158,20 @@ func awsAwsjson11_serializeDocumentResource(v *types.Resource, value smithyjson.
 
 	if v.DoubleValue != 0 {
 		ok := object.Key("doubleValue")
-		ok.Double(v.DoubleValue)
+		switch {
+		case math.IsNaN(v.DoubleValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.DoubleValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.DoubleValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.DoubleValue)
+
+		}
 	}
 
 	if v.IntegerValue != 0 {
@@ -4244,7 +4258,20 @@ func awsAwsjson11_serializeDocumentScale(v *types.Scale, value smithyjson.Value)
 
 	if v.Value != 0 {
 		ok := object.Key("value")
-		ok.Double(v.Value)
+		switch {
+		case math.IsNaN(v.Value):
+			ok.String("NaN")
+
+		case math.IsInf(v.Value, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Value, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Value)
+
+		}
 	}
 
 	return nil

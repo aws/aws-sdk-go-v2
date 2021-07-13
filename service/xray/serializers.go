@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpBatchGetTraces struct {
@@ -2182,7 +2183,20 @@ func awsRestjson1_serializeDocumentSamplingRule(v *types.SamplingRule, value smi
 
 	{
 		ok := object.Key("FixedRate")
-		ok.Double(v.FixedRate)
+		switch {
+		case math.IsNaN(v.FixedRate):
+			ok.String("NaN")
+
+		case math.IsInf(v.FixedRate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.FixedRate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.FixedRate)
+
+		}
 	}
 
 	if v.Host != nil {
@@ -2256,7 +2270,20 @@ func awsRestjson1_serializeDocumentSamplingRuleUpdate(v *types.SamplingRuleUpdat
 
 	if v.FixedRate != nil {
 		ok := object.Key("FixedRate")
-		ok.Double(*v.FixedRate)
+		switch {
+		case math.IsNaN(*v.FixedRate):
+			ok.String("NaN")
+
+		case math.IsInf(*v.FixedRate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.FixedRate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.FixedRate)
+
+		}
 	}
 
 	if v.Host != nil {
@@ -2373,7 +2400,20 @@ func awsRestjson1_serializeDocumentSamplingStrategy(v *types.SamplingStrategy, v
 
 	if v.Value != nil {
 		ok := object.Key("Value")
-		ok.Double(*v.Value)
+		switch {
+		case math.IsNaN(*v.Value):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Value, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Value, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Value)
+
+		}
 	}
 
 	return nil

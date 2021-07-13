@@ -16,6 +16,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"math"
 	"strings"
 )
 
@@ -2005,15 +2006,18 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 		switch key {
 		case "CreateTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreateTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreateTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DeliveryStreamARN":
@@ -2078,15 +2082,18 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 
 		case "LastUpdateTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdateTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.LastUpdateTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Source":
@@ -3337,15 +3344,18 @@ func awsAwsjson11_deserializeDocumentKinesisStreamSourceDescription(v **types.Ki
 		switch key {
 		case "DeliveryStartTimestamp":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected DeliveryStartTimestamp to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DeliveryStartTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DeliveryStartTimestamp to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DeliveryStartTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "KinesisStreamARN":
@@ -3657,15 +3667,36 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 
 		case "BloomFilterFalsePositiveProbability":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Proportion to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.BloomFilterFalsePositiveProbability = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.BloomFilterFalsePositiveProbability = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Proportion to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.BloomFilterFalsePositiveProbability = ptr.Float64(f64)
 			}
 
 		case "Compression":
@@ -3679,15 +3710,36 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 
 		case "DictionaryKeyThreshold":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Proportion to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DictionaryKeyThreshold = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DictionaryKeyThreshold = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Proportion to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.DictionaryKeyThreshold = ptr.Float64(f64)
 			}
 
 		case "EnablePadding":
@@ -3710,15 +3762,36 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 
 		case "PaddingTolerance":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Proportion to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PaddingTolerance = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.PaddingTolerance = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Proportion to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.PaddingTolerance = ptr.Float64(f64)
 			}
 
 		case "RowIndexStride":

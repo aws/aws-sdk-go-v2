@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpPutEvents struct {
@@ -266,7 +267,20 @@ func awsRestjson1_serializeDocumentEvent(v *types.Event, value smithyjson.Value)
 
 	if v.EventValue != nil {
 		ok := object.Key("eventValue")
-		ok.Float(*v.EventValue)
+		switch {
+		case math.IsNaN(float64(*v.EventValue)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.EventValue), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.EventValue), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.EventValue)
+
+		}
 	}
 
 	if v.Impression != nil {

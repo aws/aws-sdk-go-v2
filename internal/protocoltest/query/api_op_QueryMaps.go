@@ -39,6 +39,8 @@ type QueryMapsInput struct {
 
 	MapWithXmlMemberName map[string]string
 
+	NestedStructWithMap *types.NestedStructWithMap
+
 	RenamedMapArg map[string]string
 }
 

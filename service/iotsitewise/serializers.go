@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAssociateAssets struct {
@@ -5143,7 +5144,20 @@ func awsRestjson1_serializeDocumentVariant(v *types.Variant, value smithyjson.Va
 
 	if v.DoubleValue != nil {
 		ok := object.Key("doubleValue")
-		ok.Double(*v.DoubleValue)
+		switch {
+		case math.IsNaN(*v.DoubleValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DoubleValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DoubleValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DoubleValue)
+
+		}
 	}
 
 	if v.IntegerValue != nil {

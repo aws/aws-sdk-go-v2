@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAddFlowMediaStreams struct {
@@ -2667,7 +2668,20 @@ func awsRestjson1_serializeDocumentEncodingParametersRequest(v *types.EncodingPa
 
 	{
 		ok := object.Key("compressionFactor")
-		ok.Double(v.CompressionFactor)
+		switch {
+		case math.IsNaN(v.CompressionFactor):
+			ok.String("NaN")
+
+		case math.IsInf(v.CompressionFactor, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.CompressionFactor, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.CompressionFactor)
+
+		}
 	}
 
 	if len(v.EncoderProfile) > 0 {

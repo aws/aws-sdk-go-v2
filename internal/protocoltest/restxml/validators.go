@@ -69,6 +69,26 @@ func (m *validateOpEndpointWithHostLabelOperation) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpHttpRequestWithFloatLabels struct {
+}
+
+func (*validateOpHttpRequestWithFloatLabels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpHttpRequestWithFloatLabels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*HttpRequestWithFloatLabelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpHttpRequestWithFloatLabelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpHttpRequestWithGreedyLabelInPath struct {
 }
 
@@ -141,6 +161,10 @@ func addOpEndpointWithHostLabelOperationValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpEndpointWithHostLabelOperation{}, middleware.After)
 }
 
+func addOpHttpRequestWithFloatLabelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpHttpRequestWithFloatLabels{}, middleware.After)
+}
+
 func addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
 }
@@ -190,6 +214,24 @@ func validateOpEndpointWithHostLabelOperationInput(v *EndpointWithHostLabelOpera
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointWithHostLabelOperationInput"}
 	if v.Label == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Label"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpHttpRequestWithFloatLabelsInput(v *HttpRequestWithFloatLabelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpRequestWithFloatLabelsInput"}
+	if v.Float == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Float"))
+	}
+	if v.Double == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Double"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

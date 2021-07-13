@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpCreateDeliveryStream struct {
@@ -1435,7 +1436,20 @@ func awsAwsjson11_serializeDocumentOrcSerDe(v *types.OrcSerDe, value smithyjson.
 
 	if v.BloomFilterFalsePositiveProbability != nil {
 		ok := object.Key("BloomFilterFalsePositiveProbability")
-		ok.Double(*v.BloomFilterFalsePositiveProbability)
+		switch {
+		case math.IsNaN(*v.BloomFilterFalsePositiveProbability):
+			ok.String("NaN")
+
+		case math.IsInf(*v.BloomFilterFalsePositiveProbability, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.BloomFilterFalsePositiveProbability, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.BloomFilterFalsePositiveProbability)
+
+		}
 	}
 
 	if len(v.Compression) > 0 {
@@ -1445,7 +1459,20 @@ func awsAwsjson11_serializeDocumentOrcSerDe(v *types.OrcSerDe, value smithyjson.
 
 	if v.DictionaryKeyThreshold != nil {
 		ok := object.Key("DictionaryKeyThreshold")
-		ok.Double(*v.DictionaryKeyThreshold)
+		switch {
+		case math.IsNaN(*v.DictionaryKeyThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DictionaryKeyThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DictionaryKeyThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DictionaryKeyThreshold)
+
+		}
 	}
 
 	if v.EnablePadding != nil {
@@ -1460,7 +1487,20 @@ func awsAwsjson11_serializeDocumentOrcSerDe(v *types.OrcSerDe, value smithyjson.
 
 	if v.PaddingTolerance != nil {
 		ok := object.Key("PaddingTolerance")
-		ok.Double(*v.PaddingTolerance)
+		switch {
+		case math.IsNaN(*v.PaddingTolerance):
+			ok.String("NaN")
+
+		case math.IsInf(*v.PaddingTolerance, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.PaddingTolerance, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.PaddingTolerance)
+
+		}
 	}
 
 	if v.RowIndexStride != nil {

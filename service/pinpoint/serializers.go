@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateApp struct {
@@ -9184,12 +9185,38 @@ func awsRestjson1_serializeDocumentEndpointLocation(v *types.EndpointLocation, v
 
 	if v.Latitude != 0 {
 		ok := object.Key("Latitude")
-		ok.Double(v.Latitude)
+		switch {
+		case math.IsNaN(v.Latitude):
+			ok.String("NaN")
+
+		case math.IsInf(v.Latitude, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Latitude, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Latitude)
+
+		}
 	}
 
 	if v.Longitude != 0 {
 		ok := object.Key("Longitude")
-		ok.Double(v.Longitude)
+		switch {
+		case math.IsNaN(v.Longitude):
+			ok.String("NaN")
+
+		case math.IsInf(v.Longitude, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Longitude, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Longitude)
+
+		}
 	}
 
 	if v.PostalCode != nil {
@@ -9661,12 +9688,38 @@ func awsRestjson1_serializeDocumentGPSCoordinates(v *types.GPSCoordinates, value
 
 	{
 		ok := object.Key("Latitude")
-		ok.Double(v.Latitude)
+		switch {
+		case math.IsNaN(v.Latitude):
+			ok.String("NaN")
+
+		case math.IsInf(v.Latitude, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Latitude, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Latitude)
+
+		}
 	}
 
 	{
 		ok := object.Key("Longitude")
-		ok.Double(v.Longitude)
+		switch {
+		case math.IsNaN(v.Longitude):
+			ok.String("NaN")
+
+		case math.IsInf(v.Longitude, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Longitude, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Longitude)
+
+		}
 	}
 
 	return nil
@@ -9685,7 +9738,20 @@ func awsRestjson1_serializeDocumentGPSPointDimension(v *types.GPSPointDimension,
 
 	if v.RangeInKilometers != 0 {
 		ok := object.Key("RangeInKilometers")
-		ok.Double(v.RangeInKilometers)
+		switch {
+		case math.IsNaN(v.RangeInKilometers):
+			ok.String("NaN")
+
+		case math.IsInf(v.RangeInKilometers, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.RangeInKilometers, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.RangeInKilometers)
+
+		}
 	}
 
 	return nil
@@ -10016,7 +10082,20 @@ func awsRestjson1_serializeDocumentMapOf__double(v map[string]float64, value smi
 
 	for key := range v {
 		om := object.Key(key)
-		om.Double(v[key])
+		switch {
+		case math.IsNaN(v[key]):
+			om.String("NaN")
+
+		case math.IsInf(v[key], 1):
+			om.String("Infinity")
+
+		case math.IsInf(v[key], -1):
+			om.String("-Infinity")
+
+		default:
+			om.Double(v[key])
+
+		}
 	}
 	return nil
 }
@@ -10334,7 +10413,20 @@ func awsRestjson1_serializeDocumentMetricDimension(v *types.MetricDimension, val
 
 	{
 		ok := object.Key("Value")
-		ok.Double(v.Value)
+		switch {
+		case math.IsNaN(v.Value):
+			ok.String("NaN")
+
+		case math.IsInf(v.Value, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Value, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Value)
+
+		}
 	}
 
 	return nil

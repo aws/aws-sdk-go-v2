@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateBotVersion struct {
@@ -2289,7 +2290,20 @@ func awsRestjson1_serializeOpDocumentPutBotInput(v *PutBotInput, value smithyjso
 
 	if v.NluIntentConfidenceThreshold != nil {
 		ok := object.Key("nluIntentConfidenceThreshold")
-		ok.Double(*v.NluIntentConfidenceThreshold)
+		switch {
+		case math.IsNaN(*v.NluIntentConfidenceThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.NluIntentConfidenceThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.NluIntentConfidenceThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.NluIntentConfidenceThreshold)
+
+		}
 	}
 
 	if len(v.ProcessBehavior) > 0 {

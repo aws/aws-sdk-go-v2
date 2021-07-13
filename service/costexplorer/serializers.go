@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpCreateAnomalyMonitor struct {
@@ -1534,7 +1535,20 @@ func awsAwsjson11_serializeDocumentAnomalySubscription(v *types.AnomalySubscript
 
 	if v.Threshold != nil {
 		ok := object.Key("Threshold")
-		ok.Double(*v.Threshold)
+		switch {
+		case math.IsNaN(*v.Threshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Threshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Threshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Threshold)
+
+		}
 	}
 
 	return nil
@@ -1946,7 +1960,20 @@ func awsAwsjson11_serializeDocumentTotalImpactFilter(v *types.TotalImpactFilter,
 
 	if v.EndValue != 0 {
 		ok := object.Key("EndValue")
-		ok.Double(v.EndValue)
+		switch {
+		case math.IsNaN(v.EndValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.EndValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.EndValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.EndValue)
+
+		}
 	}
 
 	if len(v.NumericOperator) > 0 {
@@ -1956,7 +1983,20 @@ func awsAwsjson11_serializeDocumentTotalImpactFilter(v *types.TotalImpactFilter,
 
 	{
 		ok := object.Key("StartValue")
-		ok.Double(v.StartValue)
+		switch {
+		case math.IsNaN(v.StartValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.StartValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.StartValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.StartValue)
+
+		}
 	}
 
 	return nil
@@ -2967,7 +3007,20 @@ func awsAwsjson11_serializeOpDocumentUpdateAnomalySubscriptionInput(v *UpdateAno
 
 	if v.Threshold != nil {
 		ok := object.Key("Threshold")
-		ok.Double(*v.Threshold)
+		switch {
+		case math.IsNaN(*v.Threshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Threshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Threshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Threshold)
+
+		}
 	}
 
 	return nil

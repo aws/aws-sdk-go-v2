@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpBatchDeleteDocument struct {
@@ -4151,7 +4152,20 @@ func awsAwsjson11_serializeDocumentWebCrawlerConfiguration(v *types.WebCrawlerCo
 
 	if v.MaxContentSizePerPageInMegaBytes != nil {
 		ok := object.Key("MaxContentSizePerPageInMegaBytes")
-		ok.Float(*v.MaxContentSizePerPageInMegaBytes)
+		switch {
+		case math.IsNaN(float64(*v.MaxContentSizePerPageInMegaBytes)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MaxContentSizePerPageInMegaBytes), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MaxContentSizePerPageInMegaBytes), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MaxContentSizePerPageInMegaBytes)
+
+		}
 	}
 
 	if v.MaxLinksPerPage != nil {

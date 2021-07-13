@@ -31,6 +31,8 @@ type JsonMapsInput struct {
 
 	DenseNumberMap map[string]int32
 
+	DenseSetMap map[string][]string
+
 	DenseStringMap map[string]string
 
 	DenseStructMap map[string]types.GreetingStruct
@@ -38,6 +40,8 @@ type JsonMapsInput struct {
 	SparseBooleanMap map[string]*bool
 
 	SparseNumberMap map[string]*int32
+
+	SparseSetMap map[string][]string
 
 	SparseStringMap map[string]*string
 
@@ -49,6 +53,8 @@ type JsonMapsOutput struct {
 
 	DenseNumberMap map[string]int32
 
+	DenseSetMap map[string][]string
+
 	DenseStringMap map[string]string
 
 	DenseStructMap map[string]types.GreetingStruct
@@ -56,6 +62,8 @@ type JsonMapsOutput struct {
 	SparseBooleanMap map[string]*bool
 
 	SparseNumberMap map[string]*int32
+
+	SparseSetMap map[string][]string
 
 	SparseStringMap map[string]*string
 

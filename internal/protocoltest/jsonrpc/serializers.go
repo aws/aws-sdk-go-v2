@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"strings"
 )
 
@@ -470,6 +471,53 @@ func (m *awsAwsjson11_serializeOpPutAndGetInlineDocuments) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson11_serializeOpSimpleScalarProperties struct {
+}
+
+func (*awsAwsjson11_serializeOpSimpleScalarProperties) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSimpleScalarProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SimpleScalarPropertiesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.SimpleScalarProperties")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSimpleScalarPropertiesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson11_serializeDocumentDocument(v smithy.Document, value smithyjson.Value) error {
 	// TODO: implement document serialization.
 	return nil
@@ -498,7 +546,20 @@ func awsAwsjson11_serializeDocumentKitchenSink(v *types.KitchenSink, value smith
 
 	if v.Double != nil {
 		ok := object.Key("Double")
-		ok.Double(*v.Double)
+		switch {
+		case math.IsNaN(*v.Double):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Double, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Double, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Double)
+
+		}
 	}
 
 	if v.EmptyStruct != nil {
@@ -510,7 +571,20 @@ func awsAwsjson11_serializeDocumentKitchenSink(v *types.KitchenSink, value smith
 
 	if v.Float != nil {
 		ok := object.Key("Float")
-		ok.Float(*v.Float)
+		switch {
+		case math.IsNaN(float64(*v.Float)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Float), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Float), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Float)
+
+		}
 	}
 
 	if v.HttpdateTimestamp != nil {
@@ -1047,7 +1121,20 @@ func awsAwsjson11_serializeOpDocumentKitchenSinkOperationInput(v *KitchenSinkOpe
 
 	if v.Double != nil {
 		ok := object.Key("Double")
-		ok.Double(*v.Double)
+		switch {
+		case math.IsNaN(*v.Double):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Double, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Double, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Double)
+
+		}
 	}
 
 	if v.EmptyStruct != nil {
@@ -1059,7 +1146,20 @@ func awsAwsjson11_serializeOpDocumentKitchenSinkOperationInput(v *KitchenSinkOpe
 
 	if v.Float != nil {
 		ok := object.Key("Float")
-		ok.Float(*v.Float)
+		switch {
+		case math.IsNaN(float64(*v.Float)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Float), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Float), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Float)
+
+		}
 	}
 
 	if v.HttpdateTimestamp != nil {
@@ -1242,6 +1342,49 @@ func awsAwsjson11_serializeOpDocumentPutAndGetInlineDocumentsInput(v *PutAndGetI
 		ok := object.Key("inlineDocument")
 		if err := awsAwsjson11_serializeDocumentDocument(v.InlineDocument, ok); err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DoubleValue != nil {
+		ok := object.Key("doubleValue")
+		switch {
+		case math.IsNaN(*v.DoubleValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DoubleValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DoubleValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DoubleValue)
+
+		}
+	}
+
+	if v.FloatValue != nil {
+		ok := object.Key("floatValue")
+		switch {
+		case math.IsNaN(float64(*v.FloatValue)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.FloatValue), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.FloatValue), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.FloatValue)
+
 		}
 	}
 

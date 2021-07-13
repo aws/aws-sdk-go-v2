@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCancelContact struct {
@@ -2018,7 +2019,20 @@ func awsRestjson1_serializeDocumentEirp(v *types.Eirp, value smithyjson.Value) e
 
 	if v.Value != nil {
 		ok := object.Key("value")
-		ok.Double(*v.Value)
+		switch {
+		case math.IsNaN(*v.Value):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Value, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Value, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Value)
+
+		}
 	}
 
 	return nil
@@ -2069,7 +2083,20 @@ func awsRestjson1_serializeDocumentFrequency(v *types.Frequency, value smithyjso
 
 	if v.Value != nil {
 		ok := object.Key("value")
-		ok.Double(*v.Value)
+		switch {
+		case math.IsNaN(*v.Value):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Value, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Value, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Value)
+
+		}
 	}
 
 	return nil
@@ -2086,7 +2113,20 @@ func awsRestjson1_serializeDocumentFrequencyBandwidth(v *types.FrequencyBandwidt
 
 	if v.Value != nil {
 		ok := object.Key("value")
-		ok.Double(*v.Value)
+		switch {
+		case math.IsNaN(*v.Value):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Value, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Value, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Value)
+
+		}
 	}
 
 	return nil

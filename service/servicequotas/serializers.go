@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpAssociateServiceQuotaTemplate struct {
@@ -1228,7 +1229,20 @@ func awsAwsjson11_serializeOpDocumentPutServiceQuotaIncreaseRequestIntoTemplateI
 
 	if v.DesiredValue != nil {
 		ok := object.Key("DesiredValue")
-		ok.Double(*v.DesiredValue)
+		switch {
+		case math.IsNaN(*v.DesiredValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DesiredValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DesiredValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DesiredValue)
+
+		}
 	}
 
 	if v.QuotaCode != nil {
@@ -1250,7 +1264,20 @@ func awsAwsjson11_serializeOpDocumentRequestServiceQuotaIncreaseInput(v *Request
 
 	if v.DesiredValue != nil {
 		ok := object.Key("DesiredValue")
-		ok.Double(*v.DesiredValue)
+		switch {
+		case math.IsNaN(*v.DesiredValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DesiredValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DesiredValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DesiredValue)
+
+		}
 	}
 
 	if v.QuotaCode != nil {

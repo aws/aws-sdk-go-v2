@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpAddCustomRoutingEndpoints struct {
@@ -2754,7 +2755,20 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointGroupInput(v *CreateEndpointG
 
 	if v.TrafficDialPercentage != nil {
 		ok := object.Key("TrafficDialPercentage")
-		ok.Float(*v.TrafficDialPercentage)
+		switch {
+		case math.IsNaN(float64(*v.TrafficDialPercentage)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.TrafficDialPercentage), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.TrafficDialPercentage), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.TrafficDialPercentage)
+
+		}
 	}
 
 	return nil
@@ -3468,7 +3482,20 @@ func awsAwsjson11_serializeOpDocumentUpdateEndpointGroupInput(v *UpdateEndpointG
 
 	if v.TrafficDialPercentage != nil {
 		ok := object.Key("TrafficDialPercentage")
-		ok.Float(*v.TrafficDialPercentage)
+		switch {
+		case math.IsNaN(float64(*v.TrafficDialPercentage)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.TrafficDialPercentage), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.TrafficDialPercentage), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.TrafficDialPercentage)
+
+		}
 	}
 
 	return nil

@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"strings"
 )
 
@@ -3506,7 +3507,20 @@ func awsAwsjson11_serializeDocumentAutoScalingThresholds(v *types.AutoScalingThr
 
 	if v.CpuThreshold != nil {
 		ok := object.Key("CpuThreshold")
-		ok.Double(*v.CpuThreshold)
+		switch {
+		case math.IsNaN(*v.CpuThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.CpuThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.CpuThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.CpuThreshold)
+
+		}
 	}
 
 	if v.IgnoreMetricsTime != nil {
@@ -3521,12 +3535,38 @@ func awsAwsjson11_serializeDocumentAutoScalingThresholds(v *types.AutoScalingThr
 
 	if v.LoadThreshold != nil {
 		ok := object.Key("LoadThreshold")
-		ok.Double(*v.LoadThreshold)
+		switch {
+		case math.IsNaN(*v.LoadThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.LoadThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.LoadThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.LoadThreshold)
+
+		}
 	}
 
 	if v.MemoryThreshold != nil {
 		ok := object.Key("MemoryThreshold")
-		ok.Double(*v.MemoryThreshold)
+		switch {
+		case math.IsNaN(*v.MemoryThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MemoryThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MemoryThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MemoryThreshold)
+
+		}
 	}
 
 	if v.ThresholdsWaitTime != nil {

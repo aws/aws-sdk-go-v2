@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpCreateBatchInferenceJob struct {
@@ -2357,12 +2358,38 @@ func awsAwsjson11_serializeDocumentContinuousHyperParameterRange(v *types.Contin
 
 	if v.MaxValue != 0 {
 		ok := object.Key("maxValue")
-		ok.Double(v.MaxValue)
+		switch {
+		case math.IsNaN(v.MaxValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.MaxValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MaxValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MaxValue)
+
+		}
 	}
 
 	if v.MinValue != 0 {
 		ok := object.Key("minValue")
-		ok.Double(v.MinValue)
+		switch {
+		case math.IsNaN(v.MinValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinValue)
+
+		}
 	}
 
 	if v.Name != nil {

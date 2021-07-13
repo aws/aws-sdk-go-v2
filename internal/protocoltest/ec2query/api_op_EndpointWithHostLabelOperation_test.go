@@ -48,9 +48,7 @@ func TestClient_EndpointWithHostLabelOperation_awsEc2querySerialize(t *testing.T
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=EndpointWithHostLabelOperation
-			&Version=2020-01-08
-			&Label=bar`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=EndpointWithHostLabelOperation&Version=2020-01-08&Label=bar`))
 			},
 		},
 	}

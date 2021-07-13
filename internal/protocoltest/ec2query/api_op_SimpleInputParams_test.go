@@ -14,6 +14,7 @@ import (
 	smithytesting "github.com/aws/smithy-go/testing"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -51,10 +52,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&Foo=val1
-			&Bar=val2`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&Foo=val1&Bar=val2`))
 			},
 		},
 		// Serializes booleans that are true
@@ -74,10 +72,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&Foo=val1
-			&Baz=true`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&Foo=val1&Baz=true`))
 			},
 		},
 		// Serializes booleans that are false
@@ -96,9 +91,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&Baz=false`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&Baz=false`))
 			},
 		},
 		// Serializes integers
@@ -117,9 +110,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&Bam=10`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&Bam=10`))
 			},
 		},
 		// Serializes floats
@@ -138,9 +129,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&Boo=10.8`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&Boo=10.8`))
 			},
 		},
 		// Blobs are base64 encoded in the query string
@@ -159,9 +148,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&Qux=dmFsdWU%3D`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&Qux=dmFsdWU%3D`))
 			},
 		},
 		// Serializes enums in the query string
@@ -180,9 +167,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&FooEnum=Foo`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&FooEnum=Foo`))
 			},
 		},
 		// Serializes query using ec2QueryName trait.
@@ -201,9 +186,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&A=Hi`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&A=Hi`))
 			},
 		},
 		// ec2QueryName trait is preferred over xmlName.
@@ -222,9 +205,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&B=Hi`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&B=Hi`))
 			},
 		},
 		// xmlName is used with the ec2 protocol, but the first character is uppercased
@@ -243,9 +224,67 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams
-			&Version=2020-01-08
-			&C=Hi`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&C=Hi`))
+			},
+		},
+		// Supports handling NaN float values.
+		"Ec2QuerySupportsNaNFloatInputs": {
+			Params: &SimpleInputParamsInput{
+				FloatValue: ptr.Float32(float32(math.NaN())),
+				Boo:        ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&FloatValue=NaN&Boo=NaN`))
+			},
+		},
+		// Supports handling Infinity float values.
+		"Ec2QuerySupportsInfinityFloatInputs": {
+			Params: &SimpleInputParamsInput{
+				FloatValue: ptr.Float32(float32(math.Inf(1))),
+				Boo:        ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&FloatValue=Infinity&Boo=Infinity`))
+			},
+		},
+		// Supports handling -Infinity float values.
+		"Ec2QuerySupportsNegativeInfinityFloatInputs": {
+			Params: &SimpleInputParamsInput{
+				FloatValue: ptr.Float32(float32(math.Inf(-1))),
+				Boo:        ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&FloatValue=-Infinity&Boo=-Infinity`))
 			},
 		},
 	}

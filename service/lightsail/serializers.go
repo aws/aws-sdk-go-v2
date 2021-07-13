@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpAllocateStaticIp struct {
@@ -9860,7 +9861,20 @@ func awsAwsjson11_serializeOpDocumentPutAlarmInput(v *PutAlarmInput, value smith
 
 	if v.Threshold != nil {
 		ok := object.Key("threshold")
-		ok.Double(*v.Threshold)
+		switch {
+		case math.IsNaN(*v.Threshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Threshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Threshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Threshold)
+
+		}
 	}
 
 	if len(v.TreatMissingData) > 0 {

@@ -14,9 +14,11 @@ import (
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -153,6 +155,57 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
 			ExpectHeader: http.Header{
 				"X-Enum":     []string{"Foo"},
 				"X-EnumList": []string{"Foo, Bar, Baz"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling NaN float header values.
+		"RestXmlSupportsNaNFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.NaN())),
+				HeaderDouble: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"NaN"},
+				"X-Float":  []string{"NaN"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling Infinity float header values.
+		"RestXmlSupportsInfinityFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(1))),
+				HeaderDouble: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"Infinity"},
+				"X-Float":  []string{"Infinity"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Supports handling -Infinity float header values.
+		"RestXmlSupportsNegativeInfinityFloatHeaderInputs": {
+			Params: &InputAndOutputWithHeadersInput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(-1))),
+				HeaderDouble: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/InputAndOutputWithHeaders",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Double": []string{"-Infinity"},
+				"X-Float":  []string{"-Infinity"},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
@@ -333,6 +386,45 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 				},
 			},
 		},
+		// Supports handling NaN float header values.
+		"RestXmlSupportsNaNFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"NaN"},
+				"X-Float":  []string{"NaN"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.NaN())),
+				HeaderDouble: ptr.Float64(math.NaN()),
+			},
+		},
+		// Supports handling Infinity float header values.
+		"RestXmlSupportsInfinityFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"Infinity"},
+				"X-Float":  []string{"Infinity"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(1))),
+				HeaderDouble: ptr.Float64(math.Inf(1)),
+			},
+		},
+		// Supports handling -Infinity float header values.
+		"RestXmlSupportsNegativeInfinityFloatHeaderOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Double": []string{"-Infinity"},
+				"X-Float":  []string{"-Infinity"},
+			},
+			Body: []byte(``),
+			ExpectResult: &InputAndOutputWithHeadersOutput{
+				HeaderFloat:  ptr.Float32(float32(math.Inf(-1))),
+				HeaderDouble: ptr.Float64(math.Inf(-1)),
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -384,7 +476,18 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+			opts := cmp.Options{
+				cmpopts.IgnoreUnexported(
+					middleware.Metadata{},
+				),
+				cmp.FilterValues(func(x, y float64) bool {
+					return math.IsNaN(x) && math.IsNaN(y)
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmp.FilterValues(func(x, y float32) bool {
+					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+			}
+			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

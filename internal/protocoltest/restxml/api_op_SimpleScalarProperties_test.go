@@ -12,9 +12,11 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/http/httptest"
 	"strconv"
@@ -110,6 +112,69 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
 			    <stringValue>string with white    space</stringValue>
+			</SimpleScalarPropertiesInputOutput>
+			`))
+			},
+		},
+		// Supports handling NaN float values.
+		"RestXmlSupportsNaNFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+				DoubleValue: ptr.Float64(math.NaN()),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+			    <floatValue>NaN</floatValue>
+			    <DoubleDribble>NaN</DoubleDribble>
+			</SimpleScalarPropertiesInputOutput>
+			`))
+			},
+		},
+		// Supports handling Infinity float values.
+		"RestXmlSupportsInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+				DoubleValue: ptr.Float64(math.Inf(1)),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+			    <floatValue>Infinity</floatValue>
+			    <DoubleDribble>Infinity</DoubleDribble>
+			</SimpleScalarPropertiesInputOutput>
+			`))
+			},
+		},
+		// Supports handling -Infinity float values.
+		"RestXmlSupportsNegativeInfinityFloatInputs": {
+			Params: &SimpleScalarPropertiesInput{
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+			    <floatValue>-Infinity</floatValue>
+			    <DoubleDribble>-Infinity</DoubleDribble>
 			</SimpleScalarPropertiesInputOutput>
 			`))
 			},
@@ -222,6 +287,27 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				DoubleValue:       ptr.Float64(6.5),
 			},
 		},
+		// Serializes string with escaping. This validates the three escape types: literal,
+		// decimal and hexadecimal. It also validates that unescaping properly handles the
+		// case where unescaping an & produces a newly formed escape sequence (this should
+		// not be re-unescaped). Servers may produce different output, this test is
+		// designed different unescapes clients must handle
+		"SimpleScalarPropertiesComplexEscapes": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			    <stringValue>escaped data: &amp;lt;&#xD;&#10;</stringValue>
+			</SimpleScalarPropertiesInputOutput>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("escaped data: &lt;\r\n"),
+			},
+		},
 		// Serializes string with escaping
 		"SimpleScalarPropertiesWithEscapedCharacter": {
 			StatusCode: 200,
@@ -277,6 +363,57 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				StringValue: ptr.String("string with white    space"),
 			},
 		},
+		// Supports handling NaN float values.
+		"RestXmlSupportsNaNFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			    <floatValue>NaN</floatValue>
+			    <DoubleDribble>NaN</DoubleDribble>
+			</SimpleScalarPropertiesInputOutput>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.NaN())),
+				DoubleValue: ptr.Float64(math.NaN()),
+			},
+		},
+		// Supports handling Infinity float values.
+		"RestXmlSupportsInfinityFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			    <floatValue>Infinity</floatValue>
+			    <DoubleDribble>Infinity</DoubleDribble>
+			</SimpleScalarPropertiesInputOutput>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+				DoubleValue: ptr.Float64(math.Inf(1)),
+			},
+		},
+		// Supports handling -Infinity float values.
+		"RestXmlSupportsNegativeInfinityFloatOutputs": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			    <floatValue>-Infinity</floatValue>
+			    <DoubleDribble>-Infinity</DoubleDribble>
+			</SimpleScalarPropertiesInputOutput>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+				DoubleValue: ptr.Float64(math.Inf(-1)),
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -328,7 +465,18 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+			opts := cmp.Options{
+				cmpopts.IgnoreUnexported(
+					middleware.Metadata{},
+				),
+				cmp.FilterValues(func(x, y float64) bool {
+					return math.IsNaN(x) && math.IsNaN(y)
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmp.FilterValues(func(x, y float32) bool {
+					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
+				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+			}
+			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

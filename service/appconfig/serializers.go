@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateApplication struct {
@@ -281,7 +282,20 @@ func awsRestjson1_serializeOpDocumentCreateDeploymentStrategyInput(v *CreateDepl
 
 	{
 		ok := object.Key("GrowthFactor")
-		ok.Float(v.GrowthFactor)
+		switch {
+		case math.IsNaN(float64(v.GrowthFactor)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(v.GrowthFactor), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(v.GrowthFactor), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(v.GrowthFactor)
+
+		}
 	}
 
 	if len(v.GrowthType) > 0 {
@@ -2374,7 +2388,20 @@ func awsRestjson1_serializeOpDocumentUpdateDeploymentStrategyInput(v *UpdateDepl
 
 	if v.GrowthFactor != 0 {
 		ok := object.Key("GrowthFactor")
-		ok.Float(v.GrowthFactor)
+		switch {
+		case math.IsNaN(float64(v.GrowthFactor)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(v.GrowthFactor), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(v.GrowthFactor), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(v.GrowthFactor)
+
+		}
 	}
 
 	if len(v.GrowthType) > 0 {

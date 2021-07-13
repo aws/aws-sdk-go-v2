@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpBatchPutMessage struct {
@@ -3646,7 +3647,20 @@ func awsRestjson1_serializeDocumentVariable(v *types.Variable, value smithyjson.
 
 	if v.DoubleValue != 0 {
 		ok := object.Key("doubleValue")
-		ok.Double(v.DoubleValue)
+		switch {
+		case math.IsNaN(v.DoubleValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.DoubleValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.DoubleValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.DoubleValue)
+
+		}
 	}
 
 	if v.Name != nil {

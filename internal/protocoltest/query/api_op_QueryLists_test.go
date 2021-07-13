@@ -59,13 +59,7 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08
-			&ListArg.member.1=foo
-			&ListArg.member.2=bar
-			&ListArg.member.3=baz
-			&ComplexListArg.member.1.hi=hello
-			&ComplexListArg.member.2.hi=hola`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArg.member.1=foo&ListArg.member.2=bar&ListArg.member.3=baz&ComplexListArg.member.1.hi=hello&ComplexListArg.member.2.hi=hola`))
 			},
 		},
 		// Does not serialize empty query lists
@@ -81,8 +75,7 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08`))
 			},
 		},
 		// Flattens query lists by repeating the member name and removing the member
@@ -102,10 +95,7 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08
-			&FlattenedListArg.1=A
-			&FlattenedListArg.2=B`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&FlattenedListArg.1=A&FlattenedListArg.2=B`))
 			},
 		},
 		// Changes the member of lists using xmlName trait
@@ -124,10 +114,7 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08
-			&ListArgWithXmlNameMember.item.1=A
-			&ListArgWithXmlNameMember.item.2=B`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArgWithXmlNameMember.item.1=A&ListArgWithXmlNameMember.item.2=B`))
 			},
 		},
 		// Changes the name of flattened lists using xmlName trait on the structure member
@@ -146,10 +133,28 @@ func TestClient_QueryLists_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08
-			&Hi.1=A
-			&Hi.2=B`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&Hi.1=A&Hi.2=B`))
+			},
+		},
+		// Nested structure with a list member
+		"QueryNestedStructWithList": {
+			Params: &QueryListsInput{
+				NestedWithList: &types.NestedStructWithList{
+					ListArg: []string{
+						"A",
+						"B",
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&NestedWithList.ListArg.member.1=A&NestedWithList.ListArg.member.2=B`))
 			},
 		},
 	}

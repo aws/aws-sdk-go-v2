@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpBuildBotLocale struct {
@@ -407,7 +408,20 @@ func awsRestjson1_serializeOpDocumentCreateBotLocaleInput(v *CreateBotLocaleInpu
 
 	if v.NluIntentConfidenceThreshold != nil {
 		ok := object.Key("nluIntentConfidenceThreshold")
-		ok.Double(*v.NluIntentConfidenceThreshold)
+		switch {
+		case math.IsNaN(*v.NluIntentConfidenceThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.NluIntentConfidenceThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.NluIntentConfidenceThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.NluIntentConfidenceThreshold)
+
+		}
 	}
 
 	if v.VoiceSettings != nil {
@@ -4485,7 +4499,20 @@ func awsRestjson1_serializeOpDocumentUpdateBotLocaleInput(v *UpdateBotLocaleInpu
 
 	if v.NluIntentConfidenceThreshold != nil {
 		ok := object.Key("nluIntentConfidenceThreshold")
-		ok.Double(*v.NluIntentConfidenceThreshold)
+		switch {
+		case math.IsNaN(*v.NluIntentConfidenceThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.NluIntentConfidenceThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.NluIntentConfidenceThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.NluIntentConfidenceThreshold)
+
+		}
 	}
 
 	if v.VoiceSettings != nil {
@@ -5381,7 +5408,20 @@ func awsRestjson1_serializeDocumentBotLocaleImportSpecification(v *types.BotLoca
 
 	if v.NluIntentConfidenceThreshold != nil {
 		ok := object.Key("nluIntentConfidenceThreshold")
-		ok.Double(*v.NluIntentConfidenceThreshold)
+		switch {
+		case math.IsNaN(*v.NluIntentConfidenceThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.NluIntentConfidenceThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.NluIntentConfidenceThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.NluIntentConfidenceThreshold)
+
+		}
 	}
 
 	if v.VoiceSettings != nil {

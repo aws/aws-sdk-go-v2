@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpBatchAssociateClientDeviceWithCoreDevice struct {
@@ -1938,7 +1939,20 @@ func awsRestjson1_serializeDocumentIoTJobAbortCriteria(v *types.IoTJobAbortCrite
 
 	{
 		ok := object.Key("thresholdPercentage")
-		ok.Double(v.ThresholdPercentage)
+		switch {
+		case math.IsNaN(v.ThresholdPercentage):
+			ok.String("NaN")
+
+		case math.IsInf(v.ThresholdPercentage, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ThresholdPercentage, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ThresholdPercentage)
+
+		}
 	}
 
 	return nil
@@ -1987,7 +2001,20 @@ func awsRestjson1_serializeDocumentIoTJobExponentialRolloutRate(v *types.IoTJobE
 
 	{
 		ok := object.Key("incrementFactor")
-		ok.Double(v.IncrementFactor)
+		switch {
+		case math.IsNaN(v.IncrementFactor):
+			ok.String("NaN")
+
+		case math.IsInf(v.IncrementFactor, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.IncrementFactor, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.IncrementFactor)
+
+		}
 	}
 
 	if v.RateIncreaseCriteria != nil {

@@ -59,13 +59,7 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08
-			&ListArg.1=foo
-			&ListArg.2=bar
-			&ListArg.3=baz
-			&ComplexListArg.1.Hi=hello
-			&ComplexListArg.2.Hi=hola`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArg.1=foo&ListArg.2=bar&ListArg.3=baz&ComplexListArg.1.Hi=hello&ComplexListArg.2.Hi=hola`))
 			},
 		},
 		// Does not serialize empty query lists
@@ -81,8 +75,7 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08`))
 			},
 		},
 		// An xmlName trait in the member of a list has no effect on the list
@@ -102,10 +95,7 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08
-			&ListArgWithXmlNameMember.1=A
-			&ListArgWithXmlNameMember.2=B`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArgWithXmlNameMember.1=A&ListArgWithXmlNameMember.2=B`))
 			},
 		},
 		// Changes the name of the list using the xmlName trait
@@ -124,10 +114,28 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists
-			&Version=2020-01-08
-			&Hi.1=A
-			&Hi.2=B`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&Hi.1=A&Hi.2=B`))
+			},
+		},
+		// Nested structure with a list member
+		"Ec2ListNestedStructWithList": {
+			Params: &QueryListsInput{
+				NestedWithList: &types.NestedStructWithList{
+					ListArg: []string{
+						"A",
+						"B",
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&NestedWithList.ListArg.1=A&NestedWithList.ListArg.2=B`))
 			},
 		},
 	}

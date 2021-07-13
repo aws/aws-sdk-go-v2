@@ -5,44 +5,45 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example serializes an inline document as the entire HTTP payload.
-func (c *Client) InlineDocumentAsPayload(ctx context.Context, params *InlineDocumentAsPayloadInput, optFns ...func(*Options)) (*InlineDocumentAsPayloadOutput, error) {
+func (c *Client) HttpRequestWithFloatLabels(ctx context.Context, params *HttpRequestWithFloatLabelsInput, optFns ...func(*Options)) (*HttpRequestWithFloatLabelsOutput, error) {
 	if params == nil {
-		params = &InlineDocumentAsPayloadInput{}
+		params = &HttpRequestWithFloatLabelsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InlineDocumentAsPayload", params, optFns, c.addOperationInlineDocumentAsPayloadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "HttpRequestWithFloatLabels", params, optFns, c.addOperationHttpRequestWithFloatLabelsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*InlineDocumentAsPayloadOutput)
+	out := result.(*HttpRequestWithFloatLabelsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type InlineDocumentAsPayloadInput struct {
-	DocumentValue smithy.Document
+type HttpRequestWithFloatLabelsInput struct {
+
+	// This member is required.
+	Double *float64
+
+	// This member is required.
+	Float *float32
 }
 
-type InlineDocumentAsPayloadOutput struct {
-	DocumentValue smithy.Document
-
+type HttpRequestWithFloatLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func (c *Client) addOperationInlineDocumentAsPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInlineDocumentAsPayload{}, middleware.After)
+func (c *Client) addOperationHttpRequestWithFloatLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithFloatLabels{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInlineDocumentAsPayload{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithFloatLabels{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -76,7 +77,10 @@ func (c *Client) addOperationInlineDocumentAsPayloadMiddlewares(stack *middlewar
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInlineDocumentAsPayload(options.Region), middleware.Before); err != nil {
+	if err = addOpHttpRequestWithFloatLabelsValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithFloatLabels(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -91,10 +95,10 @@ func (c *Client) addOperationInlineDocumentAsPayloadMiddlewares(stack *middlewar
 	return nil
 }
 
-func newServiceMetadataMiddleware_opInlineDocumentAsPayload(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opHttpRequestWithFloatLabels(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "InlineDocumentAsPayload",
+		OperationName: "HttpRequestWithFloatLabels",
 	}
 }

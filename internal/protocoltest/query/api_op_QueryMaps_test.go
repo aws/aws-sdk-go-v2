@@ -50,12 +50,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps
-			&Version=2020-01-08
-			&MapArg.entry.1.key=bar
-			&MapArg.entry.1.value=Bar
-			&MapArg.entry.2.key=foo
-			&MapArg.entry.2.value=Foo`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08&MapArg.entry.1.key=bar&MapArg.entry.1.value=Bar&MapArg.entry.2.key=foo&MapArg.entry.2.value=Foo`))
 			},
 		},
 		// Serializes query maps and uses xmlName
@@ -73,10 +68,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps
-			&Version=2020-01-08
-			&Foo.entry.1.key=foo
-			&Foo.entry.1.value=Foo`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08&Foo.entry.1.key=foo&Foo.entry.1.value=Foo`))
 			},
 		},
 		// Serializes complex query maps
@@ -99,12 +91,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps
-			&Version=2020-01-08
-			&ComplexMapArg.entry.1.key=bar
-			&ComplexMapArg.entry.1.value.hi=Bar
-			&ComplexMapArg.entry.2.key=foo
-			&ComplexMapArg.entry.2.value.hi=Foo`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08&ComplexMapArg.entry.1.key=bar&ComplexMapArg.entry.1.value.hi=Bar&ComplexMapArg.entry.2.key=foo&ComplexMapArg.entry.2.value.hi=Foo`))
 			},
 		},
 		// Does not serialize empty query maps
@@ -120,8 +107,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps
-			&Version=2020-01-08`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08`))
 			},
 		},
 		// Serializes query maps where the member has an xmlName trait
@@ -140,12 +126,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps
-			&Version=2020-01-08
-			&MapWithXmlMemberName.entry.1.K=bar
-			&MapWithXmlMemberName.entry.1.V=Bar
-			&MapWithXmlMemberName.entry.2.K=foo
-			&MapWithXmlMemberName.entry.2.V=Foo`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08&MapWithXmlMemberName.entry.1.K=bar&MapWithXmlMemberName.entry.1.V=Bar&MapWithXmlMemberName.entry.2.K=foo&MapWithXmlMemberName.entry.2.V=Foo`))
 			},
 		},
 		// Serializes flattened query maps
@@ -164,12 +145,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps
-			&Version=2020-01-08
-			&FlattenedMap.1.key=bar
-			&FlattenedMap.1.value=Bar
-			&FlattenedMap.2.key=foo
-			&FlattenedMap.2.value=Foo`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08&FlattenedMap.1.key=bar&FlattenedMap.1.value=Bar&FlattenedMap.2.key=foo&FlattenedMap.2.value=Foo`))
 			},
 		},
 		// Serializes flattened query maps that use an xmlName
@@ -188,12 +164,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps
-			&Version=2020-01-08
-			&Hi.1.K=bar
-			&Hi.1.V=Bar
-			&Hi.2.K=foo
-			&Hi.2.V=Foo`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08&Hi.1.K=bar&Hi.1.V=Bar&Hi.2.K=foo&Hi.2.V=Foo`))
 			},
 		},
 		// Serializes query map of lists
@@ -218,14 +189,28 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps
-			&Version=2020-01-08
-			&MapOfLists.entry.1.key=bar
-			&MapOfLists.entry.1.value.member.1=C
-			&MapOfLists.entry.1.value.member.2=D
-			&MapOfLists.entry.2.key=foo
-			&MapOfLists.entry.2.value.member.1=A
-			&MapOfLists.entry.2.value.member.2=B`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08&MapOfLists.entry.1.key=bar&MapOfLists.entry.1.value.member.1=C&MapOfLists.entry.1.value.member.2=D&MapOfLists.entry.2.key=foo&MapOfLists.entry.2.value.member.1=A&MapOfLists.entry.2.value.member.2=B`))
+			},
+		},
+		// Serializes nested struct with map member
+		"QueryNestedStructWithMap": {
+			Params: &QueryMapsInput{
+				NestedStructWithMap: &types.NestedStructWithMap{
+					MapArg: map[string]string{
+						"bar": "Bar",
+						"foo": "Foo",
+					},
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryMaps&Version=2020-01-08&NestedStructWithMap.MapArg.entry.1.key=bar&NestedStructWithMap.MapArg.entry.1.value=Bar&NestedStructWithMap.MapArg.entry.2.key=foo&NestedStructWithMap.MapArg.entry.2.value=Foo`))
 			},
 		},
 	}

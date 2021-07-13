@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCloneBackend struct {
@@ -2182,7 +2183,20 @@ func awsRestjson1_serializeDocumentBackendAPIAppSyncAuthSettings(v *types.Backen
 
 	if v.ExpirationTime != 0 {
 		ok := object.Key("expirationTime")
-		ok.Double(v.ExpirationTime)
+		switch {
+		case math.IsNaN(v.ExpirationTime):
+			ok.String("NaN")
+
+		case math.IsInf(v.ExpirationTime, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ExpirationTime, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ExpirationTime)
+
+		}
 	}
 
 	if v.OpenIDAuthTTL != nil {
@@ -2424,7 +2438,20 @@ func awsRestjson1_serializeDocumentCreateBackendAuthPasswordPolicyConfig(v *type
 
 	{
 		ok := object.Key("minimumLength")
-		ok.Double(v.MinimumLength)
+		switch {
+		case math.IsNaN(v.MinimumLength):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinimumLength, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinimumLength, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinimumLength)
+
+		}
 	}
 
 	return nil
@@ -2806,7 +2833,20 @@ func awsRestjson1_serializeDocumentUpdateBackendAuthPasswordPolicyConfig(v *type
 
 	if v.MinimumLength != 0 {
 		ok := object.Key("minimumLength")
-		ok.Double(v.MinimumLength)
+		switch {
+		case math.IsNaN(v.MinimumLength):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinimumLength, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinimumLength, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinimumLength)
+
+		}
 	}
 
 	return nil

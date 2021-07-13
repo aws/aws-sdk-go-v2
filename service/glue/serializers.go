@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpBatchCreatePartition struct {
@@ -7557,7 +7558,20 @@ func awsAwsjson11_serializeDocumentBinaryColumnStatisticsData(v *types.BinaryCol
 
 	{
 		ok := object.Key("AverageLength")
-		ok.Double(v.AverageLength)
+		switch {
+		case math.IsNaN(v.AverageLength):
+			ok.String("NaN")
+
+		case math.IsInf(v.AverageLength, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.AverageLength, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.AverageLength)
+
+		}
 	}
 
 	{
@@ -8479,12 +8493,38 @@ func awsAwsjson11_serializeDocumentDoubleColumnStatisticsData(v *types.DoubleCol
 
 	if v.MaximumValue != 0 {
 		ok := object.Key("MaximumValue")
-		ok.Double(v.MaximumValue)
+		switch {
+		case math.IsNaN(v.MaximumValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.MaximumValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MaximumValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MaximumValue)
+
+		}
 	}
 
 	if v.MinimumValue != 0 {
 		ok := object.Key("MinimumValue")
-		ok.Double(v.MinimumValue)
+		switch {
+		case math.IsNaN(v.MinimumValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinimumValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinimumValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinimumValue)
+
+		}
 	}
 
 	{
@@ -8516,7 +8556,20 @@ func awsAwsjson11_serializeDocumentDynamoDBTarget(v *types.DynamoDBTarget, value
 
 	if v.ScanRate != nil {
 		ok := object.Key("scanRate")
-		ok.Double(*v.ScanRate)
+		switch {
+		case math.IsNaN(*v.ScanRate):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ScanRate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ScanRate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ScanRate)
+
+		}
 	}
 
 	return nil
@@ -8598,7 +8651,20 @@ func awsAwsjson11_serializeDocumentFindMatchesParameters(v *types.FindMatchesPar
 
 	if v.AccuracyCostTradeoff != nil {
 		ok := object.Key("AccuracyCostTradeoff")
-		ok.Double(*v.AccuracyCostTradeoff)
+		switch {
+		case math.IsNaN(*v.AccuracyCostTradeoff):
+			ok.String("NaN")
+
+		case math.IsInf(*v.AccuracyCostTradeoff, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.AccuracyCostTradeoff, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.AccuracyCostTradeoff)
+
+		}
 	}
 
 	if v.EnforceProvidedLabels != nil {
@@ -8608,7 +8674,20 @@ func awsAwsjson11_serializeDocumentFindMatchesParameters(v *types.FindMatchesPar
 
 	if v.PrecisionRecallTradeoff != nil {
 		ok := object.Key("PrecisionRecallTradeoff")
-		ok.Double(*v.PrecisionRecallTradeoff)
+		switch {
+		case math.IsNaN(*v.PrecisionRecallTradeoff):
+			ok.String("NaN")
+
+		case math.IsInf(*v.PrecisionRecallTradeoff, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.PrecisionRecallTradeoff, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.PrecisionRecallTradeoff)
+
+		}
 	}
 
 	if v.PrimaryKeyColumnName != nil {
@@ -8841,7 +8920,20 @@ func awsAwsjson11_serializeDocumentJobUpdate(v *types.JobUpdate, value smithyjso
 
 	if v.MaxCapacity != nil {
 		ok := object.Key("MaxCapacity")
-		ok.Double(*v.MaxCapacity)
+		switch {
+		case math.IsNaN(*v.MaxCapacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxCapacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxCapacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxCapacity)
+
+		}
 	}
 
 	if v.MaxRetries != 0 {
@@ -9892,7 +9984,20 @@ func awsAwsjson11_serializeDocumentStringColumnStatisticsData(v *types.StringCol
 
 	{
 		ok := object.Key("AverageLength")
-		ok.Double(v.AverageLength)
+		switch {
+		case math.IsNaN(v.AverageLength):
+			ok.String("NaN")
+
+		case math.IsInf(v.AverageLength, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.AverageLength, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.AverageLength)
+
+		}
 	}
 
 	{
@@ -11073,7 +11178,20 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 
 	if v.MaxCapacity != nil {
 		ok := object.Key("MaxCapacity")
-		ok.Double(*v.MaxCapacity)
+		switch {
+		case math.IsNaN(*v.MaxCapacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxCapacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxCapacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxCapacity)
+
+		}
 	}
 
 	if v.MaxRetries != 0 {
@@ -11158,7 +11276,20 @@ func awsAwsjson11_serializeOpDocumentCreateMLTransformInput(v *CreateMLTransform
 
 	if v.MaxCapacity != nil {
 		ok := object.Key("MaxCapacity")
-		ok.Double(*v.MaxCapacity)
+		switch {
+		case math.IsNaN(*v.MaxCapacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxCapacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxCapacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxCapacity)
+
+		}
 	}
 
 	if v.MaxRetries != nil {
@@ -13671,7 +13802,20 @@ func awsAwsjson11_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 
 	if v.MaxCapacity != nil {
 		ok := object.Key("MaxCapacity")
-		ok.Double(*v.MaxCapacity)
+		switch {
+		case math.IsNaN(*v.MaxCapacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxCapacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxCapacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxCapacity)
+
+		}
 	}
 
 	if v.NotificationProperty != nil {
@@ -14187,7 +14331,20 @@ func awsAwsjson11_serializeOpDocumentUpdateMLTransformInput(v *UpdateMLTransform
 
 	if v.MaxCapacity != nil {
 		ok := object.Key("MaxCapacity")
-		ok.Double(*v.MaxCapacity)
+		switch {
+		case math.IsNaN(*v.MaxCapacity):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxCapacity, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxCapacity, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxCapacity)
+
+		}
 	}
 
 	if v.MaxRetries != nil {

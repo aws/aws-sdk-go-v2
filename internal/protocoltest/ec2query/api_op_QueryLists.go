@@ -34,6 +34,8 @@ type QueryListsInput struct {
 	ListArgWithXmlName []string
 
 	ListArgWithXmlNameMember []string
+
+	NestedWithList *types.NestedStructWithList
 }
 
 type QueryListsOutput struct {

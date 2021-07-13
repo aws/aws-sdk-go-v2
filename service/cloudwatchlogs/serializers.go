@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsAwsjson11_serializeOpAssociateKmsKey struct {
@@ -2056,7 +2057,20 @@ func awsAwsjson11_serializeDocumentMetricTransformation(v *types.MetricTransform
 
 	if v.DefaultValue != nil {
 		ok := object.Key("defaultValue")
-		ok.Double(*v.DefaultValue)
+		switch {
+		case math.IsNaN(*v.DefaultValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.DefaultValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.DefaultValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.DefaultValue)
+
+		}
 	}
 
 	if v.Dimensions != nil {

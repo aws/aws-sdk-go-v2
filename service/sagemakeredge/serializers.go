@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpGetDeviceRegistration struct {
@@ -201,7 +202,20 @@ func awsRestjson1_serializeDocumentEdgeMetric(v *types.EdgeMetric, value smithyj
 
 	if v.Value != 0 {
 		ok := object.Key("Value")
-		ok.Double(v.Value)
+		switch {
+		case math.IsNaN(v.Value):
+			ok.String("NaN")
+
+		case math.IsInf(v.Value, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Value, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Value)
+
+		}
 	}
 
 	return nil

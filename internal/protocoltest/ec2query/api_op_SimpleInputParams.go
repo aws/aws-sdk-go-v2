@@ -35,6 +35,8 @@ type SimpleInputParamsInput struct {
 
 	Boo *float64
 
+	FloatValue *float32
+
 	Foo *string
 
 	FooEnum types.FooEnum

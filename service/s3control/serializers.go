@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestxml_serializeOpCreateAccessPoint struct {
@@ -5649,7 +5650,20 @@ func awsRestxml_serializeDocumentSelectionCriteria(v *types.SelectionCriteria, v
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Double(v.MinStorageBytesPercentage)
+		switch {
+		case math.IsNaN(v.MinStorageBytesPercentage):
+			el.String("NaN")
+
+		case math.IsInf(v.MinStorageBytesPercentage, 1):
+			el.String("Infinity")
+
+		case math.IsInf(v.MinStorageBytesPercentage, -1):
+			el.String("-Infinity")
+
+		default:
+			el.Double(v.MinStorageBytesPercentage)
+
+		}
 	}
 	return nil
 }

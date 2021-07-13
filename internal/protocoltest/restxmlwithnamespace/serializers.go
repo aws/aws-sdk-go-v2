@@ -12,6 +12,7 @@ import (
 	smithyxml "github.com/aws/smithy-go/encoding/xml"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestxml_serializeOpSimpleScalarProperties struct {
@@ -108,7 +109,20 @@ func awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPr
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Double(*v.DoubleValue)
+		switch {
+		case math.IsNaN(*v.DoubleValue):
+			el.String("NaN")
+
+		case math.IsInf(*v.DoubleValue, 1):
+			el.String("Infinity")
+
+		case math.IsInf(*v.DoubleValue, -1):
+			el.String("-Infinity")
+
+		default:
+			el.Double(*v.DoubleValue)
+
+		}
 	}
 	if v.FalseBooleanValue != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -130,7 +144,20 @@ func awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPr
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Float(*v.FloatValue)
+		switch {
+		case math.IsNaN(float64(*v.FloatValue)):
+			el.String("NaN")
+
+		case math.IsInf(float64(*v.FloatValue), 1):
+			el.String("Infinity")
+
+		case math.IsInf(float64(*v.FloatValue), -1):
+			el.String("-Infinity")
+
+		default:
+			el.Float(*v.FloatValue)
+
+		}
 	}
 	if v.IntegerValue != nil {
 		rootAttr := []smithyxml.Attr{}

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"net/http"
 	"time"
 )
@@ -1360,6 +1361,73 @@ func awsRestxml_serializeOpHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHeade
 	return nil
 }
 
+type awsRestxml_serializeOpHttpRequestWithFloatLabels struct {
+}
+
+func (*awsRestxml_serializeOpHttpRequestWithFloatLabels) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpHttpRequestWithFloatLabels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*HttpRequestWithFloatLabelsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/FloatHttpLabels/{float}/{double}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsHttpRequestWithFloatLabelsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsHttpRequestWithFloatLabelsInput(v *HttpRequestWithFloatLabelsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Double == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member double must not be empty")}
+	}
+	if v.Double != nil {
+		if err := encoder.SetURI("double").Double(*v.Double); err != nil {
+			return err
+		}
+	}
+
+	if v.Float == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member float must not be empty")}
+	}
+	if v.Float != nil {
+		if err := encoder.SetURI("float").Float(*v.Float); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpHttpRequestWithGreedyLabelInPath struct {
 }
 
@@ -2631,7 +2699,20 @@ func awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPr
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Double(*v.DoubleValue)
+		switch {
+		case math.IsNaN(*v.DoubleValue):
+			el.String("NaN")
+
+		case math.IsInf(*v.DoubleValue, 1):
+			el.String("Infinity")
+
+		case math.IsInf(*v.DoubleValue, -1):
+			el.String("-Infinity")
+
+		default:
+			el.Double(*v.DoubleValue)
+
+		}
 	}
 	if v.FalseBooleanValue != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -2653,7 +2734,20 @@ func awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPr
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Float(*v.FloatValue)
+		switch {
+		case math.IsNaN(float64(*v.FloatValue)):
+			el.String("NaN")
+
+		case math.IsInf(float64(*v.FloatValue), 1):
+			el.String("Infinity")
+
+		case math.IsInf(float64(*v.FloatValue), -1):
+			el.String("-Infinity")
+
+		default:
+			el.Float(*v.FloatValue)
+
+		}
 	}
 	if v.IntegerValue != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -4796,7 +4890,20 @@ func awsRestxml_serializeDocumentXmlNestedUnionStruct(v *types.XmlNestedUnionStr
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Double(*v.DoubleValue)
+		switch {
+		case math.IsNaN(*v.DoubleValue):
+			el.String("NaN")
+
+		case math.IsInf(*v.DoubleValue, 1):
+			el.String("Infinity")
+
+		case math.IsInf(*v.DoubleValue, -1):
+			el.String("-Infinity")
+
+		default:
+			el.Double(*v.DoubleValue)
+
+		}
 	}
 	if v.FloatValue != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -4807,7 +4914,20 @@ func awsRestxml_serializeDocumentXmlNestedUnionStruct(v *types.XmlNestedUnionStr
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Float(*v.FloatValue)
+		switch {
+		case math.IsNaN(float64(*v.FloatValue)):
+			el.String("NaN")
+
+		case math.IsInf(float64(*v.FloatValue), 1):
+			el.String("Infinity")
+
+		case math.IsInf(float64(*v.FloatValue), -1):
+			el.String("-Infinity")
+
+		default:
+			el.Float(*v.FloatValue)
+
+		}
 	}
 	if v.IntegerValue != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -4890,7 +5010,20 @@ func awsRestxml_serializeDocumentXmlUnionShape(v types.XmlUnionShape, value smit
 			Attr: customMemberNameAttr,
 		}
 		av := value.MemberElement(customMemberName)
-		av.Double(uv.Value)
+		switch {
+		case math.IsNaN(uv.Value):
+			av.String("NaN")
+
+		case math.IsInf(uv.Value, 1):
+			av.String("Infinity")
+
+		case math.IsInf(uv.Value, -1):
+			av.String("-Infinity")
+
+		default:
+			av.Double(uv.Value)
+
+		}
 
 	case *types.XmlUnionShapeMemberFloatValue:
 		customMemberNameAttr := []smithyxml.Attr{}
@@ -4901,7 +5034,20 @@ func awsRestxml_serializeDocumentXmlUnionShape(v types.XmlUnionShape, value smit
 			Attr: customMemberNameAttr,
 		}
 		av := value.MemberElement(customMemberName)
-		av.Float(uv.Value)
+		switch {
+		case math.IsNaN(float64(uv.Value)):
+			av.String("NaN")
+
+		case math.IsInf(float64(uv.Value), 1):
+			av.String("Infinity")
+
+		case math.IsInf(float64(uv.Value), -1):
+			av.String("-Infinity")
+
+		default:
+			av.Float(uv.Value)
+
+		}
 
 	case *types.XmlUnionShapeMemberIntegerValue:
 		customMemberNameAttr := []smithyxml.Attr{}

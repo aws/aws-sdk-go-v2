@@ -1604,15 +1604,18 @@ func awsAwsjson10_deserializeDocumentStreamDescription(v **types.StreamDescripti
 		switch key {
 		case "CreationRequestDateTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationRequestDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.CreationRequestDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "KeySchema":
@@ -1746,15 +1749,18 @@ func awsAwsjson10_deserializeDocumentStreamRecord(v **types.StreamRecord, value 
 		switch key {
 		case "ApproximateCreationDateTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ApproximateCreationDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
 				}
-				f64, err := jtv.Float64()
-				if err != nil {
-					return err
-				}
-				sv.ApproximateCreationDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Keys":
