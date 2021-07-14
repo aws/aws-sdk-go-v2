@@ -11,9 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the user name and password creation date for the specified IAM user.
-// If the user has not been assigned a password, the operation returns a 404
-// (NoSuchEntity) error.
+// Retrieves the user name for the specified IAM user. A login profile is created
+// when you create a password for the user to access the Management Console. If the
+// user does not exist or does not have a password, the operation returns a 404
+// (NoSuchEntity) error. If you create an IAM user with access to the console, the
+// CreateDate reflects the date you created the initial password for the user. If
+// you create an IAM user with programmatic access, and then later add a password
+// for the user to access the Management Console, the CreateDate reflects the
+// initial password creation date. A user with programmatic access does not have a
+// login profile unless you create a password for the user to access the Management
+// Console.
 func (c *Client) GetLoginProfile(ctx context.Context, params *GetLoginProfileInput, optFns ...func(*Options)) (*GetLoginProfileOutput, error) {
 	if params == nil {
 		params = &GetLoginProfileInput{}
@@ -43,7 +50,7 @@ type GetLoginProfileInput struct {
 // Contains the response to a successful GetLoginProfile request.
 type GetLoginProfileOutput struct {
 
-	// A structure containing the user name and password create date for the user.
+	// A structure containing the user name and the profile creation date for the user.
 	//
 	// This member is required.
 	LoginProfile *types.LoginProfile

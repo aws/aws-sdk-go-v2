@@ -297,7 +297,7 @@ func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// A function with the same name already exists in this AWS account. To create a
+// A function with the same name already exists in this account. To create a
 // function, you must provide a unique name. To update an existing function, use
 // UpdateFunction.
 type FunctionAlreadyExists struct {
@@ -564,7 +564,7 @@ func (e *InvalidIfMatchVersion) ErrorMessage() string {
 func (e *InvalidIfMatchVersion) ErrorCode() string             { return "InvalidIfMatchVersion" }
 func (e *InvalidIfMatchVersion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Lambda function association is invalid.
+// The specified Lambda@Edge function association is invalid.
 type InvalidLambdaFunctionAssociation struct {
 	Message *string
 }
@@ -827,9 +827,9 @@ func (e *InvalidViewerCertificate) ErrorCode() string             { return "Inva
 func (e *InvalidViewerCertificate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A web ACL ID specified is not valid. To specify a web ACL created using the
-// latest version of AWS WAF, use the ACL ARN, for example
+// latest version of WAF, use the ACL ARN, for example
 // arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a.
-// To specify a web ACL created using AWS WAF Classic, use the ACL ID, for example
+// To specify a web ACL created using WAF Classic, use the ACL ID, for example
 // 473e64fd-f30b-4765-81a0-62ad96dd167a.
 type InvalidWebACLId struct {
 	Message *string
@@ -1256,7 +1256,7 @@ func (e *RealtimeLogConfigInUse) ErrorMessage() string {
 func (e *RealtimeLogConfigInUse) ErrorCode() string             { return "RealtimeLogConfigInUse" }
 func (e *RealtimeLogConfigInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified real-time log configuration belongs to a different AWS account.
+// The specified real-time log configuration belongs to a different account.
 type RealtimeLogConfigOwnerMismatch struct {
 	Message *string
 }
@@ -1366,8 +1366,8 @@ func (e *TooManyCacheBehaviors) ErrorMessage() string {
 func (e *TooManyCacheBehaviors) ErrorCode() string             { return "TooManyCacheBehaviors" }
 func (e *TooManyCacheBehaviors) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of cache policies for this AWS account. For
-// more information, see Quotas
+// You have reached the maximum number of cache policies for this account. For more
+// information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyCachePolicies struct {
@@ -1641,7 +1641,7 @@ func (e *TooManyDistributionsWithFunctionAssociations) ErrorFault() smithy.Error
 }
 
 // Processing your request would cause the maximum number of distributions with
-// Lambda function associations per owner to be exceeded.
+// Lambda@Edge function associations per owner to be exceeded.
 type TooManyDistributionsWithLambdaAssociations struct {
 	Message *string
 }
@@ -1663,7 +1663,7 @@ func (e *TooManyDistributionsWithLambdaAssociations) ErrorFault() smithy.ErrorFa
 }
 
 // The maximum number of distributions have been associated with the specified
-// Lambda function.
+// Lambda@Edge function.
 type TooManyDistributionsWithSingleFunctionARN struct {
 	Message *string
 }
@@ -1835,8 +1835,8 @@ func (e *TooManyFunctionAssociations) ErrorMessage() string {
 func (e *TooManyFunctionAssociations) ErrorCode() string             { return "TooManyFunctionAssociations" }
 func (e *TooManyFunctionAssociations) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of CloudFront functions for this AWS
-// account. For more information, see Quotas
+// You have reached the maximum number of CloudFront functions for this account.
+// For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyFunctions struct {
@@ -1936,7 +1936,7 @@ func (e *TooManyInvalidationsInProgress) ErrorMessage() string {
 func (e *TooManyInvalidationsInProgress) ErrorCode() string             { return "TooManyInvalidationsInProgress" }
 func (e *TooManyInvalidationsInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of key groups for this AWS account. For more
+// You have reached the maximum number of key groups for this account. For more
 // information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
@@ -1980,8 +1980,8 @@ func (e *TooManyKeyGroupsAssociatedToDistribution) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
-// Your request contains more Lambda function associations than are allowed per
-// distribution.
+// Your request contains more Lambda@Edge function associations than are allowed
+// per distribution.
 type TooManyLambdaFunctionAssociations struct {
 	Message *string
 }
@@ -2039,8 +2039,8 @@ func (e *TooManyOriginGroupsPerDistribution) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// You have reached the maximum number of origin request policies for this AWS
-// account. For more information, see Quotas
+// You have reached the maximum number of origin request policies for this account.
+// For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyOriginRequestPolicies struct {
@@ -2177,7 +2177,7 @@ func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
-// You have reached the maximum number of real-time log configurations for this AWS
+// You have reached the maximum number of real-time log configurations for this
 // account. For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.

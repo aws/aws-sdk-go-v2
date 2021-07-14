@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
@@ -2007,6 +2008,13 @@ func awsRestjson1_serializeOpDocumentUpdateAnswerInput(v *UpdateAnswerInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.ChoiceUpdates != nil {
+		ok := object.Key("ChoiceUpdates")
+		if err := awsRestjson1_serializeDocumentChoiceUpdates(v.ChoiceUpdates, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IsApplicable {
 		ok := object.Key("IsApplicable")
 		ok.Boolean(v.IsApplicable)
@@ -2015,6 +2023,11 @@ func awsRestjson1_serializeOpDocumentUpdateAnswerInput(v *UpdateAnswerInput, val
 	if v.Notes != nil {
 		ok := object.Key("Notes")
 		ok.String(*v.Notes)
+	}
+
+	if len(v.Reason) > 0 {
+		ok := object.Key("Reason")
+		ok.String(string(v.Reason))
 	}
 
 	if v.SelectedChoices != nil {
@@ -2541,6 +2554,42 @@ func awsRestjson1_serializeOpDocumentUpgradeLensReviewInput(v *UpgradeLensReview
 		ok.String(*v.MilestoneName)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChoiceUpdate(v *types.ChoiceUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Notes != nil {
+		ok := object.Key("Notes")
+		ok.String(*v.Notes)
+	}
+
+	if len(v.Reason) > 0 {
+		ok := object.Key("Reason")
+		ok.String(string(v.Reason))
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChoiceUpdates(v map[string]types.ChoiceUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentChoiceUpdate(&mapVar, om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

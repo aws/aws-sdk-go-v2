@@ -6,7 +6,17 @@ import (
 	"time"
 )
 
-// An individual AWS Firewall Manager application.
+// Describes a remediation action target.
+type ActionTarget struct {
+
+	// A description of the remediation action target.
+	Description *string
+
+	// The ID of the remediation target.
+	ResourceId *string
+}
+
+// An individual Firewall Manager application.
 type App struct {
 
 	// The application's name.
@@ -27,26 +37,26 @@ type App struct {
 	Protocol *string
 }
 
-// An AWS Firewall Manager applications list.
+// An Firewall Manager applications list.
 type AppsListData struct {
 
-	// An array of applications in the AWS Firewall Manager applications list.
+	// An array of applications in the Firewall Manager applications list.
 	//
 	// This member is required.
 	AppsList []App
 
-	// The name of the AWS Firewall Manager applications list.
+	// The name of the Firewall Manager applications list.
 	//
 	// This member is required.
 	ListName *string
 
-	// The time that the AWS Firewall Manager applications list was created.
+	// The time that the Firewall Manager applications list was created.
 	CreateTime *time.Time
 
-	// The time that the AWS Firewall Manager applications list was last updated.
+	// The time that the Firewall Manager applications list was last updated.
 	LastUpdateTime *time.Time
 
-	// The ID of the AWS Firewall Manager applications list.
+	// The ID of the Firewall Manager applications list.
 	ListId *string
 
 	// A unique identifier for each update to the list. When you update the list, the
@@ -58,10 +68,10 @@ type AppsListData struct {
 	PreviousAppsList map[string][]App
 }
 
-// Details of the AWS Firewall Manager applications list.
+// Details of the Firewall Manager applications list.
 type AppsListDataSummary struct {
 
-	// An array of App objects in the AWS Firewall Manager applications list.
+	// An array of App objects in the Firewall Manager applications list.
 	AppsList []App
 
 	// The Amazon Resource Name (ARN) of the applications list.
@@ -74,32 +84,32 @@ type AppsListDataSummary struct {
 	ListName *string
 }
 
-// Violations for an EC2 instance resource.
+// Violation detail for an EC2 instance resource.
 type AwsEc2InstanceViolation struct {
 
-	// Violations for network interfaces associated with the EC2 instance.
+	// Violation detail for network interfaces associated with the EC2 instance.
 	AwsEc2NetworkInterfaceViolations []AwsEc2NetworkInterfaceViolation
 
 	// The resource ID of the EC2 instance.
 	ViolationTarget *string
 }
 
-// Violations for network interfaces associated with an EC2 instance.
+// Violation detail for network interfaces associated with an EC2 instance.
 type AwsEc2NetworkInterfaceViolation struct {
 
-	// List of security groups that violate the rules specified in the master security
-	// group of the AWS Firewall Manager policy.
+	// List of security groups that violate the rules specified in the primary security
+	// group of the Firewall Manager policy.
 	ViolatingSecurityGroups []string
 
 	// The resource ID of the network interface.
 	ViolationTarget *string
 }
 
-// Details of the rule violation in a security group when compared to the master
-// security group of the AWS Firewall Manager policy.
+// Violation detail for the rule violation in a security group when compared to the
+// primary security group of the Firewall Manager policy.
 type AwsVPCSecurityGroupViolation struct {
 
-	// List of rules specified in the security group of the AWS Firewall Manager policy
+	// List of rules specified in the security group of the Firewall Manager policy
 	// that partially match the ViolationTarget rule.
 	PartialMatches []PartialMatch
 
@@ -119,8 +129,8 @@ type ComplianceViolator struct {
 	// The resource ID.
 	ResourceId *string
 
-	// The resource type. This is in the format shown in the AWS Resource Types
-	// Reference
+	// The resource type. This is in the format shown in the Amazon Web Services
+	// Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
 	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer,
 	// AWS::CloudFront::Distribution, or AWS::NetworkFirewall::FirewallPolicy.
@@ -134,7 +144,7 @@ type ComplianceViolator struct {
 // already associated with the VPC and can't be associated again.
 type DnsDuplicateRuleGroupViolation struct {
 
-	// The ID of the VPC.
+	// Information about the VPC ID.
 	ViolationTarget *string
 
 	// A description of the violation that specifies the rule group and VPC.
@@ -149,7 +159,7 @@ type DnsRuleGroupLimitExceededViolation struct {
 	// The number of rule groups currently associated with the VPC.
 	NumberOfRuleGroupsAlreadyAssociated int32
 
-	// The ID of the VPC.
+	// Information about the VPC ID.
 	ViolationTarget *string
 
 	// A description of the violation that specifies the rule group and VPC.
@@ -173,7 +183,7 @@ type DnsRuleGroupPriorityConflictViolation struct {
 	// groups in your new DNS Firewall policy.
 	UnavailablePriorities []int32
 
-	// The ID of the VPC.
+	// Information about the VPC ID.
 	ViolationTarget *string
 
 	// A description of the violation that specifies the VPC and the rule group that's
@@ -181,28 +191,336 @@ type DnsRuleGroupPriorityConflictViolation struct {
 	ViolationTargetDescription *string
 }
 
+// The action of associating an EC2 resource, such as a subnet or internet gateway,
+// with a route table.
+type EC2AssociateRouteTableAction struct {
+
+	// The ID of the EC2 route table that is associated with the remediation action.
+	//
+	// This member is required.
+	RouteTableId *ActionTarget
+
+	// A description of the EC2 route table that is associated with the remediation
+	// action.
+	Description *string
+
+	// The ID of the gateway to be used with the EC2 route table that is associated
+	// with the remediation action.
+	GatewayId *ActionTarget
+
+	// The ID of the subnet for the EC2 route table that is associated with the
+	// remediation action.
+	SubnetId *ActionTarget
+}
+
+// An action that copies the EC2 route table for use in remediation.
+type EC2CopyRouteTableAction struct {
+
+	// The ID of the copied EC2 route table that is associated with the remediation
+	// action.
+	//
+	// This member is required.
+	RouteTableId *ActionTarget
+
+	// The VPC ID of the copied EC2 route table that is associated with the remediation
+	// action.
+	//
+	// This member is required.
+	VpcId *ActionTarget
+
+	// A description of the copied EC2 route table that is associated with the
+	// remediation action.
+	Description *string
+}
+
+// Information about the CreateRoute action in Amazon EC2.
+type EC2CreateRouteAction struct {
+
+	// Information about the ID of the route table for the route.
+	//
+	// This member is required.
+	RouteTableId *ActionTarget
+
+	// A description of CreateRoute action in Amazon EC2.
+	Description *string
+
+	// Information about the IPv4 CIDR address block used for the destination match.
+	DestinationCidrBlock *string
+
+	// Information about the IPv6 CIDR block destination.
+	DestinationIpv6CidrBlock *string
+
+	// Information about the ID of a prefix list used for the destination match.
+	DestinationPrefixListId *string
+
+	// Information about the ID of an internet gateway or virtual private gateway
+	// attached to your VPC.
+	GatewayId *ActionTarget
+
+	// Information about the ID of a VPC endpoint. Supported for Gateway Load Balancer
+	// endpoints only.
+	VpcEndpointId *ActionTarget
+}
+
+// Information about the CreateRouteTable action in Amazon EC2.
+type EC2CreateRouteTableAction struct {
+
+	// Information about the ID of a VPC.
+	//
+	// This member is required.
+	VpcId *ActionTarget
+
+	// A description of the CreateRouteTable action.
+	Description *string
+}
+
+// Information about the DeleteRoute action in Amazon EC2.
+type EC2DeleteRouteAction struct {
+
+	// Information about the ID of the route table.
+	//
+	// This member is required.
+	RouteTableId *ActionTarget
+
+	// A description of the DeleteRoute action.
+	Description *string
+
+	// Information about the IPv4 CIDR range for the route. The value you specify must
+	// match the CIDR for the route exactly.
+	DestinationCidrBlock *string
+
+	// Information about the IPv6 CIDR range for the route. The value you specify must
+	// match the CIDR for the route exactly.
+	DestinationIpv6CidrBlock *string
+
+	// Information about the ID of the prefix list for the route.
+	DestinationPrefixListId *string
+}
+
+// Information about the ReplaceRoute action in Amazon EC2.
+type EC2ReplaceRouteAction struct {
+
+	// Information about the ID of the route table.
+	//
+	// This member is required.
+	RouteTableId *ActionTarget
+
+	// A description of the ReplaceRoute action in Amazon EC2.
+	Description *string
+
+	// Information about the IPv4 CIDR address block used for the destination match.
+	// The value that you provide must match the CIDR of an existing route in the
+	// table.
+	DestinationCidrBlock *string
+
+	// Information about the IPv6 CIDR address block used for the destination match.
+	// The value that you provide must match the CIDR of an existing route in the
+	// table.
+	DestinationIpv6CidrBlock *string
+
+	// Information about the ID of the prefix list for the route.
+	DestinationPrefixListId *string
+
+	// Information about the ID of an internet gateway or virtual private gateway.
+	GatewayId *ActionTarget
+}
+
+// Information about the ReplaceRouteTableAssociation action in Amazon EC2.
+type EC2ReplaceRouteTableAssociationAction struct {
+
+	// Information about the association ID.
+	//
+	// This member is required.
+	AssociationId *ActionTarget
+
+	// Information about the ID of the new route table to associate with the subnet.
+	//
+	// This member is required.
+	RouteTableId *ActionTarget
+
+	// A description of the ReplaceRouteTableAssociation action in Amazon EC2.
+	Description *string
+}
+
 // Describes the compliance status for the account. An account is considered
 // noncompliant if it includes resources that are not protected by the specified
 // policy or that don't comply with the policy.
 type EvaluationResult struct {
 
-	// Describes an AWS account's compliance with the AWS Firewall Manager policy.
+	// Describes an Amazon Web Services account's compliance with the Firewall Manager
+	// policy.
 	ComplianceStatus PolicyComplianceStatusType
 
-	// Indicates that over 100 resources are noncompliant with the AWS Firewall Manager
+	// Indicates that over 100 resources are noncompliant with the Firewall Manager
 	// policy.
 	EvaluationLimitExceeded bool
 
-	// The number of resources that are noncompliant with the specified policy. For AWS
-	// WAF and Shield Advanced policies, a resource is considered noncompliant if it is
-	// not associated with the policy. For security group policies, a resource is
+	// The number of resources that are noncompliant with the specified policy. For WAF
+	// and Shield Advanced policies, a resource is considered noncompliant if it is not
+	// associated with the policy. For security group policies, a resource is
 	// considered noncompliant if it doesn't comply with the rules of the policy and
 	// remediation is disabled or not possible.
 	ViolatorCount int64
 }
 
-// Violation details for AWS Network Firewall for a subnet that's not associated to
-// the expected Firewall Manager managed route table.
+// Information about the expected route in the route table.
+type ExpectedRoute struct {
+
+	// Information about the allowed targets.
+	AllowedTargets []string
+
+	// Information about the contributing subnets.
+	ContributingSubnets []string
+
+	// Information about the IPv4 CIDR block.
+	IpV4Cidr *string
+
+	// Information about the IPv6 CIDR block.
+	IpV6Cidr *string
+
+	// Information about the ID of the prefix list for the route.
+	PrefixListId *string
+
+	// Information about the route table ID.
+	RouteTableId *string
+}
+
+// Violation detail for an internet gateway route with an inactive state in the
+// customer subnet route table or Network Firewall subnet route table.
+type NetworkFirewallBlackHoleRouteDetectedViolation struct {
+
+	// Information about the route table ID.
+	RouteTableId *string
+
+	// Information about the route or routes that are in violation.
+	ViolatingRoutes []Route
+
+	// The subnet that has an inactive state.
+	ViolationTarget *string
+
+	// Information about the VPC ID.
+	VpcId *string
+}
+
+// Violation detail for the subnet for which internet traffic that hasn't been
+// inspected.
+type NetworkFirewallInternetTrafficNotInspectedViolation struct {
+
+	// The actual firewall subnet routes.
+	ActualFirewallSubnetRoutes []Route
+
+	// The actual internet gateway routes.
+	ActualInternetGatewayRoutes []Route
+
+	// Information about the subnet route table for the current firewall.
+	CurrentFirewallSubnetRouteTable *string
+
+	// The current route table for the internet gateway.
+	CurrentInternetGatewayRouteTable *string
+
+	// The expected endpoint for the current firewall.
+	ExpectedFirewallEndpoint *string
+
+	// The firewall subnet routes that are expected.
+	ExpectedFirewallSubnetRoutes []ExpectedRoute
+
+	// The internet gateway routes that are expected.
+	ExpectedInternetGatewayRoutes []ExpectedRoute
+
+	// The firewall subnet ID.
+	FirewallSubnetId *string
+
+	// The internet gateway ID.
+	InternetGatewayId *string
+
+	// Information about whether the route table is used in another Availability Zone.
+	IsRouteTableUsedInDifferentAZ bool
+
+	// Information about the route table ID.
+	RouteTableId *string
+
+	// The subnet Availability Zone.
+	SubnetAvailabilityZone *string
+
+	// The subnet ID.
+	SubnetId *string
+
+	// The route or routes that are in violation.
+	ViolatingRoutes []Route
+
+	// Information about the VPC ID.
+	VpcId *string
+}
+
+// Violation detail for the improperly configured subnet route. It's possible there
+// is a missing route table route, or a configuration that causes traffic to cross
+// an Availability Zone boundary.
+type NetworkFirewallInvalidRouteConfigurationViolation struct {
+
+	// The actual firewall endpoint.
+	ActualFirewallEndpoint *string
+
+	// The actual subnet ID for the firewall.
+	ActualFirewallSubnetId *string
+
+	// The actual firewall subnet routes that are expected.
+	ActualFirewallSubnetRoutes []Route
+
+	// The actual internet gateway routes.
+	ActualInternetGatewayRoutes []Route
+
+	// The subnets that are affected.
+	AffectedSubnets []string
+
+	// The subnet route table for the current firewall.
+	CurrentFirewallSubnetRouteTable *string
+
+	// The route table for the current internet gateway.
+	CurrentInternetGatewayRouteTable *string
+
+	// The firewall endpoint that's expected.
+	ExpectedFirewallEndpoint *string
+
+	// The expected subnet ID for the firewall.
+	ExpectedFirewallSubnetId *string
+
+	// The firewall subnet routes that are expected.
+	ExpectedFirewallSubnetRoutes []ExpectedRoute
+
+	// The expected routes for the internet gateway.
+	ExpectedInternetGatewayRoutes []ExpectedRoute
+
+	// The internet gateway ID.
+	InternetGatewayId *string
+
+	// Information about whether the route table is used in another Availability Zone.
+	IsRouteTableUsedInDifferentAZ bool
+
+	// The route table ID.
+	RouteTableId *string
+
+	// The route that's in violation.
+	ViolatingRoute *Route
+
+	// Information about the VPC ID.
+	VpcId *string
+}
+
+// Violation detail for an expected route missing in Network Firewall.
+type NetworkFirewallMissingExpectedRoutesViolation struct {
+
+	// The expected routes.
+	ExpectedRoutes []ExpectedRoute
+
+	// The target of the violation.
+	ViolationTarget *string
+
+	// Information about the VPC ID.
+	VpcId *string
+}
+
+// Violation detail for Network Firewall for a subnet that's not associated to the
+// expected Firewall Manager managed route table.
 type NetworkFirewallMissingExpectedRTViolation struct {
 
 	// The Availability Zone of a violating subnet.
@@ -218,12 +536,12 @@ type NetworkFirewallMissingExpectedRTViolation struct {
 	// The resource ID of the VPC associated with a violating subnet.
 	VPC *string
 
-	// The ID of the AWS Network Firewall or VPC resource that's in violation.
+	// The ID of the Network Firewall or VPC resource that's in violation.
 	ViolationTarget *string
 }
 
-// Violation details for AWS Network Firewall for a subnet that doesn't have a
-// Firewall Manager managed firewall in its VPC.
+// Violation detail for Network Firewall for a subnet that doesn't have a Firewall
+// Manager managed firewall in its VPC.
 type NetworkFirewallMissingFirewallViolation struct {
 
 	// The Availability Zone of a violating subnet.
@@ -235,12 +553,12 @@ type NetworkFirewallMissingFirewallViolation struct {
 	// The resource ID of the VPC associated with a violating subnet.
 	VPC *string
 
-	// The ID of the AWS Network Firewall or VPC resource that's in violation.
+	// The ID of the Network Firewall or VPC resource that's in violation.
 	ViolationTarget *string
 }
 
-// Violation details for AWS Network Firewall for an Availability Zone that's
-// missing the expected Firewall Manager managed subnet.
+// Violation detail for Network Firewall for an Availability Zone that's missing
+// the expected Firewall Manager managed subnet.
 type NetworkFirewallMissingSubnetViolation struct {
 
 	// The Availability Zone of a violating subnet.
@@ -252,11 +570,11 @@ type NetworkFirewallMissingSubnetViolation struct {
 	// The resource ID of the VPC associated with a violating subnet.
 	VPC *string
 
-	// The ID of the AWS Network Firewall or VPC resource that's in violation.
+	// The ID of the Network Firewall or VPC resource that's in violation.
 	ViolationTarget *string
 }
 
-// The definition of the AWS Network Firewall firewall policy.
+// The definition of the Network Firewall firewall policy.
 type NetworkFirewallPolicyDescription struct {
 
 	// The stateful rule groups that are used in the Network Firewall firewall policy.
@@ -278,9 +596,9 @@ type NetworkFirewallPolicyDescription struct {
 	StatelessRuleGroups []StatelessRuleGroup
 }
 
-// Violation details for AWS Network Firewall for a firewall policy that has a
-// different NetworkFirewallPolicyDescription than is required by the Firewall
-// Manager policy.
+// Violation detail for Network Firewall for a firewall policy that has a different
+// NetworkFirewallPolicyDescription than is required by the Firewall Manager
+// policy.
 type NetworkFirewallPolicyModifiedViolation struct {
 
 	// The policy that's currently in use in the individual account.
@@ -290,15 +608,51 @@ type NetworkFirewallPolicyModifiedViolation struct {
 	// compliant.
 	ExpectedPolicyDescription *NetworkFirewallPolicyDescription
 
-	// The ID of the AWS Network Firewall or VPC resource that's in violation.
+	// The ID of the Network Firewall or VPC resource that's in violation.
 	ViolationTarget *string
+}
+
+// Violation detail for an unexpected route that's present in a route table.
+type NetworkFirewallUnexpectedFirewallRoutesViolation struct {
+
+	// The endpoint of the firewall.
+	FirewallEndpoint *string
+
+	// The subnet ID for the firewall.
+	FirewallSubnetId *string
+
+	// The ID of the route table.
+	RouteTableId *string
+
+	// The routes that are in violation.
+	ViolatingRoutes []Route
+
+	// Information about the VPC ID.
+	VpcId *string
+}
+
+// Violation detail for an unexpected gateway route that’s present in a route
+// table.
+type NetworkFirewallUnexpectedGatewayRoutesViolation struct {
+
+	// Information about the gateway ID.
+	GatewayId *string
+
+	// Information about the route table.
+	RouteTableId *string
+
+	// The routes that are in violation.
+	ViolatingRoutes []Route
+
+	// Information about the VPC ID.
+	VpcId *string
 }
 
 // The reference rule that partially matches the ViolationTarget rule and violation
 // reason.
 type PartialMatch struct {
 
-	// The reference rule from the master security group of the AWS Firewall Manager
+	// The reference rule from the primary security group of the Firewall Manager
 	// policy.
 	Reference *string
 
@@ -306,7 +660,7 @@ type PartialMatch struct {
 	TargetViolationReasons []string
 }
 
-// An AWS Firewall Manager policy.
+// An Firewall Manager policy.
 type Policy struct {
 
 	// If set to True, resources with the tags that are specified in the ResourceTag
@@ -316,7 +670,7 @@ type Policy struct {
 	// This member is required.
 	ExcludeResourceTags bool
 
-	// The name of the AWS Firewall Manager policy.
+	// The name of the Firewall Manager policy.
 	//
 	// This member is required.
 	PolicyName *string
@@ -327,15 +681,17 @@ type Policy struct {
 	RemediationEnabled bool
 
 	// The type of resource protected by or in scope of the policy. This is in the
-	// format shown in the AWS Resource Types Reference
+	// format shown in the Amazon Web Services Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// For AWS WAF and Shield Advanced, examples include
+	// To apply this policy to multiple resource types, specify a resource type of
+	// ResourceTypeList and then specify the resource types in a ResourceTypeList. For
+	// WAF and Shield Advanced, example resource types include
 	// AWS::ElasticLoadBalancingV2::LoadBalancer and AWS::CloudFront::Distribution. For
 	// a security group common policy, valid values are AWS::EC2::NetworkInterface and
 	// AWS::EC2::Instance. For a security group content audit policy, valid values are
 	// AWS::EC2::SecurityGroup, AWS::EC2::NetworkInterface, and AWS::EC2::Instance. For
 	// a security group usage audit policy, the value is AWS::EC2::SecurityGroup. For
-	// an AWS Network Firewall policy, the value is AWS::EC2::VPC.
+	// an Network Firewall policy or DNS Firewall policy, the value is AWS::EC2::VPC.
 	//
 	// This member is required.
 	ResourceType *string
@@ -345,13 +701,13 @@ type Policy struct {
 	// This member is required.
 	SecurityServicePolicyData *SecurityServicePolicyData
 
-	// Specifies the AWS account IDs and AWS Organizations organizational units (OUs)
-	// to exclude from the policy. Specifying an OU is the equivalent of specifying all
-	// accounts in the OU and in any of its child OUs, including any child OUs and
-	// accounts that are added at a later time. You can specify inclusions or
-	// exclusions, but not both. If you specify an IncludeMap, AWS Firewall Manager
-	// applies the policy to all accounts specified by the IncludeMap, and does not
-	// evaluate any ExcludeMap specifications. If you do not specify an IncludeMap,
+	// Specifies the Amazon Web Services account IDs and Organizations organizational
+	// units (OUs) to exclude from the policy. Specifying an OU is the equivalent of
+	// specifying all accounts in the OU and in any of its child OUs, including any
+	// child OUs and accounts that are added at a later time. You can specify
+	// inclusions or exclusions, but not both. If you specify an IncludeMap, Firewall
+	// Manager applies the policy to all accounts specified by the IncludeMap, and does
+	// not evaluate any ExcludeMap specifications. If you do not specify an IncludeMap,
 	// then Firewall Manager applies the policy to all accounts except for those
 	// specified by the ExcludeMap. You can specify account IDs, OUs, or a
 	// combination:
@@ -369,13 +725,13 @@ type Policy struct {
 	// “ouid112”]}.
 	ExcludeMap map[string][]string
 
-	// Specifies the AWS account IDs and AWS Organizations organizational units (OUs)
-	// to include in the policy. Specifying an OU is the equivalent of specifying all
-	// accounts in the OU and in any of its child OUs, including any child OUs and
-	// accounts that are added at a later time. You can specify inclusions or
-	// exclusions, but not both. If you specify an IncludeMap, AWS Firewall Manager
-	// applies the policy to all accounts specified by the IncludeMap, and does not
-	// evaluate any ExcludeMap specifications. If you do not specify an IncludeMap,
+	// Specifies the Amazon Web Services account IDs and Organizations organizational
+	// units (OUs) to include in the policy. Specifying an OU is the equivalent of
+	// specifying all accounts in the OU and in any of its child OUs, including any
+	// child OUs and accounts that are added at a later time. You can specify
+	// inclusions or exclusions, but not both. If you specify an IncludeMap, Firewall
+	// Manager applies the policy to all accounts specified by the IncludeMap, and does
+	// not evaluate any ExcludeMap specifications. If you do not specify an IncludeMap,
 	// then Firewall Manager applies the policy to all accounts except for those
 	// specified by the ExcludeMap. You can specify account IDs, OUs, or a
 	// combination:
@@ -393,7 +749,7 @@ type Policy struct {
 	// “ouid112”]}.
 	IncludeMap map[string][]string
 
-	// The ID of the AWS Firewall Manager policy.
+	// The ID of the Firewall Manager policy.
 	PolicyId *string
 
 	// A unique identifier for each update to the policy. When issuing a PutPolicy
@@ -405,16 +761,17 @@ type Policy struct {
 	// An array of ResourceTag objects.
 	ResourceTags []ResourceTag
 
-	// An array of ResourceType.
+	// An array of ResourceType objects. Use this only to specify multiple resource
+	// types. To specify a single resource type, use ResourceType.
 	ResourceTypeList []string
 }
 
-// Describes the noncompliant resources in a member account for a specific AWS
-// Firewall Manager policy. A maximum of 100 entries are displayed. If more than
-// 100 resources are noncompliant, EvaluationLimitExceeded is set to True.
+// Describes the noncompliant resources in a member account for a specific Firewall
+// Manager policy. A maximum of 100 entries are displayed. If more than 100
+// resources are noncompliant, EvaluationLimitExceeded is set to True.
 type PolicyComplianceDetail struct {
 
-	// Indicates if over 100 resources are noncompliant with the AWS Firewall Manager
+	// Indicates if over 100 resources are noncompliant with the Firewall Manager
 	// policy.
 	EvaluationLimitExceeded bool
 
@@ -422,39 +779,35 @@ type PolicyComplianceDetail struct {
 	// out of date.
 	ExpiredAt *time.Time
 
-	// Details about problems with dependent services, such as AWS WAF or AWS Config,
-	// that are causing a resource to be noncompliant. The details include the name of
-	// the dependent service and the error message received that indicates the problem
-	// with the service.
+	// Details about problems with dependent services, such as WAF or Config, and the
+	// error message received that indicates the problem with the service.
 	IssueInfoMap map[string]string
 
-	// The AWS account ID.
+	// The Amazon Web Services account ID.
 	MemberAccount *string
 
-	// The ID of the AWS Firewall Manager policy.
+	// The ID of the Firewall Manager policy.
 	PolicyId *string
 
-	// The AWS account that created the AWS Firewall Manager policy.
+	// The Amazon Web Services account that created the Firewall Manager policy.
 	PolicyOwner *string
 
-	// An array of resources that aren't protected by the AWS WAF or Shield Advanced
-	// policy or that aren't in compliance with the security group policy.
+	// An array of resources that aren't protected by the WAF or Shield Advanced policy
+	// or that aren't in compliance with the security group policy.
 	Violators []ComplianceViolator
 }
 
 // Indicates whether the account is compliant with the specified policy. An account
 // is considered noncompliant if it includes resources that are not protected by
-// the policy, for AWS WAF and Shield Advanced policies, or that are noncompliant
-// with the policy, for security group policies.
+// the policy, for WAF and Shield Advanced policies, or that are noncompliant with
+// the policy, for security group policies.
 type PolicyComplianceStatus struct {
 
 	// An array of EvaluationResult objects.
 	EvaluationResults []EvaluationResult
 
-	// Details about problems with dependent services, such as AWS WAF or AWS Config,
-	// that are causing a resource to be noncompliant. The details include the name of
-	// the dependent service and the error message received that indicates the problem
-	// with the service.
+	// Details about problems with dependent services, such as WAF or Config, and the
+	// error message received that indicates the problem with the service.
 	IssueInfoMap map[string]string
 
 	// Timestamp of the last update to the EvaluationResult objects.
@@ -463,17 +816,17 @@ type PolicyComplianceStatus struct {
 	// The member account ID.
 	MemberAccount *string
 
-	// The ID of the AWS Firewall Manager policy.
+	// The ID of the Firewall Manager policy.
 	PolicyId *string
 
-	// The name of the AWS Firewall Manager policy.
+	// The name of the Firewall Manager policy.
 	PolicyName *string
 
-	// The AWS account that created the AWS Firewall Manager policy.
+	// The Amazon Web Services account that created the Firewall Manager policy.
 	PolicyOwner *string
 }
 
-// Details of the AWS Firewall Manager policy.
+// Details of the Firewall Manager policy.
 type PolicySummary struct {
 
 	// The Amazon Resource Name (ARN) of the specified policy.
@@ -489,43 +842,69 @@ type PolicySummary struct {
 	RemediationEnabled bool
 
 	// The type of resource protected by or in scope of the policy. This is in the
-	// format shown in the AWS Resource Types Reference
+	// format shown in the Amazon Web Services Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// For AWS WAF and Shield Advanced, examples include
+	// For WAF and Shield Advanced, examples include
 	// AWS::ElasticLoadBalancingV2::LoadBalancer and AWS::CloudFront::Distribution. For
 	// a security group common policy, valid values are AWS::EC2::NetworkInterface and
 	// AWS::EC2::Instance. For a security group content audit policy, valid values are
 	// AWS::EC2::SecurityGroup, AWS::EC2::NetworkInterface, and AWS::EC2::Instance. For
 	// a security group usage audit policy, the value is AWS::EC2::SecurityGroup. For
-	// an AWS Network Firewall policy, the value is AWS::EC2::VPC.
+	// an Network Firewall policy or DNS Firewall policy, the value is AWS::EC2::VPC.
 	ResourceType *string
 
 	// The service that the policy is using to protect the resources. This specifies
-	// the type of policy that is created, either an AWS WAF policy, a Shield Advanced
+	// the type of policy that is created, either an WAF policy, a Shield Advanced
 	// policy, or a security group policy.
 	SecurityServiceType SecurityServiceType
 }
 
-// An AWS Firewall Manager protocols list.
+// A list of remediation actions.
+type PossibleRemediationAction struct {
+
+	// The ordered list of remediation actions.
+	//
+	// This member is required.
+	OrderedRemediationActions []RemediationActionWithOrder
+
+	// A description of the list of remediation actions.
+	Description *string
+
+	// Information about whether an action is taken by default.
+	IsDefaultAction bool
+}
+
+// A list of possible remediation action lists. Each individual possible
+// remediation action is a list of individual remediation actions.
+type PossibleRemediationActions struct {
+
+	// Information about the actions.
+	Actions []PossibleRemediationAction
+
+	// A description of the possible remediation actions list.
+	Description *string
+}
+
+// An Firewall Manager protocols list.
 type ProtocolsListData struct {
 
-	// The name of the AWS Firewall Manager protocols list.
+	// The name of the Firewall Manager protocols list.
 	//
 	// This member is required.
 	ListName *string
 
-	// An array of protocols in the AWS Firewall Manager protocols list.
+	// An array of protocols in the Firewall Manager protocols list.
 	//
 	// This member is required.
 	ProtocolsList []string
 
-	// The time that the AWS Firewall Manager protocols list was created.
+	// The time that the Firewall Manager protocols list was created.
 	CreateTime *time.Time
 
-	// The time that the AWS Firewall Manager protocols list was last updated.
+	// The time that the Firewall Manager protocols list was last updated.
 	LastUpdateTime *time.Time
 
-	// The ID of the AWS Firewall Manager protocols list.
+	// The ID of the Firewall Manager protocols list.
 	ListId *string
 
 	// A unique identifier for each update to the list. When you update the list, the
@@ -537,7 +916,7 @@ type ProtocolsListData struct {
 	PreviousProtocolsList map[string][]string
 }
 
-// Details of the AWS Firewall Manager protocols list.
+// Details of the Firewall Manager protocols list.
 type ProtocolsListDataSummary struct {
 
 	// The Amazon Resource Name (ARN) of the specified protocols list.
@@ -549,17 +928,56 @@ type ProtocolsListDataSummary struct {
 	// The name of the specified protocols list.
 	ListName *string
 
-	// An array of protocols in the AWS Firewall Manager protocols list.
+	// An array of protocols in the Firewall Manager protocols list.
 	ProtocolsList []string
 }
 
-// The resource tags that AWS Firewall Manager uses to determine if a particular
-// resource should be included or excluded from the AWS Firewall Manager policy.
-// Tags enable you to categorize your AWS resources in different ways, for example,
-// by purpose, owner, or environment. Each tag consists of a key and an optional
-// value. Firewall Manager combines the tags with "AND" so that, if you add more
-// than one tag to a policy scope, a resource must have all the specified tags to
-// be included or excluded. For more information, see Working with Tag Editor
+// Information about an individual action you can take to remediate a violation.
+type RemediationAction struct {
+
+	// A description of a remediation action.
+	Description *string
+
+	// Information about the AssociateRouteTable action in the Amazon EC2 API.
+	EC2AssociateRouteTableAction *EC2AssociateRouteTableAction
+
+	// Information about the CopyRouteTable action in the Amazon EC2 API.
+	EC2CopyRouteTableAction *EC2CopyRouteTableAction
+
+	// Information about the CreateRoute action in the Amazon EC2 API.
+	EC2CreateRouteAction *EC2CreateRouteAction
+
+	// Information about the CreateRouteTable action in the Amazon EC2 API.
+	EC2CreateRouteTableAction *EC2CreateRouteTableAction
+
+	// Information about the DeleteRoute action in the Amazon EC2 API.
+	EC2DeleteRouteAction *EC2DeleteRouteAction
+
+	// Information about the ReplaceRoute action in the Amazon EC2 API.
+	EC2ReplaceRouteAction *EC2ReplaceRouteAction
+
+	// Information about the ReplaceRouteTableAssociation action in the Amazon EC2 API.
+	EC2ReplaceRouteTableAssociationAction *EC2ReplaceRouteTableAssociationAction
+}
+
+// An ordered list of actions you can take to remediate a violation.
+type RemediationActionWithOrder struct {
+
+	// The order of the remediation actions in the list.
+	Order int32
+
+	// Information about an action you can take to remediate a violation.
+	RemediationAction *RemediationAction
+}
+
+// The resource tags that Firewall Manager uses to determine if a particular
+// resource should be included or excluded from the Firewall Manager policy. Tags
+// enable you to categorize your Amazon Web Services resources in different ways,
+// for example, by purpose, owner, or environment. Each tag consists of a key and
+// an optional value. Firewall Manager combines the tags with "AND" so that, if you
+// add more than one tag to a policy scope, a resource must have all the specified
+// tags to be included or excluded. For more information, see Working with Tag
+// Editor
 // (https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html).
 type ResourceTag struct {
 
@@ -575,13 +993,13 @@ type ResourceTag struct {
 // Violation detail based on resource type.
 type ResourceViolation struct {
 
-	// Violation details for an EC2 instance.
+	// Violation detail for an EC2 instance.
 	AwsEc2InstanceViolation *AwsEc2InstanceViolation
 
-	// Violation details for network interface.
+	// Violation detail for a network interface.
 	AwsEc2NetworkInterfaceViolation *AwsEc2NetworkInterfaceViolation
 
-	// Violation details for security groups.
+	// Violation detail for security groups.
 	AwsVPCSecurityGroupViolation *AwsVPCSecurityGroupViolation
 
 	// Violation detail for a DNS Firewall policy that indicates that a rule group that
@@ -589,7 +1007,7 @@ type ResourceViolation struct {
 	// VPC and can't be associated again.
 	DnsDuplicateRuleGroupViolation *DnsDuplicateRuleGroupViolation
 
-	// Violation details for a DNS Firewall policy that indicates that the VPC reached
+	// Violation detail for a DNS Firewall policy that indicates that the VPC reached
 	// the limit for associated DNS Firewall rule groups. Firewall Manager tried to
 	// associate another rule group with the VPC and failed.
 	DnsRuleGroupLimitExceededViolation *DnsRuleGroupLimitExceededViolation
@@ -599,9 +1017,23 @@ type ResourceViolation struct {
 	// group that's already associated.
 	DnsRuleGroupPriorityConflictViolation *DnsRuleGroupPriorityConflictViolation
 
+	// Violation detail for an internet gateway route with an inactive state in the
+	// customer subnet route table or Network Firewall subnet route table.
+	NetworkFirewallBlackHoleRouteDetectedViolation *NetworkFirewallBlackHoleRouteDetectedViolation
+
+	// Violation detail for the subnet for which internet traffic hasn't been
+	// inspected.
+	NetworkFirewallInternetTrafficNotInspectedViolation *NetworkFirewallInternetTrafficNotInspectedViolation
+
+	// The route configuration is invalid.
+	NetworkFirewallInvalidRouteConfigurationViolation *NetworkFirewallInvalidRouteConfigurationViolation
+
 	// Violation detail for an Network Firewall policy that indicates that a subnet is
 	// not associated with the expected Firewall Manager managed route table.
 	NetworkFirewallMissingExpectedRTViolation *NetworkFirewallMissingExpectedRTViolation
+
+	// Expected routes are missing from Network Firewall.
+	NetworkFirewallMissingExpectedRoutesViolation *NetworkFirewallMissingExpectedRoutesViolation
 
 	// Violation detail for an Network Firewall policy that indicates that a subnet has
 	// no Firewall Manager managed firewall in its VPC.
@@ -617,6 +1049,32 @@ type ResourceViolation struct {
 	// rule group, changed the priority of a stateless rule group, or changed a policy
 	// default action.
 	NetworkFirewallPolicyModifiedViolation *NetworkFirewallPolicyModifiedViolation
+
+	// There's an unexpected firewall route.
+	NetworkFirewallUnexpectedFirewallRoutesViolation *NetworkFirewallUnexpectedFirewallRoutesViolation
+
+	// There's an unexpected gateway route.
+	NetworkFirewallUnexpectedGatewayRoutesViolation *NetworkFirewallUnexpectedGatewayRoutesViolation
+
+	// A list of possible remediation action lists. Each individual possible
+	// remediation action is a list of individual remediation actions.
+	PossibleRemediationActions *PossibleRemediationActions
+}
+
+// Describes a route in a route table.
+type Route struct {
+
+	// The destination of the route.
+	Destination *string
+
+	// The type of destination for the route.
+	DestinationType DestinationType
+
+	// The route's target.
+	Target *string
+
+	// The type of target for the route.
+	TargetType TargetType
 }
 
 // Remediation option for the rule specified in the ViolationTarget.
@@ -664,11 +1122,11 @@ type SecurityGroupRuleDescription struct {
 type SecurityServicePolicyData struct {
 
 	// The service that the policy is using to protect the resources. This specifies
-	// the type of policy that is created, either an AWS WAF policy, a Shield Advanced
+	// the type of policy that is created, either an WAF policy, a Shield Advanced
 	// policy, or a security group policy. For security group policies, Firewall
 	// Manager supports one security group for each common policy and for each content
 	// audit policy. This is an adjustable limit that you can increase by contacting
-	// AWS Support.
+	// Amazon Web Services Support.
 	//
 	// This member is required.
 	Type SecurityServiceType
@@ -677,6 +1135,10 @@ type SecurityServicePolicyData struct {
 	// For service type SHIELD_ADVANCED, this is an empty string.
 	//
 	// * Example:
+	// DNS_FIREWALL"{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"
+	//
+	// *
+	// Example:
 	// NETWORK_FIREWALL"{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateless-rulegroup/rulegroup2\",\"priority\":10}],\"networkFirewallStatelessDefaultActions\":[\"aws:pass\",\"custom1\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"custom2\",\"aws:pass\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"custom1\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension1\"}]}}},{\"actionName\":\"custom2\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension2\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateful-rulegroup/rulegroup1\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":true,\"allowedIPV4CidrList\":[\"10.24.34.0/28\"]}
 	// }"
 	//
@@ -696,6 +1158,12 @@ type SecurityServicePolicyData struct {
 	// \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\"
 	// sg-000e55995d61a06bd\"}]}"
 	//
+	// * Example: Shared VPCs. Apply the preceding policy
+	// to resources in shared VPCs as well as to those in VPCs that the account owns
+	// "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
+	// \"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":true,\"securityGroups\":[{\"id\":\"
+	// sg-000e55995d61a06bd\"}]}"
+	//
 	// * Example:
 	// SECURITY_GROUPS_CONTENT_AUDIT"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"
 	// The security group action for content audit can be ALLOW or DENY. For ALLOW, all
@@ -709,7 +1177,7 @@ type SecurityServicePolicyData struct {
 	ManagedServiceData *string
 }
 
-// AWS Network Firewall stateful rule group, used in a
+// Network Firewall stateful rule group, used in a
 // NetworkFirewallPolicyDescription.
 type StatefulRuleGroup struct {
 
@@ -720,12 +1188,12 @@ type StatefulRuleGroup struct {
 	RuleGroupName *string
 }
 
-// AWS Network Firewall stateless rule group, used in a
+// Network Firewall stateless rule group, used in a
 // NetworkFirewallPolicyDescription.
 type StatelessRuleGroup struct {
 
-	// The priority of the rule group. AWS Network Firewall evaluates the stateless
-	// rule groups in a firewall policy starting from the lowest priority setting.
+	// The priority of the rule group. Network Firewall evaluates the stateless rule
+	// groups in a firewall policy starting from the lowest priority setting.
 	Priority int32
 
 	// The resource ID of the rule group.
@@ -735,11 +1203,11 @@ type StatelessRuleGroup struct {
 	RuleGroupName *string
 }
 
-// A collection of key:value pairs associated with an AWS resource. The key:value
-// pair can be anything you define. Typically, the tag key represents a category
-// (such as "environment") and the tag value represents a specific value within
-// that category (such as "test," "development," or "production"). You can add up
-// to 50 tags to each AWS resource.
+// A collection of key:value pairs associated with an Amazon Web Services resource.
+// The key:value pair can be anything you define. Typically, the tag key represents
+// a category (such as "environment") and the tag value represents a specific value
+// within that category (such as "test," "development," or "production"). You can
+// add up to 50 tags to each Amazon Web Services resource.
 type Tag struct {
 
 	// Part of the key:value pair that defines a tag. You can use a tag key to describe
@@ -756,17 +1224,17 @@ type Tag struct {
 	Value *string
 }
 
-// Violations for a resource based on the specified AWS Firewall Manager policy and
-// AWS account.
+// Violations for a resource based on the specified Firewall Manager policy and
+// Amazon Web Services account.
 type ViolationDetail struct {
 
-	// The AWS account that the violation details were requested for.
+	// The Amazon Web Services account that the violation details were requested for.
 	//
 	// This member is required.
 	MemberAccount *string
 
-	// The ID of the AWS Firewall Manager policy that the violation details were
-	// requested for.
+	// The ID of the Firewall Manager policy that the violation details were requested
+	// for.
 	//
 	// This member is required.
 	PolicyId *string

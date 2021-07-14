@@ -14,7 +14,7 @@ import (
 // Creates a version
 // (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) from the
 // current code and configuration of a function. Use versions to create a snapshot
-// of your function code and configuration that doesn't change. AWS Lambda doesn't
+// of your function code and configuration that doesn't change. Lambda doesn't
 // publish a version if the function's configuration and code haven't changed since
 // the last version. Use UpdateFunctionCode or UpdateFunctionConfiguration to
 // update the function before publishing a version. Clients can invoke versions
@@ -84,10 +84,12 @@ type PublishVersionOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables.
+	// The function's environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 	Environment *types.EnvironmentResponse
 
-	// Connection settings for an Amazon EFS file system.
+	// Connection settings for an Amazon EFS file system
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -164,7 +166,7 @@ type PublishVersionOutput struct {
 	// stopping it.
 	Timeout *int32
 
-	// The function's AWS X-Ray tracing configuration.
+	// The function's X-Ray tracing configuration.
 	TracingConfig *types.TracingConfigResponse
 
 	// The version of the Lambda function.

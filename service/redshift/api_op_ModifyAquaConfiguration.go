@@ -37,8 +37,8 @@ type ModifyAquaConfigurationInput struct {
 	// The new value of AQUA configuration status. Possible values include the
 	// following.
 	//
-	// * enabled - Use AQUA if it is available for the current AWS Region
-	// and Amazon Redshift node type.
+	// * enabled - Use AQUA if it is available for the current Region and
+	// Amazon Redshift node type.
 	//
 	// * disabled - Don't use AQUA.
 	//

@@ -13,11 +13,11 @@ import (
 
 // Creates a Direct Connect gateway, which is an intermediate object that enables
 // you to connect a set of virtual interfaces and virtual private gateways. A
-// Direct Connect gateway is global and visible in any AWS Region after it is
-// created. The virtual interfaces and virtual private gateways that are connected
-// through a Direct Connect gateway can be in different AWS Regions. This enables
-// you to connect to a VPC in any Region, regardless of the Region in which the
-// virtual interfaces are located, and pass traffic between them.
+// Direct Connect gateway is global and visible in any Region after it is created.
+// The virtual interfaces and virtual private gateways that are connected through a
+// Direct Connect gateway can be in different Regions. This enables you to connect
+// to a VPC in any Region, regardless of the Region in which the virtual interfaces
+// are located, and pass traffic between them.
 func (c *Client) CreateDirectConnectGateway(ctx context.Context, params *CreateDirectConnectGatewayInput, optFns ...func(*Options)) (*CreateDirectConnectGatewayOutput, error) {
 	if params == nil {
 		params = &CreateDirectConnectGatewayInput{}

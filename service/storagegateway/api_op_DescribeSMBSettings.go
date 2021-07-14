@@ -31,7 +31,7 @@ func (c *Client) DescribeSMBSettings(ctx context.Context, params *DescribeSMBSet
 type DescribeSMBSettingsInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -68,15 +68,16 @@ type DescribeSMBSettingsOutput struct {
 	// The name of the domain that the gateway is joined to.
 	DomainName *string
 
-	// The shares on this gateway appear when listing shares.
+	// The shares on this gateway appear when listing shares. Only supported for S3
+	// File Gateways.
 	FileSharesVisible *bool
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// This value is true if a password for the guest user smbguest is set, otherwise
-	// false. Valid Values: true | false
+	// false. Only supported for S3 File Gateways. Valid Values: true | false
 	SMBGuestPasswordSet *bool
 
 	// The type of security strategy that was specified for file gateway.
@@ -84,18 +85,19 @@ type DescribeSMBSettingsOutput struct {
 	// *
 	// ClientSpecified: If you use this option, requests are established based on what
 	// is negotiated by the client. This option is recommended when you want to
-	// maximize compatibility across different clients in your environment.
+	// maximize compatibility across different clients in your environment. Only
+	// supported for S3 File Gateways.
 	//
-	// *
-	// MandatorySigning: If you use this option, file gateway only allows connections
-	// from SMBv2 or SMBv3 clients that have signing enabled. This option works with
-	// SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.
+	// * MandatorySigning: If you use this option,
+	// file gateway only allows connections from SMBv2 or SMBv3 clients that have
+	// signing enabled. This option works with SMB clients on Microsoft Windows Vista,
+	// Windows Server 2008 or newer.
 	//
-	// *
-	// MandatoryEncryption: If you use this option, file gateway only allows
-	// connections from SMBv3 clients that have encryption enabled. This option is
-	// highly recommended for environments that handle sensitive data. This option
-	// works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.
+	// * MandatoryEncryption: If you use this option,
+	// file gateway only allows connections from SMBv3 clients that have encryption
+	// enabled. This option is highly recommended for environments that handle
+	// sensitive data. This option works with SMB clients on Microsoft Windows 8,
+	// Windows Server 2012 or newer.
 	SMBSecurityStrategy types.SMBSecurityStrategy
 
 	// Metadata pertaining to the operation's result.

@@ -32,7 +32,7 @@ type DescribeBrokerEngineTypesInput struct {
 	// Filter response by engine type.
 	EngineType *string
 
-	// The maximum number of engine types that Amazon MQ can return per page (20 by
+	// The maximum number of brokers that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
 	MaxResults int32
 

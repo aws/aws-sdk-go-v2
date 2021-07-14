@@ -14,9 +14,9 @@ import (
 // Creates a snapshot of your database in Amazon Lightsail. You can use snapshots
 // for backups, to make copies of a database, and to save data before deleting a
 // database. The create relational database snapshot operation supports tag-based
-// access control via request tags. For more information, see the Lightsail Dev
-// Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// access control via request tags. For more information, see the Amazon Lightsail
+// Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) CreateRelationalDatabaseSnapshot(ctx context.Context, params *CreateRelationalDatabaseSnapshotInput, optFns ...func(*Options)) (*CreateRelationalDatabaseSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateRelationalDatabaseSnapshotInput{}

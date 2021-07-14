@@ -15,12 +15,11 @@ import (
 // Returns information about the SSH public keys associated with the specified IAM
 // user. If none exists, the operation returns an empty list. The SSH public keys
 // returned by this operation are used only for authenticating the IAM user to an
-// AWS CodeCommit repository. For more information about using SSH keys to
-// authenticate to an AWS CodeCommit repository, see Set up AWS CodeCommit for SSH
-// connections
+// CodeCommit repository. For more information about using SSH keys to authenticate
+// to an CodeCommit repository, see Set up CodeCommit for SSH connections
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
-// in the AWS CodeCommit User Guide. Although each user is limited to a small
-// number of keys, you can still paginate the results using the MaxItems and Marker
+// in the CodeCommit User Guide. Although each user is limited to a small number of
+// keys, you can still paginate the results using the MaxItems and Marker
 // parameters.
 func (c *Client) ListSSHPublicKeys(ctx context.Context, params *ListSSHPublicKeysInput, optFns ...func(*Options)) (*ListSSHPublicKeysOutput, error) {
 	if params == nil {
@@ -55,8 +54,8 @@ type ListSSHPublicKeysInput struct {
 	MaxItems *int32
 
 	// The name of the IAM user to list SSH public keys for. If none is specified, the
-	// UserName field is determined implicitly based on the AWS access key used to sign
-	// the request. This parameter allows (through its regex pattern
+	// UserName field is determined implicitly based on the Amazon Web Services access
+	// key used to sign the request. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-

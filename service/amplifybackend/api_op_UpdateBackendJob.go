@@ -44,7 +44,7 @@ type UpdateBackendJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// Filters the list of response objects to only include those with the specified
+	// Filters the list of response objects to include only those with the specified
 	// operation name.
 	Operation *string
 

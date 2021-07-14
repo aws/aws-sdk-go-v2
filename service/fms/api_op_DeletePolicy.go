@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes an AWS Firewall Manager policy.
+// Permanently deletes an Firewall Manager policy.
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {
 		params = &DeletePolicyInput{}
@@ -34,19 +34,19 @@ type DeletePolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// If True, the request performs cleanup according to the policy type. For AWS WAF
-	// and Shield Advanced policies, the cleanup does the following:
+	// If True, the request performs cleanup according to the policy type. For WAF and
+	// Shield Advanced policies, the cleanup does the following:
 	//
-	// * Deletes rule
-	// groups created by AWS Firewall Manager
+	// * Deletes rule groups
+	// created by Firewall Manager
 	//
-	// * Removes web ACLs from in-scope
-	// resources
+	// * Removes web ACLs from in-scope resources
 	//
-	// * Deletes web ACLs that contain no rules or rule groups
+	// *
+	// Deletes web ACLs that contain no rules or rule groups
 	//
-	// For security
-	// group policies, the cleanup does the following for each security group in the
+	// For security group
+	// policies, the cleanup does the following for each security group in the
 	// policy:
 	//
 	// * Disassociates the security group from in-scope resources

@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// View a summary of OpsItems based on specified filters and aggregators.
+// View a summary of operations metadata (OpsData) based on specified filters and
+// aggregators. OpsData can include information about Amazon Web Services Systems
+// Manager OpsCenter operational workitems (OpsItems) as well as information about
+// any Amazon Web Services resource or service configured to report OpsData to
+// Amazon Web Services Systems Manager Explorer.
 func (c *Client) GetOpsSummary(ctx context.Context, params *GetOpsSummaryInput, optFns ...func(*Options)) (*GetOpsSummaryOutput, error) {
 	if params == nil {
 		params = &GetOpsSummaryInput{}
@@ -30,11 +34,11 @@ func (c *Client) GetOpsSummary(ctx context.Context, params *GetOpsSummaryInput, 
 
 type GetOpsSummaryInput struct {
 
-	// Optional aggregators that return counts of OpsItems based on one or more
+	// Optional aggregators that return counts of OpsData based on one or more
 	// expressions.
 	Aggregators []types.OpsAggregator
 
-	// Optional filters used to scope down the returned OpsItems.
+	// Optional filters used to scope down the returned OpsData.
 	Filters []types.OpsFilter
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -44,7 +48,7 @@ type GetOpsSummaryInput struct {
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 
-	// The OpsItem data type to return.
+	// The OpsData data type to return.
 	ResultAttributes []types.OpsResultAttribute
 
 	// Specify the name of a resource data sync to get.
@@ -53,7 +57,7 @@ type GetOpsSummaryInput struct {
 
 type GetOpsSummaryOutput struct {
 
-	// The list of aggregated and filtered OpsItems.
+	// The list of aggregated and filtered OpsData.
 	Entities []types.OpsEntity
 
 	// The token for the next set of items to return. Use this token to get the next

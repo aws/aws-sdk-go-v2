@@ -75,8 +75,8 @@ type DescribeIndexOutput struct {
 	// permission to write to your Amazon Cloudwatch logs.
 	RoleArn *string
 
-	// The identifier of the AWS KMS customer master key (CMK) used to encrypt your
-	// data. Amazon Kendra doesn't support asymmetric CMKs.
+	// The identifier of the KMScustomer master key (CMK) used to encrypt your data.
+	// Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The current status of the index. When the value is ACTIVE, the index is ready

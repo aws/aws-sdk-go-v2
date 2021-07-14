@@ -39,23 +39,23 @@ type GetProtectionStatusInput struct {
 
 	// The end of the time period to query for the attacks. This is a timestamp type.
 	// The request syntax listing indicates a number type because the default used by
-	// AWS Firewall Manager is Unix time in seconds. However, any valid timestamp
-	// format is allowed.
+	// Firewall Manager is Unix time in seconds. However, any valid timestamp format is
+	// allowed.
 	EndTime *time.Time
 
-	// Specifies the number of objects that you want AWS Firewall Manager to return for
+	// Specifies the number of objects that you want Firewall Manager to return for
 	// this request. If you have more objects than the number that you specify for
 	// MaxResults, the response includes a NextToken value that you can use to get
 	// another batch of objects.
 	MaxResults *int32
 
-	// The AWS account that is in scope of the policy that you want to get the details
-	// for.
+	// The Amazon Web Services account that is in scope of the policy that you want to
+	// get the details for.
 	MemberAccountId *string
 
 	// If you specify a value for MaxResults and you have more objects than the number
-	// that you specify for MaxResults, AWS Firewall Manager returns a NextToken value
-	// in the response, which you can use to retrieve another group of objects. For the
+	// that you specify for MaxResults, Firewall Manager returns a NextToken value in
+	// the response, which you can use to retrieve another group of objects. For the
 	// second and subsequent GetProtectionStatus requests, specify the value of
 	// NextToken from the previous response to get information about another batch of
 	// objects.
@@ -63,14 +63,14 @@ type GetProtectionStatusInput struct {
 
 	// The start of the time period to query for the attacks. This is a timestamp type.
 	// The request syntax listing indicates a number type because the default used by
-	// AWS Firewall Manager is Unix time in seconds. However, any valid timestamp
-	// format is allowed.
+	// Firewall Manager is Unix time in seconds. However, any valid timestamp format is
+	// allowed.
 	StartTime *time.Time
 }
 
 type GetProtectionStatusOutput struct {
 
-	// The ID of the AWS Firewall administrator account for this policy.
+	// The ID of the Firewall Manager administrator account for this policy.
 	AdminAccountId *string
 
 	// Details about the attack, including the following:
@@ -94,10 +94,10 @@ type GetProtectionStatusOutput struct {
 	// If you have more objects than the number that you specified for MaxResults in
 	// the request, the response includes a NextToken value. To list more objects,
 	// submit another GetProtectionStatus request, and specify the NextToken value from
-	// the response in the NextToken value in the next request. AWS SDKs provide
-	// auto-pagination that identify NextToken in a response and make subsequent
-	// request calls automatically on your behalf. However, this feature is not
-	// supported by GetProtectionStatus. You must submit subsequent requests with
+	// the response in the NextToken value in the next request. Amazon Web Services
+	// SDKs provide auto-pagination that identify NextToken in a response and make
+	// subsequent request calls automatically on your behalf. However, this feature is
+	// not supported by GetProtectionStatus. You must submit subsequent requests with
 	// NextToken using your own processes.
 	NextToken *string
 

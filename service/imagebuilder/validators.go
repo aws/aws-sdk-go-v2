@@ -1026,6 +1026,11 @@ func validateComponentConfiguration(v *types.ComponentConfiguration) error {
 	if v.ComponentArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComponentArn"))
 	}
+	if v.Parameters != nil {
+		if err := validateComponentParameterList(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1040,6 +1045,41 @@ func validateComponentConfigurationList(v []types.ComponentConfiguration) error 
 	invalidParams := smithy.InvalidParamsError{Context: "ComponentConfigurationList"}
 	for i := range v {
 		if err := validateComponentConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentParameter(v *types.ComponentParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentParameterList(v []types.ComponentParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentParameterList"}
+	for i := range v {
+		if err := validateComponentParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

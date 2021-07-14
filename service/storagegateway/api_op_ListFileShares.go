@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of the file shares for a specific file gateway, or the list of file
-// shares that belong to the calling user account. This operation is only supported
-// for file gateways.
+// Gets a list of the file shares for a specific S3 File Gateway, or the list of
+// file shares that belong to the calling user account. This operation is only
+// supported for S3 File Gateways.
 func (c *Client) ListFileShares(ctx context.Context, params *ListFileSharesInput, optFns ...func(*Options)) (*ListFileSharesOutput, error) {
 	if params == nil {
 		params = &ListFileSharesInput{}
@@ -51,7 +51,7 @@ type ListFileSharesInput struct {
 // ListFileShareOutput
 type ListFileSharesOutput struct {
 
-	// An array of information about the file gateway's file shares.
+	// An array of information about the S3 File Gateway's file shares.
 	FileShareInfoList []types.FileShareInfo
 
 	// If the request includes Marker, the response returns that value in this field.

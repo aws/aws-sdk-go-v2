@@ -1012,6 +1012,7 @@ const (
 	TriggerTypeScheduled   TriggerType = "SCHEDULED"
 	TriggerTypeConditional TriggerType = "CONDITIONAL"
 	TriggerTypeOnDemand    TriggerType = "ON_DEMAND"
+	TriggerTypeEvent       TriggerType = "EVENT"
 )
 
 // Values returns all known values for TriggerType. Note that this can be expanded
@@ -1022,6 +1023,7 @@ func (TriggerType) Values() []TriggerType {
 		"SCHEDULED",
 		"CONDITIONAL",
 		"ON_DEMAND",
+		"EVENT",
 	}
 }
 

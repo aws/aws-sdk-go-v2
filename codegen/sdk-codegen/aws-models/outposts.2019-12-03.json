@@ -66,7 +66,7 @@
         "com.amazonaws.outposts#AvailabilityZone": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Availability Zone.</p>\n         <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>",
+                "smithy.api#documentation": "<p>The Availability Zone.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000
@@ -77,12 +77,36 @@
         "com.amazonaws.outposts#AvailabilityZoneId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The ID of the Availability Zone.</p>\n         <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>",
+                "smithy.api#documentation": "<p>The ID of the Availability Zone.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
                 },
                 "smithy.api#pattern": "^[a-zA-Z]+\\d-[a-zA-Z]+\\d$"
+            }
+        },
+        "com.amazonaws.outposts#AvailabilityZoneIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#AvailabilityZoneId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.outposts#AvailabilityZoneList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#AvailabilityZone"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.outposts#ConflictException": {
@@ -139,7 +163,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Outpost.</p>",
+                "smithy.api#documentation": "<p>Creates an Outpost.</p>\n         <p>You can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/outposts",
@@ -462,7 +486,24 @@
         "com.amazonaws.outposts#LifeCycleStatus": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The life cycle status.</p>"
+                "smithy.api#documentation": "<p>The life cycle status.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[ A-Za-z]+$"
+            }
+        },
+        "com.amazonaws.outposts#LifeCycleStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#LifeCycleStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.outposts#ListOutposts": {
@@ -485,7 +526,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the Outposts for your AWS account.</p>",
+                "smithy.api#documentation": "<p>Create a list of the Outposts for your AWS account. Add filters to your request to return\n      a more specific list of results. Use filters to match an Outpost lifecycle status,\n      Availibility Zone (<code>us-east-1a</code>), and AZ ID (<code>use1-az1</code>). </p>\n    \n         <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only \n      results that match all of the specified filters.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/outposts",
@@ -511,6 +552,27 @@
                     "target": "com.amazonaws.outposts#MaxResults1000",
                     "traits": {
                         "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "LifeCycleStatusFilter": {
+                    "target": "com.amazonaws.outposts#LifeCycleStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A filter for the lifecycle status of the Outpost. \n    </p>\n         <p> Filter values are case sensitive. If you specify multiple values for a filter, the values\n      are joined with an <code>OR</code>, and the request returns all results that match any of the\n      specified values. </p>",
+                        "smithy.api#httpQuery": "LifeCycleStatusFilter"
+                    }
+                },
+                "AvailabilityZoneFilter": {
+                    "target": "com.amazonaws.outposts#AvailabilityZoneList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A filter for the Availibility Zone (<code>us-east-1a</code>) of the Outpost. </p>\n    \n         <p> Filter values are case sensitive. If you specify multiple values for a filter, the values\n      are joined with an <code>OR</code>, and the request returns all results that match any of the\n      specified values. </p>",
+                        "smithy.api#httpQuery": "AvailabilityZoneFilter"
+                    }
+                },
+                "AvailabilityZoneIdFilter": {
+                    "target": "com.amazonaws.outposts#AvailabilityZoneIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A filter for the AZ IDs (<code>use1-az1</code>) of the Outpost.\n    </p>\n    \n         <p> Filter values are case sensitive. If you specify multiple values for a filter, the values\n      are joined with an <code>OR</code>, and the request returns all results that match any of the\n      specified values. </p>",
+                        "smithy.api#httpQuery": "AvailabilityZoneIdFilter"
                     }
                 }
             }

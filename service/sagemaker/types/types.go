@@ -7842,6 +7842,10 @@ type PipelineExecutionStepMetadata struct {
 	// The Amazon Resource Name (ARN) of the transform job that was run by this step
 	// execution.
 	TransformJob *TransformJobStepMetadata
+
+	// The Amazon Resource Name (ARN) of the tuning job that was run by this step
+	// execution.
+	TuningJob *TuningJobStepMetaData
 }
 
 // A pipeline execution summary.
@@ -10719,6 +10723,14 @@ type TuningJobCompletionCriteria struct {
 	//
 	// This member is required.
 	TargetObjectiveMetricValue *float32
+}
+
+// Metadata for a tuning step.
+type TuningJobStepMetaData struct {
+
+	// The Amazon Resource Name (ARN) of the tuning job that was run by this step
+	// execution.
+	Arn *string
 }
 
 // Provided configuration information for the worker UI for a labeling job.

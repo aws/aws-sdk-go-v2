@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes specified tags from a resource.
+// Deletes specified tags from a resource. To specify multiple tags, use separate
+// tagKeys parameters, for example: DELETE
+// /tags/WorkloadArn?tagKeys=key1&tagKeys=key2
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,7 +30,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The keys of the tags to be removed.
+	// A list of tag keys. Existing tags of the resource whose keys are members of this
+	// list are removed from the resource.
 	//
 	// This member is required.
 	TagKeys []string

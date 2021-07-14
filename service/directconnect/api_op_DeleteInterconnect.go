@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified interconnect. Intended for use by AWS Direct Connect
-// Partners only.
+// Deletes the specified interconnect. Intended for use by Direct Connect Partners
+// only.
 func (c *Client) DeleteInterconnect(ctx context.Context, params *DeleteInterconnectInput, optFns ...func(*Options)) (*DeleteInterconnectOutput, error) {
 	if params == nil {
 		params = &DeleteInterconnectInput{}

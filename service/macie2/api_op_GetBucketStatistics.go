@@ -31,7 +31,7 @@ func (c *Client) GetBucketStatistics(ctx context.Context, params *GetBucketStati
 
 type GetBucketStatisticsInput struct {
 
-	// The unique identifier for the AWS account.
+	// The unique identifier for the Amazon Web Services account.
 	AccountId *string
 }
 
@@ -53,7 +53,8 @@ type GetBucketStatisticsOutput struct {
 	// server-side encryption of objects when objects are uploaded to the buckets.
 	BucketCountByObjectEncryptionRequirement *types.BucketCountPolicyAllowsUnencryptedObjectUploads
 
-	// The total number of buckets that are or aren't shared with another AWS account.
+	// The total number of buckets that are or aren't shared with another Amazon Web
+	// Services account.
 	BucketCountBySharedAccessType *types.BucketCountBySharedAccessType
 
 	// The total number of objects that Amazon Macie can analyze in the buckets. These

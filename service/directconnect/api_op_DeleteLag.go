@@ -42,13 +42,17 @@ type DeleteLagOutput struct {
 	// Indicates whether the LAG can host other connections.
 	AllowsHostedConnections bool
 
-	// The AWS Direct Connect endpoint that hosts the LAG.
+	// The Direct Connect endpoint that hosts the LAG.
 	//
 	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
-	// The AWS Direct Connect endpoint that hosts the LAG.
+	// The Direct Connect endpoint that hosts the LAG.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The connections bundled by the LAG.
 	Connections []types.Connection
@@ -114,13 +118,13 @@ type DeleteLagOutput struct {
 	// of 10.
 	NumberOfConnections int32
 
-	// The ID of the AWS account that owns the LAG.
+	// The ID of the account that owns the LAG.
 	OwnerAccount *string
 
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the LAG.

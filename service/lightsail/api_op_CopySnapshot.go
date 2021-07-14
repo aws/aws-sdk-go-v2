@@ -58,7 +58,7 @@ type CopySnapshotInput struct {
 	// exclusive.
 	//
 	// * Define this parameter only when copying an automatic snapshot as a
-	// manual snapshot. For more information, see the Lightsail Dev Guide
+	// manual snapshot. For more information, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	RestoreDate *string
 
@@ -66,7 +66,8 @@ type CopySnapshotInput struct {
 	// was created. Constraint:
 	//
 	// * Define this parameter only when copying an automatic
-	// snapshot as a manual snapshot. For more information, see the Lightsail Dev Guide
+	// snapshot as a manual snapshot. For more information, see the Amazon Lightsail
+	// Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	SourceResourceName *string
 
@@ -85,7 +86,7 @@ type CopySnapshotInput struct {
 	// exclusive.
 	//
 	// * Define this parameter only when copying an automatic snapshot as a
-	// manual snapshot. For more information, see the Lightsail Dev Guide
+	// manual snapshot. For more information, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool
 }

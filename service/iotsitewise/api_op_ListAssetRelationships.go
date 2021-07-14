@@ -47,7 +47,7 @@ type ListAssetRelationshipsInput struct {
 	// This member is required.
 	TraversalType types.TraversalType
 
-	// The maximum number of results to be returned per paginated request.
+	// The maximum number of results to return for each paginated request.
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -173,7 +173,7 @@ var _ ListAssetRelationshipsAPIClient = (*Client)(nil)
 // ListAssetRelationshipsPaginatorOptions is the paginator options for
 // ListAssetRelationships
 type ListAssetRelationshipsPaginatorOptions struct {
-	// The maximum number of results to be returned per paginated request.
+	// The maximum number of results to return for each paginated request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

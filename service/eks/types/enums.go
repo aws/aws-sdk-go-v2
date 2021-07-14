@@ -12,6 +12,7 @@ const (
 	AddonIssueCodeInsufficientNumberOfReplicas AddonIssueCode = "InsufficientNumberOfReplicas"
 	AddonIssueCodeConfigurationConflict        AddonIssueCode = "ConfigurationConflict"
 	AddonIssueCodeAdmissionRequestDenied       AddonIssueCode = "AdmissionRequestDenied"
+	AddonIssueCodeUnsupportedAddonModification AddonIssueCode = "UnsupportedAddonModification"
 )
 
 // Values returns all known values for AddonIssueCode. Note that this can be
@@ -25,6 +26,7 @@ func (AddonIssueCode) Values() []AddonIssueCode {
 		"InsufficientNumberOfReplicas",
 		"ConfigurationConflict",
 		"AdmissionRequestDenied",
+		"UnsupportedAddonModification",
 	}
 }
 
@@ -159,6 +161,7 @@ const (
 	ErrorCodeInsufficientNumberOfReplicas ErrorCode = "InsufficientNumberOfReplicas"
 	ErrorCodeConfigurationConflict        ErrorCode = "ConfigurationConflict"
 	ErrorCodeAdmissionRequestDenied       ErrorCode = "AdmissionRequestDenied"
+	ErrorCodeUnsupportedAddonModification ErrorCode = "UnsupportedAddonModification"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -181,6 +184,7 @@ func (ErrorCode) Values() []ErrorCode {
 		"InsufficientNumberOfReplicas",
 		"ConfigurationConflict",
 		"AdmissionRequestDenied",
+		"UnsupportedAddonModification",
 	}
 }
 

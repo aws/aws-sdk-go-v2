@@ -36,7 +36,7 @@ func (c *Client) DescribeTapeRecoveryPoints(ctx context.Context, params *Describ
 type DescribeTapeRecoveryPointsInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -54,7 +54,7 @@ type DescribeTapeRecoveryPointsInput struct {
 type DescribeTapeRecoveryPointsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// An opaque string that indicates the position at which the virtual tape recovery

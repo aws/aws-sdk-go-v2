@@ -35,10 +35,10 @@ func (c *Client) UntagSAMLProvider(ctx context.Context, params *UntagSAMLProvide
 type UntagSAMLProviderInput struct {
 
 	// The ARN of the SAML identity provider in IAM from which you want to remove tags.
-	// This parameter accepts (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters that consist of upper
+	// This parameter allows (through its regex pattern
+	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
-	// of the following characters: =,.@-
+	// of the following characters: _+=,.@-
 	//
 	// This member is required.
 	SAMLProviderArn *string

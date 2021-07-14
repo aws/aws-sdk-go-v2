@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a portal from AWS IoT SiteWise Monitor.
+// Deletes a portal from IoT SiteWise Monitor.
 func (c *Client) DeletePortal(ctx context.Context, params *DeletePortalInput, optFns ...func(*Options)) (*DeletePortalOutput, error) {
 	if params == nil {
 		params = &DeletePortalInput{}

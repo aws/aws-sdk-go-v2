@@ -43,8 +43,8 @@ type UpdateMaintenanceWindowInput struct {
 	// be defined for those targets.
 	AllowUnassociatedTargets bool
 
-	// The number of hours before the end of the maintenance window that Systems
-	// Manager stops scheduling new tasks for execution.
+	// The number of hours before the end of the maintenance window that Amazon Web
+	// Services Systems Manager stops scheduling new tasks for execution.
 	Cutoff int32
 
 	// An optional description for the update request.
@@ -64,15 +64,15 @@ type UpdateMaintenanceWindowInput struct {
 	// The name of the maintenance window.
 	Name *string
 
-	// If True, then all fields that are required by the CreateMaintenanceWindow action
-	// are also required for this API request. Optional fields that are not specified
-	// are set to null.
+	// If True, then all fields that are required by the CreateMaintenanceWindow
+	// operation are also required for this API request. Optional fields that aren't
+	// specified are set to null.
 	Replace bool
 
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
 
-	// The number of days to wait after the date and time specified by a CRON
+	// The number of days to wait after the date and time specified by a cron
 	// expression before running the maintenance window. For example, the following
 	// cron expression schedules a maintenance window to run the third Tuesday of every
 	// month at 11:30 PM. cron(30 23 ? * TUE#3 *) If the schedule offset is 2, the
@@ -98,8 +98,8 @@ type UpdateMaintenanceWindowOutput struct {
 	// be defined for those targets.
 	AllowUnassociatedTargets bool
 
-	// The number of hours before the end of the maintenance window that Systems
-	// Manager stops scheduling new tasks for execution.
+	// The number of hours before the end of the maintenance window that Amazon Web
+	// Services Systems Manager stops scheduling new tasks for execution.
 	Cutoff int32
 
 	// An optional description of the update.
@@ -112,7 +112,7 @@ type UpdateMaintenanceWindowOutput struct {
 	Enabled bool
 
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
-	// is scheduled to become inactive. The maintenance window will not run after this
+	// is scheduled to become inactive. The maintenance window won't run after this
 	// specified time.
 	EndDate *string
 
@@ -122,7 +122,7 @@ type UpdateMaintenanceWindowOutput struct {
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
 
-	// The number of days to wait to run a maintenance window after the scheduled CRON
+	// The number of days to wait to run a maintenance window after the scheduled cron
 	// expression date and time.
 	ScheduleOffset int32
 
@@ -133,7 +133,7 @@ type UpdateMaintenanceWindowOutput struct {
 	ScheduleTimezone *string
 
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
-	// is scheduled to become active. The maintenance window will not run before this
+	// is scheduled to become active. The maintenance window won't run before this
 	// specified time.
 	StartDate *string
 

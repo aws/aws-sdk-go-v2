@@ -12,20 +12,21 @@ import (
 )
 
 // Sets the specified version of the global endpoint token as the token version
-// used for the AWS account. By default, AWS Security Token Service (STS) is
-// available as a global service, and all STS requests go to a single endpoint at
-// https://sts.amazonaws.com. AWS recommends using Regional STS endpoints to reduce
-// latency, build in redundancy, and increase session token availability. For
-// information about Regional endpoints for STS, see AWS AWS Security Token Service
-// endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/sts.html) in
-// the AWS General Reference. If you make an STS call to the global endpoint, the
+// used for the account. By default, Security Token Service (STS) is available as a
+// global service, and all STS requests go to a single endpoint at
+// https://sts.amazonaws.com. Amazon Web Services recommends using Regional STS
+// endpoints to reduce latency, build in redundancy, and increase session token
+// availability. For information about Regional endpoints for STS, see Security
+// Token Service endpoints and quotas
+// (https://docs.aws.amazon.com/general/latest/gr/sts.html) in the Amazon Web
+// Services General Reference. If you make an STS call to the global endpoint, the
 // resulting session tokens might be valid in some Regions but not others. It
 // depends on the version that is set in this operation. Version 1 tokens are valid
-// only in AWS Regions that are available by default. These tokens do not work in
+// only in Regions that are available by default. These tokens do not work in
 // manually enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are
 // valid in all Regions. However, version 2 tokens are longer and might affect
 // systems where you temporarily store tokens. For information, see Activating and
-// deactivating STS in an AWS region
+// deactivating STS in an Region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 // in the IAM User Guide. To view the current session token version, see the
 // GlobalEndpointTokenVersion entry in the response of the GetAccountSummary
@@ -47,12 +48,12 @@ func (c *Client) SetSecurityTokenServicePreferences(ctx context.Context, params 
 
 type SetSecurityTokenServicePreferencesInput struct {
 
-	// The version of the global endpoint token. Version 1 tokens are valid only in AWS
+	// The version of the global endpoint token. Version 1 tokens are valid only in
 	// Regions that are available by default. These tokens do not work in manually
 	// enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are valid in
 	// all Regions. However, version 2 tokens are longer and might affect systems where
 	// you temporarily store tokens. For information, see Activating and deactivating
-	// STS in an AWS region
+	// STS in an Region
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the IAM User Guide.
 	//

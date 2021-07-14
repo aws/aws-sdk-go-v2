@@ -13,9 +13,10 @@ import (
 // Adds the specified IAM role to the specified instance profile. An instance
 // profile can contain only one role, and this quota cannot be increased. You can
 // remove the existing role and then add a different role to an instance profile.
-// You must then wait for the change to appear across all of AWS because of
-// eventual consistency (https://en.wikipedia.org/wiki/Eventual_consistency). To
-// force the change, you must disassociate the instance profile
+// You must then wait for the change to appear across all of Amazon Web Services
+// because of eventual consistency
+// (https://en.wikipedia.org/wiki/Eventual_consistency). To force the change, you
+// must disassociate the instance profile
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html)
 // and then associate the instance profile
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html),

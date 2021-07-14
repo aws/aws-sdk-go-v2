@@ -11305,6 +11305,42 @@ func awsAwsjson11_deserializeDocumentDisks(v *[]types.Disk, value interface{}) e
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEndpointNetworkConfiguration(v **types.EndpointNetworkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EndpointNetworkConfiguration
+	if *v == nil {
+		sv = &types.EndpointNetworkConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IpAddresses":
+			if err := awsAwsjson11_deserializeDocumentIpAddressList(&sv.IpAddresses, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentErrorDetails(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11520,6 +11556,11 @@ func awsAwsjson11_deserializeDocumentFileSystemAssociationInfo(v **types.FileSys
 
 		case "CacheAttributes":
 			if err := awsAwsjson11_deserializeDocumentCacheAttributes(&sv.CacheAttributes, value); err != nil {
+				return err
+			}
+
+		case "EndpointNetworkConfiguration":
+			if err := awsAwsjson11_deserializeDocumentEndpointNetworkConfiguration(&sv.EndpointNetworkConfiguration, value); err != nil {
 				return err
 			}
 
@@ -11996,6 +12037,42 @@ func awsAwsjson11_deserializeDocumentInvalidGatewayRequestException(v **types.In
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIpAddressList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IPV4Address to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentNetworkInterface(v **types.NetworkInterface, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12151,6 +12228,15 @@ func awsAwsjson11_deserializeDocumentNFSFileShareInfo(v **types.NFSFileShareInfo
 
 	for key, value := range shape {
 		switch key {
+		case "BucketRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionId to be of type string, got %T instead", value)
+				}
+				sv.BucketRegion = ptr.String(jtv)
+			}
+
 		case "CacheAttributes":
 			if err := awsAwsjson11_deserializeDocumentCacheAttributes(&sv.CacheAttributes, value); err != nil {
 				return err
@@ -12322,6 +12408,15 @@ func awsAwsjson11_deserializeDocumentNFSFileShareInfo(v **types.NFSFileShareInfo
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "VPCEndpointDNSName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DNSHostName to be of type string, got %T instead", value)
+				}
+				sv.VPCEndpointDNSName = ptr.String(jtv)
 			}
 
 		default:
@@ -12589,6 +12684,15 @@ func awsAwsjson11_deserializeDocumentSMBFileShareInfo(v **types.SMBFileShareInfo
 				sv.Authentication = ptr.String(jtv)
 			}
 
+		case "BucketRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionId to be of type string, got %T instead", value)
+				}
+				sv.BucketRegion = ptr.String(jtv)
+			}
+
 		case "CacheAttributes":
 			if err := awsAwsjson11_deserializeDocumentCacheAttributes(&sv.CacheAttributes, value); err != nil {
 				return err
@@ -12716,6 +12820,15 @@ func awsAwsjson11_deserializeDocumentSMBFileShareInfo(v **types.SMBFileShareInfo
 				sv.ObjectACL = types.ObjectACL(jtv)
 			}
 
+		case "OplocksEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OplocksEnabled = ptr.Bool(jtv)
+			}
+
 		case "Path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12769,6 +12882,15 @@ func awsAwsjson11_deserializeDocumentSMBFileShareInfo(v **types.SMBFileShareInfo
 		case "ValidUserList":
 			if err := awsAwsjson11_deserializeDocumentUserList(&sv.ValidUserList, value); err != nil {
 				return err
+			}
+
+		case "VPCEndpointDNSName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DNSHostName to be of type string, got %T instead", value)
+				}
+				sv.VPCEndpointDNSName = ptr.String(jtv)
 			}
 
 		default:
@@ -13088,6 +13210,42 @@ func awsAwsjson11_deserializeDocumentStorediSCSIVolumes(v *[]types.StorediSCSIVo
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSupportedGatewayCapacities(v *[]types.GatewayCapacity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GatewayCapacity
+	if *v == nil {
+		cv = []types.GatewayCapacity{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GatewayCapacity
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GatewayCapacity to be of type string, got %T instead", value)
+			}
+			col = types.GatewayCapacity(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -16188,6 +16346,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeGatewayInformationOutput(v **Desc
 				sv.GatewayARN = ptr.String(jtv)
 			}
 
+		case "GatewayCapacity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GatewayCapacity to be of type string, got %T instead", value)
+				}
+				sv.GatewayCapacity = types.GatewayCapacity(jtv)
+			}
+
 		case "GatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16272,6 +16439,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeGatewayInformationOutput(v **Desc
 					return fmt.Errorf("expected SoftwareUpdatesEndDate to be of type string, got %T instead", value)
 				}
 				sv.SoftwareUpdatesEndDate = ptr.String(jtv)
+			}
+
+		case "SupportedGatewayCapacities":
+			if err := awsAwsjson11_deserializeDocumentSupportedGatewayCapacities(&sv.SupportedGatewayCapacities, value); err != nil {
+				return err
 			}
 
 		case "Tags":

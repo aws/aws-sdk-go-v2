@@ -190,6 +190,26 @@ func (m *validateOpCopyClusterSnapshot) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAuthenticationProfile struct {
+}
+
+func (*validateOpCreateAuthenticationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAuthenticationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAuthenticationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAuthenticationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCluster struct {
 }
 
@@ -445,6 +465,26 @@ func (m *validateOpCreateUsageLimit) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateUsageLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAuthenticationProfile struct {
+}
+
+func (*validateOpDeleteAuthenticationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAuthenticationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAuthenticationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAuthenticationProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1090,26 @@ func (m *validateOpModifyAquaConfiguration) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyAuthenticationProfile struct {
+}
+
+func (*validateOpModifyAuthenticationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyAuthenticationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyAuthenticationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyAuthenticationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyClusterDbRevision struct {
 }
 
@@ -1606,6 +1666,10 @@ func addOpCopyClusterSnapshotValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCopyClusterSnapshot{}, middleware.After)
 }
 
+func addOpCreateAuthenticationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAuthenticationProfile{}, middleware.After)
+}
+
 func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
@@ -1656,6 +1720,10 @@ func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateUsageLimitValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUsageLimit{}, middleware.After)
+}
+
+func addOpDeleteAuthenticationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAuthenticationProfile{}, middleware.After)
 }
 
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1776,6 +1844,10 @@ func addOpGetReservedNodeExchangeOfferingsValidationMiddleware(stack *middleware
 
 func addOpModifyAquaConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyAquaConfiguration{}, middleware.After)
+}
+
+func addOpModifyAuthenticationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyAuthenticationProfile{}, middleware.After)
 }
 
 func addOpModifyClusterDbRevisionValidationMiddleware(stack *middleware.Stack) error {
@@ -2210,6 +2282,24 @@ func validateOpCopyClusterSnapshotInput(v *CopyClusterSnapshotInput) error {
 	}
 }
 
+func validateOpCreateAuthenticationProfileInput(v *CreateAuthenticationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAuthenticationProfileInput"}
+	if v.AuthenticationProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProfileName"))
+	}
+	if v.AuthenticationProfileContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProfileContent"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v == nil {
 		return nil
@@ -2467,6 +2557,21 @@ func validateOpCreateUsageLimitInput(v *CreateUsageLimitInput) error {
 	}
 	if len(v.LimitType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LimitType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAuthenticationProfileInput(v *DeleteAuthenticationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAuthenticationProfileInput"}
+	if v.AuthenticationProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProfileName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2945,6 +3050,24 @@ func validateOpModifyAquaConfigurationInput(v *ModifyAquaConfigurationInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyAquaConfigurationInput"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyAuthenticationProfileInput(v *ModifyAuthenticationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyAuthenticationProfileInput"}
+	if v.AuthenticationProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProfileName"))
+	}
+	if v.AuthenticationProfileContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProfileContent"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

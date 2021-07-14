@@ -40,13 +40,13 @@ type CreateClusterSnapshotInput struct {
 	ClusterIdentifier *string
 
 	// A unique identifier for the snapshot that you are requesting. This identifier
-	// must be unique for all snapshots within the AWS account. Constraints:
+	// must be unique for all snapshots within the account. Constraints:
 	//
-	// * Cannot
-	// be null, empty, or blank
+	// * Cannot be
+	// null, empty, or blank
 	//
-	// * Must contain from 1 to 255 alphanumeric characters
-	// or hyphens
+	// * Must contain from 1 to 255 alphanumeric characters or
+	// hyphens
 	//
 	// * First character must be a letter
 	//

@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this API action to view information about a specific execution of a specific
-// association.
+// Views information about a specific execution of a specific association.
 func (c *Client) DescribeAssociationExecutionTargets(ctx context.Context, params *DescribeAssociationExecutionTargetsInput, optFns ...func(*Options)) (*DescribeAssociationExecutionTargetsOutput, error) {
 	if params == nil {
 		params = &DescribeAssociationExecutionTargetsInput{}

@@ -14,20 +14,20 @@ import (
 
 // Creates an Amazon EKS control plane. The Amazon EKS control plane consists of
 // control plane instances that run the Kubernetes software, such as etcd and the
-// API server. The control plane runs in an account managed by AWS, and the
-// Kubernetes API is exposed via the Amazon EKS API server endpoint. Each Amazon
-// EKS cluster control plane is single-tenant and unique and runs on its own set of
-// Amazon EC2 instances. The cluster control plane is provisioned across multiple
-// Availability Zones and fronted by an Elastic Load Balancing Network Load
-// Balancer. Amazon EKS also provisions elastic network interfaces in your VPC
+// API server. The control plane runs in an account managed by Amazon Web Services,
+// and the Kubernetes API is exposed via the Amazon EKS API server endpoint. Each
+// Amazon EKS cluster control plane is single-tenant and unique and runs on its own
+// set of Amazon EC2 instances. The cluster control plane is provisioned across
+// multiple Availability Zones and fronted by an Elastic Load Balancing Network
+// Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC
 // subnets to provide connectivity from the control plane instances to the nodes
 // (for example, to support kubectl exec, logs, and proxy data flows). Amazon EKS
-// nodes run in your AWS account and connect to your cluster's control plane via
-// the Kubernetes API server endpoint and a certificate file that is created for
-// your cluster. Cluster creation typically takes several minutes. After you create
-// an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate
-// with the API server and launch nodes into your cluster. For more information,
-// see Managing Cluster Authentication
+// nodes run in your Amazon Web Services account and connect to your cluster's
+// control plane via the Kubernetes API server endpoint and a certificate file that
+// is created for your cluster. Cluster creation typically takes several minutes.
+// After you create an Amazon EKS cluster, you must configure your Kubernetes
+// tooling to communicate with the API server and launch nodes into your cluster.
+// For more information, see Managing Cluster Authentication
 // (https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html) and
 // Launching Amazon EKS nodes
 // (https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html) in the
@@ -68,8 +68,8 @@ type CreateClusterInput struct {
 	ResourcesVpcConfig *types.VpcConfigRequest
 
 	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for the
-	// Kubernetes control plane to make calls to AWS API operations on your behalf. For
-	// more information, see Amazon EKS Service IAM Role
+	// Kubernetes control plane to make calls to Amazon Web Services API operations on
+	// your behalf. For more information, see Amazon EKS Service IAM Role
 	// (https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html) in the
 	// Amazon EKS User Guide .
 	//
@@ -88,11 +88,11 @@ type CreateClusterInput struct {
 
 	// Enable or disable exporting the Kubernetes control plane logs for your cluster
 	// to CloudWatch Logs. By default, cluster control plane logs aren't exported to
-	// CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs
+	// CloudWatch Logs. For more information, see Amazon EKS Cluster control plane logs
 	// (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) in
 	// the Amazon EKS User Guide . CloudWatch Logs ingestion, archive storage, and data
 	// scanning rates apply to exported control plane logs. For more information, see
-	// Amazon CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/).
+	// CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/).
 	Logging *types.Logging
 
 	// The metadata to apply to the cluster to assist with categorization and

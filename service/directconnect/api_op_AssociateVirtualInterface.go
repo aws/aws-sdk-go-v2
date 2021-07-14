@@ -12,16 +12,16 @@ import (
 )
 
 // Associates a virtual interface with a specified link aggregation group (LAG) or
-// connection. Connectivity to AWS is temporarily interrupted as the virtual
-// interface is being migrated. If the target connection or LAG has an associated
-// virtual interface with a conflicting VLAN number or a conflicting IP address,
-// the operation fails. Virtual interfaces associated with a hosted connection
-// cannot be associated with a LAG; hosted connections must be migrated along with
-// their virtual interfaces using AssociateHostedConnection. To reassociate a
-// virtual interface to a new connection or LAG, the requester must own either the
-// virtual interface itself or the connection to which the virtual interface is
-// currently associated. Additionally, the requester must own the connection or LAG
-// for the association.
+// connection. Connectivity to Amazon Web Services is temporarily interrupted as
+// the virtual interface is being migrated. If the target connection or LAG has an
+// associated virtual interface with a conflicting VLAN number or a conflicting IP
+// address, the operation fails. Virtual interfaces associated with a hosted
+// connection cannot be associated with a LAG; hosted connections must be migrated
+// along with their virtual interfaces using AssociateHostedConnection. To
+// reassociate a virtual interface to a new connection or LAG, the requester must
+// own either the virtual interface itself or the connection to which the virtual
+// interface is currently associated. Additionally, the requester must own the
+// connection or LAG for the association.
 func (c *Client) AssociateVirtualInterface(ctx context.Context, params *AssociateVirtualInterfaceInput, optFns ...func(*Options)) (*AssociateVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &AssociateVirtualInterfaceInput{}
@@ -73,6 +73,10 @@ type AssociateVirtualInterfaceOutput struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDeviceV2 *string
 
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
+
 	// The BGP peers configured on this virtual interface.
 	BgpPeers []types.BGPPeer
 
@@ -98,14 +102,14 @@ type AssociateVirtualInterfaceOutput struct {
 	// 9001. The default value is 1500.
 	Mtu *int32
 
-	// The ID of the AWS account that owns the virtual interface.
+	// The ID of the account that owns the virtual interface.
 	OwnerAccount *string
 
-	// The AWS Region where the virtual interface is located.
+	// The Region where the virtual interface is located.
 	Region *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
+	// The routes to be advertised to the Amazon Web Services network in this Region.
+	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []types.RouteFilterPrefix
 
 	// The tags associated with the virtual interface.

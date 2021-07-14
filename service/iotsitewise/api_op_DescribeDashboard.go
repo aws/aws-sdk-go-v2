@@ -54,7 +54,7 @@ type DescribeDashboardOutput struct {
 	// The dashboard's definition JSON literal. For detailed information, see Creating
 	// dashboards (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	DashboardDefinition *string

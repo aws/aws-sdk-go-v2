@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns high-level aggregated patch compliance state for a patch group.
+// Returns high-level aggregated patch compliance state information for a patch
+// group.
 func (c *Client) DescribePatchGroupState(ctx context.Context, params *DescribePatchGroupStateInput, optFns ...func(*Options)) (*DescribePatchGroupStateOutput, error) {
 	if params == nil {
 		params = &DescribePatchGroupStateInput{}
@@ -39,9 +40,9 @@ type DescribePatchGroupStateOutput struct {
 	// The number of instances in the patch group.
 	Instances int32
 
-	// The number of instances where patches that are specified as "Critical" for
-	// compliance reporting in the patch baseline are not installed. These patches
-	// might be missing, have failed installation, were rejected, or were installed but
+	// The number of instances where patches that are specified as Critical for
+	// compliance reporting in the patch baseline aren't installed. These patches might
+	// be missing, have failed installation, were rejected, or were installed but
 	// awaiting a required instance reboot. The status of these instances is
 	// NON_COMPLIANT.
 	InstancesWithCriticalNonCompliantPatches int32
@@ -57,7 +58,7 @@ type DescribePatchGroupStateOutput struct {
 	// The number of instances with installed patches.
 	InstancesWithInstalledPatches int32
 
-	// The number of instances with patches installed by Patch Manager that have not
+	// The number of instances with patches installed by Patch Manager that haven't
 	// been rebooted after the patch installation. The status of these instances is
 	// NON_COMPLIANT.
 	InstancesWithInstalledPendingRebootPatches int32
@@ -76,18 +77,19 @@ type DescribePatchGroupStateOutput struct {
 	InstancesWithNotApplicablePatches int32
 
 	// The number of instances with patches installed that are specified as other than
-	// "Critical" or "Security" but are not compliant with the patch baseline. The
-	// status of these instances is NON_COMPLIANT.
+	// Critical or Security but aren't compliant with the patch baseline. The status of
+	// these instances is NON_COMPLIANT.
 	InstancesWithOtherNonCompliantPatches int32
 
-	// The number of instances where patches that are specified as "Security" in a
-	// patch advisory are not installed. These patches might be missing, have failed
+	// The number of instances where patches that are specified as Security in a patch
+	// advisory aren't installed. These patches might be missing, have failed
 	// installation, were rejected, or were installed but awaiting a required instance
 	// reboot. The status of these instances is NON_COMPLIANT.
 	InstancesWithSecurityNonCompliantPatches int32
 
 	// The number of instances with NotApplicable patches beyond the supported limit,
-	// which are not reported by name to Systems Manager Inventory.
+	// which aren't reported by name to Inventory. Inventory is a capability of Amazon
+	// Web Services Systems Manager.
 	InstancesWithUnreportedNotApplicablePatches int32
 
 	// Metadata pertaining to the operation's result.

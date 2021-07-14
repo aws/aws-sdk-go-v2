@@ -32,10 +32,9 @@ func (c *Client) UntagInstanceProfile(ctx context.Context, params *UntagInstance
 type UntagInstanceProfileInput struct {
 
 	// The name of the IAM instance profile from which you want to remove tags. This
-	// parameter accepts (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that consist of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// =,.@-
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
+	// string of characters consisting of upper and lowercase alphanumeric characters
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	InstanceProfileName *string

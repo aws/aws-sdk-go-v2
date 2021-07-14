@@ -59,9 +59,9 @@ func (e *EndpointDisabledException) ErrorMessage() string {
 func (e *EndpointDisabledException) ErrorCode() string             { return "EndpointDisabled" }
 func (e *EndpointDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the number of filter polices in your AWS account exceeds the
-// limit. To add more filter polices, submit an SNS Limit Increase case in the AWS
-// Support Center.
+// Indicates that the number of filter polices in your account exceeds the limit.
+// To add more filter polices, submit an SNS Limit Increase case in the Amazon Web
+// Services Support Center.
 type FilterPolicyLimitExceededException struct {
 	Message *string
 }
@@ -191,7 +191,7 @@ func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // for this request. For more information, see How Key State Affects Use of a
 // Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// Key Management Service Developer Guide.
 type KMSInvalidStateException struct {
 	Message *string
 }
@@ -226,7 +226,7 @@ func (e *KMSNotFoundException) ErrorMessage() string {
 func (e *KMSNotFoundException) ErrorCode() string             { return "KMSNotFound" }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The AWS access key ID needs a subscription for the service.
+// The Amazon Web Services access key ID needs a subscription for the service.
 type KMSOptInRequired struct {
 	Message *string
 }
@@ -246,7 +246,7 @@ func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // The request was denied due to request throttling. For more information about
 // throttling, see Limits
 // (https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
-// in the AWS Key Management Service Developer Guide.
+// in the Key Management Service Developer Guide.
 type KMSThrottlingException struct {
 	Message *string
 }
@@ -281,8 +281,7 @@ func (e *NotFoundException) ErrorCode() string             { return "NotFound" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the specified phone number opted out of receiving SMS messages
-// from your AWS account. You can't send SMS messages to phone numbers that opt
-// out.
+// from your account. You can't send SMS messages to phone numbers that opt out.
 type OptedOutException struct {
 	Message *string
 }

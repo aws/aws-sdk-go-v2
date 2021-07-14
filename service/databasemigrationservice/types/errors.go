@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// AWS DMS was denied access to the endpoint. Check that the role is correctly
+// DMS was denied access to the endpoint. Check that the role is correctly
 // configured.
 type AccessDeniedFault struct {
 	Message *string
@@ -131,7 +131,7 @@ func (e *KMSDisabledFault) ErrorMessage() string {
 func (e *KMSDisabledFault) ErrorCode() string             { return "KMSDisabledFault" }
 func (e *KMSDisabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An AWS Key Management Service (AWS KMS) error is preventing access to AWS KMS.
+// An Key Management Service (KMS) error is preventing access to KMS.
 type KMSFault struct {
 	Message *string
 }
@@ -148,7 +148,7 @@ func (e *KMSFault) ErrorMessage() string {
 func (e *KMSFault) ErrorCode() string             { return "KMSFault" }
 func (e *KMSFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The state of the specified AWS KMS resource isn't valid for this request.
+// The state of the specified KMS resource isn't valid for this request.
 type KMSInvalidStateFault struct {
 	Message *string
 }
@@ -165,7 +165,7 @@ func (e *KMSInvalidStateFault) ErrorMessage() string {
 func (e *KMSInvalidStateFault) ErrorCode() string             { return "KMSInvalidStateFault" }
 func (e *KMSInvalidStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS DMS cannot access the AWS KMS key.
+// DMS cannot access the KMS key.
 type KMSKeyNotAccessibleFault struct {
 	Message *string
 }
@@ -182,7 +182,7 @@ func (e *KMSKeyNotAccessibleFault) ErrorMessage() string {
 func (e *KMSKeyNotAccessibleFault) ErrorCode() string             { return "KMSKeyNotAccessibleFault" }
 func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified AWS KMS entity or resource can't be found.
+// The specified KMS entity or resource can't be found.
 type KMSNotFoundFault struct {
 	Message *string
 }
@@ -199,7 +199,7 @@ func (e *KMSNotFoundFault) ErrorMessage() string {
 func (e *KMSNotFoundFault) ErrorCode() string             { return "KMSNotFoundFault" }
 func (e *KMSNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This request triggered AWS KMS request throttling.
+// This request triggered KMS request throttling.
 type KMSThrottlingFault struct {
 	Message *string
 }

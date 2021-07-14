@@ -6,11 +6,11 @@ import (
 	"time"
 )
 
-// An object that contains details about when a principal in the reported AWS
-// Organizations entity last attempted to access an AWS service. A principal can be
-// an IAM user, an IAM role, or the AWS account root user within the reported
-// Organizations entity. This data type is a response element in the
-// GetOrganizationsAccessReport operation.
+// An object that contains details about when a principal in the reported
+// Organizations entity last attempted to access an Amazon Web Services service. A
+// principal can be an IAM user, an IAM role, or the Amazon Web Services account
+// root user within the reported Organizations entity. This data type is a response
+// element in the GetOrganizationsAccessReport operation.
 type AccessDetail struct {
 
 	// The name of the service in which access was attempted.
@@ -19,32 +19,32 @@ type AccessDetail struct {
 	ServiceName *string
 
 	// The namespace of the service in which access was attempted. To learn the service
-	// namespace of a service, see Actions, resources, and condition keys for AWS
-	// services
+	// namespace of a service, see Actions, resources, and condition keys for Amazon
+	// Web Services services
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the Service Authorization Reference. Choose the name of the service to view
 	// details for that service. In the first paragraph, find the service prefix. For
 	// example, (service prefix: a4b). For more information about service namespaces,
-	// see AWS service namespaces
+	// see Amazon Web Services service namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ServiceNamespace *string
 
 	// The path of the Organizations entity (root, organizational unit, or account)
-	// from which an authenticated principal last attempted to access the service. AWS
-	// does not report unauthenticated requests. This field is null if no principals
-	// (IAM users, IAM roles, or root users) in the reported Organizations entity
-	// attempted to access the service within the reporting period
+	// from which an authenticated principal last attempted to access the service.
+	// Amazon Web Services does not report unauthenticated requests. This field is null
+	// if no principals (IAM users, IAM roles, or root users) in the reported
+	// Organizations entity attempted to access the service within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	EntityPath *string
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when an authenticated principal most recently
-	// attempted to access the service. AWS does not report unauthenticated requests.
-	// This field is null if no principals in the reported Organizations entity
-	// attempted to access the service within the reporting period
+	// attempted to access the service. Amazon Web Services does not report
+	// unauthenticated requests. This field is null if no principals in the reported
+	// Organizations entity attempted to access the service within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticatedTime *time.Time
 
@@ -59,10 +59,10 @@ type AccessDetail struct {
 	TotalAuthenticatedEntities *int32
 }
 
-// Contains information about an AWS access key. This data type is used as a
-// response element in the CreateAccessKey and ListAccessKeys operations. The
-// SecretAccessKey value is returned only in response to CreateAccessKey. You can
-// get a secret access key only when you first create an access key; you cannot
+// Contains information about an Amazon Web Services access key. This data type is
+// used as a response element in the CreateAccessKey and ListAccessKeys operations.
+// The SecretAccessKey value is returned only in response to CreateAccessKey. You
+// can get a secret access key only when you first create an access key; you cannot
 // recover the secret access key later. If you lose a secret access key, you must
 // create a new access key.
 type AccessKey struct {
@@ -92,9 +92,9 @@ type AccessKey struct {
 	CreateDate *time.Time
 }
 
-// Contains information about the last time an AWS access key was used since IAM
-// began tracking this information on April 22, 2015. This data type is used as a
-// response element in the GetAccessKeyLastUsed operation.
+// Contains information about the last time an Amazon Web Services access key was
+// used since IAM began tracking this information on April 22, 2015. This data type
+// is used as a response element in the GetAccessKeyLastUsed operation.
 type AccessKeyLastUsed struct {
 
 	// The date and time, in ISO 8601 date-time format
@@ -112,7 +112,7 @@ type AccessKeyLastUsed struct {
 	// This member is required.
 	LastUsedDate *time.Time
 
-	// The AWS Region where this access key was most recently used. The value for this
+	// The Region where this access key was most recently used. The value for this
 	// field is "N/A" in the following situations:
 	//
 	// * The user does not have an access
@@ -124,31 +124,32 @@ type AccessKeyLastUsed struct {
 	// * There is no sign-in data associated with the user.
 	//
 	// For more
-	// information about AWS Regions, see Regions and endpoints
+	// information about Regions, see Regions and endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html) in the Amazon Web
 	// Services General Reference.
 	//
 	// This member is required.
 	Region *string
 
-	// The name of the AWS service with which this access key was most recently used.
-	// The value of this field is "N/A" in the following situations:
+	// The name of the Amazon Web Services service with which this access key was most
+	// recently used. The value of this field is "N/A" in the following situations:
 	//
-	// * The user does
-	// not have an access key.
+	// *
+	// The user does not have an access key.
 	//
-	// * An access key exists but has not been used since IAM
-	// started tracking this information.
+	// * An access key exists but has not been
+	// used since IAM started tracking this information.
 	//
-	// * There is no sign-in data associated with
-	// the user.
+	// * There is no sign-in data
+	// associated with the user.
 	//
 	// This member is required.
 	ServiceName *string
 }
 
-// Contains information about an AWS access key, without its secret key. This data
-// type is used as a response element in the ListAccessKeys operation.
+// Contains information about an Amazon Web Services access key, without its secret
+// key. This data type is used as a response element in the ListAccessKeys
+// operation.
 type AccessKeyMetadata struct {
 
 	// The ID for this access key.
@@ -192,10 +193,11 @@ type AttachedPermissionsBoundary struct {
 // in the IAM User Guide.
 type AttachedPolicy struct {
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	PolicyArn *string
 
 	// The friendly name of the attached policy.
@@ -240,9 +242,9 @@ type DeletionTaskFailureReasonType struct {
 }
 
 // An object that contains details about when the IAM entities (users or roles)
-// were last used in an attempt to access the specified AWS service. This data type
-// is a response element in the GetServiceLastAccessedDetailsWithEntities
-// operation.
+// were last used in an attempt to access the specified Amazon Web Services
+// service. This data type is a response element in the
+// GetServiceLastAccessedDetailsWithEntities operation.
 type EntityDetails struct {
 
 	// The EntityInfo object that contains details about the entity (user or role).
@@ -252,8 +254,9 @@ type EntityDetails struct {
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the authenticated entity last attempted
-	// to access AWS. AWS does not report unauthenticated requests. This field is null
-	// if no IAM entities attempted to access the service within the reporting period
+	// to access Amazon Web Services. Amazon Web Services does not report
+	// unauthenticated requests. This field is null if no IAM entities attempted to
+	// access the service within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticated *time.Time
 }
@@ -262,10 +265,11 @@ type EntityDetails struct {
 // element of the EntityDetails object.
 type EntityInfo struct {
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	Arn *string
@@ -330,14 +334,14 @@ type EvaluationResult struct {
 	// includes a resource ARN, then the parameter is present but the response is
 	// empty. If the simulation evaluates policies within the same account and
 	// specifies all resources (*), then the parameter is not returned. When you make a
-	// cross-account request, AWS evaluates the request in the trusting account and the
-	// trusted account. The request is allowed only if both evaluations return true.
-	// For more information about how policies are evaluated, see Evaluating policies
-	// within a single account
+	// cross-account request, Amazon Web Services evaluates the request in the trusting
+	// account and the trusted account. The request is allowed only if both evaluations
+	// return true. For more information about how policies are evaluated, see
+	// Evaluating policies within a single account
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics).
-	// If an AWS Organizations SCP included in the evaluation denies access, the
-	// simulation ends. In this case, policy evaluation does not proceed any further
-	// and this parameter is not returned.
+	// If an Organizations SCP included in the evaluation denies access, the simulation
+	// ends. In this case, policy evaluation does not proceed any further and this
+	// parameter is not returned.
 	EvalDecisionDetails map[string]PolicyEvaluationDecisionType
 
 	// The ARN of the resource that the indicated API operation was tested on.
@@ -424,10 +428,11 @@ type Group struct {
 // GetAccountAuthorizationDetails operation.
 type GroupDetail struct {
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	Arn *string
 
 	// A list of the managed policies attached to the group.
@@ -523,14 +528,15 @@ type ListPoliciesGrantingServiceAccessEntry struct {
 	Policies []PolicyGrantingServiceAccess
 
 	// The namespace of the service that was accessed. To learn the service namespace
-	// of a service, see Actions, resources, and condition keys for AWS services
+	// of a service, see Actions, resources, and condition keys for Amazon Web Services
+	// services
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the Service Authorization Reference. Choose the name of the service to view
 	// details for that service. In the first paragraph, find the service prefix. For
 	// example, (service prefix: a4b). For more information about service namespaces,
-	// see AWS service namespaces
+	// see Amazon Web Services service namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the Amazon Web Services General Reference.
 	ServiceNamespace *string
 }
 
@@ -544,7 +550,7 @@ type LoginProfile struct {
 	// This member is required.
 	CreateDate *time.Time
 
-	// The name of the user, which can be used for signing in to the AWS Management
+	// The name of the user, which can be used for signing in to the Management
 	// Console.
 	//
 	// This member is required.
@@ -563,10 +569,11 @@ type LoginProfile struct {
 // in the IAM User Guide.
 type ManagedPolicyDetail struct {
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	Arn *string
 
 	// The number of principal entities (users, groups, and roles) that the policy is
@@ -646,10 +653,11 @@ type MFADevice struct {
 // Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.
 type OpenIDConnectProviderListEntry struct {
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	Arn *string
 }
 
@@ -728,10 +736,11 @@ type PermissionsBoundaryDecisionDetail struct {
 // in the IAM User Guide.
 type Policy struct {
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	Arn *string
 
 	// The number of entities (users, groups, and roles) that the policy is attached
@@ -833,10 +842,11 @@ type PolicyGrantingServiceAccess struct {
 	// in the IAM User Guide.
 	EntityType PolicyOwnerEntityType
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	PolicyArn *string
 }
 
@@ -1025,7 +1035,7 @@ type Role struct {
 	Description *string
 
 	// The maximum session duration (in seconds) for the specified role. Anyone who
-	// uses the AWS CLI, or API to assume the role can specify the duration using the
+	// uses the CLI, or API to assume the role can specify the duration using the
 	// optional DurationSeconds API parameter or duration-seconds CLI parameter.
 	MaxSessionDuration *int32
 
@@ -1058,10 +1068,11 @@ type Role struct {
 // GetAccountAuthorizationDetails operation.
 type RoleDetail struct {
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	Arn *string
 
 	// The trust policy that grants permission to assume the role.
@@ -1139,7 +1150,7 @@ type RoleLastUsed struct {
 	// in the IAM User Guide.
 	LastUsedDate *time.Time
 
-	// The name of the AWS Region in which the role was last used.
+	// The name of the Region in which the role was last used.
 	Region *string
 }
 
@@ -1245,37 +1256,38 @@ type ServiceLastAccessed struct {
 	ServiceName *string
 
 	// The namespace of the service in which access was attempted. To learn the service
-	// namespace of a service, see Actions, resources, and condition keys for AWS
-	// services
+	// namespace of a service, see Actions, resources, and condition keys for Amazon
+	// Web Services services
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the Service Authorization Reference. Choose the name of the service to view
 	// details for that service. In the first paragraph, find the service prefix. For
 	// example, (service prefix: a4b). For more information about service namespaces,
-	// see AWS Service Namespaces
+	// see Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ServiceNamespace *string
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when an authenticated entity most recently
-	// attempted to access the service. AWS does not report unauthenticated requests.
-	// This field is null if no IAM entities attempted to access the service within the
-	// reporting period
+	// attempted to access the service. Amazon Web Services does not report
+	// unauthenticated requests. This field is null if no IAM entities attempted to
+	// access the service within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticated *time.Time
 
 	// The ARN of the authenticated entity (user or role) that last attempted to access
-	// the service. AWS does not report unauthenticated requests. This field is null if
-	// no IAM entities attempted to access the service within the reporting period
+	// the service. Amazon Web Services does not report unauthenticated requests. This
+	// field is null if no IAM entities attempted to access the service within the
+	// reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticatedEntity *string
 
 	// The Region from which the authenticated entity (user or role) last attempted to
-	// access the service. AWS does not report unauthenticated requests. This field is
-	// null if no IAM entities attempted to access the service within the reporting
-	// period
+	// access the service. Amazon Web Services does not report unauthenticated
+	// requests. This field is null if no IAM entities attempted to access the service
+	// within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticatedRegion *string
 
@@ -1323,8 +1335,8 @@ type ServiceSpecificCredential struct {
 
 	// The generated user name for the service-specific credential. This value is
 	// generated by combining the IAM user's name combined with the ID number of the
-	// AWS account, as in jane-at-123456789012, for example. This value cannot be
-	// configured by the user.
+	// Amazon Web Services account, as in jane-at-123456789012, for example. This value
+	// cannot be configured by the user.
 	//
 	// This member is required.
 	ServiceUserName *string
@@ -1428,8 +1440,8 @@ type SSHPublicKey struct {
 	SSHPublicKeyId *string
 
 	// The status of the SSH public key. Active means that the key can be used for
-	// authentication with an AWS CodeCommit repository. Inactive means that the key
-	// cannot be used.
+	// authentication with an CodeCommit repository. Inactive means that the key cannot
+	// be used.
 	//
 	// This member is required.
 	Status StatusType
@@ -1455,8 +1467,8 @@ type SSHPublicKeyMetadata struct {
 	SSHPublicKeyId *string
 
 	// The status of the SSH public key. Active means that the key can be used for
-	// authentication with an AWS CodeCommit repository. Inactive means that the key
-	// cannot be used.
+	// authentication with an CodeCommit repository. Inactive means that the key cannot
+	// be used.
 	//
 	// This member is required.
 	Status StatusType
@@ -1507,10 +1519,10 @@ type Tag struct {
 	// Department could have values such as Human Resources, Accounting, and Support.
 	// Tags with a key name of Cost Center might have values that consist of the number
 	// associated with the different cost centers in your company. Typically, many
-	// resources have tags with the same key name but with different values. AWS always
-	// interprets the tag Value as a single string. If you need to store an array, you
-	// can store comma-separated values in the string. However, you must interpret the
-	// value in your code.
+	// resources have tags with the same key name but with different values. Amazon Web
+	// Services always interprets the tag Value as a single string. If you need to
+	// store an array, you can store comma-separated values in the string. However, you
+	// must interpret the value in your code.
 	//
 	// This member is required.
 	Value *string
@@ -1525,24 +1537,25 @@ type TrackedActionLastAccessed struct {
 	// are actions that report activity to IAM.
 	ActionName *string
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	LastAccessedEntity *string
 
 	// The Region from which the authenticated entity (user or role) last attempted to
-	// access the tracked action. AWS does not report unauthenticated requests. This
-	// field is null if no IAM entities attempted to access the service within the
-	// reporting period
+	// access the tracked action. Amazon Web Services does not report unauthenticated
+	// requests. This field is null if no IAM entities attempted to access the service
+	// within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAccessedRegion *string
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when an authenticated entity most recently
-	// attempted to access the tracked service. AWS does not report unauthenticated
-	// requests. This field is null if no IAM entities attempted to access the service
-	// within the reporting period
+	// attempted to access the tracked service. Amazon Web Services does not report
+	// unauthenticated requests. This field is null if no IAM entities attempted to
+	// access the service within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAccessedTime *time.Time
 }
@@ -1595,8 +1608,8 @@ type User struct {
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the user's password was last used to sign
-	// in to an AWS website. For a list of AWS websites that capture a user's last
-	// sign-in time, see the Credential reports
+	// in to an Amazon Web Services website. For a list of Amazon Web Services websites
+	// that capture a user's last sign-in time, see the Credential reports
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) topic
 	// in the IAM User Guide. If a password is used more than once in a five-minute
 	// span, only the first use is returned in this field. If the field is null (no
@@ -1633,10 +1646,11 @@ type User struct {
 // in the GetAccountAuthorizationDetails operation.
 type UserDetail struct {
 
-	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
-	// For more information about ARNs, go to Amazon Resource Names (ARNs)
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for Amazon Web
+	// Services resources. For more information about ARNs, go to Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	Arn *string
 
 	// A list of the managed policies attached to the user.

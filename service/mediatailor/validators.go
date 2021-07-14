@@ -350,6 +350,26 @@ func (m *validateOpGetPlaybackConfiguration) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAlerts struct {
+}
+
+func (*validateOpListAlerts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAlerts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAlertsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAlertsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -616,6 +636,10 @@ func addOpGetChannelScheduleValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetPlaybackConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPlaybackConfiguration{}, middleware.After)
+}
+
+func addOpListAlertsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAlerts{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1085,6 +1109,21 @@ func validateOpGetPlaybackConfigurationInput(v *GetPlaybackConfigurationInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "GetPlaybackConfigurationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAlertsInput(v *ListAlertsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAlertsInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

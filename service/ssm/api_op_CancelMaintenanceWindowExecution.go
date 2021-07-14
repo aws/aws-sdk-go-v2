@@ -11,8 +11,8 @@ import (
 )
 
 // Stops a maintenance window execution that is already in progress and cancels any
-// tasks in the window that have not already starting running. (Tasks already in
-// progress will continue to completion.)
+// tasks in the window that haven't already starting running. Tasks already in
+// progress will continue to completion.
 func (c *Client) CancelMaintenanceWindowExecution(ctx context.Context, params *CancelMaintenanceWindowExecutionInput, optFns ...func(*Options)) (*CancelMaintenanceWindowExecutionOutput, error) {
 	if params == nil {
 		params = &CancelMaintenanceWindowExecutionInput{}

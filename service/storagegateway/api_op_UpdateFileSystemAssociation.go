@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a file system association. This operation is only supported in the
-// Amazon FSx file gateway type.
+// Updates a file system association. This operation is only supported in the FSx
+// File Gateways.
 func (c *Client) UpdateFileSystemAssociation(ctx context.Context, params *UpdateFileSystemAssociationInput, optFns ...func(*Options)) (*UpdateFileSystemAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateFileSystemAssociationInput{}
@@ -39,7 +39,7 @@ type UpdateFileSystemAssociationInput struct {
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
 
-	// The refresh cache information for the file share.
+	// The refresh cache information for the file share or FSx file systems.
 	CacheAttributes *types.CacheAttributes
 
 	// The password of the user credential.

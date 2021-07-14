@@ -30,22 +30,14 @@ func (c *Client) DescribePatchGroups(ctx context.Context, params *DescribePatchG
 
 type DescribePatchGroupsInput struct {
 
-	// One or more filters. Use a filter to return a more specific list of results. For
-	// DescribePatchGroups,valid filter keys include the following:
+	// Each element in the array is a structure containing a key-value pair. Supported
+	// keys for DescribePatchGroups include the following:
 	//
-	// * NAME_PREFIX: The
-	// name of the patch group. Wildcards (*) are accepted.
+	// * NAME_PREFIX Sample
+	// values: AWS- | My-.
 	//
-	// * OPERATING_SYSTEM: The
-	// supported operating system type to return results for. For valid operating
-	// system values, see GetDefaultPatchBaselineRequest$OperatingSystem in
-	// CreatePatchBaseline. Examples:
-	//
-	// * --filters
-	// Key=NAME_PREFIX,Values=MyPatchGroup*
-	//
-	// * --filters
-	// Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2
+	// * OPERATING_SYSTEM Sample values: AMAZON_LINUX | SUSE |
+	// WINDOWS
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patch groups to return (per page).
@@ -58,8 +50,12 @@ type DescribePatchGroupsInput struct {
 
 type DescribePatchGroupsOutput struct {
 
-	// Each entry in the array contains: PatchGroup: string (between 1 and 256
-	// characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A
+	// Each entry in the array contains:
+	//
+	// * PatchGroup: string (between 1 and 256
+	// characters. Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)
+	//
+	// * PatchBaselineIdentity: A
 	// PatchBaselineIdentity element.
 	Mappings []types.PatchGroupPatchBaselineMapping
 

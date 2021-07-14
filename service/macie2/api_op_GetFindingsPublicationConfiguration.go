@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the configuration settings for publishing findings to AWS Security
-// Hub.
+// Retrieves the configuration settings for publishing findings to Security Hub.
 func (c *Client) GetFindingsPublicationConfiguration(ctx context.Context, params *GetFindingsPublicationConfigurationInput, optFns ...func(*Options)) (*GetFindingsPublicationConfigurationOutput, error) {
 	if params == nil {
 		params = &GetFindingsPublicationConfigurationInput{}
@@ -33,7 +32,7 @@ type GetFindingsPublicationConfigurationInput struct {
 
 type GetFindingsPublicationConfigurationOutput struct {
 
-	// The configuration settings that determine which findings are published to AWS
+	// The configuration settings that determine which findings are published to
 	// Security Hub.
 	SecurityHubConfiguration *types.SecurityHubConfiguration
 

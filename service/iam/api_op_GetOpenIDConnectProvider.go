@@ -36,7 +36,7 @@ type GetOpenIDConnectProviderInput struct {
 	// the ListOpenIDConnectProviders operation. For more information about ARNs, see
 	// Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string
@@ -51,7 +51,7 @@ type GetOpenIDConnectProviderOutput struct {
 	ClientIDList []string
 
 	// The date and time when the IAM OIDC provider resource object was created in the
-	// AWS account.
+	// account.
 	CreateDate *time.Time
 
 	// A list of tags that are attached to the specified IAM OIDC provider. The

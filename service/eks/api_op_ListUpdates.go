@@ -12,7 +12,7 @@ import (
 )
 
 // Lists the updates associated with an Amazon EKS cluster or managed node group in
-// your AWS account, in the specified Region.
+// your Amazon Web Services account, in the specified Region.
 func (c *Client) ListUpdates(ctx context.Context, params *ListUpdatesInput, optFns ...func(*Options)) (*ListUpdatesOutput, error) {
 	if params == nil {
 		params = &ListUpdatesInput{}

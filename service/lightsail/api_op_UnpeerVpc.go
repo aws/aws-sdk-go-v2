@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attempts to unpeer the Lightsail VPC from the user's default VPC.
+// Unpeers the Lightsail VPC from the user's default VPC.
 func (c *Client) UnpeerVpc(ctx context.Context, params *UnpeerVpcInput, optFns ...func(*Options)) (*UnpeerVpcOutput, error) {
 	if params == nil {
 		params = &UnpeerVpcInput{}

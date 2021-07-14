@@ -1889,6 +1889,9 @@
                     "target": "com.amazonaws.ec2#DescribeSecurityGroupReferences"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeSecurityGroupRules"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeSecurityGroups"
                 },
                 {
@@ -2274,6 +2277,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyReservedInstances"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifySecurityGroupRules"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifySnapshotAttribute"
@@ -3377,7 +3383,7 @@
                 "target": "com.amazonaws.ec2#AssociateEnclaveCertificateIamRoleResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. \n\t\t\tThis enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html\">AWS Certificate \n\t\t\t\tManager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>\n\t\t\n\t\t       <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted \n\t\t\tprivate key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate \n\t\t\tis encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p>\n\t\t\n\t\t       <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> \n\t\t\ton the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must \n\t\t\tgrant it permission to call <code>kms:Decrypt</code> on the AWS KMS CMK returned by the command. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy\">\n\t\t\t\tGrant the role permission to access the certificate and encryption key</a> in the \n\t\t\t<i>AWS Nitro Enclaves User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Associates an Identity and Access Management (IAM) role with an Certificate Manager (ACM) certificate. \n\t\t\tThis enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html\">Certificate Manager for Nitro Enclaves</a> in the <i>Amazon Web Services Nitro Enclaves \n\t\t\t\t\tUser Guide</i>.</p>\n\t\t\n\t\t       <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted \n\t\t\tprivate key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate \n\t\t\tis encrypted with an Amazon Web Services managed key that has an attached attestation-based key policy.</p>\n\t\t\n\t\t       <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> \n\t\t\ton the Amazon S3 bucket returned by the command. To enable the IAM role to access the KMS key,\n\t\t\tyou must grant it permission to call <code>kms:Decrypt</code> on the KMS key returned by the command. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy\">\n\t\t\t\tGrant the role permission to access the certificate and encryption key</a> in the \n\t\t\t<i>Amazon Web Services Nitro Enclaves User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#AssociateEnclaveCertificateIamRoleRequest": {
@@ -3426,7 +3432,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "EncryptionKmsKeyId",
-                        "smithy.api#documentation": "<p>The ID of the AWS KMS CMK used to encrypt the private key of the certificate.</p>",
+                        "smithy.api#documentation": "<p>The ID of the KMS key used to encrypt the private key of the certificate.</p>",
                         "smithy.api#xmlName": "encryptionKmsKeyId"
                     }
                 }
@@ -4564,8 +4570,11 @@
             "input": {
                 "target": "com.amazonaws.ec2#AuthorizeSecurityGroupEgressRequest"
             },
+            "output": {
+                "target": "com.amazonaws.ec2#AuthorizeSecurityGroupEgressResult"
+            },
             "traits": {
-                "smithy.api#documentation": "<p>[VPC only] Adds the specified egress rules to a security group for use with a VPC.</p>\n         <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR \n      address ranges, or to the instances associated with the specified destination security groups.</p>\n         <p>You specify a protocol for each rule (for example, TCP). \n       For the TCP and UDP protocols, you must also specify the destination port or port range. \n       For the ICMP protocol, you must also specify the ICMP type and code. \n       You can use -1 for the type or code to mean all types or all codes.</p>\n         <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p>\n         <p>For more information about VPC security group limits, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC Limits</a>.</p>"
+                "smithy.api#documentation": "<p>[VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC.</p>\n         <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address \n      ranges, or to the instances that are associated with the specified destination security groups.</p>\n         <p>You specify a protocol for each rule (for example, TCP). \n       For the TCP and UDP protocols, you must also specify the destination port or port range. \n       For the ICMP protocol, you must also specify the ICMP type and code. \n       You can use -1 for the type or code to mean all types or all codes.</p>\n         <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p>\n         <p>For information about VPC security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC quotas</a>.</p>"
             }
         },
         "com.amazonaws.ec2#AuthorizeSecurityGroupEgressRequest": {
@@ -4594,6 +4603,13 @@
                         "aws.protocols#ec2QueryName": "IpPermissions",
                         "smithy.api#documentation": "<p>The sets of IP permissions. You can't specify a destination security group and a CIDR IP\n            address range in the same set of permissions.</p>",
                         "smithy.api#xmlName": "ipPermissions"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags applied to the security group rule.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
                     }
                 },
                 "CidrIp": {
@@ -4646,13 +4662,37 @@
                 }
             }
         },
+        "com.amazonaws.ec2#AuthorizeSecurityGroupEgressResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                },
+                "SecurityGroupRules": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SecurityGroupRuleSet",
+                        "smithy.api#documentation": "<p>Information about the outbound (egress) security group rules that were added.</p>",
+                        "smithy.api#xmlName": "securityGroupRuleSet"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#AuthorizeSecurityGroupIngress": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.ec2#AuthorizeSecurityGroupIngressRequest"
             },
+            "output": {
+                "target": "com.amazonaws.ec2#AuthorizeSecurityGroupIngressResult"
+            },
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified ingress rules to a security group.</p>\n         <p>An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR\n       address ranges, or from the instances associated with the specified destination security groups.</p>\n         <p>You specify a protocol for each rule (for example, TCP). \n       For TCP and UDP, you must also specify the destination port or port range. \n       For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. \n       You can use -1 to mean all types or all codes.</p>\n         <p>Rule changes are propagated to instances within the security group as quickly as possible. \n         However, a small delay might occur.</p>\n         <p>For more information about VPC security group limits, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC Limits</a>.</p>"
+                "smithy.api#documentation": "<p>Adds the specified inbound (ingress) rules to a security group.</p>\n         <p>An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR\n       address range, or from the instances that are associated with the specified destination security \n       groups.</p>\n         <p>You specify a protocol for each rule (for example, TCP). \n       For TCP and UDP, you must also specify the destination port or port range. \n       For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. \n       You can use -1 to mean all types or all codes.</p>\n         <p>Rule changes are propagated to instances within the security group as quickly as possible. \n         However, a small delay might occur.</p>\n         <p>For more information about VPC security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC quotas</a>.</p>"
             }
         },
         "com.amazonaws.ec2#AuthorizeSecurityGroupIngressRequest": {
@@ -4703,7 +4743,7 @@
                 "SourceSecurityGroupOwnerId": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>[nondefault VPC] The AWS account ID for the source security group, if the source security group is \n         in a different account. You can't specify this parameter in combination with the following parameters: \n         the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. \n         Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol \n         and port range, use a set of IP permissions instead.</p>"
+                        "smithy.api#documentation": "<p>[nondefault VPC] The Amazon Web Services account ID for the source security group, if the source security group is \n         in a different account. You can't specify this parameter in combination with the following parameters: \n         the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. \n         Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol \n         and port range, use a set of IP permissions instead.</p>"
                     }
                 },
                 "ToPort": {
@@ -4718,6 +4758,34 @@
                         "aws.protocols#ec2QueryName": "DryRun",
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[VPC Only] The tags applied to the security group rule.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#AuthorizeSecurityGroupIngressResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                },
+                "SecurityGroupRules": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SecurityGroupRuleSet",
+                        "smithy.api#documentation": "<p>Information about the inbound (ingress) security group rules that were added.</p>",
+                        "smithy.api#xmlName": "securityGroupRuleSet"
                     }
                 }
             }
@@ -20571,7 +20639,7 @@
                 "KeyNames": {
                     "target": "com.amazonaws.ec2#KeyNameStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key pair names.</p>\n         <p>Default: Describes all your key pairs.</p>",
+                        "smithy.api#documentation": "<p>The key pair names.</p>\n         <p>Default: Describes all of your key pairs.</p>",
                         "smithy.api#xmlName": "KeyName"
                     }
                 },
@@ -23229,6 +23297,91 @@
                 }
             }
         },
+        "com.amazonaws.ec2#DescribeSecurityGroupRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeSecurityGroupRulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeSecurityGroupRulesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more of your security group rules.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SecurityGroupRules",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeSecurityGroupRulesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeSecurityGroupRulesRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>group-id</code> - The ID of the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>security-group-rule-id</code> - The ID of the security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "SecurityGroupRuleIds": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the security group rules.</p>",
+                        "smithy.api#xmlName": "SecurityGroupRuleId"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeSecurityGroupRulesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n            results, make another request with the returned <code>NextToken</code> value. This value\n            can be between 5 and 1000. If this parameter is not specified, then all results are\n            returned.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeSecurityGroupRulesResult": {
+            "type": "structure",
+            "members": {
+                "SecurityGroupRules": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SecurityGroupRuleSet",
+                        "smithy.api#documentation": "<p>Information about security group rules.</p>",
+                        "smithy.api#xmlName": "securityGroupRuleSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#DescribeSecurityGroups": {
             "type": "operation",
             "input": {
@@ -23288,21 +23441,21 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>description</code> - The description of the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound\n                    security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.from-port</code> - For an outbound rule, the\n                    start of port range for the TCP and UDP protocols, or an ICMP type\n                    number.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.group-id</code> - The ID of a security group\n                    that has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.group-name</code> - The name of a security group\n                    that is referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an\n                    outbound security group rule.</p>\n            </li>\n            <li>\n     \t\t        <p>\n                  <code>egress.ip-permission.prefix-list-id</code> - The ID of a prefix list to which a security group rule allows outbound access.</p>\n     \t      </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.protocol</code> - The IP protocol for an\n                    outbound security group rule (<code>tcp</code> | <code>udp</code> |\n                        <code>icmp</code>, a protocol number, or -1 for all protocols).</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.to-port</code> - For an outbound rule, the end\n                    of port range for the TCP and UDP protocols, or an ICMP code.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.user-id</code> - The ID of an AWS account that\n                    has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>group-id</code> - The ID of the security group. </p>\n            </li>\n            <li>\n               <p>\n                  <code>group-name</code> - The name of the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security\n                    group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.from-port</code> - For an inbound rule, the start of port\n                    range for the TCP and UDP protocols, or an ICMP type number.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.group-id</code> - The ID of a security group that has been\n                    referenced in an inbound security group rule.</p>\n            </li>\n            <li>\n\t\t\t            <p>\n                  <code>ip-permission.group-name</code> - The name of a security group that is\n                    referenced in an inbound security group rule.</p>\n\t           </li>\n            <li>\n               <p>\n                  <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security\n                    group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-permission.prefix-list-id</code> - The ID of a prefix list from which a security group rule allows inbound access.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.protocol</code> - The IP protocol for an inbound security\n                group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code>, a\n                protocol number, or -1 for all protocols).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.to-port</code> - For an inbound rule, the end of port range\n                    for the TCP and UDP protocols, or an ICMP code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.user-id</code> - The ID of an AWS account that has been\n                    referenced in an inbound security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The AWS account ID of the owner of the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>description</code> - The description of the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound\n                    security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.from-port</code> - For an outbound rule, the\n                    start of port range for the TCP and UDP protocols, or an ICMP type\n                    number.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.group-id</code> - The ID of a security group\n                    that has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.group-name</code> - The name of a security group\n                    that is referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an\n                    outbound security group rule.</p>\n            </li>\n            <li>\n     \t\t        <p>\n                  <code>egress.ip-permission.prefix-list-id</code> - The ID of a prefix list to which a security group rule allows outbound access.</p>\n     \t      </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.protocol</code> - The IP protocol for an\n                    outbound security group rule (<code>tcp</code> | <code>udp</code> |\n                        <code>icmp</code>, a protocol number, or -1 for all protocols).</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.to-port</code> - For an outbound rule, the end\n                    of port range for the TCP and UDP protocols, or an ICMP code.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.user-id</code> - The ID of an Amazon Web Services account that\n                    has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>group-id</code> - The ID of the security group. </p>\n            </li>\n            <li>\n               <p>\n                  <code>group-name</code> - The name of the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security\n                    group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.from-port</code> - For an inbound rule, the start of port\n                    range for the TCP and UDP protocols, or an ICMP type number.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.group-id</code> - The ID of a security group that has been\n                    referenced in an inbound security group rule.</p>\n            </li>\n            <li>\n\t\t\t            <p>\n                  <code>ip-permission.group-name</code> - The name of a security group that is\n                    referenced in an inbound security group rule.</p>\n\t           </li>\n            <li>\n               <p>\n                  <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security\n                    group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-permission.prefix-list-id</code> - The ID of a prefix list from which a security group rule allows inbound access.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.protocol</code> - The IP protocol for an inbound security\n                group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code>, a\n                protocol number, or -1 for all protocols).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.to-port</code> - For an inbound rule, the end of port range\n                    for the TCP and UDP protocols, or an ICMP code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.user-id</code> - The ID of an Amazon Web Services account that has been\n                    referenced in an inbound security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner of the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
                 "GroupIds": {
                     "target": "com.amazonaws.ec2#GroupIdStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the security groups. Required for security groups in a nondefault VPC.</p>\n         <p>Default: Describes all your security groups.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the security groups. Required for security groups in a nondefault VPC.</p>\n         <p>Default: Describes all of your security groups.</p>",
                         "smithy.api#xmlName": "GroupId"
                     }
                 },
                 "GroupNames": {
                     "target": "com.amazonaws.ec2#GroupNameStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>[EC2-Classic and default VPC only] The names of the security groups. You can specify either\n\t\t\tthe security group name or the security group ID. For security groups in a nondefault VPC, use\n\t\t\tthe <code>group-name</code> filter to describe security groups by name.</p>\n         <p>Default: Describes all your security groups.</p>",
+                        "smithy.api#documentation": "<p>[EC2-Classic and default VPC only] The names of the security groups. You can specify either\n\t\t\tthe security group name or the security group ID. For security groups in a nondefault VPC, use\n\t\t\tthe <code>group-name</code> filter to describe security groups by name.</p>\n         <p>Default: Describes all of your security groups.</p>",
                         "smithy.api#xmlName": "GroupName"
                     }
                 },
@@ -27906,7 +28059,7 @@
                 "target": "com.amazonaws.ec2#DisassociateEnclaveCertificateIamRoleResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates an IAM role from an AWS Certificate Manager (ACM) certificate. Disassociating an IAM role \n\t\t\tfrom an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and \n\t\t\tencrypted private key from the Amazon S3 bucket. It also revokes the IAM role's permission to use the\n\t\t\tAWS Key Management Service (KMS) customer master key (CMK) used to encrypt the private key. This effectively revokes the role's \n\t\t\tpermission to use the certificate. </p>"
+                "smithy.api#documentation": "<p>Disassociates an IAM role from an Certificate Manager (ACM) certificate. Disassociating an IAM role \n\t\t\tfrom an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and \n\t\t\tencrypted private key from the Amazon S3 bucket. It also revokes the IAM role's permission to use the\n\t\t\tKMS key used to encrypt the private key. This effectively revokes the role's permission \n\t\t\tto use the certificate.</p>"
             }
         },
         "com.amazonaws.ec2#DisassociateEnclaveCertificateIamRoleRequest": {
@@ -32474,7 +32627,7 @@
                 "target": "com.amazonaws.ec2#GetAssociatedEnclaveCertificateIamRolesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the IAM roles that are associated with the specified AWS Certificate Manager (ACM) certificate. \n\t\t\tIt also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, certificate chain, \n\t\t\tand encrypted private key bundle are stored, and the ARN of the AWS Key Management Service (KMS) customer master key (CMK) \n\t\t\tthat's used to encrypt the private key.</p>"
+                "smithy.api#documentation": "<p>Returns the IAM roles that are associated with the specified ACM (ACM) certificate. \n\t\t\tIt also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, \n\t\t\tcertificate chain, and encrypted private key bundle are stored, and the ARN of the KMS key \n\t\t\tthat's used to encrypt the private key.</p>"
             }
         },
         "com.amazonaws.ec2#GetAssociatedEnclaveCertificateIamRolesRequest": {
@@ -36328,7 +36481,7 @@
                 "target": "com.amazonaws.ec2#ImportKeyPairResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Imports the public key from an RSA key pair that you created with a third-party tool. \n        Compare this with <a>CreateKeyPair</a>, in which AWS creates the key pair and gives the keys to you \n        (AWS keeps a copy of the public key). With ImportKeyPair, you create the key pair and give AWS just the public key. \n        The private key is never transferred between you and AWS.</p>\n         <p>For more information about key pairs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Imports the public key from an RSA key pair that you created with a third-party tool. \n        Compare this with <a>CreateKeyPair</a>, in which Amazon Web Services creates the key pair and gives the keys to you \n        (Amazon Web Services keeps a copy of the public key). With ImportKeyPair, you create the key pair and give Amazon Web Services just the public key. \n        The private key is never transferred between you and Amazon Web Services.</p>\n         <p>For more information about key pairs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ImportKeyPairRequest": {
@@ -36384,7 +36537,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KeyName",
-                        "smithy.api#documentation": "<p>The key pair name you provided.</p>",
+                        "smithy.api#documentation": "<p>The key pair name that you provided.</p>",
                         "smithy.api#xmlName": "keyName"
                     }
                 },
@@ -40923,7 +41076,7 @@
                     "target": "com.amazonaws.ec2#UserIdGroupPairList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Groups",
-                        "smithy.api#documentation": "<p>The security group and AWS account ID pairs.</p>",
+                        "smithy.api#documentation": "<p>The security group and Amazon Web Services account ID pairs.</p>",
                         "smithy.api#xmlName": "groups"
                     }
                 }
@@ -41267,7 +41420,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KeyFingerprint",
-                        "smithy.api#documentation": "<p>If you used <a>CreateKeyPair</a> to create the key pair, this is the SHA-1 digest of the DER encoded private key. \n        If you used <a>ImportKeyPair</a> to provide AWS the public key, this is the MD5 public key fingerprint as specified in section 4 of RFC4716.</p>",
+                        "smithy.api#documentation": "<p>If you used <a>CreateKeyPair</a> to create the key pair, this is the SHA-1 digest of the DER encoded private key. \n        If you used <a>ImportKeyPair</a> to provide Amazon Web Services the public key, this is the MD5 public key fingerprint as specified in section 4 of RFC4716.</p>",
                         "smithy.api#xmlName": "keyFingerprint"
                     }
                 },
@@ -45668,6 +45821,57 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the output of ModifyReservedInstances.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifySecurityGroupRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifySecurityGroupRulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifySecurityGroupRulesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the rules of a security group.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifySecurityGroupRulesRequest": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.ec2#SecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroupRules": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleUpdateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the security group properties to update.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "SecurityGroupRule"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ModifySecurityGroupRulesResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                }
             }
         },
         "com.amazonaws.ec2#ModifySnapshotAttribute": {
@@ -51559,6 +51763,54 @@
                 }
             }
         },
+        "com.amazonaws.ec2#ReferencedSecurityGroup": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "GroupId",
+                        "smithy.api#documentation": "<p>The ID of the security group.</p>",
+                        "smithy.api#xmlName": "groupId"
+                    }
+                },
+                "PeeringStatus": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PeeringStatus",
+                        "smithy.api#documentation": "<p>The status of a VPC peering connection, if applicable.</p>",
+                        "smithy.api#xmlName": "peeringStatus"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UserId",
+                        "smithy.api#documentation": "<p>The account ID.</p>",
+                        "smithy.api#xmlName": "userId"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VpcId",
+                        "smithy.api#documentation": "<p>The ID of the VPC.</p>",
+                        "smithy.api#xmlName": "vpcId"
+                    }
+                },
+                "VpcPeeringConnectionId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VpcPeeringConnectionId",
+                        "smithy.api#documentation": "<p>The ID of the VPC peering connection.</p>",
+                        "smithy.api#xmlName": "vpcPeeringConnectionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Describes the security group that is referenced in the security group rule.</p>"
+            }
+        },
         "com.amazonaws.ec2#Region": {
             "type": "structure",
             "members": {
@@ -54809,10 +55061,6 @@
                         "name": "network_insights_analysis"
                     },
                     {
-                        "value": "network-insights-boundary",
-                        "name": "network_insights_boundary"
-                    },
-                    {
                         "value": "network-insights-path",
                         "name": "network_insights_path"
                     },
@@ -54831,6 +55079,10 @@
                     {
                         "value": "security-group",
                         "name": "security_group"
+                    },
+                    {
+                        "value": "security-group-rule",
+                        "name": "security_group_rule"
                     },
                     {
                         "value": "snapshot",
@@ -55362,7 +55614,7 @@
                 "target": "com.amazonaws.ec2#RevokeSecurityGroupEgressResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>[VPC only] Removes the specified egress rules from a security group for EC2-VPC.\n       This action does not apply to security groups for use in EC2-Classic. To remove a rule, the\n       values that you specify (for example, ports) must match the existing rule's values\n       exactly.</p>\n         <note>\n            <p>[Default VPC] If the values you specify do not match the existing rule's values, no error is\n                returned, and the output describes the security group rules that were not revoked. </p>\n            <p>AWS recommends that you use <a>DescribeSecurityGroups</a> to verify\n                that the rule has been removed.</p>\n         </note>\n         <p>Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security\n      group. For the TCP and UDP protocols, you must also specify the destination port or range of\n      ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule\n      has a description, you do not have to specify the description to revoke the rule.</p>\n         <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
+                "smithy.api#documentation": "<p>[VPC only] Removes the specified outbound (egress) rules from a security group for EC2-VPC.\n       This action does not apply to security groups for use in EC2-Classic.</p>\n\n         <p>You can specify rules using either rule IDs or security group rule properties. If you use\n         rule properties, the values that you specify (for example, ports) must match the existing rule's \n         values exactly. Each rule has a protocol, from and to ports, and destination (CIDR range, \n         security group, or prefix list). For the TCP and UDP protocols, you must also specify the \n         destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type \n         and code. If the security group rule has a description, you do not need to specify the description \n         to revoke the rule.</p>\n         <p>[Default VPC] If the values you specify do not match the existing rule's values, no error is\n         returned, and the output describes the security group rules that were not revoked.</p>\n         <p>Amazon Web Services recommends that you describe the security group to verify that the rules were removed.</p>\n\n         <p>Rule changes are propagated to instances within the security group as quickly as possible. However, \n         a small delay might occur.</p>"
             }
         },
         "com.amazonaws.ec2#RevokeSecurityGroupEgressRequest": {
@@ -55391,6 +55643,13 @@
                         "aws.protocols#ec2QueryName": "IpPermissions",
                         "smithy.api#documentation": "<p>The sets of IP permissions. You can't specify a destination security group and a CIDR IP address range in the same set of permissions.</p>",
                         "smithy.api#xmlName": "ipPermissions"
+                    }
+                },
+                "SecurityGroupRuleIds": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the security group rules.</p>",
+                        "smithy.api#xmlName": "SecurityGroupRuleId"
                     }
                 },
                 "CidrIp": {
@@ -55473,7 +55732,7 @@
                 "target": "com.amazonaws.ec2#RevokeSecurityGroupIngressResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified ingress rules from a security group. To remove a rule, the values\n       that you specify (for example, ports) must match the existing rule's values exactly.</p>\n    \n   \t     <note>\n            <p>[EC2-Classic , default VPC] If the values you specify do not match the existing rule's values,\n                no error is returned, and the output describes the security group rules that were\n                not revoked. </p>\n            <p>AWS recommends that you use <a>DescribeSecurityGroups</a> to verify\n                that the rule has been removed.</p>\n         </note>\n\n         <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p>\n         <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
+                "smithy.api#documentation": "<p>Removes the specified inbound (ingress) rules from a security group.</p>\n\n         <p>You can specify rules using either rule IDs or security group rule properties. If you use\n           rule properties, the values that you specify (for example, ports) must match the existing rule's \n           values exactly. Each rule has a protocol, from and to ports, and source (CIDR range, \n           security group, or prefix list). For the TCP and UDP protocols, you must also specify the \n           destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type \n           and code. If the security group rule has a description, you do not need to specify the description \n           to revoke the rule.</p>\n         <p>[EC2-Classic, default VPC] If the values you specify do not match the existing rule's values, no error is\n           returned, and the output describes the security group rules that were not revoked.</p>\n         <p>Amazon Web Services recommends that you describe the security group to verify that the rules were removed.</p>\n\n         <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>"
             }
         },
         "com.amazonaws.ec2#RevokeSecurityGroupIngressRequest": {
@@ -55524,7 +55783,7 @@
                 "SourceSecurityGroupOwnerId": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>[EC2-Classic] The AWS account ID of the source security group, if the source security group is in a different account. You can't specify this parameter in combination with the following parameters: the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. To revoke a specific rule for an IP protocol and port range, use a set of IP permissions instead.</p>"
+                        "smithy.api#documentation": "<p>[EC2-Classic] The Amazon Web Services account ID of the source security group, if the source security group is in a different account. You can't specify this parameter in combination with the following parameters: the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. To revoke a specific rule for an IP protocol and port range, use a set of IP permissions instead.</p>"
                     }
                 },
                 "ToPort": {
@@ -55539,6 +55798,13 @@
                         "aws.protocols#ec2QueryName": "DryRun",
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
+                    }
+                },
+                "SecurityGroupRuleIds": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the security group rules.</p>",
+                        "smithy.api#xmlName": "SecurityGroupRuleId"
                     }
                 }
             }
@@ -57393,7 +57659,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID of the owner of the security group.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the owner of the security group.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -57431,7 +57697,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a security group</p>"
+                "smithy.api#documentation": "<p>Describes a security group.</p>"
             }
         },
         "com.amazonaws.ec2#SecurityGroupId": {
@@ -57518,6 +57784,253 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#SecurityGroupReference",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#SecurityGroupRule": {
+            "type": "structure",
+            "members": {
+                "SecurityGroupRuleId": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SecurityGroupRuleId",
+                        "smithy.api#documentation": "<p>The ID of the security group rule.</p>",
+                        "smithy.api#xmlName": "securityGroupRuleId"
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.ec2#SecurityGroupId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "GroupId",
+                        "smithy.api#documentation": "<p>The ID of the security group.</p>",
+                        "smithy.api#xmlName": "groupId"
+                    }
+                },
+                "GroupOwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "GroupOwnerId",
+                        "smithy.api#documentation": "<p>The ID of the account that owns the security group. </p>",
+                        "smithy.api#xmlName": "groupOwnerId"
+                    }
+                },
+                "IsEgress": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IsEgress",
+                        "smithy.api#documentation": "<p>Indicates whether the security group rule is an outbound rule.</p>",
+                        "smithy.api#xmlName": "isEgress"
+                    }
+                },
+                "IpProtocol": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpProtocol",
+                        "smithy.api#documentation": "<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>,\n                <code>icmpv6</code>) or number (see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a>). </p> \n        <p>Use <code>-1</code> to specify all protocols.</p>",
+                        "smithy.api#xmlName": "ipProtocol"
+                    }
+                },
+                "FromPort": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FromPort",
+                        "smithy.api#documentation": "<p>The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A value\n            of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must\n            specify all codes.</p>",
+                        "smithy.api#xmlName": "fromPort"
+                    }
+                },
+                "ToPort": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ToPort",
+                        "smithy.api#documentation": "<p>The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes. </p>",
+                        "smithy.api#xmlName": "toPort"
+                    }
+                },
+                "CidrIpv4": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CidrIpv4",
+                        "smithy.api#documentation": "<p>The IPv4 CIDR range.</p>",
+                        "smithy.api#xmlName": "cidrIpv4"
+                    }
+                },
+                "CidrIpv6": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CidrIpv6",
+                        "smithy.api#documentation": "<p>The IPv6 CIDR range.</p>",
+                        "smithy.api#xmlName": "cidrIpv6"
+                    }
+                },
+                "PrefixListId": {
+                    "target": "com.amazonaws.ec2#PrefixListResourceId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PrefixListId",
+                        "smithy.api#documentation": "<p>The ID of the prefix list.</p>",
+                        "smithy.api#xmlName": "prefixListId"
+                    }
+                },
+                "ReferencedGroupInfo": {
+                    "target": "com.amazonaws.ec2#ReferencedSecurityGroup",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReferencedGroupInfo",
+                        "smithy.api#documentation": "<p>Describes the security group that is referenced in the rule.</p>",
+                        "smithy.api#xmlName": "referencedGroupInfo"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Description",
+                        "smithy.api#documentation": "<p>The security group rule description.</p>",
+                        "smithy.api#xmlName": "description"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags applied to the security group rule.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a security group rule.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SecurityGroupRuleDescription": {
+            "type": "structure",
+            "members": {
+                "SecurityGroupRuleId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security group rule.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the security group rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the description of a security group rule.</p>\n        <p>You can use this when you want to update the security group rule description for either an inbound or outbound rule.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SecurityGroupRuleDescriptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#SecurityGroupRuleDescription",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#SecurityGroupRuleId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#SecurityGroupRuleIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#SecurityGroupRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#SecurityGroupRule",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#SecurityGroupRuleRequest": {
+            "type": "structure",
+            "members": {
+                "IpProtocol": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>,\n                <code>icmpv6</code>) or number (see <a href=\"http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a>). </p> \n        <p>Use <code>-1</code> to specify all protocols.</p>"
+                    }
+                },
+                "FromPort": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.</p>"
+                    }
+                },
+                "ToPort": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes. </p>"
+                    }
+                },
+                "CidrIpv4": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 CIDR range. To specify a single IPv4 address, use the /32 prefix length. </p>"
+                    }
+                },
+                "CidrIpv6": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 CIDR range. To specify a single IPv6 address, use the /128 prefix length.</p>"
+                    }
+                },
+                "PrefixListId": {
+                    "target": "com.amazonaws.ec2#PrefixListResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the prefix list.</p>"
+                    }
+                },
+                "ReferencedGroupId": {
+                    "target": "com.amazonaws.ec2#SecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security group that is referenced in the security group rule.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the security group rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a security group rule.</p>\n        <p>You must specify exactly one of the following parameters, based on the rule type:</p>\n        <ul>\n            <li>\n               <p>CidrIpv4</p>\n            </li>\n            <li>\n               <p>CidrIpv6</p>\n            </li>\n            <li>\n               <p>PrefixListId</p>\n            </li>\n            <li>\n               <p>ReferencedGroupId</p>\n            </li>\n         </ul>\n        <p>When you modify a rule, you cannot change the rule type. For example, if the rule  \n            uses an IPv4 address range, you must use <code>CidrIpv4</code> to specify a new IPv4 \n            address range.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SecurityGroupRuleUpdate": {
+            "type": "structure",
+            "members": {
+                "SecurityGroupRuleId": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security group rule.</p>"
+                    }
+                },
+                "SecurityGroupRule": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the security group rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an update to a security group rule.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SecurityGroupRuleUpdateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#SecurityGroupRuleUpdate",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -64558,7 +65071,7 @@
                 "target": "com.amazonaws.ec2#UpdateSecurityGroupRuleDescriptionsEgressResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>[VPC only] Updates the description of an egress (outbound) security group rule. You\n\t\t\tcan replace an existing description, or add a description to a rule that did not have one\n\t\t\tpreviously.</p>\n\t\t       <p>You specify the description as part of the IP permissions structure. You can remove a\n\t\t\tdescription for a security group rule by omitting the description parameter in the\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>[VPC only] Updates the description of an egress (outbound) security group rule. You\n\t\t\tcan replace an existing description, or add a description to a rule that did not have one\n\t\t\tpreviously. You can remove a description for a security group rule by omitting the \n\t\t\tdescription parameter in the request.</p>"
             }
         },
         "com.amazonaws.ec2#UpdateSecurityGroupRuleDescriptionsEgressRequest": {
@@ -64585,8 +65098,14 @@
                 "IpPermissions": {
                     "target": "com.amazonaws.ec2#IpPermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP permissions for the security group rule.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The IP permissions for the security group rule. You must specify either the IP permissions\n\t\t    or the description.</p>"
+                    }
+                },
+                "SecurityGroupRuleDescriptions": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleDescriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the egress security group rules. You must specify either the\n            description or the IP permissions.</p>",
+                        "smithy.api#xmlName": "SecurityGroupRuleDescription"
                     }
                 }
             }
@@ -64613,7 +65132,7 @@
                 "target": "com.amazonaws.ec2#UpdateSecurityGroupRuleDescriptionsIngressResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates the description of an ingress (inbound) security group rule. You can replace an\n\t\t\texisting description, or add a description to a rule that did not have one\n\t\t\tpreviously.</p>\n\t\t       <p>You specify the description as part of the IP permissions structure. You can remove a\n\t\t\tdescription for a security group rule by omitting the description parameter in the\n\t\t\trequest.</p>"
+                "smithy.api#documentation": "<p>Updates the description of an ingress (inbound) security group rule. You can replace an\n\t\t\texisting description, or add a description to a rule that did not have one previously.\n\t\t    You can remove a description for a security group rule by omitting the description \n\t\t    parameter in the request.</p>"
             }
         },
         "com.amazonaws.ec2#UpdateSecurityGroupRuleDescriptionsIngressRequest": {
@@ -64640,8 +65159,14 @@
                 "IpPermissions": {
                     "target": "com.amazonaws.ec2#IpPermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP permissions for the security group rule. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The IP permissions for the security group rule. You must specify either IP permissions\n\t\t    or a description.</p>"
+                    }
+                },
+                "SecurityGroupRuleDescriptions": {
+                    "target": "com.amazonaws.ec2#SecurityGroupRuleDescriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[VPC only] The description for the ingress security group rules. You must specify either\n            a description or IP permissions.</p>",
+                        "smithy.api#xmlName": "SecurityGroupRuleDescription"
                     }
                 }
             }
@@ -64792,7 +65317,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UserId",
-                        "smithy.api#documentation": "<p>The ID of an AWS account.</p>\n        <p>For a referenced security group in another VPC, the account ID of the referenced\n            security group is returned in the response. If the referenced security group is deleted,\n            this value is not returned.</p>\n         <p>[EC2-Classic] Required when adding or removing rules that reference a security group\n            in another AWS account.</p>",
+                        "smithy.api#documentation": "<p>The ID of an Amazon Web Services account.</p>\n        <p>For a referenced security group in another VPC, the account ID of the referenced\n            security group is returned in the response. If the referenced security group is deleted,\n            this value is not returned.</p>\n         <p>[EC2-Classic] Required when adding or removing rules that reference a security group\n            in another Amazon Web Services account.</p>",
                         "smithy.api#xmlName": "userId"
                     }
                 },
@@ -64814,7 +65339,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a security group and AWS account ID pair.</p>"
+                "smithy.api#documentation": "<p>Describes a security group and Amazon Web Services account ID pair.</p>"
             }
         },
         "com.amazonaws.ec2#UserIdGroupPairList": {

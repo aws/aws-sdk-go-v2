@@ -14,8 +14,8 @@ import (
 // Retrieves a list of policies that the IAM identity (user, group, or role) can
 // use to access each specified service. This operation does not use other policy
 // types when determining whether a resource could access a service. These other
-// policy types include resource-based policies, access control lists, AWS
-// Organizations policies, IAM permissions boundaries, and AWS STS assume role
+// policy types include resource-based policies, access control lists,
+// Organizations policies, IAM permissions boundaries, and STS assume role
 // policies. It only applies permissions policy logic. For more about the
 // evaluation of policy types, see Evaluating policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics)
@@ -67,16 +67,16 @@ type ListPoliciesGrantingServiceAccessInput struct {
 	// This member is required.
 	Arn *string
 
-	// The service namespace for the AWS services whose policies you want to list. To
-	// learn the service namespace for a service, see Actions, resources, and condition
-	// keys for AWS services
+	// The service namespace for the Amazon Web Services services whose policies you
+	// want to list. To learn the service namespace for a service, see Actions,
+	// resources, and condition keys for Amazon Web Services services
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the IAM User Guide. Choose the name of the service to view details for that
 	// service. In the first paragraph, find the service prefix. For example, (service
-	// prefix: a4b). For more information about service namespaces, see AWS service
-	// namespaces
+	// prefix: a4b). For more information about service namespaces, see Amazon Web
+	// Services service namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ServiceNamespaces []string

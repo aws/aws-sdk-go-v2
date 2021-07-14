@@ -12,7 +12,7 @@ import (
 )
 
 // Gets the file system association information. This operation is only supported
-// for Amazon FSx file gateways.
+// for FSx File Gateways.
 func (c *Client) DescribeFileSystemAssociations(ctx context.Context, params *DescribeFileSystemAssociationsInput, optFns ...func(*Options)) (*DescribeFileSystemAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeFileSystemAssociationsInput{}

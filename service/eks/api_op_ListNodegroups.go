@@ -12,8 +12,8 @@ import (
 )
 
 // Lists the Amazon EKS managed node groups associated with the specified cluster
-// in your AWS account in the specified Region. Self-managed node groups are not
-// listed.
+// in your Amazon Web Services account in the specified Region. Self-managed node
+// groups are not listed.
 func (c *Client) ListNodegroups(ctx context.Context, params *ListNodegroupsInput, optFns ...func(*Options)) (*ListNodegroupsOutput, error) {
 	if params == nil {
 		params = &ListNodegroupsInput{}

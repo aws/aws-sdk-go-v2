@@ -394,6 +394,24 @@ func awsRestjson1_serializeOpHttpBindingsListOutpostsInput(v *ListOutpostsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AvailabilityZoneFilter != nil {
+		for i := range v.AvailabilityZoneFilter {
+			encoder.AddQuery("AvailabilityZoneFilter").String(v.AvailabilityZoneFilter[i])
+		}
+	}
+
+	if v.AvailabilityZoneIdFilter != nil {
+		for i := range v.AvailabilityZoneIdFilter {
+			encoder.AddQuery("AvailabilityZoneIdFilter").String(v.AvailabilityZoneIdFilter[i])
+		}
+	}
+
+	if v.LifeCycleStatusFilter != nil {
+		for i := range v.LifeCycleStatusFilter {
+			encoder.AddQuery("LifeCycleStatusFilter").String(v.LifeCycleStatusFilter[i])
+		}
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}

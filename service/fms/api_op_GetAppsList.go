@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the specified AWS Firewall Manager applications list.
+// Returns information about the specified Firewall Manager applications list.
 func (c *Client) GetAppsList(ctx context.Context, params *GetAppsListInput, optFns ...func(*Options)) (*GetAppsListOutput, error) {
 	if params == nil {
 		params = &GetAppsListInput{}
@@ -29,20 +29,19 @@ func (c *Client) GetAppsList(ctx context.Context, params *GetAppsListInput, optF
 
 type GetAppsListInput struct {
 
-	// The ID of the AWS Firewall Manager applications list that you want the details
-	// for.
+	// The ID of the Firewall Manager applications list that you want the details for.
 	//
 	// This member is required.
 	ListId *string
 
-	// Specifies whether the list to retrieve is a default list owned by AWS Firewall
+	// Specifies whether the list to retrieve is a default list owned by Firewall
 	// Manager.
 	DefaultList bool
 }
 
 type GetAppsListOutput struct {
 
-	// Information about the specified AWS Firewall Manager applications list.
+	// Information about the specified Firewall Manager applications list.
 	AppsList *types.AppsListData
 
 	// The Amazon Resource Name (ARN) of the applications list.

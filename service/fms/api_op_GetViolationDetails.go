@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves violations for a resource based on the specified AWS Firewall Manager
-// policy and AWS account.
+// Retrieves violations for a resource based on the specified Firewall Manager
+// policy and Amazon Web Services account.
 func (c *Client) GetViolationDetails(ctx context.Context, params *GetViolationDetailsInput, optFns ...func(*Options)) (*GetViolationDetailsOutput, error) {
 	if params == nil {
 		params = &GetViolationDetailsInput{}
@@ -30,12 +30,12 @@ func (c *Client) GetViolationDetails(ctx context.Context, params *GetViolationDe
 
 type GetViolationDetailsInput struct {
 
-	// The AWS account ID that you want the details for.
+	// The Amazon Web Services account ID that you want the details for.
 	//
 	// This member is required.
 	MemberAccount *string
 
-	// The ID of the AWS Firewall Manager policy that you want the details for. This
+	// The ID of the Firewall Manager policy that you want the details for. This
 	// currently only supports security group content audit policies.
 	//
 	// This member is required.
@@ -46,8 +46,8 @@ type GetViolationDetailsInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// The resource type. This is in the format shown in the AWS Resource Types
-	// Reference
+	// The resource type. This is in the format shown in the Amazon Web Services
+	// Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
 	// Supported resource types are: AWS::EC2::Instance, AWS::EC2::NetworkInterface,
 	// AWS::EC2::SecurityGroup, AWS::NetworkFirewall::FirewallPolicy, and

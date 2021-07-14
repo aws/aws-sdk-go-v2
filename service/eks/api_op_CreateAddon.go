@@ -36,8 +36,8 @@ func (c *Client) CreateAddon(ctx context.Context, params *CreateAddonInput, optF
 type CreateAddonInput struct {
 
 	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html).
+	// DescribeAddonVersions
+	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html).
 	//
 	// This member is required.
 	AddonName *string

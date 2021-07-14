@@ -8387,6 +8387,15 @@ func awsAwsjson11_deserializeDocumentEndpointSetting(v **types.EndpointSetting, 
 				sv.Applicability = ptr.String(jtv)
 			}
 
+		case "DefaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
 		case "EnumValues":
 			if err := awsAwsjson11_deserializeDocumentEndpointSettingEnumValues(&sv.EnumValues, value); err != nil {
 				return err
@@ -9322,6 +9331,15 @@ func awsAwsjson11_deserializeDocumentKafkaSettings(v **types.KafkaSettings, valu
 				sv.MessageMaxBytes = ptr.Int32(int32(i64))
 			}
 
+		case "NoHexPrefix":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.NoHexPrefix = ptr.Bool(jtv)
+			}
+
 		case "PartitionIncludeSchemaTable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9486,6 +9504,15 @@ func awsAwsjson11_deserializeDocumentKinesisSettings(v **types.KinesisSettings, 
 					return fmt.Errorf("expected MessageFormatValue to be of type string, got %T instead", value)
 				}
 				sv.MessageFormat = types.MessageFormatValue(jtv)
+			}
+
+		case "NoHexPrefix":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.NoHexPrefix = ptr.Bool(jtv)
 			}
 
 		case "PartitionIncludeSchemaTable":
@@ -10747,6 +10774,19 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 				sv.SpatialDataOptionToGeoJsonFunctionName = ptr.String(jtv)
 			}
 
+		case "StandbyDelayTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StandbyDelayTime = ptr.Int32(int32(i64))
+			}
+
 		case "UseAlternateFolderForOnline":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10754,6 +10794,33 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
 				}
 				sv.UseAlternateFolderForOnline = ptr.Bool(jtv)
+			}
+
+		case "UseBFile":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseBFile = ptr.Bool(jtv)
+			}
+
+		case "UseDirectPathFullLoad":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseDirectPathFullLoad = ptr.Bool(jtv)
+			}
+
+		case "UseLogminerReader":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseLogminerReader = ptr.Bool(jtv)
 			}
 
 		case "UsePathPrefix":
@@ -11195,6 +11262,37 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 				sv.FailTasksOnLobTruncation = ptr.Bool(jtv)
 			}
 
+		case "HeartbeatEnable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.HeartbeatEnable = ptr.Bool(jtv)
+			}
+
+		case "HeartbeatFrequency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HeartbeatFrequency = ptr.Int32(int32(i64))
+			}
+
+		case "HeartbeatSchema":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.HeartbeatSchema = ptr.String(jtv)
+			}
+
 		case "MaxFileSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11215,6 +11313,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 					return fmt.Errorf("expected SecretString to be of type string, got %T instead", value)
 				}
 				sv.Password = ptr.String(jtv)
+			}
+
+		case "PluginName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PluginNameValue to be of type string, got %T instead", value)
+				}
+				sv.PluginName = types.PluginNameValue(jtv)
 			}
 
 		case "Port":

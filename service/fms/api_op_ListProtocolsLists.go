@@ -4,6 +4,7 @@ package fms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
@@ -29,32 +30,32 @@ func (c *Client) ListProtocolsLists(ctx context.Context, params *ListProtocolsLi
 
 type ListProtocolsListsInput struct {
 
-	// The maximum number of objects that you want AWS Firewall Manager to return for
-	// this request. If more objects are available, in the response, AWS Firewall
-	// Manager provides a NextToken value that you can use in a subsequent call to get
-	// the next batch of objects. If you don't specify this, AWS Firewall Manager
-	// returns all available objects.
+	// The maximum number of objects that you want Firewall Manager to return for this
+	// request. If more objects are available, in the response, Firewall Manager
+	// provides a NextToken value that you can use in a subsequent call to get the next
+	// batch of objects. If you don't specify this, Firewall Manager returns all
+	// available objects.
 	//
 	// This member is required.
 	MaxResults *int32
 
-	// Specifies whether the lists to retrieve are default lists owned by AWS Firewall
+	// Specifies whether the lists to retrieve are default lists owned by Firewall
 	// Manager.
 	DefaultLists bool
 
 	// If you specify a value for MaxResults in your list request, and you have more
-	// objects than the maximum, AWS Firewall Manager returns this token in the
-	// response. For all but the first request, you provide the token returned by the
-	// prior request in the request parameters, to retrieve the next batch of objects.
+	// objects than the maximum, Firewall Manager returns this token in the response.
+	// For all but the first request, you provide the token returned by the prior
+	// request in the request parameters, to retrieve the next batch of objects.
 	NextToken *string
 }
 
 type ListProtocolsListsOutput struct {
 
 	// If you specify a value for MaxResults in your list request, and you have more
-	// objects than the maximum, AWS Firewall Manager returns this token in the
-	// response. You can use this token in subsequent requests to retrieve the next
-	// batch of objects.
+	// objects than the maximum, Firewall Manager returns this token in the response.
+	// You can use this token in subsequent requests to retrieve the next batch of
+	// objects.
 	NextToken *string
 
 	// An array of ProtocolsListDataSummary objects.
@@ -125,6 +126,97 @@ func (c *Client) addOperationListProtocolsListsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// ListProtocolsListsAPIClient is a client that implements the ListProtocolsLists
+// operation.
+type ListProtocolsListsAPIClient interface {
+	ListProtocolsLists(context.Context, *ListProtocolsListsInput, ...func(*Options)) (*ListProtocolsListsOutput, error)
+}
+
+var _ ListProtocolsListsAPIClient = (*Client)(nil)
+
+// ListProtocolsListsPaginatorOptions is the paginator options for
+// ListProtocolsLists
+type ListProtocolsListsPaginatorOptions struct {
+	// The maximum number of objects that you want Firewall Manager to return for this
+	// request. If more objects are available, in the response, Firewall Manager
+	// provides a NextToken value that you can use in a subsequent call to get the next
+	// batch of objects. If you don't specify this, Firewall Manager returns all
+	// available objects.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListProtocolsListsPaginator is a paginator for ListProtocolsLists
+type ListProtocolsListsPaginator struct {
+	options   ListProtocolsListsPaginatorOptions
+	client    ListProtocolsListsAPIClient
+	params    *ListProtocolsListsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListProtocolsListsPaginator returns a new ListProtocolsListsPaginator
+func NewListProtocolsListsPaginator(client ListProtocolsListsAPIClient, params *ListProtocolsListsInput, optFns ...func(*ListProtocolsListsPaginatorOptions)) *ListProtocolsListsPaginator {
+	if params == nil {
+		params = &ListProtocolsListsInput{}
+	}
+
+	options := ListProtocolsListsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListProtocolsListsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListProtocolsListsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListProtocolsLists page.
+func (p *ListProtocolsListsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListProtocolsListsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListProtocolsLists(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListProtocolsLists(region string) *awsmiddleware.RegisterServiceMetadata {

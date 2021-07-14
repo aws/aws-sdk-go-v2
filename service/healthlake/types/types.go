@@ -64,6 +64,10 @@ type DatastoreProperties struct {
 	// The preloaded data configuration for the Data Store. Only data preloaded from
 	// Synthea is supported.
 	PreloadDataConfig *PreloadDataConfig
+
+	// The server-side encryption key configuration for a customer provided encryption
+	// key (CMK).
+	SseConfiguration *SseConfiguration
 }
 
 // The properties of a FHIR export job, including the ID, ARN, name, and the status
@@ -150,6 +154,9 @@ type ImportJobProperties struct {
 	// The user-generated name for an Import job.
 	JobName *string
 
+	// The output data configuration that was supplied when the export job was created.
+	JobOutputDataConfig OutputDataConfig
+
 	// An explanation of any errors that may have occurred during the FHIR import job.
 	Message *string
 }
@@ -170,21 +177,34 @@ type InputDataConfigMemberS3Uri struct {
 
 func (*InputDataConfigMemberS3Uri) isInputDataConfig() {}
 
+// The customer-managed-key(CMK) used when creating a Data Store. If a customer
+// owned key is not specified, an AWS owned key will be used for encryption.
+type KmsEncryptionConfig struct {
+
+	// The type of customer-managed-key(CMK) used for encyrption. The two types of
+	// supported CMKs are customer owned CMKs and AWS owned CMKs.
+	//
+	// This member is required.
+	CmkType CmkType
+
+	// The KMS encryption key id/alias used to encrypt the Data Store contents at rest.
+	KmsKeyId *string
+}
+
 // The output data configuration that was supplied when the export job was created.
 //
 // The following types satisfy this interface:
-//  OutputDataConfigMemberS3Uri
+//  OutputDataConfigMemberS3Configuration
 type OutputDataConfig interface {
 	isOutputDataConfig()
 }
 
-// The S3Uri is the user specified S3 location to which data will be exported from
-// a FHIR Data Store.
-type OutputDataConfigMemberS3Uri struct {
-	Value string
+// The output data configuration that was supplied when the export job was created.
+type OutputDataConfigMemberS3Configuration struct {
+	Value S3Configuration
 }
 
-func (*OutputDataConfigMemberS3Uri) isOutputDataConfig() {}
+func (*OutputDataConfigMemberS3Configuration) isOutputDataConfig() {}
 
 // The input properties for the preloaded Data Store. Only data preloaded from
 // Synthea is supported.
@@ -194,6 +214,47 @@ type PreloadDataConfig struct {
 	//
 	// This member is required.
 	PreloadDataType PreloadDataType
+}
+
+// The configuration of the S3 bucket for either an import or export job. This
+// includes assigning permissions for access.
+type S3Configuration struct {
+
+	// The KMS key ID used to access the S3 bucket.
+	//
+	// This member is required.
+	KmsKeyId *string
+
+	// The S3Uri is the user specified S3 location of the FHIR data to be imported into
+	// Amazon HealthLake.
+	//
+	// This member is required.
+	S3Uri *string
+}
+
+// The server-side encryption key configuration for a customer provided encryption
+// key.
+type SseConfiguration struct {
+
+	// The KMS encryption configuration used to provide details for data encryption.
+	//
+	// This member is required.
+	KmsEncryptionConfig *KmsEncryptionConfig
+}
+
+// A tag is a label consisting of a user-defined key and value. The form for tags
+// is {"Key", "Value"}
+type Tag struct {
+
+	// The key portion of a tag. Tag keys are case sensitive.
+	//
+	// This member is required.
+	Key *string
+
+	// The value portion of tag. Tag values are case sensitive.
+	//
+	// This member is required.
+	Value *string
 }
 
 // UnknownUnionMember is returned when a union member is returned over the wire,

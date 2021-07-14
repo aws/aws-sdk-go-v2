@@ -12,16 +12,15 @@ import (
 )
 
 // Updates a Server Message Block (SMB) file share. This operation is only
-// supported for file gateways. To leave a file share field unchanged, set the
-// corresponding input field to null. File gateways require AWS Security Token
-// Service (AWS STS) to be activated to enable you to create a file share. Make
-// sure that AWS STS is activated in the AWS Region you are creating your file
-// gateway in. If AWS STS is not activated in this AWS Region, activate it. For
-// information about how to activate AWS STS, see Activating and deactivating AWS
-// STS in an AWS Region
+// supported for S3 File Gateways. To leave a file share field unchanged, set the
+// corresponding input field to null. File gateways require Security Token Service
+// (STS) to be activated to enable you to create a file share. Make sure that STS
+// is activated in the Region you are creating your file gateway in. If STS is not
+// activated in this Region, activate it. For information about how to activate
+// STS, see Activating and deactivating STS in an Region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-// in the AWS Identity and Access Management User Guide. File gateways don't
-// support creating hard or symbolic links on a file share.
+// in the Identity and Access Management User Guide. File gateways don't support
+// creating hard or symbolic links on a file share.
 func (c *Client) UpdateSMBFileShare(ctx context.Context, params *UpdateSMBFileShareInput, optFns ...func(*Options)) (*UpdateSMBFileShareOutput, error) {
 	if params == nil {
 		params = &UpdateSMBFileShareInput{}
@@ -66,9 +65,9 @@ type UpdateSMBFileShareInput struct {
 	// determines the case sensitivity. The default value is ClientSpecified.
 	CaseSensitivity types.CaseSensitivity
 
-	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// The default storage class for objects put into an Amazon S3 bucket by the S3
+	// File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid
+	// Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
@@ -86,8 +85,8 @@ type UpdateSMBFileShareInput struct {
 	// set if Authentication is set to ActiveDirectory.
 	InvalidUserList []string
 
-	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -108,8 +107,14 @@ type UpdateSMBFileShareInput struct {
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
-	// bucket that a file gateway puts objects into. The default value is private.
+	// bucket that a S3 File Gateway puts objects into. The default value is private.
 	ObjectACL types.ObjectACL
+
+	// Specifies whether opportunistic locking is enabled for the SMB file share.
+	// Enabling opportunistic locking on case-sensitive shares is not recommended for
+	// workloads that involve access to files with the same name in different case.
+	// Valid Values: true | false
+	OplocksEnabled *bool
 
 	// A value that sets the write status of a file share. Set this value to true to
 	// set write status to read-only, otherwise set to false. Valid Values: true |
@@ -130,7 +135,7 @@ type UpdateSMBFileShareInput struct {
 	// permissions. For more information, see Using Microsoft Windows ACLs to control
 	// access to an SMB file share
 	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html) in
-	// the AWS Storage Gateway User Guide. Valid Values: true | false
+	// the Storage Gateway User Guide. Valid Values: true | false
 	SMBACLEnabled *bool
 
 	// A list of users or groups in the Active Directory that are allowed to access the

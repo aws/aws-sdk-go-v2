@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Authorizes the specified AWS customer account to restore the specified snapshot.
-// For more information about working with snapshots, go to Amazon Redshift
-// Snapshots
+// Authorizes the specified account to restore the specified snapshot. For more
+// information about working with snapshots, go to Amazon Redshift Snapshots
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeSnapshotAccessInput, optFns ...func(*Options)) (*AuthorizeSnapshotAccessOutput, error) {
@@ -34,8 +33,9 @@ func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeS
 //
 type AuthorizeSnapshotAccessInput struct {
 
-	// The identifier of the AWS customer account authorized to restore the specified
-	// snapshot. To share a snapshot with AWS support, specify amazon-redshift-support.
+	// The identifier of the account authorized to restore the specified snapshot. To
+	// share a snapshot with Amazon Web Services Support, specify
+	// amazon-redshift-support.
 	//
 	// This member is required.
 	AccountWithRestoreAccess *string

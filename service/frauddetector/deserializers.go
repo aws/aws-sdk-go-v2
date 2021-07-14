@@ -483,6 +483,9 @@ func awsAwsjson11_deserializeOpErrorCreateBatchPredictionJob(response *smithyhtt
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
 
@@ -8802,6 +8805,40 @@ func awsAwsjson11_deserializeDocumentLabelSchema(v **types.LabelSchema, value in
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentListOfLogitMetrics(v *[]types.LogitMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LogitMetric
+	if *v == nil {
+		cv = []types.LogitMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LogitMetric
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLogitMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentListOfModelScores(v *[]types.ModelScores, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8937,6 +8974,89 @@ func awsAwsjson11_deserializeDocumentListOfStrings(v *[]string, value interface{
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLogitMetric(v **types.LogitMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LogitMetric
+	if *v == nil {
+		sv = &types.LogitMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "variableImportance":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.VariableImportance = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.VariableImportance = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "variableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.VariableName = ptr.String(jtv)
+			}
+
+		case "variableType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.VariableType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -10456,6 +10576,11 @@ func awsAwsjson11_deserializeDocumentTrainingResult(v **types.TrainingResult, va
 				return err
 			}
 
+		case "variableImportanceMetrics":
+			if err := awsAwsjson11_deserializeDocumentVariableImportanceMetrics(&sv.VariableImportanceMetrics, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10606,6 +10731,42 @@ func awsAwsjson11_deserializeDocumentVariable(v **types.Variable, value interfac
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.VariableType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVariableImportanceMetrics(v **types.VariableImportanceMetrics, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VariableImportanceMetrics
+	if *v == nil {
+		sv = &types.VariableImportanceMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LogitMetrics":
+			if err := awsAwsjson11_deserializeDocumentListOfLogitMetrics(&sv.LogitMetrics, value); err != nil {
+				return err
 			}
 
 		default:

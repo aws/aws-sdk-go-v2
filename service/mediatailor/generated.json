@@ -22,6 +22,7 @@
         "api_op_GetChannelPolicy.go",
         "api_op_GetChannelSchedule.go",
         "api_op_GetPlaybackConfiguration.go",
+        "api_op_ListAlerts.go",
         "api_op_ListChannels.go",
         "api_op_ListPlaybackConfigurations.go",
         "api_op_ListSourceLocations.go",

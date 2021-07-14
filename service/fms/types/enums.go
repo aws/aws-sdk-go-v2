@@ -66,6 +66,26 @@ func (DependentServiceName) Values() []DependentServiceName {
 	}
 }
 
+type DestinationType string
+
+// Enum values for DestinationType
+const (
+	DestinationTypeIpv4       DestinationType = "IPV4"
+	DestinationTypeIpv6       DestinationType = "IPV6"
+	DestinationTypePrefixList DestinationType = "PREFIX_LIST"
+)
+
+// Values returns all known values for DestinationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationType) Values() []DestinationType {
+	return []DestinationType{
+		"IPV4",
+		"IPV6",
+		"PREFIX_LIST",
+	}
+}
+
 type PolicyComplianceStatusType string
 
 // Enum values for PolicyComplianceStatusType
@@ -132,6 +152,40 @@ func (SecurityServiceType) Values() []SecurityServiceType {
 	}
 }
 
+type TargetType string
+
+// Enum values for TargetType
+const (
+	TargetTypeGateway                   TargetType = "GATEWAY"
+	TargetTypeCarrierGateway            TargetType = "CARRIER_GATEWAY"
+	TargetTypeInstance                  TargetType = "INSTANCE"
+	TargetTypeLocalGateway              TargetType = "LOCAL_GATEWAY"
+	TargetTypeNatGateway                TargetType = "NAT_GATEWAY"
+	TargetTypeNetworkInterface          TargetType = "NETWORK_INTERFACE"
+	TargetTypeVPCEndpoint               TargetType = "VPC_ENDPOINT"
+	TargetTypeVPCPeeringConnection      TargetType = "VPC_PEERING_CONNECTION"
+	TargetTypeEgressOnlyInternetGateway TargetType = "EGRESS_ONLY_INTERNET_GATEWAY"
+	TargetTypeTransitGateway            TargetType = "TRANSIT_GATEWAY"
+)
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"GATEWAY",
+		"CARRIER_GATEWAY",
+		"INSTANCE",
+		"LOCAL_GATEWAY",
+		"NAT_GATEWAY",
+		"NETWORK_INTERFACE",
+		"VPC_ENDPOINT",
+		"VPC_PEERING_CONNECTION",
+		"EGRESS_ONLY_INTERNET_GATEWAY",
+		"TRANSIT_GATEWAY",
+	}
+}
+
 type ViolationReason string
 
 // Enum values for ViolationReason
@@ -150,6 +204,16 @@ const (
 	ViolationReasonMissingFirewallSubnetInAZ               ViolationReason = "MISSING_FIREWALL_SUBNET_IN_AZ"
 	ViolationReasonMissingExpectedRouteTable               ViolationReason = "MISSING_EXPECTED_ROUTE_TABLE"
 	ViolationReasonNetworkFirewallPolicyModified           ViolationReason = "NETWORK_FIREWALL_POLICY_MODIFIED"
+	ViolationReasonInternetGatewayMissingExpectedRoute     ViolationReason = "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE"
+	ViolationReasonFirewallSubnetMissingExpectedRoute      ViolationReason = "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE"
+	ViolationReasonUnexpectedFirewallRoutes                ViolationReason = "UNEXPECTED_FIREWALL_ROUTES"
+	ViolationReasonUnexpectedTargetGatewayRoutes           ViolationReason = "UNEXPECTED_TARGET_GATEWAY_ROUTES"
+	ViolationReasonTrafficInspectionCrossesAZBoundary      ViolationReason = "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY"
+	ViolationReasonInvalidRouteConfiguration               ViolationReason = "INVALID_ROUTE_CONFIGURATION"
+	ViolationReasonMissingTargetGateway                    ViolationReason = "MISSING_TARGET_GATEWAY"
+	ViolationReasonInternetTrafficNotInspected             ViolationReason = "INTERNET_TRAFFIC_NOT_INSPECTED"
+	ViolationReasonBlackHoleRouteDetected                  ViolationReason = "BLACK_HOLE_ROUTE_DETECTED"
+	ViolationReasonBlackHoleRouteDetectedInFirewallSubnet  ViolationReason = "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET"
 	ViolationReasonResourceMissingDnsFirewall              ViolationReason = "RESOURCE_MISSING_DNS_FIREWALL"
 )
 
@@ -172,6 +236,16 @@ func (ViolationReason) Values() []ViolationReason {
 		"MISSING_FIREWALL_SUBNET_IN_AZ",
 		"MISSING_EXPECTED_ROUTE_TABLE",
 		"NETWORK_FIREWALL_POLICY_MODIFIED",
+		"INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE",
+		"FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE",
+		"UNEXPECTED_FIREWALL_ROUTES",
+		"UNEXPECTED_TARGET_GATEWAY_ROUTES",
+		"TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY",
+		"INVALID_ROUTE_CONFIGURATION",
+		"MISSING_TARGET_GATEWAY",
+		"INTERNET_TRAFFIC_NOT_INSPECTED",
+		"BLACK_HOLE_ROUTE_DETECTED",
+		"BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET",
 		"RESOURCE_MISSING_DNS_FIREWALL",
 	}
 }

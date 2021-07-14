@@ -57,7 +57,7 @@ type GetSubscriptionAttributesOutput struct {
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html) in the
 	// Amazon SNS Developer Guide.
 	//
-	// * Owner – The AWS account ID of the subscription's
+	// * Owner – The account ID of the subscription's
 	// owner.
 	//
 	// * PendingConfirmation – true if the subscription hasn't been confirmed.

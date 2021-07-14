@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the password policy for the AWS account. This tells you the complexity
+// Retrieves the password policy for the account. This tells you the complexity
 // requirements and mandatory rotation periods for the IAM user passwords in your
 // account. For more information about using a password policy, see Managing an IAM
 // password policy

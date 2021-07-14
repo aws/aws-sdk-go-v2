@@ -48,9 +48,9 @@ type CreateProjectInput struct {
 	ProjectDescription *string
 
 	// A list of key-value pairs that contain metadata for the project. For more
-	// information, see Tagging your AWS IoT SiteWise resources
+	// information, see Tagging your IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 }
 

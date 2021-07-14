@@ -13,7 +13,7 @@ type CertificateDetail struct {
 	// The Amazon Resource Name (ARN) of the certificate. For more information about
 	// ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	CertificateArn *string
 
 	// The Amazon Resource Name (ARN) of the ACM PCA private certificate authority (CA)
@@ -42,15 +42,16 @@ type CertificateDetail struct {
 	// certificate status is FAILED. For more information, see Certificate Request
 	// Failed
 	// (https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed)
-	// in the AWS Certificate Manager User Guide.
+	// in the Amazon Web Services Certificate Manager User Guide.
 	FailureReason FailureReason
 
 	// The date and time at which the certificate was imported. This value exists only
 	// when the certificate type is IMPORTED.
 	ImportedAt *time.Time
 
-	// A list of ARNs for the AWS resources that are using the certificate. A
-	// certificate can be used by multiple AWS resources.
+	// A list of ARNs for the Amazon Web Services resources that are using the
+	// certificate. A certificate can be used by multiple Amazon Web Services
+	// resources.
 	InUseBy []string
 
 	// The time at which the certificate was issued. This value exists only when the
@@ -126,7 +127,7 @@ type CertificateDetail struct {
 	// certificates. For more information about the differences between certificates
 	// that you import and those that ACM provides, see Importing Certificates
 	// (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in
-	// the AWS Certificate Manager User Guide.
+	// the Amazon Web Services Certificate Manager User Guide.
 	Type CertificateType
 }
 
@@ -231,7 +232,8 @@ type DomainValidationOption struct {
 	ValidationDomain *string
 }
 
-// Object containing expiration events options associated with an AWS account.
+// Object containing expiration events options associated with an Amazon Web
+// Services account.
 type ExpiryEventsConfiguration struct {
 
 	// Specifies the number of days prior to certificate expiration when ACM starts
@@ -335,8 +337,8 @@ type RenewalSummary struct {
 	RenewalStatusReason FailureReason
 }
 
-// Contains a DNS record value that you can use to can use to validate ownership or
-// control of a domain. This is used by the DescribeCertificate action.
+// Contains a DNS record value that you can use to validate ownership or control of
+// a domain. This is used by the DescribeCertificate action.
 type ResourceRecord struct {
 
 	// The name of the DNS record to create in your domain. This is supplied by ACM.

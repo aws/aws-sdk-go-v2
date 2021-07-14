@@ -29,16 +29,16 @@ func (c *Client) CreateInvitations(ctx context.Context, params *CreateInvitation
 
 type CreateInvitationsInput struct {
 
-	// An array that lists AWS account IDs, one for each account to send the invitation
-	// to.
+	// An array that lists Amazon Web Services account IDs, one for each account to
+	// send the invitation to.
 	//
 	// This member is required.
 	AccountIds []string
 
 	// Specifies whether to send an email notification to the root user of each account
 	// that the invitation will be sent to. This notification is in addition to an
-	// alert that the root user receives in AWS Personal Health Dashboard. To send an
-	// email notification to the root user of each account, set this value to true.
+	// alert that the root user receives in Personal Health Dashboard. To send an email
+	// notification to the root user of each account, set this value to true.
 	DisableEmailNotification bool
 
 	// A custom message to include in the invitation. Amazon Macie adds this message to

@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the password for the specified IAM user. You can use the AWS CLI, the
-// AWS API, or the Users page in the IAM console to change the password for any IAM
-// user. Use ChangePassword to change your own password in the My Security
-// Credentials page in the AWS Management Console. For more information about
+// Changes the password for the specified IAM user. You can use the CLI, the Amazon
+// Web Services API, or the Users page in the IAM console to change the password
+// for any IAM user. Use ChangePassword to change your own password in the My
+// Security Credentials page in the Management Console. For more information about
 // modifying passwords, see Managing passwords
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in
 // the IAM User Guide.
@@ -57,7 +57,7 @@ type UpdateLoginProfileInput struct {
 	// (\u000A), and carriage return (\u000D)
 	//
 	// However, the format can be further
-	// restricted by the account administrator by setting a password policy on the AWS
+	// restricted by the account administrator by setting a password policy on the
 	// account. For more information, see UpdateAccountPasswordPolicy.
 	Password *string
 

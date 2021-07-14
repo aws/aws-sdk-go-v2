@@ -99,7 +99,7 @@ type SetSMSAttributesInput struct {
 	// * Total number of parts
 	//
 	// To receive the report, the
-	// bucket must have a policy that allows the Amazon SNS service principle to
+	// bucket must have a policy that allows the Amazon SNS service principal to
 	// perform the s3:PutObject and s3:GetBucketLocation actions. For an example bucket
 	// policy and usage report, see Monitoring SMS Activity
 	// (https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html) in the Amazon SNS

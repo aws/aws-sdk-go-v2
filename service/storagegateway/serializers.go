@@ -4332,6 +4332,20 @@ func awsAwsjson11_serializeDocumentDiskIds(v []string, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEndpointNetworkConfiguration(v *types.EndpointNetworkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IpAddresses != nil {
+		ok := object.Key("IpAddresses")
+		if err := awsAwsjson11_serializeDocumentIpAddressList(v.IpAddresses, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFileShareARNList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4377,6 +4391,17 @@ func awsAwsjson11_serializeDocumentFolderList(v []string, value smithyjson.Value
 }
 
 func awsAwsjson11_serializeDocumentHosts(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIpAddressList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -4678,6 +4703,13 @@ func awsAwsjson11_serializeOpDocumentAssociateFileSystemInput(v *AssociateFileSy
 		ok.String(*v.ClientToken)
 	}
 
+	if v.EndpointNetworkConfiguration != nil {
+		ok := object.Key("EndpointNetworkConfiguration")
+		if err := awsAwsjson11_serializeDocumentEndpointNetworkConfiguration(v.EndpointNetworkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GatewayARN != nil {
 		ok := object.Key("GatewayARN")
 		ok.String(*v.GatewayARN)
@@ -4837,6 +4869,11 @@ func awsAwsjson11_serializeOpDocumentCreateNFSFileShareInput(v *CreateNFSFileSha
 	object := value.Object()
 	defer object.Close()
 
+	if v.BucketRegion != nil {
+		ok := object.Key("BucketRegion")
+		ok.String(*v.BucketRegion)
+	}
+
 	if v.CacheAttributes != nil {
 		ok := object.Key("CacheAttributes")
 		if err := awsAwsjson11_serializeDocumentCacheAttributes(v.CacheAttributes, ok); err != nil {
@@ -4935,6 +4972,11 @@ func awsAwsjson11_serializeOpDocumentCreateNFSFileShareInput(v *CreateNFSFileSha
 		}
 	}
 
+	if v.VPCEndpointDNSName != nil {
+		ok := object.Key("VPCEndpointDNSName")
+		ok.String(*v.VPCEndpointDNSName)
+	}
+
 	return nil
 }
 
@@ -4962,6 +5004,11 @@ func awsAwsjson11_serializeOpDocumentCreateSMBFileShareInput(v *CreateSMBFileSha
 	if v.Authentication != nil {
 		ok := object.Key("Authentication")
 		ok.String(*v.Authentication)
+	}
+
+	if v.BucketRegion != nil {
+		ok := object.Key("BucketRegion")
+		ok.String(*v.BucketRegion)
 	}
 
 	if v.CacheAttributes != nil {
@@ -5033,6 +5080,11 @@ func awsAwsjson11_serializeOpDocumentCreateSMBFileShareInput(v *CreateSMBFileSha
 		ok.String(string(v.ObjectACL))
 	}
 
+	if v.OplocksEnabled != nil {
+		ok := object.Key("OplocksEnabled")
+		ok.Boolean(*v.OplocksEnabled)
+	}
+
 	if v.ReadOnly != nil {
 		ok := object.Key("ReadOnly")
 		ok.Boolean(*v.ReadOnly)
@@ -5065,6 +5117,11 @@ func awsAwsjson11_serializeOpDocumentCreateSMBFileShareInput(v *CreateSMBFileSha
 		if err := awsAwsjson11_serializeDocumentUserList(v.ValidUserList, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VPCEndpointDNSName != nil {
+		ok := object.Key("VPCEndpointDNSName")
+		ok.String(*v.VPCEndpointDNSName)
 	}
 
 	return nil
@@ -6367,6 +6424,11 @@ func awsAwsjson11_serializeOpDocumentUpdateGatewayInformationInput(v *UpdateGate
 		ok.String(*v.GatewayARN)
 	}
 
+	if len(v.GatewayCapacity) > 0 {
+		ok := object.Key("GatewayCapacity")
+		ok.String(string(v.GatewayCapacity))
+	}
+
 	if v.GatewayName != nil {
 		ok := object.Key("GatewayName")
 		ok.String(*v.GatewayName)
@@ -6585,6 +6647,11 @@ func awsAwsjson11_serializeOpDocumentUpdateSMBFileShareInput(v *UpdateSMBFileSha
 	if len(v.ObjectACL) > 0 {
 		ok := object.Key("ObjectACL")
 		ok.String(string(v.ObjectACL))
+	}
+
+	if v.OplocksEnabled != nil {
+		ok := object.Key("OplocksEnabled")
+		ok.Boolean(*v.OplocksEnabled)
 	}
 
 	if v.ReadOnly != nil {

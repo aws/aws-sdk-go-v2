@@ -6,6 +6,20 @@ import (
 	"time"
 )
 
+// A time range that specifies when DevOps Guru opens and then closes an anomaly.
+// This is different from AnomalyTimeRange, which specifies the time range when
+// DevOps Guru actually observes the anomalous behavior.
+type AnomalyReportedTimeRange struct {
+
+	// The time when an anomaly is opened.
+	//
+	// This member is required.
+	OpenTime *time.Time
+
+	// The time when an anomaly is closed.
+	CloseTime *time.Time
+}
+
 // Details about the source of the anomalous operational data that triggered the
 // anomaly. The one supported source is Amazon CloudWatch metrics.
 type AnomalySourceDetails struct {
@@ -16,7 +30,8 @@ type AnomalySourceDetails struct {
 }
 
 // A time range that specifies when the observed unusual behavior in an anomaly
-// started and ended.
+// started and ended. This is different from AnomalyReportedTimeRange, which
+// specifies the time range when DevOps Guru opens and then closes an anomaly.
 type AnomalyTimeRange struct {
 
 	// The time when the anomalous behavior started.
@@ -415,8 +430,13 @@ type PredictionTimeRange struct {
 // Information about an anomaly. This object is returned by ListAnomalies.
 type ProactiveAnomaly struct {
 
+	// A AnomalyReportedTimeRange object that specifies the time range between when the
+	// anomaly is opened and the time when it is closed.
+	AnomalyReportedTimeRange *AnomalyReportedTimeRange
+
 	// A time range that specifies when the observed unusual behavior in an anomaly
-	// started and ended.
+	// started and ended. This is different from AnomalyReportedTimeRange, which
+	// specifies the time range when DevOps Guru opens and then closes an anomaly.
 	AnomalyTimeRange *AnomalyTimeRange
 
 	// The ID of the insight that contains this anomaly. An insight is composed of
@@ -457,8 +477,13 @@ type ProactiveAnomaly struct {
 // Details about a proactive anomaly. This object is returned by DescribeAnomaly.
 type ProactiveAnomalySummary struct {
 
+	// A AnomalyReportedTimeRange object that specifies the time range between when the
+	// anomaly is opened and the time when it is closed.
+	AnomalyReportedTimeRange *AnomalyReportedTimeRange
+
 	// A time range that specifies when the observed unusual behavior in an anomaly
-	// started and ended.
+	// started and ended. This is different from AnomalyReportedTimeRange, which
+	// specifies the time range when DevOps Guru opens and then closes an anomaly.
 	AnomalyTimeRange *AnomalyTimeRange
 
 	// The ID of the insight that contains this anomaly. An insight is composed of
@@ -567,8 +592,13 @@ type ProactiveInsightSummary struct {
 // Details about a reactive anomaly. This object is returned by ListAnomalies.
 type ReactiveAnomaly struct {
 
+	// A AnomalyReportedTimeRange object that specifies the time range between when the
+	// anomaly is opened and the time when it is closed.
+	AnomalyReportedTimeRange *AnomalyReportedTimeRange
+
 	// A time range that specifies when the observed unusual behavior in an anomaly
-	// started and ended.
+	// started and ended. This is different from AnomalyReportedTimeRange, which
+	// specifies the time range when DevOps Guru opens and then closes an anomaly.
 	AnomalyTimeRange *AnomalyTimeRange
 
 	// The ID of the insight that contains this anomaly. An insight is composed of
@@ -598,8 +628,13 @@ type ReactiveAnomaly struct {
 // Details about a reactive anomaly. This object is returned by DescribeAnomaly.
 type ReactiveAnomalySummary struct {
 
+	// A AnomalyReportedTimeRange object that specifies the time range between when the
+	// anomaly is opened and the time when it is closed.
+	AnomalyReportedTimeRange *AnomalyReportedTimeRange
+
 	// A time range that specifies when the observed unusual behavior in an anomaly
-	// started and ended.
+	// started and ended. This is different from AnomalyReportedTimeRange, which
+	// specifies the time range when DevOps Guru opens and then closes an anomaly.
 	AnomalyTimeRange *AnomalyTimeRange
 
 	// The ID of the insight that contains this anomaly. An insight is composed of

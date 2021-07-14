@@ -28,24 +28,24 @@ type ActiveTrustedKeyGroups struct {
 	Items []KGKeyPairIds
 }
 
-// A list of AWS accounts and the active CloudFront key pairs in each account that
+// A list of accounts and the active CloudFront key pairs in each account that
 // CloudFront can use to verify the signatures of signed URLs and signed cookies.
 type ActiveTrustedSigners struct {
 
-	// This field is true if any of the AWS accounts in the list have active CloudFront
-	// key pairs that CloudFront can use to verify the signatures of signed URLs and
-	// signed cookies. If not, this field is false.
+	// This field is true if any of the accounts in the list have active CloudFront key
+	// pairs that CloudFront can use to verify the signatures of signed URLs and signed
+	// cookies. If not, this field is false.
 	//
 	// This member is required.
 	Enabled *bool
 
-	// The number of AWS accounts in the list.
+	// The number of accounts in the list.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// A list of AWS accounts and the identifiers of active CloudFront key pairs in
-	// each account that CloudFront can use to verify the signatures of signed URLs and
+	// A list of accounts and the identifiers of active CloudFront key pairs in each
+	// account that CloudFront can use to verify the signatures of signed URLs and
 	// signed cookies.
 	Items []Signer
 }
@@ -65,14 +65,15 @@ type Aliases struct {
 	Items []string
 }
 
-// AWS services in China customers must file for an Internet Content Provider (ICP)
-// recordal if they want to serve content publicly on an alternate domain name,
-// also known as a CNAME, that they've added to CloudFront. AliasICPRecordal
-// provides the ICP recordal status for CNAMEs associated with distributions. The
-// status is returned in the CloudFront response; you can't configure it yourself.
-// For more information about ICP recordals, see  Signup, Accounts, and Credentials
+// Amazon Web Services services in China customers must file for an Internet
+// Content Provider (ICP) recordal if they want to serve content publicly on an
+// alternate domain name, also known as a CNAME, that they've added to CloudFront.
+// AliasICPRecordal provides the ICP recordal status for CNAMEs associated with
+// distributions. The status is returned in the CloudFront response; you can't
+// configure it yourself. For more information about ICP recordals, see  Signup,
+// Accounts, and Credentials
 // (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
-// in Getting Started with AWS services in China.
+// in Getting Started with Amazon Web Services services in China.
 type AliasICPRecordal struct {
 
 	// A domain name associated with a distribution.
@@ -308,8 +309,8 @@ type CacheBehavior struct {
 	// a cache behavior.
 	FunctionAssociations *FunctionAssociations
 
-	// A complex type that contains zero or more Lambda function associations for a
-	// cache behavior.
+	// A complex type that contains zero or more Lambda@Edge function associations for
+	// a cache behavior.
 	LambdaFunctionAssociations *LambdaFunctionAssociations
 
 	// This field is deprecated. We recommend that you use the MaxTTL field in a cache
@@ -379,14 +380,14 @@ type CacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	TrustedKeyGroups *TrustedKeyGroups
 
-	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of AWS
-	// account IDs whose public keys CloudFront can use to validate signed URLs or
-	// signed cookies. When a cache behavior contains trusted signers, CloudFront
-	// requires signed URLs or signed cookies for all requests that match the cache
-	// behavior. The URLs or cookies must be signed with the private key of a
-	// CloudFront key pair in the trusted signer’s AWS account. The signed URL or
-	// cookie contains information about which public key CloudFront should use to
-	// verify the signature. For more information, see Serving private content
+	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of account
+	// IDs whose public keys CloudFront can use to validate signed URLs or signed
+	// cookies. When a cache behavior contains trusted signers, CloudFront requires
+	// signed URLs or signed cookies for all requests that match the cache behavior.
+	// The URLs or cookies must be signed with the private key of a CloudFront key pair
+	// in the trusted signer’s account. The signed URL or cookie contains information
+	// about which public key CloudFront should use to verify the signature. For more
+	// information, see Serving private content
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	TrustedSigners *TrustedSigners
@@ -665,8 +666,8 @@ type CachePolicySummary struct {
 	// This member is required.
 	CachePolicy *CachePolicy
 
-	// The type of cache policy, either managed (created by AWS) or custom (created in
-	// this AWS account).
+	// The type of cache policy, either managed (created by Amazon Web Services) or
+	// custom (created in this account).
 	//
 	// This member is required.
 	Type CachePolicyType
@@ -746,13 +747,13 @@ type CloudFrontOriginAccessIdentityList struct {
 	MaxItems *int32
 
 	// The number of CloudFront origin access identities that were created by the
-	// current AWS account.
+	// current account.
 	//
 	// This member is required.
 	Quantity *int32
 
 	// A complex type that contains one CloudFrontOriginAccessIdentitySummary element
-	// for each origin access identity that was created by the current AWS account.
+	// for each origin access identity that was created by the current account.
 	Items []CloudFrontOriginAccessIdentitySummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
@@ -781,6 +782,47 @@ type CloudFrontOriginAccessIdentitySummary struct {
 	//
 	// This member is required.
 	S3CanonicalUserId *string
+}
+
+// An alias (also called a CNAME) and the CloudFront distribution and Amazon Web
+// Services account ID that it’s associated with. The distribution and account IDs
+// are partially hidden, which allows you to identify the distributions and
+// accounts that you own, but helps to protect the information of ones that you
+// don’t own.
+type ConflictingAlias struct {
+
+	// The (partially hidden) ID of the Amazon Web Services account that owns the
+	// distribution that’s associated with the alias.
+	AccountId *string
+
+	// An alias (also called a CNAME).
+	Alias *string
+
+	// The (partially hidden) ID of the CloudFront distribution associated with the
+	// alias.
+	DistributionId *string
+}
+
+// A list of aliases (also called CNAMEs) and the CloudFront distributions and
+// Amazon Web Services accounts that they are associated with. In the list, the
+// distribution and account IDs are partially hidden, which allows you to identify
+// the distributions and accounts that you own, but helps to protect the
+// information of ones that you don’t own.
+type ConflictingAliasesList struct {
+
+	// Contains the conflicting aliases in the list.
+	Items []ConflictingAlias
+
+	// The maximum number of conflicting aliases requested.
+	MaxItems *int32
+
+	// If there are more items in the list than are in this response, this element is
+	// present. It contains the value that you should use in the Marker field of a
+	// subsequent request to continue listing conflicting aliases where you left off.
+	NextMarker *string
+
+	// The number of conflicting aliases returned in the response.
+	Quantity *int32
 }
 
 // A field-level encryption content type profile.
@@ -887,7 +929,7 @@ type CookiePreference struct {
 	// automatically. For the current limit on the number of cookie names that you can
 	// whitelist for each cache behavior, see  CloudFront Limits
 	// (https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront)
-	// in the AWS General Reference.
+	// in the Amazon Web Services General Reference.
 	WhitelistedNames *CookieNames
 }
 
@@ -1197,8 +1239,8 @@ type DefaultCacheBehavior struct {
 	// a cache behavior.
 	FunctionAssociations *FunctionAssociations
 
-	// A complex type that contains zero or more Lambda function associations for a
-	// cache behavior.
+	// A complex type that contains zero or more Lambda@Edge function associations for
+	// a cache behavior.
 	LambdaFunctionAssociations *LambdaFunctionAssociations
 
 	// This field is deprecated. We recommend that you use the MaxTTL field in a cache
@@ -1269,14 +1311,14 @@ type DefaultCacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	TrustedKeyGroups *TrustedKeyGroups
 
-	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of AWS
-	// account IDs whose public keys CloudFront can use to validate signed URLs or
-	// signed cookies. When a cache behavior contains trusted signers, CloudFront
-	// requires signed URLs or signed cookies for all requests that match the cache
-	// behavior. The URLs or cookies must be signed with the private key of a
-	// CloudFront key pair in a trusted signer’s AWS account. The signed URL or cookie
-	// contains information about which public key CloudFront should use to verify the
-	// signature. For more information, see Serving private content
+	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of account
+	// IDs whose public keys CloudFront can use to validate signed URLs or signed
+	// cookies. When a cache behavior contains trusted signers, CloudFront requires
+	// signed URLs or signed cookies for all requests that match the cache behavior.
+	// The URLs or cookies must be signed with the private key of a CloudFront key pair
+	// in a trusted signer’s account. The signed URL or cookie contains information
+	// about which public key CloudFront should use to verify the signature. For more
+	// information, see Serving private content
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	TrustedSigners *TrustedSigners
@@ -1288,7 +1330,7 @@ type Distribution struct {
 
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your AWS account ID.
+	// 123456789012 is your account ID.
 	//
 	// This member is required.
 	ARN *string
@@ -1337,18 +1379,19 @@ type Distribution struct {
 	// We recommend using TrustedKeyGroups instead of TrustedSigners. CloudFront
 	// automatically adds this field to the response if you’ve configured a cache
 	// behavior in this distribution to serve private content using trusted signers.
-	// This field contains a list of AWS account IDs and the active CloudFront key
-	// pairs in each account that CloudFront can use to verify the signatures of signed
-	// URLs or signed cookies.
+	// This field contains a list of account IDs and the active CloudFront key pairs in
+	// each account that CloudFront can use to verify the signatures of signed URLs or
+	// signed cookies.
 	ActiveTrustedSigners *ActiveTrustedSigners
 
-	// AWS services in China customers must file for an Internet Content Provider (ICP)
-	// recordal if they want to serve content publicly on an alternate domain name,
-	// also known as a CNAME, that they've added to CloudFront. AliasICPRecordal
-	// provides the ICP recordal status for CNAMEs associated with distributions. For
-	// more information about ICP recordals, see  Signup, Accounts, and Credentials
+	// Amazon Web Services services in China customers must file for an Internet
+	// Content Provider (ICP) recordal if they want to serve content publicly on an
+	// alternate domain name, also known as a CNAME, that they've added to CloudFront.
+	// AliasICPRecordal provides the ICP recordal status for CNAMEs associated with
+	// distributions. For more information about ICP recordals, see  Signup, Accounts,
+	// and Credentials
 	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
-	// in Getting Started with AWS services in China.
+	// in Getting Started with Amazon Web Services services in China.
 	AliasICPRecordals []AliasICPRecordal
 }
 
@@ -1449,23 +1492,25 @@ type DistributionConfig struct {
 	// restrict access but not by IP address), you can create two distributions. For
 	// more information, see Creating a Signed URL Using a Custom Policy
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html)
-	// in the Amazon CloudFront Developer Guide. If you're using an Amazon Route 53
-	// alias resource record set to route traffic to your CloudFront distribution, you
-	// need to create a second alias resource record set when both of the following are
-	// true:
+	// in the Amazon CloudFront Developer Guide. If you're using an Route 53 Amazon Web
+	// Services Integration alias resource record set to route traffic to your
+	// CloudFront distribution, you need to create a second alias resource record set
+	// when both of the following are true:
 	//
 	// * You enable IPv6 for the distribution
 	//
-	// * You're using alternate domain
-	// names in the URLs for your objects
+	// *
+	// You're using alternate domain names in the URLs for your objects
 	//
-	// For more information, see Routing Traffic to
-	// an Amazon CloudFront Web Distribution by Using Your Domain Name
+	// For more
+	// information, see Routing Traffic to an Amazon CloudFront Web Distribution by
+	// Using Your Domain Name
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html)
-	// in the Amazon Route 53 Developer Guide. If you created a CNAME resource record
-	// set, either with Amazon Route 53 or with another DNS service, you don't need to
-	// make any changes. A CNAME record will route traffic to your distribution
-	// regardless of the IP address format of the viewer request.
+	// in the Route 53 Amazon Web Services Integration Developer Guide. If you created
+	// a CNAME resource record set, either with Route 53 Amazon Web Services
+	// Integration or with another DNS service, you don't need to make any changes. A
+	// CNAME record will route traffic to your distribution regardless of the IP
+	// address format of the viewer request.
 	IsIPV6Enabled *bool
 
 	// A complex type that controls whether access logs are written for the
@@ -1501,19 +1546,19 @@ type DistributionConfig struct {
 	// communicating with viewers.
 	ViewerCertificate *ViewerCertificate
 
-	// A unique identifier that specifies the AWS WAF web ACL, if any, to associate
-	// with this distribution. To specify a web ACL created using the latest version of
-	// AWS WAF, use the ACL ARN, for example
+	// A unique identifier that specifies the WAF web ACL, if any, to associate with
+	// this distribution. To specify a web ACL created using the latest version of WAF,
+	// use the ACL ARN, for example
 	// arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a.
-	// To specify a web ACL created using AWS WAF Classic, use the ACL ID, for example
-	// 473e64fd-f30b-4765-81a0-62ad96dd167a. AWS WAF is a web application firewall that
+	// To specify a web ACL created using WAF Classic, use the ACL ID, for example
+	// 473e64fd-f30b-4765-81a0-62ad96dd167a. WAF is a web application firewall that
 	// lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront,
 	// and lets you control access to your content. Based on conditions that you
 	// specify, such as the IP addresses that requests originate from or the values of
 	// query strings, CloudFront responds to requests either with the requested content
 	// or with an HTTP 403 status code (Forbidden). You can also configure CloudFront
 	// to return a custom error page when a request is blocked. For more information
-	// about AWS WAF, see the AWS WAF Developer Guide
+	// about WAF, see the WAF Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).
 	WebACLId *string
 }
@@ -1586,13 +1631,13 @@ type DistributionList struct {
 	// This member is required.
 	MaxItems *int32
 
-	// The number of distributions that were created by the current AWS account.
+	// The number of distributions that were created by the current account.
 	//
 	// This member is required.
 	Quantity *int32
 
 	// A complex type that contains one DistributionSummary element for each
-	// distribution that was created by the current AWS account.
+	// distribution that was created by the current account.
 	Items []DistributionSummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
@@ -1606,7 +1651,7 @@ type DistributionSummary struct {
 
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your AWS account ID.
+	// 123456789012 is your account ID.
 	//
 	// This member is required.
 	ARN *string
@@ -1707,13 +1752,14 @@ type DistributionSummary struct {
 	// This member is required.
 	WebACLId *string
 
-	// AWS services in China customers must file for an Internet Content Provider (ICP)
-	// recordal if they want to serve content publicly on an alternate domain name,
-	// also known as a CNAME, that they've added to CloudFront. AliasICPRecordal
-	// provides the ICP recordal status for CNAMEs associated with distributions. For
-	// more information about ICP recordals, see  Signup, Accounts, and Credentials
+	// Amazon Web Services services in China customers must file for an Internet
+	// Content Provider (ICP) recordal if they want to serve content publicly on an
+	// alternate domain name, also known as a CNAME, that they've added to CloudFront.
+	// AliasICPRecordal provides the ICP recordal status for CNAMEs associated with
+	// distributions. For more information about ICP recordals, see  Signup, Accounts,
+	// and Credentials
 	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
-	// in Getting Started with AWS services in China.
+	// in Getting Started with Amazon Web Services services in China.
 	AliasICPRecordals []AliasICPRecordal
 
 	// A complex type that contains information about origin groups for this
@@ -2323,13 +2369,13 @@ type InvalidationList struct {
 	// This member is required.
 	MaxItems *int32
 
-	// The number of invalidation batches that were created by the current AWS account.
+	// The number of invalidation batches that were created by the current account.
 	//
 	// This member is required.
 	Quantity *int32
 
 	// A complex type that contains one InvalidationSummary element for each
-	// invalidation batch created by the current AWS account.
+	// invalidation batch created by the current account.
 	Items []InvalidationSummary
 
 	// If IsTruncated is true, this element is present and contains the value that you
@@ -2456,10 +2502,9 @@ type KGKeyPairIds struct {
 // real-time log data.
 type KinesisStreamConfig struct {
 
-	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
-	// role that CloudFront can use to send real-time log data to your Kinesis data
-	// stream. For more information the IAM role, see Real-time log configuration IAM
-	// role
+	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
+	// that CloudFront can use to send real-time log data to your Kinesis data stream.
+	// For more information the IAM role, see Real-time log configuration IAM role
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role)
 	// in the Amazon CloudFront Developer Guide.
 	//
@@ -2473,11 +2518,11 @@ type KinesisStreamConfig struct {
 	StreamARN *string
 }
 
-// A complex type that contains a Lambda function association.
+// A complex type that contains a Lambda@Edge function association.
 type LambdaFunctionAssociation struct {
 
-	// Specifies the event type that triggers a Lambda function invocation. You can
-	// specify the following values:
+	// Specifies the event type that triggers a Lambda@Edge function invocation. You
+	// can specify the following values:
 	//
 	// * viewer-request: The function executes when
 	// CloudFront receives a request from a viewer and before it checks to see whether
@@ -2501,31 +2546,31 @@ type LambdaFunctionAssociation struct {
 	// This member is required.
 	EventType EventType
 
-	// The ARN of the Lambda function. You must specify the ARN of a function version;
-	// you can't specify a Lambda alias or $LATEST.
+	// The ARN of the Lambda@Edge function. You must specify the ARN of a function
+	// version; you can't specify an alias or $LATEST.
 	//
 	// This member is required.
 	LambdaFunctionARN *string
 
-	// A flag that allows a Lambda function to have read access to the body content.
-	// For more information, see Accessing the Request Body by Choosing the Include
-	// Body Option
+	// A flag that allows a Lambda@Edge function to have read access to the body
+	// content. For more information, see Accessing the Request Body by Choosing the
+	// Include Body Option
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html)
 	// in the Amazon CloudFront Developer Guide.
 	IncludeBody *bool
 }
 
-// A complex type that specifies a list of Lambda functions associations for a
-// cache behavior. If you want to invoke one or more Lambda functions triggered by
-// requests that match the PathPattern of the cache behavior, specify the
-// applicable values for Quantity and Items. Note that there can be up to 4
+// A complex type that specifies a list of Lambda@Edge functions associations for a
+// cache behavior. If you want to invoke one or more Lambda@Edge functions
+// triggered by requests that match the PathPattern of the cache behavior, specify
+// the applicable values for Quantity and Items. Note that there can be up to 4
 // LambdaFunctionAssociation items in this list (one for each possible value of
-// EventType) and each EventType can be associated with the Lambda function only
-// once. If you don't want to invoke any Lambda functions for the requests that
-// match PathPattern, specify 0 for Quantity and omit Items.
+// EventType) and each EventType can be associated with only one function. If you
+// don't want to invoke any Lambda@Edge functions for the requests that match
+// PathPattern, specify 0 for Quantity and omit Items.
 type LambdaFunctionAssociations struct {
 
-	// The number of Lambda function associations for this cache behavior.
+	// The number of Lambda@Edge function associations for this cache behavior.
 	//
 	// This member is required.
 	Quantity *int32
@@ -2973,8 +3018,8 @@ type OriginRequestPolicySummary struct {
 	// This member is required.
 	OriginRequestPolicy *OriginRequestPolicy
 
-	// The type of origin request policy, either managed (created by AWS) or custom
-	// (created in this AWS account).
+	// The type of origin request policy, either managed (created by Amazon Web
+	// Services) or custom (created in this account).
 	//
 	// This member is required.
 	Type OriginRequestPolicyType
@@ -3008,12 +3053,12 @@ type OriginShield struct {
 	// This member is required.
 	Enabled *bool
 
-	// The AWS Region for Origin Shield. Specify the AWS Region that has the lowest
-	// latency to your origin. To specify a region, use the region code, not the region
-	// name. For example, specify the US East (Ohio) region as us-east-2. When you
-	// enable CloudFront Origin Shield, you must specify the AWS Region for Origin
-	// Shield. For the list of AWS Regions that you can specify, and for help choosing
-	// the best Region for your origin, see Choosing the AWS Region for Origin Shield
+	// The Region for Origin Shield. Specify the Region that has the lowest latency to
+	// your origin. To specify a region, use the region code, not the region name. For
+	// example, specify the US East (Ohio) region as us-east-2. When you enable
+	// CloudFront Origin Shield, you must specify the Region for Origin Shield. For the
+	// list of Regions that you can specify, and for help choosing the best Region for
+	// your origin, see Choosing the Region for Origin Shield
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region)
 	// in the Amazon CloudFront Developer Guide.
 	OriginShieldRegion *string
@@ -3467,13 +3512,13 @@ type S3OriginConfig struct {
 	OriginAccessIdentity *string
 }
 
-// A list of AWS accounts and the active CloudFront key pairs in each account that
+// A list of accounts and the active CloudFront key pairs in each account that
 // CloudFront can use to verify the signatures of signed URLs and signed cookies.
 type Signer struct {
 
-	// An AWS account number that contains active CloudFront key pairs that CloudFront
-	// can use to verify the signatures of signed URLs and signed cookies. If the AWS
-	// account that owns the key pairs is the same account that owns the CloudFront
+	// An account number that contains active CloudFront key pairs that CloudFront can
+	// use to verify the signatures of signed URLs and signed cookies. If the account
+	// that owns the key pairs is the same account that owns the CloudFront
 	// distribution, the value of this field is self.
 	AwsAccountNumber *string
 
@@ -3502,20 +3547,20 @@ type StreamingDistribution struct {
 
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your AWS account ID.
+	// 123456789012 is your account ID.
 	//
 	// This member is required.
 	ARN *string
 
-	// A complex type that lists the AWS accounts, if any, that you included in the
+	// A complex type that lists the accounts, if any, that you included in the
 	// TrustedSigners complex type for this distribution. These are the accounts that
 	// you want to allow to create signed URLs for private content. The Signer complex
-	// type lists the AWS account number of the trusted signer or self if the signer is
-	// the AWS account that created the distribution. The Signer element also includes
-	// the IDs of any active CloudFront key pairs that are associated with the trusted
-	// signer's AWS account. If no KeyPairId element appears for a Signer, that signer
-	// can't create signed URLs. For more information, see Serving Private Content
-	// through CloudFront
+	// type lists the account number of the trusted signer or self if the signer is the
+	// account that created the distribution. The Signer element also includes the IDs
+	// of any active CloudFront key pairs that are associated with the trusted signer's
+	// account. If no KeyPairId element appears for a Signer, that signer can't create
+	// signed URLs. For more information, see Serving Private Content through
+	// CloudFront
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
@@ -3578,7 +3623,7 @@ type StreamingDistributionConfig struct {
 	// This member is required.
 	S3Origin *S3Origin
 
-	// A complex type that specifies any AWS accounts that you want to permit to create
+	// A complex type that specifies any accounts that you want to permit to create
 	// signed URLs for private content. If you want the distribution to use signed
 	// URLs, include this element; if you want the distribution to use public URLs,
 	// remove this element. For more information, see Serving Private Content through
@@ -3637,14 +3682,13 @@ type StreamingDistributionList struct {
 	// This member is required.
 	MaxItems *int32
 
-	// The number of streaming distributions that were created by the current AWS
-	// account.
+	// The number of streaming distributions that were created by the current account.
 	//
 	// This member is required.
 	Quantity *int32
 
 	// A complex type that contains one StreamingDistributionSummary element for each
-	// distribution that was created by the current AWS account.
+	// distribution that was created by the current account.
 	Items []StreamingDistributionSummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
@@ -3658,7 +3702,7 @@ type StreamingDistributionSummary struct {
 
 	// The ARN (Amazon Resource Name) for the streaming distribution. For example:
 	// arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your AWS account ID.
+	// 123456789012 is your account ID.
 	//
 	// This member is required.
 	ARN *string
@@ -3714,8 +3758,8 @@ type StreamingDistributionSummary struct {
 	// This member is required.
 	Status *string
 
-	// A complex type that specifies the AWS accounts, if any, that you want to allow
-	// to create signed URLs for private content. If you want to require signed URLs in
+	// A complex type that specifies the accounts, if any, that you want to allow to
+	// create signed URLs for private content. If you want to require signed URLs in
 	// requests for objects in the target origin that match the PathPattern for this
 	// cache behavior, specify true for Enabled, and specify the applicable values for
 	// Quantity and Items.If you don't want to require signed URLs in requests for
@@ -3837,23 +3881,23 @@ type TrustedKeyGroups struct {
 	Items []string
 }
 
-// A list of AWS accounts whose public keys CloudFront can use to verify the
-// signatures of signed URLs and signed cookies.
+// A list of accounts whose public keys CloudFront can use to verify the signatures
+// of signed URLs and signed cookies.
 type TrustedSigners struct {
 
-	// This field is true if any of the AWS accounts have public keys that CloudFront
-	// can use to verify the signatures of signed URLs and signed cookies. If not, this
+	// This field is true if any of the accounts have public keys that CloudFront can
+	// use to verify the signatures of signed URLs and signed cookies. If not, this
 	// field is false.
 	//
 	// This member is required.
 	Enabled *bool
 
-	// The number of AWS accounts in the list.
+	// The number of accounts in the list.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// A list of AWS account identifiers.
+	// A list of account identifiers.
 	Items []string
 }
 
@@ -3887,9 +3931,9 @@ type TrustedSigners struct {
 // in the Amazon CloudFront Developer Guide.
 //
 // * The location of the SSL/TLS
-// certificate, AWS Certificate Manager (ACM)
+// certificate, Certificate Manager (ACM)
 // (https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html)
-// (recommended) or AWS Identity and Access Management (AWS IAM)
+// (recommended) or Identity and Access Management (IAM)
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html).
 // You specify the location by setting a value in one of the following fields (not
 // both):
@@ -3911,7 +3955,7 @@ type TrustedSigners struct {
 type ViewerCertificate struct {
 
 	// If the distribution uses Aliases (alternate domain names or CNAMEs) and the
-	// SSL/TLS certificate is stored in AWS Certificate Manager (ACM)
+	// SSL/TLS certificate is stored in Certificate Manager (ACM)
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html), provide
 	// the Amazon Resource Name (ARN) of the ACM certificate. CloudFront only supports
 	// ACM certificates in the US East (N. Virginia) Region (us-east-1). If you specify
@@ -3958,7 +4002,7 @@ type ViewerCertificate struct {
 	CloudFrontDefaultCertificate *bool
 
 	// If the distribution uses Aliases (alternate domain names or CNAMEs) and the
-	// SSL/TLS certificate is stored in AWS Identity and Access Management (AWS IAM)
+	// SSL/TLS certificate is stored in Identity and Access Management (IAM)
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html),
 	// provide the ID of the IAM certificate. If you specify an IAM certificate ID, you
 	// must also specify values for MinimumProtocolVersion and SSLSupportMethod.
@@ -4004,7 +4048,7 @@ type ViewerCertificate struct {
 	// * static-ip - Do not specify this value unless your
 	// distribution has been enabled for this feature by the CloudFront team. If you
 	// have a use case that requires static IP addresses for a distribution, contact
-	// CloudFront through the AWS Support Center
+	// CloudFront through the Amazon Web Services Support Center
 	// (https://console.aws.amazon.com/support/home).
 	//
 	// If the distribution uses the

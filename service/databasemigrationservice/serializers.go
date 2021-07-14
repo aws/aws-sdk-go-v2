@@ -2894,6 +2894,11 @@ func awsAwsjson11_serializeDocumentKafkaSettings(v *types.KafkaSettings, value s
 		ok.Integer(*v.MessageMaxBytes)
 	}
 
+	if v.NoHexPrefix != nil {
+		ok := object.Key("NoHexPrefix")
+		ok.Boolean(*v.NoHexPrefix)
+	}
+
 	if v.PartitionIncludeSchemaTable != nil {
 		ok := object.Key("PartitionIncludeSchemaTable")
 		ok.Boolean(*v.PartitionIncludeSchemaTable)
@@ -2985,6 +2990,11 @@ func awsAwsjson11_serializeDocumentKinesisSettings(v *types.KinesisSettings, val
 	if len(v.MessageFormat) > 0 {
 		ok := object.Key("MessageFormat")
 		ok.String(string(v.MessageFormat))
+	}
+
+	if v.NoHexPrefix != nil {
+		ok := object.Key("NoHexPrefix")
+		ok.Boolean(*v.NoHexPrefix)
 	}
 
 	if v.PartitionIncludeSchemaTable != nil {
@@ -3442,9 +3452,29 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.String(*v.SpatialDataOptionToGeoJsonFunctionName)
 	}
 
+	if v.StandbyDelayTime != nil {
+		ok := object.Key("StandbyDelayTime")
+		ok.Integer(*v.StandbyDelayTime)
+	}
+
 	if v.UseAlternateFolderForOnline != nil {
 		ok := object.Key("UseAlternateFolderForOnline")
 		ok.Boolean(*v.UseAlternateFolderForOnline)
+	}
+
+	if v.UseBFile != nil {
+		ok := object.Key("UseBFile")
+		ok.Boolean(*v.UseBFile)
+	}
+
+	if v.UseDirectPathFullLoad != nil {
+		ok := object.Key("UseDirectPathFullLoad")
+		ok.Boolean(*v.UseDirectPathFullLoad)
+	}
+
+	if v.UseLogminerReader != nil {
+		ok := object.Key("UseLogminerReader")
+		ok.Boolean(*v.UseLogminerReader)
 	}
 
 	if v.UsePathPrefix != nil {
@@ -3494,6 +3524,21 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 		ok.Boolean(*v.FailTasksOnLobTruncation)
 	}
 
+	if v.HeartbeatEnable != nil {
+		ok := object.Key("HeartbeatEnable")
+		ok.Boolean(*v.HeartbeatEnable)
+	}
+
+	if v.HeartbeatFrequency != nil {
+		ok := object.Key("HeartbeatFrequency")
+		ok.Integer(*v.HeartbeatFrequency)
+	}
+
+	if v.HeartbeatSchema != nil {
+		ok := object.Key("HeartbeatSchema")
+		ok.String(*v.HeartbeatSchema)
+	}
+
 	if v.MaxFileSize != nil {
 		ok := object.Key("MaxFileSize")
 		ok.Integer(*v.MaxFileSize)
@@ -3502,6 +3547,11 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 	if v.Password != nil {
 		ok := object.Key("Password")
 		ok.String(*v.Password)
+	}
+
+	if len(v.PluginName) > 0 {
+		ok := object.Key("PluginName")
+		ok.String(string(v.PluginName))
 	}
 
 	if v.Port != nil {
@@ -5220,6 +5270,11 @@ func awsAwsjson11_serializeOpDocumentModifyEndpointInput(v *ModifyEndpointInput,
 	if v.EngineName != nil {
 		ok := object.Key("EngineName")
 		ok.String(*v.EngineName)
+	}
+
+	if v.ExactSettings != nil {
+		ok := object.Key("ExactSettings")
+		ok.Boolean(*v.ExactSettings)
 	}
 
 	if v.ExternalTableDefinition != nil {

@@ -15,10 +15,10 @@ import (
 // specified IAM user. If none exists, the operation returns an empty list. The
 // service-specific credentials returned by this operation are used only for
 // authenticating the IAM user to a specific service. For more information about
-// using service-specific credentials to authenticate to an AWS service, see Set up
-// service-specific credentials
+// using service-specific credentials to authenticate to an Amazon Web Services
+// service, see Set up service-specific credentials
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html) in
-// the AWS CodeCommit User Guide.
+// the CodeCommit User Guide.
 func (c *Client) ListServiceSpecificCredentials(ctx context.Context, params *ListServiceSpecificCredentialsInput, optFns ...func(*Options)) (*ListServiceSpecificCredentialsOutput, error) {
 	if params == nil {
 		params = &ListServiceSpecificCredentialsInput{}
@@ -36,8 +36,9 @@ func (c *Client) ListServiceSpecificCredentials(ctx context.Context, params *Lis
 
 type ListServiceSpecificCredentialsInput struct {
 
-	// Filters the returned results to only those for the specified AWS service. If not
-	// specified, then AWS returns service-specific credentials for all services.
+	// Filters the returned results to only those for the specified Amazon Web Services
+	// service. If not specified, then Amazon Web Services returns service-specific
+	// credentials for all services.
 	ServiceName *string
 
 	// The name of the user whose service-specific credentials you want information

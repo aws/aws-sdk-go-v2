@@ -6,6 +6,7 @@
     },
     "files": [
         "api_client.go",
+        "api_op_AssociateAlias.go",
         "api_op_CreateCachePolicy.go",
         "api_op_CreateCloudFrontOriginAccessIdentity.go",
         "api_op_CreateDistribution.go",
@@ -58,6 +59,7 @@
         "api_op_GetStreamingDistributionConfig.go",
         "api_op_ListCachePolicies.go",
         "api_op_ListCloudFrontOriginAccessIdentities.go",
+        "api_op_ListConflictingAliases.go",
         "api_op_ListDistributions.go",
         "api_op_ListDistributionsByCachePolicyId.go",
         "api_op_ListDistributionsByKeyGroup.go",

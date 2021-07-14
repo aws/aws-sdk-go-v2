@@ -5224,6 +5224,11 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "ChoiceAnswers":
+			if err := awsRestjson1_deserializeDocumentChoiceAnswers(&sv.ChoiceAnswers, value); err != nil {
+				return err
+			}
+
 		case "Choices":
 			if err := awsRestjson1_deserializeDocumentChoices(&sv.Choices, value); err != nil {
 				return err
@@ -5299,6 +5304,15 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 					return fmt.Errorf("expected QuestionTitle to be of type string, got %T instead", value)
 				}
 				sv.QuestionTitle = ptr.String(jtv)
+			}
+
+		case "Reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnswerReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = types.AnswerReason(jtv)
 			}
 
 		case "Risk":
@@ -5380,6 +5394,11 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "ChoiceAnswerSummaries":
+			if err := awsRestjson1_deserializeDocumentChoiceAnswerSummaries(&sv.ChoiceAnswerSummaries, value); err != nil {
+				return err
+			}
+
 		case "Choices":
 			if err := awsRestjson1_deserializeDocumentChoices(&sv.Choices, value); err != nil {
 				return err
@@ -5419,6 +5438,15 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 					return fmt.Errorf("expected QuestionTitle to be of type string, got %T instead", value)
 				}
 				sv.QuestionTitle = ptr.String(jtv)
+			}
+
+		case "Reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnswerReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = types.AnswerReason(jtv)
 			}
 
 		case "Risk":
@@ -5491,6 +5519,199 @@ func awsRestjson1_deserializeDocumentChoice(v **types.Choice, value interface{})
 					return fmt.Errorf("expected ChoiceTitle to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentChoiceAnswer(v **types.ChoiceAnswer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChoiceAnswer
+	if *v == nil {
+		sv = &types.ChoiceAnswer{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChoiceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceId to be of type string, got %T instead", value)
+				}
+				sv.ChoiceId = ptr.String(jtv)
+			}
+
+		case "Notes":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceNotes to be of type string, got %T instead", value)
+				}
+				sv.Notes = ptr.String(jtv)
+			}
+
+		case "Reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = types.ChoiceReason(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ChoiceStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentChoiceAnswers(v *[]types.ChoiceAnswer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ChoiceAnswer
+	if *v == nil {
+		cv = []types.ChoiceAnswer{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ChoiceAnswer
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentChoiceAnswer(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentChoiceAnswerSummaries(v *[]types.ChoiceAnswerSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ChoiceAnswerSummary
+	if *v == nil {
+		cv = []types.ChoiceAnswerSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ChoiceAnswerSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentChoiceAnswerSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentChoiceAnswerSummary(v **types.ChoiceAnswerSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChoiceAnswerSummary
+	if *v == nil {
+		sv = &types.ChoiceAnswerSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChoiceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceId to be of type string, got %T instead", value)
+				}
+				sv.ChoiceId = ptr.String(jtv)
+			}
+
+		case "Reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = types.ChoiceReason(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChoiceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ChoiceStatus(jtv)
 			}
 
 		default:

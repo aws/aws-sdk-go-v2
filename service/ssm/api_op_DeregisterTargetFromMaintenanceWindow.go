@@ -39,7 +39,7 @@ type DeregisterTargetFromMaintenanceWindowInput struct {
 	WindowTargetId *string
 
 	// The system checks if the target is being referenced by a task. If the target is
-	// being referenced, the system returns an error and does not deregister the target
+	// being referenced, the system returns an error and doesn't deregister the target
 	// from the maintenance window.
 	Safe bool
 }

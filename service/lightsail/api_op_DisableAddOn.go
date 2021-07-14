@@ -12,7 +12,7 @@ import (
 )
 
 // Disables an add-on for an Amazon Lightsail resource. For more information, see
-// the Lightsail Dev Guide
+// the Amazon Lightsail Developer Guide
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 func (c *Client) DisableAddOn(ctx context.Context, params *DisableAddOnInput, optFns ...func(*Options)) (*DisableAddOnOutput, error) {
 	if params == nil {

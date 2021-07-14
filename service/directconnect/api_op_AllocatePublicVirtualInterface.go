@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions a public virtual interface to be owned by the specified AWS account.
-// The owner of a connection calls this function to provision a public virtual
-// interface to be owned by the specified AWS account. Virtual interfaces created
-// using this function must be confirmed by the owner using
+// Provisions a public virtual interface to be owned by the specified account. The
+// owner of a connection calls this function to provision a public virtual
+// interface to be owned by the specified account. Virtual interfaces created using
+// this function must be confirmed by the owner using
 // ConfirmPublicVirtualInterface. Until this step has been completed, the virtual
 // interface is in the confirming state and is not available to handle traffic.
 // When creating an IPv6 public virtual interface, omit the Amazon address and
@@ -47,7 +47,7 @@ type AllocatePublicVirtualInterfaceInput struct {
 	// This member is required.
 	NewPublicVirtualInterfaceAllocation *types.NewPublicVirtualInterfaceAllocation
 
-	// The ID of the AWS account that owns the public virtual interface.
+	// The ID of the account that owns the public virtual interface.
 	//
 	// This member is required.
 	OwnerAccount *string
@@ -76,6 +76,10 @@ type AllocatePublicVirtualInterfaceOutput struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDeviceV2 *string
 
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
+
 	// The BGP peers configured on this virtual interface.
 	BgpPeers []types.BGPPeer
 
@@ -101,14 +105,14 @@ type AllocatePublicVirtualInterfaceOutput struct {
 	// 9001. The default value is 1500.
 	Mtu *int32
 
-	// The ID of the AWS account that owns the virtual interface.
+	// The ID of the account that owns the virtual interface.
 	OwnerAccount *string
 
-	// The AWS Region where the virtual interface is located.
+	// The Region where the virtual interface is located.
 	Region *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
+	// The routes to be advertised to the Amazon Web Services network in this Region.
+	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []types.RouteFilterPrefix
 
 	// The tags associated with the virtual interface.

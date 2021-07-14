@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the specified AWS Firewall Manager policy.
+// Returns information about the specified Firewall Manager policy.
 func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns ...func(*Options)) (*GetPolicyOutput, error) {
 	if params == nil {
 		params = &GetPolicyInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns .
 
 type GetPolicyInput struct {
 
-	// The ID of the AWS Firewall Manager policy that you want the details for.
+	// The ID of the Firewall Manager policy that you want the details for.
 	//
 	// This member is required.
 	PolicyId *string
@@ -37,7 +37,7 @@ type GetPolicyInput struct {
 
 type GetPolicyOutput struct {
 
-	// Information about the specified AWS Firewall Manager policy.
+	// Information about the specified Firewall Manager policy.
 	Policy *types.Policy
 
 	// The Amazon Resource Name (ARN) of the specified policy.

@@ -34,10 +34,10 @@ type GetMasterAccountInput struct {
 
 type GetMasterAccountOutput struct {
 
-	// (Deprecated) The AWS account ID for the administrator account. If the accounts
-	// are associated by a Macie membership invitation, this object also provides
-	// details about the invitation that was sent to establish the relationship between
-	// the accounts.
+	// (Deprecated) The Amazon Web Services account ID for the administrator account.
+	// If the accounts are associated by a Macie membership invitation, this object
+	// also provides details about the invitation that was sent to establish the
+	// relationship between the accounts.
 	Master *types.Invitation
 
 	// Metadata pertaining to the operation's result.

@@ -15,8 +15,8 @@ import (
 // Retrieves information about a gateway capability configuration. Each gateway
 // capability defines data sources for a gateway. A capability configuration can
 // contain multiple data source configurations. If you define OPC-UA sources for a
-// gateway in the AWS IoT SiteWise console, all of your OPC-UA sources are stored
-// in one capability configuration. To list all capability configurations for a
+// gateway in the IoT SiteWise console, all of your OPC-UA sources are stored in
+// one capability configuration. To list all capability configurations for a
 // gateway, use DescribeGateway
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html).
 func (c *Client) DescribeGatewayCapabilityConfiguration(ctx context.Context, params *DescribeGatewayCapabilityConfigurationInput, optFns ...func(*Options)) (*DescribeGatewayCapabilityConfigurationOutput, error) {
@@ -37,7 +37,7 @@ func (c *Client) DescribeGatewayCapabilityConfiguration(ctx context.Context, par
 type DescribeGatewayCapabilityConfigurationInput struct {
 
 	// The namespace of the capability configuration. For example, if you configure
-	// OPC-UA sources from the AWS IoT SiteWise console, your OPC-UA capability
+	// OPC-UA sources from the IoT SiteWise console, your OPC-UA capability
 	// configuration has the namespace iotsitewise:opcuacollector:version, where
 	// version is a number such as 1.
 	//
@@ -55,7 +55,7 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 	// The JSON document that defines the gateway capability's configuration. For more
 	// information, see Configuring data sources (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	CapabilityConfiguration *string

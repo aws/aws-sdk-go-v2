@@ -643,6 +643,36 @@ type LoggingConfiguration struct {
 	EnableSIPLogs *bool
 }
 
+// A media capture pipeline object. A string consisting of an ID, source type, a
+// source ARN, a sink type, and a sink ARN.
+type MediaCapturePipeline struct {
+
+	// The time at which the capture pipeline was created, in ISO 8601 format.
+	CreatedTimestamp *time.Time
+
+	// The ID of a media capture pipeline.
+	MediaPipelineId *string
+
+	// ARN of the destination to which the media artifacts are saved.
+	SinkArn *string
+
+	// Destination type to which the media artifacts are saved. You must use an S3
+	// Bucket.
+	SinkType MediaPipelineSinkType
+
+	// ARN of the source from which the media artifacts will be saved.
+	SourceArn *string
+
+	// Source type from which media artifacts are saved. You must use ChimeMeeting.
+	SourceType MediaPipelineSourceType
+
+	// The status of the media capture pipeline.
+	Status MediaPipelineStatus
+
+	// The time at which the capture pipeline was updated, in ISO 8601 format.
+	UpdatedTimestamp *time.Time
+}
+
 // A set of endpoints used by clients to connect to the media service group for a
 // Amazon Chime SDK meeting.
 type MediaPlacement struct {

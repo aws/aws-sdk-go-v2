@@ -748,6 +748,13 @@ func awsRestjson1_serializeOpDocumentCreateImageRecipeInput(v *CreateImageRecipe
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalInstanceConfiguration != nil {
+		ok := object.Key("additionalInstanceConfiguration")
+		if err := awsRestjson1_serializeDocumentAdditionalInstanceConfiguration(v.AdditionalInstanceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BlockDeviceMappings != nil {
 		ok := object.Key("blockDeviceMappings")
 		if err := awsRestjson1_serializeDocumentInstanceBlockDeviceMappings(v.BlockDeviceMappings, ok); err != nil {
@@ -3859,6 +3866,25 @@ func awsRestjson1_serializeDocumentAccountList(v []string, value smithyjson.Valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdditionalInstanceConfiguration(v *types.AdditionalInstanceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SystemsManagerAgent != nil {
+		ok := object.Key("systemsManagerAgent")
+		if err := awsRestjson1_serializeDocumentSystemsManagerAgent(v.SystemsManagerAgent, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserDataOverride != nil {
+		ok := object.Key("userDataOverride")
+		ok.String(*v.UserDataOverride)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAmiDistributionConfiguration(v *types.AmiDistributionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3911,6 +3937,13 @@ func awsRestjson1_serializeDocumentComponentConfiguration(v *types.ComponentConf
 		ok.String(*v.ComponentArn)
 	}
 
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentComponentParameterList(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3923,6 +3956,49 @@ func awsRestjson1_serializeDocumentComponentConfigurationList(v []types.Componen
 		if err := awsRestjson1_serializeDocumentComponentConfiguration(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentParameter(v *types.ComponentParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		if err := awsRestjson1_serializeDocumentComponentParameterValueList(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentParameterList(v []types.ComponentParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentComponentParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentParameterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4341,6 +4417,18 @@ func awsRestjson1_serializeDocumentStringList(v []string, value smithyjson.Value
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSystemsManagerAgent(v *types.SystemsManagerAgent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UninstallAfterBuild != nil {
+		ok := object.Key("uninstallAfterBuild")
+		ok.Boolean(*v.UninstallAfterBuild)
+	}
+
 	return nil
 }
 

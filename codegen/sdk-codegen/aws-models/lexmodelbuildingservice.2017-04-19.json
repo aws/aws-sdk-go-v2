@@ -115,6 +115,12 @@
                     "target": "com.amazonaws.lexmodelbuildingservice#GetIntentVersions"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelbuildingservice#GetMigration"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#GetMigrations"
+                },
+                {
                     "target": "com.amazonaws.lexmodelbuildingservice#GetSlotType"
                 },
                 {
@@ -145,6 +151,9 @@
                     "target": "com.amazonaws.lexmodelbuildingservice#StartImport"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelbuildingservice#StartMigration"
+                },
+                {
                     "target": "com.amazonaws.lexmodelbuildingservice#TagResource"
                 },
                 {
@@ -165,6 +174,19 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>Amazon Lex Build-Time Actions</fullname>\n         <p> Amazon Lex is an AWS service for building conversational voice and text\n      interfaces. Use these actions to create, update, and delete conversational\n      bots for new and existing client applications. </p>",
                 "smithy.api#title": "Amazon Lex Model Building Service"
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your IAM user or role does not have permission to call the Amazon Lex V2 APIs\n      required to migrate your bot.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
             }
         },
         "com.amazonaws.lexmodelbuildingservice#AliasName": {
@@ -1167,7 +1189,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^((AMAZON\\.)_?|[A-Za-z]_?)+"
+                "smithy.api#pattern": "^((AMAZON\\.)_?|[A-Za-z]_?)+$"
             }
         },
         "com.amazonaws.lexmodelbuildingservice#DeleteBot": {
@@ -3276,6 +3298,212 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelbuildingservice#GetMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelbuildingservice#GetMigrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelbuildingservice#GetMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about an ongoing or complete migration from an\n      Amazon Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the migration\n      alerts and warnings related to the migration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/migrations/{migrationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#GetMigrationRequest": {
+            "type": "structure",
+            "members": {
+                "migrationId": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the migration to view. The\n        <code>migrationID</code> is returned by the  operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#GetMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "migrationId": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the migration. This is the same as the\n      identifier used when calling the <code>GetMigration</code>\n      operation.</p>"
+                    }
+                },
+                "v1BotName": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#BotName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Lex V1 bot migrated to Amazon Lex V2.</p>"
+                    }
+                },
+                "v1BotVersion": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Amazon Lex V1 bot migrated to Amazon Lex V2.</p>"
+                    }
+                },
+                "v1BotLocale": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the Amazon Lex V1 bot migrated to Amazon Lex V2.</p>"
+                    }
+                },
+                "v2BotId": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#V2BotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Lex V2 bot that the Amazon Lex V1 is being\n      migrated to.</p>"
+                    }
+                },
+                "v2BotRole": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.</p>"
+                    }
+                },
+                "migrationStatus": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the migration. When the status is\n        <code>COMPLETE</code> the migration is finished and the bot is available\n      in Amazon Lex V2. There may be alerts and warnings that need to be resolved to\n      complete the migration.</p>"
+                    }
+                },
+                "migrationStrategy": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy used to conduct the migration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_NEW</code> - Creates a new Amazon Lex V2 bot and migrates\n          the Amazon Lex V1 bot to the new bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_EXISTING</code> - Overwrites the existing Amazon Lex V2 bot\n        metadata and the locale being migrated. It doesn't change any other\n        locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale\n        is created in the Amazon Lex V2 bot.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "migrationTimestamp": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the migration started.</p>"
+                    }
+                },
+                "alerts": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationAlerts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of alerts and warnings that indicate issues with the migration\n      for the Amazon Lex V1 bot to Amazon Lex V2. You receive a warning when an Amazon Lex V1\n      feature has a different implementation if Amazon Lex V2.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/migrate.html\">Migrating a bot</a> in the <i>Amazon Lex V2\n        developer guide</i>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#GetMigrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelbuildingservice#GetMigrationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelbuildingservice#GetMigrationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/migrations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#GetMigrationsRequest": {
+            "type": "structure",
+            "members": {
+                "sortByAttribute": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationSortAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to sort the list of migrations by. You can sort by the\n      Amazon Lex V1 bot name or the date and time that the migration was\n      started.</p>",
+                        "smithy.api#httpQuery": "sortByAttribute"
+                    }
+                },
+                "sortByOrder": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order so sort the list.</p>",
+                        "smithy.api#httpQuery": "sortByOrder"
+                    }
+                },
+                "v1BotNameContains": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#BotName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list to contain only bots whose name contains the\n      specified string. The string is matched anywhere in bot name.</p>",
+                        "smithy.api#httpQuery": "v1BotNameContains"
+                    }
+                },
+                "migrationStatusEquals": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list to contain only migrations in the specified state.</p>",
+                        "smithy.api#httpQuery": "migrationStatusEquals"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of migrations to return in the response. The\n      default is 10.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that fetches the next page of migrations. If the\n      response to this operation is truncated, Amazon Lex returns a pagination token\n      in the response. To fetch the next page of migrations, specify the\n      pagination token in the request.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#GetMigrationsResponse": {
+            "type": "structure",
+            "members": {
+                "migrationSummaries": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To see\n      details of the migration, use the <code>migrationId</code> from the\n      summary in a call to the \n      operation.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, it includes a pagination token that you\n      can specify in your next request to fetch the next page of\n      migrations.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelbuildingservice#GetSlotType": {
             "type": "operation",
             "input": {
@@ -3572,7 +3800,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use the <code>GetUtterancesView</code> operation to get information\n      about the utterances that your users have made to your bot. You can use\n      this list to tune the utterances that your bot responds to.</p>\n         <p>For example, say that you have created a bot to order flowers.\n      After your users have used your bot for a while, use the\n        <code>GetUtterancesView</code> operation to see the requests that they\n      have made and whether they have been successful. You might find that the\n      utterance \"I want flowers\" is not being recognized. You could add this\n      utterance to the <code>OrderFlowers</code> intent so that your bot\n      recognizes that utterance.</p>\n         <p>After you publish a new version of a bot, you can get information\n      about the old version and the new so that you can compare the performance\n      across the two versions. </p>\n         <p>Utterance statistics are generated once a day. Data is available\n      for the last 15 days. You can request information for up to 5 versions of\n      your bot in each request. Amazon Lex returns the most frequent utterances\n      received by the bot in the last 15 days. The response contains information\n      about a maximum of 100 utterances for each version.</p>\n         <p>If you set <code>childDirected</code> field to true when you\n      created your bot, or if you opted out of participating in improving Amazon Lex,\n      utterances are not available.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetUtterancesView</code> action.</p>",
+                "smithy.api#documentation": "<p>Use the <code>GetUtterancesView</code> operation to get information\n      about the utterances that your users have made to your bot. You can use\n      this list to tune the utterances that your bot responds to.</p>\n         <p>For example, say that you have created a bot to order flowers.\n      After your users have used your bot for a while, use the\n        <code>GetUtterancesView</code> operation to see the requests that they\n      have made and whether they have been successful. You might find that the\n      utterance \"I want flowers\" is not being recognized. You could add this\n      utterance to the <code>OrderFlowers</code> intent so that your bot\n      recognizes that utterance.</p>\n         <p>After you publish a new version of a bot, you can get information\n      about the old version and the new so that you can compare the performance\n      across the two versions. </p>\n         <p>Utterance statistics are generated once a day. Data is available\n      for the last 15 days. You can request information for up to 5 versions of\n      your bot in each request. Amazon Lex returns the most frequent utterances\n      received by the bot in the last 15 days. The response contains information\n      about a maximum of 100 utterances for each version.</p>\n         <p>If you set <code>childDirected</code> field to true when you\n      created your bot, if you are using slot obfuscation with one or more\n      slots, or if you opted out of participating in improving Amazon Lex, utterances\n      are not available.</p>\n         <p>This operation requires permissions for the\n        <code>lex:GetUtterancesView</code> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/bots/{botName}/utterances?view=aggregation",
@@ -3844,7 +4072,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index\\/[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^arn:aws:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index\\/[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.lexmodelbuildingservice#KmsKeyArn": {
@@ -3864,7 +4092,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws:lambda:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?"
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:lambda:[a-z]+-[a-z]+(-[a-z]+)*-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?$"
             }
         },
         "com.amazonaws.lexmodelbuildingservice#LimitExceededException": {
@@ -4184,6 +4412,207 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelbuildingservice#MigrationAlert": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationAlertType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of alert. There are two kinds of alerts:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ERROR</code> - There was an issue with the migration that\n          can't be resolved. The migration stops.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WARN</code> - There was an issue with the migration that\n          requires manual changes to the new Amazon Lex V2 bot. The migration\n          continues.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationAlertMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes why the alert was issued.</p>"
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationAlertDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional details about the alert.</p>"
+                    }
+                },
+                "referenceURLs": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationAlertReferenceURLs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A link to the Amazon Lex documentation that describes how to resolve\n    the alert.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about alerts and warnings that Amazon Lex sends during\n      a migration. The alerts include information about how to resolve the\n      issue.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationAlertDetail": {
+            "type": "string"
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationAlertDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelbuildingservice#MigrationAlertDetail"
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationAlertMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationAlertReferenceURL": {
+            "type": "string"
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationAlertReferenceURLs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelbuildingservice#MigrationAlertReferenceURL"
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationAlertType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "WARN",
+                        "name": "WARN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationAlerts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelbuildingservice#MigrationAlert"
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationSortAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "V1_BOT_NAME",
+                        "name": "V1_BOT_NAME"
+                    },
+                    {
+                        "value": "MIGRATION_DATE_TIME",
+                        "name": "MIGRATION_DATE_TIME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE_NEW",
+                        "name": "CREATE_NEW"
+                    },
+                    {
+                        "value": "UPDATE_EXISTING",
+                        "name": "UPDATE_EXISTING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationSummary": {
+            "type": "structure",
+            "members": {
+                "migrationId": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Amazon Lex assigned to the migration.</p>"
+                    }
+                },
+                "v1BotName": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#BotName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Lex V1 bot that is the source of the migration.</p>"
+                    }
+                },
+                "v1BotVersion": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Amazon Lex V1 bot that is the source of the migration.</p>"
+                    }
+                },
+                "v1BotLocale": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the Amazon Lex V1 bot that is the source of the migration.</p>"
+                    }
+                },
+                "v2BotId": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#V2BotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Lex V2 that is the destination of the migration.</p>"
+                    }
+                },
+                "v2BotRole": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.</p>"
+                    }
+                },
+                "migrationStatus": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the operation. When the status is <code>COMPLETE</code>\n    the bot is available in Amazon Lex V2. There may be alerts and warnings that\n    need to be resolved to complete the migration.</p>"
+                    }
+                },
+                "migrationStrategy": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy used to conduct the migration.</p>"
+                    }
+                },
+                "migrationTimestamp": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the migration started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#MigrationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelbuildingservice#MigrationSummary"
+            }
+        },
         "com.amazonaws.lexmodelbuildingservice#Name": {
             "type": "string",
             "traits": {
@@ -4191,7 +4620,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z_]+"
+                "smithy.api#pattern": "^[a-zA-Z_]+$"
             }
         },
         "com.amazonaws.lexmodelbuildingservice#NextToken": {
@@ -4217,7 +4646,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[0-9]+"
+                "smithy.api#pattern": "^[0-9]+$"
             }
         },
         "com.amazonaws.lexmodelbuildingservice#ObfuscationSetting": {
@@ -5606,6 +6035,21 @@
                 ]
             }
         },
+        "com.amazonaws.lexmodelbuildingservice#SortOrder": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASCENDING",
+                        "name": "ASCENDING"
+                    },
+                    {
+                        "value": "DESCENDING",
+                        "name": "DESCENDING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lexmodelbuildingservice#StartImport": {
             "type": "operation",
             "input": {
@@ -5709,6 +6153,133 @@
                     "target": "com.amazonaws.lexmodelbuildingservice#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp for the date and time that the import job was\n      requested.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#StartMigration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelbuildingservice#StartMigrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelbuildingservice#StartMigrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelbuildingservice#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate your bot when\n      you want to take advantage of the new features of Amazon Lex V2.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/migrate.html\">Migrating a bot</a> in the <i>Amazon Lex\n        developer guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/migrations",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#StartMigrationRequest": {
+            "type": "structure",
+            "members": {
+                "v1BotName": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#BotName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "v1BotVersion": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to migrate to Amazon Lex V2. You can migrate the\n        <code>$LATEST</code> version as well as any numbered version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "v2BotName": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#V2BotName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Lex V2 bot that you are migrating the Amazon Lex V1 bot to. </p>\n         <ul>\n            <li>\n               <p>If the Amazon Lex V2 bot doesn't exist, you must use the\n            <code>CREATE_NEW</code> migration strategy.</p>\n            </li>\n            <li>\n               <p>If the Amazon Lex V2 bot exists, you must use the\n            <code>UPDATE_EXISTING</code> migration strategy to change the\n          contents of the Amazon Lex V2 bot.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "v2BotRole": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "migrationStrategy": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy used to conduct the migration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_NEW</code> - Creates a new Amazon Lex V2 bot and migrates\n          the Amazon Lex V1 bot to the new bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_EXISTING</code> - Overwrites the existing Amazon Lex V2 bot\n          metadata and the locale being migrated. It doesn't change any other\n          locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale\n          is created in the Amazon Lex V2 bot.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#StartMigrationResponse": {
+            "type": "structure",
+            "members": {
+                "v1BotName": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#BotName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.</p>"
+                    }
+                },
+                "v1BotVersion": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to migrate to Amazon Lex V2. </p>"
+                    }
+                },
+                "v1BotLocale": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale used for the Amazon Lex V1 bot. </p>"
+                    }
+                },
+                "v2BotId": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#V2BotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Lex V2 bot. </p>"
+                    }
+                },
+                "v2BotRole": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.</p>"
+                    }
+                },
+                "migrationId": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Amazon Lex assigned to the migration.</p>"
+                    }
+                },
+                "migrationStrategy": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#MigrationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy used to conduct the migration.</p>"
+                    }
+                },
+                "migrationTimestamp": {
+                    "target": "com.amazonaws.lexmodelbuildingservice#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the migration started.</p>"
                     }
                 }
             }
@@ -6060,6 +6631,26 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelbuildingservice#V2BotId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.lexmodelbuildingservice#V2BotName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^([0-9a-zA-Z][_-]?)+$"
+            }
+        },
         "com.amazonaws.lexmodelbuildingservice#Value": {
             "type": "string",
             "traits": {
@@ -6076,7 +6667,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "\\$LATEST|[0-9]+"
+                "smithy.api#pattern": "^\\$LATEST|[0-9]+$"
             }
         },
         "com.amazonaws.lexmodelbuildingservice#roleArn": {
@@ -6086,7 +6677,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws:iam::[0-9]{12}:role/.*"
+                "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/"
             }
         }
     }

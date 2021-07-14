@@ -30,6 +30,26 @@ func (m *validateOpCreateBroker) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConfiguration struct {
+}
+
+func (*validateOpCreateConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTags struct {
 }
 
@@ -354,6 +374,10 @@ func addOpCreateBrokerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBroker{}, middleware.After)
 }
 
+func addOpCreateConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfiguration{}, middleware.After)
+}
+
 func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTags{}, middleware.After)
 }
@@ -418,6 +442,38 @@ func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUser{}, middleware.After)
 }
 
+func validate__listOfUser(v []types.User) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfUser"}
+	for i := range v {
+		if err := validateUser(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigurationId(v *types.ConfigurationId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationId"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEncryptionOptions(v *types.EncryptionOptions) error {
 	if v == nil {
 		return nil
@@ -430,15 +486,142 @@ func validateEncryptionOptions(v *types.EncryptionOptions) error {
 	}
 }
 
+func validateLdapServerMetadataInput(v *types.LdapServerMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LdapServerMetadataInput"}
+	if v.Hosts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Hosts"))
+	}
+	if v.RoleBase == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleBase"))
+	}
+	if v.RoleSearchMatching == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleSearchMatching"))
+	}
+	if v.ServiceAccountPassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountPassword"))
+	}
+	if v.ServiceAccountUsername == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountUsername"))
+	}
+	if v.UserBase == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserBase"))
+	}
+	if v.UserSearchMatching == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserSearchMatching"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUser(v *types.User) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "User"}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeeklyStartTime(v *types.WeeklyStartTime) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeeklyStartTime"}
+	if len(v.DayOfWeek) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfWeek"))
+	}
+	if v.TimeOfDay == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeOfDay"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateBrokerInput(v *CreateBrokerInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBrokerInput"}
+	if v.BrokerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrokerName"))
+	}
+	if v.Configuration != nil {
+		if err := validateConfigurationId(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.DeploymentMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentMode"))
+	}
 	if v.EncryptionOptions != nil {
 		if err := validateEncryptionOptions(v.EncryptionOptions); err != nil {
 			invalidParams.AddNested("EncryptionOptions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.EngineType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineType"))
+	}
+	if v.EngineVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
+	}
+	if v.HostInstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostInstanceType"))
+	}
+	if v.LdapServerMetadata != nil {
+		if err := validateLdapServerMetadataInput(v.LdapServerMetadata); err != nil {
+			invalidParams.AddNested("LdapServerMetadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceWindowStartTime != nil {
+		if err := validateWeeklyStartTime(v.MaintenanceWindowStartTime); err != nil {
+			invalidParams.AddNested("MaintenanceWindowStartTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Users == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Users"))
+	} else if v.Users != nil {
+		if err := validate__listOfUser(v.Users); err != nil {
+			invalidParams.AddNested("Users", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConfigurationInput(v *CreateConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationInput"}
+	if len(v.EngineType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineType"))
+	}
+	if v.EngineVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -469,6 +652,9 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
 	if v.BrokerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
@@ -665,6 +851,21 @@ func validateOpUpdateBrokerInput(v *UpdateBrokerInput) error {
 	if v.BrokerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
 	}
+	if v.Configuration != nil {
+		if err := validateConfigurationId(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LdapServerMetadata != nil {
+		if err := validateLdapServerMetadataInput(v.LdapServerMetadata); err != nil {
+			invalidParams.AddNested("LdapServerMetadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceWindowStartTime != nil {
+		if err := validateWeeklyStartTime(v.MaintenanceWindowStartTime); err != nil {
+			invalidParams.AddNested("MaintenanceWindowStartTime", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -679,6 +880,9 @@ func validateOpUpdateConfigurationInput(v *UpdateConfigurationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationInput"}
 	if v.ConfigurationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationId"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

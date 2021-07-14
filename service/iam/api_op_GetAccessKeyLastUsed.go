@@ -12,8 +12,9 @@ import (
 )
 
 // Retrieves information about when the specified access key was last used. The
-// information includes the date and time of last use, along with the AWS service
-// and Region that were specified in the last request made with that key.
+// information includes the date and time of last use, along with the Amazon Web
+// Services service and Region that were specified in the last request made with
+// that key.
 func (c *Client) GetAccessKeyLastUsed(ctx context.Context, params *GetAccessKeyLastUsedInput, optFns ...func(*Options)) (*GetAccessKeyLastUsedOutput, error) {
 	if params == nil {
 		params = &GetAccessKeyLastUsedInput{}
@@ -47,7 +48,7 @@ type GetAccessKeyLastUsedOutput struct {
 	// Contains information about the last time the access key was used.
 	AccessKeyLastUsed *types.AccessKeyLastUsed
 
-	// The name of the AWS IAM user that owns this access key.
+	// The name of the IAM user that owns this access key.
 	UserName *string
 
 	// Metadata pertaining to the operation's result.

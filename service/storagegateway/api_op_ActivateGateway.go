@@ -12,7 +12,7 @@ import (
 )
 
 // Activates the gateway you previously deployed on your host. In the activation
-// process, you specify information such as the AWS Region that you want to use for
+// process, you specify information such as the Region that you want to use for
 // storing snapshots or tapes, the time zone for scheduled snapshots the gateway
 // snapshot schedule window, an activation key, and a name for your gateway. The
 // activation process also associates your gateway with your account. For more
@@ -62,7 +62,7 @@ type ActivateGatewayInput struct {
 	// arguments you pass to the ActivateGateway API call determine the actual
 	// configuration of your gateway. For more information, see Getting activation key
 	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html)
-	// in the AWS Storage Gateway User Guide.
+	// in the Storage Gateway User Guide.
 	//
 	// This member is required.
 	ActivationKey *string
@@ -72,14 +72,14 @@ type ActivateGatewayInput struct {
 	// This member is required.
 	GatewayName *string
 
-	// A value that indicates the AWS Region where you want to store your data. The
-	// gateway AWS Region specified must be the same AWS Region as the AWS Region in
-	// your Host header in the request. For more information about available AWS
-	// Regions and endpoints for AWS Storage Gateway, see AWS Storage Gateway endpoints
-	// and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the AWS
-	// General Reference. Valid Values: See AWS Storage Gateway endpoints and quotas
-	// (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the AWS General
-	// Reference.
+	// A value that indicates the Region where you want to store your data. The gateway
+	// Region specified must be the same Region as the Region in your Host header in
+	// the request. For more information about available Regions and endpoints for
+	// Storage Gateway, see  Storage Gateway endpoints and quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the Amazon Web
+	// Services General Reference. Valid Values: See  Storage Gateway endpoints and
+	// quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the Amazon Web
+	// Services General Reference.
 	//
 	// This member is required.
 	GatewayRegion *string
@@ -96,7 +96,7 @@ type ActivateGatewayInput struct {
 	// A value that defines the type of gateway to activate. The type specified is
 	// critical to all later functions of the gateway and cannot be changed after
 	// activation. The default value is CACHED. Valid Values: STORED | CACHED | VTL |
-	// FILE_S3
+	// FILE_S3 | FILE_FSX_SMB|
 	GatewayType *string
 
 	// The value that indicates the type of medium changer to use for tape gateway.
@@ -116,16 +116,16 @@ type ActivateGatewayInput struct {
 	TapeDriveType *string
 }
 
-// AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated
-// gateway. It is a string made of information such as your account, gateway name,
-// and AWS Region. This ARN is used to reference the gateway in other API
-// operations as well as resource-based authorization. For gateways activated prior
-// to September 02, 2015, the gateway ARN contains the gateway name rather than the
-// gateway ID. Changing the name of the gateway has no effect on the gateway ARN.
+// Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway.
+// It is a string made of information such as your account, gateway name, and
+// Region. This ARN is used to reference the gateway in other API operations as
+// well as resource-based authorization. For gateways activated prior to September
+// 02, 2015, the gateway ARN contains the gateway name rather than the gateway ID.
+// Changing the name of the gateway has no effect on the gateway ARN.
 type ActivateGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

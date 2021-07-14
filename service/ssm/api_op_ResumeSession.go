@@ -13,7 +13,7 @@ import (
 // Reconnects a session to an instance after it has been disconnected. Connections
 // can be resumed for disconnected sessions, but not terminated sessions. This
 // command is primarily for use by client machines to automatically reconnect
-// during intermittent network issues. It is not intended for any other use.
+// during intermittent network issues. It isn't intended for any other use.
 func (c *Client) ResumeSession(ctx context.Context, params *ResumeSessionInput, optFns ...func(*Options)) (*ResumeSessionOutput, error) {
 	if params == nil {
 		params = &ResumeSessionInput{}
@@ -45,12 +45,13 @@ type ResumeSessionOutput struct {
 	// A URL back to SSM Agent on the instance that the Session Manager client uses to
 	// send commands and receive output from the instance. Format:
 	// wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).
-	// region represents the Region identifier for an AWS Region supported by AWS
-	// Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of
-	// supported region values, see the Region column in Systems Manager service
-	// endpoints (http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region) in
-	// the AWS General Reference. session-id represents the ID of a Session Manager
-	// session, such as 1a2b3c4dEXAMPLE.
+	// region represents the Region identifier for an Region supported by Amazon Web
+	// Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a
+	// list of supported region values, see the Region column in Systems Manager
+	// service endpoints
+	// (https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region) in the
+	// Amazon Web Services General Reference. session-id represents the ID of a Session
+	// Manager session, such as 1a2b3c4dEXAMPLE.
 	StreamUrl *string
 
 	// An encrypted token value containing session and caller information. Used to

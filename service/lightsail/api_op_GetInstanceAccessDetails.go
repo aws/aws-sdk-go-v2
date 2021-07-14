@@ -14,8 +14,8 @@ import (
 // Returns temporary SSH keys you can use to connect to a specific virtual private
 // server, or instance. The get instance access details operation supports
 // tag-based access control via resource tags applied to the resource identified by
-// instance name. For more information, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// instance name. For more information, see the Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) GetInstanceAccessDetails(ctx context.Context, params *GetInstanceAccessDetailsInput, optFns ...func(*Options)) (*GetInstanceAccessDetailsOutput, error) {
 	if params == nil {
 		params = &GetInstanceAccessDetailsInput{}

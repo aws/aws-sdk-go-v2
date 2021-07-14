@@ -43,7 +43,7 @@ type CreateClusterSecurityGroupInput struct {
 	// * Must not be "Default".
 	//
 	// * Must be unique for all security groups
-	// that are created by your AWS account.
+	// that are created by your account.
 	//
 	// Example: examplesecuritygroup
 	//

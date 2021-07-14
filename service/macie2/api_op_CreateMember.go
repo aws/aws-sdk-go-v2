@@ -29,7 +29,7 @@ func (c *Client) CreateMember(ctx context.Context, params *CreateMemberInput, op
 
 type CreateMemberInput struct {
 
-	// The details for the account to associate with the administrator account.
+	// The details of the account to associate with the administrator account.
 	//
 	// This member is required.
 	Account *types.AccountDetail

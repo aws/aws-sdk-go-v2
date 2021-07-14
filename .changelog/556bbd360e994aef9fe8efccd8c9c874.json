@@ -1,0 +1,9 @@
+{
+    "id": "556bbd36-0e99-4aef-9fe8-efccd8c9c874",
+    "type": "feature",
+    "description": "Support has been added for EC2 IPv6-enabled Instance Metadata Service Endpoints.",
+    "modules": [
+        "config",
+        "feature/ec2/imds"
+    ]
+}

@@ -14,7 +14,7 @@ import (
 
 // Updates an asset's name. For more information, see Updating assets and models
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optFns ...func(*Options)) (*UpdateAssetOutput, error) {
 	if params == nil {
 		params = &UpdateAssetInput{}

@@ -11,18 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// ServiceSetting is an account-level setting for an AWS service. This setting
-// defines how a user interacts with or uses a service or a feature of a service.
-// For example, if an AWS service charges money to the account based on feature or
-// service usage, then the AWS service team might create a default setting of
-// "false". This means the user can't use this feature unless they change the
-// setting to "true" and intentionally opt in for a paid feature. Services map a
-// SettingId object to a setting value. AWS services teams define the default value
-// for a SettingId. You can't create a new SettingId, but you can overwrite the
-// default value if you have the ssm:UpdateServiceSetting permission for the
-// setting. Use the GetServiceSetting API action to view the current value. Use the
-// UpdateServiceSetting API action to change the default setting. Reset the service
-// setting for the account to the default value as provisioned by the AWS service
+// ServiceSetting is an account-level setting for an Amazon Web Services service.
+// This setting defines how a user interacts with or uses a service or a feature of
+// a service. For example, if an Amazon Web Services service charges money to the
+// account based on feature or service usage, then the Amazon Web Services service
+// team might create a default setting of "false". This means the user can't use
+// this feature unless they change the setting to "true" and intentionally opt in
+// for a paid feature. Services map a SettingId object to a setting value. Amazon
+// Web Services services teams define the default value for a SettingId. You can't
+// create a new SettingId, but you can overwrite the default value if you have the
+// ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting
+// API operation to view the current value. Use the UpdateServiceSetting API
+// operation to change the default setting. Reset the service setting for the
+// account to the default value as provisioned by the Amazon Web Services service
 // team.
 func (c *Client) ResetServiceSetting(ctx context.Context, params *ResetServiceSettingInput, optFns ...func(*Options)) (*ResetServiceSettingOutput, error) {
 	if params == nil {
@@ -39,7 +40,7 @@ func (c *Client) ResetServiceSetting(ctx context.Context, params *ResetServiceSe
 	return out, nil
 }
 
-// The request body of the ResetServiceSetting API action.
+// The request body of the ResetServiceSetting API operation.
 type ResetServiceSettingInput struct {
 
 	// The Amazon Resource Name (ARN) of the service setting to reset. The setting ID
@@ -67,11 +68,11 @@ type ResetServiceSettingInput struct {
 	SettingId *string
 }
 
-// The result body of the ResetServiceSetting API action.
+// The result body of the ResetServiceSetting API operation.
 type ResetServiceSettingOutput struct {
 
 	// The current, effective service setting after calling the ResetServiceSetting API
-	// action.
+	// operation.
 	ServiceSetting *types.ServiceSetting
 
 	// Metadata pertaining to the operation's result.

@@ -1463,7 +1463,7 @@
                 "QvbrQualityLevel": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max10",
                     "traits": {
-                        "smithy.api#documentation": "Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within av1Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.",
+                        "smithy.api#documentation": "Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.",
                         "smithy.api#jsonName": "qvbrQualityLevel"
                     }
                 },
@@ -1476,7 +1476,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+                "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
             }
         },
         "com.amazonaws.mediaconvert#Av1RateControlMode": {
@@ -1553,7 +1553,7 @@
                 "QvbrSettings": {
                     "target": "com.amazonaws.mediaconvert#Av1QvbrSettings",
                     "traits": {
-                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.",
+                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode).",
                         "smithy.api#jsonName": "qvbrSettings"
                     }
                 },
@@ -2340,6 +2340,13 @@
                         "smithy.api#jsonName": "sccDestinationSettings"
                     }
                 },
+                "SrtDestinationSettings": {
+                    "target": "com.amazonaws.mediaconvert#SrtDestinationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "SRT Destination Settings",
+                        "smithy.api#jsonName": "srtDestinationSettings"
+                    }
+                },
                 "TeletextDestinationSettings": {
                     "target": "com.amazonaws.mediaconvert#TeletextDestinationSettings",
                     "traits": {
@@ -2865,6 +2872,13 @@
                         "smithy.api#jsonName": "streamInfResolution"
                     }
                 },
+                "TargetDurationCompatibilityMode": {
+                    "target": "com.amazonaws.mediaconvert#CmafTargetDurationCompatibilityMode",
+                    "traits": {
+                        "smithy.api#documentation": "When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration.",
+                        "smithy.api#jsonName": "targetDurationCompatibilityMode"
+                    }
+                },
                 "WriteDashManifest": {
                     "target": "com.amazonaws.mediaconvert#CmafWriteDASHManifest",
                     "traits": {
@@ -3035,6 +3049,22 @@
                     {
                         "value": "EXCLUDE",
                         "name": "EXCLUDE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediaconvert#CmafTargetDurationCompatibilityMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration.",
+                "smithy.api#enum": [
+                    {
+                        "value": "LEGACY",
+                        "name": "LEGACY"
+                    },
+                    {
+                        "value": "SPEC_COMPLIANT",
+                        "name": "SPEC_COMPLIANT"
                     }
                 ]
             }
@@ -4964,7 +4994,7 @@
                 "FontColor": {
                     "target": "com.amazonaws.mediaconvert#DvbSubtitleFontColor",
                     "traits": {
-                        "smithy.api#documentation": "Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.",
+                        "smithy.api#documentation": "Specifies the color of the DVB-SUB captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "fontColor"
                     }
                 },
@@ -5139,7 +5169,7 @@
         "com.amazonaws.mediaconvert#DvbSubtitleFontColor": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.",
+                "smithy.api#documentation": "Specifies the color of the DVB-SUB captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.",
                 "smithy.api#enum": [
                     {
                         "value": "WHITE",
@@ -7019,7 +7049,7 @@
                 "QvbrQualityLevel": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max10",
                     "traits": {
-                        "smithy.api#documentation": "Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.",
+                        "smithy.api#documentation": "Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.",
                         "smithy.api#jsonName": "qvbrQualityLevel"
                     }
                 },
@@ -7032,7 +7062,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+                "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
             }
         },
         "com.amazonaws.mediaconvert#H264RateControlMode": {
@@ -7302,7 +7332,7 @@
                 "QvbrSettings": {
                     "target": "com.amazonaws.mediaconvert#H264QvbrSettings",
                     "traits": {
-                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.",
+                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode).",
                         "smithy.api#jsonName": "qvbrSettings"
                     }
                 },
@@ -7824,7 +7854,7 @@
                 "QvbrQualityLevel": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max10",
                     "traits": {
-                        "smithy.api#documentation": "Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.",
+                        "smithy.api#documentation": "Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.",
                         "smithy.api#jsonName": "qvbrQualityLevel"
                     }
                 },
@@ -7837,7 +7867,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+                "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
             }
         },
         "com.amazonaws.mediaconvert#H265RateControlMode": {
@@ -8104,7 +8134,7 @@
                 "QvbrSettings": {
                     "target": "com.amazonaws.mediaconvert#H265QvbrSettings",
                     "traits": {
-                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.",
+                        "smithy.api#documentation": "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode).",
                         "smithy.api#jsonName": "qvbrSettings"
                     }
                 },
@@ -8907,6 +8937,13 @@
                         "smithy.api#jsonName": "streamInfResolution"
                     }
                 },
+                "TargetDurationCompatibilityMode": {
+                    "target": "com.amazonaws.mediaconvert#HlsTargetDurationCompatibilityMode",
+                    "traits": {
+                        "smithy.api#documentation": "When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration.",
+                        "smithy.api#jsonName": "targetDurationCompatibilityMode"
+                    }
+                },
                 "TimedMetadataId3Frame": {
                     "target": "com.amazonaws.mediaconvert#HlsTimedMetadataId3Frame",
                     "traits": {
@@ -9195,6 +9232,22 @@
                     {
                         "value": "EXCLUDE",
                         "name": "EXCLUDE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediaconvert#HlsTargetDurationCompatibilityMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration.",
+                "smithy.api#enum": [
+                    {
+                        "value": "LEGACY",
+                        "name": "LEGACY"
+                    },
+                    {
+                        "value": "SPEC_COMPLIANT",
+                        "name": "SPEC_COMPLIANT"
                     }
                 ]
             }
@@ -15739,6 +15792,37 @@
             },
             "traits": {
                 "smithy.api#documentation": "If your output group type is CMAF, use these settings when doing DRM encryption with a SPEKE-compliant key provider. If your output group type is HLS, DASH, or Microsoft Smooth, use the SpekeKeyProvider settings instead."
+            }
+        },
+        "com.amazonaws.mediaconvert#SrtDestinationSettings": {
+            "type": "structure",
+            "members": {
+                "StylePassthrough": {
+                    "target": "com.amazonaws.mediaconvert#SrtStylePassthrough",
+                    "traits": {
+                        "smithy.api#documentation": "Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions.",
+                        "smithy.api#jsonName": "stylePassthrough"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "SRT Destination Settings"
+            }
+        },
+        "com.amazonaws.mediaconvert#SrtStylePassthrough": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions.",
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
             }
         },
         "com.amazonaws.mediaconvert#StaticKeyProvider": {

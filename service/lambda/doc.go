@@ -3,10 +3,10 @@
 // Package lambda provides the API client, operations, and parameter types for AWS
 // Lambda.
 //
-// AWS Lambda Overview This is the AWS Lambda API Reference. The AWS Lambda
-// Developer Guide provides additional information. For the service overview, see
-// What is AWS Lambda (https://docs.aws.amazon.com/lambda/latest/dg/welcome.html),
-// and for information about how the service works, see AWS Lambda: How it Works
+// Lambda Overview This is the Lambda API Reference. The Lambda Developer Guide
+// provides additional information. For the service overview, see What is Lambda
+// (https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), and for information
+// about how the service works, see Lambda: How it Works
 // (https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html) in the
-// AWS Lambda Developer Guide.
+// Lambda Developer Guide.
 package lambda

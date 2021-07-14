@@ -72,6 +72,12 @@
                 "SelectedChoices": {
                     "target": "com.amazonaws.wellarchitected#SelectedChoices"
                 },
+                "ChoiceAnswers": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceAnswers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of selected choices to a question in your workload.</p>"
+                    }
+                },
                 "IsApplicable": {
                     "target": "com.amazonaws.wellarchitected#IsApplicable"
                 },
@@ -80,10 +86,43 @@
                 },
                 "Notes": {
                     "target": "com.amazonaws.wellarchitected#Notes"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.wellarchitected#AnswerReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the question is not applicable to your workload.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An answer of the question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#AnswerReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OUT_OF_SCOPE",
+                        "name": "OUT_OF_SCOPE"
+                    },
+                    {
+                        "value": "BUSINESS_PRIORITIES",
+                        "name": "BUSINESS_PRIORITIES"
+                    },
+                    {
+                        "value": "ARCHITECTURE_CONSTRAINTS",
+                        "name": "ARCHITECTURE_CONSTRAINTS"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
             }
         },
         "com.amazonaws.wellarchitected#AnswerSummaries": {
@@ -113,11 +152,23 @@
                 "SelectedChoices": {
                     "target": "com.amazonaws.wellarchitected#SelectedChoices"
                 },
+                "ChoiceAnswerSummaries": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceAnswerSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of selected choices to a question in your workload.</p>"
+                    }
+                },
                 "IsApplicable": {
                     "target": "com.amazonaws.wellarchitected#IsApplicable"
                 },
                 "Risk": {
                     "target": "com.amazonaws.wellarchitected#Risk"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.wellarchitected#AnswerReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
+                    }
                 }
             },
             "traits": {
@@ -183,7 +234,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>An AWS account ID.</p>",
-                "smithy.api#pattern": "[0-9]{12}"
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.wellarchitected#AwsRegion": {
@@ -219,6 +270,70 @@
                 "smithy.api#documentation": "<p>A choice available to answer question.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#ChoiceAnswer": {
+            "type": "structure",
+            "members": {
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a choice.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
+                    }
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceNotes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The notes associated with a choice.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A choice that has been answered on a question in your workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceAnswerSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ChoiceAnswerSummary"
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceAnswerSummary": {
+            "type": "structure",
+            "members": {
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a choice.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A choice summary that has been answered on a question in your workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceAnswers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ChoiceAnswer"
+            }
+        },
         "com.amazonaws.wellarchitected#ChoiceDescription": {
             "type": "string",
             "traits": {
@@ -239,6 +354,61 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#ChoiceNotes": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OUT_OF_SCOPE",
+                        "name": "OUT_OF_SCOPE"
+                    },
+                    {
+                        "value": "BUSINESS_PRIORITIES",
+                        "name": "BUSINESS_PRIORITIES"
+                    },
+                    {
+                        "value": "ARCHITECTURE_CONSTRAINTS",
+                        "name": "ARCHITECTURE_CONSTRAINTS"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SELECTED",
+                        "name": "SELECTED"
+                    },
+                    {
+                        "value": "NOT_APPLICABLE",
+                        "name": "NOT_APPLICABLE"
+                    },
+                    {
+                        "value": "UNSELECTED",
+                        "name": "UNSELECTED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.wellarchitected#ChoiceTitle": {
             "type": "string",
             "traits": {
@@ -247,6 +417,42 @@
                     "min": 1,
                     "max": 512
                 }
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceUpdate": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a choice.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
+                    }
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceNotes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The notes associated with a choice.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of choices to be updated.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceUpdates": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.wellarchitected#ChoiceId"
+            },
+            "value": {
+                "target": "com.amazonaws.wellarchitected#ChoiceUpdate"
             }
         },
         "com.amazonaws.wellarchitected#Choices": {
@@ -836,7 +1042,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get lens review.</p>",
+                "smithy.api#documentation": "<p>Get the answer to a specific question in a workload review.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}",
@@ -1277,7 +1483,7 @@
         "com.amazonaws.wellarchitected#ImprovementPlanUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The improvement plan URL for a question.</p>",
+                "smithy.api#documentation": "<p>The improvement plan URL for a question.</p>\n        <p>This value is only available if the question has been answered.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -2860,7 +3066,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The ID associated with the workload share.</p>",
-                "smithy.api#pattern": "[0-9a-f]{32}"
+                "smithy.api#pattern": "^[0-9a-f]{32}$"
             }
         },
         "com.amazonaws.wellarchitected#ShareInvitation": {
@@ -2899,7 +3105,7 @@
         "com.amazonaws.wellarchitected#ShareInvitationId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9a-f]{32}"
+                "smithy.api#pattern": "^[0-9a-f]{32}$"
             }
         },
         "com.amazonaws.wellarchitected#ShareInvitationSummaries": {
@@ -3122,7 +3328,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>",
+                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>\n        <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p>\n        <p>\n            <code>DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2</code>\n         </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{WorkloadArn}",
@@ -3143,7 +3349,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.wellarchitected#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
+                        "smithy.api#documentation": "<p>A list of tag keys. Existing tags of the resource \n            whose keys are members of this list are removed from the resource.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -3218,11 +3424,23 @@
                 "SelectedChoices": {
                     "target": "com.amazonaws.wellarchitected#SelectedChoices"
                 },
+                "ChoiceUpdates": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of choices to update on a question in your workload.  The String key \n            corresponds to the choice ID to be updated.</p>"
+                    }
+                },
                 "Notes": {
                     "target": "com.amazonaws.wellarchitected#Notes"
                 },
                 "IsApplicable": {
                     "target": "com.amazonaws.wellarchitected#IsApplicable"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.wellarchitected#AnswerReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why a question is not applicable to your workload.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4011,7 +4229,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The ID assigned to the workload. This ID is unique within an AWS Region.</p>",
-                "smithy.api#pattern": "[0-9a-f]{32}"
+                "smithy.api#pattern": "^[0-9a-f]{32}$"
             }
         },
         "com.amazonaws.wellarchitected#WorkloadImprovementStatus": {

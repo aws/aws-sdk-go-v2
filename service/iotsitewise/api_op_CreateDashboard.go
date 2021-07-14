@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dashboard in an AWS IoT SiteWise Monitor project.
+// Creates a dashboard in an IoT SiteWise Monitor project.
 func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInput, optFns ...func(*Options)) (*CreateDashboardOutput, error) {
 	if params == nil {
 		params = &CreateDashboardInput{}
@@ -32,7 +32,7 @@ type CreateDashboardInput struct {
 	// The dashboard definition specified in a JSON literal. For detailed information,
 	// see Creating dashboards (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	DashboardDefinition *string
@@ -56,9 +56,9 @@ type CreateDashboardInput struct {
 	DashboardDescription *string
 
 	// A list of key-value pairs that contain metadata for the dashboard. For more
-	// information, see Tagging your AWS IoT SiteWise resources
+	// information, see Tagging your IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 }
 

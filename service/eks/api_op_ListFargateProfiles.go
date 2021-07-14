@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the AWS Fargate profiles associated with the specified cluster in your AWS
-// account in the specified Region.
+// Lists the Fargate profiles associated with the specified cluster in your Amazon
+// Web Services account in the specified Region.
 func (c *Client) ListFargateProfiles(ctx context.Context, params *ListFargateProfilesInput, optFns ...func(*Options)) (*ListFargateProfilesOutput, error) {
 	if params == nil {
 		params = &ListFargateProfilesInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListFargateProfiles(ctx context.Context, params *ListFargatePro
 
 type ListFargateProfilesInput struct {
 
-	// The name of the Amazon EKS cluster that you would like to listFargate profiles
+	// The name of the Amazon EKS cluster that you would like to list Fargate profiles
 	// in.
 	//
 	// This member is required.

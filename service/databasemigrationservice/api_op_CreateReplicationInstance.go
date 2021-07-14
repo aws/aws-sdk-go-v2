@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the replication instance using the specified parameters. AWS DMS
-// requires that your account have certain roles with appropriate permissions
-// before you can create a replication instance. For information on the required
-// roles, see Creating the IAM Roles to Use With the AWS CLI and AWS DMS API
+// Creates the replication instance using the specified parameters. DMS requires
+// that your account have certain roles with appropriate permissions before you can
+// create a replication instance. For information on the required roles, see
+// Creating the IAM Roles to Use With the CLI and DMS API
 // (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole).
 // For information on the required permissions, see IAM Permissions Needed to Use
-// AWS DMS
+// DMS
 // (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions).
 func (c *Client) CreateReplicationInstance(ctx context.Context, params *CreateReplicationInstanceInput, optFns ...func(*Options)) (*CreateReplicationInstanceOutput, error) {
 	if params == nil {
@@ -41,7 +41,7 @@ type CreateReplicationInstanceInput struct {
 	// specified replication instance class. For example to specify the instance class
 	// dms.c4.large, set this parameter to "dms.c4.large". For more information on the
 	// settings and capacities for the available replication instance classes, see
-	// Selecting the right AWS DMS replication instance for your migration
+	// Selecting the right DMS replication instance for your migration
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
 	//
 	// This member is required.
@@ -73,7 +73,7 @@ type CreateReplicationInstanceInput struct {
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone where the replication instance will be created. The
-	// default value is a random, system-chosen Availability Zone in the endpoint's AWS
+	// default value is a random, system-chosen Availability Zone in the endpoint's
 	// Region, for example: us-east-1d
 	AvailabilityZone *string
 
@@ -89,11 +89,10 @@ type CreateReplicationInstanceInput struct {
 	// the latest engine version available.
 	EngineVersion *string
 
-	// An AWS KMS key identifier that is used to encrypt the data on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS
-	// uses your default encryption key. AWS KMS creates the default encryption key for
-	// your AWS account. Your AWS account has a different default encryption key for
-	// each AWS Region.
+	// An KMS key identifier that is used to encrypt the data on the replication
+	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
+	// your default encryption key. KMS creates the default encryption key for your
+	// account. Your account has a different default encryption key for each Region.
 	KmsKeyId *string
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
@@ -102,8 +101,8 @@ type CreateReplicationInstanceInput struct {
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi Default: A 30-minute
-	// window selected at random from an 8-hour block of time per AWS Region, occurring
-	// on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+	// window selected at random from an 8-hour block of time per Region, occurring on
+	// a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
@@ -122,8 +121,8 @@ type CreateReplicationInstanceInput struct {
 	// two consecutive hyphens, and can only begin with a letter, such as
 	// Example-App-ARN1. For example, this value might result in the EndpointArn value
 	// arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a
-	// ResourceIdentifier value, AWS DMS generates a default identifier value for the
-	// end of EndpointArn.
+	// ResourceIdentifier value, DMS generates a default identifier value for the end
+	// of EndpointArn.
 	ResourceIdentifier *string
 
 	// One or more tags to be assigned to the replication instance.

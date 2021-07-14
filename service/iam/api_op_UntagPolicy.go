@@ -32,10 +32,10 @@ func (c *Client) UntagPolicy(ctx context.Context, params *UntagPolicyInput, optF
 type UntagPolicyInput struct {
 
 	// The ARN of the IAM customer managed policy from which you want to remove tags.
-	// This parameter accepts (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters that consist of upper
+	// This parameter allows (through its regex pattern
+	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
 	// and lowercase alphanumeric characters with no spaces. You can also include any
-	// of the following characters: =,.@-
+	// of the following characters: _+=,.@-
 	//
 	// This member is required.
 	PolicyArn *string

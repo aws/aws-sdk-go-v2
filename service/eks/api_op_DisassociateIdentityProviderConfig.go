@@ -15,7 +15,7 @@ import (
 // Disassociates an identity provider configuration from a cluster. If you
 // disassociate an identity provider from your cluster, users included in the
 // provider can no longer access the cluster. However, you can still access the
-// cluster with AWS IAM users.
+// cluster with Amazon Web Services IAM users.
 func (c *Client) DisassociateIdentityProviderConfig(ctx context.Context, params *DisassociateIdentityProviderConfigInput, optFns ...func(*Options)) (*DisassociateIdentityProviderConfigOutput, error) {
 	if params == nil {
 		params = &DisassociateIdentityProviderConfigInput{}

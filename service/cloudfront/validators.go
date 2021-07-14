@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateAlias struct {
+}
+
+func (*validateOpAssociateAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCachePolicy struct {
 }
 
@@ -970,6 +990,26 @@ func (m *validateOpGetStreamingDistribution) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListConflictingAliases struct {
+}
+
+func (*validateOpListConflictingAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConflictingAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConflictingAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConflictingAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDistributionsByCachePolicyId struct {
 }
 
@@ -1390,6 +1430,10 @@ func (m *validateOpUpdateStreamingDistribution) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateAlias{}, middleware.After)
+}
+
 func addOpCreateCachePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCachePolicy{}, middleware.After)
 }
@@ -1580,6 +1624,10 @@ func addOpGetStreamingDistributionConfigValidationMiddleware(stack *middleware.S
 
 func addOpGetStreamingDistributionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStreamingDistribution{}, middleware.After)
+}
+
+func addOpListConflictingAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConflictingAliases{}, middleware.After)
 }
 
 func addOpListDistributionsByCachePolicyIdValidationMiddleware(stack *middleware.Stack) error {
@@ -3533,6 +3581,24 @@ func validateTrustedSigners(v *types.TrustedSigners) error {
 	}
 }
 
+func validateOpAssociateAliasInput(v *AssociateAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateAliasInput"}
+	if v.TargetDistributionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDistributionId"))
+	}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCachePolicyInput(v *CreateCachePolicyInput) error {
 	if v == nil {
 		return nil
@@ -4332,6 +4398,24 @@ func validateOpGetStreamingDistributionInput(v *GetStreamingDistributionInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "GetStreamingDistributionInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListConflictingAliasesInput(v *ListConflictingAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConflictingAliasesInput"}
+	if v.DistributionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DistributionId"))
+	}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

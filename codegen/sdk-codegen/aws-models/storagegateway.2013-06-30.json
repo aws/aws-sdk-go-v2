@@ -46,7 +46,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates the gateway you previously deployed on your host. In the activation process,\n         you specify information such as the AWS Region that you want to use for storing snapshots\n         or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an\n         activation key, and a name for your gateway. The activation process also associates your\n         gateway with your account. For more information, see <a>UpdateGatewayInformation</a>.</p>\n         <note>\n            <p>You must turn on the gateway VM before you can activate your gateway.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Activates the gateway you previously deployed on your host. In the activation process,\n         you specify information such as the Region that you want to use for storing snapshots\n         or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an\n         activation key, and a name for your gateway. The activation process also associates your\n         gateway with your account. For more information, see <a>UpdateGatewayInformation</a>.</p>\n         <note>\n            <p>You must turn on the gateway VM before you can activate your gateway.</p>\n         </note>"
             }
         },
         "com.amazonaws.storagegateway#ActivateGatewayInput": {
@@ -55,7 +55,7 @@
                 "ActivationKey": {
                     "target": "com.amazonaws.storagegateway#ActivationKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your gateway activation key. You can obtain the activation key by sending an HTTP GET\n         request with redirects enabled to the gateway IP address (port 80). The redirect URL\n         returned in the response provides you the activation key for your gateway in the query\n         string parameter <code>activationKey</code>. It may also include other activation-related\n         parameters, however, these are merely defaults -- the arguments you pass to the\n            <code>ActivateGateway</code> API call determine the actual configuration of your\n         gateway.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html\">Getting activation\n            key</a> in the <i>AWS Storage Gateway User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Your gateway activation key. You can obtain the activation key by sending an HTTP GET\n         request with redirects enabled to the gateway IP address (port 80). The redirect URL\n         returned in the response provides you the activation key for your gateway in the query\n         string parameter <code>activationKey</code>. It may also include other activation-related\n         parameters, however, these are merely defaults -- the arguments you pass to the\n            <code>ActivateGateway</code> API call determine the actual configuration of your\n         gateway.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html\">Getting activation\n         key</a> in the <i>Storage Gateway User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -76,14 +76,14 @@
                 "GatewayRegion": {
                     "target": "com.amazonaws.storagegateway#RegionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates the AWS Region where you want to store your data. The gateway AWS\n         Region specified must be the same AWS Region as the AWS Region in your <code>Host</code>\n         header in the request. For more information about available AWS Regions and endpoints for\n         AWS Storage Gateway, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">AWS\n            Storage Gateway endpoints and quotas</a> in the <i>AWS General\n            Reference</i>.</p>\n\n         <p>Valid Values: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">AWS\n            Storage Gateway endpoints and quotas</a> in the <i>AWS General\n            Reference</i>.\n         \n      </p>",
+                        "smithy.api#documentation": "<p>A value that indicates the Region where you want to store your data. \n         The gateway Region specified must be the same Region \n         as the Region in your <code>Host</code>\n         header in the request. For more information about available Regions and endpoints for\n         Storage Gateway, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">\n            Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services General\n            Reference</i>.</p>\n\n         <p>Valid Values: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">\n         Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services General\n            Reference</i>.\n         \n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "GatewayType": {
                     "target": "com.amazonaws.storagegateway#GatewayType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that defines the type of gateway to activate. The type specified is critical to\n         all later functions of the gateway and cannot be changed after activation. The default\n         value is <code>CACHED</code>.</p>\n\n         <p>Valid Values: <code>STORED</code> | <code>CACHED</code> | <code>VTL</code> |\n            <code>FILE_S3</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A value that defines the type of gateway to activate. The type specified is critical to\n         all later functions of the gateway and cannot be changed after activation. The default\n         value is <code>CACHED</code>.</p>\n\n         <p>Valid Values: <code>STORED</code> | <code>CACHED</code> | <code>VTL</code> |\n         <code>FILE_S3</code> | <code>FILE_FSX_SMB|</code>\n         </p>"
                     }
                 },
                 "TapeDriveType": {
@@ -117,7 +117,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It\n         is a string made of information such as your account, gateway name, and AWS Region. This\n         ARN is used to reference the gateway in other API operations as well as resource-based\n         authorization.</p>\n\n         <note>\n            <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the\n            gateway name rather than the gateway ID. Changing the name of the gateway has no effect\n            on the gateway ARN.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It\n         is a string made of information such as your account, gateway name, and Region. This\n         ARN is used to reference the gateway in other API operations as well as resource-based\n         authorization.</p>\n\n         <note>\n            <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the\n            gateway name rather than the gateway ID. Changing the name of the gateway has no effect\n            on the gateway ARN.</p>\n         </note>"
             }
         },
         "com.amazonaws.storagegateway#ActivationKey": {
@@ -181,7 +181,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures one or more gateway local disks as cache for a gateway. This operation is\n         only supported in the cached volume, tape, and file gateway type (see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html\">How AWS Storage Gateway works (architecture)</a>.</p>\n\n         <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to\n         add cache, and one or more disk IDs that you want to configure as cache.</p>"
+                "smithy.api#documentation": "<p>Configures one or more gateway local disks as cache for a gateway. This operation is\n         only supported in the cached volume, tape, and file gateway type (see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html\">How Storage Gateway works (architecture)</a>.</p>\n\n         <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to\n         add cache, and one or more disk IDs that you want to configure as cache.</p>"
             }
         },
         "com.amazonaws.storagegateway#AddCacheInput": {
@@ -227,7 +227,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource. You use tags to add metadata to\n         resources, which you can use to categorize these resources. For example, you can categorize\n         resources by purpose, owner, environment, or team. Each tag consists of a key and a value,\n         which you define. You can add tags to the following AWS Storage Gateway resources:</p>\n\n         <ul>\n            <li>\n               <p>Storage gateways of all types</p>\n            </li>\n            <li>\n               <p>Storage volumes</p>\n            </li>\n            <li>\n               <p>Virtual tapes</p>\n            </li>\n            <li>\n               <p>NFS and SMB file shares</p>\n            </li>\n         </ul>\n\n         <p>You can create a maximum of 50 tags for each resource. Virtual tapes and storage volumes\n         that are recovered to a new gateway maintain their tags.</p>"
+                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource. You use tags to add metadata to\n         resources, which you can use to categorize these resources. For example, you can categorize\n         resources by purpose, owner, environment, or team. Each tag consists of a key and a value,\n         which you define. You can add tags to the following Storage Gateway resources:</p>\n\n         <ul>\n            <li>\n               <p>Storage gateways of all types</p>\n            </li>\n            <li>\n               <p>Storage volumes</p>\n            </li>\n            <li>\n               <p>Virtual tapes</p>\n            </li>\n            <li>\n               <p>NFS and SMB file shares</p>\n            </li>\n            <li>\n               <p>File System associations</p>\n            </li>\n         </ul>\n\n         <p>You can create a maximum of 50 tags for each resource. Virtual tapes and storage volumes\n         that are recovered to a new gateway maintain their tags.</p>"
             }
         },
         "com.amazonaws.storagegateway#AddTagsToResourceInput": {
@@ -437,7 +437,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associate an Amazon FSx file system with the Amazon FSx file gateway. After the\n         association process is complete, the file shares on the Amazon FSx file system are\n         available for access through the gateway. This operation only supports the Amazon FSx file\n         gateway type.</p>"
+                "smithy.api#documentation": "<p>Associate an Amazon FSx file system with the FSx File Gateway. After the\n         association process is complete, the file shares on the Amazon FSx file system are\n         available for access through the gateway. This operation only supports the FSx File\n         Gateway type.</p>"
             }
         },
         "com.amazonaws.storagegateway#AssociateFileSystemInput": {
@@ -460,7 +460,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.storagegateway#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string value that you supply that is used by the file gateway to ensure\n         idempotent file system association creation.</p>",
+                        "smithy.api#documentation": "<p>A unique string value that you supply that is used by the FSx File Gateway to ensure\n         idempotent file system association creation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -473,7 +473,7 @@
                 "LocationARN": {
                     "target": "com.amazonaws.storagegateway#FileSystemLocationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the\n         Amazon FSx file gateway.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the\n         FSx File Gateway.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -491,6 +491,12 @@
                 },
                 "CacheAttributes": {
                     "target": "com.amazonaws.storagegateway#CacheAttributes"
+                },
+                "EndpointNetworkConfiguration": {
+                    "target": "com.amazonaws.storagegateway#EndpointNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the network configuration information for the gateway associated with the Amazon FSx file system.</p>\n         <note>\n            <p>If multiple file systems are associated with this gateway, this parameter's <code>IpAddresses</code> field is required.</p>\n         </note>"
+                    }
                 }
             }
         },
@@ -810,12 +816,12 @@
                 "CacheStaleTimeoutInSeconds": {
                     "target": "com.amazonaws.storagegateway#CacheStaleTimeoutInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of\n         time since the last refresh after which access to the directory would cause the file\n         gateway to first refresh that directory's contents from the Amazon S3 bucket or Amazon FSx file system. The TTL\n         duration is in seconds.</p>\n\n         <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>"
+                        "smithy.api#documentation": "<p>Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of\n         time since the last refresh after which access to the directory would cause the file\n         gateway to first refresh that directory's contents from the Amazon S3 bucket or Amazon FSx file system. The TTL\n         duration is in seconds.</p>\n\n         <p>Valid Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The refresh cache information for the file share.</p>"
+                "smithy.api#documentation": "<p>The refresh cache information for the file share or FSx file systems.</p>"
             }
         },
         "com.amazonaws.storagegateway#CacheStaleTimeoutInSeconds": {
@@ -1176,13 +1182,13 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
                     }
                 },
                 "Tags": {
@@ -1227,7 +1233,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Network File System (NFS) file share on an existing file gateway. In Storage\n         Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage.\n         Storage Gateway exposes file shares using an NFS interface. This operation is only\n         supported for file gateways.</p>\n\n         <important>\n            <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable\n            you to create a file share. Make sure AWS STS is activated in the AWS Region you are\n            creating your file gateway in. If AWS STS is not activated in the AWS Region, activate\n            it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n               deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and\n               Access Management User Guide</i>.</p>\n\n            <p>File gateway does not support creating hard or symbolic links on a file share.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates a Network File System (NFS) file share on an existing S3 File Gateway. In Storage\n         Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage.\n         Storage Gateway exposes file shares using an NFS interface. This operation is only\n         supported for S3 File Gateways.</p>\n\n         <important>\n            <p>S3 File gateway requires Security Token Service (STS) to be activated to enable\n            you to create a file share. Make sure STS is activated in the Region you are\n            creating your S3 File Gateway in. If STS is not activated in the Region, activate\n            it. For information about how to activate STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n               deactivating STS in an Region</a> in the \n            <i>Identity and Access Management User Guide</i>.</p>\n\n            <p>S3 File Gateways do not support creating hard or symbolic links on a file share.</p>\n         </important>"
             }
         },
         "com.amazonaws.storagegateway#CreateNFSFileShareInput": {
@@ -1236,7 +1242,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.storagegateway#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string value that you supply that is used by file gateway to ensure idempotent\n         file share creation.</p>",
+                        "smithy.api#documentation": "<p>A unique string value that you supply that is used by S3 File Gateway to ensure idempotent\n         file share creation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1249,52 +1255,52 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the file gateway on which you want to create a file\n         share.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 File Gateway on which you want to create a file\n         share.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
                     }
                 },
                 "Role": {
                     "target": "com.amazonaws.storagegateway#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes\n         when it accesses the underlying storage.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes\n         when it accesses the underlying storage.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LocationARN": {
                     "target": "com.amazonaws.storagegateway#LocationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the backend storage used for storing file data. A prefix name can be added to\n         the S3 bucket name. It must end with a \"/\".</p>",
+                        "smithy.api#documentation": "<p>The ARN of the backend storage used for storing file data. A prefix name can be added to\n         the S3 bucket name. It must end with a \"/\".</p>\n         <note>\n            <p>You can specify a bucket attached to an access point using a complete ARN that includes the\n            bucket region as shown:</p>\n            <p>\n               <code>arn:aws:s3:<i>region</i>:<i>account-id</i>:accesspoint/<i>access-point-name</i>\n               </code>\n            </p>\n            <p>If you specify a bucket attached to an access point, the bucket policy must be\n            configured to delegate access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
                     "target": "com.amazonaws.storagegateway#ObjectACL",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a file gateway puts objects into. The default value is <code>private</code>.</p>"
+                        "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a S3 File Gateway puts objects into. The default value is <code>private</code>.</p>"
                     }
                 },
                 "ClientList": {
                     "target": "com.amazonaws.storagegateway#FileShareClientList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of clients that are allowed to access the file gateway. The list must contain\n         either valid IP addresses or valid CIDR blocks.</p>"
+                        "smithy.api#documentation": "<p>The list of clients that are allowed to access the S3 File Gateway. The list must contain\n         either valid IP addresses or valid CIDR blocks.</p>"
                     }
                 },
                 "Squash": {
@@ -1344,6 +1350,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
+                },
+                "VPCEndpointDNSName": {
+                    "target": "com.amazonaws.storagegateway#DNSHostName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DNS name for the VPC endpoint that the NFS file share uses to connect to \n         Amazon S3.</p>\n         <note>\n            <p>This parameter is required for NFS file shares that connect to Amazon S3 \n            through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p>\n         </note>"
+                    }
+                },
+                "BucketRegion": {
+                    "target": "com.amazonaws.storagegateway#RegionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Region of the S3 bucket where the NFS file share stores files.</p>\n         <note>\n            <p>This parameter is required for NFS file shares that connect to Amazon S3 \n            through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -1381,7 +1399,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage\n         Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage.\n         Storage Gateway exposes file shares using an SMB interface. This operation is only\n         supported for file gateways.</p>\n\n         <important>\n            <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable\n            you to create a file share. Make sure that AWS STS is activated in the AWS Region you\n            are creating your file gateway in. If AWS STS is not activated in this AWS Region,\n            activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n               deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and\n               Access Management User Guide</i>.</p>\n\n            <p>File gateways don't support creating hard or symbolic links on a file\n            share.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates a Server Message Block (SMB) file share on an existing S3 File Gateway. In Storage\n         Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage.\n         Storage Gateway exposes file shares using an SMB interface. This operation is only\n         supported for S3 File Gateways.</p>\n\n         <important>\n            <p>S3 File Gateways require Security Token Service (STS) to be activated to enable\n            you to create a file share. Make sure that STS is activated in the Region you\n            are creating your S3 File Gateway in. If STS is not activated in this Region,\n            activate it. For information about how to activate STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n               deactivating STS in an Region</a> in the \n            <i>Identity and Access Management User Guide</i>.</p>\n\n            <p>File gateways don't support creating hard or symbolic links on a file\n            share.</p>\n         </important>"
             }
         },
         "com.amazonaws.storagegateway#CreateSMBFileShareInput": {
@@ -1390,53 +1408,53 @@
                 "ClientToken": {
                     "target": "com.amazonaws.storagegateway#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string value that you supply that is used by file gateway to ensure idempotent\n         file share creation.</p>",
+                        "smithy.api#documentation": "<p>A unique string value that you supply that is used by S3 File Gateway to ensure idempotent\n         file share creation.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the file gateway on which you want to create a file share.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the S3 File Gateway on which you want to create a file share.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
                     }
                 },
                 "Role": {
                     "target": "com.amazonaws.storagegateway#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes\n         when it accesses the underlying storage.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes\n         when it accesses the underlying storage.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LocationARN": {
                     "target": "com.amazonaws.storagegateway#LocationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the backend storage used for storing file data. A prefix name can be added to\n         the S3 bucket name. It must end with a \"/\".</p>",
+                        "smithy.api#documentation": "<p>The ARN of the backend storage used for storing file data. A prefix name can be added to\n         the S3 bucket name. It must end with a \"/\".</p>\n         <note>\n            <p>You can specify a bucket attached to an access point using a complete ARN that includes the\n         bucket region as shown:</p>\n            <p>\n               <code>arn:aws:s3:<i>region</i>:<i>account-id</i>:accesspoint/<i>access-point-name</i>\n               </code>\n            </p>\n            <p>If you specify a bucket attached to an access point, the bucket policy must be\n            configured to delegate access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
                     "target": "com.amazonaws.storagegateway#ObjectACL",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a file gateway puts objects into. The default value is <code>private</code>.</p>"
+                        "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a S3 File Gateway puts objects into. The default value is <code>private</code>.</p>"
                     }
                 },
                 "ReadOnly": {
@@ -1460,7 +1478,7 @@
                 "SMBACLEnabled": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file\n         share. Set it to <code>false</code> to map file and directory permissions to the POSIX\n         permissions.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>AWS Storage Gateway User\n            Guide</i>.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file\n         share. Set it to <code>false</code> to map file and directory permissions to the POSIX\n         permissions.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>Storage Gateway User\n            Guide</i>.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "AccessBasedEnumeration": {
@@ -1528,6 +1546,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
+                },
+                "VPCEndpointDNSName": {
+                    "target": "com.amazonaws.storagegateway#DNSHostName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DNS name for the VPC endpoint that the SMB file share uses to connect to Amazon S3.</p>\n         <note>\n            <p>This parameter is required for SMB file shares that connect to Amazon S3 \n            through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p>\n         </note>"
+                    }
+                },
+                "BucketRegion": {
+                    "target": "com.amazonaws.storagegateway#RegionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Region of the S3 bucket where the SMB file share stores files.</p>\n         <note>\n            <p>This parameter is required for SMB file shares that connect to Amazon S3 \n            through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p>\n         </note>"
+                    }
+                },
+                "OplocksEnabled": {
+                    "target": "com.amazonaws.storagegateway#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p>\n         <note>\n            <p>Enabling opportunistic locking on case-sensitive shares is not recommended for workloads that involve \n            access to files with the same name in different case.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -1568,7 +1604,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a snapshot of a volume.</p>\n\n         <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data\n         to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the\n         data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2).\n         You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API\n         enables you to take an ad hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a\n            snapshot schedule</a>.</p>\n\n         <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its\n         Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS\n         Storage Gateway takes the snapshot of specified volume, the snapshot and description\n         appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a\n         snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it\n         when you want to create a volume from a snapshot. This operation is only supported in\n         stored and cached volume gateway type.</p>\n\n         <note>\n            <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a>\n            or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API\n               Reference</i>.</p>\n         </note>\n\n         <important>\n            <p>Volume and snapshot IDs are changing to a longer length ID format. For more\n            information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Initiates a snapshot of a volume.</p>\n\n         <p>Storage Gateway provides the ability to back up point-in-time snapshots of your data\n         to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the\n         data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2).\n         You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API\n         enables you to take an ad hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a\n            snapshot schedule</a>.</p>\n\n         <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its\n         Amazon Resource Name (ARN). You must also provide description for the snapshot. When \n         Storage Gateway takes the snapshot of specified volume, the snapshot and description\n         appears in the Storage Gateway console. In response, Storage Gateway returns you a\n         snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it\n         when you want to create a volume from a snapshot. This operation is only supported in\n         stored and cached volume gateway type.</p>\n\n         <note>\n            <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a>\n            or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API\n               Reference</i>.</p>\n         </note>\n\n         <important>\n            <p>Volume and snapshot IDs are changing to a longer length ID format. For more\n            information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p>\n         </important>"
             }
         },
         "com.amazonaws.storagegateway#CreateSnapshotFromVolumeRecoveryPoint": {
@@ -1591,7 +1627,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a snapshot of a gateway from a volume recovery point. This operation is only\n         supported in the cached volume gateway type.</p>\n\n         <p>A volume recovery point is a point in time at which all data of the volume is consistent\n         and from which you can create a snapshot. To get a list of volume recovery point for cached\n         volume gateway, use <a>ListVolumeRecoveryPoints</a>.</p>\n\n         <p>In the <code>CreateSnapshotFromVolumeRecoveryPoint</code> request, you identify the\n         volume by providing its Amazon Resource Name (ARN). You must also provide a description for\n         the snapshot. When the gateway takes a snapshot of the specified volume, the snapshot and\n         its description appear in the AWS Storage Gateway console.\n          In response, the gateway returns\n         you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use\n         it when you want to create a volume from a snapshot.</p>\n\n         <note>\n            <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a>\n            or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API\n               Reference</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Initiates a snapshot of a gateway from a volume recovery point. This operation is only\n         supported in the cached volume gateway type.</p>\n\n         <p>A volume recovery point is a point in time at which all data of the volume is consistent\n         and from which you can create a snapshot. To get a list of volume recovery point for cached\n         volume gateway, use <a>ListVolumeRecoveryPoints</a>.</p>\n\n         <p>In the <code>CreateSnapshotFromVolumeRecoveryPoint</code> request, you identify the\n         volume by providing its Amazon Resource Name (ARN). You must also provide a description for\n         the snapshot. When the gateway takes a snapshot of the specified volume, the snapshot and\n         its description appear in the Storage Gateway console.\n          In response, the gateway returns\n         you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use\n         it when you want to create a volume from a snapshot.</p>\n\n         <note>\n            <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a>\n            or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API\n               Reference</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.storagegateway#CreateSnapshotFromVolumeRecoveryPointInput": {
@@ -1607,7 +1643,7 @@
                 "SnapshotDescription": {
                     "target": "com.amazonaws.storagegateway#SnapshotDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic\n         Block Store snapshots panel in the <b>Description</b> field, and\n         in the AWS Storage Gateway snapshot <b>Details</b> pane,\n            <b>Description</b> field.</p>",
+                        "smithy.api#documentation": "<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic\n         Block Store snapshots panel in the <b>Description</b> field, and\n         in the Storage Gateway snapshot <b>Details</b> pane,\n            <b>Description</b> field.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1655,7 +1691,7 @@
                 "SnapshotDescription": {
                     "target": "com.amazonaws.storagegateway#SnapshotDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic\n         Block Store snapshots panel in the <b>Description</b> field, and\n         in the AWS Storage Gateway snapshot <b>Details</b> pane,\n            <b>Description</b> field.</p>",
+                        "smithy.api#documentation": "<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic\n         Block Store snapshots panel in the <b>Description</b> field, and\n         in the Storage Gateway snapshot <b>Details</b> pane,\n            <b>Description</b> field.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1756,13 +1792,13 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
                     }
                 },
                 "Tags": {
@@ -1842,7 +1878,7 @@
                 "RetentionLockType": {
                     "target": "com.amazonaws.storagegateway#RetentionLockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tape retention lock can be configured in two modes. When configured in governance mode,\n         AWS accounts with specific IAM permissions are authorized to remove the tape retention lock\n         from archived virtual tapes. When configured in compliance mode, the tape retention lock\n         cannot be removed by any user, including the root AWS account.</p>"
+                        "smithy.api#documentation": "<p>Tape retention lock can be configured in two modes. When configured in governance mode,\n         accounts with specific IAM permissions are authorized to remove the tape retention lock\n         from archived virtual tapes. When configured in compliance mode, the tape retention lock\n         cannot be removed by any user, including the root account.</p>"
                     }
                 },
                 "RetentionLockTimeInDays": {
@@ -1865,7 +1901,7 @@
                 "PoolARN": {
                     "target": "com.amazonaws.storagegateway#PoolARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the\n            <a>ListTapePools</a> operation to return a list of tape pools for your\n         account and AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the\n            <a>ListTapePools</a> operation to return a list of tape pools for your\n         account and Region.</p>"
                     }
                 }
             }
@@ -1896,7 +1932,7 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the\n         virtual tape with. Use the <a>ListGateways</a> operation to return a list of\n         gateways for your account and AWS Region.</p>",
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the\n         virtual tape with. Use the <a>ListGateways</a> operation to return a list of\n         gateways for your account and Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1917,13 +1953,13 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
                     }
                 },
                 "PoolId": {
@@ -1989,7 +2025,7 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the\n         virtual tapes with. Use the <a>ListGateways</a> operation to return a list of\n         gateways for your account and AWS Region.</p>",
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the\n         virtual tapes with. Use the <a>ListGateways</a> operation to return a list of\n         gateways for your account and Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2024,13 +2060,13 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
                     }
                 },
                 "PoolId": {
@@ -2072,6 +2108,16 @@
         },
         "com.amazonaws.storagegateway#CreatedDate": {
             "type": "timestamp"
+        },
+        "com.amazonaws.storagegateway#DNSHostName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"
+            }
         },
         "com.amazonaws.storagegateway#DayOfMonth": {
             "type": "integer",
@@ -2275,7 +2321,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a file share from a file gateway. This operation is only supported for file\n         gateways.</p>"
+                "smithy.api#documentation": "<p>Deletes a file share from an S3 File Gateway. This operation is only supported for S3 File\n         Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#DeleteFileShareInput": {
@@ -2291,7 +2337,7 @@
                 "ForceDelete": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this value is set to <code>true</code>, the operation deletes a file share\n         immediately and aborts all data uploads to AWS. Otherwise, the file share is not deleted\n         until all data is uploaded to AWS. This process aborts the data upload process, and the\n         file share enters the <code>FORCE_DELETING</code> status.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>If this value is set to <code>true</code>, the operation deletes a file share\n         immediately and aborts all data uploads to Amazon Web Services. Otherwise, the file share is not deleted\n         until all data is uploaded to Amazon Web Services. This process aborts the data upload process, and the\n         file share enters the <code>FORCE_DELETING</code> status.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 }
             },
@@ -2330,7 +2376,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a gateway. To specify which gateway to delete, use the Amazon Resource Name\n         (ARN) of the gateway in your request. The operation deletes the gateway; however, it does\n         not delete the gateway virtual machine (VM) from your host computer.</p>\n\n         <p>After you delete a gateway, you cannot reactivate it. Completed snapshots of the gateway\n         volumes are not deleted upon deleting the gateway, however, pending snapshots will not\n         complete. After you delete a gateway, your next step is to remove it from your\n         environment.</p>\n\n         <important>\n            <p>You no longer pay software charges after the gateway is deleted; however, your\n            existing Amazon EBS snapshots persist and you will continue to be billed for these\n            snapshots. You can choose to remove all remaining Amazon EBS snapshots by canceling your\n            Amazon EC2 subscription.  If you prefer not to cancel your Amazon EC2 subscription, you\n            can delete your snapshots using the Amazon EC2 console. For more information, see the\n               <a href=\"http://aws.amazon.com/storagegateway\">AWS Storage Gateway detail\n            page</a>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Deletes a gateway. To specify which gateway to delete, use the Amazon Resource Name\n         (ARN) of the gateway in your request. The operation deletes the gateway; however, it does\n         not delete the gateway virtual machine (VM) from your host computer.</p>\n\n         <p>After you delete a gateway, you cannot reactivate it. Completed snapshots of the gateway\n         volumes are not deleted upon deleting the gateway, however, pending snapshots will not\n         complete. After you delete a gateway, your next step is to remove it from your\n         environment.</p>\n\n         <important>\n            <p>You no longer pay software charges after the gateway is deleted; however, your\n            existing Amazon EBS snapshots persist and you will continue to be billed for these\n            snapshots. You can choose to remove all remaining Amazon EBS snapshots by canceling your\n            Amazon EC2 subscription.  If you prefer not to cancel your Amazon EC2 subscription, you\n            can delete your snapshots using the Amazon EC2 console. For more information, see the\n               <a href=\"http://aws.amazon.com/storagegateway\">Storage Gateway detail\n            page</a>.</p>\n         </important>"
             }
         },
         "com.amazonaws.storagegateway#DeleteGatewayInput": {
@@ -2482,7 +2528,7 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is\n         associated with. Use the <a>ListGateways</a> operation to return a list of\n         gateways for your account and AWS Region.</p>",
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is\n         associated with. Use the <a>ListGateways</a> operation to return a list of\n         gateways for your account and Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2830,7 +2876,7 @@
                 "CacheDirtyPercentage": {
                     "target": "com.amazonaws.storagegateway#double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file share's contribution to the overall percentage of the gateway's cache\n         that has not been persisted to AWS. The sample is taken at the end of the reporting\n         period.</p>"
+                        "smithy.api#documentation": "<p>The file share's contribution to the overall percentage of the gateway's cache\n         that has not been persisted to Amazon Web Services. The sample is taken at the end of the reporting\n         period.</p>"
                     }
                 },
                 "CacheHitPercentage": {
@@ -2864,7 +2910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a description of the gateway volumes specified in the request. This operation is\n         only supported in the cached volume gateway types.</p>\n\n         <p>The list of gateway volumes in the request must be from one gateway. In the response,\n         AWS Storage Gateway returns volume information sorted by volume Amazon Resource Name\n         (ARN).</p>"
+                "smithy.api#documentation": "<p>Returns a description of the gateway volumes specified in the request. This operation is\n         only supported in the cached volume gateway types.</p>\n\n         <p>The list of gateway volumes in the request must be from one gateway. In the response,\n         Storage Gateway returns volume information sorted by volume Amazon Resource Name\n         (ARN).</p>"
             }
         },
         "com.amazonaws.storagegateway#DescribeCachediSCSIVolumesInput": {
@@ -2959,7 +3005,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the file system association information. This operation is only supported for\n         Amazon FSx file gateways.</p>"
+                "smithy.api#documentation": "<p>Gets the file system association information. This operation is only supported for\n        FSx File Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#DescribeFileSystemAssociationsInput": {
@@ -3082,7 +3128,7 @@
                 "Ec2InstanceRegion": {
                     "target": "com.amazonaws.storagegateway#Ec2InstanceRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where the Amazon EC2 instance is located.</p>"
+                        "smithy.api#documentation": "<p>The Region where the Amazon EC2 instance is located.</p>"
                     }
                 },
                 "Tags": {
@@ -3125,6 +3171,18 @@
                     "target": "com.amazonaws.storagegateway#DeprecationDate",
                     "traits": {
                         "smithy.api#documentation": "<p>Date after which this gateway will not receive software updates for new features and bug\n         fixes.</p>"
+                    }
+                },
+                "GatewayCapacity": {
+                    "target": "com.amazonaws.storagegateway#GatewayCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the size of the gateway's metadata cache.</p>"
+                    }
+                },
+                "SupportedGatewayCapacities": {
+                    "target": "com.amazonaws.storagegateway#SupportedGatewayCapacities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the metadata cache sizes that the gateway can support based on its current hardware specifications.</p>"
                     }
                 }
             },
@@ -3224,7 +3282,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a description for one or more Network File System (NFS) file shares from a file\n         gateway. This operation is only supported for file gateways.</p>"
+                "smithy.api#documentation": "<p>Gets a description for one or more Network File System (NFS) file shares from an S3 File\n         Gateway. This operation is only supported for S3 File Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#DescribeNFSFileSharesInput": {
@@ -3273,7 +3331,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a description for one or more Server Message Block (SMB) file shares from a file\n         gateway. This operation is only supported for file gateways.</p>"
+                "smithy.api#documentation": "<p>Gets a description for one or more Server Message Block (SMB) file shares from a S3 File\n         Gateway. This operation is only supported for S3 File Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#DescribeSMBFileSharesInput": {
@@ -3357,19 +3415,19 @@
                 "SMBGuestPasswordSet": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This value is <code>true</code> if a password for the guest user <code>smbguest</code>\n         is set, otherwise <code>false</code>.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>This value is <code>true</code> if a password for the guest user <code>smbguest</code>\n         is set, otherwise <code>false</code>. Only supported for S3 File Gateways.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "SMBSecurityStrategy": {
                     "target": "com.amazonaws.storagegateway#SMBSecurityStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of security strategy that was specified for file gateway.</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>ClientSpecified</code>: If you use this option, requests are established\n               based on what is negotiated by the client. This option is recommended when you want\n               to maximize compatibility across different clients in your environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MandatorySigning</code>: If you use this option, file gateway only allows\n               connections from SMBv2 or SMBv3 clients that have signing enabled. This option works\n               with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MandatoryEncryption</code>: If you use this option, file gateway only allows\n               connections from SMBv3 clients that have encryption enabled. This option is highly\n               recommended for environments that handle sensitive data. This option works with SMB\n               clients on Microsoft Windows 8, Windows Server 2012 or newer.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of security strategy that was specified for file gateway.</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>ClientSpecified</code>: If you use this option, requests are established\n               based on what is negotiated by the client. This option is recommended when you want\n               to maximize compatibility across different clients in your environment. Only supported for S3 File Gateways.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MandatorySigning</code>: If you use this option, file gateway only allows\n               connections from SMBv2 or SMBv3 clients that have signing enabled. This option works\n               with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MandatoryEncryption</code>: If you use this option, file gateway only allows\n               connections from SMBv3 clients that have encryption enabled. This option is highly\n               recommended for environments that handle sensitive data. This option works with SMB\n               clients on Microsoft Windows 8, Windows Server 2012 or newer.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FileSharesVisible": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shares on this gateway appear when listing shares.</p>"
+                        "smithy.api#documentation": "<p>The shares on this gateway appear when listing shares. Only supported for S3 File Gateways. </p>"
                     }
                 }
             }
@@ -3467,7 +3525,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the description of the gateway volumes specified in the request. The list of\n         gateway volumes in the request must be from one gateway. In the response, AWS Storage\n         Gateway returns volume information sorted by volume ARNs. This operation is only supported\n         in stored volume gateway type.</p>"
+                "smithy.api#documentation": "<p>Returns the description of the gateway volumes specified in the request. The list of\n         gateway volumes in the request must be from one gateway. In the response, Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported\n         in stored volume gateway type.</p>"
             }
         },
         "com.amazonaws.storagegateway#DescribeStorediSCSIVolumesInput": {
@@ -3513,7 +3571,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a description of specified virtual tapes in the virtual tape shelf (VTS). This\n         operation is only supported in the tape gateway type.</p>\n\n         <p>If a specific <code>TapeARN</code> is not specified, AWS Storage Gateway returns a\n         description of all virtual tapes found in the VTS associated with your account.</p>",
+                "smithy.api#documentation": "<p>Returns a description of specified virtual tapes in the virtual tape shelf (VTS). This\n         operation is only supported in the tape gateway type.</p>\n\n         <p>If a specific <code>TapeARN</code> is not specified, Storage Gateway returns a\n         description of all virtual tapes found in the VTS associated with your account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -3795,7 +3853,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a description of virtual tape library (VTL) devices for the specified tape\n         gateway. In the response, AWS Storage Gateway returns VTL device information.</p>\n\n         <p>This operation is only supported in the tape gateway type.</p>",
+                "smithy.api#documentation": "<p>Returns a description of virtual tape library (VTL) devices for the specified tape\n         gateway. In the response, Storage Gateway returns VTL device information.</p>\n\n         <p>This operation is only supported in the tape gateway type.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -4092,7 +4150,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates an Amazon FSx file system from the specified gateway. After the\n         disassociation process finishes, the gateway can no longer access the Amazon FSx file\n         system. This operation is only supported in the Amazon FSx file gateway type.</p>"
+                "smithy.api#documentation": "<p>Disassociates an Amazon FSx file system from the specified gateway. After the\n         disassociation process finishes, the gateway can no longer access the Amazon FSx file\n         system. This operation is only supported in the FSx File Gateway type.</p>"
             }
         },
         "com.amazonaws.storagegateway#DisassociateFileSystemInput": {
@@ -4108,7 +4166,7 @@
                 "ForceDelete": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this value is set to true, the operation disassociates an Amazon FSx file system\n         immediately. It ends all data uploads to the file system, and the file system association\n         enters the <code>FORCE_DELETING</code> status. If this value is set to false, the Amazon\n         FSx file system does not disassociate until all data is uploaded.</p>"
+                        "smithy.api#documentation": "<p>If this value is set to true, the operation disassociates an Amazon FSx file system\n         immediately. It ends all data uploads to the file system, and the file system association\n         enters the <code>FORCE_DELETING</code> status. If this value is set to false, the Amazon FSx file system does not disassociate until all data is uploaded.</p>"
                     }
                 }
             }
@@ -4269,6 +4327,20 @@
         },
         "com.amazonaws.storagegateway#Ec2InstanceRegion": {
             "type": "string"
+        },
+        "com.amazonaws.storagegateway#EndpointNetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "IpAddresses": {
+                    "target": "com.amazonaws.storagegateway#IpAddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of gateway IP addresses on which the associated Amazon FSx file system is available.</p>\n         <note>\n            <p>If multiple file systems are associated with this gateway, this field is required.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies network configuration information for the gateway associated with the \n         Amazon FSx file system.</p>"
+            }
         },
         "com.amazonaws.storagegateway#EndpointType": {
             "type": "string",
@@ -4562,7 +4634,7 @@
                 "target": "com.amazonaws.storagegateway#IPV4AddressCIDR"
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of clients that are allowed to access the file gateway. The list must contain\n         either valid IP addresses or valid CIDR blocks.</p>",
+                "smithy.api#documentation": "<p>The list of clients that are allowed to access the S3 File Gateway. The list must contain\n         either valid IP addresses or valid CIDR blocks.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
@@ -4599,7 +4671,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a file share.</p>"
+                "smithy.api#documentation": "<p>Describes a file share. Only supported S3 File Gateway.</p>"
             }
         },
         "com.amazonaws.storagegateway#FileShareInfoList": {
@@ -4691,7 +4763,7 @@
                 "FileSystemAssociationStatus": {
                     "target": "com.amazonaws.storagegateway#FileSystemAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the file system association. \n         Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | \n         <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The status of the file system association. \n         Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | \n         <code>FORCE_DELETING</code> | <code>UPDATING</code> | <code>ERROR</code>\n         </p>"
                     }
                 },
                 "AuditDestinationARN": {
@@ -4711,6 +4783,12 @@
                 },
                 "CacheAttributes": {
                     "target": "com.amazonaws.storagegateway#CacheAttributes"
+                },
+                "EndpointNetworkConfiguration": {
+                    "target": "com.amazonaws.storagegateway#EndpointNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies network configuration information for the gateway associated with the \n         Amazon FSx file system.</p>\n         <note>\n            <p>If multiple file systems are associated with this gateway, this parameter's <code>IpAddresses</code> \n            field is required.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -4750,7 +4828,7 @@
                 "FileSystemAssociationStatus": {
                     "target": "com.amazonaws.storagegateway#FileSystemAssociationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the file share. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | \n         <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The status of the file share. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | \n         <code>FORCE_DELETING</code> | <code>UPDATING</code> | <code>ERROR</code>\n         </p>"
                     }
                 },
                 "GatewayARN": {
@@ -4800,11 +4878,30 @@
         "com.amazonaws.storagegateway#GatewayARN": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>\n         operation to return a list of gateways for your account and AWS Region.</p>",
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>\n         operation to return a list of gateways for your account and Region.</p>",
                 "smithy.api#length": {
                     "min": 50,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.storagegateway#GatewayCapacity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Small",
+                        "name": "Small"
+                    },
+                    {
+                        "value": "Medium",
+                        "name": "Medium"
+                    },
+                    {
+                        "value": "Large",
+                        "name": "Large"
+                    }
+                ]
             }
         },
         "com.amazonaws.storagegateway#GatewayId": {
@@ -4828,7 +4925,7 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>\n         operation to return a list of gateways for your account and AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>\n         operation to return a list of gateways for your account and Region.</p>"
                     }
                 },
                 "GatewayType": {
@@ -4858,7 +4955,7 @@
                 "Ec2InstanceRegion": {
                     "target": "com.amazonaws.storagegateway#Ec2InstanceRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where the Amazon EC2 instance is located.</p>"
+                        "smithy.api#documentation": "<p>The Region where the Amazon EC2 instance is located.</p>"
                     }
                 }
             },
@@ -4978,6 +5075,16 @@
                 }
             }
         },
+        "com.amazonaws.storagegateway#IPV4Address": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\\.(?!$)|$)){4}$"
+            }
+        },
         "com.amazonaws.storagegateway#IPV4AddressCIDR": {
             "type": "string",
             "traits": {
@@ -5043,6 +5150,18 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.storagegateway#IpAddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.storagegateway#IPV4Address"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.storagegateway#IqnName": {
             "type": "string",
             "traits": {
@@ -5050,7 +5169,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[0-9a-z:.-]+"
+                "smithy.api#pattern": "^[0-9a-z:.-]+$"
             }
         },
         "com.amazonaws.storagegateway#JoinDomain": {
@@ -5079,7 +5198,7 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code>\n         operation to return a list of gateways for your account and AWS Region.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code>\n         operation to return a list of gateways for your account and Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5150,12 +5269,12 @@
         "com.amazonaws.storagegateway#KMSKey": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>",
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>",
                 "smithy.api#length": {
                     "min": 7,
                     "max": 2048
                 },
-                "smithy.api#pattern": "(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)"
+                "smithy.api#pattern": "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$"
             }
         },
         "com.amazonaws.storagegateway#LastSoftwareUpdate": {
@@ -5223,7 +5342,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of the file shares for a specific file gateway, or the list of file shares\n         that belong to the calling user account. This operation is only supported for file\n         gateways.</p>",
+                "smithy.api#documentation": "<p>Gets a list of the file shares for a specific S3 File Gateway, or the list of file shares\n         that belong to the calling user account. This operation is only supported for S3 File Gateways.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "NextMarker",
@@ -5276,7 +5395,7 @@
                 "FileShareInfoList": {
                     "target": "com.amazonaws.storagegateway#FileShareInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of information about the file gateway's file shares.</p>"
+                        "smithy.api#documentation": "<p>An array of information about the S3 File Gateway's file shares.</p>"
                     }
                 }
             },
@@ -5301,7 +5420,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of <code>FileSystemAssociationSummary</code> objects. Each object contains a\n         summary of a file system association. This operation is only supported for Amazon FSx file\n         gateways.</p>",
+                "smithy.api#documentation": "<p>Gets a list of <code>FileSystemAssociationSummary</code> objects. Each object contains a\n         summary of a file system association. This operation is only supported for FSx File\n         Gateways.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "NextMarker",
@@ -5370,7 +5489,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists gateways owned by an AWS account in an AWS Region specified in the request. The\n         returned list is ordered by gateway Amazon Resource Name (ARN).</p>\n\n         <p>By default, the operation returns a maximum of 100 gateways. This operation supports\n         pagination that allows you to optionally reduce the number of gateways returned in a\n         response.</p>\n\n         <p>If you have more gateways than are returned in a response (that is, the response returns\n         only a truncated list of your gateways), the response contains a marker that you can\n         specify in your next request to fetch the next page of gateways.</p>",
+                "smithy.api#documentation": "<p>Lists gateways owned by an account in an Region specified in the request. The\n         returned list is ordered by gateway Amazon Resource Name (ARN).</p>\n\n         <p>By default, the operation returns a maximum of 100 gateways. This operation supports\n         pagination that allows you to optionally reduce the number of gateways returned in a\n         response.</p>\n\n         <p>If you have more gateways than are returned in a response (that is, the response returns\n         only a truncated list of your gateways), the response contains a marker that you can\n         specify in your next request to fetch the next page of gateways.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5929,7 +6048,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes Network File System (NFS) file share default values. Files and folders stored\n         as Amazon S3 objects in S3 buckets don't, by default, have Unix file permissions\n         assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that\n         represent files and folders are assigned these default Unix permissions. This operation is\n         only supported for file gateways.</p>"
+                "smithy.api#documentation": "<p>Describes Network File System (NFS) file share default values. Files and folders stored\n         as Amazon S3 objects in S3 buckets don't, by default, have Unix file permissions\n         assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that\n         represent files and folders are assigned these default Unix permissions. This operation is\n         only supported for S3 File Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#NFSFileShareInfo": {
@@ -5953,7 +6072,7 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
@@ -5971,7 +6090,7 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
@@ -6024,10 +6143,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
+                },
+                "VPCEndpointDNSName": {
+                    "target": "com.amazonaws.storagegateway#DNSHostName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DNS name for the VPC endpoint that the NFS file share uses to connect to Amazon S3.</p>\n         <note>\n            <p>This parameter is required for NFS file shares that connect to Amazon S3 \n            through a VPC endpoint, a VPC access point, or an access point alias that points to a \n            VPC access point.</p>\n         </note>"
+                    }
+                },
+                "BucketRegion": {
+                    "target": "com.amazonaws.storagegateway#RegionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Region of the S3 bucket where the NFS file share stores files.</p>\n         <note>\n            <p>This parameter is required for NFS file shares that connect to Amazon S3 \n            through a VPC endpoint, a VPC access point, or an access point alias that points to a \n            VPC access point.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Unix file permissions and ownership information assigned, by default, to native S3\n         objects when file gateway discovers them in S3 buckets. This operation is only supported in\n         file gateways.</p>"
+                "smithy.api#documentation": "<p>The Unix file permissions and ownership information assigned, by default, to native S3\n         objects when an S3 File Gateway discovers them in S3 buckets. This operation is only supported in\n         S3 File Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#NFSFileShareInfoList": {
@@ -6065,7 +6196,7 @@
         "com.amazonaws.storagegateway#NetworkInterfaceId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z"
+                "smithy.api#pattern": "^\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z$"
             }
         },
         "com.amazonaws.storagegateway#NextUpdateAvailabilityDate": {
@@ -6114,7 +6245,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends you notification through CloudWatch Events when all files written to your file\n         share have been uploaded to Amazon S3.</p>\n\n         <p>AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all\n         files written to your file share up to that point in time have been uploaded to Amazon S3.\n         These files include files written to the file share up to the time that you make a request\n         for notification. When the upload is done, Storage Gateway sends you notification through\n         an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification\n         through event targets such as Amazon SNS or AWS Lambda function. This operation is only\n         supported for file gateways.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification\">Getting file upload notification</a> in the <i>AWS Storage Gateway User\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Sends you notification through CloudWatch Events when all files written to your file\n         share have been uploaded to Amazon S3.</p>\n\n         <p>Storage Gateway can send a notification through Amazon CloudWatch Events when all\n         files written to your file share up to that point in time have been uploaded to Amazon S3.\n         These files include files written to the file share up to the time that you make a request\n         for notification. When the upload is done, Storage Gateway sends you notification through\n         an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification\n         through event targets such as Amazon SNS or Lambda function. \n         This operation is only supported for S3 File Gateways.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification\">Getting file upload notification</a> in the <i>Storage Gateway User\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.storagegateway#NotifyWhenUploadedInput": {
@@ -6152,7 +6283,7 @@
         "com.amazonaws.storagegateway#ObjectACL": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a file gateway puts objects into. The default value is <code>private</code>.</p>",
+                "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that an S3 File Gateway puts objects into. The default value is <code>private</code>.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "private",
@@ -6250,7 +6381,7 @@
                 "PoolARN": {
                     "target": "com.amazonaws.storagegateway#PoolARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of custom tape pools for your\n         account and AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of custom tape pools for your\n         account and Region.</p>"
                     }
                 },
                 "PoolName": {
@@ -6268,7 +6399,7 @@
                 "RetentionLockType": {
                     "target": "com.amazonaws.storagegateway#RetentionLockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tape retention lock type, which can be configured in two modes. When configured in\n         governance mode, AWS accounts with specific IAM permissions are authorized to remove the\n         tape retention lock from archived virtual tapes. When configured in compliance mode, the\n         tape retention lock cannot be removed by any user, including the root AWS account.</p>"
+                        "smithy.api#documentation": "<p>Tape retention lock type, which can be configured in two modes. When configured in\n         governance mode, accounts with specific IAM permissions are authorized to remove the\n         tape retention lock from archived virtual tapes. When configured in compliance mode, the\n         tape retention lock cannot be removed by any user, including the root account.</p>"
                     }
                 },
                 "RetentionLockTimeInDays": {
@@ -6355,7 +6486,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Refreshes the cached inventory of objects for the specified file share. This operation\n         finds objects in the Amazon S3 bucket that were added, removed, or replaced since the\n         gateway last listed the bucket's contents and cached the results. This operation does\n         not import files into the file gateway cache storage. It only updates the cached inventory\n         to reflect changes in the inventory of the objects in the S3 bucket. This operation is only\n         supported in the file gateway type. You can subscribe to be notified through an Amazon\n         CloudWatch event when your <code>RefreshCache</code> operation completes. For more\n         information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>\n\n         <p>When this API is called, it only initiates the refresh operation. When the API call\n         completes and returns a success code, it doesn't necessarily mean that the file\n         refresh has completed. You should use the refresh-complete notification to determine that\n         the operation has completed before you check for new files on the gateway file share. You\n         can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code>\n         operation completes.</p>\n\n         <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two\n         refreshes at any time. We recommend using the refresh-complete CloudWatch event\n         notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>\n\n         <p>If you invoke the RefreshCache API when two requests are already being processed, any\n         new request will cause an <code>InvalidGatewayRequestException</code> error because too\n         many requests were sent to the server.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Refreshes the cached inventory of objects for the specified file share. This operation\n         finds objects in the Amazon S3 bucket that were added, removed, or replaced since the\n         gateway last listed the bucket's contents and cached the results. This operation does\n         not import files into the S3 File Gateway cache storage. It only updates the cached inventory\n         to reflect changes in the inventory of the objects in the S3 bucket. This operation is only\n         supported in the S3 File Gateway types.</p>\n         <p>You can subscribe to be notified through an Amazon\n         CloudWatch event when your <code>RefreshCache</code> operation completes. For more\n         information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n               User Guide</i>. This operation is Only supported for S3 File Gateways.</p>\n\n         <p>When this API is called, it only initiates the refresh operation. When the API call\n         completes and returns a success code, it doesn't necessarily mean that the file\n         refresh has completed. You should use the refresh-complete notification to determine that\n         the operation has completed before you check for new files on the gateway file share. You\n         can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code>\n         operation completes.</p>\n\n         <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two\n         refreshes at any time. We recommend using the refresh-complete CloudWatch event\n         notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>.</p>\n\n         <p>If you invoke the RefreshCache API when two requests are already being processed, any\n         new request will cause an <code>InvalidGatewayRequestException</code> error because too\n         many requests were sent to the server.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>Storage Gateway\n            User Guide</i>.</p>"
             }
         },
         "com.amazonaws.storagegateway#RefreshCacheInput": {
@@ -6371,7 +6502,7 @@
                 "FolderList": {
                     "target": "com.amazonaws.storagegateway#FolderList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of the paths of folders to refresh in the cache. The default is\n            [<code>\"/\"</code>]. The default refreshes objects and folders at the root of the Amazon\n         S3 bucket. If <code>Recursive</code> is set to <code>true</code>, the entire S3 bucket that\n         the file share has access to is refreshed.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated list of the paths of folders to refresh in the cache. The default is\n            [<code>\"/\"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to <code>true</code>, the entire S3 bucket that\n         the file share has access to is refreshed.</p>"
                     }
                 },
                 "Recursive": {
@@ -6574,7 +6705,7 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to.\n         Use the <a>ListGateways</a> operation to return a list of gateways for your\n         account and AWS Region.</p>\n\n         <p>You retrieve archived virtual tapes to only one gateway and the gateway must be a tape\n         gateway.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to.\n         Use the <a>ListGateways</a> operation to return a list of gateways for your\n         account and Region.</p>\n\n         <p>You retrieve archived virtual tapes to only one gateway and the gateway must be a tape\n         gateway.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6655,7 +6786,7 @@
         "com.amazonaws.storagegateway#Role": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The ARN of the IAM role that file gateway assumes when it accesses the underlying\n         storage.</p>",
+                "smithy.api#documentation": "<p>The ARN of the IAM role that an S3 File Gateway assumes when it accesses the underlying\n         storage.</p>",
                 "smithy.api#length": {
                     "min": 20,
                     "max": 2048
@@ -6681,7 +6812,7 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
@@ -6702,7 +6833,7 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
@@ -6729,7 +6860,7 @@
                 "SMBACLEnabled": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this value is set to <code>true</code>, it indicates that access control list (ACL)\n         is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that\n         file and directory permissions are mapped to the POSIX permission.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>AWS Storage Gateway User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>If this value is set to <code>true</code>, it indicates that access control list (ACL)\n         is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that\n         file and directory permissions are mapped to the POSIX permission.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>Storage Gateway User\n            Guide</i>.</p>"
                     }
                 },
                 "AccessBasedEnumeration": {
@@ -6794,10 +6925,28 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
+                },
+                "VPCEndpointDNSName": {
+                    "target": "com.amazonaws.storagegateway#DNSHostName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the DNS name for the VPC endpoint that the SMB file share uses to connect to Amazon S3.</p>\n         <note>\n            <p>This parameter is required for SMB file shares that connect to Amazon S3 \n            through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p>\n         </note>"
+                    }
+                },
+                "BucketRegion": {
+                    "target": "com.amazonaws.storagegateway#RegionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Region of the S3 bucket where the SMB file share stores files.</p>\n         <note>\n            <p>This parameter is required for SMB file shares that connect to Amazon S3 \n            through a VPC endpoint, a VPC access point, or an access point alias that points to a VPC access point.</p>\n         </note>"
+                    }
+                },
+                "OplocksEnabled": {
+                    "target": "com.amazonaws.storagegateway#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p>\n         <note>\n            <p>Enabling opportunistic locking on case-sensitive shares is not recommended for workloads that involve \n            access to files with the same name in different case.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Windows file permissions and ownership information assigned, by default, to native\n         S3 objects when file gateway discovers them in S3 buckets. This operation is only supported\n         for file gateways.</p>"
+                "smithy.api#documentation": "<p>The Windows file permissions and ownership information assigned, by default, to native\n         S3 objects when S3 File Gateway discovers them in S3 buckets. This operation is only supported\n         for S3 File Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#SMBFileShareInfoList": {
@@ -6924,7 +7073,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the password for the guest user <code>smbguest</code>. The <code>smbguest</code>\n         user is the user when the authentication method for the file share is set to\n            <code>GuestAccess</code>.</p>"
+                "smithy.api#documentation": "<p>Sets the password for the guest user <code>smbguest</code>. The <code>smbguest</code>\n         user is the user when the authentication method for the file share is set to\n         <code>GuestAccess</code>. This operation only supported for S3 File Gateways</p>"
             }
         },
         "com.amazonaws.storagegateway#SetSMBGuestPasswordInput": {
@@ -6933,7 +7082,7 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the file gateway the SMB file share is associated\n         with.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 File Gateway the SMB file share is associated\n         with.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7014,7 +7163,7 @@
         "com.amazonaws.storagegateway#SnapshotId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\\z"
+                "smithy.api#pattern": "^\\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\\z$"
             }
         },
         "com.amazonaws.storagegateway#SoftwareUpdatesEndDate": {
@@ -7434,7 +7583,7 @@
                     "name": "storagegateway"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Storage Gateway Service</fullname>\n\n         <p>AWS Storage Gateway is the service that connects an on-premises software appliance with\n         cloud-based storage to provide seamless and secure integration between an\n         organization's on-premises IT environment and the AWS storage infrastructure. The\n         service enables you to securely upload data to the AWS Cloud for cost effective backup and\n         rapid disaster recovery.</p>\n\n         <p>Use the following links to get started using the <i>AWS Storage Gateway Service\n            API Reference</i>:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">AWS Storage Gateway required request headers</a>: Describes the required\n               headers that you must send with every POST request to AWS Storage Gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: AWS Storage Gateway requires that you authenticate\n               every request you send; this topic describes how sign such a request.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about AWS Storage Gateway\n               errors.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in AWS\n                  Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway\n               operations, their request parameters, response elements, possible errors, and\n               examples of requests and responses.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">AWS Storage Gateway\n                  endpoints and quotas</a>: Provides a list of each AWS Region and the endpoints\n               available for use with AWS Storage Gateway.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs\n            with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your\n            resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the\n            ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with\n            the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the\n            EC2 API might not behave as expected.</p>\n         </note>\n\n         <important>\n            <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes\n            are changing to a longer format. Starting in December 2016, all new volumes and\n            snapshots will be created with a 17-character string. Starting in April 2016, you will\n            be able to use these longer IDs so you can test your systems with the new format. For\n            more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and\n               EBS resource IDs</a>.</p>\n\n            <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format\n            looks like the following:</p>\n\n            <p>\n               <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p>\n\n            <p>A snapshot ID with the longer ID format looks like the following:\n               <code>snap-78e226633445566ee</code>.</p>\n\n            <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement:\n               Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in\n            2016</a>.</p>\n         </important>",
+                "smithy.api#documentation": "<fullname>Storage Gateway Service</fullname>\n\n         <p>Storage Gateway is the service that connects an on-premises software appliance with\n         cloud-based storage to provide seamless and secure integration between an\n         organization's on-premises IT environment and the Amazon Web Services storage infrastructure. The\n         service enables you to securely upload data to the Cloud for cost effective backup and\n         rapid disaster recovery.</p>\n\n         <p>Use the following links to get started using the <i>Storage Gateway Service\n            API Reference</i>:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">Storage Gateway required request headers</a>: Describes the required\n               headers that you must send with every POST request to Storage Gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: Storage Gateway requires that you authenticate\n               every request you send; this topic describes how sign such a request.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about Storage Gateway\n               errors.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in \n                  Storage Gateway</a>: Contains detailed descriptions of all Storage Gateway\n               operations, their request parameters, response elements, possible errors, and\n               examples of requests and responses.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">Storage Gateway\n                  endpoints and quotas</a>: Provides a list of each Region and the endpoints\n               available for use with Storage Gateway.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>Storage Gateway resource IDs are in uppercase. When you use these resource IDs\n            with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your\n            resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the\n            ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with\n            the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the\n            EC2 API might not behave as expected.</p>\n         </note>\n\n         <important>\n            <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes\n            are changing to a longer format. Starting in December 2016, all new volumes and\n            snapshots will be created with a 17-character string. Starting in April 2016, you will\n            be able to use these longer IDs so you can test your systems with the new format. For\n            more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and\n               EBS resource IDs</a>.</p>\n\n            <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format\n            looks like the following:</p>\n\n            <p>\n               <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p>\n\n            <p>A snapshot ID with the longer ID format looks like the following:\n               <code>snap-78e226633445566ee</code>.</p>\n\n            <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement:\n            Heads-up – Longer Storage Gateway volume and snapshot IDs coming in\n            2016</a>.</p>\n         </important>",
                 "smithy.api#title": "AWS Storage Gateway",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://storagegateway.amazonaws.com/doc/2013-06-30"
@@ -7540,6 +7689,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.storagegateway#StorediSCSIVolume"
+            }
+        },
+        "com.amazonaws.storagegateway#SupportedGatewayCapacities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.storagegateway#GatewayCapacity"
             }
         },
         "com.amazonaws.storagegateway#Tag": {
@@ -7848,7 +8003,7 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>\n         operation to return a list of gateways for your account and AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>\n         operation to return a list of gateways for your account and Region.</p>"
                     }
                 },
                 "PoolId": {
@@ -8233,7 +8388,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a file system association. This operation is only supported in the Amazon FSx\n         file gateway type.</p>"
+                "smithy.api#documentation": "<p>Updates a file system association. This operation is only supported in the FSx File Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#UpdateFileSystemAssociationInput": {
@@ -8322,6 +8477,12 @@
                     "target": "com.amazonaws.storagegateway#CloudWatchLogGroupARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use\n         to monitor and log events in the gateway.</p>\n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html\">What is Amazon CloudWatch\n            Logs?</a>\n         </p>"
+                    }
+                },
+                "GatewayCapacity": {
+                    "target": "com.amazonaws.storagegateway#GatewayCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the size of the gateway's metadata cache.</p>"
                     }
                 }
             }
@@ -8476,7 +8637,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Network File System (NFS) file share. This operation is only supported in the\n         file gateway type.</p>\n\n         <note>\n            <p>To leave a file share field unchanged, set the corresponding input field to\n            null.</p>\n         </note>\n\n         <p>Updates the following file share settings:</p>\n\n         <ul>\n            <li>\n               <p>Default storage class for your S3 bucket</p>\n            </li>\n            <li>\n               <p>Metadata defaults for your S3 bucket</p>\n            </li>\n            <li>\n               <p>Allowed NFS clients for your file share</p>\n            </li>\n            <li>\n               <p>Squash settings</p>\n            </li>\n            <li>\n               <p>Write status of your file share</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Updates a Network File System (NFS) file share. This operation is only supported in S3 File Gateways.</p>\n\n         <note>\n            <p>To leave a file share field unchanged, set the corresponding input field to\n            null.</p>\n         </note>\n\n         <p>Updates the following file share settings:</p>\n\n         <ul>\n            <li>\n               <p>Default storage class for your S3 bucket</p>\n            </li>\n            <li>\n               <p>Metadata defaults for your S3 bucket</p>\n            </li>\n            <li>\n               <p>Allowed NFS clients for your file share</p>\n            </li>\n            <li>\n               <p>Squash settings</p>\n            </li>\n            <li>\n               <p>Write status of your file share</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.storagegateway#UpdateNFSFileShareInput": {
@@ -8492,13 +8653,13 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
                     }
                 },
                 "NFSFileShareDefaults": {
@@ -8510,19 +8671,19 @@
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
                     "target": "com.amazonaws.storagegateway#ObjectACL",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a file gateway puts objects into. The default value is <code>private</code>.</p>"
+                        "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a S3 File Gateway puts objects into. The default value is <code>private</code>.</p>"
                     }
                 },
                 "ClientList": {
                     "target": "com.amazonaws.storagegateway#FileShareClientList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of clients that are allowed to access the file gateway. The list must contain\n         either valid IP addresses or valid CIDR blocks.</p>"
+                        "smithy.api#documentation": "<p>The list of clients that are allowed to access the S3 File Gateway. The list must contain\n         either valid IP addresses or valid CIDR blocks.</p>"
                     }
                 },
                 "Squash": {
@@ -8603,7 +8764,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Server Message Block (SMB) file share. This operation is only supported for\n         file gateways.</p>\n\n         <note>\n            <p>To leave a file share field unchanged, set the corresponding input field to\n            null.</p>\n         </note>\n\n         <important>\n            <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable\n            you to create a file share. Make sure that AWS STS is activated in the AWS Region you\n            are creating your file gateway in. If AWS STS is not activated in this AWS Region,\n            activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n               deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and\n               Access Management User Guide</i>.</p>\n\n            <p>File gateways don't support creating hard or symbolic links on a file\n            share.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates a Server Message Block (SMB) file share. This operation is only supported for\n         S3 File Gateways.</p>\n\n         <note>\n            <p>To leave a file share field unchanged, set the corresponding input field to\n            null.</p>\n         </note>\n\n         <important>\n            <p>File gateways require Security Token Service (STS) to be activated to enable\n            you to create a file share. Make sure that STS is activated in the Region you\n            are creating your file gateway in. If STS is not activated in this Region,\n            activate it. For information about how to activate STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n               deactivating STS in an Region</a> in the <i>Identity and Access Management\n                  User Guide</i>.</p>\n\n            <p>File gateways don't support creating hard or symbolic links on a file\n            share.</p>\n         </important>"
             }
         },
         "com.amazonaws.storagegateway#UpdateSMBFileShareInput": {
@@ -8619,25 +8780,25 @@
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own KMS\n         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon\n         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can\n         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
                     }
                 },
                 "DefaultStorageClass": {
                     "target": "com.amazonaws.storagegateway#StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.\n         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>\n\n         <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |\n            <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>\n         </p>"
                     }
                 },
                 "ObjectACL": {
                     "target": "com.amazonaws.storagegateway#ObjectACL",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a file gateway puts objects into. The default value is <code>private</code>.</p>"
+                        "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a S3 File Gateway puts objects into. The default value is <code>private</code>.</p>"
                     }
                 },
                 "ReadOnly": {
@@ -8661,7 +8822,7 @@
                 "SMBACLEnabled": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file\n         share. Set it to <code>false</code> to map file and directory permissions to the POSIX\n         permissions.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>AWS Storage Gateway User\n            Guide</i>.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file\n         share. Set it to <code>false</code> to map file and directory permissions to the POSIX\n         permissions.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>Storage Gateway User\n            Guide</i>.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "AccessBasedEnumeration": {
@@ -8717,6 +8878,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
+                },
+                "OplocksEnabled": {
+                    "target": "com.amazonaws.storagegateway#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p>\n         <note>\n            <p>Enabling opportunistic locking on case-sensitive shares is not recommended for workloads that involve \n            access to files with the same name in different case.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -8754,7 +8921,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Controls whether the shares on a gateway are visible in a net view or browse\n         list.</p>"
+                "smithy.api#documentation": "<p>Controls whether the shares on an S3 File Gateway are visible in a net view or browse\n         list. The operation is only supported for S3 File Gateways.</p>"
             }
         },
         "com.amazonaws.storagegateway#UpdateSMBFileShareVisibilityInput": {
@@ -8815,7 +8982,7 @@
                 "SMBSecurityStrategy": {
                     "target": "com.amazonaws.storagegateway#SMBSecurityStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of security strategy.</p>\n\n         <p>ClientSpecified: if you use this option, requests are established based on what is\n         negotiated by the client. This option is recommended when you want to maximize\n         compatibility across different clients in your environment.</p>\n\n         <p>MandatorySigning: if you use this option, file gateway only allows connections from\n         SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on\n         Microsoft Windows Vista, Windows Server 2008 or newer.</p>\n\n         <p>MandatoryEncryption: if you use this option, file gateway only allows connections from\n         SMBv3 clients that have encryption enabled. This option is highly recommended for\n         environments that handle sensitive data. This option works with SMB clients on Microsoft\n         Windows 8, Windows Server 2012 or newer.</p>",
+                        "smithy.api#documentation": "<p>Specifies the type of security strategy.</p>\n\n         <p>ClientSpecified: if you use this option, requests are established based on what is\n         negotiated by the client. This option is recommended when you want to maximize\n         compatibility across different clients in your environment. Supported only in S3 File Gateway.</p>\n\n         <p>MandatorySigning: if you use this option, file gateway only allows connections from\n         SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on\n         Microsoft Windows Vista, Windows Server 2008 or newer.</p>\n\n         <p>MandatoryEncryption: if you use this option, file gateway only allows connections from\n         SMBv3 clients that have encryption enabled. This option is highly recommended for\n         environments that handle sensitive data. This option works with SMB clients on Microsoft\n         Windows 8, Windows Server 2012 or newer.</p>",
                         "smithy.api#required": {}
                     }
                 }

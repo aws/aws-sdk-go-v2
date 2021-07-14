@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds permissions to the resource-based policy of a version of an AWS Lambda
-// layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-// Use this action to grant layer usage permission to other accounts. You can grant
-// permission to a single account, all AWS accounts, or all accounts in an
-// organization. To revoke permission, call RemoveLayerVersionPermission with the
-// statement ID that you specified when you added it.
+// Adds permissions to the resource-based policy of a version of an Lambda layer
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). Use
+// this action to grant layer usage permission to other accounts. You can grant
+// permission to a single account, all accounts in an organization, or all Amazon
+// Web Services accounts. To revoke permission, call RemoveLayerVersionPermission
+// with the statement ID that you specified when you added it.
 func (c *Client) AddLayerVersionPermission(ctx context.Context, params *AddLayerVersionPermissionInput, optFns ...func(*Options)) (*AddLayerVersionPermissionOutput, error) {
 	if params == nil {
 		params = &AddLayerVersionPermissionInput{}
@@ -44,7 +44,10 @@ type AddLayerVersionPermissionInput struct {
 	// This member is required.
 	LayerName *string
 
-	// An account ID, or * to grant permission to all AWS accounts.
+	// An account ID, or * to grant layer usage permission to all accounts in an
+	// organization, or all Amazon Web Services accounts (if organizationId is not
+	// specified). For the last case, make sure that you really do want all Amazon Web
+	// Services accounts to have usage permission to this layer.
 	//
 	// This member is required.
 	Principal *string

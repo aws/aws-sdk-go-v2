@@ -30,7 +30,7 @@ func (c *Client) AddPartner(ctx context.Context, params *AddPartnerInput, optFns
 
 type AddPartnerInput struct {
 
-	// The AWS account ID that owns the cluster.
+	// The Region ID that owns the cluster.
 	//
 	// This member is required.
 	AccountId *string

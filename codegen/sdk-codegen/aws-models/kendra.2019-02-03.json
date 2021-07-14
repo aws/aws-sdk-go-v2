@@ -70,6 +70,9 @@
                     "target": "com.amazonaws.kendra#DeleteIndex"
                 },
                 {
+                    "target": "com.amazonaws.kendra#DeletePrincipalMapping"
+                },
+                {
                     "target": "com.amazonaws.kendra#DeleteQuerySuggestionsBlockList"
                 },
                 {
@@ -83,6 +86,9 @@
                 },
                 {
                     "target": "com.amazonaws.kendra#DescribeIndex"
+                },
+                {
+                    "target": "com.amazonaws.kendra#DescribePrincipalMapping"
                 },
                 {
                     "target": "com.amazonaws.kendra#DescribeQuerySuggestionsBlockList"
@@ -106,6 +112,9 @@
                     "target": "com.amazonaws.kendra#ListFaqs"
                 },
                 {
+                    "target": "com.amazonaws.kendra#ListGroupsOlderThanOrderingId"
+                },
+                {
                     "target": "com.amazonaws.kendra#ListIndices"
                 },
                 {
@@ -116,6 +125,9 @@
                 },
                 {
                     "target": "com.amazonaws.kendra#ListThesauri"
+                },
+                {
+                    "target": "com.amazonaws.kendra#PutPrincipalMapping"
                 },
                 {
                     "target": "com.amazonaws.kendra#Query"
@@ -173,7 +185,7 @@
                 "KeyPath": {
                     "target": "com.amazonaws.kendra#S3ObjectKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Path to the AWS S3 bucket that contains the ACL files.</p>"
+                        "smithy.api#documentation": "<p>Path to the Amazon Web Services S3 bucket that contains the ACL files.</p>"
                     }
                 }
             },
@@ -436,7 +448,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more documents from an index. The documents must have\n      been added with the <code>BatchPutDocument</code> operation.</p>\n         <p>The documents are deleted asynchronously. You can see the progress of\n      the deletion by using AWS CloudWatch. Any error messages related to the\n      processing of the batch are sent to you CloudWatch log.</p>"
+                "smithy.api#documentation": "<p>Removes one or more documents from an index. The documents must have\n      been added with the <code>BatchPutDocument</code> operation.</p>\n         <p>The documents are deleted asynchronously. You can see the progress of\n      the deletion by using Amazon Web Services CloudWatch. Any error messages related to the\n      processing of the batch are sent to you CloudWatch log.</p>"
             }
         },
         "com.amazonaws.kendra#BatchDeleteDocumentRequest": {
@@ -636,7 +648,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more documents to an index.</p>\n         <p>The <code>BatchPutDocument</code> operation enables you to ingest\n      inline documents or a set of documents stored in an Amazon S3 bucket. Use\n      this operation to ingest your text and unstructured text into an index,\n      add custom attributes to the documents, and to attach an access control\n      list to the documents added to the index.</p>\n         <p>The documents are indexed asynchronously. You can see the progress of\n      the batch using AWS CloudWatch. Any error messages related to processing\n      the batch are sent to your AWS CloudWatch log.</p>"
+                "smithy.api#documentation": "<p>Adds one or more documents to an index.</p>\n         <p>The <code>BatchPutDocument</code> operation enables you to ingest\n      inline documents or a set of documents stored in an Amazon S3 bucket. Use\n      this operation to ingest your text and unstructured text into an index,\n      add custom attributes to the documents, and to attach an access control\n      list to the documents added to the index.</p>\n         <p>The documents are indexed asynchronously. You can see the progress of\n      the batch using Amazon Web Services CloudWatch. Any error messages related to processing\n      the batch are sent to your Amazon Web Services CloudWatch log.</p>"
             }
         },
         "com.amazonaws.kendra#BatchPutDocumentRequest": {
@@ -670,7 +682,7 @@
                 "FailedDocuments": {
                     "target": "com.amazonaws.kendra#BatchPutDocumentResponseFailedDocuments",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of documents that were not added to the index because the\n      document failed a validation check. Each document contains an error\n      message that indicates why the document couldn't be added to the\n      index.</p>\n         <p>If there was an error adding a document to an index the error is\n      reported in your AWS CloudWatch log. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html\">Monitoring\n        Amazon Kendra with Amazon CloudWatch Logs</a>\n         </p>"
+                        "smithy.api#documentation": "<p>A list of documents that were not added to the index because the\n      document failed a validation check. Each document contains an error\n      message that indicates why the document couldn't be added to the\n      index.</p>\n         <p>If there was an error adding a document to an index the error is\n      reported in your Amazon Web Services CloudWatch log. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html\">Monitoring\n        Amazon Kendra with Amazon CloudWatch Logs</a>\n         </p>"
                     }
                 }
             }
@@ -719,14 +731,14 @@
                 "StorageCapacityUnits": {
                     "target": "com.amazonaws.kendra#StorageCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. \n            A single capacity unit provides 30 GB of storage space or 100,000 documents, \n            whichever is reached first.</p>",
+                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. A single capacity\n            unit for an index provides 150 GB of storage space or \n            500,000 documents, whichever is reached first.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QueryCapacityUnits": {
                     "target": "com.amazonaws.kendra#QueryCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.1 queries per second or approximately \n            8,000 queries per day.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is five times the \n            provisioned query capacity for an index, or the base capacity of 2.5 calls per second, \n            whichever is higher. For example, the base capacity for an index is 0.1 queries per \n            second, and <code>GetQuerySuggestions</code> capacity has a base of 2.5 calls per second. \n            If you add another 0.1 queries per second to total 0.2 queries per second for an index, the \n            <code>GetQuerySuggestions</code> capacity is 2.5 calls per second \n            (higher than five times 0.2 queries per second).</p>",
+                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.5 queries per second or \n            approximately 40,000 queries per day.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query \n            capacity for an index. For example, the base capacity for an index is 0.5 \n            queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. \n            If adding another 0.5 queries per second to total 1 queries per second for an \n            index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1116,7 +1128,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret\n            that contains the key/value pairs required to connect to your\n            Confluence server. The secret must contain a JSON structure with the\n            following keys:</p>\n        <ul>\n            <li>\n                <p>username - The user name or email address of a user with\n                    administrative privileges for the Confluence server.</p>\n            </li>\n            <li>\n                <p>password - The password associated with the user logging\n                    in to the Confluence server.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret\n            that contains the key/value pairs required to connect to your\n            Confluence server. The secret must contain a JSON structure with the\n            following keys:</p>\n        <ul>\n            <li>\n                <p>username - The user name or email address of a user with\n                    administrative privileges for the Confluence server.</p>\n            </li>\n            <li>\n                <p>password - The password associated with the user logging\n                    in to the Confluence server.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1450,7 +1462,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html\">Using a\n                Database Data Source</a>. For more information about AWS\n            Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i>AWS Secrets\n                Manager</i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html\">Using a\n                Database Data Source</a>. For more information about AWS\n            Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i> Secrets Manager\n                </i> user guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1761,20 +1773,20 @@
                 "Edition": {
                     "target": "com.amazonaws.kendra#IndexEdition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Kendra edition to use for the index. Choose\n        <code>DEVELOPER_EDITION</code> for indexes intended for development,\n      testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your\n      production databases. Once you set the edition for an index, it can't be\n      changed. </p>\n         <p>The <code>Edition</code> parameter is optional. If you don't supply a\n      value, the default is <code>ENTERPRISE_EDITION</code>.</p>\n         <p>For more information on quota limits for enterprise and developer editions, \n      see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Kendra edition to use for the index. Choose\n        <code>DEVELOPER_EDITION</code> for indexes intended for development,\n      testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your\n      production databases. Once you set the edition for an index, it can't be\n      changed. </p>\n         <p>The <code>Edition</code> parameter is optional. If you don't supply a\n      value, the default is <code>ENTERPRISE_EDITION</code>.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS Identity and Access Management (IAM) role that gives\n      Amazon Kendra permissions to access your Amazon CloudWatch logs and\n      metrics. This is also the role used when you use the\n        <code>BatchPutDocument</code> operation to index documents from an\n      Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>An Identity and Access Management(IAM) role that gives\n      Amazon Kendra permissions to access your Amazon CloudWatch logs and\n      metrics. This is also the role used when you use the\n        <code>BatchPutDocument</code> operation to index documents from an\n      Amazon S3 bucket.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.kendra#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS KMS customer managed key (CMK) to use to\n      encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support\n      asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMScustomer managed key (CMK) to use to\n      encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support\n      asymmetric CMKs.</p>"
                     }
                 },
                 "Description": {
@@ -2094,6 +2106,40 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_.]*$"
+            }
+        },
+        "com.amazonaws.kendra#DataSourceGroup": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.kendra#PrincipalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the group you want to add to your list \n         of groups. This is for filtering search results based on the \n         groups' access to documents.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data source group you want to add \n         to your list of data source groups. This is for filtering \n         search results based on the groups' access to documents in \n         that data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Data source information for user context filtering.\n      </p>"
+            }
+        },
+        "com.amazonaws.kendra#DataSourceGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#DataSourceGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.kendra#DataSourceId": {
@@ -2722,6 +2768,66 @@
                 }
             }
         },
+        "com.amazonaws.kendra#DeletePrincipalMapping": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DeletePrincipalMappingRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a group so that all users and sub groups that belong to the group can \n            no longer access documents only available to that group.</p>\n        <p>For example, after deleting the group \"Summer Interns\", all interns who \n            belonged to that group no longer see intern-only documents in their search \n            results.</p>\n        <p>If you want to delete or replace users or sub groups of a group, you need to \n            use the <code>PutPrincipalMapping</code> operation. For example, if a user in \n            the group \"Engineering\" leaves the engineering team and another user takes \n            their place, you provide an updated list of users or sub groups that belong \n            to the \"Engineering\" group when calling <code>PutPrincipalMapping</code>. You \n            can update your internal list of users or sub groups and input this list \n            when calling <code>PutPrincipalMapping</code>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DeletePrincipalMappingRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index you want to delete a group from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data source you want to delete a group from.</p>\n        <p>This is useful if a group is tied to multiple data sources and you want \n            to delete a group from accessing documents in a certain data source. For example, \n            the groups \"Research\", \"Engineering\", and \"Sales and Marketing\" are all tied to \n            the company's documents stored in the data sources Confluence and Salesforce. \n            You want to delete \"Research\" and \"Engineering\" groups from Salesforce, so that\n            these groups cannot access customer-related documents stored in Salesforce. \n            Only \"Sales and Marketing\" should access documents in the Salesforce data source.</p>"
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.kendra#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the group you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OrderingId": {
+                    "target": "com.amazonaws.kendra#PrincipalOrderingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp identifier you specify to ensure Amazon Kendra does not \n            override the latest <code>DELETE</code> action with previous actions. \n            The highest number ID, which is the ordering ID, is the latest action \n            you want to process and apply on top of other actions with lower number \n            IDs. This prevents previous actions with lower number IDs from possibly \n            overriding the latest action.</p>\n        <p>The ordering ID can be the UNIX time of the last update you made to a group \n            members list. You would then provide this list when calling \n            <code>PutPrincipalMapping</code>. This ensures your <code>DELETE</code> action \n            for that updated group with the latest members list doesn't get overwritten \n            by earlier <code>DELETE</code> actions for the same group which are yet to \n            be processed.</p>\n        <p>The default ordering ID is the current UNIX time in milliseconds that the \n            action was received by Amazon Kendra.\n        </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#DeleteQuerySuggestionsBlockList": {
             "type": "operation",
             "input": {
@@ -3130,7 +3236,7 @@
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.kendra#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS KMS customer master key (CMK) used to\n      encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMScustomer master key (CMK) used to\n      encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.</p>"
                     }
                 },
                 "Status": {
@@ -3191,6 +3297,89 @@
                     "target": "com.amazonaws.kendra#UserContextPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The user context policy for the Amazon Kendra index.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DescribePrincipalMapping": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#DescribePrincipalMappingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#DescribePrincipalMappingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the processing of <code>PUT</code> and <code>DELETE</code> actions \n            for mapping users to their groups. This includes information on the status of \n            actions currently processing or yet to be processed, when actions were last updated, \n            when actions were received by Amazon Kendra, the latest action that should process \n            and apply after other actions, and useful error messages if an action could \n            not be processed.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DescribePrincipalMappingRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index required to check the processing of \n            <code>PUT</code> and <code>DELETE</code> actions for mapping users \n            to their groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data source to check the processing of \n            <code>PUT</code> and <code>DELETE</code> actions for mapping \n            users to their groups.</p>"
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.kendra#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the group required to check the processing of \n            <code>PUT</code> and <code>DELETE</code> actions for mapping users \n            to their groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#DescribePrincipalMappingResponse": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the identifier of the index to see information on the \n            processing of <code>PUT</code> and <code>DELETE</code> actions \n            for mapping users to their groups.</p>"
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the identifier of the data source to see information on \n            the processing of <code>PUT</code> and <code>DELETE</code> actions \n            for mapping users to their groups.</p>"
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.kendra#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the identifier of the group to see information on the \n            processing of <code>PUT</code> and <code>DELETE</code> actions \n            for mapping users to their groups.</p>"
+                    }
+                },
+                "GroupOrderingIdSummaries": {
+                    "target": "com.amazonaws.kendra#GroupOrderingIdSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the following information on the processing of <code>PUT</code> and \n            <code>DELETE</code> actions for mapping users to their groups:</p>\n        <ul>\n            <li>\n                <p>Status – the status can be either \n                    <code>PROCESSING</code>, <code>SUCCEEDED</code>, <code>DELETING</code>, \n                    <code>DELETED</code>, or <code>FAILED</code>.</p>\n            </li>\n            <li>\n                <p>Last updated – the last date-time an action was updated.</p>\n            </li>\n            <li>\n                <p>Received – the last date-time an action was received or submitted.</p>\n            </li>\n            <li>\n                <p>Ordering ID – the latest action that should process and apply \n                    after other actions.</p>\n            </li>\n            <li>\n                <p>Failure reason – the reason an action could not be processed.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -3577,7 +3766,7 @@
                 "Blob": {
                     "target": "com.amazonaws.kendra#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The contents of the document. </p>\n        <p>Documents passed to the <code>Blob</code> parameter must be base64\n            encoded. Your code might not need to encode the document file bytes\n            if you're using an AWS SDK to call Amazon Kendra operations. If you are\n            calling the Amazon Kendra endpoint directly using REST, you must base64\n            encode the contents before sending.</p>"
+                        "smithy.api#documentation": "<p>The contents of the document. </p>\n        <p>Documents passed to the <code>Blob</code> parameter must be base64\n            encoded. Your code might not need to encode the document file bytes\n            if you're using an Amazon Web Services SDK to call Amazon Kendra operations. If you are\n            calling the Amazon Kendra endpoint directly using REST, you must base64\n            encode the contents before sending.</p>"
                     }
                 },
                 "S3Path": {
@@ -3592,7 +3781,13 @@
                 "AccessControlList": {
                     "target": "com.amazonaws.kendra#PrincipalList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information to use for user context filtering.</p>"
+                        "smithy.api#documentation": "<p>Information on user and group access rights, which is used for \n            user context filtering.</p>"
+                    }
+                },
+                "HierarchicalAccessControlList": {
+                    "target": "com.amazonaws.kendra#HierarchicalPrincipalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html\">principal</a> lists \n            that define the hierarchy for which documents users should have access to.</p>"
                     }
                 },
                 "ContentType": {
@@ -3955,7 +4150,7 @@
                 "S3Prefix": {
                     "target": "com.amazonaws.kendra#S3ObjectKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>A prefix used to filter metadata configuration files in the AWS S3\n            bucket. The S3 bucket might contain multiple metadata files. Use\n                <code>S3Prefix</code> to include only the desired metadata\n            files.</p>"
+                        "smithy.api#documentation": "<p>A prefix used to filter metadata configuration files in the Amazon Web Services S3\n            bucket. The S3 bucket might contain multiple metadata files. Use\n                <code>S3Prefix</code> to include only the desired metadata\n            files.</p>"
                     }
                 }
             },
@@ -4084,6 +4279,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kendra#FacetResult"
+            }
+        },
+        "com.amazonaws.kendra#FailureReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
             }
         },
         "com.amazonaws.kendra#FaqFileFormat": {
@@ -4310,7 +4515,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a AWS Secrets Manager secret\n            that contains the credentials required to connect to Google Drive.\n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html\">Using a Google Workspace Drive data\n                source</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Secrets Managersecret\n            that contains the credentials required to connect to Google Drive.\n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html\">Using a Google Workspace Drive data\n                source</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4363,6 +4568,152 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#GroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#GroupMembers": {
+            "type": "structure",
+            "members": {
+                "MemberGroups": {
+                    "target": "com.amazonaws.kendra#MemberGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of sub groups that belong to a group. For example, the sub \n            groups \"Research\", \"Engineering\", and \"Sales and Marketing\" all belong \n            to the group \"Company\".</p>"
+                    }
+                },
+                "MemberUsers": {
+                    "target": "com.amazonaws.kendra#MemberUsers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of users that belong to a group. For example, a list of interns \n            all belong to the \"Interns\" group.</p>"
+                    }
+                },
+                "S3PathforGroupMembers": {
+                    "target": "com.amazonaws.kendra#S3Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you have more than 1000 users and/or sub groups for a single group, \n            you need to provide the path to the S3 file that lists your users and sub \n            groups for a group. Your sub groups can contain more than 1000 users, but \n            the list of sub groups that belong to a group (and/or users) must be no \n            more than 1000.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of users or sub groups that belong to a group. Users and groups \n            are useful for filtering search results to different users based on their \n            group's access to documents.</p>"
+            }
+        },
+        "com.amazonaws.kendra#GroupOrderingIdSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#GroupOrderingIdSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.kendra#GroupOrderingIdSummary": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.kendra#PrincipalMappingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current processing status of actions for mapping users to their groups. \n            The status can be either <code>PROCESSING</code>, <code>SUCCEEDED</code>, \n            <code>DELETING</code>, <code>DELETED</code>, or <code>FAILED</code>.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date-time an action was updated. An action can be a \n            <code>PUT</code> or <code>DELETE</code> action for mapping users \n            to their groups.</p>"
+                    }
+                },
+                "ReceivedAt": {
+                    "target": "com.amazonaws.kendra#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date-time an action was received by Amazon Kendra. An action can be a \n            <code>PUT</code> or <code>DELETE</code> action for mapping users to \n            their groups.</p>"
+                    }
+                },
+                "OrderingId": {
+                    "target": "com.amazonaws.kendra#PrincipalOrderingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order in which actions should complete processing. An action can \n            be a <code>PUT</code> or <code>DELETE</code> action for mapping users \n            to their groups.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.kendra#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason an action could not be processed. An action can be a \n            <code>PUT</code> or <code>DELETE</code> action for mapping users \n            to their groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information on the processing of <code>PUT</code> and <code>DELETE</code> actions \n            for mapping users to their groups.</p>"
+            }
+        },
+        "com.amazonaws.kendra#GroupSummary": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.kendra#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier of the group you want group summary information on.\n        </p>"
+                    }
+                },
+                "OrderingId": {
+                    "target": "com.amazonaws.kendra#PrincipalOrderingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp identifier used for the latest <code>PUT</code> or <code>DELETE</code> \n            action.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Group summary information.\n        </p>"
+            }
+        },
+        "com.amazonaws.kendra#Groups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#PrincipalName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.kendra#HierarchicalPrincipal": {
+            "type": "structure",
+            "members": {
+                "PrincipalList": {
+                    "target": "com.amazonaws.kendra#PrincipalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html\">principal</a> lists \n                that define the hierarchy for which documents users should have access to. \n                Each hierarchical list specifies which user or group has allow or deny \n                access for each document.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Information to define the hierarchy for which documents users should have access to.\n        </p>"
+            }
+        },
+        "com.amazonaws.kendra#HierarchicalPrincipalList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#HierarchicalPrincipal"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html\">principal</a> lists \n            that define the hierarchy for which documents users should have access to. \n            Each hierarchical list specifies which user or group has allow or deny \n            access for each document.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
             }
         },
         "com.amazonaws.kendra#Highlight": {
@@ -4984,6 +5335,92 @@
                 }
             }
         },
+        "com.amazonaws.kendra#ListGroupsOlderThanOrderingId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#ListGroupsOlderThanOrderingIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kendra#ListGroupsOlderThanOrderingIdResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of groups that are mapped to users before a \n            given ordering or timestamp identifier.</p>"
+            }
+        },
+        "com.amazonaws.kendra#ListGroupsOlderThanOrderingIdRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index for getting a list of groups mapped \n            to users before a given ordering or timestamp identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data source for getting a list of groups mapped \n            to users before a given ordering timestamp identifier.</p>"
+                    }
+                },
+                "OrderingId": {
+                    "target": "com.amazonaws.kendra#PrincipalOrderingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp identifier used for the latest <code>PUT</code> or \n            <code>DELETE</code> action for mapping users to their groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The next items in the list of groups that go beyond the maximum.\n        </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kendra#MaxResultsIntegerForListPrincipalsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum results shown for a list of groups that are mapped to users before a \n            given ordering or timestamp identifier. \n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#ListGroupsOlderThanOrderingIdResponse": {
+            "type": "structure",
+            "members": {
+                "GroupsSummaries": {
+                    "target": "com.amazonaws.kendra#ListOfGroupSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Summary information for list of groups that are mapped to users before a \n            given ordering or timestamp identifier.\n        </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kendra#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The next items in the list of groups that go beyond the maximum.\n        </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kendra#ListIndices": {
             "type": "operation",
             "input": {
@@ -5047,6 +5484,12 @@
                         "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you\n      can use in the subsequent request to retrieve the next set of\n      indexes.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.kendra#ListOfGroupSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#GroupSummary"
             }
         },
         "com.amazonaws.kendra#ListQuerySuggestionsBlockLists": {
@@ -5307,6 +5750,16 @@
                 }
             }
         },
+        "com.amazonaws.kendra#MaxResultsIntegerForListPrincipalsRequest": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.kendra#MaxResultsIntegerForListQuerySuggestionsBlockLists": {
             "type": "integer",
             "traits": {
@@ -5334,6 +5787,66 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 300
+                }
+            }
+        },
+        "com.amazonaws.kendra#MemberGroup": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.kendra#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the sub group you want to map to a group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data source for the sub group \n            you want to map to a group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sub groups that belong to a group.</p>"
+            }
+        },
+        "com.amazonaws.kendra#MemberGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#MemberGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.kendra#MemberUser": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.kendra#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user you want to map to a group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The users that belong to a group.</p>"
+            }
+        },
+        "com.amazonaws.kendra#MemberUsers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#MemberUser"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
                 }
             }
         },
@@ -5416,7 +5929,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret\n            that contains the user name and password to connect to OneDrive. The\n            user namd should be the application ID for the OneDrive application,\n            and the password is the application key for the OneDrive\n            application.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret\n            that contains the user name and password to connect to OneDrive. The\n            user namd should be the application ID for the OneDrive application,\n            and the password is the application key for the OneDrive\n            application.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5546,6 +6059,12 @@
                         "smithy.api#documentation": "<p>Whether to allow or deny access to the principal.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data source the principal should \n            access documents from.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5558,6 +6077,33 @@
                 "target": "com.amazonaws.kendra#Principal"
             }
         },
+        "com.amazonaws.kendra#PrincipalMappingStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "PROCESSING",
+                        "name": "PROCESSING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.kendra#PrincipalName": {
             "type": "string",
             "traits": {
@@ -5566,6 +6112,16 @@
                     "max": 200
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#PrincipalOrderingId": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 32535158400000
+                }
             }
         },
         "com.amazonaws.kendra#PrincipalType": {
@@ -5609,6 +6165,82 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides the configuration information for a web proxy to connect to \n            website hosts.</p>"
+            }
+        },
+        "com.amazonaws.kendra#PutPrincipalMapping": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kendra#PutPrincipalMappingRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kendra#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.kendra#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Maps users to their groups. You can also map sub groups to groups. \n            For example, the group \"Company Intellectual Property Teams\" includes \n            sub groups \"Research\" and \"Engineering\". These sub groups include their\n            own list of users or people who work in these teams. Only users who work \n            in research and engineering, and therefore belong in the intellectual \n            property group, can see top-secret company documents in their search \n            results. </p>\n        <p>You map users to their groups when you want to filter search results \n            for different users based on their group’s access to documents. For more \n            information on filtering search results for different users, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering \n                on user context</a>.</p>\n        <p>If more than five <code>PUT</code> actions for a group are currently \n            processing, a validation exception is thrown.</p>"
+            }
+        },
+        "com.amazonaws.kendra#PutPrincipalMappingRequest": {
+            "type": "structure",
+            "members": {
+                "IndexId": {
+                    "target": "com.amazonaws.kendra#IndexId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the index you want to map users to their groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.kendra#DataSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data source you want to map users to their groups.</p>\n        <p>This is useful if a group is tied to multiple data sources, but you only want \n            the group to access documents of a certain data source. For example, the groups \n            \"Research\", \"Engineering\", and \"Sales and Marketing\" are all tied to the company's \n            documents stored in the data sources Confluence and Salesforce. However, \n            \"Sales and Marketing\" team only needs access to customer-related documents \n            stored in Salesforce.</p>"
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.kendra#GroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the group you want to map its users to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupMembers": {
+                    "target": "com.amazonaws.kendra#GroupMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list that contains your users or sub groups that belong \n            the same group.</p>\n        <p>For example, the group \"Company\" includes the user \"CEO\" and the \n            sub groups \"Research\", \"Engineering\", and \"Sales and Marketing\".</p>\n        <p>If you have more than 1000 users and/or sub groups for a single group, \n            you need to provide the path to the S3 file that lists your users and \n            sub groups for a group. Your sub groups can contain more than 1000 users,\n            but the list of sub groups that belong to a group (and/or users) must be \n            no more than 1000.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OrderingId": {
+                    "target": "com.amazonaws.kendra#PrincipalOrderingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp identifier you specify to ensure Amazon Kendra does not override \n            the latest <code>PUT</code> action with previous actions. The highest number \n            ID, which is the ordering ID, is the latest action you want to process and \n            apply on top of other actions with lower number IDs. This prevents previous \n            actions with lower number IDs from possibly overriding the latest action.</p>\n        <p>The ordering ID can be the UNIX time of the last update you made to a \n            group members list. You would then provide this list when calling \n            <code>PutPrincipalMapping</code>. This ensures your <code>PUT</code> action \n            for that updated group with the latest members list doesn't get overwritten \n            by earlier <code>PUT</code> actions for the same group which are yet to \n            be processed.</p>\n        <p>The default ordering ID is the current UNIX time in milliseconds that the \n            action was received by Amazon Kendra.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.kendra#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role that has access to the S3 file \n            that contains your list of users or sub groups that belong to a group.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds\">IAM roles for Amazon Kendra</a>.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.kendra#Query": {
@@ -6339,7 +6971,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret\n            that contains the key/value pairs required to connect to your\n            Salesforce instance. The secret must contain a JSON structure with\n            the following keys:</p>\n        <ul>\n            <li>\n                <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra\n                    connects to get an OAUTH token. </p>\n            </li>\n            <li>\n                <p>consumerKey - The application public key generated when\n                    you created your Salesforce application.</p>\n            </li>\n            <li>\n                <p>consumerSecret - The application private key generated\n                    when you created your Salesforce application.</p>\n            </li>\n            <li>\n                <p>password - The password associated with the user logging\n                    in to the Salesforce instance.</p>\n            </li>\n            <li>\n                <p>securityToken - The token associated with the user account\n                    logging in to the Salesforce instance.</p>\n            </li>\n            <li>\n                <p>username - The user name of the user logging in to the\n                    Salesforce instance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret\n            that contains the key/value pairs required to connect to your\n            Salesforce instance. The secret must contain a JSON structure with\n            the following keys:</p>\n        <ul>\n            <li>\n                <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra\n                    connects to get an OAUTH token. </p>\n            </li>\n            <li>\n                <p>consumerKey - The application public key generated when\n                    you created your Salesforce application.</p>\n            </li>\n            <li>\n                <p>consumerSecret - The application private key generated\n                    when you created your Salesforce application.</p>\n            </li>\n            <li>\n                <p>password - The password associated with the user logging\n                    in to the Salesforce instance.</p>\n            </li>\n            <li>\n                <p>securityToken - The token associated with the user account\n                    logging in to the Salesforce instance.</p>\n            </li>\n            <li>\n                <p>username - The user name of the user logging in to the\n                    Salesforce instance.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6816,12 +7448,12 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.kendra#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS KMS customer master key (CMK). Amazon Kendra\n            doesn't support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMScustomer master key (CMK). Amazon Kendra\n            doesn't support asymmetric CMKs.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK)\n            used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support\n            asymmetric CMKs.</p>"
+                "smithy.api#documentation": "<p>Provides the identifier of the KMScustomer master key (CMK)\n            used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support\n            asymmetric CMKs.</p>"
             }
         },
         "com.amazonaws.kendra#ServiceNowAuthenticationType": {
@@ -6867,7 +7499,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secret Manager secret\n            that contains the user name and password required to connect to the\n            ServiceNow instance.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret\n            that contains the user name and password required to connect to the\n            ServiceNow instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7050,7 +7682,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i>AWS Secrets\n                Manager</i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. \n            If you use SharePoint Sever, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i>Secrets Manager\n                </i> user guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8363,12 +8995,30 @@
                 "Token": {
                     "target": "com.amazonaws.kendra#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user context token. It must be a JWT or a JSON token.</p>"
+                        "smithy.api#documentation": "<p>The user context token for filtering search results for a user. It must \n         be a JWT or a JSON token.</p>"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.kendra#PrincipalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user you want to filter search results based on their \n         access to documents.</p>"
+                    }
+                },
+                "Groups": {
+                    "target": "com.amazonaws.kendra#Groups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of groups you want to filter search results based on the \n         groups' access to documents.</p>"
+                    }
+                },
+                "DataSourceGroups": {
+                    "target": "com.amazonaws.kendra#DataSourceGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of data source groups you want to filter search results \n         based on groups' access to documents in that data source.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the user context for a Amazon Kendra index.</p>"
+                "smithy.api#documentation": "<p>Provides information about the user context for a Amazon Kendra index.</p>\n         <p>This is used for filtering search results for different users based on their access \n         to documents.</p>\n         <p>You provide one of the following:</p> \n         <ul>\n            <li>\n               <p>User token</p>\n            </li>\n            <li>\n               <p>User ID, the groups the user belongs to, and the data sources \n               the groups can access</p>\n            </li>\n         </ul>\n         <p>If you provide both, an exception is thrown.</p>"
             }
         },
         "com.amazonaws.kendra#UserContextPolicy": {
@@ -8384,6 +9034,16 @@
                         "name": "USER_TOKEN"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.kendra#UserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
             }
         },
         "com.amazonaws.kendra#UserNameAttributeField": {

@@ -32,7 +32,7 @@ type DeleteTapeInput struct {
 
 	// The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to
 	// delete is associated with. Use the ListGateways operation to return a list of
-	// gateways for your account and AWS Region.
+	// gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string

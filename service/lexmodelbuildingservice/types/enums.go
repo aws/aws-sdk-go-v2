@@ -230,6 +230,80 @@ func (MergeStrategy) Values() []MergeStrategy {
 	}
 }
 
+type MigrationAlertType string
+
+// Enum values for MigrationAlertType
+const (
+	MigrationAlertTypeError MigrationAlertType = "ERROR"
+	MigrationAlertTypeWarn  MigrationAlertType = "WARN"
+)
+
+// Values returns all known values for MigrationAlertType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationAlertType) Values() []MigrationAlertType {
+	return []MigrationAlertType{
+		"ERROR",
+		"WARN",
+	}
+}
+
+type MigrationSortAttribute string
+
+// Enum values for MigrationSortAttribute
+const (
+	MigrationSortAttributeV1BotName         MigrationSortAttribute = "V1_BOT_NAME"
+	MigrationSortAttributeMigrationDateTime MigrationSortAttribute = "MIGRATION_DATE_TIME"
+)
+
+// Values returns all known values for MigrationSortAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationSortAttribute) Values() []MigrationSortAttribute {
+	return []MigrationSortAttribute{
+		"V1_BOT_NAME",
+		"MIGRATION_DATE_TIME",
+	}
+}
+
+type MigrationStatus string
+
+// Enum values for MigrationStatus
+const (
+	MigrationStatusInProgress MigrationStatus = "IN_PROGRESS"
+	MigrationStatusCompleted  MigrationStatus = "COMPLETED"
+	MigrationStatusFailed     MigrationStatus = "FAILED"
+)
+
+// Values returns all known values for MigrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationStatus) Values() []MigrationStatus {
+	return []MigrationStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type MigrationStrategy string
+
+// Enum values for MigrationStrategy
+const (
+	MigrationStrategyCreateNew      MigrationStrategy = "CREATE_NEW"
+	MigrationStrategyUpdateExisting MigrationStrategy = "UPDATE_EXISTING"
+)
+
+// Values returns all known values for MigrationStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationStrategy) Values() []MigrationStrategy {
+	return []MigrationStrategy{
+		"CREATE_NEW",
+		"UPDATE_EXISTING",
+	}
+}
+
 type ObfuscationSetting string
 
 // Enum values for ObfuscationSetting
@@ -341,6 +415,24 @@ func (SlotValueSelectionStrategy) Values() []SlotValueSelectionStrategy {
 	return []SlotValueSelectionStrategy{
 		"ORIGINAL_VALUE",
 		"TOP_RESOLUTION",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 

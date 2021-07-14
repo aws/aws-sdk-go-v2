@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get lens review.
+// Get the answer to a specific question in a workload review.
 func (c *Client) GetAnswer(ctx context.Context, params *GetAnswerInput, optFns ...func(*Options)) (*GetAnswerOutput, error) {
 	if params == nil {
 		params = &GetAnswerInput{}

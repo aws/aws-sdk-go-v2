@@ -2,6 +2,74 @@
 
 package types
 
+type AnswerReason string
+
+// Enum values for AnswerReason
+const (
+	AnswerReasonOutOfScope              AnswerReason = "OUT_OF_SCOPE"
+	AnswerReasonBusinessPriorities      AnswerReason = "BUSINESS_PRIORITIES"
+	AnswerReasonArchitectureConstraints AnswerReason = "ARCHITECTURE_CONSTRAINTS"
+	AnswerReasonOther                   AnswerReason = "OTHER"
+	AnswerReasonNone                    AnswerReason = "NONE"
+)
+
+// Values returns all known values for AnswerReason. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AnswerReason) Values() []AnswerReason {
+	return []AnswerReason{
+		"OUT_OF_SCOPE",
+		"BUSINESS_PRIORITIES",
+		"ARCHITECTURE_CONSTRAINTS",
+		"OTHER",
+		"NONE",
+	}
+}
+
+type ChoiceReason string
+
+// Enum values for ChoiceReason
+const (
+	ChoiceReasonOutOfScope              ChoiceReason = "OUT_OF_SCOPE"
+	ChoiceReasonBusinessPriorities      ChoiceReason = "BUSINESS_PRIORITIES"
+	ChoiceReasonArchitectureConstraints ChoiceReason = "ARCHITECTURE_CONSTRAINTS"
+	ChoiceReasonOther                   ChoiceReason = "OTHER"
+	ChoiceReasonNone                    ChoiceReason = "NONE"
+)
+
+// Values returns all known values for ChoiceReason. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChoiceReason) Values() []ChoiceReason {
+	return []ChoiceReason{
+		"OUT_OF_SCOPE",
+		"BUSINESS_PRIORITIES",
+		"ARCHITECTURE_CONSTRAINTS",
+		"OTHER",
+		"NONE",
+	}
+}
+
+type ChoiceStatus string
+
+// Enum values for ChoiceStatus
+const (
+	ChoiceStatusSelected      ChoiceStatus = "SELECTED"
+	ChoiceStatusNotApplicable ChoiceStatus = "NOT_APPLICABLE"
+	ChoiceStatusUnselected    ChoiceStatus = "UNSELECTED"
+)
+
+// Values returns all known values for ChoiceStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChoiceStatus) Values() []ChoiceStatus {
+	return []ChoiceStatus{
+		"SELECTED",
+		"NOT_APPLICABLE",
+		"UNSELECTED",
+	}
+}
+
 type DifferenceStatus string
 
 // Enum values for DifferenceStatus

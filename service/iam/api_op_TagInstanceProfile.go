@@ -35,9 +35,9 @@ import (
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 // Guide.
 //
-// * AWS always interprets the tag Value as a single string. If you need to
-// store an array, you can store comma-separated values in the string. However, you
-// must interpret the value in your code.
+// * Amazon Web Services always interprets the tag Value as a single
+// string. If you need to store an array, you can store comma-separated values in
+// the string. However, you must interpret the value in your code.
 func (c *Client) TagInstanceProfile(ctx context.Context, params *TagInstanceProfileInput, optFns ...func(*Options)) (*TagInstanceProfileOutput, error) {
 	if params == nil {
 		params = &TagInstanceProfileInput{}
@@ -56,10 +56,9 @@ func (c *Client) TagInstanceProfile(ctx context.Context, params *TagInstanceProf
 type TagInstanceProfileInput struct {
 
 	// The name of the IAM instance profile to which you want to add tags. This
-	// parameter accepts (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters that consist of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// =,.@-
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
+	// string of characters consisting of upper and lowercase alphanumeric characters
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	InstanceProfileName *string

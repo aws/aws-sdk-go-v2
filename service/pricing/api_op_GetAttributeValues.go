@@ -16,7 +16,7 @@ import (
 // Price List API offer file. For a list of available attributes, see Offer File
 // Definitions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs)
-// in the AWS Billing and Cost Management User Guide
+// in the Amazon Web Services Billing and Cost Management User Guide
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html).
 func (c *Client) GetAttributeValues(ctx context.Context, params *GetAttributeValuesInput, optFns ...func(*Options)) (*GetAttributeValuesOutput, error) {
 	if params == nil {

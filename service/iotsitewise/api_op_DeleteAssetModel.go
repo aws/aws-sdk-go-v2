@@ -18,7 +18,7 @@ import (
 // formula expression that depends on the asset model that you want to delete. For
 // more information, see Deleting assets and models
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 func (c *Client) DeleteAssetModel(ctx context.Context, params *DeleteAssetModelInput, optFns ...func(*Options)) (*DeleteAssetModelOutput, error) {
 	if params == nil {
 		params = &DeleteAssetModelInput{}

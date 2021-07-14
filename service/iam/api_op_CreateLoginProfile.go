@@ -12,11 +12,11 @@ import (
 )
 
 // Creates a password for the specified IAM user. A password allows an IAM user to
-// access AWS services through the AWS Management Console. You can use the AWS CLI,
-// the AWS API, or the Users page in the IAM console to create a password for any
-// IAM user. Use ChangePassword to update your own existing password in the My
-// Security Credentials page in the AWS Management Console. For more information
-// about managing passwords, see Managing passwords
+// access Amazon Web Services services through the Management Console. You can use
+// the CLI, the Amazon Web Services API, or the Users page in the IAM console to
+// create a password for any IAM user. Use ChangePassword to update your own
+// existing password in the My Security Credentials page in the Management Console.
+// For more information about managing passwords, see Managing passwords
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in
 // the IAM User Guide.
 func (c *Client) CreateLoginProfile(ctx context.Context, params *CreateLoginProfileInput, optFns ...func(*Options)) (*CreateLoginProfileOutput, error) {
@@ -42,9 +42,9 @@ type CreateLoginProfileInput struct {
 	// character from the space (\u0020) through the end of the ASCII character range
 	// (\u00FF). You can also include the tab (\u0009), line feed (\u000A), and
 	// carriage return (\u000D) characters. Any of these characters are valid in a
-	// password. However, many tools, such as the AWS Management Console, might
-	// restrict the ability to type certain characters because they have special
-	// meaning within that tool.
+	// password. However, many tools, such as the Management Console, might restrict
+	// the ability to type certain characters because they have special meaning within
+	// that tool.
 	//
 	// This member is required.
 	Password *string

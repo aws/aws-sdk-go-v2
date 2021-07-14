@@ -11,17 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Network File System (NFS) file share on an existing file gateway. In
-// Storage Gateway, a file share is a file system mount point backed by Amazon S3
-// cloud storage. Storage Gateway exposes file shares using an NFS interface. This
-// operation is only supported for file gateways. File gateway requires AWS
-// Security Token Service (AWS STS) to be activated to enable you to create a file
-// share. Make sure AWS STS is activated in the AWS Region you are creating your
-// file gateway in. If AWS STS is not activated in the AWS Region, activate it. For
-// information about how to activate AWS STS, see Activating and deactivating AWS
-// STS in an AWS Region
+// Creates a Network File System (NFS) file share on an existing S3 File Gateway.
+// In Storage Gateway, a file share is a file system mount point backed by Amazon
+// S3 cloud storage. Storage Gateway exposes file shares using an NFS interface.
+// This operation is only supported for S3 File Gateways. S3 File gateway requires
+// Security Token Service (STS) to be activated to enable you to create a file
+// share. Make sure STS is activated in the Region you are creating your S3 File
+// Gateway in. If STS is not activated in the Region, activate it. For information
+// about how to activate STS, see Activating and deactivating STS in an Region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-// in the AWS Identity and Access Management User Guide. File gateway does not
+// in the Identity and Access Management User Guide. S3 File Gateways do not
 // support creating hard or symbolic links on a file share.
 func (c *Client) CreateNFSFileShare(ctx context.Context, params *CreateNFSFileShareInput, optFns ...func(*Options)) (*CreateNFSFileShareOutput, error) {
 	if params == nil {
@@ -41,40 +40,53 @@ func (c *Client) CreateNFSFileShare(ctx context.Context, params *CreateNFSFileSh
 // CreateNFSFileShareInput
 type CreateNFSFileShareInput struct {
 
-	// A unique string value that you supply that is used by file gateway to ensure
+	// A unique string value that you supply that is used by S3 File Gateway to ensure
 	// idempotent file share creation.
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the file gateway on which you want to create a
-	// file share.
+	// The Amazon Resource Name (ARN) of the S3 File Gateway on which you want to
+	// create a file share.
 	//
 	// This member is required.
 	GatewayARN *string
 
 	// The ARN of the backend storage used for storing file data. A prefix name can be
-	// added to the S3 bucket name. It must end with a "/".
+	// added to the S3 bucket name. It must end with a "/". You can specify a bucket
+	// attached to an access point using a complete ARN that includes the bucket region
+	// as shown: arn:aws:s3:region:account-id:accesspoint/access-point-name  If you
+	// specify a bucket attached to an access point, the bucket policy must be
+	// configured to delegate access control to the access point. For information, see
+	// Delegating access control to access points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	LocationARN *string
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that a file gateway
+	// The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway
 	// assumes when it accesses the underlying storage.
 	//
 	// This member is required.
 	Role *string
 
+	// Specifies the Region of the S3 bucket where the NFS file share stores files.
+	// This parameter is required for NFS file shares that connect to Amazon S3 through
+	// a VPC endpoint, a VPC access point, or an access point alias that points to a
+	// VPC access point.
+	BucketRegion *string
+
 	// Specifies refresh cache information for the file share.
 	CacheAttributes *types.CacheAttributes
 
-	// The list of clients that are allowed to access the file gateway. The list must
-	// contain either valid IP addresses or valid CIDR blocks.
+	// The list of clients that are allowed to access the S3 File Gateway. The list
+	// must contain either valid IP addresses or valid CIDR blocks.
 	ClientList []string
 
-	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// The default storage class for objects put into an Amazon S3 bucket by the S3
+	// File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid
+	// Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
@@ -86,8 +98,8 @@ type CreateNFSFileShareInput struct {
 	// set to false. The default value is true. Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
-	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -111,7 +123,7 @@ type CreateNFSFileShareInput struct {
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
-	// bucket that a file gateway puts objects into. The default value is private.
+	// bucket that a S3 File Gateway puts objects into. The default value is private.
 	ObjectACL types.ObjectACL
 
 	// A value that sets the write status of a file share. Set this value to true to
@@ -145,6 +157,12 @@ type CreateNFSFileShareInput struct {
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.
 	Tags []types.Tag
+
+	// Specifies the DNS name for the VPC endpoint that the NFS file share uses to
+	// connect to Amazon S3. This parameter is required for NFS file shares that
+	// connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access
+	// point alias that points to a VPC access point.
+	VPCEndpointDNSName *string
 }
 
 // CreateNFSFileShareOutput

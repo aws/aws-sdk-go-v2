@@ -7212,6 +7212,11 @@ func awsRestjson1_deserializeDocumentCaptionDestinationSettings(v **types.Captio
 				return err
 			}
 
+		case "srtDestinationSettings":
+			if err := awsRestjson1_deserializeDocumentSrtDestinationSettings(&sv.SrtDestinationSettings, value); err != nil {
+				return err
+			}
+
 		case "teletextDestinationSettings":
 			if err := awsRestjson1_deserializeDocumentTeletextDestinationSettings(&sv.TeletextDestinationSettings, value); err != nil {
 				return err
@@ -7787,6 +7792,15 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 					return fmt.Errorf("expected CmafStreamInfResolution to be of type string, got %T instead", value)
 				}
 				sv.StreamInfResolution = types.CmafStreamInfResolution(jtv)
+			}
+
+		case "targetDurationCompatibilityMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafTargetDurationCompatibilityMode to be of type string, got %T instead", value)
+				}
+				sv.TargetDurationCompatibilityMode = types.CmafTargetDurationCompatibilityMode(jtv)
 			}
 
 		case "writeDashManifest":
@@ -12194,6 +12208,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 					return fmt.Errorf("expected HlsStreamInfResolution to be of type string, got %T instead", value)
 				}
 				sv.StreamInfResolution = types.HlsStreamInfResolution(jtv)
+			}
+
+		case "targetDurationCompatibilityMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsTargetDurationCompatibilityMode to be of type string, got %T instead", value)
+				}
+				sv.TargetDurationCompatibilityMode = types.HlsTargetDurationCompatibilityMode(jtv)
 			}
 
 		case "timedMetadataId3Frame":
@@ -18217,6 +18240,46 @@ func awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(v **types.SpekeKeyProv
 					return fmt.Errorf("expected __stringPatternHttps to be of type string, got %T instead", value)
 				}
 				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSrtDestinationSettings(v **types.SrtDestinationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SrtDestinationSettings
+	if *v == nil {
+		sv = &types.SrtDestinationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "stylePassthrough":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SrtStylePassthrough to be of type string, got %T instead", value)
+				}
+				sv.StylePassthrough = types.SrtStylePassthrough(jtv)
 			}
 
 		default:

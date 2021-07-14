@@ -395,6 +395,64 @@ type Message struct {
 	GroupNumber *int32
 }
 
+// Provides information about alerts and warnings that Amazon Lex sends during a
+// migration. The alerts include information about how to resolve the issue.
+type MigrationAlert struct {
+
+	// Additional details about the alert.
+	Details []string
+
+	// A message that describes why the alert was issued.
+	Message *string
+
+	// A link to the Amazon Lex documentation that describes how to resolve the alert.
+	ReferenceURLs []string
+
+	// The type of alert. There are two kinds of alerts:
+	//
+	// * ERROR - There was an issue
+	// with the migration that can't be resolved. The migration stops.
+	//
+	// * WARN - There
+	// was an issue with the migration that requires manual changes to the new Amazon
+	// Lex V2 bot. The migration continues.
+	Type MigrationAlertType
+}
+
+// Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.
+type MigrationSummary struct {
+
+	// The unique identifier that Amazon Lex assigned to the migration.
+	MigrationId *string
+
+	// The status of the operation. When the status is COMPLETE the bot is available in
+	// Amazon Lex V2. There may be alerts and warnings that need to be resolved to
+	// complete the migration.
+	MigrationStatus MigrationStatus
+
+	// The strategy used to conduct the migration.
+	MigrationStrategy MigrationStrategy
+
+	// The date and time that the migration started.
+	MigrationTimestamp *time.Time
+
+	// The locale of the Amazon Lex V1 bot that is the source of the migration.
+	V1BotLocale Locale
+
+	// The name of the Amazon Lex V1 bot that is the source of the migration.
+	V1BotName *string
+
+	// The version of the Amazon Lex V1 bot that is the source of the migration.
+	V1BotVersion *string
+
+	// The unique identifier of the Amazon Lex V2 that is the destination of the
+	// migration.
+	V2BotId *string
+
+	// The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+	V2BotRole *string
+}
+
 // The specification of an output context that is set when an intent is fulfilled.
 type OutputContext struct {
 

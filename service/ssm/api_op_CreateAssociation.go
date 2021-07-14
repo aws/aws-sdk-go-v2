@@ -15,12 +15,13 @@ import (
 // instances. For example, an association can specify that anti-virus software must
 // be installed and running on your instances, or that certain ports must be
 // closed. For static targets, the association specifies a schedule for when the
-// configuration is reapplied. For dynamic targets, such as an AWS Resource Group
-// or an AWS Autoscaling Group, State Manager applies the configuration when new
-// instances are added to the group. The association also specifies actions to take
-// when applying the configuration. For example, an association for anti-virus
-// software might run once a day. If the software is not installed, then State
-// Manager installs it. If the software is installed, but the service is not
+// configuration is reapplied. For dynamic targets, such as an Amazon Web Services
+// resource group or an Amazon Web Services autoscaling group, State Manager, a
+// capability of Amazon Web Services Systems Manager applies the configuration when
+// new instances are added to the group. The association also specifies actions to
+// take when applying the configuration. For example, an association for anti-virus
+// software might run once a day. If the software isn't installed, then State
+// Manager installs it. If the software is installed, but the service isn't
 // running, then the association might instruct State Manager to start the service.
 func (c *Client) CreateAssociation(ctx context.Context, params *CreateAssociationInput, optFns ...func(*Options)) (*CreateAssociationOutput, error) {
 	if params == nil {
@@ -39,15 +40,16 @@ func (c *Client) CreateAssociation(ctx context.Context, params *CreateAssociatio
 
 type CreateAssociationInput struct {
 
-	// The name of the SSM document that contains the configuration information for the
-	// instance. You can specify Command or Automation documents. You can specify
-	// AWS-predefined documents, documents you created, or a document that is shared
-	// with you from another account. For SSM documents that are shared with you from
-	// other AWS accounts, you must specify the complete SSM document ARN, in the
-	// following format: arn:partition:ssm:region:account-id:document/document-name
-	// For example: arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For
-	// AWS-predefined documents and SSM documents you created in your account, you only
-	// need to specify the document name. For example, AWS-ApplyPatchBaseline or
+	// The name of the SSM Command document or Automation runbook that contains the
+	// configuration information for the instance. You can specify Amazon Web
+	// Services-predefined documents, documents you created, or a document that is
+	// shared with you from another account. For Systems Manager documents (SSM
+	// documents) that are shared with you from other accounts, you must specify the
+	// complete SSM document ARN, in the following format:
+	// arn:partition:ssm:region:account-id:document/document-name  For example:
+	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For Amazon Web
+	// Services-predefined documents and SSM documents you created in your account, you
+	// only need to specify the document name. For example, AWS-ApplyPatchBaseline or
 	// My-Document.
 	//
 	// This member is required.
@@ -56,19 +58,20 @@ type CreateAssociationInput struct {
 	// By default, when you create a new association, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
-	// it. This parameter is not supported for rate expressions.
+	// it. This parameter isn't supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
 	// Specify a descriptive name for the association.
 	AssociationName *string
 
 	// Specify the target for the association. This target is required for associations
-	// that use an Automation document and target resources by using rate controls.
+	// that use an Automation runbook and target resources by using rate controls.
+	// Automation is a capability of Amazon Web Services Systems Manager.
 	AutomationTargetParameterName *string
 
-	// The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar
-	// type documents you want to gate your associations under. The associations only
-	// run when that Change Calendar is open. For more information, see AWS Systems
+	// The names or Amazon Resource Names (ARNs) of the Change Calendar type documents
+	// you want to gate your associations under. The associations only run when that
+	// change calendar is open. For more information, see Amazon Web Services Systems
 	// Manager Change Calendar
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar).
 	CalendarNames []string
@@ -82,10 +85,11 @@ type CreateAssociationInput struct {
 
 	// The instance ID. InstanceId has been deprecated. To specify an instance ID for
 	// an association, use the Targets parameter. Requests that include the parameter
-	// InstanceID with SSM documents that use schema version 2.0 or later will fail. In
-	// addition, if you use the parameter InstanceId, you cannot use the parameters
-	// AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or
-	// ScheduleExpression. To use these parameters, you must use the Targets parameter.
+	// InstanceID with Systems Manager documents (SSM documents) that use schema
+	// version 2.0 or later will fail. In addition, if you use the parameter
+	// InstanceId, you can't use the parameters AssociationName, DocumentVersion,
+	// MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these
+	// parameters, you must use the Targets parameter.
 	InstanceId *string
 
 	// The maximum number of targets allowed to run the association at the same time.
@@ -112,7 +116,8 @@ type CreateAssociationInput struct {
 	// one at a time.
 	MaxErrors *string
 
-	// An S3 bucket where you want to store the output details of the request.
+	// An Amazon Simple Storage Service (Amazon S3) bucket where you want to store the
+	// output details of the request.
 	OutputLocation *types.InstanceAssociationOutputLocation
 
 	// The parameters for the runtime configuration of the document.
@@ -126,23 +131,23 @@ type CreateAssociationInput struct {
 	// determine the compliance status. If the association execution runs successfully,
 	// then the association is COMPLIANT. If the association execution doesn't run
 	// successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify
-	// the AssociationId as a parameter for the PutComplianceItems API action. In this
-	// case, compliance data is not managed by State Manager. It is managed by your
-	// direct call to the PutComplianceItems API action. By default, all associations
-	// use AUTO mode.
+	// the AssociationId as a parameter for the PutComplianceItems API operation. In
+	// this case, compliance data isn't managed by State Manager. It is managed by your
+	// direct call to the PutComplianceItems API operation. By default, all
+	// associations use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
-	// A location is a combination of AWS Regions and AWS accounts where you want to
-	// run the association. Use this action to create an association in multiple
-	// Regions and multiple accounts.
+	// A location is a combination of Regions and accounts where you want to run the
+	// association. Use this action to create an association in multiple Regions and
+	// multiple accounts.
 	TargetLocations []types.TargetLocation
 
-	// The targets for the association. You can target instances by using tags, AWS
-	// Resource Groups, all instances in an AWS account, or individual instance IDs.
-	// For more information about choosing targets for an association, see Using
-	// targets and rate controls with State Manager associations
+	// The targets for the association. You can target instances by using tags, Amazon
+	// Web Services resource groups, all instances in an account, or individual
+	// instance IDs. For more information about choosing targets for an association,
+	// see Using targets and rate controls with State Manager associations
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target
 }
 

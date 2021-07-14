@@ -55,7 +55,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// * Must be unique
-	// for all clusters within an AWS account.
+	// for all clusters within an account.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -77,8 +77,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// Accelerator) after the cluster is restored. Possible values include the
 	// following.
 	//
-	// * enabled - Use AQUA if it is available for the current AWS Region
-	// and Amazon Redshift node type.
+	// * enabled - Use AQUA if it is available for the current Region and
+	// Amazon Redshift node type.
 	//
 	// * disabled - Don't use AQUA.
 	//
@@ -146,14 +146,15 @@ type RestoreFromClusterSnapshotInput struct {
 	// Amazon Redshift cluster can use to retrieve and store keys in an HSM.
 	HsmConfigurationIdentifier *string
 
-	// A list of AWS Identity and Access Management (IAM) roles that can be used by the
-	// cluster to access other AWS services. You must supply the IAM roles in their
-	// Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single
-	// request. A cluster can have up to 10 IAM roles associated at any time.
+	// A list of Identity and Access Management (IAM) roles that can be used by the
+	// cluster to access other Amazon Web Services services. You must supply the IAM
+	// roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM
+	// roles in a single request. A cluster can have up to 10 IAM roles associated at
+	// any time.
 	IamRoles []string
 
-	// The AWS Key Management Service (KMS) key ID of the encryption key that you want
-	// to use to encrypt data in the cluster that you restore from a shared snapshot.
+	// The Key Management Service (KMS) key ID of the encryption key that you want to
+	// use to encrypt data in the cluster that you restore from a shared snapshot.
 	KmsKeyId *string
 
 	// The name of the maintenance track for the restored cluster. When you take a
@@ -187,8 +188,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// The number of nodes specified when provisioning the restored cluster.
 	NumberOfNodes *int32
 
-	// The AWS customer account used to create or copy the snapshot. Required if you
-	// are restoring a snapshot you do not own, optional if you own the snapshot.
+	// The account used to create or copy the snapshot. Required if you are restoring a
+	// snapshot you do not own, optional if you own the snapshot.
 	OwnerAccount *string
 
 	// The port number on which the cluster accepts connections. Default: The same port

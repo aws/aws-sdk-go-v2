@@ -43,7 +43,7 @@ type ListFunctionsInput struct {
 	// the next page of results.
 	Marker *string
 
-	// For Lambda@Edge functions, the AWS Region of the master function. For example,
+	// For Lambda@Edge functions, the Region of the master function. For example,
 	// us-east-1 filters the list of functions to only include Lambda@Edge functions
 	// replicated from a master function in US East (N. Virginia). If specified, you
 	// must set FunctionVersion to ALL.

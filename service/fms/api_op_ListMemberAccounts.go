@@ -12,8 +12,8 @@ import (
 )
 
 // Returns a MemberAccounts object that lists the member accounts in the
-// administrator's AWS organization. The ListMemberAccounts must be submitted by
-// the account that is set as the AWS Firewall Manager administrator.
+// administrator's Amazon Web Services organization. The ListMemberAccounts must be
+// submitted by the account that is set as the Firewall Manager administrator.
 func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccountsInput, optFns ...func(*Options)) (*ListMemberAccountsOutput, error) {
 	if params == nil {
 		params = &ListMemberAccountsInput{}
@@ -31,14 +31,14 @@ func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccou
 
 type ListMemberAccountsInput struct {
 
-	// Specifies the number of member account IDs that you want AWS Firewall Manager to
+	// Specifies the number of member account IDs that you want Firewall Manager to
 	// return for this request. If you have more IDs than the number that you specify
 	// for MaxResults, the response includes a NextToken value that you can use to get
 	// another batch of member account IDs.
 	MaxResults *int32
 
 	// If you specify a value for MaxResults and you have more account IDs than the
-	// number that you specify for MaxResults, AWS Firewall Manager returns a NextToken
+	// number that you specify for MaxResults, Firewall Manager returns a NextToken
 	// value in the response that allows you to list another group of IDs. For the
 	// second and subsequent ListMemberAccountsRequest requests, specify the value of
 	// NextToken from the previous response to get information about another batch of
@@ -132,7 +132,7 @@ var _ ListMemberAccountsAPIClient = (*Client)(nil)
 // ListMemberAccountsPaginatorOptions is the paginator options for
 // ListMemberAccounts
 type ListMemberAccountsPaginatorOptions struct {
-	// Specifies the number of member account IDs that you want AWS Firewall Manager to
+	// Specifies the number of member account IDs that you want Firewall Manager to
 	// return for this request. If you have more IDs than the number that you specify
 	// for MaxResults, the response includes a NextToken value that you can use to get
 	// another batch of member account IDs.

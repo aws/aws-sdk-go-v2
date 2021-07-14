@@ -37,6 +37,8 @@ type UpdateConfigurationInput struct {
 	ConfigurationId *string
 
 	// Required. The base64-encoded XML configuration.
+	//
+	// This member is required.
 	Data *string
 
 	// The description of the configuration.

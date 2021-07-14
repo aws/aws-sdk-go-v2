@@ -21,7 +21,7 @@ import (
 // Docker Hub, or from your local machine. For more information, see Creating
 // container images for your Amazon Lightsail container services
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images)
-// in the Lightsail Dev Guide.
+// in the Amazon Lightsail Developer Guide.
 func (c *Client) CreateContainerServiceDeployment(ctx context.Context, params *CreateContainerServiceDeploymentInput, optFns ...func(*Options)) (*CreateContainerServiceDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateContainerServiceDeploymentInput{}

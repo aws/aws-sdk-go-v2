@@ -20,9 +20,9 @@ import (
 // templates, see Launch template support
 // (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html). An
 // Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated
-// Amazon EC2 instances that are managed by AWS for an Amazon EKS cluster. Each
-// node group uses a version of the Amazon EKS optimized Amazon Linux 2 AMI. For
-// more information, see Managed Node Groups
+// Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS
+// cluster. Each node group uses a version of the Amazon EKS optimized Amazon Linux
+// 2 AMI. For more information, see Managed Node Groups
 // (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html) in
 // the Amazon EKS User Guide.
 func (c *Client) CreateNodegroup(ctx context.Context, params *CreateNodegroupInput, optFns ...func(*Options)) (*CreateNodegroupOutput, error) {
@@ -48,11 +48,12 @@ type CreateNodegroupInput struct {
 	ClusterName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with your node
-	// group. The Amazon EKS worker node kubelet daemon makes calls to AWS APIs on your
-	// behalf. Nodes receive permissions for these API calls through an IAM instance
-	// profile and associated policies. Before you can launch nodes and register them
-	// into a cluster, you must create an IAM role for those nodes to use when they are
-	// launched. For more information, see Amazon EKS node IAM role
+	// group. The Amazon EKS worker node kubelet daemon makes calls to Amazon Web
+	// Services APIs on your behalf. Nodes receive permissions for these API calls
+	// through an IAM instance profile and associated policies. Before you can launch
+	// nodes and register them into a cluster, you must create an IAM role for those
+	// nodes to use when they are launched. For more information, see Amazon EKS node
+	// IAM role
 	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html) in
 	// the Amazon EKS User Guide . If you specify launchTemplate, then don't specify
 	// IamInstanceProfile
@@ -167,6 +168,7 @@ type CreateNodegroupInput struct {
 	// The Kubernetes taints to be applied to the nodes in the node group.
 	Taints []types.Taint
 
+	// The node group update configuration.
 	UpdateConfig *types.NodegroupUpdateConfig
 
 	// The Kubernetes version to use for your managed nodes. By default, the Kubernetes

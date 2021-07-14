@@ -12,11 +12,10 @@ type InstanceTypeItem struct {
 // Information about an Outpost.
 type Outpost struct {
 
-	// The Availability Zone. You must specify AvailabilityZone or AvailabilityZoneId.
+	// The Availability Zone.
 	AvailabilityZone *string
 
-	// The ID of the Availability Zone. You must specify AvailabilityZone or
-	// AvailabilityZoneId.
+	// The ID of the Availability Zone.
 	AvailabilityZoneId *string
 
 	// The description of the Outpost.

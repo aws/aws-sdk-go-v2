@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to an AWS resource.
+// Adds one or more tags to an Amazon Web Services resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -29,9 +29,9 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to return tags for. The AWS
-	// Firewall Manager resources that support tagging are policies, applications
-	// lists, and protocols lists.
+	// The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall
+	// Manager resources that support tagging are policies, applications lists, and
+	// protocols lists.
 	//
 	// This member is required.
 	ResourceArn *string

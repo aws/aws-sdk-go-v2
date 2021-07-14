@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS Lambda layer
+// Creates an Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) from a
 // ZIP archive. Each time you call PublishLayerVersion with the same layer name, a
 // new version is created. Add layers to your function with CreateFunction or

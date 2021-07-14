@@ -24,7 +24,7 @@ import (
 // formatting messages, see Send Custom Platform-Specific Payloads in Messages to
 // Mobile Devices
 // (https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html).
-// You can publish messages only to topics and endpoints in the same AWS Region.
+// You can publish messages only to topics and endpoints in the same Region.
 func (c *Client) Publish(ctx context.Context, params *PublishInput, optFns ...func(*Options)) (*PublishOutput, error) {
 	if params == nil {
 		params = &PublishInput{}

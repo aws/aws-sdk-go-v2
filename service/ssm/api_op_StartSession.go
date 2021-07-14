@@ -12,14 +12,14 @@ import (
 
 // Initiates a connection to a target (for example, an instance) for a Session
 // Manager session. Returns a URL and token that can be used to open a WebSocket
-// connection for sending input and receiving outputs. AWS CLI usage: start-session
-// is an interactive command that requires the Session Manager plugin to be
-// installed on the client machine making the call. For information, see Install
-// the Session Manager plugin for the AWS CLI
+// connection for sending input and receiving outputs. Amazon Web Services CLI
+// usage: start-session is an interactive command that requires the Session Manager
+// plugin to be installed on the client machine making the call. For information,
+// see Install the Session Manager plugin for the Amazon Web Services CLI
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
-// in the AWS Systems Manager User Guide. AWS Tools for PowerShell usage:
-// Start-SSMSession is not currently supported by AWS Tools for PowerShell on
-// Windows local machines.
+// in the Amazon Web Services Systems Manager User Guide. Amazon Web Services Tools
+// for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web
+// Services Tools for PowerShell on Windows local machines.
 func (c *Client) StartSession(ctx context.Context, params *StartSessionInput, optFns ...func(*Options)) (*StartSessionOutput, error) {
 	if params == nil {
 		params = &StartSessionInput{}
@@ -61,12 +61,13 @@ type StartSessionOutput struct {
 	// A URL back to SSM Agent on the instance that the Session Manager client uses to
 	// send commands and receive output from the instance. Format:
 	// wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)
-	// region represents the Region identifier for an AWS Region supported by AWS
-	// Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of
-	// supported region values, see the Region column in Systems Manager service
-	// endpoints (http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region) in
-	// the AWS General Reference. session-id represents the ID of a Session Manager
-	// session, such as 1a2b3c4dEXAMPLE.
+	// region represents the Region identifier for an Region supported by Amazon Web
+	// Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a
+	// list of supported region values, see the Region column in Systems Manager
+	// service endpoints
+	// (https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region) in the
+	// Amazon Web Services General Reference. session-id represents the ID of a Session
+	// Manager session, such as 1a2b3c4dEXAMPLE.
 	StreamUrl *string
 
 	// An encrypted token value containing session and caller information. Used to

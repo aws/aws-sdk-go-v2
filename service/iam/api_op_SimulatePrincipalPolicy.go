@@ -13,27 +13,27 @@ import (
 )
 
 // Simulate how a set of IAM policies attached to an IAM entity works with a list
-// of API operations and AWS resources to determine the policies' effective
-// permissions. The entity can be an IAM user, group, or role. If you specify a
-// user, then the simulation also includes all of the policies that are attached to
-// groups that the user belongs to. You can simulate resources that don't exist in
-// your account. You can optionally include a list of one or more additional
-// policies specified as strings to include in the simulation. If you want to
-// simulate only policies specified as strings, use SimulateCustomPolicy instead.
-// You can also optionally include one resource-based policy to be evaluated with
-// each of the resources included in the simulation. The simulation does not
-// perform the API operations; it only checks the authorization to determine if the
-// simulated policies allow or deny the operations. Note: This operation discloses
-// information about the permissions granted to other users. If you do not want
-// users to see other user's permissions, then consider allowing them to use
-// SimulateCustomPolicy instead. Context keys are variables maintained by AWS and
-// its services that provide details about the context of an API query request. You
-// can use the Condition element of an IAM policy to evaluate context keys. To get
-// the list of context keys that the policies require for correct simulation, use
-// GetContextKeysForPrincipalPolicy. If the output is long, you can use the
-// MaxItems and Marker parameters to paginate the results. For more information
-// about using the policy simulator, see Testing IAM policies with the IAM policy
-// simulator
+// of API operations and Amazon Web Services resources to determine the policies'
+// effective permissions. The entity can be an IAM user, group, or role. If you
+// specify a user, then the simulation also includes all of the policies that are
+// attached to groups that the user belongs to. You can simulate resources that
+// don't exist in your account. You can optionally include a list of one or more
+// additional policies specified as strings to include in the simulation. If you
+// want to simulate only policies specified as strings, use SimulateCustomPolicy
+// instead. You can also optionally include one resource-based policy to be
+// evaluated with each of the resources included in the simulation. The simulation
+// does not perform the API operations; it only checks the authorization to
+// determine if the simulated policies allow or deny the operations. Note: This
+// operation discloses information about the permissions granted to other users. If
+// you do not want users to see other user's permissions, then consider allowing
+// them to use SimulateCustomPolicy instead. Context keys are variables maintained
+// by Amazon Web Services and its services that provide details about the context
+// of an API query request. You can use the Condition element of an IAM policy to
+// evaluate context keys. To get the list of context keys that the policies require
+// for correct simulation, use GetContextKeysForPrincipalPolicy. If the output is
+// long, you can use the MaxItems and Marker parameters to paginate the results.
+// For more information about using the policy simulator, see Testing IAM policies
+// with the IAM policy simulator
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
 // the IAM User Guide.
 func (c *Client) SimulatePrincipalPolicy(ctx context.Context, params *SimulatePrincipalPolicyInput, optFns ...func(*Options)) (*SimulatePrincipalPolicyOutput, error) {
@@ -64,10 +64,14 @@ type SimulatePrincipalPolicyInput struct {
 	// to include in the simulation. If you specify a user, group, or role, the
 	// simulation includes all policies that are associated with that entity. If you
 	// specify a user, the simulation also includes all policies that are attached to
-	// any groups the user belongs to. For more information about ARNs, see Amazon
-	// Resource Names (ARNs)
+	// any groups the user belongs to. The maximum length of the policy document that
+	// you can pass in this operation, including whitespace, is listed below. To view
+	// the maximum character counts of a managed policy with no whitespaces, see IAM
+	// and STS character quotas
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
+	// For more information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	PolicySourceArn *string
@@ -86,7 +90,7 @@ type SimulatePrincipalPolicyInput struct {
 	// use in evaluating the policy. For more information about ARNs, see Amazon
 	// Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	CallerArn *string
 
 	// A list of context keys and corresponding values for the simulation to use.
@@ -119,19 +123,23 @@ type SimulatePrincipalPolicyInput struct {
 	// permissions boundaries, see Permissions boundaries for IAM entities
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide. The policy input is specified as a string containing the
-	// complete, valid JSON text of a permissions boundary policy. The regex pattern
-	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
-	// characters consisting of the following:
+	// complete, valid JSON text of a permissions boundary policy. The maximum length
+	// of the policy document that you can pass in this operation, including
+	// whitespace, is listed below. To view the maximum character counts of a managed
+	// policy with no whitespaces, see IAM and STS character quotas
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
+	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
+	// parameter is a string of characters consisting of the following:
 	//
-	// * Any printable ASCII character ranging
-	// from the space character (\u0020) through the end of the ASCII character
-	// range
+	// * Any
+	// printable ASCII character ranging from the space character (\u0020) through the
+	// end of the ASCII character range
 	//
-	// * The printable characters in the Basic Latin and Latin-1 Supplement
-	// character set (through \u00FF)
+	// * The printable characters in the Basic Latin
+	// and Latin-1 Supplement character set (through \u00FF)
 	//
-	// * The special characters tab (\u0009), line feed
-	// (\u000A), and carriage return (\u000D)
+	// * The special characters
+	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
 	PermissionsBoundaryPolicyInputList []string
 
 	// An optional list of additional policy documents to include in the simulation.
@@ -151,17 +159,18 @@ type SimulatePrincipalPolicyInput struct {
 	// return (\u000D)
 	PolicyInputList []string
 
-	// A list of ARNs of AWS resources to include in the simulation. If this parameter
-	// is not provided, then the value defaults to * (all resources). Each API in the
-	// ActionNames parameter is evaluated for each resource in this list. The
-	// simulation determines the access result (allowed or denied) of each combination
-	// and reports it in the response. You can simulate resources that don't exist in
-	// your account. The simulation does not automatically retrieve policies for the
-	// specified resources. If you want to include a resource policy in the simulation,
-	// then you must include the policy as a string in the ResourcePolicy parameter.
-	// For more information about ARNs, see Amazon Resource Names (ARNs)
+	// A list of ARNs of Amazon Web Services resources to include in the simulation. If
+	// this parameter is not provided, then the value defaults to * (all resources).
+	// Each API in the ActionNames parameter is evaluated for each resource in this
+	// list. The simulation determines the access result (allowed or denied) of each
+	// combination and reports it in the response. You can simulate resources that
+	// don't exist in your account. The simulation does not automatically retrieve
+	// policies for the specified resources. If you want to include a resource policy
+	// in the simulation, then you must include the policy as a string in the
+	// ResourcePolicy parameter. For more information about ARNs, see Amazon Resource
+	// Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	ResourceArns []string
 
 	// Specifies the type of simulation to run. Different API operations that support
@@ -199,32 +208,36 @@ type SimulatePrincipalPolicyInput struct {
 	// subnet, volume
 	ResourceHandlingOption *string
 
-	// An AWS account ID that specifies the owner of any simulated resource that does
-	// not identify its owner in the resource ARN. Examples of resource ARNs include an
-	// S3 bucket or object. If ResourceOwner is specified, it is also used as the
-	// account owner of any ResourcePolicy included in the simulation. If the
-	// ResourceOwner parameter is not specified, then the owner of the resources and
-	// the resource policy defaults to the account of the identity provided in
-	// CallerArn. This parameter is required only if you specify a resource-based
-	// policy and account that owns the resource is different from the account that
-	// owns the simulated calling user CallerArn.
+	// An account ID that specifies the owner of any simulated resource that does not
+	// identify its owner in the resource ARN. Examples of resource ARNs include an S3
+	// bucket or object. If ResourceOwner is specified, it is also used as the account
+	// owner of any ResourcePolicy included in the simulation. If the ResourceOwner
+	// parameter is not specified, then the owner of the resources and the resource
+	// policy defaults to the account of the identity provided in CallerArn. This
+	// parameter is required only if you specify a resource-based policy and account
+	// that owns the resource is different from the account that owns the simulated
+	// calling user CallerArn.
 	ResourceOwner *string
 
 	// A resource-based policy to include in the simulation provided as a string. Each
 	// resource in the simulation is treated as if it had this policy attached. You can
-	// include only one resource-based policy in a simulation. The regex pattern
-	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
-	// characters consisting of the following:
+	// include only one resource-based policy in a simulation. The maximum length of
+	// the policy document that you can pass in this operation, including whitespace,
+	// is listed below. To view the maximum character counts of a managed policy with
+	// no whitespaces, see IAM and STS character quotas
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
+	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
+	// parameter is a string of characters consisting of the following:
 	//
-	// * Any printable ASCII character ranging
-	// from the space character (\u0020) through the end of the ASCII character
-	// range
+	// * Any
+	// printable ASCII character ranging from the space character (\u0020) through the
+	// end of the ASCII character range
 	//
-	// * The printable characters in the Basic Latin and Latin-1 Supplement
-	// character set (through \u00FF)
+	// * The printable characters in the Basic Latin
+	// and Latin-1 Supplement character set (through \u00FF)
 	//
-	// * The special characters tab (\u0009), line feed
-	// (\u000A), and carriage return (\u000D)
+	// * The special characters
+	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
 	ResourcePolicy *string
 }
 

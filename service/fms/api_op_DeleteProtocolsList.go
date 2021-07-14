@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes an AWS Firewall Manager protocols list.
+// Permanently deletes an Firewall Manager protocols list.
 func (c *Client) DeleteProtocolsList(ctx context.Context, params *DeleteProtocolsListInput, optFns ...func(*Options)) (*DeleteProtocolsListOutput, error) {
 	if params == nil {
 		params = &DeleteProtocolsListInput{}

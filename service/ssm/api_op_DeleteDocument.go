@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the Systems Manager document and all instance associations to the
-// document. Before you delete the document, we recommend that you use
-// DeleteAssociation to disassociate all instances that are associated with the
-// document.
+// Deletes the Amazon Web Services Systems Manager document (SSM document) and all
+// instance associations to the document. Before you delete the document, we
+// recommend that you use DeleteAssociation to disassociate all instances that are
+// associated with the document.
 func (c *Client) DeleteDocument(ctx context.Context, params *DeleteDocumentInput, optFns ...func(*Options)) (*DeleteDocumentOutput, error) {
 	if params == nil {
 		params = &DeleteDocumentInput{}
@@ -43,7 +43,7 @@ type DeleteDocumentInput struct {
 	// Some SSM document types require that you specify a Force flag before you can
 	// delete the document. For example, you must specify a Force flag to delete a
 	// document of type ApplicationConfigurationSchema. You can restrict access to the
-	// Force flag in an AWS Identity and Access Management (IAM) policy.
+	// Force flag in an Identity and Access Management (IAM) policy.
 	Force bool
 
 	// The version name of the document that you want to delete. If not provided, all

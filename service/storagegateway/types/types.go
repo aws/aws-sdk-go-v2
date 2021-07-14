@@ -16,7 +16,7 @@ type AutomaticTapeCreationPolicyInfo struct {
 	AutomaticTapeCreationRules []AutomaticTapeCreationRule
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 }
 
@@ -111,14 +111,14 @@ type BandwidthRateLimitInterval struct {
 	AverageUploadRateLimitInBitsPerSec *int64
 }
 
-// The refresh cache information for the file share.
+// The refresh cache information for the file share or FSx file systems.
 type CacheAttributes struct {
 
 	// Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of
 	// time since the last refresh after which access to the directory would cause the
 	// file gateway to first refresh that directory's contents from the Amazon S3
-	// bucket or Amazon FSx file system. The TTL duration is in seconds. Valid Values:
-	// 300 to 2,592,000 seconds (5 minutes to 30 days)
+	// bucket or Amazon FSx file system. The TTL duration is in seconds. Valid
+	// Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)
 	CacheStaleTimeoutInSeconds *int32
 }
 
@@ -254,7 +254,17 @@ type Disk struct {
 	DiskStatus *string
 }
 
-// Describes a file share.
+// Specifies network configuration information for the gateway associated with the
+// Amazon FSx file system.
+type EndpointNetworkConfiguration struct {
+
+	// A list of gateway IP addresses on which the associated Amazon FSx file system is
+	// available. If multiple file systems are associated with this gateway, this field
+	// is required.
+	IpAddresses []string
+}
+
+// Describes a file share. Only supported S3 File Gateway.
 type FileShareInfo struct {
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -271,7 +281,7 @@ type FileShareInfo struct {
 	FileShareType FileShareType
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 }
 
@@ -282,18 +292,23 @@ type FileSystemAssociationInfo struct {
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
 
-	// The refresh cache information for the file share.
+	// The refresh cache information for the file share or FSx file systems.
 	CacheAttributes *CacheAttributes
+
+	// Specifies network configuration information for the gateway associated with the
+	// Amazon FSx file system. If multiple file systems are associated with this
+	// gateway, this parameter's IpAddresses field is required.
+	EndpointNetworkConfiguration *EndpointNetworkConfiguration
 
 	// The Amazon Resource Name (ARN) of the file system association.
 	FileSystemAssociationARN *string
 
 	// The status of the file system association. Valid Values: AVAILABLE | CREATING |
-	// DELETING | FORCE_DELETING | MISCONFIGURED | UPDATING | UNAVAILABLE
+	// DELETING | FORCE_DELETING | UPDATING | ERROR
 	FileSystemAssociationStatus *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// The ARN of the backend Amazon FSx file system used for storing file data. For
@@ -318,11 +333,11 @@ type FileSystemAssociationSummary struct {
 	FileSystemAssociationId *string
 
 	// The status of the file share. Valid Values: AVAILABLE | CREATING | DELETING |
-	// FORCE_DELETING | MISCONFIGURED | UPDATING | UNAVAILABLE
+	// FORCE_DELETING | UPDATING | ERROR
 	FileSystemAssociationStatus *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 }
 
@@ -332,11 +347,11 @@ type GatewayInfo struct {
 	// The ID of the Amazon EC2 instance that was used to launch the gateway.
 	Ec2InstanceId *string
 
-	// The AWS Region where the Amazon EC2 instance is located.
+	// The Region where the Amazon EC2 instance is located.
 	Ec2InstanceRegion *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// The unique identifier assigned to your gateway during activation. This ID
@@ -373,7 +388,7 @@ type NetworkInterface struct {
 // stored as Amazon S3 objects in S3 buckets don't, by default, have Unix file
 // permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway,
 // the S3 objects that represent files and folders are assigned these default Unix
-// permissions. This operation is only supported for file gateways.
+// permissions. This operation is only supported for S3 File Gateways.
 type NFSFileShareDefaults struct {
 
 	// The Unix directory mode in the form "nnnn". For example, 0666 represents the
@@ -395,20 +410,26 @@ type NFSFileShareDefaults struct {
 }
 
 // The Unix file permissions and ownership information assigned, by default, to
-// native S3 objects when file gateway discovers them in S3 buckets. This operation
-// is only supported in file gateways.
+// native S3 objects when an S3 File Gateway discovers them in S3 buckets. This
+// operation is only supported in S3 File Gateways.
 type NFSFileShareInfo struct {
+
+	// Specifies the Region of the S3 bucket where the NFS file share stores files.
+	// This parameter is required for NFS file shares that connect to Amazon S3 through
+	// a VPC endpoint, a VPC access point, or an access point alias that points to a
+	// VPC access point.
+	BucketRegion *string
 
 	// Refresh cache information for the file share.
 	CacheAttributes *CacheAttributes
 
-	// The list of clients that are allowed to access the file gateway. The list must
-	// contain either valid IP addresses or valid CIDR blocks.
+	// The list of clients that are allowed to access the S3 File Gateway. The list
+	// must contain either valid IP addresses or valid CIDR blocks.
 	ClientList []string
 
-	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// The default storage class for objects put into an Amazon S3 bucket by the S3
+	// File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid
+	// Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -426,7 +447,7 @@ type NFSFileShareInfo struct {
 	FileShareStatus *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
@@ -434,8 +455,8 @@ type NFSFileShareInfo struct {
 	// set to false. The default value is true. Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
-	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -451,7 +472,7 @@ type NFSFileShareInfo struct {
 	// stored as Amazon S3 objects in S3 buckets don't, by default, have Unix file
 	// permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway,
 	// the S3 objects that represent files and folders are assigned these default Unix
-	// permissions. This operation is only supported for file gateways.
+	// permissions. This operation is only supported for S3 File Gateways.
 	NFSFileShareDefaults *NFSFileShareDefaults
 
 	// The notification policy of the file share. SettlingTimeInSeconds controls the
@@ -467,7 +488,7 @@ type NFSFileShareInfo struct {
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
-	// bucket that a file gateway puts objects into. The default value is private.
+	// bucket that an S3 File Gateway puts objects into. The default value is private.
 	ObjectACL ObjectACL
 
 	// The file share path used by the NFS client to identify the mount point.
@@ -487,7 +508,7 @@ type NFSFileShareInfo struct {
 	// false
 	RequesterPays *bool
 
-	// The ARN of the IAM role that file gateway assumes when it accesses the
+	// The ARN of the IAM role that an S3 File Gateway assumes when it accesses the
 	// underlying storage.
 	Role *string
 
@@ -506,13 +527,19 @@ type NFSFileShareInfo struct {
 	// key name. Each tag is a key-value pair. For a gateway with more than 10 tags
 	// assigned, you can view all tags using the ListTagsForResource API operation.
 	Tags []Tag
+
+	// Specifies the DNS name for the VPC endpoint that the NFS file share uses to
+	// connect to Amazon S3. This parameter is required for NFS file shares that
+	// connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access
+	// point alias that points to a VPC access point.
+	VPCEndpointDNSName *string
 }
 
 // Describes a custom tape pool.
 type PoolInfo struct {
 
 	// The Amazon Resource Name (ARN) of the custom tape pool. Use the ListTapePools
-	// operation to return a list of custom tape pools for your account and AWS Region.
+	// operation to return a list of custom tape pools for your account and Region.
 	PoolARN *string
 
 	// The name of the custom tape pool. PoolName can use all ASCII characters, except
@@ -527,10 +554,10 @@ type PoolInfo struct {
 	RetentionLockTimeInDays *int32
 
 	// Tape retention lock type, which can be configured in two modes. When configured
-	// in governance mode, AWS accounts with specific IAM permissions are authorized to
+	// in governance mode, accounts with specific IAM permissions are authorized to
 	// remove the tape retention lock from archived virtual tapes. When configured in
 	// compliance mode, the tape retention lock cannot be removed by any user,
-	// including the root AWS account.
+	// including the root account.
 	RetentionLockType RetentionLockType
 
 	// The storage class that is associated with the custom pool. When you use your
@@ -541,8 +568,8 @@ type PoolInfo struct {
 }
 
 // The Windows file permissions and ownership information assigned, by default, to
-// native S3 objects when file gateway discovers them in S3 buckets. This operation
-// is only supported for file gateways.
+// native S3 objects when S3 File Gateway discovers them in S3 buckets. This
+// operation is only supported for S3 File Gateways.
 type SMBFileShareInfo struct {
 
 	// Indicates whether AccessBasedEnumeration is enabled.
@@ -561,6 +588,12 @@ type SMBFileShareInfo struct {
 	// Valid Values: ActiveDirectory | GuestAccess
 	Authentication *string
 
+	// Specifies the Region of the S3 bucket where the SMB file share stores files.
+	// This parameter is required for SMB file shares that connect to Amazon S3 through
+	// a VPC endpoint, a VPC access point, or an access point alias that points to a
+	// VPC access point.
+	BucketRegion *string
+
 	// Refresh cache information for the file share.
 	CacheAttributes *CacheAttributes
 
@@ -569,9 +602,9 @@ type SMBFileShareInfo struct {
 	// determines the case sensitivity. The default value is ClientSpecified.
 	CaseSensitivity CaseSensitivity
 
-	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// The default storage class for objects put into an Amazon S3 bucket by the S3
+	// File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid
+	// Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -589,7 +622,7 @@ type SMBFileShareInfo struct {
 	FileShareStatus *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
@@ -603,8 +636,8 @@ type SMBFileShareInfo struct {
 	// set if Authentication is set to ActiveDirectory.
 	InvalidUserList []string
 
-	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -629,8 +662,14 @@ type SMBFileShareInfo struct {
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
-	// bucket that a file gateway puts objects into. The default value is private.
+	// bucket that an S3 File Gateway puts objects into. The default value is private.
 	ObjectACL ObjectACL
+
+	// Specifies whether opportunistic locking is enabled for the SMB file share.
+	// Enabling opportunistic locking on case-sensitive shares is not recommended for
+	// workloads that involve access to files with the same name in different case.
+	// Valid Values: true | false
+	OplocksEnabled *bool
 
 	// The file share path used by the SMB client to identify the mount point.
 	Path *string
@@ -649,7 +688,7 @@ type SMBFileShareInfo struct {
 	// false
 	RequesterPays *bool
 
-	// The ARN of the IAM role that file gateway assumes when it accesses the
+	// The ARN of the IAM role that an S3 File Gateway assumes when it accesses the
 	// underlying storage.
 	Role *string
 
@@ -658,13 +697,19 @@ type SMBFileShareInfo struct {
 	// directory permissions are mapped to the POSIX permission. For more information,
 	// see Using Microsoft Windows ACLs to control access to an SMB file share
 	// (https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html) in
-	// the AWS Storage Gateway User Guide.
+	// the Storage Gateway User Guide.
 	SMBACLEnabled *bool
 
 	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by
 	// key name. Each tag is a key-value pair. For a gateway with more than 10 tags
 	// assigned, you can view all tags using the ListTagsForResource API operation.
 	Tags []Tag
+
+	// Specifies the DNS name for the VPC endpoint that the SMB file share uses to
+	// connect to Amazon S3. This parameter is required for SMB file shares that
+	// connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access
+	// point alias that points to a VPC access point.
+	VPCEndpointDNSName *string
 
 	// A list of users or groups in the Active Directory that are allowed to access the
 	// file share. A group must be prefixed with the @ character. Acceptable formats
@@ -881,7 +926,7 @@ type TapeArchive struct {
 type TapeInfo struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// The date that the tape entered the custom tape pool with tape retention lock
@@ -933,7 +978,7 @@ type TapeRecoveryPointInfo struct {
 type VolumeInfo struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// The unique identifier assigned to your gateway during activation. This ID

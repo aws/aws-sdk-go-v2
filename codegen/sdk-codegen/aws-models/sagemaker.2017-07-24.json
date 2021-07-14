@@ -27833,6 +27833,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the transform job that was run by this step execution.</p>"
                     }
                 },
+                "TuningJob": {
+                    "target": "com.amazonaws.sagemaker#TuningJobStepMetaData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.</p>"
+                    }
+                },
                 "Model": {
                     "target": "com.amazonaws.sagemaker#ModelStepMetadata",
                     "traits": {
@@ -30247,7 +30253,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies an authentication configuration for the private docker registry where your\n            model image is hosted. Specify a value for this property only if you specified\n                <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the\n                <code>ImageConfig</code> object that you passed to a call to <a>CreateModel</a> and the private Docker registry where the model image is\n            hosted requires authentication.</p>"
+                "smithy.api#documentation": "<p>Specifies an authentication configuration for the private docker registry where your\n            model image is hosted. Specify a value for this property only if you specified\n            <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the\n            <code>ImageConfig</code> object that you passed to a call to <code>CreateModel</code>\n            and the private Docker registry where the model image is\n            hosted requires authentication.</p>"
             }
         },
         "com.amazonaws.sagemaker#RepositoryCredentialsProviderArn": {
@@ -35619,6 +35625,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The job completion criteria.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TuningJobStepMetaData": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata for a tuning step.</p>"
             }
         },
         "com.amazonaws.sagemaker#USD": {

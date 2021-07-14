@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the password policy for the AWS account. There are no parameters.
+// Deletes the password policy for the account. There are no parameters.
 func (c *Client) DeleteAccountPasswordPolicy(ctx context.Context, params *DeleteAccountPasswordPolicyInput, optFns ...func(*Options)) (*DeleteAccountPasswordPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteAccountPasswordPolicyInput{}

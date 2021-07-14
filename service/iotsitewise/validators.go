@@ -770,6 +770,26 @@ func (m *validateOpPutLoggingOptions) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutStorageConfiguration struct {
+}
+
+func (*validateOpPutStorageConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutStorageConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutStorageConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutStorageConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1142,6 +1162,10 @@ func addOpPutLoggingOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutLoggingOptions{}, middleware.After)
 }
 
+func addOpPutStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutStorageConfiguration{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -1474,6 +1498,24 @@ func validateAssetPropertyValues(v []types.AssetPropertyValue) error {
 	}
 }
 
+func validateCustomerManagedS3Storage(v *types.CustomerManagedS3Storage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerManagedS3Storage"}
+	if v.S3ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3ResourceArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExpressionVariable(v *types.ExpressionVariable) error {
 	if v == nil {
 		return nil
@@ -1711,6 +1753,25 @@ func validateMetricWindow(v *types.MetricWindow) error {
 	if v.Tumbling != nil {
 		if err := validateTumblingWindow(v.Tumbling); err != nil {
 			invalidParams.AddNested("Tumbling", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMultiLayerStorage(v *types.MultiLayerStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiLayerStorage"}
+	if v.CustomerManagedS3Storage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerManagedS3Storage"))
+	} else if v.CustomerManagedS3Storage != nil {
+		if err := validateCustomerManagedS3Storage(v.CustomerManagedS3Storage); err != nil {
+			invalidParams.AddNested("CustomerManagedS3Storage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2596,6 +2657,26 @@ func validateOpPutLoggingOptionsInput(v *PutLoggingOptionsInput) error {
 	} else if v.LoggingOptions != nil {
 		if err := validateLoggingOptions(v.LoggingOptions); err != nil {
 			invalidParams.AddNested("LoggingOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutStorageConfigurationInput(v *PutStorageConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutStorageConfigurationInput"}
+	if len(v.StorageType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageType"))
+	}
+	if v.MultiLayerStorage != nil {
+		if err := validateMultiLayerStorage(v.MultiLayerStorage); err != nil {
+			invalidParams.AddNested("MultiLayerStorage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

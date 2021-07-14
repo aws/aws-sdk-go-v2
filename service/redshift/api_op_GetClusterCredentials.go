@@ -20,10 +20,10 @@ import (
 // seconds (60 minutes). For more information, see Using IAM Authentication to
 // Generate Database User Credentials
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html)
-// in the Amazon Redshift Cluster Management Guide. The AWS Identity and Access
-// Management (IAM)user or role that executes GetClusterCredentials must have an
-// IAM policy attached that allows access to all necessary actions and resources.
-// For more information about permissions, see Resource Policies for
+// in the Amazon Redshift Cluster Management Guide. The Identity and Access
+// Management (IAM) user or role that runs GetClusterCredentials must have an IAM
+// policy attached that allows access to all necessary actions and resources. For
+// more information about permissions, see Resource Policies for
 // GetClusterCredentials
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources)
 // in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is

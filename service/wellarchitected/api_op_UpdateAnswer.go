@@ -46,11 +46,18 @@ type UpdateAnswerInput struct {
 	// This member is required.
 	WorkloadId *string
 
+	// A list of choices to update on a question in your workload. The String key
+	// corresponds to the choice ID to be updated.
+	ChoiceUpdates map[string]types.ChoiceUpdate
+
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable bool
 
 	// The notes associated with the workload.
 	Notes *string
+
+	// The reason why a question is not applicable to your workload.
+	Reason types.AnswerReason
 
 	// List of selected choice IDs in a question answer. The values entered replace the
 	// previously selected choices.

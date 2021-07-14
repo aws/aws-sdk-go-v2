@@ -44,9 +44,9 @@ type ConfirmSubscriptionInput struct {
 	TopicArn *string
 
 	// Disallows unauthenticated unsubscribes of the subscription. If the value of this
-	// parameter is true and the request has an AWS signature, then only the topic
-	// owner and the subscription owner can unsubscribe the endpoint. The unsubscribe
-	// action requires AWS authentication.
+	// parameter is true and the request has an Amazon Web Services signature, then
+	// only the topic owner and the subscription owner can unsubscribe the endpoint.
+	// The unsubscribe action requires Amazon Web Services authentication.
 	AuthenticateOnUnsubscribe *string
 }
 

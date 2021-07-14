@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a gateway from AWS IoT SiteWise. When you delete a gateway, some of the
+// Deletes a gateway from IoT SiteWise. When you delete a gateway, some of the
 // gateway's files remain in your gateway's file system.
 func (c *Client) DeleteGateway(ctx context.Context, params *DeleteGatewayInput, optFns ...func(*Options)) (*DeleteGatewayOutput, error) {
 	if params == nil {

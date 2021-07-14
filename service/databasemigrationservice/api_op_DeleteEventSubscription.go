@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AWS DMS event subscription.
+// Deletes an DMS event subscription.
 func (c *Client) DeleteEventSubscription(ctx context.Context, params *DeleteEventSubscriptionInput, optFns ...func(*Options)) (*DeleteEventSubscriptionOutput, error) {
 	if params == nil {
 		params = &DeleteEventSubscriptionInput{}

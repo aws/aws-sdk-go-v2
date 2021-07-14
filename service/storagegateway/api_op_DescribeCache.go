@@ -32,7 +32,7 @@ func (c *Client) DescribeCache(ctx context.Context, params *DescribeCacheInput, 
 type DescribeCacheInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -44,8 +44,8 @@ type DescribeCacheOutput struct {
 	CacheAllocatedInBytes int64
 
 	// The file share's contribution to the overall percentage of the gateway's cache
-	// that has not been persisted to AWS. The sample is taken at the end of the
-	// reporting period.
+	// that has not been persisted to Amazon Web Services. The sample is taken at the
+	// end of the reporting period.
 	CacheDirtyPercentage float64
 
 	// Percent of application read operations from the file shares that are served from
@@ -67,7 +67,7 @@ type DescribeCacheOutput struct {
 	DiskIds []string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

@@ -225,6 +225,26 @@ func (FileShareType) Values() []FileShareType {
 	}
 }
 
+type GatewayCapacity string
+
+// Enum values for GatewayCapacity
+const (
+	GatewayCapacitySmall  GatewayCapacity = "Small"
+	GatewayCapacityMedium GatewayCapacity = "Medium"
+	GatewayCapacityLarge  GatewayCapacity = "Large"
+)
+
+// Values returns all known values for GatewayCapacity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayCapacity) Values() []GatewayCapacity {
+	return []GatewayCapacity{
+		"Small",
+		"Medium",
+		"Large",
+	}
+}
+
 type HostEnvironment string
 
 // Enum values for HostEnvironment

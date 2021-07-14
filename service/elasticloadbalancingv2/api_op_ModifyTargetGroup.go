@@ -46,17 +46,20 @@ type ModifyTargetGroupInput struct {
 	// [HTTP/HTTPS health checks] The destination for health checks on the targets.
 	// [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC
 	// protocol version] The path of a custom health check method with the format
-	// /package.service/method. The default is /AWS.ALB/healthcheck.
+	// /package.service/method. The default is /Amazon Web Services.ALB/healthcheck.
 	HealthCheckPath *string
 
 	// The port the load balancer uses when performing health checks on targets.
 	HealthCheckPort *string
 
 	// The protocol the load balancer uses when performing health checks on targets.
-	// The TCP protocol is supported for health checks only if the protocol of the
-	// target group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP
-	// protocols are not supported for health checks. With Network Load Balancers, you
-	// can't modify this setting.
+	// For Application Load Balancers, the default is HTTP. For Network Load Balancers
+	// and Gateway Load Balancers, the default is TCP. The TCP protocol is not
+	// supported for health checks if the protocol of the target group is HTTP or
+	// HTTPS. It is supported for health checks only if the protocol of the target
+	// group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP protocols
+	// are not supported for health checks. With Network Load Balancers, you can't
+	// modify this setting.
 	HealthCheckProtocol types.ProtocolEnum
 
 	// [HTTP/HTTPS health checks] The amount of time, in seconds, during which no

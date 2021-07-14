@@ -6,6 +6,67 @@ import (
 	"time"
 )
 
+// Describes an access key for an Amazon Lightsail bucket. Access keys grant full
+// programmatic access to the specified bucket and its objects. You can have a
+// maximum of two access keys per bucket. Use the CreateBucketAccessKey action to
+// create an access key for a specific bucket. For more information about access
+// keys, see Creating access keys for a bucket in Amazon Lightsail
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys)
+// in the Amazon Lightsail Developer Guide. The secretAccessKey value is returned
+// only in response to the CreateBucketAccessKey action. You can get a secret
+// access key only when you first create an access key; you cannot get the secret
+// access key later. If you lose the secret access key, you must create a new
+// access key.
+type AccessKey struct {
+
+	// The ID of the access key.
+	AccessKeyId *string
+
+	// The timestamp when the access key was created.
+	CreatedAt *time.Time
+
+	// The secret access key used to sign requests. You should store the secret access
+	// key in a safe location. We recommend that you delete the access key if the
+	// secret access key is compromised.
+	SecretAccessKey *string
+
+	// The status of the access key. A status of Active means that the key is valid,
+	// while Inactive means it is not.
+	Status StatusType
+}
+
+// Describes the anonymous access permissions for an Amazon Lightsail bucket and
+// its objects. For more information about bucket access permissions, see
+// Understanding bucket permissions in Amazon Lightsail
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-understanding-bucket-permissions)
+// in the Amazon Lightsail Developer Guide.
+type AccessRules struct {
+
+	// A Boolean value that indicates whether the access control list (ACL) permissions
+	// that are applied to individual objects override the getObject option that is
+	// currently specified. When this is true, you can use the PutObjectAcl
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAcl.html) Amazon
+	// S3 API action to set individual objects to public (read-only) using the
+	// public-read ACL, or to private using the private ACL.
+	AllowPublicOverrides *bool
+
+	// Specifies the anonymous access to all objects in a bucket. The following options
+	// can be specified:
+	//
+	// * public - Sets all objects in the bucket to public
+	// (read-only), making them readable by anyone in the world. If the getObject value
+	// is set to public, then all objects in the bucket default to public regardless of
+	// the allowPublicOverrides value.
+	//
+	// * private - Sets all objects in the bucket to
+	// private, making them readable only by you or anyone you give access to. If the
+	// getObject value is set to private, and the allowPublicOverrides value is set to
+	// true, then all objects in the bucket default to private unless they are
+	// configured with a public-read ACL. Individual objects with a public-read ACL are
+	// readable by anyone in the world.
+	GetObject AccessType
+}
+
 // Describes an add-on that is enabled for an Amazon Lightsail resource.
 type AddOn struct {
 
@@ -42,7 +103,7 @@ type AddOnRequest struct {
 	AutoSnapshotAddOnRequest *AutoSnapshotAddOnRequest
 }
 
-// Describes an alarm. An alarm is a way to monitor your Amazon Lightsail resource
+// Describes an alarm. An alarm is a way to monitor your Lightsail resource
 // metrics. For more information, see Alarms in Amazon Lightsail
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms).
 type Alarm struct {
@@ -290,6 +351,118 @@ type Blueprint struct {
 
 	// The version code.
 	VersionCode *string
+}
+
+// Describes an Amazon Lightsail bucket.
+type Bucket struct {
+
+	// Indicates whether the bundle that is currently applied to a bucket can be
+	// changed to another bundle. You can update a bucket's bundle only one time within
+	// a monthly AWS billing cycle. Use the UpdateBucketBundle action to change a
+	// bucket's bundle.
+	AbleToUpdateBundle *bool
+
+	// An object that describes the access rules of the bucket.
+	AccessRules *AccessRules
+
+	// The Amazon Resource Name (ARN) of the bucket.
+	Arn *string
+
+	// The ID of the bundle currently applied to the bucket. A bucket bundle specifies
+	// the monthly cost, storage space, and data transfer quota for a bucket. Use the
+	// UpdateBucketBundle action to change the bundle of a bucket.
+	BundleId *string
+
+	// The timestamp when the distribution was created.
+	CreatedAt *time.Time
+
+	// Describes the resource location.
+	Location *ResourceLocation
+
+	// The name of the bucket.
+	Name *string
+
+	// Indicates whether object versioning is enabled for the bucket. The following
+	// options can be configured:
+	//
+	// * Enabled - Object versioning is enabled.
+	//
+	// *
+	// Suspended - Object versioning was previously enabled but is currently suspended.
+	// Existing object versions are retained.
+	//
+	// * NeverEnabled - Object versioning has
+	// never been enabled.
+	ObjectVersioning *string
+
+	// An array of strings that specify the AWS account IDs that have read-only access
+	// to the bucket.
+	ReadonlyAccessAccounts []string
+
+	// The Lightsail resource type of the bucket (for example, Bucket).
+	ResourceType *string
+
+	// An array of objects that describe Lightsail instances that have access to the
+	// bucket. Use the SetResourceAccessForBucket action to update the instances that
+	// have access to a bucket.
+	ResourcesReceivingAccess []ResourceReceivingAccess
+
+	// An object that describes the state of the bucket.
+	State *BucketState
+
+	// The support code for a bucket. Include this code in your email to support when
+	// you have questions about a Lightsail bucket. This code enables our support team
+	// to look up your Lightsail information more easily.
+	SupportCode *string
+
+	// The tag keys and optional values for the bucket. For more information, see Tags
+	// in Amazon Lightsail
+	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags) in
+	// the Amazon Lightsail Developer Guide.
+	Tags []Tag
+
+	// The URL of the bucket.
+	Url *string
+}
+
+// Describes the specifications of a bundle that can be applied to an Amazon
+// Lightsail bucket. A bucket bundle specifies the monthly cost, storage space, and
+// data transfer quota for a bucket.
+type BucketBundle struct {
+
+	// The ID of the bundle.
+	BundleId *string
+
+	// Indicates whether the bundle is active. Use for a new or existing bucket.
+	IsActive *bool
+
+	// The name of the bundle.
+	Name *string
+
+	// The monthly price of the bundle, in US dollars.
+	Price *float32
+
+	// The storage size of the bundle, in GB.
+	StoragePerMonthInGb *int32
+
+	// The monthly network transfer quota of the bundle.
+	TransferPerMonthInGb *int32
+}
+
+// Describes the state of an Amazon Lightsail bucket.
+type BucketState struct {
+
+	// The state code of the bucket. The following codes are possible:
+	//
+	// * OK - The
+	// bucket is in a running state.
+	//
+	// * Unknown - Creation of the bucket might have
+	// timed-out. You might want to delete the bucket and create a new one.
+	Code *string
+
+	// A message that describes the state of the bucket.
+	Message *string
 }
 
 // Describes a bundle, which is a set of specs describing your virtual private
@@ -588,8 +761,8 @@ type Certificate struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -609,15 +782,15 @@ type CertificateSummary struct {
 	DomainName *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
 // Describes a CloudFormation stack record created as a result of the create cloud
-// formation stack operation. A CloudFormation stack record provides information
-// about the AWS CloudFormation stack used to create a new Amazon Elastic Compute
-// Cloud instance from an exported Lightsail instance snapshot.
+// formation stack action. A CloudFormation stack record provides information about
+// the AWS CloudFormation stack used to create a new Amazon Elastic Compute Cloud
+// instance from an exported Lightsail instance snapshot.
 type CloudFormationStackRecord struct {
 
 	// The Amazon Resource Name (ARN) of the CloudFormation stack record.
@@ -840,8 +1013,8 @@ type ContainerService struct {
 	StateDetail *ContainerServiceStateDetail
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 
 	// The publicly accessible URL of the container service. If no public endpoint is
@@ -929,7 +1102,8 @@ type ContainerServiceHealthCheckConfig struct {
 	Path *string
 
 	// The HTTP codes to use when checking for a successful response from a container.
-	// You can specify values between 200 and 499.
+	// You can specify values between 200 and 499. You can specify multiple values (for
+	// example, 200,202) or a range of values (for example, 200-299).
 	SuccessCodes *string
 
 	// The amount of time, in seconds, during which no response means a failed health
@@ -1073,7 +1247,7 @@ type DestinationInfo struct {
 	Service *string
 }
 
-// Describes a system disk or a block storage disk.
+// Describes a block storage disk.
 type Disk struct {
 
 	// An array of objects representing the add-ons enabled on the disk.
@@ -1136,8 +1310,8 @@ type Disk struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -1220,8 +1394,8 @@ type DiskSnapshot struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -1238,8 +1412,8 @@ type DistributionBundle struct {
 	// The ID of the bundle.
 	BundleId *string
 
-	// Indicates whether the bundle is active, and can be specified for a new
-	// distribution.
+	// Indicates whether the bundle is active, and can be specified for a new or
+	// existing distribution.
 	IsActive *bool
 
 	// The name of the distribution bundle.
@@ -1252,7 +1426,7 @@ type DistributionBundle struct {
 	TransferPerMonthInGb *int32
 }
 
-// Describes a domain where you are storing recordsets in Lightsail.
+// Describes a domain where you are storing recordsets.
 type Domain struct {
 
 	// The Amazon Resource Name (ARN) of the domain recordset (e.g.,
@@ -1280,8 +1454,8 @@ type Domain struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -1582,8 +1756,8 @@ type Instance struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 
 	// The user name for connecting to the instance (e.g., ec2-user).
@@ -2050,8 +2224,8 @@ type InstanceSnapshot struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -2079,7 +2253,7 @@ type InstanceState struct {
 	Name *string
 }
 
-// Describes the SSH key pair.
+// Describes an SSH key pair.
 type KeyPair struct {
 
 	// The Amazon Resource Name (ARN) of the key pair (e.g.,
@@ -2107,8 +2281,8 @@ type KeyPair struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -2185,12 +2359,12 @@ type LightsailDistribution struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
-// Describes the Lightsail load balancer.
+// Describes a load balancer.
 type LoadBalancer struct {
 
 	// The Amazon Resource Name (ARN) of the load balancer.
@@ -2249,8 +2423,8 @@ type LoadBalancer struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 
 	// An array of LoadBalancerTlsCertificateSummary objects that provide additional
@@ -2412,8 +2586,8 @@ type LoadBalancerTlsCertificate struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -2909,8 +3083,8 @@ type RelationalDatabase struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -3088,8 +3262,8 @@ type RelationalDatabaseSnapshot struct {
 	SupportCode *string
 
 	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
 }
 
@@ -3140,6 +3314,16 @@ type ResourceLocation struct {
 	RegionName RegionName
 }
 
+// Describes an Amazon Lightsail instance that has access to a Lightsail bucket.
+type ResourceReceivingAccess struct {
+
+	// The name of the Lightsail instance.
+	Name *string
+
+	// The Lightsail resource type (for example, Instance).
+	ResourceType *string
+}
+
 // Describes the domain name system (DNS) records to add to your domain's DNS to
 // validate it for an Amazon Lightsail certificate.
 type ResourceRecord struct {
@@ -3154,7 +3338,7 @@ type ResourceRecord struct {
 	Value *string
 }
 
-// Describes the static IP.
+// Describes a static IP.
 type StaticIp struct {
 
 	// The Amazon Resource Name (ARN) of the static IP (e.g.,
@@ -3189,8 +3373,9 @@ type StaticIp struct {
 }
 
 // Describes a tag key and optional value assigned to an Amazon Lightsail resource.
-// For more information about tags in Lightsail, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+// For more information about tags in Lightsail, see the Amazon Lightsail Developer
+// Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 type Tag struct {
 
 	// The key of the tag. Constraints: Tag keys accept a maximum of 128 letters,

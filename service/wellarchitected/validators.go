@@ -5,6 +5,7 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -657,6 +658,39 @@ func addOpUpgradeLensReviewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpgradeLensReview{}, middleware.After)
 }
 
+func validateChoiceUpdate(v *types.ChoiceUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChoiceUpdate"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChoiceUpdates(v map[string]types.ChoiceUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChoiceUpdates"}
+	for key := range v {
+		value := v[key]
+		if err := validateChoiceUpdate(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateLensesInput(v *AssociateLensesInput) error {
 	if v == nil {
 		return nil
@@ -1057,6 +1091,11 @@ func validateOpUpdateAnswerInput(v *UpdateAnswerInput) error {
 	}
 	if v.QuestionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuestionId"))
+	}
+	if v.ChoiceUpdates != nil {
+		if err := validateChoiceUpdates(v.ChoiceUpdates); err != nil {
+			invalidParams.AddNested("ChoiceUpdates", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

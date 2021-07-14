@@ -30,8 +30,8 @@ func (c *Client) DeleteInvitations(ctx context.Context, params *DeleteInvitation
 
 type DeleteInvitationsInput struct {
 
-	// An array that lists AWS account IDs, one for each account that sent an
-	// invitation to delete.
+	// An array that lists Amazon Web Services account IDs, one for each account that
+	// sent an invitation to delete.
 	//
 	// This member is required.
 	AccountIds []string

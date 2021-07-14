@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Controls whether the shares on a gateway are visible in a net view or browse
-// list.
+// Controls whether the shares on an S3 File Gateway are visible in a net view or
+// browse list. The operation is only supported for S3 File Gateways.
 func (c *Client) UpdateSMBFileShareVisibility(ctx context.Context, params *UpdateSMBFileShareVisibilityInput, optFns ...func(*Options)) (*UpdateSMBFileShareVisibilityOutput, error) {
 	if params == nil {
 		params = &UpdateSMBFileShareVisibilityInput{}
@@ -35,7 +35,7 @@ type UpdateSMBFileShareVisibilityInput struct {
 	FileSharesVisible *bool
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -44,7 +44,7 @@ type UpdateSMBFileShareVisibilityInput struct {
 type UpdateSMBFileShareVisibilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

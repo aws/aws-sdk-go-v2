@@ -66,7 +66,7 @@ type DescribeKeyPairsInput struct {
 	// specify tag:Owner for the filter name and TeamA for the filter value.
 	Filters []types.Filter
 
-	// The key pair names. Default: Describes all your key pairs.
+	// The key pair names. Default: Describes all of your key pairs.
 	KeyNames []string
 
 	// The IDs of the key pairs.

@@ -3429,6 +3429,11 @@ func awsRestjson1_deserializeOpDocumentUpdateBrokerOutput(v **UpdateBrokerOutput
 				return err
 			}
 
+		case "maintenanceWindowStartTime":
+			if err := awsRestjson1_deserializeDocumentWeeklyStartTime(&sv.MaintenanceWindowStartTime, value); err != nil {
+				return err
+			}
+
 		case "securityGroups":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.SecurityGroups, value); err != nil {
 				return err

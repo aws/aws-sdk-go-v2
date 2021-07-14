@@ -44,8 +44,8 @@ type GetMaintenanceWindowOutput struct {
 	// The date the maintenance window was created.
 	CreatedDate *time.Time
 
-	// The number of hours before the end of the maintenance window that Systems
-	// Manager stops scheduling new tasks for execution.
+	// The number of hours before the end of the maintenance window that Amazon Web
+	// Services Systems Manager stops scheduling new tasks for execution.
 	Cutoff int32
 
 	// The description of the maintenance window.
@@ -58,7 +58,7 @@ type GetMaintenanceWindowOutput struct {
 	Enabled bool
 
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
-	// is scheduled to become inactive. The maintenance window will not run after this
+	// is scheduled to become inactive. The maintenance window won't run after this
 	// specified time.
 	EndDate *string
 
@@ -75,7 +75,7 @@ type GetMaintenanceWindowOutput struct {
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
 
-	// The number of days to wait to run a maintenance window after the scheduled CRON
+	// The number of days to wait to run a maintenance window after the scheduled cron
 	// expression date and time.
 	ScheduleOffset int32
 
@@ -86,7 +86,7 @@ type GetMaintenanceWindowOutput struct {
 	ScheduleTimezone *string
 
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
-	// is scheduled to become active. The maintenance window will not run before this
+	// is scheduled to become active. The maintenance window won't run before this
 	// specified time.
 	StartDate *string
 

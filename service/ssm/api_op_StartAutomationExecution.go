@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiates execution of an Automation document.
+// Initiates execution of an Automation runbook.
 func (c *Client) StartAutomationExecution(ctx context.Context, params *StartAutomationExecutionInput, optFns ...func(*Options)) (*StartAutomationExecutionOutput, error) {
 	if params == nil {
 		params = &StartAutomationExecutionInput{}
@@ -29,12 +29,12 @@ func (c *Client) StartAutomationExecution(ctx context.Context, params *StartAuto
 
 type StartAutomationExecutionInput struct {
 
-	// The name of the Systems Manager document to run. This can be a public document
-	// or a custom document. To run a shared document belonging to another account,
-	// specify the document ARN. For more information about how to use shared
-	// documents, see Using shared SSM documents
+	// The name of the SSM document to run. This can be a public document or a custom
+	// document. To run a shared document belonging to another account, specify the
+	// document ARN. For more information about how to use shared documents, see Using
+	// shared SSM documents
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	//
 	// This member is required.
 	DocumentName *string
@@ -43,7 +43,7 @@ type StartAutomationExecutionInput struct {
 	// enforces the UUID format, and can't be reused.
 	ClientToken *string
 
-	// The version of the Automation document to use for this execution.
+	// The version of the Automation runbook to use for this execution.
 	DocumentVersion *string
 
 	// The maximum number of targets allowed to run this task in parallel. You can
@@ -70,14 +70,14 @@ type StartAutomationExecutionInput struct {
 	Mode types.ExecutionMode
 
 	// A key-value map of execution parameters, which match the declared parameters in
-	// the Automation document.
+	// the Automation runbook.
 	Parameters map[string][]string
 
 	// Optional metadata that you assign to a resource. You can specify a maximum of
 	// five tags for an automation. Tags enable you to categorize a resource in
 	// different ways, such as by purpose, owner, or environment. For example, you
 	// might want to tag an automation to identify an environment or operating system.
-	// In this case, you could specify the following key name/value pairs:
+	// In this case, you could specify the following key-value pairs:
 	//
 	// *
 	// Key=environment,Value=test
@@ -85,19 +85,19 @@ type StartAutomationExecutionInput struct {
 	// * Key=OS,Value=Windows
 	//
 	// To add tags to an existing
-	// patch baseline, use the AddTagsToResource action.
+	// patch baseline, use the AddTagsToResource operation.
 	Tags []types.Tag
 
-	// A location is a combination of AWS Regions and/or AWS accounts where you want to
-	// run the Automation. Use this action to start an Automation in multiple Regions
-	// and multiple accounts. For more information, see Running Automation workflows in
-	// multiple AWS Regions and accounts
+	// A location is a combination of Regions and/or accounts where you want to run the
+	// automation. Use this operation to start an automation in multiple Regions and
+	// multiple accounts. For more information, see Running Automation workflows in
+	// multiple Regions and accounts
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	TargetLocations []types.TargetLocation
 
 	// A key-value mapping of document parameters to target resources. Both Targets and
-	// TargetMaps cannot be specified together.
+	// TargetMaps can't be specified together.
 	TargetMaps []map[string][]string
 
 	// The name of the parameter used as the target resource for the rate-controlled

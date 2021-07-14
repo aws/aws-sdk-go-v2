@@ -47,31 +47,51 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#AdditionalInstanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "systemsManagerAgent": {
+                    "target": "com.amazonaws.imagebuilder#SystemsManagerAgent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains settings for the SSM agent on your build instance.</p>"
+                    }
+                },
+                "userDataOverride": {
+                    "target": "com.amazonaws.imagebuilder#UserDataOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this property to provide commands or a command script to run when you launch \n\t\t\tyour build instance.</p>\n\t\t       <note>\n\t\t\t         <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure\n\t\t\t\tthat SSM is installed on your Linux build instance. If you override the user data,\n\t\t\t\tmake sure that you add commands to install SSM, if it is not pre-installed on your\n\t\t\t\tsource image.</p>\n\t\t       </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>In addition to your infrastruction configuration, these settings provide an extra layer of\n\t\t\tcontrol over your build instances. For instances where Image Builder installs the SSM agent,\n\t\t\tyou can choose whether to keep it for the AMI that you create. You can also specify commands \n\t\t\tto run on launch for all of your build instances.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#Ami": {
             "type": "structure",
             "members": {
                 "region": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region of the EC2 AMI.</p>"
+                        "smithy.api#documentation": "<p>The Region of the Amazon EC2 AMI.</p>"
                     }
                 },
                 "image": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI ID of the EC2 AMI.</p>"
+                        "smithy.api#documentation": "<p>The AMI ID of the Amazon EC2 AMI.</p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the EC2 AMI.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon EC2 AMI.</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the EC2 AMI. Minimum and maximum length are in characters.</p>"
+                        "smithy.api#documentation": "<p>The description of the Amazon EC2 AMI. Minimum and maximum length are in characters.</p>"
                     }
                 },
                 "state": {
@@ -85,7 +105,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Details of an EC2 AMI.</p>"
+                "smithy.api#documentation": "<p> Details of an Amazon EC2 AMI.</p>"
             }
         },
         "com.amazonaws.imagebuilder#AmiDistributionConfiguration": {
@@ -124,7 +144,7 @@
                 "launchPermission": {
                     "target": "com.amazonaws.imagebuilder#LaunchPermissionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p> Launch permissions can be used to configure which AWS accounts can use the AMI to launch\n      instances.</p>"
+                        "smithy.api#documentation": "<p> Launch permissions can be used to configure which accounts can use the AMI to launch\n      instances.</p>"
                     }
                 }
             },
@@ -326,6 +346,12 @@
                         "smithy.api#documentation": "<p>The operating system (OS) version supported by the component. If the OS information is\n      available, a prefix match is performed against the parent image OS version during image recipe\n      creation.</p>"
                     }
                 },
+                "parameters": {
+                    "target": "com.amazonaws.imagebuilder#ComponentParameterDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains parameter details for each of the parameters that are defined for the component.</p>"
+                    }
+                },
                 "owner": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
@@ -382,6 +408,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.imagebuilder#ComponentParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A group of parameter settings that are used to configure the component for a specific recipe.</p>"
+                    }
                 }
             },
             "traits": {
@@ -411,6 +443,124 @@
                         "name": "SHELL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ComponentParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component parameter to set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.imagebuilder#ComponentParameterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the value for the named component parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a key/value pair that sets the named component parameter.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameterDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[^\\x00]+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameterDetail": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ComponentParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this input parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#ComponentParameterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of input this parameter provides. The currently supported value is \"string\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultValue": {
+                    "target": "com.amazonaws.imagebuilder#ComponentParameterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value of this parameter if no input is provided.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#ComponentParameterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes this parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a parameter that is used to provide configuration details for the component.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameterDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#ComponentParameterDetail"
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#ComponentParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00]+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^String|Integer|Boolean|StringList$"
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[^\\x00]+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#ComponentParameterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#ComponentParameterValue"
             }
         },
         "com.amazonaws.imagebuilder#ComponentSummary": {
@@ -944,7 +1094,7 @@
                 "uri": {
                     "target": "com.amazonaws.imagebuilder#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The uri of the component. Must be an S3 URL and the requester must have permission to\n      access the S3 bucket. If you use S3, you can specify component content up to your service\n      quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the\n      component.</p>"
+                        "smithy.api#documentation": "<p>The uri of the component. Must be an Amazon S3 URL and the requester must have permission to\n      access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service\n      quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the\n      component.</p>"
                     }
                 },
                 "kmsKeyId": {
@@ -1096,7 +1246,7 @@
                 "dockerfileTemplateUri": {
                     "target": "com.amazonaws.imagebuilder#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 URI for the Dockerfile that will be used to build your container image.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 URI for the Dockerfile that will be used to build your container image.</p>"
                     }
                 },
                 "platformOverride": {
@@ -1574,7 +1724,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent\n      image or an AMI ID. The format for the ARN follows this example:\n        <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x</code>.\n      You can provide the specific version that you want to use, or you can use a wildcard in all of\n      the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and\n      the AMI must be in the same Region in which you are using Image Builder.</p>",
+                        "smithy.api#documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent \n      image or an AMI ID. The format for the ARN follows this example: \n    \t<code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x</code>. \n    \tYou can provide the specific version that you want to use, or you can use a wildcard in \n    \tall of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, \n    \tand the AMI must be in the same Region in which you are using Image Builder.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1593,7 +1743,13 @@
                 "workingDirectory": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The working directory to be used during build and test workflows.</p>"
+                        "smithy.api#documentation": "<p>The working directory used during build and test workflows.</p>"
+                    }
+                },
+                "additionalInstanceConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#AdditionalInstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify additional settings and launch scripts for your build instances.</p>"
                     }
                 },
                 "clientToken": {
@@ -1782,20 +1938,20 @@
                 "instanceProfileName": {
                     "target": "com.amazonaws.imagebuilder#InstanceProfileNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance profile to associate with the instance used to customize your EC2 AMI.</p>",
+                        "smithy.api#documentation": "<p>The instance profile to associate with the instance used to customize your Amazon EC2 AMI.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "securityGroupIds": {
                     "target": "com.amazonaws.imagebuilder#SecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security group IDs to associate with the instance used to customize your EC2 AMI.</p>"
+                        "smithy.api#documentation": "<p>The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.</p>"
                     }
                 },
                 "subnetId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subnet ID in which to place the instance used to customize your EC2 AMI.</p>"
+                        "smithy.api#documentation": "<p>The subnet ID in which to place the instance used to customize your Amazon EC2 AMI.</p>"
                     }
                 },
                 "logging": {
@@ -3767,7 +3923,7 @@
                 "type": {
                     "target": "com.amazonaws.imagebuilder#ImageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies which type of image is created by the recipe - an AMI or a container image.</p>"
+                        "smithy.api#documentation": "<p>Specifies which type of image is created by the recipe - an AMI or a \n    \tcontainer image.</p>"
                     }
                 },
                 "name": {
@@ -3834,6 +3990,12 @@
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The working directory to be used during build and test workflows.</p>"
+                    }
+                },
+                "additionalInstanceConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#AdditionalInstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Before you create a new AMI, Image Builder launches temporary Amazon EC2 instances to \n    \tbuild and test your image configuration. Instance configuration adds a layer \n    \tof control over those instances. You can define settings and add scripts to \n    \trun when an instance is launched from your AMI.</p>"
                     }
                 }
             },
@@ -4281,7 +4443,7 @@
                 "uri": {
                     "target": "com.amazonaws.imagebuilder#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The uri of the component. Must be an S3 URL and the requester must have permission to\n      access the S3 bucket. If you use S3, you can specify component content up to your service\n      quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the\n      component.</p>"
+                        "smithy.api#documentation": "<p>The uri of the component. Must be an Amazon S3 URL and the requester must have permission to\n      access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service\n      quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the\n      component.</p>"
                     }
                 },
                 "kmsKeyId": {
@@ -4383,7 +4545,7 @@
                 "keyPair": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 key pair of the infrastructure configuration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 key pair of the infrastructure configuration.</p>"
                     }
                 },
                 "terminateInstanceOnFailure": {
@@ -4492,7 +4654,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The infrastructure used when building EC2 AMIs.</p>"
+                "smithy.api#documentation": "<p>The infrastructure used when building Amazon EC2 AMIs.</p>"
             }
         },
         "com.amazonaws.imagebuilder#InfrastructureConfigurationSummaryList": {
@@ -4508,7 +4670,7 @@
                     "min": 1,
                     "max": 16000
                 },
-                "smithy.api#pattern": "[^\\x00]+"
+                "smithy.api#pattern": "^[^\\x00]+$"
             }
         },
         "com.amazonaws.imagebuilder#InlineDockerFileTemplate": {
@@ -4518,7 +4680,7 @@
                     "min": 1,
                     "max": 16000
                 },
-                "smithy.api#pattern": "[^\\x00]+"
+                "smithy.api#pattern": "^[^\\x00]+$"
             }
         },
         "com.amazonaws.imagebuilder#InstanceBlockDeviceMapping": {
@@ -4682,7 +4844,7 @@
                 "userIds": {
                     "target": "com.amazonaws.imagebuilder#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The account ID.</p>"
                     }
                 },
                 "userGroups": {
@@ -4693,7 +4855,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration for a launch permission. The launch permission modification request is sent to the \n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">EC2 ModifyImageAttribute</a> \n      API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, \n      set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at \n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">EC2 ModifyImageAttribute</a>.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration for a launch permission. The launch permission modification request is sent to the \n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">Amazon EC2 ModifyImageAttribute</a> \n      API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, \n      set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at \n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">Amazon EC2 ModifyImageAttribute</a>.</p>"
             }
         },
         "com.amazonaws.imagebuilder#LaunchTemplateConfiguration": {
@@ -4702,7 +4864,7 @@
                 "launchTemplateId": {
                     "target": "com.amazonaws.imagebuilder#LaunchTemplateId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the EC2 launch template to use.</p>",
+                        "smithy.api#documentation": "<p>Identifies the Amazon EC2 launch template to use.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4715,12 +4877,12 @@
                 "setDefaultVersion": {
                     "target": "com.amazonaws.imagebuilder#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set the specified EC2 launch template as the default launch template for the specified account.</p>"
+                        "smithy.api#documentation": "<p>Set the specified Amazon EC2 launch template as the default launch template for the specified account.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies an EC2 launch template to use for a specific account.</p>"
+                "smithy.api#documentation": "<p>Identifies an Amazon EC2 launch template to use for a specific account.</p>"
             }
         },
         "com.amazonaws.imagebuilder#LaunchTemplateConfigurationList": {
@@ -5280,7 +5442,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.</p>",
+                "smithy.api#documentation": "<p>List the Packages that are associated with an Image Build Version, as determined by Amazon EC2 Systems Manager Inventory at build time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListImagePackages",
@@ -5942,7 +6104,7 @@
                 "amis": {
                     "target": "com.amazonaws.imagebuilder#AmiList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 AMIs created by this image.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 AMIs created by this image.</p>"
                     }
                 },
                 "containers": {
@@ -6634,6 +6796,20 @@
                 "target": "com.amazonaws.imagebuilder#NonEmptyString"
             }
         },
+        "com.amazonaws.imagebuilder#SystemsManagerAgent": {
+            "type": "structure",
+            "members": {
+                "uninstallAfterBuild": {
+                    "target": "com.amazonaws.imagebuilder#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This property defaults to true. If Image Builder installs the SSM agent on a build \n\t\t\tinstance, it removes the agent before creating a snapshot for the AMI. To ensure that the AMI you create includes the SSM agent, set this property to false.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains settings for the SSM agent on your build instance.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#TagKey": {
             "type": "string",
             "traits": {
@@ -6761,7 +6937,7 @@
                     "min": 3,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9]{2,}(?:\\/[a-zA-z0-9-_+]+)*"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{2,}(?:\\/[a-zA-z0-9-_+]+)*$"
             }
         },
         "com.amazonaws.imagebuilder#UntagResource": {
@@ -7128,20 +7304,20 @@
                 "instanceProfileName": {
                     "target": "com.amazonaws.imagebuilder#InstanceProfileNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance profile to associate with the instance used to customize your EC2 AMI.</p>",
+                        "smithy.api#documentation": "<p>The instance profile to associate with the instance used to customize your Amazon EC2 AMI.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "securityGroupIds": {
                     "target": "com.amazonaws.imagebuilder#SecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security group IDs to associate with the instance used to customize your EC2 AMI.</p>"
+                        "smithy.api#documentation": "<p>The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.</p>"
                     }
                 },
                 "subnetId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subnet ID to place the instance used to customize your EC2 AMI in.</p>"
+                        "smithy.api#documentation": "<p>The subnet ID to place the instance used to customize your Amazon EC2 AMI in.</p>"
                     }
                 },
                 "logging": {
@@ -7209,6 +7385,16 @@
         },
         "com.amazonaws.imagebuilder#Uri": {
             "type": "string"
+        },
+        "com.amazonaws.imagebuilder#UserDataOverride": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 21847
+                },
+                "smithy.api#pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+            }
         },
         "com.amazonaws.imagebuilder#VersionNumber": {
             "type": "string",
@@ -7380,7 +7566,7 @@
                     "name": "imagebuilder"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>EC2 Image Builder is a fully managed AWS service that makes it easier to automate the \n      creation, management, and deployment of customized, secure, and up-to-date \"golden\" server \n      images that are pre-installed and pre-configured with software and settings to meet specific\n      IT standards.</p>",
+                "smithy.api#documentation": "<p>EC2 Image Builder is a fully managed Amazon Web Services service that makes it easier to automate the \n      creation, management, and deployment of customized, secure, and up-to-date \"golden\" server \n      images that are pre-installed and pre-configured with software and settings to meet specific\n      IT standards.</p>",
                 "smithy.api#title": "EC2 Image Builder"
             }
         }

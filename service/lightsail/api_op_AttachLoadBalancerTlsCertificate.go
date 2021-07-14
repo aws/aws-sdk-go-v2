@@ -19,8 +19,8 @@ import (
 // it will replace the existing one and become the attached certificate. The
 // AttachLoadBalancerTlsCertificate operation supports tag-based access control via
 // resource tags applied to the resource identified by load balancer name. For more
-// information, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// information, see the Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) AttachLoadBalancerTlsCertificate(ctx context.Context, params *AttachLoadBalancerTlsCertificateInput, optFns ...func(*Options)) (*AttachLoadBalancerTlsCertificateOutput, error) {
 	if params == nil {
 		params = &AttachLoadBalancerTlsCertificateInput{}

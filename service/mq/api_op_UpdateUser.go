@@ -34,9 +34,9 @@ type UpdateUserInput struct {
 	// This member is required.
 	BrokerId *string
 
-	// Required. The username of the ActiveMQ user. This value can contain only
-	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
-	// This value must be 2-100 characters long.
+	// The username of the ActiveMQ user. This value can contain only alphanumeric
+	// characters, dashes, periods, underscores, and tildes (- . _ ~). This value must
+	// be 2-100 characters long.
 	//
 	// This member is required.
 	Username *string
@@ -50,7 +50,8 @@ type UpdateUserInput struct {
 	Groups []string
 
 	// The password of the user. This value must be at least 12 characters long, must
-	// contain at least 4 unique characters, and must not contain commas.
+	// contain at least 4 unique characters, and must not contain commas, colons, or
+	// equal signs (,:=).
 	Password *string
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Outpost.
+// Creates an Outpost. You can specify AvailabilityZone or AvailabilityZoneId.
 func (c *Client) CreateOutpost(ctx context.Context, params *CreateOutpostInput, optFns ...func(*Options)) (*CreateOutpostOutput, error) {
 	if params == nil {
 		params = &CreateOutpostInput{}
@@ -39,11 +39,10 @@ type CreateOutpostInput struct {
 	// This member is required.
 	SiteId *string
 
-	// The Availability Zone. You must specify AvailabilityZone or AvailabilityZoneId.
+	// The Availability Zone.
 	AvailabilityZone *string
 
-	// The ID of the Availability Zone. You must specify AvailabilityZone or
-	// AvailabilityZoneId.
+	// The ID of the Availability Zone.
 	AvailabilityZoneId *string
 
 	// The description of the Outpost.

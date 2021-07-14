@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a version of an AWS Lambda layer
+// Returns information about a version of an Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a
 // link to download the layer archive that's valid for 10 minutes.
 func (c *Client) GetLayerVersion(ctx context.Context, params *GetLayerVersionInput, optFns ...func(*Options)) (*GetLayerVersionOutput, error) {

@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the number of days to retain snapshots in the destination AWS Region
-// after they are copied from the source AWS Region. By default, this operation
-// only changes the retention period of copied automated snapshots. The retention
-// periods for both new and existing copied automated snapshots are updated with
-// the new retention period. You can set the manual option to change only the
-// retention periods of copied manual snapshots. If you set this option, only newly
-// copied manual snapshots have the new retention period.
+// Modifies the number of days to retain snapshots in the destination Region after
+// they are copied from the source Region. By default, this operation only changes
+// the retention period of copied automated snapshots. The retention periods for
+// both new and existing copied automated snapshots are updated with the new
+// retention period. You can set the manual option to change only the retention
+// periods of copied manual snapshots. If you set this option, only newly copied
+// manual snapshots have the new retention period.
 func (c *Client) ModifySnapshotCopyRetentionPeriod(ctx context.Context, params *ModifySnapshotCopyRetentionPeriodInput, optFns ...func(*Options)) (*ModifySnapshotCopyRetentionPeriodOutput, error) {
 	if params == nil {
 		params = &ModifySnapshotCopyRetentionPeriodInput{}
@@ -38,23 +38,23 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 
 	// The unique identifier of the cluster for which you want to change the retention
 	// period for either automated or manual snapshots that are copied to a destination
-	// AWS Region. Constraints: Must be the valid name of an existing cluster that has
+	// Region. Constraints: Must be the valid name of an existing cluster that has
 	// cross-region snapshot copy enabled.
 	//
 	// This member is required.
 	ClusterIdentifier *string
 
-	// The number of days to retain automated snapshots in the destination AWS Region
-	// after they are copied from the source AWS Region. By default, this only changes
-	// the retention period of copied automated snapshots. If you decrease the
-	// retention period for automated snapshots that are copied to a destination AWS
-	// Region, Amazon Redshift deletes any existing automated snapshots that were
-	// copied to the destination AWS Region and that fall outside of the new retention
-	// period. Constraints: Must be at least 1 and no more than 35 for automated
-	// snapshots. If you specify the manual option, only newly copied manual snapshots
-	// will have the new retention period. If you specify the value of -1 newly copied
-	// manual snapshots are retained indefinitely. Constraints: The number of days must
-	// be either -1 or an integer between 1 and 3,653 for manual snapshots.
+	// The number of days to retain automated snapshots in the destination Region after
+	// they are copied from the source Region. By default, this only changes the
+	// retention period of copied automated snapshots. If you decrease the retention
+	// period for automated snapshots that are copied to a destination Region, Amazon
+	// Redshift deletes any existing automated snapshots that were copied to the
+	// destination Region and that fall outside of the new retention period.
+	// Constraints: Must be at least 1 and no more than 35 for automated snapshots. If
+	// you specify the manual option, only newly copied manual snapshots will have the
+	// new retention period. If you specify the value of -1 newly copied manual
+	// snapshots are retained indefinitely. Constraints: The number of days must be
+	// either -1 or an integer between 1 and 3,653 for manual snapshots.
 	//
 	// This member is required.
 	RetentionPeriod int32

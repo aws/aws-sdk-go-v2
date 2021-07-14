@@ -59,6 +59,7 @@ type UpdateNodegroupConfigInput struct {
 	// update.
 	Taints *types.UpdateTaintsPayload
 
+	// The node group update configuration.
 	UpdateConfig *types.NodegroupUpdateConfig
 }
 

@@ -53,7 +53,7 @@ type DeleteInventoryInput struct {
 	// associated with the custom inventory type. Choose one of the following options:
 	// DisableSchema: If you choose this option, the system ignores all inventory data
 	// for the specified version, and any earlier versions. To enable this schema
-	// again, you must call the PutInventory action for a version greater than the
+	// again, you must call the PutInventory operation for a version greater than the
 	// disabled version. DeleteSchema: This option deletes the specified custom type
 	// from the Inventory service. You can recreate the schema later, if you want.
 	SchemaDeleteOption types.InventorySchemaDeleteOption
@@ -61,16 +61,16 @@ type DeleteInventoryInput struct {
 
 type DeleteInventoryOutput struct {
 
-	// Every DeleteInventory action is assigned a unique ID. This option returns a
+	// Every DeleteInventory operation is assigned a unique ID. This option returns a
 	// unique ID. You can use this ID to query the status of a delete operation. This
 	// option is useful for ensuring that a delete operation has completed before you
-	// begin other actions.
+	// begin other operations.
 	DeletionId *string
 
 	// A summary of the delete operation. For more information about this summary, see
 	// Deleting custom inventory
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	DeletionSummary *types.InventoryDeletionSummary
 
 	// The name of the inventory data type specified in the request.

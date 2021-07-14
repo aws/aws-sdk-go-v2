@@ -12,9 +12,10 @@ import (
 
 // Deletes the access key pair associated with the specified IAM user. If you do
 // not specify a user name, IAM determines the user name implicitly based on the
-// AWS access key ID signing the request. This operation works for access keys
-// under the AWS account. Consequently, you can use this operation to manage AWS
-// account root user credentials even if the AWS account has no associated users.
+// Amazon Web Services access key ID signing the request. This operation works for
+// access keys under the account. Consequently, you can use this operation to
+// manage account root user credentials even if the account has no associated
+// users.
 func (c *Client) DeleteAccessKey(ctx context.Context, params *DeleteAccessKeyInput, optFns ...func(*Options)) (*DeleteAccessKeyOutput, error) {
 	if params == nil {
 		params = &DeleteAccessKeyInput{}

@@ -14,9 +14,9 @@ import (
 // Changes the status of the specified access key from Active to Inactive, or vice
 // versa. This operation can be used to disable a user's key as part of a key
 // rotation workflow. If the UserName is not specified, the user name is determined
-// implicitly based on the AWS access key ID used to sign the request. This
-// operation works for access keys under the AWS account. Consequently, you can use
-// this operation to manage AWS account root user credentials even if the AWS
+// implicitly based on the Amazon Web Services access key ID used to sign the
+// request. This operation works for access keys under the account. Consequently,
+// you can use this operation to manage account root user credentials even if the
 // account has no associated users. For information about rotating keys, see
 // Managing keys and certificates
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html) in
@@ -46,8 +46,8 @@ type UpdateAccessKeyInput struct {
 	AccessKeyId *string
 
 	// The status you want to assign to the secret access key. Active means that the
-	// key can be used for programmatic calls to AWS, while Inactive means that the key
-	// cannot be used.
+	// key can be used for programmatic calls to Amazon Web Services, while Inactive
+	// means that the key cannot be used.
 	//
 	// This member is required.
 	Status types.StatusType

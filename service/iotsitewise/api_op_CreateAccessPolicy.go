@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an access policy that grants the specified identity (AWS SSO user, AWS
-// SSO group, or IAM user) access to the specified AWS IoT SiteWise Monitor portal
-// or project resource.
+// Creates an access policy that grants the specified identity (Amazon Web Services
+// SSO user, Amazon Web Services SSO group, or IAM user) access to the specified
+// IoT SiteWise Monitor portal or project resource.
 func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPolicyInput, optFns ...func(*Options)) (*CreateAccessPolicyOutput, error) {
 	if params == nil {
 		params = &CreateAccessPolicyInput{}
@@ -32,8 +32,8 @@ func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPol
 
 type CreateAccessPolicyInput struct {
 
-	// The identity for this access policy. Choose an AWS SSO user, an AWS SSO group,
-	// or an IAM user.
+	// The identity for this access policy. Choose an Amazon Web Services SSO user, an
+	// Amazon Web Services SSO group, or an IAM user.
 	//
 	// This member is required.
 	AccessPolicyIdentity *types.Identity
@@ -44,8 +44,8 @@ type CreateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyPermission types.Permission
 
-	// The AWS IoT SiteWise Monitor resource for this access policy. Choose either a
-	// portal or a project.
+	// The IoT SiteWise Monitor resource for this access policy. Choose either a portal
+	// or a project.
 	//
 	// This member is required.
 	AccessPolicyResource *types.Resource
@@ -56,9 +56,9 @@ type CreateAccessPolicyInput struct {
 	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the access policy. For more
-	// information, see Tagging your AWS IoT SiteWise resources
+	// information, see Tagging your IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 }
 

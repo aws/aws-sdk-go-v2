@@ -4781,7 +4781,7 @@ type IpPermission struct {
 	// types, you must specify all codes.
 	ToPort *int32
 
-	// The security group and AWS account ID pairs.
+	// The security group and Amazon Web Services account ID pairs.
 	UserIdGroupPairs []UserIdGroupPair
 }
 
@@ -4848,9 +4848,9 @@ type Ipv6Range struct {
 type KeyPairInfo struct {
 
 	// If you used CreateKeyPair to create the key pair, this is the SHA-1 digest of
-	// the DER encoded private key. If you used ImportKeyPair to provide AWS the public
-	// key, this is the MD5 public key fingerprint as specified in section 4 of
-	// RFC4716.
+	// the DER encoded private key. If you used ImportKeyPair to provide Amazon Web
+	// Services the public key, this is the MD5 public key fingerprint as specified in
+	// section 4 of RFC4716.
 	KeyFingerprint *string
 
 	// The name of the key pair.
@@ -7346,6 +7346,25 @@ type RecurringCharge struct {
 	Frequency RecurringChargeFrequency
 }
 
+// Describes the security group that is referenced in the security group rule.
+type ReferencedSecurityGroup struct {
+
+	// The ID of the security group.
+	GroupId *string
+
+	// The status of a VPC peering connection, if applicable.
+	PeeringStatus *string
+
+	// The account ID.
+	UserId *string
+
+	// The ID of the VPC.
+	VpcId *string
+
+	// The ID of the VPC peering connection.
+	VpcPeeringConnectionId *string
+}
+
 // Describes a Region.
 type Region struct {
 
@@ -8541,7 +8560,7 @@ type ScheduledInstancesPrivateIpAddressConfig struct {
 	PrivateIpAddress *string
 }
 
-// Describes a security group
+// Describes a security group.
 type SecurityGroup struct {
 
 	// A description of the security group.
@@ -8559,7 +8578,7 @@ type SecurityGroup struct {
 	// [VPC only] The outbound rules associated with the security group.
 	IpPermissionsEgress []IpPermission
 
-	// The AWS account ID of the owner of the security group.
+	// The Amazon Web Services account ID of the owner of the security group.
 	OwnerId *string
 
 	// Any tags assigned to the security group.
@@ -8590,6 +8609,127 @@ type SecurityGroupReference struct {
 
 	// The ID of the VPC peering connection.
 	VpcPeeringConnectionId *string
+}
+
+// Describes a security group rule.
+type SecurityGroupRule struct {
+
+	// The IPv4 CIDR range.
+	CidrIpv4 *string
+
+	// The IPv6 CIDR range.
+	CidrIpv6 *string
+
+	// The security group rule description.
+	Description *string
+
+	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A
+	// value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
+	FromPort *int32
+
+	// The ID of the security group.
+	GroupId *string
+
+	// The ID of the account that owns the security group.
+	GroupOwnerId *string
+
+	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
+	// (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). Use
+	// -1 to specify all protocols.
+	IpProtocol *string
+
+	// Indicates whether the security group rule is an outbound rule.
+	IsEgress *bool
+
+	// The ID of the prefix list.
+	PrefixListId *string
+
+	// Describes the security group that is referenced in the rule.
+	ReferencedGroupInfo *ReferencedSecurityGroup
+
+	// The ID of the security group rule.
+	SecurityGroupRuleId *string
+
+	// The tags applied to the security group rule.
+	Tags []Tag
+
+	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
+	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
+	ToPort *int32
+}
+
+// Describes the description of a security group rule. You can use this when you
+// want to update the security group rule description for either an inbound or
+// outbound rule.
+type SecurityGroupRuleDescription struct {
+
+	// The description of the security group rule.
+	Description *string
+
+	// The ID of the security group rule.
+	SecurityGroupRuleId *string
+}
+
+// Describes a security group rule. You must specify exactly one of the following
+// parameters, based on the rule type:
+//
+// * CidrIpv4
+//
+// * CidrIpv6
+//
+// * PrefixListId
+//
+// *
+// ReferencedGroupId
+//
+// When you modify a rule, you cannot change the rule type. For
+// example, if the rule uses an IPv4 address range, you must use CidrIpv4 to
+// specify a new IPv4 address range.
+type SecurityGroupRuleRequest struct {
+
+	// The IPv4 CIDR range. To specify a single IPv4 address, use the /32 prefix
+	// length.
+	CidrIpv4 *string
+
+	// The IPv6 CIDR range. To specify a single IPv6 address, use the /128 prefix
+	// length.
+	CidrIpv6 *string
+
+	// The description of the security group rule.
+	Description *string
+
+	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A
+	// value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
+	FromPort *int32
+
+	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
+	// (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). Use
+	// -1 to specify all protocols.
+	IpProtocol *string
+
+	// The ID of the prefix list.
+	PrefixListId *string
+
+	// The ID of the security group that is referenced in the security group rule.
+	ReferencedGroupId *string
+
+	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A
+	// value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
+	ToPort *int32
+}
+
+// Describes an update to a security group rule.
+type SecurityGroupRuleUpdate struct {
+
+	// Information about the security group rule.
+	SecurityGroupRule *SecurityGroupRuleRequest
+
+	// The ID of the security group rule.
+	SecurityGroupRuleId *string
 }
 
 // Describes a service configuration for a VPC endpoint service.
@@ -11017,7 +11157,7 @@ type UserData struct {
 	Data *string
 }
 
-// Describes a security group and AWS account ID pair.
+// Describes a security group and Amazon Web Services account ID pair.
 type UserIdGroupPair struct {
 
 	// A description for the security group rule that references this user ID group
@@ -11037,11 +11177,11 @@ type UserIdGroupPair struct {
 	// The status of a VPC peering connection, if applicable.
 	PeeringStatus *string
 
-	// The ID of an AWS account. For a referenced security group in another VPC, the
-	// account ID of the referenced security group is returned in the response. If the
-	// referenced security group is deleted, this value is not returned. [EC2-Classic]
-	// Required when adding or removing rules that reference a security group in
-	// another AWS account.
+	// The ID of an Amazon Web Services account. For a referenced security group in
+	// another VPC, the account ID of the referenced security group is returned in the
+	// response. If the referenced security group is deleted, this value is not
+	// returned. [EC2-Classic] Required when adding or removing rules that reference a
+	// security group in another Amazon Web Services account.
 	UserId *string
 
 	// The ID of the VPC for the referenced security group, if applicable.

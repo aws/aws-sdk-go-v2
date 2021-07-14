@@ -1281,8 +1281,8 @@ type DynamoDBTarget struct {
 	ScanRate *float64
 }
 
-// An edge represents a directed connection between two Glue components that are
-// part of the workflow the edge belongs to.
+// An edge represents a directed connection between two components on a workflow
+// graph.
 type Edge struct {
 
 	// The unique of the node within the workflow where the edge ends.
@@ -1348,6 +1348,21 @@ type EvaluationMetrics struct {
 
 	// The evaluation metrics for the find matches algorithm.
 	FindMatchesMetrics *FindMatchesMetrics
+}
+
+// Batch condition that must be met (specified number of events received or batch
+// time window expired) before EventBridge event trigger fires.
+type EventBatchingCondition struct {
+
+	// Number of events that must be received from Amazon EventBridge before
+	// EventBridge event trigger fires.
+	//
+	// This member is required.
+	BatchSize int32
+
+	// Window of time in seconds after which EventBridge event trigger fires. Window
+	// starts when first event is received.
+	BatchWindow *int32
 }
 
 // An execution property of a job.
@@ -2333,8 +2348,8 @@ type MongoDBTarget struct {
 	ScanAll *bool
 }
 
-// A node represents an Glue component such as a trigger, or job, etc., that is
-// part of a workflow.
+// A node represents an Glue component (trigger, crawler, or job) on a workflow
+// graph.
 type Node struct {
 
 	// Details of the crawler when the node represents a crawler.
@@ -2863,6 +2878,18 @@ type SortCriterion struct {
 	Sort Sort
 }
 
+// The batch condition that started the workflow run. Either the number of events
+// in the batch size arrived, in which case the BatchSize member is non-zero, or
+// the batch window expired, in which case the BatchWindow member is non-zero.
+type StartingEventBatchCondition struct {
+
+	// Number of events in the batch.
+	BatchSize *int32
+
+	// Duration of the batch window in seconds.
+	BatchWindow *int32
+}
+
 // Describes the physical storage of table data.
 type StorageDescriptor struct {
 
@@ -3287,6 +3314,10 @@ type Trigger struct {
 	// A description of this trigger.
 	Description *string
 
+	// Batch condition that must be met (specified number of events received or batch
+	// time window expired) before EventBridge event trigger fires.
+	EventBatchingCondition *EventBatchingCondition
+
 	// Reserved for future use.
 	Id *string
 
@@ -3329,6 +3360,10 @@ type TriggerUpdate struct {
 
 	// A description of this trigger.
 	Description *string
+
+	// Batch condition that must be met (specified number of events received or batch
+	// time window expired) before EventBridge event trigger fires.
+	EventBatchingCondition *EventBatchingCondition
 
 	// Reserved for future use.
 	Name *string
@@ -3472,14 +3507,17 @@ type UserDefinedFunctionInput struct {
 	ResourceUris []ResourceUri
 }
 
-// A workflow represents a flow in which Glue components should be run to complete
-// a logical task.
+// A workflow is a collection of multiple dependent Glue jobs and crawlers that are
+// run to complete a complex ETL task. A workflow manages the execution and
+// monitoring of all its jobs and crawlers.
 type Workflow struct {
 
 	// The date and time when the workflow was created.
 	CreatedOn *time.Time
 
 	// A collection of properties to be used as part of each execution of the workflow.
+	// The run properties are made available to each job in the workflow. A job can
+	// modify the properties for the next jobs in the flow.
 	DefaultRunProperties map[string]string
 
 	// A description of the workflow.
@@ -3501,7 +3539,7 @@ type Workflow struct {
 	// there is no limit to the number of concurrent workflow runs.
 	MaxConcurrentRuns *int32
 
-	// The name of the workflow representing the flow.
+	// The name of the workflow.
 	Name *string
 }
 
@@ -3542,6 +3580,9 @@ type WorkflowRun struct {
 
 	// The date and time when the workflow run was started.
 	StartedOn *time.Time
+
+	// The batch condition that started the workflow run.
+	StartingEventBatchCondition *StartingEventBatchCondition
 
 	// The statistics of the run.
 	Statistics *WorkflowRunStatistics

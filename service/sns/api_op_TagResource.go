@@ -28,8 +28,8 @@ import (
 // existing tag overwrites the existing tag.
 //
 // * Tagging actions are limited to 10
-// TPS per AWS account, per AWS region. If your application requires a higher
-// throughput, file a technical support request
+// TPS per account, per Region. If your application requires a higher throughput,
+// file a technical support request
 // (https://console.aws.amazon.com/support/home#/case/create?issueType=technical).
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

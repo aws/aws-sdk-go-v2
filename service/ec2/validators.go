@@ -4670,6 +4670,26 @@ func (m *validateOpModifyReservedInstances) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifySecurityGroupRules struct {
+}
+
+func (*validateOpModifySecurityGroupRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifySecurityGroupRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifySecurityGroupRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifySecurityGroupRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifySnapshotAttribute struct {
 }
 
@@ -6030,46 +6050,6 @@ func (m *validateOpUnmonitorInstances) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateSecurityGroupRuleDescriptionsEgress struct {
-}
-
-func (*validateOpUpdateSecurityGroupRuleDescriptionsEgress) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUpdateSecurityGroupRuleDescriptionsEgress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UpdateSecurityGroupRuleDescriptionsEgressInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUpdateSecurityGroupRuleDescriptionsEgressInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpUpdateSecurityGroupRuleDescriptionsIngress struct {
-}
-
-func (*validateOpUpdateSecurityGroupRuleDescriptionsIngress) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUpdateSecurityGroupRuleDescriptionsIngress) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UpdateSecurityGroupRuleDescriptionsIngressInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUpdateSecurityGroupRuleDescriptionsIngressInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpWithdrawByoipCidr struct {
 }
 
@@ -7022,6 +7002,10 @@ func addOpModifyReservedInstancesValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpModifyReservedInstances{}, middleware.After)
 }
 
+func addOpModifySecurityGroupRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifySecurityGroupRules{}, middleware.After)
+}
+
 func addOpModifySnapshotAttributeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifySnapshotAttribute{}, middleware.After)
 }
@@ -7292,14 +7276,6 @@ func addOpUnassignPrivateIpAddressesValidationMiddleware(stack *middleware.Stack
 
 func addOpUnmonitorInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUnmonitorInstances{}, middleware.After)
-}
-
-func addOpUpdateSecurityGroupRuleDescriptionsEgressValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateSecurityGroupRuleDescriptionsEgress{}, middleware.After)
-}
-
-func addOpUpdateSecurityGroupRuleDescriptionsIngressValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateSecurityGroupRuleDescriptionsIngress{}, middleware.After)
 }
 
 func addOpWithdrawByoipCidrValidationMiddleware(stack *middleware.Stack) error {
@@ -11827,6 +11803,24 @@ func validateOpModifyReservedInstancesInput(v *ModifyReservedInstancesInput) err
 	}
 }
 
+func validateOpModifySecurityGroupRulesInput(v *ModifySecurityGroupRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifySecurityGroupRulesInput"}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.SecurityGroupRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupRules"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpModifySnapshotAttributeInput(v *ModifySnapshotAttributeInput) error {
 	if v == nil {
 		return nil
@@ -12974,36 +12968,6 @@ func validateOpUnmonitorInstancesInput(v *UnmonitorInstancesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UnmonitorInstancesInput"}
 	if v.InstanceIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceIds"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUpdateSecurityGroupRuleDescriptionsEgressInput(v *UpdateSecurityGroupRuleDescriptionsEgressInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityGroupRuleDescriptionsEgressInput"}
-	if v.IpPermissions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IpPermissions"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUpdateSecurityGroupRuleDescriptionsIngressInput(v *UpdateSecurityGroupRuleDescriptionsIngressInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityGroupRuleDescriptionsIngressInput"}
-	if v.IpPermissions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IpPermissions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

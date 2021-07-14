@@ -44,6 +44,13 @@ type CreateFHIRDatastoreInput struct {
 	// Optional parameter to preload data upon creation of the Data Store. Currently,
 	// the only supported preloaded data is synthetic data generated from Synthea.
 	PreloadDataConfig *types.PreloadDataConfig
+
+	// The server-side encryption key configuration for a customer provided encryption
+	// key specified for creating a Data Store.
+	SseConfiguration *types.SseConfiguration
+
+	// Resource tags that are applied to a Data Store when it is created.
+	Tags []types.Tag
 }
 
 type CreateFHIRDatastoreOutput struct {

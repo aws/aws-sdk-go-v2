@@ -20,8 +20,8 @@ import (
 // using the reboot relational database operation. The update relational database
 // parameters operation supports tag-based access control via resource tags applied
 // to the resource identified by relationalDatabaseName. For more information, see
-// the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// the Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) UpdateRelationalDatabaseParameters(ctx context.Context, params *UpdateRelationalDatabaseParametersInput, optFns ...func(*Options)) (*UpdateRelationalDatabaseParametersOutput, error) {
 	if params == nil {
 		params = &UpdateRelationalDatabaseParametersInput{}

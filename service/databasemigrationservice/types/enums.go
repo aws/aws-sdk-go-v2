@@ -320,6 +320,26 @@ func (ParquetVersionValue) Values() []ParquetVersionValue {
 	}
 }
 
+type PluginNameValue string
+
+// Enum values for PluginNameValue
+const (
+	PluginNameValueNoPreference PluginNameValue = "no-preference"
+	PluginNameValueTestDecoding PluginNameValue = "test-decoding"
+	PluginNameValuePglogical    PluginNameValue = "pglogical"
+)
+
+// Values returns all known values for PluginNameValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PluginNameValue) Values() []PluginNameValue {
+	return []PluginNameValue{
+		"no-preference",
+		"test-decoding",
+		"pglogical",
+	}
+}
+
 type RefreshSchemasStatusTypeValue string
 
 // Enum values for RefreshSchemasStatusTypeValue

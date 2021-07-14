@@ -96,9 +96,10 @@ type CreateContainerServiceInput struct {
 	// names using a string to array map as shown in the example later on this page.
 	PublicDomainNames map[string][]string
 
-	// The tag keys and optional values for the container service. For more information
-	// about tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	// The tag keys and optional values to add to the certificate during create. Use
+	// the TagResource action to tag a resource after it's created. For more
+	// information about tags in Lightsail, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []types.Tag
 }
 

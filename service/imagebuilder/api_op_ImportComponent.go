@@ -81,10 +81,10 @@ type ImportComponentInput struct {
 	// The tags of the component.
 	Tags map[string]string
 
-	// The uri of the component. Must be an S3 URL and the requester must have
-	// permission to access the S3 bucket. If you use S3, you can specify component
-	// content up to your service quota. Either data or uri can be used to specify the
-	// data within the component.
+	// The uri of the component. Must be an Amazon S3 URL and the requester must have
+	// permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify
+	// component content up to your service quota. Either data or uri can be used to
+	// specify the data within the component.
 	Uri *string
 }
 

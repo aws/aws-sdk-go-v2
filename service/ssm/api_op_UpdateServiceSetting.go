@@ -10,18 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// ServiceSetting is an account-level setting for an AWS service. This setting
-// defines how a user interacts with or uses a service or a feature of a service.
-// For example, if an AWS service charges money to the account based on feature or
-// service usage, then the AWS service team might create a default setting of
-// "false". This means the user can't use this feature unless they change the
-// setting to "true" and intentionally opt in for a paid feature. Services map a
-// SettingId object to a setting value. AWS services teams define the default value
-// for a SettingId. You can't create a new SettingId, but you can overwrite the
-// default value if you have the ssm:UpdateServiceSetting permission for the
-// setting. Use the GetServiceSetting API action to view the current value. Or, use
-// the ResetServiceSetting to change the value back to the original value defined
-// by the AWS service team. Update the service setting for the account.
+// ServiceSetting is an account-level setting for an Amazon Web Services service.
+// This setting defines how a user interacts with or uses a service or a feature of
+// a service. For example, if an Amazon Web Services service charges money to the
+// account based on feature or service usage, then the Amazon Web Services service
+// team might create a default setting of "false". This means the user can't use
+// this feature unless they change the setting to "true" and intentionally opt in
+// for a paid feature. Services map a SettingId object to a setting value. Amazon
+// Web Services services teams define the default value for a SettingId. You can't
+// create a new SettingId, but you can overwrite the default value if you have the
+// ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting
+// API operation to view the current value. Or, use the ResetServiceSetting to
+// change the value back to the original value defined by the Amazon Web Services
+// service team. Update the service setting for the account.
 func (c *Client) UpdateServiceSetting(ctx context.Context, params *UpdateServiceSettingInput, optFns ...func(*Options)) (*UpdateServiceSettingOutput, error) {
 	if params == nil {
 		params = &UpdateServiceSettingInput{}
@@ -37,7 +38,7 @@ func (c *Client) UpdateServiceSetting(ctx context.Context, params *UpdateService
 	return out, nil
 }
 
-// The request body of the UpdateServiceSetting API action.
+// The request body of the UpdateServiceSetting API operation.
 type UpdateServiceSettingInput struct {
 
 	// The Amazon Resource Name (ARN) of the service setting to reset. For example,
@@ -81,7 +82,7 @@ type UpdateServiceSettingInput struct {
 	// or false. For the /ssm/automation/customer-script-log-destination setting ID,
 	// the setting value can be CloudWatch. For the
 	// /ssm/automation/customer-script-log-group-name setting ID, the setting value can
-	// be the name of a CloudWatch Logs log group. For the
+	// be the name of an Amazon CloudWatch Logs log group. For the
 	// /ssm/documents/console/public-sharing-permission setting ID, the setting value
 	// can be Enable or Disable.
 	//
@@ -89,7 +90,7 @@ type UpdateServiceSettingInput struct {
 	SettingValue *string
 }
 
-// The result body of the UpdateServiceSetting API action.
+// The result body of the UpdateServiceSetting API operation.
 type UpdateServiceSettingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

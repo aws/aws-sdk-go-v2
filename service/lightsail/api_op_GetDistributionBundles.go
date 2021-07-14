@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list bundles that can be applied to you Amazon Lightsail content
+// Returns the bundles that can be applied to your Amazon Lightsail content
 // delivery network (CDN) distributions. A distribution bundle specifies the
 // monthly network transfer quota and monthly cost of your dsitribution.
 func (c *Client) GetDistributionBundles(ctx context.Context, params *GetDistributionBundlesInput, optFns ...func(*Options)) (*GetDistributionBundlesOutput, error) {

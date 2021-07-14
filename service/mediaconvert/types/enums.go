@@ -1381,6 +1381,25 @@ func (CmafStreamInfResolution) Values() []CmafStreamInfResolution {
 	}
 }
 
+type CmafTargetDurationCompatibilityMode string
+
+// Enum values for CmafTargetDurationCompatibilityMode
+const (
+	CmafTargetDurationCompatibilityModeLegacy        CmafTargetDurationCompatibilityMode = "LEGACY"
+	CmafTargetDurationCompatibilityModeSpecCompliant CmafTargetDurationCompatibilityMode = "SPEC_COMPLIANT"
+)
+
+// Values returns all known values for CmafTargetDurationCompatibilityMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CmafTargetDurationCompatibilityMode) Values() []CmafTargetDurationCompatibilityMode {
+	return []CmafTargetDurationCompatibilityMode{
+		"LEGACY",
+		"SPEC_COMPLIANT",
+	}
+}
+
 type CmafWriteDASHManifest string
 
 // Enum values for CmafWriteDASHManifest
@@ -4148,6 +4167,25 @@ func (HlsStreamInfResolution) Values() []HlsStreamInfResolution {
 	}
 }
 
+type HlsTargetDurationCompatibilityMode string
+
+// Enum values for HlsTargetDurationCompatibilityMode
+const (
+	HlsTargetDurationCompatibilityModeLegacy        HlsTargetDurationCompatibilityMode = "LEGACY"
+	HlsTargetDurationCompatibilityModeSpecCompliant HlsTargetDurationCompatibilityMode = "SPEC_COMPLIANT"
+)
+
+// Values returns all known values for HlsTargetDurationCompatibilityMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (HlsTargetDurationCompatibilityMode) Values() []HlsTargetDurationCompatibilityMode {
+	return []HlsTargetDurationCompatibilityMode{
+		"LEGACY",
+		"SPEC_COMPLIANT",
+	}
+}
+
 type HlsTimedMetadataId3Frame string
 
 // Enum values for HlsTimedMetadataId3Frame
@@ -6467,6 +6505,24 @@ func (SimulateReservedQueue) Values() []SimulateReservedQueue {
 	return []SimulateReservedQueue{
 		"DISABLED",
 		"ENABLED",
+	}
+}
+
+type SrtStylePassthrough string
+
+// Enum values for SrtStylePassthrough
+const (
+	SrtStylePassthroughEnabled  SrtStylePassthrough = "ENABLED"
+	SrtStylePassthroughDisabled SrtStylePassthrough = "DISABLED"
+)
+
+// Values returns all known values for SrtStylePassthrough. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SrtStylePassthrough) Values() []SrtStylePassthrough {
+	return []SrtStylePassthrough{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

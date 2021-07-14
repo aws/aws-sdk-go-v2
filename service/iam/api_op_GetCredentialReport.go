@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves a credential report for the AWS account. For more information about
-// the credential report, see Getting credential reports
+// Retrieves a credential report for the account. For more information about the
+// credential report, see Getting credential reports
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html) in
 // the IAM User Guide.
 func (c *Client) GetCredentialReport(ctx context.Context, params *GetCredentialReportInput, optFns ...func(*Options)) (*GetCredentialReportOutput, error) {

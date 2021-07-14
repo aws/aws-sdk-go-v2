@@ -450,6 +450,26 @@ func (m *validateOpCreateChannelModerator) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMediaCapturePipeline struct {
+}
+
+func (*validateOpCreateMediaCapturePipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMediaCapturePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMediaCapturePipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMediaCapturePipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMeetingDialOut struct {
 }
 
@@ -945,6 +965,26 @@ func (m *validateOpDeleteEventsConfiguration) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEventsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMediaCapturePipeline struct {
+}
+
+func (*validateOpDeleteMediaCapturePipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMediaCapturePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMediaCapturePipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMediaCapturePipelineInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1665,6 +1705,26 @@ func (m *validateOpGetEventsConfiguration) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEventsConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMediaCapturePipeline struct {
+}
+
+func (*validateOpGetMediaCapturePipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMediaCapturePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMediaCapturePipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMediaCapturePipelineInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3478,6 +3538,10 @@ func addOpCreateChannelModeratorValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateChannelModerator{}, middleware.After)
 }
 
+func addOpCreateMediaCapturePipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMediaCapturePipeline{}, middleware.After)
+}
+
 func addOpCreateMeetingDialOutValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMeetingDialOut{}, middleware.After)
 }
@@ -3576,6 +3640,10 @@ func addOpDeleteChannelModeratorValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteEventsConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventsConfiguration{}, middleware.After)
+}
+
+func addOpDeleteMediaCapturePipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMediaCapturePipeline{}, middleware.After)
 }
 
 func addOpDeleteMeetingValidationMiddleware(stack *middleware.Stack) error {
@@ -3720,6 +3788,10 @@ func addOpGetChannelMessageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetEventsConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventsConfiguration{}, middleware.After)
+}
+
+func addOpGetMediaCapturePipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMediaCapturePipeline{}, middleware.After)
 }
 
 func addOpGetMeetingValidationMiddleware(stack *middleware.Stack) error {
@@ -4922,6 +4994,30 @@ func validateOpCreateChannelModeratorInput(v *CreateChannelModeratorInput) error
 	}
 }
 
+func validateOpCreateMediaCapturePipelineInput(v *CreateMediaCapturePipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMediaCapturePipelineInput"}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if len(v.SinkType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SinkType"))
+	}
+	if v.SinkArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SinkArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMeetingDialOutInput(v *CreateMeetingDialOutInput) error {
 	if v == nil {
 		return nil
@@ -5386,6 +5482,21 @@ func validateOpDeleteEventsConfigurationInput(v *DeleteEventsConfigurationInput)
 	}
 	if v.BotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMediaCapturePipelineInput(v *DeleteMediaCapturePipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMediaCapturePipelineInput"}
+	if v.MediaPipelineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaPipelineId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5983,6 +6094,21 @@ func validateOpGetEventsConfigurationInput(v *GetEventsConfigurationInput) error
 	}
 	if v.BotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMediaCapturePipelineInput(v *GetMediaCapturePipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMediaCapturePipelineInput"}
+	if v.MediaPipelineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaPipelineId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

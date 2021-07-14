@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Describes an access policy, which specifies an identity's access to an AWS IoT
+// Describes an access policy, which specifies an identity's access to an IoT
 // SiteWise Monitor portal or project.
 func (c *Client) DescribeAccessPolicy(ctx context.Context, params *DescribeAccessPolicyInput, optFns ...func(*Options)) (*DescribeAccessPolicyOutput, error) {
 	if params == nil {
@@ -58,8 +58,8 @@ type DescribeAccessPolicyOutput struct {
 	// This member is required.
 	AccessPolicyId *string
 
-	// The identity (AWS SSO user, AWS SSO group, or IAM user) to which this access
-	// policy applies.
+	// The identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or
+	// IAM user) to which this access policy applies.
 	//
 	// This member is required.
 	AccessPolicyIdentity *types.Identity
@@ -75,7 +75,7 @@ type DescribeAccessPolicyOutput struct {
 	// This member is required.
 	AccessPolicyPermission types.Permission
 
-	// The AWS IoT SiteWise Monitor resource (portal or project) to which this access
+	// The IoT SiteWise Monitor resource (portal or project) to which this access
 	// policy provides access.
 	//
 	// This member is required.

@@ -16,11 +16,11 @@ import (
 // IAM user. If none exists, the operation returns an empty list. Although each
 // user is limited to a small number of signing certificates, you can still
 // paginate the results using the MaxItems and Marker parameters. If the UserName
-// field is not specified, the user name is determined implicitly based on the AWS
-// access key ID used to sign the request for this operation. This operation works
-// for access keys under the AWS account. Consequently, you can use this operation
-// to manage AWS account root user credentials even if the AWS account has no
-// associated users.
+// field is not specified, the user name is determined implicitly based on the
+// Amazon Web Services access key ID used to sign the request for this operation.
+// This operation works for access keys under the account. Consequently, you can
+// use this operation to manage account root user credentials even if the account
+// has no associated users.
 func (c *Client) ListSigningCertificates(ctx context.Context, params *ListSigningCertificatesInput, optFns ...func(*Options)) (*ListSigningCertificatesOutput, error) {
 	if params == nil {
 		params = &ListSigningCertificatesInput{}

@@ -42,6 +42,71 @@ func (e *AccessToSnapshotDeniedFault) ErrorMessage() string {
 func (e *AccessToSnapshotDeniedFault) ErrorCode() string             { return "AccessToSnapshotDenied" }
 func (e *AccessToSnapshotDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The authentication profile already exists.
+type AuthenticationProfileAlreadyExistsFault struct {
+	Message *string
+}
+
+func (e *AuthenticationProfileAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AuthenticationProfileAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AuthenticationProfileAlreadyExistsFault) ErrorCode() string {
+	return "AuthenticationProfileAlreadyExistsFault"
+}
+func (e *AuthenticationProfileAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The authentication profile can't be found.
+type AuthenticationProfileNotFoundFault struct {
+	Message *string
+}
+
+func (e *AuthenticationProfileNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AuthenticationProfileNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AuthenticationProfileNotFoundFault) ErrorCode() string {
+	return "AuthenticationProfileNotFoundFault"
+}
+func (e *AuthenticationProfileNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The size or number of authentication profiles has exceeded the quota. The
+// maximum length of the JSON string and maximum number of authentication profiles
+// is determined by a quota for your account.
+type AuthenticationProfileQuotaExceededFault struct {
+	Message *string
+}
+
+func (e *AuthenticationProfileQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AuthenticationProfileQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AuthenticationProfileQuotaExceededFault) ErrorCode() string {
+	return "AuthenticationProfileQuotaExceededFault"
+}
+func (e *AuthenticationProfileQuotaExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The specified CIDR block or EC2 security group is already authorized for the
 // specified cluster security group.
 type AuthorizationAlreadyExistsFault struct {
@@ -930,6 +995,29 @@ func (e *InsufficientS3BucketPolicyFault) ErrorCode() string {
 }
 func (e *InsufficientS3BucketPolicyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The authentication profile request is not valid. The profile name can't be null
+// or empty. The authentication profile API operation must be available in the
+// Region.
+type InvalidAuthenticationProfileRequestFault struct {
+	Message *string
+}
+
+func (e *InvalidAuthenticationProfileRequestFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidAuthenticationProfileRequestFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidAuthenticationProfileRequestFault) ErrorCode() string {
+	return "InvalidAuthenticationProfileRequestFault"
+}
+func (e *InvalidAuthenticationProfileRequestFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The status of the authorization is not valid.
 type InvalidAuthorizationStateFault struct {
 	Message *string
@@ -1430,7 +1518,7 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string             { return "InvalidVPCNetworkStateFault" }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The encryption key has exceeded its grant limit in AWS KMS.
+// The encryption key has exceeded its grant limit in Amazon Web Services KMS.
 type LimitExceededFault struct {
 	Message *string
 }
@@ -1815,7 +1903,7 @@ func (e *SnapshotCopyGrantNotFoundFault) ErrorMessage() string {
 func (e *SnapshotCopyGrantNotFoundFault) ErrorCode() string             { return "SnapshotCopyGrantNotFoundFault" }
 func (e *SnapshotCopyGrantNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The AWS account has exceeded the maximum number of snapshot copy grants in this
+// The account has exceeded the maximum number of snapshot copy grants in this
 // region.
 type SnapshotCopyGrantQuotaExceededFault struct {
 	Message *string

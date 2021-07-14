@@ -12,7 +12,48 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a broker. Note: This API is asynchronous.
+// Creates a broker. Note: This API is asynchronous. To create a broker, you must
+// either use the AmazonMQFullAccess IAM policy or include the following EC2
+// permissions in your IAM policy.
+//
+// * ec2:CreateNetworkInterface This permission is
+// required to allow Amazon MQ to create an elastic network interface (ENI) on
+// behalf of your account.
+//
+// * ec2:CreateNetworkInterfacePermission This permission
+// is required to attach the ENI to the broker instance.
+//
+// *
+// ec2:DeleteNetworkInterface
+//
+// * ec2:DeleteNetworkInterfacePermission
+//
+// *
+// ec2:DetachNetworkInterface
+//
+// * ec2:DescribeInternetGateways
+//
+// *
+// ec2:DescribeNetworkInterfaces
+//
+// * ec2:DescribeNetworkInterfacePermissions
+//
+// *
+// ec2:DescribeRouteTables
+//
+// * ec2:DescribeSecurityGroups
+//
+// * ec2:DescribeSubnets
+//
+// *
+// ec2:DescribeVpcs
+//
+// For more information, see Create an IAM User and Get Your AWS
+// Credentials
+// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user)
+// and Never Modify or Delete the Amazon MQ Elastic Network Interface
+// (https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface)
+// in the Amazon MQ Developer Guide.
 func (c *Client) CreateBroker(ctx context.Context, params *CreateBrokerInput, optFns ...func(*Options)) (*CreateBrokerOutput, error) {
 	if params == nil {
 		params = &CreateBrokerInput{}
@@ -31,19 +72,65 @@ func (c *Client) CreateBroker(ctx context.Context, params *CreateBrokerInput, op
 // Creates a broker using the specified properties.
 type CreateBrokerInput struct {
 
-	// The authentication strategy used to secure the broker.
-	AuthenticationStrategy types.AuthenticationStrategy
-
-	// Required. Enables automatic upgrades to new minor versions for brokers, as
-	// Apache releases the versions. The automatic upgrades occur during the
-	// maintenance window of the broker or after a manual broker reboot.
+	// Enables automatic upgrades to new minor versions for brokers, as new versions
+	// are released and supported by Amazon MQ. Automatic upgrades occur during the
+	// scheduled maintenance window of the broker or after a manual broker reboot. Set
+	// to true by default, if no value is specified.
+	//
+	// This member is required.
 	AutoMinorVersionUpgrade bool
 
-	// Required. The name of the broker. This value must be unique in your AWS account,
-	// 1-50 characters long, must contain only letters, numbers, dashes, and
-	// underscores, and must not contain whitespaces, brackets, wildcard characters, or
-	// special characters.
+	// Required. The broker's name. This value must be unique in your AWS account, 1-50
+	// characters long, must contain only letters, numbers, dashes, and underscores,
+	// and must not contain white spaces, brackets, wildcard characters, or special
+	// characters.
+	//
+	// This member is required.
 	BrokerName *string
+
+	// Required. The broker's deployment mode.
+	//
+	// This member is required.
+	DeploymentMode types.DeploymentMode
+
+	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and
+	// RABBITMQ.
+	//
+	// This member is required.
+	EngineType types.EngineType
+
+	// Required. The broker engine's version. For a list of supported engine versions,
+	// see Supported engines
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
+	//
+	// This member is required.
+	EngineVersion *string
+
+	// Required. The broker's instance type.
+	//
+	// This member is required.
+	HostInstanceType *string
+
+	// Enables connections from applications outside of the VPC that hosts the broker's
+	// subnets. Set to false by default, if no value is provided.
+	//
+	// This member is required.
+	PubliclyAccessible bool
+
+	// Required. The list of broker users (persons or applications) who can access
+	// queues and topics. This value can contain only alphanumeric characters, dashes,
+	// periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters
+	// long. Amazon MQ for RabbitMQ When you create an Amazon MQ for RabbitMQ broker,
+	// one and only one administrative user is accepted and created when a broker is
+	// first provisioned. All subsequent broker users are created by making RabbitMQ
+	// API calls directly to brokers or via the RabbitMQ web console.
+	//
+	// This member is required.
+	Users []types.User
+
+	// Optional. The authentication strategy used to secure the broker. The default is
+	// SIMPLE.
+	AuthenticationStrategy types.AuthenticationStrategy
 
 	// A list of information about the configuration.
 	Configuration *types.ConfigurationId
@@ -54,26 +141,11 @@ type CreateBrokerInput struct {
 	// creatorRequestId if your application doesn't require idempotency.
 	CreatorRequestId *string
 
-	// Required. The deployment mode of the broker.
-	DeploymentMode types.DeploymentMode
-
-	// Encryption options for the broker.
+	// Encryption options for the broker. Does not apply to RabbitMQ brokers.
 	EncryptionOptions *types.EncryptionOptions
 
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports
-	// ACTIVEMQ and RABBITMQ.
-	EngineType types.EngineType
-
-	// Required. The version of the broker engine. For a list of supported engine
-	// versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
-	EngineVersion *string
-
-	// Required. The broker's instance type.
-	HostInstanceType *string
-
-	// The metadata of the LDAP server used to authenticate and authorize connections
-	// to the broker.
+	// Optional. The metadata of the LDAP server used to authenticate and authorize
+	// connections to the broker. Does not apply to RabbitMQ brokers.
 	LdapServerMetadata *types.LdapServerMetadataInput
 
 	// Enables Amazon CloudWatch logging for brokers.
@@ -82,41 +154,36 @@ type CreateBrokerInput struct {
 	// The parameters that determine the WeeklyStartTime.
 	MaintenanceWindowStartTime *types.WeeklyStartTime
 
-	// Required. Enables connections from applications outside of the VPC that hosts
-	// the broker's subnets.
-	PubliclyAccessible bool
-
-	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
-	// to brokers.
+	// The list of rules (1 minimum, 125 maximum) that authorize connections to
+	// brokers.
 	SecurityGroups []string
 
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
 
 	// The list of groups that define which subnets and IP ranges the broker can use
-	// from different Availability Zones. A SINGLE_INSTANCE deployment requires one
-	// subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment
-	// (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no
-	// subnet requirements when deployed with public accessibility, deployment without
-	// public accessibility requires at least one subnet.
+	// from different Availability Zones. If you specify more than one subnet, the
+	// subnets must be in different Availability Zones. Amazon MQ will not be able to
+	// create VPC endpoints for your broker with multiple subnets in the same
+	// Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for
+	// example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ
+	// deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ
+	// deployment has no subnet requirements when deployed with public accessibility.
+	// Deployment without public accessibility requires at least one subnet. If you
+	// specify subnets in a shared VPC
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html) for a
+	// RabbitMQ broker, the associated VPC to which the specified subnets belong must
+	// be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints
+	// in VPCs that are not owned by your AWS account.
 	SubnetIds []string
 
 	// Create tags when creating the broker.
 	Tags map[string]string
-
-	// Required. The list of broker users (persons or applications) who can access
-	// queues and topics. For RabbitMQ brokers, one and only one administrative user is
-	// accepted and created when a broker is first provisioned. All subsequent broker
-	// users are created by making RabbitMQ API calls directly to brokers or via the
-	// RabbitMQ Web Console. This value can contain only alphanumeric characters,
-	// dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100
-	// characters long.
-	Users []types.User
 }
 
 type CreateBrokerOutput struct {
 
-	// The Amazon Resource Name (ARN) of the broker.
+	// The broker's Amazon Resource Name (ARN).
 	BrokerArn *string
 
 	// The unique ID that Amazon MQ generates for the broker.

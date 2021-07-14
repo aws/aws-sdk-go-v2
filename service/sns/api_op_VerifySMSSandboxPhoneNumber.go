@@ -11,13 +11,13 @@ import (
 )
 
 // Verifies a destination phone number with a one-time password (OTP) for the
-// calling AWS account. When you start using Amazon SNS to send SMS messages, your
-// AWS account is in the SMS sandbox. The SMS sandbox provides a safe environment
-// for you to try Amazon SNS features without risking your reputation as an SMS
-// sender. While your account is in the SMS sandbox, you can use all of the
-// features of Amazon SNS. However, you can send SMS messages only to verified
-// destination phone numbers. For more information, including how to move out of
-// the sandbox to send messages without restrictions, see SMS sandbox
+// calling account. When you start using Amazon SNS to send SMS messages, your
+// account is in the SMS sandbox. The SMS sandbox provides a safe environment for
+// you to try Amazon SNS features without risking your reputation as an SMS sender.
+// While your account is in the SMS sandbox, you can use all of the features of
+// Amazon SNS. However, you can send SMS messages only to verified destination
+// phone numbers. For more information, including how to move out of the sandbox to
+// send messages without restrictions, see SMS sandbox
 // (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) in the Amazon
 // SNS Developer Guide.
 func (c *Client) VerifySMSSandboxPhoneNumber(ctx context.Context, params *VerifySMSSandboxPhoneNumberInput, optFns ...func(*Options)) (*VerifySMSSandboxPhoneNumberOutput, error) {

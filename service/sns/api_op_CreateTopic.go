@@ -13,9 +13,11 @@ import (
 
 // Creates a topic to which notifications can be published. Users can create at
 // most 100,000 standard topics (at most 1,000 FIFO topics). For more information,
-// see https://aws.amazon.com/sns (http://aws.amazon.com/sns/). This action is
-// idempotent, so if the requester already owns a topic with the specified name,
-// that topic's ARN is returned without creating a new topic.
+// see Creating an Amazon SNS topic
+// (https://docs.aws.amazon.com/sns/latest/dg/sns-create-topic.html) in the Amazon
+// SNS Developer Guide. This action is idempotent, so if the requester already owns
+// a topic with the specified name, that topic's ARN is returned without creating a
+// new topic.
 func (c *Client) CreateTopic(ctx context.Context, params *CreateTopicInput, optFns ...func(*Options)) (*CreateTopicOutput, error) {
 	if params == nil {
 		params = &CreateTopicInput{}
@@ -63,12 +65,12 @@ type CreateTopicInput struct {
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 	//
 	// *
-	// KmsMasterKeyId – The ID of an AWS managed customer master key (CMK) for Amazon
-	// SNS or a custom CMK. For more information, see Key Terms
+	// KmsMasterKeyId – The ID of an Amazon Web Services managed customer master key
+	// (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
 	// For more examples, see KeyId
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
-	// in the AWS Key Management Service API Reference.
+	// in the Key Management Service API Reference.
 	//
 	// The following attributes apply
 	// only to FIFO topics

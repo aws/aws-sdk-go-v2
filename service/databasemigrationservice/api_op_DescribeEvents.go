@@ -14,10 +14,10 @@ import (
 )
 
 // Lists events for a given source identifier and source type. You can also specify
-// a start and end time. For more information on AWS DMS events, see Working with
+// a start and end time. For more information on DMS events, see Working with
 // Events and Notifications
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the AWS
-// Database Migration User Guide.
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the
+// Database Migration Service User Guide.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -62,7 +62,7 @@ type DescribeEventsInput struct {
 	// The identifier of an event source.
 	SourceIdentifier *string
 
-	// The type of AWS DMS resource that generates events. Valid values:
+	// The type of DMS resource that generates events. Valid values:
 	// replication-instance | replication-task
 	SourceType types.SourceType
 

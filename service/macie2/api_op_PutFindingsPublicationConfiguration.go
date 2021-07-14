@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration settings for publishing findings to AWS Security Hub.
+// Updates the configuration settings for publishing findings to Security Hub.
 func (c *Client) PutFindingsPublicationConfiguration(ctx context.Context, params *PutFindingsPublicationConfigurationInput, optFns ...func(*Options)) (*PutFindingsPublicationConfigurationOutput, error) {
 	if params == nil {
 		params = &PutFindingsPublicationConfigurationInput{}
@@ -34,8 +34,8 @@ type PutFindingsPublicationConfigurationInput struct {
 	// request.
 	ClientToken *string
 
-	// The configuration settings that determine which findings to publish to AWS
-	// Security Hub.
+	// The configuration settings that determine which findings to publish to Security
+	// Hub.
 	SecurityHubConfiguration *types.SecurityHubConfiguration
 }
 

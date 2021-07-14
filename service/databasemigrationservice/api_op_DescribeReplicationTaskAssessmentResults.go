@@ -12,8 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the task assessment results from Amazon S3. This action always returns
-// the latest results.
+// Returns the task assessment results from the Amazon S3 bucket that DMS creates
+// in your account. This action always returns the latest results. For more
+// information about DMS task assessments, see Creating a task assessment report
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
+// in the  Database Migration Service User Guide
+// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
 func (c *Client) DescribeReplicationTaskAssessmentResults(ctx context.Context, params *DescribeReplicationTaskAssessmentResultsInput, optFns ...func(*Options)) (*DescribeReplicationTaskAssessmentResultsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationTaskAssessmentResultsInput{}

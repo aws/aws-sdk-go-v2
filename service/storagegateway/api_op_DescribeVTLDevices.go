@@ -13,8 +13,8 @@ import (
 )
 
 // Returns a description of virtual tape library (VTL) devices for the specified
-// tape gateway. In the response, AWS Storage Gateway returns VTL device
-// information. This operation is only supported in the tape gateway type.
+// tape gateway. In the response, Storage Gateway returns VTL device information.
+// This operation is only supported in the tape gateway type.
 func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevicesInput, optFns ...func(*Options)) (*DescribeVTLDevicesOutput, error) {
 	if params == nil {
 		params = &DescribeVTLDevicesInput{}
@@ -34,7 +34,7 @@ func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevi
 type DescribeVTLDevicesInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -58,7 +58,7 @@ type DescribeVTLDevicesInput struct {
 type DescribeVTLDevicesOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// An opaque string that indicates the position at which the VTL devices that were

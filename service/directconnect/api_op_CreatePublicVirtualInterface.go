@@ -12,11 +12,11 @@ import (
 )
 
 // Creates a public virtual interface. A virtual interface is the VLAN that
-// transports AWS Direct Connect traffic. A public virtual interface supports
-// sending traffic to public services of AWS such as Amazon S3. When creating an
-// IPv6 public virtual interface (addressFamily is ipv6), leave the customer and
-// amazon address fields blank to use auto-assigned IPv6 space. Custom IPv6
-// addresses are not supported.
+// transports Direct Connect traffic. A public virtual interface supports sending
+// traffic to public services of Amazon Web Services such as Amazon S3. When
+// creating an IPv6 public virtual interface (addressFamily is ipv6), leave the
+// customer and amazon address fields blank to use auto-assigned IPv6 space. Custom
+// IPv6 addresses are not supported.
 func (c *Client) CreatePublicVirtualInterface(ctx context.Context, params *CreatePublicVirtualInterfaceInput, optFns ...func(*Options)) (*CreatePublicVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &CreatePublicVirtualInterfaceInput{}
@@ -68,6 +68,10 @@ type CreatePublicVirtualInterfaceOutput struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDeviceV2 *string
 
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
+
 	// The BGP peers configured on this virtual interface.
 	BgpPeers []types.BGPPeer
 
@@ -93,14 +97,14 @@ type CreatePublicVirtualInterfaceOutput struct {
 	// 9001. The default value is 1500.
 	Mtu *int32
 
-	// The ID of the AWS account that owns the virtual interface.
+	// The ID of the account that owns the virtual interface.
 	OwnerAccount *string
 
-	// The AWS Region where the virtual interface is located.
+	// The Region where the virtual interface is located.
 	Region *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
+	// The routes to be advertised to the Amazon Web Services network in this Region.
+	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []types.RouteFilterPrefix
 
 	// The tags associated with the virtual interface.

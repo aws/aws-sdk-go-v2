@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about IAM entity usage and IAM quotas in the AWS account.
-// For information about IAM quotas, see IAM and STS quotas
+// Retrieves information about IAM entity usage and IAM quotas in the Amazon Web
+// Services account. For information about IAM quotas, see IAM and STS quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide.
 func (c *Client) GetAccountSummary(ctx context.Context, params *GetAccountSummaryInput, optFns ...func(*Options)) (*GetAccountSummaryOutput, error) {

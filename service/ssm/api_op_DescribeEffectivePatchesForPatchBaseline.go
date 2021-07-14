@@ -13,8 +13,7 @@ import (
 )
 
 // Retrieves the current effective patches (the patch and the approval state) for
-// the specified patch baseline. Note that this API applies only to Windows patch
-// baselines.
+// the specified patch baseline. Applies to patch baselines for Windows only.
 func (c *Client) DescribeEffectivePatchesForPatchBaseline(ctx context.Context, params *DescribeEffectivePatchesForPatchBaselineInput, optFns ...func(*Options)) (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
 	if params == nil {
 		params = &DescribeEffectivePatchesForPatchBaselineInput{}

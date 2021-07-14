@@ -3243,6 +3243,97 @@
                 }
             }
         },
+        "com.amazonaws.chime#CreateMediaCapturePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chime#CreateMediaCapturePipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chime#CreateMediaCapturePipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chime#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/media-capture-pipelines",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chime#CreateMediaCapturePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "SourceType": {
+                    "target": "com.amazonaws.chime#MediaPipelineSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source type from which the media artifacts will be captured. A Chime SDK Meeting \n            is the only supported source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceArn": {
+                    "target": "com.amazonaws.chime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the source from which the media artifacts are captured.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SinkType": {
+                    "target": "com.amazonaws.chime#MediaPipelineSinkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destination type to which the media artifacts are saved. You must use an S3 bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SinkArn": {
+                    "target": "com.amazonaws.chime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.chime#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token assigned to the client making the pipeline request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#CreateMediaCapturePipelineResponse": {
+            "type": "structure",
+            "members": {
+                "MediaCapturePipeline": {
+                    "target": "com.amazonaws.chime#MediaCapturePipeline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A media capture pipeline object, the ID, source type, source ARN, sink type, and  sink ARN of a media capture pipeline object.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chime#CreateMeeting": {
             "type": "operation",
             "input": {
@@ -5150,6 +5241,56 @@
                     "target": "com.amazonaws.chime#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The bot ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#DeleteMediaCapturePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chime#DeleteMediaCapturePipelineRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chime#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chime#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/media-capture-pipelines/{MediaPipelineId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chime#DeleteMediaCapturePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "MediaPipelineId": {
+                    "target": "com.amazonaws.chime#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the media capture pipeline being deleted. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7743,6 +7884,70 @@
                     "target": "com.amazonaws.chime#VoiceConnectorSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Chime Voice Connector settings.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#GetMediaCapturePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chime#GetMediaCapturePipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chime#GetMediaCapturePipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chime#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chime#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets an existing media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/media-capture-pipelines/{MediaPipelineId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chime#GetMediaCapturePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "MediaPipelineId": {
+                    "target": "com.amazonaws.chime#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline that you want to get.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#GetMediaCapturePipelineResponse": {
+            "type": "structure",
+            "members": {
+                "MediaCapturePipeline": {
+                    "target": "com.amazonaws.chime#MediaCapturePipeline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The media capture pipeline object.</p>"
                     }
                 }
             }
@@ -10725,6 +10930,84 @@
                 }
             }
         },
+        "com.amazonaws.chime#ListMediaCapturePipelines": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chime#ListMediaCapturePipelinesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chime#ListMediaCapturePipelinesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chime#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of media capture pipelines.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/media-capture-pipelines",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chime#ListMediaCapturePipelinesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.chime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chime#ResultMax",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Valid Range: 1 - 99.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#ListMediaCapturePipelinesResponse": {
+            "type": "structure",
+            "members": {
+                "MediaCapturePipelines": {
+                    "target": "com.amazonaws.chime#MediaCapturePipelineList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The media capture pipeline objects in the list.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next page of results. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chime#ListMeetingTags": {
             "type": "operation",
             "input": {
@@ -12041,6 +12324,117 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.chime#MediaCapturePipeline": {
+            "type": "structure",
+            "members": {
+                "MediaPipelineId": {
+                    "target": "com.amazonaws.chime#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a media capture pipeline.</p>"
+                    }
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.chime#MediaPipelineSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source type from which media artifacts are saved. You must use <code>ChimeMeeting</code>.</p>"
+                    }
+                },
+                "SourceArn": {
+                    "target": "com.amazonaws.chime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the source from which the media artifacts will be saved.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.chime#MediaPipelineStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the media capture pipeline.</p>"
+                    }
+                },
+                "SinkType": {
+                    "target": "com.amazonaws.chime#MediaPipelineSinkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destination type to which the media artifacts are saved. You must use an S3 Bucket.</p>"
+                    }
+                },
+                "SinkArn": {
+                    "target": "com.amazonaws.chime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the destination to which the media artifacts are saved.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.chime#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the capture pipeline was created, in ISO 8601 format.</p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.chime#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the capture pipeline was updated, in ISO 8601 format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A media capture pipeline object. A string consisting of an ID, source type, a source ARN, a sink type, and a sink ARN.</p>"
+            }
+        },
+        "com.amazonaws.chime#MediaCapturePipelineList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#MediaCapturePipeline"
+            }
+        },
+        "com.amazonaws.chime#MediaPipelineSinkType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "S3Bucket",
+                        "name": "S3Bucket"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chime#MediaPipelineSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ChimeSdkMeeting",
+                        "name": "ChimeSdkMeeting"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chime#MediaPipelineStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Initializing",
+                        "name": "Initializing"
+                    },
+                    {
+                        "value": "InProgress",
+                        "name": "InProgress"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "Failed"
+                    },
+                    {
+                        "value": "Stopping",
+                        "name": "Stopping"
+                    },
+                    {
+                        "value": "Stopped",
+                        "name": "Stopped"
+                    }
+                ]
             }
         },
         "com.amazonaws.chime#MediaPlacement": {
@@ -15876,6 +16270,9 @@
                     "target": "com.amazonaws.chime#CreateChannelModerator"
                 },
                 {
+                    "target": "com.amazonaws.chime#CreateMediaCapturePipeline"
+                },
+                {
                     "target": "com.amazonaws.chime#CreateMeeting"
                 },
                 {
@@ -15949,6 +16346,9 @@
                 },
                 {
                     "target": "com.amazonaws.chime#DeleteEventsConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chime#DeleteMediaCapturePipeline"
                 },
                 {
                     "target": "com.amazonaws.chime#DeleteMeeting"
@@ -16062,6 +16462,9 @@
                     "target": "com.amazonaws.chime#GetGlobalSettings"
                 },
                 {
+                    "target": "com.amazonaws.chime#GetMediaCapturePipeline"
+                },
+                {
                     "target": "com.amazonaws.chime#GetMeeting"
                 },
                 {
@@ -16171,6 +16574,9 @@
                 },
                 {
                     "target": "com.amazonaws.chime#ListChannelsModeratedByAppInstanceUser"
+                },
+                {
+                    "target": "com.amazonaws.chime#ListMediaCapturePipelines"
                 },
                 {
                     "target": "com.amazonaws.chime#ListMeetings"

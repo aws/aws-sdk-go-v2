@@ -30,7 +30,7 @@ func (c *Client) DescribeInstancePatchStates(ctx context.Context, params *Descri
 
 type DescribeInstancePatchStatesInput struct {
 
-	// The ID of the instance whose patch state information should be retrieved.
+	// The ID of the instance for which patch state information should be retrieved.
 	//
 	// This member is required.
 	InstanceIds []string

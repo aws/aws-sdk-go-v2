@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies an existing AWS DMS event notification subscription.
+// Modifies an existing DMS event notification subscription.
 func (c *Client) ModifyEventSubscription(ctx context.Context, params *ModifyEventSubscriptionInput, optFns ...func(*Options)) (*ModifyEventSubscriptionOutput, error) {
 	if params == nil {
 		params = &ModifyEventSubscriptionInput{}
@@ -30,7 +30,7 @@ func (c *Client) ModifyEventSubscription(ctx context.Context, params *ModifyEven
 //
 type ModifyEventSubscriptionInput struct {
 
-	// The name of the AWS DMS event notification subscription to be modified.
+	// The name of the DMS event notification subscription to be modified.
 	//
 	// This member is required.
 	SubscriptionName *string
@@ -47,7 +47,7 @@ type ModifyEventSubscriptionInput struct {
 	// subscribe to it.
 	SnsTopicArn *string
 
-	// The type of AWS DMS resource that generates the events you want to subscribe to.
+	// The type of DMS resource that generates the events you want to subscribe to.
 	// Valid values: replication-instance | replication-task
 	SourceType *string
 }

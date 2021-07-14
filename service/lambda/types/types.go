@@ -14,8 +14,8 @@ type AccountLimit struct {
 	// extracted.
 	CodeSizeUnzipped int64
 
-	// The maximum size of a deployment package when it's uploaded directly to AWS
-	// Lambda. Use Amazon S3 for larger files.
+	// The maximum size of a deployment package when it's uploaded directly to Lambda.
+	// Use Amazon S3 for larger files.
 	CodeSizeZipped int64
 
 	// The maximum number of simultaneous function executions.
@@ -85,7 +85,8 @@ type AllowedPublishers struct {
 	SigningProfileVersionArns []string
 }
 
-// Details about a Code signing configuration.
+// Details about a Code signing configuration
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html).
 type CodeSigningConfig struct {
 
 	// List of allowed publishers.
@@ -119,8 +120,9 @@ type CodeSigningConfig struct {
 	Description *string
 }
 
-// Code signing configuration policies specifies the validation failure action for
-// signature mismatch or expiry.
+// Code signing configuration policies
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies)
+// specify the validation failure action for signature mismatch or expiry.
 type CodeSigningPolicies struct {
 
 	// Code signing configuration policy for deployment validation failure. If you set
@@ -158,10 +160,15 @@ type DestinationConfig struct {
 	OnSuccess *OnSuccess
 }
 
-// A function's environment variable settings.
+// A function's environment variable settings. You can use environment variables to
+// adjust your function's behavior without updating code. An environment variable
+// is a pair of strings that are stored in a function's version-specific
+// configuration.
 type Environment struct {
 
-	// Environment variable key-value pairs.
+	// Environment variable key-value pairs. For more information, see Using Lambda
+	// environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 	Variables map[string]string
 }
 
@@ -187,18 +194,18 @@ type EnvironmentResponse struct {
 	Variables map[string]string
 }
 
-// A mapping between an AWS resource and an AWS Lambda function. See
+// A mapping between an Amazon Web Services resource and an Lambda function. See
 // CreateEventSourceMapping for details.
 type EventSourceMappingConfiguration struct {
 
 	// The maximum number of items to retrieve in a single batch.
 	BatchSize *int32
 
-	// (Streams) If the function returns an error, split the batch in two and retry.
-	// The default value is false.
+	// (Streams only) If the function returns an error, split the batch in two and
+	// retry. The default value is false.
 	BisectBatchOnFunctionError *bool
 
-	// (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded
+	// (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded
 	// records.
 	DestinationConfig *DestinationConfig
 
@@ -208,32 +215,33 @@ type EventSourceMappingConfiguration struct {
 	// The ARN of the Lambda function.
 	FunctionArn *string
 
-	// (Streams) A list of current response type enums applied to the event source
+	// (Streams only) A list of current response type enums applied to the event source
 	// mapping.
 	FunctionResponseTypes []FunctionResponseType
 
 	// The date that the event source mapping was last updated, or its state changed.
 	LastModified *time.Time
 
-	// The result of the last AWS Lambda invocation of your Lambda function.
+	// The result of the last Lambda invocation of your Lambda function.
 	LastProcessingResult *string
 
 	// (Streams and SQS standard queues) The maximum amount of time to gather records
 	// before invoking the function, in seconds. The default value is zero.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams) Discard records older than the specified age. The default value is
-	// infinite (-1). When set to infinite (-1), failed records are retried until the
-	// record expires.
+	// (Streams only) Discard records older than the specified age. The default value
+	// is -1, which sets the maximum age to infinite. When the value is set to
+	// infinite, Lambda never discards old records.
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams) Discard records after the specified number of retries. The default
-	// value is infinite (-1). When set to infinite (-1), failed records are retried
-	// until the record expires.
+	// (Streams only) Discard records after the specified number of retries. The
+	// default value is -1, which sets the maximum number of retries to infinite. When
+	// MaximumRetryAttempts is infinite, Lambda retries failed records until the record
+	// expires in the event source.
 	MaximumRetryAttempts *int32
 
-	// (Streams) The number of batches to process from each shard concurrently. The
-	// default value is 1.
+	// (Streams only) The number of batches to process from each shard concurrently.
+	// The default value is 1.
 	ParallelizationFactor *int32
 
 	// (MQ) The name of the Amazon MQ broker destination queue to consume.
@@ -265,8 +273,8 @@ type EventSourceMappingConfiguration struct {
 	// The name of the Kafka topic.
 	Topics []string
 
-	// (Streams) The duration in seconds of a processing window. The range is between 1
-	// second up to 900 seconds.
+	// (Streams only) The duration in seconds of a processing window. The range is
+	// between 1 second up to 900 seconds.
 	TumblingWindowInSeconds *int32
 
 	// The identifier of the event source mapping.
@@ -274,7 +282,8 @@ type EventSourceMappingConfiguration struct {
 }
 
 // Details about the connection between a Lambda function and an Amazon EFS file
-// system.
+// system
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
 type FileSystemConfig struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon EFS access point that provides
@@ -294,11 +303,13 @@ type FileSystemConfig struct {
 // container image.
 type FunctionCode struct {
 
-	// URI of a container image in the Amazon ECR registry.
+	// URI of a container image
+	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon
+	// ECR registry.
 	ImageUri *string
 
-	// An Amazon S3 bucket in the same AWS Region as your function. The bucket can be
-	// in a different AWS account.
+	// An Amazon S3 bucket in the same Amazon Web Services Region as your function. The
+	// bucket can be in a different Amazon Web Services account.
 	S3Bucket *string
 
 	// The Amazon S3 key of the deployment package.
@@ -307,8 +318,8 @@ type FunctionCode struct {
 	// For versioned objects, the version of the deployment package object to use.
 	S3ObjectVersion *string
 
-	// The base64-encoded contents of the deployment package. AWS SDK and AWS CLI
-	// clients handle the encoding for you.
+	// The base64-encoded contents of the deployment package. Amazon Web Services SDK
+	// and Amazon Web Services CLI clients handle the encoding for you.
 	ZipFile []byte
 }
 
@@ -343,10 +354,12 @@ type FunctionConfiguration struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables.
+	// The function's environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 	Environment *EnvironmentResponse
 
-	// Connection settings for an Amazon EFS file system.
+	// Connection settings for an Amazon EFS file system
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
 	FileSystemConfigs []FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -423,7 +436,7 @@ type FunctionConfiguration struct {
 	// stopping it.
 	Timeout *int32
 
-	// The function's AWS X-Ray tracing configuration.
+	// The function's X-Ray tracing configuration.
 	TracingConfig *TracingConfigResponse
 
 	// The version of the Lambda function.
@@ -498,7 +511,7 @@ type ImageConfigResponse struct {
 	ImageConfig *ImageConfig
 }
 
-// An AWS Lambda layer
+// An Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 type Layer struct {
 
@@ -515,7 +528,7 @@ type Layer struct {
 	SigningProfileVersionArn *string
 }
 
-// Details about an AWS Lambda layer
+// Details about an Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 type LayersListItem struct {
 
@@ -529,7 +542,7 @@ type LayersListItem struct {
 	LayerName *string
 }
 
-// A ZIP archive that contains the contents of an AWS Lambda layer
+// A ZIP archive that contains the contents of an Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). You
 // can specify either an Amazon S3 location, or upload a layer archive directly.
 type LayerVersionContentInput struct {
@@ -543,12 +556,12 @@ type LayerVersionContentInput struct {
 	// For versioned objects, the version of the layer archive object to use.
 	S3ObjectVersion *string
 
-	// The base64-encoded contents of the layer archive. AWS SDK and AWS CLI clients
-	// handle the encoding for you.
+	// The base64-encoded contents of the layer archive. Amazon Web Services SDK and
+	// Amazon Web Services CLI clients handle the encoding for you.
 	ZipFile []byte
 }
 
-// Details about a version of an AWS Lambda layer
+// Details about a version of an Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 type LayerVersionContentOutput struct {
 
@@ -568,7 +581,7 @@ type LayerVersionContentOutput struct {
 	SigningProfileVersionArn *string
 }
 
-// Details about a version of an AWS Lambda layer
+// Details about a version of an Lambda layer
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 type LayerVersionsListItem struct {
 
@@ -666,6 +679,10 @@ type SourceAccessConfiguration struct {
 	// *
 	// SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL
 	// SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.
+	//
+	// *
+	// VIRTUAL_HOST - The name of the virtual host in your RabbitMQ broker. Lambda will
+	// use this host as the event source.
 	Type SourceAccessType
 
 	// The value for your chosen configuration in Type. For example: "URI":
@@ -673,15 +690,16 @@ type SourceAccessConfiguration struct {
 	URI *string
 }
 
-// The function's AWS X-Ray tracing configuration. To sample and record incoming
-// requests, set Mode to Active.
+// The function's X-Ray
+// (https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html) tracing
+// configuration. To sample and record incoming requests, set Mode to Active.
 type TracingConfig struct {
 
 	// The tracing mode.
 	Mode TracingMode
 }
 
-// The function's AWS X-Ray tracing configuration.
+// The function's X-Ray tracing configuration.
 type TracingConfigResponse struct {
 
 	// The tracing mode.

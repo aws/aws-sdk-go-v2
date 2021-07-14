@@ -32,20 +32,21 @@ import (
 // User Guide.
 //
 // * Cost allocation - Use tags to help track which individuals and
-// teams are using which AWS resources.
+// teams are using which Amazon Web Services resources.
 //
-// * If any one of the tags is invalid or if
-// you exceed the allowed maximum number of tags, then the entire request fails and
-// the resource is not created. For more information about tagging, see Tagging IAM
-// resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the
-// IAM User Guide.
+// * If any one of the tags
+// is invalid or if you exceed the allowed maximum number of tags, then the entire
+// request fails and the resource is not created. For more information about
+// tagging, see Tagging IAM resources
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+// Guide.
 //
-// * AWS always interprets the tag Value as a single string. If
-// you need to store an array, you can store comma-separated values in the string.
-// However, you must interpret the value in your code.
+// * Amazon Web Services always interprets the tag Value as a single
+// string. If you need to store an array, you can store comma-separated values in
+// the string. However, you must interpret the value in your code.
 //
-// For more information about
-// tagging, see Tagging IAM identities
+// For more
+// information about tagging, see Tagging IAM identities
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 // Guide.
 func (c *Client) TagRole(ctx context.Context, params *TagRoleInput, optFns ...func(*Options)) (*TagRoleOutput, error) {

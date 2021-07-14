@@ -12,14 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the managed policies that are available in your AWS account, including
-// your own customer-defined managed policies and all AWS managed policies. You can
-// filter the list of policies that is returned using the optional OnlyAttached,
-// Scope, and PathPrefix parameters. For example, to list only the customer managed
-// policies in your AWS account, set Scope to Local. To list only AWS managed
-// policies, set Scope to AWS. You can paginate the results using the MaxItems and
-// Marker parameters. For more information about managed policies, see Managed
-// policies and inline policies
+// Lists all the managed policies that are available in your account, including
+// your own customer-defined managed policies and all Amazon Web Services managed
+// policies. You can filter the list of policies that is returned using the
+// optional OnlyAttached, Scope, and PathPrefix parameters. For example, to list
+// only the customer managed policies in your Amazon Web Services account, set
+// Scope to Local. To list only Amazon Web Services managed policies, set Scope to
+// AWS. You can paginate the results using the MaxItems and Marker parameters. For
+// more information about managed policies, see Managed policies and inline
+// policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. IAM resource-listing operations return a subset of the
 // available attributes for the resource. For example, this operation does not
@@ -79,10 +80,10 @@ type ListPoliciesInput struct {
 	// policies are returned.
 	PolicyUsageFilter types.PolicyUsageType
 
-	// The scope to use for filtering the results. To list only AWS managed policies,
-	// set Scope to AWS. To list only the customer managed policies in your AWS
-	// account, set Scope to Local. This parameter is optional. If it is not included,
-	// or if it is set to All, all policies are returned.
+	// The scope to use for filtering the results. To list only Amazon Web Services
+	// managed policies, set Scope to AWS. To list only the customer managed policies
+	// in your account, set Scope to Local. This parameter is optional. If it is not
+	// included, or if it is set to All, all policies are returned.
 	Scope types.PolicyScopeType
 }
 

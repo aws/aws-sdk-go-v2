@@ -46,7 +46,7 @@ type DescribeEndpointAccessInput struct {
 	// included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
 
-	// The AWS account ID of the owner of the cluster.
+	// The account ID of the owner of the cluster.
 	ResourceOwner *string
 
 	// The virtual private cloud (VPC) identifier with access to the cluster.

@@ -2,6 +2,24 @@
 
 package types
 
+type CmkType string
+
+// Enum values for CmkType
+const (
+	CmkTypeCmCmk CmkType = "CUSTOMER_MANAGED_KMS_KEY"
+	CmkTypeAoCmk CmkType = "AWS_OWNED_KMS_KEY"
+)
+
+// Values returns all known values for CmkType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (CmkType) Values() []CmkType {
+	return []CmkType{
+		"CUSTOMER_MANAGED_KMS_KEY",
+		"AWS_OWNED_KMS_KEY",
+	}
+}
+
 type DatastoreStatus string
 
 // Enum values for DatastoreStatus
@@ -44,10 +62,11 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusSubmitted  JobStatus = "SUBMITTED"
-	JobStatusInProgress JobStatus = "IN_PROGRESS"
-	JobStatusCompleted  JobStatus = "COMPLETED"
-	JobStatusFailed     JobStatus = "FAILED"
+	JobStatusSubmitted           JobStatus = "SUBMITTED"
+	JobStatusInProgress          JobStatus = "IN_PROGRESS"
+	JobStatusCompletedWithErrors JobStatus = "COMPLETED_WITH_ERRORS"
+	JobStatusCompleted           JobStatus = "COMPLETED"
+	JobStatusFailed              JobStatus = "FAILED"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded in
@@ -57,6 +76,7 @@ func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
 		"IN_PROGRESS",
+		"COMPLETED_WITH_ERRORS",
 		"COMPLETED",
 		"FAILED",
 	}

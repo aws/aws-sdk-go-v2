@@ -14,11 +14,11 @@ import (
 
 // Returns one or more cluster subnet group objects, which contain metadata about
 // your cluster subnet groups. By default, this operation returns information about
-// all cluster subnet groups that are defined in you AWS account. If you specify
-// both tag keys and tag values in the same request, Amazon Redshift returns all
-// subnet groups that match any combination of the specified keys and values. For
-// example, if you have owner and environment for tag keys, and admin and test for
-// tag values, all subnet groups that have any combination of those values are
+// all cluster subnet groups that are defined in your account. If you specify both
+// tag keys and tag values in the same request, Amazon Redshift returns all subnet
+// groups that match any combination of the specified keys and values. For example,
+// if you have owner and environment for tag keys, and admin and test for tag
+// values, all subnet groups that have any combination of those values are
 // returned. If both tag keys and values are omitted from the request, subnet
 // groups are returned regardless of whether they have tag keys or values
 // associated with them.
@@ -45,10 +45,10 @@ type DescribeClusterSubnetGroupsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterSubnetGroups request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
+	// the Marker field of the response. You can retrieve the next set of response
+	// records by providing the returned marker value in the Marker parameter and
+	// retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of

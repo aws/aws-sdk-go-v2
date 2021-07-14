@@ -44,10 +44,10 @@ type DescribeMaintenanceWindowScheduleInput struct {
 	NextToken *string
 
 	// The type of resource you want to retrieve information about. For example,
-	// "INSTANCE".
+	// INSTANCE.
 	ResourceType types.MaintenanceWindowResourceType
 
-	// The instance ID or key/value pair to retrieve information about.
+	// The instance ID or key-value pair to retrieve information about.
 	Targets []types.Target
 
 	// The ID of the maintenance window to retrieve information about.
