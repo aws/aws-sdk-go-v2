@@ -1,6 +1,8 @@
 package config
 
 import (
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
+	"github.com/google/go-cmp/cmp"
 	"os"
 	"reflect"
 	"strconv"
@@ -105,8 +107,9 @@ func TestNewEnvConfig(t *testing.T) {
 	defer awstesting.PopEnv(restoreEnv)
 
 	cases := []struct {
-		Env    map[string]string
-		Config EnvConfig
+		Env     map[string]string
+		Config  EnvConfig
+		WantErr bool
 	}{
 		0: {
 			Env: map[string]string{
@@ -250,6 +253,69 @@ func TestNewEnvConfig(t *testing.T) {
 			Env:    map[string]string{},
 			Config: EnvConfig{},
 		},
+		16: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE": "IPv6",
+			},
+			Config: EnvConfig{
+				EC2IMDSEndpointMode: imds.EndpointModeStateIPv6,
+			},
+		},
+		17: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE": "IPv4",
+			},
+			Config: EnvConfig{
+				EC2IMDSEndpointMode: imds.EndpointModeStateIPv4,
+			},
+		},
+		18: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE": "foobar",
+			},
+			Config:  EnvConfig{},
+			WantErr: true,
+		},
+		19: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_SERVICE_ENDPOINT": "http://endpoint.localhost",
+			},
+			Config: EnvConfig{
+				EC2IMDSEndpoint: "http://endpoint.localhost",
+			},
+		},
+		20: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE": "IPv6",
+				"AWS_EC2_METADATA_SERVICE_ENDPOINT":      "http://endpoint.localhost",
+			},
+			Config: EnvConfig{
+				EC2IMDSEndpoint:     "http://endpoint.localhost",
+				EC2IMDSEndpointMode: imds.EndpointModeStateIPv6,
+			},
+		},
+		21: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_DISABLED": "false",
+			},
+			Config: EnvConfig{
+				EC2IMDSClientEnableState: imds.ClientEnabled,
+			},
+		},
+		22: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_DISABLED": "true",
+			},
+			Config: EnvConfig{
+				EC2IMDSClientEnableState: imds.ClientDisabled,
+			},
+		},
+		23: {
+			Env: map[string]string{
+				"AWS_EC2_METADATA_DISABLED": "foobar",
+			},
+			Config: EnvConfig{},
+		},
 	}
 
 	for i, c := range cases {
@@ -261,13 +327,13 @@ func TestNewEnvConfig(t *testing.T) {
 			}
 
 			cfg, err := NewEnvConfig()
-			if err != nil {
-				t.Fatalf("expect no error, got %v", err)
+			if (err != nil) != c.WantErr {
+				t.Fatalf("WantErr=%v, got err=%v", c.WantErr, err)
 			}
 
-			if !reflect.DeepEqual(c.Config, cfg) {
+			if diff := cmp.Diff(c.Config, cfg); len(diff) > 0 {
 				t.Errorf("expect config to match.\n%s",
-					awstesting.SprintExpectActual(c.Config, cfg))
+					diff)
 			}
 		})
 	}

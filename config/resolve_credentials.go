@@ -289,14 +289,8 @@ func resolveEC2RoleCredentials(ctx context.Context, cfg *aws.Config, configs con
 
 	optFns = append(optFns, func(o *ec2rolecreds.Options) {
 		// Only define a client from config if not already defined.
-		if o.Client != nil {
-			options := imds.Options{
-				HTTPClient: cfg.HTTPClient,
-			}
-			if cfg.Retryer != nil {
-				options.Retryer = cfg.Retryer()
-			}
-			o.Client = imds.New(options)
+		if o.Client == nil {
+			o.Client = imds.NewFromConfig(*cfg)
 		}
 	})
 

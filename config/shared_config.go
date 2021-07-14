@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -58,6 +59,10 @@ const (
 
 	// S3 ARN Region Usage
 	s3UseARNRegionKey = "s3_use_arn_region"
+
+	ec2MetadataServiceEndpointModeKey = "ec2_metadata_service_endpoint_mode"
+
+	ec2MetadataServiceEndpointKey = "ec2_metadata_service_endpoint"
 
 	// DefaultSharedConfigProfile is the default profile to be used when
 	// loading configuration from the config files if another profile name
@@ -152,6 +157,16 @@ type SharedConfig struct {
 	//
 	// s3_use_arn_region=true
 	S3UseARNRegion *bool
+
+	// Specifies the EC2 Instance Metadata Service default endpoint selection mode (IPv4 or IPv6)
+	//
+	// ec2_metadata_service_endpoint_mode=IPv6
+	EC2IMDSEndpointMode imds.EndpointModeState
+
+	// Specifies the EC2 Instance Metadata Service endpoint to use. If specified it overrides EC2IMDSEndpointMode.
+	//
+	// ec2_metadata_service_endpoint=http://fd00:ec2::254
+	EC2IMDSEndpoint string
 }
 
 // GetS3UseARNRegion returns if the S3 service should allow ARNs to direct the region
@@ -184,6 +199,24 @@ func (c SharedConfig) getRegion(ctx context.Context) (string, bool, error) {
 // GetCredentialsProvider returns the credentials for a profile if they were set.
 func (c SharedConfig) getCredentialsProvider() (aws.Credentials, bool, error) {
 	return c.Credentials, true, nil
+}
+
+// GetEC2IMDSEndpointMode implements a EC2IMDSEndpointMode option resolver interface.
+func (c SharedConfig) GetEC2IMDSEndpointMode() (imds.EndpointModeState, bool, error) {
+	if c.EC2IMDSEndpointMode == imds.EndpointModeStateUnset {
+		return imds.EndpointModeStateUnset, false, nil
+	}
+
+	return c.EC2IMDSEndpointMode, true, nil
+}
+
+// GetEC2IMDSEndpoint implements a EC2IMDSEndpoint option resolver interface.
+func (c SharedConfig) GetEC2IMDSEndpoint() (string, bool, error) {
+	if len(c.EC2IMDSEndpoint) == 0 {
+		return "", false, nil
+	}
+
+	return c.EC2IMDSEndpoint, true, nil
 }
 
 // loadSharedConfigIgnoreNotExist is an alias for loadSharedConfig with the
@@ -874,6 +907,11 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	updateEndpointDiscoveryType(&c.EnableEndpointDiscovery, section, enableEndpointDiscoveryKey)
 	updateBoolPtr(&c.S3UseARNRegion, section, s3UseARNRegionKey)
 
+	if err := updateEC2MetadataServiceEndpointMode(&c.EC2IMDSEndpointMode, section, ec2MetadataServiceEndpointModeKey); err != nil {
+		return fmt.Errorf("failed to load %s from shared config, %v", ec2MetadataServiceEndpointModeKey, err)
+	}
+	updateString(&c.EC2IMDSEndpoint, section, ec2MetadataServiceEndpointKey)
+
 	// Shared Credentials
 	creds := aws.Credentials{
 		AccessKeyID:     section.String(accessKeyIDKey),
@@ -887,6 +925,14 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	}
 
 	return nil
+}
+
+func updateEC2MetadataServiceEndpointMode(endpointMode *imds.EndpointModeState, section ini.Section, key string) error {
+	if !section.Has(key) {
+		return nil
+	}
+	value := section.String(key)
+	return endpointMode.SetFromString(value)
 }
 
 func (c *SharedConfig) validateCredentialsConfig(profile string) error {
