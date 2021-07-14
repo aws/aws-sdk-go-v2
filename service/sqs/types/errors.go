@@ -21,7 +21,9 @@ func (e *BatchEntryIdsNotDistinct) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BatchEntryIdsNotDistinct) ErrorCode() string             { return "BatchEntryIdsNotDistinct" }
+func (e *BatchEntryIdsNotDistinct) ErrorCode() string {
+	return "AWS.SimpleQueueService.BatchEntryIdsNotDistinct"
+}
 func (e *BatchEntryIdsNotDistinct) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The length of all the messages put together is more than the limit.
@@ -38,7 +40,7 @@ func (e *BatchRequestTooLong) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BatchRequestTooLong) ErrorCode() string             { return "BatchRequestTooLong" }
+func (e *BatchRequestTooLong) ErrorCode() string             { return "AWS.SimpleQueueService.BatchRequestTooLong" }
 func (e *BatchRequestTooLong) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The batch request doesn't contain any entries.
@@ -55,7 +57,7 @@ func (e *EmptyBatchRequest) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EmptyBatchRequest) ErrorCode() string             { return "EmptyBatchRequest" }
+func (e *EmptyBatchRequest) ErrorCode() string             { return "AWS.SimpleQueueService.EmptyBatchRequest" }
 func (e *EmptyBatchRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified attribute doesn't exist.
@@ -89,7 +91,7 @@ func (e *InvalidBatchEntryId) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidBatchEntryId) ErrorCode() string             { return "InvalidBatchEntryId" }
+func (e *InvalidBatchEntryId) ErrorCode() string             { return "AWS.SimpleQueueService.InvalidBatchEntryId" }
 func (e *InvalidBatchEntryId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified receipt handle isn't valid for the current version.
@@ -140,7 +142,7 @@ func (e *MessageNotInflight) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MessageNotInflight) ErrorCode() string             { return "MessageNotInflight" }
+func (e *MessageNotInflight) ErrorCode() string             { return "AWS.SimpleQueueService.MessageNotInflight" }
 func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified action violates a limit. For example, ReceiveMessage returns this
@@ -179,7 +181,9 @@ func (e *PurgeQueueInProgress) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PurgeQueueInProgress) ErrorCode() string             { return "PurgeQueueInProgress" }
+func (e *PurgeQueueInProgress) ErrorCode() string {
+	return "AWS.SimpleQueueService.PurgeQueueInProgress"
+}
 func (e *PurgeQueueInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You must wait 60 seconds after deleting a queue before you can create another
@@ -197,7 +201,9 @@ func (e *QueueDeletedRecently) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *QueueDeletedRecently) ErrorCode() string             { return "QueueDeletedRecently" }
+func (e *QueueDeletedRecently) ErrorCode() string {
+	return "AWS.SimpleQueueService.QueueDeletedRecently"
+}
 func (e *QueueDeletedRecently) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified queue doesn't exist.
@@ -214,7 +220,7 @@ func (e *QueueDoesNotExist) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *QueueDoesNotExist) ErrorCode() string             { return "QueueDoesNotExist" }
+func (e *QueueDoesNotExist) ErrorCode() string             { return "AWS.SimpleQueueService.NonExistentQueue" }
 func (e *QueueDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A queue with this name already exists. Amazon SQS returns this error only if the
@@ -233,7 +239,7 @@ func (e *QueueNameExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *QueueNameExists) ErrorCode() string             { return "QueueNameExists" }
+func (e *QueueNameExists) ErrorCode() string             { return "QueueAlreadyExists" }
 func (e *QueueNameExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified receipt handle isn't valid.
@@ -267,7 +273,9 @@ func (e *TooManyEntriesInBatchRequest) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyEntriesInBatchRequest) ErrorCode() string             { return "TooManyEntriesInBatchRequest" }
+func (e *TooManyEntriesInBatchRequest) ErrorCode() string {
+	return "AWS.SimpleQueueService.TooManyEntriesInBatchRequest"
+}
 func (e *TooManyEntriesInBatchRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Error code 400. Unsupported operation.
@@ -284,5 +292,7 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedOperation) ErrorCode() string             { return "UnsupportedOperation" }
+func (e *UnsupportedOperation) ErrorCode() string {
+	return "AWS.SimpleQueueService.UnsupportedOperation"
+}
 func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

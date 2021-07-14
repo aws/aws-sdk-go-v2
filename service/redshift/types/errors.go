@@ -21,7 +21,7 @@ func (e *AccessToClusterDeniedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessToClusterDeniedFault) ErrorCode() string             { return "AccessToClusterDeniedFault" }
+func (e *AccessToClusterDeniedFault) ErrorCode() string             { return "AccessToClusterDenied" }
 func (e *AccessToClusterDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The owner of the specified snapshot has not authorized your account to access
@@ -39,7 +39,7 @@ func (e *AccessToSnapshotDeniedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessToSnapshotDeniedFault) ErrorCode() string             { return "AccessToSnapshotDeniedFault" }
+func (e *AccessToSnapshotDeniedFault) ErrorCode() string             { return "AccessToSnapshotDenied" }
 func (e *AccessToSnapshotDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified CIDR block or EC2 security group is already authorized for the
@@ -57,9 +57,7 @@ func (e *AuthorizationAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationAlreadyExistsFault) ErrorCode() string {
-	return "AuthorizationAlreadyExistsFault"
-}
+func (e *AuthorizationAlreadyExistsFault) ErrorCode() string             { return "AuthorizationAlreadyExists" }
 func (e *AuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified CIDR IP range or EC2 security group is not authorized for the
@@ -77,7 +75,7 @@ func (e *AuthorizationNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationNotFoundFault) ErrorCode() string             { return "AuthorizationNotFoundFault" }
+func (e *AuthorizationNotFoundFault) ErrorCode() string             { return "AuthorizationNotFound" }
 func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The authorization quota for the cluster security group has been reached.
@@ -94,9 +92,7 @@ func (e *AuthorizationQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationQuotaExceededFault) ErrorCode() string {
-	return "AuthorizationQuotaExceededFault"
-}
+func (e *AuthorizationQuotaExceededFault) ErrorCode() string             { return "AuthorizationQuotaExceeded" }
 func (e *AuthorizationQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number for a batch delete of snapshots has been reached. The limit
@@ -115,7 +111,7 @@ func (e *BatchDeleteRequestSizeExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchDeleteRequestSizeExceededFault) ErrorCode() string {
-	return "BatchDeleteRequestSizeExceededFault"
+	return "BatchDeleteRequestSizeExceeded"
 }
 func (e *BatchDeleteRequestSizeExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -173,7 +169,7 @@ func (e *ClusterAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterAlreadyExistsFault) ErrorCode() string             { return "ClusterAlreadyExistsFault" }
+func (e *ClusterAlreadyExistsFault) ErrorCode() string             { return "ClusterAlreadyExists" }
 func (e *ClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The ClusterIdentifier parameter does not refer to an existing cluster.
@@ -190,7 +186,7 @@ func (e *ClusterNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterNotFoundFault) ErrorCode() string             { return "ClusterNotFoundFault" }
+func (e *ClusterNotFoundFault) ErrorCode() string             { return "ClusterNotFound" }
 func (e *ClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Cluster is already on the latest database revision.
@@ -207,7 +203,7 @@ func (e *ClusterOnLatestRevisionFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterOnLatestRevisionFault) ErrorCode() string             { return "ClusterOnLatestRevisionFault" }
+func (e *ClusterOnLatestRevisionFault) ErrorCode() string             { return "ClusterOnLatestRevision" }
 func (e *ClusterOnLatestRevisionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A cluster parameter group with the same name already exists.
@@ -225,7 +221,7 @@ func (e *ClusterParameterGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterParameterGroupAlreadyExistsFault) ErrorCode() string {
-	return "ClusterParameterGroupAlreadyExistsFault"
+	return "ClusterParameterGroupAlreadyExists"
 }
 func (e *ClusterParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -246,7 +242,7 @@ func (e *ClusterParameterGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterParameterGroupNotFoundFault) ErrorCode() string {
-	return "ClusterParameterGroupNotFoundFault"
+	return "ClusterParameterGroupNotFound"
 }
 func (e *ClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -271,7 +267,7 @@ func (e *ClusterParameterGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterParameterGroupQuotaExceededFault) ErrorCode() string {
-	return "ClusterParameterGroupQuotaExceededFault"
+	return "ClusterParameterGroupQuotaExceeded"
 }
 func (e *ClusterParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -295,7 +291,7 @@ func (e *ClusterQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterQuotaExceededFault) ErrorCode() string             { return "ClusterQuotaExceededFault" }
+func (e *ClusterQuotaExceededFault) ErrorCode() string             { return "ClusterQuotaExceeded" }
 func (e *ClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A cluster security group with the same name already exists.
@@ -313,7 +309,7 @@ func (e *ClusterSecurityGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterSecurityGroupAlreadyExistsFault) ErrorCode() string {
-	return "ClusterSecurityGroupAlreadyExistsFault"
+	return "ClusterSecurityGroupAlreadyExists"
 }
 func (e *ClusterSecurityGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -334,9 +330,7 @@ func (e *ClusterSecurityGroupNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterSecurityGroupNotFoundFault) ErrorCode() string {
-	return "ClusterSecurityGroupNotFoundFault"
-}
+func (e *ClusterSecurityGroupNotFoundFault) ErrorCode() string             { return "ClusterSecurityGroupNotFound" }
 func (e *ClusterSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of cluster
@@ -358,7 +352,7 @@ func (e *ClusterSecurityGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterSecurityGroupQuotaExceededFault) ErrorCode() string {
-	return "ClusterSecurityGroupQuotaExceededFault"
+	return "QuotaExceeded.ClusterSecurityGroup"
 }
 func (e *ClusterSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -379,9 +373,7 @@ func (e *ClusterSnapshotAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterSnapshotAlreadyExistsFault) ErrorCode() string {
-	return "ClusterSnapshotAlreadyExistsFault"
-}
+func (e *ClusterSnapshotAlreadyExistsFault) ErrorCode() string             { return "ClusterSnapshotAlreadyExists" }
 func (e *ClusterSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The snapshot identifier does not refer to an existing cluster snapshot.
@@ -398,7 +390,7 @@ func (e *ClusterSnapshotNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterSnapshotNotFoundFault) ErrorCode() string             { return "ClusterSnapshotNotFoundFault" }
+func (e *ClusterSnapshotNotFoundFault) ErrorCode() string             { return "ClusterSnapshotNotFound" }
 func (e *ClusterSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of cluster
@@ -416,9 +408,7 @@ func (e *ClusterSnapshotQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterSnapshotQuotaExceededFault) ErrorCode() string {
-	return "ClusterSnapshotQuotaExceededFault"
-}
+func (e *ClusterSnapshotQuotaExceededFault) ErrorCode() string             { return "ClusterSnapshotQuotaExceeded" }
 func (e *ClusterSnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A ClusterSubnetGroupName is already used by an existing cluster subnet group.
@@ -436,7 +426,7 @@ func (e *ClusterSubnetGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterSubnetGroupAlreadyExistsFault) ErrorCode() string {
-	return "ClusterSubnetGroupAlreadyExistsFault"
+	return "ClusterSubnetGroupAlreadyExists"
 }
 func (e *ClusterSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -481,7 +471,7 @@ func (e *ClusterSubnetGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterSubnetGroupQuotaExceededFault) ErrorCode() string {
-	return "ClusterSubnetGroupQuotaExceededFault"
+	return "ClusterSubnetGroupQuotaExceeded"
 }
 func (e *ClusterSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -584,7 +574,7 @@ func (e *EndpointAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EndpointAlreadyExistsFault) ErrorCode() string             { return "EndpointAlreadyExistsFault" }
+func (e *EndpointAlreadyExistsFault) ErrorCode() string             { return "EndpointAlreadyExists" }
 func (e *EndpointAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The authorization already exists for this endpoint.
@@ -602,7 +592,7 @@ func (e *EndpointAuthorizationAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointAuthorizationAlreadyExistsFault) ErrorCode() string {
-	return "EndpointAuthorizationAlreadyExistsFault"
+	return "EndpointAuthorizationAlreadyExists"
 }
 func (e *EndpointAuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -623,7 +613,7 @@ func (e *EndpointAuthorizationNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointAuthorizationNotFoundFault) ErrorCode() string {
-	return "EndpointAuthorizationNotFoundFault"
+	return "EndpointAuthorizationNotFound"
 }
 func (e *EndpointAuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -644,7 +634,7 @@ func (e *EndpointAuthorizationsPerClusterLimitExceededFault) ErrorMessage() stri
 	return *e.Message
 }
 func (e *EndpointAuthorizationsPerClusterLimitExceededFault) ErrorCode() string {
-	return "EndpointAuthorizationsPerClusterLimitExceededFault"
+	return "EndpointAuthorizationsPerClusterLimitExceeded"
 }
 func (e *EndpointAuthorizationsPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -664,7 +654,7 @@ func (e *EndpointNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EndpointNotFoundFault) ErrorCode() string             { return "EndpointNotFoundFault" }
+func (e *EndpointNotFoundFault) ErrorCode() string             { return "EndpointNotFound" }
 func (e *EndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of Redshift-managed VPC endpoints per authorization has exceeded its
@@ -683,7 +673,7 @@ func (e *EndpointsPerAuthorizationLimitExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointsPerAuthorizationLimitExceededFault) ErrorCode() string {
-	return "EndpointsPerAuthorizationLimitExceededFault"
+	return "EndpointsPerAuthorizationLimitExceeded"
 }
 func (e *EndpointsPerAuthorizationLimitExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -704,7 +694,7 @@ func (e *EndpointsPerClusterLimitExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointsPerClusterLimitExceededFault) ErrorCode() string {
-	return "EndpointsPerClusterLimitExceededFault"
+	return "EndpointsPerClusterLimitExceeded"
 }
 func (e *EndpointsPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -729,7 +719,7 @@ func (e *EventSubscriptionQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventSubscriptionQuotaExceededFault) ErrorCode() string {
-	return "EventSubscriptionQuotaExceededFault"
+	return "EventSubscriptionQuotaExceeded"
 }
 func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -917,9 +907,7 @@ func (e *InsufficientClusterCapacityFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InsufficientClusterCapacityFault) ErrorCode() string {
-	return "InsufficientClusterCapacityFault"
-}
+func (e *InsufficientClusterCapacityFault) ErrorCode() string             { return "InsufficientClusterCapacity" }
 func (e *InsufficientClusterCapacityFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cluster does not have read bucket or put object permissions on the S3 bucket
@@ -956,7 +944,7 @@ func (e *InvalidAuthorizationStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidAuthorizationStateFault) ErrorCode() string             { return "InvalidAuthorizationStateFault" }
+func (e *InvalidAuthorizationStateFault) ErrorCode() string             { return "InvalidAuthorizationState" }
 func (e *InvalidAuthorizationStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cluster parameter group action can not be completed because another task is
@@ -976,7 +964,7 @@ func (e *InvalidClusterParameterGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClusterParameterGroupStateFault) ErrorCode() string {
-	return "InvalidClusterParameterGroupStateFault"
+	return "InvalidClusterParameterGroupState"
 }
 func (e *InvalidClusterParameterGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -997,7 +985,7 @@ func (e *InvalidClusterSecurityGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClusterSecurityGroupStateFault) ErrorCode() string {
-	return "InvalidClusterSecurityGroupStateFault"
+	return "InvalidClusterSecurityGroupState"
 }
 func (e *InvalidClusterSecurityGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1018,7 +1006,7 @@ func (e *InvalidClusterSnapshotScheduleStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClusterSnapshotScheduleStateFault) ErrorCode() string {
-	return "InvalidClusterSnapshotScheduleStateFault"
+	return "InvalidClusterSnapshotScheduleState"
 }
 func (e *InvalidClusterSnapshotScheduleStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1039,9 +1027,7 @@ func (e *InvalidClusterSnapshotStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidClusterSnapshotStateFault) ErrorCode() string {
-	return "InvalidClusterSnapshotStateFault"
-}
+func (e *InvalidClusterSnapshotStateFault) ErrorCode() string             { return "InvalidClusterSnapshotState" }
 func (e *InvalidClusterSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified cluster is not in the available state.
@@ -1058,7 +1044,7 @@ func (e *InvalidClusterStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidClusterStateFault) ErrorCode() string             { return "InvalidClusterStateFault" }
+func (e *InvalidClusterStateFault) ErrorCode() string             { return "InvalidClusterState" }
 func (e *InvalidClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cluster subnet group cannot be deleted because it is in use.
@@ -1113,7 +1099,7 @@ func (e *InvalidClusterTrackFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidClusterTrackFault) ErrorCode() string             { return "InvalidClusterTrackFault" }
+func (e *InvalidClusterTrackFault) ErrorCode() string             { return "InvalidClusterTrack" }
 func (e *InvalidClusterTrackFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Elastic IP (EIP) is invalid or cannot be found.
@@ -1147,7 +1133,7 @@ func (e *InvalidEndpointStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidEndpointStateFault) ErrorCode() string             { return "InvalidEndpointStateFault" }
+func (e *InvalidEndpointStateFault) ErrorCode() string             { return "InvalidEndpointState" }
 func (e *InvalidEndpointStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified HSM client certificate is not in the available state, or it is
@@ -1206,7 +1192,7 @@ func (e *InvalidReservedNodeStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidReservedNodeStateFault) ErrorCode() string             { return "InvalidReservedNodeStateFault" }
+func (e *InvalidReservedNodeStateFault) ErrorCode() string             { return "InvalidReservedNodeState" }
 func (e *InvalidReservedNodeStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The restore is invalid.
@@ -1223,7 +1209,7 @@ func (e *InvalidRestoreFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRestoreFault) ErrorCode() string             { return "InvalidRestoreFault" }
+func (e *InvalidRestoreFault) ErrorCode() string             { return "InvalidRestore" }
 func (e *InvalidRestoreFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The retention period specified is either in the past or is not a valid value.
@@ -1296,7 +1282,7 @@ func (e *InvalidScheduledActionFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidScheduledActionFault) ErrorCode() string             { return "InvalidScheduledActionFault" }
+func (e *InvalidScheduledActionFault) ErrorCode() string             { return "InvalidScheduledAction" }
 func (e *InvalidScheduledActionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The schedule you submitted isn't valid.
@@ -1313,7 +1299,7 @@ func (e *InvalidScheduleFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidScheduleFault) ErrorCode() string             { return "InvalidScheduleFault" }
+func (e *InvalidScheduleFault) ErrorCode() string             { return "InvalidSchedule" }
 func (e *InvalidScheduleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The snapshot copy grant can't be deleted because it is used by one or more
@@ -1390,9 +1376,7 @@ func (e *InvalidTableRestoreArgumentFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTableRestoreArgumentFault) ErrorCode() string {
-	return "InvalidTableRestoreArgumentFault"
-}
+func (e *InvalidTableRestoreArgumentFault) ErrorCode() string             { return "InvalidTableRestoreArgument" }
 func (e *InvalidTableRestoreArgumentFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The tag is invalid.
@@ -1426,7 +1410,7 @@ func (e *InvalidUsageLimitFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidUsageLimitFault) ErrorCode() string             { return "InvalidUsageLimitFault" }
+func (e *InvalidUsageLimitFault) ErrorCode() string             { return "InvalidUsageLimit" }
 func (e *InvalidUsageLimitFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cluster subnet group does not cover all Availability Zones.
@@ -1478,7 +1462,7 @@ func (e *NumberOfNodesPerClusterLimitExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NumberOfNodesPerClusterLimitExceededFault) ErrorCode() string {
-	return "NumberOfNodesPerClusterLimitExceededFault"
+	return "NumberOfNodesPerClusterLimitExceeded"
 }
 func (e *NumberOfNodesPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1501,9 +1485,7 @@ func (e *NumberOfNodesQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NumberOfNodesQuotaExceededFault) ErrorCode() string {
-	return "NumberOfNodesQuotaExceededFault"
-}
+func (e *NumberOfNodesQuotaExceededFault) ErrorCode() string             { return "NumberOfNodesQuotaExceeded" }
 func (e *NumberOfNodesQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The name of the partner was not found.
@@ -1520,7 +1502,7 @@ func (e *PartnerNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PartnerNotFoundFault) ErrorCode() string             { return "PartnerNotFoundFault" }
+func (e *PartnerNotFoundFault) ErrorCode() string             { return "PartnerNotFound" }
 func (e *PartnerNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // User already has a reservation with the given identifier.
@@ -1537,7 +1519,7 @@ func (e *ReservedNodeAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReservedNodeAlreadyExistsFault) ErrorCode() string             { return "ReservedNodeAlreadyExistsFault" }
+func (e *ReservedNodeAlreadyExistsFault) ErrorCode() string             { return "ReservedNodeAlreadyExists" }
 func (e *ReservedNodeAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the reserved node has already been exchanged.
@@ -1554,9 +1536,7 @@ func (e *ReservedNodeAlreadyMigratedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReservedNodeAlreadyMigratedFault) ErrorCode() string {
-	return "ReservedNodeAlreadyMigratedFault"
-}
+func (e *ReservedNodeAlreadyMigratedFault) ErrorCode() string             { return "ReservedNodeAlreadyMigrated" }
 func (e *ReservedNodeAlreadyMigratedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified reserved compute node not found.
@@ -1573,7 +1553,7 @@ func (e *ReservedNodeNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReservedNodeNotFoundFault) ErrorCode() string             { return "ReservedNodeNotFoundFault" }
+func (e *ReservedNodeNotFoundFault) ErrorCode() string             { return "ReservedNodeNotFound" }
 func (e *ReservedNodeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Specified offering does not exist.
@@ -1590,9 +1570,7 @@ func (e *ReservedNodeOfferingNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReservedNodeOfferingNotFoundFault) ErrorCode() string {
-	return "ReservedNodeOfferingNotFoundFault"
-}
+func (e *ReservedNodeOfferingNotFoundFault) ErrorCode() string             { return "ReservedNodeOfferingNotFound" }
 func (e *ReservedNodeOfferingNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request would exceed the user's compute node quota. For information about
@@ -1612,7 +1590,7 @@ func (e *ReservedNodeQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReservedNodeQuotaExceededFault) ErrorCode() string             { return "ReservedNodeQuotaExceededFault" }
+func (e *ReservedNodeQuotaExceededFault) ErrorCode() string             { return "ReservedNodeQuotaExceeded" }
 func (e *ReservedNodeQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resize operation for the specified cluster is not found.
@@ -1629,7 +1607,7 @@ func (e *ResizeNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResizeNotFoundFault) ErrorCode() string             { return "ResizeNotFoundFault" }
+func (e *ResizeNotFoundFault) ErrorCode() string             { return "ResizeNotFound" }
 func (e *ResizeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource could not be found.
@@ -1663,9 +1641,7 @@ func (e *ScheduledActionAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ScheduledActionAlreadyExistsFault) ErrorCode() string {
-	return "ScheduledActionAlreadyExistsFault"
-}
+func (e *ScheduledActionAlreadyExistsFault) ErrorCode() string             { return "ScheduledActionAlreadyExists" }
 func (e *ScheduledActionAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The scheduled action cannot be found.
@@ -1682,7 +1658,7 @@ func (e *ScheduledActionNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ScheduledActionNotFoundFault) ErrorCode() string             { return "ScheduledActionNotFoundFault" }
+func (e *ScheduledActionNotFoundFault) ErrorCode() string             { return "ScheduledActionNotFound" }
 func (e *ScheduledActionNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for scheduled actions exceeded.
@@ -1699,9 +1675,7 @@ func (e *ScheduledActionQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ScheduledActionQuotaExceededFault) ErrorCode() string {
-	return "ScheduledActionQuotaExceededFault"
-}
+func (e *ScheduledActionQuotaExceededFault) ErrorCode() string             { return "ScheduledActionQuotaExceeded" }
 func (e *ScheduledActionQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The action type specified for a scheduled action is not supported.
@@ -1719,7 +1693,7 @@ func (e *ScheduledActionTypeUnsupportedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ScheduledActionTypeUnsupportedFault) ErrorCode() string {
-	return "ScheduledActionTypeUnsupportedFault"
+	return "ScheduledActionTypeUnsupported"
 }
 func (e *ScheduledActionTypeUnsupportedFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1740,7 +1714,7 @@ func (e *ScheduleDefinitionTypeUnsupportedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ScheduleDefinitionTypeUnsupportedFault) ErrorCode() string {
-	return "ScheduleDefinitionTypeUnsupportedFault"
+	return "ScheduleDefinitionTypeUnsupported"
 }
 func (e *ScheduleDefinitionTypeUnsupportedFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1878,7 +1852,7 @@ func (e *SnapshotScheduleAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotScheduleAlreadyExistsFault) ErrorCode() string {
-	return "SnapshotScheduleAlreadyExistsFault"
+	return "SnapshotScheduleAlreadyExists"
 }
 func (e *SnapshotScheduleAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1898,7 +1872,7 @@ func (e *SnapshotScheduleNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SnapshotScheduleNotFoundFault) ErrorCode() string             { return "SnapshotScheduleNotFoundFault" }
+func (e *SnapshotScheduleNotFoundFault) ErrorCode() string             { return "SnapshotScheduleNotFound" }
 func (e *SnapshotScheduleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded the quota of snapshot schedules.
@@ -1916,7 +1890,7 @@ func (e *SnapshotScheduleQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotScheduleQuotaExceededFault) ErrorCode() string {
-	return "SnapshotScheduleQuotaExceededFault"
+	return "SnapshotScheduleQuotaExceeded"
 }
 func (e *SnapshotScheduleQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1937,7 +1911,7 @@ func (e *SnapshotScheduleUpdateInProgressFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotScheduleUpdateInProgressFault) ErrorCode() string {
-	return "SnapshotScheduleUpdateInProgressFault"
+	return "SnapshotScheduleUpdateInProgress"
 }
 func (e *SnapshotScheduleUpdateInProgressFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1958,7 +1932,7 @@ func (e *SNSInvalidTopicFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SNSInvalidTopicFault) ErrorCode() string             { return "SNSInvalidTopicFault" }
+func (e *SNSInvalidTopicFault) ErrorCode() string             { return "SNSInvalidTopic" }
 func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You do not have permission to publish to the specified Amazon SNS topic.
@@ -1975,7 +1949,7 @@ func (e *SNSNoAuthorizationFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SNSNoAuthorizationFault) ErrorCode() string             { return "SNSNoAuthorizationFault" }
+func (e *SNSNoAuthorizationFault) ErrorCode() string             { return "SNSNoAuthorization" }
 func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An Amazon SNS topic with the specified Amazon Resource Name (ARN) does not
@@ -1993,7 +1967,7 @@ func (e *SNSTopicArnNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SNSTopicArnNotFoundFault) ErrorCode() string             { return "SNSTopicArnNotFoundFault" }
+func (e *SNSTopicArnNotFoundFault) ErrorCode() string             { return "SNSTopicArnNotFound" }
 func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified Amazon Redshift event source could not be found.
@@ -2010,7 +1984,7 @@ func (e *SourceNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SourceNotFoundFault) ErrorCode() string             { return "SourceNotFoundFault" }
+func (e *SourceNotFoundFault) ErrorCode() string             { return "SourceNotFound" }
 func (e *SourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified subnet is already in use by another cluster.
@@ -2045,7 +2019,7 @@ func (e *SubscriptionAlreadyExistFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionAlreadyExistFault) ErrorCode() string             { return "SubscriptionAlreadyExistFault" }
+func (e *SubscriptionAlreadyExistFault) ErrorCode() string             { return "SubscriptionAlreadyExist" }
 func (e *SubscriptionAlreadyExistFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value specified for the event category was not one of the allowed values, or
@@ -2064,9 +2038,7 @@ func (e *SubscriptionCategoryNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionCategoryNotFoundFault) ErrorCode() string {
-	return "SubscriptionCategoryNotFoundFault"
-}
+func (e *SubscriptionCategoryNotFoundFault) ErrorCode() string             { return "SubscriptionCategoryNotFound" }
 func (e *SubscriptionCategoryNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An Amazon Redshift event with the specified event ID does not exist.
@@ -2083,9 +2055,7 @@ func (e *SubscriptionEventIdNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionEventIdNotFoundFault) ErrorCode() string {
-	return "SubscriptionEventIdNotFoundFault"
-}
+func (e *SubscriptionEventIdNotFoundFault) ErrorCode() string             { return "SubscriptionEventIdNotFound" }
 func (e *SubscriptionEventIdNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An Amazon Redshift event notification subscription with the specified name does
@@ -2103,7 +2073,7 @@ func (e *SubscriptionNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionNotFoundFault) ErrorCode() string             { return "SubscriptionNotFoundFault" }
+func (e *SubscriptionNotFoundFault) ErrorCode() string             { return "SubscriptionNotFound" }
 func (e *SubscriptionNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value specified for the event severity was not one of the allowed values, or
@@ -2122,9 +2092,7 @@ func (e *SubscriptionSeverityNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionSeverityNotFoundFault) ErrorCode() string {
-	return "SubscriptionSeverityNotFoundFault"
-}
+func (e *SubscriptionSeverityNotFoundFault) ErrorCode() string             { return "SubscriptionSeverityNotFound" }
 func (e *SubscriptionSeverityNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of tables in the cluster exceeds the limit for the requested new
@@ -2142,7 +2110,7 @@ func (e *TableLimitExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TableLimitExceededFault) ErrorCode() string             { return "TableLimitExceededFault" }
+func (e *TableLimitExceededFault) ErrorCode() string             { return "TableLimitExceeded" }
 func (e *TableLimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified TableRestoreRequestId value was not found.
@@ -2211,7 +2179,7 @@ func (e *UnauthorizedPartnerIntegrationFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedPartnerIntegrationFault) ErrorCode() string {
-	return "UnauthorizedPartnerIntegrationFault"
+	return "UnauthorizedPartnerIntegration"
 }
 func (e *UnauthorizedPartnerIntegrationFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -2248,7 +2216,7 @@ func (e *UnsupportedOperationFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedOperationFault) ErrorCode() string             { return "UnsupportedOperationFault" }
+func (e *UnsupportedOperationFault) ErrorCode() string             { return "UnsupportedOperation" }
 func (e *UnsupportedOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A request option was specified that is not supported.
@@ -2282,7 +2250,7 @@ func (e *UsageLimitAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UsageLimitAlreadyExistsFault) ErrorCode() string             { return "UsageLimitAlreadyExistsFault" }
+func (e *UsageLimitAlreadyExistsFault) ErrorCode() string             { return "UsageLimitAlreadyExists" }
 func (e *UsageLimitAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The usage limit identifier can't be found.
@@ -2299,5 +2267,5 @@ func (e *UsageLimitNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UsageLimitNotFoundFault) ErrorCode() string             { return "UsageLimitNotFoundFault" }
+func (e *UsageLimitNotFoundFault) ErrorCode() string             { return "UsageLimitNotFound" }
 func (e *UsageLimitNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

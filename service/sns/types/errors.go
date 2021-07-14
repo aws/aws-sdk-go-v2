@@ -21,7 +21,7 @@ func (e *AuthorizationErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationErrorException) ErrorCode() string             { return "AuthorizationErrorException" }
+func (e *AuthorizationErrorException) ErrorCode() string             { return "AuthorizationError" }
 func (e *AuthorizationErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Can't perform multiple operations on a tag simultaneously. Perform the
@@ -39,7 +39,7 @@ func (e *ConcurrentAccessException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConcurrentAccessException) ErrorCode() string             { return "ConcurrentAccessException" }
+func (e *ConcurrentAccessException) ErrorCode() string             { return "ConcurrentAccess" }
 func (e *ConcurrentAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception error indicating endpoint disabled.
@@ -56,7 +56,7 @@ func (e *EndpointDisabledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EndpointDisabledException) ErrorCode() string             { return "EndpointDisabledException" }
+func (e *EndpointDisabledException) ErrorCode() string             { return "EndpointDisabled" }
 func (e *EndpointDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the number of filter polices in your AWS account exceeds the
@@ -75,9 +75,7 @@ func (e *FilterPolicyLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FilterPolicyLimitExceededException) ErrorCode() string {
-	return "FilterPolicyLimitExceededException"
-}
+func (e *FilterPolicyLimitExceededException) ErrorCode() string { return "FilterPolicyLimitExceeded" }
 func (e *FilterPolicyLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -96,7 +94,7 @@ func (e *InternalErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
+func (e *InternalErrorException) ErrorCode() string             { return "InternalError" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Indicates that a request parameter does not comply with the associated
@@ -114,7 +112,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameter" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a request parameter does not comply with the associated
@@ -132,7 +130,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string             { return "ParameterValueInvalid" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The credential signature isn't valid. You must use an HTTPS endpoint and sign
@@ -150,7 +148,7 @@ func (e *InvalidSecurityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSecurityException) ErrorCode() string             { return "InvalidSecurityException" }
+func (e *InvalidSecurityException) ErrorCode() string             { return "InvalidSecurity" }
 func (e *InvalidSecurityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The ciphertext references a key that doesn't exist or that you don't have access
@@ -168,7 +166,7 @@ func (e *KMSAccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSAccessDeniedException) ErrorCode() string             { return "KMSAccessDeniedException" }
+func (e *KMSAccessDeniedException) ErrorCode() string             { return "KMSAccessDenied" }
 func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the specified customer master key (CMK) isn't
@@ -186,7 +184,7 @@ func (e *KMSDisabledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSDisabledException) ErrorCode() string             { return "KMSDisabledException" }
+func (e *KMSDisabledException) ErrorCode() string             { return "KMSDisabled" }
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the state of the specified resource isn't valid
@@ -207,7 +205,7 @@ func (e *KMSInvalidStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSInvalidStateException) ErrorCode() string             { return "KMSInvalidStateException" }
+func (e *KMSInvalidStateException) ErrorCode() string             { return "KMSInvalidState" }
 func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the specified entity or resource can't be
@@ -225,7 +223,7 @@ func (e *KMSNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSNotFoundException) ErrorCode() string             { return "KMSNotFoundException" }
+func (e *KMSNotFoundException) ErrorCode() string             { return "KMSNotFound" }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The AWS access key ID needs a subscription for the service.
@@ -262,7 +260,7 @@ func (e *KMSThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSThrottlingException) ErrorCode() string             { return "KMSThrottlingException" }
+func (e *KMSThrottlingException) ErrorCode() string             { return "KMSThrottling" }
 func (e *KMSThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the requested resource does not exist.
@@ -279,7 +277,7 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string             { return "NotFound" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the specified phone number opted out of receiving SMS messages
@@ -298,7 +296,7 @@ func (e *OptedOutException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OptedOutException) ErrorCode() string             { return "OptedOutException" }
+func (e *OptedOutException) ErrorCode() string             { return "OptedOut" }
 func (e *OptedOutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception error indicating platform application disabled.
@@ -316,7 +314,7 @@ func (e *PlatformApplicationDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformApplicationDisabledException) ErrorCode() string {
-	return "PlatformApplicationDisabledException"
+	return "PlatformApplicationDisabled"
 }
 func (e *PlatformApplicationDisabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -337,7 +335,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFound" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A tag has been added to a resource with the same ARN as a deleted resource. Wait
@@ -355,7 +353,7 @@ func (e *StaleTagException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StaleTagException) ErrorCode() string             { return "StaleTagException" }
+func (e *StaleTagException) ErrorCode() string             { return "StaleTag" }
 func (e *StaleTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the customer already owns the maximum allowed number of
@@ -373,9 +371,7 @@ func (e *SubscriptionLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionLimitExceededException) ErrorCode() string {
-	return "SubscriptionLimitExceededException"
-}
+func (e *SubscriptionLimitExceededException) ErrorCode() string { return "SubscriptionLimitExceeded" }
 func (e *SubscriptionLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -394,7 +390,7 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceededException" }
+func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceeded" }
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request doesn't comply with the IAM tag policy. Correct your request and
@@ -412,7 +408,7 @@ func (e *TagPolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagPolicyException) ErrorCode() string             { return "TagPolicyException" }
+func (e *TagPolicyException) ErrorCode() string             { return "TagPolicy" }
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the rate at which requests have been submitted for this action
@@ -430,7 +426,7 @@ func (e *ThrottledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottledException) ErrorCode() string             { return "ThrottledException" }
+func (e *ThrottledException) ErrorCode() string             { return "Throttled" }
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the customer already owns the maximum allowed number of topics.
@@ -447,7 +443,7 @@ func (e *TopicLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TopicLimitExceededException) ErrorCode() string             { return "TopicLimitExceededException" }
+func (e *TopicLimitExceededException) ErrorCode() string             { return "TopicLimitExceeded" }
 func (e *TopicLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a request parameter does not comply with the associated
@@ -465,7 +461,7 @@ func (e *UserErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UserErrorException) ErrorCode() string             { return "UserErrorException" }
+func (e *UserErrorException) ErrorCode() string             { return "UserError" }
 func (e *UserErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a parameter in the request is invalid.

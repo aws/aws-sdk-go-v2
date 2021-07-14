@@ -42,7 +42,7 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
+func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExists" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the delete operation could not be completed.
@@ -61,7 +61,7 @@ func (e *CannotDeleteException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CannotDeleteException) ErrorCode() string             { return "CannotDeleteException" }
+func (e *CannotDeleteException) ErrorCode() string             { return "CannotDelete" }
 func (e *CannotDeleteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the configuration set could not be created because of a naming
@@ -82,7 +82,7 @@ func (e *ConfigurationSetAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetAlreadyExistsException) ErrorCode() string {
-	return "ConfigurationSetAlreadyExistsException"
+	return "ConfigurationSetAlreadyExists"
 }
 func (e *ConfigurationSetAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -105,7 +105,7 @@ func (e *ConfigurationSetDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorCode() string {
-	return "ConfigurationSetDoesNotExistException"
+	return "ConfigurationSetDoesNotExist"
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -151,7 +151,7 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorCode() string {
-	return "CustomVerificationEmailInvalidContentException"
+	return "CustomVerificationEmailInvalidContent"
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -175,7 +175,7 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorMessage() s
 	return *e.Message
 }
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorCode() string {
-	return "CustomVerificationEmailTemplateAlreadyExistsException"
+	return "CustomVerificationEmailTemplateAlreadyExists"
 }
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -199,7 +199,7 @@ func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorMessage() st
 	return *e.Message
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorCode() string {
-	return "CustomVerificationEmailTemplateDoesNotExistException"
+	return "CustomVerificationEmailTemplateDoesNotExist"
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -224,7 +224,7 @@ func (e *EventDestinationAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDestinationAlreadyExistsException) ErrorCode() string {
-	return "EventDestinationAlreadyExistsException"
+	return "EventDestinationAlreadyExists"
 }
 func (e *EventDestinationAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -248,7 +248,7 @@ func (e *EventDestinationDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDestinationDoesNotExistException) ErrorCode() string {
-	return "EventDestinationDoesNotExistException"
+	return "EventDestinationDoesNotExist"
 }
 func (e *EventDestinationDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -273,7 +273,7 @@ func (e *FromEmailAddressNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FromEmailAddressNotVerifiedException) ErrorCode() string {
-	return "FromEmailAddressNotVerifiedException"
+	return "FromEmailAddressNotVerified"
 }
 func (e *FromEmailAddressNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -298,7 +298,7 @@ func (e *InvalidCloudWatchDestinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCloudWatchDestinationException) ErrorCode() string {
-	return "InvalidCloudWatchDestinationException"
+	return "InvalidCloudWatchDestination"
 }
 func (e *InvalidCloudWatchDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -319,9 +319,7 @@ func (e *InvalidConfigurationSetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidConfigurationSetException) ErrorCode() string {
-	return "InvalidConfigurationSetException"
-}
+func (e *InvalidConfigurationSetException) ErrorCode() string             { return "InvalidConfigurationSet" }
 func (e *InvalidConfigurationSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that provided delivery option is invalid.
@@ -338,9 +336,7 @@ func (e *InvalidDeliveryOptionsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDeliveryOptionsException) ErrorCode() string {
-	return "InvalidDeliveryOptionsException"
-}
+func (e *InvalidDeliveryOptionsException) ErrorCode() string             { return "InvalidDeliveryOptions" }
 func (e *InvalidDeliveryOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the Amazon Kinesis Firehose destination is invalid. See the error
@@ -361,9 +357,7 @@ func (e *InvalidFirehoseDestinationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidFirehoseDestinationException) ErrorCode() string {
-	return "InvalidFirehoseDestinationException"
-}
+func (e *InvalidFirehoseDestinationException) ErrorCode() string { return "InvalidFirehoseDestination" }
 func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -387,7 +381,7 @@ func (e *InvalidLambdaFunctionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidLambdaFunctionException) ErrorCode() string             { return "InvalidLambdaFunctionException" }
+func (e *InvalidLambdaFunctionException) ErrorCode() string             { return "InvalidLambdaFunction" }
 func (e *InvalidLambdaFunctionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the provided policy is invalid. Check the error stack for more
@@ -405,7 +399,7 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPolicyException) ErrorCode() string             { return "InvalidPolicyException" }
+func (e *InvalidPolicyException) ErrorCode() string             { return "InvalidPolicy" }
 func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that one or more of the replacement values you provided is invalid.
@@ -425,9 +419,7 @@ func (e *InvalidRenderingParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRenderingParameterException) ErrorCode() string {
-	return "InvalidRenderingParameterException"
-}
+func (e *InvalidRenderingParameterException) ErrorCode() string { return "InvalidRenderingParameter" }
 func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -452,9 +444,7 @@ func (e *InvalidS3ConfigurationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidS3ConfigurationException) ErrorCode() string {
-	return "InvalidS3ConfigurationException"
-}
+func (e *InvalidS3ConfigurationException) ErrorCode() string             { return "InvalidS3Configuration" }
 func (e *InvalidS3ConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the Amazon Simple Notification Service (Amazon SNS) destination
@@ -475,7 +465,7 @@ func (e *InvalidSNSDestinationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSNSDestinationException) ErrorCode() string             { return "InvalidSNSDestinationException" }
+func (e *InvalidSNSDestinationException) ErrorCode() string             { return "InvalidSNSDestination" }
 func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES
@@ -497,7 +487,7 @@ func (e *InvalidSnsTopicException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSnsTopicException) ErrorCode() string             { return "InvalidSnsTopicException" }
+func (e *InvalidSnsTopicException) ErrorCode() string             { return "InvalidSnsTopic" }
 func (e *InvalidSnsTopicException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the template that you specified could not be rendered. This issue
@@ -517,7 +507,7 @@ func (e *InvalidTemplateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTemplateException) ErrorCode() string             { return "InvalidTemplateException" }
+func (e *InvalidTemplateException) ErrorCode() string             { return "InvalidTemplate" }
 func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the custom domain to be used for open and click tracking
@@ -542,9 +532,7 @@ func (e *InvalidTrackingOptionsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTrackingOptionsException) ErrorCode() string {
-	return "InvalidTrackingOptionsException"
-}
+func (e *InvalidTrackingOptionsException) ErrorCode() string             { return "InvalidTrackingOptions" }
 func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a resource could not be created because of service limits. For a
@@ -563,7 +551,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string             { return "LimitExceeded" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the message could not be sent because Amazon SES could not read
@@ -627,9 +615,7 @@ func (e *MissingRenderingAttributeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MissingRenderingAttributeException) ErrorCode() string {
-	return "MissingRenderingAttributeException"
-}
+func (e *MissingRenderingAttributeException) ErrorCode() string { return "MissingRenderingAttribute" }
 func (e *MissingRenderingAttributeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -648,9 +634,7 @@ func (e *ProductionAccessNotGrantedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ProductionAccessNotGrantedException) ErrorCode() string {
-	return "ProductionAccessNotGrantedException"
-}
+func (e *ProductionAccessNotGrantedException) ErrorCode() string { return "ProductionAccessNotGranted" }
 func (e *ProductionAccessNotGrantedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -671,7 +655,7 @@ func (e *RuleDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RuleDoesNotExistException) ErrorCode() string             { return "RuleDoesNotExistException" }
+func (e *RuleDoesNotExistException) ErrorCode() string             { return "RuleDoesNotExist" }
 func (e *RuleDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the provided receipt rule set does not exist.
@@ -690,7 +674,7 @@ func (e *RuleSetDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RuleSetDoesNotExistException) ErrorCode() string             { return "RuleSetDoesNotExistException" }
+func (e *RuleSetDoesNotExistException) ErrorCode() string             { return "RuleSetDoesNotExist" }
 func (e *RuleSetDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the Template object you specified does not exist in your Amazon
@@ -710,7 +694,7 @@ func (e *TemplateDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TemplateDoesNotExistException) ErrorCode() string             { return "TemplateDoesNotExistException" }
+func (e *TemplateDoesNotExistException) ErrorCode() string             { return "TemplateDoesNotExist" }
 func (e *TemplateDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the configuration set you specified already contains a

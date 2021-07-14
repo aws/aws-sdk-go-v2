@@ -21,7 +21,7 @@ func (e *AccessPointNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessPointNotFoundException) ErrorCode() string             { return "AccessPointNotFoundException" }
+func (e *AccessPointNotFoundException) ErrorCode() string             { return "LoadBalancerNotFound" }
 func (e *AccessPointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified ARN does not refer to a valid SSL certificate in AWS Identity and
@@ -41,7 +41,7 @@ func (e *CertificateNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateNotFoundException) ErrorCode() string             { return "CertificateNotFoundException" }
+func (e *CertificateNotFoundException) ErrorCode() string             { return "CertificateNotFound" }
 func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A request made by Elastic Load Balancing to another service exceeds the maximum
@@ -59,7 +59,7 @@ func (e *DependencyThrottleException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DependencyThrottleException) ErrorCode() string             { return "DependencyThrottleException" }
+func (e *DependencyThrottleException) ErrorCode() string             { return "DependencyThrottle" }
 func (e *DependencyThrottleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified load balancer name already exists for this account.
@@ -76,9 +76,7 @@ func (e *DuplicateAccessPointNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateAccessPointNameException) ErrorCode() string {
-	return "DuplicateAccessPointNameException"
-}
+func (e *DuplicateAccessPointNameException) ErrorCode() string             { return "DuplicateLoadBalancerName" }
 func (e *DuplicateAccessPointNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A listener already exists for the specified load balancer name and port, but
@@ -96,7 +94,7 @@ func (e *DuplicateListenerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateListenerException) ErrorCode() string             { return "DuplicateListenerException" }
+func (e *DuplicateListenerException) ErrorCode() string             { return "DuplicateListener" }
 func (e *DuplicateListenerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A policy with the specified name already exists for this load balancer.
@@ -113,7 +111,7 @@ func (e *DuplicatePolicyNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicatePolicyNameException) ErrorCode() string             { return "DuplicatePolicyNameException" }
+func (e *DuplicatePolicyNameException) ErrorCode() string             { return "DuplicatePolicyName" }
 func (e *DuplicatePolicyNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A tag key was specified more than once.
@@ -130,7 +128,7 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeysException" }
+func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeys" }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested configuration change is not valid.
@@ -148,7 +146,7 @@ func (e *InvalidConfigurationRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationRequestException) ErrorCode() string {
-	return "InvalidConfigurationRequestException"
+	return "InvalidConfigurationRequest"
 }
 func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -168,7 +166,7 @@ func (e *InvalidEndPointException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidEndPointException) ErrorCode() string             { return "InvalidEndPointException" }
+func (e *InvalidEndPointException) ErrorCode() string             { return "InvalidInstance" }
 func (e *InvalidEndPointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified value for the schema is not valid. You can only specify a scheme
@@ -186,7 +184,7 @@ func (e *InvalidSchemeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSchemeException) ErrorCode() string             { return "InvalidSchemeException" }
+func (e *InvalidSchemeException) ErrorCode() string             { return "InvalidScheme" }
 func (e *InvalidSchemeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified security groups do not exist.
@@ -203,7 +201,7 @@ func (e *InvalidSecurityGroupException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSecurityGroupException) ErrorCode() string             { return "InvalidSecurityGroupException" }
+func (e *InvalidSecurityGroupException) ErrorCode() string             { return "InvalidSecurityGroup" }
 func (e *InvalidSecurityGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified VPC has no associated Internet gateway.
@@ -220,7 +218,7 @@ func (e *InvalidSubnetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSubnetException) ErrorCode() string             { return "InvalidSubnetException" }
+func (e *InvalidSubnetException) ErrorCode() string             { return "InvalidSubnet" }
 func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The load balancer does not have a listener configured at the specified port.
@@ -237,7 +235,7 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFoundException" }
+func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFound" }
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified load balancer attribute does not exist.
@@ -255,7 +253,7 @@ func (e *LoadBalancerAttributeNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LoadBalancerAttributeNotFoundException) ErrorCode() string {
-	return "LoadBalancerAttributeNotFoundException"
+	return "LoadBalancerAttributeNotFound"
 }
 func (e *LoadBalancerAttributeNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -275,7 +273,7 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
+func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermitted" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified policies do not exist.
@@ -292,7 +290,7 @@ func (e *PolicyNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyNotFoundException) ErrorCode() string             { return "PolicyNotFoundException" }
+func (e *PolicyNotFoundException) ErrorCode() string             { return "PolicyNotFound" }
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified policy types do not exist.
@@ -309,7 +307,7 @@ func (e *PolicyTypeNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyTypeNotFoundException) ErrorCode() string             { return "PolicyTypeNotFoundException" }
+func (e *PolicyTypeNotFoundException) ErrorCode() string             { return "PolicyTypeNotFound" }
 func (e *PolicyTypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified subnets do not exist.
@@ -326,7 +324,7 @@ func (e *SubnetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubnetNotFoundException) ErrorCode() string             { return "SubnetNotFoundException" }
+func (e *SubnetNotFoundException) ErrorCode() string             { return "SubnetNotFound" }
 func (e *SubnetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the number of load balancers has been reached.
@@ -343,7 +341,7 @@ func (e *TooManyAccessPointsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyAccessPointsException) ErrorCode() string             { return "TooManyAccessPointsException" }
+func (e *TooManyAccessPointsException) ErrorCode() string             { return "TooManyLoadBalancers" }
 func (e *TooManyAccessPointsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the number of policies for this load balancer has been reached.
@@ -360,7 +358,7 @@ func (e *TooManyPoliciesException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyPoliciesException) ErrorCode() string             { return "TooManyPoliciesException" }
+func (e *TooManyPoliciesException) ErrorCode() string             { return "TooManyPolicies" }
 func (e *TooManyPoliciesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the number of tags that can be assigned to a load balancer has
@@ -378,7 +376,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTags" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified protocol or signature version is not supported.
@@ -395,5 +393,5 @@ func (e *UnsupportedProtocolException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedProtocolException) ErrorCode() string             { return "UnsupportedProtocolException" }
+func (e *UnsupportedProtocolException) ErrorCode() string             { return "UnsupportedProtocol" }
 func (e *UnsupportedProtocolException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

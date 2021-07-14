@@ -23,7 +23,7 @@ func (e *ActiveInstanceRefreshNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActiveInstanceRefreshNotFoundFault) ErrorCode() string {
-	return "ActiveInstanceRefreshNotFoundFault"
+	return "ActiveInstanceRefreshNotFound"
 }
 func (e *ActiveInstanceRefreshNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -43,7 +43,7 @@ func (e *AlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AlreadyExistsFault) ErrorCode() string             { return "AlreadyExistsFault" }
+func (e *AlreadyExistsFault) ErrorCode() string             { return "AlreadyExists" }
 func (e *AlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because an active instance refresh operation already exists
@@ -61,7 +61,7 @@ func (e *InstanceRefreshInProgressFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InstanceRefreshInProgressFault) ErrorCode() string             { return "InstanceRefreshInProgressFault" }
+func (e *InstanceRefreshInProgressFault) ErrorCode() string             { return "InstanceRefreshInProgress" }
 func (e *InstanceRefreshInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The NextToken value is not valid.
@@ -99,7 +99,7 @@ func (e *LimitExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceededFault" }
+func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceeded" }
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You already have a pending update to an Amazon EC2 Auto Scaling resource (for
@@ -117,7 +117,7 @@ func (e *ResourceContentionFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceContentionFault) ErrorCode() string             { return "ResourceContentionFault" }
+func (e *ResourceContentionFault) ErrorCode() string             { return "ResourceContention" }
 func (e *ResourceContentionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The operation can't be performed because the resource is in use.
@@ -134,7 +134,7 @@ func (e *ResourceInUseFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseFault) ErrorCode() string             { return "ResourceInUseFault" }
+func (e *ResourceInUseFault) ErrorCode() string             { return "ResourceInUse" }
 func (e *ResourceInUseFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation can't be performed because there are scaling activities in
@@ -152,7 +152,7 @@ func (e *ScalingActivityInProgressFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ScalingActivityInProgressFault) ErrorCode() string             { return "ScalingActivityInProgressFault" }
+func (e *ScalingActivityInProgressFault) ErrorCode() string             { return "ScalingActivityInProgress" }
 func (e *ScalingActivityInProgressFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service-linked role is not yet ready for use.

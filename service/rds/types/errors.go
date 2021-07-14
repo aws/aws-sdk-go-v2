@@ -22,9 +22,7 @@ func (e *AuthorizationAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationAlreadyExistsFault) ErrorCode() string {
-	return "AuthorizationAlreadyExistsFault"
-}
+func (e *AuthorizationAlreadyExistsFault) ErrorCode() string             { return "AuthorizationAlreadyExists" }
 func (e *AuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified CIDR IP range or Amazon EC2 security group might not be authorized
@@ -43,7 +41,7 @@ func (e *AuthorizationNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationNotFoundFault) ErrorCode() string             { return "AuthorizationNotFoundFault" }
+func (e *AuthorizationNotFoundFault) ErrorCode() string             { return "AuthorizationNotFound" }
 func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The DB security group authorization quota has been reached.
@@ -60,9 +58,7 @@ func (e *AuthorizationQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationQuotaExceededFault) ErrorCode() string {
-	return "AuthorizationQuotaExceededFault"
-}
+func (e *AuthorizationQuotaExceededFault) ErrorCode() string             { return "AuthorizationQuotaExceeded" }
 func (e *AuthorizationQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type BackupPolicyNotFoundFault struct {
@@ -95,7 +91,7 @@ func (e *CertificateNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateNotFoundFault) ErrorCode() string             { return "CertificateNotFoundFault" }
+func (e *CertificateNotFoundFault) ErrorCode() string             { return "CertificateNotFound" }
 func (e *CertificateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // CustomAvailabilityZoneName is already used by an existing custom Availability
@@ -114,7 +110,7 @@ func (e *CustomAvailabilityZoneAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomAvailabilityZoneAlreadyExistsFault) ErrorCode() string {
-	return "CustomAvailabilityZoneAlreadyExistsFault"
+	return "CustomAvailabilityZoneAlreadyExists"
 }
 func (e *CustomAvailabilityZoneAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -136,7 +132,7 @@ func (e *CustomAvailabilityZoneNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomAvailabilityZoneNotFoundFault) ErrorCode() string {
-	return "CustomAvailabilityZoneNotFoundFault"
+	return "CustomAvailabilityZoneNotFound"
 }
 func (e *CustomAvailabilityZoneNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -157,7 +153,7 @@ func (e *CustomAvailabilityZoneQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomAvailabilityZoneQuotaExceededFault) ErrorCode() string {
-	return "CustomAvailabilityZoneQuotaExceededFault"
+	return "CustomAvailabilityZoneQuotaExceeded"
 }
 func (e *CustomAvailabilityZoneQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -291,7 +287,7 @@ func (e *DBClusterParameterGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterParameterGroupNotFoundFault) ErrorCode() string {
-	return "DBClusterParameterGroupNotFoundFault"
+	return "DBClusterParameterGroupNotFound"
 }
 func (e *DBClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -330,9 +326,7 @@ func (e *DBClusterRoleAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBClusterRoleAlreadyExistsFault) ErrorCode() string {
-	return "DBClusterRoleAlreadyExistsFault"
-}
+func (e *DBClusterRoleAlreadyExistsFault) ErrorCode() string             { return "DBClusterRoleAlreadyExists" }
 func (e *DBClusterRoleAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified IAM role Amazon Resource Name (ARN) isn't associated with the
@@ -350,7 +344,7 @@ func (e *DBClusterRoleNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBClusterRoleNotFoundFault) ErrorCode() string             { return "DBClusterRoleNotFoundFault" }
+func (e *DBClusterRoleNotFoundFault) ErrorCode() string             { return "DBClusterRoleNotFound" }
 func (e *DBClusterRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded the maximum number of IAM roles that can be associated with
@@ -368,9 +362,7 @@ func (e *DBClusterRoleQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBClusterRoleQuotaExceededFault) ErrorCode() string {
-	return "DBClusterRoleQuotaExceededFault"
-}
+func (e *DBClusterRoleQuotaExceededFault) ErrorCode() string             { return "DBClusterRoleQuotaExceeded" }
 func (e *DBClusterRoleQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user already has a DB cluster snapshot with the given identifier.
@@ -425,7 +417,7 @@ func (e *DBInstanceAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBInstanceAlreadyExistsFault) ErrorCode() string             { return "DBInstanceAlreadyExistsFault" }
+func (e *DBInstanceAlreadyExistsFault) ErrorCode() string             { return "DBInstanceAlreadyExists" }
 func (e *DBInstanceAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No automated backup for this DB instance was found.
@@ -443,7 +435,7 @@ func (e *DBInstanceAutomatedBackupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBInstanceAutomatedBackupNotFoundFault) ErrorCode() string {
-	return "DBInstanceAutomatedBackupNotFoundFault"
+	return "DBInstanceAutomatedBackupNotFound"
 }
 func (e *DBInstanceAutomatedBackupNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -466,7 +458,7 @@ func (e *DBInstanceAutomatedBackupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBInstanceAutomatedBackupQuotaExceededFault) ErrorCode() string {
-	return "DBInstanceAutomatedBackupQuotaExceededFault"
+	return "DBInstanceAutomatedBackupQuotaExceeded"
 }
 func (e *DBInstanceAutomatedBackupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -486,7 +478,7 @@ func (e *DBInstanceNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBInstanceNotFoundFault) ErrorCode() string             { return "DBInstanceNotFoundFault" }
+func (e *DBInstanceNotFoundFault) ErrorCode() string             { return "DBInstanceNotFound" }
 func (e *DBInstanceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified RoleArn or FeatureName value is already associated with the DB
@@ -504,9 +496,7 @@ func (e *DBInstanceRoleAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBInstanceRoleAlreadyExistsFault) ErrorCode() string {
-	return "DBInstanceRoleAlreadyExistsFault"
-}
+func (e *DBInstanceRoleAlreadyExistsFault) ErrorCode() string             { return "DBInstanceRoleAlreadyExists" }
 func (e *DBInstanceRoleAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified RoleArn value doesn't match the specified feature for the DB
@@ -524,7 +514,7 @@ func (e *DBInstanceRoleNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBInstanceRoleNotFoundFault) ErrorCode() string             { return "DBInstanceRoleNotFoundFault" }
+func (e *DBInstanceRoleNotFoundFault) ErrorCode() string             { return "DBInstanceRoleNotFound" }
 func (e *DBInstanceRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't associate any more Amazon Web Services Identity and Access Management
@@ -542,9 +532,7 @@ func (e *DBInstanceRoleQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBInstanceRoleQuotaExceededFault) ErrorCode() string {
-	return "DBInstanceRoleQuotaExceededFault"
-}
+func (e *DBInstanceRoleQuotaExceededFault) ErrorCode() string             { return "DBInstanceRoleQuotaExceeded" }
 func (e *DBInstanceRoleQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // LogFileName doesn't refer to an existing DB log file.
@@ -579,7 +567,7 @@ func (e *DBParameterGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBParameterGroupAlreadyExistsFault) ErrorCode() string {
-	return "DBParameterGroupAlreadyExistsFault"
+	return "DBParameterGroupAlreadyExists"
 }
 func (e *DBParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -599,7 +587,7 @@ func (e *DBParameterGroupNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBParameterGroupNotFoundFault) ErrorCode() string             { return "DBParameterGroupNotFoundFault" }
+func (e *DBParameterGroupNotFoundFault) ErrorCode() string             { return "DBParameterGroupNotFound" }
 func (e *DBParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of DB
@@ -618,7 +606,7 @@ func (e *DBParameterGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBParameterGroupQuotaExceededFault) ErrorCode() string {
-	return "DBParameterGroupQuotaExceededFault"
+	return "DBParameterGroupQuotaExceeded"
 }
 func (e *DBParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -811,9 +799,7 @@ func (e *DBSecurityGroupAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBSecurityGroupAlreadyExistsFault) ErrorCode() string {
-	return "DBSecurityGroupAlreadyExistsFault"
-}
+func (e *DBSecurityGroupAlreadyExistsFault) ErrorCode() string             { return "DBSecurityGroupAlreadyExists" }
 func (e *DBSecurityGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // DBSecurityGroupName doesn't refer to an existing DB security group.
@@ -830,7 +816,7 @@ func (e *DBSecurityGroupNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBSecurityGroupNotFoundFault) ErrorCode() string             { return "DBSecurityGroupNotFoundFault" }
+func (e *DBSecurityGroupNotFoundFault) ErrorCode() string             { return "DBSecurityGroupNotFound" }
 func (e *DBSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A DB security group isn't allowed for this action.
@@ -847,9 +833,7 @@ func (e *DBSecurityGroupNotSupportedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBSecurityGroupNotSupportedFault) ErrorCode() string {
-	return "DBSecurityGroupNotSupportedFault"
-}
+func (e *DBSecurityGroupNotSupportedFault) ErrorCode() string             { return "DBSecurityGroupNotSupported" }
 func (e *DBSecurityGroupNotSupportedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of DB security
@@ -868,7 +852,7 @@ func (e *DBSecurityGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSecurityGroupQuotaExceededFault) ErrorCode() string {
-	return "DBSecurityGroupQuotaExceededFault"
+	return "QuotaExceeded.DBSecurityGroup"
 }
 func (e *DBSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -886,7 +870,7 @@ func (e *DBSnapshotAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBSnapshotAlreadyExistsFault) ErrorCode() string             { return "DBSnapshotAlreadyExistsFault" }
+func (e *DBSnapshotAlreadyExistsFault) ErrorCode() string             { return "DBSnapshotAlreadyExists" }
 func (e *DBSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // DBSnapshotIdentifier doesn't refer to an existing DB snapshot.
@@ -903,7 +887,7 @@ func (e *DBSnapshotNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBSnapshotNotFoundFault) ErrorCode() string             { return "DBSnapshotNotFoundFault" }
+func (e *DBSnapshotNotFoundFault) ErrorCode() string             { return "DBSnapshotNotFound" }
 func (e *DBSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // DBSubnetGroupName is already used by an existing DB subnet group.
@@ -920,9 +904,7 @@ func (e *DBSubnetGroupAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBSubnetGroupAlreadyExistsFault) ErrorCode() string {
-	return "DBSubnetGroupAlreadyExistsFault"
-}
+func (e *DBSubnetGroupAlreadyExistsFault) ErrorCode() string             { return "DBSubnetGroupAlreadyExists" }
 func (e *DBSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Subnets in the DB subnet group should cover at least two Availability Zones
@@ -997,9 +979,7 @@ func (e *DBSubnetGroupQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBSubnetGroupQuotaExceededFault) ErrorCode() string {
-	return "DBSubnetGroupQuotaExceededFault"
-}
+func (e *DBSubnetGroupQuotaExceededFault) ErrorCode() string             { return "DBSubnetGroupQuotaExceeded" }
 func (e *DBSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of subnets in
@@ -1034,9 +1014,7 @@ func (e *DBUpgradeDependencyFailureFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DBUpgradeDependencyFailureFault) ErrorCode() string {
-	return "DBUpgradeDependencyFailureFault"
-}
+func (e *DBUpgradeDependencyFailureFault) ErrorCode() string             { return "DBUpgradeDependencyFailure" }
 func (e *DBUpgradeDependencyFailureFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Domain doesn't refer to an existing Active Directory domain.
@@ -1071,7 +1049,7 @@ func (e *EventSubscriptionQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventSubscriptionQuotaExceededFault) ErrorCode() string {
-	return "EventSubscriptionQuotaExceededFault"
+	return "EventSubscriptionQuotaExceeded"
 }
 func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1091,7 +1069,7 @@ func (e *ExportTaskAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExportTaskAlreadyExistsFault) ErrorCode() string             { return "ExportTaskAlreadyExistsFault" }
+func (e *ExportTaskAlreadyExistsFault) ErrorCode() string             { return "ExportTaskAlreadyExists" }
 func (e *ExportTaskAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The export task doesn't exist.
@@ -1108,7 +1086,7 @@ func (e *ExportTaskNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExportTaskNotFoundFault) ErrorCode() string             { return "ExportTaskNotFoundFault" }
+func (e *ExportTaskNotFoundFault) ErrorCode() string             { return "ExportTaskNotFound" }
 func (e *ExportTaskNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The GlobalClusterIdentifier already exists. Choose a new global database
@@ -1183,7 +1161,7 @@ func (e *IamRoleMissingPermissionsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IamRoleMissingPermissionsFault) ErrorCode() string             { return "IamRoleMissingPermissionsFault" }
+func (e *IamRoleMissingPermissionsFault) ErrorCode() string             { return "IamRoleMissingPermissions" }
 func (e *IamRoleMissingPermissionsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The IAM role is missing for exporting to an Amazon S3 bucket.
@@ -1200,7 +1178,7 @@ func (e *IamRoleNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IamRoleNotFoundFault) ErrorCode() string             { return "IamRoleNotFoundFault" }
+func (e *IamRoleNotFoundFault) ErrorCode() string             { return "IamRoleNotFound" }
 func (e *IamRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified installation medium has already been imported.
@@ -1218,7 +1196,7 @@ func (e *InstallationMediaAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InstallationMediaAlreadyExistsFault) ErrorCode() string {
-	return "InstallationMediaAlreadyExistsFault"
+	return "InstallationMediaAlreadyExists"
 }
 func (e *InstallationMediaAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1238,7 +1216,7 @@ func (e *InstallationMediaNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InstallationMediaNotFoundFault) ErrorCode() string             { return "InstallationMediaNotFoundFault" }
+func (e *InstallationMediaNotFoundFault) ErrorCode() string             { return "InstallationMediaNotFound" }
 func (e *InstallationMediaNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of DB
@@ -1256,7 +1234,7 @@ func (e *InstanceQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InstanceQuotaExceededFault) ErrorCode() string             { return "InstanceQuotaExceededFault" }
+func (e *InstanceQuotaExceededFault) ErrorCode() string             { return "InstanceQuotaExceeded" }
 func (e *InstanceQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation can't be performed because there aren't enough available
@@ -1319,7 +1297,7 @@ func (e *InsufficientDBInstanceCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientDBInstanceCapacityFault) ErrorCode() string {
-	return "InsufficientDBInstanceCapacityFault"
+	return "InsufficientDBInstanceCapacity"
 }
 func (e *InsufficientDBInstanceCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1342,7 +1320,7 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientStorageClusterCapacityFault) ErrorCode() string {
-	return "InsufficientStorageClusterCapacityFault"
+	return "InsufficientStorageClusterCapacity"
 }
 func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1442,7 +1420,7 @@ func (e *InvalidDBInstanceAutomatedBackupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBInstanceAutomatedBackupStateFault) ErrorCode() string {
-	return "InvalidDBInstanceAutomatedBackupStateFault"
+	return "InvalidDBInstanceAutomatedBackupState"
 }
 func (e *InvalidDBInstanceAutomatedBackupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1462,7 +1440,7 @@ func (e *InvalidDBInstanceStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDBInstanceStateFault) ErrorCode() string             { return "InvalidDBInstanceStateFault" }
+func (e *InvalidDBInstanceStateFault) ErrorCode() string             { return "InvalidDBInstanceState" }
 func (e *InvalidDBInstanceStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The DB parameter group is in use or is in an invalid state. If you are
@@ -1481,9 +1459,7 @@ func (e *InvalidDBParameterGroupStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDBParameterGroupStateFault) ErrorCode() string {
-	return "InvalidDBParameterGroupStateFault"
-}
+func (e *InvalidDBParameterGroupStateFault) ErrorCode() string             { return "InvalidDBParameterGroupState" }
 func (e *InvalidDBParameterGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't perform this operation while the DB proxy endpoint is in a particular
@@ -1537,9 +1513,7 @@ func (e *InvalidDBSecurityGroupStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDBSecurityGroupStateFault) ErrorCode() string {
-	return "InvalidDBSecurityGroupStateFault"
-}
+func (e *InvalidDBSecurityGroupStateFault) ErrorCode() string             { return "InvalidDBSecurityGroupState" }
 func (e *InvalidDBSecurityGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The state of the DB snapshot doesn't allow deletion.
@@ -1556,7 +1530,7 @@ func (e *InvalidDBSnapshotStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDBSnapshotStateFault) ErrorCode() string             { return "InvalidDBSnapshotStateFault" }
+func (e *InvalidDBSnapshotStateFault) ErrorCode() string             { return "InvalidDBSnapshotState" }
 func (e *InvalidDBSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The DBSubnetGroup doesn't belong to the same VPC as that of an existing
@@ -1627,7 +1601,7 @@ func (e *InvalidEventSubscriptionStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventSubscriptionStateFault) ErrorCode() string {
-	return "InvalidEventSubscriptionStateFault"
+	return "InvalidEventSubscriptionState"
 }
 func (e *InvalidEventSubscriptionStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1647,7 +1621,7 @@ func (e *InvalidExportOnlyFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidExportOnlyFault) ErrorCode() string             { return "InvalidExportOnlyFault" }
+func (e *InvalidExportOnlyFault) ErrorCode() string             { return "InvalidExportOnly" }
 func (e *InvalidExportOnlyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The state of the export snapshot is invalid for exporting to an Amazon S3
@@ -1665,7 +1639,7 @@ func (e *InvalidExportSourceStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidExportSourceStateFault) ErrorCode() string             { return "InvalidExportSourceStateFault" }
+func (e *InvalidExportSourceStateFault) ErrorCode() string             { return "InvalidExportSourceState" }
 func (e *InvalidExportSourceStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't cancel an export task that has completed.
@@ -1875,9 +1849,7 @@ func (e *PointInTimeRestoreNotEnabledFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PointInTimeRestoreNotEnabledFault) ErrorCode() string {
-	return "PointInTimeRestoreNotEnabledFault"
-}
+func (e *PointInTimeRestoreNotEnabledFault) ErrorCode() string             { return "PointInTimeRestoreNotEnabled" }
 func (e *PointInTimeRestoreNotEnabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provisioned IOPS not available in the specified Availability Zone.
@@ -1916,7 +1888,7 @@ func (e *ReservedDBInstanceAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedDBInstanceAlreadyExistsFault) ErrorCode() string {
-	return "ReservedDBInstanceAlreadyExistsFault"
+	return "ReservedDBInstanceAlreadyExists"
 }
 func (e *ReservedDBInstanceAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1936,9 +1908,7 @@ func (e *ReservedDBInstanceNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReservedDBInstanceNotFoundFault) ErrorCode() string {
-	return "ReservedDBInstanceNotFoundFault"
-}
+func (e *ReservedDBInstanceNotFoundFault) ErrorCode() string             { return "ReservedDBInstanceNotFound" }
 func (e *ReservedDBInstanceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request would exceed the user's DB Instance quota.
@@ -1956,7 +1926,7 @@ func (e *ReservedDBInstanceQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedDBInstanceQuotaExceededFault) ErrorCode() string {
-	return "ReservedDBInstanceQuotaExceededFault"
+	return "ReservedDBInstanceQuotaExceeded"
 }
 func (e *ReservedDBInstanceQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1977,7 +1947,7 @@ func (e *ReservedDBInstancesOfferingNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedDBInstancesOfferingNotFoundFault) ErrorCode() string {
-	return "ReservedDBInstancesOfferingNotFoundFault"
+	return "ReservedDBInstancesOfferingNotFound"
 }
 func (e *ReservedDBInstancesOfferingNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -2015,9 +1985,7 @@ func (e *SharedSnapshotQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SharedSnapshotQuotaExceededFault) ErrorCode() string {
-	return "SharedSnapshotQuotaExceededFault"
-}
+func (e *SharedSnapshotQuotaExceededFault) ErrorCode() string             { return "SharedSnapshotQuotaExceeded" }
 func (e *SharedSnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of DB
@@ -2035,7 +2003,7 @@ func (e *SnapshotQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SnapshotQuotaExceededFault) ErrorCode() string             { return "SnapshotQuotaExceededFault" }
+func (e *SnapshotQuotaExceededFault) ErrorCode() string             { return "SnapshotQuotaExceeded" }
 func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // SNS has responded that there is a problem with the SND topic specified.
@@ -2052,7 +2020,7 @@ func (e *SNSInvalidTopicFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SNSInvalidTopicFault) ErrorCode() string             { return "SNSInvalidTopicFault" }
+func (e *SNSInvalidTopicFault) ErrorCode() string             { return "SNSInvalidTopic" }
 func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You do not have permission to publish to the SNS topic ARN.
@@ -2069,7 +2037,7 @@ func (e *SNSNoAuthorizationFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SNSNoAuthorizationFault) ErrorCode() string             { return "SNSNoAuthorizationFault" }
+func (e *SNSNoAuthorizationFault) ErrorCode() string             { return "SNSNoAuthorization" }
 func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The SNS topic ARN does not exist.
@@ -2086,7 +2054,7 @@ func (e *SNSTopicArnNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SNSTopicArnNotFoundFault) ErrorCode() string             { return "SNSTopicArnNotFoundFault" }
+func (e *SNSTopicArnNotFoundFault) ErrorCode() string             { return "SNSTopicArnNotFound" }
 func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested source could not be found.
@@ -2103,7 +2071,7 @@ func (e *SourceNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SourceNotFoundFault) ErrorCode() string             { return "SourceNotFoundFault" }
+func (e *SourceNotFoundFault) ErrorCode() string             { return "SourceNotFound" }
 func (e *SourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed amount of storage
@@ -2121,7 +2089,7 @@ func (e *StorageQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StorageQuotaExceededFault) ErrorCode() string             { return "StorageQuotaExceededFault" }
+func (e *StorageQuotaExceededFault) ErrorCode() string             { return "StorageQuotaExceeded" }
 func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Storage of the StorageType specified can't be associated with the DB instance.
@@ -2138,7 +2106,7 @@ func (e *StorageTypeNotSupportedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StorageTypeNotSupportedFault) ErrorCode() string             { return "StorageTypeNotSupportedFault" }
+func (e *StorageTypeNotSupportedFault) ErrorCode() string             { return "StorageTypeNotSupported" }
 func (e *StorageTypeNotSupportedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The DB subnet is already in use in the Availability Zone.
@@ -2172,7 +2140,7 @@ func (e *SubscriptionAlreadyExistFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionAlreadyExistFault) ErrorCode() string             { return "SubscriptionAlreadyExistFault" }
+func (e *SubscriptionAlreadyExistFault) ErrorCode() string             { return "SubscriptionAlreadyExist" }
 func (e *SubscriptionAlreadyExistFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The supplied category does not exist.
@@ -2189,9 +2157,7 @@ func (e *SubscriptionCategoryNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionCategoryNotFoundFault) ErrorCode() string {
-	return "SubscriptionCategoryNotFoundFault"
-}
+func (e *SubscriptionCategoryNotFoundFault) ErrorCode() string             { return "SubscriptionCategoryNotFound" }
 func (e *SubscriptionCategoryNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The subscription name does not exist.
@@ -2208,5 +2174,5 @@ func (e *SubscriptionNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubscriptionNotFoundFault) ErrorCode() string             { return "SubscriptionNotFoundFault" }
+func (e *SubscriptionNotFoundFault) ErrorCode() string             { return "SubscriptionNotFound" }
 func (e *SubscriptionNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

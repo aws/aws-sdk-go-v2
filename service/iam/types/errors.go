@@ -22,9 +22,7 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
-}
+func (e *ConcurrentModificationException) ErrorCode() string             { return "ConcurrentModification" }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the most recent credential report has expired.
@@ -45,9 +43,7 @@ func (e *CredentialReportExpiredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CredentialReportExpiredException) ErrorCode() string {
-	return "CredentialReportExpiredException"
-}
+func (e *CredentialReportExpiredException) ErrorCode() string             { return "ReportExpired" }
 func (e *CredentialReportExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the credential report does not exist. To
@@ -65,9 +61,7 @@ func (e *CredentialReportNotPresentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CredentialReportNotPresentException) ErrorCode() string {
-	return "CredentialReportNotPresentException"
-}
+func (e *CredentialReportNotPresentException) ErrorCode() string { return "ReportNotPresent" }
 func (e *CredentialReportNotPresentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -86,9 +80,7 @@ func (e *CredentialReportNotReadyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CredentialReportNotReadyException) ErrorCode() string {
-	return "CredentialReportNotReadyException"
-}
+func (e *CredentialReportNotReadyException) ErrorCode() string             { return "ReportInProgress" }
 func (e *CredentialReportNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to delete a resource that has
@@ -106,7 +98,7 @@ func (e *DeleteConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DeleteConflictException) ErrorCode() string             { return "DeleteConflictException" }
+func (e *DeleteConflictException) ErrorCode() string             { return "DeleteConflict" }
 func (e *DeleteConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the same certificate is associated with an IAM
@@ -124,7 +116,7 @@ func (e *DuplicateCertificateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateCertificateException) ErrorCode() string             { return "DuplicateCertificateException" }
+func (e *DuplicateCertificateException) ErrorCode() string             { return "DuplicateCertificate" }
 func (e *DuplicateCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the SSH public key is already associated with
@@ -142,7 +134,7 @@ func (e *DuplicateSSHPublicKeyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateSSHPublicKeyException) ErrorCode() string             { return "DuplicateSSHPublicKeyException" }
+func (e *DuplicateSSHPublicKeyException) ErrorCode() string             { return "DuplicateSSHPublicKey" }
 func (e *DuplicateSSHPublicKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create a resource that already
@@ -160,7 +152,7 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityAlreadyExistsException) ErrorCode() string             { return "EntityAlreadyExistsException" }
+func (e *EntityAlreadyExistsException) ErrorCode() string             { return "EntityAlreadyExists" }
 func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it referenced an entity that is temporarily
@@ -181,7 +173,7 @@ func (e *EntityTemporarilyUnmodifiableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityTemporarilyUnmodifiableException) ErrorCode() string {
-	return "EntityTemporarilyUnmodifiableException"
+	return "EntityTemporarilyUnmodifiable"
 }
 func (e *EntityTemporarilyUnmodifiableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -202,9 +194,7 @@ func (e *InvalidAuthenticationCodeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidAuthenticationCodeException) ErrorCode() string {
-	return "InvalidAuthenticationCodeException"
-}
+func (e *InvalidAuthenticationCodeException) ErrorCode() string { return "InvalidAuthenticationCode" }
 func (e *InvalidAuthenticationCodeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -223,7 +213,7 @@ func (e *InvalidCertificateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidCertificateException) ErrorCode() string             { return "InvalidCertificateException" }
+func (e *InvalidCertificateException) ErrorCode() string             { return "InvalidCertificate" }
 func (e *InvalidCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because an invalid or out-of-range value was supplied
@@ -241,7 +231,7 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string             { return "InvalidInput" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the public key is malformed or otherwise
@@ -259,7 +249,7 @@ func (e *InvalidPublicKeyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPublicKeyException) ErrorCode() string             { return "InvalidPublicKeyException" }
+func (e *InvalidPublicKeyException) ErrorCode() string             { return "InvalidPublicKey" }
 func (e *InvalidPublicKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the type of user for the transaction was
@@ -277,7 +267,7 @@ func (e *InvalidUserTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidUserTypeException) ErrorCode() string             { return "InvalidUserTypeException" }
+func (e *InvalidUserTypeException) ErrorCode() string             { return "InvalidUserType" }
 func (e *InvalidUserTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the public key certificate and the private key
@@ -295,7 +285,7 @@ func (e *KeyPairMismatchException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KeyPairMismatchException) ErrorCode() string             { return "KeyPairMismatchException" }
+func (e *KeyPairMismatchException) ErrorCode() string             { return "KeyPairMismatch" }
 func (e *KeyPairMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create resources beyond the
@@ -313,7 +303,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string             { return "LimitExceeded" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the certificate was malformed or expired. The
@@ -331,7 +321,7 @@ func (e *MalformedCertificateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MalformedCertificateException) ErrorCode() string             { return "MalformedCertificateException" }
+func (e *MalformedCertificateException) ErrorCode() string             { return "MalformedCertificate" }
 func (e *MalformedCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the policy document was malformed. The error
@@ -349,9 +339,7 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	return "MalformedPolicyDocumentException"
-}
+func (e *MalformedPolicyDocumentException) ErrorCode() string             { return "MalformedPolicyDocument" }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it referenced a resource entity that does not
@@ -369,7 +357,7 @@ func (e *NoSuchEntityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchEntityException) ErrorCode() string             { return "NoSuchEntityException" }
+func (e *NoSuchEntityException) ErrorCode() string             { return "NoSuchEntity" }
 func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the provided password did not meet the
@@ -387,9 +375,7 @@ func (e *PasswordPolicyViolationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PasswordPolicyViolationException) ErrorCode() string {
-	return "PasswordPolicyViolationException"
-}
+func (e *PasswordPolicyViolationException) ErrorCode() string             { return "PasswordPolicyViolation" }
 func (e *PasswordPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because a provided policy could not be successfully
@@ -407,7 +393,7 @@ func (e *PolicyEvaluationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyEvaluationException) ErrorCode() string             { return "PolicyEvaluationException" }
+func (e *PolicyEvaluationException) ErrorCode() string             { return "PolicyEvaluation" }
 func (e *PolicyEvaluationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request failed because AWS service role policies can only be attached to the
@@ -425,7 +411,7 @@ func (e *PolicyNotAttachableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyNotAttachableException) ErrorCode() string             { return "PolicyNotAttachableException" }
+func (e *PolicyNotAttachableException) ErrorCode() string             { return "PolicyNotAttachable" }
 func (e *PolicyNotAttachableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because the maximum number of concurrent requests for this
@@ -444,7 +430,7 @@ func (e *ReportGenerationLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReportGenerationLimitExceededException) ErrorCode() string {
-	return "ReportGenerationLimitExceededException"
+	return "ReportGenerationLimitExceeded"
 }
 func (e *ReportGenerationLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -465,7 +451,7 @@ func (e *ServiceFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceFailureException) ErrorCode() string             { return "ServiceFailureException" }
+func (e *ServiceFailureException) ErrorCode() string             { return "ServiceFailure" }
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The specified service does not support service-specific credentials.
@@ -482,7 +468,7 @@ func (e *ServiceNotSupportedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceNotSupportedException) ErrorCode() string             { return "ServiceNotSupportedException" }
+func (e *ServiceNotSupportedException) ErrorCode() string             { return "NotSupportedService" }
 func (e *ServiceNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because only the service that depends on the
@@ -502,7 +488,7 @@ func (e *UnmodifiableEntityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnmodifiableEntityException) ErrorCode() string             { return "UnmodifiableEntityException" }
+func (e *UnmodifiableEntityException) ErrorCode() string             { return "UnmodifiableEntity" }
 func (e *UnmodifiableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the public key encoding format is unsupported
@@ -521,7 +507,7 @@ func (e *UnrecognizedPublicKeyEncodingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnrecognizedPublicKeyEncodingException) ErrorCode() string {
-	return "UnrecognizedPublicKeyEncodingException"
+	return "UnrecognizedPublicKeyEncoding"
 }
 func (e *UnrecognizedPublicKeyEncodingException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

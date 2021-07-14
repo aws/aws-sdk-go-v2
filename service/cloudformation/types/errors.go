@@ -56,7 +56,7 @@ func (e *ChangeSetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ChangeSetNotFoundException) ErrorCode() string             { return "ChangeSetNotFoundException" }
+func (e *ChangeSetNotFoundException) ErrorCode() string             { return "ChangeSetNotFound" }
 func (e *ChangeSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource exists, but has been changed.
@@ -112,9 +112,7 @@ func (e *InvalidChangeSetStatusException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidChangeSetStatusException) ErrorCode() string {
-	return "InvalidChangeSetStatusException"
-}
+func (e *InvalidChangeSetStatusException) ErrorCode() string             { return "InvalidChangeSetStatus" }
 func (e *InvalidChangeSetStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified operation isn't valid.
@@ -150,9 +148,7 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidStateTransitionException) ErrorCode() string {
-	return "InvalidStateTransitionException"
-}
+func (e *InvalidStateTransitionException) ErrorCode() string             { return "InvalidStateTransition" }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the resource has already been reached. For information on resource
@@ -262,9 +258,7 @@ func (e *OperationStatusCheckFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationStatusCheckFailedException) ErrorCode() string {
-	return "OperationStatusCheckFailedException"
-}
+func (e *OperationStatusCheckFailedException) ErrorCode() string { return "ConditionalCheckFailed" }
 func (e *OperationStatusCheckFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
