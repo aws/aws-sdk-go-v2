@@ -11,6 +11,10 @@ import (
 func IsModuleChanged(moduleDir string, submodules []string, changes []string) (bool, error) {
 	if moduleDir == "." {
 		moduleDir = ""
+	} else {
+		// Append the path separator to ensure it is used in prefix matches. This ensure that we are looking
+		// at this specific directory and children rather then any directory that has this moduleDir prefix.
+		moduleDir += "/"
 	}
 
 	isChildPathCache := make(map[string]bool)

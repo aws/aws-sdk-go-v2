@@ -91,6 +91,15 @@ func TestIsModuleChanged(t *testing.T) {
 			},
 			want: true,
 		},
+		"module with no changes, but shares common prefix with a changed module": {
+			moduleDir:  "foobar",
+			submodules: []string{"foobar/sub1"},
+			changes: []string{
+				"foobarbaz/baz.go",
+				"foobar/sub1/sub1.go",
+			},
+			want: false,
+		},
 	}
 	for name, tt := range tests {
 		t.Run(name, func(t *testing.T) {
