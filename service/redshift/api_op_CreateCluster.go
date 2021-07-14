@@ -52,14 +52,14 @@ type CreateClusterInput struct {
 	// with a hyphen or contain two consecutive hyphens.
 	//
 	// * Must be unique for all
-	// clusters within an AWS account.
+	// clusters within an account.
 	//
 	// Example: myexamplecluster
 	//
 	// This member is required.
 	ClusterIdentifier *string
 
-	// The password associated with the master user account for the cluster that is
+	// The password associated with the admin user account for the cluster that is
 	// being created. Constraints:
 	//
 	// * Must be between 8 and 64 characters in length.
@@ -79,7 +79,7 @@ type CreateClusterInput struct {
 	// This member is required.
 	MasterUserPassword *string
 
-	// The user name associated with the master user account for the cluster that is
+	// The user name associated with the admin user account for the cluster that is
 	// being created. Constraints:
 	//
 	// * Must be 1 - 128 alphanumeric characters. The user
@@ -119,13 +119,13 @@ type CreateClusterInput struct {
 	// Accelerator) when it is created. Possible values include the following.
 	//
 	// *
-	// enabled - Use AQUA if it is available for the current AWS Region and Amazon
-	// Redshift node type.
+	// enabled - Use AQUA if it is available for the current Region and Amazon Redshift
+	// node type.
 	//
 	// * disabled - Don't use AQUA.
 	//
-	// * auto - Amazon Redshift
-	// determines whether to use AQUA.
+	// * auto - Amazon Redshift determines
+	// whether to use AQUA.
 	AquaConfigurationStatus types.AquaConfigurationStatus
 
 	// The number of days that automated snapshots are retained. If the value is 0,
@@ -236,14 +236,15 @@ type CreateClusterInput struct {
 	// Amazon Redshift cluster can use to retrieve and store keys in an HSM.
 	HsmConfigurationIdentifier *string
 
-	// A list of AWS Identity and Access Management (IAM) roles that can be used by the
-	// cluster to access other AWS services. You must supply the IAM roles in their
-	// Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single
-	// request. A cluster can have up to 10 IAM roles associated with it at any time.
+	// A list of Identity and Access Management (IAM) roles that can be used by the
+	// cluster to access other Amazon Web Services services. You must supply the IAM
+	// roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM
+	// roles in a single request. A cluster can have up to 10 IAM roles associated with
+	// it at any time.
 	IamRoles []string
 
-	// The AWS Key Management Service (KMS) key ID of the encryption key that you want
-	// to use to encrypt data in the cluster.
+	// The Key Management Service (KMS) key ID of the encryption key that you want to
+	// use to encrypt data in the cluster.
 	KmsKeyId *string
 
 	// An optional parameter for the name of the maintenance track for the cluster. If

@@ -2,22 +2,41 @@
 
 package types
 
-// Details of an EC2 AMI.
+// In addition to your infrastruction configuration, these settings provide an
+// extra layer of control over your build instances. For instances where Image
+// Builder installs the SSM agent, you can choose whether to keep it for the AMI
+// that you create. You can also specify commands to run on launch for all of your
+// build instances.
+type AdditionalInstanceConfiguration struct {
+
+	// Contains settings for the SSM agent on your build instance.
+	SystemsManagerAgent *SystemsManagerAgent
+
+	// Use this property to provide commands or a command script to run when you launch
+	// your build instance. The userDataOverride property replaces any commands that
+	// Image Builder might have added to ensure that SSM is installed on your Linux
+	// build instance. If you override the user data, make sure that you add commands
+	// to install SSM, if it is not pre-installed on your source image.
+	UserDataOverride *string
+}
+
+// Details of an Amazon EC2 AMI.
 type Ami struct {
 
 	// The account ID of the owner of the AMI.
 	AccountId *string
 
-	// The description of the EC2 AMI. Minimum and maximum length are in characters.
+	// The description of the Amazon EC2 AMI. Minimum and maximum length are in
+	// characters.
 	Description *string
 
-	// The AMI ID of the EC2 AMI.
+	// The AMI ID of the Amazon EC2 AMI.
 	Image *string
 
-	// The name of the EC2 AMI.
+	// The name of the Amazon EC2 AMI.
 	Name *string
 
-	// The AWS Region of the EC2 AMI.
+	// The Region of the Amazon EC2 AMI.
 	Region *string
 
 	// Image state shows the image status and the reason for that status.
@@ -37,8 +56,8 @@ type AmiDistributionConfiguration struct {
 	// The KMS key identifier used to encrypt the distributed image.
 	KmsKeyId *string
 
-	// Launch permissions can be used to configure which AWS accounts can use the AMI
-	// to launch instances.
+	// Launch permissions can be used to configure which accounts can use the AMI to
+	// launch instances.
 	LaunchPermission *LaunchPermissionConfiguration
 
 	// The name of the distribution configuration.
@@ -78,6 +97,10 @@ type Component struct {
 	// The owner of the component.
 	Owner *string
 
+	// Contains parameter details for each of the parameters that are defined for the
+	// component.
+	Parameters []ComponentParameterDetail
+
 	// The platform of the component.
 	Platform Platform
 
@@ -104,6 +127,46 @@ type ComponentConfiguration struct {
 	//
 	// This member is required.
 	ComponentArn *string
+
+	// A group of parameter settings that are used to configure the component for a
+	// specific recipe.
+	Parameters []ComponentParameter
+}
+
+// Contains a key/value pair that sets the named component parameter.
+type ComponentParameter struct {
+
+	// The name of the component parameter to set.
+	//
+	// This member is required.
+	Name *string
+
+	// Sets the value for the named component parameter.
+	//
+	// This member is required.
+	Value []string
+}
+
+// Defines a parameter that is used to provide configuration details for the
+// component.
+type ComponentParameterDetail struct {
+
+	// The name of this input parameter.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of input this parameter provides. The currently supported value is
+	// "string".
+	//
+	// This member is required.
+	Type *string
+
+	// The default value of this parameter if no input is provided.
+	DefaultValue []string
+
+	// Describes this parameter.
+	Description *string
 }
 
 // A high-level summary of a component.
@@ -547,6 +610,12 @@ type ImagePipeline struct {
 // An image recipe.
 type ImageRecipe struct {
 
+	// Before you create a new AMI, Image Builder launches temporary Amazon EC2
+	// instances to build and test your image configuration. Instance configuration
+	// adds a layer of control over those instances. You can define settings and add
+	// scripts to run when an instance is launched from your AMI.
+	AdditionalInstanceConfiguration *AdditionalInstanceConfiguration
+
 	// The Amazon Resource Name (ARN) of the image recipe.
 	Arn *string
 
@@ -721,7 +790,7 @@ type InfrastructureConfiguration struct {
 	// The instance types of the infrastructure configuration.
 	InstanceTypes []string
 
-	// The EC2 key pair of the infrastructure configuration.
+	// The Amazon EC2 key pair of the infrastructure configuration.
 	KeyPair *string
 
 	// The logging configuration of the infrastructure configuration.
@@ -750,7 +819,7 @@ type InfrastructureConfiguration struct {
 	TerminateInstanceOnFailure *bool
 }
 
-// The infrastructure used when building EC2 AMIs.
+// The infrastructure used when building Amazon EC2 AMIs.
 type InfrastructureConfigurationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the infrastructure configuration.
@@ -812,25 +881,26 @@ type InstanceConfiguration struct {
 }
 
 // Describes the configuration for a launch permission. The launch permission
-// modification request is sent to the EC2 ModifyImageAttribute
+// modification request is sent to the Amazon EC2 ModifyImageAttribute
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html)
 // API on behalf of the user for each Region they have selected to distribute the
 // AMI. To make an AMI public, set the launch permission authorized accounts to
-// all. See the examples for making an AMI public at EC2 ModifyImageAttribute
+// all. See the examples for making an AMI public at Amazon EC2
+// ModifyImageAttribute
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html).
 type LaunchPermissionConfiguration struct {
 
 	// The name of the group.
 	UserGroups []string
 
-	// The AWS account ID.
+	// The account ID.
 	UserIds []string
 }
 
-// Identifies an EC2 launch template to use for a specific account.
+// Identifies an Amazon EC2 launch template to use for a specific account.
 type LaunchTemplateConfiguration struct {
 
-	// Identifies the EC2 launch template to use.
+	// Identifies the Amazon EC2 launch template to use.
 	//
 	// This member is required.
 	LaunchTemplateId *string
@@ -838,8 +908,8 @@ type LaunchTemplateConfiguration struct {
 	// The account ID that this configuration applies to.
 	AccountId *string
 
-	// Set the specified EC2 launch template as the default launch template for the
-	// specified account.
+	// Set the specified Amazon EC2 launch template as the default launch template for
+	// the specified account.
 	SetDefaultVersion bool
 }
 
@@ -853,7 +923,7 @@ type Logging struct {
 // The resources produced by this image.
 type OutputResources struct {
 
-	// The EC2 AMIs created by this image.
+	// The Amazon EC2 AMIs created by this image.
 	Amis []Ami
 
 	// Container images that the pipeline has generated and stored in the output
@@ -899,6 +969,16 @@ type Schedule struct {
 	// (https://www.joda.org/joda-time/timezones.html). If not specified this defaults
 	// to UTC.
 	Timezone *string
+}
+
+// Contains settings for the SSM agent on your build instance.
+type SystemsManagerAgent struct {
+
+	// This property defaults to true. If Image Builder installs the SSM agent on a
+	// build instance, it removes the agent before creating a snapshot for the AMI. To
+	// ensure that the AMI you create includes the SSM agent, set this property to
+	// false.
+	UninstallAfterBuild *bool
 }
 
 // The container repository where the output container image is stored.

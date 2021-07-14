@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Updates an event source mapping. You can change the function that AWS Lambda
+// Updates an event source mapping. You can change the function that Lambda
 // invokes, or pause invocation and resume later from the same location. The
 // following error handling options are only available for stream sources (DynamoDB
 // and Kinesis):
@@ -73,10 +73,11 @@ type UpdateEventSourceMappingInput struct {
 	// * Self-Managed Apache Kafka - Default 100. Max 10,000.
 	BatchSize *int32
 
-	// (Streams) If the function returns an error, split the batch in two and retry.
+	// (Streams only) If the function returns an error, split the batch in two and
+	// retry.
 	BisectBatchOnFunctionError *bool
 
-	// (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded
+	// (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded
 	// records.
 	DestinationConfig *types.DestinationConfig
 
@@ -103,7 +104,7 @@ type UpdateEventSourceMappingInput struct {
 	// in length.
 	FunctionName *string
 
-	// (Streams) A list of current response type enums applied to the event source
+	// (Streams only) A list of current response type enums applied to the event source
 	// mapping.
 	FunctionResponseTypes []types.FunctionResponseType
 
@@ -111,39 +112,39 @@ type UpdateEventSourceMappingInput struct {
 	// before invoking the function, in seconds.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams) Discard records older than the specified age. The default value is
-	// infinite (-1).
+	// (Streams only) Discard records older than the specified age. The default value
+	// is infinite (-1).
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams) Discard records after the specified number of retries. The default
-	// value is infinite (-1). When set to infinite (-1), failed records will be
-	// retried until the record expires.
+	// (Streams only) Discard records after the specified number of retries. The
+	// default value is infinite (-1). When set to infinite (-1), failed records will
+	// be retried until the record expires.
 	MaximumRetryAttempts *int32
 
-	// (Streams) The number of batches to process from each shard concurrently.
+	// (Streams only) The number of batches to process from each shard concurrently.
 	ParallelizationFactor *int32
 
 	// An array of the authentication protocol, or the VPC components to secure your
 	// event source.
 	SourceAccessConfigurations []types.SourceAccessConfiguration
 
-	// (Streams) The duration in seconds of a processing window. The range is between 1
-	// second up to 900 seconds.
+	// (Streams only) The duration in seconds of a processing window. The range is
+	// between 1 second up to 900 seconds.
 	TumblingWindowInSeconds *int32
 }
 
-// A mapping between an AWS resource and an AWS Lambda function. See
+// A mapping between an Amazon Web Services resource and an Lambda function. See
 // CreateEventSourceMapping for details.
 type UpdateEventSourceMappingOutput struct {
 
 	// The maximum number of items to retrieve in a single batch.
 	BatchSize *int32
 
-	// (Streams) If the function returns an error, split the batch in two and retry.
-	// The default value is false.
+	// (Streams only) If the function returns an error, split the batch in two and
+	// retry. The default value is false.
 	BisectBatchOnFunctionError *bool
 
-	// (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded
+	// (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded
 	// records.
 	DestinationConfig *types.DestinationConfig
 
@@ -153,32 +154,33 @@ type UpdateEventSourceMappingOutput struct {
 	// The ARN of the Lambda function.
 	FunctionArn *string
 
-	// (Streams) A list of current response type enums applied to the event source
+	// (Streams only) A list of current response type enums applied to the event source
 	// mapping.
 	FunctionResponseTypes []types.FunctionResponseType
 
 	// The date that the event source mapping was last updated, or its state changed.
 	LastModified *time.Time
 
-	// The result of the last AWS Lambda invocation of your Lambda function.
+	// The result of the last Lambda invocation of your Lambda function.
 	LastProcessingResult *string
 
 	// (Streams and SQS standard queues) The maximum amount of time to gather records
 	// before invoking the function, in seconds. The default value is zero.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams) Discard records older than the specified age. The default value is
-	// infinite (-1). When set to infinite (-1), failed records are retried until the
-	// record expires.
+	// (Streams only) Discard records older than the specified age. The default value
+	// is -1, which sets the maximum age to infinite. When the value is set to
+	// infinite, Lambda never discards old records.
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams) Discard records after the specified number of retries. The default
-	// value is infinite (-1). When set to infinite (-1), failed records are retried
-	// until the record expires.
+	// (Streams only) Discard records after the specified number of retries. The
+	// default value is -1, which sets the maximum number of retries to infinite. When
+	// MaximumRetryAttempts is infinite, Lambda retries failed records until the record
+	// expires in the event source.
 	MaximumRetryAttempts *int32
 
-	// (Streams) The number of batches to process from each shard concurrently. The
-	// default value is 1.
+	// (Streams only) The number of batches to process from each shard concurrently.
+	// The default value is 1.
 	ParallelizationFactor *int32
 
 	// (MQ) The name of the Amazon MQ broker destination queue to consume.
@@ -210,8 +212,8 @@ type UpdateEventSourceMappingOutput struct {
 	// The name of the Kafka topic.
 	Topics []string
 
-	// (Streams) The duration in seconds of a processing window. The range is between 1
-	// second up to 900 seconds.
+	// (Streams only) The duration in seconds of a processing window. The range is
+	// between 1 second up to 900 seconds.
 	TumblingWindowInSeconds *int32
 
 	// The identifier of the event source mapping.

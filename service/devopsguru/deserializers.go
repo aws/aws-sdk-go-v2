@@ -3615,6 +3615,69 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAnomalyReportedTimeRange(v **types.AnomalyReportedTimeRange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AnomalyReportedTimeRange
+	if *v == nil {
+		sv = &types.AnomalyReportedTimeRange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CloseTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CloseTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "OpenTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.OpenTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAnomalySourceDetails(v **types.AnomalySourceDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5033,6 +5096,11 @@ func awsRestjson1_deserializeDocumentProactiveAnomaly(v **types.ProactiveAnomaly
 
 	for key, value := range shape {
 		switch key {
+		case "AnomalyReportedTimeRange":
+			if err := awsRestjson1_deserializeDocumentAnomalyReportedTimeRange(&sv.AnomalyReportedTimeRange, value); err != nil {
+				return err
+			}
+
 		case "AnomalyTimeRange":
 			if err := awsRestjson1_deserializeDocumentAnomalyTimeRange(&sv.AnomalyTimeRange, value); err != nil {
 				return err
@@ -5170,6 +5238,11 @@ func awsRestjson1_deserializeDocumentProactiveAnomalySummary(v **types.Proactive
 
 	for key, value := range shape {
 		switch key {
+		case "AnomalyReportedTimeRange":
+			if err := awsRestjson1_deserializeDocumentAnomalyReportedTimeRange(&sv.AnomalyReportedTimeRange, value); err != nil {
+				return err
+			}
+
 		case "AnomalyTimeRange":
 			if err := awsRestjson1_deserializeDocumentAnomalyTimeRange(&sv.AnomalyTimeRange, value); err != nil {
 				return err
@@ -5553,6 +5626,11 @@ func awsRestjson1_deserializeDocumentReactiveAnomaly(v **types.ReactiveAnomaly, 
 
 	for key, value := range shape {
 		switch key {
+		case "AnomalyReportedTimeRange":
+			if err := awsRestjson1_deserializeDocumentAnomalyReportedTimeRange(&sv.AnomalyReportedTimeRange, value); err != nil {
+				return err
+			}
+
 		case "AnomalyTimeRange":
 			if err := awsRestjson1_deserializeDocumentAnomalyTimeRange(&sv.AnomalyTimeRange, value); err != nil {
 				return err
@@ -5635,6 +5713,11 @@ func awsRestjson1_deserializeDocumentReactiveAnomalySummary(v **types.ReactiveAn
 
 	for key, value := range shape {
 		switch key {
+		case "AnomalyReportedTimeRange":
+			if err := awsRestjson1_deserializeDocumentAnomalyReportedTimeRange(&sv.AnomalyReportedTimeRange, value); err != nil {
+				return err
+			}
+
 		case "AnomalyTimeRange":
 			if err := awsRestjson1_deserializeDocumentAnomalyTimeRange(&sv.AnomalyTimeRange, value); err != nil {
 				return err

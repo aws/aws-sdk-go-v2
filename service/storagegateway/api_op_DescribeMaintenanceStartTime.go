@@ -31,7 +31,7 @@ func (c *Client) DescribeMaintenanceStartTime(ctx context.Context, params *Descr
 type DescribeMaintenanceStartTimeInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -66,7 +66,7 @@ type DescribeMaintenanceStartTimeOutput struct {
 	DayOfWeek *int32
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// The hour component of the maintenance start time represented as hh, where hh is

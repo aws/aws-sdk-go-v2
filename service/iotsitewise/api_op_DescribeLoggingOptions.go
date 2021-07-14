@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the current AWS IoT SiteWise logging options.
+// Retrieves the current IoT SiteWise logging options.
 func (c *Client) DescribeLoggingOptions(ctx context.Context, params *DescribeLoggingOptionsInput, optFns ...func(*Options)) (*DescribeLoggingOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeLoggingOptionsInput{}

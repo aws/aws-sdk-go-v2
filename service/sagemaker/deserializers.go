@@ -43444,6 +43444,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStepMetadata(v **types.Pip
 				return err
 			}
 
+		case "TuningJob":
+			if err := awsAwsjson11_deserializeDocumentTuningJobStepMetaData(&sv.TuningJob, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -51097,6 +51102,46 @@ func awsAwsjson11_deserializeDocumentTuningJobCompletionCriteria(v **types.Tunin
 					return fmt.Errorf("expected TargetObjectiveMetricValue to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTuningJobStepMetaData(v **types.TuningJobStepMetaData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TuningJobStepMetaData
+	if *v == nil {
+		sv = &types.TuningJobStepMetaData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HyperParameterTuningJobArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
 			}
 
 		default:

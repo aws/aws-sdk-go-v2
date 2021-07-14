@@ -12,12 +12,12 @@ import (
 )
 
 // Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity
-// Association Key (CAK) pair with an AWS Direct Connect dedicated connection. You
-// must supply either the secretARN, or the CKN/CAK (ckn and cak) pair in the
-// request. For information about MAC Security (MACsec) key considerations, see
-// MACsec pre-shared CKN/CAK key considerations
+// Association Key (CAK) pair with an Direct Connect dedicated connection. You must
+// supply either the secretARN, or the CKN/CAK (ckn and cak) pair in the request.
+// For information about MAC Security (MACsec) key considerations, see MACsec
+// pre-shared CKN/CAK key considerations
 // (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration)
-// in the AWS Direct Connect User Guide.
+// in the Direct Connect User Guide.
 func (c *Client) AssociateMacSecKey(ctx context.Context, params *AssociateMacSecKeyInput, optFns ...func(*Options)) (*AssociateMacSecKeyOutput, error) {
 	if params == nil {
 		params = &AssociateMacSecKeyInput{}

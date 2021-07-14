@@ -51,8 +51,8 @@ type ApplyPendingMaintenanceActionInput struct {
 	// This member is required.
 	OptInType *string
 
-	// The Amazon Resource Name (ARN) of the AWS DMS resource that the pending
-	// maintenance action applies to.
+	// The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance
+	// action applies to.
 	//
 	// This member is required.
 	ReplicationInstanceArn *string
@@ -61,7 +61,7 @@ type ApplyPendingMaintenanceActionInput struct {
 //
 type ApplyPendingMaintenanceActionOutput struct {
 
-	// The AWS DMS resource that the pending maintenance action will be applied to.
+	// The DMS resource that the pending maintenance action will be applied to.
 	ResourcePendingMaintenanceActions *types.ResourcePendingMaintenanceActions
 
 	// Metadata pertaining to the operation's result.

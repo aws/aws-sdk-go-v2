@@ -184,8 +184,8 @@ func (e *RequestInProgressException) ErrorMessage() string {
 func (e *RequestInProgressException) ErrorCode() string             { return "RequestInProgressException" }
 func (e *RequestInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The certificate is in use by another AWS service in the caller's account. Remove
-// the association and try again.
+// The certificate is in use by another Amazon Web Services service in the caller's
+// account. Remove the association and try again.
 type ResourceInUseException struct {
 	Message *string
 }
@@ -271,7 +271,8 @@ func (e *TooManyTagsException) ErrorMessage() string {
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The supplied input failed to satisfy constraints of an AWS service.
+// The supplied input failed to satisfy constraints of an Amazon Web Services
+// service.
 type ValidationException struct {
 	Message *string
 }

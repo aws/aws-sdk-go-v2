@@ -13,10 +13,10 @@ import (
 )
 
 // Creates a gateway, which is a virtual or edge device that delivers industrial
-// data streams from local servers to AWS IoT SiteWise. For more information, see
+// data streams from local servers to IoT SiteWise. For more information, see
 // Ingesting data using a gateway
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, optFns ...func(*Options)) (*CreateGatewayOutput, error) {
 	if params == nil {
 		params = &CreateGatewayInput{}
@@ -45,9 +45,9 @@ type CreateGatewayInput struct {
 	GatewayPlatform *types.GatewayPlatform
 
 	// A list of key-value pairs that contain metadata for the gateway. For more
-	// information, see Tagging your AWS IoT SiteWise resources
+	// information, see Tagging your IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 }
 
@@ -61,7 +61,7 @@ type CreateGatewayOutput struct {
 	// This member is required.
 	GatewayArn *string
 
-	// The ID of the gateway device. You can use this ID when you call other AWS IoT
+	// The ID of the gateway device. You can use this ID when you call other IoT
 	// SiteWise APIs.
 	//
 	// This member is required.

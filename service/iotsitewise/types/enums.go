@@ -453,6 +453,24 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type StorageType string
+
+// Enum values for StorageType
+const (
+	StorageTypeSitewiseDefaultStorage StorageType = "SITEWISE_DEFAULT_STORAGE"
+	StorageTypeMultiLayerStorage      StorageType = "MULTI_LAYER_STORAGE"
+)
+
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageType) Values() []StorageType {
+	return []StorageType{
+		"SITEWISE_DEFAULT_STORAGE",
+		"MULTI_LAYER_STORAGE",
+	}
+}
+
 type TimeOrdering string
 
 // Enum values for TimeOrdering

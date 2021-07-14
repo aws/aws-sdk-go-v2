@@ -290,6 +290,7 @@ const (
 	SourceAccessTypeVpcSecurityGroup SourceAccessType = "VPC_SECURITY_GROUP"
 	SourceAccessTypeSaslScram512Auth SourceAccessType = "SASL_SCRAM_512_AUTH"
 	SourceAccessTypeSaslScram256Auth SourceAccessType = "SASL_SCRAM_256_AUTH"
+	SourceAccessTypeVirtualHost      SourceAccessType = "VIRTUAL_HOST"
 )
 
 // Values returns all known values for SourceAccessType. Note that this can be
@@ -302,6 +303,7 @@ func (SourceAccessType) Values() []SourceAccessType {
 		"VPC_SECURITY_GROUP",
 		"SASL_SCRAM_512_AUTH",
 		"SASL_SCRAM_256_AUTH",
+		"VIRTUAL_HOST",
 	}
 }
 

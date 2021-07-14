@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a portal, which can contain projects and dashboards. AWS IoT SiteWise
-// Monitor uses AWS SSO or IAM to authenticate portal users and manage user
-// permissions. Before you can sign in to a new portal, you must add at least one
-// identity to that portal. For more information, see Adding or removing portal
-// administrators
+// Creates a portal, which can contain projects and dashboards. IoT SiteWise
+// Monitor uses Amazon Web Services SSO or IAM to authenticate portal users and
+// manage user permissions. Before you can sign in to a new portal, you must add at
+// least one identity to that portal. For more information, see Adding or removing
+// portal administrators
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 func (c *Client) CreatePortal(ctx context.Context, params *CreatePortalInput, optFns ...func(*Options)) (*CreatePortalOutput, error) {
 	if params == nil {
 		params = &CreatePortalInput{}
@@ -36,7 +36,7 @@ func (c *Client) CreatePortal(ctx context.Context, params *CreatePortalInput, op
 
 type CreatePortalInput struct {
 
-	// The AWS administrator's contact email address.
+	// The Amazon Web Services administrator's contact email address.
 	//
 	// This member is required.
 	PortalContactEmail *string
@@ -48,19 +48,21 @@ type CreatePortalInput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// a service role that allows the portal's users to access your AWS IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for AWS
-	// IoT SiteWise Monitor
+	// a service role that allows the portal's users to access your IoT SiteWise
+	// resources on your behalf. For more information, see Using service roles for IoT
+	// SiteWise Monitor
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Contains the configuration information of an alarm created in an AWS IoT
-	// SiteWise Monitor portal. You can use the alarm to monitor an asset property and
-	// get notified when the asset property value is outside a specified range. For
-	// more information, see .
+	// Contains the configuration information of an alarm created in an IoT SiteWise
+	// Monitor portal. You can use the alarm to monitor an asset property and get
+	// notified when the asset property value is outside a specified range. For more
+	// information, see Monitoring with alarms
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html)
+	// in the IoT SiteWise Application Guide.
 	Alarms *types.Alarms
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -68,28 +70,30 @@ type CreatePortalInput struct {
 	// request is required.
 	ClientToken *string
 
-	// The email address that sends alarm notifications. If you use the AWS IoT Events
-	// managed AWS Lambda function to manage your emails, you must verify the sender
-	// email address in Amazon SES
+	// The email address that sends alarm notifications. If you use the IoT Events
+	// managed Lambda function
+	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html)
+	// to manage your emails, you must verify the sender email address in Amazon SES
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
 	NotificationSenderEmail *string
 
 	// The service to use to authenticate users to the portal. Choose from the
 	// following options:
 	//
-	// * SSO – The portal uses AWS Single Sign-On to authenticate
-	// users and manage user permissions. Before you can create a portal that uses AWS
-	// SSO, you must enable AWS SSO. For more information, see Enabling AWS SSO
+	// * SSO – The portal uses Amazon Web Services Single Sign On
+	// to authenticate users and manage user permissions. Before you can create a
+	// portal that uses Amazon Web Services SSO, you must enable Amazon Web Services
+	// SSO. For more information, see Enabling Amazon Web Services SSO
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso)
-	// in the AWS IoT SiteWise User Guide. This option is only available in AWS Regions
-	// other than the China Regions.
+	// in the IoT SiteWise User Guide. This option is only available in Amazon Web
+	// Services Regions other than the China Regions.
 	//
-	// * IAM – The portal uses AWS Identity and Access
-	// Management (IAM) to authenticate users and manage user permissions. This option
-	// is only available in the China Regions.
+	// * IAM – The portal uses Identity
+	// and Access Management to authenticate users and manage user permissions. This
+	// option is only available in the China Regions.
 	//
-	// You can't change this value after you
-	// create a portal. Default: SSO
+	// You can't change this value
+	// after you create a portal. Default: SSO
 	PortalAuthMode types.AuthMode
 
 	// A description for the portal.
@@ -100,9 +104,9 @@ type CreatePortalInput struct {
 	PortalLogoImageFile *types.ImageFile
 
 	// A list of key-value pairs that contain metadata for the portal. For more
-	// information, see Tagging your AWS IoT SiteWise resources
+	// information, see Tagging your IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 }
 
@@ -121,10 +125,10 @@ type CreatePortalOutput struct {
 	// This member is required.
 	PortalId *string
 
-	// The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access
-	// portals that use AWS SSO for authentication. For portals that use IAM for
-	// authentication, you must use the AWS IoT SiteWise console to get a URL that you
-	// can use to access the portal.
+	// The URL for the IoT SiteWise Monitor portal. You can use this URL to access
+	// portals that use Amazon Web Services SSO for authentication. For portals that
+	// use IAM for authentication, you must use the IoT SiteWise console to get a URL
+	// that you can use to access the portal.
 	//
 	// This member is required.
 	PortalStartUrl *string
@@ -135,7 +139,8 @@ type CreatePortalOutput struct {
 	// This member is required.
 	PortalStatus *types.PortalStatus
 
-	// The associated AWS SSO application ID, if the portal uses AWS SSO.
+	// The associated Amazon Web Services SSO application ID, if the portal uses Amazon
+	// Web Services SSO.
 	//
 	// This member is required.
 	SsoApplicationId *string

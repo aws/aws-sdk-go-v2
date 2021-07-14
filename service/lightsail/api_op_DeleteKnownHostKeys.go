@@ -19,7 +19,7 @@ import (
 // new host key or certificate on the instance. For more information, see
 // Troubleshooting connection issues when using the Amazon Lightsail browser-based
 // SSH or RDP client
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-troubleshooting-browser-based-ssh-rdp-client-connection).
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-troubleshooting-browser-based-ssh-rdp-client-connection).
 func (c *Client) DeleteKnownHostKeys(ctx context.Context, params *DeleteKnownHostKeysInput, optFns ...func(*Options)) (*DeleteKnownHostKeysOutput, error) {
 	if params == nil {
 		params = &DeleteKnownHostKeysInput{}

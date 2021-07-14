@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the default encryption configuration for the AWS account. For more
-// information, see Key management
+// Sets the default encryption configuration for the Amazon Web Services account.
+// For more information, see Key management
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 func (c *Client) PutDefaultEncryptionConfiguration(ctx context.Context, params *PutDefaultEncryptionConfigurationInput, optFns ...func(*Options)) (*PutDefaultEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &PutDefaultEncryptionConfigurationInput{}
@@ -37,7 +37,7 @@ type PutDefaultEncryptionConfigurationInput struct {
 	// This member is required.
 	EncryptionType types.EncryptionType
 
-	// The Key ID of the customer managed customer master key (CMK) used for AWS KMS
+	// The Key ID of the customer managed customer master key (CMK) used for KMS
 	// encryption. This is required if you use KMS_BASED_ENCRYPTION.
 	KmsKeyId *string
 }
@@ -55,7 +55,7 @@ type PutDefaultEncryptionConfigurationOutput struct {
 	// This member is required.
 	EncryptionType types.EncryptionType
 
-	// The Key ARN of the AWS KMS CMK used for AWS KMS encryption if you use
+	// The Key ARN of the KMS CMK used for KMS encryption if you use
 	// KMS_BASED_ENCRYPTION.
 	KmsKeyArn *string
 

@@ -12,10 +12,10 @@ import (
 )
 
 // Creates a private virtual interface. A virtual interface is the VLAN that
-// transports AWS Direct Connect traffic. A private virtual interface can be
-// connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW).
+// transports Direct Connect traffic. A private virtual interface can be connected
+// to either a Direct Connect gateway or a Virtual Private Gateway (VGW).
 // Connecting the private virtual interface to a Direct Connect gateway enables the
-// possibility for connecting to multiple VPCs, including VPCs in different AWS
+// possibility for connecting to multiple VPCs, including VPCs in different
 // Regions. Connecting the private virtual interface to a VGW only provides access
 // to a single VPC within the same Region. Setting the MTU of a virtual interface
 // to 9001 (jumbo frames) can cause an update to the underlying physical connection
@@ -75,6 +75,10 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDeviceV2 *string
 
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
+
 	// The BGP peers configured on this virtual interface.
 	BgpPeers []types.BGPPeer
 
@@ -100,14 +104,14 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	// 9001. The default value is 1500.
 	Mtu *int32
 
-	// The ID of the AWS account that owns the virtual interface.
+	// The ID of the account that owns the virtual interface.
 	OwnerAccount *string
 
-	// The AWS Region where the virtual interface is located.
+	// The Region where the virtual interface is located.
 	Region *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
+	// The routes to be advertised to the Amazon Web Services network in this Region.
+	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []types.RouteFilterPrefix
 
 	// The tags associated with the virtual interface.

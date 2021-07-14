@@ -41,7 +41,8 @@ type DescribeConfigurationOutput struct {
 	// Required. The ARN of the configuration.
 	Arn *string
 
-	// The authentication strategy associated with the configuration.
+	// Optional. The authentication strategy associated with the configuration. The
+	// default is SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
 	// Required. The date and time of the configuration revision.
@@ -50,13 +51,13 @@ type DescribeConfigurationOutput struct {
 	// Required. The description of the configuration.
 	Description *string
 
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports
-	// ACTIVEMQ and RABBITMQ.
+	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and
+	// RABBITMQ.
 	EngineType types.EngineType
 
-	// Required. The version of the broker engine. For a list of supported engine
-	// versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	// Required. The broker engine's version. For a list of supported engine versions,
+	// see, Supported engines
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
 	EngineVersion *string
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.

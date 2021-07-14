@@ -18,14 +18,30 @@ import (
 // environment. Each tag consists of a key and an optional value, both of which you
 // define. For example, you could define a set of tags for your account's managed
 // instances that helps you track each instance's owner and stack level. For
-// example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and
-// Value=Production, Pre-Production, or Test. Each resource can have a maximum of
-// 50 tags. We recommend that you devise a set of tag keys that meets your needs
-// for each resource type. Using a consistent set of tag keys makes it easier for
-// you to manage your resources. You can search and filter the resources based on
-// the tags you add. Tags don't have any semantic meaning to and are interpreted
-// strictly as a string of characters. For more information about using tags with
-// EC2 instances, see Tagging your Amazon EC2 resources
+// example:
+//
+// * Key=Owner,Value=DbAdmin
+//
+// * Key=Owner,Value=SysAdmin
+//
+// *
+// Key=Owner,Value=Dev
+//
+// * Key=Stack,Value=Production
+//
+// *
+// Key=Stack,Value=Pre-Production
+//
+// * Key=Stack,Value=Test
+//
+// Each resource can have a
+// maximum of 50 tags. We recommend that you devise a set of tag keys that meets
+// your needs for each resource type. Using a consistent set of tag keys makes it
+// easier for you to manage your resources. You can search and filter the resources
+// based on the tags you add. Tags don't have any semantic meaning to and are
+// interpreted strictly as a string of characters. For more information about using
+// tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your
+// Amazon EC2 resources
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 // Amazon EC2 User Guide.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
@@ -46,30 +62,31 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 type AddTagsToResourceInput struct {
 
 	// The resource ID you want to tag. Use the ID of the resource. Here are some
-	// examples: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde
-	// PatchBaseline: pb-012345abcde OpsMetadata object: ResourceID for tagging is
-	// created from the Amazon Resource Name (ARN) for the object. Specifically,
-	// ResourceID is created from the strings that come after the word opsmetadata in
-	// the ARN. For example, an OpsMetadata object with an ARN of
+	// examples: MaintenanceWindow: mw-012345abcdePatchBaseline:
+	// pb-012345abcdeOpsMetadata object: ResourceID for tagging is created from the
+	// Amazon Resource Name (ARN) for the object. Specifically, ResourceID is created
+	// from the strings that come after the word opsmetadata in the ARN. For example,
+	// an OpsMetadata object with an ARN of
 	// arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a
 	// ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager.
-	// For the Document and Parameter values, use the name of the resource. The
-	// ManagedInstance type for this API action is only for on-premises managed
-	// instances. You must specify the name of the managed instance in the following
-	// format: mi-ID_number. For example, mi-1a2b3c4d5e6f.
+	// For the Document and Parameter values, use the name of the resource.
+	// ManagedInstance: mi-012345abcde The ManagedInstance type for this API operation
+	// is only for on-premises managed instances. You must specify the name of the
+	// managed instance in the following format: mi-ID_number . For example,
+	// mi-1a2b3c4d5e6f.
 	//
 	// This member is required.
 	ResourceId *string
 
 	// Specifies the type of resource you are tagging. The ManagedInstance type for
-	// this API action is for on-premises managed instances. You must specify the name
-	// of the managed instance in the following format: mi-ID_number. For example,
-	// mi-1a2b3c4d5e6f.
+	// this API operation is for on-premises managed instances. You must specify the
+	// name of the managed instance in the following format: mi-ID_number . For
+	// example, mi-1a2b3c4d5e6f.
 	//
 	// This member is required.
 	ResourceType types.ResourceTypeForTagging
 
-	// One or more tags. The value parameter is required. Do not enter personally
+	// One or more tags. The value parameter is required. Don't enter personally
 	// identifiable information in this field.
 	//
 	// This member is required.

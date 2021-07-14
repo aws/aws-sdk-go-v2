@@ -524,6 +524,30 @@ func (Order) Values() []Order {
 	}
 }
 
+type PrincipalMappingStatus string
+
+// Enum values for PrincipalMappingStatus
+const (
+	PrincipalMappingStatusFailed     PrincipalMappingStatus = "FAILED"
+	PrincipalMappingStatusSucceeded  PrincipalMappingStatus = "SUCCEEDED"
+	PrincipalMappingStatusProcessing PrincipalMappingStatus = "PROCESSING"
+	PrincipalMappingStatusDeleting   PrincipalMappingStatus = "DELETING"
+	PrincipalMappingStatusDeleted    PrincipalMappingStatus = "DELETED"
+)
+
+// Values returns all known values for PrincipalMappingStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalMappingStatus) Values() []PrincipalMappingStatus {
+	return []PrincipalMappingStatus{
+		"FAILED",
+		"SUCCEEDED",
+		"PROCESSING",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType

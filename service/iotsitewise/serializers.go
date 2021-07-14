@@ -2084,6 +2084,51 @@ func awsRestjson1_serializeOpHttpBindingsDescribeProjectInput(v *DescribeProject
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeStorageConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeStorageConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeStorageConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeStorageConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration/account/storage")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeStorageConfigurationInput(v *DescribeStorageConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDisassociateAssets struct {
 }
 
@@ -3353,6 +3398,81 @@ func awsRestjson1_serializeOpDocumentPutLoggingOptionsInput(v *PutLoggingOptions
 		if err := awsRestjson1_serializeDocumentLoggingOptions(v.LoggingOptions, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutStorageConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpPutStorageConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutStorageConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutStorageConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration/account/storage")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutStorageConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutStorageConfigurationInput(v *PutStorageConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutStorageConfigurationInput(v *PutStorageConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MultiLayerStorage != nil {
+		ok := object.Key("multiLayerStorage")
+		if err := awsRestjson1_serializeDocumentMultiLayerStorage(v.MultiLayerStorage, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.StorageType) > 0 {
+		ok := object.Key("storageType")
+		ok.String(string(v.StorageType))
 	}
 
 	return nil
@@ -4683,6 +4803,23 @@ func awsRestjson1_serializeDocumentAttribute(v *types.Attribute, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomerManagedS3Storage(v *types.CustomerManagedS3Storage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.S3ResourceArn != nil {
+		ok := object.Key("s3ResourceArn")
+		ok.String(*v.S3ResourceArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExpressionVariable(v *types.ExpressionVariable, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4911,6 +5048,20 @@ func awsRestjson1_serializeDocumentMetricWindow(v *types.MetricWindow, value smi
 	if v.Tumbling != nil {
 		ok := object.Key("tumbling")
 		if err := awsRestjson1_serializeDocumentTumblingWindow(v.Tumbling, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiLayerStorage(v *types.MultiLayerStorage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomerManagedS3Storage != nil {
+		ok := object.Key("customerManagedS3Storage")
+		if err := awsRestjson1_serializeDocumentCustomerManagedS3Storage(v.CustomerManagedS3Storage, ok); err != nil {
 			return err
 		}
 	}

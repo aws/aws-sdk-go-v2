@@ -30,7 +30,7 @@ func (c *Client) AuthorizeEndpointAccess(ctx context.Context, params *AuthorizeE
 
 type AuthorizeEndpointAccessInput struct {
 
-	// The AWS account ID to grant access to.
+	// The account ID to grant access to.
 	//
 	// This member is required.
 	Account *string
@@ -43,7 +43,7 @@ type AuthorizeEndpointAccessInput struct {
 }
 
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
-// endpoint access to a cluster across AWS accounts.
+// endpoint access to a cluster across accounts.
 type AuthorizeEndpointAccessOutput struct {
 
 	// Indicates whether all VPCs in the grantee account are allowed access to the
@@ -65,10 +65,10 @@ type AuthorizeEndpointAccessOutput struct {
 	// The number of Redshift-managed VPC endpoints created for the authorization.
 	EndpointCount int32
 
-	// The AWS account ID of the grantee of the cluster.
+	// The account ID of the grantee of the cluster.
 	Grantee *string
 
-	// The AWS account ID of the cluster owner.
+	// The account ID of the cluster owner.
 	Grantor *string
 
 	// The status of the authorization action.

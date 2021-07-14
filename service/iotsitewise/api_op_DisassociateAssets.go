@@ -45,7 +45,7 @@ type DisassociateAssetsInput struct {
 	// can use the hierarchy ID to identify the correct asset to disassociate. For more
 	// information, see Asset hierarchies
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	HierarchyId *string

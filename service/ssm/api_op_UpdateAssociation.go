@@ -12,12 +12,13 @@ import (
 )
 
 // Updates an association. You can update the association name and version, the
-// document version, schedule, parameters, and Amazon S3 output. In order to call
-// this API action, your IAM user account, group, or role must be configured with
-// permission to call the DescribeAssociation API action. If you don't have
+// document version, schedule, parameters, and Amazon Simple Storage Service
+// (Amazon S3) output. In order to call this API operation, your Identity and
+// Access Management (IAM) user account, group, or role must be configured with
+// permission to call the DescribeAssociation API operation. If you don't have
 // permission to call DescribeAssociation, then you receive the following error: An
 // error occurred (AccessDeniedException) when calling the UpdateAssociation
-// operation: User: is not authorized to perform: ssm:DescribeAssociation on
+// operation: User: isn't authorized to perform: ssm:DescribeAssociation on
 // resource:  When you update an association, the association immediately runs
 // against the specified targets.
 func (c *Client) UpdateAssociation(ctx context.Context, params *UpdateAssociationInput, optFns ...func(*Options)) (*UpdateAssociationOutput, error) {
@@ -45,11 +46,11 @@ type UpdateAssociationInput struct {
 	// By default, when you update an association, the system runs it immediately after
 	// it is updated and then according to the schedule you specified. Specify this
 	// option if you don't want an association to run immediately after you update it.
-	// This parameter is not supported for rate expressions. Also, if you specified
-	// this option when you created the association, you can reset it. To do so,
-	// specify the no-apply-only-at-cron-interval parameter when you update the
-	// association from the command line. This parameter forces the association to run
-	// immediately after updating it and according to the interval specified.
+	// This parameter isn't supported for rate expressions. Also, if you specified this
+	// option when you created the association, you can reset it. To do so, specify the
+	// no-apply-only-at-cron-interval parameter when you update the association from
+	// the command line. This parameter forces the association to run immediately after
+	// updating it and according to the interval specified.
 	ApplyOnlyAtCronInterval bool
 
 	// The name of the association that you want to update.
@@ -61,12 +62,13 @@ type UpdateAssociationInput struct {
 	AssociationVersion *string
 
 	// Specify the target for the association. This target is required for associations
-	// that use an Automation document and target resources by using rate controls.
+	// that use an Automation runbook and target resources by using rate controls.
+	// Automation is a capability of Amazon Web Services Systems Manager.
 	AutomationTargetParameterName *string
 
-	// The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar
-	// type documents you want to gate your associations under. The associations only
-	// run when that Change Calendar is open. For more information, see AWS Systems
+	// The names or Amazon Resource Names (ARNs) of the Change Calendar type documents
+	// you want to gate your associations under. The associations only run when that
+	// change calendar is open. For more information, see Amazon Web Services Systems
 	// Manager Change Calendar
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar).
 	CalendarNames []string
@@ -101,15 +103,16 @@ type UpdateAssociationInput struct {
 	// one at a time.
 	MaxErrors *string
 
-	// The name of the SSM document that contains the configuration information for the
-	// instance. You can specify Command or Automation documents. You can specify
-	// AWS-predefined documents, documents you created, or a document that is shared
-	// with you from another account. For SSM documents that are shared with you from
-	// other AWS accounts, you must specify the complete SSM document ARN, in the
-	// following format: arn:aws:ssm:region:account-id:document/document-name  For
-	// example: arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For
-	// AWS-predefined documents and SSM documents you created in your account, you only
-	// need to specify the document name. For example, AWS-ApplyPatchBaseline or
+	// The name of the SSM Command document or Automation runbook that contains the
+	// configuration information for the instance. You can specify Amazon Web
+	// Services-predefined documents, documents you created, or a document that is
+	// shared with you from another account. For Systems Manager document (SSM
+	// document) that are shared with you from other accounts, you must specify the
+	// complete SSM document ARN, in the following format:
+	// arn:aws:ssm:region:account-id:document/document-name  For example:
+	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For Amazon Web
+	// Services-predefined documents and SSM documents you created in your account, you
+	// only need to specify the document name. For example, AWS-ApplyPatchBaseline or
 	// My-Document.
 	Name *string
 
@@ -117,8 +120,8 @@ type UpdateAssociationInput struct {
 	OutputLocation *types.InstanceAssociationOutputLocation
 
 	// The parameters you want to update for the association. If you create a parameter
-	// using Parameter Store, you can reference the parameter using
-	// {{ssm:parameter-name}}
+	// using Parameter Store, a capability of Amazon Web Services Systems Manager, you
+	// can reference the parameter using {{ssm:parameter-name}}.
 	Parameters map[string][]string
 
 	// The cron expression used to schedule the association that you want to update.
@@ -129,15 +132,15 @@ type UpdateAssociationInput struct {
 	// determine the compliance status. If the association execution runs successfully,
 	// then the association is COMPLIANT. If the association execution doesn't run
 	// successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify
-	// the AssociationId as a parameter for the PutComplianceItems API action. In this
-	// case, compliance data is not managed by State Manager. It is managed by your
-	// direct call to the PutComplianceItems API action. By default, all associations
-	// use AUTO mode.
+	// the AssociationId as a parameter for the PutComplianceItems API operation. In
+	// this case, compliance data isn't managed by State Manager, a capability of
+	// Amazon Web Services Systems Manager. It is managed by your direct call to the
+	// PutComplianceItems API operation. By default, all associations use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
-	// A location is a combination of AWS Regions and AWS accounts where you want to
-	// run the association. Use this action to update an association in multiple
-	// Regions and multiple accounts.
+	// A location is a combination of Regions and accounts where you want to run the
+	// association. Use this action to update an association in multiple Regions and
+	// multiple accounts.
 	TargetLocations []types.TargetLocation
 
 	// The targets of the association.

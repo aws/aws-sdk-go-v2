@@ -16,8 +16,8 @@ import (
 // aggregation group (LAG) or interconnect. If the target interconnect or LAG has
 // an existing hosted connection with a conflicting VLAN number or IP address, the
 // operation fails. This action temporarily interrupts the hosted connection's
-// connectivity to AWS as it is being migrated. Intended for use by AWS Direct
-// Connect Partners only.
+// connectivity to Amazon Web Services as it is being migrated. Intended for use by
+// Direct Connect Partners only.
 func (c *Client) AssociateHostedConnection(ctx context.Context, params *AssociateHostedConnectionInput, optFns ...func(*Options)) (*AssociateHostedConnectionOutput, error) {
 	if params == nil {
 		params = &AssociateHostedConnectionInput{}
@@ -46,7 +46,7 @@ type AssociateHostedConnectionInput struct {
 	ParentConnectionId *string
 }
 
-// Information about an AWS Direct Connect connection.
+// Information about an Direct Connect connection.
 type AssociateHostedConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -56,6 +56,10 @@ type AssociateHostedConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -124,11 +128,10 @@ type AssociateHostedConnectionOutput struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
-	// The ID of the AWS account that owns the connection.
+	// The ID of the account that owns the connection.
 	OwnerAccount *string
 
-	// The name of the AWS Direct Connect service provider associated with the
-	// connection.
+	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
@@ -139,7 +142,7 @@ type AssociateHostedConnectionOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.

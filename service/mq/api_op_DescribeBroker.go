@@ -30,10 +30,7 @@ func (c *Client) DescribeBroker(ctx context.Context, params *DescribeBrokerInput
 
 type DescribeBrokerInput struct {
 
-	// The name of the broker. This value must be unique in your AWS account, 1-50
-	// characters long, must contain only letters, numbers, dashes, and underscores,
-	// and must not contain whitespaces, brackets, wildcard characters, or special
-	// characters.
+	// The unique ID that Amazon MQ generates for the broker.
 	//
 	// This member is required.
 	BrokerId *string
@@ -41,15 +38,15 @@ type DescribeBrokerInput struct {
 
 type DescribeBrokerOutput struct {
 
-	// The authentication strategy used to secure the broker.
+	// The authentication strategy used to secure the broker. The default is SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
-	// Required. Enables automatic upgrades to new minor versions for brokers, as
-	// Apache releases the versions. The automatic upgrades occur during the
-	// maintenance window of the broker or after a manual broker reboot.
+	// Enables automatic upgrades to new minor versions for brokers, as new versions
+	// are released and supported by Amazon MQ. Automatic upgrades occur during the
+	// scheduled maintenance window of the broker or after a manual broker reboot.
 	AutoMinorVersionUpgrade bool
 
-	// The Amazon Resource Name (ARN) of the broker.
+	// The broker's Amazon Resource Name (ARN).
 	BrokerArn *string
 
 	// The unique ID that Amazon MQ generates for the broker.
@@ -58,13 +55,13 @@ type DescribeBrokerOutput struct {
 	// A list of information about allocated brokers.
 	BrokerInstances []types.BrokerInstance
 
-	// The name of the broker. This value must be unique in your AWS account, 1-50
+	// The broker's name. This value must be unique in your AWS account, 1-50
 	// characters long, must contain only letters, numbers, dashes, and underscores,
-	// and must not contain whitespaces, brackets, wildcard characters, or special
+	// and must not contain white spaces, brackets, wildcard characters, or special
 	// characters.
 	BrokerName *string
 
-	// The status of the broker.
+	// The broker's status.
 	BrokerState types.BrokerState
 
 	// The list of all revisions for the specified configuration.
@@ -73,18 +70,18 @@ type DescribeBrokerOutput struct {
 	// The time when the broker was created.
 	Created *time.Time
 
-	// Required. The deployment mode of the broker.
+	// The broker's deployment mode.
 	DeploymentMode types.DeploymentMode
 
-	// Encryption options for the broker.
+	// Encryption options for the broker. Does not apply to RabbitMQ brokers.
 	EncryptionOptions *types.EncryptionOptions
 
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports
-	// ACTIVEMQ and RABBITMQ.
+	// The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
 	EngineType types.EngineType
 
-	// The version of the broker engine. For a list of supported engine versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	// The broker engine's version. For a list of supported engine versions, see
+	// Supported engines
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
 	EngineVersion *string
 
 	// The broker's instance type.
@@ -102,42 +99,39 @@ type DescribeBrokerOutput struct {
 	MaintenanceWindowStartTime *types.WeeklyStartTime
 
 	// The authentication strategy that will be applied when the broker is rebooted.
+	// The default is SIMPLE.
 	PendingAuthenticationStrategy types.AuthenticationStrategy
 
-	// The version of the broker engine to upgrade to. For a list of supported engine
-	// versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	// The broker engine version to upgrade to. For a list of supported engine
+	// versions, see Supported engines
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
 	PendingEngineVersion *string
 
-	// The host instance type of the broker to upgrade to. For a list of supported
-	// instance types, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+	// The broker's host instance type to upgrade to. For a list of supported instance
+	// types, see Broker instance types
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types).
 	PendingHostInstanceType *string
 
 	// The metadata of the LDAP server that will be used to authenticate and authorize
-	// connections to the broker once it is rebooted.
+	// connections to the broker after it is rebooted.
 	PendingLdapServerMetadata *types.LdapServerMetadataOutput
 
 	// The list of pending security groups to authorize connections to brokers.
 	PendingSecurityGroups []string
 
-	// Required. Enables connections from applications outside of the VPC that hosts
-	// the broker's subnets.
+	// Enables connections from applications outside of the VPC that hosts the broker's
+	// subnets.
 	PubliclyAccessible bool
 
-	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
-	// to brokers.
+	// The list of rules (1 minimum, 125 maximum) that authorize connections to
+	// brokers.
 	SecurityGroups []string
 
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
 
 	// The list of groups that define which subnets and IP ranges the broker can use
-	// from different Availability Zones. A SINGLE_INSTANCE deployment requires one
-	// subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment
-	// (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no
-	// subnet requirements when deployed with public accessibility, deployment without
-	// public accessibility requires at least one subnet.
+	// from different Availability Zones.
 	SubnetIds []string
 
 	// The list of all tags associated with this broker.

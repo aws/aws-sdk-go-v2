@@ -15,7 +15,7 @@ import (
 // Creates an asset from an existing asset model. For more information, see
 // Creating assets
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optFns ...func(*Options)) (*CreateAssetOutput, error) {
 	if params == nil {
 		params = &CreateAssetInput{}
@@ -49,9 +49,9 @@ type CreateAssetInput struct {
 	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the asset. For more
-	// information, see Tagging your AWS IoT SiteWise resources
+	// information, see Tagging your IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	Tags map[string]string
 }
 
@@ -65,8 +65,8 @@ type CreateAssetOutput struct {
 	// This member is required.
 	AssetArn *string
 
-	// The ID of the asset. This ID uniquely identifies the asset within AWS IoT
-	// SiteWise and can be used with other AWS IoT SiteWise APIs.
+	// The ID of the asset. This ID uniquely identifies the asset within IoT SiteWise
+	// and can be used with other IoT SiteWise APIs.
 	//
 	// This member is required.
 	AssetId *string

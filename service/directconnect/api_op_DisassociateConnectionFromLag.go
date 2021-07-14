@@ -16,12 +16,12 @@ import (
 // is interrupted and re-established as a standalone connection (the connection is
 // not deleted; to delete the connection, use the DeleteConnection request). If the
 // LAG has associated virtual interfaces or hosted connections, they remain
-// associated with the LAG. A disassociated connection owned by an AWS Direct
-// Connect Partner is automatically converted to an interconnect. If disassociating
-// the connection would cause the LAG to fall below its setting for minimum number
-// of operational connections, the request fails, except when it's the last member
-// of the LAG. If all connections are disassociated, the LAG continues to exist as
-// an empty LAG with no physical connections.
+// associated with the LAG. A disassociated connection owned by an Direct Connect
+// Partner is automatically converted to an interconnect. If disassociating the
+// connection would cause the LAG to fall below its setting for minimum number of
+// operational connections, the request fails, except when it's the last member of
+// the LAG. If all connections are disassociated, the LAG continues to exist as an
+// empty LAG with no physical connections.
 func (c *Client) DisassociateConnectionFromLag(ctx context.Context, params *DisassociateConnectionFromLagInput, optFns ...func(*Options)) (*DisassociateConnectionFromLagOutput, error) {
 	if params == nil {
 		params = &DisassociateConnectionFromLagInput{}
@@ -50,7 +50,7 @@ type DisassociateConnectionFromLagInput struct {
 	LagId *string
 }
 
-// Information about an AWS Direct Connect connection.
+// Information about an Direct Connect connection.
 type DisassociateConnectionFromLagOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -60,6 +60,10 @@ type DisassociateConnectionFromLagOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -128,11 +132,10 @@ type DisassociateConnectionFromLagOutput struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
-	// The ID of the AWS account that owns the connection.
+	// The ID of the account that owns the connection.
 	OwnerAccount *string
 
-	// The name of the AWS Direct Connect service provider associated with the
-	// connection.
+	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
@@ -143,7 +146,7 @@ type DisassociateConnectionFromLagOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.

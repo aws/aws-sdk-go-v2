@@ -29,17 +29,19 @@ func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optF
 
 type SendCommandInput struct {
 
-	// The name of the Systems Manager document to run. This can be a public document
-	// or a custom document. To run a shared document belonging to another account,
-	// specify the document ARN. For more information about how to use shared
-	// documents, see Using shared SSM documents
+	// The name of the Amazon Web Services Systems Manager document (SSM document) to
+	// run. This can be a public document or a custom document. To run a shared
+	// document belonging to another account, specify the document ARN. For more
+	// information about how to use shared documents, see Using shared SSM documents
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	//
 	// This member is required.
 	DocumentName *string
 
-	// Enables Systems Manager to send Run Command output to Amazon CloudWatch Logs.
+	// Enables Amazon Web Services Systems Manager to send Run Command output to Amazon
+	// CloudWatch Logs. Run Command is a capability of Amazon Web Services Systems
+	// Manager.
 	CloudWatchOutputConfig *types.CloudWatchOutputConfig
 
 	// User-specified information about the command, such as a brief description of
@@ -54,11 +56,11 @@ type SendCommandInput struct {
 	DocumentHashType types.DocumentHashType
 
 	// The SSM document version to use in the request. You can specify $DEFAULT,
-	// $LATEST, or a specific version number. If you run commands by using the AWS CLI,
-	// then you must escape the first two options by using a backslash. If you specify
-	// a version number, then you don't need to use the backslash. For example:
-	// --document-version "\$DEFAULT" --document-version "\$LATEST" --document-version
-	// "3"
+	// $LATEST, or a specific version number. If you run commands by using the Command
+	// Line Interface (Amazon Web Services CLI), then you must escape the first two
+	// options by using a backslash. If you specify a version number, then you don't
+	// need to use the backslash. For example: --document-version "\$DEFAULT"
+	// --document-version "\$LATEST" --document-version "3"
 	DocumentVersion *string
 
 	// The IDs of the instances where the command should run. Specifying instance IDs
@@ -70,7 +72,7 @@ type SendCommandInput struct {
 	// thousands of instances at once. For more information about how to use targets,
 	// see Using targets and rate controls to send commands to a fleet
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	InstanceIds []string
 
 	// (Optional) The maximum number of instances that are allowed to run the command
@@ -78,7 +80,7 @@ type SendCommandInput struct {
 	// 10%. The default value is 50. For more information about how to use
 	// MaxConcurrency, see Using concurrency controls
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	MaxConcurrency *string
 
 	// The maximum number of errors allowed without the command failing. When the
@@ -87,7 +89,7 @@ type SendCommandInput struct {
 	// percentage like 10%. The default value is 0. For more information about how to
 	// use MaxErrors, see Using error controls
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	MaxErrors *string
 
 	// Configurations for sending notifications.
@@ -107,8 +109,9 @@ type SendCommandInput struct {
 	// The required and optional parameters specified in the document being run.
 	Parameters map[string][]string
 
-	// The ARN of the IAM service role to use to publish Amazon Simple Notification
-	// Service (Amazon SNS) notifications for Run Command commands.
+	// The ARN of the Identity and Access Management (IAM) service role to use to
+	// publish Amazon Simple Notification Service (Amazon SNS) notifications for Run
+	// Command commands.
 	ServiceRoleArn *string
 
 	// An array of search criteria that targets instances using a Key,Value combination
@@ -119,11 +122,11 @@ type SendCommandInput struct {
 	// instances, you can use the InstanceIds option instead. For more information
 	// about how to use targets, see Sending commands to a fleet
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target
 
-	// If this time is reached and the command has not already started running, it will
-	// not run.
+	// If this time is reached and the command hasn't already started running, it won't
+	// run.
 	TimeoutSeconds int32
 }
 

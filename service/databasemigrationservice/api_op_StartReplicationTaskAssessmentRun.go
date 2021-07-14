@@ -47,47 +47,47 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// This member is required.
 	ReplicationTaskArn *string
 
-	// Amazon S3 bucket where you want AWS DMS to store the results of this assessment
-	// run.
+	// Amazon S3 bucket where you want DMS to store the results of this assessment run.
 	//
 	// This member is required.
 	ResultLocationBucket *string
 
-	// ARN of a service role needed to start the assessment run.
+	// ARN of the service role needed to start the assessment run. The role must allow
+	// the iam:PassRole action.
 	//
 	// This member is required.
 	ServiceAccessRoleArn *string
 
 	// Space-separated list of names for specific individual assessments that you want
 	// to exclude. These names come from the default list of individual assessments
-	// that AWS DMS supports for the associated migration task. This task is specified
-	// by ReplicationTaskArn. You can't set a value for Exclude if you also set a value
+	// that DMS supports for the associated migration task. This task is specified by
+	// ReplicationTaskArn. You can't set a value for Exclude if you also set a value
 	// for IncludeOnly in the API operation. To identify the names of the default
-	// individual assessments that AWS DMS supports for the associated migration task,
-	// run the DescribeApplicableIndividualAssessments operation using its own
+	// individual assessments that DMS supports for the associated migration task, run
+	// the DescribeApplicableIndividualAssessments operation using its own
 	// ReplicationTaskArn request parameter.
 	Exclude []string
 
 	// Space-separated list of names for specific individual assessments that you want
 	// to include. These names come from the default list of individual assessments
-	// that AWS DMS supports for the associated migration task. This task is specified
-	// by ReplicationTaskArn. You can't set a value for IncludeOnly if you also set a
+	// that DMS supports for the associated migration task. This task is specified by
+	// ReplicationTaskArn. You can't set a value for IncludeOnly if you also set a
 	// value for Exclude in the API operation. To identify the names of the default
-	// individual assessments that AWS DMS supports for the associated migration task,
-	// run the DescribeApplicableIndividualAssessments operation using its own
+	// individual assessments that DMS supports for the associated migration task, run
+	// the DescribeApplicableIndividualAssessments operation using its own
 	// ReplicationTaskArn request parameter.
 	IncludeOnly []string
 
 	// Encryption mode that you can specify to encrypt the results of this assessment
-	// run. If you don't specify this request parameter, AWS DMS stores the assessment
-	// run results without encryption. You can specify one of the options following:
+	// run. If you don't specify this request parameter, DMS stores the assessment run
+	// results without encryption. You can specify one of the options following:
 	//
 	// *
 	// "SSE_S3" – The server-side encryption provided as a default by Amazon S3.
 	//
 	// *
-	// "SSE_KMS" – AWS Key Management Service (AWS KMS) encryption. This encryption can
-	// use either a custom KMS encryption key that you specify or the default KMS
+	// "SSE_KMS" – Key Management Service (KMS) encryption. This encryption can use
+	// either a custom KMS encryption key that you specify or the default KMS
 	// encryption key that DMS provides.
 	ResultEncryptionMode *string
 
@@ -95,7 +95,7 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// ResultEncryptionMode to "SSE_KMS".
 	ResultKmsKeyArn *string
 
-	// Folder within an Amazon S3 bucket where you want AWS DMS to store the results of
+	// Folder within an Amazon S3 bucket where you want DMS to store the results of
 	// this assessment run.
 	ResultLocationFolder *string
 }

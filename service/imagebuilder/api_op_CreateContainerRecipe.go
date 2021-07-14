@@ -72,7 +72,8 @@ type CreateContainerRecipeInput struct {
 	// The Dockerfile template used to build your image as an inline data blob.
 	DockerfileTemplateData *string
 
-	// The S3 URI for the Dockerfile that will be used to build your container image.
+	// The Amazon S3 URI for the Dockerfile that will be used to build your container
+	// image.
 	DockerfileTemplateUri *string
 
 	// Specifies the operating system version for the source image.

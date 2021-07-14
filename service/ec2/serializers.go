@@ -13792,6 +13792,62 @@ func (m *awsEc2query_serializeOpDescribeSecurityGroupReferences) HandleSerialize
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpDescribeSecurityGroupRules struct {
+}
+
+func (*awsEc2query_serializeOpDescribeSecurityGroupRules) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeSecurityGroupRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeSecurityGroupRulesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeSecurityGroupRules")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeSecurityGroupRulesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpDescribeSecurityGroups struct {
 }
 
@@ -20996,6 +21052,62 @@ func (m *awsEc2query_serializeOpModifyReservedInstances) HandleSerialize(ctx con
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentModifyReservedInstancesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpModifySecurityGroupRules struct {
+}
+
+func (*awsEc2query_serializeOpModifySecurityGroupRules) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpModifySecurityGroupRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifySecurityGroupRulesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifySecurityGroupRules")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentModifySecurityGroupRulesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -30715,6 +30827,132 @@ func awsEc2query_serializeDocumentSecurityGroupIdStringList(v []string, value qu
 	return nil
 }
 
+func awsEc2query_serializeDocumentSecurityGroupRuleDescription(v *types.SecurityGroupRuleDescription, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.SecurityGroupRuleId != nil {
+		objectKey := object.Key("SecurityGroupRuleId")
+		objectKey.String(*v.SecurityGroupRuleId)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentSecurityGroupRuleDescriptionList(v []types.SecurityGroupRuleDescription, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleDescription(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentSecurityGroupRuleIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentSecurityGroupRuleRequest(v *types.SecurityGroupRuleRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CidrIpv4 != nil {
+		objectKey := object.Key("CidrIpv4")
+		objectKey.String(*v.CidrIpv4)
+	}
+
+	if v.CidrIpv6 != nil {
+		objectKey := object.Key("CidrIpv6")
+		objectKey.String(*v.CidrIpv6)
+	}
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.FromPort != nil {
+		objectKey := object.Key("FromPort")
+		objectKey.Integer(*v.FromPort)
+	}
+
+	if v.IpProtocol != nil {
+		objectKey := object.Key("IpProtocol")
+		objectKey.String(*v.IpProtocol)
+	}
+
+	if v.PrefixListId != nil {
+		objectKey := object.Key("PrefixListId")
+		objectKey.String(*v.PrefixListId)
+	}
+
+	if v.ReferencedGroupId != nil {
+		objectKey := object.Key("ReferencedGroupId")
+		objectKey.String(*v.ReferencedGroupId)
+	}
+
+	if v.ToPort != nil {
+		objectKey := object.Key("ToPort")
+		objectKey.Integer(*v.ToPort)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentSecurityGroupRuleUpdate(v *types.SecurityGroupRuleUpdate, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SecurityGroupRule != nil {
+		objectKey := object.Key("SecurityGroupRule")
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleRequest(v.SecurityGroupRule, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.SecurityGroupRuleId != nil {
+		objectKey := object.Key("SecurityGroupRuleId")
+		objectKey.String(*v.SecurityGroupRuleId)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentSecurityGroupRuleUpdateList(v []types.SecurityGroupRuleUpdate, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleUpdate(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentSecurityGroupStringList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -33117,6 +33355,13 @@ func awsEc2query_serializeOpDocumentAuthorizeSecurityGroupEgressInput(v *Authori
 		objectKey.String(*v.SourceSecurityGroupOwnerId)
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.FlatKey("TagSpecification")
+		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.ToPort != nil {
 		objectKey := object.Key("ToPort")
 		objectKey.Integer(*v.ToPort)
@@ -33174,6 +33419,13 @@ func awsEc2query_serializeOpDocumentAuthorizeSecurityGroupIngressInput(v *Author
 	if v.SourceSecurityGroupOwnerId != nil {
 		objectKey := object.Key("SourceSecurityGroupOwnerId")
 		objectKey.String(*v.SourceSecurityGroupOwnerId)
+	}
+
+	if v.TagSpecifications != nil {
+		objectKey := object.FlatKey("TagSpecification")
+		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.ToPort != nil {
@@ -39957,6 +40209,42 @@ func awsEc2query_serializeOpDocumentDescribeSecurityGroupReferencesInput(v *Desc
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentDescribeSecurityGroupRulesInput(v *DescribeSecurityGroupRulesInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filter")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	if v.SecurityGroupRuleIds != nil {
+		objectKey := object.FlatKey("SecurityGroupRuleId")
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleIdList(v.SecurityGroupRuleIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentDescribeSecurityGroupsInput(v *DescribeSecurityGroupsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -43767,6 +44055,30 @@ func awsEc2query_serializeOpDocumentModifyReservedInstancesInput(v *ModifyReserv
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentModifySecurityGroupRulesInput(v *ModifySecurityGroupRulesInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.GroupId != nil {
+		objectKey := object.Key("GroupId")
+		objectKey.String(*v.GroupId)
+	}
+
+	if v.SecurityGroupRules != nil {
+		objectKey := object.FlatKey("SecurityGroupRule")
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleUpdateList(v.SecurityGroupRules, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentModifySnapshotAttributeInput(v *ModifySnapshotAttributeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -45751,6 +46063,13 @@ func awsEc2query_serializeOpDocumentRevokeSecurityGroupEgressInput(v *RevokeSecu
 		objectKey.String(*v.IpProtocol)
 	}
 
+	if v.SecurityGroupRuleIds != nil {
+		objectKey := object.FlatKey("SecurityGroupRuleId")
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleIdList(v.SecurityGroupRuleIds, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceSecurityGroupName != nil {
 		objectKey := object.Key("SourceSecurityGroupName")
 		objectKey.String(*v.SourceSecurityGroupName)
@@ -45808,6 +46127,13 @@ func awsEc2query_serializeOpDocumentRevokeSecurityGroupIngressInput(v *RevokeSec
 	if v.IpProtocol != nil {
 		objectKey := object.Key("IpProtocol")
 		objectKey.String(*v.IpProtocol)
+	}
+
+	if v.SecurityGroupRuleIds != nil {
+		objectKey := object.FlatKey("SecurityGroupRuleId")
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleIdList(v.SecurityGroupRuleIds, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.SourceSecurityGroupName != nil {
@@ -46443,6 +46769,13 @@ func awsEc2query_serializeOpDocumentUpdateSecurityGroupRuleDescriptionsEgressInp
 		}
 	}
 
+	if v.SecurityGroupRuleDescriptions != nil {
+		objectKey := object.FlatKey("SecurityGroupRuleDescription")
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleDescriptionList(v.SecurityGroupRuleDescriptions, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -46468,6 +46801,13 @@ func awsEc2query_serializeOpDocumentUpdateSecurityGroupRuleDescriptionsIngressIn
 	if v.IpPermissions != nil {
 		objectKey := object.FlatKey("IpPermissions")
 		if err := awsEc2query_serializeDocumentIpPermissionList(v.IpPermissions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.SecurityGroupRuleDescriptions != nil {
+		objectKey := object.FlatKey("SecurityGroupRuleDescription")
+		if err := awsEc2query_serializeDocumentSecurityGroupRuleDescriptionList(v.SecurityGroupRuleDescriptions, objectKey); err != nil {
 			return err
 		}
 	}

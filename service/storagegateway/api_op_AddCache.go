@@ -12,7 +12,7 @@ import (
 
 // Configures one or more gateway local disks as cache for a gateway. This
 // operation is only supported in the cached volume, tape, and file gateway type
-// (see How AWS Storage Gateway works (architecture)
+// (see How Storage Gateway works (architecture)
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html).
 // In the request, you specify the gateway Amazon Resource Name (ARN) to which you
 // want to add cache, and one or more disk IDs that you want to configure as cache.
@@ -41,7 +41,7 @@ type AddCacheInput struct {
 	DiskIds []string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -50,7 +50,7 @@ type AddCacheInput struct {
 type AddCacheOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

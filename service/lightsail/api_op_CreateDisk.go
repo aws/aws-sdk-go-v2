@@ -14,8 +14,8 @@ import (
 // Creates a block storage disk that can be attached to an Amazon Lightsail
 // instance in the same Availability Zone (e.g., us-east-2a). The create disk
 // operation supports tag-based access control via request tags. For more
-// information, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// information, see the Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) CreateDisk(ctx context.Context, params *CreateDiskInput, optFns ...func(*Options)) (*CreateDiskOutput, error) {
 	if params == nil {
 		params = &CreateDiskInput{}

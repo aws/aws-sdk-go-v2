@@ -13,8 +13,8 @@ import (
 )
 
 // Gets a list of FileSystemAssociationSummary objects. Each object contains a
-// summary of a file system association. This operation is only supported for
-// Amazon FSx file gateways.
+// summary of a file system association. This operation is only supported for FSx
+// File Gateways.
 func (c *Client) ListFileSystemAssociations(ctx context.Context, params *ListFileSystemAssociationsInput, optFns ...func(*Options)) (*ListFileSystemAssociationsOutput, error) {
 	if params == nil {
 		params = &ListFileSystemAssociationsInput{}
@@ -33,7 +33,7 @@ func (c *Client) ListFileSystemAssociations(ctx context.Context, params *ListFil
 type ListFileSystemAssociationsInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// The maximum number of file system associations to return in the response. If

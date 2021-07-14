@@ -12,7 +12,7 @@ import (
 )
 
 // Updates a Network File System (NFS) file share. This operation is only supported
-// in the file gateway type. To leave a file share field unchanged, set the
+// in S3 File Gateways. To leave a file share field unchanged, set the
 // corresponding input field to null. Updates the following file share settings:
 //
 // *
@@ -53,13 +53,13 @@ type UpdateNFSFileShareInput struct {
 	// specifies refresh cache information for the file share.
 	CacheAttributes *types.CacheAttributes
 
-	// The list of clients that are allowed to access the file gateway. The list must
-	// contain either valid IP addresses or valid CIDR blocks.
+	// The list of clients that are allowed to access the S3 File Gateway. The list
+	// must contain either valid IP addresses or valid CIDR blocks.
 	ClientList []string
 
-	// The default storage class for objects put into an Amazon S3 bucket by the file
-	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// The default storage class for objects put into an Amazon S3 bucket by the S3
+	// File Gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid
+	// Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
@@ -71,8 +71,8 @@ type UpdateNFSFileShareInput struct {
 	// set to false. The default value is true. Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
-	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
+	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
@@ -96,7 +96,7 @@ type UpdateNFSFileShareInput struct {
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
-	// bucket that a file gateway puts objects into. The default value is private.
+	// bucket that a S3 File Gateway puts objects into. The default value is private.
 	ObjectACL types.ObjectACL
 
 	// A value that sets the write status of a file share. Set this value to true to

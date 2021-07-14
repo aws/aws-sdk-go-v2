@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves details about your account's limits
-// (https://docs.aws.amazon.com/lambda/latest/dg/limits.html) and usage in an AWS
-// Region.
+// (https://docs.aws.amazon.com/lambda/latest/dg/limits.html) and usage in an
+// Amazon Web Services Region.
 func (c *Client) GetAccountSettings(ctx context.Context, params *GetAccountSettingsInput, optFns ...func(*Options)) (*GetAccountSettingsOutput, error) {
 	if params == nil {
 		params = &GetAccountSettingsInput{}

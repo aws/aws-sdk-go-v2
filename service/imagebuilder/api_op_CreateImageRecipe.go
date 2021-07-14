@@ -62,6 +62,9 @@ type CreateImageRecipeInput struct {
 	// This member is required.
 	SemanticVersion *string
 
+	// Specify additional settings and launch scripts for your build instances.
+	AdditionalInstanceConfiguration *types.AdditionalInstanceConfiguration
+
 	// The block device mappings of the image recipe.
 	BlockDeviceMappings []types.InstanceBlockDeviceMapping
 
@@ -71,7 +74,7 @@ type CreateImageRecipeInput struct {
 	// The tags of the image recipe.
 	Tags map[string]string
 
-	// The working directory to be used during build and test workflows.
+	// The working directory used during build and test workflows.
 	WorkingDirectory *string
 }
 

@@ -47,6 +47,10 @@ type CreateTriggerInput struct {
 	// A description of the new trigger.
 	Description *string
 
+	// Batch condition that must be met (specified number of events received or batch
+	// time window expired) before EventBridge event trigger fires.
+	EventBatchingCondition *types.EventBatchingCondition
+
 	// A predicate to specify when the new trigger should fire. This field is required
 	// when the trigger type is CONDITIONAL.
 	Predicate *types.Predicate

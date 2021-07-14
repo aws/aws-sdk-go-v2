@@ -16,7 +16,7 @@ type AvailabilityZone struct {
 // Types of broker engines.
 type BrokerEngineType struct {
 
-	// The type of broker engine.
+	// The broker's engine type.
 	EngineType EngineType
 
 	// The list of engine versions.
@@ -26,14 +26,14 @@ type BrokerEngineType struct {
 // Returns information about all brokers.
 type BrokerInstance struct {
 
-	// The URL of the broker's Web Console.
+	// The brokers web console URL.
 	ConsoleURL *string
 
 	// The broker's wire-level protocol endpoints.
 	Endpoints []string
 
 	// The IP address of the Elastic Network Interface (ENI) attached to the broker.
-	// Does not apply to RabbitMQ brokers
+	// Does not apply to RabbitMQ brokers.
 	IpAddress *string
 }
 
@@ -43,10 +43,10 @@ type BrokerInstanceOption struct {
 	// The list of available az.
 	AvailabilityZones []AvailabilityZone
 
-	// The type of broker engine.
+	// The broker's engine type.
 	EngineType EngineType
 
-	// The type of broker instance.
+	// The broker's instance type.
 	HostInstanceType *string
 
 	// The broker's storage type.
@@ -59,32 +59,35 @@ type BrokerInstanceOption struct {
 	SupportedEngineVersions []string
 }
 
-// The Amazon Resource Name (ARN) of the broker.
+// Returns information about all brokers.
 type BrokerSummary struct {
 
-	// The Amazon Resource Name (ARN) of the broker.
+	// The broker's deployment mode.
+	//
+	// This member is required.
+	DeploymentMode DeploymentMode
+
+	// The type of broker engine.
+	//
+	// This member is required.
+	EngineType EngineType
+
+	// The broker's Amazon Resource Name (ARN).
 	BrokerArn *string
 
 	// The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string
 
-	// The name of the broker. This value must be unique in your AWS account, 1-50
-	// characters long, must contain only letters, numbers, dashes, and underscores,
-	// and must not contain whitespaces, brackets, wildcard characters, or special
-	// characters.
+	// The broker's name. This value is unique in your AWS account, 1-50 characters
+	// long, and containing only letters, numbers, dashes, and underscores, and must
+	// not contain white spaces, brackets, wildcard characters, or special characters.
 	BrokerName *string
 
-	// The status of the broker.
+	// The broker's status.
 	BrokerState BrokerState
 
 	// The time when the broker was created.
 	Created *time.Time
-
-	// Required. The deployment mode of the broker.
-	DeploymentMode DeploymentMode
-
-	// Required. The type of broker engine.
-	EngineType EngineType
 
 	// The broker's instance type.
 	HostInstanceType *string
@@ -94,35 +97,54 @@ type BrokerSummary struct {
 type Configuration struct {
 
 	// Required. The ARN of the configuration.
+	//
+	// This member is required.
 	Arn *string
 
-	// The authentication strategy associated with the configuration.
+	// Optional. The authentication strategy associated with the configuration. The
+	// default is SIMPLE.
+	//
+	// This member is required.
 	AuthenticationStrategy AuthenticationStrategy
 
 	// Required. The date and time of the configuration revision.
+	//
+	// This member is required.
 	Created *time.Time
 
 	// Required. The description of the configuration.
+	//
+	// This member is required.
 	Description *string
 
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports
-	// ACTIVEMQ and RABBITMQ.
+	// Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and
+	// RABBITMQ.
+	//
+	// This member is required.
 	EngineType EngineType
 
-	// Required. The version of the broker engine. For a list of supported engine
-	// versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	// Required. The broker engine's version. For a list of supported engine versions,
+	// see, Supported engines
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
+	//
+	// This member is required.
 	EngineVersion *string
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.
+	//
+	// This member is required.
 	Id *string
 
 	// Required. The latest revision of the configuration.
+	//
+	// This member is required.
 	LatestRevision *ConfigurationRevision
 
 	// Required. The name of the configuration. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	// This value must be 1-150 characters long.
+	//
+	// This member is required.
 	Name *string
 
 	// The list of all tags associated with this configuration.
@@ -134,6 +156,8 @@ type Configuration struct {
 type ConfigurationId struct {
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.
+	//
+	// This member is required.
 	Id *string
 
 	// The revision number of the configuration.
@@ -144,39 +168,44 @@ type ConfigurationId struct {
 type ConfigurationRevision struct {
 
 	// Required. The date and time of the configuration revision.
+	//
+	// This member is required.
 	Created *time.Time
+
+	// Required. The revision number of the configuration.
+	//
+	// This member is required.
+	Revision int32
 
 	// The description of the configuration revision.
 	Description *string
-
-	// Required. The revision number of the configuration.
-	Revision int32
 }
 
 // Broker configuration information
 type Configurations struct {
 
-	// The current configuration of the broker.
+	// The broker's current configuration.
 	Current *ConfigurationId
 
 	// The history of configurations applied to the broker.
 	History []ConfigurationId
 
-	// The pending configuration of the broker.
+	// The broker's pending configuration.
 	Pending *ConfigurationId
 }
 
-// Encryption options for the broker.
+// Does not apply to RabbitMQ brokers. Encryption options for the broker.
 type EncryptionOptions struct {
 
-	// Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+	// Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set
+	// to true by default, if no value is provided, for example, for RabbitMQ brokers.
 	//
 	// This member is required.
 	UseAwsOwnedKey bool
 
-	// The symmetric customer master key (CMK) to use for the AWS Key Management
-	// Service (KMS). This key is used to encrypt your data at rest. If not provided,
-	// Amazon MQ will use a default CMK to encrypt your data.
+	// The customer master key (CMK) to use for the AWS Key Management Service (KMS).
+	// This key is used to encrypt your data at rest. If not provided, Amazon MQ will
+	// use a default CMK to encrypt your data.
 	KmsKeyId *string
 }
 
@@ -187,82 +216,150 @@ type EngineVersion struct {
 	Name *string
 }
 
-// The metadata of the LDAP server used to authenticate and authorize connections
-// to the broker.
+// Optional. The metadata of the LDAP server used to authenticate and authorize
+// connections to the broker. Does not apply to RabbitMQ brokers.
 type LdapServerMetadataInput struct {
 
-	// Fully qualified domain name of the LDAP server. Optional failover server.
+	// Specifies the location of the LDAP server such as AWS Directory Service for
+	// Microsoft Active Directory . Optional failover server.
+	//
+	// This member is required.
 	Hosts []string
 
-	// Fully qualified name of the directory to search for a user’s groups.
+	// The distinguished name of the node in the directory information tree (DIT) to
+	// search for roles or groups. For example, ou=group, ou=corp, dc=corp, dc=example,
+	// dc=com.
+	//
+	// This member is required.
 	RoleBase *string
+
+	// The LDAP search filter used to find roles within the roleBase. The distinguished
+	// name of the user matched by userSearchMatching is substituted into the {0}
+	// placeholder in the search filter. The client's username is substituted into the
+	// {1} placeholder. For example, if you set this option to (member=uid={1})for the
+	// user janedoe, the search filter becomes (member=uid=janedoe) after string
+	// substitution. It matches all role entries that have a member attribute equal to
+	// uid=janedoe under the subtree selected by the roleBase.
+	//
+	// This member is required.
+	RoleSearchMatching *string
+
+	// Service account password. A service account is an account in your LDAP server
+	// that has access to initiate a connection. For example, cn=admin,dc=corp,
+	// dc=example, dc=com.
+	//
+	// This member is required.
+	ServiceAccountPassword *string
+
+	// Service account username. A service account is an account in your LDAP server
+	// that has access to initiate a connection. For example, cn=admin,dc=corp,
+	// dc=example, dc=com.
+	//
+	// This member is required.
+	ServiceAccountUsername *string
+
+	// Select a particular subtree of the directory information tree (DIT) to search
+	// for user entries. The subtree is specified by a DN, which specifies the base
+	// node of the subtree. For example, by setting this option to ou=Users,ou=corp,
+	// dc=corp, dc=example, dc=com, the search for user entries is restricted to the
+	// subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
+	//
+	// This member is required.
+	UserBase *string
+
+	// The LDAP search filter used to find users within the userBase. The client's
+	// username is substituted into the {0} placeholder in the search filter. For
+	// example, if this option is set to (uid={0}) and the received username is
+	// janedoe, the search filter becomes (uid=janedoe) after string substitution. It
+	// will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp,
+	// dc=example, dc=com.
+	//
+	// This member is required.
+	UserSearchMatching *string
 
 	// Specifies the LDAP attribute that identifies the group name attribute in the
 	// object returned from the group membership query.
 	RoleName *string
 
-	// The search criteria for groups.
-	RoleSearchMatching *string
-
 	// The directory search scope for the role. If set to true, scope is to search the
-	// entire sub-tree.
+	// entire subtree.
 	RoleSearchSubtree bool
-
-	// Service account password.
-	ServiceAccountPassword *string
-
-	// Service account username.
-	ServiceAccountUsername *string
-
-	// Fully qualified name of the directory where you want to search for users.
-	UserBase *string
 
 	// Specifies the name of the LDAP attribute for the user group membership.
 	UserRoleName *string
 
-	// The search criteria for users.
-	UserSearchMatching *string
-
 	// The directory search scope for the user. If set to true, scope is to search the
-	// entire sub-tree.
+	// entire subtree.
 	UserSearchSubtree bool
 }
 
-// The metadata of the LDAP server used to authenticate and authorize connections
-// to the broker.
+// Optional. The metadata of the LDAP server used to authenticate and authorize
+// connections to the broker.
 type LdapServerMetadataOutput struct {
 
-	// Fully qualified domain name of the LDAP server. Optional failover server.
+	// Specifies the location of the LDAP server such as AWS Directory Service for
+	// Microsoft Active Directory . Optional failover server.
+	//
+	// This member is required.
 	Hosts []string
 
-	// Fully qualified name of the directory to search for a user’s groups.
+	// The distinguished name of the node in the directory information tree (DIT) to
+	// search for roles or groups. For example, ou=group, ou=corp, dc=corp, dc=example,
+	// dc=com.
+	//
+	// This member is required.
 	RoleBase *string
+
+	// The LDAP search filter used to find roles within the roleBase. The distinguished
+	// name of the user matched by userSearchMatching is substituted into the {0}
+	// placeholder in the search filter. The client's username is substituted into the
+	// {1} placeholder. For example, if you set this option to (member=uid={1})for the
+	// user janedoe, the search filter becomes (member=uid=janedoe) after string
+	// substitution. It matches all role entries that have a member attribute equal to
+	// uid=janedoe under the subtree selected by the roleBase.
+	//
+	// This member is required.
+	RoleSearchMatching *string
+
+	// Service account username. A service account is an account in your LDAP server
+	// that has access to initiate a connection. For example, cn=admin,dc=corp,
+	// dc=example, dc=com.
+	//
+	// This member is required.
+	ServiceAccountUsername *string
+
+	// Select a particular subtree of the directory information tree (DIT) to search
+	// for user entries. The subtree is specified by a DN, which specifies the base
+	// node of the subtree. For example, by setting this option to ou=Users,ou=corp,
+	// dc=corp, dc=example, dc=com, the search for user entries is restricted to the
+	// subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
+	//
+	// This member is required.
+	UserBase *string
+
+	// The LDAP search filter used to find users within the userBase. The client's
+	// username is substituted into the {0} placeholder in the search filter. For
+	// example, if this option is set to (uid={0}) and the received username is
+	// janedoe, the search filter becomes (uid=janedoe) after string substitution. It
+	// will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp,
+	// dc=example, dc=com.
+	//
+	// This member is required.
+	UserSearchMatching *string
 
 	// Specifies the LDAP attribute that identifies the group name attribute in the
 	// object returned from the group membership query.
 	RoleName *string
 
-	// The search criteria for groups.
-	RoleSearchMatching *string
-
 	// The directory search scope for the role. If set to true, scope is to search the
-	// entire sub-tree.
+	// entire subtree.
 	RoleSearchSubtree bool
-
-	// Service account username.
-	ServiceAccountUsername *string
-
-	// Fully qualified name of the directory where you want to search for users.
-	UserBase *string
 
 	// Specifies the name of the LDAP attribute for the user group membership.
 	UserRoleName *string
 
-	// The search criteria for users.
-	UserSearchMatching *string
-
 	// The directory search scope for the user. If set to true, scope is to search the
-	// entire sub-tree.
+	// entire subtree.
 	UserSearchSubtree bool
 }
 
@@ -281,18 +378,22 @@ type Logs struct {
 // for the specified broker.
 type LogsSummary struct {
 
+	// Enables general logging.
+	//
+	// This member is required.
+	General bool
+
+	// The location of the CloudWatch Logs log group where general logs are sent.
+	//
+	// This member is required.
+	GeneralLogGroup *string
+
 	// Enables audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged.
 	Audit bool
 
 	// The location of the CloudWatch Logs log group where audit logs are sent.
 	AuditLogGroup *string
-
-	// Enables general logging.
-	General bool
-
-	// The location of the CloudWatch Logs log group where general logs are sent.
-	GeneralLogGroup *string
 
 	// The list of information about logs pending to be deployed for the specified
 	// broker.
@@ -314,42 +415,61 @@ type PendingLogs struct {
 // configuration.
 type SanitizationWarning struct {
 
+	// Required. The reason for which the XML elements or attributes were sanitized.
+	//
+	// This member is required.
+	Reason SanitizationWarningReason
+
 	// The name of the XML attribute that has been sanitized.
 	AttributeName *string
 
 	// The name of the XML element that has been sanitized.
 	ElementName *string
-
-	// Required. The reason for which the XML elements or attributes were sanitized.
-	Reason SanitizationWarningReason
 }
 
-// A user associated with the broker.
+// A user associated with the broker. For RabbitMQ brokers, one and only one
+// administrative user is accepted and created when a broker is first provisioned.
+// All subsequent broker users are created by making RabbitMQ API calls directly to
+// brokers or via the RabbitMQ web console.
 type User struct {
 
-	// Enables access to the ActiveMQ Web Console for the ActiveMQ user (Does not apply
-	// to RabbitMQ brokers).
+	// Required. The password of the user. This value must be at least 12 characters
+	// long, must contain at least 4 unique characters, and must not contain commas,
+	// colons, or equal signs (,:=).
+	//
+	// This member is required.
+	Password *string
+
+	// important>Amazon MQ for ActiveMQ For ActiveMQ brokers, this value can contain
+	// only alphanumeric characters, dashes, periods, underscores, and tildes (- . _
+	// ~). This value must be 2-100 characters long./important> Amazon MQ for RabbitMQ
+	// For RabbitMQ brokers, this value can contain only alphanumeric characters,
+	// dashes, periods, underscores (- . _). This value must not contain a tilde (~)
+	// character. Amazon MQ prohibts using guest as a valid usename. This value must be
+	// 2-100 characters long.
+	//
+	// This member is required.
+	Username *string
+
+	// Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not apply
+	// to RabbitMQ brokers.
 	ConsoleAccess bool
 
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
-	// tildes (- . _ ~). This value must be 2-100 characters long.
+	// tildes (- . _ ~). This value must be 2-100 characters long. Does not apply to
+	// RabbitMQ brokers.
 	Groups []string
-
-	// Required. The password of the broker user. This value must be at least 12
-	// characters long, must contain at least 4 unique characters, and must not contain
-	// commas.
-	Password *string
-
-	// Required. The username of the broker user. This value can contain only
-	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
-	// This value must be 2-100 characters long.
-	Username *string
 }
 
 // Returns information about the status of the changes pending for the ActiveMQ
 // user.
 type UserPendingChanges struct {
+
+	// Required. The type of change pending for the ActiveMQ user.
+	//
+	// This member is required.
+	PendingChange ChangeType
 
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
 	ConsoleAccess bool
@@ -358,21 +478,20 @@ type UserPendingChanges struct {
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []string
-
-	// Required. The type of change pending for the ActiveMQ user.
-	PendingChange ChangeType
 }
 
-// Returns a list of all broker users.
+// Returns a list of all broker users. Does not apply to RabbitMQ brokers.
 type UserSummary struct {
-
-	// The type of change pending for the broker user.
-	PendingChange ChangeType
 
 	// Required. The username of the broker user. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	// This value must be 2-100 characters long.
+	//
+	// This member is required.
 	Username *string
+
+	// The type of change pending for the broker user.
+	PendingChange ChangeType
 }
 
 // The scheduled time period relative to UTC during which Amazon MQ begins to apply
@@ -380,9 +499,13 @@ type UserSummary struct {
 type WeeklyStartTime struct {
 
 	// Required. The day of the week.
+	//
+	// This member is required.
 	DayOfWeek DayOfWeek
 
 	// Required. The time, in 24-hour format.
+	//
+	// This member is required.
 	TimeOfDay *string
 
 	// The time zone, UTC by default, in either the Country/City format, or the UTC

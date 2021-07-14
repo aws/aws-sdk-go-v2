@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the ability of the specified AWS customer account to restore the
-// specified snapshot. If the account is currently restoring the snapshot, the
-// restore will run to completion. For more information about working with
-// snapshots, go to Amazon Redshift Snapshots
+// Removes the ability of the specified account to restore the specified snapshot.
+// If the account is currently restoring the snapshot, the restore will run to
+// completion. For more information about working with snapshots, go to Amazon
+// Redshift Snapshots
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) RevokeSnapshotAccess(ctx context.Context, params *RevokeSnapshotAccessInput, optFns ...func(*Options)) (*RevokeSnapshotAccessOutput, error) {
@@ -35,8 +35,7 @@ func (c *Client) RevokeSnapshotAccess(ctx context.Context, params *RevokeSnapsho
 //
 type RevokeSnapshotAccessInput struct {
 
-	// The identifier of the AWS customer account that can no longer restore the
-	// specified snapshot.
+	// The identifier of the account that can no longer restore the specified snapshot.
 	//
 	// This member is required.
 	AccountWithRestoreAccess *string

@@ -45,7 +45,8 @@ type GetCommandInvocationInput struct {
 
 	// (Required) The ID of the managed instance targeted by the command. A managed
 	// instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an
-	// instance in your hybrid environment that is configured for AWS Systems Manager.
+	// instance in your hybrid environment that is configured for Amazon Web Services
+	// Systems Manager.
 	//
 	// This member is required.
 	InstanceId *string
@@ -54,17 +55,18 @@ type GetCommandInvocationInput struct {
 	// contains only one plugin, you can omit the name and details for that plugin. If
 	// the document contains more than one plugin, you must specify the name of the
 	// plugin for which you want to view details. Plugin names are also referred to as
-	// step names in Systems Manager documents. For example, aws:RunShellScript is a
-	// plugin. To find the PluginName, check the document content and find the name of
-	// the plugin. Alternatively, use ListCommandInvocations with the CommandId and
-	// Details parameters. The PluginName is the Name attribute of the CommandPlugin
-	// object in the CommandPlugins list.
+	// step names in Systems Manager documents (SSM documents). For example,
+	// aws:RunShellScript is a plugin. To find the PluginName, check the document
+	// content and find the name of the plugin. Alternatively, use
+	// ListCommandInvocations with the CommandId and Details parameters. The PluginName
+	// is the Name attribute of the CommandPlugin object in the CommandPlugins list.
 	PluginName *string
 }
 
 type GetCommandInvocationOutput struct {
 
-	// CloudWatch Logs information where Systems Manager sent the command output.
+	// Amazon CloudWatch Logs information where Systems Manager sent the command
+	// output.
 	CloudWatchOutputConfig *types.CloudWatchOutputConfig
 
 	// The parent command ID of the invocation plugin.
@@ -76,7 +78,7 @@ type GetCommandInvocationOutput struct {
 	// The name of the document that was run. For example, AWS-RunShellScript.
 	DocumentName *string
 
-	// The SSM document version used in the request.
+	// The Systems Manager document (SSM document) version used in the request.
 	DocumentVersion *string
 
 	// Duration since ExecutionStartDateTime.
@@ -84,16 +86,16 @@ type GetCommandInvocationOutput struct {
 
 	// The date and time the plugin finished running. Date and time are written in ISO
 	// 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The
-	// following sample AWS CLI command uses the InvokedAfter filter. aws ssm
-	// list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z If the
-	// plugin has not started to run, the string is empty.
+	// following sample Amazon Web Services CLI command uses the InvokedAfter filter.
+	// aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z If
+	// the plugin hasn't started to run, the string is empty.
 	ExecutionEndDateTime *string
 
 	// The date and time the plugin started running. Date and time are written in ISO
 	// 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The
-	// following sample AWS CLI command uses the InvokedBefore filter. aws ssm
-	// list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z If the
-	// plugin has not started to run, the string is empty.
+	// following sample Amazon Web Services CLI command uses the InvokedBefore filter.
+	// aws ssm list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z If
+	// the plugin hasn't started to run, the string is empty.
 	ExecutionStartDateTime *string
 
 	// The ID of the managed instance targeted by the command. A managed instance can
@@ -106,25 +108,25 @@ type GetCommandInvocationOutput struct {
 	PluginName *string
 
 	// The error level response code for the plugin script. If the response code is -1,
-	// then the command has not started running on the instance, or it was not received
+	// then the command hasn't started running on the instance, or it wasn't received
 	// by the instance.
 	ResponseCode int32
 
-	// The first 8,000 characters written by the plugin to stderr. If the command has
-	// not finished running, then this string is empty.
+	// The first 8,000 characters written by the plugin to stderr. If the command
+	// hasn't finished running, then this string is empty.
 	StandardErrorContent *string
 
 	// The URL for the complete text written by the plugin to stderr. If the command
-	// has not finished running, then this string is empty.
+	// hasn't finished running, then this string is empty.
 	StandardErrorUrl *string
 
-	// The first 24,000 characters written by the plugin to stdout. If the command has
-	// not finished running, if ExecutionStatus is neither Succeeded nor Failed, then
-	// this string is empty.
+	// The first 24,000 characters written by the plugin to stdout. If the command
+	// hasn't finished running, if ExecutionStatus is neither Succeeded nor Failed,
+	// then this string is empty.
 	StandardOutputContent *string
 
 	// The URL for the complete text written by the plugin to stdout in Amazon Simple
-	// Storage Service (Amazon S3). If an S3 bucket was not specified, then this string
+	// Storage Service (Amazon S3). If an S3 bucket wasn't specified, then this string
 	// is empty.
 	StandardOutputUrl *string
 
@@ -138,42 +140,42 @@ type GetCommandInvocationOutput struct {
 	// results than Status. For more information about these statuses, see
 	// Understanding command statuses
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
-	// in the AWS Systems Manager User Guide. StatusDetails can be one of the following
-	// values:
+	// in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one
+	// of the following values:
 	//
-	// * Pending: The command has not been sent to the instance.
+	// * Pending: The command hasn't been sent to the
+	// instance.
 	//
-	// * In
-	// Progress: The command has been sent to the instance but has not reached a
-	// terminal state.
+	// * In Progress: The command has been sent to the instance but hasn't
+	// reached a terminal state.
 	//
-	// * Delayed: The system attempted to send the command to the
-	// target, but the target was not available. The instance might not be available
-	// because of network issues, because the instance was stopped, or for similar
-	// reasons. The system will try to send the command again.
+	// * Delayed: The system attempted to send the command
+	// to the target, but the target wasn't available. The instance might not be
+	// available because of network issues, because the instance was stopped, or for
+	// similar reasons. The system will try to send the command again.
 	//
-	// * Success: The command
-	// or plugin ran successfully. This is a terminal state.
+	// * Success: The
+	// command or plugin ran successfully. This is a terminal state.
 	//
-	// * Delivery Timed Out: The
-	// command was not delivered to the instance before the delivery timeout expired.
-	// Delivery timeouts do not count against the parent command's MaxErrors limit, but
-	// they do contribute to whether the parent command status is Success or
+	// * Delivery Timed
+	// Out: The command wasn't delivered to the instance before the delivery timeout
+	// expired. Delivery timeouts don't count against the parent command's MaxErrors
+	// limit, but they do contribute to whether the parent command status is Success or
 	// Incomplete. This is a terminal state.
 	//
 	// * Execution Timed Out: The command
-	// started to run on the instance, but the execution was not complete before the
+	// started to run on the instance, but the execution wasn't complete before the
 	// timeout expired. Execution timeouts count against the MaxErrors limit of the
 	// parent command. This is a terminal state.
 	//
 	// * Failed: The command wasn't run
 	// successfully on the instance. For a plugin, this indicates that the result code
-	// was not zero. For a command invocation, this indicates that the result code for
-	// one or more plugins was not zero. Invocation failures count against the
-	// MaxErrors limit of the parent command. This is a terminal state.
+	// wasn't zero. For a command invocation, this indicates that the result code for
+	// one or more plugins wasn't zero. Invocation failures count against the MaxErrors
+	// limit of the parent command. This is a terminal state.
 	//
-	// * Canceled:
-	// The command was terminated before it was completed. This is a terminal state.
+	// * Canceled: The command
+	// was terminated before it was completed. This is a terminal state.
 	//
 	// *
 	// Undeliverable: The command can't be delivered to the instance. The instance

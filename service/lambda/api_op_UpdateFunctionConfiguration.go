@@ -23,8 +23,8 @@ import (
 // settings can vary between versions of a function and are locked when you publish
 // a version. You can't modify the configuration of a published version, only the
 // unpublished version. To configure function concurrency, use
-// PutFunctionConcurrency. To grant invoke permissions to an account or AWS
-// service, use AddPermission.
+// PutFunctionConcurrency. To grant invoke permissions to an account or Amazon Web
+// Services service, use AddPermission.
 func (c *Client) UpdateFunctionConfiguration(ctx context.Context, params *UpdateFunctionConfigurationInput, optFns ...func(*Options)) (*UpdateFunctionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionConfigurationInput{}
@@ -86,9 +86,9 @@ type UpdateFunctionConfigurationInput struct {
 	// the values in the container image Dockerfile.
 	ImageConfig *types.ImageConfig
 
-	// The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt
-	// your function's environment variables. If it's not provided, AWS Lambda uses a
-	// default service key.
+	// The ARN of the Amazon Web Services Key Management Service (KMS) key that's used
+	// to encrypt your function's environment variables. If it's not provided, Lambda
+	// uses a default service key.
 	KMSKeyArn *string
 
 	// A list of function layers
@@ -97,9 +97,10 @@ type UpdateFunctionConfigurationInput struct {
 	// including the version.
 	Layers []string
 
-	// The amount of memory available to the function at runtime. Increasing the
-	// function's memory also increases its CPU allocation. The default value is 128
-	// MB. The value can be any multiple of 1 MB.
+	// The amount of memory available to the function
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html) at
+	// runtime. Increasing the function memory also increases its CPU allocation. The
+	// default value is 128 MB. The value can be any multiple of 1 MB.
 	MemorySize *int32
 
 	// Only update the function if the revision ID matches the ID that's specified. Use
@@ -115,17 +116,19 @@ type UpdateFunctionConfigurationInput struct {
 	Runtime types.Runtime
 
 	// The amount of time that Lambda allows a function to run before stopping it. The
-	// default is 3 seconds. The maximum allowed value is 900 seconds.
+	// default is 3 seconds. The maximum allowed value is 900 seconds. For additional
+	// information, see Lambda execution environment
+	// (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).
 	Timeout *int32
 
-	// Set Mode to Active to sample and trace a subset of incoming requests with AWS
-	// X-Ray.
+	// Set Mode to Active to sample and trace a subset of incoming requests with X-Ray
+	// (https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html).
 	TracingConfig *types.TracingConfig
 
-	// For network connectivity to AWS resources in a VPC, specify a list of security
-	// groups and subnets in the VPC. When you connect a function to a VPC, it can only
-	// access resources and the internet through that VPC. For more information, see
-	// VPC Settings
+	// For network connectivity to Amazon Web Services resources in a VPC, specify a
+	// list of security groups and subnets in the VPC. When you connect a function to a
+	// VPC, it can only access resources and the internet through that VPC. For more
+	// information, see VPC Settings
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).
 	VpcConfig *types.VpcConfig
 }
@@ -145,10 +148,12 @@ type UpdateFunctionConfigurationOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables.
+	// The function's environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 	Environment *types.EnvironmentResponse
 
-	// Connection settings for an Amazon EFS file system.
+	// Connection settings for an Amazon EFS file system
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -225,7 +230,7 @@ type UpdateFunctionConfigurationOutput struct {
 	// stopping it.
 	Timeout *int32
 
-	// The function's AWS X-Ray tracing configuration.
+	// The function's X-Ray tracing configuration.
 	TracingConfig *types.TracingConfigResponse
 
 	// The version of the Lambda function.

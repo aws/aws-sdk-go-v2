@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes the record of a single premigration assessment run. This operation
-// removes all metadata that AWS DMS maintains about this assessment run. However,
-// the operation leaves untouched all information about this assessment run that is
+// removes all metadata that DMS maintains about this assessment run. However, the
+// operation leaves untouched all information about this assessment run that is
 // stored in your Amazon S3 bucket.
 func (c *Client) DeleteReplicationTaskAssessmentRun(ctx context.Context, params *DeleteReplicationTaskAssessmentRunInput, optFns ...func(*Options)) (*DeleteReplicationTaskAssessmentRunOutput, error) {
 	if params == nil {

@@ -14,9 +14,9 @@ import (
 
 // Returns table statistics on the database migration task, including table name,
 // rows inserted, rows updated, and rows deleted. Note that the "last updated"
-// column the DMS console only indicates the time that AWS DMS last updated the
-// table statistics record for a table. It does not indicate the time of the last
-// update to the table.
+// column the DMS console only indicates the time that DMS last updated the table
+// statistics record for a table. It does not indicate the time of the last update
+// to the table.
 func (c *Client) DescribeTableStatistics(ctx context.Context, params *DescribeTableStatisticsInput, optFns ...func(*Options)) (*DescribeTableStatisticsOutput, error) {
 	if params == nil {
 		params = &DescribeTableStatisticsInput{}

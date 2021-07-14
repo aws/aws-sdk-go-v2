@@ -12,8 +12,8 @@ import (
 )
 
 // Deprecated. Use DescribeHostedConnections instead. Lists the connections that
-// have been provisioned on the specified interconnect. Intended for use by AWS
-// Direct Connect Partners only.
+// have been provisioned on the specified interconnect. Intended for use by Direct
+// Connect Partners only.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) DescribeConnectionsOnInterconnect(ctx context.Context, params *DescribeConnectionsOnInterconnectInput, optFns ...func(*Options)) (*DescribeConnectionsOnInterconnectOutput, error) {

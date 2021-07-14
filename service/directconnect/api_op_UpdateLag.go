@@ -20,15 +20,15 @@ import (
 // the minimum number of connections that must be operational for the LAG itself to
 // be operational.
 //
-// * The LAG's MACsec encryption mode. AWS assigns this value to
-// each connection which is part of the LAG.
+// * The LAG's MACsec encryption mode. Amazon Web Services assigns
+// this value to each connection which is part of the LAG.
 //
 // * The tags
 //
-// If you adjust the
-// threshold value for the minimum number of operational connections, ensure that
-// the new value does not cause the LAG to fall below the threshold and become
-// non-operational.
+// If you
+// adjust the threshold value for the minimum number of operational connections,
+// ensure that the new value does not cause the LAG to fall below the threshold and
+// become non-operational.
 func (c *Client) UpdateLag(ctx context.Context, params *UpdateLagInput, optFns ...func(*Options)) (*UpdateLagOutput, error) {
 	if params == nil {
 		params = &UpdateLagInput{}
@@ -51,8 +51,8 @@ type UpdateLagInput struct {
 	// This member is required.
 	LagId *string
 
-	// The LAG MAC Security (MACsec) encryption mode. AWS applies the value to all
-	// connections which are part of the LAG.
+	// The LAG MAC Security (MACsec) encryption mode. Amazon Web Services applies the
+	// value to all connections which are part of the LAG.
 	EncryptionMode *string
 
 	// The name of the LAG.
@@ -69,13 +69,17 @@ type UpdateLagOutput struct {
 	// Indicates whether the LAG can host other connections.
 	AllowsHostedConnections bool
 
-	// The AWS Direct Connect endpoint that hosts the LAG.
+	// The Direct Connect endpoint that hosts the LAG.
 	//
 	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
-	// The AWS Direct Connect endpoint that hosts the LAG.
+	// The Direct Connect endpoint that hosts the LAG.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The connections bundled by the LAG.
 	Connections []types.Connection
@@ -141,13 +145,13 @@ type UpdateLagOutput struct {
 	// of 10.
 	NumberOfConnections int32
 
-	// The ID of the AWS account that owns the LAG.
+	// The ID of the account that owns the LAG.
 	OwnerAccount *string
 
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the LAG.

@@ -12,11 +12,11 @@ import (
 )
 
 // Gets a list of origin request policies. You can optionally apply a filter to
-// return only the managed policies created by AWS, or only the custom policies
-// created in your AWS account. You can optionally specify the maximum number of
-// items to receive in the response. If the total number of items in the list
-// exceeds the maximum that you specify, or the default maximum, the response is
-// paginated. To get the next page of items, send a subsequent request that
+// return only the managed policies created by Amazon Web Services, or only the
+// custom policies created in your account. You can optionally specify the maximum
+// number of items to receive in the response. If the total number of items in the
+// list exceeds the maximum that you specify, or the default maximum, the response
+// is paginated. To get the next page of items, send a subsequent request that
 // specifies the NextMarker value from the current response as the Marker value in
 // the subsequent request.
 func (c *Client) ListOriginRequestPolicies(ctx context.Context, params *ListOriginRequestPoliciesInput, optFns ...func(*Options)) (*ListOriginRequestPoliciesOutput, error) {
@@ -48,10 +48,10 @@ type ListOriginRequestPoliciesInput struct {
 	// A filter to return only the specified kinds of origin request policies. Valid
 	// values are:
 	//
-	// * managed – Returns only the managed policies created by AWS.
+	// * managed – Returns only the managed policies created by Amazon Web
+	// Services.
 	//
-	// *
-	// custom – Returns only the custom policies created in your AWS account.
+	// * custom – Returns only the custom policies created in your account.
 	Type types.OriginRequestPolicyType
 }
 

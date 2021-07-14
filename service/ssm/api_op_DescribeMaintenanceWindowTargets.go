@@ -36,7 +36,7 @@ type DescribeMaintenanceWindowTargetsInput struct {
 	WindowId *string
 
 	// Optional filters that can be used to narrow down the scope of the returned
-	// window targets. The supported filter keys are Type, WindowTargetId and
+	// window targets. The supported filter keys are Type, WindowTargetId, and
 	// OwnerInformation.
 	Filters []types.MaintenanceWindowFilter
 

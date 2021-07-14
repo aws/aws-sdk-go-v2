@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays all virtual interfaces for an AWS account. Virtual interfaces deleted
-// fewer than 15 minutes before you make the request are also returned. If you
-// specify a connection ID, only the virtual interfaces associated with the
-// connection are returned. If you specify a virtual interface ID, then only a
-// single virtual interface is returned. A virtual interface (VLAN) transmits the
-// traffic between the AWS Direct Connect location and the customer network.
+// Displays all virtual interfaces for an account. Virtual interfaces deleted fewer
+// than 15 minutes before you make the request are also returned. If you specify a
+// connection ID, only the virtual interfaces associated with the connection are
+// returned. If you specify a virtual interface ID, then only a single virtual
+// interface is returned. A virtual interface (VLAN) transmits the traffic between
+// the Direct Connect location and the customer network.
 func (c *Client) DescribeVirtualInterfaces(ctx context.Context, params *DescribeVirtualInterfacesInput, optFns ...func(*Options)) (*DescribeVirtualInterfacesOutput, error) {
 	if params == nil {
 		params = &DescribeVirtualInterfacesInput{}

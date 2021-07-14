@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a dashboard from AWS IoT SiteWise Monitor.
+// Deletes a dashboard from IoT SiteWise Monitor.
 func (c *Client) DeleteDashboard(ctx context.Context, params *DeleteDashboardInput, optFns ...func(*Options)) (*DeleteDashboardOutput, error) {
 	if params == nil {
 		params = &DeleteDashboardInput{}

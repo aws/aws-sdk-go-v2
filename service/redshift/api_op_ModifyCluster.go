@@ -15,7 +15,7 @@ import (
 // number of nodes to scale up or down the cluster. When resizing a cluster, you
 // must specify both the number of nodes and the node type even if one of the
 // parameters does not change. You can add another security or parameter group, or
-// change the master user password. Resetting a cluster password or modifying the
+// change the admin user password. Resetting a cluster password or modifying the
 // security groups associated with a cluster do not need a reboot. However,
 // modifying a parameter group requires a reboot for parameters to take effect. For
 // more information about managing clusters, go to Amazon Redshift Clusters
@@ -135,8 +135,8 @@ type ModifyClusterInput struct {
 	// Amazon Redshift cluster can use to retrieve and store keys in an HSM.
 	HsmConfigurationIdentifier *string
 
-	// The AWS Key Management Service (KMS) key ID of the encryption key that you want
-	// to use to encrypt data in the cluster.
+	// The Key Management Service (KMS) key ID of the encryption key that you want to
+	// use to encrypt data in the cluster.
 	KmsKeyId *string
 
 	// The name for the maintenance track that you want to assign for the cluster. This
@@ -154,11 +154,11 @@ type ModifyClusterInput struct {
 	// is -1.
 	ManualSnapshotRetentionPeriod *int32
 
-	// The new password for the cluster master user. This change is asynchronously
+	// The new password for the cluster admin user. This change is asynchronously
 	// applied as soon as possible. Between the time of the request and the completion
 	// of the request, the MasterUserPassword element exists in the
 	// PendingModifiedValues element of the operation response. Operations never return
-	// the password, so this operation provides a way to regain access to the master
+	// the password, so this operation provides a way to regain access to the admin
 	// user account for a cluster if the password is lost. Default: Uses existing
 	// setting. Constraints:
 	//
@@ -191,7 +191,7 @@ type ModifyClusterInput struct {
 	// contain two consecutive hyphens.
 	//
 	// * Must be unique for all clusters within an
-	// AWS account.
+	// account.
 	//
 	// Example: examplecluster
 	NewClusterIdentifier *string

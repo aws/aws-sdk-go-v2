@@ -18,9 +18,9 @@ import (
 // your PutInstancePublicPortsrequest. Or use the OpenInstancePublicPorts action to
 // open ports without closing currently open ports. The PutInstancePublicPorts
 // action supports tag-based access control via resource tags applied to the
-// resource identified by instanceName. For more information, see the Lightsail Dev
-// Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// resource identified by instanceName. For more information, see the Amazon
+// Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) PutInstancePublicPorts(ctx context.Context, params *PutInstancePublicPortsInput, optFns ...func(*Options)) (*PutInstancePublicPortsOutput, error) {
 	if params == nil {
 		params = &PutInstancePublicPortsInput{}

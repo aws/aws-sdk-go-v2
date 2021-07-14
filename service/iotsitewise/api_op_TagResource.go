@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds tags to an AWS IoT SiteWise resource. If a tag already exists for the
-// resource, this operation updates the tag's value.
+// Adds tags to an IoT SiteWise resource. If a tag already exists for the resource,
+// this operation updates the tag's value.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -37,9 +37,9 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tagging your AWS IoT SiteWise resources
+	// information, see Tagging your IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	Tags map[string]string

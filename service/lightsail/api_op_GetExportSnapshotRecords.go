@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the export snapshot record created as a result of the export snapshot
+// Returns all export snapshot records created as a result of the export snapshot
 // operation. An export snapshot record can be used to create a new Amazon EC2
-// instance and its related resources with the create cloud formation stack
-// operation.
+// instance and its related resources with the CreateCloudFormationStack action.
 func (c *Client) GetExportSnapshotRecords(ctx context.Context, params *GetExportSnapshotRecordsInput, optFns ...func(*Options)) (*GetExportSnapshotRecordsOutput, error) {
 	if params == nil {
 		params = &GetExportSnapshotRecordsInput{}

@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Creates a change request for Change Manager. The runbooks (Automation documents)
-// specified in the change request run only after all required approvals for the
-// change request have been received.
+// Creates a change request for Change Manager. The Automation runbooks specified
+// in the change request run only after all required approvals for the change
+// request have been received.
 func (c *Client) StartChangeRequestExecution(ctx context.Context, params *StartChangeRequestExecutionInput, optFns ...func(*Options)) (*StartChangeRequestExecutionOutput, error) {
 	if params == nil {
 		params = &StartChangeRequestExecutionInput{}
@@ -37,10 +37,9 @@ type StartChangeRequestExecutionInput struct {
 	// This member is required.
 	DocumentName *string
 
-	// Information about the Automation runbooks (Automation documents) that are run
-	// during the runbook workflow. The Automation runbooks specified for the runbook
-	// workflow can't run until all required approvals for the change request have been
-	// received.
+	// Information about the Automation runbooks that are run during the runbook
+	// workflow. The Automation runbooks specified for the runbook workflow can't run
+	// until all required approvals for the change request have been received.
 	//
 	// This member is required.
 	Runbooks []types.Runbook
@@ -77,8 +76,8 @@ type StartChangeRequestExecutionInput struct {
 	// Optional metadata that you assign to a resource. You can specify a maximum of
 	// five tags for a change request. Tags enable you to categorize a resource in
 	// different ways, such as by purpose, owner, or environment. For example, you
-	// might want to tag a change request to identify an environment or target AWS
-	// Region. In this case, you could specify the following key-value pairs:
+	// might want to tag a change request to identify an environment or target Region.
+	// In this case, you could specify the following key-value pairs:
 	//
 	// *
 	// Key=Environment,Value=Production

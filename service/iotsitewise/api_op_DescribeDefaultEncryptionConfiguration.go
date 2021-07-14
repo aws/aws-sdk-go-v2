@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the default encryption configuration for the AWS
-// account in the default or specified region. For more information, see Key
-// management
+// Retrieves information about the default encryption configuration for the Amazon
+// Web Services account in the default or specified Region. For more information,
+// see Key management
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 func (c *Client) DescribeDefaultEncryptionConfiguration(ctx context.Context, params *DescribeDefaultEncryptionConfigurationInput, optFns ...func(*Options)) (*DescribeDefaultEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeDefaultEncryptionConfigurationInput{}
@@ -47,7 +47,7 @@ type DescribeDefaultEncryptionConfigurationOutput struct {
 	// This member is required.
 	EncryptionType types.EncryptionType
 
-	// The key ARN of the customer managed customer master key (CMK) used for AWS KMS
+	// The key ARN of the customer managed customer master key (CMK) used for KMS
 	// encryption if you use KMS_BASED_ENCRYPTION.
 	KmsKeyArn *string
 

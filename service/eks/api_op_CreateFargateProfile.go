@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS Fargate profile for your Amazon EKS cluster. You must have at
-// least one Fargate profile in a cluster to be able to run pods on Fargate. The
-// Fargate profile allows an administrator to declare which pods run on Fargate and
-// specify which pods run on which Fargate profile. This declaration is done
-// through the profile’s selectors. Each profile can have up to five selectors that
-// contain a namespace and labels. A namespace is required for every selector. The
-// label field consists of multiple optional key-value pairs. Pods that match the
+// Creates an Fargate profile for your Amazon EKS cluster. You must have at least
+// one Fargate profile in a cluster to be able to run pods on Fargate. The Fargate
+// profile allows an administrator to declare which pods run on Fargate and specify
+// which pods run on which Fargate profile. This declaration is done through the
+// profile’s selectors. Each profile can have up to five selectors that contain a
+// namespace and labels. A namespace is required for every selector. The label
+// field consists of multiple optional key-value pairs. Pods that match the
 // selectors are scheduled on Fargate. If a to-be-scheduled pod matches any of the
 // selectors in the Fargate profile, then that pod is run on Fargate. When you
 // create a Fargate profile, you must specify a pod execution role to use with the
@@ -36,7 +36,7 @@ import (
 // original after the updated profile has finished creating. If any Fargate
 // profiles in a cluster are in the DELETING status, you must wait for that Fargate
 // profile to finish deleting before you can create any other profiles in that
-// cluster. For more information, see AWS Fargate Profile
+// cluster. For more information, see Fargate Profile
 // (https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html) in the
 // Amazon EKS User Guide.
 func (c *Client) CreateFargateProfile(ctx context.Context, params *CreateFargateProfileInput, optFns ...func(*Options)) (*CreateFargateProfileOutput, error) {

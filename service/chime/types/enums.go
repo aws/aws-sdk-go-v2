@@ -313,6 +313,62 @@ func (License) Values() []License {
 	}
 }
 
+type MediaPipelineSinkType string
+
+// Enum values for MediaPipelineSinkType
+const (
+	MediaPipelineSinkTypeS3Bucket MediaPipelineSinkType = "S3Bucket"
+)
+
+// Values returns all known values for MediaPipelineSinkType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MediaPipelineSinkType) Values() []MediaPipelineSinkType {
+	return []MediaPipelineSinkType{
+		"S3Bucket",
+	}
+}
+
+type MediaPipelineSourceType string
+
+// Enum values for MediaPipelineSourceType
+const (
+	MediaPipelineSourceTypeChimeSdkMeeting MediaPipelineSourceType = "ChimeSdkMeeting"
+)
+
+// Values returns all known values for MediaPipelineSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MediaPipelineSourceType) Values() []MediaPipelineSourceType {
+	return []MediaPipelineSourceType{
+		"ChimeSdkMeeting",
+	}
+}
+
+type MediaPipelineStatus string
+
+// Enum values for MediaPipelineStatus
+const (
+	MediaPipelineStatusInitializing MediaPipelineStatus = "Initializing"
+	MediaPipelineStatusInProgress   MediaPipelineStatus = "InProgress"
+	MediaPipelineStatusFailed       MediaPipelineStatus = "Failed"
+	MediaPipelineStatusStopping     MediaPipelineStatus = "Stopping"
+	MediaPipelineStatusStopped      MediaPipelineStatus = "Stopped"
+)
+
+// Values returns all known values for MediaPipelineStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MediaPipelineStatus) Values() []MediaPipelineStatus {
+	return []MediaPipelineStatus{
+		"Initializing",
+		"InProgress",
+		"Failed",
+		"Stopping",
+		"Stopped",
+	}
+}
+
 type MemberType string
 
 // Enum values for MemberType

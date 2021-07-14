@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an AWS IoT SiteWise Monitor portal.
+// Updates an IoT SiteWise Monitor portal.
 func (c *Client) UpdatePortal(ctx context.Context, params *UpdatePortalInput, optFns ...func(*Options)) (*UpdatePortalOutput, error) {
 	if params == nil {
 		params = &UpdatePortalInput{}
@@ -30,7 +30,7 @@ func (c *Client) UpdatePortal(ctx context.Context, params *UpdatePortalInput, op
 
 type UpdatePortalInput struct {
 
-	// The AWS administrator's contact email address.
+	// The Amazon Web Services administrator's contact email address.
 	//
 	// This member is required.
 	PortalContactEmail *string
@@ -47,19 +47,21 @@ type UpdatePortalInput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// a service role that allows the portal's users to access your AWS IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for AWS
-	// IoT SiteWise Monitor
+	// a service role that allows the portal's users to access your IoT SiteWise
+	// resources on your behalf. For more information, see Using service roles for IoT
+	// SiteWise Monitor
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Contains the configuration information of an alarm created in an AWS IoT
-	// SiteWise Monitor portal. You can use the alarm to monitor an asset property and
-	// get notified when the asset property value is outside a specified range. For
-	// more information, see .
+	// Contains the configuration information of an alarm created in an IoT SiteWise
+	// Monitor portal. You can use the alarm to monitor an asset property and get
+	// notified when the asset property value is outside a specified range. For more
+	// information, see Monitoring with alarms
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html)
+	// in the IoT SiteWise Application Guide.
 	Alarms *types.Alarms
 
 	// A unique case-sensitive identifier that you can provide to ensure the

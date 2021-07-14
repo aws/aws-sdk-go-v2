@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the list of AWS Identity and Access Management (IAM) roles that can be
-// used by the cluster to access other AWS services. A cluster can have up to 10
-// IAM roles associated at any time.
+// Modifies the list of Identity and Access Management (IAM) roles that can be used
+// by the cluster to access other Amazon Web Services services. A cluster can have
+// up to 10 IAM roles associated at any time.
 func (c *Client) ModifyClusterIamRoles(ctx context.Context, params *ModifyClusterIamRolesInput, optFns ...func(*Options)) (*ModifyClusterIamRolesOutput, error) {
 	if params == nil {
 		params = &ModifyClusterIamRolesInput{}

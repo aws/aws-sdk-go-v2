@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the distributions that are associated with a specified AWS WAF web ACL.
+// List the distributions that are associated with a specified WAF web ACL.
 func (c *Client) ListDistributionsByWebACLId(ctx context.Context, params *ListDistributionsByWebACLIdInput, optFns ...func(*Options)) (*ListDistributionsByWebACLIdOutput, error) {
 	if params == nil {
 		params = &ListDistributionsByWebACLIdInput{}
@@ -27,13 +27,13 @@ func (c *Client) ListDistributionsByWebACLId(ctx context.Context, params *ListDi
 	return out, nil
 }
 
-// The request to list distributions that are associated with a specified AWS WAF
-// web ACL.
+// The request to list distributions that are associated with a specified WAF web
+// ACL.
 type ListDistributionsByWebACLIdInput struct {
 
-	// The ID of the AWS WAF web ACL that you want to list the associated
-	// distributions. If you specify "null" for the ID, the request returns a list of
-	// the distributions that aren't associated with a web ACL.
+	// The ID of the WAF web ACL that you want to list the associated distributions. If
+	// you specify "null" for the ID, the request returns a list of the distributions
+	// that aren't associated with a web ACL.
 	//
 	// This member is required.
 	WebACLId *string
@@ -51,7 +51,7 @@ type ListDistributionsByWebACLIdInput struct {
 }
 
 // The response to a request to list the distributions that are associated with a
-// specified AWS WAF web ACL.
+// specified WAF web ACL.
 type ListDistributionsByWebACLIdOutput struct {
 
 	// The DistributionList type.

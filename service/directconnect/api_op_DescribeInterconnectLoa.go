@@ -13,11 +13,11 @@ import (
 
 // Deprecated. Use DescribeLoa instead. Gets the LOA-CFA for the specified
 // interconnect. The Letter of Authorization - Connecting Facility Assignment
-// (LOA-CFA) is a document that is used when establishing your cross connect to AWS
-// at the colocation facility. For more information, see Requesting Cross Connects
-// at AWS Direct Connect Locations
+// (LOA-CFA) is a document that is used when establishing your cross connect to
+// Amazon Web Services at the colocation facility. For more information, see
+// Requesting Cross Connects at Direct Connect Locations
 // (https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html) in
-// the AWS Direct Connect User Guide.
+// the Direct Connect User Guide.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) DescribeInterconnectLoa(ctx context.Context, params *DescribeInterconnectLoaInput, optFns ...func(*Options)) (*DescribeInterconnectLoaOutput, error) {

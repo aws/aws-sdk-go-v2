@@ -9416,6 +9416,51 @@ func awsRestjson1_deserializeDocumentAccountList(v *[]string, value interface{})
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdditionalInstanceConfiguration(v **types.AdditionalInstanceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdditionalInstanceConfiguration
+	if *v == nil {
+		sv = &types.AdditionalInstanceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "systemsManagerAgent":
+			if err := awsRestjson1_deserializeDocumentSystemsManagerAgent(&sv.SystemsManagerAgent, value); err != nil {
+				return err
+			}
+
+		case "userDataOverride":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserDataOverride to be of type string, got %T instead", value)
+				}
+				sv.UserDataOverride = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAmi(v **types.Ami, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9787,6 +9832,11 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				sv.Owner = ptr.String(jtv)
 			}
 
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentComponentParameterDetailList(&sv.Parameters, value); err != nil {
+				return err
+			}
+
 		case "platform":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9864,6 +9914,11 @@ func awsRestjson1_deserializeDocumentComponentConfiguration(v **types.ComponentC
 				sv.ComponentArn = ptr.String(jtv)
 			}
 
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentComponentParameterList(&sv.Parameters, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9900,6 +9955,218 @@ func awsRestjson1_deserializeDocumentComponentConfigurationList(v *[]types.Compo
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComponentParameter(v **types.ComponentParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComponentParameter
+	if *v == nil {
+		sv = &types.ComponentParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComponentParameterName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "value":
+			if err := awsRestjson1_deserializeDocumentComponentParameterValueList(&sv.Value, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComponentParameterDetail(v **types.ComponentParameterDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComponentParameterDetail
+	if *v == nil {
+		sv = &types.ComponentParameterDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultValue":
+			if err := awsRestjson1_deserializeDocumentComponentParameterValueList(&sv.DefaultValue, value); err != nil {
+				return err
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComponentParameterDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComponentParameterName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComponentParameterType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComponentParameterDetailList(v *[]types.ComponentParameterDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ComponentParameterDetail
+	if *v == nil {
+		cv = []types.ComponentParameterDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ComponentParameterDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentComponentParameterDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComponentParameterList(v *[]types.ComponentParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ComponentParameter
+	if *v == nil {
+		cv = []types.ComponentParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ComponentParameter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentComponentParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComponentParameterValueList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ComponentParameterValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}
@@ -11602,6 +11869,11 @@ func awsRestjson1_deserializeDocumentImageRecipe(v **types.ImageRecipe, value in
 
 	for key, value := range shape {
 		switch key {
+		case "additionalInstanceConfiguration":
+			if err := awsRestjson1_deserializeDocumentAdditionalInstanceConfiguration(&sv.AdditionalInstanceConfiguration, value); err != nil {
+				return err
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13739,6 +14011,46 @@ func awsRestjson1_deserializeDocumentStringList(v *[]string, value interface{}) 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSystemsManagerAgent(v **types.SystemsManagerAgent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SystemsManagerAgent
+	if *v == nil {
+		sv = &types.SystemsManagerAgent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "uninstallAfterBuild":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.UninstallAfterBuild = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -31,20 +31,20 @@ func (c *Client) ListComplianceStatus(ctx context.Context, params *ListComplianc
 
 type ListComplianceStatusInput struct {
 
-	// The ID of the AWS Firewall Manager policy that you want the details for.
+	// The ID of the Firewall Manager policy that you want the details for.
 	//
 	// This member is required.
 	PolicyId *string
 
-	// Specifies the number of PolicyComplianceStatus objects that you want AWS
-	// Firewall Manager to return for this request. If you have more
-	// PolicyComplianceStatus objects than the number that you specify for MaxResults,
-	// the response includes a NextToken value that you can use to get another batch of
-	// PolicyComplianceStatus objects.
+	// Specifies the number of PolicyComplianceStatus objects that you want Firewall
+	// Manager to return for this request. If you have more PolicyComplianceStatus
+	// objects than the number that you specify for MaxResults, the response includes a
+	// NextToken value that you can use to get another batch of PolicyComplianceStatus
+	// objects.
 	MaxResults *int32
 
 	// If you specify a value for MaxResults and you have more PolicyComplianceStatus
-	// objects than the number that you specify for MaxResults, AWS Firewall Manager
+	// objects than the number that you specify for MaxResults, Firewall Manager
 	// returns a NextToken value in the response that allows you to list another group
 	// of PolicyComplianceStatus objects. For the second and subsequent
 	// ListComplianceStatus requests, specify the value of NextToken from the previous
@@ -143,11 +143,11 @@ var _ ListComplianceStatusAPIClient = (*Client)(nil)
 // ListComplianceStatusPaginatorOptions is the paginator options for
 // ListComplianceStatus
 type ListComplianceStatusPaginatorOptions struct {
-	// Specifies the number of PolicyComplianceStatus objects that you want AWS
-	// Firewall Manager to return for this request. If you have more
-	// PolicyComplianceStatus objects than the number that you specify for MaxResults,
-	// the response includes a NextToken value that you can use to get another batch of
-	// PolicyComplianceStatus objects.
+	// Specifies the number of PolicyComplianceStatus objects that you want Firewall
+	// Manager to return for this request. If you have more PolicyComplianceStatus
+	// objects than the number that you specify for MaxResults, the response includes a
+	// NextToken value that you can use to get another batch of PolicyComplianceStatus
+	// objects.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

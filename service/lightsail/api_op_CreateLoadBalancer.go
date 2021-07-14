@@ -14,13 +14,13 @@ import (
 // Creates a Lightsail load balancer. To learn more about deciding whether to load
 // balance your application, see Configure your Lightsail instances for load
 // balancing
-// (https://lightsail.aws.amazon.com/ls/docs/how-to/article/configure-lightsail-instances-for-load-balancing).
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/configure-lightsail-instances-for-load-balancing).
 // You can create up to 5 load balancers per AWS Region in your account. When you
 // create a load balancer, you can specify a unique name and port settings. To
 // change additional load balancer settings, use the UpdateLoadBalancerAttribute
 // operation. The create load balancer operation supports tag-based access control
-// via request tags. For more information, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// via request tags. For more information, see the Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalancerInput, optFns ...func(*Options)) (*CreateLoadBalancerOutput, error) {
 	if params == nil {
 		params = &CreateLoadBalancerInput{}

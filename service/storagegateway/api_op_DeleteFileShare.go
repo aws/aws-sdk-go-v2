@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a file share from a file gateway. This operation is only supported for
-// file gateways.
+// Deletes a file share from an S3 File Gateway. This operation is only supported
+// for S3 File Gateways.
 func (c *Client) DeleteFileShare(ctx context.Context, params *DeleteFileShareInput, optFns ...func(*Options)) (*DeleteFileShareOutput, error) {
 	if params == nil {
 		params = &DeleteFileShareInput{}
@@ -36,9 +36,10 @@ type DeleteFileShareInput struct {
 	FileShareARN *string
 
 	// If this value is set to true, the operation deletes a file share immediately and
-	// aborts all data uploads to AWS. Otherwise, the file share is not deleted until
-	// all data is uploaded to AWS. This process aborts the data upload process, and
-	// the file share enters the FORCE_DELETING status. Valid Values: true | false
+	// aborts all data uploads to Amazon Web Services. Otherwise, the file share is not
+	// deleted until all data is uploaded to Amazon Web Services. This process aborts
+	// the data upload process, and the file share enters the FORCE_DELETING status.
+	// Valid Values: true | false
 	ForceDelete bool
 }
 

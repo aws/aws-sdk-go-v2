@@ -307,6 +307,25 @@ type LabelSchema struct {
 	LabelMapper map[string][]string
 }
 
+// The logit metric details.
+type LogitMetric struct {
+
+	// The relative importance of the variable.
+	//
+	// This member is required.
+	VariableImportance *float32
+
+	// The name of the variable.
+	//
+	// This member is required.
+	VariableName *string
+
+	// The type of variable.
+	//
+	// This member is required.
+	VariableType *string
+}
+
 // Model performance metrics data points.
 type MetricDataPoint struct {
 
@@ -607,6 +626,9 @@ type TrainingResult struct {
 
 	// The training metric details.
 	TrainingMetrics *TrainingMetrics
+
+	// The variable importance metrics.
+	VariableImportanceMetrics *VariableImportanceMetrics
 }
 
 // The variable.
@@ -676,4 +698,11 @@ type VariableEntry struct {
 	// SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME |
 	// SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT
 	VariableType *string
+}
+
+// The variable importance metrics details.
+type VariableImportanceMetrics struct {
+
+	// List of variable metrics.
+	LogitMetrics []LogitMetric
 }

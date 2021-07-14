@@ -19,8 +19,8 @@ import (
 // have access to all the information needed to restore the disk. The delete disk
 // snapshot operation supports tag-based access control via resource tags applied
 // to the resource identified by disk snapshot name. For more information, see the
-// Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) DeleteDiskSnapshot(ctx context.Context, params *DeleteDiskSnapshotInput, optFns ...func(*Options)) (*DeleteDiskSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteDiskSnapshotInput{}

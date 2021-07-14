@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the specified AWS Firewall Manager protocols list.
+// Returns information about the specified Firewall Manager protocols list.
 func (c *Client) GetProtocolsList(ctx context.Context, params *GetProtocolsListInput, optFns ...func(*Options)) (*GetProtocolsListOutput, error) {
 	if params == nil {
 		params = &GetProtocolsListInput{}
@@ -29,19 +29,19 @@ func (c *Client) GetProtocolsList(ctx context.Context, params *GetProtocolsListI
 
 type GetProtocolsListInput struct {
 
-	// The ID of the AWS Firewall Manager protocols list that you want the details for.
+	// The ID of the Firewall Manager protocols list that you want the details for.
 	//
 	// This member is required.
 	ListId *string
 
-	// Specifies whether the list to retrieve is a default list owned by AWS Firewall
+	// Specifies whether the list to retrieve is a default list owned by Firewall
 	// Manager.
 	DefaultList bool
 }
 
 type GetProtocolsListOutput struct {
 
-	// Information about the specified AWS Firewall Manager protocols list.
+	// Information about the specified Firewall Manager protocols list.
 	ProtocolsList *types.ProtocolsListData
 
 	// The Amazon Resource Name (ARN) of the specified protocols list.

@@ -24965,6 +24965,63 @@ func awsAwsjson11_deserializeDocumentEvaluationMetrics(v **types.EvaluationMetri
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEventBatchingCondition(v **types.EventBatchingCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EventBatchingCondition
+	if *v == nil {
+		sv = &types.EventBatchingCondition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BatchSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BatchSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BatchSize = int32(i64)
+			}
+
+		case "BatchWindow":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BatchWindow to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BatchWindow = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentExecutionProperty(v **types.ExecutionProperty, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -30854,6 +30911,63 @@ func awsAwsjson11_deserializeDocumentSkewedInfo(v **types.SkewedInfo, value inte
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStartingEventBatchCondition(v **types.StartingEventBatchCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StartingEventBatchCondition
+	if *v == nil {
+		sv = &types.StartingEventBatchCondition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BatchSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BatchSize = ptr.Int32(int32(i64))
+			}
+
+		case "BatchWindow":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BatchWindow = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStorageDescriptor(v **types.StorageDescriptor, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -32142,6 +32256,11 @@ func awsAwsjson11_deserializeDocumentTrigger(v **types.Trigger, value interface{
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "EventBatchingCondition":
+			if err := awsAwsjson11_deserializeDocumentEventBatchingCondition(&sv.EventBatchingCondition, value); err != nil {
+				return err
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -32842,6 +32961,11 @@ func awsAwsjson11_deserializeDocumentWorkflowRun(v **types.WorkflowRun, value in
 					return fmt.Errorf("expected TimestampValue to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "StartingEventBatchCondition":
+			if err := awsAwsjson11_deserializeDocumentStartingEventBatchCondition(&sv.StartingEventBatchCondition, value); err != nil {
+				return err
 			}
 
 		case "Statistics":

@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Starts the replication task. For more information about AWS DMS tasks, see
-// Working with Migration Tasks
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the AWS
+// Starts the replication task. For more information about DMS tasks, see Working
+// with Migration Tasks
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the
 // Database Migration Service User Guide.
 func (c *Client) StartReplicationTask(ctx context.Context, params *StartReplicationTaskInput, optFns ...func(*Options)) (*StartReplicationTaskOutput, error) {
 	if params == nil {
@@ -55,7 +55,7 @@ type StartReplicationTaskInput struct {
 	// should already be created and associated with the source endpoint. You can
 	// verify this by setting the slotName extra connection attribute to the name of
 	// this logical replication slot. For more information, see Extra Connection
-	// Attributes When Using PostgreSQL as a Source for AWS DMS
+	// Attributes When Using PostgreSQL as a Source for DMS
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib).
 	CdcStartPosition *string
 

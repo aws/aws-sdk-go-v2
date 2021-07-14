@@ -28,7 +28,7 @@ func (e *ConflictingOperationException) ErrorMessage() string {
 func (e *ConflictingOperationException) ErrorCode() string             { return "ConflictingOperationException" }
 func (e *ConflictingOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS IoT SiteWise can't process your request right now. Try again later.
+// IoT SiteWise can't process your request right now. Try again later.
 type InternalFailureException struct {
 	Message *string
 }
@@ -68,7 +68,7 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // to create more than the allowed number of properties for an asset model. For
 // more information, see Quotas
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-// AWS IoT SiteWise User Guide.
+// IoT SiteWise User Guide.
 type LimitExceededException struct {
 	Message *string
 }
@@ -140,10 +140,10 @@ func (e *ServiceUnavailableException) ErrorCode() string             { return "S
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Your request exceeded a rate limit. For example, you might have exceeded the
-// number of AWS IoT SiteWise assets that can be created per second, the allowed
-// number of messages per second, and so on. For more information, see Quotas
+// number of IoT SiteWise assets that can be created per second, the allowed number
+// of messages per second, and so on. For more information, see Quotas
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-// AWS IoT SiteWise User Guide.
+// IoT SiteWise User Guide.
 type ThrottlingException struct {
 	Message *string
 }
@@ -163,7 +163,7 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // You've reached the limit for the number of tags allowed for a resource. For more
 // information, see Tag naming limits and requirements
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
-// in the AWS General Reference.
+// in the Amazon Web Services General Reference.
 type TooManyTagsException struct {
 	Message *string
 

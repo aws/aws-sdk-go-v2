@@ -36,9 +36,9 @@ func (c *Client) CreateMaintenanceWindow(ctx context.Context, params *CreateMain
 
 type CreateMaintenanceWindowInput struct {
 
-	// Enables a maintenance window task to run on managed instances, even if you have
-	// not registered those instances as targets. If enabled, then you must specify the
-	// unregistered instances (by instance ID) when you register a task with the
+	// Enables a maintenance window task to run on managed instances, even if you
+	// haven't registered those instances as targets. If enabled, then you must specify
+	// the unregistered instances (by instance ID) when you register a task with the
 	// maintenance window. If you don't enable this option, then you must specify
 	// previously-registered targets when you register a task with the maintenance
 	// window.
@@ -46,8 +46,8 @@ type CreateMaintenanceWindowInput struct {
 	// This member is required.
 	AllowUnassociatedTargets bool
 
-	// The number of hours before the end of the maintenance window that Systems
-	// Manager stops scheduling new tasks for execution.
+	// The number of hours before the end of the maintenance window that Amazon Web
+	// Services Systems Manager stops scheduling new tasks for execution.
 	//
 	// This member is required.
 	Cutoff int32
@@ -79,7 +79,7 @@ type CreateMaintenanceWindowInput struct {
 	// in the future when the maintenance window will no longer run.
 	EndDate *string
 
-	// The number of days to wait after the date and time specified by a CRON
+	// The number of days to wait after the date and time specified by a cron
 	// expression before running the maintenance window. For example, the following
 	// cron expression schedules a maintenance window to run on the third Tuesday of
 	// every month at 11:30 PM. cron(30 23 ? * TUE#3 *) If the schedule offset is 2,
@@ -101,7 +101,7 @@ type CreateMaintenanceWindowInput struct {
 	// resource in different ways, such as by purpose, owner, or environment. For
 	// example, you might want to tag a maintenance window to identify the type of
 	// tasks it will run, the types of targets, and the environment it will run in. In
-	// this case, you could specify the following key name/value pairs:
+	// this case, you could specify the following key-value pairs:
 	//
 	// *
 	// Key=TaskType,Value=AgentUpdate
@@ -112,7 +112,7 @@ type CreateMaintenanceWindowInput struct {
 	// Key=Environment,Value=Production
 	//
 	// To add tags to an existing maintenance window,
-	// use the AddTagsToResource action.
+	// use the AddTagsToResource operation.
 	Tags []types.Tag
 }
 

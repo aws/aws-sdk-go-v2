@@ -19,11 +19,11 @@ import (
 // CreateSnapshotFromVolumeRecoveryPoint request, you identify the volume by
 // providing its Amazon Resource Name (ARN). You must also provide a description
 // for the snapshot. When the gateway takes a snapshot of the specified volume, the
-// snapshot and its description appear in the AWS Storage Gateway console. In
-// response, the gateway returns you a snapshot ID. You can use this snapshot ID to
-// check the snapshot progress or later use it when you want to create a volume
-// from a snapshot. To list or delete a snapshot, you must use the Amazon EC2 API.
-// For more information, see DescribeSnapshots
+// snapshot and its description appear in the Storage Gateway console. In response,
+// the gateway returns you a snapshot ID. You can use this snapshot ID to check the
+// snapshot progress or later use it when you want to create a volume from a
+// snapshot. To list or delete a snapshot, you must use the Amazon EC2 API. For
+// more information, see DescribeSnapshots
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
 // or DeleteSnapshot
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html)
@@ -46,8 +46,8 @@ func (c *Client) CreateSnapshotFromVolumeRecoveryPoint(ctx context.Context, para
 type CreateSnapshotFromVolumeRecoveryPointInput struct {
 
 	// Textual description of the snapshot that appears in the Amazon EC2 console,
-	// Elastic Block Store snapshots panel in the Description field, and in the AWS
-	// Storage Gateway snapshot Details pane, Description field.
+	// Elastic Block Store snapshots panel in the Description field, and in the Storage
+	// Gateway snapshot Details pane, Description field.
 	//
 	// This member is required.
 	SnapshotDescription *string

@@ -250,6 +250,26 @@ func (m *validateOpDeleteIndex) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePrincipalMapping struct {
+}
+
+func (*validateOpDeletePrincipalMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePrincipalMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePrincipalMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePrincipalMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteQuerySuggestionsBlockList struct {
 }
 
@@ -345,6 +365,26 @@ func (m *validateOpDescribeIndex) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribePrincipalMapping struct {
+}
+
+func (*validateOpDescribePrincipalMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePrincipalMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePrincipalMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePrincipalMappingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +530,26 @@ func (m *validateOpListFaqs) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListGroupsOlderThanOrderingId struct {
+}
+
+func (*validateOpListGroupsOlderThanOrderingId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListGroupsOlderThanOrderingId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListGroupsOlderThanOrderingIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListGroupsOlderThanOrderingIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListQuerySuggestionsBlockLists struct {
 }
 
@@ -545,6 +605,26 @@ func (m *validateOpListThesauri) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListThesauriInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutPrincipalMapping struct {
+}
+
+func (*validateOpPutPrincipalMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutPrincipalMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutPrincipalMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutPrincipalMappingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -818,6 +898,10 @@ func addOpDeleteIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIndex{}, middleware.After)
 }
 
+func addOpDeletePrincipalMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePrincipalMapping{}, middleware.After)
+}
+
 func addOpDeleteQuerySuggestionsBlockListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteQuerySuggestionsBlockList{}, middleware.After)
 }
@@ -836,6 +920,10 @@ func addOpDescribeFaqValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeIndex{}, middleware.After)
+}
+
+func addOpDescribePrincipalMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePrincipalMapping{}, middleware.After)
 }
 
 func addOpDescribeQuerySuggestionsBlockListValidationMiddleware(stack *middleware.Stack) error {
@@ -866,6 +954,10 @@ func addOpListFaqsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFaqs{}, middleware.After)
 }
 
+func addOpListGroupsOlderThanOrderingIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListGroupsOlderThanOrderingId{}, middleware.After)
+}
+
 func addOpListQuerySuggestionsBlockListsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListQuerySuggestionsBlockLists{}, middleware.After)
 }
@@ -876,6 +968,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListThesauriValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListThesauri{}, middleware.After)
+}
+
+func addOpPutPrincipalMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutPrincipalMapping{}, middleware.After)
 }
 
 func addOpQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -1299,6 +1395,41 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	}
 }
 
+func validateDataSourceGroup(v *types.DataSourceGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceGroup"}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSourceGroups(v []types.DataSourceGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceGroups"}
+	for i := range v {
+		if err := validateDataSourceGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSourceSyncJobMetricTarget(v *types.DataSourceSyncJobMetricTarget) error {
 	if v == nil {
 		return nil
@@ -1388,6 +1519,11 @@ func validateDocument(v *types.Document) error {
 	if v.AccessControlList != nil {
 		if err := validatePrincipalList(v.AccessControlList); err != nil {
 			invalidParams.AddNested("AccessControlList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchicalAccessControlList != nil {
+		if err := validateHierarchicalPrincipalList(v.HierarchicalAccessControlList); err != nil {
+			invalidParams.AddNested("HierarchicalAccessControlList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1576,6 +1712,69 @@ func validateGoogleDriveConfiguration(v *types.GoogleDriveConfiguration) error {
 	}
 }
 
+func validateGroupMembers(v *types.GroupMembers) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GroupMembers"}
+	if v.MemberGroups != nil {
+		if err := validateMemberGroups(v.MemberGroups); err != nil {
+			invalidParams.AddNested("MemberGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MemberUsers != nil {
+		if err := validateMemberUsers(v.MemberUsers); err != nil {
+			invalidParams.AddNested("MemberUsers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3PathforGroupMembers != nil {
+		if err := validateS3Path(v.S3PathforGroupMembers); err != nil {
+			invalidParams.AddNested("S3PathforGroupMembers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchicalPrincipal(v *types.HierarchicalPrincipal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalPrincipal"}
+	if v.PrincipalList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalList"))
+	} else if v.PrincipalList != nil {
+		if err := validatePrincipalList(v.PrincipalList); err != nil {
+			invalidParams.AddNested("PrincipalList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchicalPrincipalList(v []types.HierarchicalPrincipal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalPrincipalList"}
+	for i := range v {
+		if err := validateHierarchicalPrincipal(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateJsonTokenTypeConfiguration(v *types.JsonTokenTypeConfiguration) error {
 	if v == nil {
 		return nil
@@ -1601,6 +1800,70 @@ func validateJwtTokenTypeConfiguration(v *types.JwtTokenTypeConfiguration) error
 	invalidParams := smithy.InvalidParamsError{Context: "JwtTokenTypeConfiguration"}
 	if len(v.KeyLocation) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemberGroup(v *types.MemberGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemberGroup"}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemberGroups(v []types.MemberGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemberGroups"}
+	for i := range v {
+		if err := validateMemberGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemberUser(v *types.MemberUser) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemberUser"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMemberUsers(v []types.MemberUser) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemberUsers"}
+	for i := range v {
+		if err := validateMemberUser(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2192,6 +2455,23 @@ func validateUrls(v *types.Urls) error {
 	}
 }
 
+func validateUserContext(v *types.UserContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserContext"}
+	if v.DataSourceGroups != nil {
+		if err := validateDataSourceGroups(v.DataSourceGroups); err != nil {
+			invalidParams.AddNested("DataSourceGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUserTokenConfiguration(v *types.UserTokenConfiguration) error {
 	if v == nil {
 		return nil
@@ -2551,6 +2831,24 @@ func validateOpDeleteIndexInput(v *DeleteIndexInput) error {
 	}
 }
 
+func validateOpDeletePrincipalMappingInput(v *DeletePrincipalMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePrincipalMappingInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteQuerySuggestionsBlockListInput(v *DeleteQuerySuggestionsBlockListInput) error {
 	if v == nil {
 		return nil
@@ -2630,6 +2928,24 @@ func validateOpDescribeIndexInput(v *DescribeIndexInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeIndexInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePrincipalMappingInput(v *DescribePrincipalMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePrincipalMappingInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2755,6 +3071,24 @@ func validateOpListFaqsInput(v *ListFaqsInput) error {
 	}
 }
 
+func validateOpListGroupsOlderThanOrderingIdInput(v *ListGroupsOlderThanOrderingIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListGroupsOlderThanOrderingIdInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.OrderingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrderingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListQuerySuggestionsBlockListsInput(v *ListQuerySuggestionsBlockListsInput) error {
 	if v == nil {
 		return nil
@@ -2800,6 +3134,31 @@ func validateOpListThesauriInput(v *ListThesauriInput) error {
 	}
 }
 
+func validateOpPutPrincipalMappingInput(v *PutPrincipalMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutPrincipalMappingInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.GroupMembers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupMembers"))
+	} else if v.GroupMembers != nil {
+		if err := validateGroupMembers(v.GroupMembers); err != nil {
+			invalidParams.AddNested("GroupMembers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpQueryInput(v *QueryInput) error {
 	if v == nil {
 		return nil
@@ -2824,6 +3183,11 @@ func validateOpQueryInput(v *QueryInput) error {
 	if v.SortingConfiguration != nil {
 		if err := validateSortingConfiguration(v.SortingConfiguration); err != nil {
 			invalidParams.AddNested("SortingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserContext != nil {
+		if err := validateUserContext(v.UserContext); err != nil {
+			invalidParams.AddNested("UserContext", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

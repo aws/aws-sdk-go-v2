@@ -1224,6 +1224,7 @@ const (
 	OpsItemFilterKeyChangeRequestApproverName         OpsItemFilterKey = "ChangeRequestByApproverName"
 	OpsItemFilterKeyChangeRequestTemplate             OpsItemFilterKey = "ChangeRequestByTemplate"
 	OpsItemFilterKeyChangeRequestTargetsResourceGroup OpsItemFilterKey = "ChangeRequestByTargetsResourceGroup"
+	OpsItemFilterKeyInsightType                       OpsItemFilterKey = "InsightByType"
 )
 
 // Values returns all known values for OpsItemFilterKey. Note that this can be
@@ -1257,6 +1258,7 @@ func (OpsItemFilterKey) Values() []OpsItemFilterKey {
 		"ChangeRequestByApproverName",
 		"ChangeRequestByTemplate",
 		"ChangeRequestByTargetsResourceGroup",
+		"InsightByType",
 	}
 }
 
@@ -1341,6 +1343,7 @@ const (
 	OpsItemStatusPendingApproval                OpsItemStatus = "PendingApproval"
 	OpsItemStatusApproved                       OpsItemStatus = "Approved"
 	OpsItemStatusRejected                       OpsItemStatus = "Rejected"
+	OpsItemStatusClosed                         OpsItemStatus = "Closed"
 )
 
 // Values returns all known values for OpsItemStatus. Note that this can be
@@ -1366,6 +1369,7 @@ func (OpsItemStatus) Values() []OpsItemStatus {
 		"PendingApproval",
 		"Approved",
 		"Rejected",
+		"Closed",
 	}
 }
 

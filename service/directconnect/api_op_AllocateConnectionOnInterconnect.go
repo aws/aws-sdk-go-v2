@@ -15,7 +15,7 @@ import (
 // Deprecated. Use AllocateHostedConnection instead. Creates a hosted connection on
 // an interconnect. Allocates a VLAN number and a specified amount of bandwidth for
 // use by a hosted connection on the specified interconnect. Intended for use by
-// AWS Direct Connect Partners only.
+// Direct Connect Partners only.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) AllocateConnectionOnInterconnect(ctx context.Context, params *AllocateConnectionOnInterconnectInput, optFns ...func(*Options)) (*AllocateConnectionOnInterconnectOutput, error) {
@@ -37,7 +37,7 @@ type AllocateConnectionOnInterconnectInput struct {
 
 	// The bandwidth of the connection. The possible values are 50Mbps, 100Mbps,
 	// 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that
-	// only those AWS Direct Connect Partners who have met specific requirements are
+	// only those Direct Connect Partners who have met specific requirements are
 	// allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection.
 	//
 	// This member is required.
@@ -53,7 +53,7 @@ type AllocateConnectionOnInterconnectInput struct {
 	// This member is required.
 	InterconnectId *string
 
-	// The ID of the AWS account of the customer for whom the connection will be
+	// The ID of the account of the customer for whom the connection will be
 	// provisioned.
 	//
 	// This member is required.
@@ -65,7 +65,7 @@ type AllocateConnectionOnInterconnectInput struct {
 	Vlan int32
 }
 
-// Information about an AWS Direct Connect connection.
+// Information about an Direct Connect connection.
 type AllocateConnectionOnInterconnectOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -75,6 +75,10 @@ type AllocateConnectionOnInterconnectOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -143,11 +147,10 @@ type AllocateConnectionOnInterconnectOutput struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
-	// The ID of the AWS account that owns the connection.
+	// The ID of the account that owns the connection.
 	OwnerAccount *string
 
-	// The name of the AWS Direct Connect service provider associated with the
-	// connection.
+	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
@@ -158,7 +161,7 @@ type AllocateConnectionOnInterconnectOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.

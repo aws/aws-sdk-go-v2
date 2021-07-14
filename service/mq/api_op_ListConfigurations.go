@@ -29,7 +29,7 @@ func (c *Client) ListConfigurations(ctx context.Context, params *ListConfigurati
 
 type ListConfigurationsInput struct {
 
-	// The maximum number of configurations that Amazon MQ can return per page (20 by
+	// The maximum number of brokers that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
 	MaxResults int32
 

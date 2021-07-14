@@ -403,7 +403,6 @@ type ReplicationConfigurationEbsEncryption string
 
 // Enum values for ReplicationConfigurationEbsEncryption
 const (
-	ReplicationConfigurationEbsEncryptionNone    ReplicationConfigurationEbsEncryption = "NONE"
 	ReplicationConfigurationEbsEncryptionDefault ReplicationConfigurationEbsEncryption = "DEFAULT"
 	ReplicationConfigurationEbsEncryptionCustom  ReplicationConfigurationEbsEncryption = "CUSTOM"
 )
@@ -414,7 +413,6 @@ const (
 // updates.
 func (ReplicationConfigurationEbsEncryption) Values() []ReplicationConfigurationEbsEncryption {
 	return []ReplicationConfigurationEbsEncryption{
-		"NONE",
 		"DEFAULT",
 		"CUSTOM",
 	}

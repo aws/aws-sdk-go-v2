@@ -16,13 +16,13 @@ import (
 // Gets aggregated values for an asset property. For more information, see Querying
 // aggregates
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
-// in the AWS IoT SiteWise User Guide. To identify an asset property, you must
-// specify one of the following:
+// in the IoT SiteWise User Guide. To identify an asset property, you must specify
+// one of the following:
 //
-// * The assetId and propertyId of an asset
-// property.
+// * The assetId and propertyId of an asset property.
 //
-// * A propertyAlias, which is a data stream alias (for example,
+// * A
+// propertyAlias, which is a data stream alias (for example,
 // /company/windfarm/3/turbine/7/temperature). To define an asset property's alias,
 // see UpdateAssetProperty
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
@@ -68,17 +68,17 @@ type GetAssetPropertyAggregatesInput struct {
 	// The ID of the asset.
 	AssetId *string
 
-	// The maximum number of results to be returned per paginated request. Default: 100
+	// The maximum number of results to return for each paginated request. Default: 100
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
-	// The property alias that identifies the property, such as an OPC-UA server data
-	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// The alias that identifies the property, such as an OPC-UA server data stream
+	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
 	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
 	// The ID of the asset property.
@@ -210,7 +210,7 @@ var _ GetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 // GetAssetPropertyAggregatesPaginatorOptions is the paginator options for
 // GetAssetPropertyAggregates
 type GetAssetPropertyAggregatesPaginatorOptions struct {
-	// The maximum number of results to be returned per paginated request. Default: 100
+	// The maximum number of results to return for each paginated request. Default: 100
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

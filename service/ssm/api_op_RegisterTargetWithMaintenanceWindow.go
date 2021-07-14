@@ -56,7 +56,7 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// For more information about these examples formats, including the best use case
 	// for each one, see Examples: Register targets with a maintenance window
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	//
 	// This member is required.
 	Targets []types.Target
@@ -75,8 +75,8 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// An optional name for the target.
 	Name *string
 
-	// User-provided value that will be included in any CloudWatch events raised while
-	// running tasks for these targets in this maintenance window.
+	// User-provided value that will be included in any Amazon CloudWatch Events events
+	// raised while running tasks for these targets in this maintenance window.
 	OwnerInformation *string
 }
 

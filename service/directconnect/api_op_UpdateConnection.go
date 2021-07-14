@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Updates the AWS Direct Connect dedicated connection configuration. You can
-// update the following parameters for a connection:
+// Updates the Direct Connect dedicated connection configuration. You can update
+// the following parameters for a connection:
 //
 // * The connection name
 //
@@ -50,7 +50,7 @@ type UpdateConnectionInput struct {
 	EncryptionMode *string
 }
 
-// Information about an AWS Direct Connect connection.
+// Information about an Direct Connect connection.
 type UpdateConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -60,6 +60,10 @@ type UpdateConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -128,11 +132,10 @@ type UpdateConnectionOutput struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
-	// The ID of the AWS account that owns the connection.
+	// The ID of the account that owns the connection.
 	OwnerAccount *string
 
-	// The name of the AWS Direct Connect service provider associated with the
-	// connection.
+	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
@@ -143,7 +146,7 @@ type UpdateConnectionOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.

@@ -62,7 +62,7 @@ type CreateReplicationTaskInput struct {
 	// The table mappings for the task, in JSON format. For more information, see Using
 	// Table Mapping to Specify Task Settings
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html)
-	// in the AWS Database Migration Service User Guide.
+	// in the Database Migration Service User Guide.
 	//
 	// This member is required.
 	TableMappings *string
@@ -83,7 +83,7 @@ type CreateReplicationTaskInput struct {
 	// should already be created and associated with the source endpoint. You can
 	// verify this by setting the slotName extra connection attribute to the name of
 	// this logical replication slot. For more information, see Extra Connection
-	// Attributes When Using PostgreSQL as a Source for AWS DMS
+	// Attributes When Using PostgreSQL as a Source for DMS
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib).
 	CdcStartPosition *string
 
@@ -100,9 +100,9 @@ type CreateReplicationTaskInput struct {
 	CdcStopPosition *string
 
 	// Overall settings for the task, in JSON format. For more information, see
-	// Specifying Task Settings for AWS Database Migration Service Tasks
+	// Specifying Task Settings for Database Migration Service Tasks
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
-	// in the AWS Database Migration User Guide.
+	// in the Database Migration Service User Guide.
 	ReplicationTaskSettings *string
 
 	// A friendly name for the resource identifier at the end of the EndpointArn
@@ -112,8 +112,8 @@ type CreateReplicationTaskInput struct {
 	// two consecutive hyphens, and can only begin with a letter, such as
 	// Example-App-ARN1. For example, this value might result in the EndpointArn value
 	// arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a
-	// ResourceIdentifier value, AWS DMS generates a default identifier value for the
-	// end of EndpointArn.
+	// ResourceIdentifier value, DMS generates a default identifier value for the end
+	// of EndpointArn.
 	ResourceIdentifier *string
 
 	// One or more tags to be assigned to the replication task.
@@ -123,7 +123,7 @@ type CreateReplicationTaskInput struct {
 	// source and target endpoints. For more information, see Specifying Supplemental
 	// Data for Task Settings
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html) in
-	// the AWS Database Migration Service User Guide.
+	// the Database Migration Service User Guide.
 	TaskData *string
 }
 

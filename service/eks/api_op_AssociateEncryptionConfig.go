@@ -15,7 +15,7 @@ import (
 // Associate encryption configuration to an existing cluster. You can use this API
 // to enable encryption on existing clusters which do not have encryption already
 // enabled. This allows you to implement a defense-in-depth security strategy
-// without migrating applications to new EKS clusters.
+// without migrating applications to new Amazon EKS clusters.
 func (c *Client) AssociateEncryptionConfig(ctx context.Context, params *AssociateEncryptionConfigInput, optFns ...func(*Options)) (*AssociateEncryptionConfigOutput, error) {
 	if params == nil {
 		params = &AssociateEncryptionConfigInput{}

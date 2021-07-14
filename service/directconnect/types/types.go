@@ -12,7 +12,7 @@ type AssociatedGateway struct {
 	// The ID of the associated gateway.
 	Id *string
 
-	// The ID of the AWS account that owns the associated virtual private gateway or
+	// The ID of the account that owns the associated virtual private gateway or
 	// transit gateway.
 	OwnerAccount *string
 
@@ -42,6 +42,8 @@ type BGPPeer struct {
 
 	// The Direct Connect endpoint on which the BGP peer terminates.
 	AwsDeviceV2 *string
+
+	AwsLogicalDeviceId *string
 
 	// The ID of the BGP peer.
 	BgpPeerId *string
@@ -81,7 +83,7 @@ type BGPPeer struct {
 	CustomerAddress *string
 }
 
-// Information about an AWS Direct Connect connection.
+// Information about an Direct Connect connection.
 type Connection struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -91,6 +93,10 @@ type Connection struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -159,11 +165,10 @@ type Connection struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []MacSecKey
 
-	// The ID of the AWS account that owns the connection.
+	// The ID of the account that owns the connection.
 	OwnerAccount *string
 
-	// The name of the AWS Direct Connect service provider associated with the
-	// connection.
+	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
@@ -174,7 +179,7 @@ type Connection struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.
@@ -213,7 +218,7 @@ type DirectConnectGateway struct {
 	// and cannot pass traffic.
 	DirectConnectGatewayState DirectConnectGatewayState
 
-	// The ID of the AWS account that owns the Direct Connect gateway.
+	// The ID of the account that owns the Direct Connect gateway.
 	OwnerAccount *string
 
 	// The error message if the state of an object failed to advance.
@@ -255,7 +260,7 @@ type DirectConnectGatewayAssociation struct {
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
 
-	// The ID of the AWS account that owns the associated gateway.
+	// The ID of the account that owns the associated gateway.
 	DirectConnectGatewayOwnerAccount *string
 
 	// The error message if the state of an object failed to advance.
@@ -265,10 +270,10 @@ type DirectConnectGatewayAssociation struct {
 	// interfaces.
 	VirtualGatewayId *string
 
-	// The ID of the AWS account that owns the virtual private gateway.
+	// The ID of the account that owns the virtual private gateway.
 	VirtualGatewayOwnerAccount *string
 
-	// The AWS Region where the virtual private gateway is located.
+	// The Region where the virtual private gateway is located.
 	//
 	// Deprecated: This member has been deprecated.
 	VirtualGatewayRegion *string
@@ -284,7 +289,7 @@ type DirectConnectGatewayAssociationProposal struct {
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
 
-	// The ID of the AWS account that owns the Direct Connect gateway.
+	// The ID of the account that owns the Direct Connect gateway.
 	DirectConnectGatewayOwnerAccount *string
 
 	// The existing Amazon VPC prefixes advertised to the Direct Connect gateway.
@@ -344,10 +349,10 @@ type DirectConnectGatewayAttachment struct {
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
 
-	// The ID of the AWS account that owns the virtual interface.
+	// The ID of the account that owns the virtual interface.
 	VirtualInterfaceOwnerAccount *string
 
-	// The AWS Region where the virtual interface is located.
+	// The Region where the virtual interface is located.
 	VirtualInterfaceRegion *string
 }
 
@@ -361,6 +366,10 @@ type Interconnect struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -414,7 +423,7 @@ type Interconnect struct {
 	// The name of the service provider associated with the interconnect.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the interconnect.
@@ -427,13 +436,17 @@ type Lag struct {
 	// Indicates whether the LAG can host other connections.
 	AllowsHostedConnections bool
 
-	// The AWS Direct Connect endpoint that hosts the LAG.
+	// The Direct Connect endpoint that hosts the LAG.
 	//
 	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
-	// The AWS Direct Connect endpoint that hosts the LAG.
+	// The Direct Connect endpoint that hosts the LAG.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The connections bundled by the LAG.
 	Connections []Connection
@@ -499,13 +512,13 @@ type Lag struct {
 	// of 10.
 	NumberOfConnections int32
 
-	// The ID of the AWS account that owns the LAG.
+	// The ID of the account that owns the LAG.
 	OwnerAccount *string
 
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the LAG.
@@ -524,7 +537,7 @@ type Loa struct {
 	LoaContentType LoaContentType
 }
 
-// Information about an AWS Direct Connect location.
+// Information about an Direct Connect location.
 type Location struct {
 
 	// The available MAC Security (MACsec) port speeds for the location.
@@ -543,7 +556,7 @@ type Location struct {
 	// the physical site of the building.
 	LocationName *string
 
-	// The AWS Region for the location.
+	// The Region for the location.
 	Region *string
 }
 
@@ -723,8 +736,8 @@ type NewPublicVirtualInterface struct {
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
+	// The routes to be advertised to the Amazon Web Services network in this Region.
+	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix
 
 	// The tags associated with the public virtual interface.
@@ -765,8 +778,8 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
+	// The routes to be advertised to the Amazon Web Services network in this Region.
+	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix
 
 	// The tags associated with the public virtual interface.
@@ -848,7 +861,7 @@ type NewTransitVirtualInterfaceAllocation struct {
 	Vlan int32
 }
 
-// Information about a tag associated with an AWS Direct Connect resource.
+// Information about a tag associated with an Direct Connect resource.
 type ResourceTag struct {
 
 	// The Amazon Resource Name (ARN) of the resource.
@@ -925,6 +938,10 @@ type VirtualInterface struct {
 	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDeviceV2 *string
 
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
+
 	// The BGP peers configured on this virtual interface.
 	BgpPeers []BGPPeer
 
@@ -950,14 +967,14 @@ type VirtualInterface struct {
 	// 9001. The default value is 1500.
 	Mtu *int32
 
-	// The ID of the AWS account that owns the virtual interface.
+	// The ID of the account that owns the virtual interface.
 	OwnerAccount *string
 
-	// The AWS Region where the virtual interface is located.
+	// The Region where the virtual interface is located.
 	Region *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
+	// The routes to be advertised to the Amazon Web Services network in this Region.
+	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix
 
 	// The tags associated with the virtual interface.

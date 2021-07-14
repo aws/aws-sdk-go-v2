@@ -7162,6 +7162,15 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bgpPeerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7315,6 +7324,15 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -8208,6 +8226,15 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8409,6 +8436,15 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "connections":
@@ -9343,6 +9379,15 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
@@ -9771,6 +9816,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9992,6 +10046,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -10261,6 +10324,15 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
@@ -10512,6 +10584,15 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bgpPeers":
 			if err := awsAwsjson11_deserializeDocumentBGPPeerList(&sv.BgpPeers, value); err != nil {
 				return err
@@ -10755,6 +10836,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10976,6 +11066,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -11288,6 +11387,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -11693,6 +11801,15 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12024,6 +12141,15 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12191,6 +12317,15 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "connections":
@@ -12433,6 +12568,15 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -12684,6 +12828,15 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -12963,6 +13116,15 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -13343,6 +13505,15 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "connections":
@@ -14212,6 +14383,15 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14659,6 +14839,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "bandwidth":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14927,6 +15116,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
 		case "connections":
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
@@ -15167,6 +15365,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
 				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
 		case "bgpPeers":

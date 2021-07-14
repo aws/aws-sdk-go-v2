@@ -14,13 +14,13 @@ import (
 
 // Returns information about the specified HSM client certificate. If no
 // certificate ID is specified, returns information about all the HSM certificates
-// owned by your AWS customer account. If you specify both tag keys and tag values
-// in the same request, Amazon Redshift returns all HSM client certificates that
-// match any combination of the specified keys and values. For example, if you have
-// owner and environment for tag keys, and admin and test for tag values, all HSM
-// client certificates that have any combination of those values are returned. If
-// both tag keys and values are omitted from the request, HSM client certificates
-// are returned regardless of whether they have tag keys or values associated with
+// owned by your account. If you specify both tag keys and tag values in the same
+// request, Amazon Redshift returns all HSM client certificates that match any
+// combination of the specified keys and values. For example, if you have owner and
+// environment for tag keys, and admin and test for tag values, all HSM client
+// certificates that have any combination of those values are returned. If both tag
+// keys and values are omitted from the request, HSM client certificates are
+// returned regardless of whether they have tag keys or values associated with
 // them.
 func (c *Client) DescribeHsmClientCertificates(ctx context.Context, params *DescribeHsmClientCertificatesInput, optFns ...func(*Options)) (*DescribeHsmClientCertificatesOutput, error) {
 	if params == nil {
@@ -42,15 +42,15 @@ type DescribeHsmClientCertificatesInput struct {
 
 	// The identifier of a specific HSM client certificate for which you want
 	// information. If no identifier is specified, information is returned for all HSM
-	// client certificates owned by your AWS customer account.
+	// client certificates owned by your account.
 	HsmClientCertificateIdentifier *string
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeHsmClientCertificates request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
+	// the Marker field of the response. You can retrieve the next set of response
+	// records by providing the returned marker value in the Marker parameter and
+	// retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of

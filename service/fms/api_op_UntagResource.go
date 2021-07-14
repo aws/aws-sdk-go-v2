@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from an AWS resource.
+// Removes one or more tags from an Amazon Web Services resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,9 +28,9 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to return tags for. The AWS
-	// Firewall Manager resources that support tagging are policies, applications
-	// lists, and protocols lists.
+	// The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall
+	// Manager resources that support tagging are policies, applications lists, and
+	// protocols lists.
 	//
 	// This member is required.
 	ResourceArn *string

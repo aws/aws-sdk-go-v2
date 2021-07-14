@@ -470,6 +470,26 @@ func (m *validateOpGetIntentVersions) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMigration struct {
+}
+
+func (*validateOpGetMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSlotType struct {
 }
 
@@ -650,6 +670,26 @@ func (m *validateOpStartImport) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMigration struct {
+}
+
+func (*validateOpStartMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -782,6 +822,10 @@ func addOpGetIntentVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIntentVersions{}, middleware.After)
 }
 
+func addOpGetMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMigration{}, middleware.After)
+}
+
 func addOpGetSlotTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSlotType{}, middleware.After)
 }
@@ -816,6 +860,10 @@ func addOpPutSlotTypeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartImportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartImport{}, middleware.After)
+}
+
+func addOpStartMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMigration{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1754,6 +1802,21 @@ func validateOpGetIntentVersionsInput(v *GetIntentVersionsInput) error {
 	}
 }
 
+func validateOpGetMigrationInput(v *GetMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMigrationInput"}
+	if v.MigrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSlotTypeInput(v *GetSlotTypeInput) error {
 	if v == nil {
 		return nil
@@ -2003,6 +2066,33 @@ func validateOpStartImportInput(v *StartImportInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMigrationInput(v *StartMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMigrationInput"}
+	if v.V1BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("V1BotName"))
+	}
+	if v.V1BotVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("V1BotVersion"))
+	}
+	if v.V2BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("V2BotName"))
+	}
+	if v.V2BotRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("V2BotRole"))
+	}
+	if len(v.MigrationStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationStrategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

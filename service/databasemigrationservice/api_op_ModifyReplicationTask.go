@@ -14,8 +14,8 @@ import (
 
 // Modifies the specified replication task. You can't modify the task endpoints.
 // The task must be stopped before you can modify it. For more information about
-// AWS DMS tasks, see Working with Migration Tasks
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the AWS
+// DMS tasks, see Working with Migration Tasks
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the
 // Database Migration Service User Guide.
 func (c *Client) ModifyReplicationTask(ctx context.Context, params *ModifyReplicationTaskInput, optFns ...func(*Options)) (*ModifyReplicationTaskOutput, error) {
 	if params == nil {
@@ -51,7 +51,7 @@ type ModifyReplicationTaskInput struct {
 	// should already be created and associated with the source endpoint. You can
 	// verify this by setting the slotName extra connection attribute to the name of
 	// this logical replication slot. For more information, see Extra Connection
-	// Attributes When Using PostgreSQL as a Source for AWS DMS
+	// Attributes When Using PostgreSQL as a Source for DMS
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib).
 	CdcStartPosition *string
 
@@ -84,8 +84,8 @@ type ModifyReplicationTaskInput struct {
 	// JSON file that contains settings for the task, such as task metadata settings.
 	ReplicationTaskSettings *string
 
-	// When using the AWS CLI or boto3, provide the path of the JSON file that contains
-	// the table mappings. Precede the path with file://. For example, --table-mappings
+	// When using the CLI or boto3, provide the path of the JSON file that contains the
+	// table mappings. Precede the path with file://. For example, --table-mappings
 	// file://mappingfile.json. When working with the DMS API, provide the JSON as the
 	// parameter value.
 	TableMappings *string
@@ -94,7 +94,7 @@ type ModifyReplicationTaskInput struct {
 	// source and target endpoints. For more information, see Specifying Supplemental
 	// Data for Task Settings
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html) in
-	// the AWS Database Migration Service User Guide.
+	// the Database Migration Service User Guide.
 	TaskData *string
 }
 

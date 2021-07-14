@@ -39,7 +39,7 @@ type DeleteParametersOutput struct {
 	// The names of the deleted parameters.
 	DeletedParameters []string
 
-	// The names of parameters that weren't deleted because the parameters are not
+	// The names of parameters that weren't deleted because the parameters aren't
 	// valid.
 	InvalidParameters []string
 

@@ -14,8 +14,8 @@ import (
 // Deletes the specified set of tag keys and their values from the specified Amazon
 // Lightsail resource. The untag resource operation supports tag-based access
 // control via request tags and resource tags applied to the resource identified by
-// resource name. For more information, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// resource name. For more information, see the Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

@@ -13,9 +13,8 @@ import (
 
 // Updates the description of an ingress (inbound) security group rule. You can
 // replace an existing description, or add a description to a rule that did not
-// have one previously. You specify the description as part of the IP permissions
-// structure. You can remove a description for a security group rule by omitting
-// the description parameter in the request.
+// have one previously. You can remove a description for a security group rule by
+// omitting the description parameter in the request.
 func (c *Client) UpdateSecurityGroupRuleDescriptionsIngress(ctx context.Context, params *UpdateSecurityGroupRuleDescriptionsIngressInput, optFns ...func(*Options)) (*UpdateSecurityGroupRuleDescriptionsIngressOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityGroupRuleDescriptionsIngressInput{}
@@ -33,11 +32,6 @@ func (c *Client) UpdateSecurityGroupRuleDescriptionsIngress(ctx context.Context,
 
 type UpdateSecurityGroupRuleDescriptionsIngressInput struct {
 
-	// The IP permissions for the security group rule.
-	//
-	// This member is required.
-	IpPermissions []types.IpPermission
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -52,6 +46,14 @@ type UpdateSecurityGroupRuleDescriptionsIngressInput struct {
 	// [EC2-Classic, default VPC] The name of the security group. You must specify
 	// either the security group ID or the security group name in the request.
 	GroupName *string
+
+	// The IP permissions for the security group rule. You must specify either IP
+	// permissions or a description.
+	IpPermissions []types.IpPermission
+
+	// [VPC only] The description for the ingress security group rules. You must
+	// specify either a description or IP permissions.
+	SecurityGroupRuleDescriptions []types.SecurityGroupRuleDescription
 }
 
 type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
@@ -106,9 +108,6 @@ func (c *Client) addOperationUpdateSecurityGroupRuleDescriptionsIngressMiddlewar
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpUpdateSecurityGroupRuleDescriptionsIngressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSecurityGroupRuleDescriptionsIngress(options.Region), middleware.Before); err != nil {

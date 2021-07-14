@@ -11,7 +11,7 @@ import (
 )
 
 // Information about the Amazon Simple Notification Service (SNS) topic that is
-// used to record AWS Firewall Manager SNS logs.
+// used to record Firewall Manager SNS logs.
 func (c *Client) GetNotificationChannel(ctx context.Context, params *GetNotificationChannelInput, optFns ...func(*Options)) (*GetNotificationChannelOutput, error) {
 	if params == nil {
 		params = &GetNotificationChannelInput{}
@@ -32,10 +32,10 @@ type GetNotificationChannelInput struct {
 
 type GetNotificationChannelOutput struct {
 
-	// The IAM role that is used by AWS Firewall Manager to record activity to SNS.
+	// The IAM role that is used by Firewall Manager to record activity to SNS.
 	SnsRoleName *string
 
-	// The SNS topic that records AWS Firewall Manager activity.
+	// The SNS topic that records Firewall Manager activity.
 	SnsTopicArn *string
 
 	// Metadata pertaining to the operation's result.

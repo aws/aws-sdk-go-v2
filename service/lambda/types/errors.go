@@ -92,8 +92,8 @@ func (e *EC2AccessDeniedException) ErrorMessage() string {
 func (e *EC2AccessDeniedException) ErrorCode() string             { return "EC2AccessDeniedException" }
 func (e *EC2AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// AWS Lambda was throttled by Amazon EC2 during Lambda function initialization
-// using the execution role provided for the Lambda function.
+// Lambda was throttled by Amazon EC2 during Lambda function initialization using
+// the execution role provided for the Lambda function.
 type EC2ThrottledException struct {
 	Message *string
 
@@ -112,7 +112,7 @@ func (e *EC2ThrottledException) ErrorMessage() string {
 func (e *EC2ThrottledException) ErrorCode() string             { return "EC2ThrottledException" }
 func (e *EC2ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// AWS Lambda received an unexpected EC2 client exception while setting up for the
+// Lambda received an unexpected EC2 client exception while setting up for the
 // Lambda function.
 type EC2UnexpectedException struct {
 	Message *string
@@ -211,9 +211,9 @@ func (e *EFSMountTimeoutException) ErrorMessage() string {
 func (e *EFSMountTimeoutException) ErrorCode() string             { return "EFSMountTimeoutException" }
 func (e *EFSMountTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS Lambda was not able to create an elastic network interface in the VPC,
-// specified as part of Lambda function configuration, because the limit for
-// network interfaces has been reached.
+// Lambda was not able to create an elastic network interface in the VPC, specified
+// as part of Lambda function configuration, because the limit for network
+// interfaces has been reached.
 type ENILimitReachedException struct {
 	Message *string
 
@@ -350,7 +350,7 @@ func (e *InvalidSubnetIDException) ErrorMessage() string {
 func (e *InvalidSubnetIDException) ErrorCode() string             { return "InvalidSubnetIDException" }
 func (e *InvalidSubnetIDException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// AWS Lambda could not unzip the deployment package.
+// Lambda could not unzip the deployment package.
 type InvalidZipFileException struct {
 	Message *string
 
@@ -613,7 +613,7 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The AWS Lambda service encountered an internal error.
+// The Lambda service encountered an internal error.
 type ServiceException struct {
 	Message *string
 
@@ -632,8 +632,8 @@ func (e *ServiceException) ErrorMessage() string {
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// AWS Lambda was not able to set up VPC access for the Lambda function because one
-// or more configured subnets has no available IP addresses.
+// Lambda was not able to set up VPC access for the Lambda function because one or
+// more configured subnets has no available IP addresses.
 type SubnetIPAddressLimitReachedException struct {
 	Message *string
 

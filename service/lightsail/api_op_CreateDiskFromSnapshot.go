@@ -16,8 +16,8 @@ import (
 // Availability Zone (e.g., us-east-2a). The create disk from snapshot operation
 // supports tag-based access control via request tags and resource tags applied to
 // the resource identified by disk snapshot name. For more information, see the
-// Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) CreateDiskFromSnapshot(ctx context.Context, params *CreateDiskFromSnapshotInput, optFns ...func(*Options)) (*CreateDiskFromSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateDiskFromSnapshotInput{}
@@ -76,7 +76,8 @@ type CreateDiskFromSnapshotInput struct {
 	// exclusive.
 	//
 	// * Define this parameter only when creating a new disk from an
-	// automatic snapshot. For more information, see the Lightsail Dev Guide
+	// automatic snapshot. For more information, see the Amazon Lightsail Developer
+	// Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	RestoreDate *string
 
@@ -88,7 +89,8 @@ type CreateDiskFromSnapshotInput struct {
 	// are mutually exclusive.
 	//
 	// * Define this parameter only when creating a new disk
-	// from an automatic snapshot. For more information, see the Lightsail Dev Guide
+	// from an automatic snapshot. For more information, see the Amazon Lightsail
+	// Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	SourceDiskName *string
 
@@ -104,8 +106,8 @@ type CreateDiskFromSnapshotInput struct {
 	// parameters are mutually exclusive.
 	//
 	// * Define this parameter only when creating a
-	// new disk from an automatic snapshot. For more information, see the Lightsail Dev
-	// Guide
+	// new disk from an automatic snapshot. For more information, see the Amazon
+	// Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool
 }

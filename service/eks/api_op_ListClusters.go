@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon EKS clusters in your AWS account in the specified Region.
+// Lists the Amazon EKS clusters in your Amazon Web Services account in the
+// specified Region.
 func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, optFns ...func(*Options)) (*ListClustersOutput, error) {
 	if params == nil {
 		params = &ListClustersInput{}

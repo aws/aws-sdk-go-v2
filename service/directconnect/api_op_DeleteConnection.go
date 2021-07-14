@@ -12,10 +12,10 @@ import (
 	"time"
 )
 
-// Deletes the specified connection. Deleting a connection only stops the AWS
-// Direct Connect port hour and data transfer charges. If you are partnering with
-// any third parties to connect with the AWS Direct Connect location, you must
-// cancel your service with them separately.
+// Deletes the specified connection. Deleting a connection only stops the Direct
+// Connect port hour and data transfer charges. If you are partnering with any
+// third parties to connect with the Direct Connect location, you must cancel your
+// service with them separately.
 func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionInput, optFns ...func(*Options)) (*DeleteConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteConnectionInput{}
@@ -39,7 +39,7 @@ type DeleteConnectionInput struct {
 	ConnectionId *string
 }
 
-// Information about an AWS Direct Connect connection.
+// Information about an Direct Connect connection.
 type DeleteConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -49,6 +49,10 @@ type DeleteConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -117,11 +121,10 @@ type DeleteConnectionOutput struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
-	// The ID of the AWS account that owns the connection.
+	// The ID of the account that owns the connection.
 	OwnerAccount *string
 
-	// The name of the AWS Direct Connect service provider associated with the
-	// connection.
+	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
@@ -132,7 +135,7 @@ type DeleteConnectionOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.

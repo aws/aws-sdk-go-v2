@@ -44,7 +44,7 @@ type DeleteBandwidthRateLimitInput struct {
 	BandwidthType *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -55,7 +55,7 @@ type DeleteBandwidthRateLimitInput struct {
 type DeleteBandwidthRateLimitOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

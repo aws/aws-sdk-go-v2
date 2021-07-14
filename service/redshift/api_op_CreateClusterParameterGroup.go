@@ -47,9 +47,9 @@ type CreateClusterParameterGroupInput struct {
 	// The cluster engine version determines the set of parameters. To get a list of
 	// valid parameter group family names, you can call DescribeClusterParameterGroups.
 	// By default, Amazon Redshift returns a list of all the parameter groups that are
-	// owned by your AWS account, including the default parameter groups for each
-	// Amazon Redshift engine version. The parameter group family names associated with
-	// the default parameter groups provide you the valid values. For example, a valid
+	// owned by your account, including the default parameter groups for each Amazon
+	// Redshift engine version. The parameter group family names associated with the
+	// default parameter groups provide you the valid values. For example, a valid
 	// family name is "redshift-1.0".
 	//
 	// This member is required.
@@ -66,7 +66,7 @@ type CreateClusterParameterGroupInput struct {
 	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// * Must be unique
-	// withing your AWS account.
+	// withing your account.
 	//
 	// This value is stored as a lower-case string.
 	//

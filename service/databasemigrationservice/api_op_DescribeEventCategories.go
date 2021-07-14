@@ -14,7 +14,7 @@ import (
 // Lists categories for all event source types, or, if specified, for a specified
 // source type. You can see a list of the event categories and source types in
 // Working with Events and Notifications
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the AWS
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the
 // Database Migration Service User Guide.
 func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEventCategoriesInput, optFns ...func(*Options)) (*DescribeEventCategoriesOutput, error) {
 	if params == nil {
@@ -37,7 +37,7 @@ type DescribeEventCategoriesInput struct {
 	// Filters applied to the event categories.
 	Filters []types.Filter
 
-	// The type of AWS DMS resource that generates events. Valid values:
+	// The type of DMS resource that generates events. Valid values:
 	// replication-instance | replication-task
 	SourceType *string
 }

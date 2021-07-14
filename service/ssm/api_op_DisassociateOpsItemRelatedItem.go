@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the association between an OpsItem and a related resource. For example,
-// this API action can delete an Incident Manager incident from an OpsItem.
-// Incident Manager is a capability of AWS Systems Manager.
+// this API operation can delete an Incident Manager incident from an OpsItem.
+// Incident Manager is a capability of Amazon Web Services Systems Manager.
 func (c *Client) DisassociateOpsItemRelatedItem(ctx context.Context, params *DisassociateOpsItemRelatedItemInput, optFns ...func(*Options)) (*DisassociateOpsItemRelatedItemOutput, error) {
 	if params == nil {
 		params = &DisassociateOpsItemRelatedItemInput{}

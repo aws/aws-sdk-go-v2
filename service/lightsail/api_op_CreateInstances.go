@@ -13,8 +13,8 @@ import (
 
 // Creates one or more Amazon Lightsail instances. The create instances operation
 // supports tag-based access control via request tags. For more information, see
-// the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// the Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) CreateInstances(ctx context.Context, params *CreateInstancesInput, optFns ...func(*Options)) (*CreateInstancesOutput, error) {
 	if params == nil {
 		params = &CreateInstancesInput{}
@@ -90,8 +90,8 @@ type CreateInstancesInput struct {
 	// data. For example, you might want to run apt-get -y update. Depending on the
 	// machine image you choose, the command to get software on your instance varies.
 	// Amazon Linux and CentOS use yum, Debian and Ubuntu use apt-get, and FreeBSD uses
-	// pkg. For a complete list, see the Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image).
+	// pkg. For a complete list, see the Amazon Lightsail Developer Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image).
 	UserData *string
 }
 

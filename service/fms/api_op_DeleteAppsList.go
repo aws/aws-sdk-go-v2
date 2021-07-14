@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes an AWS Firewall Manager applications list.
+// Permanently deletes an Firewall Manager applications list.
 func (c *Client) DeleteAppsList(ctx context.Context, params *DeleteAppsListInput, optFns ...func(*Options)) (*DeleteAppsListOutput, error) {
 	if params == nil {
 		params = &DeleteAppsListInput{}

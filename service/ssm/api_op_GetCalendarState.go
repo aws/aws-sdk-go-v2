@@ -11,18 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the state of the AWS Systems Manager Change Calendar at an optional,
-// specified time. If you specify a time, GetCalendarState returns the state of the
-// calendar at a specific time, and returns the next time that the Change Calendar
-// state will transition. If you do not specify a time, GetCalendarState assumes
-// the current time. Change Calendar entries have two possible states: OPEN or
-// CLOSED. If you specify more than one calendar in a request, the command returns
-// the status of OPEN only if all calendars in the request are open. If one or more
-// calendars in the request are closed, the status returned is CLOSED. For more
-// information about Systems Manager Change Calendar, see AWS Systems Manager
+// Gets the state of a Amazon Web Services Systems Manager change calendar at the
+// current time or a specified time. If you specify a time, GetCalendarState
+// returns the state of the calendar at that specific time, and returns the next
+// time that the change calendar state will transition. If you don't specify a
+// time, GetCalendarState uses the current time. Change Calendar entries have two
+// possible states: OPEN or CLOSED. If you specify more than one calendar in a
+// request, the command returns the status of OPEN only if all calendars in the
+// request are open. If one or more calendars in the request are closed, the status
+// returned is CLOSED. For more information about Change Calendar, a capability of
+// Amazon Web Services Systems Manager, see Amazon Web Services Systems Manager
 // Change Calendar
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html)
-// in the AWS Systems Manager User Guide.
+// in the Amazon Web Services Systems Manager User Guide.
 func (c *Client) GetCalendarState(ctx context.Context, params *GetCalendarStateInput, optFns ...func(*Options)) (*GetCalendarStateOutput, error) {
 	if params == nil {
 		params = &GetCalendarStateInput{}
@@ -40,22 +41,23 @@ func (c *Client) GetCalendarState(ctx context.Context, params *GetCalendarStateI
 
 type GetCalendarStateInput struct {
 
-	// The names or Amazon Resource Names (ARNs) of the Systems Manager documents that
-	// represent the calendar entries for which you want to get the state.
+	// The names or Amazon Resource Names (ARNs) of the Systems Manager documents (SSM
+	// documents) that represent the calendar entries for which you want to get the
+	// state.
 	//
 	// This member is required.
 	CalendarNames []string
 
 	// (Optional) The specific time for which you want to get calendar state
 	// information, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. If you
-	// do not add AtTime, the current time is assumed.
+	// don't specify a value or AtTime, the current time is used.
 	AtTime *string
 }
 
 type GetCalendarStateOutput struct {
 
 	// The time, as an ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) string, that
-	// you specified in your command. If you did not specify a time, GetCalendarState
+	// you specified in your command. If you don't specify a time, GetCalendarState
 	// uses the current time.
 	AtTime *string
 
@@ -66,7 +68,7 @@ type GetCalendarStateOutput struct {
 	NextTransitionTime *string
 
 	// The state of the calendar. An OPEN calendar indicates that actions are allowed
-	// to proceed, and a CLOSED calendar indicates that actions are not allowed to
+	// to proceed, and a CLOSED calendar indicates that actions aren't allowed to
 	// proceed.
 	State types.CalendarState
 

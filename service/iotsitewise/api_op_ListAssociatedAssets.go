@@ -49,10 +49,10 @@ type ListAssociatedAssetsInput struct {
 	// operations. This parameter is required if you choose CHILD for
 	// traversalDirection. For more information, see Asset hierarchies
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	HierarchyId *string
 
-	// The maximum number of results to be returned per paginated request. Default: 50
+	// The maximum number of results to return for each paginated request. Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -190,7 +190,7 @@ var _ ListAssociatedAssetsAPIClient = (*Client)(nil)
 // ListAssociatedAssetsPaginatorOptions is the paginator options for
 // ListAssociatedAssets
 type ListAssociatedAssetsPaginatorOptions struct {
-	// The maximum number of results to be returned per paginated request. Default: 50
+	// The maximum number of results to return for each paginated request. Default: 50
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

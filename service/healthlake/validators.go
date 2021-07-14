@@ -70,6 +70,66 @@ func (m *validateOpDescribeFHIRImportJob) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFHIRExportJobs struct {
+}
+
+func (*validateOpListFHIRExportJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFHIRExportJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFHIRExportJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFHIRExportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFHIRImportJobs struct {
+}
+
+func (*validateOpListFHIRImportJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFHIRImportJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFHIRImportJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFHIRImportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartFHIRExportJob struct {
 }
 
@@ -110,6 +170,46 @@ func (m *validateOpStartFHIRImportJob) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFHIRDatastore{}, middleware.After)
 }
@@ -122,12 +222,66 @@ func addOpDescribeFHIRImportJobValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDescribeFHIRImportJob{}, middleware.After)
 }
 
+func addOpListFHIRExportJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFHIRExportJobs{}, middleware.After)
+}
+
+func addOpListFHIRImportJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFHIRImportJobs{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpStartFHIRExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartFHIRExportJob{}, middleware.After)
 }
 
 func addOpStartFHIRImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartFHIRImportJob{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateKmsEncryptionConfig(v *types.KmsEncryptionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KmsEncryptionConfig"}
+	if len(v.CmkType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CmkType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputDataConfig(v types.OutputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputDataConfig"}
+	switch uv := v.(type) {
+	case *types.OutputDataConfigMemberS3Configuration:
+		if err := validateS3Configuration(&uv.Value); err != nil {
+			invalidParams.AddNested("[S3Configuration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validatePreloadDataConfig(v *types.PreloadDataConfig) error {
@@ -145,6 +299,78 @@ func validatePreloadDataConfig(v *types.PreloadDataConfig) error {
 	}
 }
 
+func validateS3Configuration(v *types.S3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Configuration"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSseConfiguration(v *types.SseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SseConfiguration"}
+	if v.KmsEncryptionConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsEncryptionConfig"))
+	} else if v.KmsEncryptionConfig != nil {
+		if err := validateKmsEncryptionConfig(v.KmsEncryptionConfig); err != nil {
+			invalidParams.AddNested("KmsEncryptionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFHIRDatastoreInput(v *CreateFHIRDatastoreInput) error {
 	if v == nil {
 		return nil
@@ -153,9 +379,19 @@ func validateOpCreateFHIRDatastoreInput(v *CreateFHIRDatastoreInput) error {
 	if len(v.DatastoreTypeVersion) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreTypeVersion"))
 	}
+	if v.SseConfiguration != nil {
+		if err := validateSseConfiguration(v.SseConfiguration); err != nil {
+			invalidParams.AddNested("SseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.PreloadDataConfig != nil {
 		if err := validatePreloadDataConfig(v.PreloadDataConfig); err != nil {
 			invalidParams.AddNested("PreloadDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -201,6 +437,51 @@ func validateOpDescribeFHIRImportJobInput(v *DescribeFHIRImportJobInput) error {
 	}
 }
 
+func validateOpListFHIRExportJobsInput(v *ListFHIRExportJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFHIRExportJobsInput"}
+	if v.DatastoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFHIRImportJobsInput(v *ListFHIRImportJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFHIRImportJobsInput"}
+	if v.DatastoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartFHIRExportJobInput(v *StartFHIRExportJobInput) error {
 	if v == nil {
 		return nil
@@ -208,6 +489,10 @@ func validateOpStartFHIRExportJobInput(v *StartFHIRExportJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartFHIRExportJobInput"}
 	if v.OutputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	} else if v.OutputDataConfig != nil {
+		if err := validateOutputDataConfig(v.OutputDataConfig); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.DatastoreId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
@@ -233,6 +518,13 @@ func validateOpStartFHIRImportJobInput(v *StartFHIRImportJobInput) error {
 	if v.InputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
 	}
+	if v.JobOutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobOutputDataConfig"))
+	} else if v.JobOutputDataConfig != nil {
+		if err := validateOutputDataConfig(v.JobOutputDataConfig); err != nil {
+			invalidParams.AddNested("JobOutputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DatastoreId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
 	}
@@ -241,6 +533,46 @@ func validateOpStartFHIRImportJobInput(v *StartFHIRImportJobInput) error {
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

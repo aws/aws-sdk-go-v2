@@ -3778,6 +3778,18 @@ func validateEncryptionAtRest(v *types.EncryptionAtRest) error {
 	}
 }
 
+func validateEventBatchingCondition(v *types.EventBatchingCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventBatchingCondition"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGlueTable(v *types.GlueTable) error {
 	if v == nil {
 		return nil
@@ -4114,6 +4126,23 @@ func validateTransformSortCriteria(v *types.TransformSortCriteria) error {
 	}
 	if len(v.SortDirection) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SortDirection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerUpdate(v *types.TriggerUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerUpdate"}
+	if v.EventBatchingCondition != nil {
+		if err := validateEventBatchingCondition(v.EventBatchingCondition); err != nil {
+			invalidParams.AddNested("EventBatchingCondition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4816,6 +4845,11 @@ func validateOpCreateTriggerInput(v *CreateTriggerInput) error {
 	}
 	if v.Actions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
+	if v.EventBatchingCondition != nil {
+		if err := validateEventBatchingCondition(v.EventBatchingCondition); err != nil {
+			invalidParams.AddNested("EventBatchingCondition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6584,6 +6618,10 @@ func validateOpUpdateTriggerInput(v *UpdateTriggerInput) error {
 	}
 	if v.TriggerUpdate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TriggerUpdate"))
+	} else if v.TriggerUpdate != nil {
+		if err := validateTriggerUpdate(v.TriggerUpdate); err != nil {
+			invalidParams.AddNested("TriggerUpdate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

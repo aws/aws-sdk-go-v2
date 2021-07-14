@@ -79,7 +79,7 @@ func awsRestjson1_serializeOpDocumentCreateBrokerInput(v *CreateBrokerInput, val
 		ok.String(string(v.AuthenticationStrategy))
 	}
 
-	if v.AutoMinorVersionUpgrade {
+	{
 		ok := object.Key("autoMinorVersionUpgrade")
 		ok.Boolean(v.AutoMinorVersionUpgrade)
 	}
@@ -149,7 +149,7 @@ func awsRestjson1_serializeOpDocumentCreateBrokerInput(v *CreateBrokerInput, val
 		}
 	}
 
-	if v.PubliclyAccessible {
+	{
 		ok := object.Key("publiclyAccessible")
 		ok.Boolean(v.PubliclyAccessible)
 	}
@@ -1506,6 +1506,13 @@ func awsRestjson1_serializeOpDocumentUpdateBrokerInput(v *UpdateBrokerInput, val
 	if v.Logs != nil {
 		ok := object.Key("logs")
 		if err := awsRestjson1_serializeDocumentLogs(v.Logs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaintenanceWindowStartTime != nil {
+		ok := object.Key("maintenanceWindowStartTime")
+		if err := awsRestjson1_serializeDocumentWeeklyStartTime(v.MaintenanceWindowStartTime, ok); err != nil {
 			return err
 		}
 	}

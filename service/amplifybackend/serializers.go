@@ -2301,6 +2301,33 @@ func awsRestjson1_serializeDocumentBackendAPIResourceConfig(v *types.BackendAPIR
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBackendAuthAppleProviderConfig(v *types.BackendAuthAppleProviderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("client_id")
+		ok.String(*v.ClientId)
+	}
+
+	if v.KeyId != nil {
+		ok := object.Key("key_id")
+		ok.String(*v.KeyId)
+	}
+
+	if v.PrivateKey != nil {
+		ok := object.Key("private_key")
+		ok.String(*v.PrivateKey)
+	}
+
+	if v.TeamId != nil {
+		ok := object.Key("team_id")
+		ok.String(*v.TeamId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBackendAuthSocialProviderConfig(v *types.BackendAuthSocialProviderConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2711,6 +2738,13 @@ func awsRestjson1_serializeDocumentSocialProviderSettings(v *types.SocialProvide
 	if v.LoginWithAmazon != nil {
 		ok := object.Key("LoginWithAmazon")
 		if err := awsRestjson1_serializeDocumentBackendAuthSocialProviderConfig(v.LoginWithAmazon, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SignInWithApple != nil {
+		ok := object.Key("SignInWithApple")
+		if err := awsRestjson1_serializeDocumentBackendAuthAppleProviderConfig(v.SignInWithApple, ok); err != nil {
 			return err
 		}
 	}

@@ -5329,6 +5329,73 @@ func awsRestjson1_deserializeDocumentBackendAPIResourceConfig(v **types.BackendA
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBackendAuthAppleProviderConfig(v **types.BackendAuthAppleProviderConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BackendAuthAppleProviderConfig
+	if *v == nil {
+		sv = &types.BackendAuthAppleProviderConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "client_id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
+		case "key_id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.KeyId = ptr.String(jtv)
+			}
+
+		case "private_key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.PrivateKey = ptr.String(jtv)
+			}
+
+		case "team_id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TeamId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBackendAuthSocialProviderConfig(v **types.BackendAuthSocialProviderConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6509,6 +6576,11 @@ func awsRestjson1_deserializeDocumentSocialProviderSettings(v **types.SocialProv
 
 		case "LoginWithAmazon":
 			if err := awsRestjson1_deserializeDocumentBackendAuthSocialProviderConfig(&sv.LoginWithAmazon, value); err != nil {
+				return err
+			}
+
+		case "SignInWithApple":
+			if err := awsRestjson1_deserializeDocumentBackendAuthAppleProviderConfig(&sv.SignInWithApple, value); err != nil {
 				return err
 			}
 

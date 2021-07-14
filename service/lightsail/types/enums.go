@@ -20,6 +20,24 @@ func (AccessDirection) Values() []AccessDirection {
 	}
 }
 
+type AccessType string
+
+// Enum values for AccessType
+const (
+	AccessTypePublic  AccessType = "public"
+	AccessTypePrivate AccessType = "private"
+)
+
+// Values returns all known values for AccessType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AccessType) Values() []AccessType {
+	return []AccessType{
+		"public",
+		"private",
+	}
+}
+
 type AddOnType string
 
 // Enum values for AddOnType
@@ -111,6 +129,24 @@ func (BlueprintType) Values() []BlueprintType {
 	return []BlueprintType{
 		"os",
 		"app",
+	}
+}
+
+type BucketMetricName string
+
+// Enum values for BucketMetricName
+const (
+	BucketMetricNameBucketSizeBytes BucketMetricName = "BucketSizeBytes"
+	BucketMetricNameNumberOfObjects BucketMetricName = "NumberOfObjects"
+)
+
+// Values returns all known values for BucketMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BucketMetricName) Values() []BucketMetricName {
+	return []BucketMetricName{
+		"BucketSizeBytes",
+		"NumberOfObjects",
 	}
 }
 
@@ -1220,6 +1256,13 @@ const (
 	OperationTypeCreateContainerServiceRegistryLogin  OperationType = "CreateContainerServiceRegistryLogin"
 	OperationTypeRegisterContainerImage               OperationType = "RegisterContainerImage"
 	OperationTypeDeleteContainerImage                 OperationType = "DeleteContainerImage"
+	OperationTypeCreateBucket                         OperationType = "CreateBucket"
+	OperationTypeDeleteBucket                         OperationType = "DeleteBucket"
+	OperationTypeCreateBucketAccessKey                OperationType = "CreateBucketAccessKey"
+	OperationTypeDeleteBucketAccessKey                OperationType = "DeleteBucketAccessKey"
+	OperationTypeUpdateBucketBundle                   OperationType = "UpdateBucketBundle"
+	OperationTypeUpdateBucket                         OperationType = "UpdateBucket"
+	OperationTypeSetResourceAccessForBucket           OperationType = "SetResourceAccessForBucket"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -1299,6 +1342,13 @@ func (OperationType) Values() []OperationType {
 		"CreateContainerServiceRegistryLogin",
 		"RegisterContainerImage",
 		"DeleteContainerImage",
+		"CreateBucket",
+		"DeleteBucket",
+		"CreateBucketAccessKey",
+		"DeleteBucketAccessKey",
+		"UpdateBucketBundle",
+		"UpdateBucket",
+		"SetResourceAccessForBucket",
 	}
 }
 
@@ -1416,6 +1466,7 @@ const (
 	RegionNameApSoutheast2 RegionName = "ap-southeast-2"
 	RegionNameApNortheast1 RegionName = "ap-northeast-1"
 	RegionNameApNortheast2 RegionName = "ap-northeast-2"
+	RegionNameEuNorth1     RegionName = "eu-north-1"
 )
 
 // Values returns all known values for RegionName. Note that this can be expanded
@@ -1437,6 +1488,7 @@ func (RegionName) Values() []RegionName {
 		"ap-southeast-2",
 		"ap-northeast-1",
 		"ap-northeast-2",
+		"eu-north-1",
 	}
 }
 
@@ -1525,6 +1577,24 @@ func (RenewalStatus) Values() []RenewalStatus {
 	}
 }
 
+type ResourceBucketAccess string
+
+// Enum values for ResourceBucketAccess
+const (
+	ResourceBucketAccessAllow ResourceBucketAccess = "allow"
+	ResourceBucketAccessDeny  ResourceBucketAccess = "deny"
+)
+
+// Values returns all known values for ResourceBucketAccess. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceBucketAccess) Values() []ResourceBucketAccess {
+	return []ResourceBucketAccess{
+		"allow",
+		"deny",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -1548,6 +1618,7 @@ const (
 	ResourceTypeContactMethod              ResourceType = "ContactMethod"
 	ResourceTypeDistribution               ResourceType = "Distribution"
 	ResourceTypeCertificate                ResourceType = "Certificate"
+	ResourceTypeBucket                     ResourceType = "Bucket"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -1574,6 +1645,25 @@ func (ResourceType) Values() []ResourceType {
 		"ContactMethod",
 		"Distribution",
 		"Certificate",
+		"Bucket",
+	}
+}
+
+type StatusType string
+
+// Enum values for StatusType
+const (
+	StatusTypeActive   StatusType = "Active"
+	StatusTypeInactive StatusType = "Inactive"
+)
+
+// Values returns all known values for StatusType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StatusType) Values() []StatusType {
+	return []StatusType{
+		"Active",
+		"Inactive",
 	}
 }
 

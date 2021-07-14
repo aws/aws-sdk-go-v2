@@ -13,7 +13,7 @@ import (
 
 // Updates an existing Amazon Lightsail content delivery network (CDN)
 // distribution. Use this action to update the configuration of your existing
-// distribution
+// distribution.
 func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistributionInput, optFns ...func(*Options)) (*UpdateDistributionOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionInput{}

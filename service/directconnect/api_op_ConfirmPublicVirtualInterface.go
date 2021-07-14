@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts ownership of a public virtual interface created by another AWS account.
+// Accepts ownership of a public virtual interface created by another account.
 // After the virtual interface owner makes this call, the specified virtual
 // interface is created and made available to handle traffic.
 func (c *Client) ConfirmPublicVirtualInterface(ctx context.Context, params *ConfirmPublicVirtualInterfaceInput, optFns ...func(*Options)) (*ConfirmPublicVirtualInterfaceOutput, error) {

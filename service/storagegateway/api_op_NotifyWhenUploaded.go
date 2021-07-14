@@ -11,17 +11,17 @@ import (
 )
 
 // Sends you notification through CloudWatch Events when all files written to your
-// file share have been uploaded to Amazon S3. AWS Storage Gateway can send a
+// file share have been uploaded to Amazon S3. Storage Gateway can send a
 // notification through Amazon CloudWatch Events when all files written to your
 // file share up to that point in time have been uploaded to Amazon S3. These files
 // include files written to the file share up to the time that you make a request
 // for notification. When the upload is done, Storage Gateway sends you
 // notification through an Amazon CloudWatch Event. You can configure CloudWatch
-// Events to send the notification through event targets such as Amazon SNS or AWS
-// Lambda function. This operation is only supported for file gateways. For more
+// Events to send the notification through event targets such as Amazon SNS or
+// Lambda function. This operation is only supported for S3 File Gateways. For more
 // information, see Getting file upload notification
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification)
-// in the AWS Storage Gateway User Guide.
+// in the Storage Gateway User Guide.
 func (c *Client) NotifyWhenUploaded(ctx context.Context, params *NotifyWhenUploadedInput, optFns ...func(*Options)) (*NotifyWhenUploadedOutput, error) {
 	if params == nil {
 		params = &NotifyWhenUploadedInput{}

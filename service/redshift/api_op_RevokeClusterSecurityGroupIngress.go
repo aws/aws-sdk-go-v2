@@ -50,10 +50,10 @@ type RevokeClusterSecurityGroupIngressInput struct {
 	// and CIDRIP cannot be provided.
 	EC2SecurityGroupName *string
 
-	// The AWS account number of the owner of the security group specified in the
-	// EC2SecurityGroupName parameter. The AWS access key ID is not an acceptable
-	// value. If EC2SecurityGroupOwnerId is specified, EC2SecurityGroupName must also
-	// be provided. and CIDRIP cannot be provided. Example: 111122223333
+	// The account number of the owner of the security group specified in the
+	// EC2SecurityGroupName parameter. The Amazon Web Services access key ID is not an
+	// acceptable value. If EC2SecurityGroupOwnerId is specified, EC2SecurityGroupName
+	// must also be provided. and CIDRIP cannot be provided. Example: 111122223333
 	EC2SecurityGroupOwnerId *string
 }
 

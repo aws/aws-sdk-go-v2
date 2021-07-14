@@ -31,7 +31,7 @@ func (c *Client) DescribeInventoryDeletions(ctx context.Context, params *Describ
 type DescribeInventoryDeletionsInput struct {
 
 	// Specify the delete inventory ID for which you want information. This ID was
-	// returned by the DeleteInventory action.
+	// returned by the DeleteInventory operation.
 	DeletionId *string
 
 	// The maximum number of items to return for this call. The call also returns a

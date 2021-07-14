@@ -170,6 +170,46 @@ func (m *validateOpCopySnapshot) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBucketAccessKey struct {
+}
+
+func (*validateOpCreateBucketAccessKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBucketAccessKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBucketAccessKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBucketAccessKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateBucket struct {
+}
+
+func (*validateOpCreateBucket) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBucketInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBucketInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCertificate struct {
 }
 
@@ -605,6 +645,46 @@ func (m *validateOpDeleteAutoSnapshot) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAutoSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBucketAccessKey struct {
+}
+
+func (*validateOpDeleteBucketAccessKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBucketAccessKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBucketAccessKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBucketAccessKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBucket struct {
+}
+
+func (*validateOpDeleteBucket) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBucketInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBucketInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1085,6 +1165,46 @@ func (m *validateOpGetAutoSnapshots) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAutoSnapshotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBucketAccessKeys struct {
+}
+
+func (*validateOpGetBucketAccessKeys) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucketAccessKeys) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketAccessKeysInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketAccessKeysInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBucketMetricData struct {
+}
+
+func (*validateOpGetBucketMetricData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucketMetricData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketMetricDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketMetricDataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1870,6 +1990,26 @@ func (m *validateOpSetIpAddressType) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetResourceAccessForBucket struct {
+}
+
+func (*validateOpSetResourceAccessForBucket) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetResourceAccessForBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetResourceAccessForBucketInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetResourceAccessForBucketInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartInstance struct {
 }
 
@@ -2005,6 +2145,46 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateBucketBundle struct {
+}
+
+func (*validateOpUpdateBucketBundle) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBucketBundle) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBucketBundleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBucketBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateBucket struct {
+}
+
+func (*validateOpUpdateBucket) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBucket) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBucketInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBucketInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2162,6 +2342,14 @@ func addOpCopySnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopySnapshot{}, middleware.After)
 }
 
+func addOpCreateBucketAccessKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBucketAccessKey{}, middleware.After)
+}
+
+func addOpCreateBucketValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBucket{}, middleware.After)
+}
+
 func addOpCreateCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCertificate{}, middleware.After)
 }
@@ -2248,6 +2436,14 @@ func addOpDeleteAlarmValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteAutoSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAutoSnapshot{}, middleware.After)
+}
+
+func addOpDeleteBucketAccessKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBucketAccessKey{}, middleware.After)
+}
+
+func addOpDeleteBucketValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBucket{}, middleware.After)
 }
 
 func addOpDeleteCertificateValidationMiddleware(stack *middleware.Stack) error {
@@ -2344,6 +2540,14 @@ func addOpExportSnapshotValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAutoSnapshotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAutoSnapshots{}, middleware.After)
+}
+
+func addOpGetBucketAccessKeysValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucketAccessKeys{}, middleware.After)
+}
+
+func addOpGetBucketMetricDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucketMetricData{}, middleware.After)
 }
 
 func addOpGetContainerImagesValidationMiddleware(stack *middleware.Stack) error {
@@ -2502,6 +2706,10 @@ func addOpSetIpAddressTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetIpAddressType{}, middleware.After)
 }
 
+func addOpSetResourceAccessForBucketValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetResourceAccessForBucket{}, middleware.After)
+}
+
 func addOpStartInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartInstance{}, middleware.After)
 }
@@ -2528,6 +2736,14 @@ func addOpTestAlarmValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateBucketBundleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBucketBundle{}, middleware.After)
+}
+
+func addOpUpdateBucketValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBucket{}, middleware.After)
 }
 
 func addOpUpdateContainerServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -2798,6 +3014,39 @@ func validateOpCopySnapshotInput(v *CopySnapshotInput) error {
 	}
 	if len(v.SourceRegion) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBucketAccessKeyInput(v *CreateBucketAccessKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBucketAccessKeyInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBucketInput(v *CreateBucketInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBucketInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3248,6 +3497,39 @@ func validateOpDeleteAutoSnapshotInput(v *DeleteAutoSnapshotInput) error {
 	}
 }
 
+func validateOpDeleteBucketAccessKeyInput(v *DeleteBucketAccessKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketAccessKeyInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.AccessKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBucketInput(v *DeleteBucketInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCertificateInput(v *DeleteCertificateInput) error {
 	if v == nil {
 		return nil
@@ -3622,6 +3904,51 @@ func validateOpGetAutoSnapshotsInput(v *GetAutoSnapshotsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAutoSnapshotsInput"}
 	if v.ResourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBucketAccessKeysInput(v *GetBucketAccessKeysInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketAccessKeysInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBucketMetricDataInput(v *GetBucketMetricDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketMetricDataInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if len(v.MetricName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.Statistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
+	}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4329,6 +4656,27 @@ func validateOpSetIpAddressTypeInput(v *SetIpAddressTypeInput) error {
 	}
 }
 
+func validateOpSetResourceAccessForBucketInput(v *SetResourceAccessForBucketInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetResourceAccessForBucketInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if len(v.Access) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Access"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartInstanceInput(v *StartInstanceInput) error {
 	if v == nil {
 		return nil
@@ -4435,6 +4783,39 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBucketBundleInput(v *UpdateBucketBundleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBucketBundleInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBucketInput(v *UpdateBucketInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBucketInput"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

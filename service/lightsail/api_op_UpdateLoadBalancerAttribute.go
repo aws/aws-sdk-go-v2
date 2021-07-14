@@ -14,8 +14,9 @@ import (
 // Updates the specified attribute for a load balancer. You can only update one
 // attribute at a time. The update load balancer attribute operation supports
 // tag-based access control via resource tags applied to the resource identified by
-// load balancer name. For more information, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// load balancer name. For more information, see the Amazon Lightsail Developer
+// Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) UpdateLoadBalancerAttribute(ctx context.Context, params *UpdateLoadBalancerAttributeInput, optFns ...func(*Options)) (*UpdateLoadBalancerAttributeOutput, error) {
 	if params == nil {
 		params = &UpdateLoadBalancerAttributeInput{}

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the association between a MAC Security (MACsec) security key and an AWS
+// Removes the association between a MAC Security (MACsec) security key and an
 // Direct Connect dedicated connection.
 func (c *Client) DisassociateMacSecKey(ctx context.Context, params *DisassociateMacSecKeyInput, optFns ...func(*Options)) (*DisassociateMacSecKeyOutput, error) {
 	if params == nil {

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS Firewall Manager protocols list.
+// Creates an Firewall Manager protocols list.
 func (c *Client) PutProtocolsList(ctx context.Context, params *PutProtocolsListInput, optFns ...func(*Options)) (*PutProtocolsListOutput, error) {
 	if params == nil {
 		params = &PutProtocolsListInput{}
@@ -29,7 +29,7 @@ func (c *Client) PutProtocolsList(ctx context.Context, params *PutProtocolsListI
 
 type PutProtocolsListInput struct {
 
-	// The details of the AWS Firewall Manager protocols list to be created.
+	// The details of the Firewall Manager protocols list to be created.
 	//
 	// This member is required.
 	ProtocolsList *types.ProtocolsListData
@@ -40,7 +40,7 @@ type PutProtocolsListInput struct {
 
 type PutProtocolsListOutput struct {
 
-	// The details of the AWS Firewall Manager protocols list.
+	// The details of the Firewall Manager protocols list.
 	ProtocolsList *types.ProtocolsListData
 
 	// The Amazon Resource Name (ARN) of the protocols list.

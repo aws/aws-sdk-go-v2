@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists AWS Lambda layers
+// Lists Lambda layers
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) and
 // shows information about the latest version of each. Specify a runtime identifier
 // (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only

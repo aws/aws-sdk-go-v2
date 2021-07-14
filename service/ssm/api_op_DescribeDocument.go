@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified Systems Manager document.
+// Describes the specified Amazon Web Services Systems Manager document (SSM
+// document).
 func (c *Client) DescribeDocument(ctx context.Context, params *DescribeDocumentInput, optFns ...func(*Options)) (*DescribeDocumentOutput, error) {
 	if params == nil {
 		params = &DescribeDocumentInput{}
@@ -29,7 +30,7 @@ func (c *Client) DescribeDocument(ctx context.Context, params *DescribeDocumentI
 
 type DescribeDocumentInput struct {
 
-	// The name of the Systems Manager document.
+	// The name of the SSM document.
 	//
 	// This member is required.
 	Name *string
@@ -40,13 +41,13 @@ type DescribeDocumentInput struct {
 
 	// An optional field specifying the version of the artifact associated with the
 	// document. For example, "Release 12, Update 6". This value is unique across all
-	// versions of a document, and cannot be changed.
+	// versions of a document, and can't be changed.
 	VersionName *string
 }
 
 type DescribeDocumentOutput struct {
 
-	// Information about the Systems Manager document.
+	// Information about the SSM document.
 	Document *types.DocumentDescription
 
 	// Metadata pertaining to the operation's result.

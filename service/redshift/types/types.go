@@ -16,14 +16,15 @@ type AccountAttribute struct {
 	AttributeValues []AttributeValueTarget
 }
 
-// Describes an AWS customer account authorized to restore a snapshot.
+// Describes an account authorized to restore a snapshot.
 type AccountWithRestoreAccess struct {
 
-	// The identifier of an AWS support account authorized to restore a snapshot. For
-	// AWS support, the identifier is amazon-redshift-support.
+	// The identifier of an Amazon Web Services support account authorized to restore a
+	// snapshot. For Amazon Web Services Support, the identifier is
+	// amazon-redshift-support.
 	AccountAlias *string
 
-	// The identifier of an AWS customer account authorized to restore a snapshot.
+	// The identifier of an account authorized to restore a snapshot.
 	AccountId *string
 }
 
@@ -34,12 +35,12 @@ type AquaConfiguration struct {
 	// include the following.
 	//
 	// * enabled - Use AQUA if it is available for the current
-	// AWS Region and Amazon Redshift node type.
+	// Region and Amazon Redshift node type.
 	//
 	// * disabled - Don't use AQUA.
 	//
-	// * auto
-	// - Amazon Redshift determines whether to use AQUA.
+	// * auto -
+	// Amazon Redshift determines whether to use AQUA.
 	AquaConfigurationStatus AquaConfigurationStatus
 
 	// The value indicates the status of AQUA on the cluster. Possible values include
@@ -59,6 +60,17 @@ type AttributeValueTarget struct {
 
 	// The value of the attribute.
 	AttributeValue *string
+}
+
+// Describes an authentication profile.
+type AuthenticationProfile struct {
+
+	// The content of the authentication profile in JSON format. The maximum length of
+	// the JSON string is determined by a quota for your account.
+	AuthenticationProfileContent *string
+
+	// The name of the authentication profile.
+	AuthenticationProfileName *string
 }
 
 // Describes an availability zone.
@@ -250,12 +262,12 @@ type Cluster struct {
 	// cluster command. Values: active, applying
 	HsmStatus *HsmStatus
 
-	// A list of AWS Identity and Access Management (IAM) roles that can be used by the
-	// cluster to access other AWS services.
+	// A list of Identity and Access Management (IAM) roles that can be used by the
+	// cluster to access other Amazon Web Services services.
 	IamRoles []ClusterIamRole
 
-	// The AWS Key Management Service (AWS KMS) key ID of the encryption key used to
-	// encrypt data in the cluster.
+	// The Key Management Service (KMS) key ID of the encryption key used to encrypt
+	// data in the cluster.
 	KmsKeyId *string
 
 	// The name of the maintenance track for the cluster.
@@ -267,7 +279,7 @@ type Cluster struct {
 	// 1 and 3,653.
 	ManualSnapshotRetentionPeriod int32
 
-	// The master user name for the cluster. This name is used to connect to the
+	// The admin user name for the cluster. This name is used to connect to the
 	// database that is specified in the DBName parameter.
 	MasterUsername *string
 
@@ -358,8 +370,8 @@ type ClusterDbRevision struct {
 	RevisionTargets []RevisionTarget
 }
 
-// An AWS Identity and Access Management (IAM) role that can be used by the
-// associated Amazon Redshift cluster to access other AWS services.
+// An Identity and Access Management (IAM) role that can be used by the associated
+// Amazon Redshift cluster to access other Amazon Web Services services.
 type ClusterIamRole struct {
 
 	// A value that describes the status of the IAM role's association with an Amazon
@@ -632,7 +644,7 @@ type EC2SecurityGroup struct {
 	// The name of the EC2 Security Group.
 	EC2SecurityGroupName *string
 
-	// The AWS ID of the owner of the EC2 security group specified in the
+	// The account ID of the owner of the EC2 security group specified in the
 	// EC2SecurityGroupName field.
 	EC2SecurityGroupOwnerId *string
 
@@ -687,7 +699,7 @@ type EndpointAccess struct {
 	// The port number on which the cluster accepts incoming connections.
 	Port int32
 
-	// The AWS account ID of the owner of the cluster.
+	// The account ID of the owner of the cluster.
 	ResourceOwner *string
 
 	// The subnet group name where Amazon Redshift chooses to deploy the endpoint.
@@ -702,7 +714,7 @@ type EndpointAccess struct {
 }
 
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
-// endpoint access to a cluster across AWS accounts.
+// endpoint access to a cluster across accounts.
 type EndpointAuthorization struct {
 
 	// Indicates whether all VPCs in the grantee account are allowed access to the
@@ -724,10 +736,10 @@ type EndpointAuthorization struct {
 	// The number of Redshift-managed VPC endpoints created for the authorization.
 	EndpointCount int32
 
-	// The AWS account ID of the grantee of the cluster.
+	// The account ID of the grantee of the cluster.
 	Grantee *string
 
-	// The AWS account ID of the cluster owner.
+	// The account ID of the cluster owner.
 	Grantor *string
 
 	// The status of the authorization action.
@@ -793,8 +805,7 @@ type EventSubscription struct {
 	// The name of the Amazon Redshift event notification subscription.
 	CustSubscriptionId *string
 
-	// The AWS customer account associated with the Amazon Redshift event notification
-	// subscription.
+	// The account associated with the Amazon Redshift event notification subscription.
 	CustomerAwsId *string
 
 	// A boolean value indicating whether the subscription is enabled; true indicates
@@ -1094,7 +1105,7 @@ type PendingModifiedValues struct {
 	// next maintenance window.
 	MaintenanceTrackName *string
 
-	// The pending or in-progress change of the master user password for the cluster.
+	// The pending or in-progress change of the admin user password for the cluster.
 	MasterUserPassword *string
 
 	// The pending or in-progress change of the cluster's node type.
@@ -1391,8 +1402,8 @@ type ScheduledActionType struct {
 // Describes a snapshot.
 type Snapshot struct {
 
-	// A list of the AWS customer accounts authorized to restore the snapshot. Returns
-	// null if no accounts are authorized. Visible only to the snapshot owner.
+	// A list of the accounts authorized to restore the snapshot. Returns null if no
+	// accounts are authorized. Visible only to the snapshot owner.
 	AccountsWithRestoreAccess []AccountWithRestoreAccess
 
 	// The size of the incremental backup.
@@ -1448,8 +1459,8 @@ type Snapshot struct {
 	// Returns 0 for a completed backup.
 	EstimatedSecondsToCompletion int64
 
-	// The AWS Key Management Service (KMS) key ID of the encryption key that was used
-	// to encrypt data in the cluster from which the snapshot was taken.
+	// The Key Management Service (KMS) key ID of the encryption key that was used to
+	// encrypt data in the cluster from which the snapshot was taken.
 	KmsKeyId *string
 
 	// The name of the maintenance track for the snapshot.
@@ -1463,7 +1474,7 @@ type Snapshot struct {
 	// integer between 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
 
-	// The master user name for the cluster.
+	// The admin user name for the cluster.
 	MasterUsername *string
 
 	// The node type of the nodes in the cluster.
@@ -1472,9 +1483,9 @@ type Snapshot struct {
 	// The number of nodes in the cluster.
 	NumberOfNodes int32
 
-	// For manual snapshots, the AWS customer account used to create or copy the
-	// snapshot. For automatic snapshots, the owner of the cluster. The owner can
-	// perform all snapshot actions, such as sharing a manual snapshot.
+	// For manual snapshots, the account used to create or copy the snapshot. For
+	// automatic snapshots, the owner of the cluster. The owner can perform all
+	// snapshot actions, such as sharing a manual snapshot.
 	OwnerAccount *string
 
 	// The port that the cluster is listening on.
@@ -1526,15 +1537,15 @@ type Snapshot struct {
 }
 
 // The snapshot copy grant that grants Amazon Redshift permission to encrypt copied
-// snapshots with the specified customer master key (CMK) from AWS KMS in the
-// destination region. For more information about managing snapshot copy grants, go
-// to Amazon Redshift Database Encryption
+// snapshots with the specified customer master key (CMK) from Amazon Web Services
+// KMS in the destination region. For more information about managing snapshot copy
+// grants, go to Amazon Redshift Database Encryption
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
 type SnapshotCopyGrant struct {
 
-	// The unique identifier of the customer master key (CMK) in AWS KMS to which
-	// Amazon Redshift is granted permission.
+	// The unique identifier of the customer master key (CMK) in Amazon Web Services
+	// KMS to which Amazon Redshift is granted permission.
 	KmsKeyId *string
 
 	// The name of the snapshot copy grant.

@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// Contains an access policy that defines an identity's access to an AWS IoT
-// SiteWise Monitor resource.
+// Contains an access policy that defines an identity's access to an IoT SiteWise
+// Monitor resource.
 type AccessPolicySummary struct {
 
 	// The ID of the access policy.
@@ -15,7 +15,8 @@ type AccessPolicySummary struct {
 	// This member is required.
 	Id *string
 
-	// The identity (an AWS SSO user, an AWS SSO group, or an IAM user).
+	// The identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group,
+	// or an IAM user).
 	//
 	// This member is required.
 	Identity *Identity
@@ -26,7 +27,7 @@ type AccessPolicySummary struct {
 	// This member is required.
 	Permission Permission
 
-	// The AWS IoT SiteWise Monitor resource (a portal or project).
+	// The IoT SiteWise Monitor resource (a portal or project).
 	//
 	// This member is required.
 	Resource *Resource
@@ -78,25 +79,28 @@ type Aggregates struct {
 	Sum *float64
 }
 
-// Contains the configuration information of an alarm created in an AWS IoT
-// SiteWise Monitor portal. You can use the alarm to monitor an asset property and
-// get notified when the asset property value is outside a specified range. For
-// more information, see .
+// Contains the configuration information of an alarm created in an IoT SiteWise
+// Monitor portal. You can use the alarm to monitor an asset property and get
+// notified when the asset property value is outside a specified range. For more
+// information, see Monitoring with alarms
+// (https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html)
+// in the IoT SiteWise Application Guide.
 type Alarms struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the IAM role that allows the alarm to perform actions and access AWS resources,
-	// including AWS IoT Events.
+	// the IAM role that allows the alarm to perform actions and access Amazon Web
+	// Services resources and services, such as IoT Events.
 	//
 	// This member is required.
 	AlarmRoleArn *string
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the AWS Lambda function that manages alarm notifications. For more information,
-	// see Managing alarm notifications (https://docs.aws.amazon.com/) in the AWS IoT
-	// Events Developer Guide.
+	// the Lambda function that manages alarm notifications. For more information, see
+	// Managing alarm notifications
+	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html)
+	// in the IoT Events Developer Guide.
 	NotificationLambdaArn *string
 }
 
@@ -321,7 +325,7 @@ type AssetModelPropertyDefinition struct {
 // Contains current status information for an asset model. For more information,
 // see Asset and model states
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 type AssetModelStatus struct {
 
 	// The current state of the asset model.
@@ -354,7 +358,7 @@ type AssetModelSummary struct {
 	// This member is required.
 	Description *string
 
-	// The ID of the asset model (used with AWS IoT SiteWise APIs).
+	// The ID of the asset model (used with IoT SiteWise APIs).
 	//
 	// This member is required.
 	Id *string
@@ -393,11 +397,11 @@ type AssetProperty struct {
 	// This member is required.
 	Name *string
 
-	// The property alias that identifies the property, such as an OPC-UA server data
-	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// The alias that identifies the property, such as an OPC-UA server data stream
+	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
 	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	Alias *string
 
 	// The data type of the structure for this property. This parameter exists on
@@ -451,7 +455,7 @@ type AssetRelationshipSummary struct {
 // Contains information about the current status of an asset. For more information,
 // see Asset and model states
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 type AssetStatus struct {
 
 	// The current status of the asset.
@@ -561,7 +565,7 @@ type AssociatedAssetsSummary struct {
 
 // Contains an asset attribute property. For more information, see Attributes
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#attributes)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 type Attribute struct {
 
 	// The default value of the asset model property attribute. All assets that you
@@ -569,7 +573,7 @@ type Attribute struct {
 	// attribute's value after you create an asset. For more information, see Updating
 	// attribute values
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-attribute-values.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	DefaultValue *string
 }
 
@@ -628,7 +632,7 @@ type CompositeModelProperty struct {
 	Type *string
 }
 
-// Contains the details of an AWS IoT SiteWise configuration error.
+// Contains the details of an IoT SiteWise configuration error.
 type ConfigurationErrorDetails struct {
 
 	// The error code.
@@ -654,6 +658,28 @@ type ConfigurationStatus struct {
 	Error *ConfigurationErrorDetails
 }
 
+// Contains information about a customer managed Amazon S3 bucket.
+type CustomerManagedS3Storage struct {
+
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the Identity and Access Management role that allows IoT SiteWise to send data to
+	// Amazon S3.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the Amazon S3 object. For more information about how to find the ARN for an
+	// Amazon S3 object, see Amazon S3 resources
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-arn-format.html) in
+	// the Amazon Simple Storage Service User Guide.
+	//
+	// This member is required.
+	S3ResourceArn *string
+}
+
 // Contains a dashboard summary.
 type DashboardSummary struct {
 
@@ -677,7 +703,7 @@ type DashboardSummary struct {
 	LastUpdateDate *time.Time
 }
 
-// Contains the details of an AWS IoT SiteWise error.
+// Contains the details of an IoT SiteWise error.
 type ErrorDetails struct {
 
 	// The error code.
@@ -709,7 +735,7 @@ type ExpressionVariable struct {
 type GatewayCapabilitySummary struct {
 
 	// The namespace of the capability configuration. For example, if you configure
-	// OPC-UA sources from the AWS IoT SiteWise console, your OPC-UA capability
+	// OPC-UA sources from the IoT SiteWise console, your OPC-UA capability
 	// configuration has the namespace iotsitewise:opcuacollector:version, where
 	// version is a number such as 1.
 	//
@@ -735,7 +761,7 @@ type GatewayCapabilitySummary struct {
 // Contains a gateway's platform information.
 type GatewayPlatform struct {
 
-	// A gateway that runs on AWS IoT Greengrass.
+	// A gateway that runs on IoT Greengrass.
 	//
 	// This member is required.
 	Greengrass *Greengrass
@@ -772,13 +798,13 @@ type GatewaySummary struct {
 	GatewayCapabilitySummaries []GatewayCapabilitySummary
 }
 
-// Contains details for a gateway that runs on AWS IoT Greengrass. To create a
-// gateway that runs on AWS IoT Greengrass, you must add the IoT SiteWise connector
-// to a Greengrass group and deploy it. Your Greengrass group must also have
-// permissions to upload data to AWS IoT SiteWise. For more information, see
-// Ingesting data using a gateway
+// Contains details for a gateway that runs on IoT Greengrass. To create a gateway
+// that runs on IoT Greengrass, you must add the IoT SiteWise connector to a
+// Greengrass group and deploy it. Your Greengrass group must also have permissions
+// to upload data to IoT SiteWise. For more information, see Ingesting data using a
+// gateway
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 type Greengrass struct {
 
 	// The ARN
@@ -788,7 +814,7 @@ type Greengrass struct {
 	// (https://docs.aws.amazon.com/greengrass/latest/apireference/listgroups-get.html)
 	// and GetGroup
 	// (https://docs.aws.amazon.com/greengrass/latest/apireference/getgroup-get.html)
-	// in the AWS IoT Greengrass API Reference.
+	// in the IoT Greengrass API Reference.
 	//
 	// This member is required.
 	GroupArn *string
@@ -797,14 +823,14 @@ type Greengrass struct {
 // Contains information for a group identity in an access policy.
 type GroupIdentity struct {
 
-	// The AWS SSO ID of the group.
+	// The Amazon Web Services SSO ID of the group.
 	//
 	// This member is required.
 	Id *string
 }
 
-// Contains information about an AWS Identity and Access Management (IAM) role. For
-// more information, see IAM roles
+// Contains information about an Identity and Access Management role. For more
+// information, see IAM roles
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the IAM User
 // Guide.
 type IAMRoleIdentity struct {
@@ -817,7 +843,7 @@ type IAMRoleIdentity struct {
 	Arn *string
 }
 
-// Contains information about an AWS Identity and Access Management (IAM) user.
+// Contains information about an Identity and Access Management user.
 type IAMUserIdentity struct {
 
 	// The ARN of the IAM user. For more information, see IAM ARNs
@@ -830,13 +856,14 @@ type IAMUserIdentity struct {
 	Arn *string
 }
 
-// Contains an identity that can access an AWS IoT SiteWise Monitor resource.
-// Currently, you can't use AWS APIs to retrieve AWS SSO identity IDs. You can find
-// the AWS SSO identity IDs in the URL of user and group pages in the AWS SSO
-// console (https://console.aws.amazon.com/singlesignon).
+// Contains an identity that can access an IoT SiteWise Monitor resource.
+// Currently, you can't use Amazon Web Services APIs to retrieve Amazon Web
+// Services SSO identity IDs. You can find the Amazon Web Services SSO identity IDs
+// in the URL of user and group pages in the Amazon Web Services SSO console
+// (https://console.aws.amazon.com/singlesignon).
 type Identity struct {
 
-	// An AWS SSO group identity.
+	// An Amazon Web Services SSO group identity.
 	Group *GroupIdentity
 
 	// An IAM role identity.
@@ -845,7 +872,7 @@ type Identity struct {
 	// An IAM user identity.
 	IamUser *IAMUserIdentity
 
-	// An AWS SSO user identity.
+	// An Amazon Web Services SSO user identity.
 	User *UserIdentity
 }
 
@@ -880,7 +907,7 @@ type ImageFile struct {
 	Type ImageFileType
 }
 
-// Contains an image that is uploaded to AWS IoT SiteWise and available at a URL.
+// Contains an image that is uploaded to IoT SiteWise and available at a URL.
 type ImageLocation struct {
 
 	// The ID of the image.
@@ -912,7 +939,7 @@ type InterpolatedAssetPropertyValue struct {
 // Contains logging options.
 type LoggingOptions struct {
 
-	// The AWS IoT SiteWise logging verbosity level.
+	// The IoT SiteWise logging verbosity level.
 	//
 	// This member is required.
 	Level LoggingLevel
@@ -920,7 +947,7 @@ type LoggingOptions struct {
 
 // Contains an asset measurement property. For more information, see Measurements
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 type Measurement struct {
 }
 
@@ -933,14 +960,14 @@ type Measurement struct {
 // data type of DOUBLE and consume properties with data types of INTEGER or DOUBLE.
 // For more information, see Metrics
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 type Metric struct {
 
 	// The mathematical expression that defines the metric aggregation function. You
 	// can specify up to 10 variables per expression. You can specify up to 10
 	// functions per expression. For more information, see Quotas
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-	// AWS IoT SiteWise User Guide.
+	// IoT SiteWise User Guide.
 	//
 	// This member is required.
 	Expression *string
@@ -950,8 +977,8 @@ type Metric struct {
 	// This member is required.
 	Variables []ExpressionVariable
 
-	// The window (time interval) over which AWS IoT SiteWise computes the metric's
-	// aggregation expression. AWS IoT SiteWise computes one data point per window.
+	// The window (time interval) over which IoT SiteWise computes the metric's
+	// aggregation expression. IoT SiteWise computes one data point per window.
 	//
 	// This member is required.
 	Window *MetricWindow
@@ -965,7 +992,7 @@ type MetricWindow struct {
 	Tumbling *TumblingWindow
 }
 
-// Contains AWS IoT SiteWise Monitor error details.
+// Contains IoT SiteWise Monitor error details.
 type MonitorErrorDetails struct {
 
 	// The error code.
@@ -975,7 +1002,16 @@ type MonitorErrorDetails struct {
 	Message *string
 }
 
-// Identifies an AWS IoT SiteWise Monitor portal.
+// Contains information about the storage destination.
+type MultiLayerStorage struct {
+
+	// Contains information about a customer managed Amazon S3 bucket.
+	//
+	// This member is required.
+	CustomerManagedS3Storage *CustomerManagedS3Storage
+}
+
+// Identifies an IoT SiteWise Monitor portal.
 type PortalResource struct {
 
 	// The ID of the portal.
@@ -1009,10 +1045,10 @@ type PortalSummary struct {
 	// This member is required.
 	Name *string
 
-	// The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access
-	// portals that use AWS SSO for authentication. For portals that use IAM for
-	// authentication, you must use the AWS IoT SiteWise console to get a URL that you
-	// can use to access the portal.
+	// The URL for the IoT SiteWise Monitor portal. You can use this URL to access
+	// portals that use Amazon Web Services SSO for authentication. For portals that
+	// use IAM for authentication, you must use the IoT SiteWise console to get a URL
+	// that you can use to access the portal.
 	//
 	// This member is required.
 	StartUrl *string
@@ -1033,15 +1069,15 @@ type PortalSummary struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the service role that allows the portal's users to access your AWS IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for AWS
-	// IoT SiteWise Monitor
+	// the service role that allows the portal's users to access your IoT SiteWise
+	// resources on your behalf. For more information, see Using service roles for IoT
+	// SiteWise Monitor
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	RoleArn *string
 }
 
-// Identifies a specific AWS IoT SiteWise Monitor project.
+// Identifies a specific IoT SiteWise Monitor project.
 type ProjectResource struct {
 
 	// The ID of the project.
@@ -1091,11 +1127,11 @@ type Property struct {
 	// This member is required.
 	Name *string
 
-	// The property alias that identifies the property, such as an OPC-UA server data
-	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// The alias that identifies the property, such as an OPC-UA server data stream
+	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
 	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	Alias *string
 
 	// The asset property's notification topic and state. For more information, see
@@ -1111,10 +1147,10 @@ type Property struct {
 }
 
 // Contains asset property value notification information. When the notification
-// state is enabled, AWS IoT SiteWise publishes property value updates to a unique
-// MQTT topic. For more information, see Interacting with other services
+// state is enabled, IoT SiteWise publishes property value updates to a unique MQTT
+// topic. For more information, see Interacting with other services
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 type PropertyNotification struct {
 
 	// The current notification state.
@@ -1122,7 +1158,7 @@ type PropertyNotification struct {
 	// This member is required.
 	State PropertyNotificationState
 
-	// The MQTT topic to which AWS IoT SiteWise publishes property value update
+	// The MQTT topic to which IoT SiteWise publishes property value update
 	// notifications.
 	//
 	// This member is required.
@@ -1177,18 +1213,18 @@ type PutAssetPropertyValueEntry struct {
 	// The ID of the asset to update.
 	AssetId *string
 
-	// The property alias that identifies the property, such as an OPC-UA server data
-	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// The alias that identifies the property, such as an OPC-UA server data stream
+	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
 	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	PropertyAlias *string
 
 	// The ID of the asset property for this entry.
 	PropertyId *string
 }
 
-// Contains an AWS IoT SiteWise Monitor resource ID for a portal or project.
+// Contains an IoT SiteWise Monitor resource ID for a portal or project.
 type Resource struct {
 
 	// A portal resource.
@@ -1218,14 +1254,14 @@ type TimeInNanos struct {
 // can only have a data type of DOUBLE and consume properties with data types of
 // INTEGER or DOUBLE. For more information, see Transforms
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#transforms)
-// in the AWS IoT SiteWise User Guide.
+// in the IoT SiteWise User Guide.
 type Transform struct {
 
 	// The mathematical expression that defines the transformation function. You can
 	// specify up to 10 variables per expression. You can specify up to 10 functions
 	// per expression. For more information, see Quotas
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-	// AWS IoT SiteWise User Guide.
+	// IoT SiteWise User Guide.
 	//
 	// This member is required.
 	Expression *string
@@ -1242,13 +1278,13 @@ type Transform struct {
 type TumblingWindow struct {
 
 	// The time interval for the tumbling window. Note that w represents weeks, d
-	// represents days, h represents hours, and m represents minutes. AWS IoT SiteWise
+	// represents days, h represents hours, and m represents minutes. IoT SiteWise
 	// computes the 1w interval the end of Sunday at midnight each week (UTC), the 1d
 	// interval at the end of each day at midnight (UTC), the 1h interval at the end of
-	// each hour, and so on. When AWS IoT SiteWise aggregates data points for metric
+	// each hour, and so on. When IoT SiteWise aggregates data points for metric
 	// computations, the start of each interval is exclusive and the end of each
-	// interval is inclusive. AWS IoT SiteWise places the computed data point at the
-	// end of the interval.
+	// interval is inclusive. IoT SiteWise places the computed data point at the end of
+	// the interval.
 	//
 	// This member is required.
 	Interval *string
@@ -1257,7 +1293,7 @@ type TumblingWindow struct {
 // Contains information for a user identity in an access policy.
 type UserIdentity struct {
 
-	// The AWS SSO ID of the user.
+	// The Amazon Web Services SSO ID of the user.
 	//
 	// This member is required.
 	Id *string
@@ -1279,7 +1315,7 @@ type VariableValue struct {
 	// assets that come from the same asset model. For more information, see Asset
 	// hierarchies
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	HierarchyId *string
 }
 

@@ -31,7 +31,7 @@ type GetAutomationExecutionInput struct {
 
 	// The unique identifier for an existing automation execution to examine. The
 	// execution ID is returned by StartAutomationExecution when the execution of an
-	// Automation document is initiated.
+	// Automation runbook is initiated.
 	//
 	// This member is required.
 	AutomationExecutionId *string

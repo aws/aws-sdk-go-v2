@@ -31,8 +31,8 @@ import (
 // After the snapshot is available, you can create a block storage disk from the
 // snapshot and attach it to a running instance to access the data on the disk. The
 // create disk snapshot operation supports tag-based access control via request
-// tags. For more information, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// tags. For more information, see the Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) CreateDiskSnapshot(ctx context.Context, params *CreateDiskSnapshotInput, optFns ...func(*Options)) (*CreateDiskSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateDiskSnapshotInput{}

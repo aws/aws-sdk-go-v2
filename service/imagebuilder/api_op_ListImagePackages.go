@@ -13,7 +13,7 @@ import (
 )
 
 // List the Packages that are associated with an Image Build Version, as determined
-// by AWS Systems Manager Inventory at build time.
+// by Amazon EC2 Systems Manager Inventory at build time.
 func (c *Client) ListImagePackages(ctx context.Context, params *ListImagePackagesInput, optFns ...func(*Options)) (*ListImagePackagesOutput, error) {
 	if params == nil {
 		params = &ListImagePackagesInput{}

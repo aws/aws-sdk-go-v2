@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the AWS Organizations master account that is associated with AWS
-// Firewall Manager as the AWS Firewall Manager administrator.
+// Returns the Organizations account that is associated with Firewall Manager as
+// the Firewall Manager administrator.
 func (c *Client) GetAdminAccount(ctx context.Context, params *GetAdminAccountInput, optFns ...func(*Options)) (*GetAdminAccountOutput, error) {
 	if params == nil {
 		params = &GetAdminAccountInput{}
@@ -33,11 +33,12 @@ type GetAdminAccountInput struct {
 
 type GetAdminAccountOutput struct {
 
-	// The AWS account that is set as the AWS Firewall Manager administrator.
+	// The Amazon Web Services account that is set as the Firewall Manager
+	// administrator.
 	AdminAccount *string
 
-	// The status of the AWS account that you set as the AWS Firewall Manager
-	// administrator.
+	// The status of the Amazon Web Services account that you set as the Firewall
+	// Manager administrator.
 	RoleStatus types.AccountRoleStatus
 
 	// Metadata pertaining to the operation's result.

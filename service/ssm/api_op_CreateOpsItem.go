@@ -12,16 +12,17 @@ import (
 	"time"
 )
 
-// Creates a new OpsItem. You must have permission in AWS Identity and Access
+// Creates a new OpsItem. You must have permission in Identity and Access
 // Management (IAM) to create a new OpsItem. For more information, see Getting
 // started with OpsCenter
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
-// in the AWS Systems Manager User Guide. Operations engineers and IT professionals
-// use OpsCenter to view, investigate, and remediate operational issues impacting
-// the performance and health of their AWS resources. For more information, see AWS
-// Systems Manager OpsCenter
+// in the Amazon Web Services Systems Manager User Guide. Operations engineers and
+// IT professionals use Amazon Web Services Systems Manager OpsCenter to view,
+// investigate, and remediate operational issues impacting the performance and
+// health of their Amazon Web Services resources. For more information, see Amazon
+// Web Services Systems Manager OpsCenter
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in
-// the AWS Systems Manager User Guide.
+// the Amazon Web Services Systems Manager User Guide.
 func (c *Client) CreateOpsItem(ctx context.Context, params *CreateOpsItemInput, optFns ...func(*Options)) (*CreateOpsItemOutput, error) {
 	if params == nil {
 		params = &CreateOpsItemInput{}
@@ -79,15 +80,15 @@ type CreateOpsItemInput struct {
 	// amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm. You can choose to make the
 	// data searchable by other users in the account or you can restrict search access.
 	// Searchable data means that all users with access to the OpsItem Overview page
-	// (as provided by the DescribeOpsItems API action) can view and search on the
-	// specified data. Operational data that is not searchable is only viewable by
-	// users who have access to the OpsItem (as provided by the GetOpsItem API action).
+	// (as provided by the DescribeOpsItems API operation) can view and search on the
+	// specified data. Operational data that isn't searchable is only viewable by users
+	// who have access to the OpsItem (as provided by the GetOpsItem API operation).
 	// Use the /aws/resources key in OperationalData to specify a related resource in
 	// the request. Use the /aws/automations key in OperationalData to associate an
-	// Automation runbook with the OpsItem. To view AWS CLI example commands that use
-	// these keys, see Creating OpsItems manually
+	// Automation runbook with the OpsItem. To view Amazon Web Services CLI example
+	// commands that use these keys, see Creating OpsItems manually
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	OperationalData map[string]types.OpsItemDataValue
 
 	// The type of OpsItem to create. Currently, the only valid values are
@@ -117,9 +118,11 @@ type CreateOpsItemInput struct {
 	// OpsItems by using an inline IAM policy that specifies tags. For more
 	// information, see Getting started with OpsCenter
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions)
-	// in the AWS Systems Manager User Guide. Tags use a key-value pair. For example:
-	// Key=Department,Value=Finance To add tags to an existing OpsItem, use the
-	// AddTagsToResource action.
+	// in the Amazon Web Services Systems Manager User Guide. Tags use a key-value
+	// pair. For example: Key=Department,Value=Finance To add tags to a new OpsItem, a
+	// user must have IAM permissions for both the ssm:CreateOpsItems operation and the
+	// ssm:AddTagsToResource operation. To add tags to an existing OpsItem, use the
+	// AddTagsToResource operation.
 	Tags []types.Tag
 }
 

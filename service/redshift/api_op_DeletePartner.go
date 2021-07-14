@@ -29,7 +29,7 @@ func (c *Client) DeletePartner(ctx context.Context, params *DeletePartnerInput, 
 
 type DeletePartnerInput struct {
 
-	// The AWS account ID that owns the cluster.
+	// The Region ID that owns the cluster.
 	//
 	// This member is required.
 	AccountId *string

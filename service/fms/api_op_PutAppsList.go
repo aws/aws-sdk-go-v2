@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS Firewall Manager applications list.
+// Creates an Firewall Manager applications list.
 func (c *Client) PutAppsList(ctx context.Context, params *PutAppsListInput, optFns ...func(*Options)) (*PutAppsListOutput, error) {
 	if params == nil {
 		params = &PutAppsListInput{}
@@ -29,7 +29,7 @@ func (c *Client) PutAppsList(ctx context.Context, params *PutAppsListInput, optF
 
 type PutAppsListInput struct {
 
-	// The details of the AWS Firewall Manager applications list to be created.
+	// The details of the Firewall Manager applications list to be created.
 	//
 	// This member is required.
 	AppsList *types.AppsListData
@@ -40,7 +40,7 @@ type PutAppsListInput struct {
 
 type PutAppsListOutput struct {
 
-	// The details of the AWS Firewall Manager applications list.
+	// The details of the Firewall Manager applications list.
 	AppsList *types.AppsListData
 
 	// The Amazon Resource Name (ARN) of the applications list.

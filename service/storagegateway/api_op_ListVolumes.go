@@ -46,7 +46,7 @@ func (c *Client) ListVolumes(ctx context.Context, params *ListVolumesInput, optF
 type ListVolumesInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// Specifies that the list of volumes returned be limited to the specified number
@@ -68,7 +68,7 @@ type ListVolumesInput struct {
 type ListVolumesOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// Use the marker in your next request to continue pagination of iSCSI volumes. If

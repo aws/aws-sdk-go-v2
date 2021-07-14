@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a group (batch) of assets with an AWS IoT SiteWise Monitor project.
+// Associates a group (batch) of assets with an IoT SiteWise Monitor project.
 func (c *Client) BatchAssociateProjectAssets(ctx context.Context, params *BatchAssociateProjectAssetsInput, optFns ...func(*Options)) (*BatchAssociateProjectAssetsOutput, error) {
 	if params == nil {
 		params = &BatchAssociateProjectAssetsInput{}

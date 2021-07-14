@@ -12,15 +12,15 @@ import (
 	"time"
 )
 
-// Creates a connection between a customer network and a specific AWS Direct
-// Connect location. A connection links your internal network to an AWS Direct
-// Connect location over a standard Ethernet fiber-optic cable. One end of the
-// cable is connected to your router, the other to an AWS Direct Connect router. To
-// find the locations for your Region, use DescribeLocations. You can automatically
-// add the new connection to a link aggregation group (LAG) by specifying a LAG ID
-// in the request. This ensures that the new connection is allocated on the same
-// AWS Direct Connect endpoint that hosts the specified LAG. If there are no
-// available ports on the endpoint, the request fails and no connection is created.
+// Creates a connection between a customer network and a specific Direct Connect
+// location. A connection links your internal network to an Direct Connect location
+// over a standard Ethernet fiber-optic cable. One end of the cable is connected to
+// your router, the other to an Direct Connect router. To find the locations for
+// your Region, use DescribeLocations. You can automatically add the new connection
+// to a link aggregation group (LAG) by specifying a LAG ID in the request. This
+// ensures that the new connection is allocated on the same Direct Connect endpoint
+// that hosts the specified LAG. If there are no available ports on the endpoint,
+// the request fails and no connection is created.
 func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionInput, optFns ...func(*Options)) (*CreateConnectionOutput, error) {
 	if params == nil {
 		params = &CreateConnectionInput{}
@@ -63,14 +63,14 @@ type CreateConnectionInput struct {
 	// Security (MACsec) is only available on dedicated connections. For information
 	// about MAC Security (MACsec) prerequisties, see MACsec prerequisties
 	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites)
-	// in the AWS Direct Connect User Guide.
+	// in the Direct Connect User Guide.
 	RequestMACSec *bool
 
 	// The tags to associate with the lag.
 	Tags []types.Tag
 }
 
-// Information about an AWS Direct Connect connection.
+// Information about an Direct Connect connection.
 type CreateConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -80,6 +80,10 @@ type CreateConnectionOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -148,11 +152,10 @@ type CreateConnectionOutput struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
-	// The ID of the AWS account that owns the connection.
+	// The ID of the account that owns the connection.
 	OwnerAccount *string
 
-	// The name of the AWS Direct Connect service provider associated with the
-	// connection.
+	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
@@ -163,7 +166,7 @@ type CreateConnectionOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.

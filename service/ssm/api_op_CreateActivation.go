@@ -13,16 +13,18 @@ import (
 )
 
 // Generates an activation code and activation ID you can use to register your
-// on-premises server or virtual machine (VM) with Systems Manager. Registering
-// these machines with Systems Manager makes it possible to manage them using
-// Systems Manager capabilities. You use the activation code and ID when installing
-// SSM Agent on machines in your hybrid environment. For more information about
-// requirements for managing on-premises instances and VMs using Systems Manager,
-// see Setting up AWS Systems Manager for hybrid environments
+// on-premises server or virtual machine (VM) with Amazon Web Services Systems
+// Manager. Registering these machines with Systems Manager makes it possible to
+// manage them using Systems Manager capabilities. You use the activation code and
+// ID when installing SSM Agent on machines in your hybrid environment. For more
+// information about requirements for managing on-premises instances and VMs using
+// Systems Manager, see Setting up Amazon Web Services Systems Manager for hybrid
+// environments
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html)
-// in the AWS Systems Manager User Guide. On-premises servers or VMs that are
-// registered with Systems Manager and EC2 instances that you manage with Systems
-// Manager are all called managed instances.
+// in the Amazon Web Services Systems Manager User Guide. On-premises servers or
+// VMs that are registered with Systems Manager and Amazon Elastic Compute Cloud
+// (Amazon EC2) instances that you manage with Systems Manager are all called
+// managed instances.
 func (c *Client) CreateActivation(ctx context.Context, params *CreateActivationInput, optFns ...func(*Options)) (*CreateActivationOutput, error) {
 	if params == nil {
 		params = &CreateActivationInput{}
@@ -40,24 +42,24 @@ func (c *Client) CreateActivation(ctx context.Context, params *CreateActivationI
 
 type CreateActivationInput struct {
 
-	// The Amazon Identity and Access Management (IAM) role that you want to assign to
-	// the managed instance. This IAM role must provide AssumeRole permissions for the
-	// Systems Manager service principal ssm.amazonaws.com. For more information, see
-	// Create an IAM service role for a hybrid environment
+	// The Identity and Access Management (IAM) role that you want to assign to the
+	// managed instance. This IAMrole must provide AssumeRole permissions for the
+	// Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For
+	// more information, see Create an IAM service role for a hybrid environment
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html)
-	// in the AWS Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide.
 	//
 	// This member is required.
 	IamRole *string
 
-	// The name of the registered, managed instance as it will appear in the Systems
-	// Manager console or when you use the AWS command line tools to list Systems
-	// Manager resources. Do not enter personally identifiable information in this
-	// field.
+	// The name of the registered, managed instance as it will appear in the Amazon Web
+	// Services Systems Manager console or when you use the Amazon Web Services command
+	// line tools to list Systems Manager resources. Don't enter personally
+	// identifiable information in this field.
 	DefaultInstanceName *string
 
 	// A user-defined description of the resource that you want to register with
-	// Systems Manager. Do not enter personally identifiable information in this field.
+	// Systems Manager. Don't enter personally identifiable information in this field.
 	Description *string
 
 	// The date by which this activation request should expire, in timestamp format,
@@ -67,14 +69,14 @@ type CreateActivationInput struct {
 	ExpirationDate *time.Time
 
 	// Specify the maximum number of managed instances you want to register. The
-	// default value is 1 instance.
+	// default value is 1.
 	RegistrationLimit int32
 
 	// Optional metadata that you assign to a resource. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For
 	// example, you might want to tag an activation to identify which servers or
 	// virtual machines (VMs) in your on-premises environment you intend to activate.
-	// In this case, you could specify the following key name/value pairs:
+	// In this case, you could specify the following key-value pairs:
 	//
 	// *
 	// Key=OS,Value=Windows
@@ -88,8 +90,8 @@ type CreateActivationInput struct {
 	// can't add tags to or delete tags from an existing activation. You can tag your
 	// on-premises servers and VMs after they connect to Systems Manager for the first
 	// time and are assigned a managed instance ID. This means they are listed in the
-	// AWS Systems Manager console with an ID that is prefixed with "mi-". For
-	// information about how to add tags to your managed instances, see
+	// Amazon Web Services Systems Manager console with an ID that is prefixed with
+	// "mi-". For information about how to add tags to your managed instances, see
 	// AddTagsToResource. For information about how to remove tags from your managed
 	// instances, see RemoveTagsFromResource.
 	Tags []types.Tag

@@ -13,8 +13,8 @@ import (
 
 // Creates a new database in Amazon Lightsail. The create relational database
 // operation supports tag-based access control via request tags. For more
-// information, see the Lightsail Dev Guide
-// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// information, see the Amazon Lightsail Developer Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags).
 func (c *Client) CreateRelationalDatabase(ctx context.Context, params *CreateRelationalDatabaseInput, optFns ...func(*Options)) (*CreateRelationalDatabaseOutput, error) {
 	if params == nil {
 		params = &CreateRelationalDatabaseInput{}

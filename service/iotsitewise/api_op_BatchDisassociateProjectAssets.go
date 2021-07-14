@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a group (batch) of assets from an AWS IoT SiteWise Monitor
-// project.
+// Disassociates a group (batch) of assets from an IoT SiteWise Monitor project.
 func (c *Client) BatchDisassociateProjectAssets(ctx context.Context, params *BatchDisassociateProjectAssetsInput, optFns ...func(*Options)) (*BatchDisassociateProjectAssetsOutput, error) {
 	if params == nil {
 		params = &BatchDisassociateProjectAssetsInput{}

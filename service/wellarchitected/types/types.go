@@ -9,13 +9,17 @@ import (
 // An answer of the question.
 type Answer struct {
 
+	// A list of selected choices to a question in your workload.
+	ChoiceAnswers []ChoiceAnswer
+
 	// List of choices available for a question.
 	Choices []Choice
 
 	// The helpful resource URL for a question.
 	HelpfulResourceUrl *string
 
-	// The improvement plan URL for a question.
+	// The improvement plan URL for a question. This value is only available if the
+	// question has been answered.
 	ImprovementPlanUrl *string
 
 	// Defines whether this question is applicable to a lens review.
@@ -37,6 +41,9 @@ type Answer struct {
 	// The title of the question.
 	QuestionTitle *string
 
+	// The reason why the question is not applicable to your workload.
+	Reason AnswerReason
+
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
 
@@ -47,6 +54,9 @@ type Answer struct {
 
 // An answer summary of a lens review in a workload.
 type AnswerSummary struct {
+
+	// A list of selected choices to a question in your workload.
+	ChoiceAnswerSummaries []ChoiceAnswerSummary
 
 	// List of choices available for a question.
 	Choices []Choice
@@ -63,6 +73,9 @@ type AnswerSummary struct {
 
 	// The title of the question.
 	QuestionTitle *string
+
+	// The reason why a choice is non-applicable to a question in your workload.
+	Reason AnswerReason
 
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
@@ -85,10 +98,55 @@ type Choice struct {
 	Title *string
 }
 
+// A choice that has been answered on a question in your workload.
+type ChoiceAnswer struct {
+
+	// The ID of a choice.
+	ChoiceId *string
+
+	// The notes associated with a choice.
+	Notes *string
+
+	// The reason why a choice is non-applicable to a question in your workload.
+	Reason ChoiceReason
+
+	// The status of a choice.
+	Status ChoiceStatus
+}
+
+// A choice summary that has been answered on a question in your workload.
+type ChoiceAnswerSummary struct {
+
+	// The ID of a choice.
+	ChoiceId *string
+
+	// The reason why a choice is non-applicable to a question in your workload.
+	Reason ChoiceReason
+
+	// The status of a choice.
+	Status ChoiceStatus
+}
+
+// A list of choices to be updated.
+type ChoiceUpdate struct {
+
+	// The status of a choice.
+	//
+	// This member is required.
+	Status ChoiceStatus
+
+	// The notes associated with a choice.
+	Notes *string
+
+	// The reason why a choice is non-applicable to a question in your workload.
+	Reason ChoiceReason
+}
+
 // An improvement summary of a lens review in a workload.
 type ImprovementSummary struct {
 
-	// The improvement plan URL for a question.
+	// The improvement plan URL for a question. This value is only available if the
+	// question has been answered.
 	ImprovementPlanUrl *string
 
 	// The ID used to identify a pillar, for example, security. A pillar is identified

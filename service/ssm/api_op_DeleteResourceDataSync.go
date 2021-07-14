@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Resource Data Sync configuration. After the configuration is deleted,
+// Deletes a resource data sync configuration. After the configuration is deleted,
 // changes to data on managed instances are no longer synced to or from the target.
-// Deleting a sync configuration does not delete data.
+// Deleting a sync configuration doesn't delete data.
 func (c *Client) DeleteResourceDataSync(ctx context.Context, params *DeleteResourceDataSyncInput, optFns ...func(*Options)) (*DeleteResourceDataSyncOutput, error) {
 	if params == nil {
 		params = &DeleteResourceDataSyncInput{}

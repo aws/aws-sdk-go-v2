@@ -3228,6 +3228,13 @@ func awsRestjson1_serializeDocumentCaptionDestinationSettings(v *types.CaptionDe
 		}
 	}
 
+	if v.SrtDestinationSettings != nil {
+		ok := object.Key("srtDestinationSettings")
+		if err := awsRestjson1_serializeDocumentSrtDestinationSettings(v.SrtDestinationSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TeletextDestinationSettings != nil {
 		ok := object.Key("teletextDestinationSettings")
 		if err := awsRestjson1_serializeDocumentTeletextDestinationSettings(v.TeletextDestinationSettings, ok); err != nil {
@@ -3539,6 +3546,11 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 	if len(v.StreamInfResolution) > 0 {
 		ok := object.Key("streamInfResolution")
 		ok.String(string(v.StreamInfResolution))
+	}
+
+	if len(v.TargetDurationCompatibilityMode) > 0 {
+		ok := object.Key("targetDurationCompatibilityMode")
+		ok.String(string(v.TargetDurationCompatibilityMode))
 	}
 
 	if len(v.WriteDashManifest) > 0 {
@@ -5458,6 +5470,11 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 	if len(v.StreamInfResolution) > 0 {
 		ok := object.Key("streamInfResolution")
 		ok.String(string(v.StreamInfResolution))
+	}
+
+	if len(v.TargetDurationCompatibilityMode) > 0 {
+		ok := object.Key("targetDurationCompatibilityMode")
+		ok.String(string(v.TargetDurationCompatibilityMode))
 	}
 
 	if len(v.TimedMetadataId3Frame) > 0 {
@@ -7798,6 +7815,18 @@ func awsRestjson1_serializeDocumentSpekeKeyProviderCmaf(v *types.SpekeKeyProvide
 	if v.Url != nil {
 		ok := object.Key("url")
 		ok.String(*v.Url)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSrtDestinationSettings(v *types.SrtDestinationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.StylePassthrough) > 0 {
+		ok := object.Key("stylePassthrough")
+		ok.String(string(v.StylePassthrough))
 	}
 
 	return nil

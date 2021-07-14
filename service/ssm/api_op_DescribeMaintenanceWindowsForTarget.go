@@ -32,12 +32,12 @@ func (c *Client) DescribeMaintenanceWindowsForTarget(ctx context.Context, params
 type DescribeMaintenanceWindowsForTargetInput struct {
 
 	// The type of resource you want to retrieve information about. For example,
-	// "INSTANCE".
+	// INSTANCE.
 	//
 	// This member is required.
 	ResourceType types.MaintenanceWindowResourceType
 
-	// The instance ID or key/value pair to retrieve information about.
+	// The instance ID or key-value pair to retrieve information about.
 	//
 	// This member is required.
 	Targets []types.Target

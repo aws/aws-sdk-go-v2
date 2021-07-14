@@ -70,8 +70,8 @@ type UpdateFunctionCodeInput struct {
 	// it.
 	RevisionId *string
 
-	// An Amazon S3 bucket in the same AWS Region as your function. The bucket can be
-	// in a different AWS account.
+	// An Amazon S3 bucket in the same Amazon Web Services Region as your function. The
+	// bucket can be in a different Amazon Web Services account.
 	S3Bucket *string
 
 	// The Amazon S3 key of the deployment package.
@@ -80,8 +80,8 @@ type UpdateFunctionCodeInput struct {
 	// For versioned objects, the version of the deployment package object to use.
 	S3ObjectVersion *string
 
-	// The base64-encoded contents of the deployment package. AWS SDK and AWS CLI
-	// clients handle the encoding for you.
+	// The base64-encoded contents of the deployment package. Amazon Web Services SDK
+	// and Amazon Web Services CLI clients handle the encoding for you.
 	ZipFile []byte
 }
 
@@ -100,10 +100,12 @@ type UpdateFunctionCodeOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables.
+	// The function's environment variables
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 	Environment *types.EnvironmentResponse
 
-	// Connection settings for an Amazon EFS file system.
+	// Connection settings for an Amazon EFS file system
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -180,7 +182,7 @@ type UpdateFunctionCodeOutput struct {
 	// stopping it.
 	Timeout *int32
 
-	// The function's AWS X-Ray tracing configuration.
+	// The function's X-Ray tracing configuration.
 	TracingConfig *types.TracingConfigResponse
 
 	// The version of the Lambda function.

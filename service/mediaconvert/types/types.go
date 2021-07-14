@@ -493,20 +493,22 @@ type AutomatedEncodingSettings struct {
 	AbrSettings *AutomatedAbrSettings
 }
 
-// Settings for quality-defined variable bitrate encoding with the AV1 codec.
-// Required when you set Rate control mode to QVBR. Not valid when you set Rate
-// control mode to a value other than QVBR, or when you don't define Rate control
-// mode.
+// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
+// these settings only when you set QVBR for Rate control mode (RateControlMode).
 type Av1QvbrSettings struct {
 
-	// Required when you use QVBR rate control mode. That is, when you specify
-	// qvbrSettings within av1Settings. Specify the general target quality level for
-	// this output, from 1 to 10. Use higher numbers for greater quality. Level 10
-	// results in nearly lossless compression. The quality level for most
-	// broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value
-	// between whole numbers, also provide a value for the setting
-	// qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be
-	// 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+	// Use this setting only when you set Rate control mode (RateControlMode) to QVBR.
+	// Specify the target quality level for this output. MediaConvert determines the
+	// right number of bits to use for each part of the video to maintain the video
+	// quality that you specify. When you keep the default value, AUTO, MediaConvert
+	// picks a quality level for you, based on characteristics of your input video. If
+	// you prefer to specify a quality level, specify a number from 1 through 10. Use
+	// higher numbers for greater quality. Level 10 results in nearly lossless
+	// compression. The quality level for most broadcast-quality transcodes is between
+	// 6 and 9. Optionally, to specify a value between whole numbers, also provide a
+	// value for the setting qvbrQualityLevelFineTune. For example, if you want your
+	// QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set
+	// qvbrQualityLevelFineTune to .33.
 	QvbrQualityLevel int32
 
 	// Optional. Specify a value here to set the QVBR quality to a level that is
@@ -582,10 +584,8 @@ type Av1Settings struct {
 	// file size; choose a smaller number for better video quality.
 	NumberBFramesBetweenReferenceFrames int32
 
-	// Settings for quality-defined variable bitrate encoding with the AV1 codec.
-	// Required when you set Rate control mode to QVBR. Not valid when you set Rate
-	// control mode to a value other than QVBR, or when you don't define Rate control
-	// mode.
+	// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
+	// these settings only when you set QVBR for Rate control mode (RateControlMode).
 	QvbrSettings *Av1QvbrSettings
 
 	// 'With AV1 outputs, for rate control mode, MediaConvert supports only
@@ -994,6 +994,9 @@ type CaptionDestinationSettings struct {
 	// any required children when you set destinationType to SCC.
 	SccDestinationSettings *SccDestinationSettings
 
+	// SRT Destination Settings
+	SrtDestinationSettings *SrtDestinationSettings
+
 	// Settings related to teletext captions. Set up teletext captions in the same
 	// output as your video. For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/teletext-output-captions.html.
@@ -1302,6 +1305,17 @@ type CmafGroupSettings struct {
 	// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
 	// variant manifest.
 	StreamInfResolution CmafStreamInfResolution
+
+	// When set to LEGACY, the segment target duration is always rounded up to the
+	// nearest integer value above its current value in seconds. When set to
+	// SPEC\_COMPLIANT, the segment target duration is rounded up to the nearest
+	// integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and
+	// rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client
+	// needs to ensure that the target duration is always longer than the actual
+	// duration of the segment. Some older players may experience interrupted playback
+	// when the actual duration of a track in a segment is longer than the target
+	// duration.
+	TargetDurationCompatibilityMode CmafTargetDurationCompatibilityMode
 
 	// When set to ENABLED, a DASH MPD manifest will be generated for this output.
 	WriteDashManifest CmafWriteDASHManifest
@@ -1843,10 +1857,10 @@ type DvbSubDestinationSettings struct {
 	// and DVB-Sub font settings must match.
 	DdsYCoordinate int32
 
-	// Specifies the color of the burned-in captions. This option is not valid for
-	// source captions that are STL, 608/embedded or teletext. These source settings
-	// are already pre-defined by the caption stream. All burn-in and DVB-Sub font
-	// settings must match.
+	// Specifies the color of the DVB-SUB captions. This option is not valid for source
+	// captions that are STL, 608/embedded or teletext. These source settings are
+	// already pre-defined by the caption stream. All burn-in and DVB-Sub font settings
+	// must match.
 	FontColor DvbSubtitleFontColor
 
 	// Specifies the opacity of the burned-in captions. 255 is opaque; 0 is
@@ -2412,10 +2426,8 @@ type FrameCaptureSettings struct {
 	Quality int32
 }
 
-// Settings for quality-defined variable bitrate encoding with the H.264 codec.
-// Required when you set Rate control mode to QVBR. Not valid when you set Rate
-// control mode to a value other than QVBR, or when you don't define Rate control
-// mode.
+// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
+// these settings only when you set QVBR for Rate control mode (RateControlMode).
 type H264QvbrSettings struct {
 
 	// Use this setting only when Rate control mode is QVBR and Quality tuning level is
@@ -2426,14 +2438,18 @@ type H264QvbrSettings struct {
 	// seconds of encoded output.
 	MaxAverageBitrate int32
 
-	// Required when you use QVBR rate control mode. That is, when you specify
-	// qvbrSettings within h264Settings. Specify the general target quality level for
-	// this output, from 1 to 10. Use higher numbers for greater quality. Level 10
-	// results in nearly lossless compression. The quality level for most
-	// broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value
-	// between whole numbers, also provide a value for the setting
-	// qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be
-	// 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+	// Use this setting only when you set Rate control mode (RateControlMode) to QVBR.
+	// Specify the target quality level for this output. MediaConvert determines the
+	// right number of bits to use for each part of the video to maintain the video
+	// quality that you specify. When you keep the default value, AUTO, MediaConvert
+	// picks a quality level for you, based on characteristics of your input video. If
+	// you prefer to specify a quality level, specify a number from 1 through 10. Use
+	// higher numbers for greater quality. Level 10 results in nearly lossless
+	// compression. The quality level for most broadcast-quality transcodes is between
+	// 6 and 9. Optionally, to specify a value between whole numbers, also provide a
+	// value for the setting qvbrQualityLevelFineTune. For example, if you want your
+	// QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set
+	// qvbrQualityLevelFineTune to .33.
 	QvbrQualityLevel int32
 
 	// Optional. Specify a value here to set the QVBR quality to a level that is
@@ -2632,10 +2648,8 @@ type H264Settings struct {
 	// faster, lower quality, single-pass encoding.
 	QualityTuningLevel H264QualityTuningLevel
 
-	// Settings for quality-defined variable bitrate encoding with the H.264 codec.
-	// Required when you set Rate control mode to QVBR. Not valid when you set Rate
-	// control mode to a value other than QVBR, or when you don't define Rate control
-	// mode.
+	// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
+	// these settings only when you set QVBR for Rate control mode (RateControlMode).
 	QvbrSettings *H264QvbrSettings
 
 	// Use this setting to specify whether this output has a variable bitrate (VBR),
@@ -2759,10 +2773,8 @@ type H264Settings struct {
 	UnregisteredSeiTimecode H264UnregisteredSeiTimecode
 }
 
-// Settings for quality-defined variable bitrate encoding with the H.265 codec.
-// Required when you set Rate control mode to QVBR. Not valid when you set Rate
-// control mode to a value other than QVBR, or when you don't define Rate control
-// mode.
+// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
+// these settings only when you set QVBR for Rate control mode (RateControlMode).
 type H265QvbrSettings struct {
 
 	// Use this setting only when Rate control mode is QVBR and Quality tuning level is
@@ -2773,14 +2785,18 @@ type H265QvbrSettings struct {
 	// seconds of encoded output.
 	MaxAverageBitrate int32
 
-	// Required when you use QVBR rate control mode. That is, when you specify
-	// qvbrSettings within h265Settings. Specify the general target quality level for
-	// this output, from 1 to 10. Use higher numbers for greater quality. Level 10
-	// results in nearly lossless compression. The quality level for most
-	// broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value
-	// between whole numbers, also provide a value for the setting
-	// qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be
-	// 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+	// Use this setting only when you set Rate control mode (RateControlMode) to QVBR.
+	// Specify the target quality level for this output. MediaConvert determines the
+	// right number of bits to use for each part of the video to maintain the video
+	// quality that you specify. When you keep the default value, AUTO, MediaConvert
+	// picks a quality level for you, based on characteristics of your input video. If
+	// you prefer to specify a quality level, specify a number from 1 through 10. Use
+	// higher numbers for greater quality. Level 10 results in nearly lossless
+	// compression. The quality level for most broadcast-quality transcodes is between
+	// 6 and 9. Optionally, to specify a value between whole numbers, also provide a
+	// value for the setting qvbrQualityLevelFineTune. For example, if you want your
+	// QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set
+	// qvbrQualityLevelFineTune to .33.
 	QvbrQualityLevel int32
 
 	// Optional. Specify a value here to set the QVBR quality to a level that is
@@ -2963,10 +2979,8 @@ type H265Settings struct {
 	// faster, lower quality, single-pass encoding.
 	QualityTuningLevel H265QualityTuningLevel
 
-	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
-	// Required when you set Rate control mode to QVBR. Not valid when you set Rate
-	// control mode to a value other than QVBR, or when you don't define Rate control
-	// mode.
+	// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
+	// these settings only when you set QVBR for Rate control mode (RateControlMode).
 	QvbrSettings *H265QvbrSettings
 
 	// Use this setting to specify whether this output has a variable bitrate (VBR),
@@ -3368,6 +3382,17 @@ type HlsGroupSettings struct {
 	// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
 	// variant manifest.
 	StreamInfResolution HlsStreamInfResolution
+
+	// When set to LEGACY, the segment target duration is always rounded up to the
+	// nearest integer value above its current value in seconds. When set to
+	// SPEC\_COMPLIANT, the segment target duration is rounded up to the nearest
+	// integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and
+	// rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client
+	// needs to ensure that the target duration is always longer than the actual
+	// duration of the segment. Some older players may experience interrupted playback
+	// when the actual duration of a track in a segment is longer than the target
+	// duration.
+	TargetDurationCompatibilityMode HlsTargetDurationCompatibilityMode
 
 	// Indicates ID3 frame that has the timecode.
 	TimedMetadataId3Frame HlsTimedMetadataId3Frame
@@ -6115,6 +6140,15 @@ type SpekeKeyProviderCmaf struct {
 	// Specify the URL to the key server that your SPEKE-compliant DRM key provider
 	// uses to provide keys for encrypting your content.
 	Url *string
+}
+
+// SRT Destination Settings
+type SrtDestinationSettings struct {
+
+	// Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and
+	// position information from the captions source in the input. Keep the default
+	// value, Disabled (DISABLED), for simplified output captions.
+	StylePassthrough SrtStylePassthrough
 }
 
 // Use these settings to set up encryption with a static key provider.

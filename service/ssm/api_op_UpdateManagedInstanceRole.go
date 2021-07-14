@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the Amazon Identity and Access Management (IAM) role that is assigned to
-// the on-premises instance or virtual machines (VM). IAM roles are first assigned
-// to these hybrid instances during the activation process. For more information,
-// see CreateActivation.
+// Changes the Identity and Access Management (IAM) role that is assigned to the
+// on-premises instance or virtual machines (VM). IAM roles are first assigned to
+// these hybrid instances during the activation process. For more information, see
+// CreateActivation.
 func (c *Client) UpdateManagedInstanceRole(ctx context.Context, params *UpdateManagedInstanceRoleInput, optFns ...func(*Options)) (*UpdateManagedInstanceRoleOutput, error) {
 	if params == nil {
 		params = &UpdateManagedInstanceRoleInput{}

@@ -48,7 +48,7 @@ type DescribeEventSubscriptionsInput struct {
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The name of the AWS DMS event subscription to be described.
+	// The name of the DMS event subscription to be described.
 	SubscriptionName *string
 }
 

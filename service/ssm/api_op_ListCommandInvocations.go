@@ -38,7 +38,7 @@ type ListCommandInvocationsInput struct {
 	CommandId *string
 
 	// (Optional) If set this returns the response of the command executions and any
-	// command output. The default value is 'false'.
+	// command output. The default value is false.
 	Details bool
 
 	// (Optional) One or more filters. Use a filter to return a more specific list of

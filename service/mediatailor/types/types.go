@@ -62,6 +62,36 @@ type AdMarkerPassthrough struct {
 	Enabled bool
 }
 
+// Alert configuration parameters.
+type Alert struct {
+
+	// The code for the alert. For example, NOT_PROCESSED.
+	//
+	// This member is required.
+	AlertCode *string
+
+	// If an alert is generated for a resource, an explanation of the reason for the
+	// alert.
+	//
+	// This member is required.
+	AlertMessage *string
+
+	// The timestamp when the alert was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Names (ARNs) related to this alert.
+	//
+	// This member is required.
+	RelatedResourceArns []string
+
+	// The Amazon Resource Name (ARN) of the resource.
+	//
+	// This member is required.
+	ResourceArn *string
+}
+
 // The configuration for avail suppression, also known as ad suppression. For more
 // information about ad suppression, see Ad Suppression
 // (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).

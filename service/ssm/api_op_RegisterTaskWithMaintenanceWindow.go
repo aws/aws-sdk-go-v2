@@ -51,24 +51,25 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// An optional description for the task.
 	Description *string
 
-	// A structure containing information about an S3 bucket to write instance-level
-	// logs to. LoggingInfo has been deprecated. To specify an S3 bucket to contain
-	// logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the
-	// TaskInvocationParameters structure. For information about how Systems Manager
-	// handles these options for the supported maintenance window task types, see
-	// MaintenanceWindowTaskInvocationParameters.
+	// A structure containing information about an Amazon Simple Storage Service
+	// (Amazon S3) bucket to write instance-level logs to. LoggingInfo has been
+	// deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to
+	// contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options
+	// in the TaskInvocationParameters structure. For information about how Amazon Web
+	// Services Systems Manager handles these options for the supported maintenance
+	// window task types, see MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *types.LoggingInfo
 
 	// The maximum number of targets this task can be run for in parallel. For
-	// maintenance window tasks without a target specified, you cannot supply a value
+	// maintenance window tasks without a target specified, you can't supply a value
 	// for this option. Instead, the system inserts a placeholder value of 1. This
-	// value does not affect the running of your task.
+	// value doesn't affect the running of your task.
 	MaxConcurrency *string
 
 	// The maximum number of errors allowed before this task stops being scheduled. For
-	// maintenance window tasks without a target specified, you cannot supply a value
+	// maintenance window tasks without a target specified, you can't supply a value
 	// for this option. Instead, the system inserts a placeholder value of 1. This
-	// value does not affect the running of your task.
+	// value doesn't affect the running of your task.
 	MaxErrors *string
 
 	// An optional name for the task.
@@ -79,15 +80,15 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// order with tasks that have the same priority scheduled in parallel.
 	Priority int32
 
-	// The ARN of the IAM service role for Systems Manager to assume when running a
-	// maintenance window task. If you do not specify a service role ARN, Systems
-	// Manager uses your account's service-linked role. If no service-linked role for
-	// Systems Manager exists in your account, it is created when you run
-	// RegisterTaskWithMaintenanceWindow. For more information, see the following
-	// topics in the in the AWS Systems Manager User Guide:
+	// The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services
+	// Systems Manager to assume when running a maintenance window task. If you do not
+	// specify a service role ARN, Systems Manager uses your account's service-linked
+	// role. If no service-linked role for Systems Manager exists in your account, it
+	// is created when you run RegisterTaskWithMaintenanceWindow. For more information,
+	// see the following topics in the in the Amazon Web Services Systems Manager User
+	// Guide:
 	//
-	// * Using service-linked
-	// roles for Systems Manager
+	// * Using service-linked roles for Systems Manager
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
 	//
 	// *
@@ -99,13 +100,13 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// The targets (either instances or maintenance window targets). One or more
 	// targets must be specified for maintenance window Run Command-type tasks.
 	// Depending on the task, targets are optional for other maintenance window task
-	// types (Automation, AWS Lambda, and AWS Step Functions). For more information
-	// about running tasks that do not specify targets, see Registering maintenance
-	// window tasks without targets
+	// types (Automation, Lambda, and Step Functions). For more information about
+	// running tasks that don't specify targets, see Registering maintenance window
+	// tasks without targets
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
-	// in the AWS Systems Manager User Guide. Specify instances using the following
-	// format: Key=InstanceIds,Values=, Specify maintenance window targets using the
-	// following format: Key=WindowTargetIds,Values=,
+	// in the Amazon Web Services Systems Manager User Guide. Specify instances using
+	// the following format: Key=InstanceIds,Values=, Specify maintenance window
+	// targets using the following format: Key=WindowTargetIds,Values=,
 	Targets []types.Target
 
 	// The parameters that the task should use during execution. Populate only the

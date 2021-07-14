@@ -14,16 +14,16 @@ import (
 
 // Associates an existing connection with a link aggregation group (LAG). The
 // connection is interrupted and re-established as a member of the LAG
-// (connectivity to AWS is interrupted). The connection must be hosted on the same
-// AWS Direct Connect endpoint as the LAG, and its bandwidth must match the
-// bandwidth for the LAG. You can re-associate a connection that's currently
-// associated with a different LAG; however, if removing the connection would cause
-// the original LAG to fall below its setting for minimum number of operational
-// connections, the request fails. Any virtual interfaces that are directly
-// associated with the connection are automatically re-associated with the LAG. If
-// the connection was originally associated with a different LAG, the virtual
-// interfaces remain associated with the original LAG. For interconnects, any
-// hosted connections are automatically re-associated with the LAG. If the
+// (connectivity to Amazon Web Services is interrupted). The connection must be
+// hosted on the same Direct Connect endpoint as the LAG, and its bandwidth must
+// match the bandwidth for the LAG. You can re-associate a connection that's
+// currently associated with a different LAG; however, if removing the connection
+// would cause the original LAG to fall below its setting for minimum number of
+// operational connections, the request fails. Any virtual interfaces that are
+// directly associated with the connection are automatically re-associated with the
+// LAG. If the connection was originally associated with a different LAG, the
+// virtual interfaces remain associated with the original LAG. For interconnects,
+// any hosted connections are automatically re-associated with the LAG. If the
 // interconnect was originally associated with a different LAG, the hosted
 // connections remain associated with the original LAG.
 func (c *Client) AssociateConnectionWithLag(ctx context.Context, params *AssociateConnectionWithLagInput, optFns ...func(*Options)) (*AssociateConnectionWithLagOutput, error) {
@@ -54,7 +54,7 @@ type AssociateConnectionWithLagInput struct {
 	LagId *string
 }
 
-// Information about an AWS Direct Connect connection.
+// Information about an Direct Connect connection.
 type AssociateConnectionWithLagOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
@@ -64,6 +64,10 @@ type AssociateConnectionWithLagOutput struct {
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
+
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
+	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -132,11 +136,10 @@ type AssociateConnectionWithLagOutput struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
-	// The ID of the AWS account that owns the connection.
+	// The ID of the account that owns the connection.
 	OwnerAccount *string
 
-	// The name of the AWS Direct Connect service provider associated with the
-	// connection.
+	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
 	// The MAC Security (MACsec) port link status of the connection. The valid values
@@ -147,7 +150,7 @@ type AssociateConnectionWithLagOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The AWS Region where the connection is located.
+	// The Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.

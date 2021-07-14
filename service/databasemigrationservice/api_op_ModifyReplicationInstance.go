@@ -63,7 +63,7 @@ type ModifyReplicationInstanceInput struct {
 	//
 	// * A newer minor version is available.
 	//
-	// * AWS DMS has enabled automatic
+	// * DMS has enabled automatic
 	// patching for the given engine version.
 	AutoMinorVersionUpgrade *bool
 
@@ -89,7 +89,7 @@ type ModifyReplicationInstanceInput struct {
 	// specified replication instance class. For example to specify the instance class
 	// dms.c4.large, set this parameter to "dms.c4.large". For more information on the
 	// settings and capacities for the available replication instance classes, see
-	// Selecting the right AWS DMS replication instance for your migration
+	// Selecting the right DMS replication instance for your migration
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
 	ReplicationInstanceClass *string
 

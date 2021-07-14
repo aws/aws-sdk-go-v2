@@ -51,14 +51,14 @@ type DescribePortalOutput struct {
 	// This member is required.
 	PortalArn *string
 
-	// The AWS SSO application generated client ID (used with AWS SSO APIs). AWS IoT
-	// SiteWise includes portalClientId for only portals that use AWS SSO to
-	// authenticate users.
+	// The Amazon Web Services SSO application generated client ID (used with Amazon
+	// Web Services SSO APIs). IoT SiteWise includes portalClientId for only portals
+	// that use Amazon Web Services SSO to authenticate users.
 	//
 	// This member is required.
 	PortalClientId *string
 
-	// The AWS administrator's contact email address.
+	// The Amazon Web Services administrator's contact email address.
 	//
 	// This member is required.
 	PortalContactEmail *string
@@ -83,10 +83,10 @@ type DescribePortalOutput struct {
 	// This member is required.
 	PortalName *string
 
-	// The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access
-	// portals that use AWS SSO for authentication. For portals that use IAM for
-	// authentication, you must use the AWS IoT SiteWise console to get a URL that you
-	// can use to access the portal.
+	// The URL for the IoT SiteWise Monitor portal. You can use this URL to access
+	// portals that use Amazon Web Services SSO for authentication. For portals that
+	// use IAM for authentication, you must use the IoT SiteWise console to get a URL
+	// that you can use to access the portal.
 	//
 	// This member is required.
 	PortalStartUrl *string
@@ -96,7 +96,7 @@ type DescribePortalOutput struct {
 	// This member is required.
 	PortalStatus *types.PortalStatus
 
-	// Contains the configuration information of an alarm created in a AWS IoT SiteWise
+	// Contains the configuration information of an alarm created in an IoT SiteWise
 	// Monitor portal.
 	Alarms *types.Alarms
 
@@ -114,11 +114,11 @@ type DescribePortalOutput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the service role that allows the portal's users to access your AWS IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for AWS
-	// IoT SiteWise Monitor
+	// the service role that allows the portal's users to access your IoT SiteWise
+	// resources on your behalf. For more information, see Using service roles for IoT
+	// SiteWise Monitor
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
-	// in the AWS IoT SiteWise User Guide.
+	// in the IoT SiteWise User Guide.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

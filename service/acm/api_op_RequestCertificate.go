@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests an ACM certificate for use with other AWS services. To request an ACM
-// certificate, you must specify a fully qualified domain name (FQDN) in the
-// DomainName parameter. You can also specify additional FQDNs in the
+// Requests an ACM certificate for use with other Amazon Web Services services. To
+// request an ACM certificate, you must specify a fully qualified domain name
+// (FQDN) in the DomainName parameter. You can also specify additional FQDNs in the
 // SubjectAlternativeNames parameter. If you are requesting a private certificate,
 // domain validation is not required. If you are requesting a public certificate,
 // each domain name that you specify must be validated to verify that you own or
@@ -22,7 +22,11 @@ import (
 // email validation
 // (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
 // We recommend that you use DNS validation. ACM issues public certificates after
-// receiving approval from the domain owner.
+// receiving approval from the domain owner. ACM behavior differs from the
+// https://tools.ietf.org/html/rfc6125#appendix-B.2
+// (https://tools.ietf.org/html/rfc6125#appendix-B.2)RFC 6125 specification of the
+// certificate validation process. first checks for a subject alternative name,
+// and, if it finds one, ignores the common name (CN)
 func (c *Client) RequestCertificate(ctx context.Context, params *RequestCertificateInput, optFns ...func(*Options)) (*RequestCertificateOutput, error) {
 	if params == nil {
 		params = &RequestCertificateInput{}
@@ -54,8 +58,8 @@ type RequestCertificateInput struct {
 	// The Amazon Resource Name (ARN) of the private certificate authority (CA) that
 	// will be used to issue the certificate. If you do not provide an ARN and you are
 	// trying to request a private certificate, ACM will attempt to issue a public
-	// certificate. For more information about private CAs, see the AWS Certificate
-	// Manager Private Certificate Authority (PCA)
+	// certificate. For more information about private CAs, see the Amazon Web Services
+	// Certificate Manager Private Certificate Authority (PCA)
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html) user
 	// guide. The ARN must have the following form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012

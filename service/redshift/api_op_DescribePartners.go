@@ -29,7 +29,7 @@ func (c *Client) DescribePartners(ctx context.Context, params *DescribePartnersI
 
 type DescribePartnersInput struct {
 
-	// The AWS account ID that owns the cluster.
+	// The Region ID that owns the cluster.
 	//
 	// This member is required.
 	AccountId *string

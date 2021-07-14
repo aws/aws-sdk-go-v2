@@ -47,7 +47,7 @@ type GetMaintenanceWindowExecutionOutput struct {
 	// The status of the maintenance window execution.
 	Status types.MaintenanceWindowExecutionStatus
 
-	// The details explaining the Status. Only available for certain status values.
+	// The details explaining the status. Not available for all status values.
 	StatusDetails *string
 
 	// The ID of the task executions from the maintenance window execution.

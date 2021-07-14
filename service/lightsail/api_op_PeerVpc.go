@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tries to peer the Lightsail VPC with the user's default VPC.
+// Peers the Lightsail VPC with the user's default VPC.
 func (c *Client) PeerVpc(ctx context.Context, params *PeerVpcInput, optFns ...func(*Options)) (*PeerVpcOutput, error) {
 	if params == nil {
 		params = &PeerVpcInput{}

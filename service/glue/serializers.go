@@ -8633,6 +8633,23 @@ func awsAwsjson11_serializeDocumentEncryptionConfiguration(v *types.EncryptionCo
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEventBatchingCondition(v *types.EventBatchingCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("BatchSize")
+		ok.Integer(v.BatchSize)
+	}
+
+	if v.BatchWindow != nil {
+		ok := object.Key("BatchWindow")
+		ok.Integer(*v.BatchWindow)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentExecutionProperty(v *types.ExecutionProperty, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10346,6 +10363,13 @@ func awsAwsjson11_serializeDocumentTriggerUpdate(v *types.TriggerUpdate, value s
 		ok.String(*v.Description)
 	}
 
+	if v.EventBatchingCondition != nil {
+		ok := object.Key("EventBatchingCondition")
+		if err := awsAwsjson11_serializeDocumentEventBatchingCondition(v.EventBatchingCondition, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -11564,6 +11588,13 @@ func awsAwsjson11_serializeOpDocumentCreateTriggerInput(v *CreateTriggerInput, v
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.EventBatchingCondition != nil {
+		ok := object.Key("EventBatchingCondition")
+		if err := awsAwsjson11_serializeDocumentEventBatchingCondition(v.EventBatchingCondition, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {

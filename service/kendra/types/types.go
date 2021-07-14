@@ -11,7 +11,7 @@ import (
 // (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html).
 type AccessControlListConfiguration struct {
 
-	// Path to the AWS S3 bucket that contains the ACL files.
+	// Path to the Amazon Web Services S3 bucket that contains the ACL files.
 	KeyPath *string
 }
 
@@ -184,21 +184,20 @@ type CapacityUnitsConfiguration struct {
 
 	// The amount of extra query capacity for an index and GetQuerySuggestions
 	// (https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html)
-	// capacity. A single extra capacity unit for an index provides 0.1 queries per
-	// second or approximately 8,000 queries per day. GetQuerySuggestions capacity is
-	// five times the provisioned query capacity for an index, or the base capacity of
-	// 2.5 calls per second, whichever is higher. For example, the base capacity for an
-	// index is 0.1 queries per second, and GetQuerySuggestions capacity has a base of
-	// 2.5 calls per second. If you add another 0.1 queries per second to total 0.2
-	// queries per second for an index, the GetQuerySuggestions capacity is 2.5 calls
-	// per second (higher than five times 0.2 queries per second).
+	// capacity. A single extra capacity unit for an index provides 0.5 queries per
+	// second or approximately 40,000 queries per day. GetQuerySuggestions capacity is
+	// 5 times the provisioned query capacity for an index. For example, the base
+	// capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity
+	// is 2.5 calls per second. If adding another 0.5 queries per second to total 1
+	// queries per second for an index, the GetQuerySuggestions capacity is 5 calls per
+	// second.
 	//
 	// This member is required.
 	QueryCapacityUnits *int32
 
-	// The amount of extra storage capacity for an index. A single capacity unit
-	// provides 30 GB of storage space or 100,000 documents, whichever is reached
-	// first.
+	// The amount of extra storage capacity for an index. A single capacity unit for an
+	// index provides 150 GB of storage space or 500,000 documents, whichever is
+	// reached first.
 	//
 	// This member is required.
 	StorageCapacityUnits *int32
@@ -315,16 +314,16 @@ type ConfluenceBlogToIndexFieldMapping struct {
 // Provides configuration information for data sources that connect to Confluence.
 type ConfluenceConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains
-	// the key/value pairs required to connect to your Confluence server. The secret
-	// must contain a JSON structure with the following keys:
+	// The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the
+	// key/value pairs required to connect to your Confluence server. The secret must
+	// contain a JSON structure with the following keys:
 	//
-	// * username - The user
-	// name or email address of a user with administrative privileges for the
+	// * username - The user name or
+	// email address of a user with administrative privileges for the Confluence
+	// server.
+	//
+	// * password - The password associated with the user logging in to the
 	// Confluence server.
-	//
-	// * password - The password associated with the user logging
-	// in to the Confluence server.
 	//
 	// This member is required.
 	SecretArn *string
@@ -477,7 +476,7 @@ type ConnectionConfiguration struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html). For
 	// more information about AWS Secrets Manager, see  What Is AWS Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
-	// AWS Secrets Manager user guide.
+	// Secrets Manager user guide.
 	//
 	// This member is required.
 	SecretArn *string
@@ -551,6 +550,23 @@ type DataSourceConfiguration struct {
 
 	// Provides the configuration information required for Amazon Kendra web crawler.
 	WebCrawlerConfiguration *WebCrawlerConfiguration
+}
+
+// Data source information for user context filtering.
+type DataSourceGroup struct {
+
+	// The identifier of the data source group you want to add to your list of data
+	// source groups. This is for filtering search results based on the groups' access
+	// to documents in that data source.
+	//
+	// This member is required.
+	DataSourceId *string
+
+	// The identifier of the group you want to add to your list of groups. This is for
+	// filtering search results based on the groups' access to documents.
+	//
+	// This member is required.
+	GroupId *string
 }
 
 // Summary information for a Amazon Kendra data source. Returned in a call to the
@@ -698,7 +714,8 @@ type Document struct {
 	// This member is required.
 	Id *string
 
-	// Information to use for user context filtering.
+	// Information on user and group access rights, which is used for user context
+	// filtering.
 	AccessControlList []Principal
 
 	// Custom attributes to apply to the document. Use the custom attributes to provide
@@ -708,13 +725,18 @@ type Document struct {
 
 	// The contents of the document. Documents passed to the Blob parameter must be
 	// base64 encoded. Your code might not need to encode the document file bytes if
-	// you're using an AWS SDK to call Amazon Kendra operations. If you are calling the
-	// Amazon Kendra endpoint directly using REST, you must base64 encode the contents
-	// before sending.
+	// you're using an Amazon Web Services SDK to call Amazon Kendra operations. If you
+	// are calling the Amazon Kendra endpoint directly using REST, you must base64
+	// encode the contents before sending.
 	Blob []byte
 
 	// The file type of the document in the Blob field.
 	ContentType ContentType
+
+	// The list of principal
+	// (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html) lists that
+	// define the hierarchy for which documents users should have access to.
+	HierarchicalAccessControlList []HierarchicalPrincipal
 
 	// Information required to find a specific file in an Amazon S3 bucket.
 	S3Path *S3Path
@@ -866,9 +888,9 @@ type DocumentRelevanceConfiguration struct {
 // metadata file contains metadata about a single document.
 type DocumentsMetadataConfiguration struct {
 
-	// A prefix used to filter metadata configuration files in the AWS S3 bucket. The
-	// S3 bucket might contain multiple metadata files. Use S3Prefix to include only
-	// the desired metadata files.
+	// A prefix used to filter metadata configuration files in the Amazon Web Services
+	// S3 bucket. The S3 bucket might contain multiple metadata files. Use S3Prefix to
+	// include only the desired metadata files.
 	S3Prefix *string
 }
 
@@ -933,7 +955,7 @@ type FaqSummary struct {
 // Drive.
 type GoogleDriveConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the
+	// The Amazon Resource Name (ARN) of a Secrets Managersecret that contains the
 	// credentials required to connect to Google Drive. For more information, see Using
 	// a Google Workspace Drive data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html).
@@ -975,6 +997,76 @@ type GoogleDriveConfiguration struct {
 	// index. If an item matches both an inclusion pattern and an exclusion pattern, it
 	// is excluded from the index.
 	InclusionPatterns []string
+}
+
+// A list of users or sub groups that belong to a group. Users and groups are
+// useful for filtering search results to different users based on their group's
+// access to documents.
+type GroupMembers struct {
+
+	// A list of sub groups that belong to a group. For example, the sub groups
+	// "Research", "Engineering", and "Sales and Marketing" all belong to the group
+	// "Company".
+	MemberGroups []MemberGroup
+
+	// A list of users that belong to a group. For example, a list of interns all
+	// belong to the "Interns" group.
+	MemberUsers []MemberUser
+
+	// If you have more than 1000 users and/or sub groups for a single group, you need
+	// to provide the path to the S3 file that lists your users and sub groups for a
+	// group. Your sub groups can contain more than 1000 users, but the list of sub
+	// groups that belong to a group (and/or users) must be no more than 1000.
+	S3PathforGroupMembers *S3Path
+}
+
+// Information on the processing of PUT and DELETE actions for mapping users to
+// their groups.
+type GroupOrderingIdSummary struct {
+
+	// The reason an action could not be processed. An action can be a PUT or DELETE
+	// action for mapping users to their groups.
+	FailureReason *string
+
+	// The last date-time an action was updated. An action can be a PUT or DELETE
+	// action for mapping users to their groups.
+	LastUpdatedAt *time.Time
+
+	// The order in which actions should complete processing. An action can be a PUT or
+	// DELETE action for mapping users to their groups.
+	OrderingId *int64
+
+	// The date-time an action was received by Amazon Kendra. An action can be a PUT or
+	// DELETE action for mapping users to their groups.
+	ReceivedAt *time.Time
+
+	// The current processing status of actions for mapping users to their groups. The
+	// status can be either PROCESSING, SUCCEEDED, DELETING, DELETED, or FAILED.
+	Status PrincipalMappingStatus
+}
+
+// Group summary information.
+type GroupSummary struct {
+
+	// The identifier of the group you want group summary information on.
+	GroupId *string
+
+	// The timestamp identifier used for the latest PUT or DELETE action.
+	OrderingId *int64
+}
+
+// Information to define the hierarchy for which documents users should have access
+// to.
+type HierarchicalPrincipal struct {
+
+	// A list of principal
+	// (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html) lists that
+	// define the hierarchy for which documents users should have access to. Each
+	// hierarchical list specifies which user or group has allow or deny access for
+	// each document.
+	//
+	// This member is required.
+	PrincipalList []Principal
 }
 
 // Provides information that you can use to highlight a search result so that your
@@ -1086,6 +1178,27 @@ type JwtTokenTypeConfiguration struct {
 	UserNameAttributeField *string
 }
 
+// The sub groups that belong to a group.
+type MemberGroup struct {
+
+	// The identifier of the sub group you want to map to a group.
+	//
+	// This member is required.
+	GroupId *string
+
+	// The identifier of the data source for the sub group you want to map to a group.
+	DataSourceId *string
+}
+
+// The users that belong to a group.
+type MemberUser struct {
+
+	// The identifier of the user you want to map to a group.
+	//
+	// This member is required.
+	UserId *string
+}
+
 // Provides configuration information for data sources that connect to OneDrive.
 type OneDriveConfiguration struct {
 
@@ -1094,8 +1207,8 @@ type OneDriveConfiguration struct {
 	// This member is required.
 	OneDriveUsers *OneDriveUsers
 
-	// The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains
-	// the user name and password to connect to OneDrive. The user namd should be the
+	// The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the
+	// user name and password to connect to OneDrive. The user namd should be the
 	// application ID for the OneDrive application, and the password is the application
 	// key for the OneDrive application.
 	//
@@ -1161,6 +1274,9 @@ type Principal struct {
 	//
 	// This member is required.
 	Type PrincipalType
+
+	// The identifier of the data source the principal should access documents from.
+	DataSourceId *string
 }
 
 // Provides the configuration information for a web proxy to connect to website
@@ -1421,29 +1537,28 @@ type SalesforceChatterFeedConfiguration struct {
 // Provides configuration information for connecting to a Salesforce data source.
 type SalesforceConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains
-	// the key/value pairs required to connect to your Salesforce instance. The secret
-	// must contain a JSON structure with the following keys:
+	// The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the
+	// key/value pairs required to connect to your Salesforce instance. The secret must
+	// contain a JSON structure with the following keys:
 	//
-	// * authenticationUrl -
-	// The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.
+	// * authenticationUrl - The
+	// OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.
+	//
+	// * consumerKey
+	// - The application public key generated when you created your Salesforce
+	// application.
+	//
+	// * consumerSecret - The application private key generated when you
+	// created your Salesforce application.
+	//
+	// * password - The password associated with
+	// the user logging in to the Salesforce instance.
+	//
+	// * securityToken - The token
+	// associated with the user account logging in to the Salesforce instance.
 	//
 	// *
-	// consumerKey - The application public key generated when you created your
-	// Salesforce application.
-	//
-	// * consumerSecret - The application private key
-	// generated when you created your Salesforce application.
-	//
-	// * password - The
-	// password associated with the user logging in to the Salesforce instance.
-	//
-	// *
-	// securityToken - The token associated with the user account logging in to the
-	// Salesforce instance.
-	//
-	// * username - The user name of the user logging in to the
-	// Salesforce instance.
+	// username - The user name of the user logging in to the Salesforce instance.
 	//
 	// This member is required.
 	SecretArn *string
@@ -1644,11 +1759,11 @@ type SeedUrlConfiguration struct {
 	WebCrawlerMode WebCrawlerMode
 }
 
-// Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
-// data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+// Provides the identifier of the KMScustomer master key (CMK) used to encrypt data
+// indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
 type ServerSideEncryptionConfiguration struct {
 
-	// The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't
+	// The identifier of the KMScustomer master key (CMK). Amazon Kendra doesn't
 	// support asymmetric CMKs.
 	KmsKeyId *string
 }
@@ -1663,8 +1778,8 @@ type ServiceNowConfiguration struct {
 	// This member is required.
 	HostUrl *string
 
-	// The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains
-	// the user name and password required to connect to the ServiceNow instance.
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the
+	// user name and password required to connect to the ServiceNow instance.
 	//
 	// This member is required.
 	SecretArn *string
@@ -1777,12 +1892,13 @@ type ServiceNowServiceCatalogConfiguration struct {
 type SharePointConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The
-	// credentials should be a user/password pair. For more information, see Using a
-	// Microsoft SharePoint Data Source
+	// credentials should be a user/password pair. If you use SharePoint Sever, you
+	// also need to provide the sever domain name as part of the credentials. For more
+	// information, see Using a Microsoft SharePoint Data Source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). For
 	// more information about AWS Secrets Manager, see  What Is AWS Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
-	// AWS Secrets Manager user guide.
+	// Secrets Manager user guide.
 	//
 	// This member is required.
 	SecretArn *string
@@ -2066,11 +2182,34 @@ type Urls struct {
 	SiteMapsConfiguration *SiteMapsConfiguration
 }
 
-// Provides information about the user context for a Amazon Kendra index.
+// Provides information about the user context for a Amazon Kendra index. This is
+// used for filtering search results for different users based on their access to
+// documents. You provide one of the following:
+//
+// * User token
+//
+// * User ID, the
+// groups the user belongs to, and the data sources the groups can access
+//
+// If you
+// provide both, an exception is thrown.
 type UserContext struct {
 
-	// The user context token. It must be a JWT or a JSON token.
+	// The list of data source groups you want to filter search results based on
+	// groups' access to documents in that data source.
+	DataSourceGroups []DataSourceGroup
+
+	// The list of groups you want to filter search results based on the groups' access
+	// to documents.
+	Groups []string
+
+	// The user context token for filtering search results for a user. It must be a JWT
+	// or a JSON token.
 	Token *string
+
+	// The identifier of the user you want to filter search results based on their
+	// access to documents.
+	UserId *string
 }
 
 // Provides configuration information for a token configuration.

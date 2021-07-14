@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all Systems Manager (SSM) documents in the current AWS account and
-// Region. You can limit the results of this request by using a filter.
+// Returns all Systems Manager (SSM) documents in the current account and Region.
+// You can limit the results of this request by using a filter.
 func (c *Client) ListDocuments(ctx context.Context, params *ListDocumentsInput, optFns ...func(*Options)) (*ListDocumentsOutput, error) {
 	if params == nil {
 		params = &ListDocumentsInput{}
@@ -39,9 +39,9 @@ type ListDocumentsInput struct {
 	// tags that have been applied to a document. Other valid keys include Owner, Name,
 	// PlatformTypes, DocumentType, and TargetType. For example, to return documents
 	// you own use Key=Owner,Values=Self. To specify a custom key-value pair, use the
-	// format Key=tag:tagName,Values=valueName. This API action only supports filtering
-	// documents by using a single tag key and one or more tag values. For example:
-	// Key=tag:tagName,Values=valueName1,valueName2
+	// format Key=tag:tagName,Values=valueName. This API operation only supports
+	// filtering documents by using a single tag key and one or more tag values. For
+	// example: Key=tag:tagName,Values=valueName1,valueName2
 	Filters []types.DocumentKeyValuesFilter
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -55,7 +55,7 @@ type ListDocumentsInput struct {
 
 type ListDocumentsOutput struct {
 
-	// The names of the Systems Manager documents.
+	// The names of the SSM documents.
 	DocumentIdentifiers []types.DocumentIdentifier
 
 	// The token to use when requesting the next set of items. If there are no

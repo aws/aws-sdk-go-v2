@@ -30,14 +30,14 @@ func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, op
 
 type ListPoliciesInput struct {
 
-	// Specifies the number of PolicySummary objects that you want AWS Firewall Manager
-	// to return for this request. If you have more PolicySummary objects than the
-	// number that you specify for MaxResults, the response includes a NextToken value
-	// that you can use to get another batch of PolicySummary objects.
+	// Specifies the number of PolicySummary objects that you want Firewall Manager to
+	// return for this request. If you have more PolicySummary objects than the number
+	// that you specify for MaxResults, the response includes a NextToken value that
+	// you can use to get another batch of PolicySummary objects.
 	MaxResults *int32
 
 	// If you specify a value for MaxResults and you have more PolicySummary objects
-	// than the number that you specify for MaxResults, AWS Firewall Manager returns a
+	// than the number that you specify for MaxResults, Firewall Manager returns a
 	// NextToken value in the response that allows you to list another group of
 	// PolicySummary objects. For the second and subsequent ListPolicies requests,
 	// specify the value of NextToken from the previous response to get information
@@ -129,10 +129,10 @@ var _ ListPoliciesAPIClient = (*Client)(nil)
 
 // ListPoliciesPaginatorOptions is the paginator options for ListPolicies
 type ListPoliciesPaginatorOptions struct {
-	// Specifies the number of PolicySummary objects that you want AWS Firewall Manager
-	// to return for this request. If you have more PolicySummary objects than the
-	// number that you specify for MaxResults, the response includes a NextToken value
-	// that you can use to get another batch of PolicySummary objects.
+	// Specifies the number of PolicySummary objects that you want Firewall Manager to
+	// return for this request. If you have more PolicySummary objects than the number
+	// that you specify for MaxResults, the response includes a NextToken value that
+	// you can use to get another batch of PolicySummary objects.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

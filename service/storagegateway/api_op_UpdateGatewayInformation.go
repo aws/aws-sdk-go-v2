@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,7 +34,7 @@ func (c *Client) UpdateGatewayInformation(ctx context.Context, params *UpdateGat
 type UpdateGatewayInformationInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -43,6 +44,9 @@ type UpdateGatewayInformationInput struct {
 	// is Amazon CloudWatch Logs?
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 	CloudWatchLogGroupARN *string
+
+	// Specifies the size of the gateway's metadata cache.
+	GatewayCapacity types.GatewayCapacity
 
 	// The name you configured for your gateway.
 	GatewayName *string
@@ -56,7 +60,7 @@ type UpdateGatewayInformationInput struct {
 type UpdateGatewayInformationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	GatewayARN *string
 
 	// The name you configured for your gateway.

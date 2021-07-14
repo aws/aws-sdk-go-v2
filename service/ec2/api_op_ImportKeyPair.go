@@ -12,11 +12,11 @@ import (
 )
 
 // Imports the public key from an RSA key pair that you created with a third-party
-// tool. Compare this with CreateKeyPair, in which AWS creates the key pair and
-// gives the keys to you (AWS keeps a copy of the public key). With ImportKeyPair,
-// you create the key pair and give AWS just the public key. The private key is
-// never transferred between you and AWS. For more information about key pairs, see
-// Key Pairs
+// tool. Compare this with CreateKeyPair, in which Amazon Web Services creates the
+// key pair and gives the keys to you (Amazon Web Services keeps a copy of the
+// public key). With ImportKeyPair, you create the key pair and give Amazon Web
+// Services just the public key. The private key is never transferred between you
+// and Amazon Web Services. For more information about key pairs, see Key Pairs
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the
 // Amazon Elastic Compute Cloud User Guide.
 func (c *Client) ImportKeyPair(ctx context.Context, params *ImportKeyPairInput, optFns ...func(*Options)) (*ImportKeyPairOutput, error) {
@@ -62,7 +62,7 @@ type ImportKeyPairOutput struct {
 	// The MD5 public key fingerprint as specified in section 4 of RFC 4716.
 	KeyFingerprint *string
 
-	// The key pair name you provided.
+	// The key pair name that you provided.
 	KeyName *string
 
 	// The ID of the resulting key pair.

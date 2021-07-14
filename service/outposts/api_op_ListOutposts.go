@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the Outposts for your AWS account.
+// Create a list of the Outposts for your AWS account. Add filters to your request
+// to return a more specific list of results. Use filters to match an Outpost
+// lifecycle status, Availibility Zone (us-east-1a), and AZ ID (use1-az1). If you
+// specify multiple filters, the filters are joined with an AND, and the request
+// returns only results that match all of the specified filters.
 func (c *Client) ListOutposts(ctx context.Context, params *ListOutpostsInput, optFns ...func(*Options)) (*ListOutpostsOutput, error) {
 	if params == nil {
 		params = &ListOutpostsInput{}
@@ -29,6 +33,24 @@ func (c *Client) ListOutposts(ctx context.Context, params *ListOutpostsInput, op
 }
 
 type ListOutpostsInput struct {
+
+	// A filter for the Availibility Zone (us-east-1a) of the Outpost. Filter values
+	// are case sensitive. If you specify multiple values for a filter, the values are
+	// joined with an OR, and the request returns all results that match any of the
+	// specified values.
+	AvailabilityZoneFilter []string
+
+	// A filter for the AZ IDs (use1-az1) of the Outpost. Filter values are case
+	// sensitive. If you specify multiple values for a filter, the values are joined
+	// with an OR, and the request returns all results that match any of the specified
+	// values.
+	AvailabilityZoneIdFilter []string
+
+	// A filter for the lifecycle status of the Outpost. Filter values are case
+	// sensitive. If you specify multiple values for a filter, the values are joined
+	// with an OR, and the request returns all results that match any of the specified
+	// values.
+	LifeCycleStatusFilter []string
 
 	// The maximum page size.
 	MaxResults *int32

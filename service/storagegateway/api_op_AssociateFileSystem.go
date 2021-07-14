@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate an Amazon FSx file system with the Amazon FSx file gateway. After the
+// Associate an Amazon FSx file system with the FSx File Gateway. After the
 // association process is complete, the file shares on the Amazon FSx file system
 // are available for access through the gateway. This operation only supports the
-// Amazon FSx file gateway type.
+// FSx File Gateway type.
 func (c *Client) AssociateFileSystem(ctx context.Context, params *AssociateFileSystemInput, optFns ...func(*Options)) (*AssociateFileSystemOutput, error) {
 	if params == nil {
 		params = &AssociateFileSystemInput{}
@@ -32,20 +32,20 @@ func (c *Client) AssociateFileSystem(ctx context.Context, params *AssociateFileS
 
 type AssociateFileSystemInput struct {
 
-	// A unique string value that you supply that is used by the file gateway to ensure
-	// idempotent file system association creation.
+	// A unique string value that you supply that is used by the FSx File Gateway to
+	// ensure idempotent file system association creation.
 	//
 	// This member is required.
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and AWS Region.
+	// return a list of gateways for your account and Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
 	// The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with
-	// the Amazon FSx file gateway.
+	// the FSx File Gateway.
 	//
 	// This member is required.
 	LocationARN *string
@@ -65,8 +65,13 @@ type AssociateFileSystemInput struct {
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
 
-	// The refresh cache information for the file share.
+	// The refresh cache information for the file share or FSx file systems.
 	CacheAttributes *types.CacheAttributes
+
+	// Specifies the network configuration information for the gateway associated with
+	// the Amazon FSx file system. If multiple file systems are associated with this
+	// gateway, this parameter's IpAddresses field is required.
+	EndpointNetworkConfiguration *types.EndpointNetworkConfiguration
 
 	// A list of up to 50 tags that can be assigned to the file system association.
 	// Each tag is a key-value pair.

@@ -35,32 +35,37 @@ type UpdateBrokerInput struct {
 	// This member is required.
 	BrokerId *string
 
-	// The authentication strategy used to secure the broker.
+	// Optional. The authentication strategy used to secure the broker. The default is
+	// SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
-	// Enables automatic upgrades to new minor versions for brokers, as Apache releases
-	// the versions. The automatic upgrades occur during the maintenance window of the
-	// broker or after a manual broker reboot.
+	// Enables automatic upgrades to new minor versions for brokers, as new versions
+	// are released and supported by Amazon MQ. Automatic upgrades occur during the
+	// scheduled maintenance window of the broker or after a manual broker reboot.
 	AutoMinorVersionUpgrade bool
 
 	// A list of information about the configuration.
 	Configuration *types.ConfigurationId
 
-	// The version of the broker engine. For a list of supported engine versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	// The broker engine version. For a list of supported engine versions, see
+	// Supported engines
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
 	EngineVersion *string
 
-	// The host instance type of the broker to upgrade to. For a list of supported
-	// instance types, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+	// The broker's host instance type to upgrade to. For a list of supported instance
+	// types, see Broker instance types
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types).
 	HostInstanceType *string
 
-	// The metadata of the LDAP server used to authenticate and authorize connections
-	// to the broker.
+	// Optional. The metadata of the LDAP server used to authenticate and authorize
+	// connections to the broker. Does not apply to RabbitMQ brokers.
 	LdapServerMetadata *types.LdapServerMetadataInput
 
 	// Enables Amazon CloudWatch logging for brokers.
 	Logs *types.Logs
+
+	// The parameters that determine the WeeklyStartTime.
+	MaintenanceWindowStartTime *types.WeeklyStartTime
 
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
@@ -69,10 +74,13 @@ type UpdateBrokerInput struct {
 
 type UpdateBrokerOutput struct {
 
-	// The authentication strategy used to secure the broker.
+	// Optional. The authentication strategy used to secure the broker. The default is
+	// SIMPLE.
 	AuthenticationStrategy types.AuthenticationStrategy
 
-	// The new value of automatic upgrades to new minor version for brokers.
+	// The new boolean value that specifies whether broker engines automatically
+	// upgrade to new minor versions as new versions are released and supported by
+	// Amazon MQ.
 	AutoMinorVersionUpgrade bool
 
 	// Required. The unique ID that Amazon MQ generates for the broker.
@@ -81,22 +89,25 @@ type UpdateBrokerOutput struct {
 	// The ID of the updated configuration.
 	Configuration *types.ConfigurationId
 
-	// The version of the broker engine to upgrade to. For a list of supported engine
-	// versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	// The broker engine version to upgrade to. For a list of supported engine
+	// versions, see Supported engines
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html).
 	EngineVersion *string
 
-	// The host instance type of the broker to upgrade to. For a list of supported
-	// instance types, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+	// The broker's host instance type to upgrade to. For a list of supported instance
+	// types, see Broker instance types
+	// (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types).
 	HostInstanceType *string
 
-	// The metadata of the LDAP server used to authenticate and authorize connections
-	// to the broker.
+	// Optional. The metadata of the LDAP server used to authenticate and authorize
+	// connections to the broker. Does not apply to RabbitMQ brokers.
 	LdapServerMetadata *types.LdapServerMetadataOutput
 
 	// The list of information about logs to be enabled for the specified broker.
 	Logs *types.Logs
+
+	// The parameters that determine the WeeklyStartTime.
+	MaintenanceWindowStartTime *types.WeeklyStartTime
 
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.

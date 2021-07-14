@@ -54,7 +54,9 @@ type ListVersionsByFunctionInput struct {
 	// the next page of results.
 	Marker *string
 
-	// The maximum number of versions to return.
+	// The maximum number of versions to return. Note that ListVersionsByFunction
+	// returns a maximum of 50 items in each response, even if you set the number
+	// higher.
 	MaxItems *int32
 }
 
@@ -144,7 +146,9 @@ var _ ListVersionsByFunctionAPIClient = (*Client)(nil)
 // ListVersionsByFunctionPaginatorOptions is the paginator options for
 // ListVersionsByFunction
 type ListVersionsByFunctionPaginatorOptions struct {
-	// The maximum number of versions to return.
+	// The maximum number of versions to return. Note that ListVersionsByFunction
+	// returns a maximum of 50 items in each response, even if you set the number
+	// higher.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

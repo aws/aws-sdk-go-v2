@@ -14,12 +14,12 @@ import (
 
 // Returns information about the specified Amazon Redshift HSM configuration. If no
 // configuration ID is specified, returns information about all the HSM
-// configurations owned by your AWS customer account. If you specify both tag keys
-// and tag values in the same request, Amazon Redshift returns all HSM connections
-// that match any combination of the specified keys and values. For example, if you
-// have owner and environment for tag keys, and admin and test for tag values, all
-// HSM connections that have any combination of those values are returned. If both
-// tag keys and values are omitted from the request, HSM connections are returned
+// configurations owned by your account. If you specify both tag keys and tag
+// values in the same request, Amazon Redshift returns all HSM connections that
+// match any combination of the specified keys and values. For example, if you have
+// owner and environment for tag keys, and admin and test for tag values, all HSM
+// connections that have any combination of those values are returned. If both tag
+// keys and values are omitted from the request, HSM connections are returned
 // regardless of whether they have tag keys or values associated with them.
 func (c *Client) DescribeHsmConfigurations(ctx context.Context, params *DescribeHsmConfigurationsInput, optFns ...func(*Options)) (*DescribeHsmConfigurationsOutput, error) {
 	if params == nil {
@@ -41,14 +41,15 @@ type DescribeHsmConfigurationsInput struct {
 
 	// The identifier of a specific Amazon Redshift HSM configuration to be described.
 	// If no identifier is specified, information is returned for all HSM
-	// configurations owned by your AWS customer account.
+	// configurations owned by your account.
 	HsmConfigurationIdentifier *string
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeHsmConfigurations request exceed
-	// the value specified in MaxRecords, AWS returns a value in the Marker field of
-	// the response. You can retrieve the next set of response records by providing the
-	// returned marker value in the Marker parameter and retrying the request.
+	// the value specified in MaxRecords, Amazon Web Services returns a value in the
+	// Marker field of the response. You can retrieve the next set of response records
+	// by providing the returned marker value in the Marker parameter and retrying the
+	// request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of

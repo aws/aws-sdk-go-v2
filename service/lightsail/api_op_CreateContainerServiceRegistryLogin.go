@@ -28,7 +28,7 @@ import (
 // Pushing and managing container images on your Amazon Lightsail container
 // services
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images)
-// in the Lightsail Dev Guide.
+// in the Amazon Lightsail Developer Guide.
 func (c *Client) CreateContainerServiceRegistryLogin(ctx context.Context, params *CreateContainerServiceRegistryLoginInput, optFns ...func(*Options)) (*CreateContainerServiceRegistryLoginOutput, error) {
 	if params == nil {
 		params = &CreateContainerServiceRegistryLoginInput{}
