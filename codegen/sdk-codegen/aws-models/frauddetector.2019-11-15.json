@@ -623,6 +623,9 @@
                     "target": "com.amazonaws.frauddetector#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.frauddetector#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.frauddetector#ValidationException"
                 }
             ],
@@ -2810,7 +2813,7 @@
                 "eventVariables": {
                     "target": "com.amazonaws.frauddetector#EventVariableMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p>",
+                        "smithy.api#documentation": "<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and \n         their corresponding values for the event you are sending for evaluation.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>You must provide at least one eventVariable</p>\n               </li>\n               <li>\n                  <p>If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable</p>\n               </li>\n            </ul>\n         </important>\n      \n         <p>To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p>\n      \n         <p>\n            <b>For Amazon Fraud Detector trained models:</b>\n         </p>\n         <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) \n         with calculated default mean/medians for numeric variables and with special values for categorical variables.</p>\n      \n         <p>\n            <b>For External models ( for example, imported SageMaker):</b>\n         </p>\n         <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules \n         will use the default value that is provided for the variable. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3625,6 +3628,12 @@
                 ]
             }
         },
+        "com.amazonaws.frauddetector#ListOfLogitMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.frauddetector#LogitMetric"
+            }
+        },
         "com.amazonaws.frauddetector#ListOfModelScores": {
             "type": "list",
             "member": {
@@ -3716,6 +3725,35 @@
                         "smithy.api#documentation": "<p>The next token for subsequent requests. </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.frauddetector#LogitMetric": {
+            "type": "structure",
+            "members": {
+                "variableName": {
+                    "target": "com.amazonaws.frauddetector#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "variableType": {
+                    "target": "com.amazonaws.frauddetector#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "variableImportance": {
+                    "target": "com.amazonaws.frauddetector#float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative importance of the variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logit metric details.</p>"
             }
         },
         "com.amazonaws.frauddetector#MetricDataPoint": {
@@ -4930,6 +4968,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The training metric details.</p>"
                     }
+                },
+                "variableImportanceMetrics": {
+                    "target": "com.amazonaws.frauddetector#VariableImportanceMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The variable importance metrics.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5730,6 +5774,20 @@
                     "min": 1,
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.frauddetector#VariableImportanceMetrics": {
+            "type": "structure",
+            "members": {
+                "LogitMetrics": {
+                    "target": "com.amazonaws.frauddetector#ListOfLogitMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of variable metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The variable importance metrics details.</p>"
             }
         },
         "com.amazonaws.frauddetector#VariableList": {

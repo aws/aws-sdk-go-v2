@@ -125,6 +125,27 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.devopsguru#AnomalyReportedTimeRange": {
+            "type": "structure",
+            "members": {
+                "OpenTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time when an anomaly is opened. \n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CloseTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time when an anomaly is closed.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tA time range that specifies when DevOps Guru opens and then closes an anomaly. This is different from \n\t\t\t<code>AnomalyTimeRange</code>, which specifies the time range when DevOps Guru actually observes \n\t\t\tthe anomalous behavior.\n\t\t</p>"
+            }
+        },
         "com.amazonaws.devopsguru#AnomalySeverity": {
             "type": "string",
             "traits": {
@@ -191,7 +212,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n\t\t\tA time range that specifies when the observed unusual behavior in an anomaly started and ended.\n\t\t</p>"
+                "smithy.api#documentation": "<p>\n\t\t\tA time range that specifies when the observed unusual behavior in an anomaly started and ended. This is different from \n\t\t\t<code>AnomalyReportedTimeRange</code>, which specifies the time range when DevOps Guru opens and then closes \n\t\t\tan anomaly.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#CapstoneControlPlaneService": {
@@ -2444,6 +2465,12 @@
                 "AnomalyTimeRange": {
                     "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
                 },
+                "AnomalyReportedTimeRange": {
+                    "target": "com.amazonaws.devopsguru#AnomalyReportedTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed.\n\t\t</p>"
+                    }
+                },
                 "PredictionTimeRange": {
                     "target": "com.amazonaws.devopsguru#PredictionTimeRange"
                 },
@@ -2502,6 +2529,12 @@
                 },
                 "AnomalyTimeRange": {
                     "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
+                },
+                "AnomalyReportedTimeRange": {
+                    "target": "com.amazonaws.devopsguru#AnomalyReportedTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed.\n\t\t</p>"
+                    }
                 },
                 "PredictionTimeRange": {
                     "target": "com.amazonaws.devopsguru#PredictionTimeRange"
@@ -2714,6 +2747,12 @@
                 "AnomalyTimeRange": {
                     "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
                 },
+                "AnomalyReportedTimeRange": {
+                    "target": "com.amazonaws.devopsguru#AnomalyReportedTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed.\n\t\t</p>"
+                    }
+                },
                 "SourceDetails": {
                     "target": "com.amazonaws.devopsguru#AnomalySourceDetails",
                     "traits": {
@@ -2757,6 +2796,12 @@
                 },
                 "AnomalyTimeRange": {
                     "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
+                },
+                "AnomalyReportedTimeRange": {
+                    "target": "com.amazonaws.devopsguru#AnomalyReportedTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>AnomalyReportedTimeRange</code> object that specifies the time range between when the anomaly is opened and the time when it is closed.\n\t\t</p>"
+                    }
                 },
                 "SourceDetails": {
                     "target": "com.amazonaws.devopsguru#AnomalySourceDetails",

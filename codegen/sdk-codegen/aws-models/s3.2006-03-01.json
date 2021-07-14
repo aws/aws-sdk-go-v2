@@ -4073,6 +4073,7 @@
                 "target": "com.amazonaws.s3#GetBucketLocationOutput"
             },
             "traits": {
+                "aws.customizations#s3UnwrappedXmlOutput": {},
                 "smithy.api#documentation": "<p>Returns the Region the bucket resides in. You set the bucket's Region using the\n            <code>LocationConstraint</code> request parameter in a <code>CreateBucket</code>\n         request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">CreateBucket</a>.</p>\n\n         <p> To use this implementation of the operation, you must be the bucket owner.</p>\n\n         <p>The following operations are related to <code>GetBucketLocation</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">CreateBucket</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",

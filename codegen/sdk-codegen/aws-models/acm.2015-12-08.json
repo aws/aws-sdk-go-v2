@@ -37,6 +37,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccessDenied",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>You do not have access\n      required to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -71,7 +75,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to an ACM certificate. Tags are labels that you can use to\n      identify and organize your AWS resources. Each tag consists of a <code>key</code> and an\n      optional <code>value</code>. You specify the certificate on input by its Amazon Resource Name\n      (ARN). You specify the tag by using a key-value pair. </p>\n\n         <p>You can apply a tag to just one certificate if you want to identify a specific\n      characteristic of that certificate, or you can apply the same tag to multiple certificates if\n      you want to filter for a common relationship among those certificates. Similarly, you can\n      apply the same tag to multiple resources if you want to specify a relationship among those\n      resources. For example, you can add the same tag to an ACM certificate and an Elastic Load\n      Balancing load balancer to indicate that they are both used by the same website. For more\n      information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/tags.html\">Tagging ACM\n        certificates</a>. </p>\n\n         <p>To remove one or more tags, use the <a>RemoveTagsFromCertificate</a> action. To\n      view all of the tags that have been applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>"
+                "smithy.api#documentation": "<p>Adds one or more tags to an ACM certificate. Tags are labels that you can use to\n      identify and organize your Amazon Web Services resources. Each tag consists of a <code>key</code> and an\n      optional <code>value</code>. You specify the certificate on input by its Amazon Resource Name\n      (ARN). You specify the tag by using a key-value pair. </p>\n\n         <p>You can apply a tag to just one certificate if you want to identify a specific\n      characteristic of that certificate, or you can apply the same tag to multiple certificates if\n      you want to filter for a common relationship among those certificates. Similarly, you can\n      apply the same tag to multiple resources if you want to specify a relationship among those\n      resources. For example, you can add the same tag to an ACM certificate and an Elastic Load\n      Balancing load balancer to indicate that they are both used by the same website. For more\n      information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/tags.html\">Tagging ACM\n        certificates</a>. </p>\n\n         <p>To remove one or more tags, use the <a>RemoveTagsFromCertificate</a> action. To\n      view all of the tags that have been applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>"
             }
         },
         "com.amazonaws.acm#AddTagsToCertificateRequest": {
@@ -100,7 +104,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"
             }
         },
         "com.amazonaws.acm#AvailabilityErrorMessage": {
@@ -113,7 +117,7 @@
                     "min": 1,
                     "max": 32768
                 },
-                "smithy.api#pattern": "-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?"
+                "smithy.api#pattern": "^-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?$"
             }
         },
         "com.amazonaws.acm#CertificateBodyBlob": {
@@ -132,7 +136,7 @@
                     "min": 1,
                     "max": 2097152
                 },
-                "smithy.api#pattern": "(-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}\\u000D?\\u000A)*-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?"
+                "smithy.api#pattern": "^(-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}\\u000D?\\u000A)*-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?$"
             }
         },
         "com.amazonaws.acm#CertificateChainBlob": {
@@ -150,7 +154,7 @@
                 "CertificateArn": {
                     "target": "com.amazonaws.acm#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate. For more information about ARNs, see\n        <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in\n      the <i>AWS General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate. For more information about ARNs, see\n        <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in\n      the <i>Amazon Web Services General Reference</i>.</p>"
                     }
                 },
                 "DomainName": {
@@ -252,19 +256,19 @@
                 "InUseBy": {
                     "target": "com.amazonaws.acm#InUseList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ARNs for the AWS resources that are using the certificate. A certificate can\n      be used by multiple AWS resources. </p>"
+                        "smithy.api#documentation": "<p>A list of ARNs for the Amazon Web Services resources that are using the certificate. A certificate can\n      be used by multiple Amazon Web Services resources. </p>"
                     }
                 },
                 "FailureReason": {
                     "target": "com.amazonaws.acm#FailureReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason the certificate request failed. This value exists only when the certificate\n      status is <code>FAILED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed\">Certificate Request\n        Failed</a> in the <i>AWS Certificate Manager User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The reason the certificate request failed. This value exists only when the certificate\n      status is <code>FAILED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed\">Certificate Request\n        Failed</a> in the <i>Amazon Web Services Certificate Manager User Guide</i>. </p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.acm#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the certificate. For certificates provided by ACM, this value is\n        <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide\n        <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for\n      imported certificates. For more information about the differences between certificates that\n      you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the\n        <i>AWS Certificate Manager User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The source of the certificate. For certificates provided by ACM, this value is\n        <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide\n        <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for\n      imported certificates. For more information about the differences between certificates that\n      you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the\n        <i>Amazon Web Services Certificate Manager User Guide</i>. </p>"
                     }
                 },
                 "RenewalSummary": {
@@ -370,7 +374,7 @@
                     "name": "acm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Certificate Manager</fullname>\n         <p>You can use AWS Certificate Manager (ACM) to manage SSL/TLS certificates for your AWS-based websites\n      and applications. For more information about using ACM, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager User Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Web Services Certificate Manager</fullname>\n         <p>You can use Amazon Web Services Certificate Manager (ACM) to manage SSL/TLS certificates for your Amazon Web Services-based websites\n      and applications. For more information about using ACM, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">Amazon Web Services Certificate Manager User Guide</a>.</p>",
                 "smithy.api#title": "AWS Certificate Manager"
             }
         },
@@ -518,7 +522,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a certificate and its associated private key. If this action succeeds, the\n      certificate no longer appears in the list that can be displayed by calling the <a>ListCertificates</a> action or be retrieved by calling the <a>GetCertificate</a> action. The certificate will not be available for use by AWS\n      services integrated with ACM. </p>\n         <note>\n            <p>You cannot delete an ACM certificate that is being used by another AWS service. To\n        delete a certificate that is in use, the certificate association must first be\n        removed.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a certificate and its associated private key. If this action succeeds, the\n      certificate no longer appears in the list that can be displayed by calling the <a>ListCertificates</a> action or be retrieved by calling the <a>GetCertificate</a> action. The certificate will not be available for use by Amazon Web Services\n      services integrated with ACM. </p>\n         <note>\n            <p>You cannot delete an ACM certificate that is being used by another Amazon Web Services service. To\n        delete a certificate that is in use, the certificate association must first be\n        removed.</p>\n         </note>"
             }
         },
         "com.amazonaws.acm#DeleteCertificateRequest": {
@@ -762,7 +766,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object containing\n      expiration events options associated with an AWS account.</p>"
+                "smithy.api#documentation": "<p>Object containing\n      expiration events options associated with an Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.acm#ExportCertificate": {
@@ -1032,7 +1036,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the account\n      configuration options associated with an AWS account.</p>"
+                "smithy.api#documentation": "<p>Returns the account\n      configuration options associated with an Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.acm#GetAccountConfigurationResponse": {
@@ -1041,7 +1045,7 @@
                 "ExpiryEvents": {
                     "target": "com.amazonaws.acm#ExpiryEventsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Expiration events\n      configuration options associated with the AWS account.</p>"
+                        "smithy.api#documentation": "<p>Expiration events\n      configuration options associated with the Amazon Web Services account.</p>"
                     }
                 }
             }
@@ -1105,7 +1109,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "\\w+"
+                "smithy.api#pattern": "^\\w+$"
             }
         },
         "com.amazonaws.acm#ImportCertificate": {
@@ -1140,7 +1144,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a certificate into AWS Certificate Manager (ACM) to use with services that are integrated with\n      ACM. Note that <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html\">integrated\n        services</a> allow only certificate types and keys they support to be associated with\n      their resources. Further, their support differs depending on whether the certificate is\n      imported into IAM or into ACM. For more information, see the documentation for each\n      service. For more information about importing certificates into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing\n        Certificates</a> in the <i>AWS Certificate Manager User Guide</i>. </p>\n\n         <note>\n            <p>ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for certificates that you import.</p>\n         </note>\n\n         <p>Note the following guidelines when importing third party certificates:</p>\n\n\n         <ul>\n            <li>\n               <p>You must enter the private key that matches the certificate you are importing.</p>\n            </li>\n            <li>\n               <p>The private key must be unencrypted. You cannot import a private key that is protected\n          by a password or a passphrase.</p>\n            </li>\n            <li>\n               <p>The private key must be no larger than 5 KB (5,120 bytes).</p>\n            </li>\n            <li>\n               <p>If the certificate you are importing is not self-signed, you must enter its\n          certificate chain.</p>\n            </li>\n            <li>\n               <p>If a certificate chain is included, the issuer must be the subject of one of the\n          certificates in the chain.</p>\n            </li>\n            <li>\n               <p>The certificate, private key, and certificate chain must be PEM-encoded.</p>\n            </li>\n            <li>\n               <p>The current time must be between the <code>Not Before</code> and <code>Not\n            After</code> certificate fields.</p>\n            </li>\n            <li>\n               <p>The <code>Issuer</code> field must not be empty.</p>\n            </li>\n            <li>\n               <p>The OCSP authority URL, if present, must not exceed 1000 characters.</p>\n            </li>\n            <li>\n               <p>To import a new certificate, omit the <code>CertificateArn</code> argument. Include\n          this argument only when you want to replace a previously imported certificate.</p>\n            </li>\n            <li>\n               <p>When you import a certificate by using the CLI, you must specify the certificate, the\n          certificate chain, and the private key by their file names preceded by\n            <code>fileb://</code>. For example, you can specify a certificate saved in the\n            <code>C:\\temp</code> folder as <code>fileb://C:\\temp\\certificate_to_import.pem</code>.\n          If you are making an HTTP or HTTPS Query request, include these arguments as BLOBs.\n        </p>\n            </li>\n            <li>\n               <p>When you import a certificate by using an SDK, you must specify the certificate, the\n          certificate chain, and the private key files in the manner required by the programming\n          language you're using. </p>\n            </li>\n            <li>\n               <p>The cryptographic algorithm of an imported certificate must match the algorithm of the\n          signing CA. For example, if the signing CA key type is RSA, then the certificate key type\n          must also be RSA.</p>\n            </li>\n         </ul>\n\n         <p>This operation returns the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n        Resource Name (ARN)</a> of the imported certificate.</p>"
+                "smithy.api#documentation": "<p>Imports a certificate into Amazon Web Services Certificate Manager (ACM) to use with services that are integrated with\n      ACM. Note that <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html\">integrated\n        services</a> allow only certificate types and keys they support to be associated with\n      their resources. Further, their support differs depending on whether the certificate is\n      imported into IAM or into ACM. For more information, see the documentation for each\n      service. For more information about importing certificates into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing\n        Certificates</a> in the <i>Amazon Web Services Certificate Manager User Guide</i>. </p>\n\n         <note>\n            <p>ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for certificates that you import.</p>\n         </note>\n\n         <p>Note the following guidelines when importing third party certificates:</p>\n\n\n         <ul>\n            <li>\n               <p>You must enter the private key that matches the certificate you are importing.</p>\n            </li>\n            <li>\n               <p>The private key must be unencrypted. You cannot import a private key that is protected\n          by a password or a passphrase.</p>\n            </li>\n            <li>\n               <p>The private key must be no larger than 5 KB (5,120 bytes).</p>\n            </li>\n            <li>\n               <p>If the certificate you are importing is not self-signed, you must enter its\n          certificate chain.</p>\n            </li>\n            <li>\n               <p>If a certificate chain is included, the issuer must be the subject of one of the\n          certificates in the chain.</p>\n            </li>\n            <li>\n               <p>The certificate, private key, and certificate chain must be PEM-encoded.</p>\n            </li>\n            <li>\n               <p>The current time must be between the <code>Not Before</code> and <code>Not\n            After</code> certificate fields.</p>\n            </li>\n            <li>\n               <p>The <code>Issuer</code> field must not be empty.</p>\n            </li>\n            <li>\n               <p>The OCSP authority URL, if present, must not exceed 1000 characters.</p>\n            </li>\n            <li>\n               <p>To import a new certificate, omit the <code>CertificateArn</code> argument. Include\n          this argument only when you want to replace a previously imported certificate.</p>\n            </li>\n            <li>\n               <p>When you import a certificate by using the CLI, you must specify the certificate, the\n          certificate chain, and the private key by their file names preceded by\n            <code>fileb://</code>. For example, you can specify a certificate saved in the\n            <code>C:\\temp</code> folder as <code>fileb://C:\\temp\\certificate_to_import.pem</code>.\n          If you are making an HTTP or HTTPS Query request, include these arguments as BLOBs.\n        </p>\n            </li>\n            <li>\n               <p>When you import a certificate by using an SDK, you must specify the certificate, the\n          certificate chain, and the private key files in the manner required by the programming\n          language you're using. </p>\n            </li>\n            <li>\n               <p>The cryptographic algorithm of an imported certificate must match the algorithm of the\n          signing CA. For example, if the signing CA key type is RSA, then the certificate key type\n          must also be RSA.</p>\n            </li>\n         </ul>\n\n         <p>This operation returns the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n        Resource Name (ARN)</a> of the imported certificate.</p>"
             }
         },
         "com.amazonaws.acm#ImportCertificateRequest": {
@@ -1274,12 +1278,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
+                        "value": "RSA_1024",
+                        "name": "RSA_1024"
+                    },
+                    {
                         "value": "RSA_2048",
                         "name": "RSA_2048"
                     },
                     {
-                        "value": "RSA_1024",
-                        "name": "RSA_1024"
+                        "value": "RSA_3072",
+                        "name": "RSA_3072"
                     },
                     {
                         "value": "RSA_4096",
@@ -1524,7 +1532,7 @@
                     "min": 1,
                     "max": 10000
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$"
             }
         },
         "com.amazonaws.acm#PassphraseBlob": {
@@ -1553,7 +1561,7 @@
                     "min": 1,
                     "max": 524288
                 },
-                "smithy.api#pattern": "-{5}BEGIN PRIVATE KEY-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END PRIVATE KEY-{5}(\\u000D?\\u000A)?",
+                "smithy.api#pattern": "^-{5}BEGIN PRIVATE KEY-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END PRIVATE KEY-{5}(\\u000D?\\u000A)?$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1801,7 +1809,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Requests an ACM certificate for use with other AWS services. To request an ACM\n      certificate, you must specify a fully qualified domain name (FQDN) in the\n        <code>DomainName</code> parameter. You can also specify additional FQDNs in the\n        <code>SubjectAlternativeNames</code> parameter. </p>\n\n         <p>If you are requesting a private certificate, domain validation is not required. If you are\n      requesting a public certificate, each domain name that you specify must be validated to verify\n      that you own or control the domain. You can use <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html\">email validation</a>.\n      We recommend that you use DNS validation. ACM issues public certificates after receiving\n      approval from the domain owner. </p>"
+                "smithy.api#documentation": "<p>Requests an ACM certificate for use with other Amazon Web Services services. To request an ACM\n      certificate, you must specify a fully qualified domain name (FQDN) in the\n        <code>DomainName</code> parameter. You can also specify additional FQDNs in the\n        <code>SubjectAlternativeNames</code> parameter. </p>\n         <p>If you are requesting a private certificate, domain validation is not required. If you are\n      requesting a public certificate, each domain name that you specify must be validated to verify\n      that you own or control the domain. You can use <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html\">email validation</a>.\n      We recommend that you use DNS validation. ACM issues public certificates after receiving\n      approval from the domain owner. </p>\n    \n         <note>\n            <p>ACM behavior differs from the <a href=\"https://tools.ietf.org/html/rfc6125#appendix-B.2\">https://tools.ietf.org/html/rfc6125#appendix-B.2</a>RFC 6125 specification of the\n        certificate validation process. first checks for a subject alternative name, and, if it\n        finds one, ignores the common name (CN)</p>\n         </note>"
             }
         },
         "com.amazonaws.acm#RequestCertificateRequest": {
@@ -1847,7 +1855,7 @@
                 "CertificateAuthorityArn": {
                     "target": "com.amazonaws.acm#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used\n      to issue the certificate. If you do not provide an ARN and you are trying to request a private\n      certificate, ACM will attempt to issue a public certificate. For more information about\n      private CAs, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html\">AWS Certificate Manager Private Certificate Authority (PCA)</a> user guide. The ARN must have the following form: </p>\n\n         <p>\n            <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used\n      to issue the certificate. If you do not provide an ARN and you are trying to request a private\n      certificate, ACM will attempt to issue a public certificate. For more information about\n      private CAs, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html\">Amazon Web Services Certificate Manager Private Certificate Authority (PCA)</a> user guide. The ARN must have the following form: </p>\n\n         <p>\n            <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 },
                 "Tags": {
@@ -1938,7 +1946,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The certificate is in use by another AWS service in the caller's account. Remove the\n      association and try again.</p>",
+                "smithy.api#documentation": "<p>The certificate is in use by another Amazon Web Services service in the caller's account. Remove the\n      association and try again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1980,7 +1988,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains a DNS record value that you can use to can use to validate ownership or control\n      of a domain. This is used by the <a>DescribeCertificate</a> action. </p>"
+                "smithy.api#documentation": "<p>Contains a DNS record value that you can use to validate ownership or control\n      of a domain. This is used by the <a>DescribeCertificate</a> action. </p>"
             }
         },
         "com.amazonaws.acm#RevocationReason": {
@@ -2067,7 +2075,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*$"
             }
         },
         "com.amazonaws.acm#TagList": {
@@ -2101,7 +2109,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*$"
             }
         },
         "com.amazonaws.acm#ThrottlingException": {
@@ -2112,6 +2120,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "Throttling",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The request was denied\n      because it exceeded a quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2185,7 +2197,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The supplied input\n      failed to satisfy constraints of an AWS service.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "ValidationError",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The supplied input\n      failed to satisfy constraints of an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

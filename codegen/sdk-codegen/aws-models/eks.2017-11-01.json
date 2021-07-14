@@ -165,7 +165,7 @@
                     "name": "eks"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on\n            AWS without needing to stand up or maintain your own Kubernetes control plane.\n            Kubernetes is an open-source system for automating the deployment, scaling, and\n            management of containerized applications. </p>\n        <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use\n            all the existing plugins and tooling from the Kubernetes community. Applications running\n            on Amazon EKS are fully compatible with applications running on any standard Kubernetes\n            environment, whether running in on-premises data centers or public clouds. This means\n            that you can easily migrate any standard Kubernetes application to Amazon EKS without any\n            code modification required.</p>",
+                "smithy.api#documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on\n            Amazon Web Services without needing to stand up or maintain your own Kubernetes control plane.\n            Kubernetes is an open-source system for automating the deployment, scaling, and\n            management of containerized applications. </p>\n        <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use\n            all the existing plugins and tooling from the Kubernetes community. Applications running\n            on Amazon EKS are fully compatible with applications running on any standard Kubernetes\n            environment, whether running in on-premises data centers or public clouds. This means\n            that you can easily migrate any standard Kubernetes application to Amazon EKS without any\n            code modification required.</p>",
                 "smithy.api#title": "Amazon Elastic Kubernetes Service"
             }
         },
@@ -330,6 +330,10 @@
                     {
                         "value": "AdmissionRequestDenied",
                         "name": "ADMISSION_REQUEST_DENIED"
+                    },
+                    {
+                        "value": "UnsupportedAddonModification",
+                        "name": "UNSUPPORTED_ADDON_MODIFICATION"
                     }
                 ]
             }
@@ -442,7 +446,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associate encryption configuration to an existing cluster.</p>\n        <p>You can use this API to enable encryption on existing clusters which do not have\n            encryption already enabled. This allows you to implement a defense-in-depth security\n            strategy without migrating applications to new EKS clusters.</p>",
+                "smithy.api#documentation": "<p>Associate encryption configuration to an existing cluster.</p>\n        <p>You can use this API to enable encryption on existing clusters which do not have\n            encryption already enabled. This allows you to implement a defense-in-depth security\n            strategy without migrating applications to new Amazon EKS clusters.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/encryption-config/associate",
@@ -719,7 +723,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control\n            plane to make calls to AWS API operations on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control\n            plane to make calls to Amazon Web Services API operations on your behalf.</p>"
                     }
                 },
                 "resourcesVpcConfig": {
@@ -907,7 +911,7 @@
                 "addonName": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html\">\n               <code>ListAddons</code>\n            </a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html\">\n               <code>DescribeAddonVersions</code>\n            </a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -984,7 +988,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane. </p>\n        <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes\n            software, such as <code>etcd</code> and the API server. The control plane runs in an\n            account managed by AWS, and the Kubernetes API is exposed via the Amazon EKS API server\n            endpoint. Each Amazon EKS cluster control plane is single-tenant and unique and runs on its\n            own set of Amazon EC2 instances.</p>\n        <p>The cluster control plane is provisioned across multiple Availability Zones and\n            fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC\n            subnets to provide connectivity from the control plane instances to the nodes (for\n            example, to support <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code>\n            data flows).</p>\n        <p>Amazon EKS nodes run in your AWS account and connect to your cluster's control plane via\n            the Kubernetes API server endpoint and a certificate file that is created for your\n            cluster.</p>\n        \n        <p>Cluster creation typically takes several minutes. After you create an Amazon EKS cluster,\n            you must configure your Kubernetes tooling to communicate with the API server and launch\n            nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster\n                Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane. </p>\n        <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes\n            software, such as <code>etcd</code> and the API server. The control plane runs in an\n            account managed by Amazon Web Services, and the Kubernetes API is exposed via the Amazon EKS API server\n            endpoint. Each Amazon EKS cluster control plane is single-tenant and unique and runs on its\n            own set of Amazon EC2 instances.</p>\n        <p>The cluster control plane is provisioned across multiple Availability Zones and\n            fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC\n            subnets to provide connectivity from the control plane instances to the nodes (for\n            example, to support <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code>\n            data flows).</p>\n        <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your cluster's control plane via\n            the Kubernetes API server endpoint and a certificate file that is created for your\n            cluster.</p>\n        \n        <p>Cluster creation typically takes several minutes. After you create an Amazon EKS cluster,\n            you must configure your Kubernetes tooling to communicate with the API server and launch\n            nodes into your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster\n                Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters",
@@ -1011,7 +1015,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control\n            plane to make calls to AWS API operations on your behalf. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html\">Amazon EKS\n                Service IAM Role</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control\n            plane to make calls to Amazon Web Services API operations on your behalf. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html\">Amazon EKS\n                Service IAM Role</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1031,7 +1035,7 @@
                 "logging": {
                     "target": "com.amazonaws.eks#Logging",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n            CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n            CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch Pricing</a>.</p>\n        </note>"
                     }
                 },
                 "clientRequestToken": {
@@ -1095,7 +1099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an AWS Fargate profile for your Amazon EKS cluster. You must have at least one Fargate\n            profile in a cluster to be able to run pods on Fargate.</p>\n        <p>The Fargate profile allows an administrator to declare which pods run on Fargate and specify\n            which pods run on which Fargate profile. This declaration is done through the profile’s\n            selectors. Each profile can have up to five selectors that contain a namespace and\n            labels. A namespace is required for every selector. The label field consists of multiple\n            optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a\n            to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is\n            run on Fargate.</p>\n        <p>When you create a Fargate profile, you must specify a pod execution role to use with the\n            pods that are scheduled with the profile. This role is added to the cluster's Kubernetes\n                <a href=\"https://kubernetes.io/docs/admin/authorization/rbac/\">Role Based Access\n                Control</a> (RBAC) for authorization so that the <code>kubelet</code> that is\n            running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can\n            appear in your cluster as a node. The pod execution role also provides IAM permissions\n            to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>Fargate profiles are immutable. However, you can create a new updated profile to replace\n            an existing profile and then delete the original after the updated profile has finished\n            creating.</p>\n        <p>If any Fargate profiles in a cluster are in the <code>DELETING</code> status, you must\n            wait for that Fargate profile to finish deleting before you can create any other profiles\n            in that cluster.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html\">AWS Fargate Profile</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Fargate profile for your Amazon EKS cluster. You must have at least one Fargate\n            profile in a cluster to be able to run pods on Fargate.</p>\n        <p>The Fargate profile allows an administrator to declare which pods run on Fargate and specify\n            which pods run on which Fargate profile. This declaration is done through the profile’s\n            selectors. Each profile can have up to five selectors that contain a namespace and\n            labels. A namespace is required for every selector. The label field consists of multiple\n            optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a\n            to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is\n            run on Fargate.</p>\n        <p>When you create a Fargate profile, you must specify a pod execution role to use with the\n            pods that are scheduled with the profile. This role is added to the cluster's Kubernetes\n                <a href=\"https://kubernetes.io/docs/admin/authorization/rbac/\">Role Based Access\n                Control</a> (RBAC) for authorization so that the <code>kubelet</code> that is\n            running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can\n            appear in your cluster as a node. The pod execution role also provides IAM permissions\n            to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>Fargate profiles are immutable. However, you can create a new updated profile to replace\n            an existing profile and then delete the original after the updated profile has finished\n            creating.</p>\n        <p>If any Fargate profiles in a cluster are in the <code>DELETING</code> status, you must\n            wait for that Fargate profile to finish deleting before you can create any other profiles\n            in that cluster.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html\">Fargate Profile</a> in the <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/fargate-profiles",
@@ -1198,7 +1202,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a managed node group for an Amazon EKS cluster. You can only create a node group\n            for your cluster that is equal to the current Kubernetes version for the cluster. All\n            node groups are created with the latest AMI release version for the respective minor\n            Kubernetes version of the cluster, unless you deploy a custom AMI using a launch\n            template. For more information about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch\n                template support</a>.</p>\n        <p>An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that\n            are managed by AWS for an Amazon EKS cluster. Each node group uses a version of the Amazon EKS\n            optimized Amazon Linux 2 AMI. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed\n                Node Groups</a> in the <i>Amazon EKS User Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Creates a managed node group for an Amazon EKS cluster. You can only create a node group\n            for your cluster that is equal to the current Kubernetes version for the cluster. All\n            node groups are created with the latest AMI release version for the respective minor\n            Kubernetes version of the cluster, unless you deploy a custom AMI using a launch\n            template. For more information about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch\n                template support</a>.</p>\n        <p>An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that\n            are managed by Amazon Web Services for an Amazon EKS cluster. Each node group uses a version of the Amazon EKS\n            optimized Amazon Linux 2 AMI. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed\n                Node Groups</a> in the <i>Amazon EKS User Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/node-groups",
@@ -1264,7 +1268,7 @@
                 "nodeRole": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker\n            node <code>kubelet</code> daemon makes calls to AWS APIs on your behalf. Nodes receive\n            permissions for these API calls through an IAM instance profile and associated\n            policies. Before you can launch nodes and register them into a cluster, you must create\n            an IAM role for those nodes to use when they are launched. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">Amazon EKS node IAM role</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.\n            If you specify <code>launchTemplate</code>, then don't specify  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a> in your launch template,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The Amazon EKS worker\n            node <code>kubelet</code> daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive\n            permissions for these API calls through an IAM instance profile and associated\n            policies. Before you can launch nodes and register them into a cluster, you must create\n            an IAM role for those nodes to use when they are launched. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">Amazon EKS node IAM role</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.\n            If you specify <code>launchTemplate</code>, then don't specify  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a> in your launch template,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1300,7 +1304,10 @@
                     }
                 },
                 "updateConfig": {
-                    "target": "com.amazonaws.eks#NodegroupUpdateConfig"
+                    "target": "com.amazonaws.eks#NodegroupUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node group update configuration.</p>"
+                    }
                 },
                 "capacityType": {
                     "target": "com.amazonaws.eks#CapacityTypes",
@@ -1477,7 +1484,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an AWS Fargate profile.</p>\n        <p>When you delete a Fargate profile, any pods running on Fargate that were created with the\n            profile are deleted. If those pods match another Fargate profile, then they are scheduled\n            on Fargate with that profile. If they no longer match any Fargate profiles, then they are not\n            scheduled on Fargate and they may remain in a pending state.</p>\n        <p>Only one Fargate profile in a cluster can be in the <code>DELETING</code> status at a\n            time. You must wait for a Fargate profile to finish deleting before you can delete any\n            other profiles in that cluster.</p>",
+                "smithy.api#documentation": "<p>Deletes an Fargate profile.</p>\n        <p>When you delete a Fargate profile, any pods running on Fargate that were created with the\n            profile are deleted. If those pods match another Fargate profile, then they are scheduled\n            on Fargate with that profile. If they no longer match any Fargate profiles, then they are not\n            scheduled on Fargate and they may remain in a pending state.</p>\n        <p>Only one Fargate profile in a cluster can be in the <code>DELETING</code> status at a\n            time. You must wait for a Fargate profile to finish deleting before you can delete any\n            other profiles in that cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/clusters/{clusterName}/fargate-profiles/{fargateProfileName}",
@@ -1947,11 +1954,59 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns descriptive information about an AWS Fargate profile.</p>",
+                "smithy.api#documentation": "<p>Returns descriptive information about an Fargate profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters/{clusterName}/fargate-profiles/{fargateProfileName}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "FargateProfileActive": {
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "fargateProfile.status",
+                                        "expected": "CREATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "fargateProfile.status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    },
+                    "FargateProfileDeleted": {
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "fargateProfile.status",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ],
+                        "minDelay": 30
+                    }
                 }
             }
         },
@@ -2272,7 +2327,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates an identity provider configuration from a cluster. If you disassociate\n            an identity provider from your cluster, users included in the provider can no longer\n            access the cluster. However, you can still access the cluster with AWS IAM\n            users.</p>",
+                "smithy.api#documentation": "<p>Disassociates an identity provider configuration from a cluster. If you disassociate\n            an identity provider from your cluster, users included in the provider can no longer\n            access the cluster. However, you can still access the cluster with Amazon Web Services IAM\n            users.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/identity-provider-configs/disassociate",
@@ -2327,7 +2382,7 @@
                 "provider": {
                     "target": "com.amazonaws.eks#Provider",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS Key Management Service (AWS KMS) key. Either the ARN or the alias can be used.</p>"
+                        "smithy.api#documentation": "<p>Key Management Service (KMS) key. Either the ARN or the alias can be used.</p>"
                     }
                 }
             },
@@ -2410,6 +2465,10 @@
                     {
                         "value": "AdmissionRequestDenied",
                         "name": "ADMISSION_REQUEST_DENIED"
+                    },
+                    {
+                        "value": "UnsupportedAddonModification",
+                        "name": "UNSUPPORTED_ADDON_MODIFICATION"
                     }
                 ]
             }
@@ -2505,7 +2564,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing an AWS Fargate profile.</p>"
+                "smithy.api#documentation": "<p>An object representing an Fargate profile.</p>"
             }
         },
         "com.amazonaws.eks#FargateProfileLabel": {
@@ -2534,7 +2593,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing an AWS Fargate profile selector.</p>"
+                "smithy.api#documentation": "<p>An object representing an Fargate profile selector.</p>"
             }
         },
         "com.amazonaws.eks#FargateProfileSelectors": {
@@ -2704,7 +2763,7 @@
                 "code": {
                     "target": "com.amazonaws.eks#NodegroupIssueCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n        <ul>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or more of your\n                    managed nodes is failing to authenticate or authorize with your Kubernetes\n                    cluster API server.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is\n                    experiencing failures while attempting to launch instances.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be able to\n                    recreate an Auto Scaling group with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one or more of\n                    your managed nodes is unable to to communicate with your Kubernetes cluster API\n                    server. This can happen if there are network disruptions or if API servers are\n                    timing out processing requests. </p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be able to\n                    recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2\n                    launch template version for your managed node group does not match the version\n                    that Amazon EKS created. You may be able to revert to the version that Amazon EKS created\n                    to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                    Amazon EC2 subnets specified for a node group do not automatically assign public IP\n                    addresses to instances launched into it. If you want your instances to be\n                    assigned a public IP address, then you need to enable the <code>auto-assign\n                        public IP address</code> setting for the subnet. See <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public IPv4 addressing attribute for your subnet</a> in the Amazon\n                    VPC User Guide.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be able to\n                    recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                    IAM role for your managed node group. You may be able to recreate an IAM role\n                    with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InstanceLimitExceeded</b>: Your AWS account is\n                    unable to launch any more instances of the specified instance type. You may be\n                    able to request an Amazon EC2 instance limit increase to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n                <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of this failure\n                    are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">node IAM role</a>\n                    permissions or lack of outbound internet access for the nodes. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n        <ul>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or more of your\n                    managed nodes is failing to authenticate or authorize with your Kubernetes\n                    cluster API server.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is\n                    experiencing failures while attempting to launch instances.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be able to\n                    recreate an Auto Scaling group with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one or more of\n                    your managed nodes is unable to to communicate with your Kubernetes cluster API\n                    server. This can happen if there are network disruptions or if API servers are\n                    timing out processing requests. </p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be able to\n                    recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2\n                    launch template version for your managed node group does not match the version\n                    that Amazon EKS created. You may be able to revert to the version that Amazon EKS created\n                    to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                    Amazon EC2 subnets specified for a node group do not automatically assign public IP\n                    addresses to instances launched into it. If you want your instances to be\n                    assigned a public IP address, then you need to enable the <code>auto-assign\n                        public IP address</code> setting for the subnet. See <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public IPv4 addressing attribute for your subnet</a> in the Amazon\n                    VPC User Guide.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be able to\n                    recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                    IAM role for your managed node group. You may be able to recreate an IAM role\n                    with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is\n                    unable to launch any more instances of the specified instance type. You may be\n                    able to request an Amazon EC2 instance limit increase to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n                <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of this failure\n                    are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">node IAM role</a>\n                    permissions or lack of outbound internet access for the nodes. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "message": {
@@ -2716,7 +2775,7 @@
                 "resourceIds": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS resources that are afflicted by this issue.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services resources that are afflicted by this issue.</p>"
                     }
                 }
             },
@@ -2901,7 +2960,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon EKS clusters in your AWS account in the specified Region.</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters",
@@ -2984,7 +3043,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the AWS Fargate profiles associated with the specified cluster in your AWS\n            account in the specified Region.</p>",
+                "smithy.api#documentation": "<p>Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services\n            account in the specified Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters/{clusterName}/fargate-profiles",
@@ -3004,7 +3063,7 @@
                 "clusterName": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that you would like to listFargate profiles in.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster that you would like to list Fargate profiles in.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3162,7 +3221,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon EKS managed node groups associated with the specified cluster in your\n            AWS account in the specified Region. Self-managed node groups are not listed.</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon EKS managed node groups associated with the specified cluster in your\n            Amazon Web Services account in the specified Region. Self-managed node groups are not listed.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters/{clusterName}/node-groups",
@@ -3302,7 +3361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the updates associated with an Amazon EKS cluster or managed node group in your AWS\n            account, in the specified Region.</p>",
+                "smithy.api#documentation": "<p>Lists the updates associated with an Amazon EKS cluster or managed node group in your Amazon Web Services\n            account, in the specified Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters/{name}/updates",
@@ -3547,7 +3606,7 @@
                 "nodeRole": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role associated with your node group. The Amazon EKS node <code>kubelet</code>\n            daemon makes calls to AWS APIs on your behalf. Nodes receive permissions for these API\n            calls through an IAM instance profile and associated policies.</p>"
+                        "smithy.api#documentation": "<p>The IAM role associated with your node group. The Amazon EKS node <code>kubelet</code>\n            daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive permissions for these API\n            calls through an IAM instance profile and associated policies.</p>"
                     }
                 },
                 "labels": {
@@ -3559,7 +3618,7 @@
                 "taints": {
                     "target": "com.amazonaws.eks#taintsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group when they are\n            created. Effect is one of <code>NoSchedule</code>, <code>PreferNoSchedule</code>, or <code>NoExecute</code>. Kubernetes taints\n            can be used together with tolerations to control how workloads are scheduled to your\n            nodes.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group when they are\n            created. Effect is one of <code>No_Schedule</code>, <code>Prefer_No_Schedule</code>, or <code>No_Execute</code>. Kubernetes taints\n            can be used together with tolerations to control how workloads are scheduled to your\n            nodes.</p>"
                     }
                 },
                 "resources": {
@@ -3581,7 +3640,10 @@
                     }
                 },
                 "updateConfig": {
-                    "target": "com.amazonaws.eks#NodegroupUpdateConfig"
+                    "target": "com.amazonaws.eks#NodegroupUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node group update configuration.</p>"
+                    }
                 },
                 "launchTemplate": {
                     "target": "com.amazonaws.eks#LaunchTemplateSpecification",
@@ -3719,7 +3781,7 @@
                 "minSize": {
                     "target": "com.amazonaws.eks#ZeroCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of nodes that the managed node group can scale in to. This number\n            must be greater than zero.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of nodes that the managed node group can scale in to.</p>"
                     }
                 },
                 "maxSize": {
@@ -3778,11 +3840,20 @@
             "type": "structure",
             "members": {
                 "maxUnavailable": {
-                    "target": "com.amazonaws.eks#NonZeroInteger"
+                    "target": "com.amazonaws.eks#NonZeroInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. \n            This value or <code>maxUnavailablePercentage</code> is required to have a value.The maximum number\n            is 100.</p>"
+                    }
                 },
                 "maxUnavailablePercentage": {
-                    "target": "com.amazonaws.eks#PercentCapacity"
+                    "target": "com.amazonaws.eks#PercentCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be\n            updated in parallel, up to 100 nodes at once. This value or <code>maxUnavailable</code> is required to have a value.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The node group update configuration.</p>"
             }
         },
         "com.amazonaws.eks#NonZeroInteger": {
@@ -3976,12 +4047,12 @@
                 "keyArn": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same\n            region as the cluster, and if the KMS key was created in a different account, the user\n            must have access to the KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing\n                Users in Other Accounts to Use a KMS key</a> in the <i>AWS Key Management Service\n                Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same\n            region as the cluster, and if the KMS key was created in a different account, the user\n            must have access to the KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing\n                Users in Other Accounts to Use a KMS key</a> in the <i>Key Management Service\n                Developer Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies the AWS Key Management Service (AWS KMS) key used to encrypt the secrets.</p>"
+                "smithy.api#documentation": "<p>Identifies the Key Management Service (KMS) key used to encrypt the secrets.</p>"
             }
         },
         "com.amazonaws.eks#RemoteAccessConfig": {
@@ -3990,7 +4061,7 @@
                 "ec2SshKey": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the\n            managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 Key\n                Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the\n            managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key\n                pairs and Linux instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>"
                     }
                 },
                 "sourceSecurityGroups": {
@@ -4552,7 +4623,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to function during the\n            update. The response output includes an update ID that you can use to track the status\n            of your cluster update with the <a>DescribeUpdate</a> API operation.</p>\n        <p>You can use this API operation to enable or disable exporting the Kubernetes control\n            plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't\n            exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS\n                Cluster Control Plane Logs</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n        </note>\n        <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n        <important>\n            <p>You can't update the subnets or security group IDs for an existing cluster.</p>\n        </important>\n        <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to function during the\n            update. The response output includes an update ID that you can use to track the status\n            of your cluster update with the <a>DescribeUpdate</a> API operation.</p>\n        <p>You can use this API operation to enable or disable exporting the Kubernetes control\n            plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't\n            exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS\n                Cluster Control Plane Logs</a> in the\n            <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch Pricing</a>.</p>\n        </note>\n        <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster\n                endpoint access control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n        <important>\n            <p>You can't update the subnets or security group IDs for an existing cluster.</p>\n        </important>\n        <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{name}/update-config",
@@ -4577,7 +4648,7 @@
                 "logging": {
                     "target": "com.amazonaws.eks#Logging",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n            CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n            CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported\n                control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch Pricing</a>.</p>\n        </note>"
                     }
                 },
                 "clientRequestToken": {
@@ -4767,7 +4838,10 @@
                     }
                 },
                 "updateConfig": {
-                    "target": "com.amazonaws.eks#NodegroupUpdateConfig"
+                    "target": "com.amazonaws.eks#NodegroupUpdateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node group update configuration.</p>"
+                    }
                 },
                 "clientRequestToken": {
                     "target": "com.amazonaws.eks#String",
@@ -5102,25 +5176,25 @@
                 "securityGroupIds": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces\n            that Amazon EKS creates to use to allow communication between your nodes and the Kubernetes\n            control plane. If you don't specify any security groups, then familiarize yourself with\n            the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p>\n        <ul>\n            <li>\n                <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p>\n            </li>\n            <li>\n                <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Amazon EKS security group\n                considerations</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces\n            that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes\n            control plane. If you don't specify any security groups, then familiarize yourself with\n            the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p>\n        <ul>\n            <li>\n                <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p>\n            </li>\n            <li>\n                <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Amazon EKS security group\n                considerations</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "endpointPublicAccess": {
                     "target": "com.amazonaws.eks#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this value to <code>false</code> to disable public access to your cluster's\n            Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes\n            API server can only receive requests from within the cluster VPC. The default value for\n            this parameter is <code>true</code>, which enables public access for your Kubernetes API\n            server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>false</code> to disable public access to your cluster's\n            Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes\n            API server can only receive requests from within the cluster VPC. The default value for\n            this parameter is <code>true</code>, which enables public access for your Kubernetes API\n            server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster\n                endpoint access control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "endpointPrivateAccess": {
                     "target": "com.amazonaws.eks#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's\n            Kubernetes API server endpoint. If you enable private access, Kubernetes API requests\n            from within your cluster's VPC use the private VPC endpoint. The default value for this\n            parameter is <code>false</code>, which disables private access for your Kubernetes API\n            server. If you disable private access and you have nodes or AWS Fargate pods in the\n            cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR\n            blocks for communication with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable private access for your cluster's\n            Kubernetes API server endpoint. If you enable private access, Kubernetes API requests\n            from within your cluster's VPC use the private VPC endpoint. The default value for this\n            parameter is <code>false</code>, which disables private access for your Kubernetes API\n            server. If you disable private access and you have nodes or Fargate pods in the\n            cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR\n            blocks for communication with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster\n                endpoint access control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "publicAccessCidrs": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server\n            endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that\n            you specify is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled\n            private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure\n            that you specify the necessary CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server\n            endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that\n            you specify is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled\n            private endpoint access and you have nodes or Fargate pods in the cluster, then ensure\n            that you specify the necessary CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster\n                endpoint access control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 }
             },
@@ -5164,13 +5238,13 @@
                 "endpointPrivateAccess": {
                     "target": "com.amazonaws.eks#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If\n            the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate\n            from within your cluster's VPC use the private VPC endpoint instead of traversing the\n            internet. If this value is disabled and you have nodes or AWS Fargate pods in the cluster,\n            then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for\n            communication with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If\n            the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate\n            from within your cluster's VPC use the private VPC endpoint instead of traversing the\n            internet. If this value is disabled and you have nodes or Fargate pods in the cluster,\n            then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for\n            communication with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster\n                endpoint access control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "publicAccessCidrs": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server\n            endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks\n            is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled private\n            endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that the\n            necessary CIDR blocks are listed. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster\n                Endpoint Access Control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server\n            endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks\n            is denied. The default value is <code>0.0.0.0/0</code>. If you've disabled private\n            endpoint access and you have nodes or Fargate pods in the cluster, then ensure that the\n            necessary CIDR blocks are listed. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster\n                endpoint access control</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 }
             },

@@ -277,7 +277,7 @@
                 "ApiName": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The API name used to interact with the data model, configured as a part of the amplify project.</p>",
+                        "smithy.api#documentation": "<p>The API name used to interact with the data model, configured as a part of your Amplify project.</p>",
                         "smithy.api#jsonName": "apiName"
                     }
                 },
@@ -314,20 +314,56 @@
                 "smithy.api#documentation": "<p>The resource config for the data model, configured as a part of the Amplify project.</p>"
             }
         },
+        "com.amazonaws.amplifybackend#BackendAuthAppleProviderConfig": {
+            "type": "structure",
+            "members": {
+                "ClientId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the client_id (also called Services ID) that comes from Apple.</p>",
+                        "smithy.api#jsonName": "client_id"
+                    }
+                },
+                "KeyId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the key_id that comes from Apple.</p>",
+                        "smithy.api#jsonName": "key_id"
+                    }
+                },
+                "PrivateKey": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the private_key that comes from Apple.</p>",
+                        "smithy.api#jsonName": "private_key"
+                    }
+                },
+                "TeamId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the team_id that comes from Apple.</p>",
+                        "smithy.api#jsonName": "team_id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes Apple social federation configurations for allowing your app users to sign in using OAuth.</p>"
+            }
+        },
         "com.amazonaws.amplifybackend#BackendAuthSocialProviderConfig": {
             "type": "structure",
             "members": {
                 "ClientId": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the client_id which can be obtained from the third-party social federation provider.</p>",
+                        "smithy.api#documentation": "<p>Describes the client_id, which can be obtained from the third-party social federation provider.</p>",
                         "smithy.api#jsonName": "client_id"
                     }
                 },
                 "ClientSecret": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the client_secret which can be obtained from third-party social federation providers.</p>",
+                        "smithy.api#documentation": "<p>Describes the client_secret, which can be obtained from third-party social federation providers.</p>",
                         "smithy.api#jsonName": "client_secret"
                     }
                 }
@@ -715,7 +751,7 @@
                 "DeliveryMethod": {
                     "target": "com.amazonaws.amplifybackend#DeliveryMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>",
+                        "smithy.api#documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>",
                         "smithy.api#jsonName": "deliveryMethod",
                         "smithy.api#required": {}
                     }
@@ -769,7 +805,7 @@
                 "MFAMode": {
                     "target": "com.amazonaws.amplifybackend#MFAMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes whether MFA should be [ON, OFF, OPTIONAL] for authentication in your Amplify project.</p>",
+                        "smithy.api#documentation": "<p>Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -782,7 +818,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
+                "smithy.api#documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
             }
         },
         "com.amazonaws.amplifybackend#CreateBackendAuthOAuthConfig": {
@@ -822,7 +858,7 @@
                 "RedirectSignOutURIs": {
                     "target": "com.amazonaws.amplifybackend#ListOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Redirect URLs used by OAuth when a user signs out of an Amplify app.</p>",
+                        "smithy.api#documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>",
                         "smithy.api#jsonName": "redirectSignOutURIs",
                         "smithy.api#required": {}
                     }
@@ -1001,7 +1037,7 @@
                 "Mfa": {
                     "target": "com.amazonaws.amplifybackend#CreateBackendAuthMFAConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
+                        "smithy.api#documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
                         "smithy.api#jsonName": "mfa"
                     }
                 },
@@ -3241,6 +3277,9 @@
                 },
                 "LoginWithAmazon": {
                     "target": "com.amazonaws.amplifybackend#BackendAuthSocialProviderConfig"
+                },
+                "SignInWithApple": {
+                    "target": "com.amazonaws.amplifybackend#BackendAuthAppleProviderConfig"
                 }
             },
             "traits": {
@@ -3469,7 +3508,7 @@
                 "UnauthenticatedLogin": {
                     "target": "com.amazonaws.amplifybackend#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean value which can be set to allow or disallow guest-level authorization into your Amplify app.</p>",
+                        "smithy.api#documentation": "<p>A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.</p>",
                         "smithy.api#jsonName": "unauthenticatedLogin"
                     }
                 }
@@ -3526,14 +3565,14 @@
                 "RedirectSignInURIs": {
                     "target": "com.amazonaws.amplifybackend#ListOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Redirect URLs used by OAuth when a user signs in to an Amplify app.</p>",
+                        "smithy.api#documentation": "<p>Redirect URLs that OAuth uses when a user signs in to an Amplify app.</p>",
                         "smithy.api#jsonName": "redirectSignInURIs"
                     }
                 },
                 "RedirectSignOutURIs": {
                     "target": "com.amazonaws.amplifybackend#ListOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Redirect URLs used by OAuth when a user signs out of an Amplify app.</p>",
+                        "smithy.api#documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>",
                         "smithy.api#jsonName": "redirectSignOutURIs"
                     }
                 },
@@ -3710,7 +3749,7 @@
                 "Mfa": {
                     "target": "com.amazonaws.amplifybackend#UpdateBackendAuthMFAConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
+                        "smithy.api#documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
                         "smithy.api#jsonName": "mfa"
                     }
                 },
@@ -3881,7 +3920,7 @@
                 "Operation": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of response objects to only include those with the specified operation name.</p>",
+                        "smithy.api#documentation": "<p>Filters the list of response objects to include only those with the specified operation name.</p>",
                         "smithy.api#jsonName": "operation"
                     }
                 },

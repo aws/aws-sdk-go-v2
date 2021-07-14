@@ -1397,6 +1397,15 @@
                 }
             }
         },
+        "com.amazonaws.glue#BatchSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.glue#BatchStopJobRun": {
             "type": "operation",
             "input": {
@@ -1655,6 +1664,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The errors encountered when trying to update the requested partitions. A list of <code>BatchUpdatePartitionFailureEntry</code> objects.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.glue#BatchWindow": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 900
                 }
             }
         },
@@ -5090,6 +5109,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to use with this trigger. You may use tags to limit access to the trigger.\n      For more information about tags in Glue, see\n      <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">Amazon Web Services Tags in Glue</a> in the developer guide. </p>"
                     }
+                },
+                "EventBatchingCondition": {
+                    "target": "com.amazonaws.glue#EventBatchingCondition"
                 }
             }
         },
@@ -7147,7 +7169,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An edge represents a directed connection between two Glue components that are part of the workflow the\n      edge belongs to.</p>"
+                "smithy.api#documentation": "<p>An edge represents a directed connection between two components\n      on a workflow graph.</p>"
             }
         },
         "com.amazonaws.glue#EdgeList": {
@@ -7310,6 +7332,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Evaluation metrics provide an estimate of the quality of your machine learning transform.</p>"
+            }
+        },
+        "com.amazonaws.glue#EventBatchingCondition": {
+            "type": "structure",
+            "members": {
+                "BatchSize": {
+                    "target": "com.amazonaws.glue#BatchSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BatchWindow": {
+                    "target": "com.amazonaws.glue#BatchWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Batch condition that must be met (specified number of events received or batch time window expired)\n      before EventBridge event trigger fires.</p>"
             }
         },
         "com.amazonaws.glue#ExecutionProperty": {
@@ -13598,7 +13641,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A node represents an Glue component such as a trigger, or job, etc., that is part of a workflow.</p>"
+                "smithy.api#documentation": "<p>A node represents an Glue component (trigger, crawler, or job) on a workflow graph.</p>"
             }
         },
         "com.amazonaws.glue#NodeIdList": {
@@ -16575,6 +16618,26 @@
                 }
             }
         },
+        "com.amazonaws.glue#StartingEventBatchCondition": {
+            "type": "structure",
+            "members": {
+                "BatchSize": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of events in the batch.</p>"
+                    }
+                },
+                "BatchWindow": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Duration of the batch window in seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The batch condition that started the workflow run. Either the number of events in the batch size arrived,\n      in which case the BatchSize member is non-zero, or the batch window expired, in which case the BatchWindow\n      member is non-zero.</p>"
+            }
+        },
         "com.amazonaws.glue#StopCrawler": {
             "type": "operation",
             "input": {
@@ -17862,6 +17925,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The predicate of this trigger, which defines when it will fire.</p>"
                     }
+                },
+                "EventBatchingCondition": {
+                    "target": "com.amazonaws.glue#EventBatchingCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Batch condition that must be met (specified number of events received or batch time window expired)\n      before EventBridge event trigger fires.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17948,6 +18017,10 @@
                     {
                         "value": "ON_DEMAND",
                         "name": "ON_DEMAND"
+                    },
+                    {
+                        "value": "EVENT",
+                        "name": "EVENT"
                     }
                 ]
             }
@@ -17983,6 +18056,12 @@
                     "target": "com.amazonaws.glue#Predicate",
                     "traits": {
                         "smithy.api#documentation": "<p>The predicate of this trigger, which defines when it will fire.</p>"
+                    }
+                },
+                "EventBatchingCondition": {
+                    "target": "com.amazonaws.glue#EventBatchingCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Batch condition that must be met (specified number of events received or batch time window expired)\n      before EventBridge event trigger fires.</p>"
                     }
                 }
             },
@@ -19667,7 +19746,7 @@
                 "Name": {
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the workflow representing the flow.</p>"
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>"
                     }
                 },
                 "Description": {
@@ -19679,7 +19758,7 @@
                 "DefaultRunProperties": {
                     "target": "com.amazonaws.glue#WorkflowRunProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of properties to be used as part of each execution of the workflow.</p>"
+                        "smithy.api#documentation": "<p>A collection of properties to be used as part of each execution of the workflow.\n      The run properties are made available to each job in the workflow. A job can modify\n      the properties for the next jobs in the flow.</p>"
                     }
                 },
                 "CreatedOn": {
@@ -19714,7 +19793,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A workflow represents a flow in which Glue components should be run to complete a logical\n      task.</p>"
+                "smithy.api#documentation": "<p>A workflow is a collection of multiple dependent Glue \n      jobs and crawlers that are run to complete a complex ETL task. A\n      workflow manages the execution and monitoring of all its jobs and crawlers.</p>"
             }
         },
         "com.amazonaws.glue#WorkflowGraph": {
@@ -19810,6 +19889,12 @@
                     "target": "com.amazonaws.glue#WorkflowGraph",
                     "traits": {
                         "smithy.api#documentation": "<p>The graph representing all the Glue components that belong to the workflow as nodes and directed\n      connections between them as edges.</p>"
+                    }
+                },
+                "StartingEventBatchCondition": {
+                    "target": "com.amazonaws.glue#StartingEventBatchCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The batch condition that started the workflow run.</p>"
                     }
                 }
             },
