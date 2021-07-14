@@ -1,0 +1,17 @@
+{
+    "id": "72fc48ec-b386-4e36-a1d0-0d4e82e81f9e",
+    "type": "documentation",
+    "description": "Updated service model to latest revision.",
+    "modules": [
+        "service/elasticloadbalancing",
+        "service/elasticloadbalancingv2",
+        "service/iam",
+        "service/macie",
+        "service/macie2",
+        "service/pricing",
+        "service/sns",
+        "service/ssm",
+        "service/ssmcontacts",
+        "service/sts"
+    ]
+}

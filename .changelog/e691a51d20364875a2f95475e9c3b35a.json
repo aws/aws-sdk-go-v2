@@ -1,0 +1,25 @@
+{
+    "id": "e691a51d-2036-4875-a2f9-5475e9c3b35a",
+    "type": "bugfix",
+    "description": "The ErrorCode method for on service error types has been corrected to match the API model.",
+    "modules": [
+        "credentials",
+        "service/autoscaling",
+        "service/cloudformation",
+        "service/cloudsearch",
+        "service/cloudwatch",
+        "service/docdb",
+        "service/elasticache",
+        "service/elasticbeanstalk",
+        "service/elasticloadbalancing",
+        "service/elasticloadbalancingv2",
+        "service/iam",
+        "service/neptune",
+        "service/rds",
+        "service/redshift",
+        "service/ses",
+        "service/sns",
+        "service/sqs",
+        "service/sts"
+    ]
+}
