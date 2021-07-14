@@ -1,6 +1,6 @@
 {
     "id": "e691a51d-2036-4875-a2f9-5475e9c3b35a",
-    "type": "bugfix",
+    "type": "feature",
     "description": "The ErrorCode method on generated service error types has been corrected to match the API model.",
     "modules": [
         "credentials",
