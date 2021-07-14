@@ -22,7 +22,7 @@ func (e *APICallRateForCustomerExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *APICallRateForCustomerExceededFault) ErrorCode() string {
-	return "APICallRateForCustomerExceededFault"
+	return "APICallRateForCustomerExceeded"
 }
 func (e *APICallRateForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -43,9 +43,7 @@ func (e *AuthorizationAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationAlreadyExistsFault) ErrorCode() string {
-	return "AuthorizationAlreadyExistsFault"
-}
+func (e *AuthorizationAlreadyExistsFault) ErrorCode() string             { return "AuthorizationAlreadyExists" }
 func (e *AuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified Amazon EC2 security group is not authorized for the specified
@@ -63,7 +61,7 @@ func (e *AuthorizationNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationNotFoundFault) ErrorCode() string             { return "AuthorizationNotFoundFault" }
+func (e *AuthorizationNotFoundFault) ErrorCode() string             { return "AuthorizationNotFound" }
 func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You already have a cluster with the given identifier.
@@ -80,7 +78,7 @@ func (e *CacheClusterAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CacheClusterAlreadyExistsFault) ErrorCode() string             { return "CacheClusterAlreadyExistsFault" }
+func (e *CacheClusterAlreadyExistsFault) ErrorCode() string             { return "CacheClusterAlreadyExists" }
 func (e *CacheClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested cluster ID does not refer to an existing cluster.
@@ -97,7 +95,7 @@ func (e *CacheClusterNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CacheClusterNotFoundFault) ErrorCode() string             { return "CacheClusterNotFoundFault" }
+func (e *CacheClusterNotFoundFault) ErrorCode() string             { return "CacheClusterNotFound" }
 func (e *CacheClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A cache parameter group with the requested name already exists.
@@ -115,7 +113,7 @@ func (e *CacheParameterGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheParameterGroupAlreadyExistsFault) ErrorCode() string {
-	return "CacheParameterGroupAlreadyExistsFault"
+	return "CacheParameterGroupAlreadyExists"
 }
 func (e *CacheParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -136,9 +134,7 @@ func (e *CacheParameterGroupNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CacheParameterGroupNotFoundFault) ErrorCode() string {
-	return "CacheParameterGroupNotFoundFault"
-}
+func (e *CacheParameterGroupNotFoundFault) ErrorCode() string             { return "CacheParameterGroupNotFound" }
 func (e *CacheParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request cannot be processed because it would exceed the maximum number of
@@ -157,7 +153,7 @@ func (e *CacheParameterGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheParameterGroupQuotaExceededFault) ErrorCode() string {
-	return "CacheParameterGroupQuotaExceededFault"
+	return "CacheParameterGroupQuotaExceeded"
 }
 func (e *CacheParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -178,7 +174,7 @@ func (e *CacheSecurityGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSecurityGroupAlreadyExistsFault) ErrorCode() string {
-	return "CacheSecurityGroupAlreadyExistsFault"
+	return "CacheSecurityGroupAlreadyExists"
 }
 func (e *CacheSecurityGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -199,9 +195,7 @@ func (e *CacheSecurityGroupNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CacheSecurityGroupNotFoundFault) ErrorCode() string {
-	return "CacheSecurityGroupNotFoundFault"
-}
+func (e *CacheSecurityGroupNotFoundFault) ErrorCode() string             { return "CacheSecurityGroupNotFound" }
 func (e *CacheSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request cannot be processed because it would exceed the allowed number of
@@ -220,7 +214,7 @@ func (e *CacheSecurityGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSecurityGroupQuotaExceededFault) ErrorCode() string {
-	return "CacheSecurityGroupQuotaExceededFault"
+	return "QuotaExceeded.CacheSecurityGroup"
 }
 func (e *CacheSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -242,7 +236,7 @@ func (e *CacheSubnetGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSubnetGroupAlreadyExistsFault) ErrorCode() string {
-	return "CacheSubnetGroupAlreadyExistsFault"
+	return "CacheSubnetGroupAlreadyExists"
 }
 func (e *CacheSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -299,7 +293,7 @@ func (e *CacheSubnetGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CacheSubnetGroupQuotaExceededFault) ErrorCode() string {
-	return "CacheSubnetGroupQuotaExceededFault"
+	return "CacheSubnetGroupQuotaExceeded"
 }
 func (e *CacheSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -339,7 +333,7 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterQuotaForCustomerExceededFault) ErrorCode() string {
-	return "ClusterQuotaForCustomerExceededFault"
+	return "ClusterQuotaForCustomerExceeded"
 }
 func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -360,7 +354,7 @@ func (e *DefaultUserAssociatedToUserGroupFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DefaultUserAssociatedToUserGroupFault) ErrorCode() string {
-	return "DefaultUserAssociatedToUserGroupFault"
+	return "DefaultUserAssociatedToUserGroup"
 }
 func (e *DefaultUserAssociatedToUserGroupFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -397,7 +391,7 @@ func (e *DuplicateUserNameFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateUserNameFault) ErrorCode() string             { return "DuplicateUserNameFault" }
+func (e *DuplicateUserNameFault) ErrorCode() string             { return "DuplicateUserName" }
 func (e *DuplicateUserNameFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Global datastore name already exists.
@@ -460,7 +454,7 @@ func (e *InsufficientCacheClusterCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientCacheClusterCapacityFault) ErrorCode() string {
-	return "InsufficientCacheClusterCapacityFault"
+	return "InsufficientCacheClusterCapacity"
 }
 func (e *InsufficientCacheClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -480,7 +474,7 @@ func (e *InvalidARNFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidARNFault) ErrorCode() string             { return "InvalidARNFault" }
+func (e *InvalidARNFault) ErrorCode() string             { return "InvalidARN" }
 func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested cluster is not in the available state.
@@ -497,7 +491,7 @@ func (e *InvalidCacheClusterStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidCacheClusterStateFault) ErrorCode() string             { return "InvalidCacheClusterStateFault" }
+func (e *InvalidCacheClusterStateFault) ErrorCode() string             { return "InvalidCacheClusterState" }
 func (e *InvalidCacheClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The current state of the cache parameter group does not allow the requested
@@ -516,7 +510,7 @@ func (e *InvalidCacheParameterGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCacheParameterGroupStateFault) ErrorCode() string {
-	return "InvalidCacheParameterGroupStateFault"
+	return "InvalidCacheParameterGroupState"
 }
 func (e *InvalidCacheParameterGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -537,7 +531,7 @@ func (e *InvalidCacheSecurityGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCacheSecurityGroupStateFault) ErrorCode() string {
-	return "InvalidCacheSecurityGroupStateFault"
+	return "InvalidCacheSecurityGroupState"
 }
 func (e *InvalidCacheSecurityGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -558,7 +552,7 @@ func (e *InvalidGlobalReplicationGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGlobalReplicationGroupStateFault) ErrorCode() string {
-	return "InvalidGlobalReplicationGroupStateFault"
+	return "InvalidGlobalReplicationGroupState"
 }
 func (e *InvalidGlobalReplicationGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -596,7 +590,7 @@ func (e *InvalidParameterCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterCombinationException) ErrorCode() string {
-	return "InvalidParameterCombinationException"
+	return "InvalidParameterCombination"
 }
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -616,7 +610,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValue" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested replication group is not in the available state.
@@ -633,9 +627,7 @@ func (e *InvalidReplicationGroupStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidReplicationGroupStateFault) ErrorCode() string {
-	return "InvalidReplicationGroupStateFault"
-}
+func (e *InvalidReplicationGroupStateFault) ErrorCode() string             { return "InvalidReplicationGroupState" }
 func (e *InvalidReplicationGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The current state of the snapshot does not allow the requested operation to
@@ -653,7 +645,7 @@ func (e *InvalidSnapshotStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSnapshotStateFault) ErrorCode() string             { return "InvalidSnapshotStateFault" }
+func (e *InvalidSnapshotStateFault) ErrorCode() string             { return "InvalidSnapshotState" }
 func (e *InvalidSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An invalid subnet identifier was specified.
@@ -687,7 +679,7 @@ func (e *InvalidUserGroupStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidUserGroupStateFault) ErrorCode() string             { return "InvalidUserGroupStateFault" }
+func (e *InvalidUserGroupStateFault) ErrorCode() string             { return "InvalidUserGroupState" }
 func (e *InvalidUserGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user is not in active state.
@@ -704,7 +696,7 @@ func (e *InvalidUserStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidUserStateFault) ErrorCode() string             { return "InvalidUserStateFault" }
+func (e *InvalidUserStateFault) ErrorCode() string             { return "InvalidUserState" }
 func (e *InvalidUserStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The VPC network is in an invalid state.
@@ -760,7 +752,7 @@ func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) ErrorMessage() string 
 	return *e.Message
 }
 func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) ErrorCode() string {
-	return "NodeGroupsPerReplicationGroupQuotaExceededFault"
+	return "NodeGroupsPerReplicationGroupQuotaExceeded"
 }
 func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -781,9 +773,7 @@ func (e *NodeQuotaForClusterExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NodeQuotaForClusterExceededFault) ErrorCode() string {
-	return "NodeQuotaForClusterExceededFault"
-}
+func (e *NodeQuotaForClusterExceededFault) ErrorCode() string             { return "NodeQuotaForClusterExceeded" }
 func (e *NodeQuotaForClusterExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request cannot be processed because it would exceed the allowed number of
@@ -801,9 +791,7 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NodeQuotaForCustomerExceededFault) ErrorCode() string {
-	return "NodeQuotaForCustomerExceededFault"
-}
+func (e *NodeQuotaForCustomerExceededFault) ErrorCode() string             { return "NodeQuotaForCustomerExceeded" }
 func (e *NodeQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation was not performed because no changes were required.
@@ -838,7 +826,7 @@ func (e *ReplicationGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationGroupAlreadyExistsFault) ErrorCode() string {
-	return "ReplicationGroupAlreadyExistsFault"
+	return "ReplicationGroupAlreadyExists"
 }
 func (e *ReplicationGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -918,7 +906,7 @@ func (e *ReservedCacheNodeAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedCacheNodeAlreadyExistsFault) ErrorCode() string {
-	return "ReservedCacheNodeAlreadyExistsFault"
+	return "ReservedCacheNodeAlreadyExists"
 }
 func (e *ReservedCacheNodeAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -938,7 +926,7 @@ func (e *ReservedCacheNodeNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReservedCacheNodeNotFoundFault) ErrorCode() string             { return "ReservedCacheNodeNotFoundFault" }
+func (e *ReservedCacheNodeNotFoundFault) ErrorCode() string             { return "ReservedCacheNodeNotFound" }
 func (e *ReservedCacheNodeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request cannot be processed because it would exceed the user's cache node
@@ -957,7 +945,7 @@ func (e *ReservedCacheNodeQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedCacheNodeQuotaExceededFault) ErrorCode() string {
-	return "ReservedCacheNodeQuotaExceededFault"
+	return "ReservedCacheNodeQuotaExceeded"
 }
 func (e *ReservedCacheNodeQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -978,7 +966,7 @@ func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorCode() string {
-	return "ReservedCacheNodesOfferingNotFoundFault"
+	return "ReservedCacheNodesOfferingNotFound"
 }
 func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1149,7 +1137,7 @@ func (e *TagNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagNotFoundFault) ErrorCode() string             { return "TagNotFoundFault" }
+func (e *TagNotFoundFault) ErrorCode() string             { return "TagNotFound" }
 func (e *TagNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request cannot be processed because it would cause the resource to have more
@@ -1202,7 +1190,7 @@ func (e *UserAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UserAlreadyExistsFault) ErrorCode() string             { return "UserAlreadyExistsFault" }
+func (e *UserAlreadyExistsFault) ErrorCode() string             { return "UserAlreadyExists" }
 func (e *UserAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user group with this ID already exists.
@@ -1219,7 +1207,7 @@ func (e *UserGroupAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UserGroupAlreadyExistsFault) ErrorCode() string             { return "UserGroupAlreadyExistsFault" }
+func (e *UserGroupAlreadyExistsFault) ErrorCode() string             { return "UserGroupAlreadyExists" }
 func (e *UserGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user group was not found or does not exist
@@ -1236,7 +1224,7 @@ func (e *UserGroupNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UserGroupNotFoundFault) ErrorCode() string             { return "UserGroupNotFoundFault" }
+func (e *UserGroupNotFoundFault) ErrorCode() string             { return "UserGroupNotFound" }
 func (e *UserGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of users exceeds the user group limit.
@@ -1253,7 +1241,7 @@ func (e *UserGroupQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UserGroupQuotaExceededFault) ErrorCode() string             { return "UserGroupQuotaExceededFault" }
+func (e *UserGroupQuotaExceededFault) ErrorCode() string             { return "UserGroupQuotaExceeded" }
 func (e *UserGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user does not exist or could not be found.
@@ -1270,7 +1258,7 @@ func (e *UserNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UserNotFoundFault) ErrorCode() string             { return "UserNotFoundFault" }
+func (e *UserNotFoundFault) ErrorCode() string             { return "UserNotFound" }
 func (e *UserNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota of users has been exceeded.
@@ -1287,5 +1275,5 @@ func (e *UserQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UserQuotaExceededFault) ErrorCode() string             { return "UserQuotaExceededFault" }
+func (e *UserQuotaExceededFault) ErrorCode() string             { return "UserQuotaExceeded" }
 func (e *UserQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -43,7 +43,7 @@ func (e *IDPCommunicationErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IDPCommunicationErrorException) ErrorCode() string             { return "IDPCommunicationErrorException" }
+func (e *IDPCommunicationErrorException) ErrorCode() string             { return "IDPCommunicationError" }
 func (e *IDPCommunicationErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The identity provider (IdP) reported that authentication failed. This might be
@@ -63,7 +63,7 @@ func (e *IDPRejectedClaimException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IDPRejectedClaimException) ErrorCode() string             { return "IDPRejectedClaimException" }
+func (e *IDPRejectedClaimException) ErrorCode() string             { return "IDPRejectedClaim" }
 func (e *IDPRejectedClaimException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The error returned if the message passed to DecodeAuthorizationMessage was
@@ -104,7 +104,7 @@ func (e *InvalidIdentityTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidIdentityTokenException) ErrorCode() string             { return "InvalidIdentityTokenException" }
+func (e *InvalidIdentityTokenException) ErrorCode() string             { return "InvalidIdentityToken" }
 func (e *InvalidIdentityTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the policy document was malformed. The error
@@ -122,9 +122,7 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	return "MalformedPolicyDocumentException"
-}
+func (e *MalformedPolicyDocumentException) ErrorCode() string             { return "MalformedPolicyDocument" }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the total packed size of the session policies
@@ -152,7 +150,7 @@ func (e *PackedPolicyTooLargeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PackedPolicyTooLargeException) ErrorCode() string             { return "PackedPolicyTooLargeException" }
+func (e *PackedPolicyTooLargeException) ErrorCode() string             { return "PackedPolicyTooLarge" }
 func (e *PackedPolicyTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // STS is not activated in the requested region for the account that is being asked

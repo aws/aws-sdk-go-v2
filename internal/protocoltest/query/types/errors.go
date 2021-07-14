@@ -40,7 +40,7 @@ func (e *CustomCodeError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CustomCodeError) ErrorCode() string             { return "CustomCodeError" }
+func (e *CustomCodeError) ErrorCode() string             { return "Customized" }
 func (e *CustomCodeError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This error is thrown when an invalid greeting value is provided.

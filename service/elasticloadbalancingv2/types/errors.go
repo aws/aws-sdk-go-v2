@@ -21,7 +21,7 @@ func (e *AllocationIdNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AllocationIdNotFoundException) ErrorCode() string             { return "AllocationIdNotFoundException" }
+func (e *AllocationIdNotFoundException) ErrorCode() string             { return "AllocationIdNotFound" }
 func (e *AllocationIdNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified ALPN policy is not supported.
@@ -38,9 +38,7 @@ func (e *ALPNPolicyNotSupportedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ALPNPolicyNotSupportedException) ErrorCode() string {
-	return "ALPNPolicyNotSupportedException"
-}
+func (e *ALPNPolicyNotSupportedException) ErrorCode() string             { return "ALPNPolicyNotFound" }
 func (e *ALPNPolicyNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified Availability Zone is not supported.
@@ -58,7 +56,7 @@ func (e *AvailabilityZoneNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AvailabilityZoneNotSupportedException) ErrorCode() string {
-	return "AvailabilityZoneNotSupportedException"
+	return "AvailabilityZoneNotSupported"
 }
 func (e *AvailabilityZoneNotSupportedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -78,7 +76,7 @@ func (e *CertificateNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateNotFoundException) ErrorCode() string             { return "CertificateNotFoundException" }
+func (e *CertificateNotFoundException) ErrorCode() string             { return "CertificateNotFound" }
 func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A listener with the specified port already exists.
@@ -95,7 +93,7 @@ func (e *DuplicateListenerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateListenerException) ErrorCode() string             { return "DuplicateListenerException" }
+func (e *DuplicateListenerException) ErrorCode() string             { return "DuplicateListener" }
 func (e *DuplicateListenerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A load balancer with the specified name already exists.
@@ -112,9 +110,7 @@ func (e *DuplicateLoadBalancerNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateLoadBalancerNameException) ErrorCode() string {
-	return "DuplicateLoadBalancerNameException"
-}
+func (e *DuplicateLoadBalancerNameException) ErrorCode() string { return "DuplicateLoadBalancerName" }
 func (e *DuplicateLoadBalancerNameException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -133,7 +129,7 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeysException" }
+func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeys" }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A target group with the specified name already exists.
@@ -150,9 +146,7 @@ func (e *DuplicateTargetGroupNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateTargetGroupNameException) ErrorCode() string {
-	return "DuplicateTargetGroupNameException"
-}
+func (e *DuplicateTargetGroupNameException) ErrorCode() string             { return "DuplicateTargetGroupName" }
 func (e *DuplicateTargetGroupNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The health of the specified targets could not be retrieved due to an internal
@@ -170,7 +164,7 @@ func (e *HealthUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HealthUnavailableException) ErrorCode() string             { return "HealthUnavailableException" }
+func (e *HealthUnavailableException) ErrorCode() string             { return "HealthUnavailable" }
 func (e *HealthUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The specified configuration is not valid with this protocol.
@@ -187,7 +181,7 @@ func (e *IncompatibleProtocolsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IncompatibleProtocolsException) ErrorCode() string             { return "IncompatibleProtocolsException" }
+func (e *IncompatibleProtocolsException) ErrorCode() string             { return "IncompatibleProtocols" }
 func (e *IncompatibleProtocolsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested configuration is not valid.
@@ -205,7 +199,7 @@ func (e *InvalidConfigurationRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationRequestException) ErrorCode() string {
-	return "InvalidConfigurationRequestException"
+	return "InvalidConfigurationRequest"
 }
 func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -225,9 +219,7 @@ func (e *InvalidLoadBalancerActionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidLoadBalancerActionException) ErrorCode() string {
-	return "InvalidLoadBalancerActionException"
-}
+func (e *InvalidLoadBalancerActionException) ErrorCode() string { return "InvalidLoadBalancerAction" }
 func (e *InvalidLoadBalancerActionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -246,7 +238,7 @@ func (e *InvalidSchemeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSchemeException) ErrorCode() string             { return "InvalidSchemeException" }
+func (e *InvalidSchemeException) ErrorCode() string             { return "InvalidScheme" }
 func (e *InvalidSchemeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified security group does not exist.
@@ -263,7 +255,7 @@ func (e *InvalidSecurityGroupException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSecurityGroupException) ErrorCode() string             { return "InvalidSecurityGroupException" }
+func (e *InvalidSecurityGroupException) ErrorCode() string             { return "InvalidSecurityGroup" }
 func (e *InvalidSecurityGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified subnet is out of available addresses.
@@ -280,7 +272,7 @@ func (e *InvalidSubnetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSubnetException) ErrorCode() string             { return "InvalidSubnetException" }
+func (e *InvalidSubnetException) ErrorCode() string             { return "InvalidSubnet" }
 func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified target does not exist, is not in the same VPC as the target group,
@@ -298,7 +290,7 @@ func (e *InvalidTargetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTargetException) ErrorCode() string             { return "InvalidTargetException" }
+func (e *InvalidTargetException) ErrorCode() string             { return "InvalidTarget" }
 func (e *InvalidTargetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified listener does not exist.
@@ -315,7 +307,7 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFoundException" }
+func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFound" }
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified load balancer does not exist.
@@ -332,7 +324,7 @@ func (e *LoadBalancerNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LoadBalancerNotFoundException) ErrorCode() string             { return "LoadBalancerNotFoundException" }
+func (e *LoadBalancerNotFoundException) ErrorCode() string             { return "LoadBalancerNotFound" }
 func (e *LoadBalancerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This operation is not allowed.
@@ -349,7 +341,7 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
+func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermitted" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified priority is in use.
@@ -366,7 +358,7 @@ func (e *PriorityInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PriorityInUseException) ErrorCode() string             { return "PriorityInUseException" }
+func (e *PriorityInUseException) ErrorCode() string             { return "PriorityInUse" }
 func (e *PriorityInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified resource is in use.
@@ -383,7 +375,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUse" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified rule does not exist.
@@ -400,7 +392,7 @@ func (e *RuleNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RuleNotFoundException) ErrorCode() string             { return "RuleNotFoundException" }
+func (e *RuleNotFoundException) ErrorCode() string             { return "RuleNotFound" }
 func (e *RuleNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified SSL policy does not exist.
@@ -417,7 +409,7 @@ func (e *SSLPolicyNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SSLPolicyNotFoundException) ErrorCode() string             { return "SSLPolicyNotFoundException" }
+func (e *SSLPolicyNotFoundException) ErrorCode() string             { return "SSLPolicyNotFound" }
 func (e *SSLPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified subnet does not exist.
@@ -434,7 +426,7 @@ func (e *SubnetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubnetNotFoundException) ErrorCode() string             { return "SubnetNotFoundException" }
+func (e *SubnetNotFoundException) ErrorCode() string             { return "SubnetNotFound" }
 func (e *SubnetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of load balancers per target group.
@@ -452,7 +444,7 @@ func (e *TargetGroupAssociationLimitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetGroupAssociationLimitException) ErrorCode() string {
-	return "TargetGroupAssociationLimitException"
+	return "TargetGroupAssociationLimit"
 }
 func (e *TargetGroupAssociationLimitException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -472,7 +464,7 @@ func (e *TargetGroupNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TargetGroupNotFoundException) ErrorCode() string             { return "TargetGroupNotFoundException" }
+func (e *TargetGroupNotFoundException) ErrorCode() string             { return "TargetGroupNotFound" }
 func (e *TargetGroupNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of actions per rule.
@@ -489,7 +481,7 @@ func (e *TooManyActionsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyActionsException) ErrorCode() string             { return "TooManyActionsException" }
+func (e *TooManyActionsException) ErrorCode() string             { return "TooManyActions" }
 func (e *TooManyActionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of certificates per load balancer.
@@ -506,7 +498,7 @@ func (e *TooManyCertificatesException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyCertificatesException) ErrorCode() string             { return "TooManyCertificatesException" }
+func (e *TooManyCertificatesException) ErrorCode() string             { return "TooManyCertificates" }
 func (e *TooManyCertificatesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of listeners per load balancer.
@@ -523,7 +515,7 @@ func (e *TooManyListenersException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyListenersException) ErrorCode() string             { return "TooManyListenersException" }
+func (e *TooManyListenersException) ErrorCode() string             { return "TooManyListeners" }
 func (e *TooManyListenersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of load balancers for your AWS account.
@@ -540,7 +532,7 @@ func (e *TooManyLoadBalancersException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyLoadBalancersException) ErrorCode() string             { return "TooManyLoadBalancersException" }
+func (e *TooManyLoadBalancersException) ErrorCode() string             { return "TooManyLoadBalancers" }
 func (e *TooManyLoadBalancersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of times a target can be registered with
@@ -559,7 +551,7 @@ func (e *TooManyRegistrationsForTargetIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyRegistrationsForTargetIdException) ErrorCode() string {
-	return "TooManyRegistrationsForTargetIdException"
+	return "TooManyRegistrationsForTargetId"
 }
 func (e *TooManyRegistrationsForTargetIdException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -579,7 +571,7 @@ func (e *TooManyRulesException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRulesException) ErrorCode() string             { return "TooManyRulesException" }
+func (e *TooManyRulesException) ErrorCode() string             { return "TooManyRules" }
 func (e *TooManyRulesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of tags per load balancer.
@@ -596,7 +588,7 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTags" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of target groups for your AWS account.
@@ -613,7 +605,7 @@ func (e *TooManyTargetGroupsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTargetGroupsException) ErrorCode() string             { return "TooManyTargetGroupsException" }
+func (e *TooManyTargetGroupsException) ErrorCode() string             { return "TooManyTargetGroups" }
 func (e *TooManyTargetGroupsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of targets.
@@ -630,7 +622,7 @@ func (e *TooManyTargetsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTargetsException) ErrorCode() string             { return "TooManyTargetsException" }
+func (e *TooManyTargetsException) ErrorCode() string             { return "TooManyTargets" }
 func (e *TooManyTargetsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of unique target groups per load balancer
@@ -650,7 +642,7 @@ func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) ErrorMessage() strin
 	return *e.Message
 }
 func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) ErrorCode() string {
-	return "TooManyUniqueTargetGroupsPerLoadBalancerException"
+	return "TooManyUniqueTargetGroupsPerLoadBalancer"
 }
 func (e *TooManyUniqueTargetGroupsPerLoadBalancerException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -670,5 +662,5 @@ func (e *UnsupportedProtocolException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedProtocolException) ErrorCode() string             { return "UnsupportedProtocolException" }
+func (e *UnsupportedProtocolException) ErrorCode() string             { return "UnsupportedProtocol" }
 func (e *UnsupportedProtocolException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

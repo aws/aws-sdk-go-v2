@@ -85,8 +85,9 @@ func TestWebIdentityProviderRetrieve(t *testing.T) {
 					fn(&o)
 				}
 
-				if o.Retryer.IsErrorRetryable(mockErrorCode("InvalidIdentityTokenException")) != true {
-					return nil, fmt.Errorf("expected InvalidIdentityTokenException to be retryable")
+				errorCode := (&types.InvalidIdentityTokenException{}).ErrorCode()
+				if o.Retryer.IsErrorRetryable(mockErrorCode(errorCode)) != true {
+					return nil, fmt.Errorf("expected %v to be retryable", errorCode)
 				}
 
 				return &sts.AssumeRoleWithWebIdentityOutput{

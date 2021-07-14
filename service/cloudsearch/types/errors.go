@@ -42,7 +42,7 @@ func (e *DisabledOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DisabledOperationException) ErrorCode() string             { return "DisabledOperationException" }
+func (e *DisabledOperationException) ErrorCode() string             { return "DisabledAction" }
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error occurred while processing the request. If this problem
@@ -82,7 +82,7 @@ func (e *InvalidTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTypeException) ErrorCode() string             { return "InvalidTypeException" }
+func (e *InvalidTypeException) ErrorCode() string             { return "InvalidType" }
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because a resource limit has already been met.
@@ -101,7 +101,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string             { return "LimitExceeded" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create a resource that already
@@ -121,7 +121,7 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExists" }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to reference a resource that does
@@ -141,7 +141,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFound" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it has invalid parameters.

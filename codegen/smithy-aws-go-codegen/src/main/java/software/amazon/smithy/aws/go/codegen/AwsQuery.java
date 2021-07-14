@@ -24,6 +24,7 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
+import software.amazon.smithy.model.traits.ErrorTrait;
 
 /**
  * Handles generating the aws query protocol for services.
@@ -173,5 +174,15 @@ class AwsQuery extends HttpRpcProtocolGenerator {
         });
 
         return errors;
+    }
+
+    @Override
+    public String getErrorCode(ServiceShape service, StructureShape errorShape) {
+        Optional<AwsQueryErrorTrait> trait = errorShape.getTrait(AwsQueryErrorTrait.class);
+        if (trait.isPresent()) {
+            return trait.get().getCode();
+        }
+
+        return super.getErrorCode(service, errorShape);
     }
 }

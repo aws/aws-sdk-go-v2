@@ -42,7 +42,7 @@ func (e *DashboardInvalidInputError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DashboardInvalidInputError) ErrorCode() string             { return "DashboardInvalidInputError" }
+func (e *DashboardInvalidInputError) ErrorCode() string             { return "InvalidParameterInput" }
 func (e *DashboardInvalidInputError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified dashboard does not exist.
@@ -59,7 +59,7 @@ func (e *DashboardNotFoundError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DashboardNotFoundError) ErrorCode() string             { return "DashboardNotFoundError" }
+func (e *DashboardNotFoundError) ErrorCode() string             { return "ResourceNotFound" }
 func (e *DashboardNotFoundError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request processing has failed due to some unknown error, exception, or failure.
@@ -76,7 +76,7 @@ func (e *InternalServiceFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceFault) ErrorCode() string             { return "InternalServiceFault" }
+func (e *InternalServiceFault) ErrorCode() string             { return "InternalServiceError" }
 func (e *InternalServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Data was not syntactically valid JSON.
@@ -93,7 +93,7 @@ func (e *InvalidFormatFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidFormatFault) ErrorCode() string             { return "InvalidFormatFault" }
+func (e *InvalidFormatFault) ErrorCode() string             { return "InvalidFormat" }
 func (e *InvalidFormatFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The next token specified is invalid.
@@ -128,7 +128,7 @@ func (e *InvalidParameterCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterCombinationException) ErrorCode() string {
-	return "InvalidParameterCombinationException"
+	return "InvalidParameterCombination"
 }
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -148,7 +148,7 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValue" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation exceeded one or more limits.
@@ -182,7 +182,7 @@ func (e *LimitExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceededFault" }
+func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceeded" }
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An input parameter that is required is missing.
@@ -199,9 +199,7 @@ func (e *MissingRequiredParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MissingRequiredParameterException) ErrorCode() string {
-	return "MissingRequiredParameterException"
-}
+func (e *MissingRequiredParameterException) ErrorCode() string             { return "MissingParameter" }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The named resource does not exist.

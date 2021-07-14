@@ -121,7 +121,7 @@ func (e *OperationInProgressException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationInProgressException) ErrorCode() string             { return "OperationInProgressException" }
+func (e *OperationInProgressException) ErrorCode() string             { return "OperationInProgressFailure" }
 func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You cannot delete the platform version because there are still environments
@@ -246,7 +246,7 @@ func (e *SourceBundleDeletionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SourceBundleDeletionException) ErrorCode() string             { return "SourceBundleDeletionException" }
+func (e *SourceBundleDeletionException) ErrorCode() string             { return "SourceBundleDeletionFailure" }
 func (e *SourceBundleDeletionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified account has reached its limit of applications.
