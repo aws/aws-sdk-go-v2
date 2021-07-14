@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the account alias associated with the AWS account (Note: you can have only
-// one). For information about using an AWS account alias, see Using an alias for
-// your AWS account ID
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html) in the IAM
-// User Guide.
+// Lists the account alias associated with the account (Note: you can have only
+// one). For information about using an account alias, see Using an alias for your
+// account ID (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
+// in the IAM User Guide.
 func (c *Client) ListAccountAliases(ctx context.Context, params *ListAccountAliasesInput, optFns ...func(*Options)) (*ListAccountAliasesOutput, error) {
 	if params == nil {
 		params = &ListAccountAliasesInput{}
@@ -52,8 +51,8 @@ type ListAccountAliasesInput struct {
 // Contains the response to a successful ListAccountAliases request.
 type ListAccountAliasesOutput struct {
 
-	// A list of aliases associated with the account. AWS supports only one alias per
-	// account.
+	// A list of aliases associated with the account. Amazon Web Services supports only
+	// one alias per account.
 	//
 	// This member is required.
 	AccountAliases []string

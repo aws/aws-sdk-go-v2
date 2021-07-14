@@ -39,12 +39,12 @@ type GetMacieSessionOutput struct {
 	CreatedAt *time.Time
 
 	// The frequency with which Macie publishes updates to policy findings for the
-	// account. This includes publishing updates to AWS Security Hub and Amazon
-	// EventBridge (formerly called Amazon CloudWatch Events).
+	// account. This includes publishing updates to Security Hub and Amazon EventBridge
+	// (formerly called Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
 	// The Amazon Resource Name (ARN) of the service-linked role that allows Macie to
-	// monitor and analyze data in AWS resources for the account.
+	// monitor and analyze data in Amazon Web Services resources for the account.
 	ServiceRole *string
 
 	// The current status of the Macie account. Possible values are: PAUSED, the

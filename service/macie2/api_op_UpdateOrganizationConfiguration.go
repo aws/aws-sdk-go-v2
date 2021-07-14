@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Amazon Macie configuration settings for an AWS organization.
+// Updates the Amazon Macie configuration settings for an Amazon Web Services
+// organization.
 func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *UpdateOrganizationConfigurationInput, optFns ...func(*Options)) (*UpdateOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateOrganizationConfigurationInput{}
@@ -29,7 +30,7 @@ func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *Up
 type UpdateOrganizationConfigurationInput struct {
 
 	// Specifies whether to enable Amazon Macie automatically for each account, when
-	// the account is added to the AWS organization.
+	// the account is added to the Amazon Web Services organization.
 	//
 	// This member is required.
 	AutoEnable bool

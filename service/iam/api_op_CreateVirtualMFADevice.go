@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new virtual MFA device for the AWS account. After creating the virtual
+// Creates a new virtual MFA device for the account. After creating the virtual
 // MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more
 // information about creating and working with virtual MFA devices, see Using a
 // virtual MFA device
@@ -21,9 +21,9 @@ import (
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide. The seed information contained in the QR code and the Base32
 // string should be treated like any other secret access information. In other
-// words, protect the seed information as you would your AWS access keys or your
-// passwords. After you provision your virtual device, you should ensure that the
-// information is destroyed following secure procedures.
+// words, protect the seed information as you would your Amazon Web Services access
+// keys or your passwords. After you provision your virtual device, you should
+// ensure that the information is destroyed following secure procedures.
 func (c *Client) CreateVirtualMFADevice(ctx context.Context, params *CreateVirtualMFADeviceInput, optFns ...func(*Options)) (*CreateVirtualMFADeviceOutput, error) {
 	if params == nil {
 		params = &CreateVirtualMFADeviceInput{}

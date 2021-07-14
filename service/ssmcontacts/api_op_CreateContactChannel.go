@@ -31,7 +31,8 @@ func (c *Client) CreateContactChannel(ctx context.Context, params *CreateContact
 
 type CreateContactChannelInput struct {
 
-	// The Amazon Resource Name (ARN) of the contact channel.
+	// The Amazon Resource Name (ARN) of the contact you are adding the contact channel
+	// to.
 	//
 	// This member is required.
 	ContactId *string

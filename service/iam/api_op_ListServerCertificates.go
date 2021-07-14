@@ -17,12 +17,12 @@ import (
 // using the MaxItems and Marker parameters. For more information about working
 // with server certificates, see Working with server certificates
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide. This topic also includes a list of AWS services that can
-// use the server certificates that you manage with IAM. IAM resource-listing
-// operations return a subset of the available attributes for the resource. For
-// example, this operation does not return tags, even though they are an attribute
-// of the returned object. To view all of the information for a servercertificate,
-// see GetServerCertificate.
+// in the IAM User Guide. This topic also includes a list of Amazon Web Services
+// services that can use the server certificates that you manage with IAM. IAM
+// resource-listing operations return a subset of the available attributes for the
+// resource. For example, this operation does not return tags, even though they are
+// an attribute of the returned object. To view all of the information for a
+// servercertificate, see GetServerCertificate.
 func (c *Client) ListServerCertificates(ctx context.Context, params *ListServerCertificatesInput, optFns ...func(*Options)) (*ListServerCertificatesOutput, error) {
 	if params == nil {
 		params = &ListServerCertificatesInput{}

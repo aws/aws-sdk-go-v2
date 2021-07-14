@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the virtual MFA devices defined in the AWS account by assignment status.
-// If you do not specify an assignment status, the operation returns a list of all
+// Lists the virtual MFA devices defined in the account by assignment status. If
+// you do not specify an assignment status, the operation returns a list of all
 // virtual MFA devices. Assignment status can be Assigned, Unassigned, or Any. IAM
 // resource-listing operations return a subset of the available attributes for the
 // resource. For example, this operation does not return tags, even though they are

@@ -11,7 +11,7 @@ import (
 )
 
 // Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or
-// email, or if the endpoint and the topic are not in the same AWS account, the
+// email, or if the endpoint and the topic are not in the same account, the
 // endpoint owner must run the ConfirmSubscription action to confirm the
 // subscription. You call the ConfirmSubscription action with the token from the
 // subscription response. Confirmation tokens are valid for three days. This action
@@ -56,11 +56,11 @@ type SubscribeInput struct {
 	// * application – delivery of JSON-encoded message to an EndpointArn for a
 	// mobile app and device
 	//
-	// * lambda – delivery of JSON-encoded message to an AWS
-	// Lambda function
+	// * lambda – delivery of JSON-encoded message to an Lambda
+	// function
 	//
-	// * firehose – delivery of JSON-encoded message to an Amazon
-	// Kinesis Data Firehose delivery stream.
+	// * firehose – delivery of JSON-encoded message to an Amazon Kinesis
+	// Data Firehose delivery stream.
 	//
 	// This member is required.
 	Protocol *string
@@ -72,26 +72,26 @@ type SubscribeInput struct {
 
 	// A map of attributes with their corresponding values. The following lists the
 	// names, descriptions, and values of the special request parameters that the
-	// SetTopicAttributes action uses:
+	// Subscribe action uses:
 	//
-	// * DeliveryPolicy – The policy that defines how
-	// Amazon SNS retries failed deliveries to HTTP/S endpoints.
+	// * DeliveryPolicy – The policy that defines how Amazon
+	// SNS retries failed deliveries to HTTP/S endpoints.
 	//
-	// * FilterPolicy – The
-	// simple JSON object that lets your subscriber receive only a subset of messages,
-	// rather than receiving every message published to the topic.
+	// * FilterPolicy – The simple
+	// JSON object that lets your subscriber receive only a subset of messages, rather
+	// than receiving every message published to the topic.
 	//
-	// *
-	// RawMessageDelivery – When set to true, enables raw message delivery to Amazon
-	// SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process
-	// JSON formatting, which is otherwise created for Amazon SNS metadata.
+	// * RawMessageDelivery –
+	// When set to true, enables raw message delivery to Amazon SQS or HTTP/S
+	// endpoints. This eliminates the need for the endpoints to process JSON
+	// formatting, which is otherwise created for Amazon SNS metadata.
 	//
-	// *
-	// RedrivePolicy – When specified, sends undeliverable messages to the specified
-	// Amazon SQS dead-letter queue. Messages that can't be delivered due to client
-	// errors (for example, when the subscribed endpoint is unreachable) or server
-	// errors (for example, when the service that powers the subscribed endpoint
-	// becomes unavailable) are held in the dead-letter queue for further analysis or
+	// * RedrivePolicy
+	// – When specified, sends undeliverable messages to the specified Amazon SQS
+	// dead-letter queue. Messages that can't be delivered due to client errors (for
+	// example, when the subscribed endpoint is unreachable) or server errors (for
+	// example, when the service that powers the subscribed endpoint becomes
+	// unavailable) are held in the dead-letter queue for further analysis or
 	// reprocessing.
 	//
 	// The following attribute applies only to Amazon Kinesis Data
@@ -138,7 +138,7 @@ type SubscribeInput struct {
 	// mobile app and device.
 	//
 	// * For the lambda protocol, the endpoint is the ARN of an
-	// AWS Lambda function.
+	// Lambda function.
 	//
 	// * For the firehose protocol, the endpoint is the ARN of an
 	// Amazon Kinesis Data Firehose delivery stream.

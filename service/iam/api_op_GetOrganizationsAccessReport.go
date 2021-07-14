@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the service last accessed data report for AWS Organizations that was
+// Retrieves the service last accessed data report for Organizations that was
 // previously generated using the GenerateOrganizationsAccessReport operation. This
 // operation retrieves the status of your report job and the report contents.
 // Depending on the parameters that you passed when you generated the report, the

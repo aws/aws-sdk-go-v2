@@ -12,8 +12,8 @@ import (
 )
 
 // Lists information about the IAM OpenID Connect (OIDC) provider resource objects
-// defined in the AWS account. IAM resource-listing operations return a subset of
-// the available attributes for the resource. For example, this operation does not
+// defined in the account. IAM resource-listing operations return a subset of the
+// available attributes for the resource. For example, this operation does not
 // return tags, even though they are an attribute of the returned object. To view
 // all of the information for an OIDC provider, see GetOpenIDConnectProvider.
 func (c *Client) ListOpenIDConnectProviders(ctx context.Context, params *ListOpenIDConnectProvidersInput, optFns ...func(*Options)) (*ListOpenIDConnectProvidersOutput, error) {
@@ -37,7 +37,7 @@ type ListOpenIDConnectProvidersInput struct {
 // Contains the response to a successful ListOpenIDConnectProviders request.
 type ListOpenIDConnectProvidersOutput struct {
 
-	// The list of IAM OIDC provider resource objects defined in the AWS account.
+	// The list of IAM OIDC provider resource objects defined in the account.
 	OpenIDConnectProviderList []types.OpenIDConnectProviderListEntry
 
 	// Metadata pertaining to the operation's result.

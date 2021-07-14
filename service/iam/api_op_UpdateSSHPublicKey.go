@@ -15,11 +15,11 @@ import (
 // public keys that are inactive cannot be used for authentication. This operation
 // can be used to disable a user's SSH public key as part of a key rotation work
 // flow. The SSH public key affected by this operation is used only for
-// authenticating the associated IAM user to an AWS CodeCommit repository. For more
-// information about using SSH keys to authenticate to an AWS CodeCommit
-// repository, see Set up AWS CodeCommit for SSH connections
+// authenticating the associated IAM user to an CodeCommit repository. For more
+// information about using SSH keys to authenticate to an CodeCommit repository,
+// see Set up CodeCommit for SSH connections
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
-// in the AWS CodeCommit User Guide.
+// in the CodeCommit User Guide.
 func (c *Client) UpdateSSHPublicKey(ctx context.Context, params *UpdateSSHPublicKeyInput, optFns ...func(*Options)) (*UpdateSSHPublicKeyOutput, error) {
 	if params == nil {
 		params = &UpdateSSHPublicKeyInput{}
@@ -45,8 +45,8 @@ type UpdateSSHPublicKeyInput struct {
 	SSHPublicKeyId *string
 
 	// The status to assign to the SSH public key. Active means that the key can be
-	// used for authentication with an AWS CodeCommit repository. Inactive means that
-	// the key cannot be used.
+	// used for authentication with an CodeCommit repository. Inactive means that the
+	// key cannot be used.
 	//
 	// This member is required.
 	Status types.StatusType

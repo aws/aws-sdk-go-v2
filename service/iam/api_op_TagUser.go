@@ -31,20 +31,21 @@ import (
 // User Guide.
 //
 // * Cost allocation - Use tags to help track which individuals and
-// teams are using which AWS resources.
+// teams are using which Amazon Web Services resources.
 //
-// * If any one of the tags is invalid or if
-// you exceed the allowed maximum number of tags, then the entire request fails and
-// the resource is not created. For more information about tagging, see Tagging IAM
-// resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the
-// IAM User Guide.
+// * If any one of the tags
+// is invalid or if you exceed the allowed maximum number of tags, then the entire
+// request fails and the resource is not created. For more information about
+// tagging, see Tagging IAM resources
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+// Guide.
 //
-// * AWS always interprets the tag Value as a single string. If
-// you need to store an array, you can store comma-separated values in the string.
-// However, you must interpret the value in your code.
+// * Amazon Web Services always interprets the tag Value as a single
+// string. If you need to store an array, you can store comma-separated values in
+// the string. However, you must interpret the value in your code.
 //
-// For more information about
-// tagging, see Tagging IAM identities
+// For more
+// information about tagging, see Tagging IAM identities
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 // Guide.
 func (c *Client) TagUser(ctx context.Context, params *TagUserInput, optFns ...func(*Options)) (*TagUserOutput, error) {
@@ -70,10 +71,10 @@ type TagUserInput struct {
 	// This member is required.
 	Tags []types.Tag
 
-	// The name of the IAM user to which you want to add tags. This parameter accepts
+	// The name of the IAM user to which you want to add tags. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters that consist of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: =,.@-
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
 	UserName *string

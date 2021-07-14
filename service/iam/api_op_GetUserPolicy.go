@@ -60,7 +60,7 @@ type GetUserPolicyInput struct {
 type GetUserPolicyOutput struct {
 
 	// The policy document. IAM stores policies in JSON format. However, resources that
-	// were created using AWS CloudFormation templates can be formatted in YAML. AWS
+	// were created using CloudFormation templates can be formatted in YAML.
 	// CloudFormation always converts a YAML policy to JSON format before submitting it
 	// to IAM.
 	//

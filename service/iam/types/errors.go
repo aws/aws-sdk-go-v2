@@ -289,7 +289,8 @@ func (e *KeyPairMismatchException) ErrorCode() string             { return "KeyP
 func (e *KeyPairMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create resources beyond the
-// current AWS account limits. The error message describes the limit exceeded.
+// current Amazon Web Services account limits. The error message describes the
+// limit exceeded.
 type LimitExceededException struct {
 	Message *string
 }
@@ -396,8 +397,8 @@ func (e *PolicyEvaluationException) ErrorMessage() string {
 func (e *PolicyEvaluationException) ErrorCode() string             { return "PolicyEvaluation" }
 func (e *PolicyEvaluationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request failed because AWS service role policies can only be attached to the
-// service-linked role for that service.
+// The request failed because Amazon Web Services service role policies can only be
+// attached to the service-linked role for that service.
 type PolicyNotAttachableException struct {
 	Message *string
 }

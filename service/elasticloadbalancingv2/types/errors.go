@@ -518,7 +518,8 @@ func (e *TooManyListenersException) ErrorMessage() string {
 func (e *TooManyListenersException) ErrorCode() string             { return "TooManyListeners" }
 func (e *TooManyListenersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit on the number of load balancers for your AWS account.
+// You've reached the limit on the number of load balancers for your Amazon Web
+// Services account.
 type TooManyLoadBalancersException struct {
 	Message *string
 }
@@ -591,7 +592,8 @@ func (e *TooManyTagsException) ErrorMessage() string {
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTags" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit on the number of target groups for your AWS account.
+// You've reached the limit on the number of target groups for your Amazon Web
+// Services account.
 type TooManyTargetGroupsException struct {
 	Message *string
 }

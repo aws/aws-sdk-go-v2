@@ -19,11 +19,11 @@ type AccessControlList struct {
 	AllowsPublicWriteAccess bool
 }
 
-// Specifies details for an account to associate with an Amazon Macie administrator
-// account.
+// Specifies the details of an account to associate with an Amazon Macie
+// administrator account.
 type AccountDetail struct {
 
-	// The AWS account ID for the account.
+	// The Amazon Web Services account ID for the account.
 	//
 	// This member is required.
 	AccountId *string
@@ -38,15 +38,16 @@ type AccountDetail struct {
 // an S3 bucket.
 type AccountLevelPermissions struct {
 
-	// The block public access settings for the AWS account that owns the bucket.
+	// The block public access settings for the Amazon Web Services account that owns
+	// the bucket.
 	BlockPublicAccess *BlockPublicAccess
 }
 
 // Provides information about the delegated Amazon Macie administrator account for
-// an AWS organization.
+// an Amazon Web Services organization.
 type AdminAccount struct {
 
-	// The AWS account ID for the account.
+	// The Amazon Web Services account ID for the account.
 	AccountId *string
 
 	// The current status of the account as the delegated administrator of Amazon Macie
@@ -62,7 +63,7 @@ type ApiCallDetails struct {
 	// finding.
 	Api *string
 
-	// The URL of the AWS service that provides the operation, for example:
+	// The URL of the Amazon Web Service that provides the operation, for example:
 	// s3.amazonaws.com.
 	ApiServiceName *string
 
@@ -77,14 +78,14 @@ type ApiCallDetails struct {
 
 // Provides information about an identity that performed an action on an affected
 // resource by using temporary security credentials. The credentials were obtained
-// using the AssumeRole operation of the AWS Security Token Service (AWS STS) API.
+// using the AssumeRole operation of the Security Token Service (STS) API.
 type AssumedRole struct {
 
-	// The AWS access key ID that identifies the credentials.
+	// The Amazon Web Services access key ID that identifies the credentials.
 	AccessKeyId *string
 
-	// The unique identifier for the AWS account that owns the entity that was used to
-	// get the credentials.
+	// The unique identifier for the Amazon Web Services account that owns the entity
+	// that was used to get the credentials.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the entity that was used to get the
@@ -99,23 +100,23 @@ type AssumedRole struct {
 	SessionContext *SessionContext
 }
 
-// Provides information about an AWS account and entity that performed an action on
-// an affected resource. The action was performed using the credentials for an AWS
-// account other than your own account.
+// Provides information about an Amazon Web Services account and entity that
+// performed an action on an affected resource. The action was performed using the
+// credentials for an Amazon Web Services account other than your own account.
 type AwsAccount struct {
 
-	// The unique identifier for the AWS account.
+	// The unique identifier for the Amazon Web Services account.
 	AccountId *string
 
 	// The unique identifier for the entity that performed the action.
 	PrincipalId *string
 }
 
-// Provides information about an AWS service that performed an action on an
+// Provides information about an Amazon Web Service that performed an action on an
 // affected resource.
 type AwsService struct {
 
-	// The name of the AWS service that performed the action.
+	// The name of the Amazon Web Service that performed the action.
 	InvokedBy *string
 }
 
@@ -197,9 +198,9 @@ type BucketCountByEffectivePermission struct {
 // in the Amazon Simple Storage Service User Guide.
 type BucketCountByEncryptionType struct {
 
-	// The total number of buckets that use an AWS Key Management Service (AWS KMS)
-	// customer master key (CMK) to encrypt new objects by default. These buckets use
-	// AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption
+	// The total number of buckets that use an Key Management Service (KMS) customer
+	// master key (CMK) to encrypt new objects by default. These buckets use Amazon Web
+	// Services managed KMS encryption (AWS-KMS) or customer managed KMS encryption
 	// (SSE-KMS) by default.
 	KmsManaged int64
 
@@ -219,23 +220,24 @@ type BucketCountByEncryptionType struct {
 }
 
 // Provides information about the number of S3 buckets that are or aren't shared
-// with other AWS accounts.
+// with other Amazon Web Services accounts.
 type BucketCountBySharedAccessType struct {
 
-	// The total number of buckets that are shared with an AWS account that isn't part
-	// of the same Amazon Macie organization.
+	// The total number of buckets that are shared with an Amazon Web Services account
+	// that isn't part of the same Amazon Macie organization.
 	External int64
 
-	// The total number of buckets that are shared with an AWS account that's part of
-	// the same Amazon Macie organization.
+	// The total number of buckets that are shared with an Amazon Web Services account
+	// that's part of the same Amazon Macie organization.
 	Internal int64
 
-	// The total number of buckets that aren't shared with other AWS accounts.
+	// The total number of buckets that aren't shared with other Amazon Web Services
+	// accounts.
 	NotShared int64
 
 	// The total number of buckets that Amazon Macie wasn't able to evaluate shared
 	// access settings for. Macie can't determine whether these buckets are shared with
-	// other AWS accounts.
+	// other Amazon Web Services accounts.
 	Unknown int64
 }
 
@@ -310,7 +312,7 @@ type BucketLevelPermissions struct {
 // Provides information about an S3 bucket that Amazon Macie monitors and analyzes.
 type BucketMetadata struct {
 
-	// The unique identifier for the AWS account that owns the bucket.
+	// The unique identifier for the Amazon Web Services account that owns the bucket.
 	AccountId *string
 
 	// Specifies whether the bucket policy for the bucket requires server-side
@@ -378,31 +380,32 @@ type BucketMetadata struct {
 	// those settings.
 	PublicAccess *BucketPublicAccess
 
-	// The AWS Region that hosts the bucket.
+	// The Amazon Web Services Region that hosts the bucket.
 	Region *string
 
 	// Specifies whether the bucket is configured to replicate one or more objects to
-	// buckets for other AWS accounts and, if so, which accounts.
+	// buckets for other Amazon Web Services accounts and, if so, which accounts.
 	ReplicationDetails *ReplicationDetails
 
 	// Specifies whether the bucket encrypts new objects by default and, if so, the
 	// type of server-side encryption that's used.
 	ServerSideEncryption *BucketServerSideEncryption
 
-	// Specifies whether the bucket is shared with another AWS account. Possible values
-	// are:
+	// Specifies whether the bucket is shared with another Amazon Web Services account.
+	// Possible values are:
 	//
-	// * EXTERNAL - The bucket is shared with an AWS account that isn't part of
-	// the same Amazon Macie organization.
+	// * EXTERNAL - The bucket is shared with an Amazon Web
+	// Services account that isn't part of the same Amazon Macie organization.
 	//
-	// * INTERNAL - The bucket is shared with an
-	// AWS account that's part of the same Amazon Macie organization.
+	// *
+	// INTERNAL - The bucket is shared with an Amazon Web Services account that's part
+	// of the same Amazon Macie organization.
 	//
-	// * NOT_SHARED -
-	// The bucket isn't shared with other AWS accounts.
+	// * NOT_SHARED - The bucket isn't shared
+	// with other Amazon Web Services accounts.
 	//
-	// * UNKNOWN - Amazon Macie
-	// wasn't able to evaluate the shared access settings for the bucket.
+	// * UNKNOWN - Amazon Macie wasn't able
+	// to evaluate the shared access settings for the bucket.
 	SharedAccess SharedAccess
 
 	// The total storage size, in bytes, of the bucket. If versioning is enabled for
@@ -488,8 +491,8 @@ type BucketPublicAccess struct {
 // in the Amazon Simple Storage Service User Guide.
 type BucketServerSideEncryption struct {
 
-	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key
-	// Management Service (AWS KMS) customer master key (CMK) that's used by default to
+	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the Key
+	// Management Service (KMS) customer master key (CMK) that's used by default to
 	// encrypt objects that are added to the bucket. This value is null if the bucket
 	// uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't
 	// encrypt new objects by default.
@@ -502,12 +505,12 @@ type BucketServerSideEncryption struct {
 	// encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption
 	// (SSE-S3).
 	//
-	// * aws:kms - New objects are encrypted with an AWS KMS CMK, specified
-	// by the kmsMasterKeyId property, and use AWS managed AWS KMS encryption (AWS-KMS)
-	// or customer managed AWS KMS encryption (SSE-KMS).
+	// * aws:kms - New objects are encrypted with an KMS CMK, specified by
+	// the kmsMasterKeyId property, and use Amazon Web Services managed KMS encryption
+	// (AWS-KMS) or customer managed KMS encryption (SSE-KMS).
 	//
-	// * NONE - New objects aren't
-	// encrypted by default. Default encryption is disabled for the bucket.
+	// * NONE - New objects
+	// aren't encrypted by default. Default encryption is disabled for the bucket.
 	Type Type
 }
 
@@ -531,22 +534,20 @@ type BucketSortCriteria struct {
 // workbook, CSV file, or TSV file.
 type Cell struct {
 
-	// The location of the cell, as an absolute cell reference, that contains the data.
-	// For example, Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This
-	// value is null for CSV and TSV files.
+	// The location of the cell, as an absolute cell reference, that contains the
+	// sensitive data, for example Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel
+	// workbook. This value is null for CSV and TSV files.
 	CellReference *string
 
-	// The column number of the column that contains the data. For a Microsoft Excel
-	// workbook, this value correlates to the alphabetical character(s) for a column
-	// identifier. For example, 1 for column A, 2 for column B, and so on.
+	// The column number of the column that contains the sensitive data. For a
+	// Microsoft Excel workbook, this value correlates to the alphabetical character(s)
+	// for a column identifier, for example: 1 for column A, 2 for column B, and so on.
 	Column int64
 
-	// The name of the column that contains the data, if available. This value is also
-	// null if Amazon Macie detects sensitive data in the name of any column in the
-	// file.
+	// The name of the column that contains the sensitive data, if available.
 	ColumnName *string
 
-	// The row number of the row that contains the data.
+	// The row number of the row that contains the sensitive data.
 	Row int64
 }
 
@@ -567,7 +568,7 @@ type ClassificationDetails struct {
 	// The unique identifier for the classification job that produced the finding.
 	JobId *string
 
-	// The status and other details for the finding.
+	// The status and other details of the finding.
 	Result *ClassificationResult
 }
 
@@ -619,16 +620,16 @@ type ClassificationResultStatus struct {
 	// The status of the finding. Possible values are:
 	//
 	// * COMPLETE - Amazon Macie
-	// successfully completed its analysis of the object that the finding applies
+	// successfully completed its analysis of the S3 object that the finding applies
 	// to.
 	//
-	// * PARTIAL - Macie analyzed only a subset of the data in the object that the
-	// finding applies to. For example, the object is an archive file that contains
+	// * PARTIAL - Macie analyzed only a subset of the data in the S3 object that
+	// the finding applies to. For example, the object is an archive file that contains
 	// files in an unsupported format.
 	//
-	// * SKIPPED - Macie wasn't able to analyze the
-	// object that the finding applies to. For example, the object is a malformed file
-	// or a file that uses an unsupported format.
+	// * SKIPPED - Macie wasn't able to analyze the S3
+	// object that the finding applies to. For example, the object is a file in an
+	// unsupported format.
 	Code *string
 
 	// A brief description of the status of the finding. Amazon Macie uses this value
@@ -784,15 +785,14 @@ type DomainDetails struct {
 
 // Provides information about an identity that performed an action on an affected
 // resource by using temporary security credentials. The credentials were obtained
-// using the GetFederationToken operation of the AWS Security Token Service (AWS
-// STS) API.
+// using the GetFederationToken operation of the Security Token Service (STS) API.
 type FederatedUser struct {
 
-	// The AWS access key ID that identifies the credentials.
+	// The Amazon Web Services access key ID that identifies the credentials.
 	AccessKeyId *string
 
-	// The unique identifier for the AWS account that owns the entity that was used to
-	// get the credentials.
+	// The unique identifier for the Amazon Web Services account that owns the entity
+	// that was used to get the credentials.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the entity that was used to get the
@@ -810,11 +810,11 @@ type FederatedUser struct {
 // Provides the details of a finding.
 type Finding struct {
 
-	// The unique identifier for the AWS account that the finding applies to. This is
-	// typically the account that owns the affected resource.
+	// The unique identifier for the Amazon Web Services account that the finding
+	// applies to. This is typically the account that owns the affected resource.
 	AccountId *string
 
-	// Specifies whether the finding is archived.
+	// Specifies whether the finding is archived (suppressed).
 	Archived bool
 
 	// The category of the finding. Possible values are: CLASSIFICATION, for a
@@ -841,14 +841,14 @@ type Finding struct {
 	// generates and assigns to a finding when it creates the finding.
 	Id *string
 
-	// The AWS partition that Amazon Macie created the finding in.
+	// The Amazon Web Services partition that Amazon Macie created the finding in.
 	Partition *string
 
 	// The details of a policy finding. This value is null for a sensitive data
 	// finding.
 	PolicyDetails *PolicyDetails
 
-	// The AWS Region that Amazon Macie created the finding in.
+	// The Amazon Web Services Region that Amazon Macie created the finding in.
 	Region *string
 
 	// The resources that the finding applies to.
@@ -968,12 +968,12 @@ type GroupCount struct {
 	GroupKey *string
 }
 
-// Provides information about an AWS Identity and Access Management (IAM) user who
+// Provides information about an Identity and Access Management (IAM) user who
 // performed an action on an affected resource.
 type IamUser struct {
 
-	// The unique identifier for the AWS account that's associated with the IAM user
-	// who performed the action.
+	// The unique identifier for the Amazon Web Services account that's associated with
+	// the IAM user who performed the action.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the principal that performed the action. The
@@ -991,7 +991,7 @@ type IamUser struct {
 // received by an account.
 type Invitation struct {
 
-	// The AWS account ID for the account that sent the invitation.
+	// The Amazon Web Services account ID for the account that sent the invitation.
 	AccountId *string
 
 	// The unique identifier for the invitation. Amazon Macie uses this identifier to
@@ -1178,10 +1178,10 @@ type JobSummary struct {
 	// can contain a bucketCriteria object or a bucketDefinitions array, not both.
 	BucketCriteria *S3BucketCriteriaForJob
 
-	// An array of objects, one for each AWS account that owns specific S3 buckets for
-	// the job to analyze. Each object specifies the account ID for an account and one
-	// or more buckets to analyze for that account. A job's definition can contain a
-	// bucketDefinitions array or a bucketCriteria object, not both.
+	// An array of objects, one for each Amazon Web Services account that owns specific
+	// S3 buckets for the job to analyze. Each object specifies the account ID for an
+	// account and one or more buckets to analyze for that account. A job's definition
+	// can contain a bucketDefinitions array or a bucketCriteria object, not both.
 	BucketDefinitions []S3BucketDefinitionForJob
 
 	// The date and time, in UTC and extended ISO 8601 format, when the job was
@@ -1319,7 +1319,7 @@ type ListJobsSortCriteria struct {
 // Macie monitors and analyzes.
 type MatchingBucket struct {
 
-	// The unique identifier for the AWS account that owns the bucket.
+	// The unique identifier for the Amazon Web Services account that owns the bucket.
 	AccountId *string
 
 	// The name of the bucket.
@@ -1375,8 +1375,8 @@ type MatchingBucket struct {
 	UnclassifiableObjectSizeInBytes *ObjectLevelStatistics
 }
 
-// Provides statistical data and other information about an AWS resource that
-// Amazon Macie monitors and analyzes.
+// Provides statistical data and other information about an Amazon Web Services
+// resource that Amazon Macie monitors and analyzes.
 type MatchingResource struct {
 
 	// The details of an S3 bucket that Amazon Macie monitors and analyzes.
@@ -1387,10 +1387,10 @@ type MatchingResource struct {
 // administrator account.
 type Member struct {
 
-	// The AWS account ID for the account.
+	// The Amazon Web Services account ID for the account.
 	AccountId *string
 
-	// The AWS account ID for the administrator account.
+	// The Amazon Web Services account ID for the administrator account.
 	AdministratorAccountId *string
 
 	// The Amazon Resource Name (ARN) of the account.
@@ -1404,9 +1404,9 @@ type Member struct {
 	// Macie invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
-	// (Deprecated) The AWS account ID for the administrator account. This property has
-	// been replaced by the administratorAccountId property and is retained only for
-	// backward compatibility.
+	// (Deprecated) The Amazon Web Services account ID for the administrator account.
+	// This property has been replaced by the administratorAccountId property and is
+	// retained only for backward compatibility.
 	MasterAccountId *string
 
 	// The current status of the relationship between the account and the administrator
@@ -1444,9 +1444,9 @@ type ObjectCountByEncryptionType struct {
 	// objects use customer-provided server-side encryption (SSE-C).
 	CustomerManaged int64
 
-	// The total number of objects that are encrypted with an AWS Key Management
-	// Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS
-	// encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
+	// The total number of objects that are encrypted with an Key Management Service
+	// (KMS) customer master key (CMK). The objects use Amazon Web Services managed KMS
+	// encryption (AWS-KMS) or customer managed KMS encryption (SSE-KMS).
 	KmsManaged int64
 
 	// The total number of objects that are encrypted with an Amazon S3 managed key.
@@ -1492,32 +1492,38 @@ type ObjectLevelStatistics struct {
 type Occurrences struct {
 
 	// An array of objects, one for each occurrence of sensitive data in a Microsoft
-	// Excel workbook, CSV file, or TSV file. Each object specifies the cell or field
-	// that contains the data. This value is null for all other types of files.
+	// Excel workbook, CSV file, or TSV file. This value is null for all other types of
+	// files.Each Cell object specifies a cell or field that contains the sensitive
+	// data.
 	Cells []Cell
 
-	// An array of objects, one for each occurrence of sensitive data in a Microsoft
-	// Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file.
-	// Each object specifies the line that contains the data, and the position of the
-	// data on that line. This value is often null for file types that are supported by
-	// Cell, Page, or Record objects. Exceptions are the locations of data in:
-	// unstructured sections of an otherwise structured file, such as a comment in a
-	// file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or
-	// TSV file that has any column names that contain sensitive data.
+	// An array of objects, one for each occurrence of sensitive data in a non-binary
+	// text file, such as an HTML, TXT, or XML file. Each Range object specifies a line
+	// or inclusive range of lines that contains the sensitive data, and the position
+	// of the data on the specified line or lines. This value is often null for file
+	// types that are supported by Cell, Page, or Record objects. Exceptions are the
+	// location of sensitive data in: unstructured sections of an otherwise structured
+	// file, such as a comment in a file; a malformed file that Amazon Macie analyzes
+	// as plain text; and, a CSV or TSV file that has any column names that contain
+	// sensitive data.
 	LineRanges []Range
 
 	// Reserved for future use.
 	OffsetRanges []Range
 
 	// An array of objects, one for each occurrence of sensitive data in an Adobe
-	// Portable Document Format file. Each object specifies the page that contains the
-	// data. This value is null for all other types of files.
+	// Portable Document Format file. This value is null for all other types of
+	// files.Each Page object specifies a page that contains the sensitive data.
 	Pages []Page
 
 	// An array of objects, one for each occurrence of sensitive data in an Apache Avro
-	// object container or Apache Parquet file. Each object specifies the record index
-	// and the path to the field in the record that contains the data. This value is
-	// null for all other types of files.
+	// object container, Apache Parquet file, JSON file, or JSON Lines file. This value
+	// is null for all other types of files. For an Avro object container or Parquet
+	// file, each Record object specifies a record index and the path to a field in a
+	// record that contains the sensitive data. For a JSON or JSON Lines file, each
+	// Record object specifies the path to a field or array that contains the sensitive
+	// data. For a JSON Lines file, it also specifies the index of the line that
+	// contains the data.
 	Records []Record
 }
 
@@ -1531,7 +1537,7 @@ type Page struct {
 	// Reserved for future use.
 	OffsetRange *Range
 
-	// The page number of the page that contains the data.
+	// The page number of the page that contains the sensitive data.
 	PageNumber int64
 }
 
@@ -1545,8 +1551,8 @@ type PolicyDetails struct {
 	Actor *FindingActor
 }
 
-// Provides details about the location of an occurrence of sensitive data in a
-// Microsoft Word document or non-binary text file.
+// Specifies the location of an occurrence of sensitive data in a non-binary text
+// file, such as an HTML, TXT, or XML file.
 type Range struct {
 
 	// The number of lines from the beginning of the file to the end of the sensitive
@@ -1557,31 +1563,38 @@ type Range struct {
 	// sensitive data.
 	Start int64
 
-	// The column number for the column that contains the data, if the file contains
-	// structured data.
+	// The number of characters, with spaces and starting from 1, from the beginning of
+	// the first line that contains the sensitive data (start) to the beginning of the
+	// sensitive data.
 	StartColumn int64
 }
 
 // Specifies the location of an occurrence of sensitive data in an Apache Avro
-// object container or Apache Parquet file.
+// object container, Apache Parquet file, JSON file, or JSON Lines file.
 type Record struct {
 
-	// The path, as a JSONPath expression, to the field in the record that contains the
-	// data. If Amazon Macie detects sensitive data in the name of any element in the
-	// path, Macie omits this field. If the name of an element exceeds 20 characters,
-	// Macie truncates the name by removing characters from the beginning of the name.
-	// If the resulting full path exceeds 250 characters, Macie also truncates the
-	// path, starting with the first element in the path, until the path contains 250
-	// or fewer characters.
+	// The path, as a JSONPath expression, to the sensitive data. For an Avro object
+	// container or Parquet file, this is the path to the field in the record
+	// (recordIndex) that contains the data. For a JSON or JSON Lines file, this is the
+	// path to the field or array that contains the data. If the data is a value in an
+	// array, the path also indicates which value contains the data. If Amazon Macie
+	// detects sensitive data in the name of any element in the path, Macie omits this
+	// field. If the name of an element exceeds 20 characters, Macie truncates the name
+	// by removing characters from the beginning of the name. If the resulting full
+	// path exceeds 250 characters, Macie also truncates the path, starting with the
+	// first element in the path, until the path contains 250 or fewer characters.
 	JsonPath *string
 
-	// The record index, starting from 0, for the record that contains the data.
+	// For an Avro object container or Parquet file, the record index, starting from 0,
+	// for the record that contains the sensitive data. For a JSON Lines file, the line
+	// index, starting from 0, for the line that contains the sensitive data. This
+	// value is always 0 for JSON files.
 	RecordIndex int64
 }
 
 // Provides information about settings that define whether one or more objects in
-// an S3 bucket are replicated to S3 buckets for other AWS accounts and, if so,
-// which accounts.
+// an S3 bucket are replicated to S3 buckets for other Amazon Web Services accounts
+// and, if so, which accounts.
 type ReplicationDetails struct {
 
 	// Specifies whether the bucket is configured to replicate one or more objects to
@@ -1589,27 +1602,26 @@ type ReplicationDetails struct {
 	Replicated bool
 
 	// Specifies whether the bucket is configured to replicate one or more objects to
-	// an AWS account that isn't part of the same Amazon Macie organization.
+	// an Amazon Web Services account that isn't part of the same Amazon Macie
+	// organization.
 	ReplicatedExternally bool
 
-	// An array of AWS account IDs, one for each AWS account that the bucket is
-	// configured to replicate one or more objects to.
+	// An array of Amazon Web Services account IDs, one for each Amazon Web Services
+	// account that the bucket is configured to replicate one or more objects to.
 	ReplicationAccounts []string
 }
 
 // Provides information about the resources that a finding applies to.
 type ResourcesAffected struct {
 
-	// An array of objects, one for each S3 bucket that the finding applies to. Each
-	// object provides a set of metadata about an affected S3 bucket.
+	// The details of the S3 bucket that the finding applies to.
 	S3Bucket *S3Bucket
 
-	// An array of objects, one for each S3 object that the finding applies to. Each
-	// object provides a set of metadata about an affected S3 object.
+	// The details of the S3 object that the finding applies to.
 	S3Object *S3Object
 }
 
-// Provides information about an S3 bucket that a finding applies to.
+// Provides information about the S3 bucket that a finding applies to.
 type S3Bucket struct {
 
 	// Specifies whether the bucket policy for the bucket requires server-side
@@ -1645,7 +1657,8 @@ type S3Bucket struct {
 	// The name of the bucket.
 	Name *string
 
-	// The display name and AWS account ID for the user who owns the bucket.
+	// The display name and Amazon Web Services account ID for the user who owns the
+	// bucket.
 	Owner *S3BucketOwner
 
 	// The permissions settings that determine whether the bucket is publicly
@@ -1670,11 +1683,12 @@ type S3BucketCriteriaForJob struct {
 	Includes *CriteriaBlockForJob
 }
 
-// Specifies an AWS account that owns S3 buckets for a classification job to
-// analyze, and one or more specific buckets to analyze for that account.
+// Specifies an Amazon Web Services account that owns S3 buckets for a
+// classification job to analyze, and one or more specific buckets to analyze for
+// that account.
 type S3BucketDefinitionForJob struct {
 
-	// The unique identifier for the AWS account that owns the buckets.
+	// The unique identifier for the Amazon Web Services account that owns the buckets.
 	//
 	// This member is required.
 	AccountId *string
@@ -1691,7 +1705,7 @@ type S3BucketOwner struct {
 	// The display name of the user who owns the bucket.
 	DisplayName *string
 
-	// The AWS account ID for the user who owns the bucket.
+	// The Amazon Web Services account ID for the user who owns the bucket.
 	Id *string
 }
 
@@ -1704,9 +1718,9 @@ type S3Destination struct {
 	// This member is required.
 	BucketName *string
 
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
-	// customer master key (CMK) to use for encryption of the results. This must be the
-	// ARN of an existing CMK that's in the same AWS Region as the bucket.
+	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) customer
+	// master key (CMK) to use for encryption of the results. This must be the ARN of
+	// an existing CMK that's in the same Amazon Web Services Region as the bucket.
 	//
 	// This member is required.
 	KmsKeyArn *string
@@ -1731,10 +1745,10 @@ type S3JobDefinition struct {
 	// both.
 	BucketCriteria *S3BucketCriteriaForJob
 
-	// An array of objects, one for each AWS account that owns specific S3 buckets to
-	// analyze. Each object specifies the account ID for an account and one or more
-	// buckets to analyze for that account. A job's definition can contain a
-	// bucketDefinitions array or a bucketCriteria object, not both.
+	// An array of objects, one for each Amazon Web Services account that owns specific
+	// S3 buckets to analyze. Each object specifies the account ID for an account and
+	// one or more buckets to analyze for that account. A job's definition can contain
+	// a bucketDefinitions array or a bucketCriteria object, not both.
 	BucketDefinitions []S3BucketDefinitionForJob
 
 	// The property- and tag-based conditions that determine which S3 objects to
@@ -1743,7 +1757,7 @@ type S3JobDefinition struct {
 	Scoping *Scoping
 }
 
-// Provides information about an S3 object that a finding applies to.
+// Provides information about the S3 object that a finding applies to.
 type S3Object struct {
 
 	// The Amazon Resource Name (ARN) of the bucket that contains the object.
@@ -1817,7 +1831,7 @@ type SearchResourcesBucketCriteria struct {
 }
 
 // Specifies a property- or tag-based filter condition for including or excluding
-// AWS resources from the query results.
+// Amazon Web Services resources from the query results.
 type SearchResourcesCriteria struct {
 
 	// A property-based condition that defines a property, operator, and one or more
@@ -1830,7 +1844,7 @@ type SearchResourcesCriteria struct {
 }
 
 // Specifies property- and tag-based conditions that define filter criteria for
-// including or excluding AWS resources from the query results.
+// including or excluding Amazon Web Services resources from the query results.
 type SearchResourcesCriteriaBlock struct {
 
 	// An array of objects, one for each property- or tag-based condition that includes
@@ -1839,8 +1853,8 @@ type SearchResourcesCriteriaBlock struct {
 	And []SearchResourcesCriteria
 }
 
-// Specifies a property-based filter condition that determines which AWS resources
-// are included or excluded from the query results.
+// Specifies a property-based filter condition that determines which Amazon Web
+// Services resources are included or excluded from the query results.
 type SearchResourcesSimpleCriterion struct {
 
 	// The operator to use in the condition. Valid values are EQ (equals) and NE (not
@@ -1855,7 +1869,7 @@ type SearchResourcesSimpleCriterion struct {
 	// each supported property (key) are:
 	//
 	// * ACCOUNT_ID - A string that represents the
-	// unique identifier for the AWS account that owns the resource.
+	// unique identifier for the Amazon Web Services account that owns the resource.
 	//
 	// *
 	// S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value
@@ -1876,8 +1890,8 @@ type SearchResourcesSimpleCriterion struct {
 	Values []string
 }
 
-// Specifies criteria for sorting the results of a query for information about AWS
-// resources that Amazon Macie monitors and analyzes.
+// Specifies criteria for sorting the results of a query for information about
+// Amazon Web Services resources that Amazon Macie monitors and analyzes.
 type SearchResourcesSortCriteria struct {
 
 	// The property to sort the results by.
@@ -1889,8 +1903,8 @@ type SearchResourcesSortCriteria struct {
 	OrderBy OrderBy
 }
 
-// Specifies a tag-based filter condition that determines which AWS resources are
-// included or excluded from the query results.
+// Specifies a tag-based filter condition that determines which Amazon Web Services
+// resources are included or excluded from the query results.
 type SearchResourcesTagCriterion struct {
 
 	// The operator to use in the condition. Valid values are EQ (equals) and NE (not
@@ -1915,24 +1929,24 @@ type SearchResourcesTagCriterionPair struct {
 }
 
 // Specifies configuration settings that determine which findings are published to
-// AWS Security Hub automatically. For information about how Macie publishes
-// findings to Security Hub, see Amazon Macie integration with Security Hub
+// Security Hub automatically. For information about how Macie publishes findings
+// to Security Hub, see Amazon Macie integration with Security Hub
 // (https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html) in
 // the Amazon Macie User Guide.
 type SecurityHubConfiguration struct {
 
-	// Specifies whether to publish sensitive data findings to AWS Security Hub. If you
-	// set this value to true, Amazon Macie automatically publishes all sensitive data
+	// Specifies whether to publish sensitive data findings to Security Hub. If you set
+	// this value to true, Amazon Macie automatically publishes all sensitive data
 	// findings that weren't suppressed by a findings filter. The default value is
 	// false.
 	//
 	// This member is required.
 	PublishClassificationFindings bool
 
-	// Specifies whether to publish policy findings to AWS Security Hub. If you set
-	// this value to true, Amazon Macie automatically publishes all new and updated
-	// policy findings that weren't suppressed by a findings filter. The default value
-	// is true.
+	// Specifies whether to publish policy findings to Security Hub. If you set this
+	// value to true, Amazon Macie automatically publishes all new and updated policy
+	// findings that weren't suppressed by a findings filter. The default value is
+	// true.
 	//
 	// This member is required.
 	PublishPolicyFindings bool
@@ -1943,11 +1957,11 @@ type SecurityHubConfiguration struct {
 type SensitiveDataItem struct {
 
 	// The category of sensitive data that was detected. For example: CREDENTIALS, for
-	// credentials data such as private keys or AWS secret keys; FINANCIAL_INFORMATION,
-	// for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for
-	// personal health information, such as health insurance identification numbers, or
-	// personally identifiable information, such as driver's license identification
-	// numbers.
+	// credentials data such as private keys or Amazon Web Services secret keys;
+	// FINANCIAL_INFORMATION, for financial data such as credit card numbers; or,
+	// PERSONAL_INFORMATION, for personal health information, such as health insurance
+	// identification numbers, or personally identifiable information, such as driver's
+	// license identification numbers.
 	Category SensitiveDataItemCategory
 
 	// An array of objects, one for each type of sensitive data that was detected. Each
@@ -1968,10 +1982,9 @@ type ServerSideEncryption struct {
 	// encrypted using server-side encryption, this value is NONE.
 	EncryptionType EncryptionType
 
-	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key
-	// Management Service (AWS KMS) customer master key (CMK) that's used to encrypt
-	// data in the bucket or the object. If an AWS KMS CMK isn't used, this value is
-	// null.
+	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the Key
+	// Management Service (KMS) customer master key (CMK) that's used to encrypt data
+	// in the bucket or the object. If an KMS CMK isn't used, this value is null.
 	KmsMasterKeyId *string
 }
 
@@ -2018,8 +2031,8 @@ type SessionContextAttributes struct {
 // that were issued to an entity.
 type SessionIssuer struct {
 
-	// The unique identifier for the AWS account that owns the entity that was used to
-	// get the credentials.
+	// The unique identifier for the Amazon Web Services account that owns the entity
+	// that was used to get the credentials.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the source account, IAM user, or role that was
@@ -2067,7 +2080,7 @@ type SimpleCriterionForJob struct {
 	// each supported property (key) are:
 	//
 	// * ACCOUNT_ID - A string that represents the
-	// unique identifier for the AWS account that owns the bucket.
+	// unique identifier for the Amazon Web Services account that owns the bucket.
 	//
 	// *
 	// S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value
@@ -2226,7 +2239,7 @@ type TagValuePair struct {
 // processed.
 type UnprocessedAccount struct {
 
-	// The AWS account ID for the account that the request applies to.
+	// The Amazon Web Services account ID for the account that the request applies to.
 	AccountId *string
 
 	// The source of the issue or delay in processing the request.
@@ -2260,7 +2273,8 @@ type UsageByAccount struct {
 // Provides quota and aggregated usage data for an Amazon Macie account.
 type UsageRecord struct {
 
-	// The unique identifier for the AWS account that the data applies to.
+	// The unique identifier for the Amazon Web Services account that the data applies
+	// to.
 	AccountId *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when the free trial
@@ -2291,17 +2305,17 @@ type UsageStatisticsFilter struct {
 	// specify only one value. Valid values for each supported field are:
 	//
 	// * accountId
-	// - The unique identifier for an AWS account.
+	// - The unique identifier for an Amazon Web Services account.
 	//
-	// * freeTrialStartDate - The date and
-	// time, in UTC and extended ISO 8601 format, when the free trial started for an
-	// account.
+	// *
+	// freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format,
+	// when the free trial started for an account.
 	//
-	// * serviceLimit - A Boolean (true or false) value that indicates
-	// whether an account has reached its monthly quota.
+	// * serviceLimit - A Boolean (true or
+	// false) value that indicates whether an account has reached its monthly quota.
 	//
-	// * total - A string that
-	// represents the current estimated cost for an account.
+	// *
+	// total - A string that represents the current estimated cost for an account.
 	Values []string
 }
 
@@ -2342,43 +2356,42 @@ type UsageTotal struct {
 type UserIdentity struct {
 
 	// If the action was performed with temporary security credentials that were
-	// obtained using the AssumeRole operation of the AWS Security Token Service (AWS
-	// STS) API, the identifiers, session context, and other details about the
-	// identity.
+	// obtained using the AssumeRole operation of the Security Token Service (STS) API,
+	// the identifiers, session context, and other details about the identity.
 	AssumedRole *AssumedRole
 
-	// If the action was performed using the credentials for another AWS account, the
-	// details of that account.
+	// If the action was performed using the credentials for another Amazon Web
+	// Services account, the details of that account.
 	AwsAccount *AwsAccount
 
-	// If the action was performed by an AWS account that belongs to an AWS service,
-	// the name of the service.
+	// If the action was performed by an Amazon Web Services account that belongs to an
+	// Amazon Web Service, the name of the service.
 	AwsService *AwsService
 
 	// If the action was performed with temporary security credentials that were
-	// obtained using the GetFederationToken operation of the AWS Security Token
-	// Service (AWS STS) API, the identifiers, session context, and other details about
-	// the identity.
+	// obtained using the GetFederationToken operation of the Security Token Service
+	// (STS) API, the identifiers, session context, and other details about the
+	// identity.
 	FederatedUser *FederatedUser
 
-	// If the action was performed using the credentials for an AWS Identity and Access
+	// If the action was performed using the credentials for an Identity and Access
 	// Management (IAM) user, the name and other details about the user.
 	IamUser *IamUser
 
-	// If the action was performed using the credentials for your AWS account, the
-	// details of your account.
+	// If the action was performed using the credentials for your Amazon Web Services
+	// account, the details of your account.
 	Root *UserIdentityRoot
 
 	// The type of entity that performed the action.
 	Type UserIdentityType
 }
 
-// Provides information about an AWS account and entity that performed an action on
-// an affected resource. The action was performed using the credentials for your
-// AWS account.
+// Provides information about an Amazon Web Services account and entity that
+// performed an action on an affected resource. The action was performed using the
+// credentials for your Amazon Web Services account.
 type UserIdentityRoot struct {
 
-	// The unique identifier for the AWS account.
+	// The unique identifier for the Amazon Web Services account.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the principal that performed the action. The
@@ -2403,7 +2416,7 @@ type UserPausedDetails struct {
 	// will expire and be cancelled if you don't resume it first.
 	JobExpiresAt *time.Time
 
-	// The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to
+	// The Amazon Resource Name (ARN) of the Health event that Amazon Macie sent to
 	// notify you of the job or job run's pending expiration and cancellation. This
 	// value is null if a job has been paused for less than 23 days.
 	JobImminentExpirationHealthEventArn *string

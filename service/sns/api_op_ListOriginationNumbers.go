@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the calling AWS account's dedicated origination numbers and their
-// metadata. For more information about origination numbers, see Origination
-// numbers
+// Lists the calling account's dedicated origination numbers and their metadata.
+// For more information about origination numbers, see Origination numbers
 // (https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html)
 // in the Amazon SNS Developer Guide.
 func (c *Client) ListOriginationNumbers(ctx context.Context, params *ListOriginationNumbersInput, optFns ...func(*Options)) (*ListOriginationNumbersOutput, error) {

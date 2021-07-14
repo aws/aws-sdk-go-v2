@@ -23,9 +23,10 @@ import (
 // service-linked role, you must first remove those resources from the linked
 // service and then submit the deletion request again. Resources are specific to
 // the service that is linked to the role. For more information about removing
-// resources from a service, see the AWS documentation
+// resources from a service, see the Amazon Web Services documentation
 // (http://docs.aws.amazon.com/) for your service. For more information about
-// service-linked roles, see Roles terms and concepts: AWS service-linked role
+// service-linked roles, see Roles terms and concepts: Amazon Web Services
+// service-linked role
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role)
 // in the IAM User Guide.
 func (c *Client) DeleteServiceLinkedRole(ctx context.Context, params *DeleteServiceLinkedRoleInput, optFns ...func(*Options)) (*DeleteServiceLinkedRoleOutput, error) {

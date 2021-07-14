@@ -11,7 +11,7 @@ import (
 )
 
 // Disables an account as the delegated Amazon Macie administrator account for an
-// AWS organization.
+// Amazon Web Services organization.
 func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *DisableOrganizationAdminAccountInput, optFns ...func(*Options)) (*DisableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &DisableOrganizationAdminAccountInput{}
@@ -29,7 +29,8 @@ func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *Di
 
 type DisableOrganizationAdminAccountInput struct {
 
-	// The AWS account ID of the delegated Amazon Macie administrator account.
+	// The Amazon Web Services account ID of the delegated Amazon Macie administrator
+	// account.
 	//
 	// This member is required.
 	AdminAccountId *string

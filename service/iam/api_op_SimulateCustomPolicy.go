@@ -13,19 +13,20 @@ import (
 )
 
 // Simulate how a set of IAM policies and optionally a resource-based policy works
-// with a list of API operations and AWS resources to determine the policies'
-// effective permissions. The policies are provided as strings. The simulation does
-// not perform the API operations; it only checks the authorization to determine if
-// the simulated policies allow or deny the operations. You can simulate resources
-// that don't exist in your account. If you want to simulate existing policies that
-// are attached to an IAM user, group, or role, use SimulatePrincipalPolicy
-// instead. Context keys are variables that are maintained by AWS and its services
-// and which provide details about the context of an API query request. You can use
-// the Condition element of an IAM policy to evaluate context keys. To get the list
-// of context keys that the policies require for correct simulation, use
-// GetContextKeysForCustomPolicy. If the output is long, you can use MaxItems and
-// Marker parameters to paginate the results. For more information about using the
-// policy simulator, see Testing IAM policies with the IAM policy simulator
+// with a list of API operations and Amazon Web Services resources to determine the
+// policies' effective permissions. The policies are provided as strings. The
+// simulation does not perform the API operations; it only checks the authorization
+// to determine if the simulated policies allow or deny the operations. You can
+// simulate resources that don't exist in your account. If you want to simulate
+// existing policies that are attached to an IAM user, group, or role, use
+// SimulatePrincipalPolicy instead. Context keys are variables that are maintained
+// by Amazon Web Services and its services and which provide details about the
+// context of an API query request. You can use the Condition element of an IAM
+// policy to evaluate context keys. To get the list of context keys that the
+// policies require for correct simulation, use GetContextKeysForCustomPolicy. If
+// the output is long, you can use MaxItems and Marker parameters to paginate the
+// results. For more information about using the policy simulator, see Testing IAM
+// policies with the IAM policy simulator
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
 // the IAM User Guide.
 func (c *Client) SimulateCustomPolicy(ctx context.Context, params *SimulateCustomPolicyInput, optFns ...func(*Options)) (*SimulateCustomPolicyOutput, error) {
@@ -63,19 +64,23 @@ type SimulateCustomPolicyInput struct {
 	// or one of the AssumeRole
 	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html) API
 	// operations. In other words, do not use policies designed to restrict what a user
-	// can do while using the temporary credentials. The regex pattern
-	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
-	// characters consisting of the following:
+	// can do while using the temporary credentials. The maximum length of the policy
+	// document that you can pass in this operation, including whitespace, is listed
+	// below. To view the maximum character counts of a managed policy with no
+	// whitespaces, see IAM and STS character quotas
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
+	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
+	// parameter is a string of characters consisting of the following:
 	//
-	// * Any printable ASCII character ranging
-	// from the space character (\u0020) through the end of the ASCII character
-	// range
+	// * Any
+	// printable ASCII character ranging from the space character (\u0020) through the
+	// end of the ASCII character range
 	//
-	// * The printable characters in the Basic Latin and Latin-1 Supplement
-	// character set (through \u00FF)
+	// * The printable characters in the Basic Latin
+	// and Latin-1 Supplement character set (through \u00FF)
 	//
-	// * The special characters tab (\u0009), line feed
-	// (\u000A), and carriage return (\u000D)
+	// * The special characters
+	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
 	//
 	// This member is required.
 	PolicyInputList []string
@@ -114,34 +119,39 @@ type SimulateCustomPolicyInput struct {
 	// entities
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide. The policy input is specified as a string that contains
-	// the complete, valid JSON text of a permissions boundary policy. The regex
-	// pattern (http://wikipedia.org/wiki/regex) used to validate this parameter is a
-	// string of characters consisting of the following:
+	// the complete, valid JSON text of a permissions boundary policy. The maximum
+	// length of the policy document that you can pass in this operation, including
+	// whitespace, is listed below. To view the maximum character counts of a managed
+	// policy with no whitespaces, see IAM and STS character quotas
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
+	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
+	// parameter is a string of characters consisting of the following:
 	//
-	// * Any printable ASCII
-	// character ranging from the space character (\u0020) through the end of the ASCII
-	// character range
+	// * Any
+	// printable ASCII character ranging from the space character (\u0020) through the
+	// end of the ASCII character range
 	//
-	// * The printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF)
+	// * The printable characters in the Basic Latin
+	// and Latin-1 Supplement character set (through \u00FF)
 	//
-	// * The special characters tab
-	// (\u0009), line feed (\u000A), and carriage return (\u000D)
+	// * The special characters
+	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
 	PermissionsBoundaryPolicyInputList []string
 
-	// A list of ARNs of AWS resources to include in the simulation. If this parameter
-	// is not provided, then the value defaults to * (all resources). Each API in the
-	// ActionNames parameter is evaluated for each resource in this list. The
-	// simulation determines the access result (allowed or denied) of each combination
-	// and reports it in the response. You can simulate resources that don't exist in
-	// your account. The simulation does not automatically retrieve policies for the
-	// specified resources. If you want to include a resource policy in the simulation,
-	// then you must include the policy as a string in the ResourcePolicy parameter. If
-	// you include a ResourcePolicy, then it must be applicable to all of the resources
-	// included in the simulation or you receive an invalid input error. For more
-	// information about ARNs, see Amazon Resource Names (ARNs)
+	// A list of ARNs of Amazon Web Services resources to include in the simulation. If
+	// this parameter is not provided, then the value defaults to * (all resources).
+	// Each API in the ActionNames parameter is evaluated for each resource in this
+	// list. The simulation determines the access result (allowed or denied) of each
+	// combination and reports it in the response. You can simulate resources that
+	// don't exist in your account. The simulation does not automatically retrieve
+	// policies for the specified resources. If you want to include a resource policy
+	// in the simulation, then you must include the policy as a string in the
+	// ResourcePolicy parameter. If you include a ResourcePolicy, then it must be
+	// applicable to all of the resources included in the simulation or you receive an
+	// invalid input error. For more information about ARNs, see Amazon Resource Names
+	// (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	ResourceArns []string
 
 	// Specifies the type of simulation to run. Different API operations that support
@@ -179,7 +189,7 @@ type SimulateCustomPolicyInput struct {
 	// subnet, volume
 	ResourceHandlingOption *string
 
-	// An ARN representing the AWS account ID that specifies the owner of any simulated
+	// An ARN representing the account ID that specifies the owner of any simulated
 	// resource that does not identify its owner in the resource ARN. Examples of
 	// resource ARNs include an S3 bucket or object. If ResourceOwner is specified, it
 	// is also used as the account owner of any ResourcePolicy included in the
@@ -195,19 +205,23 @@ type SimulateCustomPolicyInput struct {
 
 	// A resource-based policy to include in the simulation provided as a string. Each
 	// resource in the simulation is treated as if it had this policy attached. You can
-	// include only one resource-based policy in a simulation. The regex pattern
-	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
-	// characters consisting of the following:
+	// include only one resource-based policy in a simulation. The maximum length of
+	// the policy document that you can pass in this operation, including whitespace,
+	// is listed below. To view the maximum character counts of a managed policy with
+	// no whitespaces, see IAM and STS character quotas
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
+	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
+	// parameter is a string of characters consisting of the following:
 	//
-	// * Any printable ASCII character ranging
-	// from the space character (\u0020) through the end of the ASCII character
-	// range
+	// * Any
+	// printable ASCII character ranging from the space character (\u0020) through the
+	// end of the ASCII character range
 	//
-	// * The printable characters in the Basic Latin and Latin-1 Supplement
-	// character set (through \u00FF)
+	// * The printable characters in the Basic Latin
+	// and Latin-1 Supplement character set (through \u00FF)
 	//
-	// * The special characters tab (\u0009), line feed
-	// (\u000A), and carriage return (\u000D)
+	// * The special characters
+	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
 	ResourcePolicy *string
 }
 

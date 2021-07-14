@@ -54,17 +54,17 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	// This member is required.
 	JobId *string
 
-	// The service namespace for an AWS service. Provide the service namespace to learn
-	// when the IAM entity last attempted to access the specified service. To learn the
-	// service namespace for a service, see Actions, resources, and condition keys for
-	// AWS services
+	// The service namespace for an Amazon Web Services service. Provide the service
+	// namespace to learn when the IAM entity last attempted to access the specified
+	// service. To learn the service namespace for a service, see Actions, resources,
+	// and condition keys for Amazon Web Services services
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the IAM User Guide. Choose the name of the service to view details for that
 	// service. In the first paragraph, find the service prefix. For example, (service
-	// prefix: a4b). For more information about service namespaces, see AWS service
-	// namespaces
+	// prefix: a4b). For more information about service namespaces, see Amazon Web
+	// Services service namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ServiceNamespace *string
@@ -89,7 +89,7 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 
 	// An EntityDetailsList object that contains details about when an IAM entity (user
 	// or role) used group or policy permissions in an attempt to access the specified
-	// AWS service.
+	// Amazon Web Services service.
 	//
 	// This member is required.
 	EntityDetailsList []types.EntityDetails

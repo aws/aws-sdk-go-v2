@@ -290,7 +290,8 @@ type HttpRequestMethodConditionConfig struct {
 	Values []string
 }
 
-// Information about an Elastic Load Balancing resource limit for your AWS account.
+// Information about an Elastic Load Balancing resource limit for your Amazon Web
+// Services account.
 type Limit struct {
 
 	// The maximum value of the limit.
@@ -497,14 +498,14 @@ type LoadBalancerAttribute struct {
 	//
 	// * waf.fail_open.enabled - Indicates
 	// whether to allow a WAF-enabled load balancer to route requests to targets if it
-	// is unable to forward the request to AWS WAF. The value is true or false. The
-	// default is false.
+	// is unable to forward the request to Amazon Web Services WAF. The value is true
+	// or false. The default is false.
 	//
-	// The following attribute is supported by Network Load
-	// Balancers and Gateway Load Balancers:
+	// The following attribute is supported by Network
+	// Load Balancers and Gateway Load Balancers:
 	//
-	// * load_balancing.cross_zone.enabled -
-	// Indicates whether cross-zone load balancing is enabled. The value is true or
+	// * load_balancing.cross_zone.enabled
+	// - Indicates whether cross-zone load balancing is enabled. The value is true or
 	// false. The default is false.
 	Key *string
 
@@ -946,13 +947,13 @@ type TargetGroupAttribute struct {
 	// is 0 seconds (disabled).
 	//
 	// * stickiness.app_cookie.cookie_name - Indicates the
-	// name of the application-based cookie. Names that start with the following names
-	// are not allowed: AWSALB, AWSALBAPP, and AWSALBTG. They're reserved for use by
-	// the load balancer.
+	// name of the application-based cookie. Names that start with the following
+	// prefixes are not allowed: AWSALB, AWSALBAPP, and AWSALBTG; they're reserved for
+	// use by the load balancer.
 	//
-	// * stickiness.app_cookie.duration_seconds - The time period,
-	// in seconds, during which requests from a client should be routed to the same
-	// target. After this time period expires, the application-based cookie is
+	// * stickiness.app_cookie.duration_seconds - The time
+	// period, in seconds, during which requests from a client should be routed to the
+	// same target. After this time period expires, the application-based cookie is
 	// considered stale. The range is 1 second to 1 week (604800 seconds). The default
 	// value is 1 day (86400 seconds).
 	//

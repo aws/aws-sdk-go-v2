@@ -40,10 +40,10 @@ type GetMemberInput struct {
 
 type GetMemberOutput struct {
 
-	// The AWS account ID for the account.
+	// The Amazon Web Services account ID for the account.
 	AccountId *string
 
-	// The AWS account ID for the administrator account.
+	// The Amazon Web Services account ID for the administrator account.
 	AdministratorAccountId *string
 
 	// The Amazon Resource Name (ARN) of the account.
@@ -57,9 +57,9 @@ type GetMemberOutput struct {
 	// Macie invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
-	// (Deprecated) The AWS account ID for the administrator account. This property has
-	// been replaced by the administratorAccountId property and is retained only for
-	// backward compatibility.
+	// (Deprecated) The Amazon Web Services account ID for the administrator account.
+	// This property has been replaced by the administratorAccountId property and is
+	// retained only for backward compatibility.
 	MasterAccountId *string
 
 	// The current status of the relationship between the account and the administrator

@@ -31,7 +31,7 @@ func (c *Client) UpdateMacieSession(ctx context.Context, params *UpdateMacieSess
 type UpdateMacieSessionInput struct {
 
 	// Specifies how often to publish updates to policy findings for the account. This
-	// includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly
+	// includes publishing updates to Security Hub and Amazon EventBridge (formerly
 	// called Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
 

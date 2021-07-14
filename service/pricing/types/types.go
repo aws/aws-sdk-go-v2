@@ -47,6 +47,6 @@ type Service struct {
 	// The attributes that are available for this service.
 	AttributeNames []string
 
-	// The code for the AWS service.
+	// The code for the Amazon Web Services service.
 	ServiceCode *string
 }

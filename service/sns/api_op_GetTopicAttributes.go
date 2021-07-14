@@ -48,8 +48,8 @@ type GetTopicAttributesOutput struct {
 	// * DisplayName – The human-readable name used in the From field for
 	// notifications to email and email-json endpoints.
 	//
-	// * Owner – The AWS account ID
-	// of the topic's owner.
+	// * Owner – The account ID of
+	// the topic's owner.
 	//
 	// * Policy – The JSON serialization of the topic's access
 	// control policy.
@@ -74,12 +74,12 @@ type GetTopicAttributesOutput struct {
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 	//
 	// *
-	// KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK) for Amazon
-	// SNS or a custom CMK. For more information, see Key Terms
+	// KmsMasterKeyId - The ID of an Amazon Web Services managed customer master key
+	// (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
 	// For more examples, see KeyId
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
-	// in the AWS Key Management Service API Reference.
+	// in the Key Management Service API Reference.
 	//
 	// The following attributes apply
 	// only to FIFO topics
