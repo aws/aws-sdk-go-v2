@@ -1,3 +1,7 @@
+# v1.2.1 (2021-07-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2021-06-25)
 
 * **Feature**: Add UnmarshalJSON for AWSEpochTime to correctly unmarshal AWSEpochTime, ([#1298](https://github.com/aws/aws-sdk-go-v2/pull/1298))

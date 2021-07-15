@@ -1,3 +1,126 @@
+# Release (2021-07-15)
+
+## General Highlights
+* **Dependency Update**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.5.0](config/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: Support has been added for EC2 IPv6-enabled Instance Metadata Service Endpoints.
+* `github.com/aws/aws-sdk-go-v2/feature/ec2/imds`: [v1.3.0](feature/ec2/imds/CHANGELOG.md#v130-2021-07-15)
+  * **Feature**: Support has been added for EC2 IPv6-enabled Instance Metadata Service Endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.5.0](service/acm/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.3.0](service/amp/CHANGELOG.md#v130-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.4.0](service/amplify/CHANGELOG.md#v140-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.3.0](service/amplifybackend/CHANGELOG.md#v130-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.10.0](service/autoscaling/CHANGELOG.md#v1100-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.6.0](service/chime/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.7.0](service/cloudformation/CHANGELOG.md#v170-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.7.0](service/cloudfront/CHANGELOG.md#v170-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.5.0](service/cloudsearch/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.6.0](service/cloudwatch/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.6.0](service/databasemigrationservice/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.6.0](service/devopsguru/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.6.0](service/directconnect/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.8.0](service/docdb/CHANGELOG.md#v180-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.12.0](service/ec2/CHANGELOG.md#v1120-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.8.0](service/eks/CHANGELOG.md#v180-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.8.0](service/elasticache/CHANGELOG.md#v180-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.5.0](service/elasticbeanstalk/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.5.0](service/elasticloadbalancing/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.5.0](service/elasticloadbalancingv2/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.6.0](service/fms/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.6.0](service/frauddetector/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.9.0](service/glue/CHANGELOG.md#v190-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.6.0](service/health/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.5.0](service/healthlake/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.7.0](service/iam/CHANGELOG.md#v170-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.7.0](service/imagebuilder/CHANGELOG.md#v170-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.8.0](service/iot/CHANGELOG.md#v180-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.8.0](service/iotsitewise/CHANGELOG.md#v180-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.9.0](service/kendra/CHANGELOG.md#v190-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.5.0](service/lambda/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.6.0](service/lexmodelbuildingservice/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.8.0](service/lightsail/CHANGELOG.md#v180-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/macie`: [v1.5.1](service/macie/CHANGELOG.md#v151-2021-07-15)
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.8.1](service/macie2/CHANGELOG.md#v181-2021-07-15)
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.8.0](service/mediaconvert/CHANGELOG.md#v180-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.5.0](service/mediatailor/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.3.0](service/mgn/CHANGELOG.md#v130-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.4.0](service/mq/CHANGELOG.md#v140-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.7.0](service/neptune/CHANGELOG.md#v170-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.6.0](service/outposts/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.5.1](service/pricing/CHANGELOG.md#v151-2021-07-15)
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.6.0](service/rds/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.9.0](service/redshift/CHANGELOG.md#v190-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.10.0](service/sagemaker/CHANGELOG.md#v1100-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.5.0](service/ses/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.7.0](service/sns/CHANGELOG.md#v170-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.7.0](service/sqs/CHANGELOG.md#v170-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.8.0](service/ssm/CHANGELOG.md#v180-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.5.0](service/storagegateway/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.6.0](service/sts/CHANGELOG.md#v160-2021-07-15)
+  * **Feature**: The ErrorCode method on generated service error types has been corrected to match the API model.
+  * **Documentation**: Updated service model to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.5.0](service/wellarchitected/CHANGELOG.md#v150-2021-07-15)
+  * **Feature**: Updated service model to latest version.
+
 # Release (2021-07-01)
 
 ## General Highlights
