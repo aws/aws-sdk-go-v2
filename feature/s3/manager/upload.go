@@ -182,7 +182,7 @@ type Uploader struct {
 //	client := s3.NewFromConfig(cfg)
 //
 //	// Create an uploader passing it the client
-//  uploader := manager.NewUploader(client)
+//	uploader := manager.NewUploader(client)
 //
 //	// Create an uploader with the client and custom options
 //	uploader := manager.NewUploader(client, func(u *manager.Uploader) {
