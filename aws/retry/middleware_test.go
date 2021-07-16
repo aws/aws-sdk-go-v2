@@ -435,6 +435,13 @@ func TestAttemptMiddleware(t *testing.T) {
 			if e, a := tt.ExpectResults, attemptResults; !reflect.DeepEqual(e, a) {
 				t.Fatalf("expected %v, got %v", e, a)
 			}
+
+			for i, attempt := range attemptResults.Results {
+				_, ok := GetAttemptResults(attempt.ResponseMetadata)
+				if ok {
+					t.Errorf("expect no attempt to include AttemptResults metadata, %v does, %#v", i, attempt)
+				}
+			}
 		})
 	}
 }
