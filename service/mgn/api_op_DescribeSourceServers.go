@@ -102,6 +102,9 @@ func (c *Client) addOperationDescribeSourceServersMiddlewares(stack *middleware.
 	if err = addOpDescribeSourceServersValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSourceServers(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -195,4 +198,13 @@ func (p *DescribeSourceServersPaginator) NextPage(ctx context.Context, optFns ..
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opDescribeSourceServers(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "DescribeSourceServers",
+	}
 }

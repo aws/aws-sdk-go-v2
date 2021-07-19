@@ -101,6 +101,9 @@ func (c *Client) addOperationUpdateServiceTemplateMiddlewares(stack *middleware.
 	if err = addOpUpdateServiceTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceTemplate(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -111,4 +114,13 @@ func (c *Client) addOperationUpdateServiceTemplateMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opUpdateServiceTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "UpdateServiceTemplate",
+	}
 }

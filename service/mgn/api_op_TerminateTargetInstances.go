@@ -97,6 +97,9 @@ func (c *Client) addOperationTerminateTargetInstancesMiddlewares(stack *middlewa
 	if err = addOpTerminateTargetInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateTargetInstances(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -107,4 +110,13 @@ func (c *Client) addOperationTerminateTargetInstancesMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opTerminateTargetInstances(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "TerminateTargetInstances",
+	}
 }

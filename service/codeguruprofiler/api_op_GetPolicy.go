@@ -100,6 +100,9 @@ func (c *Client) addOperationGetPolicyMiddlewares(stack *middleware.Stack, optio
 	if err = addOpGetPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPolicy(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -110,4 +113,13 @@ func (c *Client) addOperationGetPolicyMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "GetPolicy",
+	}
 }

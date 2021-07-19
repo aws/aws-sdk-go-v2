@@ -109,6 +109,9 @@ func (c *Client) addOperationCreateConfigMiddlewares(stack *middleware.Stack, op
 	if err = addOpCreateConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfig(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -119,4 +122,13 @@ func (c *Client) addOperationCreateConfigMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateConfig(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "CreateConfig",
+	}
 }

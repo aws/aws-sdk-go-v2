@@ -90,6 +90,9 @@ func (c *Client) addOperationDeleteTrackerMiddlewares(stack *middleware.Stack, o
 	if err = addOpDeleteTrackerValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTracker(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -100,4 +103,13 @@ func (c *Client) addOperationDeleteTrackerMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteTracker(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "DeleteTracker",
+	}
 }

@@ -116,6 +116,9 @@ func (c *Client) addOperationGetMapSpritesMiddlewares(stack *middleware.Stack, o
 	if err = addOpGetMapSpritesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapSprites(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -126,4 +129,13 @@ func (c *Client) addOperationGetMapSpritesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetMapSprites(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "GetMapSprites",
+	}
 }

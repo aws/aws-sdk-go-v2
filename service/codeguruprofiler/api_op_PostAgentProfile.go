@@ -115,6 +115,9 @@ func (c *Client) addOperationPostAgentProfileMiddlewares(stack *middleware.Stack
 	if err = addOpPostAgentProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPostAgentProfile(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -125,4 +128,13 @@ func (c *Client) addOperationPostAgentProfileMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opPostAgentProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "PostAgentProfile",
+	}
 }

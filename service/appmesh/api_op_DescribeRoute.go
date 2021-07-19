@@ -112,6 +112,9 @@ func (c *Client) addOperationDescribeRouteMiddlewares(stack *middleware.Stack, o
 	if err = addOpDescribeRouteValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRoute(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -122,4 +125,13 @@ func (c *Client) addOperationDescribeRouteMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDescribeRoute(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "DescribeRoute",
+	}
 }

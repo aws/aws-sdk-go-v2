@@ -97,6 +97,9 @@ func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.
 	if err = addOpGetMapStyleDescriptorValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapStyleDescriptor(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -107,4 +110,13 @@ func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetMapStyleDescriptor(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "GetMapStyleDescriptor",
+	}
 }

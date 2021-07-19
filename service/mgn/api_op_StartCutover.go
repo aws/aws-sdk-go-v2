@@ -97,6 +97,9 @@ func (c *Client) addOperationStartCutoverMiddlewares(stack *middleware.Stack, op
 	if err = addOpStartCutoverValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartCutover(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -107,4 +110,13 @@ func (c *Client) addOperationStartCutoverMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opStartCutover(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "StartCutover",
+	}
 }

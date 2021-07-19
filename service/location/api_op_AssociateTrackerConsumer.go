@@ -101,6 +101,9 @@ func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middlewa
 	if err = addOpAssociateTrackerConsumerValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTrackerConsumer(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -111,4 +114,13 @@ func (c *Client) addOperationAssociateTrackerConsumerMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opAssociateTrackerConsumer(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "AssociateTrackerConsumer",
+	}
 }

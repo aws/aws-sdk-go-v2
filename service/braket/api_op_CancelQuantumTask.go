@@ -104,6 +104,9 @@ func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stac
 	if err = addOpCancelQuantumTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelQuantumTask(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -114,4 +117,13 @@ func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCancelQuantumTask(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "braket",
+		OperationName: "CancelQuantumTask",
+	}
 }

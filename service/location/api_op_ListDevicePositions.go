@@ -109,6 +109,9 @@ func (c *Client) addOperationListDevicePositionsMiddlewares(stack *middleware.St
 	if err = addOpListDevicePositionsValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDevicePositions(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -207,4 +210,13 @@ func (p *ListDevicePositionsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListDevicePositions(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "ListDevicePositions",
+	}
 }

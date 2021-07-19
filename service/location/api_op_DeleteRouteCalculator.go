@@ -88,6 +88,9 @@ func (c *Client) addOperationDeleteRouteCalculatorMiddlewares(stack *middleware.
 	if err = addOpDeleteRouteCalculatorValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRouteCalculator(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -98,4 +101,13 @@ func (c *Client) addOperationDeleteRouteCalculatorMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteRouteCalculator(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "DeleteRouteCalculator",
+	}
 }

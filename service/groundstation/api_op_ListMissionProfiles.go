@@ -98,6 +98,9 @@ func (c *Client) addOperationListMissionProfilesMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMissionProfiles(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -195,4 +198,13 @@ func (p *ListMissionProfilesPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListMissionProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "ListMissionProfiles",
+	}
 }

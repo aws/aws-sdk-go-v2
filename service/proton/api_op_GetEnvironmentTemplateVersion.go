@@ -109,6 +109,9 @@ func (c *Client) addOperationGetEnvironmentTemplateVersionMiddlewares(stack *mid
 	if err = addOpGetEnvironmentTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironmentTemplateVersion(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -317,4 +320,13 @@ func environmentTemplateVersionRegisteredStateRetryable(ctx context.Context, inp
 	}
 
 	return true, nil
+}
+
+func newServiceMetadataMiddleware_opGetEnvironmentTemplateVersion(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "GetEnvironmentTemplateVersion",
+	}
 }

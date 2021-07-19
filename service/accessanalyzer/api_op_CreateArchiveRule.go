@@ -107,6 +107,9 @@ func (c *Client) addOperationCreateArchiveRuleMiddlewares(stack *middleware.Stac
 	if err = addOpCreateArchiveRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateArchiveRule(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -117,4 +120,13 @@ func (c *Client) addOperationCreateArchiveRuleMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateArchiveRule(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "access-analyzer",
+		OperationName: "CreateArchiveRule",
+	}
 }

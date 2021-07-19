@@ -96,6 +96,9 @@ func (c *Client) addOperationGetAnalyzerMiddlewares(stack *middleware.Stack, opt
 	if err = addOpGetAnalyzerValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAnalyzer(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -106,4 +109,13 @@ func (c *Client) addOperationGetAnalyzerMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetAnalyzer(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "access-analyzer",
+		OperationName: "GetAnalyzer",
+	}
 }

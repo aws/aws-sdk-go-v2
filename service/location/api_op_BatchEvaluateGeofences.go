@@ -99,6 +99,9 @@ func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware
 	if err = addOpBatchEvaluateGeofencesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchEvaluateGeofences(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -109,4 +112,12 @@ func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opBatchEvaluateGeofences(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "BatchEvaluateGeofences",
+	}
 }

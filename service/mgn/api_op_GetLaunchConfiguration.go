@@ -113,6 +113,9 @@ func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware
 	if err = addOpGetLaunchConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLaunchConfiguration(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -123,4 +126,13 @@ func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetLaunchConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "GetLaunchConfiguration",
+	}
 }

@@ -145,6 +145,9 @@ func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stac
 	if err = addOpCreateVirtualNodeValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVirtualNode(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,4 +158,13 @@ func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateVirtualNode(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "CreateVirtualNode",
+	}
 }

@@ -109,6 +109,9 @@ func (c *Client) addOperationSearchQuantumTasksMiddlewares(stack *middleware.Sta
 	if err = addOpSearchQuantumTasksValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchQuantumTasks(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -206,4 +209,13 @@ func (p *SearchQuantumTasksPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opSearchQuantumTasks(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "braket",
+		OperationName: "SearchQuantumTasks",
+	}
 }

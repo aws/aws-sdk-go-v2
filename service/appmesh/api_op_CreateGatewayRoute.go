@@ -132,6 +132,9 @@ func (c *Client) addOperationCreateGatewayRouteMiddlewares(stack *middleware.Sta
 	if err = addOpCreateGatewayRouteValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGatewayRoute(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,4 +145,13 @@ func (c *Client) addOperationCreateGatewayRouteMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateGatewayRoute(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "CreateGatewayRoute",
+	}
 }

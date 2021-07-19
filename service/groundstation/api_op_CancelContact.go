@@ -93,6 +93,9 @@ func (c *Client) addOperationCancelContactMiddlewares(stack *middleware.Stack, o
 	if err = addOpCancelContactValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelContact(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -103,4 +106,13 @@ func (c *Client) addOperationCancelContactMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCancelContact(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "CancelContact",
+	}
 }

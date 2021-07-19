@@ -94,6 +94,9 @@ func (c *Client) addOperationGetEnvironmentTemplateMiddlewares(stack *middleware
 	if err = addOpGetEnvironmentTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironmentTemplate(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -104,4 +107,13 @@ func (c *Client) addOperationGetEnvironmentTemplateMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetEnvironmentTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "GetEnvironmentTemplate",
+	}
 }

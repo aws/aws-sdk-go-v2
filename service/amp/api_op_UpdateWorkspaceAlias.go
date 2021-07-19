@@ -95,6 +95,9 @@ func (c *Client) addOperationUpdateWorkspaceAliasMiddlewares(stack *middleware.S
 	if err = addOpUpdateWorkspaceAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspaceAlias(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -105,4 +108,13 @@ func (c *Client) addOperationUpdateWorkspaceAliasMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opUpdateWorkspaceAlias(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "aps",
+		OperationName: "UpdateWorkspaceAlias",
+	}
 }

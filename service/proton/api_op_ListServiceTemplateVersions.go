@@ -113,6 +113,9 @@ func (c *Client) addOperationListServiceTemplateVersionsMiddlewares(stack *middl
 	if err = addOpListServiceTemplateVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceTemplateVersions(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -212,4 +215,13 @@ func (p *ListServiceTemplateVersionsPaginator) NextPage(ctx context.Context, opt
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListServiceTemplateVersions(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "ListServiceTemplateVersions",
+	}
 }

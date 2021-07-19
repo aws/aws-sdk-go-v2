@@ -93,6 +93,9 @@ func (c *Client) addOperationDeleteServiceTemplateMiddlewares(stack *middleware.
 	if err = addOpDeleteServiceTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteServiceTemplate(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -103,4 +106,13 @@ func (c *Client) addOperationDeleteServiceTemplateMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteServiceTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "DeleteServiceTemplate",
+	}
 }

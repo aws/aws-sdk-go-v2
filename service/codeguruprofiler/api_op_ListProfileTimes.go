@@ -148,6 +148,9 @@ func (c *Client) addOperationListProfileTimesMiddlewares(stack *middleware.Stack
 	if err = addOpListProfileTimesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProfileTimes(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -248,4 +251,13 @@ func (p *ListProfileTimesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListProfileTimes(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "ListProfileTimes",
+	}
 }

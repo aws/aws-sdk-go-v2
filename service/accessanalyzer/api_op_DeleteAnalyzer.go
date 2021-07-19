@@ -94,6 +94,9 @@ func (c *Client) addOperationDeleteAnalyzerMiddlewares(stack *middleware.Stack, 
 	if err = addOpDeleteAnalyzerValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAnalyzer(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -104,4 +107,13 @@ func (c *Client) addOperationDeleteAnalyzerMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteAnalyzer(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "access-analyzer",
+		OperationName: "DeleteAnalyzer",
+	}
 }

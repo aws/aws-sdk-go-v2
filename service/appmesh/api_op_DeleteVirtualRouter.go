@@ -108,6 +108,9 @@ func (c *Client) addOperationDeleteVirtualRouterMiddlewares(stack *middleware.St
 	if err = addOpDeleteVirtualRouterValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVirtualRouter(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -118,4 +121,13 @@ func (c *Client) addOperationDeleteVirtualRouterMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteVirtualRouter(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "DeleteVirtualRouter",
+	}
 }

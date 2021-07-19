@@ -141,6 +141,9 @@ func (c *Client) addOperationConfigureAgentMiddlewares(stack *middleware.Stack, 
 	if err = addOpConfigureAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfigureAgent(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,4 +154,13 @@ func (c *Client) addOperationConfigureAgentMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opConfigureAgent(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "ConfigureAgent",
+	}
 }

@@ -114,6 +114,9 @@ func (c *Client) addOperationGetMapTileMiddlewares(stack *middleware.Stack, opti
 	if err = addOpGetMapTileValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapTile(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -124,4 +127,13 @@ func (c *Client) addOperationGetMapTileMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetMapTile(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "GetMapTile",
+	}
 }

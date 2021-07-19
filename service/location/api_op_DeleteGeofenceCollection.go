@@ -89,6 +89,9 @@ func (c *Client) addOperationDeleteGeofenceCollectionMiddlewares(stack *middlewa
 	if err = addOpDeleteGeofenceCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGeofenceCollection(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -99,4 +102,13 @@ func (c *Client) addOperationDeleteGeofenceCollectionMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteGeofenceCollection(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "DeleteGeofenceCollection",
+	}
 }

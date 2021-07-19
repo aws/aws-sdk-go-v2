@@ -124,6 +124,9 @@ func (c *Client) addOperationListVirtualRoutersMiddlewares(stack *middleware.Sta
 	if err = addOpListVirtualRoutersValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVirtualRouters(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -227,4 +230,13 @@ func (p *ListVirtualRoutersPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListVirtualRouters(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "ListVirtualRouters",
+	}
 }

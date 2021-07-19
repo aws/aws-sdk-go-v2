@@ -98,6 +98,9 @@ func (c *Client) addOperationListDataflowEndpointGroupsMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataflowEndpointGroups(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -197,4 +200,13 @@ func (p *ListDataflowEndpointGroupsPaginator) NextPage(ctx context.Context, optF
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListDataflowEndpointGroups(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "ListDataflowEndpointGroups",
+	}
 }

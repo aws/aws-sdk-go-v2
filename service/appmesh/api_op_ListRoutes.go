@@ -129,6 +129,9 @@ func (c *Client) addOperationListRoutesMiddlewares(stack *middleware.Stack, opti
 	if err = addOpListRoutesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoutes(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -230,4 +233,13 @@ func (p *ListRoutesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListRoutes(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "ListRoutes",
+	}
 }

@@ -119,6 +119,9 @@ func (c *Client) addOperationSearchPlaceIndexForPositionMiddlewares(stack *middl
 	if err = addOpSearchPlaceIndexForPositionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchPlaceIndexForPosition(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -129,4 +132,13 @@ func (c *Client) addOperationSearchPlaceIndexForPositionMiddlewares(stack *middl
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opSearchPlaceIndexForPosition(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "SearchPlaceIndexForPosition",
+	}
 }

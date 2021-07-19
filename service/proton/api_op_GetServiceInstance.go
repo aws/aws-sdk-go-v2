@@ -105,6 +105,9 @@ func (c *Client) addOperationGetServiceInstanceMiddlewares(stack *middleware.Sta
 	if err = addOpGetServiceInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceInstance(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -293,4 +296,13 @@ func serviceInstanceDeployedStateRetryable(ctx context.Context, input *GetServic
 	}
 
 	return true, nil
+}
+
+func newServiceMetadataMiddleware_opGetServiceInstance(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "GetServiceInstance",
+	}
 }

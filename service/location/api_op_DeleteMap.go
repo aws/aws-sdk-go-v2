@@ -89,6 +89,9 @@ func (c *Client) addOperationDeleteMapMiddlewares(stack *middleware.Stack, optio
 	if err = addOpDeleteMapValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMap(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -99,4 +102,13 @@ func (c *Client) addOperationDeleteMapMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteMap(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "DeleteMap",
+	}
 }

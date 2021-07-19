@@ -99,6 +99,9 @@ func (c *Client) addOperationRejectEnvironmentAccountConnectionMiddlewares(stack
 	if err = addOpRejectEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectEnvironmentAccountConnection(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -109,4 +112,13 @@ func (c *Client) addOperationRejectEnvironmentAccountConnectionMiddlewares(stack
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opRejectEnvironmentAccountConnection(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "RejectEnvironmentAccountConnection",
+	}
 }

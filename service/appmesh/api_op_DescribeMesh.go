@@ -102,6 +102,9 @@ func (c *Client) addOperationDescribeMeshMiddlewares(stack *middleware.Stack, op
 	if err = addOpDescribeMeshValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMesh(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -112,4 +115,13 @@ func (c *Client) addOperationDescribeMeshMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDescribeMesh(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "DescribeMesh",
+	}
 }

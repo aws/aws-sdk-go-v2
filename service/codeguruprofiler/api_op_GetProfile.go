@@ -183,6 +183,9 @@ func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, opti
 	if err = addOpGetProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProfile(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -193,4 +196,13 @@ func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "GetProfile",
+	}
 }

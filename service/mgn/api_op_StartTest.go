@@ -97,6 +97,9 @@ func (c *Client) addOperationStartTestMiddlewares(stack *middleware.Stack, optio
 	if err = addOpStartTestValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartTest(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -107,4 +110,13 @@ func (c *Client) addOperationStartTestMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opStartTest(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "StartTest",
+	}
 }

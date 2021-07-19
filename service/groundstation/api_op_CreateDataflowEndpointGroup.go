@@ -101,6 +101,9 @@ func (c *Client) addOperationCreateDataflowEndpointGroupMiddlewares(stack *middl
 	if err = addOpCreateDataflowEndpointGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataflowEndpointGroup(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -111,4 +114,13 @@ func (c *Client) addOperationCreateDataflowEndpointGroupMiddlewares(stack *middl
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateDataflowEndpointGroup(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "CreateDataflowEndpointGroup",
+	}
 }

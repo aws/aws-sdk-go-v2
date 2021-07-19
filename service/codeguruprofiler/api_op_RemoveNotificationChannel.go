@@ -100,6 +100,9 @@ func (c *Client) addOperationRemoveNotificationChannelMiddlewares(stack *middlew
 	if err = addOpRemoveNotificationChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveNotificationChannel(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -110,4 +113,13 @@ func (c *Client) addOperationRemoveNotificationChannelMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opRemoveNotificationChannel(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "RemoveNotificationChannel",
+	}
 }

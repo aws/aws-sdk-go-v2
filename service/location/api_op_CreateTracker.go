@@ -170,6 +170,9 @@ func (c *Client) addOperationCreateTrackerMiddlewares(stack *middleware.Stack, o
 	if err = addOpCreateTrackerValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTracker(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -180,4 +183,13 @@ func (c *Client) addOperationCreateTrackerMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateTracker(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "CreateTracker",
+	}
 }

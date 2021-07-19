@@ -99,6 +99,9 @@ func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middl
 	if err = addOpDisassociateTrackerConsumerValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateTrackerConsumer(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -109,4 +112,13 @@ func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middl
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDisassociateTrackerConsumer(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "DisassociateTrackerConsumer",
+	}
 }

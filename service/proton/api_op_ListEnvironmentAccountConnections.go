@@ -117,6 +117,9 @@ func (c *Client) addOperationListEnvironmentAccountConnectionsMiddlewares(stack 
 	if err = addOpListEnvironmentAccountConnectionsValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnvironmentAccountConnections(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -216,4 +219,13 @@ func (p *ListEnvironmentAccountConnectionsPaginator) NextPage(ctx context.Contex
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListEnvironmentAccountConnections(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "ListEnvironmentAccountConnections",
+	}
 }

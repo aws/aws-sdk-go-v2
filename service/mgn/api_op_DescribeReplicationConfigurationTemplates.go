@@ -102,6 +102,9 @@ func (c *Client) addOperationDescribeReplicationConfigurationTemplatesMiddleware
 	if err = addOpDescribeReplicationConfigurationTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationConfigurationTemplates(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -197,4 +200,13 @@ func (p *DescribeReplicationConfigurationTemplatesPaginator) NextPage(ctx contex
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opDescribeReplicationConfigurationTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "DescribeReplicationConfigurationTemplates",
+	}
 }
