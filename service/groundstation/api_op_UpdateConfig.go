@@ -117,6 +117,9 @@ func (c *Client) addOperationUpdateConfigMiddlewares(stack *middleware.Stack, op
 	if err = addOpUpdateConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConfig(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -127,4 +130,13 @@ func (c *Client) addOperationUpdateConfigMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opUpdateConfig(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "UpdateConfig",
+	}
 }

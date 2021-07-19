@@ -111,6 +111,9 @@ func (c *Client) addOperationCreateAnalyzerMiddlewares(stack *middleware.Stack, 
 	if err = addOpCreateAnalyzerValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAnalyzer(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -121,4 +124,13 @@ func (c *Client) addOperationCreateAnalyzerMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateAnalyzer(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "access-analyzer",
+		OperationName: "CreateAnalyzer",
+	}
 }

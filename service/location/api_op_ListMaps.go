@@ -99,6 +99,9 @@ func (c *Client) addOperationListMapsMiddlewares(stack *middleware.Stack, option
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMaps(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -195,4 +198,13 @@ func (p *ListMapsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListMaps(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "ListMaps",
+	}
 }

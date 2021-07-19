@@ -92,6 +92,9 @@ func (c *Client) addOperationDeleteEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addOpDeleteEnvironmentValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEnvironment(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -102,4 +105,13 @@ func (c *Client) addOperationDeleteEnvironmentMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "DeleteEnvironment",
+	}
 }

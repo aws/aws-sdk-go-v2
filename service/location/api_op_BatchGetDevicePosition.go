@@ -109,6 +109,9 @@ func (c *Client) addOperationBatchGetDevicePositionMiddlewares(stack *middleware
 	if err = addOpBatchGetDevicePositionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetDevicePosition(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -119,4 +122,13 @@ func (c *Client) addOperationBatchGetDevicePositionMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opBatchGetDevicePosition(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "BatchGetDevicePosition",
+	}
 }

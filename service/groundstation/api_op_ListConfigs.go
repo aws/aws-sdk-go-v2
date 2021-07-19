@@ -98,6 +98,9 @@ func (c *Client) addOperationListConfigsMiddlewares(stack *middleware.Stack, opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigs(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -193,4 +196,13 @@ func (p *ListConfigsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "ListConfigs",
+	}
 }

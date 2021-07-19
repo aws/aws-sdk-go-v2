@@ -109,6 +109,9 @@ func (c *Client) addOperationGetServiceTemplateVersionMiddlewares(stack *middlew
 	if err = addOpGetServiceTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceTemplateVersion(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -317,4 +320,13 @@ func serviceTemplateVersionRegisteredStateRetryable(ctx context.Context, input *
 	}
 
 	return true, nil
+}
+
+func newServiceMetadataMiddleware_opGetServiceTemplateVersion(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "GetServiceTemplateVersion",
+	}
 }

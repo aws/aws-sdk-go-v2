@@ -101,6 +101,9 @@ func (c *Client) addOperationListAnalyzersMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnalyzers(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -196,4 +199,13 @@ func (p *ListAnalyzersPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListAnalyzers(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "access-analyzer",
+		OperationName: "ListAnalyzers",
+	}
 }

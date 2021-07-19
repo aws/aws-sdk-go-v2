@@ -89,6 +89,9 @@ func (c *Client) addOperationDeleteProfilingGroupMiddlewares(stack *middleware.S
 	if err = addOpDeleteProfilingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProfilingGroup(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -99,4 +102,13 @@ func (c *Client) addOperationDeleteProfilingGroupMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteProfilingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "DeleteProfilingGroup",
+	}
 }

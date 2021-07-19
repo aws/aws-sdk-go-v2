@@ -125,6 +125,9 @@ func (c *Client) addOperationGetMissionProfileMiddlewares(stack *middleware.Stac
 	if err = addOpGetMissionProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMissionProfile(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,4 +138,13 @@ func (c *Client) addOperationGetMissionProfileMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetMissionProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "GetMissionProfile",
+	}
 }

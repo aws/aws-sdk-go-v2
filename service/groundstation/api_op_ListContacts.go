@@ -127,6 +127,9 @@ func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, op
 	if err = addOpListContactsValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContacts(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -222,4 +225,13 @@ func (p *ListContactsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListContacts(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "ListContacts",
+	}
 }

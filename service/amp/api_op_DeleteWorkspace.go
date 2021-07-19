@@ -92,6 +92,9 @@ func (c *Client) addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = addOpDeleteWorkspaceValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkspace(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -102,4 +105,13 @@ func (c *Client) addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteWorkspace(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "aps",
+		OperationName: "DeleteWorkspace",
+	}
 }

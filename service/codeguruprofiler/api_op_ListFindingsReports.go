@@ -141,6 +141,9 @@ func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.St
 	if err = addOpListFindingsReportsValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFindingsReports(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -242,4 +245,13 @@ func (p *ListFindingsReportsPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListFindingsReports(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "ListFindingsReports",
+	}
 }

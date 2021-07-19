@@ -88,6 +88,9 @@ func (c *Client) addOperationDeletePlaceIndexMiddlewares(stack *middleware.Stack
 	if err = addOpDeletePlaceIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePlaceIndex(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -98,4 +101,13 @@ func (c *Client) addOperationDeletePlaceIndexMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeletePlaceIndex(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "DeletePlaceIndex",
+	}
 }

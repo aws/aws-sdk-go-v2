@@ -173,6 +173,9 @@ func (c *Client) addOperationCreatePlaceIndexMiddlewares(stack *middleware.Stack
 	if err = addOpCreatePlaceIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePlaceIndex(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -183,4 +186,13 @@ func (c *Client) addOperationCreatePlaceIndexMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreatePlaceIndex(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "CreatePlaceIndex",
+	}
 }

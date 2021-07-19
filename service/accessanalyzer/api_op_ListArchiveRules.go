@@ -106,6 +106,9 @@ func (c *Client) addOperationListArchiveRulesMiddlewares(stack *middleware.Stack
 	if err = addOpListArchiveRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListArchiveRules(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -202,4 +205,13 @@ func (p *ListArchiveRulesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListArchiveRules(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "access-analyzer",
+		OperationName: "ListArchiveRules",
+	}
 }

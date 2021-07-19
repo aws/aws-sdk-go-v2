@@ -107,6 +107,9 @@ func (c *Client) addOperationDescribeJobsMiddlewares(stack *middleware.Stack, op
 	if err = addOpDescribeJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeJobs(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -198,4 +201,13 @@ func (p *DescribeJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opDescribeJobs(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "DescribeJobs",
+	}
 }

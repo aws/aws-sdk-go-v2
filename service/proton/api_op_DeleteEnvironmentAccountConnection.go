@@ -99,6 +99,9 @@ func (c *Client) addOperationDeleteEnvironmentAccountConnectionMiddlewares(stack
 	if err = addOpDeleteEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEnvironmentAccountConnection(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -109,4 +112,13 @@ func (c *Client) addOperationDeleteEnvironmentAccountConnectionMiddlewares(stack
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteEnvironmentAccountConnection(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "DeleteEnvironmentAccountConnection",
+	}
 }

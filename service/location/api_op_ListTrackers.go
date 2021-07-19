@@ -100,6 +100,9 @@ func (c *Client) addOperationListTrackersMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrackers(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -196,4 +199,13 @@ func (p *ListTrackersPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListTrackers(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "ListTrackers",
+	}
 }

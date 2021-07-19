@@ -107,6 +107,9 @@ func (c *Client) addOperationListTrackerConsumersMiddlewares(stack *middleware.S
 	if err = addOpListTrackerConsumersValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrackerConsumers(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -205,4 +208,13 @@ func (p *ListTrackerConsumersPaginator) NextPage(ctx context.Context, optFns ...
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListTrackerConsumers(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "ListTrackerConsumers",
+	}
 }

@@ -103,6 +103,9 @@ func (c *Client) addOperationListGeofencesMiddlewares(stack *middleware.Stack, o
 	if err = addOpListGeofencesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGeofences(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -186,4 +189,13 @@ func (p *ListGeofencesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListGeofences(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "ListGeofences",
+	}
 }

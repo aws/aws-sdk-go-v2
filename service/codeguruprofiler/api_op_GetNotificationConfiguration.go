@@ -97,6 +97,9 @@ func (c *Client) addOperationGetNotificationConfigurationMiddlewares(stack *midd
 	if err = addOpGetNotificationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetNotificationConfiguration(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -107,4 +110,13 @@ func (c *Client) addOperationGetNotificationConfigurationMiddlewares(stack *midd
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetNotificationConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "GetNotificationConfiguration",
+	}
 }

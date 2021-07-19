@@ -134,6 +134,9 @@ func (c *Client) addOperationDescribeGeofenceCollectionMiddlewares(stack *middle
 	if err = addOpDescribeGeofenceCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGeofenceCollection(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,4 +147,12 @@ func (c *Client) addOperationDescribeGeofenceCollectionMiddlewares(stack *middle
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDescribeGeofenceCollection(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "DescribeGeofenceCollection",
+	}
 }

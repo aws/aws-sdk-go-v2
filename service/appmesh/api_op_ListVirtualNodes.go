@@ -124,6 +124,9 @@ func (c *Client) addOperationListVirtualNodesMiddlewares(stack *middleware.Stack
 	if err = addOpListVirtualNodesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVirtualNodes(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -226,4 +229,13 @@ func (p *ListVirtualNodesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListVirtualNodes(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "ListVirtualNodes",
+	}
 }

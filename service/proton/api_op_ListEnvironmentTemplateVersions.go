@@ -114,6 +114,9 @@ func (c *Client) addOperationListEnvironmentTemplateVersionsMiddlewares(stack *m
 	if err = addOpListEnvironmentTemplateVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnvironmentTemplateVersions(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -214,4 +217,13 @@ func (p *ListEnvironmentTemplateVersionsPaginator) NextPage(ctx context.Context,
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListEnvironmentTemplateVersions(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "ListEnvironmentTemplateVersions",
+	}
 }

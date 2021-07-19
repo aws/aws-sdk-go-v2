@@ -101,6 +101,9 @@ func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroundStations(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -198,4 +201,13 @@ func (p *ListGroundStationsPaginator) NextPage(ctx context.Context, optFns ...fu
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListGroundStations(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "ListGroundStations",
+	}
 }

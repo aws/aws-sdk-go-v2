@@ -145,6 +145,9 @@ func (c *Client) addOperationDescribePlaceIndexMiddlewares(stack *middleware.Sta
 	if err = addOpDescribePlaceIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePlaceIndex(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,4 +158,12 @@ func (c *Client) addOperationDescribePlaceIndexMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDescribePlaceIndex(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "DescribePlaceIndex",
+	}
 }

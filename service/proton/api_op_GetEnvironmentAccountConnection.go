@@ -96,6 +96,9 @@ func (c *Client) addOperationGetEnvironmentAccountConnectionMiddlewares(stack *m
 	if err = addOpGetEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironmentAccountConnection(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -106,4 +109,13 @@ func (c *Client) addOperationGetEnvironmentAccountConnectionMiddlewares(stack *m
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opGetEnvironmentAccountConnection(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "GetEnvironmentAccountConnection",
+	}
 }

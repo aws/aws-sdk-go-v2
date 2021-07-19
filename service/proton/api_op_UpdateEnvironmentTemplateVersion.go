@@ -110,6 +110,9 @@ func (c *Client) addOperationUpdateEnvironmentTemplateVersionMiddlewares(stack *
 	if err = addOpUpdateEnvironmentTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEnvironmentTemplateVersion(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -120,4 +123,13 @@ func (c *Client) addOperationUpdateEnvironmentTemplateVersionMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opUpdateEnvironmentTemplateVersion(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "UpdateEnvironmentTemplateVersion",
+	}
 }

@@ -110,6 +110,9 @@ func (c *Client) addOperationDeleteGatewayRouteMiddlewares(stack *middleware.Sta
 	if err = addOpDeleteGatewayRouteValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGatewayRoute(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -120,4 +123,13 @@ func (c *Client) addOperationDeleteGatewayRouteMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteGatewayRoute(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "DeleteGatewayRoute",
+	}
 }

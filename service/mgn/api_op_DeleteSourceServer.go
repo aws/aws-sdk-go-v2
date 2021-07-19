@@ -87,6 +87,9 @@ func (c *Client) addOperationDeleteSourceServerMiddlewares(stack *middleware.Sta
 	if err = addOpDeleteSourceServerValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSourceServer(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -97,4 +100,13 @@ func (c *Client) addOperationDeleteSourceServerMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteSourceServer(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "DeleteSourceServer",
+	}
 }

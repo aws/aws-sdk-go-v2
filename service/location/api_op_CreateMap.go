@@ -155,6 +155,9 @@ func (c *Client) addOperationCreateMapMiddlewares(stack *middleware.Stack, optio
 	if err = addOpCreateMapValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMap(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -165,4 +168,13 @@ func (c *Client) addOperationCreateMapMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateMap(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "CreateMap",
+	}
 }

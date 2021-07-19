@@ -111,6 +111,9 @@ func (c *Client) addOperationListMeshesMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMeshes(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -212,4 +215,13 @@ func (p *ListMeshesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListMeshes(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "ListMeshes",
+	}
 }

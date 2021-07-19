@@ -96,6 +96,9 @@ func (c *Client) addOperationDeleteArchiveRuleMiddlewares(stack *middleware.Stac
 	if err = addOpDeleteArchiveRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteArchiveRule(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -106,4 +109,13 @@ func (c *Client) addOperationDeleteArchiveRuleMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteArchiveRule(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "access-analyzer",
+		OperationName: "DeleteArchiveRule",
+	}
 }

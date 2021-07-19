@@ -99,6 +99,9 @@ func (c *Client) addOperationListPlaceIndexesMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlaceIndexes(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -196,4 +199,13 @@ func (p *ListPlaceIndexesPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListPlaceIndexes(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "ListPlaceIndexes",
+	}
 }

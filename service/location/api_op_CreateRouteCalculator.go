@@ -171,6 +171,9 @@ func (c *Client) addOperationCreateRouteCalculatorMiddlewares(stack *middleware.
 	if err = addOpCreateRouteCalculatorValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRouteCalculator(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -181,4 +184,13 @@ func (c *Client) addOperationCreateRouteCalculatorMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateRouteCalculator(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "CreateRouteCalculator",
+	}
 }

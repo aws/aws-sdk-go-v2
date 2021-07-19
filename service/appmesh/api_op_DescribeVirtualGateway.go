@@ -105,6 +105,9 @@ func (c *Client) addOperationDescribeVirtualGatewayMiddlewares(stack *middleware
 	if err = addOpDescribeVirtualGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVirtualGateway(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -115,4 +118,13 @@ func (c *Client) addOperationDescribeVirtualGatewayMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDescribeVirtualGateway(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "DescribeVirtualGateway",
+	}
 }

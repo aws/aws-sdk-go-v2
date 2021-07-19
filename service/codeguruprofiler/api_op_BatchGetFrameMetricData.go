@@ -177,6 +177,9 @@ func (c *Client) addOperationBatchGetFrameMetricDataMiddlewares(stack *middlewar
 	if err = addOpBatchGetFrameMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetFrameMetricData(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -187,4 +190,13 @@ func (c *Client) addOperationBatchGetFrameMetricDataMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opBatchGetFrameMetricData(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "BatchGetFrameMetricData",
+	}
 }

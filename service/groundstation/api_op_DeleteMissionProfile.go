@@ -93,6 +93,9 @@ func (c *Client) addOperationDeleteMissionProfileMiddlewares(stack *middleware.S
 	if err = addOpDeleteMissionProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMissionProfile(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -103,4 +106,13 @@ func (c *Client) addOperationDeleteMissionProfileMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDeleteMissionProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "groundstation",
+		OperationName: "DeleteMissionProfile",
+	}
 }

@@ -102,6 +102,9 @@ func (c *Client) addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *
 	if err = addOpBatchDeleteDevicePositionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteDevicePositionHistory(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -112,4 +115,13 @@ func (c *Client) addOperationBatchDeleteDevicePositionHistoryMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opBatchDeleteDevicePositionHistory(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "BatchDeleteDevicePositionHistory",
+	}
 }

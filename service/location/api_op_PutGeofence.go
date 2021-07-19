@@ -123,6 +123,9 @@ func (c *Client) addOperationPutGeofenceMiddlewares(stack *middleware.Stack, opt
 	if err = addOpPutGeofenceValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutGeofence(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -133,4 +136,13 @@ func (c *Client) addOperationPutGeofenceMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opPutGeofence(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "PutGeofence",
+	}
 }

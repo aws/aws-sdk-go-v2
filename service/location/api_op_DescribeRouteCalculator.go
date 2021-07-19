@@ -144,6 +144,9 @@ func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middlewar
 	if err = addOpDescribeRouteCalculatorValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRouteCalculator(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,4 +157,12 @@ func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDescribeRouteCalculator(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "DescribeRouteCalculator",
+	}
 }

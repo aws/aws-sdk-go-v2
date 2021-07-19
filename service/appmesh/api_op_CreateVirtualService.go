@@ -129,6 +129,9 @@ func (c *Client) addOperationCreateVirtualServiceMiddlewares(stack *middleware.S
 	if err = addOpCreateVirtualServiceValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVirtualService(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -139,4 +142,13 @@ func (c *Client) addOperationCreateVirtualServiceMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateVirtualService(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "CreateVirtualService",
+	}
 }

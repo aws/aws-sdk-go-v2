@@ -99,6 +99,9 @@ func (c *Client) addOperationListRouteCalculatorsMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRouteCalculators(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -197,4 +200,13 @@ func (p *ListRouteCalculatorsPaginator) NextPage(ctx context.Context, optFns ...
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListRouteCalculators(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "geo",
+		OperationName: "ListRouteCalculators",
+	}
 }

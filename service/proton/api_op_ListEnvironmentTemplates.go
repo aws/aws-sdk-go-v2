@@ -100,6 +100,9 @@ func (c *Client) addOperationListEnvironmentTemplatesMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnvironmentTemplates(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -198,4 +201,13 @@ func (p *ListEnvironmentTemplatesPaginator) NextPage(ctx context.Context, optFns
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListEnvironmentTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "proton",
+		OperationName: "ListEnvironmentTemplates",
+	}
 }

@@ -103,6 +103,9 @@ func (c *Client) addOperationUpdateMeshMiddlewares(stack *middleware.Stack, opti
 	if err = addOpUpdateMeshValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMesh(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -113,4 +116,13 @@ func (c *Client) addOperationUpdateMeshMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opUpdateMesh(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "UpdateMesh",
+	}
 }

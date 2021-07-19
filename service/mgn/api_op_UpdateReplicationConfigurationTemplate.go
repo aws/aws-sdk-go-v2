@@ -181,6 +181,9 @@ func (c *Client) addOperationUpdateReplicationConfigurationTemplateMiddlewares(s
 	if err = addOpUpdateReplicationConfigurationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateReplicationConfigurationTemplate(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -191,4 +194,13 @@ func (c *Client) addOperationUpdateReplicationConfigurationTemplateMiddlewares(s
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opUpdateReplicationConfigurationTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "UpdateReplicationConfigurationTemplate",
+	}
 }

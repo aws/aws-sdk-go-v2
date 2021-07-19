@@ -103,6 +103,9 @@ func (c *Client) addOperationUpdateArchiveRuleMiddlewares(stack *middleware.Stac
 	if err = addOpUpdateArchiveRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateArchiveRule(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -113,4 +116,13 @@ func (c *Client) addOperationUpdateArchiveRuleMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opUpdateArchiveRule(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "access-analyzer",
+		OperationName: "UpdateArchiveRule",
+	}
 }

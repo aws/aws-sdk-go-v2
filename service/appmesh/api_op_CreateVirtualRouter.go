@@ -130,6 +130,9 @@ func (c *Client) addOperationCreateVirtualRouterMiddlewares(stack *middleware.St
 	if err = addOpCreateVirtualRouterValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVirtualRouter(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,4 +143,13 @@ func (c *Client) addOperationCreateVirtualRouterMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opCreateVirtualRouter(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "CreateVirtualRouter",
+	}
 }

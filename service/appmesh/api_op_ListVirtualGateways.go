@@ -122,6 +122,9 @@ func (c *Client) addOperationListVirtualGatewaysMiddlewares(stack *middleware.St
 	if err = addOpListVirtualGatewaysValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVirtualGateways(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -225,4 +228,13 @@ func (p *ListVirtualGatewaysPaginator) NextPage(ctx context.Context, optFns ...f
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opListVirtualGateways(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "appmesh",
+		OperationName: "ListVirtualGateways",
+	}
 }

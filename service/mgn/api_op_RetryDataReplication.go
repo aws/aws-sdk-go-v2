@@ -116,6 +116,9 @@ func (c *Client) addOperationRetryDataReplicationMiddlewares(stack *middleware.S
 	if err = addOpRetryDataReplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRetryDataReplication(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -126,4 +129,13 @@ func (c *Client) addOperationRetryDataReplicationMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opRetryDataReplication(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "mgn",
+		OperationName: "RetryDataReplication",
+	}
 }

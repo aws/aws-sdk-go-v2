@@ -100,6 +100,9 @@ func (c *Client) addOperationDescribeProfilingGroupMiddlewares(stack *middleware
 	if err = addOpDescribeProfilingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProfilingGroup(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -110,4 +113,13 @@ func (c *Client) addOperationDescribeProfilingGroupMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+func newServiceMetadataMiddleware_opDescribeProfilingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "codeguru-profiler",
+		OperationName: "DescribeProfilingGroup",
+	}
 }

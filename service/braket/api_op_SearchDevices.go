@@ -109,6 +109,9 @@ func (c *Client) addOperationSearchDevicesMiddlewares(stack *middleware.Stack, o
 	if err = addOpSearchDevicesValidationMiddleware(stack); err != nil {
 		return err
 	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchDevices(options.Region), middleware.Before); err != nil {
+		return err
+	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -204,4 +207,13 @@ func (p *SearchDevicesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 	}
 
 	return result, nil
+}
+
+func newServiceMetadataMiddleware_opSearchDevices(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "braket",
+		OperationName: "SearchDevices",
+	}
 }
