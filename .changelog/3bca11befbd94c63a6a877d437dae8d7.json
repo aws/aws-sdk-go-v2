@@ -1,0 +1,16 @@
+{
+    "id": "3bca11be-fbd9-4c63-a6a8-77d437dae8d7",
+    "type": "bugfix",
+    "description": "Fixed an issue that caused one or more API operations to fail when attempting to resolve the service endpoint. ([#1349](https://github.com/aws/aws-sdk-go-v2/pull/1349))",
+    "modules": [
+        "service/accessanalyzer",
+        "service/amp",
+        "service/appmesh",
+        "service/braket",
+        "service/codeguruprofiler",
+        "service/groundstation",
+        "service/location",
+        "service/mgn",
+        "service/proton"
+    ]
+}

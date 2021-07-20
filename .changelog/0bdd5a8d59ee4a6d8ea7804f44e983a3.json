@@ -1,0 +1,8 @@
+{
+    "id": "0bdd5a8d-59ee-4a6d-8ea7-804f44e983a3",
+    "type": "bugfix",
+    "description": "Corrected an issue where the retyer was not using the last attempt's ResultMetadata as the bases for the return result from the stack. ([#1345](https://github.com/aws/aws-sdk-go-v2/pull/1345))",
+    "modules": [
+        "."
+    ]
+}

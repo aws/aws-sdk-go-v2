@@ -1,0 +1,8 @@
+{
+    "id": "ee649130-ab1f-492f-a8de-8600ad13c553",
+    "type": "feature",
+    "description": "Add `HeadObject` presign support. ([#1346](https://github.com/aws/aws-sdk-go-v2/pull/1346))",
+    "modules": [
+        "service/s3"
+    ]
+}
