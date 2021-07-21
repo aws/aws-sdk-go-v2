@@ -1,0 +1,8 @@
+{
+    "id": "8e261b4b-5633-485c-ad82-1d38e2677e46",
+    "type": "feature",
+    "description": "Add IsSet helper for ConditionBuilder and KeyConditionBuilder ([#1329](https://github.com/aws/aws-sdk-go-v2/pull/1329))",
+    "modules": [
+        "feature/dynamodb/expression"
+    ]
+}
