@@ -24,6 +24,8 @@ replace github.com/aws/aws-sdk-go-v2/service/dynamodb => ../../../service/dynamo
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../service/internal/accept-encoding/
 
+replace github.com/aws/aws-sdk-go-v2/service/internal/checksum => ../../../service/internal/checksum/
+
 replace github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery => ../../../service/internal/endpoint-discovery/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../service/internal/presigned-url/

@@ -14,42 +14,54 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/google/go-cmp/cmp"
 )
 
 func TestInteg_PresignURL(t *testing.T) {
 	cases := map[string]struct {
-		key                  string
-		body                 io.Reader
+		params               s3.PutObjectInput
 		expires              time.Duration
 		sha256Header         string
 		expectedSignedHeader http.Header
+		expectErr            string
 	}{
 		"standard": {
-			body:                 bytes.NewReader([]byte("Hello-world")),
+			params: s3.PutObjectInput{
+				Body: bytes.NewReader([]byte("Hello-world")),
+			},
 			expectedSignedHeader: http.Header{},
 		},
 		"special characters": {
-			key: "some_value_(1).foo",
+			params: s3.PutObjectInput{
+				Key: aws.String("some_value_(1).foo"),
+			},
 		},
 		"nil-body": {
 			expectedSignedHeader: http.Header{},
 		},
 		"empty-body": {
-			body:                 bytes.NewReader([]byte("")),
+			params: s3.PutObjectInput{
+				Body: bytes.NewReader([]byte("")),
+			},
+			expectedSignedHeader: http.Header{},
+		},
+		"preset checksum": {
+			params: s3.PutObjectInput{
+				Body:              bytes.NewReader([]byte("hello world")),
+				ChecksumAlgorithm: s3types.ChecksumAlgorithmCrc32,
+				ChecksumCRC32:     aws.String("DUoRhQ=="),
+			},
 			expectedSignedHeader: http.Header{},
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			key := c.key
-			if len(key) == 0 {
-				key = integrationtest.UniqueID()
-			}
 
 			ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancelFn()
@@ -62,17 +74,17 @@ func TestInteg_PresignURL(t *testing.T) {
 			client := s3.NewFromConfig(cfg)
 
 			// construct a put object
-			putObjectInput := &s3.PutObjectInput{
-				Bucket: &setupMetadata.Buckets.Source.Name,
-				Key:    &key,
-				Body:   c.body,
-			}
-
 			presignerClient := s3.NewPresignClient(client, func(options *s3.PresignOptions) {
 				options.Expires = 600 * time.Second
 			})
 
-			presignRequest, err := presignerClient.PresignPutObject(ctx, putObjectInput)
+			params := c.params
+			if params.Key == nil {
+				params.Key = aws.String(integrationtest.UniqueID())
+			}
+			params.Bucket = &setupMetadata.Buckets.Source.Name
+
+			presignRequest, err := presignerClient.PresignPutObject(ctx, &params)
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}
@@ -88,7 +100,7 @@ func TestInteg_PresignURL(t *testing.T) {
 				}
 			}
 
-			resp, err := sendHTTPRequest(presignRequest, putObjectInput.Body)
+			resp, err := sendHTTPRequest(presignRequest, params.Body)
 			if err != nil {
 				t.Errorf("expect no error while sending HTTP request using presigned url, got %v", err)
 			}
@@ -101,8 +113,8 @@ func TestInteg_PresignURL(t *testing.T) {
 
 			// construct a get object
 			getObjectInput := &s3.GetObjectInput{
-				Bucket: &setupMetadata.Buckets.Source.Name,
-				Key:    &key,
+				Bucket: params.Bucket,
+				Key:    params.Key,
 			}
 
 			presignRequest, err = presignerClient.PresignGetObject(ctx, getObjectInput)

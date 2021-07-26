@@ -17,6 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/integration"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 var integConfig aws.Config
@@ -92,7 +93,11 @@ func (d dlwriter) WriteAt(p []byte, pos int64) (n int, err error) {
 
 func validate(t *testing.T, key string, md5value string) {
 	mgr := manager.NewDownloader(client)
-	params := &s3.GetObjectInput{Bucket: bucketName, Key: &key}
+	params := &s3.GetObjectInput{
+		Bucket:       bucketName,
+		Key:          &key,
+		ChecksumMode: s3types.ChecksumModeEnabled,
+	}
 
 	w := newDLWriter(1024 * 1024 * 20)
 	n, err := mgr.Download(context.Background(), w, params)
