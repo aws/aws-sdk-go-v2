@@ -85,7 +85,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 
 // A quota was exceeded. For more information, see AWS Proton Quotas
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-limits.html) in the AWS
-// Proton Administration Guide.
+// Proton Administrator Guide.
 type ServiceQuotaExceededException struct {
 	Message *string
 

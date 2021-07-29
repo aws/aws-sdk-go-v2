@@ -55,6 +55,9 @@ type DescribeWorldOutput struct {
 	// The world template.
 	Template *string
 
+	// Returns the JSON formatted string that describes the contents of your world.
+	WorldDescriptionBody *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

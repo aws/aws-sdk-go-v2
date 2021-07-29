@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers an AWS Batch job definition.
+// Registers an Batch job definition.
 func (c *Client) RegisterJobDefinition(ctx context.Context, params *RegisterJobDefinitionInput, optFns ...func(*Options)) (*RegisterJobDefinitionOutput, error) {
 	if params == nil {
 		params = &RegisterJobDefinitionInput{}
@@ -39,7 +39,7 @@ type RegisterJobDefinitionInput struct {
 	// The type of job definition. For more information about multi-node parallel jobs,
 	// see Creating a multi-node parallel job definition
 	// (https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html) in
-	// the AWS Batch User Guide. If the job is run on Fargate resources, then multinode
+	// the Batch User Guide. If the job is run on Fargate resources, then multinode
 	// isn't supported.
 	//
 	// This member is required.
@@ -56,10 +56,10 @@ type RegisterJobDefinitionInput struct {
 	// specify node properties for a job, it becomes a multi-node parallel job. For
 	// more information, see Multi-node Parallel Jobs
 	// (https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html)
-	// in the AWS Batch User Guide. If the job definition's type parameter is
-	// container, then you must specify either containerProperties or nodeProperties.
-	// If the job runs on Fargate resources, then you must not specify nodeProperties;
-	// use containerProperties instead.
+	// in the Batch User Guide. If the job definition's type parameter is container,
+	// then you must specify either containerProperties or nodeProperties. If the job
+	// runs on Fargate resources, then you must not specify nodeProperties; use
+	// containerProperties instead.
 	NodeProperties *types.NodeProperties
 
 	// Default parameter substitution placeholders to set in the job definition.
@@ -88,19 +88,19 @@ type RegisterJobDefinitionInput struct {
 
 	// The tags that you apply to the job definition to help you categorize and
 	// organize your resources. Each tag consists of a key and an optional value. For
-	// more information, see Tagging AWS Resources
-	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in AWS
-	// Batch User Guide.
+	// more information, see Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in Batch
+	// User Guide.
 	Tags map[string]string
 
 	// The timeout configuration for jobs that are submitted with this job definition,
-	// after which AWS Batch terminates your jobs if they have not finished. If a job
-	// is terminated due to a timeout, it isn't retried. The minimum value for the
-	// timeout is 60 seconds. Any timeout configuration that's specified during a
-	// SubmitJob operation overrides the timeout configuration defined here. For more
+	// after which Batch terminates your jobs if they have not finished. If a job is
+	// terminated due to a timeout, it isn't retried. The minimum value for the timeout
+	// is 60 seconds. Any timeout configuration that's specified during a SubmitJob
+	// operation overrides the timeout configuration defined here. For more
 	// information, see Job Timeouts
 	// (https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html) in the
-	// AWS Batch User Guide.
+	// Batch User Guide.
 	Timeout *types.JobTimeout
 
 	noSmithyDocumentSerde

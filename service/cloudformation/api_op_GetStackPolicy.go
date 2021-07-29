@@ -45,7 +45,7 @@ type GetStackPolicyOutput struct {
 	// Structure containing the stack policy body. (For more information, go to
 	// Prevent Updates to Stack Resources
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
-	// in the AWS CloudFormation User Guide.)
+	// in the CloudFormation User Guide.)
 	StackPolicyBody *string
 
 	// Metadata pertaining to the operation's result.

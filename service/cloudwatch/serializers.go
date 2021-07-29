@@ -2303,6 +2303,11 @@ func awsAwsquery_serializeDocumentMetricDataQuery(v *types.MetricDataQuery, valu
 	object := value.Object()
 	_ = object
 
+	if v.AccountId != nil {
+		objectKey := object.Key("AccountId")
+		objectKey.String(*v.AccountId)
+	}
+
 	if v.Expression != nil {
 		objectKey := object.Key("Expression")
 		objectKey.String(*v.Expression)

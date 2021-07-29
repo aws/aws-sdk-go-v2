@@ -12,8 +12,9 @@ import (
 )
 
 // Updates the details of the list of email addresses and phone numbers that the
-// DDoS Response Team (DRT) can use to contact you if you have proactive engagement
-// enabled, for escalations to the DRT and to initiate proactive customer support.
+// Shield Response Team (SRT) can use to contact you if you have proactive
+// engagement enabled, for escalations to the SRT and to initiate proactive
+// customer support.
 func (c *Client) UpdateEmergencyContactSettings(ctx context.Context, params *UpdateEmergencyContactSettingsInput, optFns ...func(*Options)) (*UpdateEmergencyContactSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateEmergencyContactSettingsInput{}
@@ -31,9 +32,9 @@ func (c *Client) UpdateEmergencyContactSettings(ctx context.Context, params *Upd
 
 type UpdateEmergencyContactSettingsInput struct {
 
-	// A list of email addresses and phone numbers that the DDoS Response Team (DRT)
+	// A list of email addresses and phone numbers that the Shield Response Team (SRT)
 	// can use to contact you if you have proactive engagement enabled, for escalations
-	// to the DRT and to initiate proactive customer support. If you have proactive
+	// to the SRT and to initiate proactive customer support. If you have proactive
 	// engagement enabled, the contact list must include at least one phone number.
 	EmergencyContactList []types.EmergencyContact
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Validates the integrity of an assessment report in AWS Audit Manager.
+// Validates the integrity of an assessment report in Audit Manager.
 func (c *Client) ValidateAssessmentReportIntegrity(ctx context.Context, params *ValidateAssessmentReportIntegrityInput, optFns ...func(*Options)) (*ValidateAssessmentReportIntegrityOutput, error) {
 	if params == nil {
 		params = &ValidateAssessmentReportIntegrityInput{}

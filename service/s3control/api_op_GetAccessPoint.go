@@ -61,8 +61,8 @@ type GetAccessPointInput struct {
 	// The name of the access point whose configuration information you want to
 	// retrieve. For using this parameter with Amazon S3 on Outposts with the REST API,
 	// you must specify the name and the x-amz-outpost-id as well. For using this
-	// parameter with S3 on Outposts with the AWS SDK and CLI, you must specify the ARN
-	// of the access point accessed in the format
+	// parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must
+	// specify the ARN of the access point accessed in the format
 	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
 	// point reports-ap through outpost my-outpost owned by account 123456789012 in
 	// Region us-west-2, use the URL encoding of
@@ -77,11 +77,20 @@ type GetAccessPointInput struct {
 
 type GetAccessPointOutput struct {
 
+	// The ARN of the access point.
+	AccessPointArn *string
+
+	// The name or alias of the access point.
+	Alias *string
+
 	// The name of the bucket associated with the specified access point.
 	Bucket *string
 
 	// The date and time when the specified access point was created.
 	CreationDate *time.Time
+
+	// The VPC endpoint for the access point.
+	Endpoints map[string]string
 
 	// The name of the specified access point.
 	Name *string
@@ -104,7 +113,7 @@ type GetAccessPointOutput struct {
 
 	// Contains the virtual private cloud (VPC) configuration for the specified access
 	// point. This element is empty if this access point is an Amazon S3 on Outposts
-	// access point that is used by other AWS services.
+	// access point that is used by other Amazon Web Services.
 	VpcConfiguration *types.VpcConfiguration
 
 	// Metadata pertaining to the operation's result.

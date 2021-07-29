@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS Batch job queue. When you create a job queue, you associate one
-// or more compute environments to the queue and assign an order of preference for
-// the compute environments. You also set a priority to the job queue that
-// determines the order that the AWS Batch scheduler places jobs onto its
-// associated compute environments. For example, if a compute environment is
-// associated with more than one job queue, the job queue with a higher priority is
-// given preference for scheduling jobs to that compute environment.
+// Creates an Batch job queue. When you create a job queue, you associate one or
+// more compute environments to the queue and assign an order of preference for the
+// compute environments. You also set a priority to the job queue that determines
+// the order that the Batch scheduler places jobs onto its associated compute
+// environments. For example, if a compute environment is associated with more than
+// one job queue, the job queue with a higher priority is given preference for
+// scheduling jobs to that compute environment.
 func (c *Client) CreateJobQueue(ctx context.Context, params *CreateJobQueueInput, optFns ...func(*Options)) (*CreateJobQueueOutput, error) {
 	if params == nil {
 		params = &CreateJobQueueInput{}
@@ -43,7 +43,7 @@ type CreateJobQueueInput struct {
 	// three compute environments with a job queue. All of the compute environments
 	// must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT); EC2 and
 	// Fargate compute environments can't be mixed. All compute environments that are
-	// associated with a job queue must share the same architecture. AWS Batch doesn't
+	// associated with a job queue must share the same architecture. Batch doesn't
 	// support mixing compute environment architecture types in a single job queue.
 	//
 	// This member is required.
@@ -61,7 +61,7 @@ type CreateJobQueueInput struct {
 	// For example, a job queue with a priority value of 10 is given scheduling
 	// preference over a job queue with a priority value of 1. All of the compute
 	// environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
-	// FARGATE_SPOT); EC2 and Fargate compute environments cannot be mixed.
+	// FARGATE_SPOT); EC2 and Fargate compute environments can't be mixed.
 	//
 	// This member is required.
 	Priority int32
@@ -73,9 +73,9 @@ type CreateJobQueueInput struct {
 
 	// The tags that you apply to the job queue to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging your AWS Batch resources
-	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in AWS
-	// Batch User Guide.
+	// information, see Tagging your Batch resources
+	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in Batch
+	// User Guide.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

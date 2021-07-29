@@ -28,7 +28,8 @@ func (c *Client) DeleteTemplate(ctx context.Context, params *DeleteTemplateInput
 
 type DeleteTemplateInput struct {
 
-	// The ID of the AWS account that contains the template that you're deleting.
+	// The ID of the Amazon Web Services account; that contains the template that
+	// you're deleting.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -50,7 +51,7 @@ type DeleteTemplateOutput struct {
 	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

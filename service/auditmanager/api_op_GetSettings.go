@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the settings for the specified AWS account.
+// Returns the settings for the specified account.
 func (c *Client) GetSettings(ctx context.Context, params *GetSettingsInput, optFns ...func(*Options)) (*GetSettingsOutput, error) {
 	if params == nil {
 		params = &GetSettingsInput{}
@@ -39,7 +39,7 @@ type GetSettingsInput struct {
 
 type GetSettingsOutput struct {
 
-	// The settings object that holds all supported AWS Audit Manager settings.
+	// The settings object that holds all supported Audit Manager settings.
 	Settings *types.Settings
 
 	// Metadata pertaining to the operation's result.

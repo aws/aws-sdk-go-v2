@@ -57,7 +57,7 @@ import (
 // restrictions related to characters and encodings, see User-Defined Tag
 // Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
-// in the AWS Billing and Cost Management User Guide.
+// in the Billing and Cost Management User Guide.
 //
 // To use this action, you must
 // have permission to perform the s3:PutJobTagging action. Related actions
@@ -90,7 +90,7 @@ func (c *Client) PutJobTagging(ctx context.Context, params *PutJobTaggingInput, 
 
 type PutJobTaggingInput struct {
 
-	// The AWS account ID associated with the S3 Batch Operations job.
+	// The account ID associated with the S3 Batch Operations job.
 	//
 	// This member is required.
 	AccountId *string

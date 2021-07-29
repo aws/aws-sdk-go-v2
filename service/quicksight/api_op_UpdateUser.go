@@ -29,8 +29,9 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 
 type UpdateUserInput struct {
 
-	// The ID for the AWS account that the user is in. Currently, you use the ID for
-	// the AWS account that contains your Amazon QuickSight account.
+	// The ID for the Amazon Web Services account; that the user is in. Currently, you
+	// use the ID for the Amazon Web Services account; that contains your Amazon
+	// QuickSight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -96,7 +97,7 @@ type UpdateUserInput struct {
 	// Therefore, they override the permissions typically granted by assigning
 	// QuickSight users to one of the default security cohorts in QuickSight (admin,
 	// author, reader). This feature is available only to QuickSight Enterprise edition
-	// subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).
+	// subscriptions.
 	CustomPermissionsName *string
 
 	// The type of supported external login provider that provides identity to let a
@@ -132,7 +133,7 @@ type UpdateUserInput struct {
 
 type UpdateUserOutput struct {
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

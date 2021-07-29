@@ -403,6 +403,11 @@ func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.Fau
 //
 // * The resource policy
 // hasn't finished propagating yet.
+//
+// * The Key management service (KMS) key you
+// specified doesn’t exist or it can’t be used with the log group associated with
+// query log. Update or provide a resource policy to grant permissions for the KMS
+// key.
 type InsufficientCloudWatchLogsResourcePolicy struct {
 	Message *string
 
@@ -757,7 +762,7 @@ func (e *LastVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // with a private hosted zone, see GetHostedZoneLimit
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetHostedZoneLimit.html).
 // To request a higher limit, create a case (http://aws.amazon.com/route53-request)
-// with the AWS Support Center.
+// with the Amazon Web Services Support Center.
 type LimitsExceeded struct {
 	Message *string
 
@@ -1081,9 +1086,10 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // current limit for an account, see GetAccountLimit
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html).
 // To request a higher limit, create a case (http://aws.amazon.com/route53-request)
-// with the AWS Support Center. You have reached the maximum number of active
-// health checks for an AWS account. To request a higher limit, create a case
-// (http://aws.amazon.com/route53-request) with the AWS Support Center.
+// with the Amazon Web Services Support Center. You have reached the maximum number
+// of active health checks for an account. To request a higher limit, create a case
+// (http://aws.amazon.com/route53-request) with the Amazon Web Services Support
+// Center.
 type TooManyHealthChecks struct {
 	Message *string
 
@@ -1114,7 +1120,7 @@ func (e *TooManyHealthChecks) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // delegation set, see GetReusableDelegationSetLimit
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetReusableDelegationSetLimit.html).
 // To request a higher limit, create a case (http://aws.amazon.com/route53-request)
-// with the AWS Support Center.
+// with the Amazon Web Services Support Center.
 type TooManyHostedZones struct {
 	Message *string
 
@@ -1161,7 +1167,7 @@ func (e *TooManyKeySigningKeys) ErrorFault() smithy.ErrorFault { return smithy.F
 // see GetAccountLimit
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html).
 // To request a higher limit, create a case (http://aws.amazon.com/route53-request)
-// with the AWS Support Center.
+// with the Amazon Web Services Support Center.
 type TooManyTrafficPolicies struct {
 	Message *string
 
@@ -1188,7 +1194,7 @@ func (e *TooManyTrafficPolicies) ErrorFault() smithy.ErrorFault { return smithy.
 // current limit for an account, see GetAccountLimit
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html).
 // To request a higher limit, create a case (http://aws.amazon.com/route53-request)
-// with the AWS Support Center.
+// with the Amazon Web Services Support Center.
 type TooManyTrafficPolicyInstances struct {
 	Message *string
 

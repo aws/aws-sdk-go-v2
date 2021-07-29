@@ -41,7 +41,7 @@ func (c *Client) ListRegionalBuckets(ctx context.Context, params *ListRegionalBu
 
 type ListRegionalBucketsInput struct {
 
-	// The AWS account ID of the Outposts bucket.
+	// The account ID of the Outposts bucket.
 	//
 	// This member is required.
 	AccountId *string
@@ -52,7 +52,7 @@ type ListRegionalBucketsInput struct {
 	//
 	NextToken *string
 
-	// The ID of the AWS Outposts. This is required by Amazon S3 on Outposts buckets.
+	// The ID of the Outposts. This is required by Amazon S3 on Outposts buckets.
 	OutpostId *string
 
 	noSmithyDocumentSerde

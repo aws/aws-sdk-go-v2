@@ -86,6 +86,8 @@ type UpdateCanaryInput struct {
 	// The number of days to retain data about successful runs of this canary.
 	SuccessRetentionPeriodInDays *int32
 
+	VisualReference *types.VisualReferenceInput
+
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnet and security groups of the VPC endpoint. For more
 	// information, see  Running a Canary in a VPC

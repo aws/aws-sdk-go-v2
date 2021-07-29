@@ -13,7 +13,7 @@ import (
 
 // Attempts to cancel a service instance deployment on an UpdateServiceInstance
 // action, if the deployment is IN_PROGRESS. For more information, see Update a
-// service instance in the AWS Proton Administration guide
+// service instance in the AWS Proton Administrator guide
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-instance-update.html)
 // or the AWS Proton User guide
 // (https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-instance-update.html).

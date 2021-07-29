@@ -49,9 +49,27 @@ type CreateRouteCalculatorInput struct {
 
 	// Specifies the data provider of traffic and road network data. This field is
 	// case-sensitive. Enter the valid values as shown. For example, entering HERE
-	// returns an error. Valid Values: Esri | Here For more information about data
-	// providers, see Amazon Location Service data providers
-	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
+	// returns an error. Valid values include:
+	//
+	// * Esri – For additional information
+	// about Esri
+	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
+	// coverage in your region of interest, see Esri details on street networks and
+	// traffic coverage
+	// (https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm).
+	//
+	// *
+	// Here – For additional information about HERE Technologies
+	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)'s
+	// coverage in your region of interest, see HERE car routing coverage
+	// (https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html)
+	// and HERE truck routing coverage
+	// (https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html).
+	//
+	// For
+	// additional information , see Data providers
+	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
+	// on the Amazon Location Service Developer Guide.
 	//
 	// This member is required.
 	DataSource *string

@@ -13,9 +13,9 @@ import (
 
 // Creates an assignment with one specified IAM policy, identified by its Amazon
 // Resource Name (ARN). This policy assignment is attached to the specified groups
-// or users of Amazon QuickSight. Assignment names are unique per AWS account. To
-// avoid overwriting rules in other namespaces, use assignment names that are
-// unique.
+// or users of Amazon QuickSight. Assignment names are unique per Amazon Web
+// Services account;. To avoid overwriting rules in other namespaces, use
+// assignment names that are unique.
 func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIAMPolicyAssignmentInput, optFns ...func(*Options)) (*CreateIAMPolicyAssignmentOutput, error) {
 	if params == nil {
 		params = &CreateIAMPolicyAssignmentInput{}
@@ -33,8 +33,8 @@ func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIA
 
 type CreateIAMPolicyAssignmentInput struct {
 
-	// The name of the assignment, also called a rule. It must be unique within an AWS
-	// account.
+	// The name of the assignment, also called a rule. It must be unique within an
+	// Amazon Web Services account;.
 	//
 	// This member is required.
 	AssignmentName *string
@@ -54,8 +54,8 @@ type CreateIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentStatus types.AssignmentStatus
 
-	// The ID of the AWS account where you want to assign an IAM policy to QuickSight
-	// users or groups.
+	// The ID of the Amazon Web Services account; where you want to assign an IAM
+	// policy to QuickSight users or groups.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -80,7 +80,8 @@ type CreateIAMPolicyAssignmentOutput struct {
 	// The ID for the assignment.
 	AssignmentId *string
 
-	// The name of the assignment. This name must be unique within the AWS account.
+	// The name of the assignment. This name must be unique within the Amazon Web
+	// Services account;.
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:
@@ -103,7 +104,7 @@ type CreateIAMPolicyAssignmentOutput struct {
 	// specified in this assignment.
 	PolicyArn *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

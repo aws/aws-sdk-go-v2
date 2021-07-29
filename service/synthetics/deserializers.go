@@ -1801,6 +1801,121 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocumentBaseScreenshot(v **types.BaseScreenshot, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BaseScreenshot
+	if *v == nil {
+		sv = &types.BaseScreenshot{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IgnoreCoordinates":
+			if err := awsRestjson1_deserializeDocumentBaseScreenshotIgnoreCoordinates(&sv.IgnoreCoordinates, value); err != nil {
+				return err
+			}
+
+		case "ScreenshotName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ScreenshotName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBaseScreenshotIgnoreCoordinates(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected BaseScreenshotConfigIgnoreCoordinate to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBaseScreenshots(v *[]types.BaseScreenshot, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BaseScreenshot
+	if *v == nil {
+		cv = []types.BaseScreenshot{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BaseScreenshot
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBaseScreenshot(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCanaries(v *[]types.Canary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1998,6 +2113,11 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 
 		case "Timeline":
 			if err := awsRestjson1_deserializeDocumentCanaryTimeline(&sv.Timeline, value); err != nil {
+				return err
+			}
+
+		case "VisualReference":
+			if err := awsRestjson1_deserializeDocumentVisualReferenceOutput(&sv.VisualReference, value); err != nil {
 				return err
 			}
 
@@ -2976,6 +3096,51 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVisualReferenceOutput(v **types.VisualReferenceOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VisualReferenceOutput
+	if *v == nil {
+		sv = &types.VisualReferenceOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BaseCanaryRunId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BaseCanaryRunId = ptr.String(jtv)
+			}
+
+		case "BaseScreenshots":
+			if err := awsRestjson1_deserializeDocumentBaseScreenshots(&sv.BaseScreenshots, value); err != nil {
+				return err
 			}
 
 		default:

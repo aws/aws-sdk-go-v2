@@ -29,7 +29,8 @@ func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *Di
 
 type DisableOrganizationAdminAccountInput struct {
 
-	// The AWS account identifier of the Security Hub administrator account.
+	// The Amazon Web Services account identifier of the Security Hub administrator
+	// account.
 	//
 	// This member is required.
 	AdminAccountId *string

@@ -120,6 +120,9 @@ type Endpoint struct {
 	// The execution role ARN of the endpoint.
 	ExecutionRoleArn *string
 
+	// The reasons why the endpoint has failed.
+	FailureReason FailureReason
+
 	// The ID of the endpoint.
 	Id *string
 
@@ -137,6 +140,9 @@ type Endpoint struct {
 
 	// The state of the endpoint.
 	State EndpointState
+
+	// Additional details of the endpoint state.
+	StateDetails *string
 
 	// The subnet IDs of the endpoint.
 	SubnetIds []string

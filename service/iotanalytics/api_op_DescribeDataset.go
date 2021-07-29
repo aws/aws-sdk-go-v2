@@ -29,7 +29,7 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 
 type DescribeDatasetInput struct {
 
-	// The name of the data set whose information is retrieved.
+	// The name of the dataset whose information is retrieved.
 	//
 	// This member is required.
 	DatasetName *string
@@ -39,7 +39,7 @@ type DescribeDatasetInput struct {
 
 type DescribeDatasetOutput struct {
 
-	// An object that contains information about the data set.
+	// An object that contains information about the dataset.
 	Dataset *types.Dataset
 
 	// Metadata pertaining to the operation's result.

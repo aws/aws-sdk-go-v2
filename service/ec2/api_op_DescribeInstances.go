@@ -278,61 +278,62 @@ type DescribeInstancesInput struct {
 	// * outpost-arn - The Amazon Resource Name (ARN) of the Outpost.
 	//
 	// *
-	// owner-id - The account ID of the instance owner.
+	// owner-id - The Amazon Web Services account ID of the instance owner.
 	//
-	// * placement-group-name - The
-	// name of the placement group for the instance.
+	// *
+	// placement-group-name - The name of the placement group for the instance.
 	//
-	// * placement-partition-number -
-	// The partition in which the instance is located.
+	// *
+	// placement-partition-number - The partition in which the instance is located.
 	//
-	// * platform - The platform. To
-	// list only Windows instances, use windows.
+	// *
+	// platform - The platform. To list only Windows instances, use windows.
 	//
-	// * private-dns-name - The private IPv4
-	// DNS name of the instance.
+	// *
+	// private-dns-name - The private IPv4 DNS name of the instance.
 	//
-	// * private-ip-address - The private IPv4 address of
-	// the instance.
+	// *
+	// private-ip-address - The private IPv4 address of the instance.
 	//
-	// * product-code - The product code associated with the AMI used to
-	// launch the instance.
+	// * product-code -
+	// The product code associated with the AMI used to launch the instance.
 	//
-	// * product-code.type - The type of product code (devpay |
-	// marketplace).
+	// *
+	// product-code.type - The type of product code (devpay | marketplace).
 	//
-	// * ramdisk-id - The RAM disk ID.
+	// *
+	// ramdisk-id - The RAM disk ID.
 	//
-	// * reason - The reason for the
-	// current state of the instance (for example, shows "User Initiated [date]" when
-	// you stop or terminate the instance). Similar to the state-reason-code filter.
+	// * reason - The reason for the current state of
+	// the instance (for example, shows "User Initiated [date]" when you stop or
+	// terminate the instance). Similar to the state-reason-code filter.
 	//
 	// *
 	// requester-id - The ID of the entity that launched the instance on your behalf
-	// (for example, Management Console, Auto Scaling, and so on).
+	// (for example, Amazon Web Services Management Console, Auto Scaling, and so
+	// on).
 	//
-	// * reservation-id -
-	// The ID of the instance's reservation. A reservation ID is created any time you
-	// launch an instance. A reservation ID has a one-to-one relationship with an
-	// instance launch request, but can be associated with more than one instance if
-	// you launch multiple instances using the same launch request. For example, if you
-	// launch one instance, you get one reservation ID. If you launch ten instances
-	// using the same launch request, you also get one reservation ID.
+	// * reservation-id - The ID of the instance's reservation. A reservation ID
+	// is created any time you launch an instance. A reservation ID has a one-to-one
+	// relationship with an instance launch request, but can be associated with more
+	// than one instance if you launch multiple instances using the same launch
+	// request. For example, if you launch one instance, you get one reservation ID. If
+	// you launch ten instances using the same launch request, you also get one
+	// reservation ID.
 	//
-	// *
-	// root-device-name - The device name of the root device volume (for example,
-	// /dev/sda1).
+	// * root-device-name - The device name of the root device volume
+	// (for example, /dev/sda1).
 	//
-	// * root-device-type - The type of the root device volume (ebs |
-	// instance-store).
+	// * root-device-type - The type of the root device
+	// volume (ebs | instance-store).
 	//
-	// * source-dest-check - Indicates whether the instance performs
-	// source/destination checking. A value of true means that checking is enabled, and
-	// false means that checking is disabled. The value must be false for the instance
-	// to perform network address translation (NAT) in your VPC.
+	// * source-dest-check - Indicates whether the
+	// instance performs source/destination checking. A value of true means that
+	// checking is enabled, and false means that checking is disabled. The value must
+	// be false for the instance to perform network address translation (NAT) in your
+	// VPC.
 	//
-	// *
-	// spot-instance-request-id - The ID of the Spot Instance request.
+	// * spot-instance-request-id - The ID of the Spot Instance request.
 	//
 	// *
 	// state-reason-code - The reason code for the state change.

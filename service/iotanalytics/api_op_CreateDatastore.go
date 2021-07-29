@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a data store, which is a repository for messages. Only data stores that
-// are used to save pipeline data can be configured with ParquetConfiguration.
+// Creates a data store, which is a repository for messages.
 func (c *Client) CreateDatastore(ctx context.Context, params *CreateDatastoreInput, optFns ...func(*Options)) (*CreateDatastoreOutput, error) {
 	if params == nil {
 		params = &CreateDatastoreInput{}
@@ -35,15 +34,16 @@ type CreateDatastoreInput struct {
 	// This member is required.
 	DatastoreName *string
 
-	// Contains information about the partitions in a data store.
+	// Contains information about the partition dimensions in a data store.
 	DatastorePartitions *types.DatastorePartitions
 
-	// Where data store data is stored. You can choose one of serviceManagedS3 or
-	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
-	// You cannot change this storage option after the data store is created.
+	// Where data in a data store is stored.. You can choose serviceManagedS3 storage,
+	// customerManagedS3 storage, or iotSiteWiseMultiLayerStorage storage. The default
+	// is serviceManagedS3. You can't change the choice of Amazon S3 storage after your
+	// data store is created.
 	DatastoreStorage types.DatastoreStorage
 
-	// Contains the configuration information of file formats. AWS IoT Analytics data
+	// Contains the configuration information of file formats. IoT Analytics data
 	// stores support JSON and Parquet (https://parquet.apache.org/). The default file
 	// format is JSON. You can specify only one format. You can't change the file
 	// format after you create the data store.

@@ -147,6 +147,11 @@ func awsRestjson1_serializeOpDocumentCreateLedgerInput(v *CreateLedgerInput, val
 		ok.Boolean(*v.DeletionProtection)
 	}
 
+	if v.KmsKey != nil {
+		ok := object.Key("KmsKey")
+		ok.String(*v.KmsKey)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -1395,6 +1400,11 @@ func awsRestjson1_serializeOpDocumentUpdateLedgerInput(v *UpdateLedgerInput, val
 	if v.DeletionProtection != nil {
 		ok := object.Key("DeletionProtection")
 		ok.Boolean(*v.DeletionProtection)
+	}
+
+	if v.KmsKey != nil {
+		ok := object.Key("KmsKey")
+		ok.String(*v.KmsKey)
 	}
 
 	return nil

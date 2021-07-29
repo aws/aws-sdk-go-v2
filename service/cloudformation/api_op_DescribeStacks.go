@@ -4,12 +4,18 @@ package cloudformation
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	smithywaiter "github.com/aws/smithy-go/waiter"
+	"github.com/jmespath/go-jmespath"
+	"time"
 )
 
 // Returns the description for the specified stack; if no stack name was specified,
@@ -199,6 +205,1579 @@ func (p *DescribeStacksPaginator) NextPage(ctx context.Context, optFns ...func(*
 	}
 
 	return result, nil
+}
+
+// StackCreateCompleteWaiterOptions are waiter options for
+// StackCreateCompleteWaiter
+type StackCreateCompleteWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// StackCreateCompleteWaiter will use default minimum delay of 30 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, StackCreateCompleteWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeStacksInput, *DescribeStacksOutput, error) (bool, error)
+}
+
+// StackCreateCompleteWaiter defines the waiters for StackCreateComplete
+type StackCreateCompleteWaiter struct {
+	client DescribeStacksAPIClient
+
+	options StackCreateCompleteWaiterOptions
+}
+
+// NewStackCreateCompleteWaiter constructs a StackCreateCompleteWaiter.
+func NewStackCreateCompleteWaiter(client DescribeStacksAPIClient, optFns ...func(*StackCreateCompleteWaiterOptions)) *StackCreateCompleteWaiter {
+	options := StackCreateCompleteWaiterOptions{}
+	options.MinDelay = 30 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = stackCreateCompleteStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &StackCreateCompleteWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for StackCreateComplete waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
+func (w *StackCreateCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackCreateCompleteWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for StackCreateComplete waiter")
+}
+
+func stackCreateCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "CREATE_COMPLETE"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "CREATE_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "DELETE_COMPLETE"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "DELETE_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ROLLBACK_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ROLLBACK_COMPLETE"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ValidationError" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	return true, nil
+}
+
+// StackDeleteCompleteWaiterOptions are waiter options for
+// StackDeleteCompleteWaiter
+type StackDeleteCompleteWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// StackDeleteCompleteWaiter will use default minimum delay of 30 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, StackDeleteCompleteWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeStacksInput, *DescribeStacksOutput, error) (bool, error)
+}
+
+// StackDeleteCompleteWaiter defines the waiters for StackDeleteComplete
+type StackDeleteCompleteWaiter struct {
+	client DescribeStacksAPIClient
+
+	options StackDeleteCompleteWaiterOptions
+}
+
+// NewStackDeleteCompleteWaiter constructs a StackDeleteCompleteWaiter.
+func NewStackDeleteCompleteWaiter(client DescribeStacksAPIClient, optFns ...func(*StackDeleteCompleteWaiterOptions)) *StackDeleteCompleteWaiter {
+	options := StackDeleteCompleteWaiterOptions{}
+	options.MinDelay = 30 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = stackDeleteCompleteStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &StackDeleteCompleteWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for StackDeleteComplete waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
+func (w *StackDeleteCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackDeleteCompleteWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for StackDeleteComplete waiter")
+}
+
+func stackDeleteCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "DELETE_COMPLETE"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ValidationError" == apiErr.ErrorCode() {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "DELETE_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "CREATE_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ROLLBACK_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_IN_PROGRESS"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_COMPLETE"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	return true, nil
+}
+
+// StackExistsWaiterOptions are waiter options for StackExistsWaiter
+type StackExistsWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// StackExistsWaiter will use default minimum delay of 5 seconds. Note that
+	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, StackExistsWaiter will use default max delay of 120 seconds. Note that
+	// MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeStacksInput, *DescribeStacksOutput, error) (bool, error)
+}
+
+// StackExistsWaiter defines the waiters for StackExists
+type StackExistsWaiter struct {
+	client DescribeStacksAPIClient
+
+	options StackExistsWaiterOptions
+}
+
+// NewStackExistsWaiter constructs a StackExistsWaiter.
+func NewStackExistsWaiter(client DescribeStacksAPIClient, optFns ...func(*StackExistsWaiterOptions)) *StackExistsWaiter {
+	options := StackExistsWaiterOptions{}
+	options.MinDelay = 5 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = stackExistsStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &StackExistsWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for StackExists waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
+func (w *StackExistsWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackExistsWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for StackExists waiter")
+}
+
+func stackExistsStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
+
+	if err == nil {
+		return false, nil
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ValidationError" == apiErr.ErrorCode() {
+			return true, nil
+		}
+	}
+
+	return true, nil
+}
+
+// StackImportCompleteWaiterOptions are waiter options for
+// StackImportCompleteWaiter
+type StackImportCompleteWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// StackImportCompleteWaiter will use default minimum delay of 30 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, StackImportCompleteWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeStacksInput, *DescribeStacksOutput, error) (bool, error)
+}
+
+// StackImportCompleteWaiter defines the waiters for StackImportComplete
+type StackImportCompleteWaiter struct {
+	client DescribeStacksAPIClient
+
+	options StackImportCompleteWaiterOptions
+}
+
+// NewStackImportCompleteWaiter constructs a StackImportCompleteWaiter.
+func NewStackImportCompleteWaiter(client DescribeStacksAPIClient, optFns ...func(*StackImportCompleteWaiterOptions)) *StackImportCompleteWaiter {
+	options := StackImportCompleteWaiterOptions{}
+	options.MinDelay = 30 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = stackImportCompleteStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &StackImportCompleteWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for StackImportComplete waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
+func (w *StackImportCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackImportCompleteWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for StackImportComplete waiter")
+}
+
+func stackImportCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "IMPORT_COMPLETE"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ROLLBACK_COMPLETE"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ROLLBACK_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "IMPORT_ROLLBACK_IN_PROGRESS"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "IMPORT_ROLLBACK_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "IMPORT_ROLLBACK_COMPLETE"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ValidationError" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	return true, nil
+}
+
+// StackRollbackCompleteWaiterOptions are waiter options for
+// StackRollbackCompleteWaiter
+type StackRollbackCompleteWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// StackRollbackCompleteWaiter will use default minimum delay of 30 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, StackRollbackCompleteWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeStacksInput, *DescribeStacksOutput, error) (bool, error)
+}
+
+// StackRollbackCompleteWaiter defines the waiters for StackRollbackComplete
+type StackRollbackCompleteWaiter struct {
+	client DescribeStacksAPIClient
+
+	options StackRollbackCompleteWaiterOptions
+}
+
+// NewStackRollbackCompleteWaiter constructs a StackRollbackCompleteWaiter.
+func NewStackRollbackCompleteWaiter(client DescribeStacksAPIClient, optFns ...func(*StackRollbackCompleteWaiterOptions)) *StackRollbackCompleteWaiter {
+	options := StackRollbackCompleteWaiterOptions{}
+	options.MinDelay = 30 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = stackRollbackCompleteStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &StackRollbackCompleteWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for StackRollbackComplete waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
+func (w *StackRollbackCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackRollbackCompleteWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for StackRollbackComplete waiter")
+}
+
+func stackRollbackCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_COMPLETE"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "DELETE_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ValidationError" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	return true, nil
+}
+
+// StackUpdateCompleteWaiterOptions are waiter options for
+// StackUpdateCompleteWaiter
+type StackUpdateCompleteWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// StackUpdateCompleteWaiter will use default minimum delay of 30 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, StackUpdateCompleteWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeStacksInput, *DescribeStacksOutput, error) (bool, error)
+}
+
+// StackUpdateCompleteWaiter defines the waiters for StackUpdateComplete
+type StackUpdateCompleteWaiter struct {
+	client DescribeStacksAPIClient
+
+	options StackUpdateCompleteWaiterOptions
+}
+
+// NewStackUpdateCompleteWaiter constructs a StackUpdateCompleteWaiter.
+func NewStackUpdateCompleteWaiter(client DescribeStacksAPIClient, optFns ...func(*StackUpdateCompleteWaiterOptions)) *StackUpdateCompleteWaiter {
+	options := StackUpdateCompleteWaiterOptions{}
+	options.MinDelay = 30 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = stackUpdateCompleteStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &StackUpdateCompleteWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for StackUpdateComplete waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
+func (w *StackUpdateCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackUpdateCompleteWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeStacks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for StackUpdateComplete waiter")
+}
+
+func stackUpdateCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_COMPLETE"
+		var match = true
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_FAILED"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("Stacks[].StackStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "UPDATE_ROLLBACK_COMPLETE"
+		listOfValues, ok := pathValue.([]interface{})
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			value, ok := v.(types.StackStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.StackStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ValidationError" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	return true, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeStacks(region string) *awsmiddleware.RegisterServiceMetadata {

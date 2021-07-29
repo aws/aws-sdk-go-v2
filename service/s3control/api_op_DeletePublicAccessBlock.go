@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-// Removes the PublicAccessBlock configuration for an AWS account. For more
+// Removes the PublicAccessBlock configuration for an account. For more
 // information, see  Using Amazon S3 block public access
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html).
 // Related actions include:
@@ -42,8 +42,8 @@ func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePubl
 
 type DeletePublicAccessBlockInput struct {
 
-	// The account ID for the AWS account whose PublicAccessBlock configuration you
-	// want to remove.
+	// The account ID for the account whose PublicAccessBlock configuration you want to
+	// remove.
 	//
 	// This member is required.
 	AccountId *string

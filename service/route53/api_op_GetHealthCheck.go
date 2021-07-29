@@ -44,7 +44,7 @@ type GetHealthCheckInput struct {
 type GetHealthCheckOutput struct {
 
 	// A complex type that contains information about one health check that is
-	// associated with the current AWS account.
+	// associated with the current account.
 	//
 	// This member is required.
 	HealthCheck *types.HealthCheck

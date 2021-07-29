@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve a list of the health checks that are associated with the current AWS
+// Retrieve a list of the health checks that are associated with the current
 // account.
 func (c *Client) ListHealthChecks(ctx context.Context, params *ListHealthChecksInput, optFns ...func(*Options)) (*ListHealthChecksOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) ListHealthChecks(ctx context.Context, params *ListHealthChecksI
 }
 
 // A request to retrieve a list of the health checks that are associated with the
-// current AWS account.
+// current account.
 type ListHealthChecksInput struct {
 
 	// If the value of IsTruncated in the previous response was true, you have more
@@ -54,7 +54,7 @@ type ListHealthChecksInput struct {
 type ListHealthChecksOutput struct {
 
 	// A complex type that contains one HealthCheck element for each health check that
-	// is associated with the current AWS account.
+	// is associated with the current account.
 	//
 	// This member is required.
 	HealthChecks []types.HealthCheck

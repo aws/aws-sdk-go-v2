@@ -13,7 +13,8 @@ import (
 
 // Grants an Amazon Web Services-authorized account permission to attach the
 // specified network interface to an instance in their account. You can grant
-// permission to a single account only, and only one account at a time.
+// permission to a single Amazon Web Services account only, and only one account at
+// a time.
 func (c *Client) CreateNetworkInterfacePermission(ctx context.Context, params *CreateNetworkInterfacePermissionInput, optFns ...func(*Options)) (*CreateNetworkInterfacePermissionOutput, error) {
 	if params == nil {
 		params = &CreateNetworkInterfacePermissionInput{}
@@ -42,7 +43,7 @@ type CreateNetworkInterfacePermissionInput struct {
 	// This member is required.
 	Permission types.InterfacePermissionType
 
-	// The account ID.
+	// The Amazon Web Services account ID.
 	AwsAccountId *string
 
 	// The Amazon Web Service. Currently not supported.

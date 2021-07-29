@@ -27,8 +27,8 @@ func (e *BadRequestException) ErrorCode() string             { return "BadReques
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested Outposts bucket name is not available. The bucket namespace is
-// shared by all users of the AWS Outposts in this Region. Select a different name
-// and try again.
+// shared by all users of the Outposts in this Region. Select a different name and
+// try again.
 type BucketAlreadyExists struct {
 	Message *string
 

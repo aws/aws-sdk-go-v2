@@ -13,7 +13,7 @@ import (
 
 // Attempts to cancel a service pipeline deployment on an UpdateServicePipeline
 // action, if the deployment is IN_PROGRESS. For more information, see Update a
-// service pipeline in the AWS Proton Administration guide
+// service pipeline in the AWS Proton Administrator guide
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-pipeline-update.html)
 // or the AWS Proton User guide
 // (https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-pipeline-update.html).

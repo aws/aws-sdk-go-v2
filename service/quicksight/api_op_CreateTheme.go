@@ -33,7 +33,8 @@ func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optF
 
 type CreateThemeInput struct {
 
-	// The ID of the AWS account where you want to store the new theme.
+	// The ID of the Amazon Web Services account; where you want to store the new
+	// theme.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -56,8 +57,8 @@ type CreateThemeInput struct {
 	// This member is required.
 	Name *string
 
-	// An ID for the theme that you want to create. The theme ID is unique per AWS
-	// Region in each AWS account.
+	// An ID for the theme that you want to create. The theme ID is unique per Region;
+	// in each Amazon Web Services account;.
 	//
 	// This member is required.
 	ThemeId *string
@@ -85,7 +86,7 @@ type CreateThemeOutput struct {
 	// The theme creation status.
 	CreationStatus types.ResourceStatus
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

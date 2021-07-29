@@ -15,7 +15,8 @@ import (
 // Creates a root volume replacement task for an Amazon EC2 instance. The root
 // volume can either be restored to its initial launch state, or it can be restored
 // using a specific snapshot. For more information, see Replace a root volume
-// (https://docs.aws.amazon.com/) in the Amazon Elastic Compute Cloud User Guide.
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html#replace-root)
+// in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) CreateReplaceRootVolumeTask(ctx context.Context, params *CreateReplaceRootVolumeTaskInput, optFns ...func(*Options)) (*CreateReplaceRootVolumeTaskOutput, error) {
 	if params == nil {
 		params = &CreateReplaceRootVolumeTaskInput{}
@@ -41,7 +42,7 @@ type CreateReplaceRootVolumeTaskInput struct {
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. If you do not specify a client token, a randomly generated token is
 	// used for the request to ensure idempotency. For more information, see Ensuring
-	// Idempotency
+	// idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
 

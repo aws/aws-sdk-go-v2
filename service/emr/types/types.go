@@ -139,7 +139,7 @@ type BlockPublicAccessConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Properties that describe the AWS principal that created the
+// Properties that describe the Amazon Web Services principal that created the
 // BlockPublicAccessConfiguration using the PutBlockPublicAccessConfiguration
 // action as well as the date and time that the configuration was created. Each
 // time a configuration for block public access is updated, Amazon EMR updates this
@@ -303,9 +303,8 @@ type Cluster struct {
 	// the Amazon EMR Management Guide.
 	KerberosAttributes *KerberosAttributes
 
-	// The AWS KMS customer master key (CMK) used for encrypting log files. This
-	// attribute is only available with EMR version 5.30.0 and later, excluding EMR
-	// 6.0.0.
+	// The KMS key used for encrypting log files. This attribute is only available with
+	// EMR version 5.30.0 and later, excluding EMR 6.0.0.
 	LogEncryptionKmsKeyId *string
 
 	// The path to the Amazon S3 location where logs for this cluster are stored.
@@ -371,8 +370,8 @@ type Cluster struct {
 	// The name of the security configuration applied to the cluster.
 	SecurityConfiguration *string
 
-	// The IAM role that will be assumed by the Amazon EMR service to access AWS
-	// resources on your behalf.
+	// The IAM role that will be assumed by the Amazon EMR service to access Amazon Web
+	// Services resources on your behalf.
 	ServiceRole *string
 
 	// The current status details about the cluster.
@@ -389,14 +388,22 @@ type Cluster struct {
 	// cluster error.
 	TerminationProtected bool
 
-	// Indicates whether the cluster is visible to all IAM users of the AWS account
-	// associated with the cluster. The default value, true, indicates that all IAM
-	// users in the AWS account can perform cluster actions if they have the proper IAM
-	// policy permissions. If this value is false, only the IAM user that created the
-	// cluster can perform actions. This value can be changed on a running cluster by
-	// using the SetVisibleToAllUsers action. You can override the default value of
-	// true when you create a cluster by using the VisibleToAllUsers parameter of the
-	// RunJobFlow action.
+	// Indicates whether the cluster is visible to IAM principals in the account
+	// associated with the cluster. When true, IAM principals in the account can
+	// perform EMR cluster actions on the cluster that their IAM policies allow. When
+	// false, only the IAM principal that created the cluster and the account root user
+	// can perform EMR actions, regardless of IAM permissions policies attached to
+	// other IAM principals. The default value is false if a value is not provided when
+	// creating a cluster using the EMR API RunJobFlow command or the CLI
+	// create-cluster
+	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
+	// command. The default value is true when a cluster is created using the
+	// Management Console. IAM principals that are allowed to perform actions on the
+	// cluster can use the SetVisibleToAllUsers action to change the value on a running
+	// cluster. For more information, see Understanding the EMR Cluster
+	// VisibleToAllUsers Setting
+	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
+	// in the Amazon EMR Management Guide.
 	VisibleToAllUsers bool
 
 	noSmithyDocumentSerde
@@ -767,7 +774,7 @@ type HadoopStepConfig struct {
 // Represents an EC2 instance provisioned as part of cluster.
 type Instance struct {
 
-	// The list of EBS volumes that are attached to this instance.
+	// The list of Amazon EBS volumes that are attached to this instance.
 	EbsVolumes []EbsVolume
 
 	// The unique identifier of the instance in Amazon EC2.
@@ -821,8 +828,8 @@ type InstanceFleet struct {
 	// TASK.
 	InstanceFleetType InstanceFleetType
 
-	// The specification for the instance types that comprise an instance fleet. Up to
-	// five unique instance specifications may be defined for each instance fleet.
+	// An array of specifications for the instance types that comprise an instance
+	// fleet.
 	InstanceTypeSpecifications []InstanceTypeSpecification
 
 	// Describes the launch specification for an instance fleet.
@@ -1071,9 +1078,9 @@ type InstanceGroup struct {
 	// to set the amount equal to the On-Demand price, or specify an amount in USD.
 	BidPrice *string
 
-	// Amazon EMR releases 4.x or later. The list of configurations supplied for an EMR
-	// cluster instance group. You can specify a separate configuration for each
-	// instance group (master, core, and task).
+	// Amazon EMR releases 4.x or later. The list of configurations supplied for an
+	// Amazon EMR cluster instance group. You can specify a separate configuration for
+	// each instance group (master, core, and task).
 	Configurations []Configuration
 
 	// The version number of the requested configuration specification for this
@@ -1366,9 +1373,14 @@ type InstanceTimeline struct {
 
 // An instance type configuration for each instance type in an instance fleet,
 // which determines the EC2 instances Amazon EMR attempts to provision to fulfill
-// On-Demand and Spot target capacities. There can be a maximum of five instance
-// type configurations in a fleet. The instance fleet configuration is available
-// only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
+// On-Demand and Spot target capacities. When you use an allocation strategy, you
+// can include a maximum of 30 instance type configurations for a fleet. For more
+// information about how to use an allocation strategy, see Configure Instance
+// Fleets
+// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html).
+// Without an allocation strategy, you may specify a maximum of five instance type
+// configurations for a fleet. The instance fleet configuration is available only
+// in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
 type InstanceTypeConfig struct {
 
 	// An EC2 instance type, such as m3.xlarge.
@@ -1392,7 +1404,7 @@ type InstanceTypeConfig struct {
 	// cluster.
 	Configurations []Configuration
 
-	// The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each
+	// The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each
 	// instance as defined by InstanceType.
 	EbsConfiguration *EbsConfiguration
 
@@ -1423,7 +1435,7 @@ type InstanceTypeSpecification struct {
 	// Amazon EMR.
 	Configurations []Configuration
 
-	// The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each
+	// The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each
 	// instance as defined by InstanceType.
 	EbsBlockDevices []EbsBlockDevice
 
@@ -1482,9 +1494,8 @@ type JobFlowDetail struct {
 	// instances of the job flow assume this role.
 	JobFlowRole *string
 
-	// The AWS KMS customer master key (CMK) used for encrypting log files. This
-	// attribute is only available with EMR version 5.30.0 and later, excluding EMR
-	// 6.0.0.
+	// The KMS key used for encrypting log files. This attribute is only available with
+	// EMR version 5.30.0 and later, excluding EMR 6.0.0.
 	LogEncryptionKmsKeyId *string
 
 	// The location in Amazon S3 where log files for the job are stored.
@@ -1505,8 +1516,8 @@ type JobFlowDetail struct {
 	// earlier than 5.1.0.
 	ScaleDownBehavior ScaleDownBehavior
 
-	// The IAM role that is assumed by the Amazon EMR service to access AWS resources
-	// on your behalf.
+	// The IAM role that is assumed by the Amazon EMR service to access Amazon Web
+	// Services resources on your behalf.
 	ServiceRole *string
 
 	// A list of steps run by the job flow.
@@ -1517,14 +1528,21 @@ type JobFlowDetail struct {
 	// empty.
 	SupportedProducts []string
 
-	// Indicates whether the cluster is visible to all IAM users of the AWS account
-	// associated with the cluster. The default value, true, indicates that all IAM
-	// users in the AWS account can perform cluster actions if they have the proper IAM
-	// policy permissions. If this value is false, only the IAM user that created the
-	// cluster can perform actions. This value can be changed on a running cluster by
-	// using the SetVisibleToAllUsers action. You can override the default value of
-	// true when you create a cluster by using the VisibleToAllUsers parameter of the
-	// RunJobFlow action.
+	// Indicates whether the cluster is visible to IAM principals in the account
+	// associated with the cluster. When true, IAM principals in the account can
+	// perform EMR cluster actions that their IAM policies allow. When false, only the
+	// IAM principal that created the cluster and the account root user can perform EMR
+	// actions, regardless of IAM permissions policies attached to other IAM
+	// principals. The default value is false if a value is not provided when creating
+	// a cluster using the EMR API RunJobFlow command or the CLI create-cluster
+	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
+	// command. The default value is true when a cluster is created using the
+	// Management Console. IAM principals that are authorized to perform actions on the
+	// cluster can use the SetVisibleToAllUsers action to change the value on a running
+	// cluster. For more information, see Understanding the EMR Cluster
+	// VisibleToAllUsers Setting
+	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
+	// in the Amazon EMR Management Guide.
 	VisibleToAllUsers bool
 
 	noSmithyDocumentSerde
@@ -1589,10 +1607,14 @@ type JobFlowInstancesConfig struct {
 	// EMR versions 4.8.0 and later, excluding 5.0.x versions.
 	Ec2SubnetIds []string
 
-	// The identifier of the Amazon EC2 security group for the master node.
+	// The identifier of the Amazon EC2 security group for the master node. If you
+	// specify EmrManagedMasterSecurityGroup, you must also specify
+	// EmrManagedSlaveSecurityGroup.
 	EmrManagedMasterSecurityGroup *string
 
-	// The identifier of the Amazon EC2 security group for the core and task nodes.
+	// The identifier of the Amazon EC2 security group for the core and task nodes. If
+	// you specify EmrManagedSlaveSecurityGroup, you must also specify
+	// EmrManagedMasterSecurityGroup.
 	EmrManagedSlaveSecurityGroup *string
 
 	// Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version
@@ -1615,7 +1637,10 @@ type JobFlowInstancesConfig struct {
 	InstanceGroups []InstanceGroupConfig
 
 	// Specifies whether the cluster should remain available after completing all
-	// steps.
+	// steps. Defaults to true. For more information about configuring cluster
+	// termination, see Control Cluster Termination
+	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html)
+	// in the EMR Management Guide.
 	KeepJobFlowAliveWhenNoSteps bool
 
 	// The EC2 instance type of the master node.
@@ -1868,7 +1893,8 @@ type NotebookExecution struct {
 	noSmithyDocumentSerde
 }
 
-//
+// Details for a notebook execution. The details include information such as the
+// unique ID and status of the notebook execution.
 type NotebookExecutionSummary struct {
 
 	// The unique identifier of the editor associated with the notebook execution.
@@ -1948,7 +1974,7 @@ type OnDemandCapacityReservationOptions struct {
 	// On-Demand allocation strategy (lowest-price) is applied. If the number of unused
 	// Capacity Reservations is less than the On-Demand target capacity, the remaining
 	// On-Demand target capacity is launched according to the On-Demand allocation
-	// strategy (lowest-price). If you do not specify a value, the fleet fulfils the
+	// strategy (lowest-price). If you do not specify a value, the fleet fulfills the
 	// On-Demand capacity according to the chosen On-Demand allocation strategy.
 	UsageStrategy OnDemandCapacityReservationUsageStrategy
 
@@ -2026,6 +2052,18 @@ type PortRange struct {
 
 	// The smallest port number in a specified range of port numbers.
 	MaxRange *int32
+
+	noSmithyDocumentSerde
+}
+
+// The release label filters by application or version prefix.
+type ReleaseLabelFilter struct {
+
+	// Optional release label application filter. For example, spark@2.1.0.
+	Application *string
+
+	// Optional release label version prefix filter. For example, emr-5.
+	Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -2113,8 +2151,7 @@ type ScalingTrigger struct {
 // Configuration of the script to run during a bootstrap action.
 type ScriptBootstrapActionConfig struct {
 
-	// Location of the script to run during a bootstrap action. Can be either a
-	// location in Amazon S3 or on a local file system.
+	// Location in Amazon S3 of the script to run during a bootstrap action.
 	//
 	// This member is required.
 	Path *string
@@ -2151,7 +2188,7 @@ type SessionMappingDetail struct {
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the AWS SSO Identity Store API Reference.
+	// in the Amazon Web Services SSO Identity Store API Reference.
 	IdentityName *string
 
 	// Specifies whether the identity mapped to the Amazon EMR Studio is a user or a
@@ -2178,15 +2215,15 @@ type SessionMappingSummary struct {
 	// The time the session mapping was created.
 	CreationTime *time.Time
 
-	// The globally unique identifier (GUID) of the user or group from the AWS SSO
-	// Identity Store.
+	// The globally unique identifier (GUID) of the user or group from the Amazon Web
+	// Services SSO Identity Store.
 	IdentityId *string
 
 	// The name of the user or group. For more information, see UserName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the AWS SSO Identity Store API Reference.
+	// in the Amazon Web Services SSO Identity Store API Reference.
 	IdentityName *string
 
 	// Specifies whether the identity mapped to the Amazon EMR Studio is a user or a
@@ -2254,6 +2291,18 @@ type SimpleScalingPolicyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The returned release label application names or versions.
+type SimplifiedApplication struct {
+
+	// The returned release label application name. For example, hadoop.
+	Name *string
+
+	// The returned release label application version. For example, 3.2.1.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // The launch specification for Spot Instances in the instance fleet, which
 // determines the defined duration, provisioning timeout behavior, and allocation
 // strategy. The instance fleet configuration is available only in Amazon EMR
@@ -2302,7 +2351,16 @@ type Step struct {
 
 	// The action to take when the cluster step fails. Possible values are
 	// TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided
-	// for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
+	// for backward compatibility. We recommend using TERMINATE_CLUSTER instead. If a
+	// cluster's StepConcurrencyLevel is greater than 1, do not use AddJobFlowSteps to
+	// submit a step with this parameter set to CANCEL_AND_WAIT or TERMINATE_CLUSTER.
+	// The step is not submitted and the action fails with a message that the
+	// ActionOnFailure setting is not valid. If you change a cluster's
+	// StepConcurrencyLevel to be greater than 1 while a step is running, the
+	// ActionOnFailure parameter may not behave as you expect. In this case, for a step
+	// that fails with this parameter set to CANCEL_AND_WAIT, pending steps and the
+	// running step are not canceled; for a step that fails with this parameter set to
+	// TERMINATE_CLUSTER, the cluster does not terminate.
 	ActionOnFailure ActionOnFailure
 
 	// The Hadoop job configuration of the cluster step.
@@ -2320,7 +2378,7 @@ type Step struct {
 	noSmithyDocumentSerde
 }
 
-// Specification of a cluster (job flow) step.
+// Specification for a cluster (job flow) step.
 type StepConfig struct {
 
 	// The JAR file used for the step.
@@ -2333,9 +2391,30 @@ type StepConfig struct {
 	// This member is required.
 	Name *string
 
-	// The action to take when the cluster step fails. Possible values are
-	// TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided
-	// for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
+	// The action to take when the step fails. Use one of the following values:
+	//
+	// *
+	// TERMINATE_CLUSTER - Shuts down the cluster.
+	//
+	// * CANCEL_AND_WAIT - Cancels any
+	// pending steps and returns the cluster to the WAITING state.
+	//
+	// * CONTINUE -
+	// Continues to the next step in the queue.
+	//
+	// * TERMINATE_JOB_FLOW - Shuts down the
+	// cluster. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend
+	// using TERMINATE_CLUSTER instead.
+	//
+	// If a cluster's StepConcurrencyLevel is greater
+	// than 1, do not use AddJobFlowSteps to submit a step with this parameter set to
+	// CANCEL_AND_WAIT or TERMINATE_CLUSTER. The step is not submitted and the action
+	// fails with a message that the ActionOnFailure setting is not valid. If you
+	// change a cluster's StepConcurrencyLevel to be greater than 1 while a step is
+	// running, the ActionOnFailure parameter may not behave as you expect. In this
+	// case, for a step that fails with this parameter set to CANCEL_AND_WAIT, pending
+	// steps and the running step are not canceled; for a step that fails with this
+	// parameter set to TERMINATE_CLUSTER, the cluster does not terminate.
 	ActionOnFailure ActionOnFailure
 
 	noSmithyDocumentSerde
@@ -2419,8 +2498,7 @@ type StepSummary struct {
 
 	// The action to take when the cluster step fails. Possible values are
 	// TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is
-	// available for backward compatibility. We recommend using TERMINATE_CLUSTER
-	// instead.
+	// available for backward compatibility.
 	ActionOnFailure ActionOnFailure
 
 	// The Hadoop job configuration of the cluster step.

@@ -37,8 +37,10 @@ type CreateStudioSessionMappingInput struct {
 	IdentityType types.IdentityType
 
 	// The Amazon Resource Name (ARN) for the session policy that will be applied to
-	// the user or group. Session policies refine Studio user permissions without the
-	// need to use multiple IAM user roles.
+	// the user or group. You should specify the ARN for the session policy that you
+	// want to apply, not the ARN of your user role. For more information, see Create
+	// an EMR Studio User Role with Session Policies
+	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html).
 	//
 	// This member is required.
 	SessionPolicyArn *string
@@ -48,21 +50,21 @@ type CreateStudioSessionMappingInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The globally unique identifier (GUID) of the user or group from the AWS SSO
-	// Identity Store. For more information, see UserId
+	// The globally unique identifier (GUID) of the user or group from the Amazon Web
+	// Services SSO Identity Store. For more information, see UserId
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
 	// and GroupId
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId)
-	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId
-	// must be specified.
+	// in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName
+	// or IdentityId must be specified.
 	IdentityId *string
 
 	// The name of the user or group. For more information, see UserName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId
-	// must be specified.
+	// in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName
+	// or IdentityId must be specified.
 	IdentityName *string
 
 	noSmithyDocumentSerde

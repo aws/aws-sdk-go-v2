@@ -7,6 +7,16 @@ import (
 	"time"
 )
 
+type BaseScreenshot struct {
+
+	// This member is required.
+	ScreenshotName *string
+
+	IgnoreCoordinates []string
+
+	noSmithyDocumentSerde
+}
+
 // This structure contains all information about one canary in your account.
 type Canary struct {
 
@@ -62,6 +72,8 @@ type Canary struct {
 	// modified, and most recently run.
 	Timeline *CanaryTimeline
 
+	VisualReference *VisualReferenceOutput
+
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnets and security groups of the VPC endpoint. For more
 	// information, see  Running a Canary in a VPC
@@ -79,14 +91,14 @@ type Canary struct {
 type CanaryCodeInput struct {
 
 	// The entry point to use for the source code when running the canary. This value
-	// must end with the string .handler.
+	// must end with the string .handler. The string is limited to 29 characters or
+	// fewer.
 	//
 	// This member is required.
 	Handler *string
 
-	// If your canary script is located in S3, specify the full bucket name here. The
-	// bucket must already exist. Specify the full bucket name, including s3:// as the
-	// start of the bucket name.
+	// If your canary script is located in S3, specify the bucket name here. Do not
+	// include s3:// as the start of the bucket name.
 	S3Bucket *string
 
 	// The S3 key of your script. For more information, see Working with Amazon S3
@@ -97,8 +109,8 @@ type CanaryCodeInput struct {
 	S3Version *string
 
 	// If you input your canary script directly into the canary instead of referring to
-	// an S3 location, the value of this parameter is the .zip file that contains the
-	// script. It can be up to 5 MB.
+	// an S3 location, the value of this parameter is the base64-encoded contents of
+	// the .zip file that contains the script. It can be up to 5 MB.
 	ZipFile []byte
 
 	noSmithyDocumentSerde
@@ -155,9 +167,9 @@ type CanaryRun struct {
 // A structure that contains input information for a canary run.
 type CanaryRunConfigInput struct {
 
-	// Specifies whether this canary is to use active AWS X-Ray tracing when it runs.
+	// Specifies whether this canary is to use active X-Ray tracing when it runs.
 	// Active tracing enables this canary run to be displayed in the ServiceLens and
-	// X-Ray service maps even if the canary does not hit an endpoint that has X-ray
+	// X-Ray service maps even if the canary does not hit an endpoint that has X-Ray
 	// tracing enabled. Using X-Ray tracing incurs charges. For more information, see
 	// Canaries and X-Ray tracing
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html).
@@ -191,7 +203,7 @@ type CanaryRunConfigInput struct {
 // A structure that contains information about a canary run.
 type CanaryRunConfigOutput struct {
 
-	// Displays whether this canary run used active AWS X-Ray tracing.
+	// Displays whether this canary run used active X-Ray tracing.
 	ActiveTracing *bool
 
 	// The maximum amount of memory available to the canary while it is running, in MB.
@@ -236,13 +248,17 @@ type CanaryRunTimeline struct {
 // time when it should stop making runs.
 type CanaryScheduleInput struct {
 
-	// A rate expression that defines how often the canary is to run. The syntax is
-	// rate(number unit). unit can be minute, minutes, or hour. For example, rate(1
-	// minute) runs the canary once a minute, rate(10 minutes) runs it once every 10
-	// minutes, and rate(1 hour) runs it once every hour. You can specify a frequency
-	// between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0
-	// hour) is a special value that causes the canary to run only once when it is
-	// started.
+	// A rate expression or a cron expression that defines how often the canary is to
+	// run. For a rate expression, The syntax is rate(number unit). unit can be minute,
+	// minutes, or hour. For example, rate(1 minute) runs the canary once a minute,
+	// rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once
+	// every hour. You can specify a frequency between rate(1 minute) and rate(1 hour).
+	// Specifying rate(0 minute) or rate(0 hour) is a special value that causes the
+	// canary to run only once when it is started. Use cron(expression) to specify a
+	// cron expression. You can't schedule a canary to wait for more than a year before
+	// running. For information about the syntax for cron expressions, see  Scheduling
+	// canary runs using cron
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html).
 	//
 	// This member is required.
 	Expression *string
@@ -264,12 +280,16 @@ type CanaryScheduleOutput struct {
 	// value.
 	DurationInSeconds *int64
 
-	// A rate expression that defines how often the canary is to run. The syntax is
-	// rate(number unit). unit can be minute, minutes, or hour. For example, rate(1
-	// minute) runs the canary once a minute, rate(10 minutes) runs it once every 10
-	// minutes, and rate(1 hour) runs it once every hour. Specifying rate(0 minute) or
-	// rate(0 hour) is a special value that causes the canary to run only once when it
-	// is started.
+	// A rate expression or a cron expression that defines how often the canary is to
+	// run. For a rate expression, The syntax is rate(number unit). unit can be minute,
+	// minutes, or hour. For example, rate(1 minute) runs the canary once a minute,
+	// rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once
+	// every hour. You can specify a frequency between rate(1 minute) and rate(1 hour).
+	// Specifying rate(0 minute) or rate(0 hour) is a special value that causes the
+	// canary to run only once when it is started. Use cron(expression) to specify a
+	// cron expression. For information about the syntax for cron expressions, see
+	// Scheduling canary runs using cron
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html).
 	Expression *string
 
 	noSmithyDocumentSerde
@@ -328,6 +348,24 @@ type RuntimeVersion struct {
 	// Canary Runtime Versions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
 	VersionName *string
+
+	noSmithyDocumentSerde
+}
+
+type VisualReferenceInput struct {
+
+	// This member is required.
+	BaseCanaryRunId *string
+
+	BaseScreenshots []BaseScreenshot
+
+	noSmithyDocumentSerde
+}
+
+type VisualReferenceOutput struct {
+	BaseCanaryRunId *string
+
+	BaseScreenshots []BaseScreenshot
 
 	noSmithyDocumentSerde
 }

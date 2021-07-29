@@ -66,12 +66,6 @@ func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput
 
 type CreateCampaignInput struct {
 
-	// Specifies the requested minimum provisioned transactions (recommendations) per
-	// second that Amazon Personalize will support.
-	//
-	// This member is required.
-	MinProvisionedTPS *int32
-
 	// A name for the new campaign. The campaign name must be unique within your
 	// account.
 	//
@@ -85,6 +79,10 @@ type CreateCampaignInput struct {
 
 	// The configuration details of a campaign.
 	CampaignConfig *types.CampaignConfig
+
+	// Specifies the requested minimum provisioned transactions (recommendations) per
+	// second that Amazon Personalize will support.
+	MinProvisionedTPS *int32
 
 	noSmithyDocumentSerde
 }

@@ -17,13 +17,14 @@ import (
 // column list. Depending on the authorization method, use one of the following
 // combinations of request parameters:
 //
-// * AWS Secrets Manager - specify the Amazon
-// Resource Name (ARN) of the secret and the cluster identifier that matches the
-// cluster in the secret.
+// * Secrets Manager - specify the Amazon
+// Resource Name (ARN) of the secret, the database name, and the cluster identifier
+// that matches the cluster in the secret.
 //
-// * Temporary credentials - specify the cluster
-// identifier, the database name, and the database user name. Permission to call
-// the redshift:GetClusterCredentials operation is required to use this method.
+// * Temporary credentials - specify the
+// cluster identifier, the database name, and the database user name. Permission to
+// call the redshift:GetClusterCredentials operation is required to use this
+// method.
 func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, optFns ...func(*Options)) (*DescribeTableOutput, error) {
 	if params == nil {
 		params = &DescribeTableInput{}
@@ -42,7 +43,7 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 type DescribeTableInput struct {
 
 	// The cluster identifier. This parameter is required when authenticating using
-	// either AWS Secrets Manager or temporary credentials.
+	// either Secrets Manager or temporary credentials.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -79,7 +80,7 @@ type DescribeTableInput struct {
 	Schema *string
 
 	// The name or ARN of the secret that enables access to the database. This
-	// parameter is required when authenticating using AWS Secrets Manager.
+	// parameter is required when authenticating using Secrets Manager.
 	SecretArn *string
 
 	// The table name. If no table is specified, then all tables for all matching

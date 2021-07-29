@@ -8030,6 +8030,19 @@ func awsAwsquery_deserializeDocumentMetricDataQuery(v **types.MetricDataQuery, d
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AccountId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AccountId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Expression", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

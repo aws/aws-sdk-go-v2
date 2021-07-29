@@ -11446,6 +11446,147 @@ func awsRestjson1_serializeOpDocumentSendChannelMessageInput(v *SendChannelMessa
 	return nil
 }
 
+type awsRestjson1_serializeOpStartMeetingTranscription struct {
+}
+
+func (*awsRestjson1_serializeOpStartMeetingTranscription) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartMeetingTranscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartMeetingTranscriptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/meetings/{MeetingId}/transcription?operation=start")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartMeetingTranscriptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartMeetingTranscriptionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartMeetingTranscriptionInput(v *StartMeetingTranscriptionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MeetingId == nil || len(*v.MeetingId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MeetingId must not be empty")}
+	}
+	if v.MeetingId != nil {
+		if err := encoder.SetURI("MeetingId").String(*v.MeetingId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartMeetingTranscriptionInput(v *StartMeetingTranscriptionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TranscriptionConfiguration != nil {
+		ok := object.Key("TranscriptionConfiguration")
+		if err := awsRestjson1_serializeDocumentTranscriptionConfiguration(v.TranscriptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStopMeetingTranscription struct {
+}
+
+func (*awsRestjson1_serializeOpStopMeetingTranscription) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopMeetingTranscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopMeetingTranscriptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/meetings/{MeetingId}/transcription?operation=stop")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStopMeetingTranscriptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopMeetingTranscriptionInput(v *StopMeetingTranscriptionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MeetingId == nil || len(*v.MeetingId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MeetingId must not be empty")}
+	}
+	if v.MeetingId != nil {
+		if err := encoder.SetURI("MeetingId").String(*v.MeetingId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagAttendee struct {
 }
 
@@ -14100,6 +14241,70 @@ func awsRestjson1_serializeDocumentEmergencyCallingConfiguration(v *types.Emerge
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEngineTranscribeMedicalSettings(v *types.EngineTranscribeMedicalSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LanguageCode) > 0 {
+		ok := object.Key("LanguageCode")
+		ok.String(string(v.LanguageCode))
+	}
+
+	if len(v.Region) > 0 {
+		ok := object.Key("Region")
+		ok.String(string(v.Region))
+	}
+
+	if len(v.Specialty) > 0 {
+		ok := object.Key("Specialty")
+		ok.String(string(v.Specialty))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.VocabularyName != nil {
+		ok := object.Key("VocabularyName")
+		ok.String(*v.VocabularyName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEngineTranscribeSettings(v *types.EngineTranscribeSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LanguageCode) > 0 {
+		ok := object.Key("LanguageCode")
+		ok.String(string(v.LanguageCode))
+	}
+
+	if len(v.Region) > 0 {
+		ok := object.Key("Region")
+		ok.String(string(v.Region))
+	}
+
+	if len(v.VocabularyFilterMethod) > 0 {
+		ok := object.Key("VocabularyFilterMethod")
+		ok.String(string(v.VocabularyFilterMethod))
+	}
+
+	if v.VocabularyFilterName != nil {
+		ok := object.Key("VocabularyFilterName")
+		ok.String(*v.VocabularyFilterName)
+	}
+
+	if v.VocabularyName != nil {
+		ok := object.Key("VocabularyName")
+		ok.String(*v.VocabularyName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGeoMatchParams(v *types.GeoMatchParams, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14603,6 +14808,27 @@ func awsRestjson1_serializeDocumentTermination(v *types.Termination, value smith
 	if v.Disabled != nil {
 		ok := object.Key("Disabled")
 		ok.Boolean(*v.Disabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTranscriptionConfiguration(v *types.TranscriptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EngineTranscribeMedicalSettings != nil {
+		ok := object.Key("EngineTranscribeMedicalSettings")
+		if err := awsRestjson1_serializeDocumentEngineTranscribeMedicalSettings(v.EngineTranscribeMedicalSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EngineTranscribeSettings != nil {
+		ok := object.Key("EngineTranscribeSettings")
+		if err := awsRestjson1_serializeDocumentEngineTranscribeSettings(v.EngineTranscribeSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

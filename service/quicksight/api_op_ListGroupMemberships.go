@@ -29,8 +29,9 @@ func (c *Client) ListGroupMemberships(ctx context.Context, params *ListGroupMemb
 
 type ListGroupMembershipsInput struct {
 
-	// The ID for the AWS account that the group is in. Currently, you use the ID for
-	// the AWS account that contains your Amazon QuickSight account.
+	// The ID for the Amazon Web Services account; that the group is in. Currently, you
+	// use the ID for the Amazon Web Services account; that contains your Amazon
+	// QuickSight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -62,7 +63,7 @@ type ListGroupMembershipsOutput struct {
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -26,15 +26,16 @@ import (
 // ability to resolve public DNS hostnames to private IP addresses when queried
 // from instances in the peer VPC.
 //
-// If the peered VPCs are in the same AWS account,
-// you can enable DNS resolution for queries from the local VPC. This ensures that
-// queries from the local VPC resolve to private IP addresses in the peer VPC. This
-// option is not available if the peered VPCs are in different AWS accounts or
-// different Regions. For peered VPCs in different AWS accounts, each AWS account
-// owner must initiate a separate request to modify the peering connection options.
-// For inter-region peering connections, you must use the Region for the requester
-// VPC to modify the requester VPC peering options and the Region for the accepter
-// VPC to modify the accepter VPC peering options. To verify which VPCs are the
+// If the peered VPCs are in the same Amazon Web
+// Services account, you can enable DNS resolution for queries from the local VPC.
+// This ensures that queries from the local VPC resolve to private IP addresses in
+// the peer VPC. This option is not available if the peered VPCs are in different
+// different Amazon Web Services accounts or different Regions. For peered VPCs in
+// different Amazon Web Services accounts, each Amazon Web Services account owner
+// must initiate a separate request to modify the peering connection options. For
+// inter-region peering connections, you must use the Region for the requester VPC
+// to modify the requester VPC peering options and the Region for the accepter VPC
+// to modify the accepter VPC peering options. To verify which VPCs are the
 // accepter and the requester for a VPC peering connection, use the
 // DescribeVpcPeeringConnections command.
 func (c *Client) ModifyVpcPeeringConnectionOptions(ctx context.Context, params *ModifyVpcPeeringConnectionOptionsInput, optFns ...func(*Options)) (*ModifyVpcPeeringConnectionOptionsOutput, error) {

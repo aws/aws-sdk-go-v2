@@ -4922,6 +4922,23 @@ func awsRestjson1_serializeDocumentAudioDescription(v *types.AudioDescription, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioHlsRenditionSelection(v *types.AudioHlsRenditionSelection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupId != nil {
+		ok := object.Key("groupId")
+		ok.String(*v.GroupId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioLanguageSelection(v *types.AudioLanguageSelection, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5037,6 +5054,13 @@ func awsRestjson1_serializeDocumentAudioSelector(v *types.AudioSelector, value s
 func awsRestjson1_serializeDocumentAudioSelectorSettings(v *types.AudioSelectorSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AudioHlsRenditionSelection != nil {
+		ok := object.Key("audioHlsRenditionSelection")
+		if err := awsRestjson1_serializeDocumentAudioHlsRenditionSelection(v.AudioHlsRenditionSelection, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AudioLanguageSelection != nil {
 		ok := object.Key("audioLanguageSelection")
@@ -10252,6 +10276,11 @@ func awsRestjson1_serializeDocumentWavSettings(v *types.WavSettings, value smith
 func awsRestjson1_serializeDocumentWebvttDestinationSettings(v *types.WebvttDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.StyleControl) > 0 {
+		ok := object.Key("styleControl")
+		ok.String(string(v.StyleControl))
+	}
 
 	return nil
 }

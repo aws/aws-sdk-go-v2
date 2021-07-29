@@ -17,18 +17,18 @@ import (
 // enable Security Hub, you also automatically enable the following standards.
 //
 // *
-// CIS AWS Foundations
+// CIS Amazon Web Services Foundations
 //
-// * AWS Foundational Security Best Practices
+// * Amazon Web Services Foundational Security
+// Best Practices
 //
-// You do not
-// enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To
-// not enable the automatically enabled standards, set EnableDefaultStandards to
-// false. After you enable Security Hub, to enable a standard, use the
-// BatchEnableStandards operation. To disable a standard, use the
-// BatchDisableStandards operation. To learn more, see Setting Up AWS Security Hub
+// You do not enable the Payment Card Industry Data Security
+// Standard (PCI DSS) standard. To not enable the automatically enabled standards,
+// set EnableDefaultStandards to false. After you enable Security Hub, to enable a
+// standard, use the BatchEnableStandards operation. To disable a standard, use the
+// BatchDisableStandards operation. To learn more, see the setup information
 // (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html)
-// in the AWS Security Hub User Guide.
+// in the Security Hub User Guide.
 func (c *Client) EnableSecurityHub(ctx context.Context, params *EnableSecurityHubInput, optFns ...func(*Options)) (*EnableSecurityHubOutput, error) {
 	if params == nil {
 		params = &EnableSecurityHubInput{}

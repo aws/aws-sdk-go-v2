@@ -13,6 +13,14 @@ import (
 )
 
 // Returns the list of component build versions for the specified semantic version.
+// The semantic version has four nodes: ../. You can assign values for the first
+// three, and can filter on all of them. Filtering: When you retrieve or reference
+// a resource with a semantic version, you can use wildcards (x) to filter your
+// results. When you use a wildcard in any node, all nodes to the right of the
+// first wildcard must also be wildcards. For example, specifying "1.2.x", or
+// "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will
+// work. You do not have to specify the build - Image Builder automatically uses a
+// wildcard for that, if applicable.
 func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput, optFns ...func(*Options)) (*ListComponentsOutput, error) {
 	if params == nil {
 		params = &ListComponentsInput{}
@@ -30,7 +38,7 @@ func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput
 
 type ListComponentsInput struct {
 
-	// Returns the list of component build versions for the specified semantic version.
+	// Returns the list of component build versions for the specified name.
 	ByName bool
 
 	// The filters.
@@ -54,7 +62,8 @@ type ListComponentsInput struct {
 
 type ListComponentsOutput struct {
 
-	// The list of component semantic versions.
+	// The list of component semantic versions. The semantic version has four nodes:
+	// ../. You can assign values for the first three, and can filter on all of them.
 	ComponentVersionList []types.ComponentVersion
 
 	// The next token used for paginated responses. When this is not empty, there are

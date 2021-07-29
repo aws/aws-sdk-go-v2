@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits an AWS Batch job from a job definition. Parameters that are specified
-// during SubmitJob override parameters defined in the job definition. vCPU and
-// memory requirements that are specified in the ResourceRequirements objects in
-// the job definition are the exception. They can't be overridden this way using
-// the memory and vcpus parameters. Rather, you must specify updates to job
-// definition parameters in a ResourceRequirements object that's included in the
+// Submits an Batch job from a job definition. Parameters that are specified during
+// SubmitJob override parameters defined in the job definition. vCPU and memory
+// requirements that are specified in the ResourceRequirements objects in the job
+// definition are the exception. They can't be overridden this way using the memory
+// and vcpus parameters. Rather, you must specify updates to job definition
+// parameters in a ResourceRequirements object that's included in the
 // containerOverrides parameter. Jobs that run on Fargate resources can't be
 // guaranteed to run for more than 14 days. This is because, after 14 days, Fargate
 // resources might become unavailable and job might be terminated.
@@ -61,7 +61,7 @@ type SubmitJobInput struct {
 	// The array properties for the submitted job, such as the size of the array. The
 	// array size can be between 2 and 10,000. If you specify array properties for a
 	// job, it becomes an array job. For more information, see Array Jobs
-	// (https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html) in the AWS
+	// (https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html) in the
 	// Batch User Guide.
 	ArrayProperties *types.ArrayProperties
 
@@ -83,7 +83,7 @@ type SubmitJobInput struct {
 
 	// A list of node overrides in JSON format that specify the node range to target
 	// and the container overrides for that node range. This parameter isn't applicable
-	// to jobs running on Fargate resources; use containerOverrides instead.
+	// to jobs that are running on Fargate resources; use containerOverrides instead.
 	NodeOverrides *types.NodeOverrides
 
 	// Additional parameters passed to the job that replace parameter substitution
@@ -108,13 +108,13 @@ type SubmitJobInput struct {
 
 	// The tags that you apply to the job request to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging AWS Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
-	// Reference.
+	// information, see Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in Amazon Web
+	// Services General Reference.
 	Tags map[string]string
 
 	// The timeout configuration for this SubmitJob operation. You can specify a
-	// timeout duration after which AWS Batch terminates your jobs if they haven't
+	// timeout duration after which Batch terminates your jobs if they haven't
 	// finished. If a job is terminated due to a timeout, it isn't retried. The minimum
 	// value for the timeout is 60 seconds. This configuration overrides any timeout
 	// configuration specified in the job definition. For array jobs, child jobs have

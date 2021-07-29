@@ -82,20 +82,20 @@ type DescribeNetworkAclsInput struct {
 	// * network-acl-id - The ID of the network
 	// ACL.
 	//
-	// * owner-id - The ID of the AWS account that owns the network ACL.
+	// * owner-id - The ID of the Amazon Web Services account that owns the
+	// network ACL.
 	//
-	// * tag:
-	// - The key/value combination of a tag assigned to the resource. Use the tag key
-	// in the filter name and the tag value as the filter value. For example, to find
-	// all resources that have a tag with the key Owner and the value TeamA, specify
-	// tag:Owner for the filter name and TeamA for the filter value.
+	// * tag: - The key/value combination of a tag assigned to the
+	// resource. Use the tag key in the filter name and the tag value as the filter
+	// value. For example, to find all resources that have a tag with the key Owner and
+	// the value TeamA, specify tag:Owner for the filter name and TeamA for the filter
+	// value.
 	//
-	// * tag-key - The
-	// key of a tag assigned to the resource. Use this filter to find all resources
-	// assigned a tag with a specific key, regardless of the tag value.
+	// * tag-key - The key of a tag assigned to the resource. Use this filter
+	// to find all resources assigned a tag with a specific key, regardless of the tag
+	// value.
 	//
-	// * vpc-id - The
-	// ID of the VPC for the network ACL.
+	// * vpc-id - The ID of the VPC for the network ACL.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

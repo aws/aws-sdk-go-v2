@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a custom framework in AWS Audit Manager.
+// Creates a custom framework in Audit Manager.
 func (c *Client) CreateAssessmentFramework(ctx context.Context, params *CreateAssessmentFrameworkInput, optFns ...func(*Options)) (*CreateAssessmentFrameworkOutput, error) {
 	if params == nil {
 		params = &CreateAssessmentFrameworkInput{}

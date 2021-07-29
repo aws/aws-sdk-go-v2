@@ -57,7 +57,14 @@ type ListImagesInput struct {
 
 type ListImagesOutput struct {
 
-	// The list of image semantic versions.
+	// The list of image semantic versions. The semantic version has four nodes: ../.
+	// You can assign values for the first three, and can filter on all of them.
+	// Filtering: When you retrieve or reference a resource with a semantic version,
+	// you can use wildcards (x) to filter your results. When you use a wildcard in any
+	// node, all nodes to the right of the first wildcard must also be wildcards. For
+	// example, specifying "1.2.x", or "1.x.x" works to filter list results, but
+	// neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build -
+	// Image Builder automatically uses a wildcard for that, if applicable.
 	ImageVersionList []types.ImageVersion
 
 	// The next token used for paginated responses. When this is not empty, there are

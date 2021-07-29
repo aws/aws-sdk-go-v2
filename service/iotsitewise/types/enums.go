@@ -168,6 +168,7 @@ const (
 	CapabilitySyncStatusInSync     CapabilitySyncStatus = "IN_SYNC"
 	CapabilitySyncStatusOutOfSync  CapabilitySyncStatus = "OUT_OF_SYNC"
 	CapabilitySyncStatusSyncFailed CapabilitySyncStatus = "SYNC_FAILED"
+	CapabilitySyncStatusUnknown    CapabilitySyncStatus = "UNKNOWN"
 )
 
 // Values returns all known values for CapabilitySyncStatus. Note that this can be
@@ -178,6 +179,25 @@ func (CapabilitySyncStatus) Values() []CapabilitySyncStatus {
 		"IN_SYNC",
 		"OUT_OF_SYNC",
 		"SYNC_FAILED",
+		"UNKNOWN",
+	}
+}
+
+type ComputeLocation string
+
+// Enum values for ComputeLocation
+const (
+	ComputeLocationEdge  ComputeLocation = "EDGE"
+	ComputeLocationCloud ComputeLocation = "CLOUD"
+)
+
+// Values returns all known values for ComputeLocation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeLocation) Values() []ComputeLocation {
+	return []ComputeLocation{
+		"EDGE",
+		"CLOUD",
 	}
 }
 
@@ -198,6 +218,24 @@ func (ConfigurationState) Values() []ConfigurationState {
 		"ACTIVE",
 		"UPDATE_IN_PROGRESS",
 		"UPDATE_FAILED",
+	}
+}
+
+type DetailedErrorCode string
+
+// Enum values for DetailedErrorCode
+const (
+	DetailedErrorCodeIncompatibleComputeLocation         DetailedErrorCode = "INCOMPATIBLE_COMPUTE_LOCATION"
+	DetailedErrorCodeIncompatibleForwardingConfiguration DetailedErrorCode = "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+)
+
+// Values returns all known values for DetailedErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DetailedErrorCode) Values() []DetailedErrorCode {
+	return []DetailedErrorCode{
+		"INCOMPATIBLE_COMPUTE_LOCATION",
+		"INCOMPATIBLE_FORWARDING_CONFIGURATION",
 	}
 }
 
@@ -234,6 +272,24 @@ func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"VALIDATION_ERROR",
 		"INTERNAL_FAILURE",
+	}
+}
+
+type ForwardingConfigState string
+
+// Enum values for ForwardingConfigState
+const (
+	ForwardingConfigStateDisabled ForwardingConfigState = "DISABLED"
+	ForwardingConfigStateEnabled  ForwardingConfigState = "ENABLED"
+)
+
+// Values returns all known values for ForwardingConfigState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ForwardingConfigState) Values() []ForwardingConfigState {
+	return []ForwardingConfigState{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 

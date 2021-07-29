@@ -62,7 +62,7 @@ type CreateUserPoolClientInput struct {
 	AllowedOAuthFlowsUserPoolClient bool
 
 	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
-	// openid, and profile. Possible values provided by AWS are:
+	// openid, and profile. Possible values provided by Amazon Web Services are:
 	// aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are
 	// also supported.
 	AllowedOAuthScopes []string

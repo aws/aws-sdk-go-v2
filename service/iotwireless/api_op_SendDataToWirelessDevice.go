@@ -34,7 +34,7 @@ type SendDataToWirelessDeviceInput struct {
 	// This member is required.
 	Id *string
 
-	// The message payload to send.
+	// The binary to be sent to the end device, encoded in base64.
 	//
 	// This member is required.
 	PayloadData *string

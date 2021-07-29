@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom control in AWS Audit Manager.
+// Deletes a custom control in Audit Manager.
 func (c *Client) DeleteControl(ctx context.Context, params *DeleteControlInput, optFns ...func(*Options)) (*DeleteControlOutput, error) {
 	if params == nil {
 		params = &DeleteControlInput{}

@@ -2746,6 +2746,13 @@ func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 		}
 	}
 
+	if v.WorkDocsConfiguration != nil {
+		ok := object.Key("WorkDocsConfiguration")
+		if err := awsAwsjson11_serializeDocumentWorkDocsConfiguration(v.WorkDocsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4574,6 +4581,49 @@ func awsAwsjson11_serializeDocumentWebCrawlerConfiguration(v *types.WebCrawlerCo
 		if err := awsAwsjson11_serializeDocumentUrls(v.Urls, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWorkDocsConfiguration(v *types.WorkDocsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrawlComments {
+		ok := object.Key("CrawlComments")
+		ok.Boolean(v.CrawlComments)
+	}
+
+	if v.ExclusionPatterns != nil {
+		ok := object.Key("ExclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.ExclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldMappings != nil {
+		ok := object.Key("FieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.FieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionPatterns != nil {
+		ok := object.Key("InclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	if v.UseChangeLog {
+		ok := object.Key("UseChangeLog")
+		ok.Boolean(v.UseChangeLog)
 	}
 
 	return nil

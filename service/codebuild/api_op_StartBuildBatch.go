@@ -49,7 +49,7 @@ type StartBuildBatchInput struct {
 	// already defined in the build project. If this value is set, it can be either an
 	// inline buildspec definition, the path to an alternate buildspec file relative to
 	// the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to
-	// an S3 bucket. The bucket must be in the same Region as the build project.
+	// an S3 bucket. The bucket must be in the same AWS Region as the build project.
 	// Specify the buildspec file using its ARN (for example,
 	// arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided
 	// or is set to an empty string, the source code must contain a buildspec file in
@@ -75,12 +75,12 @@ type StartBuildBatchInput struct {
 	// Batch session debugging is not supported for matrix batch builds.
 	DebugSessionEnabled *bool
 
-	// The Key Management Service customer master key (CMK) that overrides the one
-	// specified in the batch build project. The CMK key encrypts the build output
-	// artifacts. You can use a cross-account KMS key to encrypt the build output
-	// artifacts if your service role has permission to that key. You can specify
-	// either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's
-	// alias (using the format alias/).
+	// The AWS Key Management Service (AWS KMS) customer master key (CMK) that
+	// overrides the one specified in the batch build project. The CMK key encrypts the
+	// build output artifacts. You can use a cross-account KMS key to encrypt the build
+	// output artifacts if your service role has permission to that key. You can
+	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
+	// CMK's alias (using the format alias/).
 	EncryptionKeyOverride *string
 
 	// A container type for this batch build that overrides the one specified in the
@@ -103,21 +103,21 @@ type StartBuildBatchInput struct {
 	// A unique, case sensitive identifier you provide to ensure the idempotency of the
 	// StartBuildBatch request. The token is included in the StartBuildBatch request
 	// and is valid for five minutes. If you repeat the StartBuildBatch request with
-	// the same token, but change a parameter, CodeBuild returns a parameter mismatch
-	// error.
+	// the same token, but change a parameter, AWS CodeBuild returns a parameter
+	// mismatch error.
 	IdempotencyToken *string
 
 	// The name of an image for this batch build that overrides the one specified in
 	// the batch build project.
 	ImageOverride *string
 
-	// The type of credentials CodeBuild uses to pull images in your batch build. There
-	// are two valid values: CODEBUILD Specifies that CodeBuild uses its own
+	// The type of credentials AWS CodeBuild uses to pull images in your batch build.
+	// There are two valid values: CODEBUILD Specifies that AWS CodeBuild uses its own
 	// credentials. This requires that you modify your ECR repository policy to trust
-	// CodeBuild's service principal. SERVICE_ROLE Specifies that CodeBuild uses your
-	// build project's service role. When using a cross-account or private registry
-	// image, you must use SERVICE_ROLE credentials. When using an CodeBuild curated
-	// image, you must use CODEBUILD credentials.
+	// AWS CodeBuild's service principal. SERVICE_ROLE Specifies that AWS CodeBuild
+	// uses your build project's service role. When using a cross-account or private
+	// registry image, you must use SERVICE_ROLE credentials. When using an AWS
+	// CodeBuild curated image, you must use CODEBUILD credentials.
 	ImagePullCredentialsTypeOverride types.ImagePullCredentialsType
 
 	// Enable this flag to override the insecure SSL setting that is specified in the
@@ -177,8 +177,8 @@ type StartBuildBatchInput struct {
 
 	// The version of the batch build input to be built, for this build only. If not
 	// specified, the latest version is used. If specified, the contents depends on the
-	// source provider: CodeCommit The commit ID, branch, or Git tag to use. GitHub The
-	// commit ID, pull request ID, branch name, or tag name that corresponds to the
+	// source provider: AWS CodeCommit The commit ID, branch, or Git tag to use. GitHub
+	// The commit ID, pull request ID, branch name, or tag name that corresponds to the
 	// version of the source code you want to build. If a pull request ID is specified,
 	// it must use the format pr/pull-request-ID (for example pr/25). If a branch name
 	// is specified, the branch's HEAD commit ID is used. If not specified, the default
@@ -190,7 +190,7 @@ type StartBuildBatchInput struct {
 	// specified at the project level, then this sourceVersion (at the build level)
 	// takes precedence. For more information, see Source Version Sample with CodeBuild
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
-	// in the CodeBuild User Guide.
+	// in the AWS CodeBuild User Guide.
 	SourceVersion *string
 
 	noSmithyDocumentSerde

@@ -1388,6 +1388,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 			invalidParams.AddNested("WebCrawlerConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.WorkDocsConfiguration != nil {
+		if err := validateWorkDocsConfiguration(v.WorkDocsConfiguration); err != nil {
+			invalidParams.AddNested("WorkDocsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2531,6 +2536,26 @@ func validateWebCrawlerConfiguration(v *types.WebCrawlerConfiguration) error {
 	if v.AuthenticationConfiguration != nil {
 		if err := validateAuthenticationConfiguration(v.AuthenticationConfiguration); err != nil {
 			invalidParams.AddNested("AuthenticationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWorkDocsConfiguration(v *types.WorkDocsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkDocsConfiguration"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.FieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.FieldMappings); err != nil {
+			invalidParams.AddNested("FieldMappings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

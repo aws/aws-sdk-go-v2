@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Your account is not registered with AWS Audit Manager. Check the delegated
-// administrator setup on the AWS Audit Manager settings page, and try again.
+// Your account is not registered with Audit Manager. Check the delegated
+// administrator setup on the Audit Manager settings page, and try again.
 type AccessDeniedException struct {
 	Message *string
 

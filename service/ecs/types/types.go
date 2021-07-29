@@ -96,9 +96,9 @@ type AutoScalingGroupProvider struct {
 	// the Auto Scaling group must have instance protection from scale-in actions
 	// enabled as well. For more information, see Instance Protection
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
-	// in the AWS Auto Scaling User Guide. When managed termination protection is
-	// disabled, your Amazon EC2 instances are not protected from termination when the
-	// Auto Scaling group scales in.
+	// in the Auto Scaling User Guide. When managed termination protection is disabled,
+	// your Amazon EC2 instances are not protected from termination when the Auto
+	// Scaling group scales in.
 	ManagedTerminationProtection ManagedTerminationProtection
 
 	noSmithyDocumentSerde
@@ -120,9 +120,9 @@ type AutoScalingGroupProviderUpdate struct {
 	// the Auto Scaling group must have instance protection from scale-in actions
 	// enabled as well. For more information, see Instance Protection
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
-	// in the AWS Auto Scaling User Guide. When managed termination protection is
-	// disabled, your Amazon EC2 instances are not protected from termination when the
-	// Auto Scaling group scales in.
+	// in the Auto Scaling User Guide. When managed termination protection is disabled,
+	// your Amazon EC2 instances are not protected from termination when the Auto
+	// Scaling group scales in.
 	ManagedTerminationProtection ManagedTerminationProtection
 
 	noSmithyDocumentSerde
@@ -193,9 +193,9 @@ type CapacityProvider struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for AWS use. You
-	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-	// do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for Amazon Web
+	// Services use. You cannot edit or delete tag keys or values with this prefix.
+	// Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The update status of the capacity provider. The following are the possible
@@ -222,10 +222,9 @@ type CapacityProvider struct {
 // cluster. If specifying a capacity provider that uses an Auto Scaling group, the
 // capacity provider must already be created. New Auto Scaling group capacity
 // providers can be created with the CreateCapacityProvider API operation. To use a
-// AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
-// capacity providers. The AWS Fargate capacity providers are available to all
-// accounts and only need to be associated with a cluster to be used in a capacity
-// provider strategy.
+// Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity
+// providers. The Fargate capacity providers are available to all accounts and only
+// need to be associated with a cluster to be used in a capacity provider strategy.
 type CapacityProviderStrategyItem struct {
 
 	// The short name of the capacity provider.
@@ -285,8 +284,8 @@ type Cluster struct {
 	CapacityProviders []string
 
 	// The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the
-	// arn:aws:ecs namespace, followed by the Region of the cluster, the AWS account ID
-	// of the cluster owner, the cluster namespace, and then the cluster name. For
+	// arn:aws:ecs namespace, followed by the Region of the cluster, the account ID of
+	// the cluster owner, the cluster namespace, and then the cluster name. For
 	// example, arn:aws:ecs:region:012345678910:cluster/test.
 	ClusterArn *string
 
@@ -377,9 +376,9 @@ type Cluster struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for AWS use. You
-	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-	// do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for Amazon Web
+	// Services use. You cannot edit or delete tag keys or values with this prefix.
+	// Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -896,7 +895,7 @@ type ContainerDefinition struct {
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
 	// --privileged option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers or tasks run on AWS Fargate.
+	// parameter is not supported for Windows containers or tasks run on Fargate.
 	Privileged *bool
 
 	// When this parameter is true, a TTY is allocated. This parameter maps to Tty in
@@ -1135,15 +1134,15 @@ type ContainerInstance struct {
 	CapacityProviderName *string
 
 	// The Amazon Resource Name (ARN) of the container instance. The ARN contains the
-	// arn:aws:ecs namespace, followed by the Region of the container instance, the AWS
+	// arn:aws:ecs namespace, followed by the Region of the container instance, the
 	// account ID of the container instance owner, the container-instance namespace,
 	// and then the container instance ID. For example,
 	// arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
 	ContainerInstanceArn *string
 
 	// The ID of the container instance. For Amazon EC2 instances, this value is the
-	// Amazon EC2 instance ID. For external instances, this value is the AWS Systems
-	// Manager managed instance ID.
+	// Amazon EC2 instance ID. For external instances, this value is the Amazon Web
+	// Services Systems Manager managed instance ID.
 	Ec2InstanceId *string
 
 	// The number of tasks on the container instance that are in the PENDING status.
@@ -1219,9 +1218,9 @@ type ContainerInstance struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for AWS use. You
-	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-	// do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for Amazon Web
+	// Services use. You cannot edit or delete tag keys or values with this prefix.
+	// Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The version counter for the container instance. Every time a container instance
@@ -1353,7 +1352,7 @@ type Deployment struct {
 	// The platform version on which your tasks in the service are running. A platform
 	// version is only specified for tasks using the Fargate launch type. If one is not
 	// specified, the LATEST platform version is used by default. For more information,
-	// see AWS Fargate Platform Versions
+	// see Fargate Platform Versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -1486,11 +1485,11 @@ type DeploymentController struct {
 	// update is controlled by adjusting the minimum and maximum number of healthy
 	// tasks allowed during a service deployment, as specified in the
 	// DeploymentConfiguration. CODE_DEPLOY The blue/green (CODE_DEPLOY) deployment
-	// type uses the blue/green deployment model powered by AWS CodeDeploy, which
-	// allows you to verify a new deployment of a service before sending production
-	// traffic to it. EXTERNAL The external (EXTERNAL) deployment type enables you to
-	// use any third-party deployment controller for full control over the deployment
-	// process for an Amazon ECS service.
+	// type uses the blue/green deployment model powered by CodeDeploy, which allows
+	// you to verify a new deployment of a service before sending production traffic to
+	// it. EXTERNAL The external (EXTERNAL) deployment type enables you to use any
+	// third-party deployment controller for full control over the deployment process
+	// for an Amazon ECS service.
 	//
 	// This member is required.
 	Type DeploymentControllerType
@@ -1663,11 +1662,11 @@ type EnvironmentFile struct {
 
 // The amount of ephemeral storage to allocate for the task. This parameter is used
 // to expand the total amount of ephemeral storage available, beyond the default
-// amount, for tasks hosted on AWS Fargate. For more information, see Fargate task
+// amount, for tasks hosted on Fargate. For more information, see Fargate task
 // storage
 // (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
-// in the Amazon ECS User Guide for AWS Fargate. This parameter is only supported
-// for tasks hosted on AWS Fargate using platform version 1.4.0 or later.
+// in the Amazon ECS User Guide for Fargate. This parameter is only supported for
+// tasks hosted on Fargate using platform version 1.4.0 or later.
 type EphemeralStorage struct {
 
 	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
@@ -1682,8 +1681,8 @@ type EphemeralStorage struct {
 // The details of the execute command configuration.
 type ExecuteCommandConfiguration struct {
 
-	// Specify an AWS Key Management Service key ID to encrypt the data between the
-	// local client and the container.
+	// Specify an Key Management Service key ID to encrypt the data between the local
+	// client and the container.
 	KmsKeyId *string
 
 	// The log configuration for the results of the execute command actions. The logs
@@ -1772,8 +1771,8 @@ type FirelensConfiguration struct {
 	// For more information, see Creating a Task Definition that Uses a FireLens
 	// Configuration
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef)
-	// in the Amazon Elastic Container Service Developer Guide. Tasks hosted on AWS
-	// Fargate only support the file configuration file type.
+	// in the Amazon Elastic Container Service Developer Guide. Tasks hosted on Fargate
+	// only support the file configuration file type.
 	Options map[string]string
 
 	noSmithyDocumentSerde
@@ -1789,14 +1788,14 @@ type FirelensConfiguration struct {
 type FSxWindowsFileServerAuthorizationConfig struct {
 
 	// The authorization credential option to use. The authorization credential options
-	// can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets
-	// Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer
-	// to the stored credentials.
+	// can be provided using either the Amazon Resource Name (ARN) of an Secrets
+	// Manager secret or SSM Parameter Store parameter. The ARNs refer to the stored
+	// credentials.
 	//
 	// This member is required.
 	CredentialsParameter *string
 
-	// A fully qualified domain name hosted by an AWS Directory Service
+	// A fully qualified domain name hosted by an Directory Service
 	// (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
 	// Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
 	//
@@ -1878,8 +1877,8 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 //
 // *
 // Container health checks are supported for Fargate tasks if you are using
-// platform version 1.1.0 or greater. For more information, see AWS Fargate
-// Platform Versions
+// platform version 1.1.0 or greater. For more information, see Fargate Platform
+// Versions
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
 //
 // *
@@ -2011,10 +2010,10 @@ type KernelCapabilities struct {
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and
 	// the --cap-add option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration). Tasks
-	// launched on AWS Fargate only support adding the SYS_PTRACE kernel capability.
-	// Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
-	// "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK"
-	// | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
+	// launched on Fargate only support adding the SYS_PTRACE kernel capability. Valid
+	// values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" |
+	// "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" |
+	// "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
 	// "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" |
 	// "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
 	// "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" |
@@ -2199,15 +2198,15 @@ type LoadBalancer struct {
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
-// * For tasks on AWS
+// * For tasks on
 // Fargate, because you do not have access to the underlying infrastructure your
 // tasks are hosted on, any additional software needed will have to be installed
 // outside of the task. For example, the Fluentd output aggregators or a remote
 // host running Logstash to send Gelf logs to.
 type LogConfiguration struct {
 
-	// The log driver to use for the container. For tasks on AWS Fargate, the supported
-	// log drivers are awslogs, splunk, and awsfirelens. For tasks hosted on Amazon EC2
+	// The log driver to use for the container. For tasks on Fargate, the supported log
+	// drivers are awslogs, splunk, and awsfirelens. For tasks hosted on Amazon EC2
 	// instances, the supported log drivers are awslogs, fluentd, gelf, json-file,
 	// journald, logentries,syslog, splunk, and awsfirelens. For more information about
 	// using the awslogs log driver, see Using the awslogs log driver
@@ -2563,10 +2562,11 @@ type ProxyConfiguration struct {
 type RepositoryCredentials struct {
 
 	// The Amazon Resource Name (ARN) of the secret containing the private repository
-	// credentials. When you are using the Amazon ECS API, AWS CLI, or AWS SDK, if the
-	// secret exists in the same Region as the task that you are launching then you can
-	// use either the full ARN or the name of the secret. When you are using the AWS
-	// Management Console, you must specify the full ARN of the secret.
+	// credentials. When you are using the Amazon ECS API, CLI, or Amazon Web Services
+	// SDK, if the secret exists in the same Region as the task that you are launching
+	// then you can use either the full ARN or the name of the secret. When you are
+	// using the Amazon Web Services Management Console, you must specify the full ARN
+	// of the secret.
 	//
 	// This member is required.
 	CredentialsParameter *string
@@ -2666,11 +2666,11 @@ type Secret struct {
 	Name *string
 
 	// The secret to expose to the container. The supported values are either the full
-	// ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the
-	// AWS Systems Manager Parameter Store. If the AWS Systems Manager Parameter Store
-	// parameter exists in the same Region as the task you are launching, then you can
-	// use either the full ARN or name of the parameter. If the parameter exists in a
-	// different Region, then the full ARN must be specified.
+	// ARN of the Secrets Manager secret or the full ARN of the parameter in the SSM
+	// Parameter Store. If the SSM Parameter Store parameter exists in the same Region
+	// as the task you are launching, then you can use either the full ARN or name of
+	// the parameter. If the parameter exists in a different Region, then the full ARN
+	// must be specified.
 	//
 	// This member is required.
 	ValueFrom *string
@@ -2681,7 +2681,9 @@ type Secret struct {
 // Details on a service within a cluster
 type Service struct {
 
-	// The capacity provider strategy associated with the service.
+	// The capacity provider strategy the service is using. When using the
+	// DescribeServices API, this field is omitted if the service was created using a
+	// launch type.
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// The Amazon Resource Name (ARN) of the cluster that hosts the service.
@@ -2730,10 +2732,8 @@ type Service struct {
 	// started.
 	HealthCheckGracePeriodSeconds *int32
 
-	// The infrastructure on which your service is running. For more information, see
-	// Amazon ECS launch types
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// The launch type the service is using. When using the DescribeServices API, this
+	// field is omitted if the service was created using a capacity provider strategy.
 	LaunchType LaunchType
 
 	// A list of Elastic Load Balancing load balancer objects, containing the load
@@ -2755,9 +2755,9 @@ type Service struct {
 	PlacementStrategy []PlacementStrategy
 
 	// The platform version on which to run your service. A platform version is only
-	// specified for tasks using the Fargate launch type. If one is not specified, the
-	// LATEST platform version is used by default. For more information, see AWS
-	// Fargate Platform Versions
+	// specified for tasks hosted on Fargate. If one is not specified, the LATEST
+	// platform version is used by default. For more information, see Fargate Platform
+	// Versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -2794,8 +2794,8 @@ type Service struct {
 	SchedulingStrategy SchedulingStrategy
 
 	// The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace,
-	// followed by the Region of the service, the AWS account ID of the service owner,
-	// the service namespace, and then the service name. For example,
+	// followed by the Region of the service, the account ID of the service owner, the
+	// service namespace, and then the service name. For example,
 	// arn:aws:ecs:region:012345678910:service/my-service.
 	ServiceArn *string
 
@@ -2838,9 +2838,9 @@ type Service struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for AWS use. You
-	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-	// do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for Amazon Web
+	// Services use. You cannot edit or delete tag keys or values with this prefix.
+	// Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The task definition to use for tasks in the service. This value is specified
@@ -2848,7 +2848,7 @@ type Service struct {
 	// UpdateService.
 	TaskDefinition *string
 
-	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
+	// Information about a set of Amazon ECS tasks in either an CodeDeploy or an
 	// EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
 	// number of tasks, how many tasks are running, and whether the task set serves
 	// production traffic.
@@ -2898,7 +2898,7 @@ type ServiceRegistry struct {
 	Port *int32
 
 	// The Amazon Resource Name (ARN) of the service registry. The currently supported
-	// service registry is AWS Cloud Map. For more information, see CreateService
+	// service registry is Cloud Map. For more information, see CreateService
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html).
 	RegistryArn *string
 
@@ -2993,9 +2993,9 @@ type SystemControl struct {
 // case-sensitive.
 //
 // * Do not use aws:, AWS:, or any upper or lowercase combination
-// of such as a prefix for either keys or values as it is reserved for AWS use. You
-// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-// do not count against your tags per resource limit.
+// of such as a prefix for either keys or values as it is reserved for Amazon Web
+// Services use. You cannot edit or delete tag keys or values with this prefix.
+// Tags with this prefix do not count against your tags per resource limit.
 type Tag struct {
 
 	// One part of a key-value pair that make up a tag. A key is a general label that
@@ -3145,8 +3145,8 @@ type Task struct {
 
 	// The platform version on which your task is running. A platform version is only
 	// specified for tasks using the Fargate launch type. If one is not specified, the
-	// LATEST platform version is used by default. For more information, see AWS
-	// Fargate Platform Versions
+	// LATEST platform version is used by default. For more information, see Fargate
+	// Platform Versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -3206,9 +3206,9 @@ type Task struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for AWS use. You
-	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-	// do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for Amazon Web
+	// Services use. You cannot edit or delete tag keys or values with this prefix.
+	// Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The Amazon Resource Name (ARN) of the task.
@@ -3277,9 +3277,9 @@ type TaskDefinition struct {
 	EphemeralStorage *EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
-	// ECS container agent permission to make AWS API calls on your behalf. The task
-	// execution IAM role is required depending on the requirements of your task. For
-	// more information, see Amazon ECS task execution IAM role
+	// ECS container agent permission to make Amazon Web Services API calls on your
+	// behalf. The task execution IAM role is required depending on the requirements of
+	// your task. For more information, see Amazon ECS task execution IAM role
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string
@@ -3322,7 +3322,7 @@ type TaskDefinition struct {
 	// apply to all containers within a task.
 	//
 	// This parameter is not supported for
-	// Windows containers or tasks run on AWS Fargate.
+	// Windows containers or tasks run on Fargate.
 	IpcMode IpcMode
 
 	// The amount (in MiB) of memory used by the task. If your tasks will be run on
@@ -3332,55 +3332,51 @@ type TaskDefinition struct {
 	// is optional. For more information regarding container-level memory and memory
 	// reservation, see ContainerDefinition
 	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html).
-	// If your tasks will be run on AWS Fargate, this field is required and you must
-	// use one of the following values, which determines your range of valid values for
-	// the cpu parameter:
+	// If your tasks will be run on Fargate, this field is required and you must use
+	// one of the following values, which determines your range of valid values for the
+	// cpu parameter:
 	//
-	// * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu
-	// values: 256 (.25 vCPU)
+	// * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values:
+	// 256 (.25 vCPU)
 	//
-	// * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) -
-	// Available cpu values: 512 (.5 vCPU)
+	// * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available
+	// cpu values: 512 (.5 vCPU)
 	//
-	// * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB),
-	// 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024
-	// (1 vCPU)
+	// * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB),
+	// 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
 	//
-	// * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
-	// Available cpu values: 2048 (2 vCPU)
+	// *
+	// Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available
+	// cpu values: 2048 (2 vCPU)
 	//
-	// * Between 8192 (8 GB) and 30720 (30 GB) in
-	// increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	// * Between 8192 (8 GB) and 30720 (30 GB) in increments
+	// of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
 	// values are none, bridge, awsvpc, and host. If no network mode is specified, the
 	// default is bridge. For Amazon ECS tasks on Fargate, the awsvpc network mode is
-	// required. For Amazon ECS tasks on Amazon EC2 instances, any network mode can be
-	// used. If the network mode is set to none, you cannot specify port mappings in
-	// your container definitions, and the tasks containers do not have external
-	// connectivity. The host and awsvpc network modes offer the highest networking
-	// performance for containers because they use the EC2 network stack instead of the
-	// virtualized network stack provided by the bridge mode. With the host and awsvpc
-	// network modes, exposed container ports are mapped directly to the corresponding
-	// host port (for the host network mode) or the attached elastic network interface
-	// port (for the awsvpc network mode), so you cannot take advantage of dynamic host
-	// port mappings. When using the host network mode, you should not run containers
-	// using the root user (UID 0). It is considered best practice to use a non-root
-	// user. If the network mode is awsvpc, the task is allocated an elastic network
-	// interface, and you must specify a NetworkConfiguration value when you create a
-	// service or run a task with the task definition. For more information, see Task
-	// Networking
+	// required. For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode
+	// can be used. For Amazon ECS tasks on Amazon EC2 Windows instances,  or awsvpc
+	// can be used. If the network mode is set to none, you cannot specify port
+	// mappings in your container definitions, and the tasks containers do not have
+	// external connectivity. The host and awsvpc network modes offer the highest
+	// networking performance for containers because they use the EC2 network stack
+	// instead of the virtualized network stack provided by the bridge mode. With the
+	// host and awsvpc network modes, exposed container ports are mapped directly to
+	// the corresponding host port (for the host network mode) or the attached elastic
+	// network interface port (for the awsvpc network mode), so you cannot take
+	// advantage of dynamic host port mappings. When using the host network mode, you
+	// should not run containers using the root user (UID 0). It is considered best
+	// practice to use a non-root user. If the network mode is awsvpc, the task is
+	// allocated an elastic network interface, and you must specify a
+	// NetworkConfiguration value when you create a service or run a task with the task
+	// definition. For more information, see Task Networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
-	// in the Amazon Elastic Container Service Developer Guide. Currently, only Amazon
-	// ECS-optimized AMIs, other Amazon Linux variants with the ecs-init package, or
-	// AWS Fargate infrastructure support the awsvpc network mode. If the network mode
-	// is host, you cannot run multiple instantiations of the same task on a single
-	// container instance when port mappings are used. Docker for Windows uses
-	// different network modes than Docker for Linux. When you register a task
-	// definition with Windows containers, you must not specify a network mode. If you
-	// use the console to register a task definition with Windows containers, you must
-	// choose the  network mode object. For more information, see Network settings
+	// in the Amazon Elastic Container Service Developer Guide. If the network mode is
+	// host, you cannot run multiple instantiations of the same task on a single
+	// container instance when port mappings are used. For more information, see
+	// Network settings
 	// (https://docs.docker.com/engine/reference/run/#network-settings) in the Docker
 	// run reference.
 	NetworkMode NetworkMode
@@ -3396,11 +3392,11 @@ type TaskDefinition struct {
 	// run reference. If the host PID mode is used, be aware that there is a heightened
 	// risk of undesired process namespace expose. For more information, see Docker
 	// security (https://docs.docker.com/engine/security/security/). This parameter is
-	// not supported for Windows containers or tasks run on AWS Fargate.
+	// not supported for Windows containers or tasks run on Fargate.
 	PidMode PidMode
 
 	// An array of placement constraint objects to use for tasks. This parameter is not
-	// supported for tasks run on AWS Fargate.
+	// supported for tasks run on Fargate.
 	PlacementConstraints []TaskDefinitionPlacementConstraint
 
 	// The configuration details for the App Mesh proxy. Your Amazon ECS container
@@ -3427,7 +3423,7 @@ type TaskDefinition struct {
 	// on Amazon EC2 instances. For more information, see Attributes
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
 	// in the Amazon Elastic Container Service Developer Guide. This parameter is not
-	// supported for tasks run on AWS Fargate.
+	// supported for tasks run on Fargate.
 	RequiresAttributes []Attribute
 
 	// The task launch types the task definition was validated against. To determine
@@ -3448,9 +3444,9 @@ type TaskDefinition struct {
 	// The full Amazon Resource Name (ARN) of the task definition.
 	TaskDefinitionArn *string
 
-	// The short name or full Amazon Resource Name (ARN) of the AWS Identity and Access
-	// Management (IAM) role that grants containers in the task permission to call AWS
-	// APIs on your behalf. For more information, see Amazon ECS Task Role
+	// The short name or full Amazon Resource Name (ARN) of the Identity and Access
+	// Management role that grants containers in the task permission to call Amazon Web
+	// Services APIs on your behalf. For more information, see Amazon ECS Task Role
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide. IAM roles for tasks on
 	// Windows require that the -EnableTaskIAMRole option is set when you launch the
@@ -3465,7 +3461,7 @@ type TaskDefinition struct {
 	// Using data volumes in tasks
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
 	// in the Amazon Elastic Container Service Developer Guide. The host and sourcePath
-	// parameters are not supported for tasks run on AWS Fargate.
+	// parameters are not supported for tasks run on Fargate.
 	Volumes []Volume
 
 	noSmithyDocumentSerde
@@ -3475,7 +3471,7 @@ type TaskDefinition struct {
 // For more information, see Task placement constraints
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide. Task placement
-// constraints are not supported for tasks run on AWS Fargate.
+// constraints are not supported for tasks run on Fargate.
 type TaskDefinitionPlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. For more
@@ -3501,7 +3497,7 @@ type TaskOverride struct {
 	Cpu *string
 
 	// The ephemeral storage setting override for the task. This parameter is only
-	// supported for tasks hosted on AWS Fargate using platform version 1.4.0 or later.
+	// supported for tasks hosted on Fargate using platform version 1.4.0 or later.
 	EphemeralStorage *EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution IAM role override for the
@@ -3522,7 +3518,7 @@ type TaskOverride struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
+// Information about a set of Amazon ECS tasks in either an CodeDeploy or an
 // EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
 // number of tasks, how many tasks are running, and whether the task set serves
 // production traffic.
@@ -3544,11 +3540,11 @@ type TaskSet struct {
 	// The Unix timestamp for when the task set was created.
 	CreatedAt *time.Time
 
-	// The external ID associated with the task set. If a task set is created by an AWS
-	// CodeDeploy deployment, the externalId parameter contains the AWS CodeDeploy
+	// The external ID associated with the task set. If a task set is created by an
+	// CodeDeploy deployment, the externalId parameter contains the CodeDeploy
 	// deployment ID. If a task set is created for an external deployment and is
 	// associated with a service discovery registry, the externalId parameter contains
-	// the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute.
+	// the ECS_TASK_SET_EXTERNAL_ID Cloud Map attribute.
 	ExternalId *string
 
 	// The ID of the task set.
@@ -3572,9 +3568,9 @@ type TaskSet struct {
 	// it is restarted after being in the STOPPED state.
 	PendingCount int32
 
-	// The AWS Fargate platform version on which the tasks in the task set are running.
-	// A platform version is only specified for tasks run on AWS Fargate. For more
-	// information, see AWS Fargate platform versions
+	// The Fargate platform version on which the tasks in the task set are running. A
+	// platform version is only specified for tasks run on Fargate. For more
+	// information, see Fargate platform versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -3618,8 +3614,8 @@ type TaskSet struct {
 	StabilityStatusAt *time.Time
 
 	// The tag specified when a task set is started. If the task set is created by an
-	// AWS CodeDeploy deployment, the startedBy parameter is CODE_DEPLOY. For a task
-	// set created for an external deployment, the startedBy field isn't used.
+	// CodeDeploy deployment, the startedBy parameter is CODE_DEPLOY. For a task set
+	// created for an external deployment, the startedBy field isn't used.
 	StartedBy *string
 
 	// The status of the task set. The following describes each state: PRIMARY The task
@@ -3653,9 +3649,9 @@ type TaskSet struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for AWS use. You
-	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-	// do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for Amazon Web
+	// Services use. You cannot edit or delete tag keys or values with this prefix.
+	// Tags with this prefix do not count against your tags per resource limit.
 	Tags []Tag
 
 	// The task definition the task set is using.
@@ -3750,7 +3746,7 @@ type Volume struct {
 
 	// This parameter is specified when you are using Docker volumes. Windows
 	// containers only support the use of the local driver. To use bind mounts, specify
-	// the host parameter instead. Docker volumes are not supported by tasks run on AWS
+	// the host parameter instead. Docker volumes are not supported by tasks run on
 	// Fargate.
 	DockerVolumeConfiguration *DockerVolumeConfiguration
 
