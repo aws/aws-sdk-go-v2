@@ -17,7 +17,7 @@ to use patterns like dependency injection to test your application logic.
 
 In this example, `S3GetObjectAPI` is an interface that defines the set of
 {{% alias service=S3 %}} API operations required by the `GetObjectFromS3`
-function. `s3GetObjectAPI` is satisfied by the {{% alias service=S3 %}}
+function. `S3GetObjectAPI` is satisfied by the {{% alias service=S3 %}}
 client's [GetObject]({{< apiref "service/s3#Client.GetObject" >}}) method.
 
 ```go
