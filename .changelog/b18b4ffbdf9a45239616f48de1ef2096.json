@@ -1,0 +1,14 @@
+{
+    "id": "b18b4ffb-df9a-4523-9616-f48de1ef2096",
+    "type": "feature",
+    "collapse": true,
+    "description": "adds error handling for defered close calls",
+    "modules": [
+        ".",
+        "config",
+        "feature/cloudfront/sign",
+        "feature/ec2/imds",
+        "feature/s3/manager",
+        "internal/ini"
+    ]
+}
