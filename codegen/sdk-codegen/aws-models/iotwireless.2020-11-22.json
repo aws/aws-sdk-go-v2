@@ -91,6 +91,7 @@
         "com.amazonaws.iotwireless#AmazonId": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The Sidewalk Amazon ID.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
@@ -2293,7 +2294,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.</p>",
+                "smithy.api#documentation": "<p>Returns current default log levels or log levels by resource types. Based on resource types, log levels can be\n            for wireless device log options or wireless gateway log options.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/log-levels",
@@ -2414,7 +2415,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.</p>",
+                "smithy.api#documentation": "<p>Fetches the log-level override, if any, for a given resource-ID and resource-type. It can be used for\n            a wireless device or a wireless gateway.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/log-levels/{ResourceIdentifier}",
@@ -2435,7 +2436,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.iotwireless#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+                        "smithy.api#documentation": "<p>The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.</p>",
                         "smithy.api#httpQuery": "resourceType",
                         "smithy.api#required": {}
                     }
@@ -4531,7 +4532,7 @@
         "com.amazonaws.iotwireless#MessageType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>Sidewalk device message type.</p>",
+                "smithy.api#documentation": "<p>Sidewalk device message type. Default value is <code>CUSTOM_COMMAND_ID_NOTIFY</code>.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "CUSTOM_COMMAND_ID_NOTIFY",
@@ -4777,7 +4778,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.</p>",
+                "smithy.api#documentation": "<p>Sets the log-level override for a resource-ID and resource-type. This option can be specified for a wireless gateway \n            or a wireless device. A limit of 200 log level override can be set per account.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/log-levels/{ResourceIdentifier}",
@@ -4798,7 +4799,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.iotwireless#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+                        "smithy.api#documentation": "<p>The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.</p>",
                         "smithy.api#httpQuery": "resourceType",
                         "smithy.api#required": {}
                     }
@@ -4859,7 +4860,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).</p>",
+                "smithy.api#documentation": "<p>Removes the log-level overrides for all resources; both wireless devices and wireless gateways.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/log-levels",
@@ -4901,7 +4902,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.</p>",
+                "smithy.api#documentation": "<p>Removes the log-level override, if any, for a specific resource-ID and resource-type. It can be used for\n            a wireless device or a wireless gateway.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/log-levels/{ResourceIdentifier}",
@@ -4922,7 +4923,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.iotwireless#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+                        "smithy.api#documentation": "<p>The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.</p>",
                         "smithy.api#httpQuery": "resourceType",
                         "smithy.api#required": {}
                     }
@@ -4939,7 +4940,7 @@
         "com.amazonaws.iotwireless#ResourceIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.</p>",
+                "smithy.api#documentation": "<p>The identifier of the resource. For a Wireless Device, it is the wireless device ID. For a wireless gateway, \n            it is the wireless gateway ID.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
@@ -5099,7 +5100,7 @@
                 "PayloadData": {
                     "target": "com.amazonaws.iotwireless#PayloadData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The message payload to send.</p>",
+                        "smithy.api#documentation": "<p>The binary to be sent to the end device, encoded in base64.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5292,6 +5293,9 @@
         "com.amazonaws.iotwireless#SidewalkDevice": {
             "type": "structure",
             "members": {
+                "AmazonId": {
+                    "target": "com.amazonaws.iotwireless#AmazonId"
+                },
                 "SidewalkId": {
                     "target": "com.amazonaws.iotwireless#SidewalkId",
                     "traits": {
@@ -5930,7 +5934,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.</p>",
+                "smithy.api#documentation": "<p>Set default log level, or log levels by resource types. This can be for wireless device log options or\n            wireless gateways log options and is used to control the log messages that'll be displayed in CloudWatch.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/log-levels",
@@ -6285,7 +6289,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The log option for a wireless device event. Can be used to set log level for a specific wireless device event. For a LoRaWAN device, the possible events for a log messsage are: Join, Rejoin, Downlink_Data, Uplink_Data. For a Sidewalk device, the possible events for a log message are: Registration, Downlink_Data, Uplink_Data.</p>"
+                "smithy.api#documentation": "<p>The log options for a wireless device event and can be used to set log levels for a specific wireless device event.</p> \n         <p>For a LoRaWAN device, possible events for a log messsage are: <code>Join</code>, <code>Rejoin</code>, \n             <code>Downlink_Data</code>, and <code>Uplink_Data</code>. For a Sidewalk device, possible events for a log message are \n             <code>Registration</code>, <code>Downlink_Data</code>, and <code>Uplink_Data</code>.</p>"
             }
         },
         "com.amazonaws.iotwireless#WirelessDeviceEventLogOptionList": {
@@ -6321,6 +6325,10 @@
                     {
                         "value": "ThingName",
                         "name": "ThingName"
+                    },
+                    {
+                        "value": "SidewalkManufacturingSn",
+                        "name": "SidewalkManufacturingSn"
                     }
                 ]
             }
@@ -6346,7 +6354,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The log option for wireless devices. Can be used to set log level for a specific type of wireless device.</p>"
+                "smithy.api#documentation": "<p>The log options for wireless devices and can be used to set log levels for a specific type of wireless device.</p>"
             }
         },
         "com.amazonaws.iotwireless#WirelessDeviceLogOptionList": {
@@ -6480,7 +6488,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The log option for a wireless gateway event. Can be used to set log level for a specific wireless gateway event. For a LoRaWAN gateway, the possible events for a log message are: CUPS_Request, Certificate.</p>"
+                "smithy.api#documentation": "<p>The log options for a wireless gateway event and can be used to set log levels for a specific wireless gateway event.</p> \n         <p>For a LoRaWAN gateway, possible events for a log message are <code>CUPS_Request</code> and <code>Certificate</code>.</p>"
             }
         },
         "com.amazonaws.iotwireless#WirelessGatewayEventLogOptionList": {
@@ -6540,7 +6548,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The log option for wireless gateways. Can be used to set log level for a specific type of wireless gateway.</p>"
+                "smithy.api#documentation": "<p>The log options for wireless gateways and can be used to set log levels for a specific type of wireless gateway.</p>"
             }
         },
         "com.amazonaws.iotwireless#WirelessGatewayLogOptionList": {

@@ -35,24 +35,24 @@
                 "id": {
                     "target": "com.amazonaws.auditmanager#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The identifier for the specified AWS account. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The identifier for the specified account. \n</p>"
                     }
                 },
                 "emailAddress": {
                     "target": "com.amazonaws.auditmanager#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The email address associated with the specified AWS account. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The email address associated with the specified account. \n</p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.auditmanager#AccountName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The name of the specified AWS account. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The name of the specified account. \n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The wrapper of AWS account details, such as account ID, email address, and so on. \n</p>"
+                "smithy.api#documentation": "<p>\n   The wrapper of account details, such as account ID, email address, and so on. \n</p>"
             }
         },
         "com.amazonaws.auditmanager#AWSAccounts": {
@@ -67,12 +67,12 @@
                 "serviceName": {
                     "target": "com.amazonaws.auditmanager#AWSServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The name of the AWS service. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The name of the Amazon Web Service. \n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   An AWS service such as Amazon S3, AWS CloudTrail, and so on. \n</p>"
+                "smithy.api#documentation": "<p>\n   An Amazon Web Service such as Amazon S3, CloudTrail, and so on. \n</p>"
             }
         },
         "com.amazonaws.auditmanager#AWSServiceName": {
@@ -102,7 +102,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Your account is not registered with AWS Audit Manager. Check the delegated administrator setup on the AWS Audit Manager settings page, and try again.\n</p>",
+                "smithy.api#documentation": "<p>\n   Your account is not registered with Audit Manager. Check the delegated administrator setup on the Audit Manager settings page, and try again.\n</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -217,7 +217,7 @@
                 "awsAccount": {
                     "target": "com.amazonaws.auditmanager#AWSAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n The AWS account associated with the assessment. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The account associated with the assessment. \n</p>"
                     }
                 },
                 "metadata": {
@@ -240,7 +240,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   An entity that defines the scope of audit evidence collected by AWS Audit Manager. An AWS Audit Manager assessment is an implementation of an AWS Audit Manager framework. \n</p>"
+                "smithy.api#documentation": "<p>\n   An entity that defines the scope of audit evidence collected by Audit Manager. An Audit Manager assessment is an implementation of an Audit Manager framework. \n</p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentControl": {
@@ -302,7 +302,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The control entity that represents a standard or custom control used in an AWS Audit Manager assessment.\n</p>"
+                "smithy.api#documentation": "<p>\n   The control entity that represents a standard or custom control used in an Audit Manager assessment.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentControlSet": {
@@ -358,7 +358,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nRepresents a set of controls in an AWS Audit Manager assessment.\n</p>"
+                "smithy.api#documentation": "<p>\n   Represents a set of controls in an Audit Manager assessment.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentControlSets": {
@@ -425,7 +425,7 @@
                 "dataSource": {
                     "target": "com.amazonaws.auditmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The AWS service from which the evidence was collected. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The Amazon Web Service from which the evidence was collected. \n</p>"
                     }
                 },
                 "author": {
@@ -461,7 +461,7 @@
                 "evidenceByTypeConfigurationDataCount": {
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other AWS services such as Amazon EC2, Amazon S3, or IAM.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other Amazon Web Services services such as Amazon EC2, Amazon S3, or IAM.\n      </p>"
                     }
                 },
                 "evidenceByTypeManualCount": {
@@ -473,30 +473,30 @@
                 "evidenceByTypeComplianceCheckCount": {
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The number of evidence that falls under the compliance check category. This evidence is collected from AWS Config or AWS Security Hub.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The number of evidence that falls under the compliance check category. This evidence is collected from Config or Security Hub.\n      </p>"
                     }
                 },
                 "evidenceByTypeComplianceCheckIssuesCount": {
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The total number of issues that were reported directly from AWS Security\n         Hub, AWS Config, or both.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The total number of issues that were reported directly from Security Hub, Config, or both.\n      </p>"
                     }
                 },
                 "evidenceByTypeUserActivityCount": {
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The number of evidence that falls under the user activity category. This evidence is collected from AWS CloudTrail logs.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The number of evidence that falls under the user activity category. This evidence is collected from CloudTrail logs.\n      </p>"
                     }
                 },
                 "evidenceAwsServiceSourceCount": {
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The total number of AWS resources assessed to generate the evidence. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The total number of Amazon Web Services resources assessed to generate the evidence. \n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nThe folder in which AWS Audit Manager stores evidence for an assessment.\n</p>"
+                "smithy.api#documentation": "<p>\n   The folder in which Audit Manager stores evidence for an assessment.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentEvidenceFolderName": {
@@ -541,7 +541,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The file used to structure and automate AWS Audit Manager assessments for a given compliance standard.\n</p>"
+                "smithy.api#documentation": "<p>\n   The file used to structure and automate Audit Manager assessments for a given compliance standard.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentFrameworkDescription": {
@@ -670,7 +670,7 @@
                 "scope": {
                     "target": "com.amazonaws.auditmanager#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The wrapper of AWS accounts and services in scope for the assessment. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The wrapper of accounts and services in scope for the assessment. \n</p>"
                     }
                 },
                 "roles": {
@@ -755,7 +755,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nA metadata object associated with an assessment in AWS Audit Manager.\n</p>"
+                "smithy.api#documentation": "<p>\n   A metadata object associated with an assessment in Audit Manager.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentName": {
@@ -792,7 +792,7 @@
                 "awsAccountId": {
                     "target": "com.amazonaws.auditmanager#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The identifier for the specified AWS account. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The identifier for the specified account. \n</p>"
                     }
                 },
                 "assessmentId": {
@@ -827,7 +827,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n A finalized document generated from an AWS Audit Manager assessment. These reports summarize the relevant evidence collected for your audit, and link to the relevant evidence folders which are named and organized according to the controls specified in your assessment.\n</p>"
+                "smithy.api#documentation": "<p>\n   A finalized document generated from an Audit Manager assessment. These reports summarize the relevant evidence collected for your audit, and link to the relevant evidence folders which are named and organized according to the controls specified in your assessment.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentReportDescription": {
@@ -985,7 +985,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The location in which AWS Audit Manager saves assessment reports for the given assessment.\n</p>"
+                "smithy.api#documentation": "<p>\n   The location in which Audit Manager saves assessment reports for the given assessment.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#AssessmentReportsMetadata": {
@@ -1032,7 +1032,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Associates an evidence folder to the specified assessment report in AWS Audit Manager. \n      </p>",
+                "smithy.api#documentation": "<p>\n         Associates an evidence folder to the specified assessment report in Audit Manager. \n      </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/associateToAssessmentReport",
@@ -1071,7 +1071,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:.*:auditmanager:.*"
+                "smithy.api#pattern": "^arn:.*:auditmanager:"
             }
         },
         "com.amazonaws.auditmanager#BatchAssociateAssessmentReportEvidence": {
@@ -1097,7 +1097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n        Associates a list of evidence to an assessment report in an AWS Audit Manager assessment.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Associates a list of evidence to an assessment report in an Audit Manager assessment.\n      </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/batchAssociateToAssessmentReport",
@@ -1172,7 +1172,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Create a batch of delegations for a specified assessment in AWS Audit Manager.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Create a batch of delegations for a specified assessment in Audit Manager.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/assessments/{assessmentId}/delegations",
@@ -1186,7 +1186,7 @@
                 "createDelegationRequest": {
                     "target": "com.amazonaws.auditmanager#CreateDelegationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe API request to batch create delegations in AWS Audit Manager.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The API request to batch create delegations in Audit Manager.\n</p>"
                     }
                 },
                 "errorCode": {
@@ -1218,7 +1218,7 @@
                 "createDelegationRequests": {
                     "target": "com.amazonaws.auditmanager#CreateDelegationRequests",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The API request to batch create delegations in AWS Audit Manager.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The API request to batch create delegations in Audit Manager.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1272,7 +1272,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDeletes the delegations in the specified AWS Audit Manager assessment.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Deletes the delegations in the specified Audit Manager assessment.\n      </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/delegations",
@@ -1366,7 +1366,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Disassociates a list of evidence from the specified assessment report in AWS Audit Manager. \n      </p>",
+                "smithy.api#documentation": "<p>\n         Disassociates a list of evidence from the specified assessment report in Audit Manager. \n      </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/batchDisassociateFromAssessmentReport",
@@ -1441,7 +1441,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Uploads one or more pieces of evidence to the specified control in the assessment in AWS Audit Manager.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Uploads one or more pieces of evidence to the specified control in the assessment in Audit Manager.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}/evidence",
@@ -1455,7 +1455,7 @@
                 "manualEvidence": {
                     "target": "com.amazonaws.auditmanager#ManualEvidence",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nManual evidence that cannot be collected automatically by AWS Audit Manager.\n</p>"
+                        "smithy.api#documentation": "<p>\n   Manual evidence that cannot be collected automatically by Audit Manager.\n</p>"
                     }
                 },
                 "errorCode": {
@@ -1698,7 +1698,7 @@
                     "name": "auditmanager"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the AWS Audit Manager API reference. This guide is for developers who need detailed information about the AWS Audit Manager API operations, data types, and errors. </p>\n         <p>AWS Audit Manager is a service that provides automated evidence collection so that you\n         can continuously audit your AWS usage, and assess the effectiveness of your controls to\n         better manage risk and simplify compliance.</p>\n         <p>AWS Audit Manager provides pre-built frameworks that structure and automate assessments\n         for a given compliance standard. Frameworks include a pre-built collection of controls with\n         descriptions and testing procedures, which are grouped according to the requirements of the\n         specified compliance standard or regulation. You can also customize frameworks and controls\n         to support internal audits with unique requirements. </p> \n    \n         <p>Use the following links to get started with the AWS Audit Manager API:</p> \n         <ul>\n            <li> \n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all AWS Audit Manager API operations.</p> \n            </li>\n            <li> \n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all AWS Audit Manager data types.</p> \n            </li>\n            <li> \n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p> \n            </li>\n            <li> \n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p> \n            </li>\n         </ul> \n    \n         <p>If you're new to AWS Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\"> AWS Audit Manager User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Welcome to the Audit Manager API reference. This guide is for developers who need detailed information about the Audit Manager API operations, data types, and errors. </p>\n         <p>Audit Manager is a service that provides automated evidence collection so that you\n         can continuously audit your Amazon Web Services usage, and assess the effectiveness of your controls to\n         better manage risk and simplify compliance.</p>\n         <p>Audit Manager provides pre-built frameworks that structure and automate assessments\n         for a given compliance standard. Frameworks include a pre-built collection of controls with\n         descriptions and testing procedures, which are grouped according to the requirements of the\n         specified compliance standard or regulation. You can also customize frameworks and controls\n         to support internal audits with unique requirements. </p> \n    \n         <p>Use the following links to get started with the Audit Manager API:</p> \n         <ul>\n            <li> \n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Audit Manager API operations.</p> \n            </li>\n            <li> \n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Audit Manager data types.</p> \n            </li>\n            <li> \n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p> \n            </li>\n            <li> \n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p> \n            </li>\n         </ul> \n    \n         <p>If you're new to Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\"> Audit Manager User Guide</a>.</p>",
                 "smithy.api#title": "AWS Audit Manager"
             }
         },
@@ -1738,12 +1738,12 @@
                 "createdBy": {
                     "target": "com.amazonaws.auditmanager#IamArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n The IAM user or role that performed the action. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The IAM user or role that performed the action. \n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The record of a change within AWS Audit Manager, such as a modified assessment, a delegated control set, and so on. \n</p>"
+                "smithy.api#documentation": "<p>\n   The record of a change within Audit Manager, such as a modified assessment, a delegated control set, and so on. \n</p>"
             }
         },
         "com.amazonaws.auditmanager#ChangeLogs": {
@@ -1816,7 +1816,7 @@
                 "controlSources": {
                     "target": "com.amazonaws.auditmanager#ControlSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The data source that determines from where AWS Audit Manager collects evidence for the control. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The data source that determines from where Audit Manager collects evidence for the control. \n</p>"
                     }
                 },
                 "controlMappingSources": {
@@ -1857,7 +1857,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nA control in AWS Audit Manager.\n</p>"
+                "smithy.api#documentation": "<p>\n   A control in Audit Manager.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#ControlComment": {
@@ -1962,7 +1962,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The data source that determines from where AWS Audit Manager collects evidence for the control.\n</p>"
+                "smithy.api#documentation": "<p>\n   The data source that determines from where Audit Manager collects evidence for the control.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#ControlMappingSources": {
@@ -2000,7 +2000,7 @@
                 "controlSources": {
                     "target": "com.amazonaws.auditmanager#ControlSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The data source that determines from where AWS Audit Manager collects evidence for the control.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The data source that determines from where Audit Manager collects evidence for the control.\n</p>"
                     }
                 },
                 "createdAt": {
@@ -2082,7 +2082,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nA set of controls in AWS Audit Manager.\n</p>"
+                "smithy.api#documentation": "<p>\n   A set of controls in Audit Manager.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#ControlSetId": {
@@ -2219,7 +2219,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n  Creates an assessment in AWS Audit Manager. \n</p>",
+                "smithy.api#documentation": "<p>\n   Creates an assessment in Audit Manager. \n</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/assessments",
@@ -2250,7 +2250,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nCreates a custom framework in AWS Audit Manager. \n</p>",
+                "smithy.api#documentation": "<p>\n   Creates a custom framework in Audit Manager. \n</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/assessmentFrameworks",
@@ -2269,7 +2269,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nControl entity attributes that uniquely identify an existing control to be added to a framework in AWS Audit Manager.\n</p>"
+                "smithy.api#documentation": "<p>\n   Control entity attributes that uniquely identify an existing control to be added to a framework in Audit Manager.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#CreateAssessmentFrameworkControlSet": {
@@ -2290,7 +2290,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nA <code>controlSet</code> entity that represents a collection of controls in AWS Audit Manager. This does not contain the control set ID.\n</p>"
+                "smithy.api#documentation": "<p>\n   A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This does not contain the control set ID.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#CreateAssessmentFrameworkControlSets": {
@@ -2513,7 +2513,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nCreates a new custom control in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Creates a new custom control in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/controls",
@@ -2533,7 +2533,7 @@
                 "sourceDescription": {
                     "target": "com.amazonaws.auditmanager#SourceDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The description of the data source that determines from where AWS Audit Manager collects evidence for the control. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The description of the data source that determines from where Audit Manager collects evidence for the control. \n</p>"
                     }
                 },
                 "sourceSetUpOption": {
@@ -2668,7 +2668,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n  A collection of attributes used to create a delegation for an assessment in AWS Audit Manager.\n</p>"
+                "smithy.api#documentation": "<p>\n   A collection of attributes used to create a delegation for an assessment in Audit Manager.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#CreateDelegationRequests": {
@@ -2893,7 +2893,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Deletes an assessment in AWS Audit Manager. \n</p>",
+                "smithy.api#documentation": "<p>\n   Deletes an assessment in Audit Manager. \n</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/assessments/{assessmentId}",
@@ -2924,7 +2924,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Deletes a custom framework in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Deletes a custom framework in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/assessmentFrameworks/{frameworkId}",
@@ -2972,7 +2972,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDeletes an assessment report from an assessment in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Deletes an assessment report from an assessment in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/assessments/{assessmentId}/reports/{assessmentReportId}",
@@ -3045,7 +3045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Deletes a custom control in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Deletes a custom control in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/controls/{controlId}",
@@ -3093,7 +3093,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDeregisters an account in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Deregisters an account in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/deregisterAccount",
@@ -3139,7 +3139,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n  Deregisters the delegated AWS administrator account from the AWS organization. \n</p>",
+                "smithy.api#documentation": "<p>Removes the specified member account as a delegated administrator for Audit Manager. </p> \n         <important>\n            <p>When you remove a delegated administrator from your Audit Manager settings, or when you\n        deregister a delegated administrator from Organizations, you continue to have access\n      to the evidence that you previously collected under that account. However, Audit Manager\n            will stop collecting and attaching evidence to that delegated administrator account\n            moving forward.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/deregisterOrganizationAdminAccount",
@@ -3185,7 +3185,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n  Disassociates an evidence folder from the specified assessment report in AWS Audit Manager. \n</p>",
+                "smithy.api#documentation": "<p>\n   Disassociates an evidence folder from the specified assessment report in Audit Manager. \n</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/disassociateFromAssessmentReport",
@@ -3234,7 +3234,7 @@
                     "min": 3,
                     "max": 3
                 },
-                "smithy.api#pattern": "[0-9]{3}"
+                "smithy.api#pattern": "^[0-9]{3}$"
             }
         },
         "com.amazonaws.auditmanager#ErrorMessage": {
@@ -3269,7 +3269,7 @@
                 "evidenceAwsAccountId": {
                     "target": "com.amazonaws.auditmanager#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The identifier for the specified AWS account. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The identifier for the specified account. \n</p>"
                     }
                 },
                 "time": {
@@ -3281,7 +3281,7 @@
                 "eventSource": {
                     "target": "com.amazonaws.auditmanager#AWSServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe AWS service from which the evidence is collected.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The Amazon Web Service from which the evidence is collected.\n</p>"
                     }
                 },
                 "eventName": {
@@ -3317,19 +3317,19 @@
                 "complianceCheck": {
                     "target": "com.amazonaws.auditmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The evaluation status for evidence that falls under the compliance check category. For\n         evidence collected from AWS Security Hub, a <i>Pass</i> or\n            <i>Fail</i> result is shown. For evidence collected from AWS Config, a\n            <i>Compliant</i> or <i>Noncompliant</i> result is shown. </p>"
+                        "smithy.api#documentation": "<p> The evaluation status for evidence that falls under the compliance check category. For\n   evidence collected from Security Hub, a <i>Pass</i> or\n   <i>Fail</i> result is shown. For evidence collected from Config, a\n            <i>Compliant</i> or <i>Noncompliant</i> result is shown. </p>"
                     }
                 },
                 "awsOrganization": {
                     "target": "com.amazonaws.auditmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The AWS account from which the evidence is collected, and its AWS organization path.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The account from which the evidence is collected, and its organization path.\n</p>"
                     }
                 },
                 "awsAccountId": {
                     "target": "com.amazonaws.auditmanager#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The identifier for the specified AWS account. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The identifier for the specified account. \n</p>"
                     }
                 },
                 "evidenceFolderId": {
@@ -3466,7 +3466,7 @@
                 "controlSources": {
                     "target": "com.amazonaws.auditmanager#ControlSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe sources from which AWS Audit Manager collects evidence for the control.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The sources from which Audit Manager collects evidence for the control.\n</p>"
                     }
                 },
                 "controlSets": {
@@ -3507,7 +3507,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The file used to structure and automate AWS Audit Manager assessments for a given compliance standard.\n</p>"
+                "smithy.api#documentation": "<p>\n   The file used to structure and automate Audit Manager assessments for a given compliance standard.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#FrameworkDescription": {
@@ -3590,7 +3590,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.auditmanager#GetAccountStatus": {
@@ -3607,7 +3607,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns the registration status of an account in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns the registration status of an account in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/account/status",
@@ -3625,7 +3625,7 @@
                 "status": {
                     "target": "com.amazonaws.auditmanager#AccountStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe status of the specified AWS account.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The status of the specified account.\n</p>"
                     }
                 }
             }
@@ -3653,7 +3653,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns an assessment from AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns an assessment from Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}",
@@ -3684,7 +3684,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a framework from AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a framework from Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessmentFrameworks/{frameworkId}",
@@ -3739,7 +3739,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns the URL of a specified assessment report in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns the URL of a specified assessment report in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}/reports/{assessmentReportId}/url",
@@ -3823,7 +3823,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a list of changelogs from AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of changelogs from Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}/changelogs",
@@ -3917,7 +3917,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a control from AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a control from Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/controls/{controlId}",
@@ -4041,7 +4041,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns evidence from AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns evidence from Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}/evidence/{evidenceId}",
@@ -4072,7 +4072,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Returns all evidence from a specified evidence folder in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns all evidence from a specified evidence folder in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}/evidence",
@@ -4168,7 +4168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns an evidence folder from the specified assessment in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns an evidence folder from the specified assessment in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}",
@@ -4239,7 +4239,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Returns the evidence folders from a specified assessment in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns the evidence folders from a specified assessment in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}/evidenceFolders",
@@ -4275,7 +4275,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Returns a list of evidence folders associated with a specified control of an assessment in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of evidence folders associated with a specified control of an assessment in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}/evidenceFolders-by-assessment-control/{controlSetId}/{controlId}",
@@ -4463,7 +4463,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n  Returns the name of the delegated AWS administrator account for the AWS organization. \n</p>",
+                "smithy.api#documentation": "<p>\n   Returns the name of the delegated Amazon Web Services administrator account for the organization. \n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/account/organizationAdminAccount",
@@ -4512,7 +4512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Returns a list of the in-scope AWS services for the specified assessment. \n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of the in-scope Amazon Web Services services for the specified assessment. \n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/services",
@@ -4530,7 +4530,7 @@
                 "serviceMetadata": {
                     "target": "com.amazonaws.auditmanager#ServiceMetadataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The metadata associated with the aAWS service.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The metadata associated with the Amazon Web Service.\n</p>"
                     }
                 }
             }
@@ -4552,7 +4552,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Returns the settings for the specified AWS account. \n</p>",
+                "smithy.api#documentation": "<p>\n   Returns the settings for the specified account. \n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/settings/{attribute}",
@@ -4579,7 +4579,7 @@
                 "settings": {
                     "target": "com.amazonaws.auditmanager#Settings",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The settings object that holds all supported AWS Audit Manager settings. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The settings object that holds all supported Audit Manager settings. \n</p>"
                     }
                 }
             }
@@ -4601,7 +4601,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:.*:iam:.*"
+                "smithy.api#pattern": "^arn:.*:iam:"
             }
         },
         "com.amazonaws.auditmanager#Integer": {
@@ -4657,7 +4657,7 @@
                     "min": 7,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:.*:kms:.*|DEFAULT"
+                "smithy.api#pattern": "^arn:.*:kms:.*|DEFAULT$"
             }
         },
         "com.amazonaws.auditmanager#LastUpdatedBy": {
@@ -4690,7 +4690,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a list of the frameworks available in the AWS Audit Manager framework library.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of the frameworks available in the Audit Manager framework library.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessmentFrameworks",
@@ -4773,7 +4773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a list of assessment reports created in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of assessment reports created in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessmentReports",
@@ -4842,7 +4842,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a list of current and past assessments from AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of current and past assessments from Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments",
@@ -4911,7 +4911,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a list of controls from AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of controls from Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/controls",
@@ -5065,7 +5065,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Returns a list of all AWS Audit Manager notifications. \n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of all Audit Manager notifications. \n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/notifications",
@@ -5134,7 +5134,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns a list of tags for the specified resource in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Returns a list of tags for the specified resource in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}",
@@ -5177,7 +5177,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   Evidence that is uploaded to AWS Audit Manager manually. \n</p>"
+                "smithy.api#documentation": "<p>\n   Evidence that is uploaded to Audit Manager manually. \n</p>"
             }
         },
         "com.amazonaws.auditmanager#ManualEvidenceList": {
@@ -5210,7 +5210,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.auditmanager#Notification": {
@@ -5266,7 +5266,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The notification used to inform a user of an update in AWS Audit Manager. For example, this includes the notification that is sent when a control set is delegated for review. \n</p>"
+                "smithy.api#documentation": "<p>\n   The notification used to inform a user of an update in Audit Manager. For example, this includes the notification that is sent when a control set is delegated for review. \n</p>"
             }
         },
         "com.amazonaws.auditmanager#Notifications": {
@@ -5325,7 +5325,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n Enables AWS Audit Manager for the specified AWS account. \n</p>",
+                "smithy.api#documentation": "<p>\n   Enables Audit Manager for the specified account. \n</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/registerAccount",
@@ -5339,13 +5339,13 @@
                 "kmsKey": {
                     "target": "com.amazonaws.auditmanager#KmsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The AWS KMS key details. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The KMS key details. \n</p>"
                     }
                 },
                 "delegatedAdminAccount": {
                     "target": "com.amazonaws.auditmanager#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The delegated administrator account for AWS Audit Manager. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The delegated administrator account for Audit Manager. \n</p>"
                     }
                 }
             }
@@ -5384,7 +5384,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Enables an AWS account within the organization as the delegated administrator for AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Enables an account within the organization as the delegated administrator for Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/registerOrganizationAdminAccount",
@@ -5416,7 +5416,7 @@
                 "organizationId": {
                     "target": "com.amazonaws.auditmanager#organizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The identifier for the specified AWS organization. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The identifier for the specified organization. \n</p>"
                     }
                 }
             }
@@ -5438,7 +5438,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      A system asset that is evaluated in an AWS Audit Manager assessment.  \n    </p>"
+                "smithy.api#documentation": "<p>\n       A system asset that is evaluated in an Audit Manager assessment.  \n    </p>"
             }
         },
         "com.amazonaws.auditmanager#ResourceNotFoundException": {
@@ -5494,7 +5494,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n     The wrapper that contains the AWS Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN).\n  </p>"
+                "smithy.api#documentation": "<p>\n     The wrapper that contains the Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN).\n  </p>"
             }
         },
         "com.amazonaws.auditmanager#RoleType": {
@@ -5525,7 +5525,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^(S|s)3:\\/\\/[a-zA-Z0-9-_\\/.]+$"
+                "smithy.api#pattern": "^(S|s)3:\\/\\/[a-zA-Z0-9\\-\\.\\(\\)\\'\\*\\_\\!\\/]+$"
             }
         },
         "com.amazonaws.auditmanager#SNSTopic": {
@@ -5544,18 +5544,18 @@
                 "awsAccounts": {
                     "target": "com.amazonaws.auditmanager#AWSAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n The AWS accounts included in the scope of the assessment. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The accounts included in the scope of the assessment. \n</p>"
                     }
                 },
                 "awsServices": {
                     "target": "com.amazonaws.auditmanager#AWSServices",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n The AWS services included in the scope of the assessment. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The Amazon Web Services services included in the scope of the assessment. \n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The wrapper that contains the AWS accounts and AWS services in scope for the assessment.\n</p>"
+                "smithy.api#documentation": "<p>\n   The wrapper that contains the accounts and services in scope for the assessment.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#ServiceMetadata": {
@@ -5564,30 +5564,30 @@
                 "name": {
                     "target": "com.amazonaws.auditmanager#AWSServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the AWS service.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The name of the Amazon Web Service.\n</p>"
                     }
                 },
                 "displayName": {
                     "target": "com.amazonaws.auditmanager#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe display name of the AWS service.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The display name of the Amazon Web Service.\n</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.auditmanager#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The description of the specified AWS service.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The description of the specified Amazon Web Service.\n</p>"
                     }
                 },
                 "category": {
                     "target": "com.amazonaws.auditmanager#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The category in which the AWS service belongs, such as compute, storage, database, and so on.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The category in which the Amazon Web Service belongs, such as compute, storage, database, and so on.\n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The metadata associated with the specified AWS service.\n</p>"
+                "smithy.api#documentation": "<p>\n   The metadata associated with the specified Amazon Web Service.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#ServiceMetadataList": {
@@ -5629,13 +5629,13 @@
                 "isAwsOrgEnabled": {
                     "target": "com.amazonaws.auditmanager#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n Specifies whether AWS Organizations is enabled. \n</p>"
+                        "smithy.api#documentation": "<p>\n   Specifies whether Organizations is enabled. \n</p>"
                     }
                 },
                 "snsTopic": {
                     "target": "com.amazonaws.auditmanager#SNSTopic",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n The designated Amazon Simple Notification Service (Amazon SNS) topic. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The designated Amazon Simple Notification Service (Amazon SNS) topic. \n</p>"
                     }
                 },
                 "defaultAssessmentReportsDestination": {
@@ -5653,12 +5653,12 @@
                 "kmsKey": {
                     "target": "com.amazonaws.auditmanager#KmsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The AWS KMS key details. \n      </p>"
+                        "smithy.api#documentation": "<p>\n         The KMS key details. \n      </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   The settings object that holds all supported AWS Audit Manager settings. \n</p>"
+                "smithy.api#documentation": "<p>\n   The settings object that holds all supported Audit Manager settings. \n</p>"
             }
         },
         "com.amazonaws.auditmanager#SnsArn": {
@@ -5668,7 +5668,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:.*:sns:.*"
+                "smithy.api#pattern": "^arn:.*:sns:"
             }
         },
         "com.amazonaws.auditmanager#SourceDescription": {
@@ -5712,12 +5712,12 @@
                 "keywordValue": {
                     "target": "com.amazonaws.auditmanager#KeywordValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe value of the keyword used to search AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names when mapping a control data source. \n</p>"
+                        "smithy.api#documentation": "<p>\n   The value of the keyword used to search CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names when mapping a control data source. \n</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nThe keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names.\n</p>"
+                "smithy.api#documentation": "<p>\n   The keyword to search for in CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#SourceName": {
@@ -5838,7 +5838,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nTags the specified resource in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Tags the specified resource in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -5877,7 +5877,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": ".{0,255}"
+                "smithy.api#pattern": "^.{0,255}$"
             }
         },
         "com.amazonaws.auditmanager#TestingInformation": {
@@ -5973,7 +5973,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nRemoves a tag from a resource in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Removes a tag from a resource in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
@@ -6029,7 +6029,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Edits an AWS Audit Manager assessment. \n</p>",
+                "smithy.api#documentation": "<p>\n   Edits an Audit Manager assessment. \n</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}",
@@ -6060,7 +6060,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nUpdates a control within an assessment in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Updates a control within an assessment in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}",
@@ -6143,7 +6143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Updates the status of a control set in an AWS Audit Manager assessment.\n</p>",
+                "smithy.api#documentation": "<p>\n   Updates the status of a control set in an Audit Manager assessment.\n</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/controlSets/{controlSetId}/status",
@@ -6220,7 +6220,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nUpdates a custom framework in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Updates a custom framework in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessmentFrameworks/{frameworkId}",
@@ -6252,7 +6252,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n   A <code>controlSet</code> entity that represents a collection of controls in AWS Audit Manager. This does not contain the control set ID.\n</p>"
+                "smithy.api#documentation": "<p>\n   A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This does not contain the control set ID.\n</p>"
             }
         },
         "com.amazonaws.auditmanager#UpdateAssessmentFrameworkControlSets": {
@@ -6389,7 +6389,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Updates the status of an assessment in AWS Audit Manager. \n</p>",
+                "smithy.api#documentation": "<p>\n   Updates the status of an assessment in Audit Manager. \n</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/assessments/{assessmentId}/status",
@@ -6451,7 +6451,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nUpdates a custom control in AWS Audit Manager.\n</p>",
+                "smithy.api#documentation": "<p>\n   Updates a custom control in Audit Manager.\n</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/controls/{controlId}",
@@ -6541,7 +6541,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Updates AWS Audit Manager settings for the current user account. \n</p>",
+                "smithy.api#documentation": "<p>\n   Updates Audit Manager settings for the current user account. \n</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/settings",
@@ -6555,7 +6555,7 @@
                 "snsTopic": {
                     "target": "com.amazonaws.auditmanager#SnsArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Simple Notification Service (Amazon SNS) topic to which AWS Audit Manager sends notifications.\n</p>"
+                        "smithy.api#documentation": "<p>\n   The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager sends notifications.\n</p>"
                     }
                 },
                 "defaultAssessmentReportsDestination": {
@@ -6573,7 +6573,7 @@
                 "kmsKey": {
                     "target": "com.amazonaws.auditmanager#KmsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The AWS KMS key details. \n      </p>"
+                        "smithy.api#documentation": "<p>\n         The KMS key details. \n      </p>"
                     }
                 }
             }
@@ -6632,7 +6632,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   Validates the integrity of an assessment report in AWS Audit Manager. \n</p>",
+                "smithy.api#documentation": "<p>\n   Validates the integrity of an assessment report in Audit Manager. \n</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/assessmentReports/integrity",
@@ -6779,7 +6779,7 @@
                     "min": 12,
                     "max": 34
                 },
-                "smithy.api#pattern": "o-[a-z0-9]{10,32}"
+                "smithy.api#pattern": "^o-[a-z0-9]{10,32}$"
             }
         }
     }

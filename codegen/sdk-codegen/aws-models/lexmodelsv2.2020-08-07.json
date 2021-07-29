@@ -3790,6 +3790,54 @@
                     "method": "GET",
                     "uri": "/bots/{botId}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "BotAvailable": {
+                        "documentation": "Wait until a bot is available",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botStatus",
+                                        "expected": "Available",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botStatus",
+                                        "expected": "Deleting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botStatus",
+                                        "expected": "Inactive",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -3824,6 +3872,44 @@
                     "method": "GET",
                     "uri": "/bots/{botId}/botaliases/{botAliasId}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "BotAliasAvailable": {
+                        "documentation": "Wait until a bot alias is available",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botAliasStatus",
+                                        "expected": "Available",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botAliasStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botAliasStatus",
+                                        "expected": "Deleting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -3953,6 +4039,166 @@
                     "method": "GET",
                     "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "BotLocaleBuilt": {
+                        "documentation": "Wait until a bot locale is built",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Built",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Deleting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "NotBuilt",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    },
+                    "BotLocaleCreated": {
+                        "documentation": "Wait unit a bot locale is created",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Built",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "ReadyExpressTesting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "NotBuilt",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Deleting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    },
+                    "BotLocaleExpressTestingAvailable": {
+                        "documentation": "Wait until a bot locale build is ready for express testing",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Built",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "ReadyExpressTesting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Deleting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botLocaleStatus",
+                                        "expected": "NotBuilt",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -4183,6 +4429,50 @@
                     "method": "GET",
                     "uri": "/bots/{botId}/botversions/{botVersion}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "BotVersionAvailable": {
+                        "documentation": "Wait until a bot version is available",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botStatus",
+                                        "expected": "Available",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botStatus",
+                                        "expected": "Deleting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "botStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -4300,6 +4590,44 @@
                     "method": "GET",
                     "uri": "/exports/{exportId}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "BotExportCompleted": {
+                        "documentation": "Wait until a bot has been exported",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "exportStatus",
+                                        "expected": "Completed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "exportStatus",
+                                        "expected": "Deleting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "exportStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },
@@ -4397,6 +4725,44 @@
                     "method": "GET",
                     "uri": "/imports/{importId}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "BotImportCompleted": {
+                        "documentation": "Wait until a bot has been imported",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "importStatus",
+                                        "expected": "Completed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "importStatus",
+                                        "expected": "Deleting",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "importStatus",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 10
+                    }
                 }
             }
         },

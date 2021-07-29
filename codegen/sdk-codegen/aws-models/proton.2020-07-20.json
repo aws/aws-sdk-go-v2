@@ -30,7 +30,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>In a management account, an environment account connection request is accepted. When the environment account connection request is\n            accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment\n            account.</p>\n        <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administration guide</i>.</p>",
+                "smithy.api#documentation": "<p>In a management account, an environment account connection request is accepted. When the environment account connection request is\n            accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment\n            account.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administrator guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -186,7 +186,7 @@
                     "name": "proton"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>This is the AWS Proton Service API Reference. It provides descriptions, syntax and usage examples for each of the <a href=\"https://docs.aws.amazon.com/proton/latest/APIReference/API_Operations.html\">actions</a> and <a href=\"https://docs.aws.amazon.com/proton/latest/APIReference/API_Types.html\">data types</a> for the AWS Proton service.</p>\n        <p>The documentation for each action shows the Query API request parameters and the XML response.</p>\n        <p>Alternatively, you can use the AWS CLI to access an API. For more information, see the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html\">AWS Command Line Interface User Guide</a>.</p>\n        <p>The AWS Proton service is a two-pronged automation framework. Administrators create service templates to provide standardized\n            infrastructure and deployment tooling for serverless and container based applications. Developers, in turn, select from the available\n            service templates to automate their application or service deployments.</p>\n        <p>Because administrators define the infrastructure and tooling that AWS Proton deploys and manages, they need permissions to use all of the\n            listed API operations.</p>\n        <p>When developers select a specific infrastructure and tooling set, AWS Proton deploys their applications. To monitor their applications that\n            are running on AWS Proton, developers need permissions to the service <i>create</i>, <i>list</i>,\n                <i>update</i> and <i>delete</i> API operations and the service instance <i>list</i> and\n                <i>update</i> API operations.</p>\n        <p>To learn more about AWS Proton administration, see the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/Welcome.html\">AWS Proton\n                Administration Guide</a>.</p>\n        <p>To learn more about deploying serverless and containerized applications on AWS Proton, see the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/Welcome.html\">AWS Proton User Guide</a>.</p>\n        <p>\n            <b>Ensuring Idempotency</b>\n         </p>\n        <p>When you make a mutating API request, the request typically returns a result before the asynchronous workflows of the operation are\n            complete. Operations might also time out or encounter other server issues before they're complete, even if the request already returned a\n            result. This might make it difficult to determine whether the request succeeded. Moreover, you might need to retry the request multiple\n            times to ensure that the operation completes successfully. However, if the original request and the subsequent retries are successful, the\n            operation occurs multiple times. This means that you might create more resources than you intended.</p>\n        <p>\n            <i>Idempotency</i> ensures that an API request action completes no more than one time. With an idempotent request, if the\n            original request action completes successfully, any subsequent retries complete successfully without performing any further actions.\n            However, the result might contain updated information, such as the current creation status.</p>\n        <p>The following lists of APIs are grouped according to methods that ensure idempotency.</p>\n        <p>\n            <b>Idempotent create APIs with a client token</b>\n         </p>\n        <p>The API actions in this list support idempotency with the use of a <i>client token</i>. The corresponding AWS CLI commands\n            also support idempotency using a client token. A client token is a unique, case-sensitive string of up to 64 ASCII characters. To make an\n            idempotent API request using one of these actions, specify a client token in the request. We recommend that you <i>don't</i>\n            reuse the same client token for other API requests. If you don’t provide a client token for these APIs, a default client token is\n            automatically provided by SDKs.</p>\n        <p>Given a request action that has succeeded:</p>\n        <p>If you retry the request using the same client token and the same parameters, the retry succeeds without performing any further actions\n            other than returning the original resource detail data in the response.</p>\n        <p>If you retry the request using the same client token, but one or more of the parameters are different, the retry throws a\n                <code>ValidationException</code> with an <code>IdempotentParameterMismatch</code> error.</p>\n        <p>Client tokens expire eight hours after a request is made. If you retry the request with the expired token, a new resource is\n            created.</p>\n        <p>If the original resource is deleted and you retry the request, a new resource is created.</p>\n        <p>Idempotent create APIs with a client token:</p>\n        <ul>\n            <li>\n                <p>CreateEnvironmentTemplateVersion</p>\n            </li>\n            <li>\n                <p>CreateServiceTemplateVersion</p>\n            </li>\n            <li>\n                <p>CreateEnvironmentAccountConnection</p>\n            </li>\n         </ul>\n\n        <p>\n            <b>Idempotent delete APIs</b>\n         </p>\n        <p>Given a request action that has succeeded:</p>\n        <p>When you retry the request with an API from this group and the resource was deleted, its metadata is returned in the response.</p>\n        <p>If you retry and the resource doesn't exist, the response is empty.</p>\n        <p>In both cases, the retry succeeds.</p>\n        <p>Idempotent delete APIs:</p>\n        <ul>\n            <li>\n                <p>DeleteEnvironmentTemplate</p>\n            </li>\n            <li>\n                <p>DeleteEnvironmentTemplateVersion</p>\n            </li>\n            <li>\n                <p>DeleteServiceTemplate</p>\n            </li>\n            <li>\n                <p>DeleteServiceTemplateVersion</p>\n            </li>\n            <li>\n                <p>DeleteEnvironmentAccountConnection</p>\n            </li>\n         </ul>\n        <p>\n            <b>Asynchronous idempotent delete APIs</b>\n         </p>\n        <p>Given a request action that has succeeded:</p>\n        <p>If you retry the request with an API from this group, if the original request delete operation status is\n            <code>DELETE_IN_PROGRESS</code>, the retry returns the resource detail data in the response without performing any further actions.</p>\n        <p>If the original request delete operation is complete, a retry returns an empty response.</p>\n        <p>Asynchronous idempotent delete APIs:</p>\n        <ul>\n            <li>\n                <p>DeleteEnvironment</p>\n            </li>\n            <li>\n                <p>DeleteService</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This is the AWS Proton Service API Reference. It provides descriptions, syntax and usage examples for each of the <a href=\"https://docs.aws.amazon.com/proton/latest/APIReference/API_Operations.html\">actions</a> and <a href=\"https://docs.aws.amazon.com/proton/latest/APIReference/API_Types.html\">data types</a> for the AWS Proton service.</p>\n        <p>The documentation for each action shows the Query API request parameters and the XML response.</p>\n        <p>Alternatively, you can use the AWS CLI to access an API. For more information, see the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html\">AWS Command Line Interface User Guide</a>.</p>\n        <p>The AWS Proton service is a two-pronged automation framework. Administrators create service templates to provide standardized\n            infrastructure and deployment tooling for serverless and container based applications. Developers, in turn, select from the available\n            service templates to automate their application or service deployments.</p>\n        <p>Because administrators define the infrastructure and tooling that AWS Proton deploys and manages, they need permissions to use all of the\n            listed API operations.</p>\n        <p>When developers select a specific infrastructure and tooling set, AWS Proton deploys their applications. To monitor their applications\n            that are running on AWS Proton, developers need permissions to the service <i>create</i>, <i>list</i>,\n                <i>update</i> and <i>delete</i> API operations and the service instance <i>list</i> and\n                <i>update</i> API operations.</p>\n        <p>To learn more about AWS Proton administration, see the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/Welcome.html\">AWS Proton\n                Administrator Guide</a>.</p>\n        <p>To learn more about deploying serverless and containerized applications on AWS Proton, see the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/Welcome.html\">AWS Proton User Guide</a>.</p>\n        <p>\n            <b>Ensuring Idempotency</b>\n         </p>\n        <p>When you make a mutating API request, the request typically returns a result before the asynchronous workflows of the operation are\n            complete. Operations might also time out or encounter other server issues before they're complete, even if the request already returned a\n            result. This might make it difficult to determine whether the request succeeded. Moreover, you might need to retry the request multiple\n            times to ensure that the operation completes successfully. However, if the original request and the subsequent retries are successful, the\n            operation occurs multiple times. This means that you might create more resources than you intended.</p>\n        <p>\n            <i>Idempotency</i> ensures that an API request action completes no more than one time. With an idempotent request, if the\n            original request action completes successfully, any subsequent retries complete successfully without performing any further actions.\n            However, the result might contain updated information, such as the current creation status.</p>\n        <p>The following lists of APIs are grouped according to methods that ensure idempotency.</p>\n        <p>\n            <b>Idempotent create APIs with a client token</b>\n         </p>\n        <p>The API actions in this list support idempotency with the use of a <i>client token</i>. The corresponding AWS CLI\n            commands also support idempotency using a client token. A client token is a unique, case-sensitive string of up to 64 ASCII characters. To\n            make an idempotent API request using one of these actions, specify a client token in the request. We recommend that you\n                <i>don't</i> reuse the same client token for other API requests. If you don’t provide a client token for these APIs, a\n            default client token is automatically provided by SDKs.</p>\n        <p>Given a request action that has succeeded:</p>\n        <p>If you retry the request using the same client token and the same parameters, the retry succeeds without performing any further actions\n            other than returning the original resource detail data in the response.</p>\n        <p>If you retry the request using the same client token, but one or more of the parameters are different, the retry throws a\n                <code>ValidationException</code> with an <code>IdempotentParameterMismatch</code> error.</p>\n        <p>Client tokens expire eight hours after a request is made. If you retry the request with the expired token, a new resource is\n            created.</p>\n        <p>If the original resource is deleted and you retry the request, a new resource is created.</p>\n        <p>Idempotent create APIs with a client token:</p>\n        <ul>\n            <li>\n                <p>CreateEnvironmentTemplateVersion</p>\n            </li>\n            <li>\n                <p>CreateServiceTemplateVersion</p>\n            </li>\n            <li>\n                <p>CreateEnvironmentAccountConnection</p>\n            </li>\n         </ul>\n        <p>\n            <b>Idempotent delete APIs</b>\n         </p>\n        <p>Given a request action that has succeeded:</p>\n        <p>When you retry the request with an API from this group and the resource was deleted, its metadata is returned in the response.</p>\n        <p>If you retry and the resource doesn't exist, the response is empty.</p>\n        <p>In both cases, the retry succeeds.</p>\n        <p>Idempotent delete APIs:</p>\n        <ul>\n            <li>\n                <p>DeleteEnvironmentTemplate</p>\n            </li>\n            <li>\n                <p>DeleteEnvironmentTemplateVersion</p>\n            </li>\n            <li>\n                <p>DeleteServiceTemplate</p>\n            </li>\n            <li>\n                <p>DeleteServiceTemplateVersion</p>\n            </li>\n            <li>\n                <p>DeleteEnvironmentAccountConnection</p>\n            </li>\n         </ul>\n        <p>\n            <b>Asynchronous idempotent delete APIs</b>\n         </p>\n        <p>Given a request action that has succeeded:</p>\n        <p>If you retry the request with an API from this group, if the original request delete operation status is\n            <code>DELETE_IN_PROGRESS</code>, the retry returns the resource detail data in the response without performing any further actions.</p>\n        <p>If the original request delete operation is complete, a retry returns an empty response.</p>\n        <p>Asynchronous idempotent delete APIs:</p>\n        <ul>\n            <li>\n                <p>DeleteEnvironment</p>\n            </li>\n            <li>\n                <p>DeleteService</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Proton"
             }
         },
@@ -219,7 +219,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attempts to cancel an environment deployment on an <a>UpdateEnvironment</a> action, if the deployment is\n                <code>IN_PROGRESS</code>. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-update.html\">Update an environment</a> in the <i>AWS Proton Administration guide</i>.</p>\n        <p>The following list includes potential cancellation scenarios.</p>\n        <ul>\n            <li>\n                <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n                <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p>\n            </li>\n            <li>\n                <p>If the current <a>UpdateEnvironment</a> action succeeds before the cancellation attempt starts, the resulting\n                    deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Attempts to cancel an environment deployment on an <a>UpdateEnvironment</a> action, if the deployment is\n                <code>IN_PROGRESS</code>. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-update.html\">Update an environment</a> in the <i>AWS Proton Administrator guide</i>.</p>\n        <p>The following list includes potential cancellation scenarios.</p>\n        <ul>\n            <li>\n                <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n                <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p>\n            </li>\n            <li>\n                <p>If the current <a>UpdateEnvironment</a> action succeeds before the cancellation attempt starts, the resulting\n                    deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.proton#CancelEnvironmentDeploymentInput": {
@@ -285,7 +285,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attempts to cancel a service instance deployment on an <a>UpdateServiceInstance</a> action, if the deployment is\n                <code>IN_PROGRESS</code>. For more information, see <i>Update a service instance</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-instance-update.html\">AWS Proton Administration guide</a> or the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-instance-update.html\">AWS Proton User guide</a>.</p>\n        <p>The following list includes potential cancellation scenarios.</p>\n        <ul>\n            <li>\n                <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n                <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p>\n            </li>\n            <li>\n                <p>If the current <a>UpdateServiceInstance</a> action succeeds before the cancellation attempt starts, the resulting\n                    deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Attempts to cancel a service instance deployment on an <a>UpdateServiceInstance</a> action, if the deployment is\n                <code>IN_PROGRESS</code>. For more information, see <i>Update a service instance</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-instance-update.html\">AWS Proton Administrator guide</a> or the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-instance-update.html\">AWS Proton User guide</a>.</p>\n        <p>The following list includes potential cancellation scenarios.</p>\n        <ul>\n            <li>\n                <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n                <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p>\n            </li>\n            <li>\n                <p>If the current <a>UpdateServiceInstance</a> action succeeds before the cancellation attempt starts, the resulting\n                    deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.proton#CancelServiceInstanceDeploymentInput": {
@@ -359,7 +359,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attempts to cancel a service pipeline deployment on an <a>UpdateServicePipeline</a> action, if the deployment is\n                <code>IN_PROGRESS</code>. For more information, see <i>Update a service pipeline</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-pipeline-update.html\">AWS Proton Administration guide</a> or the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-pipeline-update.html\">AWS Proton User guide</a>.</p>\n        <p>The following list includes potential cancellation scenarios.</p>\n        <ul>\n            <li>\n                <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n                <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p>\n            </li>\n            <li>\n                <p>If the current <a>UpdateServicePipeline</a> action succeeds before the cancellation attempt starts, the resulting\n                    deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Attempts to cancel a service pipeline deployment on an <a>UpdateServicePipeline</a> action, if the deployment is\n                <code>IN_PROGRESS</code>. For more information, see <i>Update a service pipeline</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-pipeline-update.html\">AWS Proton Administrator guide</a> or the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-pipeline-update.html\">AWS Proton User guide</a>.</p>\n        <p>The following list includes potential cancellation scenarios.</p>\n        <ul>\n            <li>\n                <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p>\n            </li>\n            <li>\n                <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p>\n            </li>\n            <li>\n                <p>If the current <a>UpdateServicePipeline</a> action succeeds before the cancellation attempt starts, the resulting\n                    deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.proton#CancelServicePipelineDeploymentInput": {
@@ -515,7 +515,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deploy a new environment. An AWS Proton environment is created from an environment template that defines infrastructure and resources that\n            can be shared across services. For more information, see the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html\">Environments</a> in the <i>AWS Proton Administration\n            Guide.</i>\n         </p>",
+                "smithy.api#documentation": "<p>Deploy a new environment. An AWS Proton environment is created from an environment template that defines infrastructure and resources\n            that can be shared across services. For more information, see the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html\">Environments</a> in the <i>AWS Proton Administrator\n            Guide.</i>\n         </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -548,7 +548,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in\n            the environment account from the management account.</p>\n        <p>An environment account connection is a secure bi-directional connection between a <i>management account</i> and an\n                <i>environment account</i> that maintains authorization and permissions. For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton\n                Administration guide</i>.</p>",
+                "smithy.api#documentation": "<p>Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in\n            the environment account from a management account.</p>\n        <p>An environment account connection is a secure bi-directional connection between a <i>management account</i> and an\n                <i>environment account</i> that maintains authorization and permissions. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton\n                Administrator guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -610,7 +610,7 @@
                 "templateName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the environment template. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-templates.html\">Environment Templates</a> in the <i>AWS Proton Administration\n                Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The name of the environment template. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html\">Environment Templates</a> in the <i>AWS Proton Administrator\n                Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -636,26 +636,26 @@
                 "spec": {
                     "target": "com.amazonaws.proton#SpecContents",
                     "traits": {
-                        "smithy.api#documentation": "<p>A link to a YAML formatted spec file that provides inputs as defined in the environment template bundle schema file. For more\n            information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-managing-environments.html\">Environments</a> in the\n                <i>AWS Proton Administration Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>A link to a YAML formatted spec file that provides inputs as defined in the environment template bundle schema file. For more\n            information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html\">Environments</a> in the\n                <i>AWS Proton Administrator Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "protonServiceRoleArn": {
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf. You must\n            include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf. You\n            must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value.</p>"
                     }
                 },
                 "environmentAccountConnectionId": {
                     "target": "com.amazonaws.proton#EnvironmentAccountConnectionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an\n            environment account. You must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code>\n            parameter and value. For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account\n                connections</a> in the <i>AWS Proton Administration guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an\n            environment account. You must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code>\n            parameter and value. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account\n                connections</a> in the <i>AWS Proton Administrator guide</i>.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.proton#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Create tags for your environment. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administration Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Create tags for your environment. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>"
                     }
                 }
             }
@@ -701,7 +701,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an environment template for AWS Proton. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-templates.html\">Environment Templates</a> in the <i>AWS Proton Administration\n                Guide</i>.</p>\n        <p>You can create an environment template in one of the two following ways:</p>\n        <ul>\n            <li>\n                <p>Register and publish a <i>standard</i> environment template that instructs AWS Proton to deploy and manage\n                    environment infrastructure.</p>\n            </li>\n            <li>\n                <p>Register and publish a <i>customer managed</i> environment template that connects AWS Proton to your existing\n                    provisioned infrastructure that you manage. AWS Proton <i>doesn't</i> manage your existing provisioned\n                    infrastructure. To create an environment template for customer provisioned and managed infrastructure, include the\n                        <code>provisioning</code> parameter and set the value to <code>CUSTOMER_MANAGED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/env-template-v1.html\">Register and publish an environment template</a>\n                    in the <i>AWS Proton Administration Guide</i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Create an environment template for AWS Proton. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html\">Environment Templates</a> in the <i>AWS Proton Administrator\n                Guide</i>.</p>\n        <p>You can create an environment template in one of the two following ways:</p>\n        <ul>\n            <li>\n                <p>Register and publish a <i>standard</i> environment template that instructs AWS Proton to deploy and manage\n                    environment infrastructure.</p>\n            </li>\n            <li>\n                <p>Register and publish a <i>customer managed</i> environment template that connects AWS Proton to your existing\n                    provisioned infrastructure that you manage. AWS Proton <i>doesn't</i> manage your existing provisioned\n                    infrastructure. To create an environment template for customer provisioned and managed infrastructure, include the\n                        <code>provisioning</code> parameter and set the value to <code>CUSTOMER_MANAGED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/template-create.html\">Register and publish an environment template</a>\n                    in the <i>AWS Proton Administrator Guide</i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -742,7 +742,7 @@
                 "tags": {
                     "target": "com.amazonaws.proton#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Create tags for your environment template. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administration Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Create tags for your environment template. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>"
                     }
                 }
             }
@@ -821,7 +821,7 @@
                 "majorVersion": {
                     "target": "com.amazonaws.proton#TemplateVersionPart",
                     "traits": {
-                        "smithy.api#documentation": "<p>To create a new minor version of the environment template, include a <code>majorVersion</code>.</p>\n        <p>To create a new major and minor version of the environment template, exclude <code>majorVersion</code>.</p>"
+                        "smithy.api#documentation": "<p>To create a new minor version of the environment template, include a <code>majorVersion</code>.</p>\n        <p>To create a new major and minor version of the environment template, <i>exclude</i>\n            <code>majorVersion</code>.</p>"
                     }
                 },
                 "source": {
@@ -883,7 +883,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an AWS Proton service. An AWS Proton service is an instantiation of a service template and often includes several service instances and\n            pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-services.html\">Services</a> in the\n                <i>AWS Proton Administration Guide</i> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-service.html\">Services</a> in the <i>AWS Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Create an AWS Proton service. An AWS Proton service is an instantiation of a service template and often includes several service instances\n            and pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-services.html\">Services</a> in\n            the <i>AWS Proton Administrator Guide</i> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-service.html\">Services</a> in the <i>AWS Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -926,14 +926,14 @@
                 "spec": {
                     "target": "com.amazonaws.proton#SpecContents",
                     "traits": {
-                        "smithy.api#documentation": "<p>A link to a spec file that provides inputs as defined in the service template bundle schema file. The spec file is in YAML format. Don’t\n            include pipeline inputs in the spec if your service template doesn’t include a service pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-create-svc.html.html\">Create a service</a> in the <i>AWS Proton\n                Administration Guide</i> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html\">Create a\n                service</a> in the <i>AWS Proton User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>A link to a spec file that provides inputs as defined in the service template bundle schema file. The spec file is in YAML format. Don’t\n            include pipeline inputs in the spec if your service template <i>doesn’t</i> include a service pipeline. For more\n            information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-create-svc.html.html\">Create a service</a> in the\n                <i>AWS Proton Administrator Guide</i> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html\">Create a service</a> in the <i>AWS Proton User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "repositoryConnectionArn": {
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the repository connection. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#settingSS-up-vcontrol\">Set up repository connection</a> in the\n                <i>AWS Proton Administration Guide</i> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-getting-started.html#getting-started-step1\">Getting started</a> in the <i>AWS Proton User\n                Guide</i>. <i>Don't</i> include this parameter if your service template <i>doesn't</i> include a\n            service pipeline.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the repository connection. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol\">Set up repository connection</a> in the\n                <i>AWS Proton Administrator Guide</i> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection\">Setting up with AWS Proton</a> in the <i>AWS Proton\n                User Guide</i>. <i>Don't</i> include this parameter if your service template <i>doesn't</i> include\n            a service pipeline.</p>"
                     }
                 },
                 "repositoryId": {
@@ -945,13 +945,13 @@
                 "branchName": {
                     "target": "com.amazonaws.proton#GitBranchName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the code repository branch that holds the code that's deployed in AWS Proton. <i>Don't</i> include this parameter\n            if your service template <i>doesn't</i> include a service pipeline.</p>"
+                        "smithy.api#documentation": "<p>The name of the code repository branch that holds the code that's deployed in AWS Proton. <i>Don't</i> include this\n            parameter if your service template <i>doesn't</i> include a service pipeline.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.proton#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Create tags for your service. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administration Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Create tags for your service. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>"
                     }
                 }
             }
@@ -997,7 +997,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a service template. The administrator creates a service template to define standardized infrastructure and an optional CICD\n            service pipeline. Developers, in turn, select the service template from AWS Proton. If the selected service template includes a service\n            pipeline definition, they provide a link to their source code repository. AWS Proton then deploys and manages the infrastructure defined by the\n            selected service template. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/managing-svc-templates.html\">Service Templates</a> in the <i>AWS Proton Administration\n                Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Create a service template. The administrator creates a service template to define standardized infrastructure and an optional CICD\n            service pipeline. Developers, in turn, select the service template from AWS Proton. If the selected service template includes a service\n            pipeline definition, they provide a link to their source code repository. AWS Proton then deploys and manages the infrastructure defined by\n            the selected service template. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/managing-svc-templates.html\">Service Templates</a> in the <i>AWS Proton Administrator\n                Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1032,13 +1032,13 @@
                 "pipelineProvisioning": {
                     "target": "com.amazonaws.proton#Provisioning",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS Proton includes a service pipeline for your service by default. When included, this parameter indicates that an AWS Proton service\n            pipeline <i>won't</i> be included for your service. Once specified, this parameter <i>can't</i> be changed.\n            For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-template-bundles.html\">Service template\n                bundles</a> in the <i>AWS Proton Administration Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>AWS Proton includes a service pipeline for your service by default. When included, this parameter indicates that an AWS Proton service\n            pipeline <i>won't</i> be included for your service. Once specified, this parameter <i>can't</i> be changed.\n            For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html\">Service template\n                bundles</a> in the <i>AWS Proton Administrator Guide</i>.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.proton#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Create tags for your service template. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administration Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Create tags for your service template. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>"
                     }
                 }
             }
@@ -1216,7 +1216,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>In an environment account, delete an environment account connection.</p>\n        <p>After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton <i>can’t</i>\n            manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and\n            associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection.</p>\n        <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administration guide</i>.</p>",
+                "smithy.api#documentation": "<p>In an environment account, delete an environment account connection.</p>\n        <p>After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton <i>can’t</i>\n            manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and\n            associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administrator guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1752,7 +1752,7 @@
                 "templateName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the environment template.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment template.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1786,7 +1786,7 @@
                 "protonServiceRoleArn": {
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your\n            behalf.</p>"
                     }
                 },
                 "environmentAccountConnectionId": {
@@ -2180,7 +2180,7 @@
                 "protonServiceRoleArn": {
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your\n            behalf.</p>"
                     }
                 },
                 "environmentAccountConnectionId": {
@@ -2765,7 +2765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>In an environment account, view the detail data for an environment account connection.</p>\n        <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administration guide</i>.</p>",
+                "smithy.api#documentation": "<p>In an environment account, view the detail data for an environment account connection.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administrator guide</i>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -3534,7 +3534,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>View a list of environment account connections.</p>\n        <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administration guide</i>.</p>",
+                "smithy.api#documentation": "<p>View a list of environment account connections.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administrator guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4150,7 +4150,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List tags for a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administration Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>List tags for a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4166,7 +4166,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource for the listed tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for the listed tags.</p>",
                         "smithy.api#httpQuery": "resourceArn",
                         "smithy.api#required": {}
                     }
@@ -4261,7 +4261,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>In a management account, reject an environment account connection from another environment account.</p>\n        <p>After you reject an environment account connection request, you <i>won’t</i> be able to accept or use the rejected\n            environment account connection.</p>\n        <p>You <i>can’t</i> reject an environment account connection that is connected to an environment.</p>\n        <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administration guide</i>.</p>",
+                "smithy.api#documentation": "<p>In a management account, reject an environment account connection from another environment account.</p>\n        <p>After you reject an environment account connection request, you <i>won’t</i> be able to accept or use the rejected\n            environment account connection.</p>\n        <p>You <i>can’t</i> reject an environment account connection that is connected to an environment.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administrator guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4445,7 +4445,7 @@
                 "repositoryConnectionArn": {
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the repository connection. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol\">Set up a repository connection</a> in the\n                <i>AWS Proton Administration Guide</i> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-getting-started.html#getting-started-step1\">Getting started</a> in the <i>AWS Proton User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the repository connection. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol\">Set up a repository connection</a> in the\n                <i>AWS Proton Administrator Guide</i> and <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection\">Setting up with AWS Proton</a> in the <i>AWS Proton\n                User Guide</i>.</p>"
                     }
                 },
                 "repositoryId": {
@@ -4811,7 +4811,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A quota was exceeded. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-limits.html\">AWS Proton\n                Quotas</a> in the <i>AWS Proton Administration Guide</i>.</p>",
+                "smithy.api#documentation": "<p>A quota was exceeded. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-limits.html\">AWS Proton\n                Quotas</a> in the <i>AWS Proton Administrator Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -5466,7 +5466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tag a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administration Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Tag a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5609,7 +5609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove a tag from a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administration Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Remove a tag from a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">AWS Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">AWS Proton User Guide</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5718,7 +5718,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update an environment.</p>\n        <p>If the environment is associated with an environment account connection, <i>don't</i> update or include the\n                <code>protonServiceRoleArn</code> parameter to update or connect to an environment account connection. </p>\n        <p>You can only update to a new environment account connection if it was created in the same environment account that the current\n            environment account connection was created in and associated with the current environment.</p>\n        <p>If the environment <i>isn't</i> associated with an environment account connection, <i>don't</i> update or\n            include the <code>environmentAccountConnectionId</code> parameter to update or connect to an environment account connection.</p>\n        <p>You can update either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value. You\n            can’t update both.</p>\n        <p>There are four modes for updating an environment as described in the following. The <code>deploymentType</code> field defines the\n            mode.</p>\n        <dl>\n            <dt/>\n            <dd>\n                    <p>\n                  <code>NONE</code>\n               </p>\n                    <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p>\n                </dd>\n            <dt/>\n            <dd>\n                    <p>\n                  <code>CURRENT_VERSION</code>\n               </p>\n                    <p>In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are\n                        updated. <i>Don’t</i> include minor or major version parameters when you use this\n                        <code>deployment-type</code>.</p>\n                </dd>\n            <dt/>\n            <dd>\n                    <p>\n                  <code>MINOR_VERSION</code>\n               </p>\n                    <p>In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current\n                        major version in use, by default. You can also specify a different minor version of the current major version in use.</p>\n                </dd>\n            <dt/>\n            <dd>\n                    <p>\n                  <code>MAJOR_VERSION</code>\n               </p>\n                    <p>In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of\n                        the current template, by default. You can also specify a different major version that's higher than the major version in use\n                        and a minor version (optional).</p>\n                </dd>\n         </dl>"
+                "smithy.api#documentation": "<p>Update an environment.</p>\n        <p>If the environment is associated with an environment account connection, <i>don't</i> update or include the\n                <code>protonServiceRoleArn</code> parameter to update or connect to an environment account connection. </p>\n        <p>You can only update to a new environment account connection if it was created in the same environment account that the current\n            environment account connection was created in and is associated with the current environment.</p>\n        <p>If the environment <i>isn't</i> associated with an environment account connection, <i>don't</i> update or\n            include the <code>environmentAccountConnectionId</code> parameter to update or connect to an environment account connection.</p>\n        <p>You can update either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value. You\n            can’t update both.</p>\n        <p>There are four modes for updating an environment as described in the following. The <code>deploymentType</code> field defines the\n            mode.</p>\n        <dl>\n            <dt/>\n            <dd>\n                    <p>\n                  <code>NONE</code>\n               </p>\n                    <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p>\n                </dd>\n            <dt/>\n            <dd>\n                    <p>\n                  <code>CURRENT_VERSION</code>\n               </p>\n                    <p>In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are\n                        updated. <i>Don’t</i> include minor or major version parameters when you use this\n                        <code>deployment-type</code>.</p>\n                </dd>\n            <dt/>\n            <dd>\n                    <p>\n                  <code>MINOR_VERSION</code>\n               </p>\n                    <p>In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current\n                        major version in use, by default. You can also specify a different minor version of the current major version in use.</p>\n                </dd>\n            <dt/>\n            <dd>\n                    <p>\n                  <code>MAJOR_VERSION</code>\n               </p>\n                    <p>In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of\n                        the current template, by default. You can also specify a different major version that's higher than the major version in use\n                        and a minor version (optional).</p>\n                </dd>\n         </dl>"
             }
         },
         "com.amazonaws.proton#UpdateEnvironmentAccountConnection": {
@@ -5750,7 +5750,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>In an environment account, update an environment account connection to use a new IAM role.</p>\n        <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administration guide</i>.</p>",
+                "smithy.api#documentation": "<p>In an environment account, update an environment account connection to use a new IAM role.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a>\n            in the <i>AWS Proton Administrator guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5829,7 +5829,7 @@
                 "protonServiceRoleArn": {
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Proton service role that allows AWS Proton to make API calls to other services your behalf.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make API calls to other services your\n            behalf.</p>"
                     }
                 },
                 "deploymentType": {
@@ -5842,7 +5842,7 @@
                 "environmentAccountConnectionId": {
                     "target": "com.amazonaws.proton#EnvironmentAccountConnectionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the environment account connection.</p>\n        <p>You can only update to a new environment account connection if it was created in the same environment account that the current\n            environment account connection was created in and associated with the current environment.</p>"
+                        "smithy.api#documentation": "<p>The ID of the environment account connection.</p>\n        <p>You can only update to a new environment account connection if it was created in the same environment account that the current\n            environment account connection was created in and is associated with the current environment.</p>"
                     }
                 }
             },
@@ -6084,7 +6084,7 @@
                 "spec": {
                     "target": "com.amazonaws.proton#SpecContents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the service instances to add and the existing service instances to remain. Omit the existing service instances to delete from the\n            list. <i>Don't</i> include edits to the existing service instances or pipeline. For more information, see <i>Edit a\n                service</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-update.html\">AWS Proton Administration\n                Guide</a> or the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-update.html\">AWS Proton User Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Lists the service instances to add and the existing service instances to remain. Omit the existing service instances to delete from the\n            list. <i>Don't</i> include edits to the existing service instances or pipeline. For more information, see <i>Edit a\n                service</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-update.html\">AWS Proton Administrator\n                Guide</a> or the <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-update.html\">AWS Proton User Guide</a>.</p>"
                     }
                 }
             },
