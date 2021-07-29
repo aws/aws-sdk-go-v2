@@ -1128,7 +1128,7 @@ to use patterns like dependency injection to test your application logic.&lt;/p&
 &lt;h2 id=&#34;mocking-client-operations&#34;&gt;Mocking Client Operations&lt;/h2&gt;
 &lt;p&gt;In this example, &lt;code&gt;S3GetObjectAPI&lt;/code&gt; is an interface that defines the set of
 Amazon S3 API operations required by the &lt;code&gt;GetObjectFromS3&lt;/code&gt;
-function. &lt;code&gt;s3GetObjectAPI&lt;/code&gt; is satisfied by the Amazon S3
+function. &lt;code&gt;S3GetObjectAPI&lt;/code&gt; is satisfied by the Amazon S3
 client&amp;rsquo;s &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#Client.GetObject&#34;&gt;GetObject&lt;/a&gt; method.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;context&amp;#34;&lt;/span&gt;
 &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;github.com/aws/aws-sdk-go-v2/service/s3&amp;#34;&lt;/span&gt;
