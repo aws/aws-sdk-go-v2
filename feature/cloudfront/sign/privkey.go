@@ -12,12 +12,20 @@ import (
 
 // LoadPEMPrivKeyFile reads a PEM encoded RSA private key from the file name.
 // A new RSA private key will be returned if no error.
-func LoadPEMPrivKeyFile(name string) (*rsa.PrivateKey, error) {
+func LoadPEMPrivKeyFile(name string) (key *rsa.PrivateKey, err error) {
 	file, err := os.Open(name)
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
+
+	defer func() {
+		closeErr := file.Close()
+		if err == nil {
+			err = closeErr
+		} else if closeErr != nil {
+			err = fmt.Errorf("close error: %v, original error: %w", closeErr, err)
+		}
+	}()
 
 	return LoadPEMPrivKey(file)
 }

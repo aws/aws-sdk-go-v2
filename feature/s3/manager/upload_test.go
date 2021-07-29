@@ -1034,7 +1034,13 @@ func newMockS3UploadServer(tb testing.TB, partHandler []http.Handler) *mockS3Upl
 }
 
 func (s mockS3UploadServer) handleRequest(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
+	defer func() {
+		closeErr := r.Body.Close()
+		if closeErr != nil {
+			failRequest(w, 0, "BodyCloseError",
+				fmt.Sprintf("request body close error: %v", closeErr))
+		}
+	}()
 
 	_, hasUploads := r.URL.Query()["uploads"]
 
@@ -1091,7 +1097,13 @@ type successPartHandler struct {
 }
 
 func (h successPartHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
+	defer func() {
+		closeErr := r.Body.Close()
+		if closeErr != nil {
+			failRequest(w, 0, "BodyCloseError",
+				fmt.Sprintf("request body close error: %v", closeErr))
+		}
+	}()
 
 	n, err := io.Copy(ioutil.Discard, r.Body)
 	if err != nil {
@@ -1128,7 +1140,13 @@ type failPartHandler struct {
 }
 
 func (h *failPartHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
+	defer func() {
+		closeErr := r.Body.Close()
+		if closeErr != nil {
+			failRequest(w, 0, "BodyCloseError",
+				fmt.Sprintf("request body close error: %v", closeErr))
+		}
+	}()
 
 	if h.failsRemaining == 0 && h.successHandler != nil {
 		h.successHandler.ServeHTTP(w, r)
